@@ -1,0 +1,82 @@
+# DE 1010.  Schleswig (ausschl) - Schleswig Altstadt
+#
+let neufle = path("path.de.1040");
+let slakap = path("path.de.9102");
+let slesla = path("path.de.1010");
+
+with detail = [4, 5] {
+    track(:second :removed, slesla[:a, :got - 1sw]);
+    with layer = 1 line_badge(:removed, slesla[:a + .4km], "1010");
+
+    #--- point.de.Gottorf
+    #
+    track(:second :station :removed, slesla[:got - 1sw, :got + 1sw]);
+    marker(:de.zst :right :removed, slesla[:got]);
+    label(slesla[:got] >> 1.3sh + (.5sw, 0sh),
+        hbox(:center :top, span(:medium :removed, "Gottorf"))
+    );
+
+    track(:second :removed, slesla[:got + 1sw, :slh - 1sw]);
+
+
+    #--- point.de.Schleihalle
+    #
+    track(:second :station :removed, slesla[:slh - 1sw, :slh + 1sw]);
+    marker(:de.zst :left :removed, slesla[:slh]);
+    label(slesla[:slh - .6sw] << 1sh - (1dt, 0dt),
+        hbox(:right :base, span(:medium :removed, "Schleihalle"))
+    );
+
+
+    track(:second :removed, slesla[:slh + 1sw, :dom - 1sw]);
+
+
+    #--- point.de.Domziegelhof
+    #
+    track(:second :station :removed, slesla[:dom - 1sw, :dom + 1sw]);
+    marker(:de.zst :left :removed, slesla[:dom]);
+    label(slesla[:dom] << 1.1sh + (1sw, 0sw),
+        hbox(:right :bottom, span(:medium :removed, "Domziegelhof"))
+    );
+
+
+    track(:second :removed, slesla[:dom + 1sw, :sla.a]);
+
+
+    #--- point.de.Schleswig-Altstadt
+    #
+    # Gl. 1
+    track(:station :removed,
+            slesla[:sla.a, :sla.a + .1dl]
+        --  slesla[:sla.a + 2dl, :sla - .6sw] << 2dt
+    );
+
+    # Gl. 2
+    track(:station :removed,
+            slesla[:sla.a + 2.9dl, :sla.a + 3dl]
+        --  slesla[:sla.a + 4dl, :f] << 1dt
+        --  slakap[:a, :a + .1dl] << 1dt
+    );
+   
+    # Gl. 3
+    track(:second :station :removed,
+            slesla[:sla.a, :f]
+        ..  slakap[:a, :a + 1.dl]
+    );
+
+    # Gl. 5
+    track(:station :removed,
+            slesla[:sla.a + 1.9dl, :sla.a + 2dl]
+        --  slesla[:sla.a + 3dl, :f] >> 1dt
+        --  slakap[:a, :a + .1dl] >> 1dt
+    );
+
+    marker(:de.bf :removed :left, slesla[:sla] << 1dt);
+    station(:top :right_align :removed,
+        slesla[:sla] << 1dt << 1.3sh + (.2sw, 0sw),
+        span(:medium :bold :removed, "Schleswig Altstadt"),
+        "1010: 136,02"
+    );
+
+}
+

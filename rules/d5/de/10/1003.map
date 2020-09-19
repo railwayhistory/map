@@ -1,0 +1,57 @@
+# DE 1003.  Flensburg Alter Bf - Flensburg Hafen West
+#
+let flafhw = path("path.de.1003");
+let flwfho = path("path.de.1002");
+
+with detail = 5 {
+    with link = "point.de.Flensburg-Hafen-West" {
+        # Gl. 40 - 44 - 51 - 62
+        track(:station :removed,
+                flwfho[:fla + 2wl, :fla + 2.1wl] << 1dt
+            ..  flafhw[:a, :a + 150m]
+            ..  flafhw[:w52, :r] << 2dt
+            ..  flafhw[:s, :f]
+        );
+
+        # Gl. 41
+        track(:station :removed,
+                flafhw[:w52 + 2.1wl, :w57 - 2.1wl] << 1dt
+            --  flafhw[:w57 - 1.1wl, :w57 - 1.09wl] << 2dt
+        );
+
+        # Gl. 42
+        track(:station :removed,
+                flafhw[:w52 + 1.09wl, :w52 + 1.1wl] << 2dt
+            --  flafhw[:w52 + 3.1wl, :w57 - 2wl]
+            --  flafhw[:w57, :w57 + 0.01wl] << 2dt
+        );
+
+        # Gl. 43
+        track(:station :removed,
+                flafhw[:w52 - 0.01wl, :w52] << 2dt
+            --  flafhw[:w52 + 3wl, :w57] >> 1dt
+        );
+
+        # Gl. 46
+        track(:station :removed,
+                flafhw[:w57 + 0.99wl, :w57 + 1wl] << 2dt
+            --  flafhw[:w57 + 2wl, :w61 + 150m] << 1dt
+        );
+        track(:station :removed,
+                flafhw[:w61 - 0.01wl, :w61] << 2dt
+            --  flafhw[:w61 + 1wl, :w61 + 1.01wl] << 1dt
+        );
+
+        # Gl. 56 - 57
+        let gl57 = path("path.de.1003.gl57");
+        track(:station :removed,
+                flafhw[:w65 - 0.1dl, :w65]
+            ..  gl57[:a, :f]
+        );
+
+        slabel(:left :removed, flafhw[:fhw] << 4dt,
+            span(:italic, "Hafenbahn Westseite")
+        );
+    }
+}
+

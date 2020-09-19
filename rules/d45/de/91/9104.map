@@ -1,0 +1,76 @@
+# DE 9104.  Neuwittenbek - Kiel-Schusterkrug
+#
+let hasfle = path("path.de.1020");
+let neusus = path("path.de.9104");
+
+with detail = [4,5] {
+    with link = "line.de.9104" {
+        track(:second :open,
+                hasfle[:nwi.f, :asus] >> 1dt
+            ..  neusus[:aa, :rat - 0.5sw]
+        );
+    }
+
+    # Neuwittenbek Gr: 1020.
+
+    with link = "point.de.Rathmannsdorf" {
+        track(:second :station :open, neusus[:rat - 0.5sw, :rat + 0.5sw]);
+        with layer = -1 marker(:de.anst :removed :left, neusus[:rat]);
+        station(:top :removed, neusus[:rat] << 1.4sh,
+            "Rathmannsdorf", "3,4"
+        );
+    }
+
+    with link = "line.de.9104" {
+        track(:second :open, neusus[:rat + 0.5sw, :alt - 1sw]);
+        with layer = 1 line_badge(:open, neusus[:rat + 1.6km], "9104");
+    }
+
+    with link = "point.de.Altenholz" {
+        track(:second :station :open, neusus[:alt - 1sw, :alt + 1sw]);
+        with layer = -1 marker(:de.bf :removed :left, neusus[:alt]);
+        station(:left :removed, neusus[:alt - 0.5sw] << 1.4sh,
+            "Altenholz", "8,0"
+        );
+    }
+
+    with link = "line.de.9104" {
+        track(:second :open, neusus[:alt + 1sw, :sus.r - 250m]);
+    }
+
+    with link = "point.de.Kiel-Schusterkrug" {
+        # Gl. 1
+        track(:station :open,
+                neusus[:sus - 1.01sw, :sus - 1sw]
+            --  neusus[:sus - 1sw + 1dl, :sus + 1sw - 3dl] >> 1dt
+            --  neusus[:sus + 1sw - 2dl, :sus + 1sw - 1.9dl]
+        );
+
+        # Gl. 2
+        track(:second :station :open, neusus[:sus.r - 250m, :sus + 1sw]);
+        track(:station :open, neusus[:sus + 1sw, :f]);
+
+        # Gl. 3
+        track(:station :open,
+                neusus[:sus - 1sw, :sus + 1sw - 2dl] << 1dt
+            --  neusus[:sus + 1sw - 1dl, :sus + 1sw - 0.9dl]
+        );
+        track(:station :open,
+                neusus[:sus - 1sw + 0.9dl, :sus - 1sw + 1.0dl]
+            --  neusus[:sus - 1sw + 2.0dl, :sus - 1sw + 2.1dl] << 1dt
+        );
+
+        # Agl. bei sus.r
+        track(:station :open,
+                neusus[:sus.r - 131m, :sus.r - 130m]
+            --  neusus[:sus.r - 130m + 1dl, :sus.r] >> 1dt
+        );
+
+        marker(:de.bf :open :right, neusus[:sus] >> 1dt);
+        station(:right :open, neusus[:sus + 0.4sw] << 2dt,
+            span(:bold, "Kiel-Schusterkrug"),
+            "9104: 11,0"
+        );
+    }
+}
+

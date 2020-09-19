@@ -1,0 +1,77 @@
+# DE 11022.  Großenbrode Abzw - Großenbrode Kai
+# DE 11023.  Großenbrode - Großenbrode Kai
+#
+let gragrk = path("path.de.11022");
+let grbgrk = path("path.de.11023");
+let lubput = path("path.de.1100");
+
+with detail = 4 {
+    with link = "line.de.11022" {
+        track(:first :removed,
+            lubput[:gbr.a + 2.1dl, :gbr.a + 2.2dl] >> 1dt
+                ..  gragrk[:fgbr - 1dl, :fgbr]
+        );
+    }
+
+    with link = "line.de.11023" {
+        track(:first :removed,
+            lubput[:gbr.w10 - 2dl, :gbr.w10 - 2.1dl] << 1dt
+                ..  grbgrk[:grk.a - 1dl, :grk.a]
+        );
+    }
+
+
+    with link = "point.de.Großenbrode-Kai" {
+        # Gl. 44 - Gl. 1
+        track(:first:station :removed, grbgrk[:grk.a, :f]);
+
+        # Gl. 46 - Gl. 22
+        track(:station :removed, grbgrk[:grk.a + 1dl, :f - 2dl] << 1dt);
+
+        # Gl. 49
+        track(:station :removed,
+                grbgrk[:grk.a + 3.9dl, :grk.a + 4dl] << 1dt
+            --  grbgrk[:grk.a + 5dl, :grk.r - 4.1dl] << 2dt
+            --  grbgrk[:grk.r - 2.1dl, :grk.r - 2dl]
+        );
+
+        # Gl. 23
+        track(:station :removed,
+                grbgrk[:grk.r + 0.9dl, :grk.r + 1dl]
+            --  grbgrk[:grk.r + 3dl, :f - 2dl] << 2dt
+        );
+
+        # Gl. 6
+        track(:station :removed,
+                grbgrk[:grk.r - 1.1dl, :grk.r - 1dl] << 1dt
+            --  grbgrk[:grk.r + 1dl, :f - 3dl] >> 1dt
+            --  grbgrk[:f - 2dl, :f - 1.9dl]
+        );
+        track(:station :removed,
+                grbgrk[:f - 4.1dl, :f - 4dl] >> 1dt
+            --  grbgrk[:f - 3dl, :f - 2.9dl] >> 2dt
+        );
+
+        # Gl. 11
+        track(:station :removed,
+                grbgrk[:grk.r - 2.2dl, :grk.r - 2.1dl]
+            --  grbgrk[:grk.r + 0.9dl, :f] >> 2dt
+        );
+
+        # Gl. 12
+        track(:station :removed,
+                grbgrk[:grk.r + 1.9dl, :grk.r + 2dl] >> 2dt
+            --  grbgrk[:grk.r + 3dl, :f - 4dl] >> 3dt
+            --  grbgrk[:f - 3dl, :f - 2.9dl] >> 2dt
+        );
+
+        marker(:de.bf :removed :left, grbgrk[:grk] << 2dt);
+        station(:right:removed, grbgrk[:grk + 0.4sw] << 2dt << 1.6sh,
+            span(:bold, "Großenbrode Kai"),
+            "11022: 3,89"
+        );
+
+    }
+
+}
+

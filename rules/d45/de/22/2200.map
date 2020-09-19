@@ -1,0 +1,89 @@
+#
+#
+let wanham = path("path.de.2200");
+
+with detail = [4, 5] {
+    # ...
+
+    with link = "line.de.2200" {
+        track(:first :cat, wanham[:spr + 1sw, :buc.a] << 1dt);
+        track(:first :cat, wanham[:spr + 1sw, :buc.a] >> 1dt);
+    }
+    with link = "line.de.1283" {
+        track(:first :cat, wanham[:spr + 1sw, :buc.a]);
+    }
+
+    with link = "point.de.Buchholz-Nordheide" {
+        # 2200/1283
+        track(:first:station :cat, wanham[:buc.a, :buc.f] << 1dt);
+        track(:first:station :cat, wanham[:buc.a, :buc.f]);
+        track(:first:station :cat,
+                wanham[:buc.a, :buc + 210m] >> 1dt
+            ..  wanham[:buc + 270m, :buc + 721m]
+        );
+
+        # 1712
+        track(:first:station,
+                wanham[:fsol, :buc.bhf - 400m] >> 2dt
+            ..  wanham[:buc.bhf, :buc] >> 4dt
+        );
+
+        # 1300
+        track(:second:station,
+                wanham[:fbre, :buc.bhf - 400m] >> 3dt
+            ..  wanham[:buc.bhf, :buc] >> 5dt
+        );
+
+        # 1280
+        track(:first:station :double :cat,
+                path("path.de.1280.buc")[:buc, :buc.f] >> 4.5dt
+        );
+
+
+        marker(:de.bf :right, wanham[:buc] >> 1dt);
+        station(:top, wanham[:buc - 2sw] << 3dt,
+            hbox(:center:base,
+                span(:bold, "Buchholz "),
+                span(:regular, "(Nordh)")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "1151: "),
+                    span(:open, "1280: "),
+                    span(:open, "1283: "),
+                    span(:removed, "1300: "),
+                    span(:open, "1712: "),
+                    span(:open, "2200: ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "268,"),
+                    span(:open, "0,"),
+                    span(:open, "323,"),
+                    span(:removed, "92,"),
+                    span(:open, "133,"),
+                    span(:open, "323,")
+                ),
+                vbox(:left:top,
+                    span(:removed, "31"),
+                    span(:open, "00"),
+                    span(:open, "20"),
+                    span(:removed, "94"),
+                    span(:open, "06"),
+                    span(:open, "20")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.2200" {
+        track(:first :double :cat,
+                wanham[:buc.f, :buc.f + 1m] << 0.5dt
+            ..  wanham[:buc.f + 400m, :bun - 1sw]
+        );
+    }
+
+
+    # ...
+}
+

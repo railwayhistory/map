@@ -1,0 +1,99 @@
+# DE 1000.  Flensburg Weiche (ausschl) - Harrislee Grenze
+#
+let flwhag = path("path.de.1000");
+let neufle = path("path.de.1040");
+
+with detail = 4 {
+    track(:double :first :cat, flwhag[:ffle, :fri - 1sw]);
+
+    # Friedensweg
+    track(:first, flwhag[:fri - 1sw, :fri + 1sw] << 0.5dt);
+    track(:first,
+           flwhag[:fri - 1sw, :fri - .2sw - 1dl] >> 0.5dt
+        -- flwhag[:fri - .2sw, :fri - 0.1sw] >> 1.5dt
+    );
+    track(:first,
+           flwhag[:fri - 1sw, :fri + .2sw + 2dl] >> 1.5dt
+        -- flwhag[:fri + .2sw + 3dl, :fri + 1sw] >> 0.5dt
+    );
+    track(:station,
+           flwhag[:fri + .1sw, :fri + .2sw] >> 1.5dt
+        -- flwhag[:fri + .2sw + 2dl, :fri + .2sw + 3dl] << 0.5dt
+    );
+    marker(:de.abzw, flwhag[:fri] >> 1.5dt);
+    station(
+        :left, flwhag[:fri - .4sw] << .5dt << 6bp,
+        hbox(:center :base,
+            span(:medium, "F. "),
+            span(:medium :bold, "Friedensweg")
+        ),
+        hbox(:right :top,
+            vbox(:left :top,
+                span(:xsmall, "1000: "),
+                span(:xsmall, "1005: ")
+            ),
+            vbox(:right :top,
+                span(:xsmall, "174,57"),
+                span(:xsmall, "5,49")
+            ),
+            vbox(:left :top,
+                span(:xsmall :removed, " (168,75)")
+            )
+        )
+    );
+
+
+    track(:double :first :cat, flwhag[:fri + 1sw, :har - .6sw]);
+    with layer = 1 line_badge(:open, flwhag[:har - 1.5km], "1000");
+
+
+    # Harrislee
+    with layer = 0.5 track(:double :first, flwhag[:har - 0.6sw, :har.x + 4dl]);
+    track(:station :removed,
+           flwhag[:har - 0.51sw, :har - 0.5sw] << 0.5dt
+        -- flwhag[:har - 0.5sw + 1dl, :har.x - 1dl] << 1.5dt
+        -- flwhag[:har.x + 4dl, :har.f] >> 3.5dt
+    );
+    track(:station :removed,
+           flwhag[:har.x + 3dl, :har.f] >> 2.5dt
+    );
+    marker(:de.bf :removed, flwhag[:har] >> 0.5dt);
+    station(
+        :right :left_align :removed, flwhag[:har - .4sw] >> 1.3sw,
+        "Harrislee", "177,44 (171,87)"
+    );
+
+
+    track(:double :first :cat, flwhag[:har.x + 4dl, :f]);
+
+    # Harrislee Grenze
+    marker(:de.dirgr, flwhag[:hag] >> 0.5dt);
+    marker(:statdt, flwhag[:hag] << 0.5dt);
+    marker(:de.dirgr :left, flwhag[:hag] << 0.5dt);
+    label(
+        flwhag[:hag] << 5dt,
+        hbox(:right :middle,
+            vbox(:right :middle,
+                span(:xsmall, "DK 26: "),
+                hbar(0.3),
+                span(:xsmall, "DE 1000: ")
+            ),
+            vbox(:right :middle,
+                span(:xsmall, "110,"),
+                hbar(0.3),
+                span(:xsmall, "179,")
+            ),
+            vbox(:left :middle,
+                span(:xsmall, "6"),
+                hbar(0.3),
+                span(:xsmall, "784")
+            ),
+            vbox(:left :middle,
+                span(:xsmall, ""),
+                hbar(0.3),
+                span(:xsmall :removed, " (174,21)")
+            )
+        )
+    );
+}
+

@@ -1,0 +1,54 @@
+#
+#
+let celsol = path("path.de.9170");
+let uellan = path("path.de.1960");
+
+with detail = [4, 5] {
+    # ...
+
+    with link = "line.de.9170" {
+        track(:third,
+                celsol[:bas + 1sw, :ff - 500m]
+            ..  uellan[:fcel, :sol.a] << 3.5dt
+        );
+    }
+
+    with link = "point.de.Soltau-Han-Süd" {
+        let solneu = path("path.de.9171");
+
+        track(:third:station, uellan[:sol.a, :sos] << 2.5dt);
+        track(:third:station, uellan[:sol.a, :sos] << 3.5dt);
+        with layer = -1 track(:third:station :removed,
+                uellan[:sos - 3.6dt, :sos - 3.5dt] << 3.5dt
+            ..  solneu[:aa + 3.9dt, :aa + 4dt]
+        );
+
+        marker(:de.bf :left, uellan[:sos + 0.5sw] << 2.25dt);
+        station(:bottom, uellan[:sos] << 620m,
+            hbox(:center:base,
+                span(:bold, "Soltau "),
+                span(:regular, "(Han) "),
+                span(:bold, "Süd")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "9111: "),
+                    span(:open, "9170: "),
+                    span(:removed, "9171: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "57,"),
+                    span(:open, "58,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "1"),
+                    span(:open, "9"),
+                    span(:removed, "0")
+                )
+            )
+        );
+            
+    }
+}
+

@@ -1,0 +1,27 @@
+# DE 10112.  Eggebek Gabelung - Sollbrück Gabelung
+#
+let eggsol = path("path.de.10112");
+let jubhus = path("path.de.1011");
+let neufle = path("path.de.1040");
+
+with detail = 3, layer = -1 {
+    # Eggebek Gabelung - Sollerup (ausschl.)
+    track(:first :gone,
+            neufle[:egg, :fohr] >> 0.5dt
+        ..  eggsol[:a, :sol - 1ssw]
+    );
+    with layer = 0 line_badge(:gone, eggsol[:sol - 2km], "10112");
+
+    # point.de.Sollerup
+    #
+    track(:first :station :gone, eggsol[:sol - 1ssw, :sol + 1ssw]);
+    marker(:de.bf :gone :left, eggsol[:sol]);
+    slabel(:left :gone, eggsol[:sol + .3ssw] >> 1dt, "Sollerup");
+
+    # Sollerup (ausschl.) - Sollbrück Gabelung
+    track(:first :gone,
+            eggsol[:sol + 1ssw, :f]
+        ..  jubhus[:sog, :sog + .1dl]
+    );
+}
+

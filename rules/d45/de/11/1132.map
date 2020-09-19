@@ -1,0 +1,28 @@
+# DE 1132.  Lübeck-Schlutup (ausschl.) - Lübeck-Schlutup Fischereihafen
+#
+let sluslh = path("path.de.1132");
+
+with detail = [4, 5] {
+    with link = "line.de.1132" {
+        track(:private, sluslh[:slu.w31, :slu.w51 - 0.5sw]);
+    }
+
+
+    with link = "point.de.Lübeck-Schlutup-W51" {
+        track(:private:station, sluslh[:slu.w51 - 0.5sw, :slu.w51 + 0.5sw]);
+    }
+
+
+    with link = "line.de.1132" {
+        track(:private, sluslh[:slu.w51 + 0.5sw, :slh - 200m]);
+    }
+
+    
+    with link = "point.de.Lübeck-Schlutup-Fischereihafen" {
+        track(:private:station, sluslh[:slh - 200m, :f]);
+        slabel(:right, sluslh[:slh + 0.5sw] >> 5pt,
+            span(:italic, "Fischereihafen")
+        );
+    }
+}
+

@@ -1,0 +1,134 @@
+# DE 1215.  St Michaelisdonn - Brunsbüttel Nord
+#
+let smibru = path("path.de.1215");
+
+with detail = 3 {
+    with link = "line.de.1215" {
+        let elmnie = path("path.de.1210");
+
+        track(:second :station,
+                elmnie[:fbru + 1m, :fbru] >> 0.5dt
+            ..  smibru[:aa + 800m, :aa + 801m] << 0.5dt
+        );
+        track(:second :flip, smibru[:aa + 801m, :din - 1ssw] << 0.5dt);
+
+        
+        with layer = -1 track(:first :gone,
+                elmnie[:fbru + 1m, :fbru] << 0.5dt
+            ..  smibru[:aa, :aa + 801m] << 0.5dt
+        );
+        with layer = -1 track(:first :gone,
+                elmnie[:fbru + 1m, :fbru] >> 0.5dt
+            ..  smibru[:aa, :din - 1ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.de.Dingerdonn" {
+        with layer = -2 track(:first:station :gone,
+                smibru[:din - 1ssw, :din + 1ssw] >> 0.5dt
+        );
+        track(:second:station, smibru[:din - 1ssw, :din + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, smibru[:din] << 0.5dt);
+        slabel(:left :removed, smibru[:din + 0.3ssw] << 0.5dt >> 1.8ssw,
+            "Dingerdonn"
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:first :gone, smibru[:din + 1ssw, :edd - 1ssw] >> 0.5dt);
+        track(:second :flip, smibru[:din + 1ssw, :edd - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Eddelak" {
+        with layer = -1 track(:first :gone,
+                smibru[:edd - 1ssw, :edd + 1ssw] >> 0.5dt
+        );
+        track(:second:station, smibru[:edd - 1ssw, :edd + 1ssw] << 0.5dt);
+
+        with layer = -2 marker(:de.anst :removed :right, smibru[:edd] >> 0.5dt);
+        with layer = -3 marker(:de.bf :gone :right, smibru[:edd] >> 0.5dt);
+        slabel(:left :removed, smibru[:edd + 0.3ssw] >> 0.5dt >> 1.8ssw,
+            "Eddelack"
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:first :gone, smibru[:edd + 1ssw, :ave - 1ssw] >> 0.5dt);
+        track(:second :flip, smibru[:edd + 1ssw, :ave - 1ssw] << 0.5dt);
+    }
+
+
+    with link = "point.de.Averlak" {
+        with layer = -2 track(:first:station :gone,
+                smibru[:ave - 1ssw, :ave + 1ssw] >> 0.5dt
+        );
+        track(:second:station, smibru[:ave - 1ssw, :ave + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, smibru[:ave] << 0.5dt);
+        slabel(:left :removed, smibru[:ave + 0.2ssw] << 0.5dt >> 1.8ssw,
+            "Averlak"
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:first :gone, smibru[:ave + 1ssw, :bla - 1ssw] >> 0.5dt);
+        track(:second :flip, smibru[:ave + 1ssw, :bla - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Blangenmoor" {
+        track(:first:station :gone, smibru[:bla - 1ssw, :bla + 1ssw] >> 0.5dt);
+        track(:second:station, smibru[:bla - 1ssw, :bla + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hst :removed :left, smibru[:bla] << 0.5dt);
+        with layer = -2 marker(:de.bf :gone :left, smibru[:bla] << 0.5dt);
+        slabel(:right :removed, smibru[:bla] << 0.5dt << 1.2ssw,
+            vbox(:left:bottom,
+                span(:removed, "Blangen-"),
+                span(:removed, "moor")
+            )
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:second :flip, smibru[:bla + 1ssw, :ble - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Blangenmoor-Lehe" {
+        track(:second:station, smibru[:ble - 1ssw, :ble + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :left, smibru[:ble] << 0.5dt);
+        slabel(:left :removed, smibru[:ble + 0.3ssw], "Blangenmoor-Lehe");
+    }
+
+    with link = "line.de.1215" {
+        track(:second :flip,
+                smibru[:ble + 1ssw, :ble + 1.1ssw] << 0.5dt
+            ..  smibru[:con - 0.6ssw, :con - 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Brunsbüttel-Condea" {
+        track(:second:station, smibru[:con - 0.5ssw, :con]);
+        with layer = -1 track(:second:station :removed,
+                smibru[:con, :con + 1ssw]
+        );
+        marker(:de.anst :right, smibru[:con]);
+        slabel(:left, smibru[:con + 0.5ssw] >> 1.4ssw,
+            hbox(:center:base,
+                span(:light, "Brunsbüttel "),
+                span(:regular, "Condea")
+            )
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:second :flip :removed, smibru[:con + 1ssw, :bru - 1ssw]);
+    }
+
+    with link = "point.de.Brunsbüttel-Nord" {
+        track(:second:station :removed, smibru[:bru - 1ssw, :f]);
+        marker(:de.bf :removed :left, smibru[:bru]);
+        slabel(:left :removed, smibru[:bru + 0.3ssw] >> 0.5dt,
+            span(:bold, "Brunsbüttel Nord")
+        );
+    }
+}
+
+

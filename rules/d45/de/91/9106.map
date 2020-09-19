@@ -1,0 +1,47 @@
+# DE 9106.  Kiel Hbf Ko - Kiel Seefischmarkt
+#
+let altkie = path("path.de.1220");
+let kkosee = path("path.de.9106");
+
+with detail = [4, 5] {
+    with link = "path.de.9106" {
+        track(:second :open,
+                altkie[:kie.ko - 1.1dl, :kie.ko - 1.0dl] >> 2.5dt
+            ..  kkosee[:aa, :nor - 0.5sw]
+        );
+    }
+
+    with link = "point.de.Kiel-Norwegenkai-KV" {
+        track(:second :station :open, kkosee[:nor - 0.5sw, :nor + 0.5sw]);
+        marker(:de.anst :open :left, kkosee[:nor]);
+    }
+
+    with link = "path.de.9106" {
+        track(:second :open, kkosee[:nor + 0.5sw, :how - 0.5sw]);
+        with layer = 1 line_badge(:open, kkosee[:how - 0.5km], "9106");
+    }
+
+    with link = "point.de.Kiel-Howaldtswerke" {
+        track(:second :station :open, kkosee[:how - 0.5sw, :how + 0.5sw]);
+        marker(:de.anst :open :left, kkosee[:how]);
+    }
+
+    with link = "path.de.9106" {
+        track(:second :open, kkosee[:how + 0.5sw, :mar - 0.5sw]);
+    }
+
+    with link = "point.de.Kiel-Marinearsenal" {
+        track(:second :station :open, kkosee[:mar - 0.5sw, :mar + 0.5sw]);
+        marker(:de.anst :open :left, kkosee[:mar]);
+    }
+
+    with link = "path.de.9106" {
+        track(:second :open, kkosee[:mar + 0.5sw, :see - 0.5sw]);
+    }
+
+    with link = "point.de.Kiel-Seefischmarkt" {
+        track(:second :station :open, kkosee[:see - 0.5sw, :f]);
+        marker(:de.bf :open :right, kkosee[:see]);
+    }
+}
+

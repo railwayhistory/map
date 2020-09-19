@@ -1,0 +1,69 @@
+#
+#
+let uellan = path("path.de.1960");
+
+with detail = [4, 5] {
+    # ...
+
+    with link = "line.de.1960" {
+        track(:second, uellan[:har + 0.5sw, :sol.a] >> 0.5dt);
+        track(:second:station :removed, uellan[:har + 0.5sw, :sol.a] << 0.5dt);
+    }
+
+
+    with link = "point.de.Soltau-Han" {
+        track(:second:station, uellan[:sol.a, :sol.f] >> 0.5dt);
+
+        track(:second:station :removed, uellan[:sol.a, :sol.a + 160m] << 0.5dt);
+        track(:second:station,
+                uellan[:sol.a + 99m, :sol.a + 100m] >> 0.5dt
+            --  uellan[:sol.a + 160m, :sol.f - 160m] << 0.5dt
+            --  uellan[:sol.f - 100m, :sol.f - 99m] >> 0.5dt
+        );
+        track(:second:station :removed, uellan[:sol.f - 160m, :sol.f] << 0.5dt);
+
+        track(:second:station, uellan[:sol.a, :sol] << 1.5dt);
+        track(:first:station, uellan[:sol, :sol.f] << 1.5dt);
+
+        marker(:de.bf :right, uellan[:sol] >> 0.5dt);
+        station(:top, uellan[:sol] >> 0.5dt >> 1.4sh,
+            hbox(:center:base,
+                span(:bold, "Soltau "),
+                span(:regular, "(Han)")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1712: "),
+                    span(:open, "1960: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "87,"),
+                    span(:open, "52,")
+                ),
+                vbox(:left:top,
+                    span(:open, "96"),
+                    span(:open, "11")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1960" {
+        track(:second, uellan[:sol.f, :fri - 1sw] >> 0.5dt);
+        track(:second:station :removed, uellan[:sol.f, :fri - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.de.Frielingen-Fallingbostel" {
+        track(:second:station, uellan[:fri - 1sw, :fri + 1sw] >> 0.5dt);
+        track(:second:station :removed
+                , uellan[:fri - 1sw, :fri + 1sw] << 0.5dt
+        );
+
+        marker(:de.bf :removed :left, uellan[:fri] << 0.5dt);
+    }
+
+    # ...
+}
+

@@ -1,0 +1,155 @@
+# DE 9102.  Schleswig Altstadt Kreisbf - Kappeln (Schlei)
+#
+let flekap = path("path.de.91011");
+let hasfle = path("path.de.1020");
+let slakap = path("path.de.9102");
+let slesla = path("path.de.1010");
+
+with detail = 3 {
+    # Schleswig Altstadt
+    track(:third :station :removed, slakap[:sla, :sla + 2.5ssw]);
+    marker(:de.bf :removed :left, slakap[:sla + 1.5ssw]);
+
+    # Streckengleis Schleswig Altstadt - Klosterfeld
+    track(:third :removed, slakap[:sla + 2.5ssw, :klo - 1ssw]);
+
+    # Klosterfeld
+    track(:third :station :removed, slakap[:klo - 1ssw, :klo + 1ssw]);
+    marker(:de.abzw :removed, slakap[:klo]);
+    slabel(:right :removed, slakap[:klo - .5ssw] >> 1.4ssw,
+        span(:small :bold :removed, "Klosterfeld")
+    );
+
+    # Streckengleis Klosterfeld - Klensby
+    track(:third :removed, slakap[:klo + 1ssw, :kle - 1ssw]);
+
+    # Klensby
+    track(:third :station :removed, slakap[:kle - 1ssw, :kle + 1ssw]);
+    marker(:de.kzst :removed :left, slakap[:kle]);
+    slabel(:right :removed, slakap[:kle - 0.2ssw] >> 2.0dt,
+        "Klensby"
+    );
+
+    # Streckengleis Klensby - Winning
+    track(:third :removed, slakap[:kle + 1ssw, :win - 1ssw]);
+
+    # Winning
+    track(:third :station :removed, slakap[:win - 1ssw, :win + 1ssw]);
+    marker(:de.khp :removed :right, slakap[:win]);
+    slabel(:right :removed, slakap[:win - 0.2ssw] >> 1.8ssw + (0.4ssw, 0ssw),
+        "Winning"
+    );
+
+    # Streckengleis Winning - Schaalby
+    track(:third :removed, slakap[:win + 1ssw, :saa - 1ssw]);
+
+    # Schaalby
+    track(:third :station :removed, slakap[:saa - 1ssw, :saa + 1ssw]);
+    marker(:de.kbf :removed :right, slakap[:saa]);
+    slabel(:right :removed, slakap[:saa - 0.5ssw] >> 1.5ssw, "Schaalby");
+
+    # Streckengleis Schaalby - Scholderup
+    track(:third :removed, slakap[:saa + 1ssw, :sol - 1ssw]);
+
+    # Scholderup
+    track(:third :station :removed, slakap[:sol - 1ssw, :sol + 1ssw]);
+    marker(:de.kbf :removed :right, slakap[:sol]);
+    slabel(:right :removed, slakap[:sol - 0.3ssw] >> 1.8ssw, "Scholderup");
+
+    # Streckengleis Scholderup - Taarstedt
+    track(:third :removed, slakap[:sol + 1ssw, :taa - 1ssw]);
+
+    # Taarstedt
+    track(:third :station :removed, slakap[:taa - 1ssw, :taa + 1ssw]);
+    marker(:de.kbf :removed :right, slakap[:taa]);
+    slabel(:right :removed, slakap[:taa - 0.2ssw] >> 2.0ssw, "Taarstedt");
+
+    # Streckengleis Taarstedt - Loit
+    track(:third :removed, slakap[:taa + 1ssw, :loi - 1ssw]);
+
+    # Loit
+    track(:third :station :removed, slakap[:loi - 1ssw, :loi + 1ssw]);
+    marker(:de.khp :removed :right, slakap[:loi]);
+    slabel(:right :removed, slakap[:loi] >> 2.7ssw - (1ssw, 0ssw), "Loit");
+
+    # Streckengleis Loit - Steinfeld
+    track(:third :removed, slakap[:loi + 1ssw, :ste - 1ssw]);
+
+    # Steinfeld-Schlesw
+    track(:third :station :removed, slakap[:ste - 1ssw, :ste + 1ssw]);
+    marker(:de.kbf :removed :right, slakap[:ste]);
+    slabel(:left :removed, slakap[:ste - 0.2ssw] << 1dt,
+        vbox(:center :bottom,
+            span(:regular, "Steinfeld "),
+            span(:light, "(Schlesw)")
+        )
+    );
+
+    # Streckengleis Steinfeld - Süderbrarup
+    with layer = -1 track(:third :removed,
+            slakap[:loi + 1ssw, :sud.aa]
+        ..  hasfle[:sud - 1.1ssw, :sud - 1ssw]
+    );
+
+    # Süderbrarup: DE 1020.
+
+    # Streckengleis Süderbrarup - Wagersrott
+    with layer = -1 track(:third :open,
+            hasfle[:sud + 1ssw, :sud + 1.1ssw]
+        ..  slakap[:sud.ff, :wag - 1ssw]
+    );
+
+    # Wagersrott
+    track(:third :station :open, slakap[:wag - 1ssw, :wag + 1ssw]);
+    marker(:de.hp :open :left, slakap[:wag]);
+    with layer = -1 marker(:de.bf :gone :left, slakap[:wag]);
+    slabel(:top :open, slakap[:wag] << 1.4ssw - (2ssw, 0ssw), "Wagersrott");
+
+    # Streckengleis Wagersrott - Scheggerott
+    track(:third :open, slakap[:wag + 1ssw, :seg - 1ssw]);
+
+    # Scheggerott
+    track(:third :station :open, slakap[:seg - 1ssw, :seg + 1ssw]);
+    marker(:de.bf :open :left, slakap[:seg]);
+    slabel(:top :open, slakap[:seg] << 1.4ssw, "Scheggerott");
+
+    # Streckengleis Scheggerott - Rabenkirchen
+    track(:third :open, slakap[:seg + 1ssw, :rab - 1ssw]);
+
+    # Rabenkirchen
+    track(:third :station :open, slakap[:rab - 1ssw, :rab + 1ssw]);
+    marker(:de.hp :closed :left, slakap[:rab]);
+    with layer = -1 marker(:de.bf :gone :left, slakap[:rab]);
+    slabel(:left :closed, slakap[:rab + 0.5ssw] >> 1.5dt,
+        "Rabenk.n"
+    );
+
+    # Streckengleis Rabenkirchen - Faulück
+    track(:third :open, slakap[:rab + 1ssw, :fau - 1ssw]);
+
+    # Faulück
+    track(:third :station :open, slakap[:fau - 1ssw, :fau + 1ssw]);
+    marker(:de.hp :closed :right, slakap[:fau]);
+    with layer = -1 marker(:de.bf :gone :right, slakap[:fau]);
+    slabel(:bottom :closed, slakap[:fau] >> 1.2ssw, "Faulück");
+
+    # Streckengleis Faulück - Arnis-Grödersby
+    track(:third :open, slakap[:fau + 1ssw, :arn - 1ssw]);
+
+    # Arnis-Grödersby
+    track(:third :station :open, slakap[:arn - 1ssw, :arn + 1ssw]);
+    marker(:de.hp :closed :right, slakap[:arn]);
+    with layer = -1 marker(:de.bf :gone :right, slakap[:arn]);
+    slabel(:right :closed, slakap[:arn - 0.4ssw] >> 2.6ssw - (2ssw, 0sw),
+        "Arnis-G."
+    );
+
+    # Streckengleis Arnis-Grödersby - Kappeln
+    track(:third :open, slakap[:arn + 1ssw, :kap - 1ssw]);
+
+    # Kappeln (Schlei)
+    track(:third :station :open, slakap[:kap - 1ssw, :kap + 1ssw]);
+    marker(:de.bf :open :left, slakap[:kap]);
+
+}
+

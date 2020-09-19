@@ -1,0 +1,54 @@
+# DE 1041.  Neumünster (ausschl.) - Ascheberg (Holst) (ausschl.)
+#
+let altkie = path("path.de.1220");
+let kieneu = path("path.de.1023");
+let neuasc = path("path.de.1041");
+
+with detail = [4,5] {
+    # Streckengleis Neumünster - Bokhorst
+    track(:first :closed, neuasc[:aa, :bok - 1sw]);
+    with layer = 2 line_badge(:closed, neuasc[:bok - 4.5km], "1041");
+
+
+    #--- point.de.Bokhorst
+    #
+    track(:first :station :closed, neuasc[:bok - 1sw, :bok + 1sw]);
+    marker(:de.bf :closed :left, neuasc[:bok]);
+    station(:top :closed, neuasc[:bok] << 1.4sh,
+        "Bokhorst", "83,76"
+    );
+
+    # Streckengleis Bokhorst - Wankendorf
+    track(:first :closed, neuasc[:bok + 1sw, :wan - 1sw]);
+
+
+    #--- point.de.Wankendorf
+    #
+    track(:first :station :closed, neuasc[:wan - 1sw, :wan + 1sw]);
+    marker(:de.bf :closed :right, neuasc[:wan]);
+    station(:bottom :closed, neuasc[:wan] >> 1.4sh,
+        "Wankendorf", "89,66"
+    );
+
+    # Streckengleis Wankendorf - Ascheberg
+    track(:first :closed, neuasc[:wan + 1sw, :ff]);
+    with layer = 2 line_badge(:closed, neuasc[:asc - 2.5km], "1041");
+
+
+    #--- point.de.Perdoel
+    #
+    marker(:de.hp :closed :left, neuasc[:per]);
+    with layer = -1 marker(:de.bf :gone :left, neuasc[:per]);
+    station(:top :closed, neuasc[:per] << 1.4sh,
+        "Perdoel", "93,46"
+    );
+
+
+    #--- point.de.Kalübbe
+    #
+    marker(:de.hp :closed :left, neuasc[:kal]);
+    station(:top :closed, neuasc[:kal] << 1.4sh,
+        "Kalübbe", "95,98"
+    );
+}
+

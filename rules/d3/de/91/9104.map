@@ -1,0 +1,40 @@
+# DE 9104.  Neuwittenbek - Kiel-Schusterkrug
+#
+let hasfle = path("path.de.1020");
+let neusus = path("path.de.9104");
+
+with detail = 3 {
+    with link = "line.de.9104" {
+        track(:second :open,
+                hasfle[:asus - 0.1dl, :asus]
+            ..  neusus[:aa, :rat - 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Rathmannsdorf" {
+        track(:second :station :open, neusus[:rat - 0.5ssw, :rat + 0.5ssw]);
+        marker(:de.anst :removed :left, neusus[:rat]);
+    }
+
+    with link = "line.de.9104" {
+        track(:second :open, neusus[:rat + 0.5ssw, :alt - 1ssw]);
+    }
+
+    with link = "point.de.Altenholz" {
+        track(:second :station :open, neusus[:alt - 1ssw, :alt + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, neusus[:alt]);
+        slabel(:left :removed, neusus[:alt - 0.6ssw] << 1.4ssw, "Altenholz");
+    }
+
+    with link = "line.de.9104" {
+        track(:second :open, neusus[:alt + 1ssw, :sus - 1ssw]);
+    }
+
+    with link = "point.de.Kiel-Schusterkrug" {
+        track(:second :station :open, neusus[:sus - 1ssw, :sus + 1ssw]);
+        marker(:de.bf :open :right, neusus[:sus]);
+        slabel(:right :open, neusus[:sus + 0.6ssw] << 1dt,
+            span(:bold, "Kiel-Schusterkrug")
+        );
+    }
+}

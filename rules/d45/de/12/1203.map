@@ -1,0 +1,28 @@
+# DE 1203.  Husum Nord - Husum Außenhafen
+#
+let elmnie = path("path.de.1210");
+let hunhua = path("path.de.1203");
+
+with detail = [4, 5] {
+    with link = "line.de.1203" {
+        track(:station,
+                elmnie[:fhua, :fhua - 1m] >> 1.5dt
+            ..  hunhua[:aa, :aa + 1m]
+        );
+        with detail = 5 {
+            with layer = 1 line_badge(:open,
+                hunhua[:aa + 1dt] >> 0.2dt, "1203"
+            );
+        }
+    }
+
+    with link = "point.de.Husum-Außenhafen" {
+        track(:station, hunhua[:aa + 1m, :f]);
+        with detail = 5 {
+            slabel(:left, hunhua[:f] >> 1dt,
+                span(:italic, "Husum Außenhafen")
+            );
+        }
+    }
+}
+

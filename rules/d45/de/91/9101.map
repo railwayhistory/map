@@ -1,0 +1,345 @@
+# DE 9101.  (Schleswig) Klosterfeld - Satrup (Angeln)
+#
+let flerun = path("path.de.91012");
+let slakap = path("path.de.9102");
+let slasat = path("path.de.9101");
+
+with detail = [4, 5] {
+    # Streckengleis Klosterfeld - St Jürgen
+    track(:third :station :removed,
+            slakap[:klo, :klo + .1dl]
+        ..  slasat[:a - 0.1dl, :a]
+    );
+    track(:third :removed, slasat[:a, :jur - 1sw]);
+
+
+    #--- point.de.St-Jürgen
+    #
+    track(:third :station :removed, slasat[:jur - 1sw, :jur + 1sw]);
+    marker(:de.kzst :removed, slasat[:jur]);
+    with layer = -1 station(:left :removed, slasat[:jur - 0.2sw] << 2dt,
+        "St Jürgen", "??"
+    );
+
+    # Streckengleis St Jürgen - Ehlers
+    track(:third :removed, slasat[:jur + 1sw, :ehl - 1sw]);
+
+
+    #--- point.de.Ehlers
+    #
+    track(:third :station :removed, slasat[:ehl - 1sw, :ehl + 1sw]);
+    marker(:de.kzst :removed :right, slasat[:ehl]);
+    station(:right :removed, slasat[:ehl - 0.4sw] >> 1.2sh,
+        "Ehlers", "4,0"
+    );
+
+    # Streckengleis Ehlers - Berend
+    track(:third :removed, slasat[:ehl + 1sw, :ber - 1sw]);
+    with layer = 1 line_badge(:removed, slasat[:ber - 0.9km], "9101");
+
+
+    #--- point.de.Berend-Schlesw
+    #
+    track(:third :station :removed, slasat[:ber - 1sw, :ber + 2sw]);
+    track(:station :removed,
+            slasat[:ber - 0.5sw - 1.1dl, :ber - 0.5sw - 1.0dl]
+        --  slasat[:ber - 0.5sw, :ber + 2sw] << 1dt
+    );
+    track(:station :removed,
+            slasat[:ber + 0.49sw, :ber + 0.5sw] << 1dt
+        --  slasat[:ber + 0.5sw + 1dl, :ber + 0.5sw + 1.1dl]
+    );
+    track(:station :removed,
+            slasat[:ber + 1sw, :ber + 2sw - 2.0dl] >> 1dt
+        --  slasat[:ber + 2sw - 1.0dl, :ber + 2sw - 0.9dl]
+    );
+    marker(:de.kbf :removed :right, slasat[:ber]);
+    station(:left :removed, slasat[:ber - 0.4sw] << 2dt,
+        hbox(:center :base,
+            span(:medium :removed, "Berend "),
+            span(:medium :light :removed, "(Schlesw)")
+        ),
+        "??"
+    );
+
+    # Streckengleis Berend - Nübel
+    track(:third :removed, slasat[:ber + 2sw, :nub - 1sw]);
+
+
+    #--- point.de.Nübel
+    #
+    track(:third :station :removed, slasat[:nub - 1sw, :nub + 1sw]);
+    marker(:de.kbf :removed :right, slasat[:nub]);
+    station(:right :removed, slasat[:nub - 0.1sw] >> 1.4sh,
+        "Nübel", "??"
+    );
+
+    # Streckengleis Nübel - Brekling
+    track(:third :removed, slasat[:nub + 1sw, :bre - 1sw]);
+
+
+    #--- point.de.Brekling
+    #
+    track(:third :station :removed, slasat[:bre - 1sw, :bre + 1sw]);
+    track(:station :removed,
+            slasat[:bre - 0.5sw - 1.1dl, :bre - 0.5sw - 1dl]
+        --  slasat[:bre - 0.5sw, :bre + 0.5sw] << 1dt
+        --  slasat[:bre + 0.5sw + 1dl, :bre + 0.5sw + 1.1dl]
+    );
+    marker(:de.kbf :removed :left, slasat[:bre] << 1dt);
+    station(:top :removed, slasat[:bre] << 1dt << 1.2sh,
+        "Brekling", "??"
+    );
+
+}
+with detail = 4 {
+
+    # Streckengleis Brekling - Tolk
+    track(:third :removed, slasat[:bre + 1sw, :tol - 1sw]);
+
+
+    #--- point.de.Tolk
+    #
+    track(:third :station :removed, slasat[:tol - 1sw, :tol + 1sw]);
+    track(:station :removed,
+            slasat[:tol - 1sw + 0.9dl, :tol - 1sw + 1.0dl]
+        --  slasat[:tol - 1sw + 2.0dl, :tol + 1sw - 2.0dl] >> 1dt
+        --  slasat[:tol + 1sw - 1.0dl, :tol + 1sw - 0.9dl]
+    );
+    marker(:de.kbf :removed :right, slasat[:tol] >> 1dt);
+    station(:right :removed, slasat[:tol - 0.1sw] >> 1dt >> 1.3sh,
+        "Tolk", "??"
+    );
+
+    # Streckengleis Tolk - Wellspang
+    track(:third :removed, slasat[:tol + 1sw, :wel - 1.5sw]);
+
+}
+with detail = [4, 5] {
+
+    #--- point.de.Wellspang
+    #
+    track(:third :station :removed, slasat[:wel - 1.5sw, :wel + 1sw]);
+    track(:station :removed,
+            slasat[:wel - 1.5sw + 0.9dl, :wel - 1.5sw + 1.0dl]
+        --  slasat[:wel - 1.5sw + 2dl, :wel - 0.5sw - 1.0dl] << 1dt
+        --  slasat[:wel - 0.5sw, :wel - 0.5sw + 0.1dl]
+    );
+    marker(:de.kbf :removed :left, slasat[:wel]);
+    station(:bottom :removed, slasat[:wel] << 1.0sh,
+        "Wellspang", "??"
+    );
+
+    # Streckengleis Wellspang - Böklund
+    track(:third :removed, slasat[:wel + 1sw, :bok - 1sw]);
+
+
+    #--- point.de.Böklund
+    #
+    track(:third :station :removed, slasat[:bok - 1sw, :bok + 1sw]);
+    track(:station :removed,
+            slasat[:bok - 1sw + 0.9dl, :bok - 1sw + 1.0dl]
+        --  slasat[:bok - 1sw + 2.0dl, :bok + 1sw - 2.0dl] << 1dt
+        --  slasat[:bok + 1sw - 1.0dl, :bok + 1sw - 0.9dl]
+    );
+    marker(:de.kbf :removed :left, slasat[:bok] << 1dt);
+    station(:left :removed, slasat[:bok - 0.4sw] << 1dt << 1.3sh,
+        "Böklund", "??"
+    );
+
+    # Streckengleis Böklund - Bellig
+    track(:third :removed, slasat[:bok + 1sw, :bel - 1sw]);
+    with layer = 1 line_badge(:removed, slasat[:bok + 1.1km], "9101");
+
+
+    #--- point.de.Bellig
+    #
+    track(:third :station :removed, slasat[:bel - 1sw, :bel + 1sw]);
+    marker(:de.kbf :removed :right, slasat[:bel]);
+    station(:right :removed, slasat[:bel - 0.4sw] >> 1.6sh,
+        "Bellig", "??"
+    );
+
+    # Streckengleis Bellig - Hollmühle
+    track(:third :removed, slasat[:bel + 1sw, :hol - 1sw]);
+
+    
+    #--- point.de.Hollmühle
+    #
+    track(:third :station :removed, slasat[:hol - 1sw, :hol + 1sw]);
+    track(:station :removed,
+            slasat[:hol - 0.5sw - 1.6dl, :hol - 0.5sw - 1.5dl]
+        --  slasat[:hol - 0.5sw - 0.5dl, :hol + 0.5sw + 0.5dl] >> 1dt
+        --  slasat[:hol + 0.5sw + 1.5dl, :hol + 0.5sw + 1.6dl]
+    );
+    marker(:de.kbf :removed :right, slasat[:hol] >> 1dt);
+    station(:right :removed, slasat[:hol - 0.2sw] >> 1dt >> 1.2sh,
+        "Hollmühle", "??"
+    );
+
+    # Streckengleis Hollmühle - Ekebergkrug
+    track(:third :removed, slasat[:hol + 1sw, :ekk - 1sw]);
+
+
+    #--- point.de.Ekebergkrug
+    #
+    track(:third :station :removed, slasat[:ekk - 1sw, :ekk + 1sw]);
+    track(:station :removed,
+            slasat[:ekk - 0.5sw - 1.6dl, :ekk - 0.5sw - 1.5dl]
+        --  slasat[:ekk - 0.5sw - 0.5dl, :ekk + 0.5sw + 0.5dl] >> 1dt
+        --  slasat[:ekk + 0.5sw + 1.5dl, :ekk + 0.5sw + 1.6dl]
+    );
+    marker(:de.kbf :removed :left, slasat[:ekk]);
+    station(:left :removed, slasat[:ekk - 0.4sw] << 1.6sh,
+        "Ekebergkrug", "??"
+    );
+
+    # Streckengleis Ekebergkrug - Ekebergdorf
+    track(:third :removed, slasat[:ekk + 1sw, :ekd - 1sw]);
+
+
+    #--- point.de.Ekebergdorf
+    #
+    track(:third :station :removed, slasat[:ekd - 1sw, :ekd + 1sw]);
+    marker(:de.khp :removed :right, slasat[:ekd]);
+    station(:right :removed, slasat[:ekd - 0.4sw] >> 1.2sh,
+        "Ekebergdorf", "??"
+    );
+
+    # Streckengleis Ekebergdorf - Weißes Roß
+    track(:third :removed, slasat[:ekd + 1sw, :wei - 1sw]);
+
+
+    #--- point.de.Weißes-Roß-Schlesw
+    #
+    track(:third :station :removed, slasat[:wei - 1sw, :wei + 1sw]);
+    track(:station :removed,
+            slasat[:wei - 0.5sw - 1.6dl, :wei - 0.5sw - 1.5dl]
+        --  slasat[:wei - 0.5sw - 0.5dl, :wei + 0.5sw + 0.5dl] >> 1dt
+        --  slasat[:wei + 0.5sw + 1.5dl, :wei + 0.5sw + 1.6dl]
+    );
+    marker(:de.kbf :removed :right, slasat[:wei] >> 1dt);
+    station(:top :removed, slasat[:wei] >> 1dt >> 1.2sh,
+        hbox(:left :base,
+            span(:medium :removed, "Weißes Roß "),
+            span(:medium :light :gone, "(Schlesw)")
+        ),
+        "??"
+    );
+
+    # Streckengleis Weißes Roß - Dammholm
+    track(:third :removed, slasat[:wei + 1sw, :dam - 1sw]);
+
+
+    #--- point.de.Dammholm
+    #
+    track(:third :station :removed, slasat[:dam - 1sw, :dam + 1sw]);
+    marker(:de.kbf :removed :left, slasat[:dam]);
+    station(:bottom :removed, slasat[:dam] << 1.4sh,
+        "Dammholm", "??"
+    );
+
+    # Streckengleis Dammholm - Havetoftloit
+    track(:third :removed, slasat[:dam + 1sw, :hav - 1sw]);
+
+
+    #--- point.de.Havetoftloit
+    #
+    track(:third :station :removed, slasat[:hav - 1sw, :hav + 1sw]);
+    track(:station :removed,
+            slasat[:hav - 0.5sw - 1.6dl, :hav - 0.5sw - 1.5dl]
+        --  slasat[:hav - 0.5sw - 0.5dl, :hav + 0.5sw + 0.5dl] << 1dt
+        --  slasat[:hav + 0.5sw + 1.5dl, :hav + 0.5sw + 1.6dl]
+    );
+    marker(:de.kbf :removed :left, slasat[:hav] << 1dt);
+    station(:left :removed, slasat[:hav - 0.25sw] << 1dt << 1.4sh,
+        "Havetoftloit", "??"
+    );
+
+    # Streckengleis Havetoftloit - Torsballig
+    track(:third :removed, slasat[:hav + 1sw, :tor - 1sw]);
+
+
+    #--- point.de.Torsballig
+    #
+    track(:third :station :removed, slasat[:tor - 1sw, :tor + 1sw]);
+    marker(:de.kbf :removed :right, slasat[:tor]);
+    station(:right :removed, slasat[:tor - 0.4sw] >> 1.3sh,
+        "Torsballig", "??"
+    );
+
+    # Streckengleis Torsballig - Satrup-Kircheholz
+    track(:third :removed, slasat[:tor + 1sw, :kir - 1sw]);
+
+
+    #--- point.de.Satrup-Kirchenholz
+    #
+    track(:third :station :removed, slasat[:kir - 1sw, :kir + 1sw]);
+    marker(:de.kzst :removed :right, slasat[:kir]);
+    station(:left :removed, slasat[:kir - 0.4sw] << 1dt,
+        "Satrup-Kirchenholz", "??"
+    );
+
+    # Streckengleis Satrup-Kircheholz - Esmark
+    track(:third :removed, slasat[:kir + 1sw, :esm - 1sw]);
+    with layer = 1 line_badge(:removed, slasat[:kir + 1.0km], "9101");
+
+
+    #--- point.de.Esmark
+    #
+    track(:third :station :removed, slasat[:esm - 1sw, :esm + 1sw]);
+    track(:station :removed,
+            slasat[:esm - 0.5sw - 1.6dl, :esm - 0.5sw - 1.5dl]
+        --  slasat[:esm - 0.5sw - 0.5dl, :esm + 0.5sw + 0.5dl] >> 1dt
+        --  slasat[:esm + 0.5sw + 1.5dl, :esm + 0.5sw + 1.6dl]
+    );
+    marker(:de.kbf :removed :right, slasat[:esm] >> 1dt);
+    station(:right :removed, slasat[:esm - 0.1sw] >> 1dt >> 1.5sh,
+        "Esmark", "??"
+    );
+
+    # Streckengleis Esmark - Satrup
+    track(:third :removed, slasat[:esm + 1sw, :ff]);
+
+
+    #--- point.de.Satrup-Angeln-Schlesw
+    #
+    track(:third :station :removed,
+            slasat[:ff, :ff + 0.1dl]
+        ..  flerun[:sat.a + 1.5sw, :sat.a] << 2dt
+    );
+    track(:station :removed,
+            flerun[:sat.a + 1.51sw, :sat.a + 1.5sw] << 2dt
+        --  flerun[:sat.a + 1.5sw - 1dl, :sat.a + 1sw] << 3dt
+    );
+    track(:station :removed,
+            flerun[:sat.a + 1.5sw - 0.9dl, :sat.a + 1.5sw - 1dl] << 2dt
+        --  flerun[:sat.a + 1.5sw - 2dl, :sat.a + 0.5sw] << 1dt
+        --  flerun[:sat.a + 0.5sw - 1dl, :sat.a + 0.5sw - 1.1dl] << 2dt
+    );
+            
+    marker(:de.kbf :removed :right, flerun[:sat.a + 0.5sw] >> 2dt);
+}
+
+
+with detail = 5 {
+    # Streckengleis Brekling - Tolk
+    track(:third :removed, slasat[:bre + 1sw, :tol - 130m]);
+    
+    #--- point.de.Tolk
+    #
+    track(:third :station :removed, slasat[:tol - 130m, :tol + 170m]);
+    track(:station :removed,
+            slasat[:tol - 101m, :tol - 100m]
+        --  slasat[:tol - 100m + 1wl, :tol + 140m - 1wl] >> 1dt
+        --  slasat[:tol + 140m, :tol + 141m]
+    );
+    marker(:de.bf :removed :right, slasat[:tol] >> 1dt);
+    station(:right :removed, slasat[:tol - 0.2sw] >> 1dt >> 1.6sh,
+        "Tolk", "??"
+    );
+
+    # Streckengleis Tolk - Wellspang
+    track(:third :removed, slasat[:tol + 170m, :wel - 1.5sw]);
+
+}

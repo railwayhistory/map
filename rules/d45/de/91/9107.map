@@ -1,0 +1,236 @@
+# DE 9107.  Kiel Süd - Schönberg (Holst)
+#
+let kieneu = path("path.de.1023");
+let kieson = path("path.de.9107");
+
+with detail = [4, 5] {
+    with link = "point.de.Kiel-Süd" {
+        track(:third :station :open,
+                kieson[:kie, :kie + 1sw + 1dl] << 1dt
+            ..  kieneu[:fkis - 0.1dl, :fkis] << 3dt
+        );
+        track(:third :station :open,
+                kieson[:kie, :kie + 1sw]
+            --  kieson[:kie + 1sw + 1dl, :kie + 1sw + 1.1dl] << 1dt
+        );
+        track(:third :station :removed,
+                kieson[:kie + 1sw, :kie + 1sw + 1dl]
+            ..  kieneu[:fkis - 0.1dl, :fkis] << 2dt
+        );
+
+        marker(:de.bbf :open :left, kieson[:a + 0.5sw] << 1dt);
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open,
+                kieneu[:kss + 1dl, :kss + 1.1dl] << 3dt
+            ..  kieson[:kss.ff, :sul - 1sw]
+        );
+    }
+
+    with link = "point.de.Kiel-Schulen-am-Langsee" {
+        track(:third :station :open, kieson[:sul - 1sw, :sul + 1sw]);
+        marker(:de.hp :open :right, kieson[:sul]);
+        station(:right :open, kieson[:sul - 0.3sw] >> 1.6sh,
+            "Kiel Schulen am Langsee",
+            "??"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:sul + 1sw, :ell - 1sw]);
+        with layer = 1 line_badge(:open, kieson[:ell - 0.5km], "9107");
+    }
+
+    with link = "point.de.Kiel-Ellerbek" {
+        track(:third :station :open, kieson[:ell - 1sw, :ell + 1sw]);
+        marker(:de.hp :open :right, kieson[:ell]);
+        station(:right :open, kieson[:ell - 0.3sw] >> 2.0sh,
+            "Kiel-Ellerbek",
+            "3,6"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:ell + 1sw, :wel - 1sw]);
+    }
+
+    with link = "point.de.Kiel-Wellingdorf" {
+        track(:third :station, kieson[:wel - 1sw, :wel + 1sw]);
+        with layer = -1 marker(:de.anst :closed :left, kieson[:wel]);
+        with layer = -2 marker(:de.bf :gone :left, kieson[:wel]);
+        station(:top :closed, kieson[:wel] << 1.2sh,
+            "K.-Wellingdorf",
+            "5,3"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:wel + 1sw, :opp - 1sw]);
+    }
+
+    with link = "point.de.Oppendorf" {
+        # Hauptgleis
+        track(:third :station, kieson[:opp - 1sw, :opg + 0.5sw]);
+
+        # Gleis Strecke 91071
+        track(:station,
+                kieson[:opp + 0.9dl, :opp + 1dl]
+            --  kieson[:opp + 2dl, :opp + 2.1dl] << 1dt
+        );
+
+        track(:station, kieson[:opp.a, :opp + 3dl] << 1dt);
+        track(:station,
+                kieson[:opp.a + 0.9dl, :opp.a + 1dl] << 1dt
+            --  kieson[:opp.a + 2dl, :opp] << 2dt
+            --  kieson[:opp + 1dl, :opp + 1.1dl] << 1dt
+        );
+
+        marker(:de.bf :right, kieson[:opp]);
+        station(:right :open, kieson[:opp - 0.5sw] >> 1.8sh,
+            span(:bold, "Oppendorf"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:regular, "9107: "),
+                    span(:regular, "91071: ")
+                ),
+                vbox(:center:top,
+                    span(:regular, "6,8"),
+                    span(:regular, "??")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Oppendorf-Gr" {
+        marker(:de.dirgr :open :right, kieson[:opg]);
+        slabel(:right :open, kieson[:opg + 0.5sw] >> 4.5dt,
+            "VKP/SHK"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:opg + 0.5sw, :sok - 1sw]);
+    }
+
+    with link = "point.de.Schönkirchen" {
+        track(:third :station, kieson[:sok - 1sw, :sok + 1sw]);
+        track(:station,
+                kieson[:sok - 0.5sw - 1.1dl, :sok - 0.5sw - 1.0dl]
+            --  kieson[:sok - 0.5sw, :sok + 1sw - 2dl] << 1dt
+            --  kieson[:sok + 1.0sw - 1.0dl, :sok + 1.0sw - 0.9dl]
+        );
+        marker(:de.bf :open :right, kieson[:sok]);
+        station(:right :open, kieson[:sok - 0.3sw] >> 2.0sh,
+            "Schönkirchen", "8,4"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:sok + 1sw, :lan - 1sw]);
+    }
+
+    with link = "point.de.Schönkirchen-Landgraben" {
+        track(:third :station, kieson[:lan - 1sw, :lan + 1sw]);
+        with layer = -1 marker(:de.bf :closed :left, kieson[:lan]);
+        station(:left :closed, kieson[:lan - 0.3sw] << 1.4sh,
+            "Landgraben", "9,9"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:lan + 1sw, :tre - 1sw]);
+    }
+
+    with link = "point.de.Trensahl" {
+        track(:third :station, kieson[:tre - 1sw, :tre + 1sw]);
+        with layer = -1 marker(:de.hp :closed :left, kieson[:tre]);
+        station(:left :closed, kieson[:tre - 0.6sw] << 1.4sh,
+            "Trensahl", "12,4"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:tre + 1sw, :hag - 1sw]);
+    }
+
+    with link = "point.de.Hagen-Holst" {
+        track(:third :station, kieson[:hag - 1sw, :hag + 1sw]);
+        with layer = -1 marker(:de.bf :closed :right, kieson[:hag]);
+        with layer = -2 station(:right :closed, kieson[:hag - 0.4sw] >> 1.9sh,
+            hbox(:left :base,
+                span(:regular, "Hagen "),
+                span(:light, "(Holst)")
+            ),
+            "13,4"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:hag + 1sw, :pro - 1sw]);
+    }
+
+    with link = "point.de.Probsteierhagen" {
+        track(:third :station, kieson[:pro - 1sw, :pro + 1sw]);
+        track(:station,
+                kieson[:pro - 0.5sw - 1.1dl, :pro - 0.5sw - 1.0dl]
+            --  kieson[:pro - 0.5sw, :pro + 0.5sw] << 1dt
+            --  kieson[:pro + 0.5sw + 1.0dl, :pro + 0.5sw + 1.1dl]
+        );
+        marker(:de.bf :right, kieson[:pro]);
+        with layer = -1 station(:top, kieson[:pro] << 2dt,
+            "Probsteierhagen     ", "14,1"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:pro + 1sw, :pas - 1sw]);
+    }
+
+    with link = "point.de.Passade" {
+        track(:third :station, kieson[:pas - 1sw, :pas + 1sw]);
+        with layer = -1 marker(:de.hp :closed :right, kieson[:pas]);
+        station(:bottom :closed, kieson[:pas] >> 1.4sh,
+            "Passade", "16,0"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:pas + 1sw, :fie - 1sw]);
+        with layer = 1 line_badge(:open, kieson[:fie - 0.9km], "9107");
+    }
+
+    with link = "point.de.Fiefbergen" {
+        track(:third :station, kieson[:fie - 1sw, :fie + 1sw]);
+        marker(:de.bf :open :right, kieson[:fie]);
+        station(:right, kieson[:fie - 0.5sw] >> 2.0sh,
+            "Fiefbergen", "18,0"
+        );
+    }
+
+    with link = "line.de.9107" {
+        track(:third :open, kieson[:fie + 1sw, :son - 1sw]);
+    }
+
+    with link = "point.de.Schönberg-Holst" {
+        track(:third :station, kieson[:son - 1sw, :son + 1sw]);
+        track(:station,
+                kieson[:son - 0.5sw, :son + 0.5sw] >> 1dt
+            --  kieson[:son + 0.5sw + 1.0dl, :son + 0.5sw + 1.1dl]
+        );
+        track(:station,
+                kieson[:son - 0.5sw - 1.1dl, :son - 0.5sw - 1dl]
+            --  kieson[:son - 0.5sw + 1.0dl, :son + 0.5sw] >> 2dt
+        );
+
+        marker(:de.bf :open :left, kieson[:son]);
+        station(:left :open, kieson[:son - 0.5sw] << 1.4sh,
+            hbox(:right:base,
+                span(:bold, "Schönberg "),
+                span(:regular, "(Holst)")
+            ),
+            "9107: 20,2 • 9108: 20,2"
+        );
+    }
+}
+

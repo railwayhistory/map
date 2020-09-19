@@ -1,0 +1,25 @@
+# DE 1133.  Lübeck-Schlutup (ausschl.) - Lübeck-Schlutup Breitling
+#
+let sluslb = path("path.de.1133");
+
+with detail = [4, 5] {
+    with link = "point.de.Lübeck-Schlutup-W51" {
+        with layer = -1 {
+            track(:private:station :removed,
+                sluslb[:slu.w51, :slu.w51 + 0.5sw]
+            );
+        }
+    }
+
+    with link = "line.de.1133" {
+        track(:private :removed, sluslb[:slu.w51 + 0.5sw, :bre - 200m]);
+    }
+
+    with link = "point.de.Lübeck-Schlutup-Breitling" {
+        track(:private:station :removed, sluslb[:bre - 200m, :f]);
+        slabel(:top :removed, sluslb[:bre] >> 1.5dt,
+            span(:italic, "Breitling")
+        );
+    }
+}
+

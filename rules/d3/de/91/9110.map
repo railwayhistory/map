@@ -1,0 +1,110 @@
+# DE 9110.  Lüneburg Nord - Bleckede
+#
+let lunble = path("path.de.9110");
+
+with detail = 3 {
+    with link = "point.de.Lüneburg-Nord" {
+        track(:third:station,
+                path("path.de.1720")[:lun + 1ssw, :lun + 1.1ssw] >> 0.5dt
+            ..  lunble[:aa - 1m, :aa]
+        );
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:aa, :erz - 1ssw]);
+    }
+
+    with link = "point.de.Erbstorf-Ziegelei" {
+        track(:third:station, lunble[:erz - 1ssw, :erz + 1ssw]);
+        marker(:de.bf :left, lunble[:erz]);
+        slabel(:right, lunble[:erz - 0.4ssw] >> 5pt, "Erbstorf Ziegelei");
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:erz + 1ssw, :erb - 1ssw]);
+    }
+
+    with link = "point.de.Erbstorf" {
+        track(:third:station, lunble[:erb - 1ssw, :erb + 1ssw]);
+        marker(:de.bf :left, lunble[:erb]);
+        slabel(:right, lunble[:erb - 0.4ssw] >> 5pt, "Erbstorf");
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:erb + 1ssw, :sar - 1ssw]);
+    }
+
+    with link = "point.de.Scharnebeck" {
+        track(:third:station, lunble[:sar - 1ssw, :sar + 1ssw]);
+        marker(:de.hp :left, lunble[:sar]);
+        with layer = -1 marker(:de.bf :removed :left, lunble[:sar]);
+        slabel(:right, lunble[:sar] - (3ssw, 1.5ssw), "Scharnebeck");
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:sar + 1ssw, :rul - 1ssw]);
+    }
+
+    with link = "point.de.Rullstorf" {
+        track(:third:station, lunble[:rul - 1ssw, :rul + 1ssw]);
+        marker(:de.hp :right, lunble[:rul]);
+        with layer = -1 marker(:de.bf :removed :right, lunble[:rul]);
+        slabel(:bottom, lunble[:rul] >> 1.2ssw, "Rullstorf");
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:rul + 1ssw, :bol - 1ssw]);
+    }
+
+    with link = "point.de.Boltersen" {
+        track(:third:station, lunble[:bol - 1ssw, :bol + 1ssw]);
+        marker(:de.bf :right, lunble[:bol]);
+        slabel(:right, lunble[:bol - 0.4ssw] << 0.5dt, "Boltersen");
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:bol + 1ssw, :nee - 1ssw]);
+        with layer = 1 line_badge(:open, lunble[:bol + 2.1km], "9110");
+    }
+
+    with link = "point.de.Neetze" {
+        track(:third:station, lunble[:nee - 1ssw, :nee + 1ssw]);
+        marker(:de.hp :right, lunble[:nee]);
+        with layer = -1 marker(:de.bf :removed :right, lunble[:nee]);
+        slabel(:right, lunble[:nee - 0.1ssw] >> 2.2ssw,
+            "Neetze"
+        );
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:nee + 1ssw, :neg - 0.5ssw]);
+    }
+    
+    with link = "point.de.Neetze-Gabelung" {
+        track(:third:station, lunble[:neg - 0.5ssw, :neg + 0.5ssw]);
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:neg + 0.5ssw, :nne - 1ssw]);
+    }
+
+    with link = "point.de.Neu-Neetze" {
+        track(:third:station, lunble[:nne - 1ssw, :nne + 1ssw]);
+        marker(:de.hp :left, lunble[:nne]);
+        with layer = -1 marker(:de.bf :left :right, lunble[:nne]);
+        slabel(:right, lunble[:nne] + (-0.3ssw, 7pt), "Neu Neetze");
+    }
+
+    with link = "line.de.9110" {
+        track(:third, lunble[:nne + 1ssw, :ble - 1ssw]);
+    }
+
+    with link = "point.de.Bleckede" {
+        track(:third:station, lunble[:ble - 1ssw, :ble + 1ssw]);
+        marker(:de.bf :left, lunble[:ble]);
+        slabel(:right, lunble[:ble + 0.6ssw] << 1.4ssw,
+            span(:bold, "Bleckede")
+        );
+    }
+}
+

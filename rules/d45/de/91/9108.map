@@ -1,0 +1,54 @@
+# DE 9108.  Schönberg (Holst) (ausschl.) - Schönberger Strand
+#
+let sonsos = path("path.de.9108");
+
+with detail = [4, 5] {
+    with link = "line.de.9108" {
+        track(:third :open, sonsos[:son + 1sw, :sta - 1sw]);
+    }
+
+    with link = "point.de.Schönberg-Holst-Gr" {
+        marker(:de.dirgr :left, sonsos[:sog]);
+        station(:top :open, sonsos[:sog] << 4dt,
+            span(:small, "VKP/VVM"),
+            "20,586"
+        );
+    }
+
+    with link = "point.de.Stakendorf" {
+        track(:third :station :open, sonsos[:sta - 1sw, :sta + 1sw]);
+        marker(:de.hp :open :right, sonsos[:sta]);
+        station(:right :open, sonsos[:sta - 0.3sw] >> 1.8sh,
+            "Stakendorf", "21,7"
+        );
+    }
+
+    with link = "line.de.9108" {
+        track(:third :open, sonsos[:sta + 1sw, :sos.a]);
+        with layer = 1 line_badge(:open, sonsos[:sta + 0.7km], "9108");
+    }
+
+    with link = "point.de.Schönberger-Strand" {
+        track(:third :station :open, sonsos[:sos.a, :f]);
+
+        track(:station :open,
+                sonsos[:sos.a + 1.9dl, :sos.a + 2dl]
+            --  sonsos[:sos.a + 4dl, :f - 1.3sw] << 2dt
+        );
+        track(:station :open,
+                sonsos[:sos.a + 1dl, :f - 1.1sw - 1dl] << 1dt
+            --  sonsos[:f - 1.1sw, :f - 1.09sw]
+        );
+        track(:station :open,
+                sonsos[:sos.a + 0.9dl, :sos.a + 1dl]
+            --  sonsos[:sos.a + 2.0dl, :f] >> 1dt
+        );
+
+        marker(:de.bf :open :left, sonsos[:f - 0.6sw]);
+        station(:left :open, sonsos[:f - 1.1sw] << 1.4sh,
+            span(:bold, "Schönberger Strand"),
+            "9108: 24,1"
+        );
+    }
+}
+

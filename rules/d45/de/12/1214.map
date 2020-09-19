@@ -1,0 +1,302 @@
+# DE 1214.  Wilster - Brunsbüttel
+#
+let wilbru = path("path.de.1214");
+
+with detail = [4, 5] {
+    with link = "line.de.1214" {
+        with layer = -1 track(:first :gone,
+                wilbru[:wil.ww - 80m, :wil.ww + 41m] << 1.5dt
+            ..  wilbru[:rum - 1.1sw, :rum - 1sw] >> 0.5dt
+        );
+        track(:second :flip,
+                wilbru[:wil.ww + 40m, :wil.ww + 41m] << 2.5dt
+            ..  wilbru[:rum - 1.1sw, :rum - 1sw] << 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Rumfleth" {
+        track(:first:station :gone, wilbru[:rum - 1sw, :rum + 1sw] >> 0.5dt);
+        track(:second:station, wilbru[:rum - 1sw, :rum + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :left, wilbru[:rum] << 0.5dt);
+        station(:bottom :removed, wilbru[:rum] << 0.5dt << 1.2sw,
+            "Rumfleth", "1,22"
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:first :gone, wilbru[:rum + 1sw, :kus - 1sw] >> 0.5dt);
+        track(:second :flip, wilbru[:rum + 1sw, :kus - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.de.Kuskoppermoor" {
+        with layer = -2 track(:first:station :gone,
+                wilbru[:kus - 1sw, :kus + 1sw] >> 0.5dt
+        );
+        track(:second:station, wilbru[:kus - 1sw, :kus + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, wilbru[:kus] << 0.5dt);
+        station(:top :removed, wilbru[:kus] << 0.5dt >> 1.2sw,
+            "Kuskoppermoor", "2,32"
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:first :gone, wilbru[:kus + 1sw, :sot - 1sw] >> 0.5dt);
+        track(:second :flip, wilbru[:kus + 1sw, :sot - 1sw] << 0.5dt);
+        with layer = 1 line_badge(:open, wilbru[:kus + 1.0km], "1214");
+    }
+
+
+    with link = "point.de.Schotten-Steinburg" {
+        with layer = -2 track(:first:station :gone,
+                wilbru[:sot - 1sw, :sot + 1sw] >> 0.5dt
+        );
+        track(:second:station, wilbru[:sot - 1sw, :sot + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, wilbru[:sot] << 0.5dt);
+        station(:top :removed, wilbru[:sot] << 0.5dt >> 1.2sw,
+            vbox(:center:bottom,
+                span(:regular, "Schotten"),
+                span(:light, "(Kr Steinburg)")
+            ),
+            "4,38"
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:first :gone, wilbru[:sot + 1sw, :nor - 1sw] >> 0.5dt);
+        track(:second :flip, wilbru[:sot + 1sw, :nor - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.de.Nortorf-Steinburg" {
+        with layer = -1 track(:first:station :gone,
+                wilbru[:nor - 1sw, :nor + 1sw] >> 0.5dt
+        );
+        track(:second:station, wilbru[:nor - 1sw, :nor + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, wilbru[:nor] << 0.5dt);
+        station(:bottom :removed, wilbru[:nor] << 1.5dt,
+            vbox(:center:bottom,
+                span(:regular, "Nortorf"),
+                span(:light, "(Kr Steinburg)")
+            ),
+            "5,49"
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:first :gone, wilbru[:nor + 1sw, :lan - 1sw] >> 0.5dt);
+        track(:second :flip, wilbru[:nor + 1sw, :lan - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.de.Landscheide" {
+        with layer = -2 track(:first:station :gone,
+                wilbru[:lan - 1sw, :lan + 1sw] >> 0.5dt
+        );
+        track(:second:station, wilbru[:lan - 1sw, :lan + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, wilbru[:lan] << 0.5dt);
+        station(:top :removed, wilbru[:lan] << 0.5dt >> 1.2sw,
+            "Landscheide", "7,25"
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:first :gone, wilbru[:lan + 1sw, :sma.a] >> 0.5dt);
+        track(:second :flip, wilbru[:lan + 1sw, :sma.a] << 0.5dt);
+    }
+
+
+    with link = "point.de.St-Margarethen" {
+        # Gl. 1
+        track(:second:station, wilbru[:sma.a, :sma.f] << 0.5dt);
+
+        # Gl. 2
+        with layer = -1 track(:first :gone,
+                wilbru[:sma.a, :sma.a + 160m] >> 0.5dt
+        );
+        track(:station,
+                wilbru[:sma.a + 99m, :sma.a + 100m] << 0.5dt
+            --  wilbru[:sma.a + 160m, :sma.f - 160m] >> 0.5dt
+            --  wilbru[:sma.f - 100m, :sma.f - 99m] << 0.5dt
+        );
+        with layer = -1 track(:first :gone,
+                wilbru[:sma.f - 160m, :sma.f] >> 0.5dt
+        );
+
+        # Gl. 3
+        track(:station,
+                wilbru[:sma.a + 159m, :sma.a + 160m] << 0.5dt
+            --  wilbru[:sma.a + 200m, :sma - 0.6sw] << 1.5dt
+        );
+
+        marker(:de.bf :left, wilbru[:sma] << 0.5dt);
+        station(:bottom, wilbru[:sma] << 0.5dt << 1.2sw,
+            hbox(:center:base,
+                span(:regular, "St Margarethen "),
+                span(:light, "(Holst)")
+            ),
+            "8,82"
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:first :gone, wilbru[:sma.f, :smg] >> 0.5dt);
+        track(:second :flip,
+                wilbru[:sma.f, :smg] << 0.5dt
+            ..  wilbru[:kud - 1.1sw, :kud - 1sw]
+        );
+    }
+
+
+    with link = "point.de.Kudensee" {
+        track(:second:station, wilbru[:kud - 1sw, :kud + 1sw]);
+        marker(:de.awanst :left, wilbru[:kud]);
+        with layer = -1 marker(:de.hp :removed :left, wilbru[:kud]);
+        station(:left, wilbru[:kud + 0.3sw] >> 1dt,
+            "Kudensee", "10,92"
+        );
+
+        let kudkud = path("path.de.1214.kud");
+        track(:private,
+                kudkud[:kud - 1m, :kud]
+            ..  kudkud[:aa, :f] << 2dt
+        );
+        track(:private,
+                kudkud[:aa +19m, :aa + 20m] << 2dt
+            --  kudkud[:aa + 60m, :f - 640m] << 1dt
+            --  kudkud[:f - 600m, :f - 599m] << 2dt
+        );
+        track(:private,
+                kudkud[:aa + 80m, :f - 360m] << 4dt
+            --  kudkud[:f - 300m, :f - 299m] << 2dt
+        );
+        track(:private,
+                kudkud[:aa, :aa + 1m] << 2dt
+            --  kudkud[:aa + 120m, :f - 50m] << 5dt
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:second :flip, wilbru[:kud + 1sw, :bro.a]);
+        with layer = 1 line_badge(:open, wilbru[:kud + 1.5km], "1214");
+    }
+
+
+    with link = "point.de.Brunsbüttel-Ost" {
+        track(:second:station, wilbru[:bro.a, :bro + 1sw]);
+
+        track(:private, wilbru[:bro.a, :bro - 0.2sw] << 1dt);
+            track(:private,
+                    wilbru[:bro.agl] << 1dt
+                --  wilbru[:bro.agl + 40m]
+            );
+        track(:private,
+                wilbru[:bro.a, :bro.agl - 220m] << 2dt
+            --  wilbru[:bro.agl - 180m, :bro.agl - 39m] << 1dt
+        );
+        track(:private,
+                path("path.de.1214.bro")[:a, :ff - 1dt]
+            ..  wilbru[:bro.agl, :bro.agl + 1m] << 1dt
+        );
+
+	    with layer = -1 marker(:de.awanst :closed :left, wilbru[:bro]);
+	    with layer = -2 marker(:de.bf :gone :left, wilbru[:bro]);
+        label(wilbru[:bro - 0.4sw] << 1.0sw,
+            hbox(:left:top,
+                vbox(:center:top,
+                    vbox(:left:top :medium,
+                        span(:gone, "Ostermoor"),
+                        span(:closed, "Brünsbüttel Ost")
+                    ),
+                    span(:xsmall :closed, "13,80")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1214" {
+        track(:second :flip, wilbru[:bro + 1sw, :bru.a]);
+    }
+
+
+    with link = "point.de.Brunsbüttel" {
+        # Gl. 1
+        track(:second:station, wilbru[:bru.a, :f]);
+
+        # Gl. 2
+        track(:station, wilbru[:bru - 540m, :bru + 120m] >> 1dt);
+
+        # Gl. 3
+        track(:station,
+                wilbru[:bru - 500m, :bru + 80m] >> 2dt
+            --  wilbru[:bru + 160m, :bru + 161m]
+        );
+
+        # Gl. 5
+        track(:station, wilbru[:bru - 460m, :bru + 170m] >> 3dt);
+
+        # Gl. 6
+        track(:station,
+                wilbru[:bru - 581m, :bru - 580m]
+            --  wilbru[:bru - 420m, :bru + 170m] >> 4dt
+        );
+
+        marker(:de.gbf :left, wilbru[:bru]);
+        with layer = -1 marker(:de.bf :gone :left, wilbru[:bru]);
+        with layer = 1 station(:bottom, wilbru[:bru] + (0m, 250m),
+            hbox(:center:base,
+                span(:bold, "Brunsbüttel"),
+                span(:bold :removed, "koog")
+            ),
+            "1214: 15,64"
+        );
+
+
+        track(:private,
+                wilbru[:bru.agl - 41m, :bru.agl - 40m]
+            ..  path("path.de.1214.bru.1")[:aa, :f]
+        );
+        track(:private, path("path.de.1214.bru.2")[:a2, :f]);
+        track(:private, path("path.de.1214.bru.3")[:a3, :f]);
+
+        let bruag4 = path("path.de.1214.bru.4");
+        let bruag5 = path("path.de.1214.bru.5");
+
+        track(:private,
+                wilbru[:bru.agl + 81m, :bru.agl + 80m]
+            --  wilbru[:bru.agl + 40m, :bru.agl - 40m] >> 1dt
+            ..  bruag4[:a5 - 40m, :a6 - 40m] >> 1dt
+        );
+            track(:private,
+                    bruag4[:a5 - 60m]
+                --  bruag4[:a5 - 20m] >> 1dt
+            );
+        track(:private,
+                bruag4[:a5 - 1m, :a5] >> 1dt
+            --  bruag4[:a5 + 40m, :a6 - 80m] >> 2dt
+            --  bruag4[:a6, :a6 + 1m]
+        );
+
+        track(:private, bruag4[:a, :f]);
+
+        track(:private, bruag5[:a5, :f]);
+        track(:private,
+                bruag5[:a5 - 1m, :a5]
+            ..  bruag5[:aa, :aa + 900m] << 1dt
+        );
+        track(:private,
+                bruag5[:f - 651m, :f - 650m]
+            --  bruag5[:f - 610m, :f - 240m] << 1dt
+        );
+    }
+}
+

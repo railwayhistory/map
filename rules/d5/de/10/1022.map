@@ -1,0 +1,218 @@
+# DE 1022.  Kiel Hbf - Osterrönfeld
+#
+let hasfle = path("path.de.1020");
+let haskiw = path("path.de.1021");
+let kieost = path("path.de.1022");
+
+with detail = 5 {
+    # Kiel Hbf - Kiel Hbf (ausschl.)
+    #    DE 1220.
+
+    with link = "line.de.1022" {
+        track(:first, kieost[:fmei, :khg - 1sw] >> 0.5dt);
+        track(:first :removed, kieost[:fmei, :khg - 1sw] << 0.5dt);
+    }
+
+    with link = "point.de.Kiel-Hg" {
+        track(:first, kieost[:khg - 1sw, :khg + 1sw] >> 0.5dt);
+        track(:first :removed, kieost[:khg - 1sw, :khg + 1sw] << 0.5dt);
+        track(:first, kieost[:khg - 1sw, :khg + 1sw] << 1.5dt);
+
+        marker(:de.abzw :removed :right, kieost[:khg] >> 0.5dt);
+        station(:top :removed, kieost[:khg] >> 0.5dt >> 1.3sh,
+            "Hg",
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:regular, "1022: "),
+                    span(:regular, "1031: ")
+                ),
+                vbox(:center:top,
+                    span(:regular, "1,53"),
+                    span(:regular, "??")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1022" {
+        track(:first, kieost[:khg + 1sw, :has - 310m] >> 0.5dt);
+        track(:first :removed, kieost[:khg + 1sw, :has - 310m] << 0.5dt);
+    }
+
+    with link = "point.de.Kiel-Hassee" {
+        # Gl. 1 (<< 1.5dt)
+        track(:station :removed, kieost[:has + 50m, :has.hn - 190m] << 1.5dt);
+        with layer = 1 track(:station,
+                kieost[:has.hn - 190m, :has.hn + 10m] << 1.5dt
+        );
+            # W 4 - W 8
+            with layer = 1 track(:station,
+                    kieost[:has.hn - 180m] << 1.5dt
+                --  kieost[:has.hn - 140m] << 0.5dt
+            );
+
+        # Gl. 2 (<< 0.5dt)
+        track(:first :station :removed,
+                kieost[:has - 310m, :has + 50m] << 0.5dt
+        );
+        with layer = 1 track(:first :station,
+                kieost[:has + 50m, :has.f] << 0.5dt
+        );
+            # W 3 - W 5
+            with layer = 1 track(:station,
+                    kieost[:has.hn - 220m] << 0.5dt
+                --  kieost[:has.hn - 180m] >> 0.5dt
+            );
+
+        # Gl. 3 (>> 0.5dt)
+        with layer = 1 track(:first:station,
+                kieost[:has - 310m, :afle] >> 0.5dt
+            ..  hasfle[:aoro + 10m, :has.f] >> 0.5dt
+        );
+            # W 3 - W S22
+            with layer = 1 track(:station,
+                    kieost[:has - 10m] >> 0.5dt
+                --  kieost[:has + 50m] << 0.5dt
+            );
+            # W N31 - W N41
+            track(:station :removed,
+                    hasfle[:has.hn - 150m] >> 0.5dt
+                --  hasfle[:has.hn - 110m] >> 1.5dt
+            );
+    
+        # Gl. 4 (>> 1.5dt)
+        track(:second:station :removed,
+                kieost[:has + 20m] >> 0.5dt
+            --  kieost[:has + 50m] >> 1dt
+            ..  kieost[:has + 110m, :afle] >> 1.5dt
+            ..  haskiw[:has.hn, :has.hn + 40m] >> 1.5dt
+        );
+
+        # Gl. 5 (<< 2.5dt)
+        track(:station :removed,
+                kieost[:has + 120m] << 3.5dt
+            --  kieost[:has + 135m] << 3dt
+            ..  kieost[:has + 220m, :has.hn - 270m] << 2.5dt
+        );
+        with layer = 1 track(:station,
+                kieost[:has.hn - 270m, :has.hn - 240m] << 2.5dt
+            ..  kieost[:has.hn - 205m] << 2dt
+            --  kieost[:has.hn - 190m] << 1.5dt
+        );
+
+        # Gl. 6 (<< 3.5dt)
+        with layer = 1 track(:station,
+                kieost[:has + 80m, :has.hn - 320m] << 3.5dt
+            ..  kieost[:has.hn - 285m] << 3dt
+            --  kieost[:has.hn - 270m] << 2.5dt
+        );
+
+        # Gl. W1 (<< 5.5dt)
+        with layer = 1 track(:station,
+                kieost[:has + 130m, :has + 200m] << 5.5dt
+        );
+
+        # Gl. W2
+        with layer = 1 track(:station,
+                kieost[:has + 130m] << 9dt
+            --  kieost[:has + 240m] << 3.5dt
+        );
+
+        # Gl. W3 (<< 5.5dt)
+        track(:station :closed,
+                kieost[:has.hn - 270m, :has.hn - 240m] << 5.5dt
+            ..  kieost[:has.hn - 210m] << 5dt
+            --  kieost[:has.hn - 140m] << 1.5dt
+        );
+
+        # Gl. G1 (>> 3.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 320m, :has.hn - 60m] >> 3.5dt
+        );
+
+        # Gl. G2 (>> 4.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 320m, :has.hn - 145m] >> 4.5dt
+            ..  hasfle[:has.hn - 110m] >> 4dt
+            --  hasfle[:has.hn - 95m] >> 3.5dt
+        );
+
+        # Gl. G3 (>> 5.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 320m, :has.hn - 120m] >> 5.5dt
+        );
+
+        # Gl. G4 (>> 6.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 230m, :has.hn - 170m] >> 6.5dt
+            ..  hasfle[:has.hn - 135m] >> 6dt
+            --  hasfle[:has.hn] >> 1.5dt
+        );
+
+        # Gl. G5 (>> 6.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 320m, :has.hn - 290m] >> 6.5dt
+            ..  hasfle[:has.hn - 255m] >> 7dt
+            --  hasfle[:has.hn - 240m] >> 7.5dt
+        );
+
+        # Gl. G6 (>> 7.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 320m, :has.hn - 130m] >> 7.5dt
+        );
+
+        # Gl. G7 (>> 9.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 250m, :has.hn - 170m] >> 9.5dt
+        );
+
+        # Gl. G8 (>> 10.5dt)
+        track(:station :removed,
+                hasfle[:has.hn - 250m, :has.hn - 210m] >> 10.5dt
+            ..  hasfle[:has.hn - 180m] >> 10dt
+            --  hasfle[:has.hn - 30m] >> 2.5dt
+        );
+
+        # Gl. G9
+        track(:station :removed,
+                hasfle[:has.hn - 140m] >> 10.5dt
+            --  hasfle[:has.hn - 70m] >> 4.5dt
+        );
+
+        marker(:de.bf :left, kieost[:has] << 0.5dt);
+        station(:left, kieost[:has - 0.3sw] << 0.5dt << 1.6sh,
+            span(:medium :bold, "Kiel-Hassee Cittipark"),
+            hbox(:right :top,
+                vbox(:right :top,
+                    span(:xsmall, "1020: "),
+                    span(:xsmall :closed, "1021: "),
+                    span(:xsmall, "1022: "),
+                    span(:xsmall, "1031: ")
+                ),
+                vbox(:right :top,
+                    span(:xsmall, "2,"),
+                    span(:xsmall :closed, "0,"),
+                    span(:xsmall, "2,"),
+                    span(:xsmall, "")
+                ),
+                vbox(:left :top,
+                    span(:xsmall, "90"),
+                    span(:xsmall :closed, "00"),
+                    span(:xsmall, "90"),
+                    span(:xsmall, "??")
+                )
+            )
+        );
+
+        marker(:de.stw :removed :left, hasfle[:has.hn] >> 0.5dt);
+        slabel(:right :removed, hasfle[:has.hn] >> 2.5dt, "Hn");
+
+    }
+
+    # Kiel-Hassee (ausschl.) - Osterrönfeld (ausschl.)
+    #    detail [4, 5]
+
+    # Osterrönfeld (ausschl.) - Osterönfeld
+    #    DE 1040.
+}
+

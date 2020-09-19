@@ -1,0 +1,42 @@
+# DE 91071.  Oppendorf (ausschl.) - Kiel Ostuferhafen
+#
+let kieson = path("path.de.9107");
+let oppost = path("path.de.91071");
+
+with detail = [4, 5] {
+    with link = "line.de.91071" {
+        track(:third :open,
+                kieson[:opp + 2dl, :opp + 2.1dl] << 1dt
+            ..  oppost[:a, :opk - 0.5sw]
+        );
+    }
+
+    with link = "point.de.Oppendorf-Kraftwerk" {
+        track(:third :station :open, oppost[:opk - 0.5sw, :opk + 0.5sw]);
+        marker(:de.anst :open :right, oppost[:opk]);
+        station(:top :open, oppost[:opk] >> 1.2sh,
+            vbox(:center:bottom,
+                span(:regular, "Oppendorf"),
+                span(:regular, "Kraftwerk")
+            ),
+            "??"
+        );
+    }
+
+    with link = "line.de.91071" {
+        track(:third :open, oppost[:opk + 0.5sw, :ost - 1sw]);
+    }
+
+    with link = "point.de.Kiel-Ostuferhafen" {
+        track(:third :station :open, oppost[:ost - 1sw, :ost + 1sw]);
+        marker(:de.bf :open :left, oppost[:ost]);
+        station(:left :open, oppost[:ost + 0.5sw] >> 1dt,
+            vbox(:center :bottom,
+                span(:regular :removed, "Dietrichsdorf"),
+                span(:bold, "Kiel Ostuferhafen")
+            ),
+            "91071: ??"
+        );
+    }
+}
+

@@ -1,0 +1,131 @@
+# DE 1206.  Heide (Holst) - Büsum
+#
+let elmnie = path("path.de.1210");
+let heibus = path("path.de.1206");
+
+with detail = 3 {
+    with link = "line.de.1206" {
+        with layer = -2 track(:second,
+                path("path.de.1210.hei")[:hei + 1ssw, :hei + 1.1ssw] >> 1.5dt
+            ..  elmnie[:hei.f, :weh.x - 800m] >> 1.5dt
+            ..  elmnie[:weh - 1.1ssw, :weh - 1ssw] << 1.5dt << 1ssw
+        );
+    }
+
+    with link = "point.de.Weddinghusen" {
+        track(:second:station,
+                elmnie[:weh - 1ssw, :weh + 0.5ssw] << 1.5dt << 1ssw
+        );
+        with layer = -1 track(:second:station :removed,
+                elmnie[:weh - 0.5ssw, :weh + 1ssw] << 1.5dt
+        );
+        with layer = -1 marker(:de.bf :removed :left, elmnie[:weh] << 1.5dt);
+        slabel(:right :removed, elmnie[:weh - 0.6ssw] >> 1.0dt,
+            span(:bold, "Weddinghusen")
+        );
+    }
+
+    with link = "line.de.1206" {
+        track(:second,
+                elmnie[:weh + 0.5ssw, :weh + 0.51ssw] << 1.5dt << 1ssw
+            ..  heibus[:weh.ff + 1200m, :del - 1ssw]
+        );
+    }
+
+    with link = "point.de.Dellweg" {
+        track(:second:station, heibus[:del - 1ssw, :del + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :right, heibus[:del]);
+        slabel(:top :removed, heibus[:del] >> 1.4ssw, "Dellweg");
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:del + 1ssw, :tie - 1ssw]);
+    }
+
+    with link = "point.de.Tiebensee" {
+        track(:second:station, heibus[:tie - 1ssw, :tie + 1ssw]);
+        marker(:de.hp :left, heibus[:tie]);
+        with layer = -1 marker(:de.bf :removed :left, heibus[:tie.bf]);
+        slabel(:right, heibus[:tie + 1.5ssw] << 2.6ssw, "Tiebensee");
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:tie + 1ssw, :haf - 1ssw]);
+    }
+
+    with link = "point.de.Haferwisch" {
+        track(:second:station, heibus[:haf - 1ssw, :haf + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, heibus[:haf]);
+        with layer = -2 marker(:de.bf :gone :left, heibus[:haf]);
+        slabel(:left :removed, heibus[:haf - 1ssw] >> 1.0dt, "Haferwisch");
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:haf + 1ssw, :jar - 1ssw]);
+    }
+
+    with link = "point.de.Jarrenwisch" {
+        track(:second:station, heibus[:jar - 1ssw, :jar + 1ssw]);
+        marker(:de.hp :left, heibus[:jar]);
+        with layer = -1 marker(:de.bf :gone :left, heibus[:jar]);
+        slabel(:right, heibus[:jar + 1.5ssw] << 2.4ssw, "Jarrenwisch");
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:jar + 1ssw, :wes - 1ssw]);
+    }
+
+    with link = "point.de.Wesselburen" {
+        track(:second:station, heibus[:wes - 1ssw, :wes + 1ssw]);
+        marker(:de.hp :right, heibus[:wes]);
+        with layer = -1 marker(:de.bf :removed :right, heibus[:wes]);
+        slabel(:left, heibus[:wes - 1ssw] >> 1.4ssw, "Wesselburen");
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:wes + 1ssw, :sde - 1ssw]);
+    }
+
+    with link = "point.de.Süderdeich" {
+        track(:second:station, heibus[:sde - 1ssw, :sde + 1ssw]);
+        marker(:de.hp :right, heibus[:sde]);
+        with layer = -1 marker(:de.bf :gone :right, heibus[:sde]);
+        slabel(:left, heibus[:sde + 0.3ssw] >> 1.4ssw, "Süderdeich");
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:sde + 1ssw, :rei - 1ssw]);
+    }
+
+    with link = "point.de.Reinsbüttel" {
+        track(:second:station, heibus[:rei - 1ssw, :rei + 1ssw]);
+        marker(:de.hp :left, heibus[:rei]);
+        with layer = -1 marker(:de.bf :removed :left, heibus[:rei.bf]);
+        slabel(:right, heibus[:rei + 0.3ssw] << 2.0ssw, "Reinsbüttel");
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:rei + 1ssw, :oho - 1ssw]);
+    }
+
+    with link = "point.de.Osterhof" {
+        track(:second:station, heibus[:oho - 1ssw, :oho + 1ssw]);
+        with layer = -1 marker(:de.hst :removed :left, heibus[:oho]);
+        with layer = -2 marker(:de.bf :gone :left, heibus[:oho]);
+        slabel(:right :removed, heibus[:oho + 0.4ssw] << 1.6ssw,
+            "Osterhof"
+        );
+    }
+
+    with link = "line.de.1206" {
+        track(:second, heibus[:oho + 1ssw, :f - 1.6ssw]);
+    }
+
+    with link = "point.de.Büsum" {
+        track(:second:station, heibus[:f - 1.6ssw, :f]);
+        marker(:de.bf :right, heibus[:f - 0.6ssw]);
+        slabel(:left, heibus[:f] >> 1.4ssw, span(:bold, "Büsum"));
+    }
+}
+
+

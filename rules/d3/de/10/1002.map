@@ -1,0 +1,30 @@
+# DE 1002.  Flensburg Weiche (ausschl) - Flensburg Hafen Ost
+# DE 1003.  Flensburg Alter Bf - Flensburg Hafen West
+#
+let flafhw = path("path.de.1003");
+let flwfho = path("path.de.1002");
+let neufle = path("path.de.1040");
+
+with detail = 3 {
+    track(:second :removed :flip, neufle[:flw.f, :wil] << 1.5dt);
+
+    # Flensburg Wilhelminental
+    marker(:de.awanst :closed :left, neufle[:wil] << 1.5dt);
+
+    track(:second :closed :flip,
+           neufle[:wil, :afla + 0.4km] << 1.5dt
+        .. flwfho[:fla - 1.1ssw, :fla - 1ssw]
+    );
+
+    # Flensburg Alter Bf
+    #
+    track(:second :station :closed, flwfho[:fla - 1ssw, :fla + .5ssw]);
+    track(:station :closed, flwfho[:fla + .5ssw, :f]);
+    track(:station :closed,
+            flwfho[:fla + .5ssw, :fla + .6ssw]
+        ..  flafhw[:afho + 0.7km, :f]
+    )
+    marker(:de.bf :closed :left, flwfho[:fla]);
+
+}
+

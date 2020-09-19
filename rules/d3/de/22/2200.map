@@ -1,0 +1,60 @@
+#
+#
+let wanham = path("path.de.2200");
+
+with detail = 3 {
+    # ...
+
+    with link = "line.de.2200" {
+        track(:first :cat, wanham[:spr + 1ssw, :buc - 1ssw] << 1dt);
+        track(:first :cat, wanham[:spr + 1ssw, :buc - 1ssw] >> 1dt);
+    }
+    with link = "line.de.1283" {
+        track(:first :cat, wanham[:spr + 1ssw, :buc - 1ssw]);
+    }
+
+    with link = "point.de.Buchholz-Nordheide" {
+        # 2200/1283
+        track(:first:station :cat,
+                wanham[:buc - 1ssw, :buc + 0.5ssw] << 1dt
+            --  wanham[:buc + 0.5ssw + 1dl, :buc + 1ssw] << 0.5dt
+        );
+        track(:first:station :cat,
+                wanham[:buc - 1ssw, :buc + 0.5ssw]
+            --  wanham[:buc + 0.5ssw + 1dl, :buc + 0.5ssw + 1.1dl] >> 0.5dt
+        );
+        track(:first:station :cat,
+                wanham[:buc - 1ssw, :buc + 0.5ssw] >> 1dt
+            --  wanham[:buc + 0.5ssw + 1dl, :buc + 1ssw] >> 0.5dt
+        );
+
+        # 1712
+        track(:first:station,
+                wanham[:buc - 1ssw, :buc - 0.5ssw] >> 1dt >> 1ssw
+        );
+
+        # 1300
+        with layer = -1 track(:second:station :removed,
+                wanham[:buc - 1ssw, :buc - 0.5ssw] >> 2dt >> 1ssw
+        );
+
+        # 1280
+        track(:first:station :double :cat,
+                wanham[:buc - 0.5ssw, :buc + 0.5ssw] >> 1.5dt >> 1ssw
+        );
+
+        marker(:de.bf :right, wanham[:buc] >> 1dt);
+        slabel(:left, wanham[:buc + 1ssw] << 2dt,
+            hbox(:center:base,
+                span(:bold, "Buchholz "),
+                span(:regular, "(Nordh)")
+            )
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat, wanham[:buc + 1ssw, :bun - 1ssw]);
+    }
+
+    # ...
+}

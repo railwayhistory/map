@@ -1,0 +1,113 @@
+# DE 9100.  Niebüll NEG (ausschl.) - Dagebüll Mole
+#
+let elmnie = path("path.de.1210");
+let niedag = path("path.de.9100");
+
+with detail = [4,5] {
+    # Streckengleis Niebüll - Niebüll Süd
+    track(:third :open,
+            elmnie[:nie - 1sw, :nie - 1.1sw] >> 5.5dt
+        ..  niedag[:nis - 1.1sw, :nis - 1sw]
+    );
+
+
+    #--- point.de.Niebüll-Süd
+    #
+    track(:third :station :open, niedag[:nis - 1sw, :nis + 1sw]);
+    with layer = -1 marker(:de.hp :removed :right, niedag[:nis]);
+    station(:left :removed, niedag[:nis + 0.6sw] >> 1.4sh,
+        "Niebüll Süd", "??"
+    );
+
+    # Streckengleis Niebüll Süd - Deezbüll
+    track(:third :open, niedag[:nis + 1sw, :dee - 1sw]);
+
+
+    #--- point.de.Deezbüll
+    #
+    track(:third :station :open, niedag[:dee - 1sw, :dee + 1sw]);
+    marker(:de.hp :open :left, niedag[:dee]);
+    with layer = -1 station(:left :open, niedag[:dee + 0.5sw] >> 1.5dt,
+        "Deezbüll", "1,8"
+    );
+
+    # Streckengleis Deezbüll - Maasbüll
+    track(:third :open, niedag[:dee + 1sw, :maa - 1sw]);
+
+
+    #--- point.de.Maasbüll
+    #
+    track(:third :station :open, niedag[:maa - 1sw, :maa + 1sw]);
+    marker(:de.hp :open :left, niedag[:maa]);
+    station(:right :open, niedag[:maa + 0.1sw] << 1.8sh,
+        hbox(:center :base,
+            span(:medium, "Maasbüll "),
+            span(:medium :light, "(b Niebüll)")
+        ),
+        "4,6"
+    );
+
+    # Streckengleis Maasbüll - Blocksberg
+    track(:third :open, niedag[:maa + 1sw, :blo - 1sw]);
+    with layer = 2 line_badge(:open, niedag[:maa + 2.0km], "9100");
+
+
+    #--- point.de.Blocksberg
+    #
+    track(:third :station :open, niedag[:blo - 1sw, :blo + 1sw]);
+    track(:station :open,
+            niedag[:blo - 0.5sw - 1.1dl, :blo - 0.5sw - 1dl]
+        --  niedag[:blo - 0.5sw, :blo + 0.5sw] >> 1dt
+        --  niedag[:blo + 0.5sw + 1dl, :blo + 0.5sw + 1.1dl]
+    );
+    marker(:de.bbf :open :left, niedag[:blo]);
+    station(:right :open, niedag[:blo + 0.3sw] << 2.0sh,
+        "Blocksberg", "9,0"
+    );
+
+    # Streckengleis Blocksberg - Dagebüll Kirche
+    track(:third :open, niedag[:blo + 1sw, :dak - 1sw]);
+
+
+    #--- point.de.Dagebüll-Kirche
+    #
+    track(:third :station :open, niedag[:dak - 1sw, :dak + 1sw]);
+    marker(:de.hp :open :left, niedag[:dak]);
+    with layer = -1 marker(:de.bf :gone :left, niedag[:dak]);
+    station(:bottom :open, niedag[:dak] << 1.5sh,
+        "Dagebüll Kirche", "11,3"
+    );
+
+    # Streckengleis Dagebüll Kirche - Dagebüll Hafen
+    track(:third :open, niedag[:dak + 1sw, :dah - 1sw]);
+
+
+    #--- point.de.Dagebüll-Hafen
+    #--- point.de.Dagebüll-Mole
+    #
+    track(:third :station :open, niedag[:dah - 1sw, :f]);
+    track(:station :open,
+            niedag[:dah - 1.1sw, :dah - 1sw]
+        --  niedag[:dah - 1sw + 1dl, :dah + 0.5sw - 2dl] << 1dt
+        --  niedag[:dah + 0.5sw - 1dl, :dah + 0.5sw - 0.9dl]
+    );
+    marker(:de.bf :open :right, niedag[:dah]);
+    station(:left :open, niedag[:dah - 0.4sw] << 1dt << 1sw,
+        "Dagebüll Hafen", "13,6"
+    );
+
+    track(:station :open,
+            niedag[:dam - 0.51sw, :dam - 0.5sw]
+        --  niedag[:dam - 0.5sw + 1dl, :f] << 1dt
+    );
+    track(:station :open,
+            niedag[:dam + 0.59sw, :dam + 0.6sw]
+        --  niedag[:dam + 0.6sw + 1dl, :dam + 0.6sw + 1.1dl] << 1dt
+    );
+    marker(:de.bf :open :right, niedag[:dam]);
+    station(:top :open, niedag[:dam] >> 1.4sh,
+        span(:medium :bold, "Dagebüll Mole"),
+        "13,9"
+    );
+}
+

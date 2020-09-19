@@ -1,0 +1,50 @@
+# DE 9105.  Suchsdorf - Kiel-Scheerhafen
+#
+let hasfle = path("path.de.1020");
+let sucsee = path("path.de.9105");
+
+with detail = [4, 5] {
+    with link = "line.de.9105" {
+        track(:third :open,
+                hasfle[:awik, :awik + 0.1dl] >> 1dt
+            ..  sucsee[:a + 1km, :wik.aa]
+            ..  sucsee[:wik.a - 0.1dl, :wik.a] >> 2dt
+        );
+        with layer = 1 line_badge(:open, sucsee[:a + 1.5km], "9105");
+    }
+
+    with link = "point.de.Kiel-Wik" {
+        track(:third :station :open,
+                sucsee[:wik.a, :wik.r - 4dl] >> 2dt
+            --  sucsee[:wik.r, :wik.f]
+        );
+        track(:station :open,
+                sucsee[:wik.r - 0.1dl, :wik.r]
+            --  sucsee[:wik.r + 1.0dl, :wik.f - 1dl] << 1dt
+            --  sucsee[:wik.f, :wik.f + 0.1dl]
+        );
+
+        track(:station :open, sucsee[:wik.a, :wik.r]);
+        track(:station :open,
+                sucsee[:wik.a, :wik.r - 2dl] << 1dt
+            --  sucsee[:wik.r - 1dl, :wik.r - 0.9dl]
+        );
+
+        marker(:de.bf :open :right, sucsee[:wik]);
+        station(:bottom :open, sucsee[:wik] >> 1.4sh,
+            span(:bold, "Kiel-Wik"),
+            "9105: 3,0"
+        );
+    }
+
+    with link = "point.de.Kiel-Scheerhafen" {
+        track(:station :open, sucsee[:wik.f, :f]);
+        marker(:de.bf :open :left, sucsee[:see]);
+        station(:top :open, sucsee[:see] << 1.4sh,
+            "Kiel Scheerhafen",
+            "??"
+        );
+    }
+}
+
+

@@ -1,0 +1,157 @@
+# DE 1121.  Lübeck Hgbf Abzw (ausschl.) - Büchen (ausschl.)
+#
+let lubbuc = path("path.de.1121");
+let lubstr = path("path.de.1122");
+
+with detail = 3 {
+    with link = "line.de.1121" {
+        track(:first,
+                lubstr[:abuc, :abuc + 1m]
+            ..  lubbuc[:a + 100m, :hoc - 1ssw]
+        );
+    }
+
+    with link = "point.de.Lübeck-Hochschulstadtteil" {
+        track(:first:station, lubbuc[:hoc - 1ssw, :hoc + 1ssw]);
+        marker(:de.hp :right, lubbuc[:hoc]);
+        slabel(:left, lubbuc[:hoc - 0.6ssw] >> 1.2ssw,
+            vbox(:right:top,
+                span(:open, "L. Hochschul-"),
+                span(:open, "stadtteil")
+            )
+        );
+     }
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:hoc + 1ssw, :flu - 1ssw]);
+    }
+
+    with link = "point.de.Lübeck-Flughafen" {
+        track(:first:station, lubbuc[:flu - 1ssw, :flu + 100m]);
+        marker(:de.hp :left, lubbuc[:flu]);
+        slabel(:right, lubbuc[:flu + 0.4ssw] << 1.3ssw,
+            "Lübeck Flughafen"
+        );
+     }
+
+
+    with link = "point.de.Lübeck-Blankensee" {
+        track(:first:station, lubbuc[:flu + 100m, :bla + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, lubbuc[:bla]);
+        slabel(:left :removed, lubbuc[:bla + 0.4ssw] >> 1dt,
+            "Lübeck-Blankensee"
+        );
+    }
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:bla + 1ssw, :sar - 1ssw]);
+        with layer = 1 line_badge(:open, lubbuc[:bla + 2.5km], "1121");
+    }
+
+
+    with link = "point.de.Sarau" {
+        track(:first:station, lubbuc[:sar - 1ssw, :sar + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, lubbuc[:sar]);
+        slabel(:right :removed, lubbuc[:sar + 0.6ssw] << 1.4ssw, "Sarau");
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:sar + 1ssw, :pog - 1ssw]);
+    }
+
+    with link = "point.de.Pogeez" {
+        track(:first:station, lubbuc[:pog - 1ssw, :pog + 1ssw]);
+        marker(:de.bbf :left, lubbuc[:pog]);
+        slabel(:right, lubbuc[:pog + 0.6ssw] << 1.4ssw, "Pogeez");
+    }
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:pog + 1ssw, :rat.a]);
+    }
+
+    with link = "point.de.Pogeez" {
+        with layer = -1 marker(:de.bk :removed :right, lubbuc[:pob]);
+    }
+
+    with link = "point.de.Ratzeburg" {
+        track(:first:station, lubbuc[:rat.a, :rat.f]);
+        marker(:de.bf :left, lubbuc[:rat] >> 0.5ssw);
+        slabel(:left, lubbuc[:rat + 0.5ssw] >> 1dt,
+            span(:bold, "Ratzeburg ")
+        );
+    }
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:rat.f, :mol - 1ssw]);
+        with layer = 1 line_badge(:open, lubbuc[:rat + 4.6km], "1121");
+    }
+
+    with link = "point.de.Mölln-Lauenburg" {
+        track(:first:station, lubbuc[:mol - 1sw, :mol + 1sw]);
+        marker(:de.bf :left, lubbuc[:mol]);
+        slabel(:left, lubbuc[:mol + 0.4ssw] >> 1.5dt,
+            hbox(:center:base,
+                span(:bold, "Mölln "),
+                span(:regular, "(Lauenburg)")
+            )
+        );
+    }
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:mol + 1ssw, :moi - 0.5ssw]);
+    }
+
+    with link = "point.de.Mölln-Lauenburg-Industriegleis" {
+        track(:first:station, lubbuc[:moi - 0.5ssw, :moi + 0.5ssw]);
+        marker(:de.anst :right, lubbuc[:moi]);
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:moi + 0.5ssw, :gub - 1ssw]);
+    }
+
+    with link = "point.de.Güster-Bahnsteig" {
+        track(:first:station, lubbuc[:gub - 1ssw, :gub + 1ssw]);
+        with layer = -1 marker(:de.bft :removed :left, lubbuc[:gub]);
+    }
+
+    with link = "point.de.Güster" {
+        track(:first:station, lubbuc[:gub + 1ssw, :gus + 1ssw]);
+        marker(:de.bbf :left, lubbuc[:gus]);
+        with layer = -1 marker(:de.bf :gone :left, lubbuc[:gus]);
+        slabel(:right, lubbuc[:gus + 0.4ssw] << 2.2ssw, "Güster");
+    }
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:gus + 1ssw, :ros - 1ssw]);
+    }
+
+    with link = "point.de.Roseburg" {
+        track(:first:station, lubbuc[:ros - 1ssw, :ros + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, lubbuc[:ros]);
+        slabel(:left :removed, lubbuc[:ros + 0.4ssw] >> 1.4ssw, "Roseburg");
+    }
+
+    with link = "line.de.1121" {
+        track(:first, lubbuc[:ros + 1ssw, :nus - 1ssw]);
+        with layer = 1 line_badge(:open, lubbuc[:nus - 2.0km], "1121");
+    }
+
+    with link = "point.de.Büchen-Nüssau" {
+        track(:first:station, lubbuc[:nus - 1ssw, :nus + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, lubbuc[:nus]);
+        slabel(:right :removed, lubbuc[:nus + 0.6ssw] << 1.4ssw,
+            "Büchen-Nüssau"
+        );
+    }
+
+    with link = "line.de.1121" {
+        track(:first,
+	            lubbuc[:nus + 1ssw, :f]
+            ..  path("path.de.6100")[:buc + 0.51ssw, :buc + 0.5ssw] << 0.5dt
+        );
+    }
+}
+

@@ -1,0 +1,332 @@
+# DE 1043.  Neumünster (ausschl.) - Bad Oldesloe (ausschl.)
+#
+let altkie = path("path.de.1220");
+let neuold = path("path.de.1043");
+
+with detail = [4, 5] {
+    # Streckengleiss Neumünster - Neumünster Süd
+    track(:first :open,
+            altkie[:neu.a, :neu.a - 0.1dl] << 1.5dt
+        ..  neuold[:aa, :nes.a] << 0.5dt
+    );
+    with layer = -1 track(:first :removed,
+            altkie[:neu.a, :neu.a - 0.1dl] << .5dt
+        ..  neuold[:aa, :nes.a] >> 0.5dt
+    );
+
+
+    #--- point.de.Neumünster-Gr
+    #
+    marker(:de.dirgr :open :right, altkie[:neu.a] >> 1dt);
+    with layer = 1 label(altkie[:neu.a] << 2dt,
+        hbox(:right :middle,
+            span(:xsmall, "1043: "),
+            vbox(:center :middle,
+                span(:xsmall, "DB"),
+                hbar(0.3),
+                span(:xsmall, "AKN")
+            ),
+            span(:xsmall, " 75,32")
+        )
+    );
+
+
+    #--- point.de.Neumünster-Süd
+    #    point.de.Neumünster-Süd-AKN
+    #
+    track(:first :station :open, neuold[:nes.a, :nes.f] << 0.5dt);
+    with layer = -1 track(:first :station :removed,
+            neuold[:nes.a, :nes.f] >> 0.5dt
+    );
+
+    # Nebengleise Nordseite
+    track(:station :open,
+            neuold[:nes - 0.5sw - 1.1dl, :nes - 0.5sw - 1dl] << 0.5dt
+        --  neuold[:nes - 0.5sw, :nes.x] << 1.5dt
+    );
+    track(:station :open,
+            neuold[:nes + 0.5sw + 0.9dl, :nes + 0.5sw + 1dl] << 1.5dt
+        --  neuold[:nes + 0.5sw + 2dl, :nes.x] << 2.5dt
+    );
+
+
+    # AKN
+    track(:second :station :open,
+            neuold[:nes.a + 0.9dl, :nes.a + 1dl] << 0.5dt
+        --  neuold[:nes.a + 3dl, :nes.f] >> 1.5dt
+    );
+
+    track(:station :open,
+            neuold[:nes + 0.5sw + 0.9dl, :nes + 0.5sw + 1dl] >> 1.5dt
+        --  neuold[:nes + 0.5sw + 2dl, :nes.f - 1dl] >> 2.5dt
+    );
+    with layer = -1 track(:station :removed,
+            neuold[:nes + 0.5sw, :nes + 0.5sw + 2dl] >> 2.5dt);
+    track(:station :open, neuold[:nes + 0.6sw, :nes.x - 1dl] >> 3.5dt);
+    track(:station :open,
+            neuold[:nes + 0.6sw, :nes.x - 2dl] >> 4.5dt
+        --  neuold[:nes.x, :nes.x + 0.1dl] >> 2.5dt
+    );
+
+    with layer = -1 marker(:de.bf :removed :left, neuold[:nes] << 1.5dt);
+    marker(:de.bf :open :right, neuold[:nes] >> 1.5dt);
+
+    station(:right :closed, neuold[:nes + 0.6sw] << 1.5dt << 1.2sh,
+        vbox(:center :bottom,
+            span(:medium :gone, "„AK“"),
+            span(:medium :closed, "Neumünster Süd")
+        ),
+        "1043: 76,70"
+    );
+    station(:left :open, neuold[:nes + 0.3sw] >> 1.5dt >> 2.2sh,
+        span(:medium :bold, "N. Süd AKN"),
+        "9121: 66,87"
+    );
+
+    # Streckengleis Neumünster Süd - Kleinkummerfeld
+    track(:first :open, neuold[:nes.f, :kku - 1sw] << 0.5dt);
+    with layer = -1 track(:first :removed,
+            neuold[:nes.f, :kku - 1sw] >> 0.5dt
+    );
+    with layer = 2 line_badge(:open, neuold[:kku - 2.4km], "1043");
+
+
+    #--- point.de.Neumünster-Süd-Gr
+    #
+    marker(:de.dirgr :open :left, neuold[:nsg]);
+    marker(:statdt :open :left, neuold[:nsg] >> 1dt);
+    label(neuold[:nsg] << 4dt,
+        hbox(:left :bottom,
+            hbox(:center :middle,
+                vbox(:center :middle,
+                    span(:xsmall, "AKN"),
+                    hbar(0.3),
+                    span(:xsmall, "DB")
+                ),
+                span(:xsmall, " 78,50")
+            )
+        )
+    );
+
+
+    #--- point.de.Kleinkummerfeld
+    #
+    track(:first :station :open, neuold[:kku - 1sw, :kku + 1sw] << 0.5dt);
+    with layer = -1 track(:first :station :removed,
+            neuold[:kku - 1sw, :kku + 1sw] >> 0.5dt
+    );
+    with layer = -2 marker(:de.bf :closed, neuold[:kku] >> 0.5dt);
+    station(:left :closed, neuold[:kku] >> 0.5dt >> 2.0sw,
+        "Kleinkummerfeld", "83,24"
+    );
+
+    # Streckengleise Kleinkummerfeld - Rickling
+    track(:first :open, neuold[:kku + 1sw, :rin - 1sw] << 0.5dt);
+    with layer = -1 track(:first :removed,
+            neuold[:kku + 1sw, :rin - 1sw] >> 0.5dt
+    );
+
+    
+    #--- point.de.Rickling-Ölweiche
+    #
+    with layer = -1 marker(:de.anst :removed :left, neuold[:rio] << 0.5dt);
+    station(:top :removed, neuold[:rio] << 0.5dt << 1.4sh,
+        "Rickling Ölweiche", "86,05"
+    );
+
+
+    #--- point.de.Rickling
+    track(:first :station :open, neuold[:rin - 1sw, :ric + 1sw] << 0.5dt);
+    with layer = -1 track(:first :station :removed,
+            neuold[:rin - 1sw, :ric + 1sw] >> 0.5dt
+    );
+    marker(:de.hp :open :left, neuold[:rin] << 0.5dt);
+    with layer = -1 marker(:de.bf :gone :left, neuold[:ric] << 0.5dt);
+    station(:right :left_align :open,
+        neuold[:ric + 0.4sw] << 0.5dt << 1.8sh,
+        "Rickling",
+        hbox(:left :base,
+            span(:xsmall, "91,01"),
+            span(:xsmall :closed, " ← 91,09")
+        )
+    );
+
+    # Streckengleise Rickling - Fahrenkrug
+    track(:first :open, neuold[:ric + 1sw, :fah.a] << 0.5dt);
+    with layer = -1 track(:first :removed,
+            neuold[:ric + 1sw, :fah.a] >> 0.5dt
+    );
+    with layer = 2 line_badge(:open, neuold[:ric + 3.0km], "1043");
+
+    
+    #--- point.de.Wahlstedt
+    #
+    marker(:de.hp :open :left, neuold[:wah] << 0.5dt);
+    station(:right :open, neuold[:wah + .5sw] << 0.5dt << 1.4sh,
+        "Wahlstedt", "96,83"
+    );
+
+
+    #--- point.de.Fahrenkrug
+    #
+    track(:first :station :open, neuold[:fah.a, :fak + 1sw] << 0.5dt);
+    with layer = -1 track(:first :station :removed,
+            neuold[:fah.a, :fah.agl] >> 0.5dt
+    );
+    track(:station :open, neuold[:fah.agl, :fah.agl + 130m] >> 0.5dt);
+    with layer = -1 track(:first :station :removed,
+            neuold[:fah.agl + 130m, :fak + 1sw] >> 0.5dt
+    );
+    track(:station :open,
+            path("path.de.1043.fah")[:f, :a]
+        ..  neuold[:fah.agl - 0.1dl, :fah.agl] >> 0.5dt
+        --  neuold[:fah.agl + 1dl, :fah.agl + 1.1dl] << 0.5dt
+    );
+
+    marker(:de.bft :open :left, neuold[:fak] << 0.5dt);
+    with layer = -2 marker(:de.bf :gone :right, neuold[:fah] >> 0.5dt);
+    station(:top :open, neuold[:fak] << 0.5dt << 1.4sh + (0.5sw, 0dt),
+        "Fahrenkrug",
+        hbox(:left :base,
+            span(:xsmall :closed, "99,26 → "),
+            span(:xsmall, "99,36")
+        )
+    );
+
+    # Streckengleise Rickling - Bad Segeberg
+    track(:first :open, neuold[:fak + 1sw, :seg.a] << 0.5dt);
+    with layer = -1 track(:first :removed,
+            neuold[:fak + 1sw, :seg.a] >> 0.5dt
+    );
+
+
+    #--- point.de.Bad-Segeberg
+    #
+    # Gl. 1
+    track(:first :station :open, neuold[:seg.a, :seg.f] << 0.5dt);
+
+    # Gl. 2
+    track(:first :station :removed, neuold[:seg.a, :seg.a + 2dl] >> 0.5dt);
+    track(:station :open,
+            neuold[:seg.a + 0.9dl, :seg.a + 1.0dl] << 0.5dt
+        --  neuold[:seg.a + 2.0dl, :seg.f - 2.0dl] >> 0.5dt
+    );
+    track(:first :station :removed, neuold[:seg.f - 2dl, :seg.f] >> 0.5dt);
+
+    # Gl. 3
+    with layer = -1 track(:station :removed,
+            neuold[:seg + 1.0dl, :seg.f - 4.0dl] >> 1.5dt
+    );
+
+    # Gl. 5 - Gl. 4
+    track(:station :open,
+            neuold[:seg - 0.1dl, :seg] >> 0.5dt
+        --  neuold[:seg + 2.0dl, :sel + 2.1dl] >> 2.5dt
+    );
+    track(:station :open,
+            neuold[:seg - 0.5sw, :seg.f - 5.0dl] >> 2.5dt
+        --  neuold[:seg.f - 4.0dl, :seg.f - 3.0dl] >> 1.5dt
+        --  neuold[:seg.f - 1.0dl, :seg.f - 0.9dl] << 0.5dt
+    );
+
+    # Gl. 6
+    track(:station :open, neuold[:seg + 180m, :seg.f - 7.0dl] >> 3.5dt);
+
+    # Gl. 7
+    track(:station :open,
+            neuold[:seg + 180m, :seg.f - 8.0dl] >> 4.5dt
+        --  neuold[:seg.f - 6.0dl, :seg.f - 5.9dl] >> 2.5dt
+    );
+
+    marker(:de.bf :open :left, neuold[:seb] << 0.5dt);
+    with layer = -1 marker(:de.bf :gone :left, neuold[:seg] << 0.5dt);
+    station(:open :left, neuold[:seb + 0.4sw] >> 3.5dt,
+        span(:medium :bold, "Bad Segeberg"),
+        hbox(:center :base,
+            span(:xsmall, "1043: 103,14"),
+            span(:xsmall :closed, " ← 103,41")
+        )
+    );
+
+    # Streckengleise Bad Segeberg - Wakendorf
+    track(:first :open, neuold[:seg.f, :wak - 1sw] << 0.5dt);
+    with layer = -1 track(:first :removed,
+            neuold[:seg.f, :wak - 1sw] >> 0.5dt
+    );
+    with layer = 2 line_badge(:open, neuold[:ago - 1.4km], "1043");
+
+
+    #--- point.de.Altengörs
+    #
+    marker(:de.hp :open :left, neuold[:ago] << 0.5dt);
+    station(:right :open, neuold[:ago + 0.4sw] << 0.5dt << 1.4sh,
+        "Altengörs", "180,17"
+    );
+
+    
+    #--- point.de.Wakendorf
+    #
+    track(:first :station :open, neuold[:wak - 1sw, :wak + 1sw] << 0.5dt);
+    with layer = -1 track(:first :station :removed,
+            neuold[:wak - 1sw, :wak + 1sw] >> 0.5dt
+    );
+    marker(:de.hpext :open :right, neuold[:wak] << 0.5dt);
+    marker(:de.hp :open :right, neuold[:wak] >> 0.5dt);
+    with layer = -2 marker(:de.bf :gone :right, neuold[:wak] >> 0.5dt);
+    station(:left :open, neuold[:wak + 0.4sw] >> 0.5dt >> 2.0sh,
+        "Wakendorf",
+        hbox(:left :base,
+            span(:xsmall :closed, "111,98 → "),
+            span(:xsmall, "112,01")
+        )
+    );
+
+    # Streckengleise Wakendorf - Fresenburg
+    track(:first :open, neuold[:wak + 1sw, :frh - 1sw] << 0.5dt);
+    with layer = -1 track(:first :removed,
+            neuold[:wak + 1sw, :frh - 1sw] >> 0.5dt
+    );
+    with layer = 2 line_badge(:open, neuold[:fre - 2.0km], "1043");
+
+
+    #--- point.de.Fresenburg
+    #
+    track(:first :station :open, neuold[:frh - 1sw, :fre + 1sw] << 0.5dt);
+    with layer = -1 track(:first :station :removed,
+            neuold[:frh - 1sw, :fre + 1sw] >> 0.5dt
+    );
+    marker(:de.hp :open :right, neuold[:frh] >> 0.5dt);
+    marker(:de.hpext :open :right, neuold[:frh] << 0.5dt);
+    with layer = -2 marker(:de.bf :gone :right, neuold[:fre] >> 0.5dt);
+    station(:left :open, neuold[:frh + 0.4sw] >> 0.5dt >> 1.4sh,
+        "Fresenburg",
+        hbox(:left :base,
+            span(:xsmall, "115,32"),
+            span(:xsmall :closed, " ← 115,35")
+        )
+    );
+
+
+    with link = "line.de.1043" {
+        let oldold = path("path.de.1120.old");
+
+        # Streckengleise Fresenburg - Bad Oldesloe
+        track(:first :open,
+                neuold[:fre + 1sw, :ff] << 0.5dt
+            ..  oldold[:old.a - 1m, :old.a] >> 1.5dt
+        );
+        with layer = -1 track(:first :removed,
+                neuold[:fre + 1sw, :ff] >> 0.5dt
+            ..  oldold[:old.a - 1m, :old.a] >> 2.5dt
+        );
+    }
+
+
+    #--- point.de.Poggensee
+    #
+    with layer = -2 marker(:de.hp :removed :left, neuold[:pog] << 0.5dt);
+    station(:left :removed, neuold[:pog + .4sw] >> 2.0dt,
+        "Poggensee", "117,18"
+    );
+}
+

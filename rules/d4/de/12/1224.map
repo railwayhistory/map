@@ -1,0 +1,168 @@
+# DE 1224.  Hamburg-Altona - Hamburg-Blankenese
+#
+let altbla = path("path.de.1224");
+
+with detail = 4 {
+    # point.de.Hamburg-Altona-S-Bahn: de.1270
+
+    with link = "line.de.1224" {
+        track(:first :double :rail, altbla[:fala, :baa - 1dl - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Bahrenfeld-Abzw" {
+        track(:first:station,
+                altbla[:baa - 1dl - 1sw, :baa - 1dl] >> 1.5dt
+            --  altbla[:baa, :baa + 1m] >> 0.5dt
+        );
+
+        track(:first:station :double :rail,
+                altbla[:baa - 1dl - 1sw, :baa + 2dl + 1sw]
+        );
+            track(:station,
+                    altbla[:baa + 1dl] >> 0.5dt
+                --  altbla[:baa + 2dl] << 0.5dt
+            );
+
+        marker(:de.abzw :left, altbla[:baa] << 0.5dt);
+        # 1224: 2,53
+        # 1230: 0,35
+    }
+
+
+    with link = "point.de.Hamburg-Bahrenfeld" {
+        track(:first:station :double :rail,
+                altbla[:baa + 2dl + 1sw, :bah + 1sw]
+        );
+
+        marker(:de.hp :right, altbla[:bah] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, altbla[:bah] >> 0.5dt);
+        # 1224: 2,91
+        # 1230: ex ??
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail, altbla[:bah + 1sw, :oth - 1.5sw - 100m]);
+        with layer = 1 line_badge(:open, altbla[:bah + 0.7km], "1224");
+    }
+
+
+    with link = "point.de.Hamburg-Othmarschen" {
+        # Gl. 1
+        track(:first:station :rail,
+                altbla[:oth - 1.5sw - 100m, :oth - 1.5sw] << 0.5dt
+            ..  altbla[:oth - 0.5sw, :oth + 440m] << 1.5dt
+            ..  altbla[:oth + 440m + 1sw, :oth.f] << 0.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :rail,
+                altbla[:oth - 1.5sw - 100m, :oth.f] >> 0.5dt
+        );
+
+        # Gl. 3
+        track(:station, altbla[:oth + 220m, :oth + 440m] << 0.5dt);
+            track(:station,
+                    altbla[:oth + 220m] >> 0.5dt
+                --  altbla[:oth + 220m + 1dl] << 0.5dt
+            );
+            track(:station,
+                    altbla[:oth + 220m + 1dl] << 1.5dt
+                --  altbla[:oth + 220m + 2dl] << 0.5dt
+            );
+
+        marker(:de.bf :left, altbla[:oth] << 1.5dt);
+        station(:bottom, altbla[:oth] << 1.5dt << 1.2sh,
+            "H.-Othmarschen", "4,44"
+        );
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail, altbla[:oth + 650m, :kfl - 550m]);
+    }
+
+
+    with link = "point.de.Hamburg-Klein-Flottbek" {
+        track(:first:station :double :rail, altbla[:kfl - 550m, :kfl + 300m]);
+            track(:station :rail,
+                    altbla[:kfl - 450m] >> 0.5dt
+                --  altbla[:kfl - 450m + 1dl] << 0.5dt
+            );
+            track(:station :rail,
+                    altbla[:kfl + 200m - 1dl] << 0.5dt
+                --  altbla[:kfl + 200m] >> 0.5dt
+            );
+
+        marker(:de.bf :left, altbla[:kfl] << 0.5dt);
+        station(:bottom, altbla[:kfl] << 0.5dt << 1.2sh,
+            "H.-Klein Flottbek", "6,19"
+        );
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail, altbla[:kfl + 300m, :hoc - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Hochkamp" {
+    	track(:first:station :double :rail, altbla[:hoc - 1sw, :hoc + 1sw]);
+        marker(:de.hp :right, altbla[:hoc] >> 0.5dt);
+        station(:right, altbla[:hoc - 0.4sw] >> 0.5dt >> 1.4sh,
+            "H.-Hochkamp", "7,52"
+        );
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail, altbla[:hoc + 1sw, :fwed - 160m]);
+        with layer = 1 line_badge(:open, altbla[:hoc + 1.0km], "1224");
+    }
+
+
+    with link = "point.de.Hamburg-Blankenese" {
+        # Gl. 1
+        track(:station :rail,
+                altbla[:fwed - 3.1dl, :fwed - 3dl] << 0.5dt
+            ..  altbla[:fwed - 1dl, :bla - 0.5sw] << 1.5dt
+        );
+            track(:station :rail,
+                    altbla[:bla - 0.5sw - 2dl] << 1.5dt
+                --  altbla[:bla - 0.5sw - 1dl] << 0.5dt
+            );
+
+        # Gl. 2
+        track(:first:station :rail, altbla[:fwed - 160m, :f] << 0.5dt);
+            track(:station :rail,
+                    altbla[:bla - 0.5sw] << 0.5dt
+                --  altbla[:bla - 0.5sw + 1dl] >> 0.5dt
+            );
+
+        # Gl. 3
+        track(:first:station :rail, altbla[:fwed - 160m, :f] >> 0.5dt);
+            track(:station :rail,
+                    altbla[:fwed - 1dl] >> 0.5dt
+                --  altbla[:fwed + 1dl] << 1.5dt
+            );
+
+        # Strecke 1226
+        track(:first:station :rail,
+                altbla[:fwed - 2dl, :fwed] >> 1.5dt
+            --  altbla[:fwed + 2dl, :fwed + 2.1dl] << 0.5dt
+        );
+
+        marker(:de.bf :left, altbla[:bla] << 0.5dt);
+        station(:bottom, altbla[:bla] << 0.5dt << 1.4sh,
+            span(:bold, "H.-Blankenese"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1224: 9,56"),
+                    span(:open, "1225: 9,56")
+                )
+            )
+        );
+    }
+}
+

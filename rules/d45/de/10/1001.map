@@ -1,0 +1,88 @@
+# DE 1001.  Flensburg Weiche (ausschl) - Lindholm (ausschl)
+#
+let flwlin = path("path.de.1001");
+let neufle = path("path.de.1040");
+
+with detail = [4, 5] {
+    track(:second :closed, flwlin[:flw.f, :han - 1sw]);
+    with layer = 1 line_badge(:closed, flwlin[:flw.f + 2km], "1001");
+
+    # Handewitt
+    track(:second :closed :station, flwlin[:han - 1sw, :han + 1sw]);
+    marker(:de.hst :closed :left, flwlin[:han]);
+    station(:bottom :closed, flwlin[:han] << 1.3sw,
+        "Handewitt", "5,74 (172,74)"
+    );
+
+    track(:second :closed, flwlin[:han + 1sw, :una - 1sw]);
+
+    # Unaften
+    track(:second :closed :station, flwlin[:una - 1sw, :una + 1sw]);
+    marker(:de.hp :closed :right, flwlin[:una]);
+    station(:top :closed, flwlin[:una] >> 1.3sw,
+        "Unaften", "7,74 (174,74)"
+    );
+
+    track(:second :closed, flwlin[:una - 1sw, :wal.a]);
+
+    # Wallsbüll
+    track(:second :closed :station, flwlin[:wal.a, :wal.f]);
+    track(:closed :station,
+           flwlin[:wal.a + 49m, :wal.a + 50m]
+        -- flwlin[:wal.a + 50m + 1dl, :wal.f - 50m - 1dl] >> 1dt
+        -- flwlin[:wal.f - 50m, :wal.f - 49m]
+    );
+    track(:removed :station,
+           flwlin[:wal + 0.49sw, :wal + 0.5sw]
+        -- flwlin[:wal + 0.5sw + 1dl, :wal.f - 50m - 3dl] << 1dt
+        -- flwlin[:wal.f - 50m - 2dl, :wal.f - 50m - 1.9dl]
+    );
+    marker(:de.bf :closed :left, flwlin[:wal]);
+    station(:bottom :closed, flwlin[:wal] << 1.3sw + (8bp, 0bp),
+        "Wallsbüll", "11,43 (178,44)"
+    );
+
+    track(:second :closed, flwlin[:wal.f, :saf - 1sw]);
+
+    # Schafflund
+    track(:second :closed :station, flwlin[:saf - 1sw, :saf + 1sw]);
+    marker(:de.hst :closed :left, flwlin[:saf]);
+    station(:bottom :closed, flwlin[:saf] << 1.3sw,
+        "Schafflund", "15,56 (182,57)"
+    );
+
+    track(:second :closed, flwlin[:saf + 1sw, :spr - 1sw]);
+    with layer = 1 line_badge(:closed, flwlin[:saf + 3km], "1001");
+
+    # Sprakebüll
+    track(:second :closed :station, flwlin[:spr - 1sw, :spr + 1sw]);
+    marker(:de.bf :closed :right, flwlin[:spr]);
+    station(
+        :top :closed, flwlin[:spr] >> 1.3sw,
+        "Sprakebüll", "21,93 (188,90)"
+    );
+
+    track(:second :closed, flwlin[:spr + 1sw, :ach - 1sw]);
+
+    # Achtrup
+    track(:second :closed :station, flwlin[:ach - 1sw, :ach + 1sw]);
+    marker(:de.hst :removed :left, flwlin[:ach]);
+    station(
+        :bottom :removed, flwlin[:ach] << 1.3sw,
+        "Achtrup", "25,44 (192,44)"
+    );
+
+    track(:second :closed, flwlin[:ach + 1sw, :lec - 1sw]);
+
+    # Leck
+    track(:second :station :closed, flwlin[:lec - 1sw, :lec + 1sw]);
+    marker(:de.bf :closed :left, flwlin[:lec]);
+    station(
+        :bottom :closed, flwlin[:lec] << 1.3sw,
+        "Leck", "28,79 (195,79)"
+    );
+
+    track(:second :closed, flwlin[:lec + 1sw, :lin.aa]);
+    with layer = 1 line_badge(:closed, flwlin[:lin.aa - 3km], "1001");
+}
+

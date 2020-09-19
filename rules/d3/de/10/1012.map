@@ -1,0 +1,71 @@
+# DE 1012.  Büdelsdorf (ausschl.) - Husum (ausschl.)
+#
+let budhus = path("path.de.1012");
+let budhus.gen = path("path.de.1012.gen");
+let neufle = path("path.de.1040");
+
+with detail = 3 {
+    # Büdelsdorf - Garlbek (ausschl):
+    track(:station,
+            neufle[:bud + 1ssw, :bud + 1.01ssw] << .5dt
+        ..  budhus[:a, :gen]
+    );
+    track(:second :removed, budhus[:gen, :gar - 1ssw]);
+    with layer = 1 line_badge(:removed, budhus[:foc + 1.8km], "1012");
+
+    marker(:de.anst :right, budhus[:gen]);
+
+    # Fockbek
+    with layer = -1 marker(:de.bf :gone :left, budhus[:foc]);
+    marker(:de.anst :closed :left, budhus[:foc]);
+    #slabel(:bottom :closed, budhus[:foc] << 1.2ssw, "Fockbek");
+
+    # Garlbek
+    track(:second :station :removed, budhus[:gar - 1ssw, :gar + 1ssw]);
+    marker(:de.hp :removed :right, budhus[:gar]);
+    slabel(:top :removed, budhus[:gar] >> 1.6ssw, "Garlbek");
+
+    # Streckengleis Garlbek - Norderstapel
+    track(:second :removed, budhus[:gar + 1ssw, :nor - 0.5ssw]);
+    with layer = 1 line_badge(:removed, budhus[:erf + 3.0km], "1012");
+
+    # Hohn
+    marker(:de.bf :removed :left, budhus[:hoh]);
+    slabel(:bottom :removed, budhus[:hoh] << 1.2ssw, "Hohn");
+
+    # Christiansholm
+    marker(:de.bf :removed :left, budhus[:chr]);
+    slabel(:top :removed, budhus[:chr] >> 2dt, "Christiansholm");
+
+    # Erfde
+    marker(:de.bf :removed :left, budhus[:erf]);
+    slabel(:bottom :removed, budhus[:erf] << 1.2ssw, "Erfde");
+
+    # Norderstapel
+    track(:second :station :removed, budhus[:nor - .5ssw, :nor + 1.5ssw]);
+    with layer = -1 marker(:de.bf :gone :right, budhus[:nor + 0.5ssw]);
+    marker(:de.anst :closed :right, budhus[:nor + 0.5ssw]);
+    slabel(:right :removed, budhus[:nor - 3.0ssw] >> 1dt + (1ssw, 0ssw),
+        span(:bold, "Norderstapel")
+    );
+
+    # Streckengleis Norderstapel - Husum
+    track(:second :removed, budhus[:nor + 1.5ssw, :f]);
+    with layer = 1 line_badge(:removed, budhus[:ran - 2.0km], "1012");
+
+    # Schwabstedt
+    with layer = -1 marker(:de.bf :gone :left, budhus[:swa]);
+    marker(:de.anst :closed :left, budhus[:swa]);
+    slabel(:left :removed, budhus[:swa] << 2ssw, "Schwabstedt");
+
+    # Rantrum
+    with layer = -1 marker(:de.bf :gone :left, budhus[:ran]);
+    marker(:de.anst :closed :left, budhus[:ran]);
+    slabel(:right :removed, budhus[:ran - 0.5ssw] >> 1dt, "Rantrum");
+
+    # Mildstedt
+    with layer = -1 marker(:de.bf :gone :left, budhus[:mil]);
+    marker(:de.hst :removed :left, budhus[:mil]);
+    slabel(:right :removed, budhus[:mil - .5ssw] >> 1dt, "Mildstedt");
+}
+

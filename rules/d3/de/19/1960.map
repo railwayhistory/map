@@ -1,0 +1,26 @@
+#
+#
+let uellan = path("path.de.1960");
+
+with detail = 3 {
+    # ...
+
+    with link = "line.de.1960" {
+        track(:second, uellan[:har + 0.5ssw, :sol - 1ssw] >> 0.5dt);
+        track(:second:station :removed, uellan[:har + 0.5ssw, :fbuc] << 0.5dt);
+        track(:second:station, uellan[:fbuc, :sol - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Soltau-Han" {
+        track(:second:station :double, uellan[:sol - 1ssw, :sol + 1ssw]);
+        marker(:de.bf :right, uellan[:sol] >> 0.5dt);
+        slabel(:top, uellan[:sol] >> 0.5dt >> 1.2ssw,
+            hbox(:center:base,
+                span(:bold, "Soltau "),
+                span(:regular, "(Han)")
+            )
+        );
+    }
+
+    # ...
+}

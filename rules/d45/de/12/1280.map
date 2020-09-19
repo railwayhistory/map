@@ -1,0 +1,76 @@
+#
+#
+let bucall = path("path.de.1280");
+
+with detail = [4, 5] {
+    with link = "line.de.1280" {
+        track(:first :double :cat,
+                path("path.de.1280.buc")[:buc.f, :buc.f + 1m] >> 4.5dt
+            ..  bucall[:buc.ff + 900m, :rei - 1sw]
+        );
+        with layer = 1 line_badge(:open, bucall[:rei - 0.9km], "1280");
+    }
+
+
+    with link = "point.de.Reindorf" {
+        track(:first:station :double :cat, bucall[:rei - 1sw, :rei + 1sw]);
+        with layer = -1 marker(:de.hp :removed :right, bucall[:rei] >> 0.5dt);
+        station(:bottom :removed, bucall[:rei] >> 0.5dt >> 1.4sh,
+            "Reindorf",
+            "1151: 264,40"
+        );
+    }
+
+
+    with link = "line.de.1280" {
+        track(:first :double :cat, bucall[:rei + 1sw, :jeb - 1sw]);
+        with layer = 1 line_badge(:removed, bucall[:rei + 0.9km], "1151");
+    }
+
+
+    with link = "point.de.Jesteburg-Bf" {
+        track(:first:station :double :cat, bucall[:jeb - 1sw, :jeb + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, bucall[:jeb] >> 0.5dt);
+        station(:bottom :removed, bucall[:jeb] >> 0.5dt >> 1.4sh,
+            "Jesteburg",
+            "1151: 262,03"
+        );
+    }
+
+
+    with link = "line.de.1280" {
+        track(:first :double :cat, bucall[:jeb + 1sw, :jes - 0.5sw]);
+    }
+
+
+    with link = "point.de.Jesteburg" {
+        track(:first:station :double :cat, bucall[:jes - 0.5sw, :jes + 0.5sw]);
+        marker(:de.uest :right, bucall[:jes] >> 0.5dt);
+        station(:bottom, bucall[:jes] >> 0.5dt >> 1.4sh,
+            "Jesteburg",
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "1151: "),
+                    span(:open, "1280: ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "260,"),
+                    span(:open, "7,")
+                ),
+                vbox(:left:top,
+                    span(:removed, "35"),
+                    span(:open, "97")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1280" {
+        track(:first :double :cat, bucall[:jes + 0.5sw, :mss - 0.5sw]);
+        with layer = 1 line_badge(:open, bucall[:jes + 2.0km], "1280");
+    }
+
+    # ...
+}
+

@@ -1,0 +1,67 @@
+# DE 1204.  Abzw Hörn - Tönning
+#
+let horton = path("path.de.1204");
+
+with detail = 3 {
+    with link = "line.de.1204" {
+        track(:second,
+                path("path.de.1210")[:hor - 0.49sw, :hor - 0.5sw] >> 0.5dt
+            ..  horton[:pla - 0.51ssw, :pla - 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Platenhörn" {
+        track(:second:station, horton[:pla - 0.5ssw, :pla + 0.5ssw]);
+        with layer = -1 marker(:de.hp :removed :left, horton[:pla]);
+        slabel(:left :removed,
+            path("path.de.12041")[:pla + 0.4ssw] >> 1.5dt,
+            "Platenhörn"
+        );
+    }
+
+    with link = "line.de.1204" {
+        track(:second, horton[:pla + 0.5ssw, :but - 1ssw]);
+    }
+
+    with link = "point.de.Büttel" {
+        track(:second:station, horton[:but - 1ssw, :but + 1ssw]);
+        with layer = -1 marker(:de.hst :removed :left, horton[:but]);
+        with layer = -2 marker(:de.bf :gone :left, horton[:but]);
+        slabel(:left :removed, horton[:but + 0.4ssw] >> 1.0dt, "Büttel");
+    }
+
+    with link = "line.de.1204" {
+        track(:second, horton[:but + 1ssw, :wit - 1ssw]);
+    }
+
+    with link = "point.de.Witzwort" {
+        track(:second:station, horton[:wit - 1ssw, :wit + 1ssw]);
+        marker(:de.hp :left, horton[:wit]);
+        slabel(:left, horton[:wit + 0.4ssw] >> 1.0dt, "Witzwort");
+    }
+
+    with link = "line.de.1204" {
+        track(:second, horton[:wit + 1ssw, :har - 1ssw]);
+        with layer = 1 line_badge(:open, horton[:wit + 1.8km], "1204");
+    }
+
+    with link = "point.de.Harblek" {
+        track(:second:station, horton[:har - 1ssw, :har + 1ssw]);
+        marker(:de.hp :right, horton[:har]);
+        with layer = -1 marker(:de.bf :removed :right, horton[:har]);
+        slabel(:left, horton[:har + 0.4sw] >> 1.3ssw, "Harblek");
+    }
+
+    with link = "line.de.1204" {
+        track(:second, horton[:har + 1ssw, :ton.aa]);
+        track(:second:station,
+                horton[:ton.aa, :ton.aa + 1m]
+            ..  path("path.de.1205")[:ton + 0.51ssw, :ton + 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Tönning-Hafen" {
+        with layer = -1 track(:station :removed, horton[:ton + 1ssw, :f]);
+    }
+}
+

@@ -1,0 +1,213 @@
+# DE 1023.  Kiel Hbf (ausschl.) - Neustadt (Holst)
+#
+let altkie = path("path.de.1220");
+let kieneu = path("path.de.1023");
+let kieneu.wel = path("path.de.1023.wel");
+let lubpat = path("path.de.1100");
+let mallut = path("path.de.1112");
+let neuasc = path("path.de.1041");
+
+with detail = 3 {
+    with layer = 1 {
+        # Streckengleis Kiel Hbf - Kiel Hbf Ss
+        track(:first,
+                altkie[:kie, :fasc] << 1.5dt
+            ..  kieneu[:kss - .1ssw, :kss]
+        );
+
+        # Kiel Hbf (Ss), Kiel Wellsee Awanst
+        track(:first :station, kieneu[:kss, :wel + 1ssw]);
+#       marker(:de.abzw :left, kieneu[:kss] << 2dt);
+        marker(:de.anst :right, kieneu[:wel]);
+    }
+
+    # Streckengleis Wellsee - Elmschenhagen
+    track(:first, kieneu[:wel + 1ssw, :elh - 1ssw]);
+
+    # Kiel-Elmschenhagen
+    track(:first :station, kieneu[:elh - 1ssw, :elh + 1ssw]);
+    marker(:de.bf :left, kieneu[:elh]);
+    with layer = -1 slabel(:right, kieneu[:elm] << 1.8ssw - (1ssw, 0ssw),
+        "K.-Elmschenhagen"
+    );
+
+    # Streckengleis Elmschenhagen - Raisdorf
+    track(:first, kieneu[:elh + 1ssw, :rai - 1ssw]);
+
+    # Kroog
+    marker(:de.hp :closed :right, kieneu[:kro]);
+    slabel(:bottom :closed, kieneu[:kro] >> 1.2ssw, "Kroog");
+
+    # Raisdorf West
+    marker(:de.awanst :left, kieneu[:raw]);
+
+    # Raisdorf
+    track(:first :station, kieneu[:rai - 1ssw, :rai + 1ssw]);
+    marker(:de.bf :right, kieneu[:rai]);
+    slabel(:right, kieneu[:rai + .4ssw] << 1dt, "Raisdorf");
+
+    # Streckengleis Raisdorf - Preetz
+    track(:first, kieneu[:rai + 1ssw, :pre - 1ssw]);
+    with layer = 1 line_badge(:open, kieneu[:rai + 2.3km], "1023");
+    with layer = -1 casing(:first, kieneu[:pre.x - 1dt, :pre.x + 1dt]);
+
+    # Preetz
+    track(:first :station, kieneu[:pre - 1ssw, :pre + 1ssw]);
+    marker(:de.bf :left, kieneu[:pre]);
+    slabel(:right, kieneu[:pre + 2.0ssw] << 1.2ssw, "Preetz");
+
+    # Streckengleis Preetz - Kühren
+    track(:first, kieneu[:pre + 1ssw, :kuh - 1ssw]);
+
+    # Kühren
+    track(:first :station, kieneu[:kuh - 1ssw, :kuh + 1ssw]);
+    with layer = -1 marker(:de.bf :removed :right, kieneu[:kuh]);
+    slabel(:left, kieneu[:kuh + .3ssw] >> 2ssw,
+        hbox(:center :base,
+            span(:small:closed, "Kühren "),
+            span(:small :light :closed, "(Holst)")
+        )
+    );
+
+    # Streckengleis Kühren - Wahlstorf
+    track(:first, kieneu[:kuh + 1ssw, :wah - 1ssw]);
+
+    # Wahlstorf
+    track(:first :station, kieneu[:wah - 1ssw, :wah + 1ssw]);
+    marker(:de.bf :removed :left, kieneu[:wah]);
+    slabel(:right :removed, kieneu[:wah + .3ssw] << 1.3ssw, "Wahlstorf");
+
+    # Streckengleis Wahlstorf - Ascheberg
+    track(:first, kieneu[:wah + 1ssw, :asc - 1ssw]);
+    with layer = 1 line_badge(:open, kieneu[:asc - 2km], "1023");
+
+    # Ascheberg
+    track(:first :station, kieneu[:asc - 1ssw, :asc + 1ssw]);
+    with layer = -1 track(:first :station :closed,
+            neuasc[:ff, :ff + .1dl]
+        ..  kieneu[:fneu, :fneu + .1dl]
+    );
+    marker(:de.bf :right, kieneu[:asc]);
+    label(kieneu[:asc] >> 1.3ssw - (1.5ssw, 0ssw),
+    	vbox(:left :top,
+            hbox(:left :base,
+                span(:small :bold, "Ascheberg "),
+                span(:small, "(Holst)")
+            )
+        )
+    );
+
+    # Streckengleis Ascheberg - Plön
+    track(:first, kieneu[:asc + 1ssw, :plo - 1ssw]);
+
+    # Plön
+    track(:first :station, kieneu[:plo - 1ssw, :plo + 1ssw]);
+    marker(:de.bf :left, kieneu[:plo]);
+    slabel(:top, kieneu[:plo] << 1.3ssw - (.3ssw, 0ssw), "Plön");
+
+    # Streckengleis Plön - Timmdorf
+    track(:first, kieneu[:plo + 1ssw, :tim - 1ssw]);
+
+    # Timmdorf
+    track(:first :station, kieneu[:tim - 1ssw, :tim + 1ssw]);
+    with layer = -1 marker(:de.bf :removed :right, kieneu[:tim]);
+    slabel(:bottom :removed, kieneu[:tim] >> 1.2ssw, "Timmdorf");
+
+    # Streckengleis Timmdorf - Malente-G.
+    track(:first,
+            kieneu[:tim + 1ssw, :mal - 1ssw - .4km]
+        ..  kieneu[:mal - 1ssw - .1dl, :mal - 1ssw] << 0.5dt);
+    with layer = 1 line_badge(:open, kieneu[:tim + 1.8km], "1023");
+
+    # Malente-Gremsmühlen
+    track(:first :station, kieneu[:mal - 1ssw, :mal + 1ssw] << 0.5dt);
+    track(:first :station,
+            kieneu[:mal - 1ssw - .1dl, :mal - 1ssw] << 0.5dt
+        --  kieneu[:mal - 1ssw + 1dl, :mal + 1ssw] >> 0.5dt
+    );
+    with layer = -1 track(:second :station :closed,
+            mallut[:aaa, :aaa - .1dl]
+        ..  kieneu[:mal - .2ssw, :mal + .5ssw] << 0.5dt << 1ssw
+    );
+    marker(:de.bf :left, kieneu[:mal] << 0.5dt);
+    slabel(:right, kieneu[:mal + 1.5ssw] << 2dt,
+        span(:small :bold, "Bad Malente-Gremsmühlen")
+    );
+
+    # Streckengleis Malente-G - Eutin
+    track(:double :first, kieneu[:mal + 1ssw, :eut - 1ssw]);
+    with layer = 1 line_badge(:open, kieneu[:eut - 2.4km], "1023");
+
+    # Eutin
+    track(:first :station, kieneu[:eut - 1ssw, :eut + .5ssw] << 0.5dt);
+    track(:second :station :removed,
+            kieneu[:eut + .5ssw, :eut + 1ssw] << .5dt
+    );
+    track(:first :station, kieneu[:eut - 1ssw, :eut + 1ssw] >> 0.5dt);
+    marker(:de.bf :left, kieneu[:eut - .5ssw] << 0.5dt);
+    slabel(:right, kieneu[:eut] << .5dt << 1.3ssw,
+        span(:small :bold, "Eutin")
+    );
+
+    # Streckengleis Eutin - Röbel
+    track(:second :removed,
+            kieneu[:eut + 1ssw, :eut.fx - 1ssw] << .5dt
+        ..  kieneu[:eut.ff, :rob - 1ssw]
+    );
+    with layer = 1 line_badge(:removed, kieneu[:eut + 3.2km], "1023");
+
+    # Röbel
+    track(:second :station :removed, kieneu[:rob - 1ssw, :rob + 1ssw]);
+    marker(:de.hp :removed :right, kieneu[:rob]);
+    slabel(:right :removed, kieneu[:rob + .3ssw] << .5ssw, "Röbel");
+
+    # Streckengleis Röbel - Bujendorf
+    track(:second :removed, kieneu[:rob + 1ssw, :buj - 1ssw]);
+
+    # Bujendorf
+    track(:second :station :removed, kieneu[:buj - 1ssw, :buj + 1ssw]);
+    marker(:de.bf :removed :left, kieneu[:buj]);
+    slabel(:right :removed, kieneu[:buj] << 1.5ssw, "Bujendorf");
+
+    # Streckengleis Bujendorf - Ovelgönne
+    track(:second :removed, kieneu[:buj + 1ssw, :ove - 1ssw]);
+
+    # Ovelgönne
+    track(:second :station :removed, kieneu[:ove - 1ssw, :ove + 1ssw]);
+    marker(:de.hp :removed :right, kieneu[:ove]);
+    slabel(:bottom :removed, kieneu[:ove] >> 1.4ssw, "Ovelgönne");
+
+    # Streckengleis Ovelgönne - Neustadt
+    track(:second :removed, kieneu[:ove + 1ssw, :neg.aa]);
+
+    # Neustadt (Holst) Gbf, Neustadt (Holst)
+    with layer = -1 track(:second :station :removed,
+            kieneu[:neg.aa, :neg.ns]
+    );
+    track(:first :station,
+            lubpat[:neg - 1ssw, :neg + 1ssw]
+    );
+    track(:first :station,
+            kieneu[:neg, :f]
+    );
+    marker(:de.gbf, kieneu[:neg]);
+    slabel(:right, kieneu[:neg - 0.4ssw] >> 1.7ssw,
+        hbox(:left :base,
+            span(:small :bold, "Neustadt "),
+            span(:small, "(Holst) "),
+            span(:small :bold, "Gbf")
+        )
+    );
+
+    marker(:de.hp :left, kieneu[:f - .5ssw]);
+    marker(:de.awanst :left, kieneu[:f - .5ssw]);
+    with layer = -1 marker(:de.bf :gone :left, kieneu[:f - .5ssw]);
+    slabel(:right, kieneu[:nst] + (.5ssw, 0ssw),
+        hbox(:left :base,
+            span(:small :bold, "Neustadt "),
+            span(:small, "(Holst) ")
+        )
+    );
+
+}
+

@@ -1,0 +1,1234 @@
+# DE 1040.  Neumünster (ausschl) - Flensburg (einschl)
+#
+let flefri = path("path.de.1005");
+let flwlin = path("path.de.1001");
+let husflw = path("path.de.12035");
+let neufle = path("path.de.1040");
+
+with detail = 5 {
+    with link = "point.de.Flensburg-Weiche" {
+        let flwflw = path("path.de.1040.flw");
+
+        # Gl. 1 (>> 0.5dt)
+        with layer = 1 track(:first :station :cat,
+                neufle[:flw.aa, :flw.f] >> 0.5dt
+        );
+            # W 1 - W 2
+            track(:station,
+                    neufle[:flw.wa - 310m] >> 0.5dt
+                --  neufle[:flw.wa - 260m] << 0.5dt
+            );
+            # W A1 - W A3
+            with layer = -1 track(:station :removed,
+                    neufle[:flw.wa - 20m] >> 0.5dt
+                --  neufle[:flw.wa + 25m] << 1dt
+                ..  neufle[:flw.wa + 60m, :flw.wa + 61m] << 1.5dt
+            );
+            # W A6 - W A7
+            with layer = -1 track(:station :removed,
+                    neufle[:flw.wa + 80m] >> 0.5dt
+                --  neufle[:flw.wa + 110m] >> 1.5dt
+            );
+
+        # Gl. 2 (<< 0.5dt, << 1.5dt)
+        with layer = 1 track(:first :station :cat,
+                neufle[:flw.aa, :flin + 50m] << 0.5dt
+            ..  neufle[:flw - 260m, :flw + 20m] << 1.5dt
+            ..  neufle[:flw + 220m, :flw.f] << 0.5dt
+        );
+            # W A4 - W A5
+            with track(:station :removed,
+                    neufle[:flw.wa + 30m] << 0.5dt
+                --  neufle[:flw.wa + 60m] >> 0.5dt
+            );
+            # W F6 - W F8
+            with track(:station :removed,
+                    neufle[:flw - 240m] << 1.5dt
+                --  neufle[:flw - 180m] << 3.5dt
+            );
+            # W255 - W256
+            with layer = 1 track(:station,
+                    neufle[:flw + 340m] << 0.5dt
+                --  neufle[:flw + 380m] >> 0.5dt
+            );
+
+        # Gl. 3 (<< 2.5dt)
+        with layer = -2 track(:second:station :removed,
+                neufle[:flw.wr2 - 320m, :flw.wr2 - 300m] << 35.5dt
+            ..  flwlin[:flw.w130 - 200m, :aneu + 115m] << 2.5dt
+            ..  neufle[:flin, :flw + 20m] << 2.5dt
+            ..  neufle[:flw + 220m, :flw + 280m] << 1.5dt
+        );
+        track(:station :removed,
+                neufle[:flw + 280m, :flw.f - 70m] << 1.5dt
+        );
+            # W F4 - W F5
+            track(:station :removed,
+                    neufle[:flin] << 2.5dt
+                --  neufle[:flin + 30m] << 3.5dt
+            );
+            # W F24 - W F25
+            track(:station :removed,
+                    neufle[:flw + 300m] << 1.5dt
+                --  neufle[:flw + 320m] << 2.5dt
+            );
+
+        # Gl. 4 (<< 3.5dt, << 4.5dt)
+        with layer = -2 track(:second:station :removed,
+                flwlin[:flw.f - 49m, :flw.f - 50m]
+            ..  flwlin[:flw.w130 - 200m, :aneu + 115m] << 3.5dt
+            ..  neufle[:flin, :flw - 180m] << 3.5dt
+            --  neufle[:flw - 150m, :flw + 20m] << 4.5dt
+            ..  neufle[:flw + 220m, :flw.f - 90m] << 2.5dt
+            ..  neufle[:flw.f - 1m, :flw.f] << 1.5dt
+        );
+            # W F9 -- W F14
+            track(:station :removed,
+                    neufle[:flw - 150m] << 4.5dt
+                --  neufle[:flw] << 9.5dt
+            );
+
+        # Gl. 6 (<< 5.5dt)
+        track(:station :removed,
+                neufle[:flw.wm + 40m, :flw] << 5.5dt
+        );
+            # W F15 - W F18
+            track(:station :removed,
+                    neufle[:flw - 60m] << 5.5dt
+                --  neufle[:flw + 20m] << 7.5dt
+            );
+            # W F16 - W F17
+            track(:station :removed,
+                    neufle[:flw - 40m] << 5.5dt
+                --  neufle[:flw - 10m] << 4.5dt
+            );
+
+        # Gl. 7 (<< 6.5dt)
+        track(:station :removed,
+                neufle[:flw.wm + 40m, :flw - 90m] << 6.5dt
+        );
+
+        # Gl. 8 (<< 7.5dt)
+        with layer = 1 track(:first:station,
+                neufle[:flw.wm, :flw.wm + 60m] << 8.5dt
+            --  neufle[:flw.wm + 90m, :flw] << 7.5dt
+            ..  flwflw[:flw + 20m, :flw + 70m] << 7.5dt
+            --  flwflw[:flw + 130m, :flw + 250m] << 9.5dt
+        );
+            # W M83 - W M73
+            track(:station :removed,
+                    neufle[:flw.wm + 90m] << 7.5dt
+                --  neufle[:flw.wm + 120m] << 6.5dt
+            );
+            # W F19 - W254
+            with layer = 1 track(:station,
+                    flwflw[:flw + 40m] << 7.5dt
+                --  flwflw[:flw + 80m] << 6.5dt
+                ..  neufle[:flw + 220m] << 3dt
+                --  neufle[:flw + 320m] << 0.5dt
+            );
+            # W F21 - W F26
+            track(:station :removed,
+                    flwflw[:flw + 120m, :flw + 130m] << 5.5dt
+                ..  neufle[:flw + 310m] << 3dt
+                --  neufle[:flw + 340m] << 2.5dt
+            );
+
+        # Gl. 9 (<< 8.5dt)
+        track(:station :removed,
+                neufle[:flw.wm + 60m, :flw - 20m] << 8.5dt
+            ..  neufle[:flw + 20m] << 8dt
+            --  neufle[:flw + 40m] << 7.5dt
+        );
+
+        # Gl. 10 (<< 9.5dt)
+        track(:station :removed,
+                neufle[:flw.wm + 70m, :flw] << 9.5dt
+            --  flwflw[:flw + 30m, :flw + 130m] << 9.5dt
+        );
+            # W M102 - W M141
+            track(:station :removed,
+                    neufle[:flw.wm + 30m] << 9.5dt
+                --  neufle[:flw.wm + 150m] << 13.5dt
+            );
+
+        # Gl. 11 (<< 10.5dt)
+        with layer = 1 track(:second :station,
+                flwlin[:flw.f, :flw.f - 50m]
+            ..  neufle[:flw.wm - 75m] << 18dt
+            --  neufle[:flw.wm - 55m] << 16.5dt
+            ..  neufle[:flw.wm - 10m] << 12.5dt
+            --  neufle[:flw.wm - 5m] << 12dt
+            ..  neufle[:flw.wm + 40m, :flw.wm + 100m] << 10.5dt
+        );
+        with layer = 1 track(:first :station,
+                neufle[:flw.wm + 100m, :flw] << 10.5dt
+            --  flwflw[:flw + 30m, :flw + 250m] << 10.5dt
+        );
+
+        # Gl. 12 (<< 11.5dt)
+        track(:station :removed,
+                neufle[:flw.wm - 20m, :flw] << 11.5dt
+        );
+
+        # Gl. 13 (<< 12.5dt)
+        track(:station :removed,
+                neufle[:flw.wm - 65m] << 17.25dt
+            --  neufle[:flw.wm - 55m] << 16.5dt
+            ..  neufle[:flw.wm + 90m, :flw + 30m] << 12.5dt
+            ..  flwflw[:flw + 150m, :flw + 250m] << 11.5dt
+        );
+
+        # Gl. 14 (<< 13.5dt)
+        track(:station :removed,
+                neufle[:flw.wm - 50m] << 18dt
+            --  neufle[:flw.wm - 30m] << 16.5dt
+            ..  neufle[:flw.wm + 100m, :flw - 80m] << 13.5dt
+            ..  neufle[:flw - 45m] << 13dt
+            --  flwflw[:flw + 90m] << 8.5dt
+        );
+
+        # Gl. 15 (<< 14.5dt)
+        track(:station :removed,
+                neufle[:flw.wm + 250m, :flw - 75m] << 14.5dt
+            ..  neufle[:flw - 40m] << 14dt
+            --  neufle[:flw + 5m] << 12.5dt
+        );
+
+        # Gl. 16 (<< 15.5dt)
+        track(:station :removed,
+                neufle[:flw.wm + 230m] << 13.5dt
+            --  neufle[:flw.wm + 260m] << 15dt
+            ..  neufle[:flw.wm + 290m, :flw.wm + 380m] << 15.5dt
+        );
+
+        # Gl. 31 (>> 1.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 50m, :flw.wm + 260m] >> 1.5dt
+        );
+            # W F1 - W F3
+            track(:station :removed,
+                    neufle[:flw.wm + 180m] >> 1.5dt
+                --  neufle[:flw.wm + 240m] << 0.5dt
+            );
+
+        # Gl. 32 (<< 1.5dt)
+        with layer = 1 track(:station,
+                neufle[:flw.wa - 90m, :flw.wa] << 2.5dt
+            ..  neufle[:flw.wa + 60m, :flw.wr2 + 40m] << 1.5dt
+            ..  neufle[:flw.wm - 80m] << 4.5dt
+            --  neufle[:flw.wm - 65m] << 5dt
+            ..  neufle[:flw.wm - 20m, :flw.wm + 40m] << 5.5dt
+            --  neufle[:flw.wm + 120m, :flw.wm + 121m] << 7.5dt
+        );
+        with layer = -1 casing(:station,
+                neufle[:flw.wm - 80m] << 4.5dt
+            --  neufle[:flw.wm - 65m] << 5dt
+            ..  neufle[:flw.wm - 20m, :flw.wm + 40m] << 5.5dt
+        );
+            # W R321 - W R361
+            with layer = 1 track(:station,
+                    neufle[:flw.wr2 - 120m] << 1.5dt
+                --  neufle[:flw.wr2] << 5.5dt
+            );
+            # W M61 - W M103
+            track(:station :removed,
+                    neufle[:flw.wm - 65m] << 5dt
+                --  neufle[:flw.wm + 70m] << 9.5dt
+            );
+            with layer = -1 casing(:station :removed,
+                    neufle[:flw.wm - 65m] << 5dt
+                --  neufle[:flw.wm + 70m] << 9.5dt
+            );
+ 
+
+        # Gl. 33 (<< 2.5dt)
+        track(:station :removed,
+                neufle[:flw.wa, :flw.wr2 - 30m] << 2.5dt
+        );
+
+        # Gl. 34 (<< 3.5dt)
+        with layer = 1 track(:station,
+                neufle[:flw.wa - 30m, :flw.wr2 - 60m] << 3.5dt
+        );
+
+        # Gl. 35 (<< 4.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 30m, :flw.wr2 - 30m] << 4.5dt
+        );
+            # W R351 - W R322
+            track(:station :removed,
+                    neufle[:flw.wr2 - 90m] << 4.5dt
+                --  neufle[:flw.wr2] << 1.5dt
+            );
+
+        # Gl. 36 (<< 5.5dt)
+        with layer = 1 track(:first:station,
+                neufle[:flw.wa - 250m] << 0.5dt
+            --  neufle[:flw.wa - 175m] << 1.25dt
+            ..  neufle[:flw.wa - 120m] << 2dt
+            --  neufle[:flw.wa + 60m] << 5dt
+            ..  neufle[:flw.wa + 120m, :flw.wr2] << 5.5dt
+            ..  neufle[:flw.wm - 30m] << 7.5dt
+            --  neufle[:flw.wm] << 8.5dt
+            --  neufle[:flw.wm + 30m, :flw.wm + 70m] << 9.5dt
+            --  neufle[:flw.wm + 100m, :flw.wm + 101m] << 10.5dt
+        );
+        with layer = -1 casing(:first:station,
+                neufle[:flw.wa + 120m, :flw.wr2] << 5.5dt
+            ..  neufle[:flw.wm - 30m] << 7.5dt
+            --  neufle[:flw.wm] << 8.5dt
+        );
+
+        # Gl. 37 (<< 6.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 80m, :flw.wr2 + 100m] << 6.5dt
+        );
+
+        # Gl. 38 (<< 7.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 150m] << 6.5dt
+            --  neufle[:flw.wa + 180m] << 7dt
+            ..  neufle[:flw.wa + 240m, :flw.wr2 - 20m] << 7.5dt
+            ..  neufle[:flw.wr2 + 25m] << 7dt
+            --  neufle[:flw.wr2 + 50m] << 6.5dt
+        );
+            # W R381 - W R396
+            track(:station :removed,
+                    neufle[:flw.wr2 - 60m] << 7.5dt
+                --  neufle[:flw.wr2 - 20m] << 8.5dt
+            );
+
+        # Gl. 39 (<< 8.5dt)
+        track(:station :removed,
+                neufle[:flw.aa, :flw.wa - 290m] << 1.5dt
+        );
+        with layer = 1 track(:station,
+                neufle[:flw.wa - 290m, :flw.wa - 251m] << 1.5dt
+            --  neufle[:flw.wa - 250m] << 1.5dt
+            --  neufle[:flw.wa - 200m] << 1dt
+        );
+        track(:station :removed,
+                neufle[:flw.wa - 251m, :flw.wa - 250m] << 1.5dt
+            ..  neufle[:flw.wa - 190m] << 2dt
+            --  neufle[:flw.wa + 170m] << 8dt
+            ..  neufle[:flw.wa + 230m, :flw.wr2 + 90m] << 8.5dt
+        );
+
+        # Gl. 40 (<< 9.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 20m] << 5.5dt
+            --  neufle[:flw.wa + 160m] << 9dt
+            ..  neufle[:flw.wa + 210m, :flw.wr2 - 350m] << 9.5dt
+            ..  neufle[:flw.wr2 - 280m] << 9dt
+            --  neufle[:flw.wr2 - 250m] << 8.5dt
+        );
+
+        # Gl. 41 (<< 10.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 120m] << 8dt
+            --  neufle[:flw.wa + 150m] << 9.5dt
+            ..  neufle[:flw.wa + 200m, :flw.wr2 - 350m] << 10.5dt
+            ..  neufle[:flw.wr2 - 225m] << 9dt
+            --  neufle[:flw.wr2 - 200m] << 8.5dt
+        );
+
+        # Gl. 42 (<< 11.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 120m, :flw.wr2 - 350m] << 11.5dt
+            ..  neufle[:flw.wr2 - 200m] << 9.5dt
+            --  neufle[:flw.wr2 - 150m] << 8.5dt
+        );
+
+        # Gl. 43 (<< 12.5dt)
+        track(:station :removed,
+                neufle[:flw.wa - 60m] << 5.5dt
+            --  neufle[:flw.wa + 135m] << 12dt
+            ..  neufle[:flw.wa + 170m, :flw.wr2 - 350m] << 12.5dt
+            ..  neufle[:flw.wr2 - 200m] << 10.5dt
+            --  neufle[:flw.wr2 - 100m] << 8.5dt
+        );
+
+        # Gl. 44 (<< 13.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 120m, :flw.wr2 - 350m] << 13.5dt
+            ..  neufle[:flw.wr2 - 200m] << 11.5dt
+            --  neufle[:flw.wr2 - 50m] << 8.5dt
+        );
+
+        # GL. 45 (<< 14.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 60m] << 11.5dt
+            --  neufle[:flw.wa + 135m] << 14dt
+            ..  neufle[:flw.wa + 170m, :flw.wr2 - 350m] << 14.5dt
+            ..  neufle[:flw.wr2 - 200m] << 12.5dt
+            --  neufle[:flw.wr2 - 50m] << 9.5dt
+            ..  neufle[:flw.wr2 - 20m] << 9dt
+            --  neufle[:flw.wr2 + 40m] << 8dt
+            ..  neufle[:flw.wr2 + 90m, :flw.wr2 + 100m] << 7.5dt
+            ..  neufle[:flw.wm - 90m, :flw.wm] << 8.5dt
+        );
+        with layer = -1 casing(:station,
+                neufle[:flw.wr2 + 90m, :flw.wr2 + 100m] << 7.5dt
+            ..  neufle[:flw.wm - 90m, :flw.wm] << 8.5dt
+        );
+            # W M92 - W M63
+            track(:station :removed,
+                    neufle[:flw.wm - 20m] << 8.5dt
+                --  neufle[:flw.wm + 70m] << 5.5dt
+            );
+
+        # Gl. 46 (<< 15.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 140m, :flw.wr2 - 350m] << 15.5dt
+            ..  neufle[:flw.wr2 - 200m] << 13.5dt
+            --  neufle[:flw.wr2 - 50m] << 10.5dt
+            ..  neufle[:flw.wr2 - 20m] << 10dt
+            --  neufle[:flw.wr2 + 40m] << 9dt
+            ..  neufle[:flw.wr2 + 90m, :flw.wr2 + 100m] << 8.5dt
+            ..  neufle[:flw.wm - 90m, :flw.wm - 65m] << 9.5dt
+        );
+
+        # Gl. 47 (<< 16.5dt)
+        track(:station :removed,
+                neufle[:flw.wa - 100m] << 3.5dt
+            --  neufle[:flw.wa + 140m] << 15.5dt
+            ..  neufle[:flw.wa + 180m, :flw.wr2 - 350m] << 16.5dt
+            ..  neufle[:flw.wr2 - 200m] << 14.5dt
+            --  neufle[:flw.wr2 - 125m] << 13dt
+            ..  neufle[:flw.wr2 - 80m] << 11.5dt
+            --  neufle[:flw.wr2 - 62.5m] << 10.75dt
+        );
+
+        # Gl. 48 (<< 17.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 120m, :flw.wr2 - 350m] << 17.5dt
+            ..  neufle[:flw.wr2 - 200m] << 15.5dt
+            --  neufle[:flw.wr2 - 80m] << 13dt
+        );
+
+        # Gl. 49 (<< 18.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 40m] << 13.5dt
+            --  neufle[:flw.wa + 120m] << 17.5dt
+            ..  neufle[:flw.wa + 160m, :flw.wr2 - 350m] << 18.5dt
+            ..  neufle[:flw.wr2 - 200m] << 16.5dt
+            --  neufle[:flw.wr2 - 110m] << 14.5dt
+        );
+
+        # Gl. 50 (<< 19.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 110m, :flw.wr2 - 350m] << 19.5dt
+            ..  neufle[:flw.wr2 - 200m] << 17.5dt
+            --  neufle[:flw.wr2 - 140m] << 16dt
+        );
+
+        # Gl. 51 (<< 20.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 65m] << 17.25dt
+            --  neufle[:flw.wa + 110m] << 19.5dt
+            ..  neufle[:flw.wa + 150m, :flw.wr2 - 350m] << 20.5dt
+            ..  neufle[:flw.wr2 - 200m] << 18.5dt
+            --  neufle[:flw.wr2 - 190m] << 18.25dt
+            ..  neufle[:flw.wr2 - 150m] << 16.5dt
+            --  neufle[:flw.wr2 - 20m] << 10dt
+        );
+
+        # Gl. 54 (<< 23.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 140m, :flw.wr2 - 320m] << 23.5dt
+            ..  neufle[:flw.wr2 - 200m] << 20.5dt
+            --  neufle[:flw.wr2 + 70m] << 7dt
+            ..  neufle[:flw.wr2 + 90m, :flw.wr2 + 100m] << 6.5dt
+            ..  neufle[:flw.wm - 90m, :flw.wm - 30m] << 7.5dt
+        );
+
+        # Gl. 55 (<< 24.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 160m, :flw.wr2 - 320m] << 24.5dt
+            ..  neufle[:flw.wr2 - 200m] << 21.75dt
+            --  neufle[:flw.wr2 - 30m] << 13.25dt
+        );
+
+        # Gl. 56 (<< 25.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 90m] << 21dt
+            --  neufle[:flw.wa + 160m] << 24.5dt
+            ..  neufle[:flw.wa + 200m, :flw.wr2 - 300m] << 25.5dt
+            ..  neufle[:flw.wr2 - 200m] << 24.5dt
+            --  neufle[:flw.wr2] << 19.5dt
+        );
+
+        # Gl. 57 (<< 26.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 170m, :flw.wr2 - 310m] << 26.5dt
+            ..  neufle[:flw.wr2 - 280m] << 26dt
+            --  neufle[:flw.wr2 - 265m] << 25.4dt
+        );
+
+        # Gl. 58 (<< 27.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 150m] << 25.5dt
+            --  neufle[:flw.wa + 170m] << 26.5dt
+            ..  neufle[:flw.wa + 210m, :flw.wr2 - 300m] << 27.5dt
+            ..  neufle[:flw.wr2 - 200m] << 23dt
+            --  neufle[:flw.wr2 - 40m] << 15dt
+            ..  neufle[:flw.wr2 + 30m] << 13dt
+            --  neufle[:flw.wm - 195m] << 11.75dt
+            ..  neufle[:flw.wm - 150m, :flw.wm - 20m] << 11.5dt
+        );
+        with layer = -1 casing(:station,
+                neufle[:flw.wr2 + 30m] << 13dt
+            --  neufle[:flw.wm - 195m] << 11.75dt
+            ..  neufle[:flw.wm - 150m, :flw.wm - 20m] << 11.5dt
+        );
+            # W R582 - W M122
+            track(:station :removed,
+                    neufle[:flw.wr2 - 301m, :flw.wr2 - 300m] << 27.5dt
+                ..  neufle[:flw.wr2 - 200m] << 25.5dt
+                --  neufle[:flw.wr2 - 60m] << 22dt
+                ..  neufle[:flw.wr2 - 20m] << 20.5dt
+                --  neufle[:flw.wr2] << 19.5dt
+                ..  neufle[:flw.wm - 160m] << 12.5dt
+                --  neufle[:flw.wm - 140m] << 11.5dt
+            );
+            # W R584 - W R541
+            track(:station :removed,
+                    neufle[:flw.wr2 - 40m] << 15dt
+                --  neufle[:flw.wr2 - 20m] << 11.5dt
+            );
+            # W M121 - W M91
+            track(:station :removed,
+                    neufle[:flw.wm - 120m] << 11.5dt
+                --  neufle[:flw.wm - 35m] << 8.5dt
+            );
+            with layer = -1 casing(:station,
+                    neufle[:flw.wm - 120m] << 11.5dt
+                --  neufle[:flw.wm - 35m] << 8.5dt
+            );
+
+        # Gl. 59 (<< 28.5dt)
+        track(:station :removed,
+                neufle[:flw.wr2 - 305m, :flw.wr2 - 300m] << 28.5dt
+            ..  neufle[:flw.wr2 - 185m] << 23.5dt
+            --  neufle[:flw.wr2 - 40m] << 16.25dt
+            ..  neufle[:flw.wr2 + 30m] << 14.25dt
+            --  neufle[:flw.wm - 200m] << 13dt
+            ..  neufle[:flw.wm - 180m] << 12.75dt
+            --  neufle[:flw.wm - 160m] << 12.5dt
+        );
+
+        # Gl. 60 (<< 29.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 120m] << 22.5dt
+            --  neufle[:flw.wa + 180m] << 28.5dt
+            ..  neufle[:flw.wa + 220m, :flw.wr2 - 300m] << 29.5dt
+            ..  neufle[:flw.wr2 - 200m] << 28dt
+            --  neufle[:flw.wr2 - 100m] << 23dt
+        );
+
+        # Gl. 61 (<< 30.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 155m] << 28.5dt
+            --  neufle[:flw.wa + 160m] << 29dt
+            ..  neufle[:flw.wa + 180m] << 30dt
+            --  neufle[:flw.wa + 190m] << 30.25dt
+            ..  neufle[:flw.wa + 220m, :flw.wa + 280m] << 30.5dt
+            ..  neufle[:flw.wa + 310m] << 31dt
+            --  neufle[:flw.wa + 340m] << 32.5dt
+        );
+
+        # Gl. 62 (<< 31.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 180m] << 30dt
+            --  neufle[:flw.wa + 190m] << 30.25dt
+            ..  neufle[:flw.wa + 230m, :flw.wa + 320m] << 31.5dt
+        );
+
+        # Gl. 63 (<< 32.5dt)
+        track(:station :removed,
+                neufle[:flw.wa + 10m] << 9dt
+            --  neufle[:flw.wa + 90m] << 21dt
+            ..  neufle[:flw.wa + 140m] << 27dt
+            --  neufle[:flw.wa + 180m] << 31dt
+            ..  neufle[:flw.wa + 220m, :flw.wr2 - 230m] << 32.5dt
+            ..  neufle[:flw.wr2 - 180m] << 31.5dt
+            --  neufle[:flw.wr2 - 20m] << 23.5dt
+            ..  neufle[:flw.wr2 + 25m] << 22dt
+            --  neufle[:flw.wr2 + 50m] << 21.5dt
+        );
+            # W R637 - W R642
+            track(:station :removed,
+                    neufle[:flw.wr2 - 300m] << 32.5dt
+                --  neufle[:flw.wr2 - 260m] << 33.5dt
+            );
+
+        # Gl. 64 (<< 33.5dt)
+        with layer = 1 track(:station,
+                neufle[:flw.wa - 175m] << 1.25dt
+            --  neufle[:flw.wa - 50m] << 7.5dt
+            ..  neufle[:flw.wa + 20m] << 12.5dt
+            --  neufle[:flw.wa + 75m] << 21dt
+            ..  neufle[:flw.wa + 123m] << 27dt
+            --  neufle[:flw.wa + 168m] << 31.5dt
+            ..  neufle[:flw.wa + 220m, :flw.wr2 - 230m] << 33.5dt
+            ..  neufle[:flw.wr2 - 160m] << 32dt
+            --  neufle[:flw.wr2 + 50m] << 21.5dt
+            ..  neufle[:flw.wm - 120m] << 14.0dt
+            --  neufle[:flw.wm - 60m] << 11.5dt
+            ..  neufle[:flw.wm + 20m, :flw.wm + 30m] << 9.5dt
+        );
+        with layer = -1 casing(:station,
+                neufle[:flw.wr2 - 160m] << 32dt
+            --  neufle[:flw.wr2 + 50m] << 21.5dt
+            ..  neufle[:flw.wm - 120m] << 14.0dt
+            --  neufle[:flw.wm - 60m] << 11.5dt
+            ..  neufle[:flw.wm + 20m, :flw.wm + 30m] << 9.5dt
+        );
+            # W R641 - W R638
+            track(:station :removed,
+                    neufle[:flw.wr2 - 300m] << 33.5dt
+                --  neufle[:flw.wr2 - 260m] << 32.5dt
+            );
+            # W M121 - W M102
+            track(:station :removed,
+                    neufle[:flw.wm - 120m] << 14.0dt
+                --  neufle[:flw.wm - 118m] << 13.9dt
+                ..  neufle[:flw.wm - 40m] << 12dt
+                --  neufle[:flw.wm + 30m] << 9.5dt
+            );
+            with layer = -1 casing(:station :removed,
+                    neufle[:flw.wm - 120m] << 14.0dt
+                --  neufle[:flw.wm - 118m] << 13.9dt
+                ..  neufle[:flw.wm - 40m] << 12dt
+                --  neufle[:flw.wm + 30m] << 9.5dt
+            );
+
+        # Gl. 65
+        track(:station :removed,
+                neufle[:flw.wa - 175m] << 2.25dt
+            --  neufle[:flw.wa - 80m] << 7dt
+        );
+
+        # Gl. S1
+        track(:station :removed,
+                neufle[:flw.wa - 330m] <<  1.5dt
+            --  neufle[:flw.wa +  10m] << 18.5dt
+            ..  neufle[:flw.wa +  40m] << 21dt
+            --  neufle[:flw.wa + 120m] << 33dt
+        );
+
+        # Gl. S2
+        track(:station :removed,
+                neufle[:flw.wa -  10m] << 17.5dt
+            --  neufle[:flw.wa +  95m] << 33dt
+        );
+
+        # Gl. S3
+        track(:station :removed,
+                neufle[:flw.wa -  45m] << 15.75dt
+            --  neufle[:flw.wa +  70m] << 33dt
+        );
+
+        # Gl. S4
+        track(:station :removed,
+                neufle[:flw.wa -  80m] << 14dt
+            --  neufle[:flw.wa +  45m] << 33dt
+        );
+
+        # Gl. S5
+        track(:station :removed,
+                neufle[:flw.wa - 270m] << 4.5dt
+            --  neufle[:flw.wa - 240m] << 5dt
+            ..  neufle[:flw.wa - 210m] << 6dt
+            --  neufle[:flw.wa - 150m] << 9dt
+            ..  neufle[:flw.wa - 130m] << 10.5dt
+            --  neufle[:flw.wa +  20m] << 33dt
+        );
+
+        # Gl. S6
+        track(:station :removed,
+                neufle[:flw.wa - 125m] << 15dt
+            --  neufle[:flw.wa -   5m] << 33dt
+        );
+
+        # Gl. S7
+        track(:station :removed,
+                neufle[:flw.wa - 140m] << 16.5dt
+            --  neufle[:flw.wa -  30m] << 33dt
+        );
+
+        # Gl. S8
+        track(:station :removed,
+                neufle[:flw.wa - 155m] << 18dt
+            --  neufle[:flw.wa -  55m] << 33dt
+        );
+
+        # Gl. S9
+        track(:station :removed,
+                neufle[:flw.wa - 110m] << 13.5dt
+            --  neufle[:flw.wa - 160m] << 18.5dt
+            ..  neufle[:flw.wa - 160m] << 21dt
+            --  neufle[:flw.wa -  80m] << 33dt
+        );
+
+        # Gl. 91
+        track(:station :removed,
+                neufle[:flw.wr2 - 20m] << 3.5dt
+            --  neufle[:flw.wr2 + 40m] << 1.5dt
+        );
+
+        # Gl. B1
+        track(:station :removed, flwflw[:flw + 50m, :flw + 500m] << 8.5dt);
+
+        # Gl. B2
+        track(:station :removed, flwflw[:flw + 70m, :flw + 500m] << 7.5dt);
+
+        # Gl. B3
+        track(:station :removed, flwflw[:flw + 80m, :flw + 350m] << 6.5dt);
+
+        # Gl. B4
+        track(:station :removed,
+                flwflw[:flw + 219m, :flw + 220m] << 6.5dt
+            --  flwflw[:flw + 260m, :flw + 350m] << 5.5dt
+        );
+
+        # Gl. B5
+        track(:station :removed, flwflw[:flw + 260m, :flw + 450m] << 4.5dt);
+
+        # Gl. B6
+        track(:station :removed, flwflw[:flw + 300m, :flw + 400m] << 3.5dt);
+
+        # Gl. B7
+        track(:station :removed,
+                flwflw[:flw + 179m, :flw + 180m] << 6.5dt
+            --  flwflw[:flw + 340m, :flw + 400m] << 2.5dt
+        );
+
+        marker(:de.stw :removed :left, neufle[:flw.wa - 120m] << 12dt @ -45);
+        label(neufle[:flw.wa - 140m] << 13dt,
+            hbox(:right:top, span(:small:removed, "Wr I"))
+        );
+
+        marker(:de.stw :removed :left, neufle[:flw.wa] << 0.5dt);
+        slabel(:right :removed, neufle[:flw.wa] >> 2.5dt, "Wa");
+
+        marker(:de.stw :removed :left, neufle[:flw.wr2 + 40m] << 9.5dt);
+        slabel(:right :removed, neufle[:flw.wr2 + 40m] >> 3.5dt, "Wr II");
+
+        marker(:de.stw :removed :right, neufle[:flw.wm] << 5.5dt);
+        with layer = -1 marker(:de.stw.casing :right,
+            neufle[:flw.wm] << 5.5dt
+        );
+        slabel(:right :removed, neufle[:flw.wm] >> 3.5dt, "Wm");
+
+        marker(:de.bbf :right, neufle[:flw] >> 0.5dt);
+        with layer = -1 marker(:de.bf :gone :right, neufle[:flw] >> 0.5dt);
+        station(:right, neufle[:flw - 0.3sw] >> 0.5dt >> 2.0sh,
+            span(:medium :bold, "Flensburg Weiche"),
+            hbox(:center :top,
+                vbox(:right :xsmall,
+                    span(:open,    "1000: "),
+                    span(:closed,  "1001: "),
+                    span(:removed, "1002: "),
+                    span(:open,    "1040: "),
+                    span(:removed, "12035: ")
+                ),
+                vbox(:right :xsmall,
+                    span(:open,    "172,"),
+                    span(:closed,  "0,"),
+                    span(:removed, "172,"),
+                    span(:open,    "172,"),
+                    span(:removed, "45,")
+                ),
+                vbox(:left :xsmall,
+                    span(:open,    "92 "),
+                    span(:closed,  "00 "),
+                    span(:removed, "92 "),
+                    span(:open,    "92 "),
+                    span(:removed, "50")
+                ),
+                vbox(:left :xsmall,
+                    span(:removed, "(167,34)"),
+                    span(:removed, "(167,01)"),
+                    span(:removed, "(167,34)"),
+                    span(:removed, "(167,34)")
+                )
+            )
+        );
+
+        marker(:de.stw :removed :left, neufle[:flw + 30m] << 5dt);
+        slabel(:left :removed, neufle[:flw + 30m] << 13.5dt, "Wo");
+
+        marker(:de.bw :removed :top, flwflw[:flw + 500m] << 8dt);
+    }
+
+
+    with link = "line.de.1040" {
+        track(:double :first :cat, neufle[:flw.f, :wil - 60m]);
+        with layer = 1 line_badge(:open,
+            neufle[:wil - 0.5km] >> 0.25dt,
+            "1040"
+        );
+    }
+
+
+    with link = "point.de.Flensburg-Wilhelminental" {
+        track(:double :first :station :cat, neufle[:wil - 60m, :wil + 100m]);
+        track(:station:closed,
+                neufle[:wil - 60m, :wil + 100m] << 1.5dt
+        );
+        with layer = -1 track(:station :closed,
+                neufle[:wil] << 0.5dt
+            --  neufle[:wil + 40m] << 1.5dt
+        );
+        
+        marker(:de.awanst :closed :left, neufle[:wil] << 1.5dt);
+        with detail = 5 station(:left :closed,
+            neufle[:wil - 0.6sw] << 1.5dt << 1.5sh,
+            "Flensburg Wilheminental", "174,86"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:double :first :cat, neufle[:wil + 100m, :fle.a]);
+    }
+
+
+    with link = "point.de.Flensburg" {
+        # s. research/map/de/point.de.Flensburg.svg
+
+        # Gl. 1 (<< 10.5dt)
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fw + 110m] << 8.5dt
+            --  neufle[:fle.fw + 130m] << 9dt
+            ..  neufle[:fle.fw + 210m, :fle.fo - 180m] << 10.5dt
+            ..  neufle[:fle.fo - 105m] << 9dt
+            --  neufle[:fle.fo - 60m] << 7.5dt
+        );
+
+        # Gl. 2 (<< 9.5dt)
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fw + 155m] << 8.5dt
+            --  neufle[:fle.fw + 175m] << 9dt
+            ..  neufle[:fle.fw + 210m, :fle.fo - 175m] << 9.5dt
+            ..  neufle[:fle.fo - 125m] << 8.5dt
+            --  neufle[:fle.fo -  95m] << 7.5dt
+        );
+
+        # Gl. 3 (<< 8.5dt)
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fw -  90m] << 1.5dt
+            --  neufle[:fle.fw -  30m] << 3.5dt
+            ..  neufle[:fle.fw +  40m] << 6.5dt
+            --  neufle[:fle.fw +  60m] << 7.5dt
+            ..  neufle[:fle.fw + 110m, :fle.fo - 170m] << 8.5dt
+            ..  neufle[:fle.fo - 145m] << 8dt
+            --  neufle[:fle.fo - 130m] << 7.5dt
+        );
+
+        # Gl. 4 (<< 7.5dt)
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fw - 320m, :fle.fw - 30m] << 2.5dt
+            ..  neufle[:fle.fw +  20m] << 4dt
+            --  neufle[:fle.fw +  70m] << 6.5dt
+            ..  neufle[:fle.fw + 120m, :fle.fo - 20m] << 7.5dt
+        );
+            # W P1 - W 3
+            with layer = -1 track(:station :removed,
+                    neufle[:fle.fw - 220m] << 2.5dt
+                --  neufle[:fle.fw - 160m] << 0.5dt
+            );
+
+        # Gl. 5 (<< 6.5dt)
+        track(:station,
+                neufle[:fle.fw + 40m] << 3.5dt
+            --  neufle[:fle.fw + 80m] << 5.5dt
+            ..  neufle[:fle.fw + 130m, :fle.fo - 90m] << 6.5dt
+            ..  neufle[:fle.fo - 45m] << 6dt
+            --  neufle[:fle.fo] << 4.5dt
+        );
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo - 90m, :fle.fo + 10m] << 6.5dt
+        );
+        track(:station,
+                neufle[:fle.fo - 21m, :fle.fo - 20m] << 7.5dt
+            --  neufle[:fle.fo + 10m, :fle.fo + 220m] << 6.5dt
+        );
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo + 220m, :fle.wp1] << 6.5dt
+        );
+            # W Q14 - W 10
+            with layer = -1 track(:station :removed,
+                    neufle[:fle.fo - 30m] << 6.5dt
+                --  neufle[:fle.fo + 30m] << 4.5dt
+            );
+            # W Q5 - W Q9 
+            with layer = -1 track(:station :removed,
+                    neufle[:fle.fo + 10m] << 6.5dt
+                --  neufle[:fle.fo + 70m] << 4.5dt
+            );
+
+        # Gl. 6 (<< 4.5dt)
+        track(:second :station,
+                neufle[:fle.fw - 119m, :fle.fw - 120m] >> 0.5dt
+            --  neufle[:fle.fw -  90m, :fle.fw -  20m] << 1.5dt
+            ..  neufle[:fle.fw + 20m] << 2.5dt
+            --  neufle[:fle.fw + 40m] << 3.5dt
+            ..  neufle[:fle.fw + 90m, :fle.fa] << 4.5dt
+        );
+            # W10 - W13
+            track(:station,
+                    neufle[:fle.fo +  30m] << 4.5dt
+                --  neufle[:fle.fo + 150m] << 0.5dt
+            );
+            # W11 - W12
+            track(:station,
+                    neufle[:fle.fo +  90m] << 4.5dt
+                --  neufle[:fle.fo + 150m] << 6.5dt
+            );
+
+        # Gl. 7 (<< 3.5dt)
+        track(:station,
+                neufle[:fle.fw +  15m] << 2.25dt
+            --  neufle[:fle.fw +  20m] << 2.5dt
+            ..  neufle[:fle.fw +  80m, :fle.fo - 140m] << 3.5dt
+            ..  neufle[:fle.fo -  90m] << 4dt
+            --  neufle[:fle.fo -  70m] << 4.5dt
+        );
+
+        # Gl. 8 (<< 1.5dt)
+        with layer = -1 track(:station :removed,
+                neufle[:fle.a, :fle.fw - 90m] << 1.5dt
+        );
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fw - 20m, :fle.fo + 160m] << 1.5dt
+        );
+   
+        # Gl. 9 (<< 0.5dt)
+        track(:first :station,
+                neufle[:fle.a, :fle.fo + 200m] << 0.5dt
+            ..  neufle[:fle.fa - 30m] >> 11.5dt
+            --  neufle[:fle.fa - 20m] >> 12.5dt
+        );
+            # W3 - W5
+            track(:station,
+                    neufle[:fle.fw - 160m] << 0.5dt
+                --  neufle[:fle.fw - 120m] >> 0.5dt
+            );
+ 
+        # Gl. 10 (>> 1.5dt)
+        track(:first :station,
+                neufle[:fle.a, :fle.fw - 110m] >> 0.5dt
+            ..  neufle[:fle.fw, :fle.fo - 230m] >> 1.5dt
+            ..  neufle[:fle.fo - 150m, :fle.fo + 100m] >> 0.5dt
+            ..  neufle[:fle.fo + 150m]
+            --  neufle[:fle.fo + 170m] << 0.5dt
+        );
+            # W1 - W2
+            track(:station,
+                    neufle[:fle.fw - 240m] >> 0.5dt
+                --  neufle[:fle.fw - 200m] << 0.5dt
+            );
+            # W P8 -  W4
+            with layer = -1 track(:station:removed,
+                    neufle[:fle.fw - 160m] >> 0.5dt
+                --  neufle[:fle.fw - 120m] << 0.5dt
+            );
+
+        # Gl. Q1
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo - 230m, :fle.fo + 60m] >> 1.5dt
+            ..  neufle[:fle.fo + 110m] >> 1dt
+            --  neufle[:fle.fo + 150m]
+        );
+
+        # Gl. Q2
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo - 90m, :fle.fo + 90m] << 2.5dt
+        );
+
+        # Gl. Q3
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo - 140m] << 11.5dt
+            --  neufle[:fle.fo - 20m] << 7.5dt
+        );
+
+        # Gl. Q4
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo - 40m] << 9.5dt
+            --  neufle[:fle.fo + 50m] << 6.5dt
+        );
+
+        # Gl. Q5
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo - 90m, :fle.fo - 70m] << 11.5dt
+            ..  neufle[:fle.fo + 10m] << 8.5dt
+            --  neufle[:fle.fo + 60m] << 3.5dt
+        );
+
+        # Gl. Q6
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo + 10m] << 11dt
+            --  neufle[:fle.fo + 30m] << 9dt
+            ..  neufle[:fle.fo + 60m] << 7.5dt
+            --  neufle[:fle.fo + 90m] << 6.5dt
+        );
+
+        # Gl. Q7
+        track(:station,
+                neufle[:fle.fo + 70m] << 8.5dt
+            --  neufle[:fle.fo + 130m] << 6.5dt
+        );
+
+        # Gl. Q8
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo + 50m] << 10.5dt
+            --  neufle[:fle.fo + 170m] << 6.5dt
+        );
+
+        # Gl. Q9
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fo + 90m] << 10.5dt
+            --  neufle[:fle.fo + 120m] << 9.5dt
+            ..  neufle[:fle.fo + 140m] << 7.5dt
+            --  neufle[:fle.fo + 155m] << 7.0dt
+        );
+
+        # Gl. 40
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fa  -  90m] << 0.5dt
+            --  neufle[:fle.fa  -  75m] << 1dt
+            ..  neufle[:fle.fa  -  40m, :fle.wp1 - 280m] << 1.5dt
+            ..  neufle[:fle.wp1 - 245m] << 1dt
+            --  neufle[:fle.wp1 - 230m] << 0.5dt
+        );
+
+        # Gl. 41
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fa  - 155m, :fle.wp1 - 210m] << 0.5dt
+            ..  neufle[:fle.wp1 - 175m]
+            --  neufle[:fle.wp1 - 100m] >> 2.5dt
+        );
+
+        # Gl. 42
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fa  -  90m, :fle.wp1 - 260m] >> 0.5dt
+            ..  neufle[:fle.wp1 - 225m]
+            --  neufle[:fle.wp1 - 210m] << 0.5dt
+        );
+
+        # Gl. 43
+        track(:station,
+                neufle[:fle.fa  -  60m, :fle.wp1 - 190m] >> 1.5dt
+            ..  neufle[:fle.wp1 - 155m] >> 2dt
+            --  neufle[:fle.wp1 - 140m] >> 2.5dt
+        );
+
+        # Gl. 44
+        track(:station,
+                neufle[:fle.fa  -  30m, :fle.f] >> 2.5dt
+        );
+
+        # Gl. 45
+        track(:station,
+                neufle[:fle.fo  + 100m] << 3.5dt
+            --  neufle[:fle.fo  + 145m] << 2dt
+            ..  neufle[:fle.fo  + 180m, :fle.fa - 170m] << 1.5dt
+            ..  neufle[:fle.fa  - 135m] << 1dt
+            --  neufle[:fle.fa  -  15m] >> 3dt
+            ..  neufle[:fle.fa  +  20m, :fle.wp1 - 130m] >> 3.5dt
+            ..  neufle[:fle.wp1 -  95m] >> 3dt
+            --  neufle[:fle.wp1 -  80m] >> 2.5dt
+        );
+
+        # Gl. 46
+        track(:station,
+                neufle[:fle.fa  - 185m] << 1.5dt
+            --  neufle[:fle.fa  -  20m] >> 4dt
+            ..  neufle[:fle.fa  +  15m, :fle.wp1 - 120m] >> 4.5dt
+        );
+
+        # Gl. 47
+        track(:station,
+                neufle[:fle.fa  -  20m] >> 4dt
+            --  neufle[:fle.fa  +  10m] >> 5dt
+            ..  neufle[:fle.fa  +  45m, :fle.wp1 - 190m] >> 5.5dt
+            ..  neufle[:fle.wp1 - 145m] >> 5dt
+            --  neufle[:fle.wp1 -  70m] >> 3.5dt
+        );
+
+        # Gl. 48
+        track(:station,
+                neufle[:fle.fa  +  10m] >> 5dt
+            --  neufle[:fle.fa  +  40m] >> 6dt
+            ..  neufle[:fle.fa  +  75m, :fle.wp1 - 200m] >> 6.5dt
+            ..  neufle[:fle.wp1 -  70m] >> 3.5dt
+            --  neufle[:fle.wp1 -  40m] >> 2.5dt
+        );
+
+        # Gl. 49
+        track(:station,
+                neufle[:fle.fa  +  40m] >> 6dt
+            --  neufle[:fle.fa  +  70m] >> 7dt
+            ..  neufle[:fle.fa  + 105m, :fle.wp1 - 160m] >> 7.5dt
+        );
+
+        # Gl. 50
+        track(:station,
+                neufle[:fle.fa  -  65m] >> 2.5dt
+            --  neufle[:fle.fa  +  35m] >> 7.5dt
+            ..  neufle[:fle.fa  +  90m, :fle.wp1 - 190m] >> 8.5dt
+        );
+
+        # Gl. 51
+        track(:station,
+                neufle[:fle.fa  +  35m] >> 7.5dt
+            --  neufle[:fle.fa  +  55m] >> 8.5dt
+            ..  neufle[:fle.fa  + 110m, :fle.wp1 - 275m] >> 9.5dt
+            ..  neufle[:fle.wp1 - 240m] >> 9dt
+            --  neufle[:fle.wp1 - 225m] >> 8.5dt
+        );
+
+        # Gl. 52
+        track(:station,
+                neufle[:fle.fa  +  55m] >> 8.5dt
+            --  neufle[:fle.fa  +  75m] >> 9.5dt
+            ..  neufle[:fle.fa  + 130m, :fle.wp1 - 270m] >> 10.5dt
+            ..  neufle[:fle.wp1 - 205m] >> 9dt
+            --  neufle[:fle.wp1 - 160m] >> 7.5dt
+            ..  neufle[:fle.wp1 -  35m] >> 3.5dt
+            --  neufle[:fle.wp1 -   5m] >> 2.5dt
+        );
+
+        # Gl. B1
+        track(:station,
+                neufle[:fle.fa  -  25m] >> 4.5dt
+            --  neufle[:fle.fa  +  25m] >> 9.5dt
+        );
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fa  +  25m] >> 9.5dt
+            --  neufle[:fle.fa  +  30m] >> 10dt
+            ..  neufle[:fle.fa  + 150m, :fle.wp1 - 265m] >> 12.5dt
+        );
+
+        # Gl. B2
+        with layer = -1 track(:station :removed,
+                neufle[:fle.fa  - 105m]
+            --  neufle[:fle.fa  +  30m] >> 11.5dt
+            ..  neufle[:fle.fa  + 150m, :fle.wp1 - 320m] >> 13.5dt
+            ..  neufle[:fle.wp1 - 265m] >> 12.5dt
+            --  neufle[:fle.wp1 - 115m] >> 7.5dt
+            ..  neufle[:fle.wp1 -  70m] >> 5.5dt
+            --  neufle[:fle.wp1 -  35m] >> 3.5dt
+        );
+
+        # Gl. G0
+        track(:station :removed,
+                neufle[:fle.fo - 260m, :fle.fo - 110m] << 16dt
+            ..  neufle[:fle.fo -  75m] << 16.5dt
+            --  neufle[:fle.fo -  30m] << 18dt
+        );
+
+        # Gl. G2
+        track(:station :removed,
+                neufle[:fle.fo - 200m, :fle.fo + 40m] << 18dt
+        );
+
+        # Gl. G3
+        track(:station :removed,
+                neufle[:fle.fo - 260m, :fle.fo - 180m] << 19dt
+            ..  neufle[:fle.fo - 145m] << 19.5dt
+            --  neufle[:fle.fo - 130m] << 20dt
+        );
+
+        # Gl. G4
+        track(:station :removed,
+                neufle[:fle.fo - 260m, :fle.fo - 40m] << 20dt
+        );
+
+        # Gl. G5
+        track(:station :removed,
+                neufle[:fle.fo - 260m, :fle.fo - 80m] << 21dt
+        );
+
+        # Gl. G6
+        track(:station :removed,
+                neufle[:fle.fo - 260m, :fle.fo - 140m] << 22dt
+            ..  neufle[:fle.fo - 100m] << 21.5dt
+            --  neufle[:fle.fo + 500m] << 6.5dt
+        );
+
+        # Gl. G7
+        track(:station :removed,
+                neufle[:fle.fo - 260m, :fle.fo - 110m] << 24dt
+            ..  neufle[:fle.fo -  90m] << 23.5dt
+            --  neufle[:fle.fo -  50m] << 21.5dt
+            ..  neufle[:fle.fo -  20m, :fle.fo - 10m] << 21dt
+        );
+
+        # Gl. G8
+        track(:station :removed,
+                neufle[:fle.fo - 260m, :fle.fo - 90m] << 25dt
+        );
+
+        # Gl. G9
+        track(:station :removed,
+                neufle[:fle.fo - 200m, :fle.fo - 170m] << 26dt
+            ..  neufle[:fle.fo - 130m] << 25.5dt
+            --  neufle[:fle.fo - 120m] << 25dt
+        );
+
+        # Gl. G10
+        track(:station :removed,
+                neufle[:fle.fo - 200m, :fle.fo - 160m] << 27dt
+            ..  neufle[:fle.fo - 100m] << 25.5dt
+            --  neufle[:fle.fo +  60m] << 17.5dt
+        );
+
+        with layer = -2 marker(:de.stw :closed :left,
+                neufle[:fle.fw] << 4.75dt
+        );
+        slabel(:top :closed, neufle[:fle.fw] << 6.75dt, "Fw");
+
+        marker(:de.bf :left, neufle[:fle] << 10.5dt);
+        station(:left, neufle[:fle] >> 1.5dt >> 10pt,
+            span(:bold, "Flensburg"),
+            hbox(:center:top,
+                vbox(:right :bottom,
+                    span(:xsmall, "1005: "),
+                    span(:xsmall, "1020: "),
+                    span(:xsmall, "1040: "),
+                    span(:xsmall, ""),
+                    span(:xsmall :removed, "12035: ")
+                ),
+                vbox(:right :bottom,
+                    span(:xsmall, "0,"),
+                    span(:xsmall, "80,"),
+                    span(:xsmall, "176,"),
+                    span(:xsmall :removed, "(170,"),
+                    span(:xsmall :removed, "48,")
+                ),
+                vbox(:left :bottom,
+                    span(:xsmall, "00"),
+                    span(:xsmall, "64"),
+                    span(:xsmall, "23"),
+                    span(:xsmall :removed, "66)"),
+                    span(:xsmall :removed, "82")
+                )
+            )
+        );
+        
+        with layer = 2 marker(:de.stw :closed :left,
+                neufle[:fle.fo]
+        );
+        with layer = 1 marker(:de.stw.casing :closed :left,
+                neufle[:fle.fo]
+        );
+        slabel(:bottom :closed, neufle[:fle.fo] >> 2.5dt, "Fo");
+        
+        marker(:de.bw :closed :right, neufle[:fle.fa + 150m] >> 13dt << 0.5sh);
+    }
+}
+

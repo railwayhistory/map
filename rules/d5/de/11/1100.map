@@ -1,0 +1,1637 @@
+# DE 1100.  Lübeck Hbf (ausschl.) - Puttgarden
+#
+let burort = path("path.de.1103");
+let lubput = path("path.de.1100");
+let waltra = path("path.de.1113");
+
+with detail = 5 {
+    with link = "line.de.1100" {
+        track(:first :double :cat, lubput[:aluh, :wal - 0.5sw]);
+        with layer = 1 badge(lubput[:wal - 1.4km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11001)")
+            )
+        );
+    }
+
+    with link = "point.de.Schwartau-Waldhalle-Wr" {
+        track(:first :station :double, lubput[:wal - 0.5sw, :wal + 0.5sw]);
+        track(:first :station :double,
+                lubput[:wal, :wal + 0.1dl]
+            ..  waltra[:aa - 0.1dl, :aa]
+        );
+
+        marker(:de.abzw :left, lubput[:wal] << 0.5dt);
+        station(:left, lubput[:wal - 0.4sw] << 0.5dt << 1.4sw,
+            hbox(:center:base :bold,
+                span(:open, "Schwartau Waldhalle "),
+                span(:removed, "(Wr)")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1100: "),
+                    span(:removed, "1110: "),
+                    span(:open, "1113: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "4,"),
+                    span(:removed, ""),
+                    span(:open, "4,")
+                ),
+                vbox(:left:top,
+                    span(:open, "70 "),
+                    span(:removed, ""),
+                    span(:open, "70 ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "← "),
+                    span(:removed, ""),
+                    span(:removed, "← ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "4,"),
+                    span(:removed, "28,"),
+                    span(:removed, "4,")
+                ),
+                vbox(:left:top,
+                    span(:removed, "89"),
+                    span(:removed, "04"),
+                    span(:removed, "88")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1100" {
+        track(:first :double, lubput[:wal + 0.5sw, :swr.sf - 60m]);
+    }
+
+
+    with link = "point.de.Bad-Schwartau" {
+        # Gl. 1
+        track(:first :station, lubput[:swr.sf - 60m, :swr.sn - 30m] << 0.5dt);
+            # W38 - W37
+            with layer = -1 track(:station :removed,
+                    lubput[:swr.sf + 90m] << 0.5dt
+                --  lubput[:swr.sf + 130m] >> 0.5dt
+            );
+            # W35 - W27
+            with layer = -1 track(:station :removed,
+                    lubput[:swr.sf + 160m] << 0.5dt
+                --  lubput[:swr.sf + 190m] << 1.5dt
+            );
+
+        # Gl. 2
+        track(:first :station, lubput[:swr.sf - 60m, :swr.sn - 30m] >> 0.5dt);
+            # W40 - W39
+            with layer = -1 track(:station :removed,
+                    lubput[:swr.sf + 10m] >> 0.5dt
+                --  lubput[:swr.sf + 50m] << 0.5dt
+            );
+            # W8 - W7
+            with layer = -1 track(:station :removed,
+                    lubput[:swr.sn - 120m] >> 0.5dt
+                --  lubput[:swr.sn - 60m] << 0.5dt
+            );
+
+        # Gl. 3
+        with layer = -1 track(:station :removed,
+                lubput[:swr.sf + 170m] >> 0.5dt
+            --  lubput[:swr.sf + 185m] >> 1.0dt
+            ..  lubput[:swr.sf + 220m, :swr.sn - 90m] >> 1.5dt
+        );
+
+        # Gl. 4
+        track(:station :removed,
+                lubput[:swr.sf + 260m, :swr.sn - 170m] >> 3.5dt
+            ..  lubput[:swr.sn - 135m] >> 3dt
+            --  lubput[:swr.sn -  60m] >> 0.5dt
+        );
+
+        # Gl. „4a”
+        track(:station :removed,
+                lubput[:swr.sf + 200m, :swr.sf + 210m] >> 2.5dt
+            ..  lubput[:swr.sf + 245m] >> 3dt
+            --  lubput[:swr.sf + 260m] >> 3.5dt
+        );
+
+        # Gl. 5
+        track(:station :removed,
+                lubput[:swr.sf + 185m] >> 1.0dt
+            --  lubput[:swr.sf + 260m] >> 3.5dt
+            ..  lubput[:swr.sf + 320m, :swr + 20m] >> 4.5dt
+            ..  lubput[:swr    +  55m] >> 4dt
+            --  lubput[:swr    +  70m] >> 3.5dt
+        );
+
+        # Gl. 5a
+        track(:station :removed,
+                lubput[:swr.sf + 190m, :swr.sf + 320m] >> 4.5dt
+        );
+
+        # Gl. 6
+        with layer = -1 track(:station :removed,
+                lubput[:swr    +  60m] << 0.5dt
+            --  lubput[:swr    +  75m] << 1.0dt
+            ..  lubput[:swr    + 110m, :swr.sn +40m] << 1.5dt
+            ..  lubput[:swr.sn +  75m] << 1.0dt
+            --  lubput[:swr.sn +  90m] << 0.5dt
+        );
+
+        # Gl. 7
+        track(:station :removed,
+                lubput[:swr.sf +  40m, :swr - 0.6sw] << 1.5dt
+        );
+
+        # Gl. „7a“
+        track(:station :removed,
+                lubput[:swr.sf +  40m, :swr.sf + 210m] << 2.5dt
+        );
+            # W28 - W26
+            with layer = -1 track(:station :removed,
+                    lubput[:swr.sf + 190m] << 2.5dt
+                --  lubput[:swr.sf + 220m] << 1.5dt
+            );
+
+        # Gl. 11
+        track(:station :removed,
+                lubput[:swr    + 100m] >> 3.5dt
+            --  lubput[:swr    + 115m] >> 3.0dt
+            ..  lubput[:swr    + 150m, :swr.sn - 120m] >> 2.5dt
+        );
+
+        # Gl. 13
+        track(:station :removed,
+                lubput[:swr    + 130m] >> 3.5dt
+            --  lubput[:swr    + 145m] >> 4.0dt
+            ..  lubput[:swr    + 180m, :swr.sn - 150m] >> 4.5dt
+        );
+
+        marker(:de.hp :left, lubput[:swr] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, lubput[:swr] << 0.5dt);
+        station(:left, lubput[:swr - 0.5sw] << 0.5dt << 1.3sw,
+            span(:bold, "Bad Schwartau"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1100: "),
+                    span(:removed, "11001: "),
+                    span(:closed, "1110: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "6,"),
+                    span(:removed, "0,"),
+                    span(:closed, "26,")
+                ),
+                vbox(:left:top,
+                    span(:open, "00"),
+                    span(:removed, "00"),
+                    span(:closed, "93")
+                )
+            )
+        );
+
+        marker(:de.stw :closed :left, lubput[:swr.sf] << 0.5dt);
+        slabel(:left :closed, lubput[:swr.sf - 2pt] << 3.0dt, "Sf");
+    }
+
+    with link = "point.de.Bad-Schwartau-Abzw" {
+        track(:first :double, lubput[:swr.sn - 30m, :swr.sn + 450m]);
+        
+        # W31 - W32
+        track(:station,
+                lubput[:swr.sn +  14m, :swr.sn +  15m] << 0.5dt
+            ..  lubput[:swr.sn + 150m, :swr.sn + 151m] >> 0.5dt
+        );
+        # W33 - W34
+        track(:station,
+                lubput[:swr.sn + 239m, :swr.sn + 240m] >> 0.5dt
+            ..  lubput[:swr.sn + 385m, :swr.sn + 386m] << 0.5dt
+        );
+
+        marker(:de.abzw :left, lubput[:swa] << 1.5dt);
+        marker(:statdt :left, lubput[:swa] << 0.5dt);
+        label(lubput[:swa - 0.8sw] << 0.5dt << 2.3sw,
+            hbox(:right:bottom,
+                vbox(:center:bottom,
+                    hbox(:center:top :xsmall,
+                        vbox(:right:top,
+                            span(:open, "1100: "),
+                            span(:open, "1110: ")
+                        ),
+                        vbox(:right:top,
+                            span(:open, "6,"),
+                            span(:open, "26,")
+                        ),
+                        vbox(:left:top,
+                            span(:open, "44"),
+                            span(:open, "51")
+                        )
+                    ),
+                    span(:medium :bold, "Bad Schwartau Abzw")
+                )
+            )
+        );
+
+        marker(:de.stw :closed :left, lubput[:swa] << 1.5dt << 1sw);
+        slabel(:right :closed, lubput[:swa - 2pt] >> 2.5dt, "Sn");
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first,
+                lubput[:swr.sn + 450m, :aeut.ff - 1km] >> 0.5dt
+            ..  lubput[:aeut.ff, :rat.a]
+        );
+        with layer = 1 badge(lubput[:swa + 1.9km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11001)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Ratekau" {
+        # Gl. 2 (Hauptgleis)
+        track(:first, lubput[:rat.a, :rat.f]);
+
+        # Gl. 1 (>> 1dt)
+        track(:station,
+                lubput[:rat.a +  59m, :rat.a + 60m]
+            ..  lubput[:rat.a + 200m, :rat.f - 200m] >> 1dt
+            ..  lubput[:rat.f -  60m, :rat.f - 59m]
+        );
+
+        marker(:de.bbf :left, lubput[:rat]);
+        with layer = -1 marker(:de.bf :gone :left, lubput[:rat]);
+        station(:left, lubput[:rat - 0.5sw] << 1.4sw,
+            "Ratekau",
+            hbox(:center:base,
+                span(:regular, "10,59 "),
+                span(:removed, "(4,60)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:rat.f, :tim.f]);
+        with layer = 1 badge(lubput[:rat + 2.2km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11001)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Timmendorferstrand" {
+        # Gl. 1 (>> 1dt)
+        track(:station,
+                lubput[:tim.a +  59m, :tim.a + 60m]
+            ..  lubput[:tim.a + 180m, :tim.f - 180m] >> 1dt
+            ..  lubput[:tim.f -  60m, :tim.f -  59m]
+        );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:tim.a, :tim.f]);
+
+        # Gl. 3 (<< 1dt, Norseite unklar)
+        with layer = -1 track(:station :closed,
+                lubput[:tim.a + 109m, :tim.a + 110m]
+            ..  lubput[:tim.a + 200m, :tim   + 150m] << 1dt
+        );
+
+        marker(:de.bf :right, lubput[:tim] >> 1dt);
+        station(:right :open, lubput[:tim - 0.35sw] >> 1dt >> 1.4sh,
+            "Timmendorfer Strand",
+            hbox(:center:base,
+                span(:regular, "15,77 "),
+                span(:removed, "(9,77)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:tim.f, :sar.a]);
+        with layer = 1 badge(lubput[:tim + 1.5km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11001)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Scharbeutz" {
+        # Gl.1 (>> 1dt)
+        track(:station,
+                lubput[:sar.a +  59m, :sar.a +  60m]
+            ..  lubput[:sar.a + 260m, :sar.f - 210m] >> 1dt
+            ..  lubput[:sar.f -  60m, :sar.f -  59m]
+        );
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:sar.a, :sar.f]);
+
+        marker(:de.bf :right, lubput[:sar] >> 1dt);
+        station(:right, lubput[:sar - 0.4sw] >> 1dt >> 1.4sh,
+            "Scharbeutz",
+            hbox(:center:base,
+                span(:regular, "18,70 "),
+                span(:removed, "(12,71)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:sar.f, :haf.a]);
+        with layer = 1 badge(lubput[:sar + 2.1km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11001)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Haffkrug" {
+        # Gl. 1 (>> 1dt)
+        track(:station,
+                lubput[:haf.a +  59m, :haf.a +  60m]
+            ..  lubput[:haf.a + 180m, :haf.f - 180m] >> 1dt
+            ..  lubput[:haf.f -  60m, :haf.f -  59m]
+        );
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:haf.a, :haf.f]);
+
+        marker(:de.bf :right, lubput[:haf] >> 1dt);
+        station(:right, lubput[:haf - 0.3sw] >> 1dt >> 1.7sh,
+            "Haffkrug",
+            hbox(:center:base,
+                span(:regular, "23,04 "),
+                span(:removed, "(17,07)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:haf.f, :sie.a]);
+        with layer = 1 badge(lubput[:haf + 1.3km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11001)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Sierksdorf" {
+        # Gl. 1 (<< 1dt)
+        track(:station,
+                lubput[:sie.w1 - 1m, :sie.w1]
+            ..  lubput[:sie.w1 + 120m, :sie.f - 180m] << 1dt
+            ..  lubput[:sie.f - 60m, :sie.f - 59m]
+        );
+        # Gl. 2
+        track(:first :station, lubput[:sie.a, :sie.f]);
+
+        marker(:de.bf :right, lubput[:sie]);
+        station(:right, lubput[:sie - 0.4sw] >> 2.1sh,
+            "Sierksdorf",
+            hbox(:center:base,
+                span(:regular, "25,40 "),
+                span(:removed, "(19,39)")
+            )
+        );
+        with layer = -1 marker(:de.bft :left :closed, lubput[:sib] << 1dt);
+        station(:left :closed, lubput[:sib - 0.4sw] << 1dt << 1.2sh,
+            "Sierksdorf", "26,16"
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:sie.f, :neg.a]);
+        with layer = 1 badge(lubput[:sib + 1.3km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11001)")
+            )
+        );
+    }
+
+    # point.de.Neustadt-Holst-Gbf: 1023.
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:neg.f, :ssl - 120m]);
+        with layer = -1 casing(:first, lubput[:neg.x - 2dt, :neg.x + 2dt]);
+    }
+
+
+    with link = "point.de.Südschleuse" {
+        track(:first :station, lubput[:ssl - 120m, :ssl + 0.5sw]);
+        with layer = -1 track(:second :station :removed,
+                lubput[:ssl - 120m, :ssl - 60m] << 1dt
+            --  lubput[:ssl, :ssl + 1m]
+        );
+
+        with layer = -1 marker(:de.abzw :removed :left, lubput[:ssl]);
+        station(:left :removed, lubput[:ssl - 0.4sw] << 1.4sh,
+            "Südschleuse", "??"
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:ssl + 0.5sw, :has.a]);
+        with layer = 1 badge(lubput[:has - 2.65km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Hasselburg" {
+        # Gl. 1 (<< 1dt)
+        track(:station,
+                lubput[:has.a +  59m, :has.a +  60m]
+            ..  lubput[:has.a + 160m, :has.f - 160m] << 1dt
+            ..  lubput[:has.f -  60m, :has.f -  59m]
+        );
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:has.a, :has.f]);
+
+        marker(:de.bbf :right, lubput[:has]);
+        station(:right, lubput[:has - 0.3sw] >> 1.7sh,
+            "Hasselburg",
+            hbox(:center:base,
+                span(:regular, "34,47 "),
+                span(:removed, "(5,31)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:has.f, :gsl.a]);
+        with layer = 1 badge(lubput[:has + 2.0km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Groß-Schlamin" {
+        # Gl. 1 (>> 1dt)
+        track(:station,
+                lubput[:gsl.a +  59m, :gsl.a +  60m]
+            ..  lubput[:gsl.a + 180m, :gsl.r -  25m] >> 1dt
+        );
+        with layer = -1 track(:station :removed,
+                lubput[:gsl.r -  25m, :gsl.r +  25m] >> 1dt
+        );
+        track(:station :closed,
+                lubput[:gsl.r +  25m, :gsl.f - 230m] >> 1dt
+        );
+        with layer = -1 track(:station :removed,
+                lubput[:gsl.f - 230m, :gsl.f - 181m] >> 1dt
+        );
+        track(:station,
+                lubput[:gsl.f - 181m, :gsl.f - 180m] >> 1dt
+            ..  lubput[:gsl.f -  60m, :gsl.f -  59m]
+        );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:gsl.a, :gsl.f]);
+
+        marker(:de.bbf :left, lubput[:gsl]);
+        station(:left, lubput[:gsl - 0.5sw] << 1.3sw,
+            "Groß Schlamin",
+            hbox(:center:base,
+                span(:regular, "38,37 "),
+                span(:removed, "(8,21)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:gsl.f, :bes.a]);
+        with layer = 1 badge(lubput[:gsl + 1.6km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Beschendorf" {
+        # Gl. 1 (<< 1dt)
+        track(:station,
+                lubput[:bes.a +  59m, :bes.a +  60m]
+            ..  lubput[:bes.a + 160m, :bes.f - 180m] << 1dt
+            ..  lubput[:bes.f -  60m, :bes.f -  59m]
+        );
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:bes.a, :bes.f]);
+
+        marker(:de.bbf :left, lubput[:bes] << 1dt);
+        station(:left, lubput[:bes - 0.4sw] << 1dt << 1.4sw,
+            "Beschendorf",
+            hbox(:center:base,
+                span(:regular, "41,68 "),
+                span(:removed, "(11,31)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:bes.f, :len.a]);
+        with layer = 1 badge(lubput[:bes + 1.7km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Lensahn" {
+        # Gl. 1 (<< 1dt)
+        with layer = -1 track(:station :closed,
+                lubput[:len.a +  59m, :len.a +  60m]
+            ..  lubput[:len.a + 160m, :len.f - 440m] << 1dt
+        );
+        track(:station,
+                lubput[:len.f - 440m, :len.f - 140m] << 1dt
+        );
+            # W17 - W19
+            track(:station,
+                    lubput[:len.f - 181m, :len.f - 180m] << 1dt
+                ..  lubput[:len.f - 120m, :len.f - 119m]
+            );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:len.a, :len.f]);
+
+        # Gl. 3? (>> 1dt)
+        with layer = -1 track(:station :closed,
+                lubput[:len.a + 149m, :len.a + 150m]
+            ..  lubput[:len.a + 200m, :len.f - 160m] >> 1dt
+            ..  lubput[:len.f -  60m, :len.f -  59m]
+        );
+        # Anschlußgleis Nordkopf
+        with layer = -1 track(:station :removed,
+                lubput[:len.f - 191m, :len.f - 190m] >> 1dt
+            ..  lubput[:len.f -  90m, :len.f] >> 3dt
+        );
+
+        marker(:de.bf :left, lubput[:len] << 1dt);
+        station(:left :right_align, lubput[:len - 0.4sw] << 1dt << 1.4sw,
+            "Lensahn",
+            hbox(:center:base,
+                span(:regular, "44,96 "),
+                span(:removed, "(15,80)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:len.f, :gru.a]);
+    }
+
+
+    with link = "point.de.Grüner-Hirsch" {
+        # Gl. 1 (<< 1dt)
+        track(:station,
+                lubput[:gru.a +  59m, :gru.a +  60m]
+            ..  lubput[:gru.a + 160m, :gru.f - 180m] << 1dt
+            ..  lubput[:gru.f -  60m, :gru.f -  59m]
+        );
+
+        # Gl. 2 (<< 2dt)
+        track(:first :station, lubput[:gru.a, :gru.f]);
+
+        marker(:de.bbf :left, lubput[:gru] << 1dt);
+        station(:left, lubput[:gru - 0.4sw] << 1dt << 1.4sw,
+            "Grüner Hirsch",
+            hbox(:center:base,
+                span(:regular, "47,10 "),
+                span(:removed, "(17,94)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:gru.f, :old.a]);
+        with layer = 1 badge(lubput[:gru + 2.5km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+    
+    with link = "point.de.Oldenburg-Holst-Gbf" {
+        # Gl. 6 (Hauptgleis)
+        track(:first :station, lubput[:old.a, :old.r]);
+
+        # Gl. 7 (>> 1dt)
+        track(:station,
+                lubput[:old.a +  59m, :old.a + 60m]
+            ..  lubput[:old.a + 180m, :old.r] >> 1dt
+        );
+            # W7 - W8
+            track(:station,
+                    lubput[:old.r - 71m, :old.r - 70m] >> 1dt
+                ..  lubput[:old.r -  1m, :old.r]
+            );
+
+        # Gl. 8? (>> 2dt)
+        track(:station,
+                lubput[:old.a + 269m, :old.a + 270m] >> 1dt
+            ..  lubput[:old.a + 340m, :old.a + 345m] >> 2dt
+        );
+        with layer = -1 track(:station :closed,
+                lubput[:old.a + 345m, :old.r - 165m] >> 2dt
+        );
+        track(:station,
+                lubput[:old.r - 165m, :old.r - 160m] >> 2dt
+            ..  lubput[:old.r - 70m, :old.r - 69m] >> 1dt
+        );
+
+        marker(:de.bft :left, lubput[:olg]);
+        station(:left, lubput[:olg - 0.2sw] << 1.6sw,
+            hbox(:center:base,
+                span(:regular, "Oldenburg "),
+                span(:light, "(Holst) "),
+                span(:regular, "Gbf")
+            ),
+            "??"
+        );
+    }
+
+    with link = "point.de.Oldenburg-Holst" {
+        # Gl. 1 (<< 1dt)
+        track(:station,
+                lubput[:old.r -   1m, :old.r]
+            ..  lubput[:old.r +  80m, :old.r +  81m] << 1dt
+        );
+        with layer = -1 track(:station :removed,
+                lubput[:old.r +  80m, :old.f - 140m] << 1dt
+            ..  lubput[:old.f -  60m, :old.f -  59m]
+        );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:old.r, :old.f]);
+
+        # Gl. >> 1dt
+        with layer = -1 track(:station :removed,
+                lubput[:old.r, :old.f - 140m] >> 1dt
+        );
+
+        # Gl. >> 2dt
+        track(:station,
+                lubput[:old.r -   1m, :old.r] >> 1dt
+            ..  lubput[:old.r + 100m, :old.r + 200m] >> 2dt
+        );
+
+        # GL. >> 3dt
+        track(:station,
+                lubput[:old.r -   1m, :old.r] >> 1dt
+            ..  lubput[:old.r + 120m, :old.f - 140m] >> 3dt
+        );
+        with layer = -1 track(:station :closed,
+                lubput[:old.r +  60m, :old.r + 120m] >> 3dt
+        );
+
+        marker(:de.bf :left, lubput[:old] << 1dt);
+        station(:left, lubput[:old - 0.3sw] << 1.6sw,
+            hbox(:center:base,
+                span(:regular, "Oldenburg "),
+                span(:light, "(Holst) ")
+            ),
+            hbox(:center:base,
+                span(:regular, "52,27 "),
+                span(:removed, "(23,13)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:old.f, :ols - 1sw]);
+    }
+
+
+    with link = "point.de.Oldenburg-Holst-Stadt" {
+        track(:first :statin, lubput[:ols - 1sw, :ols + 1sw]);
+        with layer = -1 marker(:de.anst :removed :left, lubput[:ols]);
+        with layer = -2 marker(:de.hp :gone :left, lubput[:ols]);
+        station(:top :removed, lubput[:ols] << 1.4sh,
+            hbox(:center:base,
+                span(:regular, "Oldenburg "),
+                span(:light, "(Holst) "),
+                span(:regular, "Stadt")
+            ),
+            hbox(:center:base,
+                span(:regular, "?? "),
+                span(:removed, "(24,05)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:ols + 1sw, :goh.a]);
+        with layer = 1 badge(lubput[:ols + 1.7km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Göhl" {
+        # Gl. 1 (>> 1dt)
+        track(:station,
+                lubput[:goh.a +  59m, :goh.a +  60m]
+            ..  lubput[:goh.a + 240m, :goh.a + 250m] >> 2dt
+            ..  lubput[:goh  - 0.5sw, :goh.f - 180m] >> 1dt
+            ..  lubput[:goh.f -  60m, :goh.f -  59m]
+        );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:goh.a, :goh.f]);
+
+        marker(:de.bbf :right, lubput[:goh] >> 1dt);
+        station(:bottom, lubput[:goh] >> 1dt >> 1.4sh,
+            "Göhl",
+            hbox(:center:base,
+                span(:regular, "56,60 "),
+                span(:removed, "(27,46)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:goh.f, :her - 1sw]);
+        with layer = 1 badge(lubput[:goh + 2.5km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Heringsdorf-Holst" {
+        track(:first :station, lubput[:her - 1sw, :her + 1sw]);
+        with layer = -1 marker(:de.bf :closed :right, lubput[:her]);
+        station(:right :closed, lubput[:her - 0.4sw] >> 1.8sw,
+            hbox(:center:base,
+                span(:regular, "Heringsdorf "),
+                span(:light, "(Holst)")
+            ),
+            hbox(:center:base,
+                span(:regular, "61,42 "),
+                span(:removed, "(32,30)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:her + 1sw, :nki.a]);
+        with layer = 1 badge(lubput[:her + 1.2km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Neukirchen-Holst" {
+        # Gl. 1 (<< 1dt)
+        track(:station,
+                lubput[:nki.a +  59m, :nki.a + 60m]
+            ..  lubput[:nki.a + 140m, :nki.f - 90m] << 1dt
+        );
+            # W3 - W4
+            track(:station,
+                    lubput[:nki.f - 151m, :nki.f - 150m] << 1dt
+                ..  lubput[:nki.f -  60m, :nki.f -  59m]
+            );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:nki.a, :nki.f]);
+
+        marker(:de.bbf :left, lubput[:nki] << 1dt);
+        station(:left, lubput[:nki - 0.3sw] << 1.6sh,
+            hbox(:center:base,
+                span(:regular, "Neukirchen "),
+                span(:light, "(Holst)")
+            ),
+            hbox(:center:base,
+                span(:regular, "64,35 "),
+                span(:removed, "(35,24)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:nki.f, :lus - 0.5sw]);
+        with layer = 1 badge(lubput[:nki + 1.7km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11011)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Lütjenbrode-Süd" {
+        track(:first :station, lubput[:lus - 0.5sw, :lus + 120m]);
+        with layer = -1 track(:second:station :removed,
+                lubput[:lus - 1m, :lus]
+            ..  lubput[:lus + 60m, :lus + 120m] << 1dt
+        );
+
+        with layer = -1 marker(:de.abzw :removed :right, lubput[:lus]);
+        station(:right :removed, lubput[:lus - 0.4sw] >> 1.4sh,
+            "Lütjenbrode Süd",
+            hbox(:center:base,
+                vbox(:right:top,
+                    span(:regular, "1100: "),
+                    span(:regular, "11011: ")
+                ),
+                vbox(:right:top,
+                    span(:regular, "??"),
+                    span(:regular, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:lus + 120m, :luo - 120m]);
+        with layer = 1 line_badge(:open, lubput[:lus + 0.7km], "1100");
+    }
+
+
+    with link = "point.de.Lütjenbrode-Ost" {
+        track(:first :station, lubput[:luo - 120m, :luo + 60m]);
+        with layer = -1 track(:second:station :removed,
+                lubput[:luo - 120m, :luo - 60m] << 1dt
+            ..  lubput[:luo, :luo + 1m]
+        );
+
+        with layer = -1 marker(:de.anst :removed :left, lubput[:luo]);
+        with layer = -2 marker(:de.abzw :gone :left, lubput[:luo]);
+        station(:top :removed, lubput[:luo] << 1.4sh,
+            "Lütjenbrode Ost",
+            hbox(:center:base,
+                vbox(:right:top,
+                    span(:regular, "1100: "),
+                    span(:regular, "11021: ")
+                ),
+                vbox(:right:top,
+                    span(:regular, "??"),
+                    span(:regular, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:luo + 60m, :gbr.a]);
+        with layer = 1 badge(lubput[:luo + 0.65km],
+            hbox(:center:middle,
+                span(:small, "1100 "),
+                span(:small:removed, "(11021)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Großenbrode" {
+        # Gl. nach Großenbrode Kai
+        with layer = -1 track(:first :station :removed,
+                lubput[:gbr.a + 60m]
+            --  lubput[:gbr.a + 90m] >> 0.5dt
+            ..  path("path.de.11022")[:gba + 299m, :gba + 300m]
+        );
+
+        # Gl. 1 - Gl. 7 (<< 1dt)
+        track(:station,
+                lubput[:gbr.a +  90m] -- lubput[:gbr.a + 120m] << 0.5dt
+            ..  lubput[:gbr.a + 170m, :gbr.f - 140m] << 1dt
+            ..  lubput[:gbr.f - 90m] << 0.5dt -- lubput[:gbr.f -  60m]
+        );
+            # W10 - W11
+            track(:station,
+                    lubput[:gbr.w10] << 1dt
+                --  lubput[:gbr.w10 + 60m]
+            );
+
+        # Gl. 2 - Gl. 8 (Hauptgleis)
+        track(:first :station, lubput[:gbr.a, :gbr.f]);
+
+        # Gl. 3 - Gl. 6 (>> 1dt)
+        track(:station :removed,
+                path("path.de.1100.gbr")[:f, :a]
+            ..  lubput[:gbr.a + 50m, :gbr.a + 400m] >> 1dt
+        );
+        track(:station :closed, lubput[:gbr.a + 400m, :gbr.w10 + 80m] >> 1dt);
+
+        # Gl. 4 (>> 2dt)
+        with layer = -1 track(:station :removed,
+                lubput[:gbr.w10 - 290m]
+            --  lubput[:gbr.w10 - 245m] >> 1.5dt
+            ..  lubput[:gbr.w10 - 220m, :gbr.w10 - 120m] >> 2dt
+            ..  lubput[:gbr.w10 - 95m] >> 1.5dt
+            --  lubput[:gbr.w10 - 80m] >> 1dt
+        );
+
+        # Gl. 5 (<< 2dt)
+        with layer = -1 track(:station :removed,
+                lubput[:gbr.w10 - 290m] << 1dt
+            --  lubput[:gbr.w10 - 275m] << 1.5dt
+            ..  lubput[:gbr.w10 - 250m, :gbr.w10 - 220m] << 2dt
+            ..  lubput[:gbr.w10 - 195m] << 1.5dt
+            --  lubput[:gbr.w10 - 180m] << 1dt
+        );
+
+        # Gl. von Großenbrode Kai
+        with layer = -1 track(:first:station :removed,
+                path("path.de.11023")[:gbr.f, :gbr.f - 1m]
+            ..  lubput[:gbr.w10 - 60m] >> 1.5dt
+            --  lubput[:gbr.w10]
+        );
+
+        # Gl. nach Großenbroder Fähre
+        with layer = -1 track(:third :station :removed,
+                lubput[:agbf, :agbf + 1m]
+            ..  path("path.de.11021")[:aput + 159m, :aput + 160m]
+        );
+
+        marker(:de.bf :left, lubput[:gbr] << 1dt);
+        station(:left, lubput[:gbr - 0.4sw] << 1dt << 1.4sw,
+            span(:bold, "Großenbrode"),
+            hbox(:center:base,
+                vbox(:right:top,
+                    span(:regular, "1100: "),
+                    span(:removed, "11021: ")
+                ),
+                vbox(:right:top,
+                    span(:regular, "70,"),
+                    span(:removed, "3,")
+                ),
+                vbox(:left:top,
+                    span(:regular, "49"),
+                    span(:removed, "04")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:gbr.f, :bfea]);
+        with layer = 1 line_badge(:open, lubput[:gbr + 2.5km], "1100");
+    }
+
+
+    with link = "struct.de.Fehmarnsundbrücke" {
+        track(:first, lubput[:bfea, :bfef]);
+        slabel(:right, lubput[:bfea + 450m] >> 2dt, "Fehmarnsundbrücke");
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:bfef, :str.a]);
+        with layer = 1 line_badge(:open, lubput[:str - 1.5km], "1100");
+    }
+
+
+    with link = "point.de.Strukkamp" {
+        # Gl. 1 (<< 1dt)
+        track(:station,
+                lubput[:str.a +  59m, :str.a +  60m]
+            ..  lubput[:str.a + 150m, :str.f - 150m] << 1dt
+            ..  lubput[:str.f -  60m, :str.f -  59m]
+        );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:str.a, :str.f]);
+
+        marker(:de.bbf :left, lubput[:str] << 1dt);
+        station(:left, lubput[:str - 0.4sw] << 1dt << 1.3sh,
+            "Strukkamp", "77,82"
+        );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:str.f, :buw.a]);
+        with layer = 1 line_badge(:open, lubput[:str + 2.0km], "1100");
+    }
+
+
+    with link = "point.de.Burg-Fehmarn-West" {
+        # Gl. 1 (>> 1dt)
+        track(:second :station,
+                lubput[:buw.a + 59m, :buw.a + 60m]
+            ..  lubput[:buw.a + 120m, :buw.a + 200m] >> 1dt
+            ..  burort[:bua + 1m, :bua]
+        );
+        track(:station,
+                lubput[:buw.a + 200m, :buw.f - 180m] >> 1dt
+        );
+        track(:second :station,
+                burort[:bua, :bua + 1m]
+            ..  lubput[:buw.f - 180m, :buw.f - 160m] >> 1dt
+            ..  lubput[:buw.f -  60m, :buw.f -  59m]
+        );
+
+        # Gl. 2 (Hauptgleis)
+        track(:first :station, lubput[:buw.a, :buw.f]);
+
+        # Abzw aus Richtung Orth
+        with layer = -1 track(:second :station :closed,
+                burort[:lag, :lag - 1m]
+            ..  lubput[:buw.a + 140m, :buw.a + 141m]
+        );
+
+        marker(:de.bbf :right, lubput[:buw] >> 1dt);
+        station(:left, lubput[:buw - 0.4sw] << 3dt,
+            hbox(:right:base,
+                span(:bold, "Burg "),
+                span(:regular, "(Fehmarn) "),
+                span(:bold, "West")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1100: "),
+                    span(:open, "1103: "),
+                    span(:open, "1104: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "82,"),
+                    span(:open, ""),
+                    span(:open, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "15"),
+                    span(:open, "??"),
+                    span(:open, "37")
+                )
+             )
+         );
+    }
+
+
+    with link = "line.de.1100" {
+        track(:first, lubput[:buw.f, :put.a]);
+        with layer = 1 line_badge(:open, lubput[:buw + 2.5km], "1100");
+    }
+
+    with link = "point.de.Puttgarden" {
+        let putput = path("path.de.1100.put");
+
+        # Gl. 1
+        with layer = -1 track(:station :closed,
+                putput[:put.pf + 88m] << 7.9dt  # W49?
+            --  putput[:put.pf + 90m] << 8.0dt
+            ..  putput[:put.pf + 270m, :put + 60m] << 11dt
+        );
+
+        # Gl. 2
+        track(:station,
+                putput[:put.pf + 46m] << 6.4dt   # W47
+            --  putput[:put.pf + 54m] << 6.6dt
+            ..  putput[:put.pf + 88m] << 7.9dt  # W49?
+            --  putput[:put.pf + 90m] << 8.0dt
+            ..  putput[:put.pf + 270m, :put + 60m] << 10dt
+        );
+        track(:staition:closed,
+                putput[:put + 60m, :put + 80m] << 10dt
+            ..  putput[:put + 130m] << 10.5dt
+            --  putput[:put + 200m] << 11.0dt
+        );
+            # W101 - W102?
+            with layer = -1 track(:station :closed,
+                    putput[:put - 261m, :put - 260m] << 10dt
+                ..  putput[:put - 210m, :put - 209m] << 11dt
+            );
+
+        # Gl. 3
+        track(:station,
+                putput[:put.pf + 9m, :put.pf + 10m] << 6dt
+            ..  putput[:put.pf + 46m] << 6.4dt   # W47
+            --  putput[:put.pf + 54m] << 6.6dt
+            ..  putput[:put.pf + 130m, :put + 60m] << 8dt
+        );
+        with layer = -1 track(:station :removed,
+                putput[:put + 60m, :put + 61m] << 8dt
+            ..  putput[:f - 20m, :f] << 5dt
+        );
+            # W113 - W114?
+            with layer = -1 track(:station:closed,
+                    putput[:put.pf + 229m, :put.pf + 230m] << 8dt
+                ..  putput[:put.pf + 330m, :put.pf + 331m] << 6dt
+            );
+            # W119 - W110
+            track(:station,
+                    putput[:put + 10m] << 8dt -- putput[:put + 15m] << 8.1dt
+                ..  putput[:put + 60m, :put + 61m] << 9dt
+            );
+
+        # Gl. 4
+        with layer = -1 track(:station :closed,
+                putput[:put.pf + 59m, :put.pf + 60m] << 6dt
+            ..  putput[:put.pf + 120m, :put - 40m] << 7dt
+            ..  putput[:put + 10m, :put + 11m] << 6dt
+        );
+            # W115? - W112
+            with layer = -1 track(:station :closed,
+                    putput[:put - 211m, :put - 210m] << 7dt
+                ..  putput[:put - 150m, :put - 149m] << 8dt
+            );
+            # W118? - W119
+            with layer = -1 track(:station :closed,
+                    putput[:put - 41m, :put - 40m] << 7dt
+                ..  putput[:put +  5m] << 7.9dt -- putput[:put + 10m] << 8dt
+            );
+
+        # Gl. 5
+        track(:first :station, putput[:put.pf, :put + 60m] << 6dt);
+            # W116? - W117?
+            with layer = -1 track(:station :closed,
+                    putput[:put - 121m, :put - 120m] << 6dt
+                ..  putput[:put -  60m, :put -  59m] << 7dt
+            );
+
+        # Gl. 6
+        track(:first :station, lubput[:put.pf, :put + 60m] << 5dt);
+            # WX5 - WX6
+            with layer = -1 track(:station:closed,
+                    lubput[:put - 121m, :put - 120m] << 5dt
+                ..  lubput[:put -  60m, :put -  59m] << 4dt
+            );
+
+        # Gl. 7 - Fährbett II
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf +  59m, :put.pf +  60m] << 5dt
+            ..  lubput[:put.pf + 120m, :put    -  40m] << 4dt
+            ..  lubput[:put    +  60m, :put    + 150m] << 2dt
+        );
+            # WX3 - WX4
+            with layer = -1 track(:station :closed,
+                    lubput[:put - 211m, :put - 210m] << 4dt
+                ..  lubput[:put - 150m, :put - 149m] << 3dt
+            );
+            # WX7 - WX8
+            with layer = -1 track(:station :closed,
+                    lubput[:put - 41m, :put - 40m] << 4dt
+                ..  lubput[:put + 10m, :put + 11m] << 5dt
+            );
+
+        # Gl. 8
+        track(:station,
+                lubput[:put.pf + 9m, :put.pf + 10m] << 5dt
+            ..  lubput[:put.pf + 46m] << 4.6dt             # W74
+            --  lubput[:put.pf + 54m] << 4.4dt
+            ..  lubput[:put.pf + 130m, :put + 60m] << 3dt
+        );
+        with layer = -1 track(:station :removed,
+                lubput[:put + 60m, :put + 61m] << 3dt
+            ..  lubput[:f - 20m, :f] << 6dt
+        );
+            # WX1 - WX2
+            with layer = -1 track(:station :closed,
+                    lubput[:put.pf + 229m, :put.pf + 230m] << 3dt
+                ..  lubput[:put.pf + 330m, :put.pf + 331m] << 5dt
+            );
+
+        # Gl. 9
+        track(:station,
+                lubput[:put.pf + 46m] << 4.6dt             # W74
+            --  lubput[:put.pf + 54m] << 4.4dt
+            ..  lubput[:put.pf + 88m] << 3.1dt             # W75?
+            --  lubput[:put.pf + 92m] << 2.9dt
+            ..  lubput[:put.pf + 220m, :put + 60m] << 1dt
+        );
+        track(:station:closed,
+                lubput[:put + 60m, :put + 80m] << 1dt
+            ..  lubput[:put + 130m] << 0.5dt
+            --  lubput[:put + 200m]
+        );
+            # W75? - W76?
+            with layer = -1 track(:station :closed,
+                    lubput[:put.pf + 88m] << 3.1dt             # W75?
+                --  lubput[:put.pf + 92m] << 2.9dt
+                ..  lubput[:put.pf + 220m, :put.pf + 221m]
+            );
+            # WX11 - WX12
+            with layer = -1 track(:station :closed,
+                    lubput[:put - 261m, :put - 260m] << 1dt
+                ..  lubput[:put - 200m, :put - 199m]
+            );
+
+        # Gl. 10
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf +  59m, :put.pf + 60m] >> 1dt
+            ..  lubput[:put.pf + 120m, :put    - 70m]
+            ..  lubput[:put] << 0.75dt -- lubput[:put + 10m] << 1dt
+        );
+            # W77? - W78?
+            with layer = -1 track(:station :closed,
+                    lubput[:put.pf + 279m, :put.pf + 280m]
+                ..  lubput[:put.pf + 320m, :put.pf + 321m] >> 1dt
+            );
+
+        # Gl. 11
+        track(:station,
+                lubput[:put.pf - 120m, :put - 110m] >> 1dt
+        );
+        with layer = -1 track(:station :closed,
+                lubput[:put - 111m, :put - 110m] >> 1dt
+            ..  lubput[:put - 40m] >> 0.25dt -- lubput[:put - 30m]
+        );
+            # WY3 - WY5
+            with layer = -1 track(:station :closed,
+                    lubput[:put.pf - 70m] >> 1dt
+                --  lubput[:put.pf + 10m] >> 3dt
+            );
+
+        # Gl. 12
+        track(:station,
+                lubput[:put.pf - 120m, :put - 150m] >> 2dt
+        );
+        with layer = -1 track(:station :closed,
+                lubput[:put - 151m, :put - 150m] >> 2dt
+            ..  lubput[:put - 80m] >> 1.25dt -- lubput[:put - 70m] >> 1dt
+        );
+            # WY6 - WY7
+            with layer = -1 track(:station :closed,
+                    lubput[:put.pf] >> 2dt
+                --  lubput[:put.pf + 40m] >> 1dt
+            );
+
+        # Gl. 13
+        track (:station,
+                lubput[:put.pf - 120m, :put - 190m] >> 3dt
+        );
+        with layer = -1 track(:station :closed,
+                lubput[:put - 191m, :put - 190m] >> 3dt
+            ..  lubput[:put - 120m] >> 2.25dt -- lubput[:put + 10m] << 1dt
+            --  lubput[:put + 60m, :put + 61m] << 2dt
+        );
+            # WY1 - WY2
+            with layer = -1 track(:station :closed,
+                    lubput[:put.pf - 100m] >> 3dt
+                --  lubput[:put.pf -  60m] >> 2dt
+            );
+
+        # Gl. 14
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 175m] >> 3.25dt
+            --  lubput[:put.pf + 185m] >> 3.5dt
+            ..  lubput[:put.pf + 240m, :put.pf + 320m] >> 4dt
+        );
+
+        # Gl. 15
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 215m] >> 4.25dt
+            --  lubput[:put.pf + 225m] >> 4.5dt
+            ..  lubput[:put.pf + 280m, :put - 190m] >> 5dt
+        );
+        with layer = -2 track(:station :removed,
+                lubput[:put - 251m, :put - 250m] >> 5dt
+            ..  lubput[:put - 170m] >> 3.5dt -- lubput[:put - 120m] >> 2.25dt
+        );
+
+        # Gl. 16
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 165m] >> 3dt
+            --  lubput[:put.pf + 265m] >> 5.5dt
+            ..  lubput[:put.pf + 320m, :put - 190m] >> 6dt
+        );
+        with layer = -2 track(:station :removed,
+                lubput[:put - 241m, :put - 240m] >> 6dt
+            ..  lubput[:put - 160m] >> 3.25dt -- lubput[:put - 150m] >> 3dt
+        );
+
+        # Gl. 17
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 120m] >> 3dt
+            --  lubput[:put.pf + 600m] >> 15dt
+        );
+
+        # Gl. 18
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 75m] >> 3dt
+            --  lubput[:put.pf + 595m] >> 16dt
+        );
+
+        # Gl. 19
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 30m] >> 3dt
+            --  lubput[:put.pf + 590m] >> 17dt
+        );
+
+        # Gl. 20
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 75m] >> 4.5dt
+            --  lubput[:put.pf + 80m] >> 5dt
+            ..  lubput[:put.pf + 125m] >> 6.5dt
+            --  lubput[:put.pf + 585m] >> 18dt
+        );
+
+        # Gl. 21
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf + 50m] >> 3.5dt
+            --  lubput[:put.pf + 60m] >> 3.75dt
+            ..  lubput[:put.pf + 75m] >> 4.5dt
+            --  lubput[:put.pf + 85m] >> 5.5dt
+            ..  lubput[:put.pf + 110m] >> 7.25dt
+            --  lubput[:put.pf + 320m] >> 12.5dt
+        );
+
+        # Gl. 29
+        track(:station :closed,
+                putput[:put.pf, :put.pf + 10m] << 7dt
+            ..  putput[:put.pf + 68m] << 8.2dt
+            --  putput[:put.pf + 70m] << 8.3dt
+            ..  putput[:put.pf + 240m, :put - 100m] << 12dt
+            ..  putput[:put - 55m] << 11.5dt -- putput[:put - 50m] << 11.4dt
+        );
+
+        # Gl. 30 - Fährbrücke I
+        with layer = -1 track(:station:closed,
+                putput[:put.pf + 88m] << 7.9dt  # W48?
+            --  putput[:put.pf + 90m] << 8.0dt
+            ..  putput[:put.pf + 240m, :put - 120m] << 13dt
+            ..  putput[:put - 5m] << 10.1dt -- putput[:put] << 10dt
+        );
+        track(:station,
+                putput[:put] << 10dt -- putput[:put + 5m] << 9.9dt
+            ..  putput[:put + 60m, :put + 150m] << 9dt
+        );
+
+        # Gl. 50
+        track(:first :station,
+                lubput[:put.a + 59m, :put.a + 60m]
+            ..  lubput[:put.a + 380m, :put.r] << 2dt
+            ..  lubput[:put.r + 170m] << 5.5dt
+            --  lubput[:put.r + 390m] << 16.5dt
+            ..  lubput[:put.r + 450m, :put.pf - 380m] << 18dt
+            ..  lubput[:put.pf - 10m, :put.pf] << 6dt
+        );
+
+        # Gl. 51
+        with layer = -1 track(:station :closed,
+                lubput[:put.pf - 381m, :put.pf - 380m] << 18dt
+            ..  lubput[:put.pf - 330m] << 17dt
+            --  lubput[:put.pf - 130m] << 7dt
+        );
+
+        # Gl. 52
+        track(:station :closed,
+                lubput[:put.r + 300m] << 10.5dt
+            --  lubput[:put.r + 410m] << 16dt
+            ..  lubput[:put.r + 450m, :put.pf - 380m] << 17dt
+            ..  lubput[:put.pf - 340m] << 16dt
+            --  lubput[:put.pf - 320m] << 15dt
+            ..  lubput[:put.pf - 300m] << 13dt
+            --  lubput[:put.pf - 300m] << 12.5dt
+        );
+
+        # Gl. 53
+        track(:station :closed,
+                lubput[:put.r + 410m, :put.pf - 390m] << 16dt
+            ..  lubput[:put.pf - 350m] << 15dt
+            --  lubput[:put.pf - 280m] << 11.5dt
+        );
+
+        # Gl. 54
+        track(:station :closed,
+                lubput[:put.pf - 410m, :put.pf - 400m] << 15dt
+            ..  lubput[:put.pf - 360m] << 14dt
+            --  lubput[:put.pf - 310m] << 11.5dt
+        );
+
+        # Gl. 55
+        track(:station :closed,
+                lubput[:put.pf - 430m] << 16dt
+            --  lubput[:put.pf - 340m] << 11.5dt
+        );
+
+        # Gl. 56
+        track(:station :closed,
+                lubput[:put.r + 230m] << 7dt
+            --  lubput[:put.r + 300m] << 10.5dt
+            ..  lubput[:put.r + 375m, :put.pf - 430m] << 12dt
+            ..  lubput[:put.pf - 400m, :put.pf - 399m] << 11.5dt
+        );
+
+        # Gl. 57
+        track(:station :closed,
+                lubput[:put.r + 280m] << 9.5dt
+            --  lubput[:put.r + 330m] << 10.5dt
+            ..  lubput[:put.r + 380m, :put.pf - 430m] << 11dt
+            ..  lubput[:put.pf - 400m, :put.pf - 220m] << 11.5dt
+        );
+
+        # Gl. 58
+        track(:station :closed,
+                lubput[:put.r + 170m] << 4dt
+            --  lubput[:put.r + 230m] << 7dt
+            ..  lubput[:put.r + 260m] << 8dt
+            --  lubput[:put.r + 335m] << 9.5dt
+            ..  lubput[:put.r + 385m, :put.pf - 305m] << 10dt
+            ..  lubput[:put.pf - 255m] << 9.5dt
+            --  lubput[:put.pf - 30m] << 5dt
+        );
+
+        # Gl.59
+        track(:station :closed,
+                lubput[:put.r + 270m] << 6dt
+            --  lubput[:put.r + 290m] << 7dt
+            ..  lubput[:put.r + 330m] << 8.25dt
+            --  lubput[:put.r + 340m] << 8.5dt
+            ..  lubput[:put.r + 390m, :put.pf - 315m] << 9dt
+            ..  lubput[:put.pf - 265m] << 8.5dt
+            --  lubput[:put.pf - 140m] << 6dt
+        );
+
+        # Gl. 60
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 20m] << 1dt
+            --  lubput[:put.r + 345m] << 7.5dt
+            ..  lubput[:put.r + 395m, :put.pf - 240m] << 8dt
+        );
+
+        # Gl. 61
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 75m] << 1dt
+            --  lubput[:put.r + 350m] << 6.5dt
+            ..  lubput[:put.r + 400m, :put.pf - 270m] << 7dt
+            ..  lubput[:put.pf - 220m] << 6.5dt
+            --  lubput[:put.pf - 195m] << 6dt
+        );
+
+        # Gl. 62
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 440m] << 7dt
+            --  lubput[:put.r + 470m] << 6.5dt
+            ..  lubput[:put.r + 510m, :put.pf - 10m] << 6dt
+        );
+
+        # Gl. 63
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 325m, :put.r + 430m] << 6dt
+            ..  lubput[:put.r + 470m] << 6.5dt
+            --  lubput[:put.r + 500m] << 7dt
+        );
+
+        # Gl.64
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 275m, :put.pf - 240m] << 5dt
+            ..  lubput[:put.pf - 195m] << 5.5dt
+            --  lubput[:put.pf - 170m] << 6dt
+        );
+
+        # Gl. 65
+        track(:station:closed, lubput[:put.r + 225m, :put.pf - 250m] << 4dt);
+
+        # Gl. 66
+        track(:station:closed, lubput[:put.r + 175m, :put.pf - 280m] << 3dt);
+
+        # Gl. 67
+        track(:station:closed, lubput[:put.r + 125m, :put.pf - 310m] << 2dt);
+
+        # Gl. 68
+        with layer = -1 track(:station :closed,
+                lubput[:put.r, :put.pf - 380m] << 1dt
+            ..  lubput[:put.pf - 310m] << 2dt
+            --  lubput[:put.pf - 235m] << 4.5dt
+            ..  lubput[:put.pf - 195m] << 5.5dt
+            --  lubput[:put.pf - 170m] << 6dt
+        );
+
+        # Gl. 69
+        track(:station,
+                lubput[:put.a + 380m, :put.r] << 1dt
+        );
+            # W2 - W3
+            track(:station,
+                    lubput[:put.r - 1m, :put.r] << 1dt
+                ..  lubput[:put.r + 70m, :put.r + 71m]
+            );
+
+        # Gl. 70
+        track(:first :station,
+                lubput[:put.a, :put.pf - 360m]
+            ..  lubput[:put.pf - 100m, :put.pf] << 5dt
+        );
+            # W4 - W5
+            track(:station,
+                    lubput[:put.r + 119m, :put.r + 120m]
+                ..  lubput[:put.r + 190m, :put.r + 191m] >> 1dt
+            );
+
+        # Gl. 71
+        with layer = -1 track(:station :closed,
+                lubput[:put.r - 160m, :put.r + 190m] >> 1dt
+        );
+
+        # Gl. 72
+        track(:station,
+                lubput[:put.r + 190m, :put.pf - 120m] >> 1dt
+        );
+            # W6 - W7
+            with layer = -1 track(:station :closed,
+                    lubput[:put.r + 199m, :put.r + 200m] >> 1dt
+                ..  lubput[:put.r + 260m, :put.r + 261m]
+            );
+
+        # Gl. 73
+        track(:station,
+                lubput[:put.r + 240m] >> 1.25dt
+            --  lubput[:put.r + 250m] >> 1.5dt
+            ..  lubput[:put.r + 300m, :put.pf - 120m] >> 2dt
+        );
+
+        # Gl. 74
+        track(:station,
+                lubput[:put.r + 219m, :put.r + 220m] >> 1dt
+            ..  lubput[:put.r + 240m] >> 1.25dt
+            --  lubput[:put.r + 330m] >> 3.5dt
+            ..  lubput[:put.r + 380m, :put.r + 390m] >> 4dt
+            ..  lubput[:put.r + 470m, :put.pf - 120m] >> 3dt
+        );
+
+        # Gl. 75?
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 330m] >> 3.5dt
+            --  lubput[:put.r + 370m] >> 4.5dt
+            ..  lubput[:put.r + 420m, :put.pf] >> 5dt
+        );
+
+        # Gl. 76?
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 280m] >> 2.25dt
+            --  lubput[:put.r + 290m] >> 2.5dt
+            ..  lubput[:put.r + 330m] >> 4dt
+            --  lubput[:put.r + 350m] >> 5dt
+            ..  lubput[:put.r + 400m, :put.pf] >> 6dt
+        );
+
+        # Gl. 77?
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 350m] >> 5dt
+            --  lubput[:put.r + 370m] >> 6dt
+            ..  lubput[:put.r + 420m, :put.pf] >> 7dt
+        );
+
+        # Gl. 78?
+        with layer = -1 track(:station :closed,
+                lubput[:put.r + 370m] >> 6dt
+            --  lubput[:put.r + 390m] >> 7dt
+            ..  lubput[:put.r + 440m, :put.pf] >> 8dt
+        );
+
+        with layer = -1 marker(:de.bft :closed :left, lubput[:pus] << 18dt);
+        station(:left :closed, lubput[:pus - 0.4sw] << 18dt << 1.4sh,
+            "Puttgarden (Ps)", "??"
+        );
+
+        marker(:de.bf :left, putput[:put] << 11dt);
+        station(:left, putput[:put - 0.4sw] << 11dt << 1.4sh,
+            span(:bold, "Puttgarden"),
+            "1100: 88,59"
+        );
+    }
+}
+

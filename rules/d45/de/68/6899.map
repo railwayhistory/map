@@ -1,0 +1,62 @@
+#
+#
+let steuel = path("path.de.6899");
+
+with detail = [4, 5] {
+    # ...
+
+
+    with link = "line.de.6899" {
+        track(:first :double :cat, steuel[:pre + 1sw, :sal.a]);
+    }
+
+
+    with link = "point.de.Salzwedel-Gbf" {
+        track(:first:station :double :cat, steuel[:sal.a, :sal.r]);
+
+        marker(:de.bft :left, steuel[:sag] << 0.5dt);
+        station(:bottom, steuel[:sag] << 1.4sh,
+            "Salzwedel Gbf", "??"
+        );
+    }
+
+    with link = "point.de.Salzwedel" {
+        # 6899
+        track(:first:station :double :cat, steuel[:sal.r, :sal.f]);
+
+        # 6905
+        with layer = -1 track(:second:station :removed,
+                path("path.de.6905")[:gbur, :gbur - 1m]
+            ..  steuel[:sal.r, :sal.swt - 100m] >> 1.5dt
+            --  steuel[:sal.swt - 40m, :sal.swt - 39m] >> 0.5dt
+        );
+
+        marker(:de.bf :left, steuel[:sal] << 0.5dt);
+        station(:top, steuel[:sal] >> 3.5dt,
+            span(:bold, "Salzwedel"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "6899: "),
+                    span(:closed, "6900: "),
+                    span(:open, "6901: "),
+                    span(:removed, "6905: ")
+                ),
+                vbox(:center:top,
+                    span(:open, "57,13"),
+                    span(:closed, "??"),
+                    span(:open, "??"),
+                    span(:removed, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6899" {
+        track(:first :cat, steuel[:sal.f, :gsal - 0.5sw] >> 0.5dt);
+        track(:first :removed, steuel[:aoeb, :gsal - 0.5sw] << 0.5dt);
+    }
+
+    # ...
+}
+

@@ -1,0 +1,293 @@
+# DE 1200.  Niebüll (ausschl.) - Westerland (Sylt)
+#
+let niewes = path("path.de.1200");
+
+with detail = [4, 5] {
+    with link = "line.de.1200" {
+        track(:first,
+                path("path.de.1210")[:nie.f, :nie.f + 1m] << 0.5dt
+            ..  niewes[:aa, :leh.a]
+        );
+        with layer = 1 line_badge(:open, niewes[:leh - 3.0km], "1200");
+        line_badge(:open, niewes[:leh - 3.0km] << 6pt, "(VzG: 1210)");
+    }
+
+
+    with link = "point.de.Lehnshallig" {
+        track(:first:station, niewes[:leh.a, :leh.f]);
+        track(:station,
+                niewes[:leh.a + 99m, :leh.a + 100m]
+            --  niewes[:leh.a + 160m, :leh.f - 160m] >> 1dt
+            --  niewes[:leh.f - 100m, :leh.f - 99m]
+        );
+        marker(:de.bbf :right, niewes[:leh] >> 1dt);
+        station(:top, niewes[:leh - 0.2sw] >> 1dt >>1.6sh,
+            "Lehnshallig",
+            hbox(:center:base,
+                span(:open, "205,06 "),
+                span(:removed, "(6,61)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1200" {
+        track(:first, niewes[:leh.f, :emm - 1sw]);
+    }
+
+
+    with link = "point.de.Emmelsbüll" {
+        track(:first:station, niewes[:emm - 1sw, :emm + 1sw]);
+        with layer = -1 marker(:de.hst :removed :right, niewes[:emm]);
+        with layer = -2 marker(:de.bf :gone :right, niewes[:emm]);
+        station(:right :removed, niewes[:emm - 0.4sw] >> 1.3sh,
+            "Emmelsbüll",
+            hbox(:center:base,
+                span(:removed, "208,08 "),
+                span(:removed, "(9,74)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1200" {
+        track(:first, niewes[:emm + 1sw, :kla.a]);
+    }
+
+
+    with link = "point.de.Klanxbüll" {
+        # Gleis 1
+        track(:first:station, niewes[:kla.a, :kla.f]);
+            track(:station,
+                    niewes[:kla.f - 240m]
+                --  niewes[:kla.f - 180m] << 1dt
+            );
+
+        # Gleis 2
+        track(:first:station,
+                niewes[:kla.a + 99m, :kla.a + 100m]
+            --  niewes[:kla.a + 160m, :kla.f] << 1dt
+        );
+            track(:station,
+                    niewes[:kla.f - 160m] << 1dt
+                --  niewes[:kla.f - 100m]
+            );
+
+        # Gleis 3
+        with layer = -1 track(:station :removed,
+                niewes[:kla - 101m, :kla - 100m] << 1dt
+            --  niewes[:kla - 60m, :kla + 360m] << 2dt
+        );
+
+        # Gleis 4
+        track(:station,
+                niewes[:kla + 180m, :kla + 320m] << 3dt
+            --  niewes[:kla + 400m, :kla + 401m] << 1dt
+        );
+
+        marker(:de.bf :right, niewes[:kla]);
+        station(:right :left_align, niewes[:kla - 0.4sw] >> 1.3sh,
+            "Klanxbüll",
+            hbox(:left:base,
+                span(:open, " 211,69 "),
+                span(:removed, "(13,22)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1200" {
+        track(:first:double, niewes[:kla.f, :hin - 0.5sw] << 0.5dt);
+        with layer = 1 line_badge(:open, niewes[:hin - 2.5km] << 0.5dt, "1200");
+        line_badge(:open, niewes[:hin - 2.5km] << 0.5dt << 6pt, "(VzG: 1210)");
+    }
+
+
+    with link = "point.de.Hindenburgdamm" {
+        track(:first:station :double,
+                niewes[:hin - 0.5sw, :hin + 0.5sw] << 0.5dt
+        );
+        with layer = -1 marker(:de.bk :removed :right, niewes[:hin]);
+        station(:top :removed, niewes[:hin] >> 1.2sh,
+            "Hindenburgdamm", "(21,65)"
+        );
+    }
+
+
+    with link = "line.de.1200" {
+        track(:first:double, niewes[:hin + 0.5sw, :mor.a] << 0.5dt);
+    }
+
+
+    with link = "point.de.Morsum-Sylt" {
+        # Gleis 301
+        track(:first:station,
+                niewes[:mor.a, :mor.f - 160m] << 1dt
+            ..  niewes[:mor.f - 100m, :mor.f - 99m]
+        );
+            track(:station,
+                    niewes[:mor.a + 180m] << 1dt
+                --  niewes[:mor.a + 240m]
+            );
+
+        # Gleis 302
+        track(:first:station, niewes[:mor.a, :mor.f]);
+            track(:station,
+                    niewes[:mor.a + 100m]
+                --  niewes[:mor.a + 160m] << 1dt
+            );
+
+        # Ladegleis
+        with layer = -1 track(:station :removed,
+                niewes[:mor - 401m, :mor - 400m] << 1dt
+            --  niewes[:mor - 360m, :mor - 150m] << 2dt
+        );
+
+        marker(:de.bf :left, niewes[:mor] << 1dt);
+        station(:bottom, niewes[:mor] << 1.6sh,
+            hbox(:center:base,
+                span(:regular, "Morsum "),
+                span(:light, "(Sylt)")
+            ),
+            hbox(:center:base,
+                span(:open, "228,80 "),
+                span(:removed, "(30,32)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1200" {
+        track(:first, niewes[:mor.f, :kei.a]);
+        with layer = 1 line_badge(:open, niewes[:kei - 1.0km], "1200");
+        line_badge(:open, niewes[:kei - 1.0km] << 6pt, "(VzG: 1210)");
+    }
+
+
+    with link = "point.de.Keitum" {
+        # Gleis 312
+        track(:first:station, niewes[:kei.a, :kei.f]);
+
+        # Gleis 211
+        track(:station,
+                niewes[:kei.a + 99m, :kei.a + 100m]
+            --  niewes[:kei.a + 160m, :kei.f - 160m] >> 1dt
+            --  niewes[:kei.f - 100m, :kei.f - 99m]
+        );
+
+        # Ladegleis
+        track(:station :removed, niewes[:kei + 0.6sw, :kei.f - 160m] >> 2dt);
+            with layer = -1 track(:station :removed,
+                    niewes[:kei + 130m] >> 1dt
+                --  niewes[:kei + 170m] >> 2dt
+            );
+            with layer = -1 track(:station :removed,
+                    niewes[:kei + 190m] >> 2dt
+                --  niewes[:kei + 230m] >> 1dt
+            );
+
+        marker(:de.bf :right, niewes[:kei] >> 1dt);
+        station(:top :left_align, niewes[:kei + 1sw] >> 1dt >> 1.0sh,
+            "Keitum",
+            hbox(:left:base,
+                span(:open, "233,32 "),
+                span(:removed, "(34,85)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1200" {
+        track(:first, niewes[:kei.a, :wes.a]);
+    }
+
+
+    with link = "point.de.Tinnum" {
+        with layer = -1 marker(:de.hp :removed, niewes[:tin]);
+        station(:top :left_align :removed, niewes[:tin] >> 1.2sh,
+            "Tinnum", "(37,22)"
+        );
+    }
+
+
+    with link = "point.de.Westerland-Sylt" {
+        # Gleis 1 (Strecke 1200)
+        track(:first :station :open, niewes[:wes.a, :wes]);
+            track(:station,
+                    niewes[:wes.wla - 280m]
+                --  niewes[:wes.wla - 220m] >> 1dt
+            );
+
+        # Gleis 2
+        track(:station,
+                niewes[:wes.wla - 211m, :wes.wla - 210m]
+            --  niewes[:wes.wla - 150m, :wes] << 1dt
+        );
+
+        # Gleis 3
+        track(:station,
+                niewes[:wes.wla - 101m, :wes.wla - 100m] << 1dt
+            --  niewes[:wes.wla - 60m, :wes] << 2dt
+        );
+
+        # Gleis 36 - 126 - 106 - 7
+        track(:station, niewes[:wes.a, :wes] >> 1dt);
+        with layer = -0.5 casing(:station, niewes[:wes.a, :wes.a + 1sw] >> 1dt);
+
+        # Gleis 47
+        track(:station,
+                niewes[:wes.r + 120m, :wes.wla + 150m] << 3dt
+        );
+
+        # Gleis 48
+        track(:station,
+                niewes[:wes.r - 59m, :wes.r - 60m]
+            --  niewes[:wes.r + 180m, :wes.wla + 150m] << 4dt
+        );
+
+        # Gleis 101
+        track(:station,
+                niewes[:wes.a + 439m, :wes.a + 440m] >> 3dt
+            --  niewes[:wes.a + 480m, :wes.r - 160m] >> 4dt
+            --  niewes[:wes.r, :wes.r + 1m]
+        );
+
+        # Gleis 123 - 103
+        track(:station,
+                niewes[:wes.a + 149m, :wes.a + 150m] >> 1dt
+            --  niewes[:wes.a + 230m, :wes.r - 120m] >> 3dt
+        );
+
+        # Gleis 125 - 105
+        track(:station,
+                niewes[:wes.a + 209m, :wes.a + 210m] >> 1dt
+            --  niewes[:wes.a + 250m, :wes.r - 140m] >> 2dt
+            --  niewes[:wes.r - 100m, :wes.r - 59m] >> 1dt
+        );
+
+        # Gleis 107
+        track(:station,
+                niewes[:wes.a + 400m, :wes.r + 40m] << 1dt
+            --  niewes[:wes.r + 80m, :wes.r + 81m]
+        );
+
+        # Gleis 109
+        track(:station,
+                niewes[:wes.a + 460m, :wes.r - 180m] << 2dt
+            --  niewes[:wes.r - 140m, :wes.r - 139m] << 1dt
+        );
+
+        with layer = 1 marker(:de.bf :left, niewes[:wes - 0.4sw] >> 1dt);
+        station(:right, niewes[:wes - 0.8sw] >> 0.9sh,
+            hbox(:center:base,
+                span(:bold, "Westerland "),
+                span(:regular, "(Sylt)")
+            ),
+            hbox(:center:base,
+                span(:open, "1200: 237,68 "),
+                span(:removed, "(39,18)")
+            )
+        );
+    }
+}
+

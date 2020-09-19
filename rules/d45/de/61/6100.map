@@ -1,0 +1,1419 @@
+# DE 6100.  Berlin-Spandau (ausschl.) - Aumühle (ausschl.)
+#
+#           Aumühle (einschl) - Hamburg Hbf: DE 1244
+#           Hamburg Hbf - Hamburg-Altona: DE 1240
+#
+let spaalt = path("path.de.6100");
+let spaalt.wis = path("path.de.6100.wis");
+
+with detail = [4, 5] {
+    with link = "line.de.6100" {
+        let berleh = path("path.de.6107");
+
+        track(:first :cat,
+                berleh[:sdu.f, :anau] >> 1.5dt
+            ..  spaalt[:a - 1m, :a] >> 0.5dt
+        );
+        track(:first :cat :flip,
+                berleh[:sdu.f, :anau] << 0.5dt
+            ..  spaalt[:a - 1m, :a] << 0.5dt
+        );
+        track(:first :double :cat, spaalt[:a, :szw - 0.5sw]);
+    }
+
+
+    with link = "point.de.Berlin-Spandau-Bk-27" {
+        track(:first:station :double :cat, spaalt[:szw - 0.5sw, :szw + 0.5sw]);
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:szw] >> 0.5dt);
+        station(:top :removed, spaalt[:szw] >> 0.5dt >> 1.2sh,
+            "Bk 27", "14,80"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:szw + 0.5sw, :gahs - 0.5sw]);
+        with layer = 1 line_badge(:open, spaalt[:szw + 0.8km], "6100");
+    }
+
+
+    with link = "point.de.Berlin-Albrechtshof-Gr" {
+        track(:first:station :double :cat,
+                spaalt[:gahs - 0.5sw, :gahs + 0.5sw]
+        );
+        with layer = -1 {
+            marker(:de.lgr :removed :right, spaalt[:gahs] >> 0.5dt);
+            marker(:statdt :removed :right, spaalt[:gahs] << 0.5dt);
+            marker(:de.lgr :removed :left, spaalt[:gahs] << 0.5dt);
+        }
+        slabel(:top :removed, spaalt[:gahs] >> 4.5dt,
+            span(:xsmall, "16,350")
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:gahs + 0.5sw, :alb - 1sw]);
+    }
+
+
+    with link = "point.de.Berlin-Albrechtshof" {
+        track(:first:station :double :cat, spaalt[:alb - 1sw, :alb.hp + 1sw]);
+        marker(:de.hp :right, spaalt[:alb.hp] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, spaalt[:alb] >> 0.5dt);
+        station(:right, spaalt[:alb.hp + 0.4sw] >> 0.5dt >> 1.4sh,
+            hbox(:center:base,
+                span(:light, "Berlin-"),
+                span(:regular, "Albrechtshof")
+            ),
+            hbox(:center:base,
+                span(:open, "17,42 "),
+                span(:removed, "← 17,24")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:alb.hp + 1sw, :see - 1sw]);
+    }
+
+
+    with link = "point.de.Berlin-Albrechtshof-LGr" {
+        marker(:statdt :right, spaalt[:gahl] >> 0.5dt);
+        marker(:statdt :right, spaalt[:gahl] << 0.5dt);
+        marker(:de.lgr :left, spaalt[:gahl] << 0.5dt);
+    }
+
+
+    with link = "point.de.Seegefeld" {
+        track(:first:station :double :cat, spaalt[:see - 1sw, :see + 1sw]);
+        marker(:de.hp :right, spaalt[:see] >> 0.5dt);
+        station(:left, spaalt[:see - 0.4sw] << 0.5dt << 7pt,
+            "Seegefeld", "18,32"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:see + 1sw, :fal - 1sw]);
+        with detail = 5 {
+            with layer = 1 line_badge(:open, spaalt[:see + 1.0km], "6100");
+        }
+    }
+
+
+    with link = "point.de.Falkensee" {
+        track(:first:station :double :cat, spaalt[:fal - 1sw, :fal + 1sw]);
+        marker(:de.bf :right, spaalt[:fal] >> 0.5dt);
+        station(:top, spaalt[:fal] >> 0.5dt >> 1.4sh,
+            vbox(:center:bottom,
+                span(:removed, "Seegefeld"),
+                span(:open, "Falkensee")
+            ),
+            hbox(:center:base,
+                span(:removed, "20,41 → "),
+                span(:open, "20,37")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:fal + 1sw, :fin - 1sw]);
+    }
+
+
+    with link = "point.de.Finkenkrug" {
+        track(:first:station :double :cat, spaalt[:fin - 1sw, :fin.hp + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, spaalt[:fin] >> 0.5dt);
+        marker(:de.hp :right, spaalt[:fin.hp] >> 0.5dt);
+        station(:top, spaalt[:fin.hp] >> 0.5dt >> 1.4sh,
+            "Finkenkrug",
+            hbox(:center:base,
+                span(:open, "23,10 "),
+                span(:removed, "← 23,03")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:fin.hp + 1sw, :afi - 150m]);
+        with layer = 1 line_badge(:open, spaalt[:fin + 0.8km], "6100");
+    }
+
+
+    with link = "point.de.Finkenkrug-Afi" {
+        track(:first:station :double :cat, spaalt[:afi - 150m, :afi + 120m]);
+        track(:first:station :cat,
+                spaalt[:afi - 1m, :afi] >> 0.5dt
+            ..  spaalt[:afi + 60m, :afi + 120m] >> 1.5dt
+        );
+        track(:station :cat,
+                spaalt[:afi - 90m] << 0.5dt
+            --  spaalt[:afi - 30m] >> 0.5dt
+        );
+        with detail = 4 {
+            marker(:statdt :right, spaalt[:afi] >> 0.5dt);
+            marker(:de.abzw :right, spaalt[:afi] >> 1.5dt);
+            label(spaalt[:afi - 0.5sw] >> 1.5dt >> 1.0sh,
+                hbox(:left:bottom,
+                    vbox(:center:bottom :xsmall,
+                        hbox(:center:bottom,
+                            vbox(:right:top,
+                                span(:open, "6098: "),
+                                span(:open, "6100: ")
+                            ),
+                            vbox(:center:top,
+                                span(:open, "??"),
+                                span(:open, "24,60")
+                            )
+                        ),
+                        span(:medium :bold, "Finkenkrug (Afi)")
+                    )
+                )
+            );
+        }
+        with detail = 5 {
+            marker(:de.abzw :right, spaalt[:afi] >> 0.5dt);
+            station(:top, spaalt[:afi] >> 0.5dt >> 1.6sh,
+                span(:bold, "Finkenkrug (Afi)"),
+                hbox(:center:bottom,
+                    vbox(:right:top,
+                        span(:open, "6098: "),
+                        span(:open, "6100: ")
+                    ),
+                    vbox(:center:top,
+                        span(:open, "??"),
+                        span(:open, "24,60")
+                    )
+                )
+            );
+        }
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:afi + 120m, :fbar - 1sw]);
+    }
+
+
+    with link = "point.de.Brieselang" {
+        track(:first:station :double :cat, spaalt[:fbar - 1sw, :bri.neu + 1sw]);
+        track(:first:station :cat,
+                spaalt[:fbar - 1sw, :fbar - 1dl] >> 1.5dt
+            --  spaalt[:fbar, :fbar + 1m] >> 0.5dt
+        );
+        track(:first:station :cat,
+                spaalt[:fbar - 1sw, :fbar - 1dl] << 1.5dt
+            --  spaalt[:fbar, :fbar + 1m] << 0.5dt
+        );
+
+        with layer = -1 marker(:de.bf :removed :right, spaalt[:bri] >> 0.5dt);
+        marker(:de.bf :right, spaalt[:bri.neu] >> 0.5dt);
+        station(:top, spaalt[:bri.neu] >> 0.5dt >> 1.6sh,
+            span(:bold, "Brieselang"),
+            hbox(:center:bottom,
+                vbox(:left:top,
+                    span(:open, ""),
+                    span(:open, "             "),
+                    span(:open, "")
+                ),
+                vbox(:right:top,
+                    span(:open, "6099: "),
+                    span(:open, "6100: "),
+                    span(:open, "6101: ")
+                ),
+                vbox(:center:top,
+                    span(:open, "??"),
+                    span(:open, "26,95"),
+                    span(:open, "??")
+                ),
+                vbox(:left:top,
+                    span(:open, ""),
+                    span(:removed, " ← 26,68"),
+                    span(:open, "")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:bri.neu + 1sw, :nau.a]);
+        with layer = 1 line_badge(:open, spaalt[:bri + 2.5km], "6100");
+    }
+
+
+    with link = "point.de.Graben-Nauen" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:gra] >> 0.5dt);
+        station(:top :removed, spaalt[:gra] >> 0.5dt >> 1.2sh,
+            "Graben", "31,26"
+        );
+    }
+
+
+    with link = "point.de.Nauen" {
+        track(:first:station :double :cat, spaalt[:nau.a, :nau.f]);
+        track(:first:station :removed, spaalt[:nau.a, :nau.f] >> 1.5dt);
+        marker(:de.bf :left, spaalt[:nau] << 0.5dt);
+        station(:bottom, spaalt[:nau] << 0.5dt << 1.4sh,
+            span(:bold, "Nauen"),
+            hbox(:center:bottom,
+                vbox(:right:top,
+                    span(:open, "6100: "),
+                    span(:removed, "6105: "),
+                    span(:removed, "6505: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "35,"),
+                    span(:removed, "90,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "37"),
+                    span(:removed, "06"),
+                    span(:removed, "00")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:nau.f,  :bed - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:lie + 2.0km], "6100");
+    }
+
+
+    with link = "point.de.Nauen-Lietzow" {
+        with layer = -1 marker(:de.bk :removed :left, spaalt[:lie] << 0.5dt);
+        station(:bottom :removed, spaalt[:lie] << 0.5dt << 1.2sh,
+            "Lietzow", "38,12"
+        );
+    }
+
+
+    with link = "point.de.Berger-Damm" {
+        track(:first:station :double :cat, spaalt[:bed - 1sw, :bed + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, spaalt[:bed] >> 0.5dt);
+        station(:top :removed, spaalt[:bed] >> 0.5dt >> 1.4sh,
+            "Berger Damm", "42,21"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:bed + 1sw, :pao.a]);
+    }
+
+
+    with link = "point.de.Selbelang-Bk" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:sel] >> 0.5dt);
+        station(:top :removed, spaalt[:sel] >> 0.5dt >> 1.2sh,
+            "Selbelang", "45,38"
+        );
+    }
+
+
+    with link = "point.de.Paulinenaue-Ost" {
+        track(:first:station :double :cat, spaalt[:pao.a, :pao.f]);
+        marker(:de.bft :left, spaalt[:pao] << 0.5dt);
+        station(:left, spaalt[:pao + 0.2sw] << 0.5dt << 1.8sh,
+            "Paulinenaue Ost", "46,70"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:pao.f, :pau.a]);
+    }
+
+
+    with link = "point.de.Paulinenaue" {
+        track(:first:station :double :cat, spaalt[:pau.a, :pau.f]);
+        track(:second:station :removed, spaalt[:pau.a, :anru] >> 1.5dt);
+
+        marker(:de.bf :left, spaalt[:pau] << 0.5dt);
+        station(:left, spaalt[:pau - 0.4sw] << 0.5dt << 2.0sh,
+            span(:bold, "Paulinenaue"),
+            hbox(:center:bottom,
+                vbox(:right:top,
+                    span(:open, "6100: "),
+                    span(:removed, "6948: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "48,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "99"),
+                    span(:removed, "00")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:pau.f, :vie - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:pau + 2.3km], "6100");
+    }
+
+
+    with link = "point.de.Brädikow-Bk" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:bra] >> 0.5dt);
+        station(:right :removed, spaalt[:bra - 0.4sw] >> 0.5dt >> 1.2sh,
+            "Brädikow", "53,09"
+        );
+    }
+
+
+    with link = "point.de.Vietznitz" {
+        track(:first:station :double :cat, spaalt[:vie - 1sw, :vie + 1sw]);
+        with layer = -1 marker(:de.hp :closed :left, spaalt[:vie] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, spaalt[:vie] << 0.5dt);
+        station(:left :closed, spaalt[:vie - 0.3sw] << 0.5dt << 2.0sh,
+            "Vietznitz", "57,14"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:vie + 1sw, :fri - 1sw]);
+    }
+
+
+    with link = "point.de.Friesack-Mark" {
+        track(:first:station :double :cat, spaalt[:fri - 1sw, :fri + 1sw]);
+        marker(:de.bf :left, spaalt[:fri] << 0.5dt);
+        station(:left, spaalt[:fri - 0.3sw] << 0.5dt << 2.0sh,
+            hbox(:center:base,
+                span(:regular, "Friesack "),
+                span(:light, "(Mark)")
+            ),
+            "61,67"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:fri + 1sw, :seg - 120m]);
+        with layer = 1 line_badge(:open, spaalt[:fri + 2.6km], "6100");
+    }
+
+
+    with link = "point.de.Segeletz" {
+        track(:first:station :double :cat, spaalt[:seg - 120m, :seg + 120m]);
+        with layer = -1 {
+            track(:station :removed,
+                    spaalt[:seg - 80m] << 0.5dt
+                --  spaalt[:seg - 20m] >> 0.5dt
+            );
+            track(:station :removed,
+                    spaalt[:seg + 20m] >> 0.5dt
+                --  spaalt[:seg + 80m] << 0.5dt
+            );
+            marker(:de.abzw :removed :left, spaalt[:seg] << 0.5dt);
+        }
+        station(:left :closed, spaalt[:seg - 0.3sw] << 0.5dt << 1.8sh,
+            "Segeletz", "67,38"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:seg + 120m, :nns - 0.5sw]);
+        with layer = 1 line_badge(:open, spaalt[:saf + 1.5km], "6100");
+    }
+
+
+    with link = "point.de.Schäferberg" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:saf] >> 0.5dt);
+        station(:right :removed, spaalt[:saf - 0.5sw] >> 0.5dt >> 1.2sh,
+            "Schäferberg", "70,68"
+        );
+    }
+
+    
+    with link = "point.de.Neustadt-Dosse-Ns" {
+        track(:first:station :double :cat, spaalt[:nns - 0.5sw, :nns + 0.5sw]);
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:nns] >> 0.5dt);
+        label(spaalt[:nns - 0.5sw] >> 0.5dt >> 1.2sh,
+            hbox(:left:base :removed,
+                span(:medium, "Ns "),
+                span(:xsmall, "73,9")
+            )
+        );
+    }
+
+
+    with link = "point.de.Neustadt-Dosse-Gbf" {
+        track(:first:station :double :cat, spaalt[:nns + 0.5sw, :nst.r]);
+        marker(:de.bft :left, spaalt[:nsg] << 0.5dt);
+        with detail = 4 {
+            station(:left, spaalt[:nsg - 0.1sw] << 0.5dt << 2.0sh,
+                hbox(:center:base,
+                    span(:regular, "N. "),
+                    span(:light, "(D.) "),
+                    span(:regular, "Gbf")
+                ),
+                "??"
+            );
+        }
+        with detail = 5 {
+            station(:left, spaalt[:nsg - 0.1sw] << 0.5dt << 2.0sh,
+                hbox(:center:base,
+                    span(:regular, "Neustadt "),
+                    span(:light, "(Dosse) "),
+                    span(:regular, "Gbf")
+                ),
+                "??"
+            );
+        }
+    }
+
+
+    with link = "point.de.Neustadt-Dosse" {
+        track(:first:station :double :cat, spaalt[:nst.r, :nst.f]);
+        
+        # nach Pritzwalk
+        track(:station,
+                spaalt[:nst.r - 1m, :nst.r] >> 0.5dt
+            ..  spaalt[:nst.r + 120m, :apri] >> 2.5dt
+        );
+
+        # von Brandenburg
+        track(:second:station, spaalt[:nst.r, :nst.r + 120m] >> 2.5dt);
+
+        # von Neuruppin
+        track(:second:station, spaalt[:nst.r, :nsb - 0.5sw] >> 3.5dt);
+
+        with layer = -1 marker(:de.bf :removed :right, spaalt[:nsb] >> 2.5dt);
+        with detail = 5 {
+            station(:right :removed, spaalt[:nsb - 0.5sw] >> 2.5dt >> 1.4sh,
+                hbox(:center:base,
+                    span(:bold, "Neustadt "),
+                    span(:regular, "(Dosse) "),
+                    span(:bold, "Brand St")
+                ),
+                hbox(:center:top,
+                    vbox(:right:top,
+                        span(:removed, "6512: "),
+                        span(:removed, "6946: ")
+                    ),
+                    vbox(:right:top,
+                        span(:removed, "125,"),
+                        span(:removed, "0,")
+                    ),
+                    vbox(:left:top,
+                        span(:removed, "6"),
+                        span(:removed, "0")
+                    )
+                )
+            );
+        }
+
+        marker(:de.bf :left, spaalt[:nst] << 0.5dt);
+        station(:left, spaalt[:nst - 0.2sw] << 0.5dt << 2.0sh,
+            hbox(:center:base,
+                span(:bold, "Neustadt "),
+                span(:regular, "(Dosse) "),
+                span(:bold :removed, "Reichsb")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "6100: "),
+                    span(:closed, "6512: "),
+                    span(:open, "6938: "),
+                    span(:open, "6946: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "75,"),
+                    span(:closed, "125,"),
+                    span(:open, "0,"),
+                    span(:open, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "44"),
+                    span(:closed, "6"),
+                    span(:open, "00"),
+                    span(:open, "0")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:nst.f, :zer - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:nst + 2.5km], "6100");
+    }
+
+
+    with link = "point.de.Plänitz" {
+        with layer = -1 marker(:de.bk :removed :left, spaalt[:plz] << 0.5dt);
+        station(:bottom :removed, spaalt[:plz] << 0.5dt << 1.4sh,
+            "Plänitz", "79,25"
+        );
+    }
+
+
+    with link = "point.de.Zernitz" {
+        track(:first:station :double :cat, spaalt[:zer - 1sw, :zer + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, spaalt[:zer] >> 0.5dt);
+        station(:top :removed, spaalt[:zer] >> 0.5dt >> 1.6sh,
+            "Zernitz", "83,50"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:zer + 1sw, :stu - 1sw]);
+    }
+
+
+    with link = "point.de.Stüdenitz" {
+        track(:first:station :double :cat, spaalt[:stu - 1sw, :stu + 1sw]);
+        with layer = -1 marker(:de.hp :removed :left, spaalt[:stu] << 0.5dt);
+        with layer = -2 marker(:de.bf :gone :left, spaalt[:stu] << 0.5dt);
+        station(:bottom :removed, spaalt[:stu] << 0.5dt << 1.4sh,
+            "Stüdenitz", "88,83"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:stu + 1sw, :bre - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:stu + 1.6km], "6100");
+    }
+
+
+    with link = "point.de.Breddin" {
+        track(:first:station :double :cat, spaalt[:bre - 1sw, :bre + 1sw]);
+        marker(:de.bf :left, spaalt[:bre] << 0.5dt);
+        station(:bottom, spaalt[:bre] << 0.5dt << 1.2sh,
+            span(:bold, "Breddin"),
+            "6100: 92,12"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:bre + 1sw, :glo.a]);
+        with layer = 1 line_badge(:open, spaalt[:dam + 2.3km], "6100");
+    }
+
+
+    with link = "point.de.Damelak" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:dak] >> 0.5dt);
+        station(:top :removed, spaalt[:dak] >> 0.5dt >> 1.2sh,
+            "Damelak", "97,13"
+        );
+    }
+
+
+    with link = "point.de.Glöwen" {
+        track(:first:station :double :cat, spaalt[:glo.a, :glo.f]);
+        track(:second:station,
+                spaalt[:glo.a + 329m, :glo.a + 330m] << 0.5dt
+            ..  spaalt[:glo.a + 390m, :ahav] << 1.5dt
+        );
+        marker(:de.bf :left, spaalt[:glo] << 1.5dt);
+        station(:bottom, spaalt[:glo] << 1.5dt << 1.2sh,
+            span(:bold, "Glöwen"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "6100: "),
+                    span(:removed, "8984: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "101,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "81"),
+                    span(:removed, "00")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:glo.f, :wil - 1sw]);
+    }
+
+
+    with link = "point.de.Roddan" {
+        with layer = -1 marker(:de.bk :removed :left, spaalt[:ron] << 0.5dt);
+        station(:bottom :removed, spaalt[:ron] << 0.5dt << 1.4sh,
+            "Roddan", "107,53"
+        );
+    }
+
+
+    with link = "point.de.Bad-Wilsnack" {
+        track(:first:station :double :cat, spaalt[:wil - 1sw, :wil + 1sw]);
+        marker(:de.bf :left, spaalt[:wil] << 0.5dt);
+        station(:left, spaalt[:wil] << 0.5dt << 2.0sh,
+            "Bad Wilsnack", "112,80"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:wil + 1sw, :kuh - 1sw]);
+    }
+
+
+    with link = "point.de.Lüben" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:lun] >> 0.5dt);
+        station(:top :removed, spaalt[:lun] >> 0.5dt >> 1.3sh,
+            "Lüben", "116,63"
+        );
+    }
+
+
+    with link = "point.de.Kuhblank" {
+        track(:first:station :double :cat, spaalt[:kuh - 1sw, :kuh + 1sw]);
+        with layer = -1 marker(:de.uest :right, spaalt[:kuh] >> 0.5dt);
+        with layer = -2 marker(:de.bf :removed, spaalt[:kuh] >> 0.5dt);
+        station(:top :closed, spaalt[:kuh] >> 0.5dt >> 1.3sh,
+            "Kuhblank", "119,96"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:kuh + 1sw, :wit.a]);
+        with layer = 1 line_badge(:open, spaalt[:kuh + 1.6km], "6100");
+    }
+
+
+    with link = "point.de.Breese" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:brs] >> 0.5dt);
+        station(:top :removed, spaalt[:brs] >> 0.5dt >> 1.3sh,
+            "Breese", "122,92"
+        );
+    }
+
+
+    with link = "line.de.6100", layer = -1 {
+        track(:first :double :removed, spaalt.wis[:awis, :wis - 1sw]);
+    }
+
+
+    with link = "point.de.Wittenberge-Süd", layer = -1 {
+        track(:first:station :double :removed,
+                spaalt.wis[:wis - 1sw, :wis + 1sw]
+        );
+        marker(:de.hp :removed :left, spaalt.wis[:wis] << 0.5dt);
+        station(:right :removed, spaalt.wis[:wis + 1sw] << 0.5dt << 2.6sh,
+            "Wittenberge Süd", "125,2"
+        );
+    }
+
+
+    with link = "line.de.6100", layer = -1 {
+        track(:first :double :removed, spaalt.wis[:wis + 1sw, :fwis]);
+    }
+
+
+    with link = "point.de.Wittenberge" {
+        track(:first:station :double :cat, spaalt[:wit.a, :wit.u]);
+        track(:first:station :cat,
+                spaalt[:fman, :wib + 470m] << 1.5dt
+            ..  spaalt[:wib + 530m, :wib + 531m] << 0.5dt
+        );
+        with layer = -1 track(:first:station :removed,
+                spaalt[:wib + 470m, :adom] << 1.5dt
+        );
+        track(:second:station,
+                spaalt[:wib - 211m, :wib - 210m] >> 0.5dt
+            ..  spaalt[:wib - 150m, :wit.u] >> 1.5dt
+        );
+
+        marker(:de.bf :left, spaalt[:wib] << 1.5dt);
+        station(:left :right_align, spaalt[:wib - 0.4sw] << 1.5dt << 1.6sh,
+            span(:bold, "Wittenberge"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "1151: "),
+                    span(:open, "6100: "),
+                    span(:open, "6401: "),
+                    span(:open, "6941: ")
+                ),
+                vbox(:right:top,
+                    span(:removed, ""),
+                    span(:open, "126,"),
+                    span(:open, "53,"),
+                    span(:open, "0,")
+                ),
+                vbox(:left:top,
+                    span(:removed, ""),
+                    span(:open, "79 "),
+                    span(:open, "81 "),
+                    span(:open, "14 ")
+                ),
+                vbox(:right:top,
+                    span(:removed, ""),
+                    span(:removed, "← "),
+                    span(:removed, "← "),
+                    span(:removed, "← ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "126,"),
+                    span(:removed, "126,"),
+                    span(:removed, "53,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    span(:removed, "62"),
+                    span(:removed, "62"),
+                    span(:removed, "84"),
+                    span(:removed, "00")
+                )
+           )
+       );
+    }
+
+    with link = "point.de.Wittenberge-Nord" {
+        track(:first:station :double :cat, spaalt[:wit.u, :wit.f]);
+        marker(:de.bft :left, spaalt[:win] << 0.5dt);
+        station(:right, spaalt[:win - 0.3sw] >> 1.5dt,
+            "Wittenberge Nord", "??"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:wit.f, :der - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:sld - 1.6km], "6100");
+    }
+
+
+    with link = "point.de.Schilde" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:sld] >> 0.5dt);
+        label(spaalt[:sld + 0.2sw] >> 0.5dt >> 1.4sh,
+            vbox(:left:middle,
+                span(:medium :gone, "Bentwisch"),
+                hbox(:left:top,
+                    vbox(:center:top,
+                        span(:medium :closed, "Schilde"),
+                        span(:xsmall :closed, "132,10")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "point.de.Dergenthin" {
+        track(:first:station :double :cat, spaalt[:der - 1sw, :der + 1sw]);
+        marker(:de.bf :left, spaalt[:der] << 0.5dt);
+        station(:left, spaalt[:der - 0.4sw] << 0.5dt << 1.4sw,
+            "Dergenthin", "135,78"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:der + 1sw, :kat.a]);
+        with layer = 1 line_badge(:open, spaalt[:neb + 2.6km], "6100");
+    }
+
+
+    with link = "point.de.Nebelin" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:neb] >> 0.5dt);
+        station(:right :removed, spaalt[:neb - 0.4sw] >> 0.5dt >> 1.2sw,
+            "Nebelin", "139,29"
+        );
+    }
+
+
+    with link = "point.de.Karstädt" {
+        track(:first:station :double :cat, spaalt[:kat.a, :kat.f]);
+        marker(:de.bf :right, spaalt[:kat] >> 0.5dt);
+        station(:left :right_align, spaalt[:kat - 0.4sw] << 2.5dt,
+            span(:bold, "Karstädt"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "6100: "),
+                    span(:removed, "6944: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "144,38 "),
+                    span(:removed, "")
+                ),
+                vbox(:right:top,
+                    span(:removed, "← 144,"),
+                    span(:removed, "14,")
+                ),
+                vbox(:left:top,
+                    span(:removed, "32"),
+                    span(:removed, "78")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:kat.f, :wrn - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:kat + 2.6km], "6100");
+    }
+
+
+    with link = "point.de.Streesow" {
+        with layer = -1 marker(:de.abzw :removed :right, spaalt[:stw] >> 0.5dt);
+        station(:top :removed, spaalt[:stw - 0.2sw] >> 0.5dt >> 1.6sw,
+            "Streesow", "149,94"
+        );
+    }
+
+
+    with link = "point.de.Klein-Warnow" {
+        track(:first:station :double :cat, spaalt[:wrn - 1sw, :wrn + 1sw]);
+        marker(:de.bf :right, spaalt[:wrn] >> 0.5dt);
+        station(:top, spaalt[:wrn - 0.1sw] >> 0.5dt >> 1.6sw,
+            vbox(:center:bottom,
+                span(:removed, "Wendisch Warnow"),
+                span(:open, "Klein Warnow")
+            ),
+            "154,83"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:wrn + 1sw, :gwrn - 0.5sw]);
+    }
+
+
+    with link = "point.de.Klein-Warnow-LGr" {
+        track(:first:station :double :cat,
+                spaalt[:gwrn - 0.5sw, :gwrn + 0.5sw]
+        );
+        marker(:statdt :right, spaalt[:gwrn] >> 0.5dt);
+        marker(:statdt :right, spaalt[:gwrn] << 0.5dt);
+        marker(:de.lgr :left, spaalt[:gwrn] << 0.5dt);
+        label(spaalt[:gwrn] << 4.5dt,
+            hbox(:center:top, span(:xsmall, "??"))
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:gwrn + 0.5sw, :grb - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:grb - 2.2km], "6100");
+    }
+
+
+    with link = "point.de.Neese" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:nee] >> 0.5dt);
+        station(:top :removed, spaalt[:nee - 0.2sw] >> 0.5dt >> 1.4sw,
+            "Neese", "158,56"
+        );
+    }
+
+
+    with link = "point.de.point.de.Grabow-Meckl" {
+        track(:first:station :double :cat, spaalt[:grb - 1sw, :grb + 1sw]);
+        marker(:de.bf :left, spaalt[:grb] << 0.5dt);
+        station(:left, spaalt[:grb - 0.3sw] << 0.5dt << 2.0sh,
+            hbox(:center:base,
+                span(:regular, "Grabow "),
+                span(:light, "(Meckl)")
+            ),
+            "163,21"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:grb + 1sw, :lud.a]);
+        with layer = 1 line_badge(:open, spaalt[:grh + 1.6km], "6100");
+    }
+
+
+    with link = "point.de.Grünhof" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:grh] >> 0.5dt);
+        station(:top :removed, spaalt[:grh - 0.2sw] >> 0.5dt >> 1.5sw,
+            "Grünhof", "166,21"
+        );
+    }
+
+
+    with link = "point.de.Ludwigslust" {
+        track(:first:station :double :cat, spaalt[:lud.a, :lud.f]);
+        track(:second:station,
+                spaalt[:lud.a, :lud.a + 220m] >> 2.5dt
+        );
+        track(:first:station :cat,
+                spaalt[:lud.a + 99m, :lud.a + 100m] >> 0.5dt
+            --  spaalt[:lud.a + 220m, :aswe] >> 2.5dt
+        );
+        track(:first:station :cat,
+                spaalt[:lud.a + 160m, :aswe] >> 1.5dt
+        );
+
+        marker(:de.bf :left, spaalt[:lud] << 0.5dt);
+        station(:left :right_align, spaalt[:lud - 0.4sw] << 0.5dt << 2.0sh,
+            span(:bold, "Ludwigslust"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "6100: "),
+                    span(:open, "6441: "),
+                    span(:open, "6935: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "170,"),
+                    span(:open, " 30,"),
+                    span(:open, "?")
+                ),
+                vbox(:left:top,
+                    span(:open, "78"),
+                    span(:open, "39"),
+                    span(:open, "?")
+                ),
+                vbox(:center:top,
+                    span(:removed, " ← "),
+                    span(:removed, " ← "),
+                    span(:removed, " ← ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "170,"),
+                    span(:removed, "30,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    span(:removed, "76"),
+                    span(:removed, "28"),
+                    span(:removed, "00")
+                )
+            )
+        );
+    }
+
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:lud.f, :wes - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:wes - 0.8km], "6100");
+    }
+
+
+    with link = "point.de.Weselsdorf" {
+        track(:first:station :double :cat, spaalt[:wes - 1sw, :wes + 1sw]);
+        with layer = -1 marker(:de.hp :closed :left, spaalt[:wes] << 0.5dt);
+        station(:left :closed, spaalt[:wes - 0.4sw] << 0.5dt << 2.0sh,
+            "Weselsdorf", "174,50"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:wes + 1sw, :jas - 1sw]);
+    }
+
+
+    with link = "point.de.Niendorf-Ludwigslust" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:nie] >> 0.5dt);
+        station(:left :removed, spaalt[:nie - 0.4sw] << 0.5dt << 6pt,
+            "Niendorf", "175,67"
+        );
+    }
+
+
+    with link = "point.de.Jasnitz" {
+        track(:first:station :double :cat, spaalt[:jas - 1sw, :jas + 1sw]);
+        marker(:de.bf :right, spaalt[:jas] >> 0.5dt);
+        station(:top, spaalt[:jas] >> 0.5dt >> 1.4sh,
+            "Jasnitz", "180,63"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:jas + 1sw, :str - 1sw]);
+    }
+
+
+    with link = "point.de.Strohkirchen" {
+        track(:first:station :double :cat, spaalt[:str - 1sw, :str + 1sw]);
+        marker(:de.hp :right, spaalt[:str] >> 0.5dt);
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:str] >> 0.5dt);
+        station(:top, spaalt[:str] >> 0.5dt >> 1.4sh,
+            "Strohkirchen", "184,65"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:str + 1sw, :hag.a]);
+        with layer = 1 line_badge(:open, spaalt[:mor + 1.0km], "6100");
+    }
+
+
+    with link = "point.de.Moraas" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:mor] >> 0.5dt);
+        station(:top :removed, spaalt[:mor] >> 0.5dt >> 1.4sh,
+            "Moraas", "188,74"
+        );
+    }
+
+
+    with link = "point.de.Hagenow-Land" {
+        track(:first:station :double :cat, spaalt[:hag.a, :hag.f]);
+        marker(:de.bf :right, spaalt[:hag] >> 0.5dt);
+        station(:right, spaalt[:hag + 0.5sw] << 0.5dt << 6pt,
+            span(:medium:bold, "Hagenow Land"),
+            hbox(:center:top :xsmall,
+                vbox(:right:top,
+                    span(:open, "6100: "),
+                    span(:open, "6442: "),
+                    span(:open, "6928: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "191,"),
+                    span(:open, "0,"),
+                    span(:open, "?")
+                ),
+                vbox(:left:top,
+                    span(:open, "83"),
+                    span(:open, "20 "),
+                    span(:open, "?")
+                ),
+                vbox(:right:top,
+                    span(:removed, ""),
+                    span(:removed, "← 0,00"),
+                    span(:removed, "← 0,00")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:hag.f, :war - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:pat + 1.5km], "6100");
+    }
+
+
+    with link = "point.de.Paetow" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:pat] >> 0.5dt);
+        station(:right :removed, spaalt[:pat + 0.5sw] << 3.0dt,
+            "Paetow", "194,65"
+        );
+    }
+
+
+    with link = "point.de.Warlitz" {
+        track(:first:station :double :cat, spaalt[:war - 1sw, :war + 1sw]);
+        with layer = -1 marker(:de.hp :closed :left, spaalt[:war] << 0.5dt);
+        with layer = -2 marker(:de.bk :gone :left, spaalt[:war] << 0.5dt);
+        station(:bottom :closed, spaalt[:war] << 0.5dt << 1.4sh,
+            "Warlitz", "198,57"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:war + 1sw, :pri - 1sw]);
+    }
+
+
+    with link = "point.de.Pritzier" {
+        track(:first:station :double :cat, spaalt[:pri - 1sw, :pri + 1sw]);
+        marker(:de.bf :left, spaalt[:pri] << 0.5dt);
+        station(:bottom, spaalt[:pri] << 0.5dt << 1.4sh,
+            "Pritzier", "202,60"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:pri + 1sw, :brh.a]);
+        with layer = 1 line_badge(:open, spaalt[:mel + 1.5km], "6100");
+    }
+
+
+    with link = "point.de.Melkof" {
+        with layer = -1 marker(:de.bk :removed :left, spaalt[:mel] << 0.5dt);
+        station(:bottom :removed, spaalt[:mel] << 0.5dt << 1.2sh,
+            "Melkof", "206,54"
+        );
+    }
+
+
+    with link = "point.de.Brahlstorf" {
+        track(:first:station :double :cat, spaalt[:brh.a, :brh.f]);
+        marker(:de.bf :right, spaalt[:brh] >> 0.5dt);
+        station(:top, spaalt[:brh] >> 0.5dt >> 1.4sh,
+            span(:bold, "Brahlstorf"),
+            "6100: 211,54"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:brh.f, :kfd - 1sw]);
+    }
+
+
+    with link = "point.de.Kuhlenfeld" {
+        track(:first:station :double :cat, spaalt[:kfd - 1sw, :kfd + 1sw]);
+        with layer = -1 marker(:de.bf :removed :left, spaalt[:kfd] << 0.5dt);
+        station(:bottom :removed, spaalt[:kfd] << 0.5dt << 1.2sh,
+            "Kuhlenfeld", "218,17"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:kfd + 1sw, :boi.a]);
+        with layer = 1 line_badge(:open, spaalt[:ngu + 1.2km], "6100");
+    }
+
+
+    with link = "point.de.Neu-Gülze" {
+        with layer = -1 marker(:de.bk :removed :left, spaalt[:ngu] << 0.5dt);
+        station(:bottom :removed, spaalt[:ngu] << 0.5dt << 1.2sh,
+            "Neu Gülze", "221,21"
+        );
+    }
+
+
+    with link = "point.de.Boizenburg" {
+        track(:first:station :double :cat, spaalt[:boi.a, :boi.f]);
+        marker(:de.bf :left, spaalt[:boi] << 0.5dt);
+        station(:bottom, spaalt[:boi] << 0.5dt << 1.6sh,
+            span(:bold, "Boizenburg"),
+            "6100: 224,95"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:boi.f, :sah - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:met + 1.2km], "6100");
+    }
+
+
+    with link = "point.de.Metlitzhof" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:met] >> 0.5dt);
+        station(:right :removed, spaalt[:met - 0.4sw] >> 0.5dt >> 1.4sh,
+            "Metlitzhof", "228,27"
+        );
+    }
+
+
+    with link = "point.de.Schwanheide" {
+        track(:first:station :double :cat, spaalt[:sah - 1sw, :sah + 1sw]);
+        marker(:de.hp :right, spaalt[:sah] >> 0.5dt);
+        marker(:de.uest :right, spaalt[:sah] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, spaalt[:sah] >> 0.5dt);
+        station(:right :left_align, spaalt[:sah - 0.4sw] >> 0.5dt >> 1.4sh,
+            "Schwanheide",
+            hbox(:left:base,
+                span(:removed, "232,52 → 232,02 → "),
+                span(:open, "232,01")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:sah + 1sw, :gsah - 0.5sw]);
+    }
+
+
+    with link = "point.de.Zweedorf" {
+        with layer = -1 marker(:de.bk :removed :left, spaalt[:zwe] << 0.5dt);
+        station(:left :removed, spaalt[:zwe - 0.2sw] << 0.5dt << 1.8sh,
+            "Zweedorf", "234,92"
+        );
+    }
+
+
+    with link = "point.de.Schwanheide-LGr" {
+        track(:first:station :double :cat,
+                spaalt[:gsah - 0.5sw, :gsah + 0.5sw]
+        );
+        marker(:de.lgr :right, spaalt[:gsah] >> 0.5dt);
+        marker(:statdt :right, spaalt[:gsah] << 0.5dt);
+        marker(:de.lgr :left, spaalt[:gsah] << 0.5dt);
+        slabel(:right, spaalt[:gsah] >> 4.5dt,
+            span(:xsmall, "236,475")
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:gsah + 0.5sw, :buc.a]);
+        with layer = 1 line_badge(:open, spaalt[:gsah + 1.0km], "6100");
+    }
+
+
+    with link = "point.de.Büchen" {
+        let lubbuc = path("path.de.1121");
+        let lunbuc = path("path.de.1150");
+
+        track(:first:station,
+                spaalt[:alub - 1m, :alub] >> 0.5dt
+            ..  lubbuc[:f + 1m, :f]
+        );
+        track(:first:station :double :cat, spaalt[:buc.a, :buc.u]);
+        track(:first:station,
+                lunbuc[:buc.a, :buc.a + 100m]
+            ..  spaalt[:buc - 0.5sw, :buc + 0.5sw] << 2.5dt
+        );
+
+        marker(:de.inbf :left, spaalt[:buc] << 0.5dt);
+        station(:left, spaalt[:buc - 0.3sw] << 2.5dt << 8pt,
+            span(:bold, "Büchen"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1121: "),
+                    span(:open, "1150: "),
+                    span(:open, "6100: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "47,"),
+                    span(:open, "161,"),
+                    span(:open, "238,")
+                ),
+                vbox(:left:top,
+                    span(:open, "59"),
+                    span(:open, "34"),
+                    span(:open, "92")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Büchen-Bbf" {
+        track(:first:station :double :cat, spaalt[:buc.u, :buc.f]);
+        marker(:de.bft :left, spaalt[:bcb] << 0.5dt);
+        station(:left, spaalt[:bcb - 0.3sw] << 2.5dt << 8pt,
+            "Büchen Bbf", "??"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:buc.f, :stt - 0.5sw]);
+    }
+
+
+    with link = "point.de.Büchen-Steinautal" {
+        track(:first:station :double :cat, spaalt[:stt - 0.5sw, :stt + 0.5sw]);
+        marker(:de.uest :right, spaalt[:stt] >> 0.5dt);
+        station(:top, spaalt[:stt] >> 0.5dt >> 1.4sh,
+            hbox(:right:base,
+                span(:light, "Büchen "),
+                span(:regular, "Steinautal")
+            ),
+            "241,64"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:stt + 0.5sw, :mus - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:stt + 1.2km], "6100");
+    }
+
+
+    with link = "point.de.Müssen" {
+        track(:first:station :double :cat, spaalt[:mus - 1sw, :mus + 1sw]);
+        marker(:de.hp :left, spaalt[:mus] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, spaalt[:mus] << 0.5dt);
+        station(:bottom, spaalt[:mus] << 0.5dt << 1.4sh,
+            "Müssen",
+            hbox(:center:base,
+                span(:removed, "244,07 → "),
+                span(:open, "244,02")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:mus + 1sw, :swa.a]);
+        with layer = 1 line_badge(:open, spaalt[:swa - 2.0km], "6100");
+    }
+
+
+    with link = "point.de.Schwarzenbek" {
+        with layer = -1 track(:second:station :removed,
+                spaalt[:swa - 281m, :swa - 280m] >> 0.5dt
+            ..  spaalt[:swa - 220m, :aold] >> 1.5dt
+        );
+        track(:first:station :double :cat, spaalt[:swa.a, :swa.f]);
+        
+        marker(:de.bf :left, spaalt[:swa] << 0.5dt);
+        station(:bottom, spaalt[:swa] << 0.5dt << 1.4sh,
+            span(:bold, "Schwarzenbek"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "1141: "),
+                    span(:open, "6100: ")
+                ),
+                vbox(:right:top,
+                    span(:removed, ""),
+                    span(:open, "249,23 ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "249,26"),
+                    span(:removed, "← 249,26")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:swa.f, :frr - 1sw]);
+        with layer = 1 line_badge(:open, spaalt[:rap + 1.8km], "6100");
+    }
+
+
+    with link = "point.de.Radekamp" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:rap] >> 0.5dt);
+        station(:top :removed, spaalt[:rap - 0.2sw] >> 0.5dt >> 1.5sh,
+            "Radekamp", "251,86"
+        );
+    }
+
+
+    with link = "point.de.Sachsenwald" {
+        with layer = -1 marker(:de.bk :removed :right, spaalt[:sad] >> 0.5dt);
+        station(:top :removed, spaalt[:sad] >> 0.5dt >> 1.3sh,
+            "Sachsenwald", "255,20"
+        );
+    }
+
+
+    with link = "point.de.Friedrichsruh" {
+        track(:first:station :double :cat, spaalt[:frr - 1sw, :frr + 1sw]);
+        marker(:de.hp :right, spaalt[:frr] >> 0.5dt);
+        with layer = -1 marker(:de.bf :gone :right, spaalt[:frr] >> 0.5dt);
+        station(:top, spaalt[:frr] >> 0.5dt >> 1.4sh,
+            "Friedrichsruh",
+            hbox(:center:base,
+                span(:open, "259,4+166 "),
+                span(:removed, "(259,57)")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:frr + 1sw, :aum.a]);
+    }
+
+}
+

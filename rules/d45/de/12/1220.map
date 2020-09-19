@@ -1,0 +1,1097 @@
+# DE 1220.  Altona Palmaille - Kiel Altonaer Bf
+#
+#   Altona Palmaille - Hamburg-Eidelstedt: d4/d5
+#   Kiel Hbf: d4/d5
+#
+let altkie = path("path.de.1220");
+let kieneu = path("path.de.1023");
+let kieost = path("path.de.1022");
+let neuasc = path("path.de.1041");
+let neufle = path("path.de.1040");
+let neuhei = path("path.de.1042");
+
+with detail = [4, 5] {
+    # Altona Palmaille - Hamburg-Eidelstedt: d4/d5
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:eid.f, :pin.a]);
+        with layer = 1 line_badge(:open, altkie[:hal + 0.9km], "1220");
+    }
+
+
+    with link = "point.de.Thesdorf-Bk" {
+        with layer = -1 marker(:de.bk :removed :left, altkie[:the] << 0.5dt);
+        station(:left :removed, altkie[:the - 0.2sw] << 0.5dt << 1.8sh,
+            "Thesdorf", "13,81"
+        );
+    }
+
+
+    with link = "point.de.Pinneberg" {
+        # Gl. 3
+        track(:station,
+                altkie[:pin - 301m, :pin - 300m] >> 0.5dt
+            --  altkie[:pin - 300m + 2dl, :pin + 320m] >> 1.5dt
+            --  altkie[:pin + 320m + 2dl, :pin + 320m + 2.1dl] >> 0.5dt
+        );
+
+        # Gl. 4 (Richtungsgleis)
+        track(:first:station :cat, altkie[:pin.a, :pin.f] >> 0.5dt);
+            track(:station,
+                    altkie[:pin.a + 100m] >> 0.5dt
+                --  altkie[:pin.a + 100m + 2dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:pin + 320m] >> 0.5dt
+                --  altkie[:pin + 320m + 2dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:pin + 320m + 3dl] >> 0.5dt
+                --  altkie[:pin + 320m + 5dl] << 0.5dt
+            );
+
+        # Gl. 5 (Gegenrichtungsgleis)
+        track(:first:station :cat, altkie[:pin.a, :pin.f] << 0.5dt);
+            track(:station,
+                    altkie[:pin.a + 100m + 3dl] << 0.5dt
+                --  altkie[:pin.a + 100m + 5dl] >> 0.5dt
+            );
+            track(:station,
+                    altkie[:pin.f - 100m - 2dl] << 0.5dt
+                --  altkie[:pin.f - 100m] >> 0.5dt
+            );
+
+        # Gl. 6
+        track(:station,
+                altkie[:pin - 301m, :pin - 300m] << 0.5dt
+            --  altkie[:pin - 300m + 2dl, :pin.f - 100m - 5dl] << 1.5dt
+            --  altkie[:pin.f - 100m - 3dl, :pin.f + 100m - 2.9dl] << 0.5dt
+        );
+
+        # Gl. 31
+        track(:station,
+                altkie[:pin + 79m, :pin + 80m] >> 1.5dt
+            --  altkie[:pin + 80m + 1dl, :pin + 350m] >> 2.5dt
+        );
+
+        marker(:de.bf :right, altkie[:pin] >> 1.5dt);
+        station(:left, altkie[:pin - 0.2sw] << 2.5dt << 2.8pt,
+            span(:bold, "Pinneberg"),
+            "1220: 15,95"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:pin.f, :pri - 1sw]);
+        with layer = 1 line_badge(:open, altkie[:pri - 1.3km], "1220");
+    }
+
+
+    with link = "point.de.Prisdorf" {
+        track(:first:station :double :cat, altkie[:pri - 1sw, :pri + 1sw]);
+        marker(:de.hp :right, altkie[:pri] >> 0.5dt)
+        with layer = -1 marker(:de.bf :removed :right, altkie[:pri] >> 0.5dt);
+        station(:top, altkie[:pri] >> 0.5dt >> 1.6sh,
+            "Prisdorf", "19,26"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:pri + 1sw, :tor.a]);
+    }
+
+
+    with link = "point.de.Tornesch" {
+        # Gl. 12, Gl. 22
+        track(:first:station :double :cat, altkie[:tor.a, :tor + 1sw]);
+            track(:station,
+                    altkie[:tor.a + 100m] >> 0.5dt
+                --  altkie[:tor.a + 100m + 1dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:tor - 300m + 1dl] << 0.5dt
+                --  altkie[:tor - 300m + 2dl] >> 0.5dt
+            );
+
+        # Gl. 31
+        track(:station,
+                altkie[:tor.a + 100m + 1.9dl, :tor.a + 100m + 2dl] << 0.5dt
+            --  altkie[:tor.a + 100m + 3dl, :tor - 300m - 1dl] << 1.5dt
+            --  altkie[:tor - 300m, :tor - 299m] << 0.5dt
+        );
+
+        # Gl. 4?
+        track(:station,
+                altkie[:tor - 500m + 1dl, :tor - 130m - 1dl] << 2.5dt
+            --  altkie[:tor - 130m, :tor - 129m] << 3.5dt
+        );
+
+        # Gl. 5? 
+        track(:third:station,
+                altkie[:tor - 501m, :tor - 500m] << 1.5dt
+            --  altkie[:tor - 500m + 2dl, :tor] << 3.5dt
+        );
+
+        marker(:de.bf :left, altkie[:tor] << 0.5dt);
+        label(altkie[:tor - 0.5sw] >> 0.5dt,
+            hbox(:left:bottom,
+                vbox(:center:bottom,
+                    span(:bold :medium, "Tornesch"),
+                    hbox(:left:top :xsmall,
+                        vbox(:right:top,
+                            span(:open, "1220: "),
+                            span(:open, "9129: ")
+                        ),
+                        vbox(:right:top,
+                            span(:open, "23,"),
+                            span(:open, "0,")
+                        ),
+                        vbox(:left:top,
+                            span(:open, "17"),
+                            span(:open, "0")
+                        )
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:tor + 1sw, :els - 1sw]);
+        with layer = 1 line_badge(:open, altkie[:els - 1.3km], "1220");
+    }
+
+
+    with link = "point.de.Himmel" {
+        with layer = -1 marker(:de.bk :removed :right, altkie[:him] >> 0.5dt);
+        station(:right :removed, altkie[:him - 0.4sw] >> 0.5dt >> 1.2sw,
+            "Himmel", "25,46"
+        );
+    }
+
+
+    with link = "point.de.Lieth" {
+        with layer = -1 marker(:de.bk :removed :right, altkie[:lie] >> 0.5dt);
+        station(:right :removed, altkie[:lie - 0.4sw] >> 0.5dt >> 1.2sw,
+            "Lieth", "27,20"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:tor + 1sw, :els - 1sw]);
+        with layer = 1 line_badge(:open, altkie[:els - 1.3km], "1220");
+    }
+
+
+    with link = "point.de.Himmel" {
+        with layer = -1 marker(:de.bk :removed :right, altkie[:him] >> 0.5dt);
+        station(:right :removed, altkie[:him - 0.4sw] >> 0.5dt >> 1.2sw,
+            "Himmel", "25,46"
+        );
+    }
+
+
+    with link = "point.de.Lieth" {
+        with layer = -1 marker(:de.bk :removed :right, altkie[:lie] >> 0.5dt);
+        station(:right :removed, altkie[:lie - 0.4sw] >> 0.5dt >> 1.2sw,
+            "Lieth", "27,20"
+        );
+    }
+
+
+    with link = "point.de.Elmshorn-Els" {
+        # Gl. 1/2 (Strecke 1220);
+        track(:first:station :double :cat, altkie[:els - 1sw, :elm.r]);
+
+        # Gl. 12
+        track(:station :removed, altkie[:els + 20m, :elm.r] >> 1.5dt);
+            with layer = -1 track(:station :removed,
+                    altkie[:els + 30m] >> 0.5dt
+                --  altkie[:els + 90m] >> 1.5dt
+            );
+
+        with layer = -1 marker(:de.bft :removed :left, altkie[:els] << 0.5dt);
+        station(:left :removed, altkie[:els - 0.4sw] << 0.5dt << 1.4sw,
+            "Elmshorn (Els)", "29,20"
+        );
+    }
+
+    with link = "point.de.Elmshorn" {
+        let elmnie = path("path.de.1210");
+
+        # Gl. 101/202 (1/2 alt) (Strecke 1220)
+        track(:first:station :double :cat, altkie[:elm.r, :elm.u]);
+            track(:station,
+                    altkie[:elm - 750m] >> 0.5dt
+                --  altkie[:elm - 690m] << 0.5dt
+            );
+            track(:station,
+                    altkie[:elm - 630m] << 0.5dt
+                --  altkie[:elm - 570m] >> 0.5dt
+            );
+            track(:station,
+                    altkie[:elm - 550m] >> 0.5dt
+                --  altkie[:elm - 490m] << 0.5dt
+            );
+            track(:station,
+                    altkie[:elm + 30m] >> 0.5dt
+                --  altkie[:elm + 90m] << 0.5dt
+            );
+
+        # Gl. 106 (1W alt) (Richtungsgleis Strecke 1210)
+        track(:first:station :cat,
+                altkie[:elm + 149m, :elm + 150m] << 0.5dt
+            --  altkie[:elm + 210m, :elm + 211m] << 1.5dt
+            ..  elmnie[:elw - 1.1sw, :elw - 1sw] >> 0.5dt
+        );
+
+        # Gl. 203 - 107 (3 - 2W alt) (Gegenrichtungsgleis Strecke 1210)
+        track(:first:station :cat,
+                altkie[:elm - 551m, :elm - 550m] << 0.5dt
+            --  altkie[:elm - 430m, :aitz] << 2.5dt
+            ..  elmnie[:elw - 1.1sw, :elw - 1sw] << 0.5dt
+        );
+            track(:station,
+                    altkie[:elm + 180m] << 2.5dt
+                --  altkie[:elm + 300m] << 0.5dt
+            );
+
+        # Gl. 4 (alt)
+        track(:station :removed, altkie[:elm - 620m, :elm + 100m] << 3.5dt);
+            with layer = -1 track(:station :removed,
+                    altkie[:elm - 240m] << 3.5dt
+                --  altkie[:elm - 200m] << 2.5dt
+            );
+            with layer = -1 track(:station :removed,
+                    altkie[:elm + 60m] << 3.5dt
+                --  altkie[:elm + 100m] << 2.5dt
+            );
+
+        # Gl. 12 (alt)
+        track(:station :removed, altkie[:elm.r, :elm - 0.6sw] >> 1.5dt);
+
+        # Gl. 30 (alt)
+        track(:station :removed,
+                altkie[:elm - 610m, :elm - 0.5sw - 120m] >> 2.5dt
+        );
+
+        # Gl. 33 (alt)
+        with layer = -1 track(:station :removed,
+                altkie[:elm - 651m, :elm - 650m] >> 1.5dt
+            --  altkie[:elm - 570m, :elm - 0.5sw - 160m] >> 3.5dt
+            --  altkie[:elm - 0.5sw, :elm - 0.49sw] << 0.5dt
+        );
+
+        # 9120
+        track(:third:station, altkie[:elm + 0.5sw, :aulz] >> 1.5dt);
+
+        marker(:de.bf :right, altkie[:elm] >> 0.5dt);
+        station(:right :left_align, altkie[:elm - 0.4sw] >> 0.5dt >> 1.4sw,
+            span(:bold, "Elmshorn"),
+            hbox(:left:top,
+                vbox(:right:top,
+                    span(:open, "  1210: "),
+                    span(:open, "1220: "),
+                    span(:open, "9120: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "30,"),
+                    span(:open, "30,"),
+                    span(:open, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "07 "),
+                    span(:open, "07"),
+                    span(:open, "0")
+                ),
+                vbox(:left:top,
+                    span(:removed, "(0,07)"),
+                    span(:removed, ""),
+                    span(:removed, "")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Elmshorn-Nord" {
+        # Gl. 111/112 (Strecke 1220)
+        track(:first:station :double :cat, altkie[:elm.u, :elm.f]);
+            track(:station,
+                    altkie[:elm.f - 160m] << 0.5dt
+                --  altkie[:elm.f - 100m] >> 0.5dt
+            );
+
+        # Gl. 113
+        track(:station, altkie[:elm + 210m, :eln + 100m] << 1.5dt);
+            track(:station,
+                    altkie[:elm + 480m] << 0.5dt
+                --  altkie[:elm + 550m] << 1.5dt
+            );
+            track(:station,
+                    altkie[:eln + 40m] << 1.5dt
+                --  altkie[:eln + 100m] << 0.5dt
+            );
+
+
+        marker(:de.bft :right, altkie[:eln] >> 0.5dt);
+        station(:right, altkie[:eln - 0.4sw] >> 0.5dt >> 1.4sw,
+            "Elmshorn Nord", "32,05"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:elm.f, :hot - 1sw]);
+        with layer = 1 line_badge(:open, altkie[:eln + 2.0km], "1220");
+    }
+
+
+    with link = "point.de.Horst-in-Holstein" {
+        track(:first:station :double :cat, altkie[:hot - 1sw, :hot + 1sw]);
+        marker(:de.hp :left, altkie[:hot] << 0.5dt);
+        station(:right, altkie[:hot - 0.3sw] >> 2.0dt,
+            "Horst in Holstein", "36,24"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:hot + 1sw, :hrt - 1sw]);
+    }       
+
+
+    with link = "point.de.Horst-Holst" {
+        track(:first:station :double :cat, altkie[:hrt - 1sw, :hrt + 1sw]);
+        with layer = -1 marker(:de.bf :removed :left, altkie[:hrt] << 0.5dt);
+        station(:left :removed, altkie[:hrt - 0.3sw] << 0.5dt << 1.5sw,
+            hbox(:right:base,
+                span(:regular, "Horst "),
+                span(:light, "(Holst)")
+            ),
+            "37,43"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:hrt + 1sw, :dhf.a]);
+    }       
+
+
+    with link = "point.de.Dauenhof" {
+        # Gl. 1 + 2
+        track(:first:station :double :cat, altkie[:dhf.a, :dhf.f]);
+            track(:station,
+                    altkie[:dhf.a + 100m] << 0.5dt
+                --  altkie[:dhf.a + 100m + 1dl] >> 0.5dt
+            );
+            track(:station,
+                    altkie[:dhf.f - 100m - 1dl] >> 0.5dt
+                --  altkie[:dhf.f - 100m] << 0.5dt
+            );
+
+        # Gl. 3
+        track(:station,
+                altkie[:dhf + 279m, :dhf + 280m] >> 0.5dt
+            --  altkie[:dhf + 280m + 1dl, :dhf.f - 100m - 3dl] >> 1.5dt
+            --  altkie[:dhf.f - 100m - 2dl, :dhf.f - 100m - 1.9dl] >> 0.5dt
+        );
+
+        marker(:de.bf :left, altkie[:dhf] << 0.5dt);
+        station(:left, altkie[:dhf - 0.4sw] << 0.5dt << 1.3sw,
+            "Dauenhof", "42,38"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:dhf.f, :wri.a]);
+        with layer = 1 line_badge(:open, altkie[:sie + 2.0km], "1220");
+    }       
+
+
+    with link = "point.de.Siebenecksknöll" {
+        with layer = -1 marker(:de.bk :removed :left, altkie[:sie] << 0.5dt);
+        station(:left :removed, altkie[:sie - 0.6sw] << 0.5dt << 1.3sw,
+            "Siebenecksknöll", "47,74"
+        );
+    }
+
+
+    with link = "point.de.Wrist" {
+        # Gl. 1 & 2
+        track(:first:station :double :cat, altkie[:wri.a, :wri.f]);
+            track(:station,
+                    altkie[:wri.a + 100m] >> 0.5dt
+                --  altkie[:wri.a + 100m + 1dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:wri.f - 100m - 1dl] << 0.5dt
+                --  altkie[:wri.f - 100m] >> 0.5dt
+            );
+
+        # Gl. 3
+        track(:second:station,
+                altkie[:wri.a + 100m + 1.9dl, :wri.a + 100m + 2dl] << 0.5dt
+            --  altkie[:wri.a + 100m + 3dl, :ahoh] << 1.5dt
+        );
+        track(:station,
+                altkie[:ahoh, :wri.f - 100m - 3dl] << 1.5dt
+            --  altkie[:wri.f - 100m - 2dl, :wri.f - 100m - 1.9dl] << 0.5dt
+        );
+
+        # Gl. 4
+        track(:second:station,
+                altkie[:ahoh - 2.1dl, :ahoh - 2dl] << 1.5dt
+            --  altkie[:ahoh - 1dl, :ahoh] << 2.5dt
+            ..  path("path.de.1221")[:aa - 1m, :aa]
+        );
+
+        marker(:de.bf :left, altkie[:wri] << 1.5dt);
+        station(:right :left_align, altkie[:wri - 0.2sw] >> 3.0dt,
+            span(:bold, "Wrist"),
+            hbox(:left:top,
+                vbox(:right:top,
+                    span(:open, "1220: 52,23"),
+                    span(:removed, "1221: 52,23")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:wri.f, :brs.a]);
+        with layer = 1 line_badge(:open, altkie[:qua - 1.5km], "1220");
+    }       
+
+
+    with link = "point.de.Quarnstedt" {
+        with layer = -1 marker(:de.bk :removed :left, altkie[:qua] << 0.5dt);
+        station(:left :removed, altkie[:qua - 0.6sw] << 0.5dt << 1.1sw,
+            "Quarnstedt", "56,46"
+        );
+    }
+
+
+    with link = "point.de.Brokstedt" {
+        # Gl. 1 & 2
+        track(:first:station :double :cat, altkie[:brs.a, :brs.f]);
+            track(:station,
+                    altkie[:brs.a + 100m] >> 0.5dt
+                --  altkie[:brs.a + 100m + 1dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:brs.f - 100m - 1dl] << 0.5dt
+                --  altkie[:brs.f - 100m] >> 0.5dt
+            );
+
+        # Gl. 3
+        track(:station,
+                altkie[:brs.a + 100m + 1.9dl, :brs.a + 100m + 2dl] << 0.5dt
+            --  altkie[:brs.a + 100m + 3dl, :brs - 0.6sw - 1dl] << 1.5dt
+            --  altkie[:brs - 0.6sw, :brs - 0.59sw] << 0.5dt
+        );
+
+        marker(:de.bf :left, altkie[:brs] << 0.5dt);
+        station(:left, altkie[:brs - 0.3sw] << 0.5dt << 1.4sh,
+            "Brokstedt", "60,51"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:brs.f, :arp - 1sw]);
+        with layer = 1 line_badge(:open, altkie[:pad + 2.5km], "1220");
+    }       
+
+
+    with link = "point.de.Arpsdorf" {
+        track(:first:station :double :cat, altkie[:arp - 1sw, :arp + 1sw]);
+        with layer = -1 marker(:de.bk :removed :left, altkie[:arp] << 0.5dt);
+        with layer = -2 marker(:de.bf :gone :left, altkie[:arp] << 0.5dt);
+        station(:left :removed, altkie[:arp - 0.6sw] << 0.5dt << 1.1sw,
+            "Arpsdorf", "65,62"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:arp + 1sw, :neu.a]);
+    }       
+
+
+    with link = "point.de.Padenstedt" {
+        with layer = -1 marker(:de.bk :removed :left, altkie[:pad] << 0.5dt);
+        station(:left :removed, altkie[:pad - 0.6sw] << 0.5dt << 1.1sw,
+            "Padenstedt", "70,58"
+        );
+    }
+
+
+    with link = "point.de.Neumüster" {
+        # Gleiswechsel Südkopf
+        track(:station,
+                altkie[:neu.a + .9dl, :neu.a + 1dl] << .5dt
+            --  altkie[:neu.a + 2dl, :neu.a + 2.1dl] >> 0.5dt
+        );
+        track(:station,
+                altkie[:neu.a + 1.9dl, :neu.a + 2dl] >> 1.5dt
+            --  altkie[:neu.a + 3dl, :neu.a + 3.1dl] >> 0.5dt
+        );
+        track(:station,
+                altkie[:neu.a + 3.9dl, :neu.a + 4dl] >> 0.5dt
+            --  altkie[:neu.a + 5dl, :neu.a + 5.1dl] << 0.5dt
+        );
+        track(:station,
+                altkie[:neu.a + 4.9dl, :neu.a + 5dl] >> 0.5dt
+            --  altkie[:neu.a + 6dl, :neu.a + 6.1dl] >> 1.5dt
+        );
+
+        # Gl. 1
+        track(:first :station,
+                altkie[:neu.ns - 2.1dl, :neu.ns - 2dl] >> 1.5dt
+            --  altkie[:neu.ns - 1dl, :neu.np - 4dl] >> 2.5dt
+        );
+        track(:station,
+                altkie[:neu.np - 4.1dl, :neu.np - 4dl] >> 2.5dt
+            --  altkie[:neu.np - 3dl, :neu.np - 2.9dl] >> 1.5dt
+        );
+        with layer = -1 track(:first :station :closed,
+                altkie[:neu.np - 4dl, :aasc] >> 2.5dt
+            ..  neuasc[:aa - .1dl, :aa]
+        );
+
+        # Gl. 2 - Gl. 51
+        track(:first :station, altkie[:neu.a, :neu + .5sw] >> 1.5dt);
+        track(:station, altkie[:neu + .5sw, :ngn + 4dl] >> 1.5dt);
+        track(:station,
+                altkie[:ngn + 1.9dl, :ngn + 2dl] >> 1.5dt
+            --  altkie[:ngn + 3dl, :ngn + 3.1dl] >> 0.5dt
+        );
+
+        # Gl. 3 - Gl. 13
+        track(:first :station, altkie[:neu.a, :neu.f] >> .5dt);
+
+        # Gl. 4 - Gl. 14
+        track(:first :station, altkie[:neu.a, :neu.f] << .5dt);
+
+        # Gl. 5 - Gl. 15
+        track(:first :station,
+                altkie[:neu.a + 5.9dl, :neu.a + 6dl] << 0.5dt
+            --  altkie[:neu.a + 7dl, :aren] << 1.5dt
+            ..  neufle[:a - .1dl, :a] << 0.5dt
+        );
+
+        # Ausfahrt Rendsburg
+        track(:first :station,
+                altkie[:aren - .1dl, :aren] << 0.5dt
+            ..  neufle[:a - .1dl, :a] >> 0.5dt
+        );
+
+        # Gl. 6
+        track(:second :station,
+                altkie[:neu.ns - 1.1dl, :neu.ns - 1dl] << 1.5dt
+            --  altkie[:neu.ns, :neu.np + 7dl] << 2.5dt
+            ..  neuhei[:aa - .1dl, :aa]
+        );
+
+        # Gleiswechsel bei Np
+        track(:station,
+                altkie[:neu.np - 2.1dl, :neu.np - 2dl] >> 1.5dt
+            --  altkie[:neu.np - 1dl, :neu.np - .9dl] >> 0.5dt
+        );
+        track(:station,
+                altkie[:neu.np - 1.1dl, :neu.np - 1dl] << 0.5dt
+            --  altkie[:neu.np, :neu.np + .1dl] >> 0.5dt
+        );
+        track(:station,
+                altkie[:neu.np - .1dl, :neu.np] << 1.5dt
+            --  altkie[:neu.np + 1dl, :neu.np + 1.1dl] << 0.5dt
+        );
+        track(:station,
+                altkie[:neu.np + 0.9dl, :neu.np + 1dl] >> 0.5dt
+            --  altkie[:neu.np + 2dl, :neu.np + 2.1dl] << 0.5dt
+        );
+        track(:station,
+                altkie[:neu.np + 1.9dl, :neu.np + 2dl] << 2.5dt
+            --  altkie[:neu.np + 3dl, :neu.np + 3.1dl] << 1.5dt
+        );
+        track(:station,
+                altkie[:neu.np + 1.9dl, :neu.np + 2dl] >> 0.5dt
+            --  altkie[:neu.np + 3dl, :neu.np + 3.1dl] >> 1.5dt
+        );
+        track(:station,
+                altkie[:neu.np + 2.9dl, :neu.np + 3dl] << 0.5dt
+            --  altkie[:neu.np + 4dl, :neu.np + 4.1dl] << 1.5dt
+        );
+        track(:station,
+                altkie[:neu.np + 4.9dl, :neu.np + 5dl] << 1.5dt
+            --  altkie[:neu.np + 6dl, :neu.np + 6.1dl] << 2.5dt
+        );
+        track(:station,
+                altkie[:neu.np + 5.9dl, :neu.np + 6dl] << 1.5dt
+            --  altkie[:neu.np + 7dl, :neu.np + 7.1dl] << 0.5dt
+        );
+
+        # Gl. 16
+        track(:station,
+                altkie[:neu.ngs - 6.1dl, :neu.ngs - 6dl] << 1.5dt
+            --  altkie[:neu.ngs - 5dl, :neu.ngs - 4.9dl] << 2.5dt
+        );
+        track(:station,
+                altkie[:neu.ngs - 7dl, :ngn + 4dl] << 2.5dt
+            --  altkie[:ngn + 7dl, :ngn + 7.1dl] << 5.5dt
+        );
+        track(:station,
+                altkie[:ngn + 2.9dl, :ngn + 3dl] << 2.5dt
+            --  altkie[:ngn + 4dl, :ngn + 4.1dl] << 1.5dt
+        );
+
+        # Gl. 17
+        track(:station, altkie[:neu.ngs + 1dl, :ngn + 1dl] << 3.5dt);
+
+        # Gl.19
+        track(:station,
+                altkie[:neu.ngs + 2dl, :ngn] << 4.5dt
+            --  altkie[:ngn + 2dl, :ngn + 2.1dl] << 2.5dt
+        );
+
+        # Gl. 21
+        track(:station,
+                altkie[:neu.ngs + 3dl, :ngn + 10dl] << 5.5dt
+            ..  neufle[:a - .1dl, :a] << 2.5dt
+        );
+
+        # Gl. 22
+        track(:station, altkie[:neu.ngs + 4dl, :ngn + 9dl] << 6.5dt);
+
+        # Gl. 24
+        track(:station,
+                altkie[:neu.ngs - 4.1dl, :neu.ngs] << 2.5dt
+            --  altkie[:neu.ngs + 5dl, :ngn + 8dl] << 7.5dt
+            --  altkie[:ngn + 10dl, :ngn + 10.1dl] << 5.5dt
+        );
+        
+        marker(:de.bf, altkie[:neu] >> 2.5dt);
+        station(:right :left_align, altkie[:neu - .4sw] >> 2.5dt >> 1.8sh,
+            span(:medium :bold, "NEUMÜNSTER"),
+            hbox(:left:top,
+                hbox(:center :top,
+                    vbox(:right :top,
+                        span(:xsmall, "1040: "),
+                        span(:xsmall :closed, "1041: "),
+                        span(:xsmall, "1042: ")
+                    ),
+                    vbox(:right :top,
+                        span(:xsmall, "74,"),
+                        span(:xsmall :closed, "74,"),
+                        span(:xsmall, "0,")
+                    ),
+                    vbox(:right :top,
+                        span(:xsmall, "69"),
+                        span(:xsmall :closed, "69"),
+                        span(:xsmall, "03")
+                    )
+                ),
+                hbox(:center :top,
+                    vbox(:right :top,
+                        span(:xsmall, "   1043: "),
+                        span(:xsmall, "1220: ")
+                    ),
+                    vbox(:right :top,
+                        span(:xsmall, "74,"),
+                        span(:xsmall, "74,")
+                    ),
+                    vbox(:right :top,
+                        span(:xsmall, "69"),
+                        span(:xsmall, "69")
+                    )
+                )
+            )
+        );
+
+        marker(:de.bft :left, altkie[:neg] << 7.5dt);
+        slabel(:left, altkie[:neg - .4sw] << 7.5dt << 1.3sh,
+            span(:medium, "N. Gbf")
+        );
+
+        with layer = -1 marker(:de.bft :closed, altkie[:ngn] >> 1.5dt);
+        station(:right, altkie[:ngn - .4sw] >> 1.5dt >> 1.3sh,
+            "„Ngn“", "76,16"
+        );
+
+        # Aw
+        track(:station,
+                altkie[:neu.aw - .5sw - 3.1dl, :neu.aw - .5sw - 3dl] >> 1.5dt
+            --  altkie[:neu.aw - .5sw, :neu.aw + .5sw] >> 4.5dt
+            --  altkie[:neu.aw + .5sw + 3dl, :neu.aw + .5sw + 3.1dl] >> 1.5dt
+        );
+        marker(:de.aw, altkie[:neu.aw] >> 1.5dt);
+    }
+
+    with link = "line.de.1220" {
+        track(:double :first :cat, altkie[:neu.f, :bor.a]);
+        with layer = 1 line_badge(:open, altkie[:ngn + 2.5km], "1220");
+    }
+
+
+    with link = "point.de.Einfeld" {
+        marker(:de.hp :left, altkie[:ein] << .5dt);
+        with layer = -1 marker(:de.bf :gone :left, altkie[:ein] << .5dt);
+        station(:left, altkie[:ein - .4sw] << .5dt << 1.4sh,
+            "Einfeld", "80,71"
+        );
+    }
+
+
+    with link = "point.de.Bordesholm" {
+        track(:double :first :station, altkie[:bor.a, :bor + 1sw]);
+            track(:station,
+                    altkie[:bor.a + 100m] >> 0.5dt
+                --  altkie[:bor.a + 100m + 1dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:bor.a + 100m + 2dl] << 0.5dt
+                --  altkie[:bor.a + 100m + 3dl] >> 0.5dt
+            );
+
+        marker(:de.bf :left, altkie[:bor] << 0.5dt);
+        station(:left, altkie[:bor - 0.4sw] << 0.5dt << 1.4sh,
+            "Bordesholm", "86,63"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:double :first :cat, altkie[:bor + 1sw, :mei.a]);
+        with layer = 1 line_badge(:open, altkie[:fli + 1.3km], "1220");
+    }
+
+
+    with link = "point.de.Techelsdorf" {
+        with layer = -1 marker(:de.bk :removed :right, altkie[:tec] >> 0.5dt);
+        station(:right :removed, altkie[:tec - 0.4sw] >> 0.5dt >> 1.4sh,
+            "Techelsdorf", "91,61"
+        );
+    }
+
+    with link = "point.de.Flintbek" {
+        marker(:de.hp :left, altkie[:fli] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, altkie[:fli] << 0.5dt);
+        station(:left, altkie[:fli - 0.8sw] << 0.5dt << 1.4sh,
+            vbox(:center :bottom,
+                span(:medium :removed, "Voorde"),
+                span(:medium, "Flintbek")
+            ),
+            "95,31"
+        );
+    }
+
+
+    with link = "point.de.Meimersdorf" {
+        with layer = -1 marker(:de.hp :closed, altkie[:mei] >> 0.5dt);
+        station(:right :closed, altkie[:mei - .4sw] >> 0.5dt >> 1.8sh,
+            "Meimersdorf", "100,00"
+        );
+    }
+
+
+    with link = "point.de.Meimersdorf-Mf" {
+        track(:double :first :station, altkie[:mei.a, :mef + 1sw]);
+        track(:station,
+                altkie[:mei.a + 0.9dl, :mei.a + 1dl] >> 0.5dt
+            --  altkie[:mei.a + 2dl, :mei.a + 2.1dl] << 0.5dt
+        );
+        track(:station, altkie[:mei.a + 2dl, :mei.a + 4dl] << 1.5dt);
+
+        with layer = -1 marker(:de.bft :closed :left, altkie[:mef] << 1.5dt);
+        station(:left :right_align :closed,
+            altkie[:mef - 0.4sw] << 1.5dt << 1.4sh,
+            "„Mf“",  "100,17"
+        );
+    }
+
+    with link = "point.de.Meimersdorf-Rbf" {
+        # Strecke 1031
+        track(:first :station,
+                altkie[:mei.a + 2.9dl, :mei.a + 3dl] << 0.5dt
+            --  altkie[:mei.a + 4dl, :mef + .5sw] << 1.5dt
+            --  altkie[:mef + .5sw + 2dl, :meg - .5sw - 5dl] << 3.5dt
+            --  altkie[:meg - .5sw - 1dl, :mer - .5sw - 2.5dl] << 7.5dt
+            --  altkie[:mer - .5sw + 1.5dl, :agbf] << 3.5dt
+            ..  altkie[:fasc, :kie.ko - .5sw] << 2.5dt
+            ..  kieost[:fmei, :has.a] << 1.5dt
+        );
+
+        # Strecke 1033
+        with layer = 2 track(:first :station,
+                altkie[:mef + .5sw, :mef + .5sw + 2dl] << 1.5dt
+            --  altkie[:mef + .5sw + 3dl, :meg - .5sw - 4dl] << 2.5dt
+            --  altkie[:meg - .5sw, :mer - .5sw - 4dl] << 6.5dt
+            --  altkie[:mer - .5sw, :mmo - .5sw] << 2.5dt
+            ..  altkie[:meo - .5sw, :meo + .5sw] >> 1.5dt
+            ..  altkie[:fasc, :kie.a] >> 2.5dt
+        );
+        with layer = 1 casing(:first :station,
+                altkie[:mmo - .51sw, :mmo - .5sw] << 2.5dt
+            ..  altkie[:meo - .5sw, :meo + .5sw] >> 1.5dt
+            ..  altkie[:fasc, :fasc + .1sw] >> 2.5dt
+        );
+
+        # Gl. 3
+        track(:station,
+                altkie[:mef + .5sw + 2dl, :meg - .5sw - 5dl] << 1.5dt
+            --  altkie[:meg - .5sw - 4dl, :meg - .5sw - 3.99dl] << 2.5dt
+        );
+        # Gl. 6
+        track(:station,
+                altkie[:mef + .5sw + 1.99dl, :mef + .5sw + 2dl] << 3.5dt
+            --  altkie[:mef + .5sw + 3dl, :meg - .5sw - 7dl] << 4.5dt
+            --  altkie[:meg - .5sw - 6dl, :meg - .5sw - 5.99dl] << 3.5dt
+        );
+
+        track(:station,
+                altkie[:meg + .49sw, :meg + .5sw] << 6.5dt
+            --  altkie[:meg + .5sw + 5dl, :mer - .5sw - 6dl] << 1.5dt
+            --  altkie[:mer - .5sw - 5dl, :mer - .5sw] << 2.5dt
+        );
+        track(:station, altkie[:meg + .5sw + 4dl, :mer - .5sw - 4dl] << 2.5dt);
+        track(:station, altkie[:meg + .5sw + 3dl, :mer - .5sw - 5dl] << 3.5dt);
+        track(:station, altkie[:meg + .5sw + 2dl, :mer - .5sw - 6dl] << 4.5dt);
+        track(:station,
+                altkie[:meg + .5sw + 1dl, :mer - .5sw - 7dl] << 5.5dt
+            --  altkie[:mer - .5sw - 4dl, :mer - .5sw - 3.9dl] << 2.5dt
+        );
+        marker(:de.bf :left, altkie[:meg] << 7.5dt);
+        station(:top, altkie[:meg] << 7.5dt << 1.2sh,
+            hbox(:center :base,
+                span(:medium :bold, "MEIMERSDORF "),
+                span(:medium :bold :closed, "Vbf")
+            ),
+            hbox(:center :base,
+                span(:xsmall, "101,00 "),
+                span(:xsmall :closed, "← 101,95")
+            )
+        );
+    }
+
+    
+    with link = "point.de.Meimersdorf-Ost" {
+        with layer = 2 track(:first :station,
+                altkie[:meo - .51sw, :meo - .5sw] >> 1.5dt
+            --  altkie[:meo - .5sw + 1dl, :meo + .5sw] >> 2.5dt
+            ..  kieneu[:agaa - 2.1dl, :agaa - 2dl] >> 1dt
+        );
+        with layer = 2 marker(:de.bft, altkie[:meo] >> 2.5dt);
+
+        with detail = 4 {
+            label(altkie[:meo - 0.7sw] >> 3.0dt,
+                hbox(:left:top,
+                    span(:medium, "M. Ost")
+                )
+            );
+        }
+        with detail = 5 {
+            station(:right, altkie[:meo - 0.3sw] >> 2.5dt >> 1.6sh,
+                "Meimersdorf Ost",
+                hbox(:center:top,
+                    vbox(:right:top,
+                        span(:open, "1032: "),
+                        span(:open, "1033: ")
+                    ),
+                    vbox(:right:top,
+                        span(:removed, "102,90 → "),
+                        span(:removed, "102,90 → ")
+                    ),
+                    vbox(:right:top,
+                        span(:open, "102,98"),
+                        span(:open, "102,98")
+                    )
+                )
+            );
+        }
+    }
+
+    with link = "point.de.Kiel-Hgbf" {
+        track(:first :station :removed,
+                altkie[:mmo - .5sw - 1.1dl, :mmo - .5sw - 1dl] << 3.5dt
+            --  altkie[:mmo - .5sw, :agbf] << 4.5dt
+            ..  altkie[:khg - 1.5sw, :khg] << 5.5dt
+        );
+        track(:station :removed,
+                altkie[:khg - 1sw - 1.1dl, :khg - 1sw - 1dl] << 5.5dt
+            --  altkie[:khg - 1sw, :khg] << 4.5dt
+        );
+        track(:station :removed,
+                altkie[:khg - 1sw - 1.1dl, :khg - 1sw - 1dl] << 5.5dt
+            --  altkie[:khg - 1sw, :khg] << 6.5dt
+        );
+
+        marker(:de.bf :top :removed, altkie[:khg] << 5.5dt);
+        station(:left :removed, altkie[:khg + 0.3sw] << 5.5dt << 1.3sw,
+            "K. Hgbf", "1030: ??"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:double :first :cat, altkie[:mef + 1sw, :kie.a]);
+    }
+}
+
+
+
+
+
+with detail = 50 {
+    #--- Kiel Hbf
+    #
+
+    # Gleis 1
+    # W16 - Stumpf
+    track(:station,
+            altkie[:kie.kp - 5.1wl, :kie.kp - 5wl] >> 1.5dt
+        --  altkie[:kie.kp - 3wl, :kie] >> 3.5dt
+    );
+
+    # Gleis 2b
+    # W37 - Stumpf
+    track(:station,
+            altkie[:kie.kp - 1.1wl, :kie.kp - 1wl] >> 1.5dt
+        ..  altkie[:kie.kp, :kie.kp + 110m] >> 2.5dt
+    );
+
+    # Gleis 2
+    # Einfahrt - Stumpf
+    track(:first :station, altkie[:kie.a, :kie] >> 1.5dt);
+    # W7 - W3
+    track(:station,
+            altkie[:kie.kp - 2.1wl, :kie.kp - 2wl] >> 1.5dt
+        --  altkie[:kie.kp, :kie.kp + .1wl] >> 3.5dt
+    );
+
+    # Gleis 3
+    # Einfahrt - Stumpf
+    track(:first :station, altkie[:kie.a, :kie] >> 0.5dt);
+    # W22 - W25
+    track(:station,
+            altkie[:kie.kp - 11.1wl, :kie.kp - 11.0wl] >> 0.5dt
+        ..  altkie[:kie.kp - 10.0wl, :kie.kp - 9.9wl] << 0.5dt
+    );
+    # W21 - W20
+    track(:station,
+            altkie[:kie.kp - 10.1wl, :kie.kp - 10.0wl] >> 0.5dt
+        --  altkie[:kie.kp - 9.0wl, :kie.kp - 8.9wl] >> 1.5dt
+    );
+    # W13 - W8
+    track(:station,
+            altkie[:kie.kp - 5.1wl, :kie.kp - 5wl] >> 0.5dt
+        --  altkie[:kie.kp - 4wl, :kie.kp - 3.9wl] >> 1.5dt
+    );
+
+
+    # Gleis 4
+    # Einfahrt - Stumpf
+    track(:first :station,
+            altkie[:kie.a, :kie.kp - 2.0wl] << 0.5dt
+        --  altkie[:kie.kp - 1.0wl, :kie] << 1.5dt
+    );
+    # W23 - W17
+    track(:station,
+            altkie[:kie.kp - 8.1wl, :kie.kp - 8.0wl] << 0.5dt
+        --  altkie[:kie.kp - 7.0wl, :kie.kp - 6.9wl] >> 0.5dt
+    );
+    # W30 - W29
+    track(:station,
+            altkie[:kie.kp - 7.1wl, :kie.kp - 7.0wl] << 0.5dt
+        --  altkie[:kie.kp - 5.0wl, :kie.kp - 4.9wl] << 2.5dt
+    );
+    # W10 - W6
+    track(:station,
+            altkie[:kie.kp - 4.1wl, :kie.kp - 4.0wl] << 0.5dt
+        --  altkie[:kie.kp - 2.0wl, :kie.kp - 1.9wl] << 2.5dt
+    );
+
+    # Gleis 48 - 12 - 5
+    track(:station,
+            altkie[:kie.ko + 3wl, :kie] << 2.5dt
+    );
+    # W26 - W24
+    track(:station,
+            altkie[:kie.kp - 11.1wl, :kie.kp - 11.0wl] << 2.5dt
+        --  altkie[:kie.kp -  9.0wl, :kie.kp -  8.9wl] << 0.5dt
+    );
+    # W4 - W1
+    track(:station,
+            altkie[:kie.kp - 0.1wl, :kie.kp] << 2.5dt
+        --  altkie[:kie.kp + 2.0wl, :kie.kp + 2.1wl] << 4.5dt
+    );
+
+    # Gleis 6b
+    track(:station,
+            altkie[:kie.kp - 1.1wl, :kie.kp - 1.0wl] << 4.5dt
+        --  altkie[:kie.kp, :kie.kp + 130m] << 3.5dt
+    );
+
+    # Gleis 6
+    track(:first :station,
+            kieost[:fmei, :kie.f]
+        ..  altkie[:kie.kp - 10wl, :kie.kp - 9wl] << 9.5dt
+        --  altkie[:kie.kp - 5wl, :kie] << 4.5dt
+    );
+    # W41 - W2
+    track(:station,
+            altkie[:kie.kp - 3.1wl, :kie.kp - 3.0wl] << 4.5dt
+        --  altkie[:kie.kp + 0.0wl, :kie.kp + 0.1wl] << 1.5dt
+    );
+
+    # Gleis 8
+    track(:station,
+            altkie[:kie.kp - 12.1wl, :kie.kp - 12.0wl] << 6.5dt
+        --  altkie[:kie.kp - 11.0wl, :kie.kp - 10.0wl] << 7.5dt
+        --  altkie[:kie.kp - 9.0wl, :kie.kp - 8.9wl] << 6.5dt
+    );
+
+    # Gleis 65 - Gleis 9
+    track(:station,
+            kieost[:kie.f, :kie.f - 1wl] >> 1.5dt
+        ..  altkie[:kie.kp - 13.1wl, :kie.kp - 8.0wl] << 6.5dt
+        --  altkie[:kie.kp - 4.0wl, :kie.kp - 3.9wl] << 2.5dt
+    );
+    # W 52 - W59
+    track(:station,
+            altkie[:kie.kp - 13.1wl, :kie.kp - 13.0wl] << 6.5dt
+        --  altkie[:kie.kp -  9.0wl, :kie.kp  - 8.9wl] << 2.5dt
+    );
+
+    # Gleis 10
+    track(:station, altkie[:kie.kp - 12.0wl, :kie.kp - 7.0wl] << 5.5dt);
+
+    # Gleis 11
+    track(:station, altkie[:kie.kp - 11.0wl, :kie.kp - 6.0wl] << 4.5dt);
+
+
+    # Gleis 19
+    # W19 - W11
+    track(:station,
+            altkie[:kie.kp - 9.1wl, :kie.kp - 9wl] >> 3.5dt
+        --  altkie[:kie.kp - 5wl, :kie.kp - 4.9wl] << 0.5dt
+    );
+
+
+    marker(:de.stw, altkie[:kie.ko] >> 1.5dt);
+
+
+    marker(:de.bf :bottom, altkie[:kie]);
+    marker(:statdt :left, altkie[:kie] << 1.5dt);
+    marker(:statdt :left, altkie[:kie] << 0.5dt);
+    marker(:statdt :right, altkie[:kie] << 0.5dt);
+    marker(:statdt :right, altkie[:kie] >> 0.5dt);
+    marker(:statdt :right, altkie[:kie] >> 1.5dt);
+}
+

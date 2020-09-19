@@ -1,0 +1,22 @@
+# DE 1130.  Lübeck Hafen - Lübeck Hbf (ausschl.)
+#
+#	    Lübeck Hbf (einschl.) - Lübeck Hgbf Abzw: de.1120
+#
+let lubput = path("path.de.1100");
+let luhlua = path("path.de.1130");
+
+with detail = [4, 5] {
+    with link = "point.de.Lübeck-Hafen" {
+        track(:second:station,
+                luhlua[:a, :luh + 0.6sw]
+            ..  lubput[:aluh + 1m, :aluh] << 1.5dt
+        );
+        marker(:de.gbf :left, luhlua[:luh]);
+        with detail = 5 {
+            station(:right, luhlua[:luh + 0.2sw] << 1.8sw,
+                "Lübeck Hafen", "1130: ??"
+            );
+        }
+    }
+}
+

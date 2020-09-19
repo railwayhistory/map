@@ -1,0 +1,135 @@
+# DE 91004.  Hörnum - Westerland (Sylt) ausschl.
+#
+let horwes = path("path.de.91004");
+let weslis = path("path.de.91006");
+
+with detail = [4,5] {
+    #--- point.de.Hörnum
+    #
+    track(:third :station :narrow :removed, horwes[:a, :hor.f]);
+    track(:station :narrow :removed,
+            horwes[:a, :hor.r - 2.0dl] >> 1dt
+        --  horwes[:hor.r - 1.0dl, :hor.r - 0.9dl]
+    );
+    track(:station :narrow :removed,
+            horwes[:hor.r + 0.9dl, :hor.r + 1.0dl]
+        --  horwes[:hor.r + 3dl, :hor.f] >> 2dt
+    );
+    track(:station :narrow :removed,
+            horwes[:hor.r + 2.0dl, :hor + .5sw + 2.0dl] >> 1dt
+    );
+    track(:station :narrow :removed,
+            horwes[:hor + .5sw + 0.9dl, :hor + .5sw + 1.0dl] >> 2dt
+        --  horwes[:hor + .5sw + 2.0dl, :hor + .5sw + 2.1dl]
+    );
+    marker(:de.bf :removed :left, horwes[:hor]);
+    station(:bottom :removed, horwes[:hor] << 1.4sh,
+        span(:medium :bold :removed, "Hörnum"),
+        "91004: ??"
+    );
+
+    # Streckengleis Hörnum - Hörnum Nord
+    track(:third :narrow :removed, horwes[:hor.f, :hon - 1sw]);
+
+    
+    #--- point.de.Hörnum-Nord
+    #
+    track(:third :station :narrow :removed, horwes[:hon - 1sw, :hon + 1sw]);
+    marker(:de.zst :right :removed, horwes[:hon]);
+    station(:right :removed, horwes[:hon - 0.4sw] >> 1.4sh,
+        "Hörnum Nord", "??"
+    );
+
+    # Streckengleis Hörnum Nord - Puan Klent
+    track(:third :narrow :removed, horwes[:hon + 1sw, :pua - 1sw]);
+
+
+    #--- point.de.Puan-Klent
+    #
+    track(:third :station :narrow :removed, horwes[:pua - 1sw, :pua + 1sw]);
+    track(:station :narrow :removed,
+            horwes[:pua - 0.5sw - 1.1dl, :pua - 0.5sw - 1dl]
+        --  horwes[:pua - 0.5sw, :pua + 0.5sw] >> 1dt
+        --  horwes[:pua + 0.5sw + 1dl, :pua + 0.5sw + 1.1dl]
+    );
+    marker(:de.zst :removed :right, horwes[:pua] >> 1dt);
+    station(:right :removed, horwes[:pua - 0.4sw] >> 1dt >> 1.4sh,
+        "Puan Klent", "??"
+    );
+
+    # Streckengleis Puan Klent - Rantum Dorf
+    track(:third :narrow :removed, horwes[:pua + 1sw, :rad - 1sw]);
+    with layer = 1 line_badge(:removed, horwes[:pua + 1.8km], "91004");
+
+
+    #--- point.de.Rantum-Dorf
+    #
+    track(:third :station :narrow :removed, horwes[:rad - 1sw, :rad + 1sw]);
+    track(:station :narrow :removed,
+            horwes[:rad - 1sw, :rad + 0.5sw] >> 1dt
+        --  horwes[:rad + 0.5sw + 1dl, :rad + 0.5sw + 1.1dl]
+    );
+    track(:station :narrow :removed,
+            horwes[:rad - 0.5sw - 1.1dl, :rad - 0.5sw - 1dl]
+        --  horwes[:rad - 0.5sw, :rad - 0.5sw + 0.1dl] >> 1dt
+    );
+    marker(:de.zst :removed :right, horwes[:rad] >> 1dt);
+    station(:right :removed, horwes[:rad - 0.5sw] >> 1dt >> 1.8sh,
+        vbox(:left :bottom,
+            span(:medium :gone, "Rantum (Sylt)"),
+            span(:medium :removed, "Rantum Dorf")
+        ),
+        "??"
+    );
+
+    # Streckengleis Rantum - Seeheim Rantum
+    track(:third :narrow :removed, horwes[:rad + 1sw, :ras - 1sw]);
+
+
+    #--- point.de.Seeheim-Rantum
+    #
+    track(:third :station :narrow :removed, horwes[:ras - 1sw, :ras + 1sw]);
+    marker(:de.zst :removed :left, horwes[:ras]);
+    station(:left :removed, horwes[:ras - 0.4sw] << 1.6sh,
+        "Seeheim Rantum", "??"
+    );
+
+    # Streckengleis Seeheim Rantum - Diken-Deel
+    track(:third :narrow :removed, horwes[:ras + 1sw, :dik - 1sw]);
+
+
+    #--- point.de.Dikjen-Deel
+    #
+    track(:third :station :narrow :removed, horwes[:dik - 1sw, :dik + 1sw]);
+    marker(:de.zst :removed :left, horwes[:dik]);
+    station(:left :removed, horwes[:dik - 0.35sw] << 1.6sh,
+        "Dikjen-Deel", "??"
+    );
+
+    # Streckengleis Diken-Deel - Bundesbahnhof
+    track(:third :narrow :removed, horwes[:dik + 1sw, :weg - 1sw]);
+    track(:third :narrow :station :removed, horwes[:weg - 1sw, :weg + 1sw]);
+    track(:third :narrow :removed, horwes[:weg + 1sw, :web - 1sw]);
+
+
+    #--- point.de.Westerland-Bundesbf
+    #
+    with layer = -1 {
+        track(:third :station :narrow :removed, horwes[:web - 1sw, :web + 1sw]);
+        marker(:de.bf :removed :right, horwes[:web]);
+        station(:left :removed, horwes[:web] << 2.5dt,
+            hbox(:center:base,
+                span(:regular, "Westerland "),
+                span(:light, "(Sylt) "),
+                span(:regular, "Bundesbf")
+            ),
+            "??"
+        );
+    }
+
+    # Streckengleis Diken-Deel - Inselbf
+    with layer = -1 track(:third :narrow :removed,
+            horwes[:web + 1sw, :wes - 1sw]
+    );
+}
+

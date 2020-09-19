@@ -1,0 +1,40 @@
+# DE 11201.  Lübeck alter Bf - Lübeck Mönkhof
+# DE 11202.  Lübeck alter Bf (ausschl.) - Genin Abzw
+# DE 11203.  Lübeck Nord - Lübeck alter Bf
+#
+let luabuc = path("path.de.11201");
+
+with detail = 3 {
+    with link = "point.de.Lübeck-alter-Bf" {
+        with layer = -1 {
+            track(:first:station :gone, luabuc[:lua - 1ssw, :lua + 1ssw]);
+            marker(:de.bf :gone :left, luabuc[:lua]);
+        }
+    }
+
+    with link = "path.de.11201" {
+        with layer = -1 track(:first :gone, luabuc[:lua + 1ssw, :mon]);
+    }
+
+    with link = "line.de.11202" {
+        with layer = -1 track(:first :gone,
+                path("path.de.11201")[:aham - 1m, :aham]
+            ..  path("path.de.11202")[:aa, :gea]
+        );
+    }
+
+    with link = "line.de.11203" {
+        with layer = -1 track(:first :gone,
+                luabuc[:lua - 1ssw, :lua - 2ssw]
+            ..  luabuc[:lun + 1m, :lun] >> 0.5dt
+        );
+    }
+
+    with link = "line.de.11204" {
+        with layer = -1 track(:first :gone,
+                luabuc[:akle - 1m, :akle]
+            ..  path("path.de.1122")[:lsg - 1m, :lsg]
+        );
+    }
+}
+
