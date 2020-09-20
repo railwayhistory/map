@@ -1,0 +1,60 @@
+# PL 204.  Malbork – Granica Państwa Braniewo
+#
+let malbra = path("path.pl.204");
+
+with detail = [4, 5] {
+
+    with link = "point.pl.Braniewo" {
+        track(:first:station :double, malbra[:bra - 1sw, :bra + 1sw]);
+        marker(:de.bf :left, malbra[:bra] << 0.5dt);
+        station(:left, malbra[:bra - 0.8sw] << 0.5dt << 1.6sw,
+            vbox(:right:bottom :bold,
+                span(:gone, "Braunsberg "),
+                span(:open, "Braniewo")
+             ),
+             hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, " 204: "),
+                    span(:open, " 221: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "83,"),
+                    span(:open, "87,")
+                ),
+                vbox(:left:top,
+                    span(:open, "71"),
+                    span(:open, "50")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.pl.204" {
+        track(:first :double, malbra[:bra + 1sw, :gr]);
+        with layer = 1 line_badge(:open, malbra[:bra + 3.0km], "204");
+    }
+
+
+    with link = "point.int.Braniewo-Мамоново" {
+        let kalmam = path("path.ru.kg.1");
+
+        marker(:de.dirgr :right, kalmam[:gr] >> 0.5dt);
+        marker(:de.dirgr :left, kalmam[:gr] << 0.5dt);
+        label(kalmam[:gr] >> 4.5dt,
+            hbox(:xsmall :right:middle,
+                vbox(:right:middle,
+                    span(:open, " RU "),
+                    hbar(0.2),
+                    span(:open, "PL ")
+                ),
+                vbox(:left:middle,
+                    span(:open, "КГ 1 "),
+                    hbar(0.2),
+                    span(:open, "204 ")
+                )
+            )
+        );
+    }
+}
+
