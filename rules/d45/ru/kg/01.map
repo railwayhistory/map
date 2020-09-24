@@ -5,14 +5,26 @@ let kalmam = path("path.ru.kg.1");
 with detail = [4, 5] {
     with link = "point.ru.Калининград-Пассажирский" {
         let kalter = path("path.ru.kg.2");
+        let kalbal = path("path.ru.kg.4");
 
-        track(:first:station :removed, kalmam[:kal, :kal + 1sw] >> 0.5dt);
-        track(:first:station, kalmam[:kal, :kal + 1sw] << 0.5dt);
-        track(:first:station :removed, kalter[:kal, :kal + 1sw] >> 0.5dt);
-        track(:first:station, kalter[:kal, :kal + 1sw] << 0.5dt);
+        # KG 1
+        track(:first:station :removed,
+                kalmam[:kal + 0.5sw, :kal + 1sw] >> 0.5dt
+        );
+        track(:first:station, kalmam[:kal - 0.5sw, :kal + 1sw] << 0.5dt);
 
-        marker(:de.bf :right, kalmam[:kal] >> 0.5dt);
-        station(:right, kalmam[:kal - 0.5sw] >> 0.5dt >> 1.2sw,
+        # KG 2
+        track(:first:station :removed,
+                kalter[:kal + 0.5sw, :kal + 1sw] >> 0.5dt
+        );
+        track(:first:station, kalter[:kal - 0.5sw, :kal + 1sw] << 0.5dt);
+
+        # KG 4
+        track(:first:station, kalmam[:kal - 0.5sw, :abal] >> 2.5dt);
+        track(:first:station :removed, kalmam[:kal - 0.5sw, :abal] >> 1.5dt);
+
+        marker(:de.bf :right, kalmam[:kal] >> 2.5dt);
+        station(:right, kalmam[:kal - 0.5sw] >> 2.5dt >> 1.2sw,
             vbox(:bottom:left,
                 hbox(:base:left :gone,
                     span(:bold, "Königsberg "),
