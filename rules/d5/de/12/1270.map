@@ -2,35 +2,265 @@
 #
 let altkie = path("path.de.1220");
 let altbla = path("path.de.1224");
+let hamdie = path("path.de.1270");
 let spaalt = path("path.de.6100");
 
 with detail = 5 {
     # ...
 
-    with link = "point.de.Hamburg-Altona-S-Bahn" {
+    with link = "point.de.Hamburg-Königstraße" {
         # Gl. 1
         track(:first:station :rail,
-                # ...
-                altkie[:alt - 50m, :alt + 5m] << 13.5dt
-            --  altkie[:alt + 725m, :alt + 830m] << 37.5dt
-                # ...
-        );
-
-        # Gegenrichtungsgleis Strecke 1224
-        track(:first:station :rail,
-                altkie[:alt + 10m] << 12.5dt
-            --  altkie[:alt + 190m] << 18.5dt
-            --  altbla[:baa - 110m, :baa - 100m] << 0.5dt
+                hamdie[:kon - 150m, :kon - 149m] >> 0.5dt
+             .. hamdie[:kon - 100m, :kon + 100m] >> 1.0dt
+             .. hamdie[:kon + 149m, :kon + 150m] >> 0.5dt
         );
 
         # Gl. 2
         track(:first:station :rail,
-                # ...
-                altkie[:alt - 50m, :alt + 45m] << 12.5dt
-            --  altkie[:alt + 735m, :alt + 830m] << 35.5dt
-                # ...
+                hamdie[:kon - 150m, :kon - 149m] << 0.5dt
+             .. hamdie[:kon - 100m, :kon + 100m] << 1.0dt
+             .. hamdie[:kon + 149m, :kon + 150m] << 0.5dt
         );
 
+        platform(:open,
+                hamdie[:kon - 100m, :kon + 100m] >> 0.6dt
+             -- hamdie[:kon + 100m, :kon - 100m] >> 0.6dt
+        );
+
+        marker(:de.hp :left, hamdie[:kon] << 1.0dt);
+        station(:right, hamdie[:kon + 1sw] << 1.0dt << 1.8sw,
+            "H. Königstraße", "4,91"
+        );
+    }
+
+    with link = "line.de.1270" {
+        track(:first :double :rail,
+                hamdie[:kon + 150m, :kon + 151m]
+            ..  hamdie[:alt - 401m, :alt - 400m] << 12dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Altona-S-Bahn" {
+        # Gl. 1 - Diebsteich
+        track(:first:station :rail,
+                hamdie[:alt - 400m, :alt - 390m] << 12.5dt
+            ..  hamdie[:alt - 360m, :alt - 225m] << 13.0dt
+            --  hamdie[:alt - 180m, :alt - 30m] << 14.5dt
+            --  altkie[:alt, :alt + 145m] << 13.5dt
+            --  altkie[:alt + 190m] << 15dt
+            --  altkie[:alt + 230m] << 21dt
+            --  altkie[:alt + 725m, :alt + 830m] << 37.5dt
+                # ...
+        );
+            # W 701 - W 708
+            track(:station :rail,
+                    hamdie[:alt - 255m] << 13dt
+                --  hamdie[:alt - 210m] << 11.5dt
+            );
+            # W 725 - W 728
+            track(:station :rail,
+                    altkie[:alt + 70m] << 13.5dt
+                --  altkie[:alt + 100m] << 12.5dt
+            );
+            # W 750 - W 756
+            track(:station :rail,
+                    altkie[:alt + 210m] << 18.0dt
+                --  altkie[:alt + 240m] << 19.0dt
+            );
+
+        # Gl. 2 - Holstenstraße
+        track(:first:station :rail,
+                hamdie[:alt - 226m, :alt - 225m] << 13.0dt
+            --  hamdie[:alt - 210m, :alt + 150m] << 12.5dt
+            --  altkie[:alt + 240m] << 15.5dt
+            --  altkie[:alt + 270m] << 20.0dt
+            --  altkie[:alt + 735m, :alt + 830m] << 35.5dt
+        );
+            # W 712 - W 717
+            track(:station :rail,
+                    altkie[:alt + 20m] << 12.5dt
+                --  altkie[:alt + 50m] << 13.5dt
+            );
+            # W 726 - W 729
+            track(:station :rail,
+                    altkie[:alt + 70m] << 12.5dt
+                --  altkie[:alt + 100m] << 11.5dt
+            );
+            # W 731 - W 736
+            track(:station :rail,
+                    altkie[:alt + 110m] << 12.5dt
+                --  altkie[:alt + 160m] << 10.5dt
+            );
+            # W 732 - W 741
+            track(:station :rail,
+                    altkie[:alt + 165m] << 13.0dt
+                --  altkie[:alt + 175m] << 14.5dt
+            );
+
+        # (Gl. 2) W 751 - Bahrenfeld
+        track(:first:station :rail,
+                altkie[:alt + 210m] << 14.5dt
+            --  altkie[:alt + 280m] << 25dt
+        );
+
+        # Gl. 3 - Bahrenfeld
+        track(:first:station :rail,
+                hamdie[:alt - 226m, :alt - 225m] << 11dt
+            --  hamdie[:alt - 210m, :alt + 295m] << 11.5dt
+            --  altkie[:alt + 310m] << 12dt
+            --  altkie[:alt + 450m] << 33dt
+            ..  path("path.de.1224")[:baa - 110m, :baa - 105m] >> 0.5dt
+        );
+            # W 713 - W 718
+            track(:station :rail,
+                    altkie[:alt + 20m] << 11.5dt
+                --  altkie[:alt + 50m] << 12.5dt
+            );
+            # W 727 - W 730
+            track(:station :rail,
+                    altkie[:alt + 70m] << 11.5dt
+                --  altkie[:alt + 100m] << 10.5dt
+            );
+
+        # (Gl. 3) W 752 - Holstenstraße
+        track(:first:station :rail,
+                altkie[:alt + 260m] << 11.5dt
+            --  altkie[:alt + 290m] << 12.5dt
+            --  altkie[:alt + 350m] << 21.5dt
+            --  altkie[:alt + 365m] << 22dt
+            --  altkie[:alt + 740m, :alt + 830m] << 34.5dt
+        );
+
+        # Gl. 4 - Diebsteich
+        track(:first:station :rail,
+                hamdie[:alt - 400m, :alt - 390m] << 11.5dt
+            ..  hamdie[:alt - 360m, :alt - 225m] << 11.0dt
+            --  hamdie[:alt - 190m, :alt - 30m] << 9.5dt
+            --  altkie[:alt, :alt + 300m] << 10.5dt
+            --  altkie[:alt + 330m] << 11.5dt
+            --  altkie[:alt + 430m] << 26.5dt
+            --  altkie[:alt + 730m, :alt + 830m] << 36.5dt
+        );
+            # W 701 - W 704
+            track(:station :rail,
+                    hamdie[:alt - 275m] << 11dt
+                --  hamdie[:alt - 245m] << 12dt
+            );
+            # W 713 - W 718
+            track(:station :rail,
+                    altkie[:alt + 20m] << 10.5dt
+                --  altkie[:alt + 50m] << 11.5dt
+            );
+            # W 755 - W 757
+            track(:station :rail,
+                    altkie[:alt + 370m] << 17.5dt
+                --  altkie[:alt + 360m] << 19.5dt
+            );
+
+        # Gl. 14
+        track(:station :rail,
+                altkie[:alt + 154m, :alt + 155m] << 11.5dt
+            --  altkie[:alt + 260m] << 15dt
+            --  altkie[:alt + 290m] << 19.5dt
+        );
+
+        # Gl. 15
+        track(:station :rail,
+                altkie[:alt + 180m, :alt + 250m] << 13.5dt
+            --  altkie[:alt + 280m] << 14.5dt
+            --  altkie[:alt + 320m] << 20.5dt
+        );
+
+        # Gl. 16
+        track(:station :rail,
+                altkie[:alt + 185m, :alt + 250m] << 12.5dt
+            --  altkie[:alt + 255m] << 12.5dt
+            --  altkie[:alt + 270m] << 13dt
+        );
+
+        # Gl. 25
+        track(:station :rail,
+                altkie[:alt + 350m] << 11dt
+            --  altkie[:alt + 430m] << 23dt
+        );
+
+        # Gl. 26
+        track(:station :rail,
+                altkie[:alt + 360m] << 12.5dt
+            --  altkie[:alt + 390m] << 13.5dt
+            --  altkie[:alt + 400m] << 15dt
+            --  altkie[:alt + 460m] << 24dt
+        );
+
+        # Gl. 27
+        track(:station :rail,
+                altkie[:alt + 410m] << 13dt
+            --  altkie[:alt + 490m] << 25dt
+        );
+
+        # Gl. 28
+        track(:station :rail,
+                altkie[:alt + 420m] << 14.5dt
+            --  altkie[:alt + 450m] << 15.5dt
+            --  altkie[:alt + 500m] << 23dt
+            --  altkie[:alt + 520m] << 26dt
+        );
+
+        # Gl. 29
+        track(:station :rail,
+                altkie[:alt + 300m, :alt + 330m] << 10.5dt
+            --  altkie[:alt + 470m] << 15dt
+            --  altkie[:alt + 550m] << 27dt
+        );
+            # W 799 - W 17
+            track(:station :rail,
+                    altkie[:alt + 380m] << 12.0dt
+                --  altkie[:alt + 415m] << 12.0dt
+            );
+
+	    # Gl. 32
+        track(:station :rail,
+                hamdie[:alt - 360m, :alt - 240m] << 12dt
+            --  hamdie[:alt - 210m, :alt - 209m] << 12.5dt
+        );
+
+        # Bahnsteig 1
+        platform(:open,
+                hamdie[:alt - 195m, :alt - 15m] << 12.9dt
+            --  hamdie[:alt - 15m] << 13.6dt
+            --  hamdie[:alt - 30m] << 14.1dt
+            --  hamdie[:alt - 180m] << 14.1dt
+            --  hamdie[:alt - 195m] << 13.6dt
+        );
+        # Bahnsteig 2
+        platform(:open,
+                hamdie[:alt - 200m] << 10.4dt
+            --  hamdie[:alt - 190m] << 9.9dt
+            --  hamdie[:alt - 30m] << 9.9dt
+            --  hamdie[:alt - 15m] << 10.4dt
+            --  hamdie[:alt - 15m, :alt - 200m] >> 11.1dt
+        );
+
+        marker(:de.bf :right, hamdie[:als] << 9.5dt);
+        station(:left, hamdie[:als - 0.4sw] << 15.5dt,
+            hbox(:center:base,
+                span(:bold, "H.-Altona "),
+                span(:regular, "(S-Bahn)")
+            ),
+            hbox(:center:top,
+                vbox(:left:top,
+                    span(:open, "1224: "),
+                    span(:open, "1240: "),
+                    span(:open, "1270: ")
+                ),
+                vbox(:center:top,
+                    span(:open, "??"),
+                    span(:open, "??"),
+                    span(:open, "5,89")
+                )
+            )
+        );
     }
 }
 
