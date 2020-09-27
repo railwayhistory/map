@@ -241,13 +241,23 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.2" {
-        track(:first :double, kalter[:pas + 1sw, :tja - 1sw]);
+        track(:first :double, kalter[:pas + 1sw, :tja.r]);
         with layer = 1 line_badge(:open, kalter[:pas + 6.5km], "КГ 2");
     }
 
 
     with link = "point.ru.Черняховск" {
-        track(:first:station :double, kalter[:tja - 1sw, :tja.f]);
+        # KG 2
+        track(:first:station :double, kalter[:tja.r, :tja.f]);
+
+        # KG 6
+        track(:first:station, kalter[:tja.r, :asow - 50m] >> 1.5dt);
+        track(:first:station :removed, kalter[:tja.r, :tja - 500m] >> 2.5dt);
+        track(:first:station,
+                kalter[:tja - 500m, :asow - 100m] >> 2.5dt
+            --  kalter[:asow, :asow + 1m] >> 0.5dt
+        );
+
         marker(:de.bf :left, kalter[:tja] << 0.5dt);
         station(:top, kalter[:tja] << 0.5dt << 1.2sw,
             vbox(:center:bottom :bold,

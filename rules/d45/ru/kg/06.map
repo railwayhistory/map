@@ -1,0 +1,268 @@
+# RU KG 6.  Черняховск - Железнодорожный
+#
+let tjasel = path("path.ru.kg.6");
+
+with detail = [4, 5] {
+    with link = "line.ru.kg.6" {
+        let kalter = path("path.ru.kg.2");
+
+        track(:first,
+                kalter[:tja.r, :fsel] << 1.5dt
+            ..  tjasel[:aa, :op4 - 1sw] >> 0.5dt
+        );
+        track(:first :removed,
+                kalter[:tja.r, :fsel] << 2.5dt
+            ..  tjasel[:aa, :op4 - 1sw] << 0.5dt
+        );
+        with layer = 1 line_badge(:open, tjasel[:op4 - 1.0km], "КГ 6");
+    }
+
+
+    with link = "point.ru.kg.6.Оп-4" {
+        track(:first:station, tjasel[:op4 - 1sw, :op4 + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasel[:op4 - 1sw, :op4 + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, tjasel[:op4] >> 0.5dt);
+        station(:right :removed, tjasel[:op4 + 0.3sw] << 3.0dt,
+            "4 км", "3,8"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first, tjasel[:op4 + 1sw, :kra.aa] >> 0.5dt);
+        track(:first :removed, tjasel[:op4 + 1sw, :kra.aa] << 0.5dt);
+    }
+
+
+    with link = "point.ru.Красновка" {
+        with layer = -1 track(:first :removed, tjasel[:kra.aa, :ftja] >> 0.5dt);
+        track(:first, tjasel[:ftja, :op8 - 1sw] >> 0.5dt);
+
+        with layer = -1 track(:first :removed,
+                tjasel[:kra.aa, :op8 - 1sw] << 0.5dt
+        );
+
+        track(:first,
+                tjasel[:kra.aa, :kra.aa + 1m] >> 0.5dt
+            ..  tjasel[:kra.rr - 20m, :kra.rr + 10m] << 3.5dt
+            ..  tjasel[:kra - 0.5sw, :op8 - 500m] << 1.5dt
+            ..  tjasel[:op8 - 1.1sw, :op8 - 1sw] << 0.5dt
+        );
+
+        marker(:de.bbf :left, tjasel[:kra] << 1.5dt);
+        station(:right, tjasel[:kra + 0.3sw] << 1.5dt << 1.8sw,
+            "Красновка", "6,2"
+        );
+    }
+
+
+    with link = "point.ru.kg.6.Оп-8" {
+        track(:first:station :double, tjasel[:op8 - 1sw, :op8 + 1sw]);
+        with layer = -1 marker(:de.hp :removed :left, tjasel[:op8] << 0.5dt);
+        station(:right :removed, tjasel[:op8 + 0.3sw] << 0.5dt << 1.8sw,
+            "8 км", "7,3"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:op8 + 1sw, :op9 - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.6.Оп-9" {
+        track(:first:station :double, tjasel[:op9 - 1sw, :op9 + 1sw]);
+        with layer = -1 marker(:de.hp :removed :left, tjasel[:op9] << 0.5dt);
+        label(tjasel[:op9] << 0.5dt,
+            vbox(:right:bottom,
+                hbox(:right:base :medium :gone,
+                    span(:regular, "Rehfeld "),
+                    span(:light, "(Kr Insterburg)")
+                ),
+                hbox(:right:top,
+                    vbox(:center:top,
+                        span(:medium :removed, "9 км"),
+                        span(:xsmall :removed, "8,9")
+                    ),
+                    span(:medium, "  ")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:op9 + 1sw, :ugr - 1sw]);
+        with layer = 1 line_badge(:open, tjasel[:op9 + 2.2km], "КГ 6");
+    }
+
+
+    with link = "point.ru.Угрюмово-Новое" {
+        track(:first:station :double, tjasel[:ugr - 1sw, :ugr + 1sw]);
+        marker(:de.bf :left, tjasel[:ugr] << 0.5dt);
+        station(:left, tjasel[:ugr + 0.3sw] >> 1.5dt,
+            vbox(:center:bottom,
+                span(:gone, "Matheninken"),
+                span(:gone, "Mattenau"),
+                span(:open, "Угрюмово-Новое")
+            ),
+            "13,5"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:ugr + 1sw, :krb - 1sw]);
+    }
+
+
+    with link = "point.ru.Kranichbruch" {
+        track(:first:station :double, tjasel[:krb - 1sw, :krb + 1sw]);
+        with layer = -1 marker(:de.ldst :gone :right, tjasel[:krb] >> 0.5dt);
+        station(:left :gone, tjasel[:krb + 0.5sw] >> 0.5dt >> 1.2sw,
+            "Kranichbruch", "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:krb + 1sw, :lis - 1sw]);
+    }
+
+
+    with link = "point.ru.Листовое" {
+        track(:first:station :double, tjasel[:lis - 1sw, :lis + 1sw]);
+        marker(:de.hp :left, tjasel[:lis] << 0.5dt);
+        station(:left, tjasel[:lis + 0.3sw] >> 1.5dt,
+            vbox(:center:bottom,
+                span(:gone, "Dallwitz"),
+                span(:open, "Листовое")
+            ),
+            "19,6"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:lis + 1sw, :fru - 1sw]);
+    }
+
+
+    with link = "point.ru.Фрунзенское" {
+        track(:first:station :double, tjasel[:fru - 1sw, :fru + 1sw]);
+        marker(:de.hp :left, tjasel[:fru] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, tjasel[:fru] << 0.5dt);
+        station(:left, tjasel[:fru + 0.3sw] >> 1.5dt,
+            vbox(:center:bottom,
+                span(:gone, "Bokellen"),
+                span(:open, "Фрунзенское")
+            ),
+            "23,5"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:fru + 1sw, :mos - 1sw]);
+        with layer = 1 line_badge(:open, tjasel[:fru + 3.5km], "КГ 6");
+    }
+
+
+    with link = "point.ru.Мозырь-Новый" {
+        track(:first:station :double, tjasel[:mos - 1sw, :mos + 1sw]);
+        marker(:de.hp :left, tjasel[:mos] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, tjasel[:mos] << 0.5dt);
+        station(:left, tjasel[:mos + 0.3sw] >> 1.5dt,
+            vbox(:center:bottom,
+                span(:gone, "Klein Gnie"),
+                span(:open, "Мозырь-Новый")
+            ),
+            "30,4"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:mos + 1sw, :ose - 1sw]);
+    }
+
+
+    with link = "point.ru.Озерки-Вольные" {
+        track(:first:station :double, tjasel[:ose - 1sw, :ose + 1sw]);
+        marker(:de.hp :right, tjasel[:ose] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, tjasel[:ose] >> 0.5dt);
+        station(:left, tjasel[:ose + 0.4sw] >> 0.5dt >> 1.2sw,
+            vbox(:center:bottom,
+                span(:gone, "Georgenfelde"),
+                span(:open, "Озерки-Вольные")
+            ),
+            "37,5"
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:ose + 1sw, :sel - 1sw]);
+        with layer = 1 line_badge(:open, tjasel[:ose + 3.0km], "КГ 6");
+    }
+
+
+    with link = "point.ru.Железнодорожный" {
+        track(:first:station :double, tjasel[:sel - 1sw, :sel + 1sw]);
+        marker(:de.bf :right, tjasel[:sel] >> 0.5dt);
+        station(:left, tjasel[:sel + 0.6sw] >> 0.5dt >> 1.2sw,
+            vbox(:center:bottom :bold,
+                span(:gone, "Gerdauen"),
+                span(:open, "Железнодорожный")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "КГ 6: "),
+                    span(:removed, "КГ 13: ")
+                ),
+                vbox(:center:top,
+                    span(:open, "44,5"),
+                    span(:removed, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.6" {
+        track(:first :double, tjasel[:sel + 1sw, :gr - 0.5sw]);
+        with layer = 1 line_badge(:open, tjasel[:sel + 1.5km], "КГ 6");
+    }
+
+
+    with link = "point.int.Железнодорожный-Skandawa" {
+        track(:first:station :double, tjasel[:gr - 0.5sw, :gr + 0.5sw]);
+        marker(:de.dirgr :right, tjasel[:gr] >> 0.5dt);
+        marker(:de.dirgr :left, tjasel[:gr] << 0.5dt);
+        label(tjasel[:gr] >> 4.5dt,
+            hbox(:right:middle :xsmall,
+                vbox(:right:top,
+                    span(:open, "RU "),
+                    hbar(0.2),
+                    span(:open, "PL ")
+                ),
+                vbox(:right:top,
+                    span(:open, "КГ 6: "),
+                    hbar(0.2),
+                    span(:open, "353: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "47,"),
+                    hbar(0.2),
+                    span(:open, "389,")
+                ),
+                vbox(:left:top,
+                    span(:open, "60 "),
+                    hbar(0.2),
+                    span(:open, "06 ")
+                )
+            )
+        );
+    }
+}
+
