@@ -1,0 +1,339 @@
+# RU KG 21.  Калининград-Пассажирский - Советск
+#
+let kalsow = path("path.ru.kg.21");
+
+with detail = 3 {
+    with link = "line.ru.kg.21" {
+        let kalbal = path("path.ru.kg.3");
+
+        track(:second:station :cat,
+                kalbal[:asow - 1m, :asow] >> 0.5dt
+            ..  kalsow[:fbal, :kse - 1ssw]
+        );
+    }
+
+    with link = "point.ru.Калининград-Северный" {
+        track(:second:station :cat, kalsow[:kse - 1ssw, :kse + 1ssw]);
+        marker(:de.hp :right, kalsow[:kse]);
+        slabel(:right, kalsow[:kse - 0.1ssw] >> 2.2ssw,
+            "Калининград-Северный"
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second:station, kalsow[:kse + 1ssw, :mar - 1ssw]);
+    }
+
+    with link = "point.ru.Königsberg-Maraunenhof" {
+        track(:second:station, kalsow[:mar - 1ssw, :mar + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :right, kalsow[:mar]);
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second:station , kalsow[:mar + 1ssw, :kut - 1ssw]);
+    }
+
+    with link = "point.ru.Кутузово-Новое" {
+        track(:second:station, kalsow[:kut - 1ssw, :kut + 1ssw]);
+        track(:first:station :cat, kalsow[:kut - 1ssw, :kut + 1ssw] << 1.0dt);
+
+        marker(:de.bf :right, kalsow[:kut]);
+        slabel(:right, kalsow[:kut - 0.3ssw] >> 2.0ssw,
+            span(:bold, "Калининград-Северный")
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:kut + 1ssw, :khe - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Kleinheide" {
+        track(:second:station, kalsow[:khe - 1ssw, :khe + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :right, kalsow[:khe]);
+        slabel(:right :removed, kalsow[:khe - 1.0ssw] >> 2.4ssw,
+            "Kleinheide"
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:khe + 1ssw, :guz - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Гурьевск-Центральный" {
+        track(:second:station, kalsow[:guz - 1ssw, :guz + 1ssw]);
+        marker(:de.hp :right, kalsow[:guz]);
+        slabel(:right, kalsow[:guz] >> 2.2ssw,
+            "Гурьевск-Центральный"
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:guz + 1ssw, :gur - 1ssw]);
+    }
+
+    with link = "point.ru.Гурьевск-Новый" {
+        track(:second:station, kalsow[:gur - 1ssw, :gur + 1ssw]);
+        marker(:de.bf :right, kalsow[:gur]);
+        slabel(:right, kalsow[:gur - 2.0ssw] >> 2.4ssw, "Гурьевск-Новый");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:gur + 1ssw, :kon - 1ssw]);
+    }
+
+    with link = "point.ru.Константиновка" {
+        track(:second:station, kalsow[:kon - 1ssw, :kon + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, kalsow[:kon]);
+        slabel(:left :removed, kalsow[:kon + 1ssw] << 1.2dt,
+            "Константиновка"
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:kon + 1ssw, :ba1 - 1ssw]);
+    }
+
+
+    with link = "point.ru.kg.Баевка-1" {
+        track(:second:station, kalsow[:ba1 - 1ssw, :ba1 + 1ssw]);
+        marker(:de.hp :right, kalsow[:ba1]);
+        with layer = -1 marker(:de.bf :gone :right, kalsow[:ba1]);
+        slabel(:bottom, kalsow[:ba1] >> 1.2ssw, "Баевка 1");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:ba1 + 1ssw, :ba2 - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Баевка-2" {
+        track(:second:station, kalsow[:ba2 - 1ssw, :ba2 + 1ssw]);
+        marker(:de.hp :left, kalsow[:ba2]);
+        slabel(:top, kalsow[:ba2] << 1.4ssw,
+            "Баевка 2"
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:ba2 + 1ssw, :dob - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Добрино" {
+        track(:second:station, kalsow[:dob - 1ssw, :dob + 1ssw]);
+        marker(:de.hp :right, kalsow[:dob]);
+        with layer = -1 marker(:de.bf :gone :right, kalsow[:dob]);
+        slabel(:bottom, kalsow[:dob] >> 1.4ssw, "Добрино");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:dob + 1ssw, :sla - 1ssw]);
+        with layer = 1 line_badge(:open, kalsow[:dob + 4.0km], "21");
+    }
+
+    with link = "point.ru.kg.Славянское" {
+        track(:second:station, kalsow[:sla - 1ssw, :sla + 1ssw]);
+        marker(:de.hp :right, kalsow[:sla]);
+        with layer = -1 marker(:de.bf :gone :right, kalsow[:sla]);
+        slabel(:right, kalsow[:sla - 2ssw] >> 2.4ssw, "Славянское");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:sla + 1ssw, :kth - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Kuth" {
+        track(:second:station, kalsow[:kth - 1ssw, :kth + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :right, kalsow[:kth]);
+        slabel(:bottom :removed, kalsow[:kth] >> 1.2ssw, "Kuth");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:kth + 1ssw, :pol - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Полесск" {
+        track(:second:station, kalsow[:pol - 1ssw, :pol + 1ssw]);
+        marker(:de.bf :left, kalsow[:pol]);
+        slabel(:top, kalsow[:pol] << 1.3ssw, span(:bold, "Полесск"));
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:pol + 1ssw, :lug - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Луговое" {
+        track(:second:station, kalsow[:lug - 1ssw, :lug + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, kalsow[:lug]);
+        slabel(:bottom :removed, kalsow[:lug] >> 0.5dt, "Луговое");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:lug + 1ssw, :sol - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Шолохово" {
+        track(:second:station, kalsow[:sol - 1ssw, :sol + 1ssw]);
+        marker(:de.hp :left, kalsow[:sol]);
+        with layer = -1 marker(:de.bf :gone :left, kalsow[:sol]);
+        slabel(:top, kalsow[:sol] << 1.2ssw, "Шолохово");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:sol + 1ssw, :sar - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Саранское" {
+        track(:second:station, kalsow[:sar - 1ssw, :sar + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :right, kalsow[:sar]);
+        slabel(:bottom :removed, kalsow[:sar] >> 1.2ssw, "Саранское");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:sar + 1ssw, :pet - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Петино" {
+        track(:second:station, kalsow[:pet - 1ssw, :pet + 1ssw]);
+        marker(:de.hp :right, kalsow[:pet]);
+        with layer = -1 marker(:de.bf :gone :right, kalsow[:pet]);
+        slabel(:top, kalsow[:pet] << 1.0dt, "Петино");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:pet + 1ssw, :bog - 1ssw]);
+        with layer = 1 line_badge(:open, kalsow[:pet + 2.2km], "21");
+    }
+
+
+    with link = "point.ru.kg.Богатово" {
+        track(:second:station, kalsow[:bog - 1ssw, :bog + 1ssw]);
+        marker(:de.hp :right, kalsow[:bog]);
+        with layer = -1 marker(:de.bf :gone :right, kalsow[:bog]);
+        slabel(:bottom, kalsow[:bog] >> 1.4ssw, "Богатово");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:bog + 1ssw, :pod - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Подлипное" {
+        track(:second:station, kalsow[:pod - 1ssw, :pod + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, kalsow[:pod]);
+        slabel(:right :removed, kalsow[:pod - 2ssw] << 1.2ssw, "Подлипное");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:pod + 1ssw, :sal.op - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Залесье-Новое" {
+        track(:second:station, kalsow[:sal.op - 1ssw, :sal + 1ssw]);
+        marker(:de.hp :left, kalsow[:sal.op]);
+        with layer = -1 marker(:de.bf :removed :right, kalsow[:sal]);
+        slabel(:right, kalsow[:sal.op] >> 2.6ssw,
+            span(:bold, "Залесье-Новое")
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:sal + 1ssw, :lus - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Лужское" {
+        track(:second:station, kalsow[:lus - 1ssw, :lus + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, kalsow[:lus]);
+        slabel(:left :removed, kalsow[:lus + 1.5ssw] << 1.2ssw, "Лужское");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:lus + 1ssw, :bol - 1ssw]);
+        with layer = 1 line_badge(:open, kalsow[:lus + 1.5km], "21");
+    }
+
+    with link = "point.ru.kg.Большаково-Новое" {
+        track(:second:station, kalsow[:bol - 1ssw, :bol + 1ssw]);
+        marker(:de.bf :right, kalsow[:bol]);
+        slabel(:left, kalsow[:bol - 0.3ssw] << 1.5dt,
+            span(:bold, "Большаково-Новое")
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:bol + 1ssw, :wil - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Wilhelmsbruch" {
+        track(:second:station, kalsow[:wil - 1ssw, :wil + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, kalsow[:wil]);
+        slabel(:right :removed, kalsow[:wil - 0.45ssw] >> 1.6ssw,
+            "Wilhelmsbruch"
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:wil + 1ssw, :slw - 1ssw]);
+        with layer = 1 line_badge(:open, kalsow[:wil + 3.0km], "21");
+    }
+
+
+    with link = "point.ru.kg.Славск-Новый" {
+        track(:second:station, kalsow[:slw - 1ssw, :slw + 1ssw]);
+        marker(:de.bf :right, kalsow[:slw]);
+        slabel(:right, kalsow[:slw - 0.5ssw] >> 1.5ssw, "Славск-Новый");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:slw + 1ssw, :sts - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Щегловка-Новая" {
+        track(:second:station, kalsow[:sts - 1ssw, :sts + 1ssw]);
+        marker(:de.hp :left, kalsow[:sts]);
+        with layer = -1 marker(:de.bf :gone :left, kalsow[:sts]);
+        slabel(:right, kalsow[:sts - 1ssw] << 4.0ssw,
+            span(:bold, "Щегловка-Новая")
+        );
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:sts + 1ssw, :pse - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Ржевское" {
+        track(:second:station, kalsow[:pse - 1ssw, :pse + 1ssw]);
+        marker(:de.hp :left, kalsow[:pse]);
+        with layer = -1 marker(:de.bf :gone :left, kalsow[:pse]);
+        slabel(:left, kalsow[:pse + 1.5ssw] >> 1.8ssw, "Ржевское");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:pse + 1ssw, :okt - 1ssw]);
+    }
+
+
+    with link = "point.ru.kg.Октябрьское" {
+        track(:second:station, kalsow[:okt - 1ssw, :okt + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, kalsow[:okt]);
+        slabel(:top :removed, kalsow[:okt] << 1.6ssw, "Октябрьское");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:okt + 1ssw, :op119 - 1ssw]);
+        with layer = 1 line_badge(:open, kalsow[:okt + 1.2km], "21");
+    }
+
+
+    with link = "point.ru.kg.21.119-км" {
+        track(:second:station, kalsow[:op119 - 1ssw, :op119 + 1ssw]);
+        marker(:de.hp :right, kalsow[:op119]);
+        slabel(:right, kalsow[:op119 - 1.5ssw] >> 2.5ssw, "119 км");
+    }
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:op119 + 1ssw, :ff]);
+        track(:second:station,
+                kalsow[:ff, :ff + 1m]
+            ..  path("path.ru.kg.7")[:fkal - 1m, :fkal] << 0.5dt
+        );
+    }
+}
+

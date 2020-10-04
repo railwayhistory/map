@@ -1,0 +1,296 @@
+# RU KG 7.  Черняховск - Советск
+#
+let kalter = path("path.ru.kg.2");
+let tjasow = path("path.ru.kg.7");
+
+with detail = [4, 5] {
+    with link = "point.ru.Черняховск" {
+        track(:station, kalter[:asow2 - 180m, :asow2 + 1dl] << 1.5dt);
+        track(:first:station,
+                kalter[:asow2 - 1m, :asow2] << 0.5dt
+            --  kalter[:asow2 + 1dl, :tja.f] << 1.5dt
+        );
+    }
+
+    
+    with link = "line.ru.kg.7" {
+        track(:first,
+                kalter[:tja.f, :tja.f + 1m] << 1.5dt
+            ..  tjasow[:aa, :ftja - 800m]
+            ..  tjasow[:ftja, :nag - 1sw] >> 0.5dt
+        );
+        with layer = -1 track(:first :removed,
+                kalter[:asow - 1m, :asow] << 0.5dt
+            ..  tjasow[:ftja, :nag - 1sw] << 0.5dt
+        );
+        with layer = -1 track(:first :removed,
+                kalter[:asow - 1m, :asow] >> 0.5dt
+            ..  tjasow[:ftja, :ftja + 1m] >> 0.5dt
+        );
+        with layer = 1 line_badge(:open, tjasow[:ftja + 1.5km], "КГ 7");
+    }
+
+
+    with link = "point.ru.Нагорное" {
+        track(:first:station, tjasow[:nag - 1sw, :nag + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:nag - 1sw, :nag + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, tjasow[:nag] >> 0.5dt);
+        station(:left :removed, tjasow[:nag - 0.5sw] << 1.5dt,
+            vbox(:right:bottom,
+                span(:gone, "Geswethen"),
+                hbox(:left:base :gone,
+                    span(:regular, "Landwehr "),
+                    span(:light, "(Ostpr)")
+                ),
+                span(:removed, "Нагорное")
+            ),
+            "8,0"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:nag + 1sw, :owr - 1sw] >> 0.5dt);
+        track(:first :removed, tjasow[:nag + 1sw, :owr - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.ru.Овражное-Новая" {
+        track(:first:station, tjasow[:owr - 1sw, :owr + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:owr - 1sw, :owr + 1sw] << 0.5dt);
+        marker(:de.hp :right, tjasow[:owr] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, tjasow[:owr] >> 0.5dt);
+        station(:right , tjasow[:owr - 0.6sw] >> 0.5dt >> 1.5sw,
+            vbox(:left:bottom,
+                hbox(:left:base :gone,
+                    span(:regular, " Blumenthal "),
+                    span(:light, "(Ostpr)")
+                ),
+                span(:open, "Овражное-Новая")
+            ),
+            "11,40"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:owr + 1sw, :kal - 1sw] >> 0.5dt);
+        track(:first :removed, tjasow[:owr + 1sw, :kal - 1sw] << 0.5dt);
+        with layer = 1 line_badge(:open, tjasow[:kal - 3.7km], "КГ 7");
+    }
+
+
+    with link = "point.ru.Калужское" {
+        track(:first:station, tjasow[:kal - 1sw, :kal + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:kal - 1sw, :kal + 1sw] << 0.5dt);
+        marker(:de.hp :right, tjasow[:kal] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, tjasow[:kal] >> 0.5dt);
+        station(:right , tjasow[:kal - 0.6sw] >> 0.5dt >> 1.5sw,
+            vbox(:left:bottom,
+                span(:gone, "Grünheide"),
+                span(:open, "Калужское")
+            ),
+            "22,00"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:kal + 1sw, :wis - 1sw] >> 0.5dt);
+        track(:first :removed, tjasow[:kal + 1sw, :wis - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.ru.Вишневое" {
+        track(:first:station, tjasow[:wis - 1sw, :wis + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:wis - 1sw, :wis + 1sw] << 0.5dt);
+        marker(:de.hp :right, tjasow[:wis] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, tjasow[:wis] >> 0.5dt);
+        station(:right , tjasow[:wis - 0.6sw] >> 0.5dt >> 1.4sw,
+            vbox(:left:bottom,
+                span(:gone, "Paballen"),
+                hbox(:left:base :gone,
+                    span(:regular, "Werfen "),
+                    span(:light, "(Ostpr)")
+                ),
+                span(:open, "Вишневое")
+            ),
+            "27,20"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:wis + 1sw, :sil - 1sw] >> 0.5dt);
+        track(:first :removed, tjasow[:wis + 1sw, :sil - 1sw] << 0.5dt);
+        with layer = 1 line_badge(:open, tjasow[:wis + 3.2km], "КГ 7");
+    }
+
+
+    with link = "point.ru.Жилино-Новое" {
+        track(:first:station, tjasow[:sil - 1sw, :sil + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:sil - 1sw, :sil + 1sw] << 0.5dt);
+        marker(:de.bf :right, tjasow[:sil] >> 0.5dt);
+        station(:right , tjasow[:sil - 0.6sw] >> 0.5dt >> 1.4sw,
+            vbox(:left:bottom,
+                span(:gone, "Szillen"),
+                span(:gone, "Schillen"),
+                span(:open, "Жилино-Новое")
+            ),
+            "33,50"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:sil + 1sw, :min - 1sw] >> 0.5dt);
+        track(:first :removed, tjasow[:sil + 1sw, :min - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.ru.Минино" {
+        track(:first:station, tjasow[:min - 1sw, :min + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:min - 1sw, :min + 1sw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, tjasow[:min] >> 0.5dt);
+        station(:right :removed, tjasow[:min - 0.6sw] >> 0.5dt >> 1.2sw,
+            vbox(:left:bottom,
+                span(:gone, "Skrebudicken"),
+                hbox(:left:base :gone,
+                    span(:regular, "Finkental "),
+                    span(:light, "(Ostpr)")
+                ),
+                span(:removed, "Минино")
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:min + 1sw, :art - 1sw] >> 0.5dt);
+        track(:first :removed, tjasow[:min + 1sw, :art - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.ru.Артемовка" {
+        track(:first:station, tjasow[:art - 1sw, :art + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:art - 1sw, :art + 1sw] << 0.5dt);
+        with layer = 1 marker(:de.hp :left, tjasow[:art] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, tjasow[:art] << 0.5dt);
+        station(:right, tjasow[:art - 0.6sw] >> 1.5dt,
+            vbox(:left:bottom,
+                span(:gone, "Argeningken"),
+                span(:gone, "Argenhof"),
+                span(:open, "Артемовка")
+            ),
+            "41,50"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:art + 1sw, :bar - 1sw] >> 0.5dt);
+        track(:first :removed, tjasow[:art + 1sw, :bar - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.ru.Барсуковка" {
+        track(:first:station, tjasow[:bar - 1sw, :bar + 1sw] >> 0.5dt);
+        track(:first:station :removed, tjasow[:bar - 1sw, :bar + 1sw] << 0.5dt);
+        marker(:de.hp :right, tjasow[:bar] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, tjasow[:bar] >> 0.5dt);
+        station(:right, tjasow[:bar - 0.6sw] >> 0.5dt >> 1.4sw,
+            vbox(:left:bottom,
+                span(:gone, "Pamletten"),
+                span(:open, "Барсуковка")
+            ),
+            "48,10"
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:bar + 1sw, :sow.a] >> 0.5dt);
+        track(:first :removed, tjasow[:bar + 1sw, :sow.a] << 0.5dt);
+        with layer = 1 line_badge(:open, tjasow[:bar + 1.5km], "КГ 7");
+    }
+
+
+    with link = "point.ru.Советск" {
+        track(:first:station, tjasow[:sow.a, :sow.f] >> 0.5dt);
+        track(:first:station, tjasow[:sow.a, :sow.f - 150m] << 0.5dt);
+        with layer = -1 track(:first:station :removed,
+                tjasow[:sow.f - 150m, :sow.f] << 0.5dt
+        );
+        track(:second:station,
+                tjasow[:sow - 1sw, :sow.f - 200m] << 1.5dt
+            --  tjasow[:sow.f - 100m, :sow.f - 99m] >> 0.5dt
+        );
+
+        marker(:de.bf :right, tjasow[:sow] >> 0.5dt);
+        station(:right, tjasow[:sow - 0.6sw] >> 0.5dt >> 1.8sw,
+            vbox(:center:bottom :bold,
+                span(:gone, "Tilsit"),
+                span(:open, "Советск")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "КГ 7: "),
+                    span(:open, "КГ 21: "),
+                    span(:open, "КГ 29: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "53"),
+                    span(:open, ""),
+                    span(:open, "")
+                ),
+                vbox(:left:top,
+                    span(:open, ",80"),
+                    span(:open, "??"),
+                    span(:open, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.7" {
+        track(:first, tjasow[:sow.f, :gr - 0.5sw] >> 0.5dt);
+        track(:first :removed, tjasow[:sow.f, :gr - 0.5sw] << 0.5dt);
+    }
+
+
+    with link = "point.int.Pagėgiai-Советск" {
+        track(:first:station, tjasow[:gr - 0.5sw, :gr + 0.5sw] >> 0.5dt);
+        track(:first:station :removed,
+                tjasow[:gr - 0.5sw, :gr + 0.5sw] << 0.5dt
+        );
+        marker(:de.dirgr :right, tjasow[:gr] >> 0.5dt);
+        with layer = 1 marker(:de.dirgr :left, tjasow[:gr] << 0.5dt);
+        label(tjasow[:gr] << 4.5dt,
+            hbox(:xsmall :right:middle,
+                vbox(:right:middle,
+                    span(:open, " LT "),
+                    hbar(0.2),
+                    span(:open, "RU ")
+                ),
+                vbox(:right:middle,
+                    span(:open, ""),
+                    hbar(0.2),
+                    span(:open, "КГ 7: ")
+                ),
+                vbox(:right:middle,
+                    span(:open, ""),
+                    hbar(0.2),
+                    span(:open, "58,")
+                ),
+                vbox(:left:middle,
+                    span(:open, ""),
+                    hbar(0.2),
+                    span(:open, "4 ")
+                )
+            )
+        );
+     }
+}
+

@@ -1,245 +1,251 @@
-# RU KZD 3.  Черняховск - Советск
+# RU KG 3.  Калининград-Пассажирский - Балтийск
 #
-let kalter = path("path.ru.kg.2");
-let tjasow = path("path.ru.kg.3");
+let kalbal = path("path.ru.kg.3");
 
 with detail = [4, 5] {
-    with link = "point.ru.Черняховск" {
-        track(:station, kalter[:asow2 - 180m, :asow2 + 1dl] << 1.5dt);
-        track(:first:station,
-                kalter[:asow2 - 1m, :asow2] << 0.5dt
-            --  kalter[:asow2 + 1dl, :tja.f] << 1.5dt
-        );
-    }
-
-    
     with link = "line.ru.kg.3" {
+        let kalmam = path("path.ru.kg.1");
+
         track(:first,
-                kalter[:tja.f, :tja.f + 1m] << 1.5dt
-            ..  tjasow[:aa, :ftja - 800m]
-            ..  tjasow[:ftja, :nag - 1sw] >> 0.5dt
+                kalmam[:abal, :abal + 1m] >> 2.5dt
+            ..  kalbal[:aa, :sap - 1sw] >> 0.5dt
         );
-        with layer = -1 track(:first :removed,
-                kalter[:asow - 1m, :asow] << 0.5dt
-            ..  tjasow[:ftja, :nag - 1sw] << 0.5dt
+        track(:first :removed,
+                kalmam[:abal, :abal + 1m] >> 1.5dt
+            ..  kalbal[:aa, :sap - 1sw] << 0.5dt
         );
-        with layer = -1 track(:first :removed,
-                kalter[:asow - 1m, :asow] >> 0.5dt
-            ..  tjasow[:ftja, :ftja + 1m] >> 0.5dt
-        );
-        with layer = 1 line_badge(:open, tjasow[:ftja + 1.5km], "КГ 3");
     }
 
 
-    with link = "point.ru.Нагорное" {
-        track(:first:station, tjasow[:nag - 1sw, :nag + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:nag - 1sw, :nag + 1sw] << 0.5dt);
-        with layer = -1 marker(:de.hp :removed :right, tjasow[:nag] >> 0.5dt);
-        station(:left :removed, tjasow[:nag - 0.5sw] << 1.5dt,
-            vbox(:right:bottom,
-                span(:gone, "Geswethen"),
-                hbox(:left:base :gone,
-                    span(:regular, "Landwehr "),
-                    span(:light, "(Ostpr)")
-                ),
-                span(:removed, "Нагорное")
+    with link = "point.ru.Западный-Новый" {
+        track(:first:station, kalbal[:sap - 1sw, :sap + 1sw] >> 0.5dt);
+        track(:first:station :removed, kalbal[:sap - 1sw, :sap + 1sw] << 0.5dt);
+        marker(:de.bf :right, kalbal[:sap] >> 0.5dt);
+        station(:top :left_align, kalbal[:sap + 1sw] >> 0.5dt >> 1.4sw,
+            vbox(:left:bottom,
+                span(:gone, "Königsberg-Rathshof"),
+                span(:open, "Западный-Новый")
             ),
-            "8,0"
+            "  4,0"
         );
     }
 
 
     with link = "line.ru.kg.3" {
-        track(:first, tjasow[:nag + 1sw, :owr - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:nag + 1sw, :owr - 1sw] << 0.5dt);
+        track(:first, kalbal[:sap + 1sw, :bru - 2.2sw] >> 0.5dt);
+        track(:first :removed, kalbal[:sap + 1sw, :bru - 2.2sw] << 0.5dt);
     }
 
 
-    with link = "point.ru.Овражное-Новая" {
-        track(:first:station, tjasow[:owr - 1sw, :owr + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:owr - 1sw, :owr + 1sw] << 0.5dt);
-        marker(:de.hp :right, tjasow[:owr] >> 0.5dt);
-        with layer = -1 marker(:de.bf :removed :right, tjasow[:owr] >> 0.5dt);
-        station(:right , tjasow[:owr - 0.6sw] >> 0.5dt >> 1.5sw,
-            vbox(:left:bottom,
-                hbox(:left:base :gone,
-                    span(:regular, "Blumenthal "),
-                    span(:light, "(Ostpr)")
-                ),
-                span(:open, "Овражное-Новая")
-            ),
-            "11,40"
+    with link = "point.ru.Калининград-Менделеево" {
+        track(:first:station, kalbal[:bru - 2.2sw, :bru - 0.6sw] >> 0.5dt);
+        track(:first:station :removed,
+                kalbal[:bru - 2.2sw, :bru - 0.6sw] << 0.5dt
         );
-    }
-
-
-    with link = "line.ru.kg.3" {
-        track(:first, tjasow[:owr + 1sw, :kal - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:owr + 1sw, :kal - 1sw] << 0.5dt);
-        with layer = 1 line_badge(:open, tjasow[:kal - 3.7km], "КГ 3");
-    }
-
-
-    with link = "point.ru.Калужское" {
-        track(:first:station, tjasow[:kal - 1sw, :kal + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:kal - 1sw, :kal + 1sw] << 0.5dt);
-        marker(:de.hp :right, tjasow[:kal] >> 0.5dt);
-        with layer = -1 marker(:de.bf :removed :right, tjasow[:kal] >> 0.5dt);
-        station(:right , tjasow[:kal - 0.6sw] >> 0.5dt >> 1.5sw,
-            vbox(:left:bottom,
-                span(:gone, "Grünheide"),
-                span(:open, "Калужское")
-            ),
-            "22,00"
+        with layer = -1 marker(:de.hp :removed :right,
+                kalbal[:bru - 1.2sw] >> 0.5dt
         );
-    }
-
-
-    with link = "line.ru.kg.3" {
-        track(:first, tjasow[:kal + 1sw, :wis - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:kal + 1sw, :wis - 1sw] << 0.5dt);
-    }
-
-
-    with link = "point.ru.Вишневое" {
-        track(:first:station, tjasow[:wis - 1sw, :wis + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:wis - 1sw, :wis + 1sw] << 0.5dt);
-        marker(:de.hp :right, tjasow[:wis] >> 0.5dt);
-        with layer = -1 marker(:de.bf :removed :right, tjasow[:wis] >> 0.5dt);
-        station(:right , tjasow[:wis - 0.6sw] >> 0.5dt >> 1.4sw,
-            vbox(:left:bottom,
-                span(:gone, "Paballen"),
-                hbox(:left:base :gone,
-                    span(:regular, "Werfen "),
-                    span(:light, "(Ostpr)")
-                ),
-                span(:open, "Вишневое")
-            ),
-            "27,20"
-        );
-    }
-
-
-    with link = "line.ru.kg.3" {
-        track(:first, tjasow[:wis + 1sw, :sil - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:wis + 1sw, :sil - 1sw] << 0.5dt);
-        with layer = 1 line_badge(:open, tjasow[:wis + 3.2km], "КГ 3");
-    }
-
-
-    with link = "point.ru.Жилино-Новое" {
-        track(:first:station, tjasow[:sil - 1sw, :sil + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:sil - 1sw, :sil + 1sw] << 0.5dt);
-        marker(:de.bf :right, tjasow[:sil] >> 0.5dt);
-        station(:right , tjasow[:sil - 0.6sw] >> 0.5dt >> 1.4sw,
-            vbox(:left:bottom,
-                span(:gone, "Szillen"),
-                span(:gone, "Schillen"),
-                span(:open, "Жилино-Новое")
-            ),
-            "33,50"
-        );
-    }
-
-
-    with link = "line.ru.kg.3" {
-        track(:first, tjasow[:sil + 1sw, :min - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:sil + 1sw, :min - 1sw] << 0.5dt);
-    }
-
-
-    with link = "point.ru.Минино" {
-        track(:first:station, tjasow[:min - 1sw, :min + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:min - 1sw, :min + 1sw] << 0.5dt);
-        with layer = -1 marker(:de.hp :removed :right, tjasow[:min] >> 0.5dt);
-        station(:right :removed, tjasow[:min - 0.6sw] >> 0.5dt >> 1.2sw,
-            vbox(:left:bottom,
-                span(:gone, "Skrebudicken"),
-                hbox(:left:base :gone,
-                    span(:regular, "Finkental "),
-                    span(:light, "(Ostpr)")
-                ),
-                span(:removed, "Минино")
+        station(:left :removed, kalbal[:bru - 1.3sw] << 1.0dt,
+            vbox(:right:top,
+                span(:gone, "Königsberg-Juditten"),
+                span(:removed, "Калининград-Менделеево")
             ),
             "??"
         );
+            
     }
 
 
-    with link = "line.ru.kg.3" {
-        track(:first, tjasow[:min + 1sw, :art - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:min + 1sw, :art - 1sw] << 0.5dt);
-    }
-
-
-    with link = "point.ru.Артемовка" {
-        track(:first:station, tjasow[:art - 1sw, :art + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:art - 1sw, :art + 1sw] << 0.5dt);
-        with layer = 1 marker(:de.hp :left, tjasow[:art] >> 0.5dt);
-        with layer = -1 marker(:de.bf :removed :left, tjasow[:art] << 0.5dt);
-        station(:right, tjasow[:art - 0.6sw] >> 1.5dt,
-            vbox(:left:bottom,
-                span(:gone, "Argeningken"),
-                span(:gone, "Argenhof"),
-                span(:open, "Артемовка")
-            ),
-            "41,50"
+    with link = "point.ru.Брусничная" {
+        track(:first:station, kalbal[:bru - 0.6sw, :bru + 1sw] >> 0.5dt);
+        track(:first:station :removed,
+                kalbal[:bru - 0.6sw, :bru + 1sw] << 0.5dt
+        );
+        marker(:de.hp :right, kalbal[:bru] >> 0.5dt);
+        station(:top, kalbal[:bru] >> 0.5dt >> 1.2sw,
+            "Брусничная", "??"
         );
     }
 
 
     with link = "line.ru.kg.3" {
-        track(:first, tjasow[:art + 1sw, :bar - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:art + 1sw, :bar - 1sw] << 0.5dt);
+        track(:first, kalbal[:bru + 1sw, :les - 1sw] >> 0.5dt);
+        track(:first :removed, kalbal[:bru + 1sw, :les - 1sw] << 0.5dt);
+        with layer = 1 line_badge(:open, kalbal[:bru + 2.2km], "КГ 3");
     }
 
 
-    with link = "point.ru.Барсуковка" {
-        track(:first:station, tjasow[:bar - 1sw, :bar + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:bar - 1sw, :bar + 1sw] << 0.5dt);
-        marker(:de.hp :right, tjasow[:bar] >> 0.5dt);
-        with layer = -1 marker(:de.bf :removed :right, tjasow[:bar] >> 0.5dt);
-        station(:right, tjasow[:bar - 0.6sw] >> 0.5dt >> 1.4sw,
-            vbox(:left:bottom,
-                span(:gone, "Pamletten"),
-                span(:open, "Барсуковка")
+    with link = "point.ru.Лесное-Новое" {
+        track(:first:station, kalbal[:les - 1sw, :les + 1sw] >> 0.5dt);
+        track(:first:station :removed, 
+                kalbal[:les - 1sw, :les + 1sw - 1.1dl] << 0.5dt
+            --  kalbal[:les + 1sw - 0.1dl, :les + 1sw] >> 0.5dt
+        );
+        marker(:de.bf :right, kalbal[:les] >> 0.5dt);
+        station(:top, kalbal[:les] >> 0.5dt >> 1.4sw,
+            vbox(:center:top,
+                span(:gone, "Metgethen"),
+                span(:open, "Лесное-Новое")
             ),
-            "48,10"
+            "10,3"
         );
     }
 
 
     with link = "line.ru.kg.3" {
-        track(:first, tjasow[:bar + 1sw, :sow - 1sw] >> 0.5dt);
-        track(:first :removed, tjasow[:bar + 1sw, :sow - 1sw] << 0.5dt);
-        with layer = 1 line_badge(:open, tjasow[:bar + 1.5km], "КГ 3");
+        track(:first,
+                kalbal[:les + 1sw, :op13 - 2sw] >> 0.5dt
+            ..  kalbal[:op13 - 0.51sw, :op13 - 0.5sw]
+        );
     }
 
 
-    with link = "point.ru.Советск" {
-        track(:first:station, tjasow[:sow - 1sw, :sow + 1sw] >> 0.5dt);
-        track(:first:station :removed, tjasow[:sow - 1sw, :sow + 1sw] << 0.5dt);
-        marker(:de.bf :right, tjasow[:sow] >> 0.5dt);
-        station(:right, tjasow[:sow - 0.6sw] >> 0.5dt >> 1.8sw,
+    with link = "point.ru.kg.4.Оп-13" {
+        track(:first:station, kalbal[:op13 - 0.5sw, :op13 + 1sw]);
+        marker(:de.hp :right, kalbal[:op13]);
+        station(:top, kalbal[:op13] >> 1.2sw,
+            "13 км", "12,8"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:op13 + 1sw, :lub - 1sw]);
+    }
+
+
+    with link = "point.ru.Люблино-Новое" {
+        track(:first:station, kalbal[:lub - 1sw, :lub + 1sw]);
+        marker(:de.hp :left, kalbal[:lub]);
+        with layer = -1 marker(:de.bf :removed :right, kalbal[:lub]);
+        station(:bottom, kalbal[:lub] << 1.2sw,
+            vbox(:center:top,
+                span(:gone, "Seerappen"),
+                span(:open, "Люблино-Новое")
+            ),
+            "15,0"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:lub + 1sw, :op18 - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.4.Оп-18" {
+        track(:first:station, kalbal[:op18 - 1sw, :op18 + 1sw]);
+        marker(:de.hp :right, kalbal[:op18]);
+        station(:top, kalbal[:op18] >> 1.2sw,
+            vbox(:center:top,
+                span(:gone, "Lindenau"),
+                span(:open, "18 км")
+            ),
+            "17,6"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:op18 + 1sw, :sip.a]);
+        with layer = 1 line_badge(:open, kalbal[:op18 + 2.4km], "КГ 3");
+    }
+
+
+    with link = "point.ru.Шиповка" {
+        track(:first:station, kalbal[:sip.a, :sip + 1sw]);
+        track(:first:station,
+                kalbal[:sip.a + 99m, :sip.a + 100m]
+            ..  kalbal[:sip.a + 160m + 1dl, :sip + 1sw] << 1dt
+        );
+        marker(:de.bf :right, kalbal[:sip]);
+        station(:top, kalbal[:sip] >> 1.3sw,
+            vbox(:center:top,
+                span(:gone, "Powayen"),
+                span(:open, "Шиповка")
+            ),
+            "22,1"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:sip + 1sw, :pp26 - 1sw]);
+        track(:first, kalbal[:sip + 1sw, :pp26 - 1sw] << 1dt);
+    }
+
+
+    with link = "point.ru.kg.4.Пп-26" {
+        track(:first:station, kalbal[:pp26 - 1sw, :pp26 + 1sw]);
+        track(:first:station, kalbal[:pp26 - 1sw, :pp26 + 1dt] << 1dt);
+        marker(:de.abzw :left, kalbal[:pp26] << 1dt);
+        station(:bottom, kalbal[:pp26] << 1dt << 1.3sw,
+            "26 км", "25,5"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:pp26 + 1sw, :op29 - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.4.Оп-29" {
+        track(:first:station, kalbal[:op29 - 1sw, :op29 + 1sw]);
+        marker(:de.hp :left, kalbal[:op29]);
+        with layer = -1 marker(:de.bf :removed :left, kalbal[:op29]);
+        station(:bottom, kalbal[:op29] << 1.3sw,
+            vbox(:center:top,
+                span(:gone, "Caspershöfen"),
+                span(:open, "29 км")
+            ),
+            "28,3"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:op29 + 1sw, :op33 - 1sw]);
+        with layer = 1 line_badge(:open, kalbal[:op29 + 1.6km], "КГ 3");
+    }
+
+
+    with link = "point.ru.kg.4.Оп-33" {
+        track(:first:station, kalbal[:op33 - 1sw, :op33 + 1sw]);
+        marker(:de.hp :right, kalbal[:op33]);
+        station(:top, kalbal[:op33] >> 1.3sw,
+            "33 км", "32,6"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:op33 + 1sw, :pri.a]);
+    }
+
+
+    with link = "point.ru.Приморск-Новый" {
+        track(:first:station, kalbal[:pri.a, :pri.f]);
+        with layer = -1 track(:second:station :closed,
+                kalbal[:pri.a, :pri.f - 160m] >> 1dt
+            ..  kalbal[:pri.f - 100m, :pri.f - 99m]
+        );
+
+        marker(:de.hp :left, kalbal[:pri]);
+        with layer = -1 marker(:de.bf :closed :left, kalbal[:pri]);
+        station(:right, kalbal[:pri + 0.3sw] << 2.0sw,
             vbox(:center:bottom :bold,
-                span(:gone, "Tilsit"),
-                span(:open, "Советск")
+                span(:gone, "Fischhausen"),
+                span(:open, "Приморск-Новый")
             ),
             hbox(:center:top,
                 vbox(:right:top,
                     span(:open, "КГ 3: "),
-                    span(:open, "КГ 11: "),
-                    span(:open, "КГ 12: ")
+                    span(:closed, "КГ 20: ")
                 ),
                 vbox(:right:top,
-                    span(:open, "53"),
-                    span(:open, ""),
-                    span(:open, "")
-                ),
-                vbox(:left:top,
-                    span(:open, ",80"),
-                    span(:open, "??"),
-                    span(:open, "??")
+                    span(:open, "35,9"),
+                    span(:removed, "88,2")
                 )
             )
         );
@@ -247,32 +253,69 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.3" {
-        track(:first, tjasow[:sow + 1sw, :gr - 0.5sw] >> 0.5dt);
-        track(:first :removed, tjasow[:sow + 1sw, :gr - 0.5sw] << 0.5dt);
+        track(:first, kalbal[:pri.f, :op39 - 1sw]);
+        with layer = 1 line_badge(:open, kalbal[:op39 - 2.0km], "КГ 3");
     }
 
 
-    with link = "point.int.Pagėgiai-Советск" {
-        track(:first:station, tjasow[:gr - 0.5sw, :gr + 0.5sw] >> 0.5dt);
-        track(:first:station :removed,
-                tjasow[:gr - 0.5sw, :gr + 0.5sw] << 0.5dt
+    with link = "point.ru.kg.4.Оп-39" {
+        track(:first:station, kalbal[:op39 - 1sw, :op39 + 1sw]);
+        with layer = -1 marker(:de.hp :removed :right, kalbal[:op39]);
+        station(:left :removed, kalbal[:op39 + 0.4sw] >> 1.2sw,
+            "39 км", "??"
         );
-        marker(:de.dirgr :right, tjasow[:gr] >> 0.5dt);
-        with layer = 1 marker(:de.dirgr :left, tjasow[:gr] << 0.5dt);
-        label(tjasow[:gr] << 4.5dt,
-            hbox(:xsmall :right:middle,
-                vbox(:right:middle,
-                    span(:open, " LT "),
-                    hbar(0.2),
-                    span(:open, "RU ")
-                ),
-                vbox(:left:middle,
-                    span(:open, ""),
-                    hbar(0.2),
-                    span(:open, "КГ 3 ")
-                )
-            )
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:op39 + 1sw, :met - 1sw]);
+    }
+
+
+    with link = "point.ru.Мечниково" {
+        track(:first:station, kalbal[:met - 1sw, :met + 1sw]);
+        marker(:de.hp :right, kalbal[:met]);
+        with layer = -1 marker(:de.bf :removed :right, kalbal[:met]);
+        station(:left, kalbal[:met + 0.6sw] >> 1.2sw,
+            vbox(:center:bottom,
+                span(:gone, "Neuhäuser"),
+                span(:open, "Мечниково")
+            ),
+            "42,0"
         );
-     }
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:met + 1sw, :op45 - 1sw]);
+        with layer = 1 line_badge(:open, kalbal[:met + 1.3km], "КГ 3");
+    }
+
+
+    with link = "point.ru.kg.4.Оп-45" {
+        track(:first:station, kalbal[:op45 - 1sw, :op45 + 1sw]);
+        marker(:de.hp :right, kalbal[:op45]);
+        station(:left, kalbal[:op45 + 0.5sw] >> 1.3sw,
+            "45 км", "44,6"
+        );
+    }
+
+
+    with link = "line.ru.kg.3" {
+        track(:first, kalbal[:op45 + 1sw, :bal.a]);
+    }
+
+
+    with link = "point.ru.Балтийск" {
+        track(:first:station, kalbal[:bal.a, :f]);
+        marker(:de.bf :right, kalbal[:bal]);
+        station(:top, kalbal[:bal] >> 1.8sw,
+            vbox(:center:bottom :bold,
+                span(:gone, "Pillau Seestadt"),
+                span(:open, "Балтийск")
+            ),
+            "КГ 3: 46,9"
+        );
+    }
 }
 

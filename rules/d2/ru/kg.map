@@ -1,115 +1,265 @@
 with detail = 2 {
-    let kalmam = path("path.ru.kg.1");
+    let kalmam = path("simple.ru.kg.1");
     with link = "line.ru.kg.1" {
-        track(:first :double,
-            path("path.ru.kg.1")[:kal, :gr]
-        );
+        track(:first :double, kalmam[:kal, :gr]);
+        with layer = 1 line_badge(:open, kalmam[:kal + 9.0km], "1");
+        with layer = 1 line_badge(:open, kalmam[:akor + 14.0km], "1");
     }
 
     with link = "point.ru.Калининград-Пассажирский" {
-        slabel(:right, path("path.ru.kg.1")[:kal] >> 2pt,
-            vbox(:left:bottom,
-                span(:gone, "Königsberg"),
-                span(:open, "Калининград")
-            )
-        );
+        with layer = 1 marker(:statdot, kalmam[:kal]);
+        slabel(:right, kalmam[:kal] + (1.5dt, -1.0dt), "Калининград");
+    }
+
+    with link = "point.ru.Светлое" {
+        with layer = 1 marker(:statdot, kalmam[:swe]);
+        slabel(:right, kalmam[:swe + 2.0dt] << 3.0dt, "Светлое");
+    }
+
+    with link = "point.ru.Мамоново" {
+        with layer = 1 marker(:statdot, kalmam[:mam]);
+        slabel(:left, kalmam[:mam] >> 1.5dt, "Мамоново");
     }
 }
 
 with detail = 2 {
-    let kalter = path("path.ru.kg.2");
+    let kalter = path("simple.ru.kg.2");
 
     with link = "line.ru.kg.2" {
         track(:first :double, kalter[:kal, :gr]);
+        with layer = 1 line_badge(:open, kalter[:kal + 13.0km], "2");
+        with layer = 1 line_badge(:open, kalter[:tja - 26.0km], "2");
+        with layer = 1 line_badge(:open, kalter[:gus + 12.0km], "2");
+    }
+
+    with link = "point.ru.Комсомольск-Западный" {
+        with layer = 1 marker(:statdot, kalter[:kom]);
+    }
+
+    with link = "point.ru.Гвардейск" {
+        with layer = 1 marker(:statdot, kalter[:gwa]);
+    }
+
+    with link = "point.ru.Знаменск" {
+        with layer = 1 marker(:statdot, kalter[:sna]);
     }
 
     with link = "point.ru.Черняховск" {
-        slabel(:left, kalter[:tja - 1.5km] << 1.0dt,
-            vbox(:center:bottom,
-                span(:gone, "Insterburg"),
-                span(:open, "Черняховск")
-            )
-        );
+        with layer = 1 marker(:statdot, kalter[:tja]);
+        slabel(:right, kalter[:tja + 2.0km] << 1.4dt, "Черняховск");
+    }
+
+    with link = "point.ru.Гусев" {
+        with layer = 1 marker(:statdot, kalter[:gus]);
+    }
+
+    with link = "point.ru.Нестеров" {
+        with layer = 1 marker(:statdot, kalter[:nes]);
     }
 }
 
+
+# KG 3
+#
 with detail = 2 {
-    let tjasow = path("path.ru.kg.3");
+    let kalbal = path("simple.ru.kg.3");
 
     with link = "line.ru.kg.3" {
-        track(:first, tjasow[:a, :gr]);
-    }
-
-    with link = "point.ru.Советск" {
-        slabel(:left, tjasow[:sow] << 1.0dt,
-            vbox(:right:bottom,
-                span(:gone, " Tilsit"),
-                span(:open, "Советск")
-            )
-        );
-    }
-}
-
-with detail = 2 {
-    let kalbal = path("path.ru.kg.4");
-
-    with link = "line.ru.kg.4" {
-        track(:first, kalbal[:amam, :f]);
+        track(:first, kalbal[:abal, :f]);
+        with layer = 1 line_badge(:open, kalbal[:pri - 18.0km], "3");
+        with layer = 1 line_badge(:open, kalbal[:pri + 6.0km], "3");
     }
 
     with link = "point.ru.Приморск-Новый" {
-        slabel(:left, kalbal[:pri + 0.8ssw] >> 0.5dt,
-            vbox(:center:bottom,
-                span(:gone, "Fischhausen"),
-                span(:open, "Приморск-Новый")
-            )
-        );
+        with layer = 1 marker(:statdot, kalbal[:pri]);
+        slabel(:left, kalbal[:pri + 0.8ssw] >> 2.0dt, "Приморск-Новый");
     }
 
     with link = "point.ru.Балтийск" {
-        slabel(:left, kalbal[:bal + 0.5ssw] >> 1.0dt,
-            vbox(:right:bottom,
-                span(:gone, "Pillau Seestadt"),
-                span(:open, "Балтийск")
-            )
-        );
+        with layer = 1 marker(:statdot, kalbal[:bal]);
+        slabel(:left, kalbal[:bal] >> 2.0dt, "Балтийск");
     }
-
 }
 
 with detail = 2 {
-    let kalbag = path("d2.ru.kg.5");
+    let korswe = path("simple.ru.kg.4");
+
+    with link = "line.ru.kg.4" {
+        track(:first :removed, korswe[:gr, :per]);
+        with layer = -1 track(:first :double :removed,
+                korswe[:per, :per + 1m]
+            ..  path("simple.ru.kg.1")[:akor, :akor - 1m]
+        );
+        with layer = 1 line_badge(:removed, korswe[:kor + 9.0km], "4");
+    }
+
+    with link = "point.ru.Корнево" {
+        with layer = 1 marker(:statdot :removed, korswe[:kor]);
+        slabel(:right :removed, korswe[:kor] >> 1.5dt, "Корнево");
+    }
+}
+
+with detail = 2 {
+    let kalbag = path("simple.ru.kg.5");
 
     with link = "line.ru.kg.5" {
-        track(:first, kalbag[:atja, :bag]);
+        track(:first, kalbag[:abag, :bag]);
         with layer = -1 track(:first :closed, kalbag[:bag, :gr]);
+        with layer = 1 line_badge(:open, kalbag[:wla + 9.0km], "5");
+    }
+
+    with link = "point.ru.Владимиров" {
+        with layer = 1 marker(:statdot, kalbag[:wla]);
+        slabel(:right, kalbag[:wla + 0.5ssw] << 1.5dt, "Владимиров");
     }
 
     with link = "point.ru.Багратионовск" {
-        label(kalbag[:bag] >> 1.5dt,
-            vbox(:right:middle :small,
-                span(:gone, "Preußisch Eylau"),
-                span(:open, "Багратионовск")
+        with layer = 1 marker(:statdot, kalbag[:bag]);
+        slabel(:left, kalbag[:bag + 0.3ssw] >> 1.5dt, "Багратионовск");
+    }
+}
+
+
+# KG 6
+#
+with detail = 2 {
+    let kalsel = path("simple.ru.kg.6.1");
+    let selswe = path("simple.ru.kg.6.2");
+
+    with link = "line.ru.kg.6" {
+        track(:second :cat, kalsel[:asel, :sel]);
+        with layer = 1 line_badge(:open, kalsel[:rja + 5.0km], "6.");
+
+        track(:second :cat, selswe[:fswe, :swe]);
+        with layer = 1 line_badge(:open, selswe[:pio - 8.0km], "6.");
+    }
+
+    with link = "point.ru.kg.Рябиновка" {
+        with layer = 1 marker(:statdot, kalsel[:rja]);
+    }
+
+    with link = "point.ru.Зеленоградск-Новый" {
+        with layer = 1 marker(:statdot, kalsel[:sel]);
+        slabel(:top, kalsel[:sel] + (0dt, -1.5dt),
+            vbox(:center:bottom,
+                span(:open, "Зеленоградск-"),
+                span(:open, "Новый")
             )
         );
     }
 
+    with link = "point.ru.kg.Пионерский-Курорт" {
+        with layer = 1 marker(:statdot, selswe[:pio]);
+    }
+
+    with link = "point.ru.kg.Светлогорск-1" {
+        with layer = 1 marker(:statdot, selswe[:swe]);
+    }
 }
 
-with detail = 2 {
-    let tjasel = path("simple.ru.kg.6");
 
-    with link = "line.ru.kg.6" {
+# KG 7
+with detail = 2 {
+    let tjasow = path("simple.ru.kg.7");
+
+    with link = "line.ru.kg.7" {
+        track(:first,
+                path("simple.ru.kg.2")[:asow - 1m, :asow]
+            ..  tjasow[:ftja, :gr]
+        );
+        with layer = 1 line_badge(:open, tjasow[:ftja + 25.0km], "7");
+    }
+
+    with link = "point.ru.Советск" {
+        with layer = 1 marker(:statdot, tjasow[:sow]);
+        slabel(:right, tjasow[:sow - 0.3ssw] >> 2.0dt, "Советск");
+    }
+}
+
+# KG 8
+#
+with detail = 2 {
+    let tjasel = path("simple.ru.kg.8");
+
+    with link = "line.ru.kg.8" {
         track(:first :double, tjasel[:akal, :gr]);
+        with layer = 1 line_badge(:open, tjasel[:akal + 22.0km], "8");
     }
 
     with link = "point.ru.Железнодорожный" {
-        slabel(:left, tjasel[:sel] >> 1.5dt,
-            vbox(:right:bottom,
-                span(:gone, "Gerdauen"),
-                span(:open, "Железнодорожный")
-            )
-        );
+	with layer = 1 marker(:statdot, tjasel[:sel]);
+        slabel(:left, tjasel[:sel + 0.5ssw] >> 1.5dt, "Железнодорожный");
+    }
+}
+
+
+# KG 20
+#
+with detail = 2 {
+    let swepri = path("simple.ru.kg.20");
+
+    with link = "line.ru.kg.20" {
+        track(:second :cat, swepri[:swe, :apri]);
+        with layer = -1 track(:second :closed, swepri[:apri, :akal]);
+        with layer = 0 line_badge(:closed, swepri[:ant + 6.5km], "20");
+    }
+}
+
+
+# KG 21
+#
+with detail = 2 {
+    let kalsow = path("simple.ru.kg.21");
+
+    with link = "line.ru.kg.21" {
+        track(:second, kalsow[:asow, :fkal]);
+        
+        with layer = 1 line_badge(:open, kalsow[:pol - 18km], "21");
+        with layer = 1 line_badge(:open, kalsow[:bol + 10km], "21");
+    }
+
+    with link = "point.ru.Калининград-Северный" {
+        with layer = 1 marker(:statdot, kalsow[:kse]);
+    }
+
+    with link = "point.ru.kg.Полесск" {
+        with layer = 1 marker(:statdot, kalsow[:pol]);
+    }
+
+    with link = "point.ru.kg.Залесье-Новое" {
+        with layer = 1 marker(:statdot, kalsow[:sal]);
+    }
+
+    with link = "point.ru.kg.Большаково-Новое" {
+        with layer = 1 marker(:statdot, kalsow[:bol]);
+    }
+
+    with link = "point.ru.kg.Щегловка-Новая" {
+        with layer = 1 marker(:statdot, kalsow[:sts]);
+    }
+}
+    
+
+with detail = 2 {
+    let tjabag = path("simple.ru.kg.25");
+
+    with link = "line.ru.kg.25" {
+        track(:second :removed, tjabag[:asel, :gr]);
+    }
+}
+
+
+# KG 33
+with detail = 2 {
+    let swesw2 = path("simple.ru.kg.33");
+    
+    with link = "line.ru.kg.33" {
+        track(:second :cat, swesw2[:apri, :sw2]);
+    }
+
+    with link = "point.ru.kg.Светлогорск-2" {
+        with layer = 1 marker(:statdot, swesw2[:sw2]);
+        slabel(:top, swesw2[:sw2] << 2.0dt, "Светлогорск");
     }
 }
 
