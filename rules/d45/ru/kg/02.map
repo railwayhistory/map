@@ -57,13 +57,18 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.2" {
-        track(:first :double, kalter[:op1271 + 1sw, :kom - 1sw]);
+        track(:first :double, kalter[:op1271 + 1sw, :kom.a]);
         with layer = 1 line_badge(:open, kalter[:op1271 + 2.0km], "КГ 2");
     }
 
 
     with link = "point.ru.Комсомольск-Западный" {
-        track(:first:station :double, kalter[:kom - 1sw, :kom + 1sw]);
+        track(:first:station :double, kalter[:kom.a, :kom.f]);
+        with layer = -1 track(:second:station :removed,
+                kalter[:kom.a + 99m, :kom.a + 100m] >> 0.5dt
+            --  kalter[:kom.a + 150m, :kom.f] >> 1.5dt
+        );
+
         marker(:de.hp :left, kalter[:kom] << 0.5dt);
         with layer = -1 marker(:de.bf :removed :left, kalter[:kom] << 0.5dt);
         station(:top, kalter[:kom] << 0.5dt << 1.4sw,
@@ -86,7 +91,7 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.2" {
-        track(:first :double, kalter[:kom + 1sw, :ose - 1sw]);
+        track(:first :double, kalter[:kom.f, :ose - 1sw]);
         with layer = 1 line_badge(:open, kalter[:kom + 3.0km], "КГ 2");
     }
 
@@ -138,13 +143,21 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.2" {
-        track(:first :double, kalter[:gwa + 1sw, :sna - 1sw]);
+        track(:first :double, kalter[:gwa + 1sw, :sna.a]);
         with layer = 1 line_badge(:open, kalter[:gwa + 5.0km], "КГ 2");
     }
 
 
     with link = "point.ru.Знаменск" {
-        track(:first:station :double, kalter[:sna - 1sw, :sna + 1sw]);
+        # KG 2
+        track(:first:station :double, kalter[:sna.a, :sna.f]);
+
+        # KG 23
+        with layer = -1 track(:second:station :removed,
+                kalter[:sna.a + 499m, :sna.a + 500m] >> 0.5dt
+            --  kalter[:sna.a + 550m, :sna.f] >> 1.5dt
+        );
+
         marker(:de.bf :left, kalter[:sna] << 0.5dt);
         station(:top, kalter[:sna] << 0.5dt << 1.4sw,
             vbox(:center:bottom :bold,
@@ -153,8 +166,12 @@ with detail = [4, 5] {
             ),
             hbox(:center:top,
                 vbox(:right:top,
-                    span(:open, "КГ 2: "),
-                    span(:removed, "КГ 23: ")
+                    span(:open, "КГ "),
+                    span(:removed, "КГ ")
+                ),
+                vbox(:right:top,
+                    span(:open, "2: "),
+                    span(:removed, "23: ")
                 ),
                 vbox(:center:top,
                     span(:open, "1235,3"),
@@ -345,24 +362,53 @@ with detail = [4, 5] {
     }
 
 
-    with link = "point.ru.Гусев" {
+    with link = "point.ru.kg.Гусев" {
+        let ulagus = path("path.ru.kg.26");
+
+        # KG 2
         track(:first:station :double, kalter[:gus - 1sw, :gus + 1sw]);
+
+        # KG 26
+        with layer = -1 track(:second:station :removed,
+                ulagus[:ff, :ff + 1m]
+            ..  kalter[:foso, :gus.f - 500m] >> 1.5dt
+        );
+
+        # KG 27
+        with layer = -1 track(:second:station,
+                ulagus[:ff, :ff + 1m] >> 1dt
+            ..  kalter[:foso, :gus.f - 540m] >> 2.5dt
+            --  kalter[:gus.f - 420m, :gus.f - 419m] << 0.5dt
+        );
+
         marker(:de.bf :left, kalter[:gus] << 0.5dt);
         station(:top, kalter[:gus] << 0.5dt << 1.4sw,
             vbox(:center:bottom :bold,
                 span(:gone, "Gumbinnen"),
                 span(:open, "Гусев")
             ),
-            hbox(:center:top,
-                vbox(:right:top,
-                    span(:open, "КГ 2: "),
-                    span(:open, "КГ 26: "),
-                    span(:removed, "КГ 27: ")
+            vbox(:center:top,
+                hbox(:center:base,
+                    span(:open, "КГ 2: 1170,4 "),
+                    span(:removed, "(705,84)")
                 ),
-                vbox(:center:top,
-                    span(:open, "1170,4"),
-                    span(:open, "??"),
-                    span(:removed, "??")
+                hbox(:center:top,
+                    vbox(:right:top,
+                        span(:removed, "КГ 26: "),
+                        span(:removed, "КГ 27: ")
+                    ),
+                    vbox(:right:top,
+                        span(:removed, ""),
+                        span(:removed, "")
+                    ),
+                    vbox(:right:top,
+                        span(:removed, "64,"),
+                        span(:removed, "0,")
+                    ),
+                    vbox(:left:top,
+                        span(:removed, "98"),
+                        span(:removed, "00")
+                    )
                 )
             )
         );
@@ -407,15 +453,29 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.2" {
-        track(:first :double, kalter[:diw + 1sw, :nes - 1sw]);
+        track(:first :double, kalter[:diw + 1sw, :nes.a]);
         with layer = 1 line_badge(:open, kalter[:nes - 4.0km], "КГ 2");
     }
 
 
     with link = "point.ru.Нестеров" {
-        track(:first:station :double, kalter[:nes - 1sw, :nes + 1sw]);
-        marker(:de.bf :left, kalter[:nes] << 0.5dt);
-        station(:top, kalter[:nes] << 0.5dt << 1.4sw,
+        # KG 2
+        track(:first:station :double, kalter[:nes.a, :nes.f]);
+
+        # KG 28
+        track(:second:station,
+                kalter[:nes.a + 99m, :nes.a + 100m] >> 0.5dt
+            --  kalter[:nes.a + 150m, :atis] >> 1.5dt
+        );
+
+        # KG 29
+        with layer = -1 track(:second:station :removed,
+                kalter[:fdob, :nes.f - 150m] << 1.5dt
+            --  kalter[:nes.f - 100m, :nes.f - 99m] << 0.5dt
+        );
+
+        marker(:de.bf :left, kalter[:nes] << 1.5dt);
+        station(:top, kalter[:nes] << 1.5dt << 1.4sw,
             vbox(:center:bottom :bold,
                 span(:gone, "Stallupönen"),
                 span(:gone, "Ebenrode"),
@@ -423,14 +483,29 @@ with detail = [4, 5] {
             ),
             hbox(:center:top,
                 vbox(:right:top,
-                    span(:open, "КГ 2: "),
-                    span(:removed, "КГ 28: "),
-                    span(:closed, "КГ 29: ")
+                    span(:open, "КГ "),
+                    span(:removed, "КГ "),
+                    span(:closed, "КГ ")
+                ),
+                vbox(:right:top,
+                    span(:open, "2: "),
+                    span(:removed, "28: "),
+                    span(:closed, "29: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "1144"),
+                    span(:removed, "0"),
+                    span(:closed, "??")
+                ),
+                vbox(:left:top,
+                    span(:open, ",9 "),
+                    span(:removed, ",0 "),
+                    span(:closed, "")
                 ),
                 vbox(:center:top,
-                    span(:open, "1144,9"),
-                    span(:removed, "??"),
-                    span(:closed, "??")
+                    span(:removed, "(??)"),
+                    span(:removed, "(??)"),
+                    span(:removed, "")
                 )
             )
         );
@@ -438,7 +513,7 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.2" {
-        track(:first :double, kalter[:nes + 1sw, :ter - 1sw]);
+        track(:first :double, kalter[:nes.f, :ter - 1sw]);
         with layer = 1 line_badge(:open, kalter[:nes + 5.0km], "КГ 2");
     }
 

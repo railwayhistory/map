@@ -1,0 +1,146 @@
+# RU KG 28.  Железнодорожное - Нестеров
+#
+let selnes = path("path.ru.kg.28");
+
+with detail = 3 {
+    with link = "point.int.Gołdap-Железнодорожное" {
+        track(:second:station :removed, selnes[:gr - 0.5ssw, :gr + 0.5ssw]);
+        marker(:de.dirgr :removed :right, selnes[:gr]);
+        marker(:de.dirgr :removed :left, selnes[:gr]);
+        label(selnes[:gr] >> 2.5dt,
+            hbox(:left:middle :xsmall :removed,
+                span(:regular, "  "),
+                vbox(:right:middle,
+                    span(:regular, "  RU "),
+                    hbar(0.2),
+                    span(:regular, "  PL ")
+                ),
+                vbox(:left:middle,
+                    span(:regular, "КГ 28 "),
+                    hbar(0.2),
+                    span(:regular, "N07 ")
+                )
+            )
+        );
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second :removed, selnes[:gr + 0.5ssw, :sel - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Железнодорожное" {
+        track(:second:station :removed, selnes[:sel - 1ssw, :sel + 1ssw]);
+        marker(:de.bf :removed :left, selnes[:sel]);
+        slabel(:right :removed, selnes[:sel - 0.4ssw] >> 2.2dt,
+            "Железнодорожное"
+        );
+    }
+
+
+    with link = "line.ru.kg.28" {
+        track(:second :removed, selnes[:sel + 1ssw, :kra - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Краснолесье" {
+        track(:second:station, selnes[:kra - 1ssw, :kra + 1ssw]);
+        marker(:de.bf :left, selnes[:kra]);
+        slabel(:left, selnes[:kra - 0.4ssw] << 1.3ssw, "Краснолесье");
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:kra + 1ssw, :tok - 1ssw]);
+        with layer = 1 line_badge(:open, selnes[:kra + 1.5km], "28");
+    }
+
+    with link = "point.ru.kg.Токаревка-Новая" {
+        track(:second:station, selnes[:tok - 1ssw, :tok + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, selnes[:tok]);
+        slabel(:left :removed, selnes[:tok - 0.6ssw] << 1.4ssw,
+            "Токаревка-Новая"
+        );
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:tok + 1ssw, :folk]);
+    }
+
+    with link = "point.ru.kg.Чистые-Пруды" {
+        track(:second:station, selnes[:folk, :ales]);
+        with layer = -1 marker(:de.bf :removed :left, selnes[:tis]);
+        slabel(:left :removed, selnes[:tis - 0.8ssw] << 1.2ssw,
+            vbox(:right:bottom,
+                span(:bold, "Чистые"),
+                span(:bold, "Пруды")
+            )
+        );
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:ales, :ili - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Ильинское-Новое" {
+        track(:second:station, selnes[:ili - 1ssw, :ili + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, selnes[:ili]);
+        slabel(:top :removed, selnes[:ili] << 1.3ssw,
+            vbox(:center:bottom,
+                span(:regular, "Ильинское-"),
+                span(:regular, "Новое")
+            )
+        );
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:ili + 1ssw, :pan - 1ssw]);
+    }
+
+
+    with link = "point.ru.kg.Панфилово" {
+        track(:second:station, selnes[:pan - 1ssw, :pan + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, selnes[:pan]);
+        slabel(:right :removed, selnes[:pan - 1.5ssw] >> 2.2ssw, "Панфилово");
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:pan + 1ssw, :new - 1ssw]);
+        with layer = 1 line_badge(:open, selnes[:ili + 2.0km], "28");
+    }
+
+    with link = "point.ru.kg.Невское" {
+        track(:second:station, selnes[:new - 1sw, :new + 1sw]);
+        with layer = -1 marker(:de.hp :removed :right, selnes[:new]);
+        with layer = -2 marker(:de.bf :gone :right, selnes[:new]);
+        slabel(:right :removed, selnes[:new - 0.4ssw] >> 2.0ssw, "Невское");
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:new + 1ssw, :bud - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Budweitschen" {
+        track(:second:station, selnes[:bud - 1ssw, :bud + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, selnes[:bud]);
+        slabel(:left :removed, selnes[:bud - 0.3ssw] << 1.9ssw, "Talfriede");
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:bud + 1ssw, :pus - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Пушкино-Новое" {
+        track(:second:station, selnes[:pus - 1ssw, :pus + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, selnes[:pus]);
+        slabel(:right :removed, selnes[:pus - 0.6ssw] >> 1.5ssw, "Панфилово");
+    }
+
+    with link = "line.ru.kg.28" {
+        track(:second, selnes[:pus + 1ssw, :ff]);
+        track(:second:station,
+                selnes[:ff, :ff + 1m]
+            ..  path("path.ru.kg.2")[:atis + 1m, :atis] << 0.5dt
+        );
+    }
+
+    # point.ru.Нестеров: ru.kg.2
+}
+

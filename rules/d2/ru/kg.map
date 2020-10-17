@@ -29,6 +29,7 @@ with detail = 2 {
         track(:first :double, kalter[:kal, :gr]);
         with layer = 1 line_badge(:open, kalter[:kal + 13.0km], "2");
         with layer = 1 line_badge(:open, kalter[:tja - 26.0km], "2");
+        with layer = 1 line_badge(:open, kalter[:tja + 12.0km], "2");
         with layer = 1 line_badge(:open, kalter[:gus + 12.0km], "2");
     }
 
@@ -49,8 +50,9 @@ with detail = 2 {
         slabel(:right, kalter[:tja + 2.0km] << 1.4dt, "Черняховск");
     }
 
-    with link = "point.ru.Гусев" {
+    with link = "point.ru.kg.Гусев" {
         with layer = 1 marker(:statdot, kalter[:gus]);
+        slabel(:top, kalter[:gus] << 1.0dt, "Гусев");
     }
 
     with link = "point.ru.Нестеров" {
@@ -110,12 +112,12 @@ with detail = 2 {
 
     with link = "point.ru.Владимиров" {
         with layer = 1 marker(:statdot, kalbag[:wla]);
-        slabel(:right, kalbag[:wla + 0.5ssw] << 1.5dt, "Владимиров");
+        #slabel(:right, kalbag[:wla + 0.5ssw] << 1.5dt, "Владимиров");
     }
 
     with link = "point.ru.Багратионовск" {
         with layer = 1 marker(:statdot, kalbag[:bag]);
-        slabel(:left, kalbag[:bag + 0.3ssw] >> 1.5dt, "Багратионовск");
+        #slabel(:left, kalbag[:bag + 0.3ssw] >> 1.5dt, "Багратионовск");
     }
 }
 
@@ -187,8 +189,8 @@ with detail = 2 {
     }
 
     with link = "point.ru.Железнодорожный" {
-	with layer = 1 marker(:statdot, tjasel[:sel]);
-        slabel(:left, tjasel[:sel + 0.5ssw] >> 1.5dt, "Железнодорожный");
+        with layer = 1 marker(:statdot, tjasel[:sel]);
+        # slabel(:left, tjasel[:sel + 0.5ssw] >> 1.5dt, "Железнодорожный");
     }
 }
 
@@ -196,12 +198,14 @@ with detail = 2 {
 # KG 20
 #
 with detail = 2 {
-    let swepri = path("simple.ru.kg.20");
+    let selcra = path("path.ru.kg.20");
 
     with link = "line.ru.kg.20" {
-        track(:second :cat, swepri[:swe, :apri]);
-        with layer = -1 track(:second :closed, swepri[:apri, :akal]);
-        with layer = 0 line_badge(:closed, swepri[:ant + 6.5km], "20");
+        with layer = -1 track(:second :removed, selcra[:akal, :cra]);
+    }
+
+    with link = "point.ru.kg.Cranzbeek" {
+        with layer = 1 marker(:statdot :removed, selcra[:cra]);
     }
 }
 
@@ -238,22 +242,208 @@ with detail = 2 {
         with layer = 1 marker(:statdot, kalsow[:sts]);
     }
 }
-    
 
+
+# KG 22
+#
 with detail = 2 {
-    let tjabag = path("simple.ru.kg.25");
+    let komkri = path("simple.ru.kg.22");
+    let tjasel = path("simple.ru.kg.8");
 
-    with link = "line.ru.kg.25" {
-        track(:second :removed, tjabag[:asel, :gr]);
+    with link = "line.ru.kg.22" {
+        with layer = -1 track(:second :removed,
+                komkri[:kom, :sel.aa]
+            ..  tjasel[:akom, :akom - 1m]
+        );
+        with layer = -1 track(:second :removed,
+                tjasel[:fkri + 1m, :fkri]
+            ..  komkri[:sel.ff, :gr]
+        );
+        line_badge(:removed, komkri[:kom + 16km], "22");
+        line_badge(:removed, komkri[:pra + 12km], "22");
+        line_badge(:removed, komkri[:kri - 6.2km], "22");
+    }
+
+    with link = "point.ru.kg.Правдинск" {
+        with layer = 1 marker(:statdot :removed, komkri[:pra]);
+        slabel(:top :removed, komkri[:pra - 1ssw] << 1.5dt, "Правдинск");
+    }
+
+    with link = "point.ru.kg.Крылово" {
+        with layer = 1 marker(:statdot :removed, komkri[:kri]);
     }
 }
 
 
-# KG 33
+# KG 23
+#
 with detail = 2 {
-    let swesw2 = path("simple.ru.kg.33");
+    let snapra = path("simple.ru.kg.23");
+    with link = "line.ru.kg.23" {
+        with layer = -1 track(:second :removed, snapra[:abel, :asna]);
+        with layer = 1 line_badge(:removed, snapra[:abel + 15.5km], "23");
+    }
+}
+
+
+# KG 24
+#
+with detail = 2 {
+    let prasip = path("simple.ru.kg.24");
+
+    with link = "line.ru.kg.24" {
+        with layer = -1 track(:second :removed, prasip[:akom, :gr]);
+        with layer = 1 line_badge(:removed, prasip[:akom + 5km], "24");
+    }
+
+    with link = "point.int.Judyty-Domarady-Широкое" {
+        marker(:refdt :removed :right, prasip[:gr]);
+        marker(:refdt :removed :left, prasip[:gr]);
+    }
+}
+ 
+
+# KG 25
+#
+with detail = 2 {
+    let tjabag = path("simple.ru.kg.25");
+
+    with link = "line.ru.kg.25" {
+        with layer = -1 track(:second :removed, tjabag[:asel, :gr]);
+        with layer = 1 line_badge(:removed, tjabag[:oso - 17km], "25");
+        with layer = 1 line_badge(:removed, tjabag[:oso + 6km], "25");
+    }
+
+    with link = "point.ru.Озёрск-Восточный" {
+        marker(:statdot :removed, tjabag[:oso]);
+    }
+
+    with link = "point.int.Багратионово-Gołdap" {
+        marker(:refdt :removed :right, tjabag[:gr]);
+        marker(:refdt :removed :left, tjabag[:gr]);
+    }
+}
+
+
+# KG 26
+#
+with detail = 2 {
+    let ulagus = path("simple.ru.kg.26");
+
+    with link = "line.ru.kg.26" {
+        with layer = -1 track(:second :removed, ulagus[:gr, :oso.a]);
+        with layer = -1 track(:second :removed, ulagus[:oso, :gus]);
+        with layer = 1 line_badge(:removed, ulagus[:oso - 9.0km], "26");
+        with layer = 1 line_badge(:removed, ulagus[:oso + 13.5km], "26");
+    }
+
+    with link = "point.int.Ołownik-Ульяновское" {
+        marker(:refdt :removed :left, ulagus[:gr]);
+        marker(:refdt :removed :right, ulagus[:gr]);
+    }
+}
+
+
+# KG 27
+#
+with detail = 2 {
+    let gusles = path("simple.ru.kg.27");
+
+    with link = "line.ru.kg.27" {
+        with layer = -1 track(:second :removed, gusles[:aa, :fgol]);
+        with layer = -1 track(:second :removed, gusles[:anes, :gr]);
+        with layer = 1 line_badge(:removed, gusles[:aa + 13.0km], "27");
+        with layer = 1 line_badge(:removed, gusles[:gr - 11.6km], "27");
+    }
+
+    with link = "point.int.Лесистое-Żytkiejmy" {
+        marker(:refdt :removed :left, gusles[:gr]);
+        marker(:refdt :removed :right, gusles[:gr]);
+    }
+}
+
+
+# KG 28
+#
+with detail = 2 {
+    let selnes = path("simple.ru.kg.28");
+
+    with link = "line.ru.kg.28" {
+        with layer = -1 track(:second:removed, selnes[:gr, :kra]);
+        track(:second, selnes[:kra, :nes]);
+        with layer = 1 line_badge(:open, selnes[:kra + 4.0km], "28");
+        with layer = 1 line_badge(:open, selnes[:tis + 8.0km], "28");
+    }
+
+    with link = "point.int.Gołdap-Железнодорожное" {
+        marker(:refdt :removed :left, selnes[:gr]);
+        marker(:refdt :removed :right, selnes[:gr]);
+    }
+
+    with link = "point.ru.kg.Краснолесье" {
+        with layer = 1 marker(:statdot, selnes[:kra]);
+    }
+
+    with link = "point.ru.kg.Чистые-Пруды" {
+        with layer = 1 marker(:statdot, selnes[:tis]);
+    }
+}
+
+
+# KG 29
+#
+with detail = 2 {
+    let sownes = path("simple.ru.kg.29");
+
+    with link = "line.ru.kg.29" {
+        track(:second, sownes[:atja, :las.x]);
+        with layer = -1 track(:second :removed, sownes[:las.x, :ftja]);
+        with layer = 1 line_badge(:open, sownes[:nem - 5.7km], "29");
+        with layer = 1 line_badge(:removed, sownes[:dob - 17.0km], "29");
+        with layer = 1 line_badge(:removed, sownes[:dob + 7.0km], "29");
+    }
+
+    with link = "point.ru.kg.Неман-Новый" {
+        with layer = 1 marker(:statdot, sownes[:nem]);
+    }
+
+    with link = "point.ru.kg.Добровольск" {
+        with layer = 1 marker(:statdot :removed, sownes[:dob]);
+    }
+}
+
+# KG 31
+with detail = 2 {
+    let mambag = path("simple.ru.kg.31");
+
+    with link = "line.ru.kg.31" {
+        with layer = -1 track(:second :removed, mambag[:mam, :fmam]);
+        with layer = -1 track(:second :project :removed, mambag[:abag, :bog]);
+        with layer = -1 track(:second :removed, mambag[:bog, :fkor]);
+        with layer = 1 line_badge(:removed, mambag[:mam + 13.0km], "31");
+        with layer = 1 line_badge(:removed, mambag[:fkor - 10.0km], "31");
+    }
+}
+
+
+# KG 41
+#
+with detail = 2 {
+    let swepri = path("simple.ru.kg.41");
+
+    with link = "line.ru.kg.41" {
+        track(:second :cat, swepri[:swe, :apri]);
+        with layer = -1 track(:second :closed, swepri[:apri, :akal]);
+        with layer = 0 line_badge(:closed, swepri[:ant + 6.5km], "41");
+    }
+}
+
+
+# KG 43
+with detail = 2 {
+    let swesw2 = path("simple.ru.kg.43");
     
-    with link = "line.ru.kg.33" {
+    with link = "line.ru.kg.43" {
         track(:second :cat, swesw2[:apri, :sw2]);
     }
 

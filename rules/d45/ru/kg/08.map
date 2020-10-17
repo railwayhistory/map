@@ -208,7 +208,23 @@ with detail = [4, 5] {
 
 
     with link = "point.ru.Железнодорожный" {
+        # KG 8
         track(:first:station :double, tjasel[:sel - 1sw, :sel + 1sw]);
+
+        # KG 22
+        with layer = -1 track(:second:station :removed,
+                tjasel[:sel.a, :sel.a + 100m + 1dl] << 1.5dt
+        );
+        track(:second:station,
+                tjasel[:sel.a + 99m, :sel.a + 100m] << 0.5dt
+            --  tjasel[:sel.a + 100m + 1dl, :sel.f - 100m - 1dl] << 1.5dt
+            --  tjasel[:sel.f - 100m, :sel.f - 99m] << 0.5dt
+        );
+        with layer = -1 track(:second:station :removed,
+                tjasel[:sel + 0.59sw, :sel + 0.6sw] >> 0.5dt
+            --  tjasel[:sel + 0.6sw + 1dl, :sel.f] >> 1.5dt
+        );
+	
         marker(:de.bf :right, tjasel[:sel] >> 0.5dt);
         station(:left, tjasel[:sel + 0.6sw] >> 0.5dt >> 1.2sw,
             vbox(:center:bottom :bold,
@@ -222,7 +238,7 @@ with detail = [4, 5] {
                 ),
                 vbox(:right:top,
                     span(:open, "8: "),
-                    span(:removed, "13: ")
+                    span(:removed, "22: ")
                 ),
                 vbox(:center:top,
                     span(:open, "44,5"),
@@ -235,7 +251,7 @@ with detail = [4, 5] {
 
     with link = "line.ru.kg.8" {
         track(:first :double, tjasel[:sel + 1sw, :gr - 0.5sw]);
-        with layer = 1 line_badge(:open, tjasel[:sel + 1.5km], "КГ 8");
+        with layer = 1 line_badge(:open, tjasel[:sel + 1.2km] << 0.7dt, "КГ 8");
     }
 
 

@@ -1,0 +1,125 @@
+# RU KG 31.  Мамоново - Багратионовск
+#
+let korswe = path("path.ru.kg.4");
+let mambag = path("path.ru.kg.31");
+
+with detail = 3 {
+    # point.ru.kg.Мамоново: ru.kg.1
+
+    with link = "line.ru.kg.31" {
+        with layer = -1 track(:second:station :removed,
+                path("path.ru.kg.1")[:fkor + 1m, :fkor] >> 0.5dt
+            ..  mambag[:aa - 1m, :aa]
+        );
+        track(:second :removed, mambag[:aa, :tho - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Thomsdorf" {
+        track(:second:station :removed, mambag[:tho - 1ssw, :tho + 1ssw]);
+        marker(:de.hp :removed :left, mambag[:tho]);
+        slabel(:right :removed, mambag[:tho + 0.8ssw] << 1.4ssw,
+            vbox(:left:bottom,
+                span(:regular, "Thomsdorf"),
+                span(:light, "(Kr Heiligenbeil)")
+            )
+        );
+    }
+
+    with link = "line.ru.kg.31" {
+        track(:second :removed, mambag[:tho + 1ssw, :reh - 1ssw]);
+    }
+
+
+    with link = "point.ru.kg.Rehfeld" {
+        track(:second:station :removed, mambag[:reh - 1ssw, :reh + 1ssw]);
+        marker(:de.bf :removed :left, mambag[:reh]);
+        slabel(:left :removed, mambag[:reh + 0.4ssw] >> 0.5dt,
+            vbox(:right:top,
+                span(:regular, "Rehfeld "),
+                span(:light, "(Kr Heiligenbeil)")
+            )
+        );
+    }
+
+    with link = "line.ru.kg.31" {
+        track(:second :removed, mambag[:reh + 1ssw, :iwa - 1ssw]);
+    }
+
+    with link = "point.ru.kg.Иванцово" {
+        track(:second:station :removed, mambag[:iwa - 1ssw, :iwa + 1ssw]);
+        marker(:de.bf :removed :right, mambag[:iwa]);
+        slabel(:right :removed, mambag[:iwa - 1.0ssw] >> 2.2ssw, "Иванцово");
+    }
+
+    with link = "line.ru.kg.31" {
+        track(:second :removed, mambag[:iwa + 1ssw, :pog - 1ssw]);
+        with layer = 1 line_badge(:removed, mambag[:iwa + 3.3km], "31");
+    }
+
+    with link = "point.ru.kg.Пограничный" {
+        track(:second:station :removed, mambag[:pog - 1ssw, :pog + 1ssw]);
+        marker(:de.bf :removed :right, mambag[:pog]);
+        slabel(:bottom:removed, mambag[:pog] >> 1.2ssw, "Пограничный");
+    }
+
+    with link = "line.ru.kg.31" {
+        track(:second :removed, mambag[:pog + 1ssw, :kor.aa]);
+        with layer = -1 track(:second:station :removed,
+                mambag[:kor.aa - 200m, :kor.aa + 199m]
+            ..  korswe[:amam, :amam + 1m]
+        );
+    }
+
+    # point.ru.kg.Корнево: ru.kg.4
+
+    with link = "line.ru.kg.31" {
+        with layer = 2 track(:second:station :project :removed,
+                korswe[:fkor, :fkor - 1m]
+            ..  korswe[:fkor - 700m, :fkor - 701m] >> 1dt
+            ..  mambag[:kor.ff + 1000m, :kor.ff + 1400m]
+        );
+        track(:second :project :removed, mambag[:kor.ff + 1400m, :bog - 1ssw]);
+                
+        with layer = 1 casing(:second,
+                korswe[:fkor - 700m, :fkor - 701m] >> 1dt
+            ..  mambag[:kor.ff + 1000m, :kor.ff + 1400m]
+        );
+    }
+
+    with link = "point.ru.kg.Богатово" {
+        track(:second:station :removed, mambag[:bog - 1ssw, :bog + 1ssw]);
+        marker(:de.bf :removed :right, mambag[:bog]);
+        slabel(:bottom :removed, mambag[:bog] >> 1.2ssw, "Богатово");
+    }
+
+    with link = "line.ru.kg.31" {
+        track(:second :removed, mambag[:bog + 1ssw, :dol - 1ssw]);
+        with layer = 1 line_badge(:removed, mambag[:bog + 2.3km], "31");
+    }
+
+    with link = "point.ru.kg.Долгоруково" {
+        track(:second:station :removed, mambag[:dol - 1ssw, :dol + 1ssw]);
+        marker(:de.bf :removed :left, mambag[:dol]);
+        slabel(:top :removed, mambag[:dol] << 1.4ssw, "Долгоруково");
+    }
+
+    with link = "line.ru.kg.31" {
+        track(:second :removed, mambag[:dol + 1ssw, :ore - 1ssw]);
+    }
+
+
+    with link = "point.ru.kg.Орехово" {
+        track(:second:station :removed, mambag[:ore - 1ssw, :ore + 1ssw]);
+        marker(:de.bf :removed :left, mambag[:ore]);
+        slabel(:left :removed, mambag[:ore + 1.5ssw] << 1.6ssw, "Орехово");
+    }
+
+    with link = "line.ru.kg.31" {
+        with layer = -1 track(:second :removed,
+                mambag[:ore + 1ssw, :ff]
+            ..  path("path.ru.kg.5")[:fkor, :fkor + 1m]
+        );
+    }
+}
+
+
