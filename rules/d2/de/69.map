@@ -1,19 +1,56 @@
+# Area DE 69
 
+
+# DE 6905
+#
 with detail = 2 {
+    let saldan = path("simple.de.6905");
+
     with link = "line.de.6905" {
-        let saldan = path("path.de.6905");
+        with layer = -1 track(:second :removed, saldan[:sal.a, :luc]);
+        track(:second, saldan[:luc, :dan.f]);
 
-        with layer = -1 track(:second :removed, saldan[:sal, :luc]);
-        track(:second, saldan[:luc, :dan]);
+        with layer = 1 line_badge(:removed, saldan[:sal + 8.5km], "6905");
+        with layer = 1 line_badge(:open, saldan[:luc + 10.0km], "6905");
     }
-        
-    with link = "line.de.6928" {
-        let hagold = path("path.de.6928");
 
-        track(:second, hagold[:abuc, :zar]);
+    with link = "point.de.Lüchow" {
+        with layer = 1 marker(:statdot, saldan[:luc]);
+        label(saldan[:luc] << 1.8dt,
+            hbox(:right:middle :small, "Lüchow")
+        );
+    }
+
+    with link = "point.de.Dannenberg-West" {
+        with layer = 1 marker(:statdot, saldan[:daw]);
+    }
+}
+
+
+# DE 6928
+#
+with detail = 2 {
+    let hagold = path("simple.de.6928");
+
+    with link = "line.de.6928" {
+        track(:second, hagold[:hag, :zar]);
         with layer = -2 track(:second :removed, hagold[:zar, :hol]);
-        with layer = -1 track(:second :closed, hagold[:hol, :rat]);
-        with layer = -2 track(:second :removed, hagold[:rat, :f]);
+        with layer = -1 track(:second :closed, hagold[:hol, :rat.f]);
+        with layer = -2 track(:second :removed, hagold[:rat.a, :old.f]);
+
+        with layer = 1 line_badge(:open, hagold[:hag + 12.2km], "6928");
+        with layer = 1 line_badge(:closed, hagold[:hol + 4.0km], "6928");
+        with layer = 1 line_badge(:removed, hagold[:rat + 12.0km], "6928");
+    }
+
+    with link = "point.de.Zarrentin" {
+        with layer = 1 marker(:statdot, hagold[:zar]);
+        slabel(:right, hagold[:zar + 1dt] >> 1.5dt, "Zarrentin");
+    }
+
+    with link = "point.de.Hollenbek" {
+        with layer = 1 marker(:statdot :closed, hagold[:hol]);
+        slabel(:right :closed, hagold[:hol - 1dt] >> 1.5dt, "Hollenbek");
     }
 }
 
