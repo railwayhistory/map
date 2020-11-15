@@ -103,6 +103,9 @@ with detail = 2 {
     }
 }
 
+
+# KG 5
+#
 with detail = 2 {
     let kalbag = path("simple.ru.kg.5");
 
@@ -114,12 +117,17 @@ with detail = 2 {
 
     with link = "point.ru.Владимиров" {
         with layer = 1 marker(:statdot, kalbag[:wla]);
-        #slabel(:right, kalbag[:wla + 0.5ssw] << 1.5dt, "Владимиров");
+        slabel(:right, kalbag[:wla + 0.5ssw] << 1.5dt, "Владимиров");
     }
 
     with link = "point.ru.Багратионовск" {
         with layer = 1 marker(:statdot, kalbag[:bag]);
-        #slabel(:left, kalbag[:bag + 0.3ssw] >> 1.5dt, "Багратионовск");
+        slabel(:right, kalbag[:bag + 0.3ssw] << 1.5dt, "Багратионовск");
+    }
+
+    with link = "point.int.Багратионовск-Głomno" {
+        with layer = 1 marker(:refdt :closed :right, kalbag[:gr]);
+        with layer = 1 marker(:refdt :closed :left, kalbag[:gr]);
     }
 }
 
@@ -574,3 +582,22 @@ with detail = 2 {
     }
 }
 
+
+# KG 70
+#
+with detail = 2 {
+    let wlasla = path("simple.ru.kg.70");
+
+    with link = "line.ru.kg.70" {
+        with layer = -1 track(:third :removed, wlasla[:wla, :sla]);
+        with layer = 1 line_badge(:removed, wlasla[:sla - 7.5km], "70");
+    }
+
+    with link = "point.ru.kg.Славское" {
+        with layer = 1 marker(:statdot :removed, wlasla[:sla]);
+        label(wlasla[:sla] - (1.6dt, 0.2dt),
+            hbox(:right:middle :small :designation :removed, "Славское")
+        );
+    }
+}
+    
