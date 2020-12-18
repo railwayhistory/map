@@ -165,19 +165,22 @@ with detail = 3 {
     with link = "point.ru.Пастухово-Новое" {
         track(:first:station :double, kalter[:pas - 1ssw, :pas + 1ssw]);
         marker(:de.bf :right, kalter[:pas] >> 0.5dt);
-        slabel(:bottom, kalter[:pas] >> 0.5dt >> 1.2ssw, "Пастухово-Новое");
+        slabel(:top, kalter[:pas] << 1.5dt,
+            vbox(:center:bottom, "Пастухово-", "Новое")
+        );
     }
 
     with link = "line.ru.kg.2" {
         track(:first :double, kalter[:pas + 1ssw, :tja - 1ssw]);
+        with layer = -1 casing(:first :double, kalter[:tja.r - 2km, :tja.r]);
         with layer = 1 line_badge(:open, kalter[:pas + 6km], "КГ 2");
     }
 
     with link = "point.ru.Черняховск" {
         track(:first:station :double, kalter[:tja - 1sw, :tja + 1ssw]);
         marker(:de.bf :left, kalter[:tja] << 0.5dt);
-        slabel(:left, kalter[:tja + 1ssw] << 0.5dt << 1.4ssw,
-            vbox(:center:bottom :bold,
+        slabel(:left, kalter[:fsel - 0.5ssw] << 2.5dt,
+            vbox(:right:bottom :bold,
                 span(:gone, "Insterburg"),
                 span(:open, "Черняховск")
             )

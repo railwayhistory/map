@@ -1,0 +1,476 @@
+# RU KG 83.  Черняховск Узкоколейка - Большаково Узкоколейка
+#
+let tjabol      = path("path.ru.kg.83");
+let tjabol.tga  = path("path.ru.kg.83.tga");
+let kalter      = path("path.ru.kg.2");
+let tjasow      = path("path.ru.kg.7");
+let tjaulj      = path("path.ru.kg.86");
+
+with detail = [4, 5] {
+    # point.ru.kg.Черняховск-Узкоколейка: ru.kg.80
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed,
+                kalter[:tju + 1sw, :tju + 1.1sw] << 2.5dt
+            ..  kalter[:tgu - 2sw, :tgu - 1sw] << 4.5dt
+        );
+    }
+
+
+    with link = "point.ru.kg.Черняховск-Гусевское-шоссе" {
+        track(:third:station :narrower :removed,
+                kalter[:tgu - 1sw, :tgu + 1sw] << 4.5dt
+        );
+        marker(:de.kzst :removed :left, kalter[:tgu] << 4.5dt);
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed,
+                kalter[:tgu + 1sw, :tgu + 1.1sw] << 4.5dt
+            ..  tjabol.tga[:a, :a + 1m] << 2dt
+        );
+    }
+
+
+    with link = "point.ru.kg.Черняховск-Гагарина" {
+        track(:third:station :narrower :removed,
+                tjabol.tga[:a + 1m, :tga + 1sw] << 2dt
+        );
+        marker(:de.kzst :removed :left, tjabol.tga[:tga] << 2dt);
+        station(:right :removed, tjabol.tga[:tga - 0.5sw] >> 2dt,
+            vbox(:left:bottom,
+                span(:former, "Insterburg Göhringstraße"),
+                span(:designation, "Черняховск Гагарина")
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed,
+                tjabol.tga[:tga + 1sw, :tse.aa] << 2dt
+            ..  tjaulj[:tse.x - 1.71sw, :tse.x - 1.7sw]
+        );
+    }
+
+    
+    with link = "point.ru.kg.Черняховск-Северный" {
+        with layer = 2 track(:third:station :narrower :removed,
+                tjaulj[:tse.x - 1.7sw, :tse.x - 1sw]
+        );
+        marker(:de.kbf :removed :left, tjaulj[:tse.x - 1.35sw]);
+        label(tjaulj[:tse.x - 1.7sw] << 1.0sw,
+            vbox(:right:bottom,
+                vbox(:center:bottom,
+                    hbox(:center:bottom :xsmall :removed,
+                        vbox(:right:bottom, "КГ ", "КГ ", "КГ "),
+                        vbox(:right:bottom, "83: ", "86: ", "88: "),
+                        vbox(:right:bottom, "??", "??", "??")
+                    ),
+                    span(:medium :former :bold, "Insterburg-Luxenberg"),
+                    span(:medium :designation :bold :removed,
+                        "Черняховск Северный"
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        with layer = 2 track(:third :narrower :removed,
+                tjaulj[:tse.x - 1sw, :tse.x - 0.9sw]
+            ..  tjabol.tga[:tse.x + 1sw, :f] << 2dt
+            ..  tjabol[:tse.fff, :maj - 1sw]
+        );
+    }
+
+
+    with link = "point.ru.kg.Маёвка" {
+        track(:third:station :narrower :removed,
+                tjabol[:maj - 1sw, :maj + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:maj] >> 0.3dt);
+        label(tjabol[:maj] + (-2dt, 0.1sw),
+            vbox(:right:middle,
+                span(:medium :former, "Georgenburg "),
+                hbox(:right:top,
+                    vbox(:center:top,
+                        span(:medium :designation :removed, "Маёвка"),
+                        span(:xsmall :removed, "??")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:maj + 1sw, :per - 1sw]);
+        with layer = 1 line_badge(:removed, tjabol[:per - 1.2km], "КГ 83");
+    }
+
+
+    with link = "point.ru.kg.Перелесное" {
+        track(:third:station :narrower :removed,
+                tjabol[:per - 1sw, :per + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:per]);
+        station(:right :removed, tjabol[:per - 0.6sw] >> 1.0sw,
+            vbox(:center:bottom,
+                span(:former, "Pagelienen"),
+                span(:designation, "Перелесное")
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:per + 1sw, :hor - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Horstenau" {
+        track(:third:station :narrower :removed,
+                tjabol[:hor - 1sw, :asaw + 1sw]
+        );
+        track(:third:station :narrower :removed,
+                tjabol[:hor - 0.8sw, :hor - 0.7sw]
+            --  tjabol[:hor - 0.7sw + 1dl, :asaw] << 1dt
+        );
+        marker(:de.kbf :left :removed, tjabol[:hor] << 1dt);
+        label(tjabol[:hor - 0.6sw] >> 1.0dt,
+            hbox(:left:bottom,
+                vbox(:center:bottom,
+                    hbox(:center:top :xsmall :removed,
+                        vbox(:right:top, "КГ ", "КГ "),
+                        vbox(:right:bottom, "83: ", "84: "),
+                        vbox(:right:bottom,  "??", "??")
+                    ),
+                    span(:medium :former :bold, "Kauschen"),
+                    span(:medium :removed :bold, "Horstenau")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:asaw + 1sw, :rec - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Reckeitschen" {
+        track(:third:station :narrower :removed,
+                tjabol[:rec - 1sw, :rec + 1sw]
+        );
+        marker(:de.kzst :left :removed, tjabol[:rec]);
+        station(:left :removed, tjabol[:rec - 0.6sw] << 1.0sw,
+            vbox(:center:bottom,
+                span(:former, "Reckeitschen"),
+                "Blüchersdorf"
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:rec + 1sw, :lip - 1sw]);
+        with layer = 1 line_badge(:removed, tjabol[:rec + 1.2km], "КГ 83");
+    }
+
+
+    with link = "point.ru.kg.Липовка" {
+        track(:third:station :narrower :removed,
+                tjabol[:lip - 1sw, :lip + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:lip]);
+        label(tjabol[:lip] + (1.3sw, -1.7sw),
+            vbox(:left:middle,
+                span(:medium :former, "Auxkallen-Tabacken"),
+                span(:medium :former, "Ringelau"),
+                hbox(:left:top,
+                    vbox(:center:top,
+                        span(:medium :removed :designation, "Липовка"),
+                        span(:xsmall :removed, "??")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:lip + 1sw, :buc - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Бухово" {
+        track(:third:station :narrower :removed,
+                tjabol[:buc - 1sw, :buc + 1sw]
+        );
+        track(:third:station :narrower :removed,
+                tjabol[:buc - 0.8sw, :buc - 0.7sw]
+            --  tjabol[:buc - 0.7sw + 1dl, :apip] << 1dt
+        );
+
+        marker(:de.kbf :left :removed, tjabol[:buc] << 1dt);
+        station(:right :removed, tjabol[:buc - 1.4sw] >> 2dt,
+            vbox(:center:bottom,
+                span(:former :bold, "Buchhof"),
+                span(:designation :bold, "Бухово")
+            ),
+            hbox(:center:top,
+                vbox(:right:top, "КГ ", "КГ "),
+                vbox(:right:bottom, "83: ", "85: "),
+                vbox(:right:bottom,  "??", "??")
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:buc + 1sw, :fjo - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Фёдорово" {
+        track(:third:station :narrower :removed,
+                tjabol[:fjo - 1sw, :fjo + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:fjo]);
+        label(tjabol[:fjo] + (1.3sw, -0.4sw),
+            vbox(:left:middle,
+                span(:medium :former, " Waldfrieden Moorbad"),
+                hbox(:left:top,
+                    vbox(:center:top,
+                        span(:medium :removed :designation, "Фёдорово"),
+                        span(:xsmall :removed, "??")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:fjo + 1sw, :wal - 1sw]);
+        with layer = 1 line_badge(:removed, tjabol[:fjo + 0.9km], "КГ 83");
+    }
+
+
+    with link = "point.ru.kg.Waldfrieden-Gründann" {
+        track(:third:station :narrower :removed,
+                tjabol[:wal - 1sw, :wal + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:wal]);
+        station(:right :removed, tjabol[:wal - 0.35sw] >> 1.2sw,
+            "Waldfrieden-Gründann", "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:wal + 1sw, :kal - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Калиновка" {
+        track(:third:station :narrower :removed,
+                tjabol[:kal - 1sw, :kal + 1sw]
+        );
+        marker(:de.kzst :left :removed, tjabol[:kal]);
+        label(tjabol[:kal + 0.5sw] >> 4.0dt,
+            vbox(:left:middle,
+                span(:medium :former, "  Aulowöhnen"),
+                span(:medium :former, " Aulenbach"),
+                hbox(:left:top,
+                    vbox(:center:top,
+                        span(:medium :removed :designation, "Калиновка"),
+                        span(:xsmall :removed, "??")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:kal + 1sw, :jab - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Яблочное" {
+        track(:third:station :narrower :removed,
+                tjabol[:jab - 1sw, :jab + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:jab]);
+        label(tjabol[:jab] + (1.3sw, -0.6sw),
+            vbox(:left:middle,
+                span(:medium :former, "Eichhorn"),
+                hbox(:left:top,
+                    vbox(:center:top,
+                        span(:medium :removed :designation, "Яблочное"),
+                        span(:xsmall :removed, "??")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:jab + 1sw, :sad - 1sw]);
+        with layer = 1 line_badge(:removed, tjabol[:jab + 1.2km], "КГ 83");
+    }
+
+
+    with link = "point.ru.kg.Садовое" {
+        track(:third:station :narrower :removed,
+                tjabol[:sad - 1sw, :sad + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:sad]);
+        station(:right :removed, tjabol[:sad - 0.4sw] >> 1.5sw,
+            vbox(:center:bottom,
+                span(:former, "  Swainen"),
+                span(:designation, "Садовое")
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:sad + 1sw, :bir - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Birkenhausen" {
+        track(:third:station :narrower :removed,
+                tjabol[:bir - 1sw, :bir + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:bir]);
+        station(:right :removed, tjabol[:bir - 0.5sw] >> 1.3sw,
+            vbox(:center:bottom,
+                span(:former, "Bersziubchen"),
+                "Birkenhausen"
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:bir + 1sw, :pri - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Придорожное" {
+        track(:third:station :narrower :removed,
+                tjabol[:pri - 1sw, :pri + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:pri]);
+        station(:top :removed, tjabol[:pri] >> 1.0sw,
+            vbox(:center:bottom,
+                span(:former, "Grenzberg"),
+                span(:designation, "Придорожное")
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:pri + 1sw, :osc - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Oschwenningken" {
+        track(:third:station :narrower :removed,
+                tjabol[:osc - 1sw, :osc + 1sw]
+        );
+        marker(:de.kzst :left :removed, tjabol[:osc]);
+        station(:bottom :removed, tjabol[:osc + 1sw] << 1.4sw,
+            vbox(:center:bottom,
+                span(:former, "Oschwenningken"),
+                "Breitenhof"
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:osc + 1sw, :uro - 1sw]);
+        with layer = 1 line_badge(:removed, tjabol[:uro - 0.6km], "КГ 83");
+    }
+
+
+    with link = "point.ru.kg.Урожайное" {
+        track(:third:station :narrower :removed,
+                tjabol[:uro - 1sw, :uro + 1sw]
+        );
+        marker(:de.kzst :right :removed, tjabol[:uro]);
+        station(:right :removed, tjabol[:uro + 1sw] >> 1.2sw,
+            vbox(:left:bottom,
+                span(:former, "Kletellen"),
+                span(:designation, "Урожайное")
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:uro + 1sw, :bom - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Большаково-Место" {
+        track(:third:station :narrower :removed,
+                tjabol[:bom - 1sw, :bom + 1sw]
+        );
+        marker(:de.kzst :left :removed, tjabol[:bom]);
+        station(:bottom :removed, tjabol[:bom + 1sw] << 1.2sw,
+            vbox(:center:bottom,
+                span(:former, "Skaisgirren Ort"),
+                span(:former, "Kreuzingen Ort"),
+                span(:designation, "Большаково Место")
+            ),
+            "??"
+        );
+    }
+
+
+    with link = "line.ru.kg.83" {
+        track(:third :narrower :removed, tjabol[:bom + 1sw, :ff - 1sw]);
+    }
+
+
+    with link = "point.ru.kg.Большаково-Узкоколейка" {
+        let kalsow = path("path.ru.kg.21");
+
+        track(:third:station :narrower :removed,
+                tjabol[:ff - 1sw, :ff - 0.9sw]
+            ..  kalsow[:bol.ftja, :bol + 1.6sw] >> 1sw >> 1dt
+        );
+        with layer = -1 marker(
+            :de.bf :left :removed,
+            kalsow[:bol + 0.5sw] >> 1sw >> 1dt
+        );
+        station(:right :removed, kalsow[:bol] >> 1sw + (2.0sw, 0sw),
+            vbox(:center:bottom,
+                span(:former :bold, "Skaisgirren Kleinb"),
+                span(:former :bold, "Kreuzingen Kleinb"),
+                span(:designation :bold, "Большаково Узкоколейка")
+            ),
+            "КГ 83: ??"
+        );
+    }
+}
+
