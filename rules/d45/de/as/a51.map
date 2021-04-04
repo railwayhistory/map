@@ -1,0 +1,37 @@
+# DE A51.  Echem (ausschl.) - Hohnstorf Uferladestelle
+#
+let lunbuc = path("path.de.1150");
+let echecu = path("path.de.A51");
+
+with detail = [4, 5] {
+    with link = "line.de.A51" {
+        track(:second :removed,
+                lunbuc[:ech + 1sw, :aecu] >> 1dt
+            ..  echecu[:alau + 200m, :aa] >> 1dt
+            ..  echecu[:gbf - 1.1sw, :gbf - 1sw]
+        );
+        with layer = 1 line_badge(:removed,
+            echecu[:alau + 0.8km] >> 1dt,
+            "A51"
+        );
+    }
+
+
+    with link = "point.de.Hohnstorf-Gbf" {
+        track(:second:station :removed, echecu[:gbf - 1sw, :gbf + 1sw]);
+        marker(:de.gbf :removed :right, echecu[:gbf]);
+        label(echecu[:gbf] >> 1.4sw,
+            hbox(:left:middle :medium, span(:removed, "Hohnstorf Gbf"))
+        );
+    }
+
+
+    with link = "point.de.Hohnstorf-Uferldst" {
+        track(:second:station :removed, echecu[:gbf + 1sw, :f]);
+        with layer = -1 marker(:de.ldst :removed :right, echecu[:ufe]);
+        label(echecu[:ufe] >> 1.2sw,
+            hbox(:left:middle :medium, span(:removed, "Uferladestelle"))
+        );
+    }
+}
+

@@ -1,0 +1,30 @@
+# DE A10.  Ohrstedt (ausschl.) - Klosterkrug Gabelung
+#
+let jubhus = path("path.de.1011");
+let klosla = path("path.de.A11");
+let neufle = path("path.de.1040");
+let ohrklo = path("path.de.A10");
+
+with detail = 3 {
+    with layer = -1 {
+        track(:first :gone,
+                jubhus[:ohr + .1dl, :ohr]
+            ..  ohrklo[:a, :f]
+            ..  neufle[:klg, :klg - 1.dl] >> .5dt
+        );
+    }
+    with layer = 0 line_badge(:gone, ohrklo[:a + 1.7km], "A10");
+    with layer = 0 line_badge(:gone, ohrklo[:klo - 3.5km], "A10");
+
+    marker(:de.bf :gone :right, ohrklo[:hol]);
+    slabel(:bottom :gone, ohrklo[:hol] >> 1.6ssw, "Holm");
+
+    marker(:de.bf :gone :right, ohrklo[:ell]);
+    slabel(:bottom :gone, ohrklo[:ell] >> 1.6ssw, "Ellingstedt");
+
+    with layer = -1 marker(:de.bf :gone :right, ohrklo[:klo]);
+    slabel(:left :gone, ohrklo[:klo + .2ssw] >> 2.2ssw,
+        span(:small :bold :gone, "Klosterkrug")
+    );
+}
+

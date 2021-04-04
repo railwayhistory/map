@@ -1,0 +1,162 @@
+# DE A32.  Lütjenbrode Süd (ausschl.) - Heiligenhafen
+#   
+let heihaf = path("path.de.11012");
+let lubput = path("path.de.1100");
+
+with detail = 5 {
+    let neuhei = path("path.de.a32.neu");
+
+    with link = "line.de.a32" {
+        with layer = -2 track(:second :removed :flip,
+                neuhei[:nst.f, :fneg - 100m]
+            ..  lubput[:fnst, :ssl - 120m] << 1dt
+        );
+
+        line_badge(:removed, neuhei[:neg.x - 140m] >> 0.5dt, "A32");
+    }
+}
+
+with detail = 5 {
+    let neuhei = path("path.de.a32.hei");
+
+    with link = "line.de.a32" {
+        track(:second :removed :flip,
+                lubput[:lus + 120m, :lus + 121m] << 1dt
+            ..  neuhei[:lus.f + 100m, :lut - 1sw]
+        );
+        with layer = 1 line_badge(:removed, neuhei[:lus.f + 800m], "A32");
+    }
+
+    with link = "point.de.Lütjenbrode" {
+        track(:second:station :removed, neuhei[:lut - 1sw, :lut + 1sw]);
+        track(:third:station :removed,
+                neuhei[:lut - 1sw, :lut + 0.6sw] >> 1dt
+            --  neuhei[:lut + 0.6sw + 1dl, :lut + 0.6sw + 1.1dl]
+        );
+
+        marker(:de.bf :removed :left, neuhei[:lut]);
+        station(:left :removed, neuhei[:lut - 0.3sw] << 1.8sh,
+            span(:bold, "Lütjenbrode"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:regular, "A32: "),
+                    span(:regular, "11021: ")
+                ),
+                vbox(:right:top,
+                    span(:regular, "39,"),
+                    span(:regular, "0,")
+                ),
+                vbox(:left:top,
+                    span(:regular, "55"),
+                    span(:regular, "00")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.a32" {
+        track(:second :removed, neuhei[:lut + 1sw, :hei.a]);
+        with layer = 1 line_badge(:removed, neuhei[:lut + 2.2km], "A32");
+    }
+
+    with link = "point.de.Heiligenhafen" {
+        # Gl. 1
+        track(:second:station :removed,
+                neuhei[:hei.a, :f - 30m]
+            ..  neuhei[:f + 5m] >> 0.5dt
+            --  neuhei[:f + 10m] >> 0.75dt
+        );
+
+        # Gl. 2 (>> 1dt)
+        track(:station :removed, neuhei[:hei - 115m, :f] >> 1dt);
+
+        # Gl. 4 (>> 3dt)
+        track(:station :removed,
+                neuhei[:hei - 80m] >> 1dt
+            --  neuhei[:hei - 35m] >> 2.5dt
+            ..  neuhei[:hei, :f] >> 3dt
+        );
+
+        # Gl. 3 (>> 2dt)
+        track(:station :removed,
+                neuhei[:hei - 45m] >> 1dt
+            --  neuhei[:hei - 30m] >> 1.5dt
+            ..  neuhei[:hei +  5m, :f] >> 2dt
+        );
+
+        # Gl. 5
+        track(:station :removed,
+                neuhei[:hei - 145m]
+            --  neuhei[:hei -  25m] >> 4dt
+        );
+            # W 12 - W 14
+            track(:station :removed,
+                    neuhei[:hei - 100m] >> 1.5dt
+                --  neuhei[:hei -  95m] >> 3dt
+            );
+
+        # Gl. 6 (>> 5dt)
+        track(:station :removed,
+                neuhei[:hei - 180m]
+            --  neuhei[:hei - 45m] >> 4.5dt
+            ..  neuhei[:hei - 10m, :f] >> 5dt
+        );
+
+        # Gl. 7
+        track(:station :removed,
+                neuhei[:hei - 185m] >> 1dt
+            --  neuhei[:hei - 95m] >> 4dt
+        );
+
+        # Gl. 8 (Einfahrgleis Richtung Hafen >> 1dt)
+        track(:station :removed,
+                neuhei[:hei.a + 60m]
+            --  neuhei[:hei.a + 75m] >> 0.5dt
+            ..  neuhei[:hei.a + 110m, :hei - 150m] >> 1.0dt
+        );
+
+        # Gl. 9 (<< 1dt)
+        track(:station :removed,
+                neuhei[:hei - 170m, :hei - 0.6sw] << 1dt
+        );
+
+        # Gl. 10 (<< 2dt)
+        track(:station :removed,
+                neuhei[:hei - 200m]
+            --  neuhei[:hei - 155m] << 1.5dt
+            ..  neuhei[:hei - 120m, :hei - 80m] << 2dt
+        );
+
+        # Gl. 11
+        track(:station :removed,
+                neuhei[:hei - 185m] << 0.5dt
+            --  neuhei[:hei - 140m] << 5dt
+        );
+
+        # Gl. 12
+        track(:station :removed,
+                neuhei[:hei - 167m] << 2dt
+            --  neuhei[:hei - 120m] << 4.5dt
+        );
+
+        marker(:de.bf :removed :left, neuhei[:hei]);
+        marker(:de.bw :removed :top, neuhei[:f] >> 1dt);
+        station(:left :removed, neuhei[:hei] << 1.7sw,
+            span(:bold, "Heiligenhafen"),
+            "A32: 42,35"
+        );
+    }
+
+    with link = "point.de.Heiligenhafen-Hafen" {
+        track(:station:removed,
+                neuhei[:f, :f + 1m] >> 5dt
+            ..  heihaf[:a + 100m, :f]
+        );
+
+        marker(:de.ldst :removed :right, heihaf[:a + 200m]);
+        slabel(:top :removed, heihaf[:a + 200m] >> 1.2sh,
+            span(:medium, "Heiligenhafen Hafen")
+        );
+    }
+}
+

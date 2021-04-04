@@ -1,49 +1,45 @@
 # DE 1224.  Hamburg-Altona - Hamburg-Blankenese
 #
-let altbla = path("path.de.1224");
-let altkie = path("path.de.1220");
+let altbla = path("metro.de.hmb.1224");
+let altkie = path("metro.de.hmb.1220");
 
 with detail = 3 {
     # point.de.Hamburg-Altona-S-Bahn: de.1270
 
     with link = "line.de.1224" {
-        track(:first :double :rail, altbla[:fala, :baa - 1ssw]);
-    }
-
-
-    with link = "point.de.Hamburg-Bahrenfeld-Abzw" {
-        track(:first:station :double :rail, altbla[:baa - 1ssw, :baa + 1ssw]);
-        marker(:de.abzw :left, altbla[:baa] << 0.5dt);
+        with layer = 2 track(:first:station :double :rail,
+                altkie[:alt + 0.5ssw, :alt + 0.51ssw] << 4dt
+            ..  altbla[:bah - 0.51ssw, :bah - 0.5ssw]
+        );
     }
 
     with link = "point.de.Hamburg-Bahrenfeld" {
-        track(:first:station :double :rail, altbla[:baa + 1ssw, :bah + 0.5ssw]);
+        track(:first:station :double :rail,
+                altbla[:bah - 0.5ssw, :bah + 0.5ssw]
+        );
         marker(:de.hp :right, altbla[:bah] >> 0.5dt);
-        with layer = -1 marker(:de.bf :removed :right, altbla[:bah] >> 0.5dt);
     }
 
-    # Streckengleise bis Blankenese ausschl.
     with link = "line.de.1224" {
-        track(:first :double :rail, altbla[:bah + 0.5ssw, :fwed - 1ssw]);
+        track(:first :double :rail,
+                altbla[:bah + 0.5ssw, :bla - 1ssw]
+        );
     }
 
     with link = "point.de.Hamburg-Othmarschen" {
-        track(:first:station :double :rail, altbla[:oth - 1ssw, :oth + 1ssw]);
         marker(:de.bf :left, altbla[:oth] << 0.5dt);
     }
 
     with link = "point.de.Hamburg-Klein-Flottbek" {
-        track(:first:station :double :rail, altbla[:kfl - 1ssw, :kfl + 1ssw]);
         marker(:de.bf :left, altbla[:kfl] << 0.5dt);
     }
 
     with link = "point.de.Hamburg-Hochkamp" {
-    	track(:first:station :double :rail, altbla[:hoc - 1ssw, :hoc + 1ssw]);
         marker(:de.hp :right, altbla[:hoc] >> 0.5dt);
     }
 
     with link = "point.de.Hamburg-Blankenese" {
-        track(:first:station :double :rail, altbla[:fwed - 1ssw, :f]);
+        track(:first:station :double :rail, altbla[:bla - 1ssw, :bla + 1ssw]);
         marker(:de.bf :left, altbla[:bla] << 0.5dt);
         slabel(:left, altbla[:bla] << 0.5dt << 2.8ssw + (2ssw, 0ssw),
             span(:bold, "H.-Blankenese")

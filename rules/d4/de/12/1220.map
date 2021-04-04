@@ -26,11 +26,6 @@ with detail = 4 {
         # Gegenrichtungsgleis Strecke 6100
         with layer = 2 track(:first:station :cat,
                 altkie[:alt, :aham - 100m] << 0.5dt
-            ..  spaalt[:rai + 1.1sw, :rai + 1sw] >> 2.5dt
-        );
-        with layer = 1 casing(:first:station :cat,
-                altkie[:aham - 101m, :aham - 100m] << 0.5dt
-            ..  spaalt[:rai + 1.1sw, :rai + 1sw] >> 2.5dt
         );
 
         # Richtungsgleis Strecke 1231
@@ -63,11 +58,6 @@ with detail = 4 {
         with layer = 2 track(:first:station :cat,
                 altkie[:alt, :atu] << 5.5dt
             ..  altkie[:aham - 101m, :aham - 100m] << 6.5dt
-            ..  spaalt[:rai + 1.1sw, :rai + 1sw] << 0.5dt
-        );
-        with layer = 1 casing(:first:station :cat,
-                altkie[:aham - 101m, :aham - 100m] << 6.5dt
-            ..  spaalt[:rai + 1.1sw, :rai + 1sw] << 0.5dt
         );
 
         # Gegenrichtungsgleis Strecke 1220
@@ -117,9 +107,9 @@ with detail = 4 {
         track(:first:station :cat, altkie[:fbah, :alt.f] << 2.5dt);
 
         # Strecke 1230
-        track(:first:station, altkie[:fbah, :alt.f] << 3.5dt);
+        track(:first:station, altkie[:fbah + 1sw, :alt.f] << 3.5dt);
 
-        marker(:de.bft :left, altkie[:alg] << 3.5dt);
+        marker(:de.bft :left, altkie[:fbah + 1.5sw] << 3.5dt);
     }
 
 
@@ -469,7 +459,8 @@ with detail = 4 {
                 --  altkie[:laa - 150m] << 1.5dt
             );
 
-        marker(:de.abzw :right, altkie[:laa] >> 1.5dt);
+        with layer = -1 marker(:de.abzw.casing :right, altkie[:laa] >> 1.5dt);
+        with layer = 1 marker(:de.abzw :right, altkie[:laa] >> 1.5dt);
     }
 
     with link = "line.de.1220" {
@@ -488,8 +479,8 @@ with detail = 4 {
         track(:first:station :cat,
                 altkie[:ala.f, :ala.f + 1dl] << 1.5dt
             ..  altkie[:frot + 300m, :eid.en - 700m] << 7.5dt
-            ..  altkie[:eid.en - 2dl, :eid.en + 1dl] << 1.5dt
-            --  altkie[:eid.f - 100m, :eid.f] << 0.5dt
+            ..  altkie[:eid.en - 2dl, :eid.en + 2dl] << 1.5dt
+            --  altkie[:eid.en + 3dl, :eid.f] << 0.5dt
         );
         with layer = -1 casing(:first:station :cat,
                 altkie[:ala.f, :ala.f + 1dl] << 1.5dt
@@ -555,9 +546,9 @@ with detail = 4 {
             );
 
         # Gl. 31 (Strecke 1234)
-        track(:first:station :cat,
-            # ...
-                altkie[:frot, :frot + 1dl] << 1.5dt
+        with layer = -4 track(:first:station :cat,
+                path("path.de.1234")[:aa + 6dt, :aa]
+            ..  altkie[:frot, :frot + 1dl] << 1.5dt
             ..  altkie[:eid.egs - 5dl, :eid.egs - 1dl] << 0.5dt
         );
             track(:station,
@@ -567,6 +558,9 @@ with detail = 4 {
 
         # Gl. „32“ (Richtungsgleis Strecke 1232)
         track(:first:station :cat, altkie[:ala.f, :eid.egs] >> 0.5dt);
+        with layer = -1 casing(:first :cat,
+                altkie[:eis, :frot] >> 0.5dt
+        );
 
         # Gl. 54/57/58
         track(:station, altkie[:eid.egs, :eid.eo] << 1.5dt)
@@ -611,6 +605,9 @@ with detail = 4 {
         track(:first:station :cat,
                 altkie[:ala.f, :esn - 1km] >> 1.5dt
             ..  altkie[:esn - 300m, :eid.f] >> 0.5dt
+        );
+        with layer = -1 casing(:first :cat,
+                altkie[:eis, :frot] >> 1.5dt
         );
             track(:station,
                     altkie[:eid.f - 100m - 1dl] >> 0.5dt
@@ -666,11 +663,83 @@ with detail = 4 {
         marker(:de.bbf :left, altkie[:eid] << 7.5dt);
         marker(:de.bw :left, altkie[:eid.eo - 100m] << 3.0dt);
         marker(:de.bft :right, altkie[:eio] >> 1.5dt);
-        marker(:de.bft :right, altkie[:esn] >> 0.5dt);
+        with layer = -1 marker(:de.bft.casing :right, altkie[:eio] >> 1.5dt);
+        marker(:de.bft :left, altkie[:esn] << 0.5dt);
+    }
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, altkie[:eid.f, :pin.a]);
+        with layer = 1 badge(
+            altkie[:hal + 0.9km] >> 1.0dt,
+            vbox(:center:middle :badgesize, "1225", "1220")
+        );
+    }
+
+
+    with link = "point.de.Thesdorf-Bk" {
+        with layer = -1 marker(:de.bk :removed :left, altkie[:the] << 0.5dt);
+        station(:left :removed, altkie[:the - 0.2sw] << 0.5dt << 1.8sh,
+            "Thesdorf", "13,81"
+        );
+    }
+
+
+    with link = "point.de.Pinneberg" {
+        # Gl. 3
+        track(:station,
+                altkie[:pin - 301m, :pin - 300m] >> 0.5dt
+            --  altkie[:pin - 300m + 2dl, :pin + 320m] >> 1.5dt
+            --  altkie[:pin + 320m + 2dl, :pin + 320m + 2.1dl] >> 0.5dt
+        );
+
+        # Gl. 4 (Richtungsgleis)
+        track(:first:station :cat, altkie[:pin.a, :pin.f] >> 0.5dt);
+            track(:station,
+                    altkie[:pin.a + 100m] >> 0.5dt
+                --  altkie[:pin.a + 100m + 2dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:pin + 320m] >> 0.5dt
+                --  altkie[:pin + 320m + 2dl] << 0.5dt
+            );
+            track(:station,
+                    altkie[:pin + 320m + 3dl] >> 0.5dt
+                --  altkie[:pin + 320m + 5dl] << 0.5dt
+            );
+
+        # Gl. 5 (Gegenrichtungsgleis)
+        track(:first:station :cat, altkie[:pin.a, :pin.f] << 0.5dt);
+            track(:station,
+                    altkie[:pin.a + 100m + 3dl] << 0.5dt
+                --  altkie[:pin.a + 100m + 5dl] >> 0.5dt
+            );
+            track(:station,
+                    altkie[:pin.f - 100m - 2dl] << 0.5dt
+                --  altkie[:pin.f - 100m] >> 0.5dt
+            );
+
+        # Gl. 6
+        track(:station,
+                altkie[:pin - 301m, :pin - 300m] << 0.5dt
+            --  altkie[:pin - 300m + 2dl, :pin.f - 100m - 5dl] << 1.5dt
+            --  altkie[:pin.f - 100m - 3dl, :pin.f + 100m - 2.9dl] << 0.5dt
+        );
+
+        # Gl. 31
+        track(:station,
+                altkie[:pin + 79m, :pin + 80m] >> 1.5dt
+            --  altkie[:pin + 80m + 1dl, :pin + 350m] >> 2.5dt
+        );
+
+        marker(:de.bf :right, altkie[:pin] >> 1.5dt);
+        station(:left, altkie[:pin - 0.2sw] << 2.5dt << 2.8pt,
+            span(:bold, "Pinneberg"),
+            "1220: 15,95"
+        );
     }
 
     
-    # Hamburg-Eidelstedt ausschl. - Kiel Hbf ausschl.: d45
+    # Pinneberg ausschl. - Kiel Hbf ausschl.: d45
 
 
     with link = "point.de.Kiel-Hbf" {

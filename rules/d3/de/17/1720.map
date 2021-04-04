@@ -1,9 +1,238 @@
-#
+# DE 1720.  Lehrte - Cuxhaven
 #
 let lehcux = path("path.de.1720");
 
 with detail = 3 {
-    # ...
+    # point.de.Lehrte: de.1730
+
+
+    with link = "point.de.Lehrte-Nord" {
+        track(:first:station :double :cat,
+                lehcux[:leh + 400m, :leh.lnf + 1ssw]
+        );
+
+        marker(:de.bft :right, lehcux[:len] >> 0.5dt);
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:leh.lnf + 1ssw, :ali - 1ssw]);
+    }
+
+    with link = "point.de.Aligse" {
+        track(:first:station :double :cat, lehcux[:ali - 1ssw, :ali + 1ssw]);
+        marker(:de.hp :left, lehcux[:ali] << 0.5dt);
+        with layer = -1 marker(
+            :de.bf :removed :left, lehcux[:ali - 85m] << 0.5dt
+        );
+        slabel(:left, lehcux[:ali - 0.6ssw] << 0.5dt << 1.6ssw, "Aligse");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:ali + 1ssw, :bur - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:ali + 2.5km], "1720");
+    }
+
+    with link = "point.de.Burgdorf-Han" {
+        track(:first:station :double :cat, lehcux[:bur - 1ssw, :bur + 1ssw]);
+        marker(:de.bf :right, lehcux[:bur] >> 0.5dt);
+        slabel(:right, lehcux[:bur - 0.4ssw] >> 0.5dt >> 2.0ssw,
+            hbox(:right:base, span(:bold, "Burgdorf "), "(Han)")
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:bur + 1ssw, :otz - 1ssw]);
+    }
+
+    with link = "point.de.Otze" {
+        track(:first:station :double :cat, lehcux[:otz - 1ssw, :otz + 1ssw]);
+        marker(:de.hp :left, lehcux[:otz] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:otz] << 0.5dt);
+        slabel(:left, lehcux[:otz - 0.5ssw] << 0.5dt << 1.6ssw, "Otze");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:otz + 1ssw, :ehl - 1ssw]);
+    }
+
+
+    with link = "point.de.Ehlershausen" {
+        track(:first:station :double, lehcux[:ehl - 1ssw, :ehl + 1ssw]);
+        marker(:de.bf :right, lehcux[:ehl] >> 0.5dt);
+        slabel(:right, lehcux[:ehl - 0.5ssw] >> 0.5dt >> 1.8ssw,
+            "Ehlershausen"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:ehl + 1ssw, :cel.a]);
+        with layer = 1 line_badge(:open, lehcux[:cel.a - 3.0km], "1720");
+    }
+
+    with link = "point.de.Celle" {
+        with layer = -1 track(:second:station :removed,
+                lehcux[:cel.a, :cel + 0.6ssw] << 3.5dt
+            --  lehcux[:cel + 0.6ssw + 1dl, :cel + 0.6ssw + 1.1dl] << 2.5dt
+        );
+
+        track(:first:station :double :cet, lehcux[:cel.a, :cel.f] << 2dt);
+
+        track(:first:station :cet,
+                lehcux[:cel.a, :cel.a + 2dl] << 0.5dt
+            --  lehcux[:cel.a + 3dl, :cel.a + 3.1dl] << 2.5dt
+        );
+        track(:first:station :cet,
+                lehcux[:cel.a, :cel.a + 3dl] >> 0.5dt
+            --  lehcux[:cel.a + 4dl, :cel + 0.6ssw + 1dl] << 0.5dt
+            --  lehcux[:cel + 0.6ssw + 2dl, :cel + 0.6ssw + 2.1dl] << 1.5dt
+        );
+
+        with layer = -1 track(:second:station :removed,
+                lehcux[:cel.a, :cel.a + 4dl] >> 1.5dt
+            --  lehcux[:cel.a + 5dl, :cel + 0.6ssw] >> 0.5dt
+            --  lehcux[:cel + 0.6ssw + 1dl, :cel + 0.6ssw + 1.1dl] << 0.5dt
+        );
+
+        marker(:de.bf :right, lehcux[:cel] >> 0.5dt);
+        slabel(:right, lehcux[:cel - 0.5ssw] >> 0.5dt >> 1.6ssw,
+            span(:bold, "Celle")
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat,
+                lehcux[:cel.f, :cel.f + 0.1dl] << 2dt
+            ..  lehcux[:cel.ff, :gar - 1ssw]
+        );
+    }
+
+    with link = "point.de.Garßen" {
+        track(:first:station :double :cat, lehcux[:gar - 1ssw, :gar + 1ssw]);
+        marker(:de.bf :left, lehcux[:gar] << 0.5dt);
+        slabel(:right, lehcux[:gar - 0.4ssw] >> 3.0dt, "Garßen");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:gar + 1ssw, :ese - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:gar + 5.5km], "1720");
+    }
+
+    with link = "point.de.Eschede" {
+        track(:first:station :double :cat, lehcux[:ese - 1ssw, :ese + 1ssw]);
+        marker(:de.bf :right, lehcux[:ese] >> 0.5dt);
+        slabel(:right, lehcux[:ese - 0.3ssw] >> 0.5dt >> 2.2ssw, "Eschede");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:ese + 1ssw, :ulu - 1ssw]);
+    }
+
+    with link = "point.de.Unterlüß" {
+        track(:first:station :double :cat, lehcux[:ulu - 1ssw, :ulu + 1ssw]);
+        marker(:de.bf :left, lehcux[:ulu] << 0.5dt);
+        slabel(:left, lehcux[:ulu - 0.6ssw] << 0.5dt << 1.6ssw, "Unterlüß");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:ulu + 1ssw, :sud - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:sud - 5.5km], "1720");
+    }
+
+    with link = "point.de.Suderburg" {
+        track(:first:station :double :cat, lehcux[:sud - 1ssw, :sud + 1ssw]);
+        marker(:de.bf :right, lehcux[:sud] >> 0.5dt);
+        slabel(:right, lehcux[:sud - 0.4ssw] >> 0.5dt >> 2.0ssw,
+            "Suderburg"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:sud + 1ssw, :ksu - 1ssw]);
+    }
+
+    with link = "point.de.Klein-Süstedt" {
+        track(:first:station :double :cat, lehcux[:ksu - 1ssw, :ksu + 1ssw]);
+        marker(:de.bbf :left, lehcux[:ksu] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, lehcux[:ksu] << 0.5dt);
+        slabel(:left, lehcux[:ksu - 0.6ssw] << 0.5dt << 1.6ssw,
+            "Klein Süstedt"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:ksu + 1ssw, :uel.a]);
+    }
+
+    with link = "point.de.Uelzen" {
+        track(:first:station :double :cat, lehcux[:uel.a, :uel + 1ssw]);
+
+        track(:first:station :cat, lehcux[:uel.a, :uel + 1ssw] << 2.0dt);
+
+        marker(:de.bf :left, lehcux[:uel] << 0.5dt);
+        slabel(:right, lehcux[:uel] >> 2.5dt, span(:bold, "Uelzen"));
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:uel + 1ssw, :emm - 1ssw]);
+    }
+
+    with link = "point.de.Emmendorf" {
+        track(:first:station :double :cat, lehcux[:emm - 1ssw, :emm + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, lehcux[:emm] >> 0.5dt);
+        slabel(:right :removed, lehcux[:emm - 0.5ssw] >> 0.5dt >> 1.6ssw,
+            "Emmendorf"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:emm + 1ssw, :bev - 1ssw]);
+    }
+
+    with link = "point.de.Bad-Bevensen" {
+        track(:first:station :double :cat, lehcux[:bev - 1ssw, :bev + 1ssw]);
+        marker(:de.bf :right, lehcux[:bev] >> 0.5dt);
+        slabel(:right, lehcux[:bev - 0.6ssw] >> 0.5dt >> 1.6ssw,
+            "Bad Bevensen"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:bev + 1ssw, :bie - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:bev + 3.0km], "1720");
+    }
+
+    with link = "point.de.Bruchtorf" {
+        with layer = -1 marker(:de.bk :removed, lehcux[:bru] >> 0.5dt);
+        slabel(:right :removed, lehcux[:bru - 0.8ssw] >> 0.5dt >> 1.4ssw,
+            "Bruchtorf"
+        );
+    }
+
+    with link = "point.de.Bienenbüttel" {
+        track(:first:station :double :cat, lehcux[:bie - 1ssw, :bie + 1ssw]);
+        marker(:de.bf :right, lehcux[:bie] >> 0.5dt);
+        slabel(:right, lehcux[:bie - 0.8ssw] >> 0.5dt >> 1.6ssw,
+            "Bienenbüttel"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:bie + 1ssw, :deu - 1ssw]);
+    }
+
+    with link = "point.de.Hohenbostel" {
+        with layer = -1 marker(:de.bk :removed :right, lehcux[:hbo] >> 0.5dt);
+        slabel(:right :removed, lehcux[:hbo - 0.8ssw] >> 0.5dt >> 1.4ssw,
+            "Hohenbostel"
+        );
+    }
+
+    with link = "point.de.Deutsch-Evern" {
+        track(:first:station :double :cat, lehcux[:deu - 1ssw, :deu + 1ssw]);
+        marker(:de.bbf :left, lehcux[:deu] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:deu] << 0.5dt);
+        slabel(:right, lehcux[:deu - 0.8ssw] >> 1.5dt, "Deutsch Evern");
+    }
 
     with link = "line.de.1720" {
         track(:first :double :cat, lehcux[:deu + 1ssw, :lun.a]);
@@ -70,7 +299,8 @@ with detail = 3 {
         track(:first:station :double :cat, lehcux[:rad - 1ssw, :rad + 1ssw]);
         track(:first:station :cat, lehcux[:rad - 1ssw, :rad + 1ssw] << 1.5dt);
 
-        marker(:de.bf :left, lehcux[:rad] << 1.5dt);
+        marker(:de.hp :left, lehcux[:rad] << 1.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:rad] << 1.5dt);
         slabel(:left, lehcux[:rad - 1.5ssw] << 1.5dt << 2.2ssw,
             "Radbruch"
         );
@@ -100,6 +330,401 @@ with detail = 3 {
         );
     }
 
-    # ...
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:win + 1ssw, :ash - 1ssw]);
+    }
+    with link = "line.de.1153" {
+        track(:first :cat, lehcux[:win + 1ssw, :ash - 1ssw] << 1.5dt);
+    }
+
+    with link = "point.de.Ashausen" {
+        track(:first:station :double :cat, lehcux[:ash - 1ssw, :ash + 1ssw]);
+        track(:first:station :cat, lehcux[:ash - 1ssw, :ash + 1ssw] << 1.5dt);
+        track(:first:station :cat,
+                lehcux[:ash - 1.1dl, :ash - 1dl] >> 0.5dt
+            --  lehcux[:ash, :ash + 1ssw] >> 1.5dt
+        );
+        marker(:de.abzw :right, lehcux[:ash] >> 1.5dt);
+        marker(:de.hp :left, lehcux[:ash] << 1.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:ash] << 1.5dt);
+        slabel(:left, lehcux[:ash - 1ssw] << 1.5dt << 2.3ssw, "Ashausen");
+    }
+
+    with link = "line.de.1281" {
+        track(:first :cat :flip, lehcux[:ash + 1ssw, :ste - 1ssw] >> 1.5dt);
+    }
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:ash + 1ssw, :ste - 1ssw]);
+    }
+    with link = "line.de.1153" {
+        track(:first :cat, lehcux[:ash + 1ssw, :ste - 1ssw] << 1.5dt);
+    }
+
+    with link = "point.de.Stelle" {
+        track(:first :station :cat, lehcux[:ste - 1ssw, :ste + 1ssw] >> 1.5dt);
+        track(:first :station :cat, lehcux[:ste - 1ssw, :ste + 1ssw] >> 0.5dt);
+        track(:first :station :cat, lehcux[:ste - 1ssw, :ste + 1ssw] << 0.5dt);
+        track(:first :station :cat, lehcux[:ste - 1ssw, :ste + 1ssw] << 1.5dt);
+        marker(:de.bf :left, lehcux[:ste] << 1.5dt);
+        slabel(:right, lehcux[:ste] >> 2.5dt,
+            span(:bold, "Stelle")
+        );
+    }
+}
+
+
+# Großraum Hamburg
+#
+with detail = 3 {
+    let lehcux = path("metro.de.hmb.1720");
+
+    with link = "line.de.1720" {
+        track(:first :double :cat,
+                lehcux[:meh + 1sw, :har.a - 1200m]
+        );
+    }
+
+    # point.de.Hamburg-Harburg: de.2200
+
+    with link = "point.de.Hamburg-Unterelbe" {
+        track(:first:station :double :cat, lehcux[:unt, :unt + 2ssw]);
+        marker(:de.bbf :right, lehcux[:unt + 1ssw] >> 0.5dt);
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:unt + 2ssw, :haa - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Hausbruch" {
+        track(:first:station :double :cat, lehcux[:haa - 1ssw, :hbm + 1ssw]);
+        marker(:de.bbf :left, lehcux[:haa] << 0.5dt);
+        with layer = -1 marker(:de.bf.casing :left, lehcux[:haa] << 0.5dt);
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:hbm + 1ssw, :ngr - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Neugraben" {
+        track(:first:station :double :cat, lehcux[:ngr - 1ssw, :ngr + 4dl]);
+        marker(:de.bf :right, lehcux[:ngr] >> 0.5dt);
+    }
+}
+
+with detail = 3 {
+    let lehcux = path("path.de.1720");
+
+    with link = "line.de.1720" {
+        track(:first :double :cat,
+                path("metro.de.hmb.1720")[:ngr + 4dl, :ngr + 5dl]
+            ..  lehcux[:fis - 1.1ssw, :fis - 1ssw]
+        );
+    }
+
+    with link = "point.de.Fischbek" {
+        track(:first:station :double :cat, lehcux[:fis - 1ssw, :fis + 1ssw]);
+        marker(:de.hp :right, lehcux[:fis] >> 0.5dt);
+        slabel(:top, lehcux[:fis] >> 0.5dt >> 1.2ssw, "Fischbek");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:fis + 1ssw, :nwu - 1ssw]);
+    }
+
+    with link = "point.de.Neu-Wulmstorf" {
+        track(:first:station :double :cat, lehcux[:nwu - 1ssw, :nwu + 1ssw]);
+        marker(:de.hp :left, lehcux[:nwu] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:nwu] << 0.5dt);
+        slabel(:left, lehcux[:nwu - 2ssw] << 0.5dt << 3.5ssw, "Neu Wulmstorf");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:nwu + 1ssw, :bux - 1ssw]);
+    }
+
+    with link = "point.de.Buxtehude" {
+        track(:first:station :double :cat, lehcux[:bux - 1ssw, :bux + 1ssw]);
+        marker(:de.bf :right, lehcux[:bux] >> 0.5dt);
+        slabel(:right, lehcux[:bux + 2ssw] >> 0.5dt >> 1.2ssw,
+            span(:bold, "Buxtehude")
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:bux + 1ssw, :nkl - 1ssw]);
+    }
+
+    with link = "point.de.Neukloster-Stade" {
+        track(:first:station :double :cat, lehcux[:nkl - 1ssw, :nkl + 1ssw]);
+        marker(:de.hp :right, lehcux[:nkl] >> 0.5dt);
+        with layer = -1 marker(:de.bf :gone :right, lehcux[:nkl] >> 0.5dt);
+        slabel(:right, lehcux[:nkl - 0.5ssw] >> 0.5dt >> 1.4ssw,
+            hbox(:left:base,
+                "Neukloster ", span(:light, "(Kr Stade)")
+            )
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:nkl + 1ssw, :hor - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:nkl + 2.5km], "1720");
+    }
+
+    with link = "point.de.Horneburg" {
+        track(:first:station :double :cat, lehcux[:hor - 1ssw, :hor + 1ssw]);
+        marker(:de.bf :right, lehcux[:hor] >> 0.5dt);
+        slabel(:right, lehcux[:hor - 0.8ssw] >> 0.5dt >> 1.5ssw,
+            "Horneburg"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:hor + 1ssw, :dol - 1ssw]);
+    }
+
+    with link = "point.de.Dollern" {
+        track(:first:station :double :cat, lehcux[:dol - 1ssw, :dol + 1ssw]);
+        marker(:de.hp :right, lehcux[:dol] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, lehcux[:dol] >> 0.5dt);
+        slabel(:right, lehcux[:dol - 0.5ssw] >> 0.5dt >> 1.5ssw, "Dollern");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:dol + 1ssw, :aga - 1ssw]);
+    }
+
+    with link = "point.de.Agathenburg" {
+        track(:first:station :double :cat, lehcux[:aga - 1ssw, :aga + 1ssw]);
+        marker(:de.hp :left, lehcux[:aga] << 0.5dt);
+        slabel(:left, lehcux[:aga - 0.4ssw] << 0.5dt << 2.4ssw,
+            "Agathenburg"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:aga + 1ssw, :sta.a]);
+    }
+
+    with link = "point.de.Stade" {
+        track(:first:station :double :cat, lehcux[:sta.a, :sta + 1ssw]);
+        marker(:de.bf :right, lehcux[:sta] >> 0.5dt);
+        slabel(:top, lehcux[:sta] >> 0.5dt >> 1.4ssw,
+            span(:bold, "Stade")
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:sta + 1ssw, :ham - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:ham - 2.0km], "1720");
+    }
+
+    with link = "point.de.Hahle" {
+        with layer = -1 marker(:de.bk :removed :left, lehcux[:hah] << 0.5dt);
+        slabel(:bottom :removed, lehcux[:hah] << 0.5dt << 1.2ssw, "Hahle");
+    }
+
+    with link = "point.de.Hammah" {
+        track(:first:station :double, lehcux[:ham - 1ssw, :ham + 1ssw]);
+        marker(:de.hp :left, lehcux[:ham] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:ham] << 0.5dt);
+        slabel(:left, lehcux[:ham - 2ssw] << 0.5dt << 2.4ssw, "Hammah");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:ham + 1ssw, :him - 1ssw]);
+    }
+
+    with link = "point.de.Himmelpforten" {
+        track(:first:station,
+                lehcux[:him - 1ssw, :him + 0.5ssw] >> 0.5dt
+            --  lehcux[:him + 0.5ssw + 1dl, :him + 0.5ssw + 1.1dl] << 0.5dt
+        );
+        with layer = -1 track(:first:station :removed,
+                lehcux[:him + 0.5ssw, :him + 1.5ssw] >> 0.5dt
+        );
+        track(:first:station, lehcux[:him - 1ssw, :him + 1.5ssw] << 0.5dt);
+
+        marker(:de.hp :left, lehcux[:him] << 0.5dt);
+        marker(:de.uest :left, lehcux[:him] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, lehcux[:him] << 0.5dt);
+        slabel(:left, lehcux[:him - 2ssw] << 0.5dt << 2.2ssw, "Himmelpforten");
+    }
+
+    with link = "line.de.1720" {
+        with layer = -1 track(:first :removed,
+                lehcux[:him.f, :ost - 250m] >> 0.5dt
+        );
+        with layer = -1 track(:first:removed,
+                lehcux[:ost + 500m, :hec - 1ssw] >> 0.5dt
+        );
+        track(:first,
+                lehcux[:him.f, :ost - 250m - 1dl] << 0.5dt
+            --  lehcux[:ost - 250m, :ost + 500m] >> 0.5dt
+            --  lehcux[:ost + 500m + 1dl, :hec - 1ssw] << 0.5dt
+        );
+        with layer = -1 track(:first:removed,
+                lehcux[:ost - 250m - 1dl, :ost + 500m + 1dl] << 0.5dt
+        );
+    }
+
+    with link = "point.de.Ostebrücke" {
+        with layer = -1 marker(:de.bk :removed :right, lehcux[:ost] >> 0.5dt);
+        slabel(:right:removed, lehcux[:ost + 1ssw] >> 0.5dt >> 1.2ssw,
+            "Ostebrücke"
+        );
+    }
+
+    with link = "point.de.Hechthausen" {
+        with layer = -1 track(:first:station :removed,
+                lehcux[:hec - 1ssw, :hec + 0.5ssw + 1dl] >> 0.5dt
+        );
+        track(:first:station,
+                lehcux[:hec + 0.49ssw, :hec + 0.5ssw] << 0.5dt
+            --  lehcux[:hec + 0.5ssw + 1dl, :hec + 1.5ssw] >> 0.5dt
+        );
+        track(:first:station,
+                lehcux[:hec - 1ssw, :hec + 1.5ssw] << 0.5dt
+        );
+        marker(:de.hp :right, lehcux[:hec] >> 0.5dt);
+        marker(:de.uest :right, lehcux[:hec] >> 0.5dt);
+        with layer = -1 marker(:de.bf :gone :right, lehcux[:hec] >> 0.5dt);
+        slabel(:left, lehcux[:hec - 0.4ssw] << 0.5dt << 1.5ssw,
+            "Hechthausen"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:hec + 1.5ssw, :hem - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:hec + 4.0km], "1720");
+    }
+
+    with link = "point.de.Hemmoor" {
+        track(:first:station :double, lehcux[:hem - 1ssw, :hem + 1ssw]);
+        marker(:de.hp :right, lehcux[:hem] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, lehcux[:hem] >> 0.5dt);
+        slabel(:right, lehcux[:hem - 1.0ssw] >> 0.5dt >> 1.2ssw,
+            vbox(:left:bottom,
+                span(:removed, "Basbeck-Osten"),
+                "Hemmoor"
+            )
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:hem + 1ssw, :war - 1ssw]);
+    }
+
+    with link = "point.de.Warstade" {
+        track(:first:station :double, lehcux[:war - 1ssw, :war + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:war] << 0.5dt);
+        slabel(:left :removed, lehcux[:war] << 0.5dt << 2.2ssw,
+            "Warstade-Hemmoor"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:war + 1ssw, :wig - 1ssw]);
+    }
+
+    with link = "point.de.Wingst" {
+        track(:first:station :double, lehcux[:wig - 1ssw, :wig + 1ssw]);
+        marker(:de.hp :right, lehcux[:wig] >> 0.5dt);
+        with layer = -1 marker(:de.bf :gone :right, lehcux[:wig] >> 0.5dt);
+        slabel(:right, lehcux[:wig - 1.0ssw] >> 0.5dt >> 1.4ssw,
+            vbox(:left:bottom,
+                span(:removed, "Höftgrube"),
+                "Wingst"
+            )
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:wig + 1ssw, :cad - 1ssw]);
+    }
+
+    with link = "point.de.Cadenberge" {
+        track(:first:station :double, lehcux[:cad - 1ssw, :cad + 1ssw]);
+        marker(:de.bf :right, lehcux[:cad] >> 0.5dt);
+        slabel(:right, lehcux[:cad - 0.5ssw] >> 0.5dt >> 1.4ssw,
+            "Cadenberge"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:cad + 1ssw, :nha - 1ssw]);
+    }
+
+    with link = "point.de.Neuhaus-Oste" {
+        track(:first:station :double, lehcux[:nha - 1ssw, :nha + 1ssw]);
+        marker(:de.hp :removed :right, lehcux[:nha] >> 0.5dt);
+        marker(:de.anst :removed :right, lehcux[:nha] >> 0.5dt);
+        with layer = -1 marker(:de.bf :former :right, lehcux[:nha] >> 0.5dt);
+        slabel(:right :removed, lehcux[:nha - 0.5ssw] >> 0.5dt >> 1.4ssw,
+            hbox(:left:base, "Neuhaus ", span(:light, "(Oste)"))
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:nha + 1ssw, :ose - 1ssw]);
+    }
+
+    with link = "point.de.Otterndorf-Osterende" {
+        track(:first:station :double, lehcux[:ose - 1ssw, :ose + 1ssw]);
+        with layer = -1 marker(:de.bk :removed :right, lehcux[:ose] >> 0.5dt);
+        slabel(:right :gone, lehcux[:ose - 0.5ssw] >> 0.5dt >> 1.2ssw,
+            "Osterende"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:ose + 1ssw, :ott - 1ssw]);
+    }
+
+    with link = "point.de.Otterndorf" {
+        track(:first:station :double, lehcux[:ott - 1ssw, :ott + 1ssw]);
+        marker(:de.hp :right, lehcux[:ott] >> 0.5dt);
+        with layer = -1 marker(:de.bf :former :right, lehcux[:ott] >> 0.5dt);
+        slabel(:top, lehcux[:ott] >> 0.5dt >> 1.3ssw,
+            "Otterndorf"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:ott + 1ssw, :wee - 1ssw]);
+    }
+
+    with link = "point.de.Otterndorf-Westerende" {
+        track(:first:station :double, lehcux[:wee - 1ssw, :wee + 1ssw]);
+        with layer = -1 marker(:de.bk :right :gone, lehcux[:wee] >> 0.5dt);
+        slabel(:right :gone, lehcux[:wee + 1ssw] >> 0.5dt >> 1.0ssw,
+            "Westerende"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:wee + 1ssw, :abr - 1ssw]);
+        with layer = 1 line_badge(:open, lehcux[:wee + 2.0km], "1720");
+    }
+
+    with link = "point.de.Altenbruch" {
+        track(:first:station :double, lehcux[:abr - 1ssw, :abr + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, lehcux[:abr] << 0.5dt);
+        with layer = -2 marker(:de.bf :former :left, lehcux[:abr] << 0.5dt);
+        slabel(:left :removed, lehcux[:abr - 0.5ssw] << 0.5dt << 2.8ssw,
+            "Altenbruch"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double, lehcux[:abr + 1ssw, :cuf - 1ssw]);
+    }
+
+    with link = "point.de.Cuxhaven" {
+        track(:first:station :double, lehcux[:cuf - 1ssw, :cux]);
+        marker(:de.bf :top, lehcux[:cux]);
+        slabel(:left, lehcux[:cux] - (1.8ssw, 0.2ssw),
+            span(:bold, "Cuxhaven")
+        );
+    }
 }
 

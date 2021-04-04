@@ -1,0 +1,245 @@
+# DE AF2.  Flensburg Kreisb (ausschl.) - Rundhof (ausschl.)
+#
+let flekap = path("path.de.AF1");
+let flerun = path("path.de.AF2");
+let hasfle = path("path.de.1020");
+let maaflk = path("path.de.A00");
+
+with detail = 3 {
+    # Streckengleis Flensburg (ausschl.) - Fruerlund
+    with layer = 2 track(:third :narrow :removed,
+        maaflk[:flk.aa - 2ssw, :fru + 1ssw] >> 1dt
+    );
+
+    # Fruerlund
+    track(:third :station :narrow :removed,
+            maaflk[:fru + 1ssw, :fru - 1ssw] >> 1dt
+    );
+    marker(:de.kzst :removed :left, maaflk[:fru] << 1dt);
+
+    # Streckengleis Fruerlund - Groß Tarup
+    track(:third :narrow :removed,
+            maaflk[:fru - 1ssw, :fsat] >> 1dt
+        ..  flerun[:gta - 0.51ssw, :gta - 0.5ssw]
+    );
+
+    # Groß-Tarup
+    track(:third :station :narrow :removed, flerun[:gta - 1ssw, :gta + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:gta]);
+
+    # Streckengleis Groß Tarup - Tastrup
+    track(:third :narrow :removed, flerun[:gta + 1ssw, :tas - 1ssw]);
+
+    # Tastrup
+    track(:third :station :narrow :removed, flerun[:tas - 1ssw, :tas + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:tas]);
+    slabel(:right :removed, flerun[:tas + .2ssw] << 1dt, "Tastrup");
+
+    # Streckengleis Tastrup - Hürup
+    track(:third :narrow :removed, flerun[:tas + 1ssw, :hur - 0.5ssw]);
+
+    # Hürup
+    track(:third :station :narrow :removed,
+        flerun[:hur - 0.5ssw, :hur + 1.5ssw]);
+    marker(:de.kzst :removed :left, flerun[:hur + 0.5ssw]);
+    slabel(:right :removed, flerun[:hur] << 1.4ssw,
+        vbox(:left :middle,
+            span(:regular, "Hürup"),
+            span(:light, "(Kr Flensburg)")
+        )
+    );
+
+    with link = "line.de.AF2" {
+        track(:third :narrow :removed, flerun[:hur + 1.5ssw, :fre - 1ssw]);
+        with layer = 1 line_badge(:removed, flerun[:hur + 1.5km], "AF2");
+    }
+
+    # Freienwill
+    track(:third :station :narrow :removed, flerun[:fre - 1ssw, :fre + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:fre] << 0.1dt);
+    slabel(:left :removed, flerun[:fre + .15ssw] >> 1.6ssw, "Freienwill");
+
+    # Streckengleis Freienwill - Kleinsolt
+    track(:third :narrow :removed, flerun[:fre + 1ssw, :kso - 1ssw]);
+
+    # Kleinsolt
+    track(:third :station :narrow :removed, flerun[:kso - 1ssw, :kso + 1ssw]);
+    marker(:de.kzst :removed :left, flerun[:kso] >> 0.1dt);
+    slabel(:right :removed, flerun[:kso + .15ssw] << 1.3ssw, "Kleinsolt");
+
+    # Streckengleis Kleinsolt - Mühlenbrück
+    track(:third :narrow :removed, flerun[:kso + 1ssw, :mub - 1ssw]);
+
+    # Mühlenbrück
+    track(:third :station :narrow :removed, flerun[:mub - 1ssw, :mub + 1ssw]);
+    marker(:de.kzst :removed :left, flerun[:mub]);
+    slabel(:right :removed, flerun[:mub + .4ssw] << 1.3ssw, "Mühlenbrück");
+
+    # Streckengleis Mühlenbrück - Bistoft
+    track(:third :narrow :removed, flerun[:mub + 1ssw, :bis - 1ssw]);
+
+    # Bistoft
+    track(:third :station :narrow :removed, flerun[:bis - 1ssw, :bis + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:bis]);
+    slabel(:bottom :removed, flerun[:bis] >> 1.3ssw, "Bistoft");
+
+    # Streckengleis Bistoft - Obdrup
+    track(:third :narrow :removed, flerun[:bis + 1ssw, :obd - 1ssw]);
+
+    # Obdrup
+    track(:third :station :narrow :removed, flerun[:obd - 1ssw, :obd + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:obd]);
+    slabel(:bottom :removed, flerun[:obd] >> 1.3ssw, "Obdrup");
+
+    # Streckengleis Obdrup - Satrup
+    track(:third :narrow :removed, flerun[:obd + 1ssw, :sat.a]);
+
+    # Satrup
+    track(:third :station :narrow :removed, flerun[:sat.a, :sat.a + 1ssw]);
+    marker(:de.kbf :removed :left, flerun[:sat.a + 0.5ssw]);
+    slabel(:top :removed, flerun[:sat.a + 0.5ssw] << 1.2ssw + (1dt, 0dt),
+        vbox(:center :bottom,
+            span(:bold, "Satrup"),
+            span(:regular, "(Angeln)")
+        )
+    );
+
+    # Streckengleis Satrup - Großrüde
+    track(:third :narrow :removed, flerun[:sat.a + 1ssw, :gru - 1ssw]);
+
+    # Großrüde
+    track(:third :station :narrow :removed, flerun[:gru - 1ssw, :gru + 1ssw]);
+    marker(:de.kzst :removed :left, flerun[:gru]);
+
+    # Streckengleis Großrüde - Kleinrüde
+    track(:third :narrow :removed, flerun[:gru + 1ssw, :kru - 1ssw]);
+    
+    # Klein Rüde
+    track(:third :station :narrow :removed, flerun[:kru - 1ssw, :kru + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:kru]);
+
+    # Streckengleis Kleinrüde - Mühlenholz
+    track(:third :narrow :removed, flerun[:kru + 1ssw, :muh - 1ssw]);
+
+    # Mühlenholz
+    track(:third :station :narrow :removed, flerun[:muh - 1ssw, :muh + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:muh]);
+
+    # Streckengleis Mühlenholz - Südensee
+    track(:third :narrow :removed, flerun[:muh + 1ssw, :sud - 1ssw]);
+
+    # Südensee
+    track(:third :station :narrow :removed, flerun[:sud - 1ssw, :sud + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:sud]);
+
+    # Streckengleis Südensee - Sörup
+    track(:third :narrow :removed, flerun[:muh + 1sw, :sor.x - 1ssw]);
+
+    # Sörup
+    with layer = 2 track(:third :station :removed,
+            flerun[:sor.x - 1ssw, :sor.x + .5ssw]
+        ..  hasfle[:asat, :frun] >> 1dt
+        ..  flerun[:sor.ff - 0.1dl, :sor.ff]
+    );
+    with layer = 1 casing(:third :station :removed,
+            hasfle[:frun + .1dl, :frun] >> 1dt
+        ..  flerun[:sor.ff - 0.1dl, :sor.ff]
+    );
+    marker(:de.kbf :removed :left, flerun[:sor.x]);
+
+    # Streckengleis Sörup - Schauby
+    track(:third :narrow :removed, flerun[:sor.ff, :sau - 1ssw]);
+
+    # Schauby
+    track(:third :station :narrow :removed, flerun[:sau - 1ssw, :sau + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:sau]);
+
+    with link = "line.de.AF2" {
+        track(:third :narrow :removed, flerun[:sau + 1ssw, :mol - 1ssw]);
+    }
+
+    # Möllmark
+    track(:third :station :narrow :removed, flerun[:mol - 1ssw, :mol + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:mol]);
+
+    with link = "line.de.AF2" {
+        track(:third :narrow :removed, flerun[:mol + 1ssw, :stb - 1ssw]);
+    }
+
+    # Sterupbek
+    track(:third :station :narrow :removed, flerun[:stb - 1ssw, :stb + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:stb]);
+
+    # Streckengleis Sterupbek - Sterup
+    track(:third :narrow :removed, flerun[:stb + 1ssw, :ste - 1ssw]);
+
+    # Sterup
+    track(:third :station :narrow :removed, flerun[:ste - 1ssw, :ste + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:ste]);
+    slabel(:top :removed, flerun[:ste] << 1dt - (1ssw, 0ssw), "Sterup");
+
+    with link = "line.de.AF2" {
+        track(:third :narrow :removed, flerun[:ste + 1ssw, :jor - 1ssw]);
+        with layer = 1 line_badge(:removed, flerun[:ste + 1.1km], "AF2");
+    }
+
+    # Jordan
+    track(:third :station :narrow :removed, flerun[:jor - 1ssw, :jor + 1ssw]);
+    marker(:de.kzst :removed :left, flerun[:jor]);
+
+    # Streckengleis Jordan - Grünholz
+    track(:third :narrow :removed, flerun[:jor + 1ssw, :grh - 1ssw]);
+    
+    # Grünholz
+    track(:third :station :narrow :removed, flerun[:grh - 1ssw, :grh + 1ssw]);
+    marker(:de.kzst :removed :left, flerun[:grh]);
+    slabel(:left :removed, flerun[:grh + 0.3ssw] >> 1.0ssw,
+        vbox(:right :base,
+            span(:regular, "Grünholz "),
+            span(:light, "(Kr Fl.bg.)")
+        )
+    );
+
+    # Streckengleis Grünholz - Brunsholm
+    track(:third :narrow :removed, flerun[:grh + 1ssw, :bru - 1ssw]);
+
+    # Brunsholm
+    track(:third :station :narrow :removed, flerun[:bru - 1ssw, :bru + 1ssw]);
+    marker(:de.kzst :removed :left, flerun[:bru]);
+
+    # Streckengleis Brunsholm - Schorrehy
+    track(:third :narrow :removed, flerun[:bru + 1ssw, :soh - 1ssw]);
+
+    # Schorrehy
+    track(:third :station :narrow :removed, flerun[:soh - 1ssw, :soh + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:soh]);
+
+    # Streckengleis Schorrehy - Knochenmühle
+    track(:third :narrow :removed, flerun[:soh + 1ssw, :wik - 1ssw]);
+
+    # Wippendorfer Knochenmühle
+    track(:third :station :narrow :removed, flerun[:wik - 1ssw, :wik + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:wik]);
+
+    # Streckengleis Knochenmühle - Wippendorf
+    track(:third :narrow :removed, flerun[:wik + 1ssw, :wip - 1ssw]);
+
+    # Wippendorf
+    track(:third :station :narrow :removed, flerun[:wip - 1ssw, :wip + 1ssw]);
+    marker(:de.kzst :removed :right, flerun[:wip]);
+    slabel(:right :removed, flerun[:wip - 0.5ssw] >> 1.6ssw, "Wippendorf");
+
+    # Streckengleis Wippendorf - Vaskos
+    track(:third :narrow :removed, flerun[:wip + 1ssw, :vas - 1ssw]);
+
+    # Vaskos
+    track(:third :station :narrow :removed, flerun[:vas - 1ssw, :vas + 1ssw]);
+    marker(:de.kzst :removed :left, flerun[:vas]);
+
+
+    track(:third :narrow :removed,
+            flerun[:vas + 1ssw, :ff]
+        ..  flekap[:fsat, :fsat + 0.1dl]
+    );
+}
+

@@ -1,23 +1,24 @@
 # DE 9111. Lüneburg Süd - Soltau (Han) Süd
 #
+let lehcux = path("path.de.1720");
 let lunsol = path("path.de.9111");
 
 with detail = [4, 5] {
     with link = "point.de.Lüneburg-Süd" {
-        let lehcux = path("path.de.1720");
-        let witbuc = path("path.de.1151");
-
+        track(:third:station :removed,
+                lehcux[:lbs, :lun.a + 481m + 2sw] >> 9.5dt
+        );
         track(:third:station,
-                lehcux[:lbs, :lbs - 1sw] >> 5.5dt
-            ..  witbuc[:fsol, :fsol - 1m] >> 2dt
-            ..  lunsol[:aa - 1m, :aa]
+                lehcux[:lun.a + 481m + 2sw, :lun.a + 481m] >> 9.5dt
         );
 
-        marker(:de.bbf :left, lehcux[:lbs - 0.5sw] << 5.5dt);
-        with layer = -1 marker(:de.bf :removed :left,
-                lehcux[:lbs - 0.5sw] << 5.5dt
+        marker(:de.bbf :left, lehcux[:lun.a + 481m + 1.5sw] << 9.5dt);
+        station(:left, lehcux[:lun.a + 481m + 0.8sw] << 9.5dt << 1.6sh,
+            span(:bold, "Lüneburg Süd"), "9111: ??"
         );
-        station(:left, lehcux[:lbs - 1.1sw] << 5.5dt << 1.6sh,
+
+        marker(:de.bf :removed :left, lehcux[:lbs - 0.5sw] << 9.5dt);
+        station(:left :removed, lehcux[:lbs - 0.9sw] << 8.5dt << 1.6sh,
             span(:bold, "Lüneburg Süd"),
             "9111: 0,0"
         );
@@ -25,7 +26,10 @@ with detail = [4, 5] {
 
     
     with link = "line.de.9111" {
-        track(:third, lunsol[:aa, :luk - 1sw]);
+        track(:third,
+                lehcux[:lun.a + 481m, :lun.a + 480m] >> 9.5dt
+            ..  lunsol[:aa + 5dt, :luk - 1sw]
+        );
         with detail = 5 {
             with layer = 1 line_badge(:open, lunsol[:luk - 0.4km], "9111");
         }
@@ -35,7 +39,7 @@ with detail = [4, 5] {
     with link = "point.de.Lüneburg-Kurpark" {
         track(:third:station, lunsol[:luk - 1sw, :luk + 1sw]);
         marker(:de.hp :right, lunsol[:luk]);
-        station(:top, lunsol[:luk] >> 1.2sh,
+        station(:bottom, lunsol[:luk] << 2.0dt,
             "L. Kurpark", "2,4"
         );
     }

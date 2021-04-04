@@ -1,11 +1,11 @@
-# DE 6100.  Berlin-Spandau (ausschl.) - Aumühle (ausschl.)
+# DE 6100.  Berlin-Spandau (ausschl.) - Hamburg-Altona
 #
-#           Aumühle (einschl) - Hamburg Hbf: DE 1244
-#           Hamburg Hbf - Hamburg-Altona: DE 1240
-#
-let spaalt = path("path.de.6100");
 
+# Berlin-Spandau (ausschl) - Hamburg-Bergedorf (einsschl.)
+#
 with detail = 3 {
+    let spaalt = path("path.de.6100");
+
     with link = "line.de.6100" {
         let berleh = path("path.de.6107");
         
@@ -651,7 +651,129 @@ with detail = 3 {
     }
 
     with link = "line.de.6100" {
-        track(:first :double :cat, spaalt[:frr + 1ssw, :aum.a]);
+        track(:first :double :cat, spaalt[:frr + 1ssw, :aua - 1ssw]);
+    }
+
+    with link = "point.de.Aumühle-Abzw" {
+        track(:first:station :double :cat, spaalt[:aua - 1ssw, :aua + 1ssw]);
+        marker(:de.bft.abzw :left, spaalt[:aua] << 0.5dt);
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:aua + 1ssw, :ber - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Bergedorf" {
+        track(:first:station :double :cat, spaalt[:ber - 1ssw, :ber + 1ssw]);
+        marker(:de.bf :left, spaalt[:ber] << 0.5dt);
+        slabel(:right, spaalt[:ber + 0.3ssw] << 0.5dt << 2.0ssw + (0.5dt, 0dt),
+            span(:bold, "H.-Bergedorf")
+        );
     }
 }
 
+
+# Hamburg-Bergedorf (ausschl.) - Hamburg-Altona
+#
+with detail = 3 {
+    let spaalt = path("metro.de.hmb.6100");
+
+    with link = "line.de.6100" {
+        track(:first :double :cat,
+                path("path.de.6100")[:ber + 1ssw, :ber + 1.1ssw]
+            ..  spaalt[:ber.f, :all - 1ssw]
+        );
+    }
+
+    with link = "point.de.Hamburg-Allermöhe" {
+        track(:first:station :double :cat, spaalt[:all - 1ssw, :all + 1ssw]);
+        track(:first:station :cat,
+                spaalt[:all - 1.1dl, :all - 1dl] << 0.5dt
+            --  spaalt[:all, :all + 1ssw] << 1.5dt
+        );
+        marker(:de.abzw :left, spaalt[:all] << 1.5dt);
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:all + 1ssw, :rtk - 1ssw]);
+    }
+
+    # point.de.Hamburg-Rothenburgsort-Tk: de.1280
+
+    with link = "line.de.6100" {
+        with layer = 2 track(:first :double :cat,
+                spaalt[:rtk + 1ssw, :ahar - 1ssw]
+        );
+        with layer = 1 casing(:first :double :cat,
+                spaalt[:rtk + 1ssw, :ahar - 1ssw]
+        );
+    }
+
+    with link = "point.de.Hamburg-Rothenburgsort-Rop" {
+        track(:first:station :double :cat, spaalt[:ahar - 1ssw, :ahar]);
+    }
+
+    with link = "line.de.6100" {
+        track(:first :cat, spaalt[:ahar, :anc - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Hamburg-Anckelmannsplatz" {
+        track(:first:station :cat, spaalt[:anc - 1ssw, :anc + 1ssw] >> 0.5dt);
+        track(:first:station :cat,
+                spaalt[:anc - 1.1dl, :anc - 1dl] >> 0.5dt
+            --  spaalt[:anc, :anc + 1ssw] << 0.5dt
+        );
+    }
+
+    with link = "line.de.6100" {
+        track(:first:station :double, spaalt[:anc + 1ssw, :ham - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Hbf" {
+        let wanham = path("metro.de.hmb.2200");
+
+        track(:first:station :double :cat,
+                spaalt[:ham - 1ssw, :ham + 0.5ssw + 3dl]
+        );
+        with layer = -1 casing(:first:station :double :cat,
+                spaalt[:ham, :ham + 0.5ssw + 3dl]
+        );
+
+        track(:first:station :cat,
+                wanham[:ham - 1ssw, :ham + 0.5ssw + 1dl] << 1.5dt
+        );
+        with layer = -1 casing(:first:station :cat,
+                spaalt[:ham, :ham + 0.5ssw + 1dl] << 1.5dt
+        );
+
+        track(:first:station :cat,
+                wanham[:ham - 1ssw, :ham + 0.5ssw] << 2.5dt
+            --  spaalt[:ham + 0.5ssw + 2dl, :ham + 0.5ssw + 2.1dl] << 0.5dt
+        );
+        with layer = -1 casing(:first:station :cat,
+                spaalt[:ham, :ham + 0.5ssw] << 2.5dt
+            --  spaalt[:ham + 0.5ssw + 2dl, :ham + 0.5ssw + 2.1dl] << 0.5dt
+        );
+
+        marker(:de.bf :left, spaalt[:ham] << 2.5dt);
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:ham + 0.5ssw + 3dl, :rai]);
+    }
+
+    with link = "point.de.Hamburg-Dammtor" {
+        marker(:de.hp :left, spaalt[:dam] << 0.5dt);
+    }
+
+    with link = "line.de.6100" {
+        track(:first:station :double :cat,
+                spaalt[:rai - 0.1dl, :rai]
+            ..  path("metro.de.hmb.1220")[:aham, :aham - 0.1dl] >> 1dt
+        );
+        with layer = -1 casing(:first:station :double :cat,
+                spaalt[:rai - 0.1dl, :rai]
+            ..  path("metro.de.hmb.1220")[:aham, :aham - 0.1dl] >> 1dt
+        );
+    }
+}

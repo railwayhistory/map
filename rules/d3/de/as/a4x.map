@@ -1,0 +1,41 @@
+# DE A40.  Lübeck alter Bf - Lübeck Mönkhof
+# DE A41.  Lübeck alter Bf (ausschl.) - Genin Abzw
+# DE A42.  Lübeck Nord - Lübeck alter Bf
+# DE A43.  Lübeck alter Bf - Strecknitz
+#
+let luabuc = path("path.de.A40");
+
+with detail = 3 {
+    with link = "point.de.Lübeck-alter-Bf" {
+        with layer = -1 {
+            track(:first:station :gone, luabuc[:lua - 1ssw, :lua + 1ssw]);
+            marker(:de.bf :gone :left, luabuc[:lua]);
+        }
+    }
+
+    with link = "path.de.A40" {
+        with layer = -1 track(:first :gone, luabuc[:lua + 1ssw, :mon]);
+    }
+
+    with link = "line.de.A41" {
+        with layer = -1 track(:first :gone,
+                path("path.de.A40")[:aham - 1m, :aham]
+            ..  path("path.de.A41")[:aa, :gea]
+        );
+    }
+
+    with link = "line.de.A42" {
+        with layer = -1 track(:first :gone,
+                luabuc[:lua - 1ssw, :lua - 2ssw]
+            ..  luabuc[:lun + 1m, :lun] >> 0.5dt
+        );
+    }
+
+    with link = "line.de.A43" {
+        with layer = -1 track(:first :gone,
+                luabuc[:akle - 1m, :akle]
+            ..  path("path.de.1122")[:lsg - 1m, :lsg]
+        );
+    }
+}
+

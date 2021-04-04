@@ -1,0 +1,40 @@
+# DE A34.  Lütjenbrode (ausschl.) - Lütjenbrode Ost (ausschl.)
+#          Großenbrode (ausschl.) - Großenbroder Fähre
+#
+let lutgro = path("path.de.A34");
+let lubput = path("path.de.1100");
+let neuhei = path("path.de.a32.hei");
+
+with detail = 4 {
+    with link = "line.de.A34" {
+        track(:third :removed,
+                lutgro[:aold, :luo - 0.5sw] << 1dt
+        );
+    }
+
+    # Lütjenbrode Ost - Großenbrode: line.de.1100
+
+    with link = "line.de.A34" {
+        with layer = -1 track(:third :removed,
+                lubput[:agbf - 1m, :agbf]
+            ..  lutgro[:aput + 100m, :grf - 2sw]
+        );
+        with layer = 1 line_badge(:removed, lutgro[:grf - 1.4km], "A34");
+    }
+
+
+    with link = "point.de.Großenbroder-Fähre" {
+        track(:third:station :removed, lutgro[:grf - 2sw, :f]);
+        track(:station :removed,
+                lutgro[:grf - 2sw + 0.9dl, :grf - 2sw + 1.0dl]
+            --  lutgro[:grf - 2sw + 2.0dl, :grf - 0.6sw] << 1.0dt
+        );
+
+        marker(:de.bf :removed :left, lutgro[:grf]);
+        station(:right :removed, lutgro[:grf - 0.4sw] >> 1.5dt,
+            span(:bold, "Großenbroder Fähre"),
+            "A34: 7,10"
+        );
+    }
+}
+

@@ -1,11 +1,12 @@
-# DE 1120.  Lübeck Hbf (einschl.) - Hamburg-Wandsbek (einschl.)
+# DE 1120.  Lübeck Hbf - Hamburg Hbf
 #
-#           Hamburg-Wandsbek - Hamburg Hbf: DE 1241.
-#
-let lubham = path("path.de.1120");
-let lubham.old = path("path.de.1120.old");
 
+# Lübeck Hbf (einschl) - Hamburg-Wandsbek (ausschl)
+#
 with detail = 3 {
+    let lubham = path("path.de.1120");
+    let lubham.old = path("path.de.1120.old");
+
     with link = "point.de.Lübeck-Hbf" {
         track(:first:station :double :cat, lubham[:fluh, :lub.f]);
         marker(:de.bf :open :left, lubham[:lub] << 0.5dt);
@@ -90,7 +91,7 @@ with detail = 3 {
         );
     }
 
-    with link = "line.de.1020" {
+    with link = "line.de.1120" {
         track(:first :double :cat, lubham[:old + 1ssw, :kup - 1ssw]);
         with layer = -1 casing(:first :double,
             lubham[:rup.x - 200m, :rup.x + 200m]
@@ -105,7 +106,7 @@ with detail = 3 {
         );
     }
 
-    with link = "line.de.1020" {
+    with link = "line.de.1120" {
         track(:first :double :cat, lubham[:kup + 1ssw, :bar - 1ssw]);
     }
 
@@ -122,7 +123,7 @@ with detail = 3 {
         );
     }
 
-    with link = "line.de.1020" {
+    with link = "line.de.1120" {
         track(:first :double :cat, lubham[:bar + 1ssw, :gar - 1ssw]);
         with layer = 1 line_badge(:open, lubham[:bar + 1.7km], "1120");
     }
@@ -142,7 +143,7 @@ with detail = 3 {
         );
     }
 
-    with link = "line.de.1020" {
+    with link = "line.de.1120" {
         track(:first :double :cat, lubham[:gar + 1ssw, :ahr - 1ssw]);
     }
 
@@ -159,7 +160,7 @@ with detail = 3 {
         );
     }
 
-    with link = "line.de.1020" {
+    with link = "line.de.1120" {
         track(:first :double :cat, lubham[:ahr + 1ssw, :rab - 1ssw]);
     }
 
@@ -180,7 +181,7 @@ with detail = 3 {
         );
     }
 
-    with link = "line.de.1020" {
+    with link = "line.de.1120" {
         track(:first :double :cat, lubham[:ahr + 1ssw, :ton - 1ssw]);
     }
 
@@ -191,26 +192,28 @@ with detail = 3 {
     with link = "point.de.Hamburg-Tonndorf" {
         track(:first:station :double :cat, lubham[:ton - 1ssw, :ton + 1ssw]);
         marker(:de.bf :right, lubham[:ton] >> 0.5dt);
-        slabel(:left, lubham[:ton + 0.6ssw] >> 0.5dt >> 1.4ssw,
-            "Hamburg-Tonndorf"
-        );
     }
+}
 
-    with link = "line.de.1020" {
-        track(:first :double :cat, lubham[:ton + 1ssw, :waf - 1ssw]);
-    }
+# Hamburg-Wandsbek (einschl.) - Hamburg Hbf
+#
+with detail = 3 {
+    let lubham = path("metro.de.hmb.1120");
 
-    with link = "point.de.Hamburg-Wandsbek-Wf" {
-        track(:first:station :double :cat, lubham[:waf - 1ssw, :waf + 1ssw]);
-        marker(:de.bft :left, lubham[:waf] << 0.5dt);
+    with link = "line.de.1120" {
+        track(:first :double :cat, lubham[:ton + 1ssw, :wan - 1ssw]);
     }
 
     with link = "point.de.Hamburg-Wandsbek" {
-        track(:first:station :double :cat, lubham[:waf + 1ssw, :arot]);
+        track(:first:station :double :cat, lubham[:wan - 1ssw, :wan + 1ssw]);
         marker(:de.bf :right, lubham[:wan] >> 0.5dt);
-        slabel(:right, lubham[:wan + 0.5ssw] << 0.5dt << 1.8ssw,
-            span(:bold, "Hamburg-Wandsbek")
-        );
+    }
+
+    with link = "line.de.1120" {
+        track(:first :double :cat, lubham[:wan + 1ssw, :ham.aa - 1ssw]);
+        with layer = -1 casing(:first :double :cat, lubham[:wan + 1ssw, :has]);
+
+        track(:first:station :double :cat, lubham[:ham.aa - 1ssw, :ham.aa]);
     }
 }
 

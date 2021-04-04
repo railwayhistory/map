@@ -1,6 +1,8 @@
-#
+# DE 1280.  Buchholz (Nordheide) - Hamburg-Allermöhe
 #
 let bucall = path("path.de.1280");
+let spaalt = path("metro.de.hmb.6100");
+let wanham = path("metro.de.hmb.2200");
 
 with detail = 3 {
     with link = "line.de.1280" {
@@ -48,5 +50,39 @@ with detail = 3 {
     }
 
     # ...
+
+    with link = "line.de.1280" {
+        track(:first :double :cat, wanham[:har.f, :oha] >> 1dt);
+    }
+
+    with link = "line.de.1280" {
+        track(:first :double :cat,
+                wanham[:oha, :oha + 0.1dl] >> 1dt
+            ..  spaalt[:ahar, :rop + 1ssw] >> 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Rothenburgsort" {
+        track(:first:station :double :cat, spaalt[:rtk + 1ssw, :rtk - 1ssw]);
+        track(:first:station :cat, spaalt[:rop + 1ssw, :rtk - 1ssw] >> 1.5dt);
+        track(:first:station :cat,
+                spaalt[:rop + 1ssw, :rtk] >> 2.5dt
+            --  spaalt[:rtk - 1dl, :rtk - 1.1dl] >> 1.5dt
+        );
+        marker(:de.gbf :left, spaalt[:rop] << 2.5dt);
+    }
+
+    with link = "line.de.1280" {
+        track(:first :cat :flip, spaalt[:rtk - 1ssw, :bil + 1ssw] >> 1.5dt);
+    }
+
+    with link = "point.de.Hamburg-Billwerder" {
+        track(:first:station :cat, spaalt[:bil + 1ssw, :bil - 1ssw] >> 1.5dt);
+        marker(:de.gbf :left, spaalt[:bil] << 1.5dt);
+    }
+
+    with link = "line.de.1280" {
+        track(:first :cat :flip, spaalt[:bil - 1ssw, :all + 1ssw] >> 1.5dt);
+    }
 }
 

@@ -1,0 +1,60 @@
+# DE A40.  Lübeck alter Bf - Lübeck Mönkhof
+# DE A41.  Lübeck alter Bf - Genin Abzw
+# DE A42.  Lübeck Nord - Lübeck alter Bf
+# DE A43.  Lübeck alter Bf - Strecknitz
+#
+let luabuc = path("path.de.A40");
+
+with detail = [4, 5] {
+    with link = "point.de.Lübeck-alter-Bf" {
+        track(:first:station :gone, luabuc[:lua - 0.5sw, :lua + 1sw] >> 1dt);
+        track(:first:station :gone, luabuc[:lua - 1sw, :lua + 1sw]);
+        track(:first:station :gone, luabuc[:lua - 0.5sw, :lua + 1sw] << 1dt);
+
+        marker(:de.bf :gone :left, luabuc[:lua] << 1dt);
+        station(:right :gone, luabuc[:lua + 0.4sw] << 1dt << 1.4sh,
+            span(:bold, "Lübeck"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:gone, "A40: "),
+                    span(:gone, "A41: "),
+                    span(:gone, "A42: "),
+                    span(:gone, "11204: ")
+                ),
+                vbox(:right:top,
+                    span(:gone, "??"),
+                    span(:gone, "??"),
+                    span(:gone, "??"),
+                    span(:gone, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "path.de.A40" {
+        with layer = -1 track(:first :gone, luabuc[:lua + 1sw, :mon]);
+    }
+
+    with link = "line.de.A41" {
+        with layer = -1 track(:first :gone,
+                luabuc[:lua + 1sw, :aham] >> 1dt
+            ..  path("path.de.A41")[:aa, :gea]
+        );
+    }
+
+    with link = "line.de.A42" {
+        with layer = -1 track(:first :gone,
+                luabuc[:lua - 1sw, :lua - 2sw]
+            ..  luabuc[:lun + 1m, :lun] >> 0.5dt
+        );
+    }
+
+    with link = "line.de.A43" {
+        with layer = -1 track(:first :gone,
+                luabuc[:lua + 1sw, :akle] << 1dt
+            ..  path("path.de.1122")[:lsg - 1m, :lsg]
+        );
+    }
+}
+

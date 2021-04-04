@@ -1,0 +1,28 @@
+# DE AS1.  Munkmarsch - Westerland (Sylt) Inselbf (ausschl.)
+#
+let munwes = path("path.de.AS1");
+let weslis = path("path.de.AS4");
+
+with detail = [4, 5] {
+    with link = "point.de.Munkmarsch" {
+        track(:third :station :narrow :removed, munwes[:a, :mun + 1sw]);
+        marker(:de.bf :removed :left, munwes[:mun]);
+        station(:right :removed, munwes[:mun] << 2.0sh,
+            span(:medium :bold :removed, "Munkmarsch"),
+            "AS1: ??"
+        );
+    }
+
+
+    with link = "line.de.AS1" {
+        track(:third :narrow :removed :flip,
+                munwes[:mun + 1sw, :flis.aa]
+            ..  weslis[:amun, :amun - 1m] << 1dt
+        );
+        track(:third :narrow :removed :tight :flip,
+                weslis[:amun - 1m, :wes + 3sw] << 1dt
+        );
+        with layer = 2 line_badge(:removed, munwes[:flis.a - 0.9km], "AS1");
+    }
+}
+

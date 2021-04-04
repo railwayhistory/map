@@ -1,25 +1,40 @@
 #
 #
 let wanham = path("path.de.2200");
+let wanham.har = path("path.de.2200.har");
 
 with detail = [4, 5] {
     # ...
 
     with link = "line.de.2200" {
-        track(:first :cat, wanham[:spr + 1sw, :buc.a] << 1dt);
-        track(:first :cat, wanham[:spr + 1sw, :buc.a] >> 1dt);
+        track(:first :cat :flip :tight, wanham[:spr + 1sw, :buc.a] << 1dt);
+        track(:first :cat :tight, wanham[:spr + 1sw, :buc.a] >> 1dt);
     }
     with link = "line.de.1283" {
-        track(:first :cat, wanham[:spr + 1sw, :buc.a]);
+        track(:first :cat :tight, wanham[:spr + 1sw, :buc.a]);
     }
 
     with link = "point.de.Buchholz-Nordheide" {
-        # 2200/1283
-        track(:first:station :cat, wanham[:buc.a, :buc.f] << 1dt);
-        track(:first:station :cat, wanham[:buc.a, :buc.f]);
+        # Str. 2200 L
         track(:first:station :cat,
-                wanham[:buc.a, :buc + 210m] >> 1dt
-            ..  wanham[:buc + 270m, :buc + 721m]
+                wanham[:buc.a, :buc + 0.5sw] << 1dt
+            ..  wanham[:buc.f - 100m, :buc.f] << 0.5dt
+        );
+
+        # Str. 1283
+        track(:first:station :cat,
+                wanham[:buc.a, :buc + 0.5sw]
+            ..  wanham[:buc.f - 100m, :buc.f - 99m] << 0.5dt
+        );
+        track(:first:station :cat,
+                wanham[:buc + 0.49sw, :buc + 0.5sw]
+            ..  wanham[:buc.f - 100m, :buc.f - 99m] >> 0.5dt
+        );
+
+        # Str. 2200 R
+        track(:first:station :cat,
+                wanham[:buc.a, :buc + 0.5sw] >> 1dt
+            ..  wanham[:buc.f - 100m, :buc.f] >> 0.5dt
         );
 
         # 1712
@@ -77,13 +92,75 @@ with detail = [4, 5] {
 
 
     with link = "line.de.2200" {
-        track(:first :double :cat,
-                wanham[:buc.f, :buc.f + 1m] << 0.5dt
-            ..  wanham[:buc.f + 400m, :bun - 1sw]
+        track(:first :double :cat, wanham[:buc.f, :kle - 1sw]);
+        with layer = 1 line_badge(:open, wanham[:buc.f + 1.2km], "2200");
+    }
+
+
+    with link = "point.de.Bünsen" {
+        with layer = -1 marker(:de.bk :removed :left, wanham[:bun] << 0.5dt);
+        station(:left :removed, wanham[:bun - 0.4sw] << 0.5dt << 1.2sw,
+            "Bünsen", "325,92"
+        );
+    }
+
+    
+    with link = "point.de.Klecken" {
+        track(:first:station :double :cat, wanham[:kle - 1sw, :kle + 1sw]);
+        marker(:de.hp :left, wanham[:kle] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, wanham[:kle] << 0.5dt);
+        station(:left, wanham[:kle - 0.4sw] << 0.5dt << 1.4sw,
+            "Klecken", "329,10"
         );
     }
 
 
-    # ...
+    with link = "line.de.2200" {
+        track(:first :double :cat, wanham[:kle + 1sw, :hit - 1sw]);
+    }
+
+
+    with link = "point.de.Eddelsen" {
+        with layer = -1 marker(:de.bk :removed :left, wanham[:edd] << 0.5dt);
+        station(:left :removed, wanham[:edd - 0.4sw] << 0.5dt << 1.2sw,
+            "Eddelsen", "331,42"
+        );
+    }
+
+
+    with link = "point.de.Hittfeld" {
+        track(:first:station :double :cat,
+                wanham[:hit - 1sw, :hit + 30m + 1sw]
+        );
+        marker(:de.hp :right, wanham[:hit] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right,
+            wanham[:hit + 30m] >> 0.5dt
+        );
+        station(:right :left_align, wanham[:hit - 0.3sw] >> 0.5dt >> 1.6sw,
+            "Hittfeld",
+            hbox(:left:base,
+                "334,52 ",
+                span(:removed, "(334,55)")
+            )
+        );
+    }
+
+
+    with link = "line.de.2200" {
+        with layer = 4 track(:first :double :cat,
+                wanham[:hit + 30m + 1sw, :hga.a]
+        );
+        with layer = 5 line_badge(:open, wanham[:hga.a - 1.2km], "2200");
+    }
+
+
+    with link = "point.de.Glüsingen-Harburg" {
+        with layer = -1 marker(:de.bk :removed :right, wanham[:glu] >> 0.5dt);
+        station(:right :removed, wanham[:glu - 0.2sw] >> 0.5dt >> 1.6sw,
+            "Glüsingen", "337,60"
+        );
+    }
+
+    # point.de.Hamburg-Harburg - point.de.Hamburg-Hbf: D4/D5 getrennt.
 }
 

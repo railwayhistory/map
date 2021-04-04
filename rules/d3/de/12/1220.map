@@ -1,159 +1,108 @@
 # DE 1220.  Altona Palmaille - Kiel Altonaer Bf
 #
-let altkie = path("path.de.1220");
-let kieneu = path("path.de.1023");
-let kieost = path("path.de.1022");
-let neuasc = path("path.de.1041");
-let neufle = path("path.de.1040");
-let neuhei = path("path.de.1042");
+
+#--- Hamburg-Altona - Pinneberg (einschl.)
 
 with detail = 3 {
-    with link = "point.de.Altona-Palmaille", layer = -1 {
-        track(:first :double :gone, altkie[:pal, :pal + 0.5sw]);
-        marker(:de.bf :gone :bottom, altkie[:pal]);
-    }
-
-    with link = "line.de.1220" {
-        with layer = -1 track(:first :double :gone, altkie[:pal + 0.5sw, :alt]);
-    }
+    let altkie = path("metro.de.hmb.1220");
 
     with link = "point.de.Hamburg-Altona" {
-        let spaalt = path("path.de.6100");
-
-        # Richtungsgleis Strecke 6100
-        track(:first:station :cat, altkie[:alt, :alt + 1ssw] >> 0.5dt);
-
-        # Gegenrichtungsgleis Strecke 1220
-        track(:first:station :cat,
-                altkie[:alt, :alt + 1ssw] << 0.5dt
-             .. altkie[:fbah, :alg] << 1.5dt
+        with layer = -2 track(:first:station :cat,
+                altkie[:alt, :aham] >> 0.5dt
+            ..  altkie[:fham, :fham + 0.1dl] << 1.5dt
         );
 
-        # Gegenrichtungsgleis Strecke 6100
-        track(:first:station :cat, altkie[:alt, :alt + 1ssw] << 1.5dt);
+        track(:first:station :double :cat,
+                altkie[:alt, :aham] << 1dt
+        );
 
-        # Richtungsgleis Strecke 1220
-        track(:first:station :cat, altkie[:alt, :alg] << 2.5dt);
+        track(:first:station :cat,
+                altkie[:alt, :aham] << 2.5dt
+            ..  altkie[:fham, :fham + 0.1dl] << 2.5dt
+        );
 
-        # Strecke 1230
-        track(:first:station, altkie[:fbah, :alg] << 3.5dt);
+        marker(:de.bf :bottom, altkie[:alt + 0.5ssw]);
+        marker(:de.bf :bottom, altkie[:alt + 0.5ssw] << 1dt);
+        marker(:de.bf :bottom, altkie[:alt + 0.5ssw] << 2dt);
+    }
 
-        # Richtungsgleis Strecke 1232
-        track(:first:station, altkie[:fbah, :alg] << 0.5dt);
-
-        # Gegenrichtungsgleis Strecke 1232
-        track(:first:station, altkie[:fbah, :alg] >> 0.5dt);
-
-        area(:open,
-                altkie[:alt - 1ssw, :alt] >> 0.7dt
-            --  altkie[:alt, :alt - 1ssw] >> 2.7dt
+    with link = "point.de.Hamburg-Altona-Gbf" {
+        track(:first:station :double :cat,
+                altkie[:fham, :fham + 1ssw]
+        );
+        track(:first:station :double :cat,
+                altkie[:fham, :fham + 1ssw] << 2dt
         );
     }
 
     with link = "line.de.1220" {
-        # Gegenrichtungsgleis
-        track(:first :cat :flip:tight,
-                altkie[:alg, :alg + 1m] << 1.5dt
-            ..  altkie[:ala - 1.1ssw, :ala - 1ssw] << 2.5dt
+        track(:first :cat :tight :flip,
+                altkie[:fham + 1ssw, :alt.f] << 1.5dt
+            --  altkie[:alt.f + 2dl, :ala - 1ssw] << 2.5dt
         );
 
-        # Richtungsgleis s. Strecke 1230
-    }
-
-    with link = "line.de.1230" {
-        with layer = 2 track(:first :double,
-                altkie[:alg, :alg + 1m] << 3.0dt
-            ..  altkie[:ala - 1.5ssw, :ala - 1ssw] >> 1.0dt
+        with layer = 2 track(:first :cat :tight,
+                altkie[:fham + 1ssw, :alt.f] << 2.5dt
+            --  altkie[:alt.f + 3dl, :ala - 1ssw] >> 0.5dt
         );
-        with layer = 1 casing(:first :double,
-                altkie[:alg, :alg + 1m] << 3.0dt
-            ..  altkie[:ala - 1.5ssw, :ala - 1ssw] >> 1.0dt
-        );
-    }
-
-    with link = "line.de.1232" {
-        track(:first :double :cat,
-                altkie[:alg, :alg + 1m]
-            ..  altkie[:ala - 1.1ssw, :ala - 1ssw] << 1dt
+        with layer = 1 casing(:first :cat :tight,
+                altkie[:fham + 1ssw, :alt.f] << 2.5dt
+            --  altkie[:alt.f + 3dl, :ala - 1ssw] >> 0.5dt
         );
     }
 
     with link = "point.de.Hamburg-Langenfelde-Bbf" {
-        # Richtungsgleis Strecke 1220/1230
         track(:first:station :cat, altkie[:ala - 1ssw, :ala + 1ssw] >> 0.5dt);
-        track(:first:station,
-                altkie[:ala - 1ssw] >> 1.5dt
-            --  altkie[:ala - 1ssw + 1dl] >> 0.5dt
-        );
-
-        # Richtungsgleis Strecke 1232
         track(:first:station :cat, altkie[:ala - 1ssw, :ala + 1ssw] << 0.5dt);
-
-        # Gegenrichtungsgleis Strecke 1232
         track(:first:station :cat, altkie[:ala - 1ssw, :ala + 1ssw] << 1.5dt);
-
-        # Gegenrichtungsgleis Strecke 1220
         track(:first:station :cat, altkie[:ala - 1ssw, :ala + 1ssw] << 2.5dt);
-
         marker(:de.bbf :left, altkie[:ala] << 2.5dt);
     }
 
-    with link = "point.de.Hamburg-Langenfelde-Abzw" {
-        track(:first:station, altkie[:ala + 1ssw, :laa + 0.5ssw] >> 0.5dt);
-        track(:first:station, altkie[:ala + 1ssw, :laa + 0.5ssw] << 0.5dt);
-        track(:first:station, altkie[:ala + 1ssw, :laa + 0.5ssw] << 1.5dt);
-        track(:first:station, altkie[:ala + 1ssw, :laa + 0.5ssw] << 2.5dt);
-
-        marker(:de.abzw :right, altkie[:laa] >> 0.5dt);
-    }
-
     with link = "line.de.1220" {
-        track(:first :cat :tight,
-                altkie[:laa + 0.5ssw, :frot - 2ssw] >> 0.5dt
+        with layer = 2 track(:first :cat :tight,
+                altkie[:ala + 1ssw, :frot] >> 0.5dt
         );
-        track(:first :cat :flip:tight,
-                altkie[:laa + 0.5ssw, :frot - 2ssw] << 2.5dt
+        with layer = 1 casing(:first:station :cat,
+                altkie[:frot - 1ssw, :frot + 1ssw] >> 0.5dt
         );
-    }
-
-    with link = "line.de.1232" {
-        track(:first :double :cat, altkie[:laa + 0.5ssw, :frot - 2ssw] << 1dt);
+        track(:first :cat :tight :flip, altkie[:ala + 1ssw, :frot] << 2.5dt);
     }
 
     with link = "point.de.Hamburg-Eidelstedt" {
-        # Richtungsgleis Strecke 1220
-        track(:first:station :cat, altkie[:frot - 2ssw, :eid.f] >> 0.5dt);
-
-        # Richtungsgleis Strecke 1232
-        track(:first:station :cat,
-                altkie[:frot - 2ssw, :eid - 1dl] << 0.5dt
+        let eidrot = path("metro.de.hmb.1234");
+        
+        with layer = 2 track(:first:station :cat,
+                altkie[:frot, :eid + 6dl] >> 0.5dt
         );
 
-        # Strecke 1234
         track(:first:station :cat,
-                altkie[:frot, :eid - 2dl] << 1.5dt
-            --  altkie[:eid, :eid + 1m] >> 0.5dt
+                altkie[:frot, :eid + 2dl] << 0.5dt
+            --  altkie[:eid + 3dl, :eid + 3.1dl] >> 0.5dt
         );
 
-        # Gegenrichtungsgleis Strecke 1232
         track(:first:station :cat,
-                altkie[:frot - 2ssw, :frot - 1.9ssw] << 1.5dt
-            ..  altkie[:frot, :eid - 1dl] << 2.5dt
-            --  altkie[:eid, :eid + 1m] << 3.5dt
+                altkie[:frot, :eid + 3dl] << 1.5dt
         );
 
-        # Gegenrichtungsgleis Strecke 1220
         track(:first:station :cat,
-                altkie[:frot - 2ssw, :frot - 1.9ssw] << 2.5dt
-            ..  altkie[:frot, :eid + 0.5ssw] << 3.5dt
-            ..  altkie[:eid.f - 1m, :eid.f] << 0.5dt
+                altkie[:frot, :eid + 2dl] << 2.5dt
+            --  altkie[:eid + 4dl, :eid + 6dl] << 0.5dt
         );
 
-        marker(:de.bbf :left, altkie[:eid] << 3.5dt);
+        track(:first:station :cat,
+                eidrot[:aa + 0.1dl, :aa]
+            ..  altkie[:frot + 1ssw, :frot + 1.1ssw] << 0.5dt
+        );
+
+        marker(:de.bbf :left, altkie[:eid] << 2.5dt);
     }
 
     with link = "line.de.1220" {
-        track(:first :double :cat, altkie[:eid.f, :pin - 2ssw]);
+        track(:first :double :cat,
+                path("metro.de.hmb.1220")[:eid + 6dl, :f]
+            ..  altkie[:the, :pin - 2ssw]
+        );
     }
 
     with link = "point.de.Thesdorf-Bk" {
@@ -163,13 +112,28 @@ with detail = 3 {
     with link = "point.de.Pinneberg" {
         track(:first:station :double :cat, altkie[:pin - 2ssw, :pin + 1ssw]);
         marker(:de.bf :right, altkie[:pin] >> 0.5dt);
-        slabel(:right, altkie[:pin - 0.5ssw] >> 0.5dt >> 1.4ssw,
+        slabel(:right, altkie[:pin] >> 0.5dt >> 1.6ssw,
             span(:bold, "Pinneberg")
         );
     }
+}
+
+
+#--- Pinneberg (ausschl.) - Kiel Hbf
+
+with detail = 3 {
+    let altkie = path("path.de.1220");
+    let kieneu = path("path.de.1023");
+    let kieost = path("path.de.1022");
+    let neuasc = path("path.de.1041");
+    let neufle = path("path.de.1040");
+    let neuhei = path("path.de.1042");
 
     with link = "line.de.1220" {
-        track(:first :double :cat, altkie[:pin + 1ssw, :pri - 1ssw]);
+        track(:first :double :cat,
+                path("metro.de.hmb.1220")[:pin + 1ssw, :pin + 1.2km]
+            ..  altkie[:pri - 1.4km, :pri - 1ssw]
+        );
     }
 
     with link = "point.de.Prisdorf" {

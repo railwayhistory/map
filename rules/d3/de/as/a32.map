@@ -1,0 +1,48 @@
+# DE A32.  Neustadt (Holst) (ausschl.) - Südschleuse (ausschl.)
+#          Lütjenbrode Süd (ausschl.) - Heiligenhafen
+#
+let lubput = path("path.de.1100");
+
+with detail = 3 {
+    let neuhei = path("path.de.a32.neu");
+    let kieneu = path("path.de.1023");
+
+    with link = "line.de.A32" {
+        with layer = -2 track(:second :removed :flip,
+                kieneu[:fold + 1m, :fold]
+            ..  lubput[:fnst, :fnst + 1m]
+        );
+    }
+}
+
+with detail = 3 {
+    let neuhei = path("path.de.a32.hei");
+
+    with link = "line.de.A32" {
+        with layer = -1 track(:second :removed :flip,
+                lubput[:lus + 0.5ssw, :lus + 0.6ssw]
+            ..  neuhei[:lus.f, :lut - 1ssw]
+        );
+    }
+
+    with link = "point.de.Lütjenbrode" {
+        track(:second:station :removed, neuhei[:lut - 1ssw, :lut + 1ssw]);
+        marker(:de.bf :removed :left, neuhei[:lut]);
+        slabel(:left :removed, neuhei[:lut - 1.0ssw] << 1.8ssw,
+            span(:bold, "Lütjenbrode")
+        );
+    }
+
+    with link = "line.de.A32" {
+        track(:second :removed, neuhei[:lut + 1ssw, :hei - 1ssw]);
+    }
+
+    with link = "point.de.Heiligenhafen" {
+        track(:second:station :removed, neuhei[:hei - 1ssw, :hei + 0.6ssw]);
+        marker(:de.bf :removed :left, neuhei[:hei]);
+        slabel(:left :removed, neuhei[:hei + 1ssw] << 1.7ssw - (0.3ssw, 0ssw),
+            span(:bold, "Heiligenhafen")
+        );
+    }
+}
+

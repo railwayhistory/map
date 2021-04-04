@@ -1,0 +1,28 @@
+# DE AP1.  Oppendorf (ausschl.) - Kiel Ostuferhafen
+#
+let kieson = path("path.de.9107");
+let oppost = path("path.de.AP1");
+
+with detail = 3 {
+    with link = "line.de.AP1" {
+        track(:third :open,
+                kieson[:opp + 0.5ssw, :opp + 0.51ssw]
+            ..  oppost[:a, :opk - 1ssw]
+        );
+    }
+
+    with link = "point.de.Oppendorf-Kraftwerk" {
+        track(:third :station :open, oppost[:opk - 1ssw, :opk + 1ssw]);
+        marker(:de.anst :open :right, oppost[:opk]);
+    }
+
+    with link = "line.de.AP1" {
+        track(:third :open, oppost[:opk + 1ssw, :ost - 1ssw]);
+    }
+
+    with link = "point.de.Kiel-Ostuferhafen" {
+        track(:third :station :open, oppost[:ost - 1ssw, :ost + 1ssw]);
+        marker(:de.bf :open :left, oppost[:ost]);
+    }
+}
+

@@ -1,0 +1,258 @@
+# DE AF1.  Flensburg Kreisb - Kappeln (Schlei)
+#
+let flekap = path("path.de.AF1");
+let maaflk = path("path.de.A00");
+
+with detail = 3 {
+    # Flensburg Kreisb
+    with layer = 1 {
+        track(:third :station :narrow :removed,
+                maaflk[:flk.aa, :flk.aa - 1ssw] >> 1dt
+        );
+        track(:third :station :narrow :removed,
+                maaflk[:flk.aa, :flk.aa - 1ssw] >> 2dt
+        );
+    }
+    marker(:de.kbf :removed :left, maaflk[:flk.aa - .5ssw] << 1dt);
+
+    # Streckengleis Flensburg - Engelsby
+    with layer = 1 track(:third :narrow :cat :removed,
+            maaflk[:flk.aa - 1ssw, :flk.aa - 2.1ssw] >> 1dt
+         .. maaflk[:flex - 1ssw, :flex - 1.1ssw] << 1dt
+         .. flekap[:eng - 0.6ssw, :eng - 0.5ssw]
+    );
+    with layer = 0.5 casing(:third :narrow,
+            maaflk[:flk.aa - 1ssw, :flk.aa - 2.1ssw] >> 1dt
+         .. maaflk[:flex - 1ssw, :flex - 1.1ssw] << 1dt
+    );
+    
+    # Engelsby
+    track(:third :station :narrow :removed, flekap[:eng - 1ssw, :eng + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:eng]);
+    slabel(:right :removed, flekap[:eng - 0.5ssw] >> 1.3ssw + (1ssw, 0ssw),
+        "Engelsby"
+    );
+
+    # Streckengleis Engelsby - Kauslund
+    track(:third :narrow :cat :removed, flekap[:eng + 1ssw, :kau - 1ssw]);
+
+    # Kauslund
+    track(:third :station :narrow :removed, flekap[:kau - 1ssw, :kau + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:kau]);
+    slabel(:left :removed, flekap[:kau] << 1dt, "Kauslund");
+
+    # Streckengleis Kauslund - Wees
+    track(:third :narrow :cat :removed, flekap[:kau + 1ssw, :wee - 1ssw]);
+
+    # Wees
+    #
+    track(:third :station :narrow :removed, flekap[:wee - 1ssw, :wee + 1ssw]);
+    marker(:de.kzst :removed :left, flekap[:wee]);
+    slabel(:right :removed, flekap[:wee] >> 1.8ssw, "Wees");
+
+    # Streckengleis Wees - Rothenhaus
+    track(:third :narrow :cat :removed, flekap[:wee + 1ssw, :rot - 0.5ssw]);
+
+    # Rothenhaus
+    track(:third :station :narrow :removed,
+            flekap[:rot - 0.5ssw, :rot + 1.5ssw]
+    );
+    marker(:de.kzst :removed :right, flekap[:rot + 0.5ssw]);
+    slabel(:left :removed, flekap[:rot + 1ssw] << 1dt, "Rothenhaus");
+
+    # Streckengleis Rothenhaus - Glücksburg
+    track(:third :narrow :cat :removed, flekap[:rot + 1.5ssw, :glu - 1ssw]);
+
+    # Glücksburg
+    track(:third :station :narrow :removed, flekap[:glu - 1ssw, :glu + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:glu]);
+    slabel(:top :removed, flekap[:glu] << 1dt,
+        hbox(:center :base,
+            span(:small :removed, "Glücksburg "),
+            span(:small :light :removed, "(Kr Flensburg)")
+        )
+    );
+
+    # Streckengleis Glücksburg - Rüde
+    track(:third :narrow :removed, flekap[:glu + 1ssw, :rud - 1ssw]);
+
+    # Rüde
+    track(:third :station :narrow :removed, flekap[:rud - 1ssw, :rud + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:rud]);
+    slabel(:right :removed, flekap[:rud + 0.5ssw] << 1.0dt, "Rüde");
+
+    # Streckengleis Rüde - Ringsberg
+    track(:third :narrow :removed, flekap[:rud + 1ssw, :rin - 1ssw]);
+
+    # Ringsberg
+    track(:third :station :narrow :removed, flekap[:rin - 1ssw, :rin + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:rin]);
+    slabel(:left :removed, flekap[:rin + 0.4ssw] >> 2.4ssw, "Ringsberg");
+
+    # Streckengleis Ringsberg - Langballig
+    track(:third :narrow :removed, flekap[:rin + 1ssw, :lan - 1ssw]);
+    with layer = 1 line_badge(:removed, flekap[:rin + 1.2km], "AF1");
+
+    # Langballig
+    track(:third :station :narrow :removed, flekap[:lan - 1ssw, :lan + 1ssw]);
+    marker(:de.kzst :removed :left, flekap[:lan]);
+    slabel(:right :removed, flekap[:lan] << 1.8ssw - (2ssw, 0ssw),
+        "Langballig"
+    );
+
+    # Streckengleis Langballig - Streichmühle
+    track(:third :narrow :removed, flekap[:lan + 1ssw, :str - 1.5ssw]);
+
+    # Streichmühle
+    track(:third :station :narrow :removed,
+            flekap[:str - 1.5ssw, :str + 0.5ssw]
+    );
+    marker(:de.kzst :removed :right, flekap[:str - 0.5ssw]);
+    slabel(:right :removed, flekap[:str - 1ssw] << 1.0dt,
+        "Streichmühle"
+    );
+
+    # Streckengleis Streichmühle - Dollerup
+    track(:third :narrow :removed, flekap[:str + 0.5ssw, :dol - 1ssw]);
+
+    # Dollerup
+    track(:third :station :narrow :removed, flekap[:dol - 1ssw, :dol + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:dol]);
+    with layer = -1 slabel(:bottom :removed,
+        flekap[:dol] >> 1ssw + (0ssw, 1ssw),
+        "Dollerup"
+    );
+
+    # Streckengleis Dollerup - Nübelfeld
+    track(:third :narrow :removed, flekap[:dol + 1ssw, :nub - 1ssw]);
+
+    # Nübelfeld
+    track(:third :station :narrow :removed, flekap[:nub - 1ssw, :nub + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:nub]);
+    slabel(:top :removed, flekap[:nub] << 1.0dt, "Nübelfeld");
+
+    # Streckengleis Dollerup - Steinbergkirche
+    track(:third :narrow :removed, flekap[:nub + 1ssw, :stk - 1ssw]);
+
+    # Steinbergkirche
+    track(:third :station :narrow :removed, flekap[:stk - 1ssw, :stk + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:stk]);
+    slabel(:left :removed, flekap[:stk + 0.5ssw] >> 3.0ssw + (1ssw, 0ssw),
+        "Steinbergkirche"
+    );
+
+    # Streckengleis Steinbergkirche - Steinberg
+    track(:third :narrow :removed, flekap[:stk + 1ssw, :ste - 1.5ssw]);
+
+
+    # Steinberg-Flensburg
+    #
+    track(:third :station :narrow :removed,
+        flekap[:ste - 1.5ssw, :ste + 0.5ssw]
+    );
+    marker(:de.kzst :removed :left, flekap[:ste - 0.5ssw]);
+    slabel(:right :removed, flekap[:ste - 1ssw] << 1.4ssw - (1ssw, 0ssw),
+        vbox(:left :bottom,
+            span(:regular, "Steinberg"),
+            span(:light, "(Kr Flensburg)")
+        )
+    );
+
+    # Streckengleis Steinberg - Niesgrau
+    track(:third :narrow :removed, flekap[:ste + 0.5ssw, :nie - 1.5ssw]);
+
+    # Niesgrau
+    track(:third :station :narrow :removed,
+        flekap[:nie - 1.5ssw, :nie + 0.5ssw]
+    );
+    marker(:de.kzst :removed :left, flekap[:nie - 0.5ssw]);
+    slabel(:right :removed, flekap[:nie - 1ssw] << 1.6ssw - (1ssw, 0ssw),
+        "Niesgrau"
+    );
+
+    # Streckengleis Niesgrau - Stausmark
+    track(:third :narrow :removed, flekap[:nie + 0.5ssw, :sta - 1ssw]);
+
+    # Stausmark
+    track(:third :station :narrow :removed, flekap[:sta - 1ssw, :sta + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:sta]);
+    slabel(:left :removed, flekap[:sta + 0.3ssw] >> 2.2ssw, "Stausmark");
+
+    # Streckengleis Stausmark - Rundhof
+    track(:third :narrow :removed, flekap[:sta + 1ssw, :fsat]);
+
+    # Rundhof
+    track(:third :station :narrow :removed, flekap[:fsat, :run + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:run]);
+    slabel(:right :removed, flekap[:run] >> 2.3ssw,
+        span(:bold, "Rundhof")
+    );
+
+    # Streckengleis Rundhof - Lehbek
+    track(:third :narrow :removed, flekap[:run + 1ssw, :leh - 1ssw]);
+
+    # Lehbek
+    track(:third :station :narrow :removed, flekap[:leh - 1ssw, :leh + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:leh]);
+    slabel(:right :removed, flekap[:leh] >> 2.8ssw - (1.3ssw, 0ssw), "Lehbek");
+
+    # Streckengleis Lehbek - Gelting
+    track(:third :narrow :removed, flekap[:leh + 1ssw, :gel - 1ssw]);
+
+    # Gelting
+    track(:third :station :narrow :removed, flekap[:gel - 1ssw, :gel + 1ssw]);
+    marker(:de.kzst :removed :left, flekap[:gel]);
+    slabel(:top :removed, flekap[:gel] << 1.2ssw, "Gelting");
+
+    # Streckengleis Gelting - Stenderup
+    track(:third :narrow :removed, flekap[:gel + 1ssw, :stp - 1ssw]);
+    with layer = 1 line_badge(:removed, flekap[:gel + 1.4km], "AF1");
+
+    # Stenderup
+    track(:third :station :narrow :removed, flekap[:stp - 1ssw, :stp + 1ssw]);
+    marker(:de.kzst :removed :left, flekap[:stp]);
+    slabel(:right:removed, flekap[:stp + 0.3ssw] << 1.4ssw, "Stenderup");
+
+    # Streckengleis Stenderup - Schwackendorf
+    track(:third :narrow :removed, flekap[:stp + 1ssw, :swa - 1ssw]);
+
+    # Schwackendorf
+    track(:third :station :narrow :removed, flekap[:swa - 1ssw, :swa + 1ssw]);
+    marker(:de.kzst :removed :left, flekap[:swa]);
+    slabel(:right:removed, flekap[:swa + 0.4ssw] << 1.4ssw,
+        "Schwackendorf"
+    );
+
+    # Streckengleis Schwackendorf - Rabel
+    track(:third :narrow :removed, flekap[:swa + 1ssw, :rab - 1ssw]);
+
+    # Rabel
+    track(:third :station :narrow :removed, flekap[:rab - 1ssw, :rab + 1ssw]);
+    marker(:de.kzst :removed :left, flekap[:rab]);
+    slabel(:right:removed, flekap[:rab + 0.5ssw] << 1.2ssw, "Rabel");
+
+    # Streckengleis Rabel - Grimnis
+    track(:third :narrow :removed, flekap[:rab + 1ssw, :gri - 1ssw]);
+
+    # Grimsnis
+    track(:third :station :narrow :removed, flekap[:gri - 1ssw, :gri + 1ssw]);
+    marker(:de.kzst :removed :right, flekap[:gri]);
+    slabel(:left :removed, flekap[:gri + 0.5ssw] >> 1.4ssw, "Grimnis");
+
+    # Streckengleis Grimnis - Kappeln
+    track(:third :narrow :removed, flekap[:gri + 1ssw, :kap - 1ssw]);
+
+    # Kappeln
+    track(:third :station :narrow :removed, flekap[:kap - 1ssw, :kap + 1ssw]);
+    marker(:de.kbf :removed :right, flekap[:kap]);
+    slabel(:left, flekap[:kap] >> 1.2ssw,
+        vbox(:right :middle,
+            vbox(:center :bottom,
+                span(:bold, "Kappeln "),
+                span(:regular, "(Schlei)")
+            )
+        )
+    );
+
+}
+

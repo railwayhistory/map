@@ -421,17 +421,65 @@ with detail = [4, 5] {
         );
     }
 
-
+    
     with link = "line.de.1151" {
         with layer = 2 track(:second,
-                witbuc[:wen + 1sw, :lun.x + 300m]
-            ..  lehcux[:fdan - 1m, :fdan] << 4.5dt
+                witbuc[:wen + 1sw, :lun.x]
+            ..  lehcux[:lun.a + 480m, :lun.a + 481m] << 7.5dt
         );
-        with layer = 1 casing(:second, witbuc[:lun.x - 300m, :lun.x + 300m]);
-        with layer = 3 line_badge(:open, witbuc[:wen + 1.6km], "1151");
+        with layer = 1 casing(:second,
+                witbuc[:lun.x - 300m, :lun.x]
+            ..  lehcux[:lun.a + 480m, :lun.a + 481m] << 7.5dt
+        );
     }
+    
+    
+    with link = "point.de.Lüneburg-Westseite" {
+        # Gl. 301 (Str. 1151)
+        track(:second :station,
+                lehcux[:lun.a + 480m, :lun.a + 481m] << 7.5dt
+            ..  lehcux[:fdan, :lun + 300m] << 6.5dt
+            ..  lehcux[:fluw - 0.1dl, :fluw] << 1.5dt
+        );
 
-    # point.de.Lüneburg de.1720
+        # Gl. 302
+        track(:station,
+                lehcux[:lun - 250m + 0.9dl, :lun - 250m + 1dl] << 6.5dt
+            --  lehcux[:lun - 250m + 2dl, :lun + 300m - 1dl] << 7.5dt
+            --  lehcux[:lun + 300m, :lun + 301m] << 6.5dt
+        );
+
+        # Gl. 307 (Str. 9111)
+        track(:station,
+                lehcux[:lun.a + 480m, :lun.a + 481m] << 9.5dt
+            --  lehcux[:lun.a + 480m + 1dl, :lun.a + 481m + 1dl] << 8.5dt
+            ..  lehcux[:fdan, :lun - 250m - 1dl] << 7.5dt
+            --  lehcux[:lun - 250m, :lun - 249m] << 6.5dt
+        );
+
+        # Gl. 308
+        track(:station,
+                lehcux[:fdan - 0.1dl, :fdan] << 7.5dt
+            --  lehcux[:fdan + 1dl, :lun - 250m - 3dl] << 8.5dt
+            --  lehcux[:lun - 250m - 2dl, :lun - 250m - 1.9dl] << 7.5dt
+        );
+
+        with layer = -2 marker(:de.bftp :right, lehcux[:lun] << 6.5dt);
+        station(:left, lehcux[:lun] << 9dt,
+            "Lüneburg Westseite", "1151: 228,973"
+        );
+    }
+                
+
+
+    with detail = 10, link = "point.de.Lüneburg-Westseite" {
+        track(:second:station,
+                lehcux[:fdan, :fdan + 100m] << 4.5dt
+            ..  lehcux[:lun - 100m, :abuc] << 4dt
+            ..  lehcux[:fluw - 50m, :fluw] << 1.5dt
+        );
+
+    }
 
 
     with link = "point.de.Sternkamp" {
