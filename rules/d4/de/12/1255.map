@@ -1,0 +1,92 @@
+# DE 1255.  Meckelfeld - Hamburg Süd
+#
+let lehcux = path("path.de.1720");
+let wanham = path("path.de.2200");
+
+with detail = 4 {
+    with link = "line.de.1255" {
+        # Str. 1255 R
+        track(:first :cat :tight,
+                lehcux[:meh + 300m, :fbre - 350m] << 0.5dt
+        );
+
+        # Str. 1255 L
+        track(:first :cat :tight :flip,
+                lehcux[:meh + 300m, :fbre - 930m] << 3.5dt
+            ..  lehcux[:fbre - 355m, :fbre - 350m] << 1.5dt
+        );
+
+        # Str. 1255 L/R
+        track(:first :double :cat,
+                lehcux[:fbre - 350m, :fbre - 340m] << 1dt
+            ..  lehcux[:fbre + 100m, :hrs - 180m] << 3dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Harburg-Bbf-Süd" {
+        # Gl. 7
+        track(:first:station :cat,
+                wanham[:hrs - 180m, :hrb - 450m] << 2.5dt
+        );
+
+        # Gl. 8
+        track(:first:station :cat,
+                wanham[:hrs - 180m, :hrb - 450m] << 3.5dt
+        );
+
+        # W1 - W2
+        track(:station :cat,
+                wanham[:hrs - 2dl] << 2.5dt
+            --  wanham[:hrs - 1dl] << 3.5dt
+        );
+
+        # W3 - W4
+        track(:station :cat,
+                wanham[:hrs + 0.3sw + 1dl] << 3.5dt
+            --  wanham[:hrs + 0.3sw + 2dl] << 4.5dt
+        );
+
+        # W18 - W17
+        track(:station :cat,
+                wanham[:hrs + 0.3sw + 2dl] << 2.5dt
+            --  wanham[:hrs + 0.3sw + 3dl] << 3.5dt
+        );
+
+        marker(:de.bft :left, wanham[:hrs] << 3.5dt);
+        with layer = -1 marker(:de.bft.casing :left, wanham[:hrs] << 3.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Harburg-Bbf" {
+        # Gl. 180 - Gl. 125
+        with layer = -2 track(:station :cat,
+                wanham[:hrs - 250m, :hrb + 400m + 7dl] << 4.5dt
+        );
+
+        # Gl. 127
+        track(:station :cat,
+                wanham[:hrs + 0.3sw + 5dl, :hrb + 400m + 3dl] << 5.5dt
+        );
+
+        # Gl. 130
+        track(:station :cat,
+                wanham[:hrs + 0.3sw + 6dl, :hrb + 400m + 2dl] << 6.5dt
+        );
+
+        # Gl. 133
+        track(:station :cat,
+                wanham[:hrs + 0.3sw + 3.9dl, :hrs + 0.3sw + 4dl] << 4.5dt
+            --  wanham[:hrs + 0.3sw + 7dl, :hrb + 400m + 1dl] << 7.5dt
+        );
+
+        # Gl. 138
+        track(:station :cat,
+                wanham[:hrs + 0.3sw + 5dl, :hrb + 400m] << 8.5dt
+            --  wanham[:hrb + 400m + 5dl, :hrb + 400m + 5.1dl] << 3.5dt
+        );
+
+        marker(:de.bft :left, wanham[:hrb] << 8.5dt);
+    }
+}
+

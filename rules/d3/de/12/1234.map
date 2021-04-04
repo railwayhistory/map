@@ -1,0 +1,48 @@
+# DE 1234.  Hamburg-Eidelstedt (Ef) - Hamburg Lübecker Gbf
+#
+let eidrot = path("metro.de.hmb.1234");
+let lubham = path("metro.de.hmb.1120");
+let spaalt = path("metro.de.hmb.6100");
+
+with detail = 3 {
+    # point.de.Hamburg-Eidelstedt: de.1220
+
+    with link = "line.de.1234" {
+        track(:first :cat, eidrot[:aa, :lok - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Lokstedt" {
+        track(:first:station :cat, eidrot[:lok - 1ssw, :lok + 1ssw]);
+        marker(:de.gbf :left, eidrot[:lok]);
+    }
+
+    with link = "line.de.1234" {
+        with layer = -2 track(:first :cat,
+                eidrot[:lok + 1ssw, :bar.aa]
+            ..  eidrot[:bar.a, :hoa - 0.5ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Horn" {
+        track(:first:station :cat,
+                eidrot[:hoa - 0.5ssw, :hoa + 0.5ssw] >> 0.5dt
+        );
+        track(:first:station :cat,
+                lubham[:arot - 0.5dt, :arot - 0.49dt] << 0.5dt
+            ..  eidrot[:hoa, :hoa + 0.5ssw] << 0.5dt
+        );
+        marker(:de.abzw :left, eidrot[:hoa] << 0.5dt);
+    }
+
+    with link = "line.de.1234" {
+        track(:first :double :cat, eidrot[:hoa + 0.5ssw, :rot.aa]);
+    }
+
+    with link = "point.de.Hamburg-Rothenburgsort" {
+        track(:first:station :double :cat,
+                eidrot[:rot.aa - 0.1dl, :rot.aa]
+            ..  spaalt[:rop, :rop + 0.1dl] << 2dt
+        );
+    }
+}
+

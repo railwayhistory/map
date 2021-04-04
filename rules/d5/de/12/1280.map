@@ -1,0 +1,138 @@
+# DE 1280.  Buchholz (Nordheide) - Hamburg-Allermöhe
+#
+let lehcux = path("path.de.1720");
+let spaalt = path("path.de.6100");
+
+with detail = 5 {
+
+    with link = "line.de.1280" {
+        with layer = 6 track(:first :double :cat,
+                lehcux[:meh + 300m, :fbre - 630m] << 4dt
+            ..  lehcux[:fbre, :hrs - 180m] >> 4dt
+            ..  lehcux[:hrb - 451m, :hrb - 450m] >> 3dt
+        );
+        with layer = 5 casing(:first :double :cat,
+                lehcux[:fbre - 635m, :fbre - 630m] << 4dt
+            ..  lehcux[:fbre, :fbre + 5m] >> 4dt
+        );
+    }
+
+
+
+    with link = "point.de.Hamburg-Rothenburgsort-Tk" {
+        # Gl. 121
+        track(:first:station :cat,
+                spaalt[:rtk + 750m, :rtk + 740m] >> 4.5dt
+            ..  spaalt[:rtk + 451m, :rtk + 450m] >> 2.5dt
+            ..  spaalt[:rtk + 340m, :rtk + 339m] >> 1.5dt
+        );
+
+        # Gl. 122
+        track(:first:station :cat,
+                spaalt[:rtk + 750m, :rtk + 740m] >> 3.5dt
+            ..  spaalt[:rtk + 451m, :rtk - 100m] >> 1.5dt
+        );
+
+        # Gl. 126
+        track(:station,
+                spaalt[:rtk + 180m] << 230m
+            --  spaalt[:rtk + 190m] << 150m
+            ..  spaalt[:rtk + 40m, :rtk - 20m] >> 2.5dt
+        );
+
+        # Gl. 150
+        track(:first:station :cat,
+                spaalt[:rop - 560m, :rtk - 100m] >> 0.5dt
+        );
+
+        # Gl. 160
+        track(:first:station :cat,
+                spaalt[:rop - 560m, :rtk - 100m] << 0.5dt
+        );
+
+        # W104 - W101
+        track(:station :cat,
+                spaalt[:rtk + 40m] << 2.5dt
+            --  spaalt[:rtk] << 1.5dt
+        );
+
+        # W105 - W103
+        track(:station :cat,
+                spaalt[:rtk + 100m] << 0.5dt
+            --  spaalt[:rtk] >> 0.5dt
+        );
+
+        # W106 - W102
+        track(:station :cat,
+                spaalt[:rtk + 100m] << 1.5dt
+            --  spaalt[:rtk] << 0.5dt
+        );
+
+        # W109 - W107
+        track(:station :cat,
+                spaalt[:rtk + 450m] << 1.5dt
+            --  spaalt[:rtk + 320m] << 0.5dt
+        );
+
+        marker(:de.bft :right, spaalt[:rtk] >> 0.5dt);
+        with layer = -1 marker(:de.bft.casing, spaalt[:rtk] >> 0.5dt);
+        station(:left, spaalt[:rtk - 1sw] << 2.5dt << 2sw,
+            "H.-Rothenburgsort Tk",
+            hbox(:center:top,
+                vbox(:right:top, "1280: ", "6100: "),
+                vbox(:right:top, "??", "??")
+            )
+        );
+    }
+
+
+    with link = "line.de.1280" {
+        track(:first :cat :flip, spaalt[:rtk - 100m, :bia + 240m] >> 1.5dt);
+    }
+
+    with link = "point.de.Hamburg-Billwerder-Moorfleet-Abzw" {
+        let w38 = spaalt[:bia - 120m, :bia - 121m] >> 1.5dt;
+        let w39 = spaalt[:bia - 29m, :bia - 30m] >> 0.5dt;
+        let w90 = spaalt[:bia + 30m, :bia + 29m] >> 0.5dt;
+        let w96 = spaalt[:bia - 29m, :bia - 30m] >> 1.5dt;
+        let w97 = spaalt[:bia + 30m, :bia + 29m] >> 1.5dt;
+        let w98 = spaalt[:bia + 141m, :bia + 140m] >> 0.5dt;
+        let w99 = spaalt[:bia + 111m, :bia + 110m] << 0.5dt;
+
+        # Str. 6100 R
+        track(:first:station :cat, spaalt[:bia + 240m, :bia - 130m] << 0.5dt);
+
+        # Str. 6100 L
+        track(:first:station :cat, spaalt[:bia + 240m, :bia - 130m] >> 0.5dt);
+
+        # Gl. 70
+        track(:first:station :cat, spaalt[:bia + 240m, :bia - 130m] >> 1.5dt);
+
+        # Gl. 71
+        track(:first:station :cat,
+                w96
+            ..  spaalt[:bia - 90m, :bia - 110m] >> 2.5dt
+        );
+
+        # Gl. 91
+        track(:station :cat, spaalt[:bia + 20m, :bia - 90m] >> 2.5dt);
+
+        # W39 - W38
+        track(:station :cat, w39 .. w38);
+
+        # W98 - W97
+        track(:station :cat, w98 .. w97);
+
+        # W99 - W90
+        track(:station :cat, w99 .. w90);
+
+        marker(:de.bft.abzw :left, spaalt[:bia] << 2.5dt);
+        station(:left, spaalt[:bia + 0.3sw] << 2.5dt << 1.8sw,
+            "H.-B.-M. (Abzw)",
+            hbox(:center:top,
+                vbox(:right:top, "6100: ??", "1280: ??")
+            )
+        );
+    }
+}
+

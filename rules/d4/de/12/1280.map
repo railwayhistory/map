@@ -1,0 +1,116 @@
+# DE 1280.  Buchholz (Nordheide) - Hamburg-Allermöhe
+#
+let lehcux = path("path.de.1720");
+let spaalt = path("path.de.6100");
+
+with detail = 4 {
+
+    with link = "line.de.1280" {
+        with layer = 6 track(:first :double :cat,
+                lehcux[:meh + 300m, :fbre - 930m] << 2dt
+            ..  lehcux[:fbre - 200m, :hrb - 450m] >> 3dt
+        );
+        with layer = 5 casing(:first :double :cat,
+                lehcux[:fbre - 935m, :fbre - 930m] << 2dt
+            ..  lehcux[:fbre - 200m, :fbre - 95m] >> 3dt
+        );
+    }
+
+
+
+    with link = "point.de.Hamburg-Rothenburgsort-Tk" {
+        # Gl. 121
+        track(:first:station :cat,
+                spaalt[:rtk + 750m, :rtk + 450m] >> 2.5dt
+            --  spaalt[:rtk + 450m - 1dl, :rtk + 450m - 1.1dl] >> 1.5dt
+        );
+
+        # Gl. 122
+        track(:first:station :cat,
+                spaalt[:rtk + 750m, :rtk - 1sw] >> 1.5dt
+        );
+
+        # Gl. 150
+        track(:first:station :cat,
+                spaalt[:rop - 1sw, :rtk - 1sw] >> 0.5dt
+        );
+
+        # Gl. 160
+        track(:first:station :cat,
+                spaalt[:rop - 1sw, :rtk - 1sw] << 0.5dt
+        );
+
+        # W105 - W102
+        track(:station :cat,
+                spaalt[:rtk + 2dl] << 0.5dt
+            --  spaalt[:rtk + 1dl] >> 0.5dt
+        );
+
+        # W106 - W103
+        track(:station :cat,
+                spaalt[:rtk + 1dl] << 1.5dt
+            --  spaalt[:rtk] << 0.5dt
+        );
+
+        # W109 - W107
+        track(:station :cat,
+                spaalt[:rtk + 450m + 1dl] << 1.5dt
+            --  spaalt[:rtk + 450m] << 0.5dt
+        );
+    }
+
+
+    with link = "line.de.1280" {
+        track(:first :cat :flip,
+                spaalt[:rtk - 1sw, :bia + 1sw] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Billwerder-Moorfleet-Abzw" {
+        # Str. 6100 R
+        track(:first :station :cat,
+                spaalt[:bia + 1sw, :bia - 1sw] << 0.5dt
+        );
+
+        # Str. 6100 L
+        track(:first :station :cat,
+                spaalt[:bia + 1sw, :bia - 1sw] >> 0.5dt
+        );
+
+        # Gl. 70
+        track(:first :station :cat,
+                spaalt[:bia + 1sw, :bia - 4dl] >> 1.5dt
+        );
+
+        # Gl. 71
+        track(:station :cat,
+                spaalt[:bia - 0.9dl, :bia - 1dl] >> 1.5dt
+            --  spaalt[:bia - 2dl, :bia - 3dl] >> 2.5dt
+        );
+
+        # Gl. 91
+        track(:station :cat,
+                spaalt[:bia + 1dl, :bia - 2dl] >> 2.5dt
+        );
+
+        # W39 - W38
+        track(:station :cat,
+                spaalt[:bia - 2dl] << 0.5dt
+            --  spaalt[:bia - 3dl] << 1.5dt
+        );
+
+        # W98 - W97
+        track(:station :cat,
+                spaalt[:bia + 3dl] << 0.5dt
+            --  spaalt[:bia + 2dl] << 1.5dt
+        );
+
+        # W99 - W90
+        track(:station :cat,
+                spaalt[:bia + 2dl] >> 0.5dt
+            --  spaalt[:bia + 1dl] << 0.5dt
+        );
+    }
+}
+

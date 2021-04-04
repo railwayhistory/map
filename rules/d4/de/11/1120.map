@@ -1,0 +1,153 @@
+# DE 1120.  Lübeck Hbf - Hamburg Hbf
+#
+let lubham = path("path.de.1120");
+
+with detail = 4 {
+    with link = "point.de.Hamburg-Wandsbek-Wf" {
+        # Gl. 1
+        track(:first:station :cat, lubham[:wan.a, :wan - 0.5sw] >> 0.5dt);
+
+        # Gl. 2
+        track(:first:station :cat, lubham[:wan.a, :wan - 0.5sw] << 0.5dt);
+
+        # Gl. 3
+        track(:first:station :cat,
+                lubham[:waf - 0.5sw - 2.1dl, :waf - 0.5sw - 2dl] << 0.5dt
+            --  lubham[:waf - 0.5sw - 1dl, :wan - 0.5sw] << 1.5dt
+        );
+
+        # Gl. 4
+        track(:station :cat,
+                lubham[:waf - 0.5sw - 1.1dl, :waf - 0.5sw - 1dl] << 1.5dt
+            --  lubham[:waf - 0.5sw, :wan - 0.5sw - 8dl] << 2.5dt
+        );
+
+        # Gl. 5
+        track(:station,
+                lubham[:waf - 0.5sw - 1dl, :wan - 0.5sw - 9dl] << 3.5dt
+            --  lubham[:wan - 0.5sw - 7dl, :wan - 0.5sw - 6.9dl] << 1.5dt
+        );
+
+        # Gl. 8
+        track(:station,
+                lubham[:waf + 0.5sw + 1dl, :wan - 0.5sw - 8dl] << 4.5dt
+        );
+
+        # Gl. 11
+        track(:station,
+                lubham[:waf + 0.5sw - 0.1dl, :waf + 0.5sw] << 3.5dt
+            --  lubham[:waf + 0.5sw + 2dl, :waf + 350m] << 5.5dt
+        );
+
+        # W101 - W102
+        track(:station :cat,
+                lubham[:waf - 0.5sw - 5dl] >> 0.5dt
+            --  lubham[:waf - 0.5sw - 4dl] << 0.5dt
+        );
+
+        # W113 - W114
+        track(:station :cat,
+                lubham[:wan - 0.5sw - 8dl] >> 0.5dt
+            --  lubham[:wan - 0.5sw - 7dl] << 0.5dt
+        );
+
+        # W115 - W234
+        track(:station :cat,
+                lubham[:wan - 0.5sw - 6dl] << 0.5dt
+            --  lubham[:wan - 0.5sw - 5dl] << 1.5dt
+        );
+
+        # W235 - W116
+        track(:station :cat,
+                lubham[:wan - 0.5sw - 4dl] << 1.5dt
+            --  lubham[:wan - 0.5sw - 3dl] << 0.5dt
+        );
+
+        # W117 - W118
+        track(:station :cat,
+                lubham[:wan - 0.5sw - 2dl] << 0.5dt
+            --  lubham[:wan - 0.5sw - 1dl] >> 0.5dt
+        );
+
+
+        marker(:de.bft :left, lubham[:waf] << 3.5dt);
+        station(:right, lubham[:waf + 0.6sw] << 3.5dt << 2.0sh,
+            "Hamburg-Wandsbek Wf",
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1120: "),
+                    span(:open, "1242: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "??"),
+                    span(:open, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Wandsbek" {
+        track(:first:station :double :cat, lubham[:wan - 0.5sw, :arot]);
+        track(:first:station :cat, lubham[:wan - 0.5sw, :arot] << 1.5dt);
+        marker(:de.bf :right, lubham[:wan] >> 0.5dt);
+        station(:top, lubham[:wan] >> 0.5dt >> 1.6sh,
+            span(:bold, "Hamburg-Wandsbek"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1120: "),
+                    span(:open, "1242: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "58,20"),
+                    span(:open, "58,20")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1120" {
+        with layer = 2 track(:first :double :cat, lubham[:arot, :has - 200m]);
+        with layer = 1 casing(:first :double :cat,
+                lubham[:has.x - 1sw, :has.x + 1sw]
+        );
+    }
+    with link = "point.de.Hamburg-Hasselbrook" {
+        track(:first:station :double :cat, lubham[:has - 200m, :has + 300m]);
+        marker(:de.hp :left, lubham[:has] << 0.5dt);
+    }
+
+
+    with link = "line.de.1120" {
+        track(:first :double :cat, lubham[:has + 300m, :btu - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Berliner-Tor-Üst" {
+        track(:first:station :double :cat, lubham[:btu - 1sw, :btu + 1sw]);
+
+        # W901 - W902
+        track(:station :cat,
+                lubham[:btu - 2dl] >> 0.5dt
+            --  lubham[:btu - 1dl] << 0.5dt
+        );
+
+        # W903 - W904
+        track(:station :cat,
+                lubham[:btu + 1dl] << 0.5dt
+            --  lubham[:btu + 2dl] >> 0.5dt
+        );
+
+        marker(:de.uest :left, lubham[:btu] << 0.5dt);
+    }
+
+
+    with link = "line.de.1120" {
+        track(:first :double :cat, lubham[:btu + 1sw, :ham.a]);
+    }
+
+
+    # point.de.Hamburg-Hbf: de.6100
+}
+

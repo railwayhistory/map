@@ -1,0 +1,53 @@
+# DE 1243.  Hamburg-Barmbek - Hamburg-Ohlsdorf
+#
+let hampop = path("path.de.1241");
+
+with detail = 5 {
+    # point.de.Hamburg-Barmbek: de.1234
+
+
+    with link = "line.de.1243" {
+        track(:station, hampop[:bar.a, :ohl.a] << 1.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Ohlsdorf" {
+        track(:station,
+                hampop[:ohl.a, :ohl - 759m] << 1.5dt
+            ..  hampop[:ohl - 620m, :ohl - 340m] << 2.5dt
+        );
+        track(:station,
+                hampop[:ohl - 620m, :ohl - 619m] << 2.5dt
+            ..  hampop[:ohl - 540m, :ohl - 340m] << 3.5dt
+            ..  hampop[:ohl - 260m, :ohl - 219m] << 1.5dt
+            ..  hampop[:ohl - 85m, :ohl - 50m] << 3.5dt
+        );
+        with layer = -1 track(:station :removed,
+                hampop[:ohl - 50m, :ohl + 200m] << 3.5dt
+        );
+        with layer = 2 track(:second:station :removed,
+                hampop[:aair - 0.1dl, :aair] << 2.5dt
+            ..  path("path.de.1247")[:aa - 1m, :aa]
+        );
+        with layer = 1 casing(:second:station :removed,
+                hampop[:aair - 0.1dl, :aair] << 2.5dt
+            ..  path("path.de.1247")[:aa - 1m, :aa]
+        );
+
+        track(:station,
+                hampop[:ohl - 401m, :ohl - 400m] << 2.5dt
+            ..  hampop[:ohl - 350m, :ohl - 349m] << 3.5dt
+        );
+
+        with layer = -1 marker(:de.gbf :removed :left, hampop[:ohg] << 1.5dt);
+        station(:left :removed, hampop[:ohg - 0.3sw] << 1.5dt << 1.6sw,
+            span(:bold, "H.-Ohlsdorf"),
+            hbox(:center:top,
+                vbox(:right:top, "1243: ", "1247: "),
+                vbox(:right:top, "10,", "?"),
+                vbox(:left:top, "52", "?")
+            )
+        );
+    }
+}
+

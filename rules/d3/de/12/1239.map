@@ -1,0 +1,26 @@
+# DE 1239.  Hamburg-Ohlsdorf - Hamburg Airport
+#
+let hampop = path("metro.de.hmb.1241");
+let ohlair = path("path.de.1239");
+
+with detail = 3 {
+    # point.de.Hamburg-Ohlsdorf-S-Bahn: de.1241
+
+    with link = "line.de.1239" {
+        track(:first :double :rail,
+                hampop[:aair - 0.1dl, :aair] >> 1dt
+            ..  ohlair[:aa, :air - 1ssw]
+        );
+    }
+    
+    with link = "point.de.Hamburg-Airport" {
+        track(:first:station :double :rail,
+                ohlair[:air - 1ssw, :air + 0.6ssw]
+        );
+        marker(:de.bf :left, ohlair[:air] << 0.5dt);
+        slabel(:left, ohlair[:air - 0.33ssw] << 0.5dt << 1.8ssw,
+            span(:bold, "H. Airport")
+        );
+    }
+}
+

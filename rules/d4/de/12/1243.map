@@ -1,0 +1,47 @@
+# DE 1243.  Hamburg-Barmbek - Hamburg-Ohlsdorf
+#
+let hampop = path("path.de.1241");
+
+with detail = 4 {
+    # point.de.Hamburg-Barmbek: de.1234
+
+
+    with link = "line.de.1243" {
+        track(:station, hampop[:bar.a, :ohl.a] << 1.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Ohlsdorf" {
+        track(:station,
+                hampop[:ohl.a, :ohl - 610m - 3dl] << 1.5dt
+            --  hampop[:ohl - 610m - 1dl, :ohl] << 3.5dt
+        );
+        track(:station,
+                hampop[:ohl - 610m - 2dl, :ohl - 340m] << 2.5dt
+        );
+        track(:station,
+                hampop[:ohl - 340m - 2dl] << 2.5dt
+            --  hampop[:ohl - 340m - 1dl] << 3.5dt
+        );
+
+        with layer = 2 track(:second:station :removed,
+                hampop[:ohl, :aair] << 3.5dt
+            ..  path("path.de.1247")[:aa + 1.9dt, :aa + 2dt]
+        );
+        with layer = 1 casing(:second:station :removed,
+                hampop[:aair - 0.1dl, :aair] << 3.5dt
+            ..  path("path.de.1247")[:aa + 1.9dt, :aa + 2dt]
+        );
+
+        with layer = -1 marker(:de.gbf :removed :left, hampop[:ohg] << 1.5dt);
+        station(:left :removed, hampop[:ohg] << 1.5dt << 1.6sw,
+            span(:bold, "H.-Ohlsdorf"),
+            hbox(:center:top,
+                vbox(:right:top, "1243: ", "1247: "),
+                vbox(:right:top, "10,", "?"),
+                vbox(:left:top, "52", "?")
+            )
+        );
+    }
+}
+

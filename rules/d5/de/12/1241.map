@@ -1,0 +1,716 @@
+# DE 1241.  Hamburg Hbf - Hamburg-Poppenbüttel
+#
+let eidrot = path("path.de.1234");
+let hampop = path("path.de.1241");
+let haswan = path("path.de.1241.has");
+let lubham = path("path.de.1120");
+
+with detail = 5 {
+    # point.de.Hamburg-Hbf-S-Bahn: de.1240
+
+
+    with link = "point.de.Hamburg-Berliner-Tor-Landwehr" {
+        # Gl. 3
+        track(:first:station :rail,
+                lubham[:ham.a - 150m, :ber - 70m] << 3.5dt
+            ..  lubham[:ber - 200m, :btu - 180m] << 1.5dt
+        );
+
+        # Gl. 2
+        track(:station :rail,
+                lubham[:ham.a - 150m, :ber - 70m] << 4.5dt
+            ..  lubham[:ber - 200m, :ber - 201m] << 2.5dt
+        );
+
+        # Gl. 1
+        track(:first:station :rail,
+                lubham[:ham.a - 150m, :ber - 70m] << 6.5dt
+            ..  lubham[:ber - 200m, :btu - 180m] << 2.5dt
+        );
+
+        # W111 - W112
+        track(:station :rail,
+                lubham[:btu + 30m] >> 1.5dt
+            --  lubham[:btu - 10m] >> 2.5dt
+        );
+
+        # W113 - W114
+        track(:station :rail,
+                lubham[:btu - 40m] >> 2.5dt
+            --  lubham[:btu - 80m] >> 1.5dt
+        );
+
+        # Bahnsteig 1/2
+        platform(:open,
+                lubham[:ber + 140m, :ber - 70m] << 4.9dt
+            --  lubham[:ber - 70m, :ber + 140m] >> 6.1dt
+        );
+
+        # Bahnsteig 3
+        platform(:open,
+                lubham[:ber + 140m, :ber - 70m] << 3.1dt
+            --  lubham[:ber - 70m, :ber + 140m] >> 2.5dt
+        );
+
+        marker(:de.bftp :right, lubham[:ber] >> 6.5dt);
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail,
+                lubham[:btu - 180m, :lan + 150m] << 2dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Landwehr" {
+        track(:first:station :rail,
+                lubham[:lan + 150m, :lan - 310m] << 1.5dt
+        );
+        track(:first:station :rail,
+                lubham[:lan + 150m, :lan + 100m] << 2.5dt
+            ..  lubham[:lan, :lan - 150m] << 3.5dt
+            ..  lubham[:lan - 300m, :lan - 310m] << 2.5dt
+        );
+        platform(:open,
+                lubham[:lan, :lan - 210m] << 1.9dt
+            --  lubham[:lan - 210m] >> 2.7dt
+            --  lubham[:lan - 200m] >> 2.8dt
+            ..  lubham[:lan - 150m, :lan] >> 3.1dt
+        );
+        marker(:de.hp :right, lubham[:lan] >> 3.5dt);
+        station(:top, lubham[:lan] >> 3.5dt >> 1.4sw,
+            hbox(:center:base, span(:light, "H. "), "Landwehr"),
+            "2,79"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail,
+                lubham[:lan - 310m, :has + 300m] << 2dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Hasselbrook-S-Bahn" {
+        # Gl. 1
+        track(:first:station :rail,
+                haswan[:has - 300m, :has - 299m] << 2.5dt
+            ..  haswan[:has - 220m, :has] << 3.5dt
+            ..  haswan[:has + 90m, :has + 340m] << 4.5dt
+            ..  haswan[:wan - 201m, :wan - 200m] << 3dt
+        );
+
+        # Gl. 2
+        track(:station :rail,
+                haswan[:has + 80m, :has + 380m] << 3.5dt
+        );
+
+        # Gl. 3
+        track(:station :rail,
+                haswan[:has + 89m, :has + 90m] << 4.5dt
+            ..  haswan[:has + 180m, :has + 360m] << 2.5dt
+        );
+        with layer = -1 track(:station :removed :rail,
+                haswan[:has + 360m, :has + 430m] << 2.5dt
+        );
+
+        # Gl. 5
+        track(:first:station :rail,
+                haswan[:has - 300m, :has + 430m] << 1.5dt
+            ..  haswan[:wan - 201m, :wan - 200m] << 1dt
+        );
+
+        # W1 - W3
+        track(:station :rail,
+                haswan[:has + 59m, :has + 60m] << 1.5dt
+            ..  haswan[:has + 120m, :has + 121m] << 3.5dt
+        );
+
+        # Bahnsteig
+        with layer = -1 platform(:removed,
+                haswan[:has - 215m, :has - 180m] << 1.9dt
+            --  haswan[:has - 180m, :has - 215m] >> 3.1dt
+        );
+        platform(:open,
+                haswan[:has - 180m, :has] << 1.9dt
+            --  haswan[:has, :has - 180m] >> 3.1dt
+        );
+
+        marker(:de.bf :left, haswan[:has - 0.5sw] << 3.5dt);
+        station(:top :right_align, haswan[:has + 0.2sw] << 3.5dt << 1.0sw,
+            hbox(:center:base,
+                span(:light, "H. "), "Hasselbrook ", span(:light, "(S-Bahn)")
+            ),
+            "4,17  "
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Wandsbeker-Chaussee" {
+        track(:first:station :rail, eidrot[:wan + 200m, :wan - 100m] << 1.0dt);
+        track(:first:station :rail,
+                eidrot[:wan + 200m, :wan] << 3dt
+            ..  eidrot[:wan - 70m, :wan - 100m] << 2dt
+        );
+
+        platform(:open,
+                eidrot[:wan + 180m, :wan] << 1.4dt
+            --  eidrot[:wan, :wan + 180m] >> 2.6dt
+        );
+        marker(:de.hp :right, eidrot[:wan + 0.4sw] >> 3dt);
+        station(:left, eidrot[:wan + 1sw] >> 3dt >> 1.6sw,
+            vbox(:right:bottom,
+                span(:removed, "Wandsbekerchausee "),
+                hbox(:right:base, span(:light, "H. "), "Wandsbeker Chaussee")
+            ),
+            "4,92"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, eidrot[:wan - 100m, :fri + 150m] << 1.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Friedrichsberg" {
+        track(:first:station :rail,
+                eidrot[:fri + 150m, :fri - 250m] << 1dt
+        );
+        track(:first:station :rail,
+                eidrot[:fri + 150m, :fri + 149m] << 2dt
+            ..  eidrot[:fri + 20m, :fri - 100m] << 3dt
+            ..  eidrot[:fri - 249m, :fri - 250m] << 2dt
+        );
+        platform(:open,
+                eidrot[:fri + 20m, :fri - 130m] << 1.4dt
+            --  eidrot[:fri - 130m] >> 2.5dt
+            --  eidrot[:fri - 120m] >> 2.55dt
+            ..  eidrot[:fri - 100m, :fri + 20m] >> 2.6dt
+        );
+        with layer = -1 platform(:removed,
+                eidrot[:fri - 120m, :fri - 190m] << 1.4dt
+            --  eidrot[:fri - 190m] >> 1.95dt
+            --  eidrot[:fri - 180m] >> 2.05dt
+            ..  eidrot[:fri - 130m] >> 2.5dt
+            --  eidrot[:fri - 120m] >> 2.55dt
+        );
+        marker(:de.hp :right, eidrot[:fri + 20m - 0.5sw] >> 3dt);
+        station(:left, eidrot[:fri + 20m - 0.1sw] >> 3dt >> 1.4sw,
+            hbox(:right:base, span(:light, "H. "), "Friedrichsberg"),
+            "5,62"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, eidrot[:fri - 250m, :bap + 100m] << 1.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Barmbek-S-Bahn" {
+        # Gl. 1
+        track(:first:station :rail,
+                eidrot[:bap + 100m, :bap + 99m] << 2dt
+            ..  eidrot[:bap, :bap - 200m] << 3dt
+            ..  eidrot[:bap - 360m, :bap - 380m] << 5dt
+            ..  eidrot[:bap - 560m, :bap - 570m] << 6dt
+            ..  eidrot[:bar.ff - 79m, :bar.ff - 80m] << 3dt
+        );
+
+        # Gl. 2
+        track(:station :rail,
+                eidrot[:bap - 279m, :bap - 280m] << 2dt
+            ..  eidrot[:bap - 360m, :bap - 380m] << 4dt
+            ..  eidrot[:bap - 560m, :bap - 570m] << 5dt
+            ..  eidrot[:bar.ff + 0.1dl, :bar.ff] << 3dt
+        );
+
+        # Gl. 3
+        track(:station :rail,
+                eidrot[:bap - 319m, :bap - 320m] << 2dt
+            ..  eidrot[:bap - 360m, :bap - 380m] << 3dt
+            ..  eidrot[:bap - 560m, :bap - 570m] << 4dt
+        );
+
+        # Gl. 4
+        track(:station :rail,
+                eidrot[:bap - 210m, :bap - 380m] << 2dt
+            ..  eidrot[:bap - 560m, :bap - 570m] << 3dt
+        );
+
+        # Gl. 5
+        track(:first:station :rail,
+                eidrot[:bap + 100m, :bap - 380m] << 1dt
+            ..  eidrot[:bap - 570m, :bar.ff - 80m] << 2dt
+        );
+
+        # W1 - W4
+        track(:station :rail,
+                eidrot[:bap - 200m] >> 1dt
+            --  eidrot[:bap - 270m] >> 2dt
+        );
+
+        # W2 - W3
+        track(:station :rail,
+                eidrot[:bap - 200m] >> 3dt
+            --  eidrot[:bap - 240m] >> 2dt
+        );
+
+        # Bahnsteig
+        platform(:open,
+                eidrot[:bap, :bap - 200m] << 1.4dt
+            --  eidrot[:bap - 200m, :bap] >> 2.6dt
+        );
+
+        marker(:de.bf :right, eidrot[:bap - 0.5sw] >> 3dt);
+        station(:left, eidrot[:bap - 0.5sw] >> 3dt >> 2.2sw + (2sw, 0sw),
+            hbox(:center:base,
+                span(:light, "H.-"), "Barmbek ", span(:light, "(S-Bahn)")
+            ),
+            "7,13"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        with layer = 2 track(:first :double :rail,
+                eidrot[:bar.ff - 80m, :bar.ff - 81m] << 2.5dt
+            ..  eidrot[:bar.f - 60m, :bar.f - 150m] >> 1.5dt
+            ..  eidrot[:bar.f - 320m, :awo + 150m]
+        );
+        with layer = 1 casing(:first :double :rail,
+                eidrot[:bar.ff - 80m, :bar.ff - 81m] << 2.5dt
+            ..  eidrot[:bar.f - 60m, :bar.f - 61m] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Alte-Wöhr" {
+        track(:first:station :rail, eidrot[:awo + 150m, :awo - 280m] << 0.5dt);
+        track(:first:station :rail,
+                eidrot[:awo + 150m, :awo + 149m] >> 0.5dt
+            ..  eidrot[:awo + 30m, :awo - 130m] >> 1.5dt
+            ..  eidrot[:awo - 279m, :awo - 280m] >> 0.5dt
+        );
+        platform(:open,
+                eidrot[:awo + 30m, :awo - 130m] >> 1.1dt
+            --  eidrot[:awo - 130m, :awo + 30m] >> 0.1dt
+        );
+        marker(:de.hp :left, eidrot[:awo] << 1.5dt);
+        station(:right, eidrot[:awo + 0.7sw] << 1.5dt << 1.4sw,
+            vbox(:left:bottom,
+                span(:removed, "Alte Wöhr-Stadtpark"),
+                span(:removed, "Stadtpark"),
+                hbox(:left:base, span(:light, "H. "), "Alte Wöhr")
+            ),
+            "8,63"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, eidrot[:awo - 280m, :rub + 300m]);
+    }
+
+
+    with link = "point.de.Hamburg-Rübenkamp" {
+        track(:first:station :rail, hampop[:rub - 300m, :rub + 100m] << 0.5dt);
+        track(:first:station :rail,
+                hampop[:rub - 300m, :rub - 299m] >> 0.5dt
+            ..  hampop[:rub - 150m, :rub - 50m] >> 1.5dt
+            ..  hampop[:rub + 99m, :rub + 100m] >> 0.5dt
+        );
+        platform(:open,
+                hampop[:rub - 200m, :rub - 50m] << 0.1dt
+            --  hampop[:rub - 50m, :rub - 150m] << 1.1dt
+            ..  hampop[:rub - 190m] >> 0.95dt
+            --  hampop[:rub - 200m] >> 0.85dt
+        );
+        marker(:de.hp :right, hampop[:rub] >> 1.2dt);
+        station(:right, hampop[:rub - 0.4sw] >> 1.2dt >> 1.4sw,
+            hbox(:center:base, span(:light, "H.-"), "Rübenkamp"),
+            "9,66"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, hampop[:rub + 100m, :ohl.a]);
+    }
+
+
+    with link = "point.de.Hamburg-Ohlsdorf-S-Bahn" {
+        let ohlair = path("path.de.1239");
+
+        let w52 = hampop[:ohl - 170m, :ohl - 169m] >> 0.5dt;
+        let w60 = hampop[:ohl - 361m, :ohl - 360m] << 0.5dt;
+        let w61 = hampop[:ohl - 290m, :ohl - 289m] >> 0.5dt;
+        let w62 = hampop[:ohl - 281m, :ohl - 280m] >> 0.5dt;
+        let w64 = hampop[:ohl - 165m] << 1.25dt
+               -- hampop[:ohl - 155m] << 1.50dt;
+        let w63 = hampop[:ohl - 220m, :ohl - 219m] << 0.5dt;
+        let w72 = hampop[:ohl - 760m, :ohl - 759m] << 0.5dt;
+        let w75 = hampop[:ohl - 521m, :ohl - 520m] << 0.5dt;
+        let w76 = hampop[:ohl - 470m, :ohl - 469m] << 1.5dt;
+        let w77 = hampop[:ohl - 501m, :ohl - 500m] << 0.5dt;
+        let w78 = hampop[:ohl - 450m, :ohl - 449m] >> 0.5dt;
+        let w81 = hampop[:ohl - 40m, :ohl - 39m] >> 0.5dt;
+        let w82 = hampop[:ohl - 21m, :ohl - 20m] << 2.5dt;
+        let w84 = hampop[:ohl + 30m, :ohl + 31m] << 1.5dt;
+        let w85 = hampop[:ohl + 25m] << 0.20dt
+               -- hampop[:ohl + 30m] << 0.30dt;
+        let w87 = hampop[:ohl + 80m, :ohl + 81m] << 1.5dt;
+        let w88 = hampop[:ohl + 80m, :ohl + 81m] << 0.5dt;
+        let w89 = hampop[:ohl + 309m, :ohl + 310m] >> 0.5dt;
+        let w90 = hampop[:ohl - 21m, :ohl - 20m] >> 0.5dt;
+        let w91 = hampop[:ohl + 339m, :ohl + 340m] << 2.5dt;
+        let w92 = hampop[:ohl + 389m] << 2.02dt
+               -- hampop[:ohl + 390m] << 2.00dt;
+        let w93 = hampop[:ohl + 460m, :ohl + 461m] << 0.5dt;
+        let w94 = hampop[:ohl + 499m, :ohl + 500m] << 0.5dt;
+        let w95 = ohlair[:ohl + 580m, :ohl + 581m] << 1.5dt;
+        let w96 = hampop[:ohl + 599m, :ohl + 600m] >> 0.5dt;
+        let w97 = hampop[:ohl + 720m, :ohl + 721m] << 0.5dt;
+        let w98 = hampop[:ohl + 729m, :ohl + 730m] << 0.5dt;
+        let w99 = hampop[:ohl + 800m, :ohl + 801m] >> 0.5dt;
+
+        # Gl. 1
+        track(:station :rail,
+                hampop[:ohl - 160m, :ohl + 190m] >> 1.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :rail, hampop[:ohl.a, :ohl.f] >> 0.5dt);
+
+        # Gl. 5
+        with layer = 3 track(:first:station :rail,
+                hampop[:ohl.a, :ohl - 759m] << 0.5dt
+            ..  hampop[:ohl - 620m, :ohl - 440m] << 1.5dt
+            ..  hampop[:ohl - 361m, :ohl - 219m] << 0.5dt
+            ..  w64
+            ..  hampop[:ohl - 85m, :ohl + 30m] << 2.5dt
+            ..  hampop[:ohl + 199m, :ohl + 201m] << 3.5dt
+            ..  hampop[:ohl + 339m, :aair] << 2.5dt
+            ..  hampop[:ohl + 720m, :ohl.f] << 0.5dt
+        );
+        with layer = 1 casing(:first:station :rail,
+                hampop[:aair - 0.1dl, :aair] << 2.5dt
+            ..  hampop[:ohl + 720m, :ohl + 721m] << 0.5dt
+        );
+
+        # Gl. 8
+        track(:station :rail,
+                w85
+            ..  hampop[:ohl + 80m, :ohl + 260m] << 0.5dt
+        );
+
+        # Gl. 9
+        track(:station :rail, hampop[:ohl, :ohl + 260m] << 1.5dt);
+
+        # Gl. 70
+        track(:station :rail, hampop[:ohl - 610m, :ohl - 440m] << 0.5dt);
+
+        # Gl. X2
+        track(:first:station :rail,
+                w89
+            ..  ohlair[:ohl + 460m, :ohl + 700m] << 0.5dt
+        );
+
+        # Gl. X5
+        track(:first:station :rail,
+                w91
+            ..  w92
+            ..  ohlair[:ohl + 460m, :ohl + 700m] << 1.5dt
+        );
+
+        # W60 - W61
+        track(:station :rail, w60 .. w61);
+
+        # W62 - W63
+        track(:station :rail, w62 .. w63);
+
+        # W75 - W76
+        track(:station :rail, w75 .. w76);
+
+        # W77 - W78
+        track(:station :rail, w77 .. w78);
+
+        # W82 - W88
+        track(:station :rail, w82 .. w88);
+
+        # W90 - W87
+        track(:station :rail, w90 .. w85 .. w87);
+
+        # W92 - W93
+        track(:station :rail, w92 .. w93);
+
+        # W94 - W95
+        track(:station :rail, w94 .. w95);
+
+        # W96 - W97
+        with layer = 2 track(:station :rail, w96 .. w97);
+
+        # W98 - W99
+        track(:station :rail, w98 .. w99);
+
+        # Stellwerk Ow
+        marker(:de.stw :right, hampop[:ohl.ow] >> 0.5dt);
+
+        # Bahnsteig
+        platform(:open,
+                hampop[:ohl - 160m, :ohl - 20m] >> 0.1dt
+            --  hampop[:ohl - 20m, :ohl - 85m] >> 2.1dt
+            ..  hampop[:ohl - 150m] << 1.15dt
+            --  hampop[:ohl - 160m] << 0.9dt
+        );
+
+        marker(:de.bw :right, hampop[:ohl - 480m] >> 1.5dt);
+
+        marker(:de.bf :right, hampop[:ohl] >> 1.5dt);
+        station(:right, hampop[:ohl - 0.3sw] >> 1.5dt >> 1.4sw,
+            hbox(:center:base,
+                "H.-", span(:bold, "Ohlsdorf "), "(S-Bahn)"
+            ),
+            vbox(:right:top, "1239: 11,28", "1241: 11,28")
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, hampop[:ohl.f, :kor - 150m]);
+        with layer = 1 line_badge(:open, hampop[:kor - 700m], "1241");
+    }
+
+
+    with link = "point.de.Hamburg-Kornweg-Klein-Borstel" {
+        track(:first:station :rail,
+                hampop[:kor - 150m, :kor - 149m] >> 0.5dt
+            ..  hampop[:kor, :kor + 80m] >> 1.0dt
+            ..  hampop[:kor + 319m, :kor + 320m] >> 0.5dt
+        );
+        track(:first:station :rail,
+                hampop[:kor - 150m, :kor - 149m] << 0.5dt
+            ..  hampop[:kor, :kor + 80m] << 1.0dt
+            ..  hampop[:kor + 319m, :kor + 320m] << 0.5dt
+        );
+        platform(:open,
+                hampop[:kor - 80m] << 0.25dt
+            --  hampop[:kor - 70m] << 0.3dt
+            ..  hampop[:kor, :kor + 60m] << 0.6dt
+            --  hampop[:kor + 60m, :kor] << 0.6dt
+            ..  hampop[:kor - 70m] >> 0.3dt
+            --  hampop[:kor - 80m] >> 0.25dt
+        );
+        with layer = -1 platform(:removed,
+                hampop[:kor + 50m, :kor + 80m] << 0.6dt
+            ..  hampop[:kor + 170m] << 0.35dt
+            --  hampop[:kor + 180m] << 0.3dt
+            --  hampop[:kor + 180m] >> 0.3dt
+            --  hampop[:kor + 170m] >> 0.35dt
+            ..  hampop[:kor + 80m, :kor] << 0.6dt
+        );
+        marker(:de.hp :left, hampop[:kor] << 1.0dt);
+        station(:top, hampop[:kor] << 1.0dt << 1.3sw,
+            hbox(:center:base,
+                span(:light, "H. "), "Kornweg (Klein Borstel)", "   "
+            ),
+            "13,41"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, hampop[:kor + 320m, :hoh - 150m]);
+    }
+
+
+    with link = "point.de.Hamburg-Hoheneichen" {
+        track(:first:station :rail,
+                hampop[:hoh - 150m, :hoh - 149m] >> 0.5dt
+            ..  hampop[:hoh, :hoh + 80m] >> 1.0dt
+            ..  hampop[:hoh + 199m, :hoh + 200m] >> 0.5dt
+        );
+        track(:first:station :rail,
+                hampop[:hoh - 150m, :hoh - 149m] << 0.5dt
+            ..  hampop[:hoh, :hoh + 80m] << 1.0dt
+            ..  hampop[:hoh + 199m, :hoh + 200m] << 0.5dt
+        );
+        platform(:open,
+                hampop[:hoh - 80m] >> 0.3dt
+            --  hampop[:hoh - 70m] >> 0.35dt
+            ..  hampop[:hoh, :hoh + 80m] >> 0.6dt
+            --  hampop[:hoh + 80m, :hoh] >> 0.6dt
+            ..  hampop[:hoh - 70m] << 0.35dt
+            --  hampop[:hoh - 80m] << 0.3dt
+        );
+        marker(:de.hp :left, hampop[:hoh] << 1.0dt);
+        station(:top, hampop[:hoh] << 1.0dt << 1.3sw,
+            hbox(:center:base,
+                span(:light, "H. "), "Hoheneichen"
+            ),
+            "14,37"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, hampop[:hoh + 200m, :wel - 200m]);
+    }
+
+
+    with link = "point.de.Hamburg-Wellingsbüttel" {
+        track(:first:station :rail,
+                hampop[:wel - 200m, :wel - 199m] >> 0.5dt
+            ..  hampop[:wel - 80m, :wel] >> 1.0dt
+            ..  hampop[:wel + 119m, :wel + 120m] >> 0.5dt
+        );
+        track(:first:station :rail,
+                hampop[:wel - 200m, :wel - 199m] << 0.5dt
+            ..  hampop[:wel - 80m, :wel] << 1.0dt
+            ..  hampop[:wel + 119m, :wel + 120m] << 0.5dt
+        );
+        platform(:open,
+                hampop[:wel - 80m, :wel] >> 0.6dt
+            ..  hampop[:wel + 60m] >> 0.35dt
+            --  hampop[:wel + 70m] >> 0.25dt
+            --  hampop[:wel + 70m] << 0.25dt
+            --  hampop[:wel + 60m] << 0.35dt
+            ..  hampop[:wel, :wel - 80m] >> 0.6dt
+        );
+        marker(:de.hp :right, hampop[:wel] >> 1dt);
+        station(:right, hampop[:wel - 0.3sw] >> 1dt >> 1.8sw,
+            hbox(:center:base,
+                span(:light, "H.-"), "Wellingsbüttel"
+            ),
+            "15,66"
+        );
+    }
+
+
+    with link = "line.de.1241" {
+        track(:first :double :rail, hampop[:wel + 120m, :pop - 410m]);
+        with layer = 1 line_badge(:open, hampop[:pop - 820m], "1241");
+    }
+
+
+    with link = "point.de.Hamburg-Poppenbüttel" {
+        let w8   = hampop[:pop - 140m] << 0.90dt
+                -- hampop[:pop - 135m] << 1.00dt;
+        let w9   = hampop[:pop - 80m] << 3.01dt
+                -- hampop[:pop - 75m] << 3.07dt;
+        let w11  = hampop[:pop + 5m]  << 4.07dt
+                -- hampop[:pop + 10m] << 4.15dt;
+        let w14  = hampop[:pop + 45m]  << 5.00dt
+                -- hampop[:pop + 50m] << 5.15dt;
+
+        # Gl. 1
+        track(:first:station :rail,
+                hampop[:pop - 410m, :pop - 180m] >> 0.5dt
+            ..  hampop[:pop - 30m, :pop + 140m] << 0.5dt
+        );
+        track(:station :rail,
+                hampop[:pop + 139m, :pop + 140m] << 0.5dt
+            ..  hampop[:pop + 210m, :pop + 450m] << 1.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :rail,
+                hampop[:pop - 410m, :pop - 180m] << 0.5dt
+            ..  w8
+            ..  hampop[:pop - 30m, :pop + 140m] << 2.5dt
+        );
+        track(:station :rail,
+                hampop[:pop + 140m, :pop + 450m] << 2.5dt
+        );
+
+        # Gl. 3
+        track(:station :rail,
+                hampop[:pop - 410m, :pop - 180m] << 1.5dt
+            ..  w9
+            ..  hampop[:pop - 30m, :pop + 410m] << 3.5dt
+        );
+
+        # Gl. 4
+        track(:station :rail,
+                w11
+            ..  hampop[:pop + 80m, :pop + 410m] << 4.5dt
+        );
+
+        # Gl. 5
+        track(:station :rail,
+                w14
+            ..  hampop[:pop + 110m, :pop + 450m] << 5.5dt
+        );
+
+        # Gl. 6
+        track(:station :rail,
+                hampop[:pop - 30m, :pop - 29m] << 3.5dt
+            ..  w11
+            ..  w14
+            ..  hampop[:pop + 110m, :pop + 390m] << 6.5dt
+        );
+
+        # Gl. 11
+        track(:station :rail,
+                hampop[:pop + 224m, :pop + 225m] << 1.5dt
+            ..  hampop[:pop + 280m, :pop + 450m] << 0.5dt
+        );
+
+        # W1 - W2
+        track(:station :rail,
+                hampop[:pop - 330m] >> 0.5dt
+            --  hampop[:pop - 260m] << 0.5dt
+        );
+
+        # W3 - W4
+        track(:station :rail,
+                hampop[:pop - 250m] << 0.5dt
+            --  hampop[:pop - 170m] >> 0.5dt
+        );
+
+        # W5 - W6
+        track(:station :rail,
+                hampop[:pop - 240m] << 1.5dt
+            --  hampop[:pop - 190m] << 0.5dt
+        );
+
+        # W8 - W9
+        track(:station :rail, w8 .. w9);
+
+        # W17 - W18
+        track(:station :rail,
+                hampop[:pop + 149m, :pop + 150m] << 2.5dt
+            ..  hampop[:pop + 210m, :pop + 211m] << 1.5dt
+        );
+
+        # W20 - W22
+        track(:station :rail,
+                hampop[:pop + 149m, :pop + 150m] << 3.5dt
+            ..  hampop[:pop + 210m, :pop + 211m] << 2.5dt
+        );
+
+        # W23 - W24
+        track(:station :rail,
+                hampop[:pop + 289m, :pop + 290m] << 2.5dt
+            ..  hampop[:pop + 360m, :pop + 361m] << 1.5dt
+        );
+
+        # Bahnsteig 1/2
+        platform(:open,
+                hampop[:pop, :pop + 140m] << 0.9dt
+            --  hampop[:pop + 140m, :pop] >> 2.1dt
+        );
+
+        marker(:de.bf :right, hampop[:pop] << 0.5dt);
+        station(:right, hampop[:pop - 0.3sw] << 0.5dt >> 1.6sw,
+            hbox(:center:base,
+                "H.-", span(:bold, "Poppenbüttel")
+            ),
+            "1241: 17,02"
+        );
+    }
+}
+

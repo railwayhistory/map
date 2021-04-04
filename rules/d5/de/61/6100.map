@@ -1,0 +1,882 @@
+# DE 6100.  Berlin-Spandau - Hamburg-Altona
+#
+#           Abschnitt Aumühle (einschl.) - Hamburg-Altona
+#
+let spaalt = path("path.de.6100");
+let spaalt.ar = path("path.de.6100.ar");
+
+with detail = 5 {
+    
+    with link = "point.de.Aumühle-Abzw" {
+        let w801 = spaalt[:aum - 581m, :aum - 580m] >> 0.5dt;
+        let w802 = spaalt[:aum - 480m, :aum - 479m] << 0.5dt;
+        let w803 = spaalt[:aum - 451m, :aum - 450m] << 0.5dt;
+        let w804 = spaalt[:aum - 350m, :aum - 349m] >> 0.5dt;
+        let w805 = spaalt[:aum - 306m, :aum - 305m] >> 0.5dt;
+
+        # Str. 6100 R
+        track(:first:station :cat,
+                spaalt[:aum - 680m, :aum - 210m] >> 0.5dt
+        );
+
+        # Str. 6100 L
+        track(:first:station :cat,
+                spaalt[:aum - 680m, :aum - 210m] << 0.5dt
+        );
+
+        # Gl. 803
+        track(:first:station :cat,
+                w805
+            ..  spaalt[:aum - 201m, :aum - 200m] >> 1.5dt
+        );
+
+        # W801 - W802
+        track(:station :cat, w801 .. w802);
+
+        # W803 - W804
+        track(:station :cat, w803 .. w804);
+
+        marker(:de.bft.abzw :left, spaalt[:aum - 300m] << 0.5dt);
+        station(:bottom, spaalt[:aum - 300m] << 0.5dt << 1.2sw,
+            span(:bold, "Aumühle Abzw"),
+            hbox(:center:top,
+                vbox(:right:top, "1285: ", "6100: "),
+                vbox(:right:top, "??", "??")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:aum - 210m, :ber - 920m]);
+    }
+
+
+    with link = "point.de.Hamburg-Mörkenweg" {
+        with layer = -1 marker(:de.bk :removed :left, spaalt[:mow] << 0.5dt);
+        station(:bottom :removed, spaalt[:mow - 1sw] << 0.5dt << 1.4sw,
+            "Mörkenweg", "268,90"
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf" {
+        let w701 = spaalt[:ber - 821m, :ber - 820m] >> 0.5dt;
+        let w702 = spaalt[:ber - 740m, :ber - 739m] << 0.5dt;
+        let w703 = spaalt[:ber - 661m, :ber - 660m] << 0.5dt;
+        let w704 = spaalt[:ber - 560m, :ber - 559m] >> 0.5dt;
+
+        # Gl. 701
+        track(:first:station :cat,
+                spaalt[:ber - 920m, :ber - 560m] << 0.5dt
+            ..  spaalt[:ber - 270m, :ber + 180m] << 1.5dt
+            ..  spaalt[:bek - 81m, :bek - 80m] << 0.5dt
+        );
+
+        # Gl. 702
+        track(:first:station :cat,
+                spaalt[:ber - 920m, :bek - 80m] >> 0.5dt
+        );
+
+        # W701 - W702
+        track(:station :cat, w701 .. w702);
+
+        # W703 - W704
+        track(:station :cat, w703 .. w704);
+
+        # Bahnsteig
+        platform(:open,
+                spaalt[:ber - 270m, :ber + 80m] >> 0.1dt
+            --  spaalt[:ber + 80m, :ber - 270m] >> 1.1dt
+        );
+        with layer = -1 platform(:removed,
+                spaalt[:ber + 80m, :ber + 180m] >> 0.1dt
+            --  spaalt[:ber + 180m, :ber + 80m] >> 1.1dt
+        );
+
+        marker(:de.bf :left, spaalt[:ber] << 1.5dt);
+        station(:right, spaalt[:ber] << 1.5dt << 1.8sw,
+            span(:bold, "Hamburg-Bergedorf"),
+            "6100: 207,07"
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf-Bk" {
+        let w712 = spaalt[:bek + 150m, :bek + 151m] << 1.5dt;
+        let w713 = spaalt[:bek + 229m, :bek + 230m] << 1.5dt;
+        let w714 = spaalt[:bek + 229m, :bek + 230m] >> 0.5dt;
+        let w715 = spaalt[:bek + 290m, :bek + 291m] << 0.5dt;
+        let w716 = spaalt[:bek + 330m, :bek + 331m] << 0.5dt;
+
+        # Gl. 710
+        track(:second:station,
+                spaalt[:bek + 50m, :bek + 80m] << 2.5dt
+            ..  w712
+        );
+
+        # Gl. 711
+        track(:first:station :cat,
+                spaalt[:bek - 80m, :bek - 79m] << 0.5dt
+            ..  spaalt[:bek + 150m, :bek + 380m] << 1.5dt
+        );
+
+        # Gl. 712
+        with layer = 3 track(:first:station :cat,
+                spaalt[:bek - 80m, :bek + 380m] >> 0.5dt
+        );
+
+        # Gl. 713
+        track(:station :cat, spaalt[:bek + 250m, :bek + 380m] << 0.5dt);
+
+        # Gl. W711
+        track(:station, spaalt[:bek + 80m, :bek + 130m] << 2.5dt);
+
+        # W713 - W715
+        track(:station :cat, w713 .. w715);
+
+        # W714 - W716
+        track(:station :cat, w714 .. w716);
+
+        with layer = 2 marker(:de.bft :removed, spaalt[:bek] >> 0.5dt);
+        with layer = 1 marker(:de.bft.casing, spaalt[:bek] >> 0.5dt);
+        station(:top :removed, spaalt[:bek] >> 0.5dt >> 1.2sw,
+            "H.-B. (Bk)", "6100: 271,18"
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf-Gbf" {
+        # Gl. 711
+        track(:first:station :cat, spaalt[:bek + 380m, :bea - 160m] << 1.5dt);
+
+        # Gl. 712
+        track(:first:station :cat, spaalt[:bek + 380m, :bea - 160m] >> 0.5dt);
+
+        # Gl. 713
+        track(:station :cat, spaalt[:bek + 380m, :bea - 160m] << 0.5dt);
+
+        marker(:de.bft :left, spaalt[:beg] << 1.5dt);
+        station(:bottom, spaalt[:beg] << 1.5dt << 1.2sw,
+            span(:bold, "H.-Bergedorf Gbf"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    "6100: ??",
+                    span(:removed, "1246: ??"),
+                    "9123: ??"
+                )
+            )
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf-Ba" {
+        let w721 = spaalt[:bea - 111m, :bea - 110m] << 0.5dt;
+        let w722 = spaalt[:bea - 71m, :bea - 70m] << 0.5dt;
+        let w723 = spaalt[:bea, :bea + 1m] >> 0.5dt;
+        let w724 = spaalt[:bea, :bea + 1m] << 1.5dt;
+
+        # Gl. 711
+        track(:first:station :cat,
+                spaalt[:bea - 160m, :bea] << 1.5dt
+            ..  spaalt[:bea + 499m, :bea + 500m] << 0.5dt
+        );
+
+        # Gl. 712
+        track(:first:station :cat, spaalt[:bea - 160m, :bea + 500m] >> 0.5dt);
+
+        # Gl. 713
+        track(:station :cat, spaalt[:bea - 160m, :bea] << 0.5dt);
+
+        # W721 - W723
+        track(:station :cat, w721 .. w723);
+
+        # W722 - W724
+        track(:station :cat, w722 .. w724);
+
+        with layer = -1 marker(:de.bft :removed :left, spaalt[:bea] << 1.5dt);
+        station(:bottom :removed, spaalt[:bea] << 1.5dt << 1.2sw,
+            "H.-B. (Ba)", "6100: 272,44"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:bea + 500m, :all - 250m]);
+    }
+
+
+    with link = "point.de.Hamburg-Allermöhe" {
+        let w16 = spaalt[:all - 151m, :all - 150m] >> 0.5dt;
+        let w17 = spaalt[:all - 70m, :all - 69m] << 0.5dt;
+        let w18 = spaalt[:all + 29m, :all + 30m] << 0.5dt;
+
+        # Str. 6100 R
+        track(:first:station :cat, spaalt[:all - 250m, :all + 130m] >> 0.5dt);
+
+        # Str. 6100 L
+        track(:first:station :cat, spaalt[:all - 250m, :all + 130m] << 0.5dt);
+
+        # Str. 1280
+        track(:first:station :cat,
+                w18
+            ..  spaalt[:all + 129m, :all + 130m] << 1.5dt
+        );
+
+        # W16 - W17
+        track(:station :cat, w16 .. w17);
+
+        marker(:de.abzw :left, spaalt[:all] << 0.5dt);
+        station(:bottom, spaalt[:all + 0.2sw] << 0.5dt << 1.2sw,
+            "H.-Allermöhe",
+            hbox(:center:top,
+                vbox(:right:top, "6100: ", "1280: "),
+                vbox(:right:top, "273,", "49,"),
+                vbox(:left:top, "71", "24")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:all + 130m, :bia - 130m]);
+    }
+
+
+    # point.de.Hamburg-Billwerder-Moorfleet-Abzw: de.1280
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:bia + 240m, :rtk - 100m]);
+    }
+
+
+    # point.de.Hamburg-Rothenburgsort-Tk: de.1280
+
+
+    with link = "point.de.Hamburg-Rothenburgsort-Rop" {
+        let w121 = spaalt[:rop - 381m, :rop - 380m] >> 0.5dt;
+        let w122 = spaalt[:rop - 240m, :rop - 239m] << 0.5dt;
+        let w123 = spaalt[:rop - 1m, :rop] << 0.5dt;
+        let w124 = spaalt[:rop + 230m, :rop + 231m] >> 0.5dt;
+
+        # Gl. 150
+        track(:first:station :cat,
+                spaalt[:rop - 560m, :rop] << 0.5dt
+            ..  w124
+        );
+
+        # Gl. 150X
+        with layer = -1 track(:first:station :removed,
+                spaalt[:rop, :rop + 330m] << 0.5dt
+        );
+
+        # Gl. 160
+        with layer = 2 track(:first:station :cat,
+                spaalt[:rop - 560m, :rop + 330m] >> 0.5dt
+        );
+
+        # W121 - W122
+        track(:station :cat, w121 .. w122);
+
+        with layer = 2 marker(:de.bft :right, spaalt[:rop] >> 0.5dt);
+        with layer = 1 marker(:de.bft.casing :right, spaalt[:rop] >> 0.5dt);
+        station(:top, spaalt[:rop - 0.2sw] >> 0.5dt >> 1.4sw,
+            "H.-R. Rop",
+            hbox(:center:top,
+                vbox(:right:top, "6100: ??", "1291: ??")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :cat, spaalt[:rop + 330m, :anc - 100m] >> 0.5dt);
+        with layer = -1 track(:first :removed,
+                spaalt[:rop + 330m, :anc - 100m] << 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Anckelmannsplatz" {
+        # Str. 6100 R
+        track(:first:station :cat, spaalt[:anc - 100m, :anc + 100m] >> 0.5dt);
+
+        # Str. 6100 L
+        with layer = -1 track(:first:station :removed,
+                spaalt[:anc - 100m, :anc + 70m] << 0.5dt
+        );
+        track(:first:station :cat,
+                spaalt[:anc, :anc + 1m] >> 0.5dt
+            ..  spaalt[:anc + 70m, :anc + 100m] << 0.5dt
+        );
+
+        marker(:de.uest :left, spaalt[:anc] << 0.5dt);
+        marker(:statdt :left, spaalt[:anc] >> 0.5dt);
+        station(:right, spaalt[:anc - 0.3sw] >> 4.0dt,
+            hbox(:left:base, span(:light, "H.-"), "Anckelmannsplatz"),
+            "6100: 284,66"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        # Str. 6100 R
+        with layer = 2 track(:first :cat :tight,
+                spaalt[:anc + 100m, :btb] >> 0.5dt
+            ..  spaalt[:ham.a - 150m, :ham.a] >> 1.5dt
+        );
+        with layer = 1 casing(:first :cat,
+                spaalt[:btb - 1m, :btb] >> 0.5dt
+            ..  spaalt[:ham.a - 150m, :ham.a - 149m] >> 1.5dt
+        );
+
+        # Str. 6100 L
+        track(:first :cat :tight :flip,
+                spaalt[:anc + 100m, :btb - 150m] << 0.5dt
+            ..  spaalt[:ham.a - 150m, :ham.a] << 1.5dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Hbf" {
+        let ham = path("path.de.1245.ham");
+        let har = path("path.de.2200.ham");
+
+        # Gl. 59 - 96: de.1245
+
+
+        let w35  = spaalt[:ham - 611m, :ham - 610m] >> 1.5dt;
+
+        let w136 = ham[:ham - 601m, :ham - 600m] << 2.5dt;
+        let w137 = ham[:ham - 550m, :ham - 549m] << 3.5dt;
+        let w138 = ham[:ham - 530m, :ham - 529m] << 3.5dt;
+        let w165 = ham[:ham - 581m, :ham - 580m] << 4.5dt;
+        let w203 = har[:ham - 591m, :ham - 590m] << 6.5dt;
+        let w204 = har[:ham - 601m, :ham - 600m] << 8.5dt;
+        let w205 = ham[:ham - 541m, :ham - 540m] << 4.5dt;
+        let w206 = har[:ham - 541m, :ham - 540m] << 5.5dt;
+        let w207 = har[:ham - 556m, :ham - 555m] << 6.5dt;
+        let w208 = har[:ham - 541m, :ham - 540m] << 7.5dt;
+        let w209 = ham[:ham - 501m, :ham - 500m] << 3.5dt;
+        let w210 = ham[:ham - 501m, :ham - 500m] << 4.5dt;
+        let w211 = har[:ham - 505m, :ham - 504m] << 5.5dt;
+        let w212 = har[:ham - 505m, :ham - 504m] << 6.5dt;
+        let w213 = har[:ham - 505m, :ham - 504m] << 7.5dt;
+        let w214 = har[:ham - 521m, :ham - 520m] << 8.5dt;
+        let w215 = ham[:ham - 460m, :ham - 459m] << 2.5dt;
+        let w216 = ham[:ham - 461m, :ham - 460m] << 2.5dt;
+        let w217 = ham[:ham - 470m, :ham - 469m] << 3.5dt;
+        let w218 = ham[:ham - 461m, :ham - 460m] << 3.5dt;
+        let w219 = ham[:ham - 410m, :ham - 409m] << 3.5dt;
+        let w220 = ham[:ham - 481m, :ham - 480m] << 4.5dt;
+        let w221 = ham[:ham - 450m, :ham - 449m] << 5.5dt;
+        let w222 = ham[:ham - 470m, :ham - 469m] << 5.5dt;
+        let w223 = ham[:ham - 431m, :ham - 430m] << 5.5dt;
+        let w224 = ham[:ham - 470m, :ham - 469m] << 6.5dt;
+        let w225 = ham[:ham - 470m, :ham - 469m] << 7.5dt;
+        let w226 = ham[:ham - 470m, :ham - 469m] << 8.5dt;
+        let w227 = ham[:ham - 430m, :ham - 429m] << 6.5dt;
+        let w228 = ham[:ham - 430m, :ham - 429m] << 7.5dt;
+        let w229 = ham[:ham - 380m] << 8.7dt
+                -- ham[:ham - 375m] << 8.76dt;
+        let w230 = ham[:ham - 421m, :ham - 420m] << 4.5dt;
+        let w231 = ham[:ham - 371m, :ham - 370m] << 4.5dt;
+        let w232 = ham[:ham - 370m, :ham - 369m] << 5.5dt;
+        let w233 = ham[:ham - 401m, :ham - 400m] << 3.5dt;
+        let w235 = ham[:ham - 330m, :ham - 329m] << 2.5dt;
+        let w236 = ham[:ham - 290m, :ham - 289m] << 2.5dt;
+        let w237 = ham[:ham - 281m, :ham - 280m] << 2.5dt;
+        let w238 = spaalt[:ham - 220m, :ham - 219m] << 2.5dt;
+        let w239 = spaalt[:ham - 220m, :ham - 219m] << 3.5dt;
+        let w240 = spaalt[:ham - 141m, :ham - 140m] << 3.5dt;
+        let w241 = spaalt[:ham - 80m, :ham - 79m] << 4.5dt;
+        let w242 = spaalt[:ham - 200m, :ham - 199m] << 4.5dt;
+        let w301 = spaalt[:ham - 611m, :ham - 610m] << 1.5dt;
+        let w302 = spaalt[:ham - 611m, :ham - 610m] << 0.5dt;
+        let w303 = spaalt[:ham - 611m, :ham - 610m] >> 0.5dt;
+        let w304 = spaalt[:ham - 540m, :ham - 539m] >> 0.5dt;
+        let w305 = spaalt[:ham - 540m, :ham - 539m] << 0.5dt;
+        let w306 = spaalt[:ham - 521m, :ham - 520m] >> 1.5dt;
+        let w307 = spaalt[:ham - 501m, :ham - 500m] << 0.5dt;
+        let w308 = spaalt[:ham - 501m, :ham - 500m] >> 0.5dt;
+        let w309 = spaalt[:ham - 431m, :ham - 430m] << 0.5dt;
+        let w310 = spaalt[:ham - 430m, :ham - 429m] << 1.5dt;
+        let w311 = spaalt[:ham - 401m, :ham - 400m] << 1.5dt;
+        let w313 = spaalt[:ham - 400m] >> 2.15dt
+                -- spaalt[:ham - 395m] >> 2.2dt;
+        let w314 = spaalt[:ham - 370m, :ham - 369m] >> 0.5dt;
+        let w319 = spaalt[:ham.a + 169m, :ham.a + 170m] >> 0.5dt;
+        let w320 = spaalt[:ham.a + 169m, :ham.a + 170m] << 0.5dt;
+        let w321 = spaalt[:ham.a + 260m, :ham.a + 261m] << 1.5dt;
+        let w322 = spaalt[:ham.a + 260m, :ham.a + 261m] << 0.5dt;
+        let w323 = spaalt[:ham.a + 260m, :ham.a + 261m] >> 0.5dt;
+        let w324 = spaalt[:ham.a + 309m, :ham.a + 310m] << 0.5dt;
+        let w325 = spaalt[:ham.a + 380m, :ham.a + 381m] << 1.5dt;
+        let w326 = spaalt[:ham.a + 439m, :ham.a + 440m] >> 0.5dt;
+        let w327 = spaalt[:ham.a + 510m, :ham.a + 511m] << 0.5dt;
+        let w328 = spaalt[:ham.a + 499m, :ham.a + 500m] << 1.5dt;
+        let w329 = spaalt[:ham.a + 550m, :ham.a + 551m] << 0.5dt;
+        let w401 = spaalt[:ham + 49m, :ham + 50m] << 7.5dt;
+        let w402 = spaalt[:ham + 49m, :ham + 50m] << 4.5dt;
+        let w403 = spaalt[:ham + 99m, :ham + 100m] << 4.5dt;
+        let w405 = spaalt[:ham + 100m] << 3.1dt
+                -- spaalt[:ham + 105m] << 2.9dt;
+        let w406 = spaalt[:ham + 140m, :ham + 141m] << 2.5dt;
+        let w411 = spaalt[:ham + 95m] << 9.8dt
+                -- spaalt[:ham + 100m] << 9.5dt;
+        let w415 = spaalt[:ham + 115m] << 6.3dt
+                -- spaalt[:ham + 120m] << 6.0dt;
+        let w421 = spaalt[:ham + 170m, :ham + 171m] << 4.5dt;
+        let w424 = spaalt[:ham + 170m, :ham + 171m] << 3.5dt;
+        let w425 = spaalt[:ham + 189m, :ham + 190m] << 4.5dt;
+        let w426 = spaalt[:ham + 189m, :ham + 190m] << 3.5dt;
+        let w441 = spaalt[:ham + 230m, :ham + 231m] << 5.5dt;
+        let w442 = spaalt[:ham + 230m, :ham + 231m] << 4.5dt;
+        let w450 = spaalt[:ham + 285m, :ham + 290m] << 4.5dt;
+        let w451 = spaalt[:ham + 300m] << 3.0dt
+                -- spaalt[:ham + 305m] << 2.8dt;
+        let w452 = spaalt[:ham + 340m, :ham + 341m] << 1.5dt;
+        let w453 = spaalt[:ham + 390m, :ham + 391m] << 0.5dt;
+        let w455 = spaalt[:ham + 390m] << 3.5dt
+                -- spaalt[:ham + 395m] << 3.3dt;
+        let w456 = spaalt[:ham + 430m, :ham + 431m] << 0.5dt;
+        let w461 = spaalt[:ham + 160m] >> 2.0dt
+                -- spaalt[:ham + 162m] >> 1.9dt;
+        let w463 = spaalt[:ham + 210m, :ham + 211m] >> 0.5dt;
+        let w464 = spaalt[:ham + 224m, :ham + 225m] >> 0.5dt;
+        let w465 = spaalt[:ham + 290m, :ham + 291m] >> 0.5dt;
+        let w466 = spaalt[:ham + 290m, :ham + 291m] << 0.5dt;
+        let w467 = spaalt[:ham + 309m, :ham + 310m] << 0.5dt;
+        let w468 = spaalt[:ham + 390m, :ham + 391m] >> 0.5dt;
+        let w469 = spaalt[:ham + 430m, :ham + 431m] >> 0.5dt;
+        let w470 = spaalt[:ham.f - 231m, :ham.f - 230m] << 0.5dt;
+       #let w471 = spaalt[:ham.f - 231m, :ham.f - 230m] >> 0.5dt;
+        let w472 = spaalt[:ham.f - 160m, :ham.f - 159m] << 1.5dt;
+        let w473 = spaalt[:ham.f - 160m, :ham.f - 159m] << 0.5dt;
+
+        # Gl. 5 (Richtungsgleis 6100)
+        track(:first:station :cat,
+                w303
+            ..  spaalt[:ham - 520m, :ham - 500m] >> 1.5dt
+            ..  w313
+            ..  spaalt[:ham - 340m, :ham + 100m] >> 2.5dt
+            ..  w461
+            ..  w463
+        );
+
+        # Gl. 6 (Richtungsgleis 1120 - Richtungsgleis 6100)
+        with layer = 2 track(:first:station :cat,
+                spaalt[:ham.a, :ham.f - 230m] >> 0.5dt
+            ..  spaalt[:ham.f - 160m, :ham.f - 100m] << 0.5dt
+            ..  spaalt[:ham.f - 1m, :ham.f] >> 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat,
+                spaalt[:ham.f - 160m, :ham.f - 100m] << 0.5dt
+            ..  spaalt[:ham.f - 1m, :ham.f] >> 0.5dt
+        );
+
+        # Gl. 7
+        track(:first:station :cat,
+                spaalt[:ham.a, :ham.f - 160m] << 0.5dt
+        );
+
+        # Gl. 8
+        track(:first:station :cat,
+                spaalt[:ham.a, :ham - 400m] << 1.5dt
+            ..  spaalt[:ham - 200m, :ham + 260m] << 2.5dt
+            ..  w452 .. w469
+        );
+
+        # Gl. 9
+        track(:station :cat,
+                ham[:ham - 600m, :ham - 300m] << 2.5dt
+            ..  spaalt[:ham - 220m, :ham + 50m] << 3.5dt
+            ..  w405
+        );
+
+        # Gl. 10
+        track(:station :cat,
+                ham[:ham - 600m, :ham - 300m] << 4.5dt
+            ..  w242
+        );
+        track(:second:station :cat,
+                spaalt[:ham - 200m, :ham + 100m] << 4.5dt
+            ..  spaalt[:ham + 170m, :ham + 260m] << 3.5dt
+            ..  w451
+            ..  w452
+        );
+
+        # Gl. 11
+        track(:first:station :cat,
+                har[:ham.a, :ham + 50m] << 5.5dt
+            ..  w403
+        );
+
+        # Gl. 12
+        track(:first:station :cat,
+                har[:ham.a, :ham - 430m] << 6.5dt
+            ..  ham[:ham - 200m, :ham + 50m] << 7.5dt
+            ..  w424
+        );
+
+        # Gl. 13
+        track(:first:station :cat,
+                har[:ham.a, :ham - 430m] << 7.5dt
+            ..  ham[:ham - 200m, :ham + 50m] << 8.5dt
+            ..  w415
+            ..  spaalt[:ham + 170m, :ham + 290m] << 4.5dt # W424 -
+            ..  w456
+        );
+
+        # Gl. 14
+        with layer = 2 track(:first:station :cat,
+                har[:ham.a, :ham - 430m] << 8.5dt
+            ..  w229
+            ..  ham[:ham - 200m, :ham + 50m] << 10.5dt
+            ..  w411
+            ..  spaalt[:ham + 170m, :ham + 290m] << 5.5dt
+            ..  w455
+            ..  spaalt[:ham.f - 230m, :ham.f - 100m] << 1.5dt
+            ..  spaalt[:ham.f - 1m, :ham.f] << 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat,
+                spaalt[:ham.f - 160m, :ham.f - 100m] << 1.5dt
+            ..  spaalt[:ham.f - 1m, :ham.f] << 0.5dt
+        );
+                
+
+        # Gl. 28
+        track(:second:station :cat,
+                ham[:ham - 600m, :ham - 300m] << 3.5dt
+            ..  w242
+        );
+
+        # Gl. 31
+        track(:station :cat,
+                w311
+            ..  spaalt[:ham - 340m] << 2.4dt
+            --  spaalt[:ham - 330m] << 2.5dt
+            ..  w239
+        );
+ 
+        # Gl. 33
+        track(:station :cat,
+                spaalt[:ham + 200m, :ham + 201m] >> 2.5dt # W462
+            ..  spaalt[:ham + 260m, :ham + 320m] >> 3.5dt
+        );
+
+        # Gl. 34
+        track(:station :cat,
+                spaalt[
+                    :ham + 100m, # W404
+                        # W460: ham + 150m
+                        # W462: ham + 200m
+                    :ham + 320m
+                ] >> 2.5dt
+        );
+
+        # Gl. 35
+        with layer = 2 track(:station :cat,
+                spaalt[:ham.f - 230m, :ham.f - 100m] >> 0.5dt
+        );
+        with layer = 1 casing(:station :cat,
+                spaalt[:ham.f - 180m, :ham.f - 100m] >> 0.5dt
+        );
+
+        # W136 - W137
+        track(:station :cat, w136 .. w137);
+
+        # W165 - W138
+        track(:station :cat, w165 .. w138);
+
+        # W203 - W217
+        track(:station :cat,
+                w203
+            ..  ham[:ham - 540m] << 5.5dt
+            --  ham[:ham - 500m] << 4.5dt
+            ..  w217
+        );
+
+        # W204 - W222
+        track(:station :cat,
+                w204
+            ..  ham[:ham - 540m] << 7.5dt
+            --  ham[:ham - 470m] << 5.5dt
+        );
+
+        # W205 - W229
+        track(:station :cat,
+                w205
+            ..  ham[:ham - 505m] << 5.5dt
+            --  ham[:ham - 430m] << 7.5dt
+            ..  w229
+        );
+
+        # W207 - W226
+        track(:station :cat, w207 .. w226);
+
+        # W209 - W215
+        track(:station :cat, w209 .. w215);
+
+        # W214 - W227
+        track(:station :cat, w214 .. w227);
+
+        # W216 - W219
+        track(:station :cat, w216 .. w219);
+
+        # W218 - W232
+        track(:station :cat, w218 .. w232);
+
+        # W220 - W221
+        track(:station :cat, w220 .. w221);
+
+        # W223 - W236
+        track(:station :cat, w223 .. w236);
+
+        # W233 - W235
+        track(:station :cat, w233 .. w235);
+
+        # W237 - W238
+        track(:station :cat, w237 .. w238);
+
+        # W35 - W306
+        track(:station, w35 .. w306);
+
+        # W301 - W305
+        track(:station :cat, w301 .. w305);
+
+        # W302 - W304
+        track(:station :cat, w302 .. w304);
+
+        # W307 - W310
+        track(:station :cat, w307 .. w310);
+
+        # W308 - W313
+        track(:station :cat, w308 .. w313);
+
+        # W309 - W314
+        track(:station :cat, w309 .. w314);
+
+        # W330 - W323
+        track(:first:station :cat,
+                spaalt[:ham.a, :ham.a + 170m] >> 1.5dt
+            ..  w323
+        );
+
+        # W319 - W322
+        track(:station :cat, w319 .. w322);
+
+        # W320 - W321
+        track(:station :cat, w320 .. w321);
+
+        # W324 - W325
+        track(:station :cat, w324 .. w325);
+
+        # W326 - W327
+        track(:station :cat, w326 .. w327);
+
+        # W328 - W329
+        track(:station :cat, w328 .. w329);
+
+        # W401 - W415
+        track(:station :cat, w401 .. w415);
+
+        # W402 - W406
+        track(:station :cat, w402 .. w405 .. w406);
+
+        # W411 - W421
+        track(:station :cat, w411 .. w421);
+
+        # W425 - W441
+        track(:station :cat, w425 .. w441);
+
+        # W426 - W451
+        track(:station :cat, w426 .. w442 .. w451);
+
+        # W450 - W455
+        track(:station :cat, w450 .. w455);
+
+        # W460 - W68
+        track(:station :cat,
+                spaalt[:ham + 150m, :ham + 151m] >> 2.5dt
+            ..  spaalt[:ham + 259m, :ham + 261m] >> 4.5dt
+        );
+
+        # W461 - W465
+        track(:station :cat,
+                w461
+            ..  spaalt[:ham + 180m, :ham + 200m] >> 1.5dt
+            ..  w465
+        );
+
+        # W464 - W466
+        track(:station :cat, w464 .. w466);
+
+        # W467 - W468
+        track(:station :cat, w467 .. w468);
+
+        # W470 - W472
+        track(:station :cat, w470 .. w472);
+
+        # Bahnsteig 5/6
+        platform(:open,
+                spaalt[:ham - 340m, :ham + 100m] >> 0.9dt
+            --  spaalt[:ham + 100m, :ham - 340m] << 2.1dt
+        );
+
+        # Bahnsteig 7/8
+        platform(:open,
+                spaalt[:ham - 340m, :ham + 260m] << 0.9dt
+            --  spaalt[:ham + 260m, :ham - 200m] >> 2.1dt
+            ..  spaalt[:ham - 330m] << 1.3dt
+            --  spaalt[:ham - 340m] << 1.24dt
+        );
+
+        # Bahnsteig 11/12
+        platform(:open,
+                ham[:ham - 400m, :ham + 30m] << 5.9dt
+            --  ham[:ham + 30m, :ham - 200m] >> 7.1dt
+            ..  ham[:ham - 390m] << 6.22dt
+            --  ham[:ham - 400m] << 6.2dt
+        );
+
+        # Bahnsteig 13/14
+        platform(:open,
+                ham[:ham - 350m] << 8.2dt
+            --  ham[:ham - 340m] << 8.3dt
+            ..  ham[:ham - 200m, :ham + 30m] << 8.9dt
+            --  ham[:ham + 30m, :ham - 200m] >> 10.1dt
+            ..  ham[:ham - 340m] << 8.85dt
+            --  ham[:ham - 350m] << 8.7dt
+        );
+
+        marker(:de.bf :left, ham[:ham] << 10.5dt);
+        station(:left, ham[:ham - 0.8sw] << 10.5dt << 1.8sw,
+            span(:bold, "Hamburg Hbf"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    "1120: ", "1245: ", "1250: ", "2200: ", "6100: "
+                ),
+                vbox(:right:top,
+                    "63,", "2,", "355,", "355,", "286,"
+                ),
+                vbox(:left:top,
+                    "90", "73", "33", "32", "66"
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:ham.f, :dam - 280m]);
+    }
+
+
+    with link = "point.de.Hamburg-Dammtor" {
+        # Gl. 3
+        track(:first:station :cat,
+                spaalt[:dam - 280m, :dam - 180m] >> 0.5dt
+            ..  spaalt[:dam - 70m, :dam + 320m] >> 1.5dt
+            ..  spaalt[:dam + 599m, :dam + 600m] >> 0.5dt
+        );
+
+        # Gl. 4
+        track(:first:station :cat, spaalt[:dam - 280m, :dam + 600m] << 0.5dt);
+
+        # Bahnsteig
+        platform(:open,
+                spaalt[:dam - 60m, :dam + 320m] >> 1.1dt
+            --  spaalt[:dam + 320m, :dam - 60m] >> 0.1dt
+        );
+
+        marker(:de.hp :left, spaalt[:dam] << 0.5dt);
+        station(:left, spaalt[:dam - 0.3sw] << 0.5dt << 1.7sw,
+            "H. Dammtor", "288,11"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:dam + 600m, :ste.uest - 220m]);
+    }
+
+
+    with link = "point.de.Hamburg-Sternschanze" {
+        track(:first:station :cat,
+                spaalt[:ste.uest - 220m, :ste - 320m] >> 0.5dt
+            ..  spaalt[:ste - 180m, :ste] >> 1.5dt
+            ..  spaalt[:ste + 140m, :ste + 200m] >> 0.5dt
+        );
+        track(:first:station :cat,
+                spaalt[:ste.uest - 220m, :ste + 200m] << 0.5dt
+        );
+
+        track(:station :cat,
+                spaalt[:ste.uest - 120m] >> 0.5dt
+            --  spaalt[:ste.uest - 60m] << 0.5dt
+        );
+        track(:station :cat,
+                spaalt[:ste.uest + 40m] << 0.5dt
+            --  spaalt[:ste.uest + 100m] >> 0.5dt
+        );
+
+        platform(:removed,
+                spaalt[:ste - 220m, :ste] << 0.1dt
+            --  spaalt[:ste, :ste - 180m] << 1.1dt
+            ..  spaalt[:ste - 210m] >> 0.9dt
+            --  spaalt[:ste - 220m] >> 0.8dt
+        );
+
+        marker(:de.uest :left, spaalt[:ste.uest] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, spaalt[:ste] << 0.5dt);
+
+        station(:bottom, spaalt[:ste.uest] << 0.5dt << 1.2sw,
+            "H. Sternschanze", "289,10"
+        );
+        station(:bottom :removed, spaalt[:ste - 2sw] << 0.5dt << 1.2sw,
+            "H. Sternschanze", "289,81"
+        );
+    }
+
+
+    with link = "point.de.Altona-Schulterblatt" {
+        track(:first:station :double :cat, spaalt[:ste + 200m, :sul + 100m]);
+        with layer = -1 marker(:de.gbf :gone :left, spaalt[:sul] << 0.5dt);
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat, spaalt[:sul + 100m, :rai - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Rainweg" {
+        track(:first:station :cat,
+                spaalt[:rai - 1sw, :aeid] >> 0.5dt
+        );
+        track(:first:station :cat,
+                spaalt[:rai, :rai + 0.1dl] >> 0.5dt
+            ..  spaalt.ar[:aeid - 30m, :aeid] >> 1.0dt
+        );
+        track(:first:station :cat,
+                spaalt[:rai, :rai + 0.1dl] << 0.5dt
+            ..  spaalt.ar[:aeid - 30m, :aeid]
+        );
+        track(:first:station :cat,
+                spaalt[:rai - 1sw, :rai + 0.1dl] << 0.5dt
+            ..  spaalt.ar[:aeid - 30m, :aeid] << 1.0dt
+        );
+
+        marker(:de.abzw :left, spaalt[:rai] << 0.5dt);
+        station(:bottom, spaalt[:rai - 1sw] << 0.5dt << 1.2sw,
+            hbox(:center:base, "H. ", span(:bold, "Rainweg")),
+            hbox(:center:top,
+                vbox(:right:top, "1232: ", "6100: "),
+                vbox(:right:top, "1,", "291,"),
+                vbox(:left:top, "48", "50")
+            )
+        );
+    }
+}
+

@@ -1,0 +1,28 @@
+# DE 1248.  Hamburg Süd - Hamburg Kai rechts
+#
+let wanham = path("path.de.2200");
+
+with detail = 5 {
+    with link = "line.de.1248" {
+        track(:second :removed,
+                wanham[:ved + 150m, :ved + 500m] << 2.5dt
+            ..  wanham[:ved + 650m, :kar - 1sw] << 3.5dt
+        );
+        with layer = 1 line_badge(
+            :removed, wanham[:ved + 850m] << 3.5dt, "1248"
+        );
+    }
+
+    
+    with link = "point.de.Hamburg-Kai-Rechts" {
+        track(:second:station :removed,
+                wanham[:kar - 1sw, :kar + 1sw] << 3.5dt
+        );
+        marker(:de.gbf :removed :left, wanham[:kar] << 3.5dt);
+        station(:left :removed, wanham[:kar - 1sw] << 3.5dt << 1.8sw,
+            span(:bold, "Hamburg Kai rechts"),
+            "1248: ??"
+        );
+    }
+}
+

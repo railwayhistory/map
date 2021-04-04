@@ -1,0 +1,69 @@
+# DE 1270.  Hamburg Hbf - Hamburg Landungsbrücken - Hamburg Diebsteich
+#
+let hamdie = path("path.de.1270");
+let altkie = path("path.de.1220");
+let spaalt = path("path.de.6100");
+
+with detail = 4 {
+
+#   with link = "line.de.1270" {
+#       track(:first :double :rail,
+#               hamdie[:kon + 1sw, :kon + 2sw]
+#           ..  altkie[:als - 0.61sw, :als - 0.6sw] << 9dt
+#       );
+#   }
+
+    with link = "point.de.Hamburg-Altona-S-Bahn" {
+        # Richtungsgleis Strecke 1270
+        track(:first:station :rail,
+                altkie[:als - 0.6sw, :als + 0.5sw] << 6.5dt
+            --  altkie[:als + 0.5sw + 1dl, :alt.af] << 5.5dt
+            ..  altkie[:aham - 101m, :aham - 100m] << 10.5dt
+        );
+
+        # Richtungsgleis Strecke 1240
+        track(:first:station :rail,
+                altkie[:als + 0.5sw + 3dl, :alt.af] << 6.5dt
+            ..  altkie[:aham - 101m, :aham - 100m] << 8.5dt
+        );
+
+        # Gegenrichtungsgleis Strecke 1240
+        track(:first:station :rail,
+                altkie[:als + 0.5sw, :alt.af] << 9.5dt
+            ..  altkie[:aham - 101m, :aham - 100m] << 9.5dt
+        );
+
+        # Gegenrichtungsgleis Strecke 1270
+        track(:first:station :rail,
+                altkie[:als - 0.6sw, :als + 0.5sw] << 9.5dt
+            --  altkie[:als + 0.5sw + 1dl, :alt.af] << 10.5dt
+            ..  altkie[:aham - 101m, :aham - 100m] << 11.5dt
+        );
+
+        with layer = -2 marker(:de.bf :right, altkie[:als] << 6.5dt);
+    }
+
+    with link = "line.de.1270" {
+        with layer = 2 track(:first:station :rail,
+                altkie[:aham - 100m, :aham - 99m] << 10.5dt
+            ..  spaalt[:rai.x + 0.1dt, :rai.x] << 3.5dt
+            ..  altkie[:die - 221m, :die - 220m] >> 5.5dt
+        );
+        with layer = 1 casing(:first:station :rail,
+                altkie[:aham - 100m, :aham - 99m] << 10.5dt
+            ..  spaalt[:rai.x + 0.1dt, :rai.x] << 3.5dt
+            ..  altkie[:die - 221m, :die - 220m] >> 5.5dt
+        );
+        with layer = 2 track(:first:station :rail,
+                altkie[:aham - 100m, :aham - 99m] << 11.5dt
+            ..  spaalt[:rai.x + 0.1dt, :rai.x] << 4.5dt
+            ..  altkie[:die - 221m, :die - 220m] >> 4.5dt
+        );
+        with layer = 1 casing(:first:station :rail,
+                altkie[:aham - 100m, :aham - 99m] << 11.5dt
+            ..  spaalt[:rai.x + 0.1dt, :rai.x] << 4.5dt
+            ..  altkie[:die - 221m, :die - 220m] >> 4.5dt
+        );
+    }
+}
+

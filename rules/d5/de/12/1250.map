@@ -1,0 +1,53 @@
+# DE 1250.  Hamburg-Harburg Hga - Hamburg Hbf
+#
+let wanham = path("path.de.2200");
+
+with detail = 5 {
+
+    with link = "point.de.Hamburg-Ericus" {
+        let w710 = wanham[:eri - 321m, :eri - 320m] >> 2.5dt;
+        let w711 = wanham[:eri - 260m, :eri - 259m] >> 1.5dt;
+        let w712 = wanham[:eri - 240m, :eri - 239m] >> 2.5dt;
+        let w714 = wanham[:eri - 231m, :eri - 230m] >> 2.5dt;
+        let w715 = wanham[:eri - 135m, :eri - 134m] >> 1.5dt;
+        let w716 = wanham[:eri, :eri + 1m] >> 1.5dt;
+
+        # Str. 1250 L
+        track(:first:station :cat, wanham[:eri.a, :eri.f] >> 1.5dt);
+
+        # Str. 1250 L
+        track(:first:station :cat, wanham[:eri.a, :eri.f] >> 2.5dt);
+
+        # Str. 1291
+        track(:first:station :cat,
+                wanham[:eri.a, :eri - 320m] >> 3.5dt
+            ..  w712
+        );
+
+        # Str. 1292
+        track(:first:station :cat,
+                wanham[:eri - 340m, :eri - 240m] << 1.5dt
+            ..  w716
+        );
+
+        # W710 - W711
+        track(:station :cat, w710 .. w711);
+
+        # W714 - W715
+        track(:station :cat, w714 .. w715);
+
+        marker(:de.abzw :right, wanham[:eri] >> 2.5dt);
+    }
+
+
+    with link = "line.de.1250" {
+        track(:first :double :cat,
+                wanham[:eri.f, :eri.f + 1m] >> 2dt
+            ..  wanham[:ham.a - 1m, :ham.a] << 6dt
+        );
+    }
+    
+
+    # point.de.Hamburg-Hbf: de.6100
+}
+

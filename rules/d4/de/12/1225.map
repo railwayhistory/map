@@ -1,0 +1,288 @@
+# DE 1225.  Hamburg-Holstenstraße - Pinneberg
+#
+let altkie = path("path.de.1220");
+
+with detail = 4 {
+    with link = "line.de.1225" {
+        let spaalt = path("path.de.6100");
+
+        track(:first:station :rail,
+                spaalt[:rai + 0.2sw, :rai + 0.21sw] >> 3.5dt
+            ..  altkie[:die - 221m, :die - 220m] >> 6.5dt
+        );
+        track(:first:station :rail,
+                spaalt[:rai + 0.2sw, :rai + 0.21sw] >> 2.5dt
+            ..  altkie[:die - 221m, :die - 220m] >> 4.5dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Diebsteich" {
+        # Gleis Pinneberg - Holstenstraße/Altona
+        track(:first:station :rail,
+                altkie[:die - 220m, :die + 1.0sw] >> 4.5dt
+        );
+
+        # Gleis Holstenstraße - Pinneberg
+        track(:first:station :rail,
+                altkie[:die - 220m, :die + 1.0sw - 3dl] >> 6.5dt
+            --  altkie[:die + 1.0sw - 2dl, :die + 1.0sw] >> 5.5dt
+        );
+
+        # Gleis Altona - Diebsteich
+        track(:first:station :rail,
+                altkie[:die - 220m, :die - 200m] >> 5.5dt
+            --  altkie[:die - 200m + 1dl, :die - 200m + 1.1dl] >> 6.5dt
+        );
+
+        marker(:de.bf :right, altkie[:die] >> 6.5dt);
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail,
+                altkie[:die + 1sw, :ala.a] >> 5dt
+            ..  altkie[:las - 0.6sw, :las - 0.5sw] >> 6dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Langenfelde-S-Bahn" {
+        track(:first:station :double :rail,
+                altkie[:las - 0.5sw, :las + 0.5sw] >> 6.0dt
+        );
+        marker(:de.hp :right, altkie[:las] >> 6.5dt);
+    }
+
+
+    with link = "line.de.1225" {
+        with layer = -2 track(:first :double :rail,
+                altkie[:las + 0.5sw, :las + 0.6sw] >> 6.0dt
+            ..  altkie[:ste - 1.1sw, :ste - 1sw] >> 3.0dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Stellingen-S-Bahn" {
+        track(:first:station :double :rail,
+                altkie[:ste - 1sw, :ste + 1sw] >> 3.0dt
+        );
+        marker(:de.hp :right, altkie[:ste] >> 3.5dt);
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, altkie[:ste + 1sw, :eis - 500m] >> 3.0dt);
+    }
+
+
+    with link = "point.de.Hamburg-Eidelstedt-S-Bahn" {
+        # Gleis Pinneberg - Holstenstraße
+        track(:first:station :rail, altkie[:eis - 500m, :elb.a] >> 2.5dt);
+        with layer = -3 casing(:first:station :rail,
+                altkie[:eis, :frot] >> 2.5dt
+        );
+        
+        # Gleis Holstenstraße - Pinneberg
+        track(:first:station :rail,
+                altkie[:eis - 500m, :eis - 500m + 1dl] >> 3.5dt
+            --  altkie[:eis - 500m + 2dl, :elb.a - 2dl] >> 4.5dt
+            --  altkie[:elb.a - 1dl, :elb.a] >> 3.5dt
+        );
+        with layer = -3 casing(:first:station :rail,
+                altkie[:eis, :frot - 1sw] >> 4.5dt
+        );
+        with layer = -1 casing(:first:station :rail,
+                altkie[:frot - 1sw, :elb.a - 2dl] >> 4.5dt
+        );
+
+        # Abstellgleis A-Seite
+        track(:station,
+                altkie[:eis - 500m + 3dl, :eis - 0.5sw] >> 3.5dt
+        );
+        track(:station,
+                altkie[:eis - 0.5sw - 3dl] >> 3.5dt
+            --  altkie[:eis - 0.5sw - 2dl] >> 4.5dt
+        );
+        track(:station,
+                altkie[:eis - 0.5sw - 2dl] >> 3.5dt
+            --  altkie[:eis - 0.5sw - 1dl] >> 2.5dt
+        );
+
+        # Ausfädelung Strecke 9121 (AKN)
+        with layer = -2 track(:second:station,
+                altkie[:eis + 2.9dl, :eis + 3.0dl] >> 2.5dt
+            --  altkie[:eis + 4.0dl, :elb.a - 5dl] >> 3.5dt
+            --  altkie[:elb.a - 3dl, :elb.a - 2dl] >> 5.5dt
+        );
+        with layer = -3 casing(:second:station,
+                altkie[:eis + 2.9dl, :eis + 3.0dl] >> 2.5dt
+            --  altkie[:eis + 4.0dl, :frot - 1sw] >> 3.5dt
+        );
+        track(:second:station,
+                altkie[:eis + 4.0dl] >> 4.5dt
+            --  altkie[:eis + 5.0dl] >> 3.5dt
+        );
+
+        # Verbindung vom Gütergleis
+        track(:station,
+                altkie[:eis + 2dl] >> 5.5dt
+            --  altkie[:eis + 3dl] >> 4.5dt
+        );
+
+        marker(:de.bf :right, altkie[:eis - 0.5sw] >> 4.5dt);
+        with layer = -1 marker(:de.bf.casing, altkie[:eis - 0.5sw] >> 4.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Elbgaustrasse", layer = -2 {
+        # Gleis Pinneberg - Holstenstraße
+        track(:first:station :rail, altkie[:elb.a, :elb.f] >> 2.5dt);
+            track(:station :rail,
+                    altkie[:elb + 0.5sw + 4dl] >> 2.5dt
+                --  altkie[:elb + 0.5sw + 6dl] >> 4.5dt
+            );
+
+        # Gleis Holstenstraße - Pinneberg
+        track(:first:station :rail,
+                altkie[:elb.a, :elb + 0.5sw + 1dl] >> 3.5dt
+            --  altkie[:elb + 0.5sw + 4dl, :elb.bw - 0.5sw - 3dl] >> 5.5dt
+            --  altkie[:elb.bw - 0.5sw - 2dl, :elb.bw + 0.7sw] >> 6.5dt
+            --  altkie[:elb.bw + 0.7sw + 3dl, :elb.f] >> 3.5dt
+        );
+
+        # Bw
+        track(:station :rail,
+                altkie[:elb + 0.5sw + 4dl, :elb.bw - 0.5sw] >> 3.5dt
+        );
+        track(:station :rail,
+                altkie[:elb + 0.5sw + 2dl, :elb.bw - 0.5sw] >> 4.5dt
+        );
+            track(:station :rail,
+                    altkie[:elb + 0.5sw + 3dl] >> 4.5dt
+                --  altkie[:elb + 0.5sw + 4dl] >> 3.5dt
+            );
+        track(:station :rail,
+                altkie[:elb.bw - 0.5sw - 3dl, :elb.bw - 0.5sw] >> 5.5dt
+        );
+
+        marker(:de.bf :right, altkie[:elb] >> 3.5dt);
+        marker(:de.bw :right, altkie[:elb.bw] >> 3.0dt);
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, altkie[:elb.f, :kru - 1sw] >> 3dt);
+    }
+
+
+    with link = "point.de.Krupunder" {
+        track(:first:station :double :rail,
+                altkie[:kru - 1sw, :kru + 1sw] >> 3dt
+        );
+        marker(:de.hp :right, altkie[:kru] >> 3.5dt);
+        station(:right, altkie[:kru - 0.4sw] >> 3.5dt >> 1.2sw,
+            "Krupunder", "9,59"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail,
+                altkie[:kru + 1sw, :kru + 1.1sw] >> 3dt
+            ..  altkie[:bic - 1.1sw, :bic - 1sw] >> 2dt
+        );
+    }
+
+
+    with link = "point.de.Bickbargen" {
+        track(:first:station :double :rail,
+                altkie[:bic - 1sw, :bic + 1sw] >> 2dt
+        );
+            track(:station :rail,
+                    altkie[:bic - 1.5dl] >> 1.5dt
+                --  altkie[:bic - 0.5dl] >> 2.5dt
+            );
+            track(:station :rail,
+                    altkie[:bic + 0.5dl] >> 2.5dt
+                --  altkie[:bic + 1.5dl] >> 1.5dt
+            );
+        marker(:de.uest :right, altkie[:bic] >> 2.5dt);
+        station(:right, altkie[:bic - 0.4sw] >> 2.5dt >> 1.2sw,
+            "Bickbargen", "10,78"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, altkie[:bic + 1sw, :hal - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Halstenbek" {
+        track(:first:station :double :rail,
+                altkie[:hal - 1sw, :hal + 1sw] >> 2dt
+        );
+        marker(:de.hp :right, altkie[:hal] >> 2.5dt);
+        with layer = -1 marker(:de.bf :gone :right, altkie[:hal] >> 2.5dt);
+        station(:right, altkie[:hal - 0.5sw] >> 2.5dt >> 1.3sw,
+            "Halstenbek", "11,98"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, altkie[:hal + 1sw, :ths - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Thesdorf" {
+        track(:first:station :double :rail,
+                altkie[:ths - 1sw, :ths + 1sw] >> 2dt
+        );
+        marker(:de.hp :right, altkie[:ths] >> 2.5dt);
+        station(:right, altkie[:ths - 0.5sw] >> 2.5dt >> 1.3sw,
+            "Thesdorf", "14,34"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, altkie[:ths + 1sw, :pin.a] >> 2dt);
+    }
+
+
+    with link = "point.de.Pinneberg-S-Bahn" {
+        # Gegenrichtungsgleis
+        track(:first:station :rail,
+                altkie[:pin.a, :pin - 1.6sw - 2dl] >> 1.5dt
+            --  altkie[:pin - 1.6sw - 1dl, :pin - 0.6sw] >> 2.5dt
+        );
+            track(:station :rail,
+                    altkie[:pin - 1.6sw - 4dl] >> 1.5dt
+                --  altkie[:pin - 1.6sw - 3dl] >> 2.5dt
+            );
+
+        # Richtungsgleis
+        track(:first:station :rail,
+                altkie[:pin.a, :pin - 1.6sw - 3dl] >> 2.5dt
+            --  altkie[:pin - 1.6sw - 2dl, :pin - 0.6sw] >> 3.5dt
+        );
+            track(:station :rail,
+                    altkie[:pin - 1.6sw - 6dl] >> 2.5dt
+                --  altkie[:pin - 1.6sw - 5dl] >> 1.5dt
+            );
+
+        # Abstellgleis
+        track(:station :rail,
+                altkie[:pin - 1.6sw - 8dl, :pin - 1.6sw - 5dl] >> 3.5dt
+            --  altkie[:pin - 1.6sw - 4dl, :pin - 1.6sw - 3.9dl] >> 2.5dt
+        );
+
+        marker(:de.bf :right, altkie[:pin - 1.1sw] >> 3.5dt);
+        station(:right, altkie[:pin - 1.6sw] >> 3.5dt >> 1.3sw,
+            hbox(:left:base, span(:bold, "Pinneberg "), "(S-Bahn)"),
+            "1225: 14,34"
+        );
+    }
+}
+

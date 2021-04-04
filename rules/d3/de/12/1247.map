@@ -1,0 +1,33 @@
+# DE 1247.  Hamburg-Ohlsdorf - Hamburg-Ochsenzoll
+#
+let hampop = path("metro.de.hmb.1241");
+let ohloch = path("path.de.1247");
+
+with detail = 3 {
+    # point.de.Hamburg-Ohlsdorf: de.1243, de.1241
+
+    with link = "line.de.1247" {
+        with layer = -1 track(:second :removed,
+                hampop[:ohl - 0.5ssw, :aair] << 0.5dt
+            ..  ohloch[:aa, :lan - 1ssw]
+        );
+    }
+
+    with link = "point.de.Hamburg-Langenhorn" {
+        track(:second:station :removed, ohloch[:lan - 1ssw, :lan + 1ssw]);
+        marker(:de.ldst :removed :right, ohloch[:lan]);
+    }
+
+    with link = "line.de.1247" {
+        track(:second :removed, ohloch[:lan + 1ssw, :och - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Ochsenzoll" {
+        track(:second:station :removed, ohloch[:och - 1ssw, :och + 1ssw]);
+        marker(:de.gbf :removed :right, ohloch[:och]);
+        slabel(:top :removed, ohloch[:och] >> 1.6ssw,
+            span(:bold, "H.-Ochsenzoll")
+        );
+    }
+}
+

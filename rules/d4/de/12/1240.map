@@ -1,0 +1,154 @@
+# DE 1240.  Hamburg Hbf - Hamburg-Altona
+#
+let spaalt = path("path.de.6100");
+let altkie = path("path.de.1220");
+
+with detail = 4 {
+    with link = "point.de.Hamburg-Hbf-S-Bahn" {
+        let ham = path("path.de.6100.ah");
+
+        # Gl. 1
+        track(:first:station :rail,
+                spaalt[:ham.a, :ham.a + 260m] >> 5.5dt
+            ..  ham[:ham - 100m, :ham.s] >> 5.5dt
+            ..  spaalt[:ham.f - 1m, :ham.f] >> 2.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :rail,
+                spaalt[:ham.a, :ham.a + 260m] >> 4.5dt
+            ..  ham[:ham - 100m, :ham.s] >> 4.5dt
+        );
+
+        # Gl. 3
+        track(:first:station :rail,
+                spaalt[:ham.a, :ham.a + 260m] >> 3.5dt
+            ..  ham[:ham - 100m, :ham.s] >> 3.5dt
+        );
+
+        # Gl. 4
+        track(:first:station :rail,
+                spaalt[:ham.a, :ham.a + 260m] >> 2.5dt
+            ..  ham[:ham - 100m, :ham.s] >> 2.5dt
+            ..  spaalt[:ham.f - 1m, :ham.f] >> 1.5dt
+        );
+
+        marker(:de.bf :right, ham[:ham] >> 5.5dt);
+    }
+
+
+    with link = "line.de.1240" {
+        track(:first :double :rail, spaalt[:ham.f, :dam - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Dammtor-S-Bahn" {
+        track(:first:station :double :rail,
+                spaalt[:dam - 1sw, :dam + 1sw] >> 2dt
+        );
+        marker(:de.hp :right, spaalt[:dam] >> 2.5dt);
+    }
+
+
+    with link = "line.de.1240" {
+        track(:first :double :rail, spaalt[:dam + 1sw, :ste - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Sternschanze-S-Bahn" {
+        track(:first:station :double :rail,
+                spaalt[:ste - 1sw, :ste + 1sw] >> 2dt
+        );
+        marker(:de.bf :right, spaalt[:ste] >> 2.5dt);
+    }
+
+
+    with link = "line.de.1240" {
+        track(:first :double :rail, spaalt[:ste + 1sw, :hos - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Holstenstrasse" {
+        track(:first:station :double :rail,
+                spaalt[:hos - 1sw, :hos + 0.7sw] >> 2dt
+        );
+        marker(:de.hp :right, spaalt[:hos] >> 2.5dt);
+        with layer = -1 marker(:de.bf :gone :right, spaalt[:hos] >> 2.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Holstenstraße-D" {
+        with layer = 2 track(:first:station :rail,
+                spaalt[:hos + 0.7sw, :hos + 1.2sw - 1dl] >> 2.5dt
+            --  spaalt[:hos + 1.2sw, :hos + 1.7sw] >> 3.5dt
+        );
+        track(:first:station :rail,
+                spaalt[:hos + 1.2sw - 1dl, :hos + 1.7sw] >> 2.5dt
+        );
+        track(:first:station :rail,
+                spaalt[:hos + 0.7sw, :hos + 1.7sw] >> 1.5dt
+        );
+        marker(:de.abzw :right, spaalt[:hos + 1.2sw] >> 3.5dt);
+    }
+
+    with link = "line.de.1240" {
+        with layer = 2 track(:first:station :rail,
+                spaalt[:hos + 1.7sw, :hos + 1.71sw] >> 3.5dt
+            ..  spaalt[:rai - 0.51sw, :rai - 0.5sw] >> 1.5dt
+        );
+        with layer = 1 casing(:first:station :rail,
+                spaalt[:hos + 1.7sw, :hos + 1.71sw] >> 3.5dt
+            ..  spaalt[:rai - 0.51sw, :rai - 0.5sw] >> 1.5dt
+        );
+        track(:first:station :rail,
+                spaalt[:hos + 1.7sw, :hos + 1.71sw] >> 1.5dt
+            ..  spaalt[:rai - 0.51sw, :rai - 0.5sw] >> 2.5dt
+        );
+    }
+    with link = "line.de.1225" {
+        track(:first:station :rail,
+                spaalt[:hos + 1.7sw, :hos + 1.71sw] >> 2.5dt
+            ..  spaalt[:rai - 0.51sw, :rai - 0.5sw] >> 3.5dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Holstenstraße-H" {
+        with layer = 2 track(:first:station :rail,
+                spaalt[:rai - 0.5sw, :rai + 1sw] >> 1.5dt
+        );
+        track(:first:station :rail,
+                spaalt[:rai - 0.5sw, :rai + 1sw] >> 2.5dt
+        );
+        track(:first:station :rail,
+                spaalt[:rai - 0.5sw, :rai + 0.2sw] >> 3.5dt
+        );
+        # Gleis von Diebsteich: de.1225
+
+        marker(:de.abzw :right, spaalt[:rai] >> 3.5dt);
+    }
+
+
+    with link = "line.de.1240" {
+        with layer = 2 track(:first:station :rail,
+                spaalt[:rai + 1sw, :rai.x] >> 1.5dt
+            ..  altkie[:aham - 99m, :aham - 100m] >> 8.5dt
+        );
+        with layer = 1 casing(:first:station :rail,
+                spaalt[:rai + 1sw, :rai.x] >> 1.5dt
+            ..  altkie[:aham - 99m, :aham - 100m] >> 8.5dt
+        );
+
+        with layer = 2 track(:first:station :rail,
+                spaalt[:rai + 1sw, :rai.x] >> 2.5dt
+            ..  altkie[:aham - 99m, :aham - 100m] >> 9.5dt
+        );
+        with layer = 1 casing(:first:station :rail,
+                spaalt[:rai + 1sw, :rai.x] >> 2.5dt
+            ..  altkie[:aham - 99m, :aham - 100m] >> 9.5dt
+        );
+    }
+
+
+    # point.de.Hamburg-Altona-S-Bahn: de.1270
+}
+

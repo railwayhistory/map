@@ -1,0 +1,235 @@
+# DE 1255.  Meckelfeld - Hamburg Süd
+#
+let lehcux = path("path.de.1720");
+let wanham = path("path.de.2200");
+
+with detail = 5 {
+    with link = "line.de.1255" {
+        # Str. 1255 R
+        track(:first :cat :tight,
+                lehcux[:meh + 300m, :fbre - 340m] << 1.5dt
+            ..  lehcux[:fbre + 80m, :fbre + 85m] << 3.5dt
+        );
+
+        # Str. 1255 L
+        track(:first :cat :tight :flip,
+                lehcux[:meh + 300m, :fbre - 630m] << 6.5dt
+            ..  lehcux[:fbre + 80m, :fbre + 85m] << 4.5dt
+        );
+
+        # Str. 1255 L/R
+        track(:first :double :cat, lehcux[:fbre + 85m, :hrs - 180m] << 4dt);
+    }
+
+
+    with link = "point.de.Hamburg-Harburg-Bbf-Süd" {
+        let w1  = wanham[:hrs - 81m, :hrs - 80m] << 3.5dt;
+        let w2  = wanham[:hrs - 20m, :hrs - 19m] << 4.5dt;
+        let w3  = wanham[:hrs + 14m, :hrs + 15m] << 4.5dt;
+        let w4  = wanham[:hrs + 90m, :hrs + 91m] << 5.5dt;
+        let w5   = wanham[:hrb - 631m, :hrb - 630m] << 5.5dt;
+        let w17 = wanham[:hrs + 75m, :hrs + 76m] << 4.5dt;
+        let w18 = wanham[:hrs + 14m, :hrs + 15m] << 3.5dt;
+
+        # Gl. 7
+        track(:first:station :cat,
+                wanham[:hrs - 180m, :hrb - 450m] << 3.5dt
+        );
+
+        # Gl. 8
+        track(:first:station :cat,
+                wanham[:hrs - 180m, :hrb - 450m] << 4.5dt
+        );
+
+        # W1 - W2
+        track(:station :cat, w1 .. w2);
+
+        # W3 - W4
+        track(:station :cat, w3 .. w4);
+
+        # W18 - W17
+        track(:station :cat, w18 .. w17);
+
+        marker(:de.bft :left, wanham[:hrs] << 4.5dt);
+        with layer = -1 marker(:de.bft.casing :left, wanham[:hrs] << 4.5dt);
+        station(:left, wanham[:hrs - 0.2sw] << 4.5dt << 1.6sw,
+            "H.-Harburg Bbf Süd", "1255: ??"
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Harburg-Bbf" {
+        let w5   = wanham[:hrb - 621m, :hrb - 620m] << 5.5dt;
+        let w6   = wanham[:hrb - 591m, :hrb - 590m] << 5.5dt;
+        let w7   = wanham[:hrb - 555m] << 5.75dt
+                -- wanham[:hrb - 550m] << 5.90dt;  
+        let w8   = wanham[:hrb - 551m, :hrb - 550m] << 5.5dt;
+        let w9   = wanham[:hrb - 515m] << 5.75dt
+                -- wanham[:hrb - 510m] << 5.90dt;  
+        let w10  = wanham[:hrb - 511m, :hrb - 510m] << 5.5dt;
+        let w11  = wanham[:hrb - 475m] << 5.65dt
+                -- wanham[:hrb - 470m] << 5.80dt;  
+        let w12  = wanham[:hrb - 471m, :hrb - 470m] << 5.5dt;
+        let w13  = wanham[:hrb - 435m] << 5.70dt
+                -- wanham[:hrb - 430m] << 5.80dt;
+        let w19  = wanham[:hrb + 280m] << 19.50dt
+                -- wanham[:hrb + 285m] << 19.25dt;
+        let w20  = wanham[:hrb + 345m] << 15.48dt
+                -- wanham[:hrb + 350m] << 15.38dt;
+        let w21  = wanham[:hrb + 400m] << 13.50dt
+                -- wanham[:hrb + 405m] << 13.25dt;
+        let w22  = wanham[:hrb + 410m] << 12.60dt
+                -- wanham[:hrb + 415m] << 12.45dt;
+        let w23  = wanham[:hrb + 440m] << 11.50dt
+                -- wanham[:hrb + 445m] << 11.25dt;
+        let w24  = wanham[:hrb + 440m] << 10.90dt
+                -- wanham[:hrb + 445m] << 10.80dt;
+        let w25  = wanham[:hrb + 480m] << 9.50dt
+                -- wanham[:hrb + 485m] << 9.25dt;
+        let w26  = wanham[:hrb + 480m] << 8.90dt
+                -- wanham[:hrb + 485m] << 8.80dt;
+        let w27  = wanham[:hrb + 520m] << 7.50dt
+                -- wanham[:hrb + 525m] << 7.25dt;
+        let w28  = wanham[:hrb + 540m] << 6.65dt
+                -- wanham[:hrb + 545m] << 6.50dt;
+        let w29  = w28;
+        let w79  = wanham[:hrb + 630m] << 4.95dt
+                -- wanham[:hrb + 635m] << 5.00dt;
+
+        # Gl. 125
+        track(:station :cat,
+                wanham[:hrb - 470m, :hrb - 280m] << 5.5dt
+            ..  wanham[:hrb - 140m, :hrb + 395m] << 8.5dt
+            ..  w28
+        );
+
+        # Gl. 126
+        track(:station :cat,
+                w12
+            ..  w13
+            ..  wanham[:hrb - 325m] << 8.20dt
+            --  wanham[:hrb - 320m] << 8.30dt
+            ..  wanham[:hrb - 180m, :hrb + 380m] << 9.5dt
+            ..  w26
+            ..  w27
+        );
+
+        # Gl. 127
+        track(:station :cat,
+                w13
+            ..  wanham[:hrb - 325m] << 9.20dt
+            --  wanham[:hrb - 320m] << 9.30dt
+            ..  wanham[:hrb - 190m, :hrb + 365m] << 10.5dt
+            ..  w26
+        );
+
+        # Gl. 128
+        track(:station :cat,
+                w10
+            ..  w11
+            ..  wanham[:hrb - 385m] << 8.20dt
+            --  wanham[:hrb - 380m] << 8.50dt
+            ..  wanham[:hrb - 200m, :hrb + 350m] << 11.5dt
+            ..  w24
+            ..  w25
+        );
+
+        # Gl. 129
+        track(:station :cat,
+                w11
+            ..  wanham[:hrb - 385m] << 9.20dt
+            --  wanham[:hrb - 380m] << 9.50dt
+            ..  wanham[:hrb - 210m, :hrb + 335m] << 12.5dt
+            ..  w24
+        );
+
+        # Gl. 130
+        track(:station :cat,
+                w9
+            ..  wanham[:hrb - 385m] << 10.20dt
+            --  wanham[:hrb - 380m] << 10.50dt
+            ..  wanham[:hrb - 220m, :hrb + 320m] << 13.5dt
+            ..  w22
+            ..  w23
+        );
+
+        # Gl. 131
+        track(:station :cat,
+                w8
+            ..  w9
+            ..  wanham[:hrb - 385m] << 11.20dt
+            --  wanham[:hrb - 380m] << 11.50dt
+            ..  wanham[:hrb - 230m, :hrb + 305m] << 14.5dt
+            ..  w22
+        );
+
+        # Gl. 132
+        track(:station :cat,
+                w6
+            ..  w7
+            ..  wanham[:hrb - 385m] << 12.20dt
+            --  wanham[:hrb - 380m] << 12.50dt
+            ..  wanham[:hrb - 240m, :hrb + 290m] << 15.5dt
+            ..  w20
+        );
+
+        # Gl. 133
+        track(:station :cat,
+                w7
+            ..  wanham[:hrb - 385m] << 13.20dt
+            --  wanham[:hrb - 380m] << 13.50dt
+            ..  wanham[:hrb - 250m, :hrb + 275m] << 16.5dt
+            ..  w20
+            ..  w21
+        );
+
+        # Gl. 134
+        track(:station :cat :removed,
+                wanham[:hrb - 260m, :hrb + 260m] << 17.5dt
+        );
+
+        # Gl. 135
+        track(:station :cat :removed,
+                wanham[:hrb - 270m, :hrb + 245m] << 18.5dt
+        );
+
+        # Gl. 136
+        track(:station :cat :removed,
+                wanham[:hrb - 280m, :hrb + 230m] << 19.5dt
+        );
+
+        # Gl. 137
+        with layer = -3 track(:station :cat :removed,
+                w5
+            ..  wanham[:hrb - 290m, :hrb + 215m] << 20.5dt
+            ..  w19
+        );
+
+        # Gl. 138
+        track(:station,
+                wanham[:hrb - 180m, :hrb + 200m] << 21.5dt
+            ..  wanham[:hrb + 260m] << 20.50dt
+            --  wanham[:hrb + 520m] << 7.50dt
+            ..  w28
+            ..  w79
+        );
+
+        # Gl. 180
+        with layer = -2 track(:station :cat,
+                wanham[:hrs - 280m, :hrb - 470m] << 5.5dt
+        );
+
+        # Gl. 182
+        track(:station,
+                w29
+            ..  wanham[:hrb + 630m] << 5.95dt
+                -- wanham[:hrb + 635m] << 6.00dt
+        );
+
+        marker(:de.bft :left, wanham[:hrb] << 21.5dt);
+        station(:left, wanham[:hrb - 0.1sw] << 21.5dt << 1.8sw,
+            "H.-Harburg Bbf", "1255: ??"
+        );
+    }
+}
+

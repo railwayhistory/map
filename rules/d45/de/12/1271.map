@@ -1,0 +1,86 @@
+# DE 1271.  Hamburg Hbf - Hamburg-Neugraben
+#
+let lehcux = path("path.de.1720");
+
+with detail = [4, 5] {
+    with link = "line.de.1271" {
+        track(:first :double :rail, lehcux[:nwi + 1sw, :ngr.a] << 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Neugraben-S-Bahn" {
+        # Gl. 1
+        track(:first:station :rail,
+                lehcux[:ngr.a, :ngr.a + 100m + 1dl] << 2.5dt
+            --  lehcux[:ngr.a + 100m + 2dl, :ngr + 250m] << 3.5dt
+            --  lehcux[:ngr + 250m + 2dl, :ngr.f - 100m - 5dl] << 5.5dt
+            --  lehcux[:ngr.f - 100m, :ngr.f - 99m] << 0.5dt
+        );
+
+        # Gl. 2
+        track(:station :rail,
+                lehcux[:ngr.a + 100m + 1.9dl, :ngr.a + 100m + 2dl] << 1.5dt
+            --  lehcux[:ngr.a + 100m + 3dl, :ngr.f - 100m - 4dl] << 2.5dt
+        );
+
+        # Gl. 3
+        track(:first:station :rail,
+                lehcux[:ngr.a, :ngr.f - 100m - 5dl] << 1.5dt
+            --  lehcux[:ngr.f - 100m - 4dl, :ngr.f - 100m - 3.9dl] << 0.5dt
+        );
+
+        # Gl. 11
+        track(:station :rail,
+                lehcux[:ngr + 250m + 1dl, :ngr.f - 100m - 6dl] << 4.5dt
+        );
+
+        # Gl. 12
+        track(:station :rail,
+                lehcux[:ngr + 250m + 2.9dl, :ngr + 250m + 3dl] << 4.5dt
+            --  lehcux[:ngr + 250m + 4dl, :ngr.f - 100m - 5dl] << 3.5dt
+        );
+
+        # W1 - W2
+        track(:station :rail,
+                lehcux[:ngr.a + 100m] << 1.5dt
+            --  lehcux[:ngr.a + 100m + 1dl] << 2.5dt
+        );
+
+        # W3 - W4
+        track(:station :rail,
+                lehcux[:ngr.a + 100m + 3dl] << 3.5dt
+            --  lehcux[:ngr.a + 100m + 4dl] << 2.5dt
+        );
+
+        # W5 - W6
+        track(:station :rail,
+                lehcux[:ngr + 250m - 4dl] << 3.5dt
+            --  lehcux[:ngr + 250m - 3dl] << 2.5dt
+        );
+
+        # W8 - W9
+        track(:station :rail,
+                lehcux[:ngr + 250m - 1dl] << 2.5dt
+            --  lehcux[:ngr + 250m] << 3.5dt
+        );
+
+        # W18 - W25
+        track(:station :rail,
+                lehcux[:ngr + 250m] << 2.5dt
+            --  lehcux[:ngr + 250m + 1dl] << 1.5dt
+        );
+
+        # W24 - W7
+        track(:station :rail,
+                lehcux[:ngr + 250m - 3dl] << 1.5dt
+            --  lehcux[:ngr + 250m - 2dl] << 2.5dt
+        );
+
+        marker(:de.bf :left, lehcux[:ngr] << 3.5dt);
+        station(:bottom, lehcux[:ngr] << 3.5dt << 1.2sw,
+            hbox(:center:base, "H.-", span(:bold, "Neugraben "), "(S-Bahn)"),
+            "1271: 22,13"
+        );
+    }
+}
+

@@ -1,0 +1,79 @@
+# DE 1271.  Hamburg Hbf - Hamburg-Neugraben
+#
+let hamneu = path("metro.de.hmb.1271");
+let lehcux = path("metro.de.hmb.1720");
+let wanham = path("metro.de.hmb.2200");
+
+with detail = 3 {
+    with link = "line.de.1271" {
+        with layer = 2 track(:first:station :double :rail,
+                hamneu[:ham.a - 0.1dl, :ham.a] << 2dt
+            ..  hamneu[:hab, :hab + 0.5ssw]
+        );
+        with layer = 1 casing(:first:station :double :rail,
+                hamneu[:ham.a - 0.1dl, :ham.a] << 2dt
+            ..  hamneu[:hab, :hab + 0.1dl]
+        );
+    }
+
+    with link = "point.de.Hamburg-Hammerbrook" {
+        with layer = 2 marker(:de.hp :left, hamneu[:hab] << 0.5dt);
+        with layer = 1 marker(:de.hp.casing :left, hamneu[:hab] << 0.5dt);
+    }
+
+    with link = "line.de.1271" {
+        with layer = 2 track(:first :double :rail,
+                hamneu[:hab + 0.5ssw, :hab.f]
+            ..  wanham[:oha, :ves + 1ssw] << 3dt
+        );
+        with layer = 1 casing(:first :double :rail,
+                hamneu[:hab - 0.1dl, :hab.f]
+            ..  hamneu[:oha, :oha + 0.1dl] << 3dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Veddel-S-Bahn" {
+        track(:first:station :double :rail,
+                wanham[:ves + 1ssw, :ves - 1ssw] << 3dt
+        );
+        marker(:de.hp :right, wanham[:ves] >> 3.5dt);
+    }
+
+    with link = "line.de.1271" {
+        track(:first :double :rail, wanham[:ves - 1ssw, :wis + 1ssw] << 3dt);
+    }
+
+    with link = "point.de.Hamburg-Wilhelmsburg-S-Bahn" {
+        track(:first:station :double :rail,
+                wanham[:wis + 1ssw, :wis - 1ssw] << 3dt
+        );
+        marker(:de.hp :right, wanham[:wis] >> 3.5dt);
+    }
+
+    with link = "line.de.1271" {
+        track(:first :double :rail, wanham[:wis - 1ssw, :har.f] << 3dt);
+    }
+
+
+
+
+    with link = "line.de.1271" {
+        track(:first :double :rail, lehcux[:nwi + 1ssw, :ngr - 1ssw] << 2dt);
+    }
+
+    with link = "point.de.Hamburg-Neugraben-S-Bahn" {
+        track(:first:station :rail,
+                lehcux[:ngr - 1ssw, :ngr + 0.5ssw + 1dl] << 1.5dt
+        );
+        track(:first:station :rail,
+                lehcux[:ngr - 1ssw, :ngr + 0.5ssw] << 2.5dt
+            --  lehcux[:ngr + 0.5ssw + 3dl, :ngr + 0.5ssw + 3.1dl] >> 0.5dt
+        );
+
+        marker(:de.bf :left, lehcux[:ngr] << 2.5dt);
+        slabel(:bottom, lehcux[:ngr] << 2.5dt << 1.2ssw,
+            span(:bold, "H.-Neugraben")
+        );
+    }
+}
+

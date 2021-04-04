@@ -1,0 +1,40 @@
+# DE 1250.  Hamburg-Harburg Hga - Hamburg Hbf
+#
+let wanham = path("path.de.2200");
+
+with detail = 4 {
+    with link = "point.de.Hamburg-Ericus" {
+        # Str. 1250 L
+        track(:first:station :cat, wanham[:eri - 2sw, :eri] >> 1.5dt);
+
+        # Str. 1250 R
+        track(:first:station :cat, wanham[:eri - 2sw, :eri] >> 2.5dt);
+
+        # Str. 1291
+        track(:first:station :cat,
+                wanham[:eri - 2sw, :eri - 3dl] >> 3.5dt
+            --  wanham[:eri - 1dl, :eri - 0.9dl] >> 1.5dt
+        );
+
+        # Str. 1292
+        track(:first:station :cat,
+                wanham[:eri - 2sw, :eri - 2dl] << 1.5dt
+            --  wanham[:eri + 1dl, :eri + 1.1dl] >> 1.5dt
+        );
+
+        track(:station :cat,
+                wanham[:eri - 4dl] >> 2.5dt
+            --  wanham[:eri - 3dl] >> 1.5dt
+        );
+    }
+
+
+    with link = "line.de.2200" {
+        track(:first :double :cat,
+                wanham[:eri - 0.1dl, :eri] >> 2dt
+            ..  wanham[:ham.aa, :ham.a] << 2dt
+        );
+    }
+    
+}
+
