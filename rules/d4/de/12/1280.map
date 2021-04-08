@@ -2,6 +2,7 @@
 #
 let lehcux = path("path.de.1720");
 let spaalt = path("path.de.6100");
+let wanham = path("path.de.2200");
 
 with detail = 4 {
 
@@ -16,6 +17,68 @@ with detail = 4 {
         );
     }
 
+
+    # point.de.Hamburg-Harburg: de.2200
+
+
+    with link = "line.de.2200" {
+        track(:first :double :cat, wanham[:har.f, :wis - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Wilhelmsburg-Abzw-S-Bahn" {
+        # s. a. DE 1271
+
+        # Str. 1280 R
+        track(:first:station :cat, wanham[:wis - 1sw, :wil.x] >> 2.5dt);
+
+        # Str. 1280 L
+        track(:first:station :cat, wanham[:wis - 1sw, :wil.x] >> 1.5dt);
+
+        # W90 - W26
+        track(:station,
+                wanham[:wis - 1dl] >> 2.5dt
+            --  wanham[:wis] >> 3.5dt
+        );
+    }
+
+
+    with link = "line.de.1280" {
+        track(:first :double :cat, wanham[:wil.x, :wla - 5dl] >> 2dt);
+    }
+
+
+    # point.de.Hamburg-Wilhelmsburg-Abzw: de.1255
+
+
+    with link = "line.de.1280" {
+        track(:first :double :cat, wanham[:wla + 8dl, :ved - 3dl] >> 2dt);
+    }
+
+
+    # point.de.Hamburg-Veddel: de.2200
+
+
+    with link = "line.de.1280" {
+        track(:first :double :cat, wanham[:ved + 12dl, :oha - 0.5sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Oberhafen" {
+        let bucall = path("path.de.1280.rot");
+
+        # Str. 1250 L
+        track(:first:station :cat, wanham[:oha, :oha + 1.5sw] >> 1.5dt);
+
+        # Str. 1250 R
+        track(:first:station :cat, wanham[:oha, :oha + 1.5sw] >> 2.5dt);
+
+        # Str. 1280 L
+        track(:first:station :cat, bucall[:oha - 0.5sw, :oha + 2sw] >> 1.5dt);
+
+        # Str. 1280 R
+        track(:first:station :cat, bucall[:oha - 0.5sw, :oha + 2sw] >> 2.5dt);
+    }
 
 
     with link = "point.de.Hamburg-Rothenburgsort-Tk" {

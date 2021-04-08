@@ -1,0 +1,41 @@
+# DE 1251.  Hamburg-Waltershof - Hamburg-Finkenwerder
+#
+let walfin = path("path.de.1251");
+let seldra = path("path.de.1253");
+
+with detail = 5 {
+    # point.de.Hamburg-Waltershof-Umspannwerk: de.1253
+
+
+    with link = "line.de.1251" {
+        track(:second:station,
+                seldra[:ffin, :ffin - 0.1dl] >> 1.5dt
+            ..  walfin[:awes - 0.1dl, :awes]
+        );
+        with layer = -1 track(:second :removed,
+                walfin[:awes, :fin.a - 100m]
+        );
+
+        with layer = 1 line_badge(:removed, walfin[:fin - 2.5km], "1251");
+    }
+
+
+    with link = "point.de.Hamburg-Finkenwerder" {
+        track(:second:station :removed, walfin[:fin.a - 100m, :f]);
+        track(:second:station :removed,
+                walfin[:fin.a - 0.1dl, :fin.a]
+            ..  walfin[:fin.a + 60m, :fin.f - 60m] << 1dt
+            ..  walfin[:fin.f, :fin.f + 0.1dl]
+        );
+
+        marker(:de.gbf :removed :left, walfin[:fin] << 1dt);
+        station(:top :removed, walfin[:fin] >> 2dt,
+            span(:bold, "H.-Finkenwerder"),
+            "1251: 4,20"
+        );
+        slabel(:top :removed, walfin[:f - 1sw] >> 4dt,
+            span(:italic, "Airbus Operations")
+        );
+    }
+}
+
