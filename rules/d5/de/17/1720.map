@@ -27,7 +27,71 @@ with detail = 5 {
 
 
     with link = "line.de.1720" {
-        track(:first :double :cat, lehcux[:har.f + 11dt, :unt - 100m]);
+        track(:first :double :cat, lehcux[:har.f + 11dt, :unt - 200m]);
+    }
+
+
+    with link = "point.de.Hamburg-Unterelbe" {
+        let untuns = path("path.de.1252");
+
+        let w1 = lehcux[:unt - 101m, :unt - 100m] << 0.5dt;
+        let w2 = lehcux[:unt - 20m, :unt - 19m] >> 0.5dt;
+        let w3 = lehcux[:unt - 1m, :unt] >> 0.5dt;
+        let w4 = lehcux[:unt + 99m, :unt + 100m] >> 1.5dt;
+        let w5 = untuns[:unt + 209m, :unt + 210m];
+        let w6 = untuns[:uns.a - 66m, :uns.a - 65m] << 1dt;
+        let w7 = untuns[:uns.a - 5m, :uns.a - 4m];
+
+        # Gl. 1 (Str. 1720 L)
+        track(:first:station :cat, lehcux[:unt - 200m, :unt + 200m] << 0.5dt);
+
+        # Gl. 2 (Str. 1720 R)
+        track(:first:station :cat, lehcux[:unt - 200m, :unt + 200m] >> 0.5dt);
+
+        # Gl. 4
+        track(:station, lehcux[:unt + 20m, :unt + 100m] >> 1.5dt);
+
+        # Gl. 5
+        track(:station :cat,
+                w5
+            ..  untuns[:unt + 320m, :uns.a] << 1dt
+        );
+
+        # Gl. 6 (Str. 1252)
+        track(:second:station :cat,
+                w3
+            ..  w4
+            ..  untuns[:unt + 210m, :uns.a]
+        );
+
+        # W1 - W2
+        track(:station :cat, w1 .. w2);
+
+        # W6 - W7
+        track(:station :cat, w6 .. w7);
+
+        marker(:de.bbf :left, lehcux[:unt] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lehcux[:unt] << 0.5dt);
+        label(lehcux[:unt] << 0.5dt << 1.5sw + (1.5sw, 0sw),
+            hbox(:right:top,
+                vbox(:right:top,
+                    span(:medium :bold :removed, "Harburg-Wilhelmsburg U E"),
+                    vbox(:center:top,
+                        span(:medium :bold, "Hamburg Unterelbe"),
+                        hbox(:center:top :xsmall,
+                            vbox(:right:top, "1252: ", "1720: "),
+                            vbox(:right:top, "0,", "170,"),
+                            vbox(:left:top, "00", "78")
+                        )
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:unt + 200m, :tem - 1sw]);
     }
 }
 
