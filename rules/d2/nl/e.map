@@ -1,0 +1,61 @@
+# EA.  Enschede Zuid - Broekheurne grens (- Ahaus)
+with detail = 2 {
+    let ea = path("simple.nl.ea");
+
+    with link = "line.nl.EA" {
+        with layer = -1 track(:second :removed, ea[:ega, :brhg]);
+        with layer = 1 line_badge(:removed, ea[:ega + 2.5km], "EA");
+    }
+
+    with link = "point.nl.Enschede-Zuid" {
+        with layer = 1 marker(:statdot :removed, ea[:ega]);
+    }
+
+    with link = "point.int.Alstätte-Broekheurne" {
+        with layer = 1 marker(:refdt :removed :right, ea[:brhg]);
+        with layer = 1 marker(:refdt :removed :left, ea[:brhg]);
+    }
+}
+
+
+# ED.  Elst - Dordrecht
+with detail = 2 {
+    let ed = path("simple.nl.ed");
+
+    with link = "line.nl.ED" {
+        track(:first :cat, ed[:est.x, :vrk]);
+        track(:first :double :cat, ed[:vrk, :ktr]);
+
+        track(:first :cat, ed[:ktr, :wnn]);
+        track(:first :double :cat, ed[:wnn, :gdm.x]);
+        with layer = 1 line_badge(:open, ed[:ktr + 13km], "ED");
+
+        track(:first :cat, ed[:gdma, :ddrs]);
+        track(:first :double :cat, ed[:ddrs, :ddr.x]);
+        with layer = 1 line_badge(:open, ed[:gdma + 10km], "ED");
+    }
+
+    with link = "point.nl.Kesteren" {
+        with layer = 1 marker(:statdot, ed[:ktr]);
+        slabel(:right, ed[:ktr] + (1dt, -1.5dt), "Kesteren");
+    }
+
+
+}
+
+
+# EW.  Eindhoven - Weert
+with detail = 2 {
+    let ew = path("simple.nl.ew");
+
+    with link = "line.nl.EW" {
+        track(:first :double :cat, ew[:ehv, :wt.x]);
+        with layer = 1 line_badge(:open, ew[:gp + 10km], "EW");
+    }
+
+    with link = "point.nl.Geldrop" {
+        with layer = 1 marker(:statdot, ew[:gp]);
+        slabel(:right, ew[:gp] + (2.0dt, 0.3dt), "Geldrop");
+    }
+}
+
