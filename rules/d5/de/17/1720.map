@@ -93,5 +93,75 @@ with detail = 5 {
     with link = "line.de.1720" {
         track(:first :double :cat, lehcux[:unt + 200m, :tem - 1sw]);
     }
+
+
+    with link = "point.de.Hamburg-Tempowerk" {
+        track(:first:station :double :cat, lehcux[:tem - 1sw, :tem + 0.55sw]);
+        with layer = -1 marker(:de.hp :removed :right, lehcux[:tem] >> 0.5dt);
+    }
+
+
+    with link = "point.de.Heimfeld" {
+        track(:first:station :double :cat,
+                lehcux[:tem + 0.55sw, :tem + 2.1sw]
+        );
+        with layer = -1 marker(
+            :de.bk :removed :right, lehcux[:tem + 1.1sw] >> 0.5dt
+        );
+    }
+
+
+    with link = "line.de.1720" {
+        track(:first :double :cat, lehcux[:tem + 2.1sw, :haa.a]);
+    }
+
+
+    with link = "point.de.Hamburg-Hausbruch" {
+        let seldra = path("path.de.1253");
+
+        let w1   = lehcux[:haa - 116m, :haa - 115m] << 0.5dt;
+        let w2   = lehcux[:haa - 30m, :haa - 29m] >> 0.5dt;
+        let w3   = lehcux[:haa - 0.1dl, :haa] >> 0.5dt;
+        let w5   = lehcux[:haa + 124m, :haa + 125m] >> 1.5dt;
+        let w6   = lehcux[:haa - 146m, :haa - 145m] >> 0.5dt;
+        let w7   = lehcux[:haa + 195m, :haa + 196m] >> 2.5dt;
+        let w16  = lehcux[:haa.f - 351m, :haa.f - 350m] >> 0.5dt;
+        let w17  = lehcux[:haa.f - 275m, :haa.f - 274m] << 0.5dt;
+
+        # Gl. 1
+        track(:first:station :cat,
+                lehcux[:haa.a, :haa.f] << 0.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :cat,
+                lehcux[:haa.a, :haa.f] >> 0.5dt
+        );
+
+        # Gl. 3
+        track(:second:station :cat,
+                w3
+            ..  lehcux[:haa + 100m, :haa + 300m] >> 1.5dt
+        );
+
+        # Gl. 4
+        track(:second:station :cat,
+                w6
+            ..  lehcux[:haa - 30m, :haa] >> 1.5dt
+            ..  lehcux[:haa + 100m, :haa + 300m] >> 2.5dt
+        );
+
+        # W1 - W2
+        track(:station :cat, w1 .. w2);
+
+        # W5 - W7
+        track(:station :cat, w5 .. w7);
+
+        # W16 - W17
+        track(:station :cat, w16 .. w17);
+
+        marker(:de.bbf :right, lehcux[:haa] >> 1.5dt);
+        marker(:de.bft :right, lehcux[:hbm] >> 4.5dt);
+    }
 }
 

@@ -3,7 +3,7 @@
 let altkie = path("path.de.1220");
 let holpin = path("path.de.1225");
 
-with detail = 5 {
+with detail = 5, style = :de.sbahn {
     with link = "line.de.1225" {
         let spaalt = path("path.de.6100");
 
@@ -104,78 +104,39 @@ with detail = 5 {
 
     with link = "line.de.1225" {
         track(:first :double :rail,
-                holpin[:lan + 280m, :ste.aa]
+                holpin[:lan + 280m, :stg]
         );
     }
 
+    
     with link = "point.de.Hamburg-Stellingen-S-Bahn" {
         # Gl. 1 (Str. 1225 R)
         track(:first:station :rail,
-                holpin[:ste.aa - 1m, :ste.aa] >> 0.5dt
-            ..  holpin[:ste - 110m] >> 2.9dt
-            --  holpin[:ste - 100m] >> 3.1dt
-            ..  holpin[:ste, :ste + 50m] >> 4.5dt
-            ..  altkie[:fste - 1m, :fste] >> 2.5dt
+                holpin[:stg, :stg + 1m] >> 0.5dt
+            ..  holpin[:ste - 1m, :fste] >> 2.5dt
         );
+
         # Gl. 2 (Str. 1225 L)
         track(:first:station :rail,
-                holpin[:ste.aa - 1m, :ste.aa] << 0.5dt
-            ..  holpin[:ste - 110m] >> 1.15dt
-            --  holpin[:ste - 100m] >> 1.3dt
-            ..  holpin[:ste, :ste + 50m] >> 2.5dt
-            ..  altkie[:fste - 1m, :fste] >> 1.5dt
+                holpin[:stg, :stg + 1m] << 0.5dt
+            ..  holpin[:ste - 80m, :ste - 30m] >> 0.5dt
+            ..  holpin[:fste - 1m, :fste] >> 1.5dt
         );
 
         # Bahnsteig
         platform(:open,
-                holpin[:ste - 110m] >> 2.50dt
-            --  holpin[:ste - 100m] >> 2.70dt
-            ..  holpin[:ste, :ste + 50m] >> 4.1dt
-            ..  holpin[:ste +  90m] >> 3.75dt
-            --  holpin[:ste + 100m] >> 3.60dt
-            --  holpin[:ste + 100m] >> 2.60dt
-            --  holpin[:ste +  90m] >> 2.70dt
-            ..  holpin[:ste + 50m, :ste] << 2.9dt
-            ..  holpin[:ste - 100m] >> 1.70dt
-            --  holpin[:ste - 110m] >> 1.55dt
+                holpin[:ste - 110m] >> 1.96dt
+            --  holpin[:ste - 105m] >> 1.98dt
+            ..  holpin[:ste +  95m] >> 2.12dt
+            --  holpin[:ste + 100m] >> 2.13dt
+            --  holpin[:ste + 100m] >> 1.50dt
+            --  holpin[:ste +  95m] >> 1.47dt
+            ..  holpin[:ste - 30m, :ste - 80m] << 0.9dt
+            ..  holpin[:ste - 105m] >> 0.90dt
+            --  holpin[:ste - 110m] >> 0.89dt
         );
 
-        marker(:de.hp :right, holpin[:ste] >> 4.5dt);
-        station(:right, holpin[:ste - 0.5sw] >> 4.5dt >> 1.2sw,
-            hbox(:left:base, "H.-Stellingen ", span(:light, "(S-Bahn)")),
-            "4,05"
-        );
-    }
-
-    with detail = 10, link = "point.de.Hamburg-Stellingen-S-Bahn" {
-        # Gl. 1 (Richtungsgleis Strecke 1225)
-        track(:first:station :rail,
-                holpin[:ste - 220m, :ste] >> 2.2dt
-            ..  altkie[:fste - 1m, :fste] >> 2.5dt
-        );
-
-        # Gl. 2 (Gegenrichtungsgleis Strecke 1225)
-        track(:first:station :rail,
-                holpin[:ste - 220m, :ste - 219m] >> 1.2dt
-            ..  holpin[:ste - 20m, :ste] >> 0.2dt
-            ..  holpin[:ste + 90m] >> 0.2dt
-            --  holpin[:ste + 100m] >> 0.25dt
-            ..  altkie[:fste - 1m, :fste] >> 1.5dt
-        );
-
-        # Bahnsteig
-        platform(:open,
-                holpin[:ste - 100m] >> 0.85dt
-            --  holpin[:ste - 90m] >> 0.8dt
-            ..  holpin[:ste - 20m, :ste] >> 0.6dt
-            ..  holpin[:ste + 90m] >> 0.6dt
-            --  holpin[:ste + 100m] >> 0.65dt
-            --  holpin[:ste + 100m] >> 1.4dt
-            --  holpin[:ste + 90m] >> 1.43dt
-            ..  holpin[:ste, :ste - 100m] << 1.8dt
-        );
-
-        marker(:de.hp :right, holpin[:ste] >> 2.2dt);
+        marker(:de.hp :right, holpin[:ste] >> 2.4dt);
         station(:right, holpin[:ste - 0.5sw] >> 2.5dt >> 1.2sw,
             hbox(:left:base, "H.-Stellingen ", span(:light, "(S-Bahn)")),
             "4,05"
@@ -183,7 +144,7 @@ with detail = 5 {
     }
 
     with link = "line.de.1225" {
-        track(:first :double :rail, altkie[:fste, :stx - 0.5sw] >> 2dt);
+        track(:first :double :rail, holpin[:fste, :stx - 0.5sw] >> 2dt);
     }
 
 
@@ -194,8 +155,8 @@ with detail = 5 {
         marker(:refdt :right, altkie[:stx] >> 2.5dt);
         marker(:refdt :right, altkie[:stx] >> 1.5dt);
         marker(:refdt :left, altkie[:stx] >> 2.0dt);
-        label(altkie[:stx - 0.5dt] >> 4.5dt,
-            hbox(:left:middle :xsmall, "1225: 4,38 = 5,45")
+        slabel(:right, altkie[:stx - 1.0dt] >> 4.5dt,
+            span(:xsmall, "1225: 4,38 = 5,45")
         );
     }
 
