@@ -1,0 +1,30 @@
+# DE 2200 Rotenburg (Wümme) (ausschl.) - Hamburg Hbf
+with detail = 2 {
+    let wanham = path("simple.de.2200");
+
+    with link = "line.de.2200" {
+        track(:first :double :cat, wanham[:rot, :ham]);
+
+        with layer = 1 line_badge(:open, wanham[:rot + 15km], "2200");
+        with layer = 1 line_badge(:open, wanham[:buc - 6km], "2200");
+    }
+
+    with link = "point.de.Tostedt" {
+        with layer = 1 marker(:statdot, wanham[:tos]);
+        slabel(:right, wanham[:tos] >> 3.0dt, "Tostedt");
+    }
+
+    with link = "point.de.Buchholz-Nordheide" {
+        with layer = 1 marker(:statdot, wanham[:buc]);
+        slabel(:left, wanham[:buc - 0.5dt] + (0.5dt, -1dt),
+            vbox(:right:bottom, "Buchholz ", span(:light, "(Nordh.)"))
+        );
+    }
+
+    with link = "point.de.Hamburg-Harburg" {
+        with layer = 1 marker(:statdot, wanham[:har]);
+    }
+}
+
+
+
