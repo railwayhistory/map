@@ -29,3 +29,44 @@ with detail = 2 {
     }
 }
 
+
+# DE 1302.  Bremerhaven-Wulsdorf - Bremerhaven-Geestemünde
+with detail = 2 {
+    let wuge = path("simple.de.1302");
+
+    with link = "line.de.1302" {
+        with layer = -1 track(:first :double :removed, wuge[:wul.f, :gee]);
+    }
+
+    with link = "point.de.Bremerhaven-Geestemünde" {
+        with layer = 1 marker(:statdot :removed, wuge[:gee]);
+    }
+}
+
+
+# DE 1310.  Bremerhaven-Geestemünde - Cuxhaven
+with detail = 2 {
+    let bhcu = path("simple.de.1310");
+
+    with link = "line.de.1310" {
+        track(:second, bhcu[:spe.f, :cuf]);
+        with layer = 1 line_badge(:open, bhcu[:cuf - 10km], "1310");
+    }
+}
+
+
+# DE 1311.  Bremerhaven-Speckenbüttel - Bad Bederkesa
+with detail = 2 {
+    let bhbe = path("simple.de.1311");
+
+    with link = "line.de.1311" {
+        track(:second, bhbe[:spe.a, :bed]);
+        with layer = 1 line_badge(:open, bhbe[:bed - 5km], "1311");
+    }
+
+    with link = "point.de.Bad-Bederkesa" {
+        with layer = 1 marker(:statdot, bhbe[:bed]);
+        slabel(:right, bhbe[:bed] + (1.8dt, 0.8dt), "Bad Bederkesa");
+    }
+}
+

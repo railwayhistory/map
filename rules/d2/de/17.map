@@ -1,12 +1,213 @@
-# Area DE 17
+# DE 1700.  Hannover Hbf - Hamm (Westf)
+with detail = 2 {
+    let hh = path("simple.de.1700");
 
-# DE 1720
-#
+    with link = "line.de.1700" {
+        track(:first :double :cat :pax, hh[:han, :min]);
+        with layer = 1 line_badge(:open, hh[:has + 7.5km], "1700");
+
+        track(:first :double :cat :pax, hh[:min, :bra]);
+        with layer = 1 line_badge(:open, hh[:min + 8.5km], "1700");
+
+        track(:first :double :cat :pax, hh[:bra, :ham]);
+        with layer = 1 line_badge(:open, hh[:bra + 7km], "1700");
+        with layer = 1 line_badge(:open, hh[:nbe + 6.5km], "1700");
+    }
+
+    with link = "point.de.Hannover-Hbf" {
+        with layer = 1 marker(:statdot :pax, hh[:han]);
+    }
+
+    with link = "point.de.Seelze" {
+        with layer = 1 marker(:statdot :pax, hh[:see]);
+        slabel(:bottom, hh[:see] + (0dt, 1.2dt), "Seelze");
+    }
+
+    with link = "point.de.Wunstorf" {
+        with layer = 1 marker(:statdot :pax, hh[:wun]);
+        slabel(:right, hh[:wun] + (1.8dt, -1dt), "Wunstorf");
+    }
+
+    with link = "point.de.Haste" {
+        with layer = 1 marker(:statdot :pax, hh[:has]);
+        slabel(:left, hh[:has] - (1.8dt, 0.8dt), "Haste");
+    }
+
+    with link = "point.de.Stadthagen" {
+        with layer = 1 marker(:statdot :pax, hh[:sta]);
+        slabel(:right, hh[:sta] + (1.8dt, 3.0dt), "Stadthagen");
+    }
+
+    with link = "point.de.Bückeburg" {
+        with layer = 1 marker(:statdot :pax, hh[:buc]);
+    }
+
+    with link = "point.de.Minden-Westf" {
+        with layer = 1 marker(:statdot :pax, hh[:min]);
+    }
+
+    with link = "point.de.Löhne-Westf-Pbf" {
+        with layer = 1 marker(:statdot :pax, hh[:loh]);
+    }
+
+    with link = "point.de.Herford" {
+        with layer = 1 marker(:statdot :pax, hh[:her]);
+    }
+
+    with link = "point.de.Bielefeld-Hbf" {
+        with layer = 1 marker(:statdot :pax, hh[:bie]);
+    }
+
+    with link = "point.de.Brackwede" {
+        with layer = 1 marker(:statdot :pax, hh[:bra]);
+    }
+
+    with link = "point.de.Gütersloh-Hbf" {
+        with layer = 1 marker(:statdot :pax, hh[:gut]);
+        slabel(:left, hh[:gut] + (-2.2dt, 0.4dt), "Gütersloh Hbf");
+    }
+
+    with link = "point.de.Rheda-Wiedenbrück" {
+        with layer = 1 marker(:statdot :pax, hh[:rhe]);
+        slabel(:left, hh[:rhe] + (1.5dt, 3.0dt),
+            vbox(:right:top, "Rheda-", "Wiedenbrück")
+        );
+    }
+
+    with link = "point.de.Neubeckum" {
+        with layer = 1 marker(:statdot :pax, hh[:nbe]);
+        slabel(:right, hh[:nbe] + (2.5dt, 2.0dt), "Neubeckum");
+    }
+
+    with link = "point.de.Hamm-Westf-Pbf" {
+        with layer = 1 marker(:statdot :pax, hh[:ham]);
+        slabel(:right, hh[:ham] + (1.8km, -1.6km),
+            hbox(:left:base, "Hamm ", span(:light, "(Westf)"))
+        );
+    }
+}
+
+
+# DE 1706.  Hannover Nordhafen EGr - Hannover Nordhafen
+with detail = 2 {
+    let hn = path("simple.de.1706");
+
+    with link = "line.de.1706" {
+        track(:second, hn[:led.f, :nor]);
+    }
+
+    with link = "point.de.Hannover-Nordhafen" {
+        with layer = 1 marker(:statdot, hn[:nor]);
+    }
+}
+
+
+# DE 1710.  Hannover Hbf - Celle
+with detail = 2 {
+    let hc = path("simple.de.1710");
+
+    with link = "line.de.1710" {
+        track(:first :double :cat :pax, hc[:hai.f, :cel.aa]);
+        with layer = 1 line_badge(:open, hc[:lan + 12km], "1710");
+    }
+
+    with link = "point.de.Langenhagen-Pferdemarkt" {
+        with layer = 1 marker(:statdot :pax, hc[:lan]);
+        slabel(:right, hc[:lan] + (1.8dt, 2dt),
+            vbox(:left:middle, "Langenhagen-", "Pferdemarkt")
+        );
+    }
+}
+
+
+# DE 1711.  Hannover Nordstadt - Visselhövede - Bremervörde
+with detail = 2 {
+    let hb = path("simple.de.1711");
+
+    with link = "line.de.1711" {
+        track(:first :double :cat :pax, hb[:lan.f, :bis]);
+        track(:first :cat :pax, hb[:bis, :ben]);
+        with layer = 1 line_badge(:open, hb[:ben - 4.45km], "1711");
+
+        track(:first :pax, hb[:ben, :wal]);
+        with layer = 1 line_badge(:open, hb[:swa + 9.5km], "1711");
+
+        with layer = -1 track(:second, hb[:wal.f, :cor]);
+        with layer = -2 track(:second :removed, hb[:cor, :vis.a]);
+        with layer = 1 line_badge(:removed, hb[:vis.a - 3km], "1711");
+
+        with layer = -2 track(:second :removed, hb[:vis.f, :rot.f]);
+        with layer = 1 line_badge(:removed, hb[:vis.f + 10km], "1711");
+
+        with layer = -1 track(:second, hb[:rot.a, :brv.f]);
+        with layer = 1 line_badge(:removed, hb[:zev - 9km], "1711");
+        with layer = 1 line_badge(:removed, hb[:zev + 10km], "1711");
+    }
+
+    with link = "point.de.Bennemühlen" {
+        with layer = 1 marker(:statdot :pax, hb[:ben]);
+        slabel(:left, hb[:ben] + (-1.8dt, 0.8dt), "Bennemühlen");
+    }
+
+    with link = "point.de.Schwarmstedt" {
+        with layer = 1 marker(:statdot :pax, hb[:swa]);
+        slabel(:left, hb[:swa] + (-1.8dt, 0.8dt), "Schwarmstedt");
+    }
+
+    with link = "point.de.Walsrode" {
+        with layer = 1 marker(:statdot :pax, hb[:wal]);
+        slabel(:left, hb[:wal] + (-1.8dt, 1.8dt), "Walsrode");
+    }
+
+    with link = "point.de.Cordingen" {
+        with layer = 1 marker(:statdot, hb[:cor]);
+        slabel(:left, hb[:cor] + (-1.8dt, 0.8dt), "Cordingen");
+    }
+
+    with link = "point.de.Zeven-Han" {
+        with layer = 1 marker(:statdot, hb[:zev]);
+        slabel(:right, hb[:zev] + (2.0dt, 0.4dt),
+            hbox(:left:base, "Zeven ", span(:light, "(Han)"))
+        );
+    }
+}
+
+
+# DE 1712.  Walsrode - Buchholz (Nordheide)
+with detail = 2 {
+    let wb = path("simple.de.1712");
+
+    with link = "line.de.1712" {
+        track(:second :pax, wb[:wal, :sol.f]);
+        with layer = 1 line_badge(:open, wb[:wal + 12.5km], "1712");
+
+        track(:first :pax, wb[:sol.a, :buc.a]);
+        with layer = 1 line_badge(:open, wb[:sol.a + 12km], "1712");
+    }
+}
+
+
+# DE 1713.  Langenhagen Pferdemarkt - Hannover Flughafen
+with detail = 2 {
+    let lf = path("simple.de.1713");
+
+    with link = "line.de.1713" {
+        track(:first :cat :pax, lf[:lan.f, :flu]);
+    }
+
+    with link = "point.de.Hannover-Flughafen" {
+        with layer = 1 marker(:statdot :pax, lf[:flu]);
+        slabel(:left, lf[:flu] + (-1.8dt, 0.8dt), "H. Flughafen");
+    }
+}
+
+
+# DE 1720.
 with detail = 2 {
     let lehcux = path("simple.de.1720");
 
     with link = "line.de.1720" {
-        track(:first:double :cat, lehcux[:leh, :har.a]);
+        track(:first :double :cat :pax, lehcux[:leh, :har.a]);
 
         with layer = 1 line_badge(:open, lehcux[:bur + 9.0km], "1720");
         with layer = 1 line_badge(:open, lehcux[:cel + 23.0km], "1720");
@@ -15,7 +216,10 @@ with detail = 2 {
     }
 
     with link = "point.de.Burgdorf-Han" {
-        with layer = 1 marker(:statdot, lehcux[:bur]);
+        with layer = 1 marker(:statdot :pax, lehcux[:bur]);
+        slabel(:right, lehcux[:bur] + (1.8dt, 1.3dt),
+            hbox(:left:base, "Burgdorf ", span(:light, "(Han)"))
+        );
     }
 
     with link = "point.de.Celle" {
@@ -48,7 +252,7 @@ with detail = 2 {
     }
 
     with link = "line.de.1720" {
-        track(:first:double :cat, lehcux[:har, :sta]);
+        track(:first:double :cat :pax, lehcux[:har, :sta]);
 
         with layer = 1 line_badge(:open, lehcux[:bux + 5.5km], "1720");
     }
@@ -76,9 +280,9 @@ with detail = 2 {
     }
 
     with link = "line.de.1720" {
-        track(:first :double, lehcux[:sta, :him]);
-        track(:first, lehcux[:him, :hec]);
-        track(:first :double, lehcux[:hec, :cux]);
+        track(:first :double :pax, lehcux[:sta, :him]);
+        track(:first :pax, lehcux[:him, :hec]);
+        track(:first :double :pax, lehcux[:hec, :cux]);
 
         with layer = 1 line_badge(:open, lehcux[:sta + 25km], "1720");
     }
@@ -90,10 +294,590 @@ with detail = 2 {
 }
 
 
-# DE 1740
+# DE 1721.  Celle - Wahnebergen
 with detail = 2 {
+    let cw = path("simple.de.1721");
+
+    with link = "line.de.1721" {
+        with layer = -2 track(:second :removed, cw[:cel.a, :swa.a]);
+        with layer = 1 line_badge(:removed, cw[:swa.a - 13km], "1721");
+
+        with layer = -2 track(:second :removed, cw[:swa.f, :wah.a]);
+        with layer = 1 line_badge(:removed, cw[:swa.f + 16km], "1721");
+    }
+}
+
+
+# DE 1722.  Celle - Braunschweig-Gliesmarode
+with detail = 2 {
+    let cb = path("simple.de.1722");
+
+    with link = "line.de.1722" {
+        with layer = -2 track(:second :removed, cb[:cel.aa, :rau]);
+        with layer = 1 line_badge(:removed, cb[:cel.aa + 11.5km], "1722");
+
+        with layer = -1 track(:second, cb[:rau, :gli.ff]);
+        with layer = 1 line_badge(:removed, cb[:rau - 3km], "1722");
+    }
+
+    with link = "point.de.Braunschweig-Rühme" {
+        with layer = 1 marker(:statdot, cb[:ruh]);
+    }
+}
+
+
+# DE 1723.  Plockhorst - Peine
+with detail = 2 {
+    let pp = path("simple.de.1723");
+
+    with link = "line.de.1723" {
+        with layer = -2 track(:second :removed, pp[:plo.f, :pei.a]);
+        with layer = 1 line_badge(:removed, pp[:plo.f + 4.5km], "1723");
+    }
+}
+
+
+# DE 1724.  Gifhorn Stadt - Celle
+with detail = 2 {
+    let gc = path("simple.de.1724");
+
+    with link = "line.de.1724" {
+        with layer = -2 track(:second :removed, gc[:gis.f, :cel.a]);
+        with layer = 1 line_badge(:removed, gc[:gis.f + 15km], "1724");
+    }
+}
+
+
+# DE 1725.  Braunschweig-Rühme - Braunschweig Hafen
+with detail = 2 {
+    let bh = path("simple.de.1725");
+
+    with link = "line.de.1725" {
+        with layer = -1 track(:station, bh[:ruh, :haf]);
+    }
+}
+
+
+# DE 1730.  Hannover Hbf - Braunschweig Hbf
+with detail = 2 {
+    let hb = path("simple.de.1730");
+
+    with link = "line.de.1730" {
+        track(:first :double :cat :pax, hb[:han, :bra]);
+        with layer = 1 line_badge(:open, hb[:leh + 6.2km], "1730");
+        with layer = 1 line_badge(:open, hb[:pei + 9km], "1730");
+    }
+
     with link = "point.de.Lehrte" {
-        with layer = 1 marker(:statdot, path("simple.de.1720")[:leh]);
+        with layer = 1 marker(:statdot :pax, hb[:leh]);
+        slabel(:left, hb[:leh] - (2dt, 2dt), "Lehrte");
+    }
+
+    with link = "point.de.Hämelerwald" {
+        with layer = 1 marker(:statdot :pax, hb[:ham]);
+        slabel(:right, hb[:ham] + (-0.8dt, -1.2dt),
+            vbox(:left:bottom, "Hämeler-", "wald")
+        );
+    }
+
+    with link = "point.de.Peine" {
+        with layer = 1 marker(:statdot :pax, hb[:pei]);
+        slabel(:right, hb[:pei] + (0.8dt, -1.5dt), "Peine");
+    }
+
+    with link = "point.de.Groß-Gleidingen" {
+        with layer = 1 marker(:statdot, hb[:gle]);
+    }
+
+    with link = "point.de.Braunschweig-Hbf" {
+        with layer = 1 marker(:statdot :pax, hb[:bra]);
+    }
+}
+
+
+# DE 1732.  Hannover Hbf - Kassel Hbf
+with detail = 2 {
+    let hk = path("simple.de.1732");
+
+    with link = "line.de.1732" {
+        track(:first :double :cat :pax, hk[:ret.f, :har.a]);
+        with layer = 1 line_badge(:open, hk[:ban + 11.1km] >> 0.8dt, "1732");
+
+        with layer = -2 track(:first :double :removed, hk[:got.ff, :mun.a]);
+        with layer = 1 line_badge(:removed, hk[:mun.a - 9km], "1732");
+
+        track(:first :double :cat :pax, hk[:mun, :ihr]);
+        track(:guide,
+                hk[:mun + 8.5km] >> 0.7dt
+            --  hk[:mun + 8.5km] >> 3.0dt
+        );
+        label(hk[:mun + 8.5km] >> 3.7dt,
+            hbox(:right:middle :badgesize, "1732")
+        );
+    }
+
+    with link = "point.de.Nordstemmen" {
+        with layer = 1 marker(:statdot :pax, hk[:nst]);
+        slabel(:left, hk[:nst] + (-1.8dt, -0.5dt), "Nordstemmen");
+    }
+
+    with link = "point.de.Elze-Han" {
+        with layer = 1 marker(:statdot :pax, hk[:elz]);
+        slabel(:left, hk[:elz] + (-1.3dt, -1.2dt),
+            hbox(:right:base, "Elze ", span(:light, "(Han)"))
+        );
+    }
+
+    with link = "point.de.Banteln" {
+        with layer = 1 marker(:statdot :pax, hk[:ban]);
+        slabel(:right, hk[:ban] + (1.8dt, 0.5dt), "Banteln");
+    }
+
+    with link = "point.de.Kreiensen" {
+        with layer = 1 marker(:statdot :pax, hk[:kre]);
+        slabel(:left, hk[:kre] + (-4.5dt, 1.5dt), "Kreiensen");
+    }
+
+    with link = "point.de.Einbeck-Salzderhelden" {
+        with layer = 1 marker(:statdot :pax, hk[:sal]);
+        slabel(:left, hk[:sal] + (-1.8dt, 0dt),
+            vbox(:right:top, "Einbeck-", "Salzderhelden")
+        );
+    }
+
+    with link = "point.de.Northeim-Han" {
+        with layer = 1 marker(:statdot :pax, hk[:nor]);
+        slabel(:left, hk[:nor] - (3.0dt, 0.5dt),
+            hbox(:right:base, "Northeim ", span(:light, "(Han)"))
+        );
+    }
+
+    with link = "point.de.Hann-Münden" {
+        with layer = 1 marker(:statdot :pax, hk[:mun]);
+        slabel(:left, hk[:mun] + (-2.5dt, 0.5dt), "Hann Münden");
+    }
+}
+
+
+# DE 1733.  Hannover Hbf - Kassel-Wilhelmshöhe - Würzburg Hbf
+with detail = 2 {
+    let hw = path("simple.de.1733");
+
+    with link = "line.de.1733" {
+        track(:first :double :cat :pax, hw[:han.f, :edn]);
+        with layer = 1 line_badge(:open, hw[:lat + 23km], "1733");
+
+        track(:first :double :cat :pax, hw[:eds, :got]);
+
+        track(:first :double :cat :pax, hw[:got, :wil]);
+        with layer = 1 line_badge(:open, hw[:got.ff + 9km], "1733");
+
+        track(:first :double :cat :pax, hw[:wil, :ful.ff]);
+        with layer = 1 line_badge(:open, hw[:wil + 16km], "1733");
+        with layer = 1 line_badge(:open, hw[:wil + 48km], "1733");
+        with layer = 1 line_badge(:open, hw[:ful.ff - 16.5km], "1733");
+
+        track(:first :double :cat :pax, hw[:bro.aa, :bur.a]);
+        with layer = 1 line_badge(:open, hw[:bro.aa + 18km], "1733");
+
+        track(:first :double :cat :pax, hw[:bur.f, :wur.f]);
+        with layer = 1 line_badge(:open, hw[:roh + 10km], "1733");
+    }
+
+    with link = "point.de.Hannover-Messe-Laatzen" {
+        with layer = 1 marker(:statdot :pax, hw[:lat]);
+    }
+
+    with link = "point.de.Göttingen" {
+        with layer = 1 marker(:statdot :pax, hw[:got]);
+        slabel(:right, hw[:got] + (1.8dt, 0.8dt), "Göttingen");
+    }
+
+    with link = "point.de.Kassel-Wilhelmshöhe" {
+        with layer = 1 marker(:statdot :pax, hw[:wil]);
+        slabel(:left, hw[:wil] + (-1.8dt, 0.8dt), "Kassel-Wilhelmshöhe");
+    }
+
+    with link = "point.de.Rohrbach" {
+        with layer = 1 marker(:statdot, hw[:roh]);
+        slabel(:left, hw[:roh] - (1.8dt, 1.0dt),
+            vbox(:right:top, "Rohr-", "bach")
+        );
+    }
+}
+
+
+# DE 1740.  Wunstorf - Bremerhaven-Seehafen DB-Grenze
+with detail = 2 {
+    let wb = path("simple.de.1740");
+
+    with link = "line.de.1740" {
+        track(:first :double :cat :pax, wb[:wun, :bre]);
+        with layer = 1 line_badge(:open, wb[:wun + 15km], "1740");
+        with layer = 1 line_badge(:open, wb[:eys + 4.5km], "1740");
+        with layer = 1 line_badge(:open, wb[:lwe + 9.5km], "1740");
+
+        track(:first :double :cat :pax, wb[:bre, :spe.f]);
+        with layer = 1 line_badge(:open, wb[:oho + 12km], "1740");
+    }
+
+    with link = "point.de.Nienburg-Weser" {
+        with layer = 1 marker(:statdot :pax, wb[:nie]);
+        slabel(:right, wb[:nie] + (1.8dt, -0.8dt),
+            hbox(:left:base, "Nienburg ", span(:light, "(Weser)"))
+        );
+    }
+
+    with link = "point.de.Eystrup" {
+        with layer = 1 marker(:statdot :pax, wb[:eys]);
+        slabel(:right, wb[:eys] + (1.8dt, 0.8dt), "Eystrup");
+    }
+
+    with link = "point.de.Wahnebergen" {
+        with layer = 1 marker(:statdot, wb[:wah]);
+        slabel(:left, wb[:wah] + (-1.8dt, 0.8dt), "Wahnebergen");
+    }
+
+    with link = "point.de.Verden-Aller" {
+        with layer = 1 marker(:statdot :pax, wb[:ver]);
+        slabel(:left, wb[:ver] + (-1.8dt, 0.8dt),
+            hbox(:right:base, "Verden ", span(:light, "(Aller)"))
+        );
+    }
+
+    with link = "point.de.Langwedel" {
+        with layer = 1 marker(:statdot :pax, wb[:lwe]);
+        slabel(:left, wb[:lwe] + (-1.8dt, 3dt), "Langwedel");
+    }
+
+    with link = "point.de.Bremen-Hbf" {
+        with layer = 1 marker(:statdot :pax, wb[:bre]);
+    }
+
+    with link = "point.de.Bremen-Burg" {
+        with layer = 1 marker(:statdot :pax, wb[:bur]);
+    }
+
+    with link = "point.de.Osterholz-Scharmbeck" {
+        with layer = 1 marker(:statdot :pax, wb[:oho]);
+        slabel(:left, wb[:oho] + (-1.8dt, 0.8dt),
+            vbox(:right:bottom, "Osterholz-", "Scharmbeck")
+        );
+    }
+
+    with link = "point.de.Bremerhaven-Wulsdorf" {
+        with layer = 1 marker(:statdot :pax, wb[:wul]);
+        slabel(:right, wb[:wul - 1.5km] + (1.8dt, 0.8dt), "B.-Wulsdorf");
+    }
+
+    with link = "point.de.Bremerhaven-Hbf" {
+        with layer = 1 marker(:statdot :pax, wb[:bhv]);
+        label(wb[:bhv] + (3dt, -2dt),
+            hbox(:left:bottom :medium :bold, "Bremerhaven")
+        );
+    }
+
+    with link = "point.de.Bremerhaven-Speckenbüttel" {
+        with layer = 1 marker(:statdot, wb[:spe]);
+    }
+}
+
+
+# DE 1741.  Nienburg (Weser) - Minden (Westf)
+with detail = 2 {
+    let nw = path("simple.de.1741");
+
+    with link = "line.de.1741" {
+        track(:first :cat :pax, nw[:nie.a, :mig.a]);
+        with layer = 1 line_badge(:open, nw[:nie.a + 12km], "1741");
+        with layer = 1 line_badge(:open, nw[:mig.a - 10km], "1741");
+    }
+
+    with link = "point.de.Leese-Stolzenau" {
+        with layer = 1 marker(:statdot :pax, nw[:lee]);
+        slabel(:right, nw[:lee] + (1.8dt, 1.8dt), "Leese-Stolzenau");
+    }
+}
+
+
+#  DE 1742.  Leese-Stolzenau - Stadthagen
+with detail = 2 {
+    let ls = path("simple.de.1742");
+
+    with link = "line.de.1742" {
+        with layer = -2 track(:second :removed, ls[:lee.f, :sta.ff]);
+        with layer = 1 line_badge(:removed, ls[:loc + 8.5km], "1742");
+    }
+
+    with link = "point.de.Loccum" {
+        with layer = 1 marker(:statdot :removed, ls[:loc]);
+        slabel(:left :removed, ls[:loc] + (-1.8dt, 1.8dt), "Loccum");
+    }
+}
+
+
+# DE 1743.  Nienburg (Weser) - Rahden (Lr Lübbecke)
+with detail = 2 {
+    let nr = path("simple.de.1743");
+
+    with link = "line.de.1743" {
+        with layer = -1 track(:second, nr[:nie.f, :lie]);
+
+        with layer = -2 track(:second :removed, nr[:lie, :uch]);
+        with layer = 1 line_badge(:removed, nr[:lie + 12km], "1743");
+
+        with layer = -1 track(:second, nr[:uch, :rah.f]);
+        with layer = 1 line_badge(:open, nr[:uch + 13km] << 0.5dt, "1743");
+    }
+
+    with link = "point.de.Liebenau-Han" {
+        with layer = 1 marker(:statdot, nr[:lie]);
+        slabel(:left, nr[:lie] + (-1.8dt, 0.8dt),
+            hbox(:right:base, "Liebenau ", span(:light, "(Han)"))
+        );
+    }
+
+    with link = "point.de.Uchte" {
+        with layer = 1 marker(:statdot, nr[:uch]);
+        slabel(:left, nr[:uch] + (-1.8dt, 0.8dt), "Uchte");
+    }
+}
+
+
+# DE 1744.  Nienburg Lohe - Diepholz
+with detail = 2 {
+    let nd = path("simple.de.1744");
+
+    with link = "line.de.1744" {
+        with layer = -2 track(:second :removed, nd[:loh, :sul.f]);
+        with layer = 1 line_badge(:removed, nd[:loh + 13km], "1744");
+
+        with layer = -1 track(:second, nd[:sul.a, :die.f]);
+        with layer = 1 line_badge(:open, nd[:sul.a + 20km], "1744");
+    }
+}
+
+
+# DE 1745.  Verden (Aller) - Rotenburg (Wümme)
+with detail = 2 {
+    let vr = path("simple.de.1745");
+
+    with link = "line.de.1745" {
+        track(:first :cat :pax, vr[:ver.f, :rot.a]);
+        with layer = 1 line_badge(:open, vr[:ver.f + 11km], "1745");
+    }
+}
+
+
+# DE 1750.  Wunstorf - Hannover-Linden - Lehrte Nord
+with detail = 2 {
+    let wl = path("simple.de.1750");
+
+    with link = "line.de.1750" {
+        with layer = -1 track(:first :double :cat, wl[:see.a, :lin.f]);
+        with layer = -1 track(:first :double :cat, wl[:wha, :leh.a]);
+    }
+}
+
+
+# DE 1760.  Hannover Hbf - Soest
+with detail = 2 {
+    let hs = path("simple.de.1760");
+
+    with link = "line.de.1760" {
+        track(:first :double :cat :pax, hs[:bis.f, :ham]);
+        with layer = 1 line_badge(:open, hs[:mun - 11.5km] >> 0.3dt, "1760");
+
+        track(:first :double :cat :pax, hs[:ham, :abe]);
+        with layer = 1 line_badge(:open, hs[:emm + 12.5km], "1760");
+
+        track(:first :double :cat :pax, hs[:abe, :soe]);
+        with layer = 1 line_badge(:open, hs[:abe + 4.7km] >> 0.4dt, "1760");
+        with layer = 1 line_badge(:open, hs[:soe - 10km], "1760");
+    }
+
+    with link = "point.de.Hannover-Linden" {
+        with layer = 1 marker(:statdot, hs[:lin]);
+    }
+
+    with link = "point.de.Weetzen" {
+        with layer = 1 marker(:statdot :pax, hs[:wee]);
+        slabel(:right, hs[:wee] + (2.0dt, 1.0dt), "Weetzen");
+    }
+
+    with link = "point.de.Bad-Münder-Deister" {
+        with layer = 1 marker(:statdot :pax, hs[:mun]);
+        slabel(:right, hs[:mun] + (1.5dt, 0dt),
+            vbox(:left:top, "Bad Münder", span(:light, "(Deister)"))
+        );
+    }
+
+    with link = "point.de.Hameln" {
+        with layer = 1 marker(:statdot :pax, hs[:ham]);
+        slabel(:left, hs[:ham] + (-1.8dt, 0.8dt), "Hameln");
+    }
+
+    with link = "point.de.Emmerthal" {
+        with layer = 1 marker(:statdot :pax, hs[:emm]);
+        slabel(:right, hs[:emm] + (2.0dt, 1.7dt), "Emmerthal");
+    }
+
+    with link = "point.de.Noltehof" {
+        with layer = 1 marker(:statdot :removed, hs[:nol]);
+        slabel(:right :removed, hs[:nol] + (2.0dt, 1.7dt), "Noltehof");
+    }
+
+    with link = "point.de.Himmighausen" {
+        with layer = 1 marker(:statdot, hs[:him]);
+        slabel(:right, hs[:him] + (2.0dt, 2.2dt), "Himmighausen");
+    }
+
+    with link = "point.de.Langeland" {
+        with layer = 1 marker(:statdot, hs[:lan]);
+        slabel(:right, hs[:lan] + (3.0dt, 0.5dt), "Langeland");
+    }
+
+    with link = "point.de.Altenbeken" {
+        with layer = 1 marker(:statdot :pax, hs[:abe]);
+        slabel(:left, hs[:abe] + (1.5dt, -2.0dt), "Altenbeken");
+    }
+
+    with link = "point.de.Paderborn-Hbf" {
+        with layer = 1 marker(:statdot :pax, hs[:pad]);
+        slabel(:right, hs[:pad] + (0.5dt, 3.5dt), "Paderborn Hbf");
+    }
+
+    with link = "point.de.Geseke" {
+        with layer = 1 marker(:statdot :pax, hs[:ges]);
+        slabel(:left, hs[:ges] + (-0.5dt, 3.0dt), "Geseke");
+    }
+
+    with link = "point.de.Lippstadt" {
+        with layer = 1 marker(:statdot :pax, hs[:lip]);
+        slabel(:right, hs[:lip] + (0.5dt, -2.0dt), "Lippstadt");
+    }
+
+    with link = "point.de.Soest" {
+        with layer = 1 marker(:statdot :pax, hs[:soe]);
+        slabel(:right, hs[:soe - 3km] + (2.0dt, 2.0dt), "Soest");
+    }
+}
+
+
+# DE 1761.  Weetzen - Haste
+with detail = 2 {
+    let wh = path("simple.de.1761");
+
+    with link = "line.de.1761" {
+        track(:first :double :cat :pax, wh[:wee.f, :ege]);
+        track(:first :cat :pax, wh[:ege, :has.f]);
+        with layer = 1 line_badge(:open, wh[:nen - 8km], "1761");
+    }
+
+    with link = "point.de.Bad-Nenndorf" {
+        with layer = 1 marker(:statdot :pax, wh[:nen]);
+        slabel(:right, wh[:nen] + (1.8dt, -0.5dt), "Bad Nenndorf");
+    }
+}
+
+
+# DE 1762.  Bad Münder (Deister) - Bad Nenndorf
+with detail = 2 {
+    let mn = path("simple.de.1762");
+
+    with link = "line.de.1762" {
+        with layer = -2 track(:second :removed, mn[:mun.a, :nen]);
+        with layer = 1 line_badge(:removed, mn[:mun.a + 12km], "1762");
+    }
+}
+
+
+# DE 1770.  Lehrte - Nordstemmen
+with detail = 2 {
+    let ln = path("simple.de.1770");
+
+    with link = "line.de.1770" {
+        track(:first :double :cat :pax, ln[:leh.ff, :nst]);
+        with layer = 1 line_badge(:open, ln[:hil - 12km], "1770");
+    }
+
+    with link = "point.de.Hildesheim-Hbf" {
+        with layer = 1 marker(:statdot :pax, ln[:hil]);
+        slabel(:right, ln[:hil] + (3dt, 3dt), "Hildesheim Hbf");
+    }
+}
+
+
+# DE 1771.  Barnten - Rössing
+with detail = 2 {
+    let bb = path("simple.de.1771");
+
+    with link = "line.de.1771" {
+        track(:first :cat, bb[:bar.f, :ros]);
+    }
+}
+
+
+# DE 1772.  Hildesheim Hbf - Groß Gleidingen
+with detail = 2 {
+    let hg = path("simple.de.1772");
+
+    with link = "line.de.1772" {
+        track(:first :double :cat :pax, hg[:hil.a, :gle]);
+        with layer = 1 line_badge(:open, hg[:hil + 12km], "1772");
+    }
+
+    with link = "point.de.Lengede-Broistedt" {
+        with layer = 1 marker(:statdot :pax, hg[:len]);
+    }
+}
+
+
+# DE 1773.  Hildesheim Hbf - Goslar
+with detail = 2 {
+    let hg = path("simple.de.1773");
+
+    with link = "line.de.1773" {
+        track(:first :double :pax, hg[:hil.a, :gos.a]);
+        with layer = 1 line_badge(:open, hg[:der - 4km], "1773");
+        with layer = 1 line_badge(:open, hg[:gra - 8km], "1773");
+    }
+
+    with link = "point.de.Marienburg-Han" {
+        with layer = 1 marker(:statdot :removed, hg[:mar]);
+    }
+
+    with link = "point.de.Groß-Düngen" {
+        with layer = 1 marker(:statdot :pax, hg[:dun]);
+        slabel(:right, hg[:dun] - (1.5dt, 1.5dt),
+            vbox(:left:bottom, "Groß", "Düngen")
+        );
+    }
+
+    with link = "point.de.Derneburg-Han" {
+        with layer = 1 marker(:statdot :pax, hg[:der]);
+        slabel(:right, hg[:der] + (2.5dt, 2.5dt),
+            vbox(:left:top, "Derne-", "burg", span(:light, "(Han)"))
+        );
+    }
+
+    with link = "point.de.Salzgitter-Ringelheim" {
+        with layer = 1 marker(:statdot :pax, hg[:rin]);
+    }
+
+    with link = "point.de.Grauhof" {
+        with layer = 1 marker(:statdot :removed, hg[:gra]);
+        slabel(:left :removed, hg[:gra] - (2.5dt, 0dt), "Grauhof");
+    }
+}
+
+
+# DE 1774.  Sorsum - Himmelsthür (Abzw)
+with detail = 2 {
+    let sh = path("simple.de.1774");
+
+    with link = "line.de.1774" {
+        track(:first :cat :pax, sh[:sor, :him]);
     }
 }
 
