@@ -1,30 +1,107 @@
-# DE 2200 Rotenburg (Wümme) (ausschl.) - Hamburg Hbf
+# DE 2200.  Wanne-Eickel Hbf - Hamburg Hbf
 with detail = 2 {
-    let wanham = path("simple.de.2200");
+    let wh = path("simple.de.2200");
 
     with link = "line.de.2200" {
-        track(:first :double :cat, wanham[:rot, :ham]);
+        track(:first :double :cat :pax, wh[:len, :osn]);
 
-        with layer = 1 line_badge(:open, wanham[:rot + 15km], "2200");
-        with layer = 1 line_badge(:open, wanham[:buc - 6km], "2200");
+        track(:first :double :cat :pax, wh[:osn, :bre.a]);
+        track(:guide,
+                wh[:osn + 10km] << 1.0dt
+            --  wh[:osn + 10km] << 2.5dt
+        );
+        label(wh[:osn + 10km] << 2.7dt,
+            hbox(:center:bottom :badgesize, "2200")
+        );
+        with layer = 1 line_badge(:open, wh[:die - 12km], "2200");
+        with layer = 1 line_badge(:open, wh[:die + 20km], "2200");
+        with layer = 1 line_badge(:open, wh[:syk + 6km], "2200");
+
+        track(:first :double :cat :pax, wh[:bre.ff, :ham]);
+        with layer = 1 line_badge(:open, wh[:sag - 7km], "2200");
+        with layer = 1 line_badge(:open, wh[:sag + 10km], "2200");
+        with layer = 1 line_badge(:open, wh[:rot + 15km], "2200");
+        with layer = 1 line_badge(:open, wh[:buc - 6km], "2200");
     }
 
+    with link = "point.de.Hasbergen-Osnabrück" {
+        with layer = 1 marker(:statdot :pax, wh[:has]);
+    }
+
+    with link = "point.de.Hörne" {
+        with layer = 1 marker(:statdot, wh[:hrn]);
+        slabel(:right, wh[:hrn] + (-0.5dt, 3.8dt), "Hörne");
+    }
+
+    with link = "point.de.Bohmte" {
+        with layer = 1 marker(:statdot :pax, wh[:boh]);
+        slabel(:right, wh[:boh] + (2.0dt, 1.0dt), "Bohmte");
+    }
+
+    with link = "point.de.Diepholz" {
+        with layer = 1 marker(:statdot :pax, wh[:die]);
+        slabel(:left, wh[:die] + (-1.8dt, 0.3dt), "Diepholz");
+    }
+
+    with link = "point.de.Bassum" {
+        with layer = 1 marker(:statdot :pax, wh[:bas]);
+        slabel(:left, wh[:bas] + (-1.8dt, -0.3dt), "Bassum");
+    }
+
+    with link = "point.de.Syke" {
+        with layer = 1 marker(:statdot :pax, wh[:syk]);
+        slabel(:left, wh[:syk] + (-1.8dt, 0.8dt), "Syke");
+    }
+
+    with link = "point.de.Sagehorn" {
+        with layer = 1 marker(:statdot :pax, wh[:sag]);
+        slabel(:right, wh[:sag] + (1.0dt, 3.5dt), "Sagehorn");
+    }
+
+    with link = "point.de.Rotenburg-Wümme" {
+        with layer = 1 marker(:statdot :pax, wh[:rot]);
+        slabel(:bottom, wh[:rot] + (2dt, 3.2dt),
+            vbox(:center:top, "Rotenburg", span(:light, "(Wümme)"))
+        );
+    }    
+
     with link = "point.de.Tostedt" {
-        with layer = 1 marker(:statdot, wanham[:tos]);
-        slabel(:right, wanham[:tos] >> 3.0dt, "Tostedt");
+        with layer = 1 marker(:statdot :pax, wh[:tos]);
+        slabel(:right, wh[:tos] >> 3.0dt, "Tostedt");
     }
 
     with link = "point.de.Buchholz-Nordheide" {
-        with layer = 1 marker(:statdot, wanham[:buc]);
-        slabel(:left, wanham[:buc - 0.5dt] + (0.5dt, -1dt),
+        with layer = 1 marker(:statdot :pax, wh[:buc]);
+        slabel(:left, wh[:buc - 0.5dt] + (0.5dt, -1dt),
             vbox(:right:bottom, "Buchholz ", span(:light, "(Nordh.)"))
         );
     }
 
     with link = "point.de.Hamburg-Harburg" {
-        with layer = 1 marker(:statdot, wanham[:har]);
+        with layer = 1 marker(:statdot :pax, wh[:har]);
     }
 }
 
 
+# DE 2273.  Bottrop Nord - Quakenbrück
+with detail = 2 {
+    let bq = path("simple.de.2273.g");
+
+    with link = "line.de.2273" {
+        with layer = -1 track(:second, bq[:rhe.f, :spe]);
+
+        with layer = -4 track(:second :removed, bq[:spe, :qua.f]);
+        with layer = 1 line_badge(:removed, bq[:spe + 10km], "2273");
+        with layer = 1 line_badge(:removed, bq[:qua.f - 12km], "2273");
+    }
+
+    with link = "point.de.Altenrheine" {
+        with layer = 1 marker(:statdot, bq[:arh]);
+    }
+
+    with link = "point.de.Spelle" {
+        with layer = 1 marker(:statdot, bq[:spe]);
+        slabel(:right, bq[:spe] + (1.8dt, 0.8dt), "Spelle");
+    }
+}
 
