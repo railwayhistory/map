@@ -1,0 +1,54 @@
+# BE 27A.  Y.Liersesteenweg - Antwerpen-D.S.-Rhodesië
+#
+let lr = path("d3.be.27a");
+
+with detail = [4, 5] {
+    # ...
+
+
+    # point.be.Y-Antwerpen-Oost         be.12
+    # point.be.Antwerpen-Oost           be.12
+    # point.be.Y-Antwerpen-Schijnpoort  be.12
+
+
+    with link = "point.be.Antwerpen-Schijnpoort-Bundel-Q" {
+        with layer = -1 track(:first:station :double :cat:dc3,
+                lr[:ysi + 0.5sw, :yho - 0.5sw] >> 1dt
+        );
+
+        marker(:de.gbf :right, lr[:siq] >> 1.5dt);
+        station(:right, lr[:siq - 0.4sw] >> 1.5dt >> 1.2sw,
+            "Antwerpen-Schijnpoort-Bundel Q",
+            "27A: ??"
+        );
+    }
+
+
+    # point.be.Y-Holland  be.12
+
+
+    with link = "line.be.27A" {
+        with layer = -1 track(:first :double :cat:dc3,
+                lr[:yho + 0.5sw, :luc - 1sw] >> 1dt
+        );
+    }
+
+
+    # point.be.Antwerpen-Luchtbal  be.12
+
+
+    with link = "line.be.27A" {
+        with layer = 2 track(:first :double :cat:dc3,
+                lr[:luc + 1sw, :ylu + 3dl] >> 1dt
+            ..  lr[:ndo - 1.1sw, :ndo - 1sw] << 1dt
+        );
+        with layer = 1 casing(:first :double :cat:dc3,
+                lr[:ylu + 2.9dl, :ylu + 3dl] >> 1dt
+            ..  lr[:ndo - 1.1sw, :ndo - 1sw] << 1dt
+        );
+    }
+
+
+    # point.be.Antwerpen-Noorderdokken  be.12
+}
+

@@ -1,0 +1,223 @@
+# NL LR.  Lage Zwaluwe - Roosendaal grens
+#
+let lr = path("d3.nl.lr");
+
+with detail = [4, 5] {
+    # point.nl.Lage-Zwaluw: NL BR
+
+    with link = "line.nl.LR" {
+        track(:first :double :cat :dc15 :pax, lr[:zlw.f, :zvb - 1sw]);
+        with layer = 1 line_badge(:open, lr[:zlw.f + 3km], "LR");
+    }
+
+    with link = "point.nl.Zevenbergen" {
+        track(:first :double :cat :dc15 :pax :station,
+                lr[:zvb - 1sw, :zvb.f]
+        );
+        track(:station :cat :dc15,
+                lr[:zvb + 270m - 1.1dl, :zvb + 270m - 1dl] << 0.5dt
+            --  lr[:zvb + 270m + 1dl, :zvb.f - 300m - 1dl] >> 1.5dt
+            --  lr[:zvb.f - 300m + 1dl, :zvb.f - 300m +1.1dl] << 0.5dt
+        );
+        marker(:de.bf :right, lr[:zvb] >> 0.5dt)
+        station(:left, lr[:zvb + 0.5sw] >> 0.5dt >> 1.3sw,
+            "Zevenbergen", "7,54"
+        );
+    }
+
+    with link = "line.nl.LR" {
+        track(:first :double :cat :dc15 :pax, lr[:zvb.f, :odb.a]);
+    }
+
+    with link = "point.nl.Oudenbosch" {
+        track(:first :double :cat :dc15 :pax :station, lr[:odb.a, :odb.f]);
+        track(:station :cat :dc15,
+                lr[:odb - 50m - 3dl] >> 0.5dt
+            --  lr[:odb - 50m - 2dl] << 0.5dt
+        );
+        track(:station :cat :dc15,
+                lr[:odb - 50m - 1.1dl, :odb - 50m - 1dl] << 0.5dt
+            --  lr[:odb - 50m, :odb + 620m] << 1.5dt
+            --  lr[:odb + 620m + 1dl, :odb + 620m + 1.1dl] << 0.5dt
+        );
+        track(:station :cat :dc15,
+                lr[:odb + 620m + 2dl] << 0.5dt
+            --  lr[:odb + 620m + 3dl] >> 0.5dt
+        );
+
+        marker(:de.bf :right, lr[:odb] >> 0.5dt)
+        station(:left, lr[:odb + 0.5sw] >> 0.5dt >> 1.3sw,
+            "Oudenbosch", "15,55"
+        );
+    }
+
+    with link = "line.nl.LR" {
+        track(:first :double :cat :dc15 :pax, lr[:odb.f, :rsd.aa])
+        with layer = 1 line_badge(:open, lr[:rsd.aa - 2km], "LR");
+    }
+
+    with link = "point.nl.Roosendaal" {
+        let rb = path("d3.nl.rb");
+
+        # Spoor 1
+        track(:first :cat :dc15 :pax :station, rb[:rsd.b, :rsd] << 0.5dt);
+        track(:first :cat :dc15 :pax :station, lr[:rsd, :rsd.f] << 0.5dt);
+            track(:station :cat :dc15 :pax,
+                    lr[:rsd - 2dl] << 0.5dt
+                --  lr[:rsd] >> 0.5dt
+            );
+            track(:station :cat :dc15 :pax,
+                    lr[:rsd + 300m + 1dl] << 0.5dt
+                --  lr[:rsd + 300m + 2dl] >> 0.5dt
+            );
+
+        # Spoor 2
+        track(:first :cat :dc15 :pax :station, rb[:rsd.b, :rsd] >> 0.5dt);
+        track(:first :cat :dc15 :pax :station, lr[:rsd, :rsd.f] >> 0.5dt);
+            track(:station :cat :dc15 :pax,
+                    lr[:rsd + 300m] >> 0.5dt
+                --  lr[:rsd + 300m + 2dl] >> 2.5dt
+            );
+
+        # Spoor 3
+        track(:first :cat :dc15 :pax :station,
+                lr[:rsd.aa - 0.1dl, :rsd.aa] << 0.5dt
+            ..  lr[:rsd.x, :rsd.f] >> 1.5dt
+        );
+            track(:station :cat :dc15 :pax,
+                    lr[:rsd - 4dl] >> 1.5dt
+                --  lr[:rsd] << 0.5dt
+            );
+
+        # Spoor 4
+        track(:first :cat :dc15 :pax :station,
+                lr[:rsd.aa - 0.1dl, :rsd.aa] >> 0.5dt
+            ..  lr[:rsd.x, :rsd.f] >> 2.5dt
+        );
+            track(:station :cat :dc15 :pax,
+                    lr[:rsd - 2dl] >> 2.5dt
+                --  lr[:rsd] >> 3.5dt
+            );
+
+        # Spoor 5/6/31
+        track(:station :cat :dc15,
+                lr[:rsd - 600m + 1dl, :rsd.f - 80m] >> 3.5dt
+        );
+            track(:station :cat :dc15 :pax,
+                    lr[:rsd - 2dl] >> 3.5dt
+                --  lr[:rsd] >> 2.5dt
+            );
+
+        # Spoor 32/33
+        track(:station :cat :dc15,
+                lr[:rsd - 600m + 2dl, :rsd + 430m - 2dl] >> 4.5dt
+        );
+
+        # Spoor 34/36
+        track(:station :cat :dc15,
+                lr[:rsd - 600m - 3.1dl, :rsd - 600m - 3dl] << 1.5dt
+            --  lr[:rsd - 600m + 3dl, :rsd + 430m - 3dl] >> 5.5dt
+            --  lr[:rsd + 430m - 1dl, :rsd + 430m - 0.9dl] >> 3.5dt
+        );
+
+        # Spoor 37/39
+        track(:station,
+                lr[:rsd - 700m, :rsd + 430m - 2dl] >> 6.5dt
+        );
+
+        # Spoor 40/42
+        track(:station,
+                lr[:rsd - 600m + 3dl, :rsd + 430m - 3dl] >> 7.5dt
+            --  lr[:rsd + 430m + 8.5dl, :rsd + 430m + 8.6dl] << 0.5dt
+        );
+
+        # Spoor 43/47
+        track(:station,
+                lr[:rsd.a - 240m, :rsd - 600m - 0.5dl] >> 3.5dt
+            --  lr[:rsd - 600m + 4dl, :rsd + 150m] >> 8.5dt
+        );
+
+        # Spoor 11/14/17
+        track(:station :cat :dc15,
+                rb[:rsd + 1500m, :rsd + 250m] << 1.5dt
+        );
+
+        # Spoor 12/13
+        track(:station :cat :dc15,
+                lr[:rsd - 600m - 4.1dl, :rsd - 600m - 4dl] >> 3.5dt
+            --  lr[:rsd - 600m, :rsd - 220m] << 2.5dt
+        );
+
+        marker(:de.bf :left, lr[:rsd] << 0.5dt);
+        station(:right, lr[:rsd + 0.3sw] << 0.5dt << 1.8sw,
+            span(:bold, "Roosendaal"),
+            hbox(:center:top,
+                vbox(:right:top, "LR: ", "RB·RV: "),
+                vbox(:right:top, "23,", "0,"),
+                vbox(:left:top, "00", "00   ")
+            )
+        );
+    }
+
+    with link = "line.nl.LR" {
+        # 1.5kV section reversed so the markers look good
+        track(:first :double :cat :dc15 :pax, lr[:rsd.el, :rsd.f]);
+    }
+
+    
+    with link = "point.nl.Roosendaal-Spanningssluis" {
+        marker(:refdt :left,  lr[:rsd.el] << 0.5dt);
+        marker(:refdt :right, lr[:rsd.el] << 0.5dt);
+        marker(:refdt :right, lr[:rsd.el] >> 0.5dt);
+        label(lr[:rsd.el] << 1.5dt,
+            hbox(:left:middle,
+                vbox(:center:middle :small,
+                    "  1500 V= ",
+                    hbar(0.3),
+                    "  3000 V= "
+                )
+            )
+        );
+    }
+
+
+    with link = "line.nl.LR" {
+        track(:first :double :cat :dc30 :pax, lr[:rsd.el, :rsdg - 0.5sw]);
+
+        with layer = 1 line_badge(:open, lr[:rsd.f + 4km], "LR");
+    }
+
+    with link = "point.int.Essen-Roosendaal" {
+        track(:first :double :cat :dc30 :pax, lr[:rsdg - 0.5sw, :rsdg + 0.5sw]);
+
+        marker(:de.dirgr :right, lr[:rsdg] >> 0.5dt);
+        marker(:statdt, lr[:rsdg] << 0.5dt);
+        marker(:de.dirgr :left, lr[:rsdg] << 0.5dt);
+
+        track(:guide,
+                lr[:rsdg - 1dt] >> 3dt
+            --  lr[:rsdg - 4dt] >> 5dt
+        );
+        label(
+            lr[:rsdg - 4dt] >> 5dt,
+            hbox(:right :middle,
+                vbox(:right :middle,
+                    span(:xsmall, "NL LR: "),
+                    hbar(0.3),
+                    span(:xsmall, "BE 12: ")
+                ),
+                vbox(:right :middle,
+                    span(:xsmall, "31,"),
+                    hbar(0.3),
+                    span(:xsmall, "33,")
+                ),
+                vbox(:left :middle,
+                    span(:xsmall, "2 "),
+                    hbar(0.3),
+                    span(:xsmall, "2 ")
+                )
+            )
+        );
+    }
+}
+

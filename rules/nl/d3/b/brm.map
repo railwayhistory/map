@@ -1,0 +1,28 @@
+# NL BRM.  Lage Zwaluwe - Moerdijk SS
+#
+let brm = path("d3.nl.brm");
+
+
+with detail = 3 {
+    # point.nl.Lage-Zwaluwe: nl.BR
+
+    with link = "line.nl.BRM" {
+        with layer = -4 track(:first :gone,
+                brm[:zlw.x - 0.1dl, :zlw.x] << 0.5dt
+            ..  brm[:zlw.x + 1km, :mdss - 1ssw]
+        );
+    }
+
+
+    with link = "point.nl.Moerdijk-SS" {
+        with layer = -4 track(:first:station :gone,
+                brm[:mdss - 1ssw, :mdss + 0.7sw]
+        );
+        marker(:de.bf :gone :right, brm[:mdss]);
+        with layer = -1 slabel(:left :gone, brm[:mdss] >> 1.6ssw,
+            span(:bold, "Moerdijk SS")
+        );
+    }
+}
+
+

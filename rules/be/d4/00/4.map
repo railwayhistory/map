@@ -1,0 +1,95 @@
+# BE 4.  (Antwerpen) Y.Luchtbal - Meer-grens
+#
+let lm = path("d3.be.4");
+
+with detail = [4, 5] {
+    # point.be.Y-Luchtbal  be.12
+
+
+    with link = "line.be.4" {
+        track(:first :double :cat:dc3 :pax,
+                path("d3.be.12")[:ndo - 1sw, :ndo - 0.9sw] >> 1dt
+            ..  lm[:lus - 0.1dl, :lus]
+        );
+    }
+
+
+    with link = "point.be.Luchtbal-Spanningssluis" {
+        marker(:refdt :left, lm[:lus] << 0.5dt);
+        marker(:refdt :right, lm[:lus] << 0.5dt);
+        marker(:refdt :right, lm[:lus] >> 0.5dt);
+        track(:guide,
+                lm[:lus] >> 1.5dt
+            --  lm[:lus] >> 4.5dt
+        );
+        label(lm[:lus] >> 4.5dt,
+            hbox(:left:middle,
+                vbox(:center:middle :small,
+                    "  25 kV 50 Hz ",
+                    hbar(0.3),
+                    "3000 V="
+                )
+            )
+        );
+    }
+
+
+    with link = "line.be.4" {
+        track(:first :double :cat:ac25 :pax, lm[:lus, :nke.a]);
+        with layer = 1 line_badge(:open, lm[:lus + 1.5km], "4");
+    }
+
+
+    with link = "point.be.Noorderkempen" {
+        # Spoor 1
+        track(:station :cat:ac25 :pax,
+                lm[:nke - 501m, :nke - 500m] << 0.5dt
+            --  lm[:nke - 350m, :nke + 130m] << 1.5dt
+            --  lm[:nke + 285m, :nke + 286m] << 0.5dt
+        );
+        # Spoor 2
+        track(:first:station :cat:ac25 :pax, lm[:nke.a, :nke.f] << 0.5dt);
+            with layer = -1 track(:station :cat:ac25,
+                    lm[:nke.f - 380m] << 0.5dt
+                --  lm[:nke.f - 100m] >> 0.5dt
+            );
+
+        # Spoor 3
+        track(:first:station :cat:ac25 :pax, lm[:nke.a, :nke.f] >> 0.5dt);
+            with layer = -1 track(:station :cat:ac25,
+                    lm[:nke.a + 100m] >> 0.5dt
+                --  lm[:nke.a + 380m] << 0.5dt
+            );
+
+        # Spoor 4
+        track(:station :cat:ac25 :pax,
+                lm[:nke - 501m, :nke - 500m] >> 0.5dt
+            --  lm[:nke - 350m, :nke + 130m] >> 1.5dt
+            --  lm[:nke + 285m, :nke + 286m] >> 0.5dt
+        );
+
+        # Spoor 5
+        with layer = -1 track(:station,
+                lm[:nke + 85m, :nke + 130m] << 2.5dt
+            --  lm[:nke + 250m, :nke + 430m] << 1.5dt
+        );
+
+        # Spoor 6
+        with layer = -1 track(:station,
+                lm[:nke + 130m, :nke + 131m] << 1.5dt
+            --  lm[:nke + 250m, :nke + 400m] << 2.5dt
+        );
+
+        marker(:de.bf :left, lm[:nke + 130m - 0.8sw] << 1.5dt);
+        station(:left, lm[:nke + 130m - 1.3sw] << 1.5dt << 1.3sw,
+            "Noorderkempen", "67,7"
+        );
+    }
+
+
+    with link = "line.be.4" {
+        track(:first :double :cat:ac25 :pax, lm[:nke.f, :merg - 0.5sw]);
+        with layer = 1 line_badge(:open, lm[:merg - 5km], "4");
+    }
+}
+

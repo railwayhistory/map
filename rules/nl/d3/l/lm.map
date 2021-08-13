@@ -1,0 +1,29 @@
+# NL LM.  Lage Zwaluwe - Moerdijk
+#
+let br = path("d3.nl.br");
+let lm = path("d3.nl.lm");
+
+with detail = 3 {
+    # point.nl.Lage-Zwaluwe: nl.BR
+
+
+    with link = "line.nl.LM" {
+        with layer = -2 track(:first,
+                br[:zlw.r - 1.1dl, :zlw.r - 1dl] >> 2.5dt
+            --  br[:zlw.r, :mdbz - 4dl] >> 3.5dt
+            ..  lm[:mdk.aa, :mdk.aa + 0.1dl]
+            ..  lm[:mdk.aa + 900m, :mdk - 1ssw]
+        );
+        with layer = 1 line_badge(:open, lm[:mdk.a - 1km], "LM");
+    }
+
+
+    with link = "point.nl.Moerdijk" {
+        track(:first:station, lm[:mdk - 1ssw, :mdk + 1ssw]);
+        marker(:de.gbf :right, lm[:mdk]);
+        slabel(:left, lm[:mdk - 1ssw] >> 1.0ssw,
+            span(:bold, "Moerdijk")
+        );
+    }
+}
+        

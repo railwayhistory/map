@@ -1,0 +1,249 @@
+# NL BE.  Breda - Eindhoven Centraal
+#
+let be = path("d3.nl.be");
+
+with detail = 3 {
+    # point.nl.Breda: nl.RB
+
+
+    with link = "line.nl.BE" {
+        track(:first :double :cat:dc15 :pax, be[:bd.f, :gz - 1ssw]);
+    }
+
+
+    with link = "point.nl.Dorst" {
+        with layer = -1 marker(:de.hp :removed :right, be[:do] >> 0.5dt);
+        slabel(:bottom :removed, be[:do] >> 0.5dt >> 1.3ssw,
+            "Dorst"
+        );
+    }
+
+    with link = "point.nl.Gilze-Rijen" {
+        track(:first:station :double :cat:dc15 :pax,
+                be[:gz - 1ssw, :gz + 1ssw]
+        );
+        marker(:de.bf :left, be[:gz] << 0.5dt);
+        slabel(:right, be[:gz - 1.5ssw] << 0.5dt << 1.2ssw, "Gilze-Rijen");
+    }
+
+
+    with link = "line.nl.BE" {
+        track(:first :double :cat:dc15 :pax, be[:gz + 1ssw, :tbu - 1ssw]);
+        with layer = 1 line_badge(:open, be[:gz + 2.3km], "BE");
+    }
+
+    with link = "point.nl.Tilburg-Reeshof" {
+        marker(:de.hp :left, be[:tbr] << 0.5dt);
+        slabel(:left, be[:tbr - 0.5ssw] >> 1.0dt,
+            hbox(:right:top, "Tilburg Reeshof")
+        );
+    }
+
+    with link = "point.nl.Tilburg-Universiteit" {
+        # Lijn BE
+        track(:first:station :double :cat:dc15 :pax,
+                be[:tbu - 1ssw, :tb.a]
+        );
+
+        # Lijn TT
+        track(:first:station :cat:dc15 :pax,
+                be[:tbu - 0.5ssw, :tb.a - 1dl] >> 1.5dt
+            --  be[:tb.a - 0.1dl, :tb.a] >> 0.5dt
+        );
+
+        marker(:de.bf :left, be[:tbu] << 0.5dt);
+        slabel(:top, be[:tbu] << 0.5dt << 1.3ssw + (1ssw, 0ssw),
+            "T. Universiteit"
+        );
+    }
+
+    with link = "point.nl.Tilburg-goed-empl" {
+        marker(:de.gbf :right, be[:tbge] >> 1.5dt);
+    }
+
+    with link = "point.nl.Tilburg" {
+        # Lijn BE
+        track(:first:station :double :cat:dc15 :pax, be[:tb.a, :tb.f]);
+
+        # Lijn TN
+        track(:first:station :cat:dc15 :pax,
+                be[:tb - 0.5ssw - 1.1dl, :tb - 0.5ssw - 1dl] << 0.5dt
+            --  be[:tb - 0.5ssw, :tb.f] << 1.5dt
+        );
+
+        marker(:de.bf :left, be[:tb] << 1.5dt);
+        slabel(:bottom, be[:tb + 0.5ssw] >> 1.5dt,
+            span(:bold, "Tilburg")
+        );
+    }
+
+    with link = "point.nl.Tilburg-aansl" {
+        let tn = path("d3.nl.tn");
+
+        # Lijn BE
+        track(:first:station :double :cat:dc15 :pax, be[:tb.f, :tba.f + 2dl]);
+
+        # Lijn TN
+        # linke spoor
+        track(:first:station :cat:dc15 :pax,
+                tn[:tb.f, :tba.x - 2dl] << 1.5dt
+            ..  tn[:tba.g + 1.9dl, :tba.g + 2dl] << 0.5dt
+        );
+        # rechte spoor
+        track(:first:station :cat:dc15 :pax,
+                tn[:tba.x - 2.1dl, :tba.x - 2dl] << 0.5dt
+            ..  tn[:tba.g + 1.9dl, :tba.g + 2dl] >> 0.5dt
+        );
+
+        marker(:de.abzw :right, be[:tba] >> 0.5dt);
+    }
+
+    with link = "line.nl.BE" {
+        track(:first :double :cat:dc15 :pax, be[:tba.f + 2dl, :btl.a - 1dt]);
+        with layer = 1 line_badge(:open, be[:btl.a - 4km], "BE");
+    }
+
+    with link = "point.nl.Oisterwijk" {
+        marker(:de.hp :right, be[:ot] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, be[:ot] >> 0.5dt);
+        slabel(:right, be[:ot - 1ssw] >> 0.5dt >> 1.0ssw,
+            hbox(:left:top, "Oisterwijk")
+        );
+    }
+
+    with link = "point.nl.Boxtel" {
+        track(:first:station :double :cat:dc15 :pax,
+                be[:btl.a - 1dt, :btl.a - 0.9dt]
+            ..  be[:btl - 0.5ssw, :btl.f] >> 1dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                path("d3.nl.ub")[:btl - 1ssw, :btl.f] << 1dt
+        );
+        marker(:de.bf :left, be[:btl] << 1.5dt);
+        slabel(:right, be[:btl + 0.6ssw] << 1.5dt << 1.4ssw,
+            span(:bold, "Boxtel")
+        );
+    }
+
+    with link = "point.nl.Liempde" {
+        # Spoor A
+        track(:first:station :cat:dc15 :pax,
+                be[:btl.f, :lpe + 1ssw] >> 1.5dt
+        );
+
+        # Spoor B
+        track(:first:station :cat:dc15 :pax,
+                be[:btl.f, :lpe.r - 1.75dl] << 0.5dt
+            --  be[:lpe.r - 0.75dl, :lpe + 1ssw] >> 0.5dt
+        );
+
+        # Spoor C
+        track(:first:station :cat:dc15 :pax,
+                be[:btl.f, :lpe.r - 1dl] << 1.5dt
+            --  be[:lpe.r, :lpe + 1ssw] << 0.5dt
+        );
+
+        # Spoor D
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                be[:btl.f, :lpe.r - 2dl] >> 0.5dt
+            --  be[:lpe.r, :lpe + 1ssw] << 1.5dt
+        );
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                be[:lpe.r - 2.1dl, :lpe.r - 2dl] >> 0.5dt
+            --  be[:lpe.r, :lpe.r + 0.1dl] << 1.5dt
+        );
+
+        marker(:de.abzw :right, be[:lpe] >> 1.5dt);
+        slabel(:left, be[:lpe + 0.4ssw] >> 1.5dt >> 1.8ssw, "Liempde");
+    }
+
+    with link = "line.nl.BE" {
+        track(:first :cat:dc15 :pax :flip:tight,
+                be[:lpe + 1ssw, :at - 1ssw] << 1.5dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                be[:lpe + 1ssw, :at - 1ssw]
+        );
+        track(:first :cat:dc15 :pax :tight,
+                be[:lpe + 1ssw, :at - 1ssw] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Best-overloopwissels" {
+        with layer = -4 marker(:de.uest :removed :left, be[:beto] << 2dt);
+    }
+
+    with link = "point.nl.Best" {
+        marker(:de.hp :left, be[:bet] << 1.5dt);
+        with layer = -1 marker(:de.bf :removed :left, be[:bet] << 1.5dt);
+        slabel(:right, be[:bet + 0.6ssw] << 1.5dt << 1.5ssw, "Best");
+    }
+
+    with link = "point.nl.Acht" {
+        track(:first:station :cat:dc15 :pax,
+                be[:at - 1ssw, :at + 1ssw] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                be[:at - 1ssw, :at + 1ssw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                be[:at - 1ssw, :at + 1ssw] >> 1.5dt
+        );
+        marker(:de.gbf :right, be[:at] >> 1.5dt);
+        slabel(:left, be[:at + 0.3ssw] >> 1.5dt >> 1.8ssw, "Acht");
+    }
+
+    with link = "line.nl.BE" {
+        track(:first :cat:dc15 :pax :flip:tight,
+                be[:at + 1ssw, :ehs - 1ssw] << 1.5dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                be[:at + 1ssw, :ehs - 1ssw]
+        );
+        track(:first :cat:dc15 :pax :tight,
+                be[:at + 1ssw, :ehs - 1ssw] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Woensel" {
+        with layer = -4 marker(:de.hp :removed :left, be[:wsl] << 1.5dt);
+        slabel(:right :removed, be[:wsl + 0.7ssw] << 1.5dt << 1.4ssw,
+            "Woensel"
+        );
+    }
+
+    with link = "point.nl.Eindhoven-Strijp-S" {
+        track(:first:station :cat:dc15 :pax,
+                be[:ehs - 1ssw, :ehv.a] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                be[:ehs - 1ssw, :ehv.a]
+        );
+        track(:first:station :cat:dc15 :pax,
+                be[:ehs - 1ssw, :ehv.a] >> 1.5dt
+        );
+        marker(:de.bf :right, be[:ehs] >> 1.5dt);
+        slabel(:left, be[:ehs + 0.4ssw] >> 1.5dt >> 2.2ssw,
+            "Eindhoven Strijp-S"
+        );
+    }
+
+    with link = "point.nl.Eindhoven-Stadion" {
+        marker(:de.hp :right, be[:ehst] >> 1.5dt);
+        slabel(:left, be[:ehst - 0.8ssw] >> 2.5dt,
+            hbox(:right:top, "Eindhoven Stadion")
+        );
+    }
+
+    with link = "point.nl.Eindhoven-Centraal" {
+        track(:first:station :cat:dc15 :pax, be[:ehv.a, :ehv + 1ssw] << 1.5dt);
+        track(:first:station :cat:dc15 :pax, be[:ehv.a, :ehv + 1ssw] << 0.5dt);
+        track(:first:station :cat:dc15 :pax, be[:ehv.a, :ehv + 1ssw] >> 0.5dt);
+        track(:first:station :cat:dc15 :pax, be[:ehv.a, :ehv + 1ssw] >> 1.5dt);
+        marker(:de.bf :right, be[:ehv] >> 1.5dt);
+        slabel(:bottom, be[:ehv] >> 1.5dt >> 1.6ssw,
+            span(:bold, "Eindhoven")
+        );
+    }
+}
+

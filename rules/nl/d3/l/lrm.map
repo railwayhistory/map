@@ -1,0 +1,27 @@
+# NL LRM.  Zevenbergen - Moerdijk AR
+#
+let lrm = path("d3.nl.lrm");
+
+with detail = 3 {
+    # point.nl.Zevenbergen: nl.LR
+
+    with link = "line.nl.ZMD" {
+        with layer = -4 track(:first :gone,
+                lrm[:zvb.x, :zvb.x + 200m] << 0.5dt
+            ..  lrm[:zvb.x + 1.5km, :mdar - 1ssw]
+        );
+
+        with layer = 5 line_badge(:gone, lrm[:zvb + 3km], "LRM");
+    }
+
+    with link = "point.nl.Moerdijk-AR" {
+        with layer = -4 track(:first:station :gone,
+                lrm[:mdar - 1ssw, :mdar + 0.7ssw]
+        );
+        marker(:de.bf :gone :left, lrm[:mdar]);
+        slabel(:left :gone, lrm[:mdar - 0.2ssw] << 2.2ssw,
+            span(:bold, "Moerdijk AR")
+        );
+    }
+}
+

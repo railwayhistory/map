@@ -1,0 +1,117 @@
+# NL RN.  Rotterdam Lombardijen - HSL Breda grens
+#
+let rn = path("d3.nl.rn");
+
+with detail = 3 {
+    # point.nl.Rotterdam-Lombardijen: nl.BR
+
+    with link = "line.nl.RN" {
+        # Spoor A
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                rn[:rlb + 1ssw, :rlb + 1.1ssw] << 1.5dt
+            --  rn[:rlb + 1ssw + 8dl, :brda + 0.5ssw] >> 6.5dt
+        );
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                rn[:rlb + 1ssw, :rlb + 1.1ssw] << 1.5dt
+            --  rn[:rlb + 1ssw + 8dl, :rlb + 1ssw + 8.1dl] >> 6.5dt
+        );
+
+        # Spoor B
+        track(:first:station :cat:dc15 :pax,
+                rn[:rlb + 1ssw, :rlb + 1ssw + 7dl] >> 3.5dt
+            --  rn[:rlb + 1ssw + 9dl, :brda + 0.5ssw] >> 5.5dt
+        );
+    }
+
+    with link = "point.nl.HSL-Barendrecht-overloop-wissel" {
+        marker(:de.uest :right, rn[:brda] >> 6.5dt);
+    }
+
+    with link = "line.nl.RN" {
+        with layer = 2 track(:first :double :cat:ac25 :pax,
+                rn[:brda + 0.5ssw, :kfhan] >> 6dt
+            ..  rn[:kfhan.g + 6dt, :xmdb.f - 3dt]
+            ..  rn[:xmdb, :hszha - 1ssw] >> 3dt
+        );
+        with layer = 1 casing(:first :double :cat:ac25 :pax,
+                rn[:mdbz.f, :mdbz] >> 3dt
+        );
+        with layer = 1 casing(:first :double :cat:ac25 :pax,
+                rn[:zlw.f, :hszha - 1ssw] >> 3dt
+        );
+        with layer = 3 line_badge(:open, rn[:xmdb.f - 4km], "RN");
+    }
+
+    with link = "point.nl.HSL-Zevenbergsche-hoek-aansl" {
+        with layer = 2 track(:first:station :double :cat:ac25 :pax,
+                rn[:hszha - 1ssw, :hszha + 1ssw] >> 3dt
+        );
+        with layer = 1 casing(:first:station :double :cat:ac25 :pax,
+                rn[:hszha - 1ssw, :hszha + 1ssw] >> 3dt
+        );
+
+        with layer = 2 track(:first:station :cat:ac25 :pax,
+                rn[:hszha - 0.1dl, :hszha] >> 3.5dt
+            --  rn[:hszha + 1dl, :hszha + 1ssw] >> 4.5dt
+        );
+        with layer = 2 track(:first:station :cat:ac25 :pax,
+                rn[:hszha - 0.1dl, :hszha] >> 2.5dt
+            --  rn[:hszha + 1dl, :hszha + 1ssw] >> 1.5dt
+        );
+
+        marker(:de.abzw :right, rn[:hszha + 1.5dl] >> 4.5dt);
+        slabel(:right, rn[:hszha + 1.5ssw] << 1.5dt,
+            "HSL Z’sche hoek aansl."
+        );
+
+    }
+
+    with link = "line.nl.RN" {
+        with layer = 2 track(:first :double :cat:ac25 :pax,
+                rn[:hszha + 1ssw, :xbdpb] >> 3dt
+            ..  rn[:hsbda - 1.1ssw, :hsbda - 1ssw]
+        );
+        with layer = 1 casing(:first :double :cat:ac25 :pax,
+                rn[:xbdpb - 0.1dl, :xbdpb] >> 3dt
+            ..  rn[:hsbda - 1.1ssw, :hsbda - 1ssw]
+        );
+    }
+
+    with link = "point.nl.HSL-Breda-aansl" {
+        with layer = 2 track(:first:station :double :cat:ac25 :pax,
+                rn[:hsbda - 1ssw, :hsbda + 1ssw]
+        );
+
+        with layer = 2 track(:first:station :cat:ac25 :pax,
+                rn[:hsbda - 1ssw, :hsbda] << 1.5dt
+            --  rn[:hsbda + 1dl, :hsbda + 1.1dl] << 0.5dt
+        );
+        with layer = 2 track(:first:station :cat:ac25 :pax,
+                rn[:hsbda - 1ssw, :hsbda] >> 1.5dt
+            --  rn[:hsbda + 1dl, :hsbda + 1.1dl] >> 0.5dt
+        );
+
+        marker(:de.abzw :left, rn[:hsbda] << 1.5dt);
+    }
+
+    with link = "line.nl.RN" {
+        track(:first :double :cat:ac25 :pax,
+            rn[:hsbda + 1ssw, :hsbdg - 0.5ssw]
+        );
+        with layer = 1 line_badge(:open, rn[:hsbdgo - 4.5km], "RN");
+    }
+
+    with link = "point.nl.HSL-Breda-grens-overloop" {
+        marker(:de.uest :right, rn[:hsbdgo] >> 0.5dt);
+    }
+
+    with link = "point.int.Breda-Noorderkempen" {
+        track(:first:station :double :cat:ac25 :pax,
+                rn[:hsbdg - 0.5ssw, :hsbdg + 0.5ssw]
+        );
+        marker(:de.dirgr :right, rn[:hsbdg] >> 0.5dt);
+        marker(:refdt :left, rn[:hsbdg] >> 0.5dt);
+        marker(:de.dirgr :left, rn[:hsbdg] << 0.5dt);
+    }
+}
+

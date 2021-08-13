@@ -1,0 +1,94 @@
+# NL ED.  Elst - Dordrecht
+#
+let ed = path("d3.nl.ed");
+
+with detail = 3 {
+    # ...
+
+    with link = "line.nl.ED" {
+        track(:first :cat:dc15 :pax, ed[:akl + 1ssw, :gr - 1ssw]);
+    }
+
+    with link = "point.nl.Gorinchem" {
+        track(:first:station :cat:dc15 :pax,
+                ed[:gr - 1ssw, :gr + 1ssw]
+        );
+        marker(:de.bf :left, ed[:gr]);
+    }
+
+    with link = "line.nl.ED" {
+        track(:first :cat:dc15 :pax, ed[:gr + 1ssw, :bhdv - 1ssw]);
+    }
+
+    with link = "point.nl.Boven-Hardinxveld" {
+        track(:first:station :cat:dc15 :pax,
+                ed[:bhdv - 1ssw, :bhdv + 1ssw]
+        );
+        marker(:de.bf :left, ed[:bhdv]);
+    }
+
+    with link = "line.nl.ED" {
+        track(:first :cat:dc15 :pax, ed[:bhdv + 1ssw, :gnd - 1ssw]);
+    }
+
+    with link = "point.nl.Hardinxveld-Giessendam" {
+        track(:first:station :cat:dc15 :pax,
+                ed[:gnd - 1ssw, :gnd + 1ssw]
+        );
+        marker(:de.bf :left, ed[:gnd]);
+    }
+
+    with link = "line.nl.ED" {
+        track(:first :cat:dc15 :pax, ed[:gnd + 1ssw, :hbzm - 1ssw]);
+    }
+
+    with link = "point.nl.Hardinxveld-Blauwe-Zoom" {
+        track(:first:station :cat:dc15 :pax,
+                ed[:hbzm - 1ssw, :hbzm + 1ssw]
+        );
+        marker(:de.hp :left, ed[:hbzm]);
+    }
+
+    with link = "line.nl.ED" {
+        track(:first :cat:dc15 :pax, ed[:hbzm + 1ssw, :sdt - 1ssw]);
+    }
+
+    with link = "point.nl.Sliedrecht" {
+        track(:first:station :cat:dc15 :pax,
+                ed[:sdt - 1ssw, :sdt + 1ssw]
+        );
+        marker(:de.bf :left, ed[:sdt]);
+    }
+
+    with link = "line.nl.ED" {
+        track(:first :cat:dc15 :pax,
+                ed[:sdt + 1ssw, :ddri.ff]
+            ..  ed[:ddrs - 1.1ssw, :ddrs - 1ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.nl.Sliedrecht-Baanhoek" {
+        marker(:de.hp :right, ed[:sdtb]);
+    }
+
+    with link = "point.nl.Dordrecht-Stadspolders" {
+        track(:first:station :cat:dc15 :pax,
+                ed[:ddrs - 1ssw, :ddrs + 1ssw] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ed[:ddrs - 0.5ssw - 1.1dl, :ddrs - 0.5ssw - 1dl] >> 0.5dt
+            --  ed[:ddrs - 0.5ssw, :ddrs + 1ssw] << 0.5dt
+        );
+        marker(:de.bf :right, ed[:ddrs] >> 0.5dt);
+        slabel(:right, ed[:ddrs + 1.5ssw] << 1.5dt,
+            hbox(:left:top, "D. Stadspolders")
+        );
+    }
+
+    with link = "line.nl.ED" {
+        track(:first :double :cat:dc15 :pax, ed[:ddrs + 1ssw, :ddr.r - 0.5ssw]);
+    }
+
+    # point.nl.Dordrecht: nl.BR
+}
+

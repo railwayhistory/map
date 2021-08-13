@@ -1,0 +1,62 @@
+# NL LR.  Lage Zwaluwe - Roosendaal grens
+#
+let lr = path("d3.nl.lr");
+
+with detail = 3 {
+    # point.nl.Lage-Zwaluw: NL BR
+
+    with link = "line.nl.LR" {
+        track(:first :double :cat :dc15 :pax, lr[:zlw + 1ssw, :zvb - 1ssw]);
+        with layer = 1 line_badge(:open, lr[:zlw.f + 4km], "LR");
+    }
+
+    with link = "point.nl.Zevenbergen" {
+        track(:first:station :double :cat:dc15 :pax,
+                lr[:zvb - 1ssw, :zvb + 1ssw]
+        );
+        marker(:de.bf :right, lr[:zvb] >> 0.5dt)
+        slabel(:left, lr[:zvb + 0.7ssw] >> 0.5dt >> 1.4ssw, "Zevenbergen");
+    }
+
+    with link = "line.nl.LR" {
+        track(:first :double :cat :dc15 :pax, lr[:zvb + 1ssw, :rsd.aa]);
+        with layer = 1 line_badge(:open, lr[:rsd.a - 3km], "LR");
+    }
+
+    with link = "point.nl.Oudenbosch" {
+        marker(:de.bf :right, lr[:odb] >> 0.5dt)
+        slabel(:left, lr[:odb + 0.7ssw] >> 0.5dt >> 1.4ssw, "Oudenbosch");
+    }
+
+    with link = "point.nl.Roosendaal" {
+        track(:first:station :double :cat:dc15 :pax, lr[:rsd.aa, :rsd.f]);
+        with style = :normal 
+        track(:first:station :double :cat:dc15 :pax,
+                path("d3.nl.rb")[:rsd.x, :rsd.b]
+        );
+
+        marker(:de.bf :left, lr[:rsd] << 0.5dt);
+        slabel(:right, lr[:rsd + 0.3ssw] << 0.5dt << 2.2ssw,
+            span(:bold, "Roosendaal")
+        );
+    }
+
+    with link = "line.nl.LR" {
+        # 1.5kV section reversed so the markers look good
+        track(:first :double :cat :dc15 :pax, lr[:rsd.el, :rsd.f]);
+        track(:first :double :cat :dc30 :pax, lr[:rsd.el, :rsdg - 0.5ssw]);
+
+        with layer = 1 line_badge(:open, lr[:rsd.f + 4km], "LR");
+    }
+
+    with link = "point.int.Essen-Roosendaal" {
+        track(:first :double :cat :dc30 :pax,
+                lr[:rsdg - 0.5ssw, :rsdg + 0.5ssw]
+        );
+
+        marker(:de.dirgr :right, lr[:rsdg] >> 0.5dt);
+        marker(:statdt, lr[:rsdg] << 0.5dt);
+        marker(:de.dirgr :left, lr[:rsdg] << 0.5dt);
+    }
+}
+

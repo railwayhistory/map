@@ -1,0 +1,123 @@
+# NL TT.  Baarle-Nassau Grens grens - Tilburg
+#
+let tt = path("d3.nl.tt");
+
+with detail = [4, 5] {
+    with link = "point.int.Baarle-Weelde" {
+        with layer = -4 marker(:de.dirgr :removed :left, tt[:bngg]);
+    }
+
+
+    with link = "point.nl.Baarle-Nassau-Grens" {
+        with layer = -4 track(:first:station :removed, tt[:bngg, :bng.f]);
+        with layer = -4 marker(:de.bf :removed :right, tt[:bngg + 0.6sw]);
+        station(:right :removed, tt[:bngg + 0.9sw] >> 1.4sw,
+            span(:bold, "Baarle-Nassau Grens"), "NL TT: ??"
+        );
+    }
+
+
+    with link = "line.nl.TT" {
+        with layer = -4 track(:first :removed, tt[:bng.f, :bar.a]);
+        with layer = 1 line_badge(:removed, tt[:bng.f + 0.8km], "TT");
+    }
+
+
+    with link = "point.nl.Baarle-Nassau" {
+        # Spoor 1
+        with layer = -4 track(:station :removed,
+                tt[:bar.a + 99m, :bar.a + 100m]
+            --  tt[:bar.a + 100m + 1dl, :bar.f - 100m - 1dl] >> 1dt
+            --  tt[:bar.f - 100m, :bar.f - 99m]
+        );
+
+        # Spoor 2
+        with layer = -4 track(:first:station :removed, tt[:bar.a, :bar.f]);
+
+        # Spoor 3
+        with layer = -4 track(:station :removed,
+                tt[:bar - 151m, :bar - 150m]
+            --  tt[:bar - 150m + 1dl, :bar + 150m - 1dl] << 1dt
+            --  tt[:bar + 150m, :bar + 151m]
+        );
+
+        marker(:de.bf :removed :right, tt[:bar] >> 1dt);
+        station(:right :removed, tt[:bar - 0.4sw] >> 1dt >> 1.4sw,
+            "Baarle-Nassau", "13,43"
+        );
+    }
+
+
+    with link = "line.nl.TT" {
+        with layer = -4 track(:first :removed, tt[:bar.f, :al.a]);
+    }
+
+
+    with link = "point.nl.Alphen" {
+        # Spoor 1
+        with layer = -4 track(:first:station :removed, tt[:al.a, :al.f]);
+
+        # Spoor 2
+        with layer = -4 track(:station :removed,
+                tt[:al.a, :al.f - 50m] >> 1dt
+        );
+            with layer = -4 track(:station :removed,
+                    tt[:al.a + 100m]
+                --  tt[:al.a + 100m + 1dl] >> 1dt
+            );
+
+        # Spoor 3
+        with layer = -4 track(:station :removed,
+                tt[:al - 0.1dl, :al] >> 1dt
+            --  tt[:al + 1dl, :al.f - 100m - 2dl] >> 2dt
+            --  tt[:al.f - 100m, :al.f - 99m]
+        );
+
+        marker(:de.bf :removed :left, tt[:al]);
+        station(:left :removed, tt[:al - 0.4sw] << 1.3sw,
+            "Alphen", "18,22"
+        );
+    }
+
+
+    with link = "line.nl.TT" {
+        with layer = -4 track(:first :removed, tt[:al.f, :ril.a]);
+    }
+
+
+    with link = "point.nl.Riel" {
+        # Spoor 1
+        with layer = -4 track(:first:station :removed, tt[:ril.a, :ril.f]);
+
+        # Spoor 2
+        with layer = -4 track(:station :removed,
+                tt[:ril.a + 100m + 1dl, :ril.f - 50m] >> 1dt
+        );
+            with layer = -4 track(:station :removed,
+                    tt[:ril.f - 100m - 1dl] >> 1dt
+                --  tt[:ril.f - 100m]
+            );
+
+        # Spoor 3
+        with layer = -4 track(:station :removed,
+                tt[:ril.a + 99m, :ril.a + 100m]
+            --  tt[:ril.a + 100m + 2dl, :ril + 150m] >> 2dt
+            --  tt[:ril + 150m + 1dl, :ril + 150m + 1.1dl] >> 1dt
+        );
+
+        marker(:de.bf :removed :left, tt[:ril]);
+        station(:left :removed, tt[:ril - 0.4sw] << 1.3sw,
+            "Riel", "25,30  "
+        );
+    }
+
+
+    with link = "line.nl.TT" {
+        with layer = -4 track(:first :removed,
+                tt[:ril.f, :tbu.aa]
+            ..  tt[:tbu.x, :tbu.a] >> 1.5dt
+        );
+        with layer = 1 line_badge(:removed, tt[:rila + 1.5km], "TT");
+    }
+}
+

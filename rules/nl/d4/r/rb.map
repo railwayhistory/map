@@ -1,0 +1,200 @@
+# NL RB.  Roosendaal - Breda
+#
+let rb = path("d3.nl.rb");
+
+with detail = [4, 5] {
+    # point.nl.Roosendaal: nl.LR
+
+
+    with link = "line.nl.RB" {
+        track(:first :double :cat:dc15 :pax, rb[:rsd.b, :etn.a]);
+        with layer = 1 line_badge(:open, rb[:rsd.b + 1.2km], "RB");
+    }
+
+
+    with link = "point.nl.Seppe" {
+        with layer = -1 marker(:de.hp :removed :left, rb[:sp] << 0.5dt);
+        station(:top :removed, rb[:sp] << 0.5dt << 1.3sw,
+            "Seppe", "7,12"
+        );
+    }
+
+
+    with link = "point.nl.Hoeven" {
+        with layer = -1 marker(:de.hp :removed :left, rb[:hvn] << 0.5dt);
+        station(:top :removed, rb[:hvn] << 0.5dt << 1.3sw,
+            "Hoeven", "10,28"
+        );
+    }
+
+
+    with link = "point.nl.Etten-Leur" {
+        track(:first:station :double :cat:dc15 :pax, rb[:etn.a, :etn.f]);
+
+        # Toestand 1915
+
+        with layer = -1 track(:station :removed,
+                rb[:etn.xa, :etn.x + 2dl] << 1.5dt
+        );
+            with layer = -1 track(:station :removed,
+                    rb[:etn.xa + 2dl] << 0.5dt
+                --  rb[:etn.xa + 3dl] << 1.5dt
+            );
+            with layer = -1 track(:station :removed,
+                    rb[:etn.x - 2dl] << 1.5dt
+                --  rb[:etn.x + 1dl] >> 0.5dt
+            );
+
+        marker(:de.hp :right, rb[:etn] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, rb[:etn.x] >> 0.5dt);
+        station(:bottom, rb[:etn] >> 0.5dt >> 1.3sw,
+            "Etten-Leur",
+            hbox(:center:base,
+                "13,74 ", span(:removed, "← 14,30")
+            )
+        );
+    }
+
+
+    with link = "line.nl.RB" {
+        track(:first :double :cat:dc15 :pax, rb[:etn.f, :bda.a]);
+        with layer = 1 line_badge(:open, rb[:bda.a - 2km], "RB");
+    }
+
+
+    with link = "point.nl.Leur" {
+        with layer = -1 marker(:de.hp :removed :left, rb[:ler] << 0.5dt);
+        station(:top :removed, rb[:ler] << 0.5dt << 1.3sw,
+            "Leur", "15,42"
+        );
+    }
+
+
+    with link = "point.nl.Liesbosch" {
+        with layer = -1 marker(:de.hp :removed :right, rb[:lib] >> 0.5dt);
+        station(:bottom :removed, rb[:lib] >> 0.5dt >> 1.3sw,
+            "Liesbosch", "18,0"
+        );
+    }
+
+
+    with link = "point.nl.Breda-aansluiting" {
+        let br = path("d3.nl.br");
+
+        # Spoor BA-BB-BC
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.x - 300m] << 0.5dt
+            ..  rb[:bda.x + 200m, :bda.x + 220m] << 2dt
+            ..  rb[:bda.x + 500m, :bda.f] << 1.5dt
+        );
+        with layer = 1 casing(:first:station,
+                rb[:bda.x - 301m, :bda.x - 300m] << 0.5dt
+            ..  rb[:bda.x + 200m, :bda.x + 201m] << 2dt
+        );
+
+        # Spoor BX-BY-BZ
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.x - 300m] >> 0.5dt
+            ..  rb[:bda.x + 300m, :bda.f] >> 1.5dt
+        );
+
+        # Spoor HA
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.x - 460m - 2dl] >> 2.5dt
+            --  rb[:bda.x - 460m + 1dl, :bda.x - 460m + 1.1dl] << 0.5dt
+        );
+
+        # Spoor HB
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.x - 460m - 1dl] >> 1.5dt
+        );
+
+        # Spoor ML
+        track(:first:station :cat:dc15 :pax,
+                br[:bda.b, :bda.x + 300m] << 2dt
+            ..  br[:bda.x - 300m, :bda.f] << 0.5dt
+        );
+
+        # Spoor NL
+        track(:first:station :cat:dc15 :pax,
+                br[:bda.b, :bda.x + 300m] << 1dt
+            ..  br[:bda.x - 300m, :bda.f] >> 0.5dt
+        );
+
+        marker(:de.abzw :right, rb[:bda] >> 1.5dt);
+        station(:bottom, rb[:bda] >> 1.5dt >> 1.2sw,
+            "Breda aansl.",
+            hbox(:center:top,
+                vbox(:right:top, "BR: ", "RB: ", "RNB: "),
+                vbox(:right:top, "1,", "22,", "403,"),
+                vbox(:left:top, "71", "34", "46")
+            )
+        );
+    }
+
+
+    with link = "point.nl.Breda" {
+        let be = path("d3.nl.be");
+
+        # Spoor 2
+        track(:station :cat:dc15 :pax,
+                rb[:bd.a + 450m + 0.9dl, :bd.a + 450m + 1dl] >> 2.5dt
+            --  rb[:bd.a + 450m + 2dl, :bd + 440m - 3dl] >> 3.5dt
+            --  rb[:bd + 440m, :bd + 440m + 0.1dl] >> 0.5dt
+        );
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax,
+                rb[:bd.a + 450m - 3.1dl, :bd.a + 450m - 3dl] << 1.5dt
+            --  rb[:bd.a + 450m + 1dl, :bd.f - 890m] >> 2.5dt
+            --  rb[:bd.f - 890m + 1dl, :bd.f - 400m] >> 1.5dt
+            --  rb[:bd.f - 400m + 1dl, :bd.f] >> 0.5dt
+        );
+
+        # Spoor 4
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd + 440m + 2dl] >> 1.5dt
+        );
+        track(:station :cat:dc15,
+                rb[:bd + 440m + 2dl, :bd.f - 890m - 1dl] >> 1.5dt
+        );
+
+        # Spoor 5
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd.f - 400m - 1.5dl] >> 0.5dt
+            --  rb[:bd.f - 400m - 0.5dl, :bd.f - 400m - 0.49dl] << 0.5dt
+        );
+        track(:station :cat:dc15 :pax,
+                rb[:bd + 440m + 2dl] >> 0.5dt
+            --  rb[:bd + 440m + 3dl] << 0.5dt
+        );
+
+        # Spoor 6
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd.f] << 0.5dt
+        );
+
+        # Spoor 7
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd + 440m - 1dl] << 1.5dt
+        );
+
+        # Spoor 8
+        track(:station :cat:dc15 :pax,
+                rb[:bd.a + 450m - 3.1dl, :bd.a + 450m - 3dl] >> 1.5dt
+            --  rb[:bd.a + 450m + 1dl, :bd + 440m - 2dl] << 2.5dt
+            --  rb[:bd + 440m + 3dl, :bd + 440m + 3.1dl] >> 2.5dt
+        );
+
+        marker(:de.bf :right, rb[:bd] >> 3.5dt);
+        station(:bottom, rb[:bd] >> 3.5dt >> 1.2sw,
+            span(:bold, "Breda"),
+            hbox(:center:top,
+                vbox(:right:top, "BE: ", "BR: ", "RB: "),
+                vbox(:right:top, "0,", "0,", "24,"),
+                vbox(:left:top, "61", "05", "00")
+            )
+        );
+    }
+}
+

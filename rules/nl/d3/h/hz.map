@@ -1,0 +1,35 @@
+# NL HZ.  Haarlem - Zandvoort aan Zee.
+#
+let hz = path("path.nl.hz");
+
+with detail = 3 {
+    # point.nl.Haarlem: nl.ar
+
+
+    with link = "line.nl.hz" {
+        track(:first :double :cat, hz[:hlm.z, :ovn - 1ssw]);
+    }
+
+
+    with link = "point.nl.Overveen" {
+        track(:first:station :double :cat, hz[:ovn - 1ssw, :ovn + 1ssw]);
+
+        marker(:de.hp :right, hz[:ovn] >> 0.5dt);
+        slabel(:top, hz[:ovn] >> 0.5dt >> 1.4ssw, "Overveen");
+    }
+
+    with link = "line.nl.hz" {
+        track(:first :double :cat, hz[:ovn + 1ssw, :zvt - 1ssw]);
+        with layer = 1 line_badge(:open, hz[:zvt - 3.0km], "HZ");
+    }
+
+    with link = "point.nl.Zandvoort-aan-Zee" {
+        track(:first:station :double :cat, hz[:zvt - 1ssw, :zvt]);
+        marker(:de.bf :top, hz[:zvt]);
+        slabel(:left, hz[:zvt] - (1.6ssw, 0.1ssw),
+            span(:bold, "Zandvoort aan Zee")
+        );
+    }
+
+}
+

@@ -1,0 +1,109 @@
+# NL RB.  Roosendaal - Breda
+#
+let rb = path("d3.nl.rb");
+
+with detail = 3 {
+    # point.nl.Roosendaal: nl.LR
+
+    with link = "line.nl.RB" {
+        track(:first :double :cat:dc15 :pax, rb[:rsd.b, :bda.a]);
+        with layer = 1 line_badge(:open, rb[:etn - 2km], "RB");
+    }
+
+    with link = "point.nl.Seppe" {
+        with layer = -1 marker(:de.hp :removed :left, rb[:sp] << 0.5dt);
+        slabel(:top :removed, rb[:sp] << 0.5dt << 1.5ssw, "Seppe");
+    }
+
+    with link = "point.nl.Hoeven" {
+        with layer = -1 marker(:de.hp :removed :left, rb[:hvn] << 0.5dt);
+        slabel(:top :removed, rb[:hvn] << 0.5dt << 1.3ssw, "Hoeven");
+    }
+
+    with link = "point.nl.Etten-Leur" {
+        marker(:de.hp :right, rb[:etn] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, rb[:etn.x] >> 0.5dt);
+        slabel(:right, rb[:etn - 2ssw] >> 0.5dt >> 2.3ssw, "Etten-Leur");
+    }
+
+    with link = "point.nl.Leur" {
+        with layer = -1 marker(:de.hp :removed :left, rb[:ler] << 0.5dt);
+        slabel(:left :removed, rb[:ler - 0.5ssw] << 0.5dt << 1.3ssw, "Leur");
+    }
+
+    with link = "point.nl.Liesbosch" {
+        with layer = -1 marker(:de.hp :removed :right, rb[:lib] >> 0.5dt);
+        slabel(:left :removed, rb[:lib + 2ssw] << 1.5dt, "Liesbosch");
+    }
+
+    with link = "point.nl.Breda-aansluiting" {
+        let br = path("d3.nl.br");
+
+        # Spoor BA-BB-BC
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.x] << 0.5dt
+            --  rb[:bda.x + 3dl, :bda.f] << 2.5dt
+        );
+        with layer = 1 casing(:first:station,
+                rb[:bda.x] << 0.5dt
+            --  rb[:bda.x + 3dl] << 2.5dt
+        );
+
+        # Spoor BX-BY-BZ
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.f] >> 0.5dt
+        );
+
+        # Spoor HA
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.a + 1dl] >> 2.5dt
+            --  rb[:bda.a + 3dl, :bda.a + 3.1dl] << 0.5dt
+        );
+
+        # Spoor HB
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.a + 2dl] >> 1.5dt
+        );
+
+        # Spoor ML
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.x + 1.7dl] << 2.5dt
+            --  rb[:bda.x + 2.7dl, :bda.f] << 1.5dt
+        );
+
+        # Spoor NL
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.a, :bda.x + 1dl] << 1.5dt
+            --  rb[:bda.x + 2dl, :bda.f] << 0.5dt
+        );
+
+        marker(:de.abzw :right, rb[:bda] >> 0.5dt);
+    }
+
+    with link = "point.nl.Breda" {
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd.a] << 2.5dt
+            ..  rb[:bd - 0.5ssw, :bd + 1ssw] << 1.5dt
+            --  rb[:bd + 1ssw + 2dl, :bd + 1ssw + 2.1dl] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd.a] << 1.5dt
+            ..  rb[:bd - 0.5ssw, :bd.f] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd.a] << 0.5dt
+            ..  rb[:bd - 0.5ssw, :bd.f] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                rb[:bda.f, :bd.a] >> 0.5dt
+            ..  rb[:bd - 0.5ssw, :bd + 1ssw] >> 1.5dt
+            --  rb[:bd + 1ssw + 2dl, :bd + 1ssw + 2.1dl] << 0.5dt
+        );
+
+        marker(:de.bf :right, rb[:bd] >> 1.5dt);
+        slabel(:bottom, rb[:bd] >> 1.5dt >> 1.3ssw,
+            span(:bold, "Breda")
+        );
+    }
+}
+

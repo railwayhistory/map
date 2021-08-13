@@ -1,0 +1,73 @@
+# NL HZ.  Haarlem - Zandvoort aan Zee.
+#
+let hz = path("path.nl.hz");
+
+with detail = 4 {
+    # point.nl.Haarlem: nl.ar
+
+
+    with link = "line.nl.hz" {
+        track(:first :double :cat, hz[:hlm.z, :ovn - 130m]);
+        with layer = 1 line_badge(:open, hz[:ovn - 600m], "HZ");
+    }
+
+
+    with link = "point.nl.Overveen" {
+        track(:first:station :double :cat, hz[:ovn - 130m, :ovn + 310m]);
+
+        marker(:de.hp :right, hz[:ovn] >> 0.5dt);
+        station(:top, hz[:ovn] >> 0.5dt >> 1.4sw,
+            "Overveen", "HZ: 2,17"
+        );
+    }
+
+
+    with link = "line.nl.hz" {
+        track(:first :double :cat, hz[:ovn + 310m, :zvt.a]);
+        with layer = 1 line_badge(:open, hz[:zvt - 3.0km], "HZ");
+    }
+
+
+    with link = "point.nl.Zandvoort-aan-Zee" {
+        # Spoor 1
+        track(:first:station :cat, hz[:zvt.a, :zvt] << 0.5dt);
+
+        # Spoor 2
+        track(:first:station :cat,
+                hz[:zvt.a, :zvt.a + 2dl] >> 0.5dt
+            --  hz[:zvt.a + 3dl, :zvt] >> 1.5dt
+        );
+
+        # Spoor 3
+        track(:station :cat,
+                hz[:zvt.a + 5.9dl, :zvt.a + 6dl] >> 1.5dt
+            --  hz[:zvt.a + 7dl, :zvt - 250m - 1dl] >> 0.5dt
+            --  hz[:zvt - 250m, :zvt - 250m + 0.1dl] >> 1.5dt
+        );
+
+        # 251A - 251B
+        track(:station :cat,
+                hz[:zvt.a + 1dl] << 0.5dt
+            --  hz[:zvt.a + 2dl] >> 0.5dt
+        );
+
+        # 253A - 253B
+        track(:station :cat,
+                hz[:zvt.a + 4dl] >> 1.5dt
+            --  hz[:zvt.a + 6dl] << 0.5dt
+        );
+
+        # 257A - 257B
+        track(:station :cat,
+                hz[:zvt - 250m - 2dl] >> 0.5dt
+            --  hz[:zvt - 250m - 1dl] << 0.5dt
+        );
+
+        marker(:de.bf :top, hz[:zvt] >> 0.5dt);
+        station(:left, hz[:zvt] + (-1.3sw, -0.3sw),
+            span(:bold, "Zandvoort aan Zee"),
+            "HZ: 8,19"
+        );
+    }
+}
+
