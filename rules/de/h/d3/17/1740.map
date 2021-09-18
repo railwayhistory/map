@@ -1,0 +1,55 @@
+# DE 1740.  Wunstorf - Bremerhaven-Seehafen DB-Grenze
+#
+let wb = path("d3.de.1740");
+
+with detail = 3 {
+    # ...
+
+    with link = "point.de.Bremerhaven-Wulsdorf" {
+        # Str. 1740
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul - 2ssw, :wul - 1ssw - 1.7dl] >> 0.5dt
+             -- wb[:wul - 1ssw - 0.7dl, :wul.f] >> 1.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul - 2ssw, :wul - 1ssw - 1dl] << 0.5dt
+             -- wb[:wul - 1ssw, :wul.f] >> 0.5dt
+        );
+
+        # Str. 1306
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul - 1ssw - 1dl, :wul.f] << 0.5dt
+        );
+
+        # Str. 1300
+        with layer = -1 track(:second:station :pax,
+                wb[:wul - 1ssw - 2dl, :wul - 1ssw - 0.7dl] >> 1.5dt
+        );
+
+        # Str. 1301
+        with layer = -2 track(:station,
+                wb[:wul + 0.9ssw, :wul + 1ssw] << 0.5dt
+            ..  path("d3.de.1301")[:wul.h + 0.9dt, :wul.h + 1dt]
+        );
+
+        marker(:de.bf :right, wb[:wul] >> 1.5dt);
+    }
+
+    with link = "point.de.Bremerhaven-Süd" {
+        # Str. 1740
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.f, :wul.f + 2ssw] >> 1.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.f, :wul.f + 2ssw] >> 0.5dt
+        );
+
+        # Str. 1306
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.f, :wul.f + 1ssw] << 0.5dt
+            --  wb[:wul.f + 1ssw + 1dl, :wul.f + 1ssw + 1.1dl] >> 0.5dt
+        );
+    }
+
+    # ...
+}

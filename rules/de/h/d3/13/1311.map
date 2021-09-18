@@ -1,0 +1,53 @@
+# DE 1311.  Bremerhaven-Speckenbüttel - Bad Bederkesa
+#
+let sb = path("d3.de.1311");
+
+with detail = 3 {
+    # point.de.Bremerhaven-Speckenbüttel  de.1740
+
+    with link = "line.de.1311" {
+        track(:second, sb[:spe.h, :lan - 1ssw]);
+    }
+
+    with link = "point.de.Langen-Han" {
+        track(:second:station, sb[:lan - 1ssw, :lan + 1ssw]);
+        marker(:de.bf :left, sb[:lan]);
+        slabel(:right, sb[:lan - 0.2ssw] >> 2.0dt,
+            hbox(:center:base, "Langen ", span(:light, "(Han)"))
+        );
+    }
+
+    with link = "line.de.1311" {
+        track(:second, sb[:lan + 1ssw, :deb - 1ssw]);
+    }
+
+    with link = "point.de.Debstedt" {
+        track(:second:station, sb[:deb - 1ssw, :deb + 1ssw]);
+        marker(:de.hp :left, sb[:deb]);
+        slabel(:top, sb[:deb] << 1.4ssw, "Debstedt");
+    }
+
+    with link = "line.de.1311" {
+        track(:second, sb[:deb + 1ssw, :dra - 1ssw]);
+    }
+
+    with link = "point.de.Drangstedt" {
+        track(:second:station, sb[:dra - 1ssw, :dra + 1ssw]);
+        marker(:de.bf :right, sb[:dra]);
+        slabel(:bottom, sb[:dra] >> 1.4ssw, "Drangstedt");
+    }
+
+    with link = "line.de.1311" {
+        track(:second, sb[:dra + 1ssw, :bed + 1ssw]);
+        with layer = 1 line_badge(:open, sb[:dra.f + 2km], "1311");
+    }
+
+    with link = "point.de.Bad-Bederkesa" {
+        track(:second:station, sb[:bed - 1ssw, :bed + 1ssw]);
+        marker(:de.bf :right, sb[:bed]);
+        slabel(:right, sb[:bed - 2ssw] >> 1.0ssw,
+            hbox(:left:top :bold, "Bad Bederkesa")
+        );
+    }
+}
+

@@ -1,0 +1,49 @@
+# DE 1301.  Bremerhaven-Wulsdorf - Bremerhaven-Fischereihafen
+#
+let wf = path("d3.de.1301");
+
+with detail = [4, 5] {
+    # point.de.Bremerhaven-Wulsdorf  de.1740
+
+
+    with link = "line.de.1301" {
+        track(:station, wf[:wul.h, :bfi.a]);
+
+        guide(:open,
+                wf[:bfi.a - 0.3km] << 0.5dt
+            --  wf[:bfi.a - 0.3km] << 2.0dt
+        );
+        label(wf[:bfi.a - 0.3km] << 2.0dt,
+            hbox(:center:top :badgesize, "1301")
+        );
+    }
+
+
+    with link = "point.de.Bremerhaven-Fischereihafen" {
+        track(:station, wf[:bfi.a, :bfi.s]);
+        with layer = -1 track(:station :removed, wf[:bfi.s, :bfi]);
+
+        track(:station,
+                wf[:bfi.r + 149m, :bfi.r + 150m]
+            --  wf[:bfi.r + 150m + 1dl, :bfi.s] << 1dt
+        );
+        with layer = -1 track(:station :removed, wf[:bfi.s, :bfi] << 1dt);
+
+        with layer = -1 track(:station :removed,
+                wf[:bfi.r + 150m + 2dl, :bfi] << 2dt
+        );
+
+        with layer = -1 track(:station :removed,
+                wf[:bfi.r + 149m + 1dl, :bfi.r + 150m + 1dl] << 1dt
+            --  wf[:bfi.r + 150m + 3dl, :bfi] << 3dt
+        );
+
+        marker(:de.gbf :top :removed, wf[:bfi] << 1.5dt);
+        station(:left, wf[:bfi] + (-1.4sw, 1.5dt),
+            "B. Fischereihafen",
+            hbox(:center:base, "1301: ", span(:removed, "2,26"))
+        );
+    }
+
+}
+

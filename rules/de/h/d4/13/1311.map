@@ -1,0 +1,107 @@
+# DE 1311.  Bremerhaven-Speckenbüttel - Bad Bederkesa
+#
+let sb = path("d3.de.1311");
+
+with detail = [4, 5] {
+    # point.de.Bremerhaven-Speckenbüttel  de.1740
+
+
+    with link = "line.de.1311" {
+        track(:second, sb[:spe.h, :lan.a]);
+    }
+
+
+    with link = "point.de.Langen-Han" {
+        track(:second:station, sb[:lan.a, :lan.f]);
+        track(:station,
+                sb[:lan - 0.5sw - 1.1dl, :lan - 0.5sw - 1dl]
+            --  sb[:lan - 0.5sw, :lan.f - 100m - 1dl] << 1dt
+            --  sb[:lan.f - 100m, :lan.f - 99m]
+        );
+        marker(:de.bf :left, sb[:lan] << 1dt);
+        station(:right, sb[:lan - 0.2sw] >> 2.5dt,
+            hbox(:center:base, "Langen ", span(:light, "(Han)")),
+            "1,55"
+        );
+    }
+
+
+    with link = "line.de.1311" {
+        track(:second, sb[:lan.f, :deb - 1sw]);
+        with layer = 1 line_badge(:open, sb[:lan.f + 1km], "1311");
+    }
+
+
+    with link = "point.de.Debstedt" {
+        track(:second:station, sb[:deb - 1sw, :deb + 1sw]);
+        marker(:de.hp :left, sb[:deb]);
+        station(:top, sb[:deb] << 1.2sw,
+            "Debstedt", "5,67"
+        );
+    }
+
+
+    with link = "line.de.1311" {
+        track(:second, sb[:deb + 1sw, :dra - 1sw]);
+    }
+
+
+    with link = "point.de.Drangstedt" {
+        track(:second:station, sb[:dra - 1sw, :dra.f]);
+        track(:station,
+                sb[:dra + 0.49sw, :dra + 0.5sw]
+            --  sb[:dra + 0.5sw + 1dl, :dra.f - 100m - 1dl] >> 1dt
+            --  sb[:dra.f - 100m, :dra.f - 99m]
+        );
+        marker(:de.bf :right, sb[:dra]);
+        station(:bottom, sb[:dra] >> 1.2sw,
+            "Drangstedt", "11,72"
+        );
+    }
+
+
+    with link = "line.de.1311" {
+        track(:second, sb[:dra.f, :bed.a]);
+        with layer = 1 line_badge(:open, sb[:dra.f + 2km], "1311");
+    }
+
+
+    with link = "point.de.Bad-Bederkesa" {
+        # Gl. 1
+        track(:station,
+                sb[:bed.a + 100m + 1dl, :bed + 0.5sw] >> 1dt
+            --  sb[:bed + 0.5sw + 1dl, :bed + 0.5sw + 1.1dl]
+        );
+
+        # Gl. 2
+        track(:second:station, sb[:bed.a, :bed + 0.5sw + 1dl + 50m]);
+
+        # Gl. 3
+        track(:station,
+                sb[:bed - 0.5sw - 1.1dl, :bed - 0.5sw - 1dl] >> 1dt
+            --  sb[:bed - 0.5sw + 1dl, :bed + 0.5sw + 1dl] << 1dt
+        );
+
+        # Gl. 5
+        track(:station,
+                sb[:bed.a + 99m, :bed.a + 100m]
+            --  sb[:bed.a + 100m + 2dl, :bed - 0.6sw] >> 2dt
+        );
+
+        # Depotgleise
+        track(:station,
+                sb[:bed.a + 50m, :bed - 0.5sw - 3dl] << 1dt
+        );
+        track(:station,
+                sb[:bed.a + 50m, :bed - 0.5sw - 4dl] << 2dt
+            --  sb[:bed - 0.5sw - 2dl, :bed - 0.5sw - 1.9dl]
+        );
+
+        marker(:de.bf :right, sb[:bed] >> 1dt);
+        station(:bottom, sb[:bed] >> 1dt >> 1.2sw,
+            span(:bold, "Bad Bederkesa"),
+            "1311: 17,61"
+        );
+    }
+}
+

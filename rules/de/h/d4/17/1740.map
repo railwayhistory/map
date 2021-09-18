@@ -1,0 +1,113 @@
+# DE 1740.  Wunstorf - Bremerhaven-Seehafen DB-Grenze
+#
+let wb = path("d3.de.1740");
+
+with detail = [4, 5] {
+    # ...
+
+
+    with link = "point.de.Bremerhaven-Wulsdorf" {
+        let bb = path("d3.de.1300.h");
+
+        # Gl. 1 (Str. 1740 rechts)
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.a, :wul.s - 4dl] >> 0.5dt
+            --  wb[:wul.s, :wul.u] >> 4.5dt
+            ..  wb[:wul.f - 0.1dl, :wul.f] >> 0.5dt
+        );
+
+        # Gl. 2 (Str. 1740 links)
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.a, :wul.s - 3.3dl] << 0.5dt
+            --  wb[:wul.s + 0.7dl, :wul.u] >> 3.5dt
+            ..  wb[:wul.f - 0.1dl, :wul.f] << 0.5dt
+        );
+
+        # Gl. 3
+        with layer = -1 track(:station :cat:ac15,
+                wb[:wul.s + 2dl, :wul.u - 1dl] >> 2.5dt
+            --  wb[:wul.u, :wul.u + 0.1dl] >> 1.5dt
+        );
+
+        # Gl. 4 (Str. 1306)
+        with layer = -1 track(:first:station :cat:ac15,
+                wb[:wul.s + 0.9dl, :wul.s + 1dl] >> 3.5dt
+            --  wb[:wul.s + 3dl, :wul.u] >> 1.5dt
+            ..  wb[:wul.f - 0.1dl, :wul.f] << 1.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                path("d3.de.1302")[:wul.u, :wul.g] >> 1.5dt
+        );
+
+        # Gl. 5 (Str. 1302)
+        with layer = -1 track(:first:station :cat:ac15,
+                wb[:wul.s - 4dl, :wul.u] >> 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                path("d3.de.1302")[:wul.u, :wul.g] >> 0.5dt
+        );
+
+        # Gl. 8
+        with layer = -1 track(:station :cat:ac15,
+                wb[:wul.s + 1dl, :wul.u - 1dl] << 0.5dt
+            ..  path("d3.de.1301")[:wul.h - 0.1dl, :wul.h]
+        );
+
+        # Gl. 9
+        with layer = -1 track(:station :cat:ac15,
+                wb[:wul.s - 0.1dl, :wul.s] >> 0.5dt
+            --  wb[:wul.s + 2dl, :wul.u - 2dl] << 1.5dt
+            --  wb[:wul.u + 1dl, :wul.u + 1.1dl] >> 1.5dt
+        );
+
+        # Gl. 10
+        with layer = -1 track(:station :cat:ac15,
+                wb[:wul.s - 350m, :wul.s - 2.7dl] << 1.5dt
+        );
+
+        # Gl. 11
+        with layer = -1 track(:station :cat:ac15,
+                wb[:wul.s - 450m, :wul.s - 3.7dl] << 2.5dt
+            --  wb[:wul.s - 0.7dl, :wul.s - 0.6dl] >> 0.5dt
+        );
+
+        # Str. 1300
+        with layer = -1 track(:second:station :pax,
+                bb[:wul.s + 6dl, :wul.s] >> 4.5dt
+        );
+            with layer = -2 track(:station,
+                    bb[:wul.s + 5.1dl, :wul.s + 5dl] >> 4.5dt
+                --  bb[:wul.s + 4dl, :wul.s - 0.7dl] >> 3.5dt
+            );
+
+        marker(:de.bf :right, wb[:wul] >> 4.5dt);
+    }
+
+
+    with link = "point.de.Bremerhaven-Süd" {
+        # Gl. 1
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.f, :wus.f] >> 0.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.f, :wus.f] << 0.5dt
+        );
+
+        # Gl. 103
+        track(:first:station :cat:ac15 :pax,
+                wb[:wul.f, :wul.f + 180m - 1dl] << 1.5dt
+            --  wb[:wul.f + 180m + 1dl, :wul.f + 180m + 1.1dl] >> 0.5dt
+        );
+        with layer = -4 track(:first:station :cat:ac15 :removed,
+                path("d3.de.1303")[:wul.f + 100m, :wul.f] << 1.5dt
+        );
+
+        marker(:de.abzw :right, wb[:wus] >> 0.5dt);
+    }
+
+
+    # ...
+}
+

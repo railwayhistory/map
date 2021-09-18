@@ -1,0 +1,44 @@
+# DE 1302.  Bremerhaven-Wulsdorf - Bremerhaven-Geestemünde
+#
+let wg = path("d3.de.1302");
+
+with detail = [4, 5] {
+    # point.de.Bremerhaven-Wulsdorf  de.1740
+
+
+    with link = "line.de.1302" {
+        with layer = -4 track(:first :double :cat:ac15 :removed,
+                wg[:wul.g, :gee.x - 100m] >> 1dt
+        );
+
+        guide(:removed,
+                wg[:gee.x - 300m]
+            --  wg[:gee.x - 320m] << 1.5dt
+        );
+        label(wg[:gee.x - 320m] << 1.5dt,
+            hbox(:center:top :badgesize :removed, "1302 ")
+        );
+    }
+
+
+    with link = "point.de.Bremerhaven-Geestemünde" {
+        with layer = -4 track(:first:station :double :cat:ac15 :removed,
+                wg[:gee.x - 100m, :gee] >> 1dt
+        );
+        with layer = -4 track(:first:station :cat:ac15 :removed,
+                path("d3.de.1303")[:gee.x - 100m, :gee.x] >> 2.5dt
+            --  wg[:gee.x + 1dl, :gee.x + 1.1dl] >> 1.5dt
+        );
+
+        marker(:de.gbf :removed :top, wg[:gee] >> 1dt);
+        station(:left :removed, wg[:gee] << 0.7sw - (0dt, 1dt),
+            span(:bold, "B. Geestemünde"),
+            hbox(:center:top,
+                vbox(:right:top, "1302: ", "1303: "),
+                vbox(:right:top, "183", ""),
+                vbox(:left:top, ",61", "??")
+            )
+        );
+    }
+}
+
