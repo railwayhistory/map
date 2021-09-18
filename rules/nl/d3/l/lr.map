@@ -19,7 +19,10 @@ with detail = 3 {
     }
 
     with link = "line.nl.LR" {
-        track(:first :double :cat :dc15 :pax, lr[:zvb + 1ssw, :rsd.aa]);
+        track(:first :double :cat :dc15 :pax,
+                lr[:zvb + 1ssw, :rsd.aa - 0.5ssw]
+            ..  lr[:rsd.x - 0.1dl, :rsd.x] >> 1dt
+        );
         with layer = 1 line_badge(:open, lr[:rsd.a - 3km], "LR");
     }
 
@@ -29,21 +32,26 @@ with detail = 3 {
     }
 
     with link = "point.nl.Roosendaal" {
-        track(:first:station :double :cat:dc15 :pax, lr[:rsd.aa, :rsd.f]);
-        with style = :normal 
         track(:first:station :double :cat:dc15 :pax,
-                path("d3.nl.rb")[:rsd.x, :rsd.b]
+                lr[:rsd.x, :rsd.f] >> 1dt
         );
-
-        marker(:de.bf :left, lr[:rsd] << 0.5dt);
-        slabel(:right, lr[:rsd + 0.3ssw] << 0.5dt << 2.2ssw,
-            span(:bold, "Roosendaal")
+        track(:first:station :double :cat:dc15 :pax,
+                lr[:rsd.x, :rsd.f] << 1dt
         );
+        with style = :red {
+        with layer = -1 marker(:de.bf :left, lr[:rsd] << 1.5dt);
+        slabel(:right, lr[:rsd + 0.3ssw] << 1.5dt << 2.2ssw,
+            span(:bold :medium :bold, "Roosendaal")
+        );
+        }
     }
 
     with link = "line.nl.LR" {
         # 1.5kV section reversed so the markers look good
-        track(:first :double :cat :dc15 :pax, lr[:rsd.el, :rsd.f]);
+        track(:first :double :cat :dc15 :pax,
+                lr[:rsd.el, :rsd.el - 0.1dl]
+            ..  lr[:rsd.f + 0.1dl, :rsd.f] >> 1dt
+        );
         track(:first :double :cat :dc30 :pax, lr[:rsd.el, :rsdg - 0.5ssw]);
 
         with layer = 1 line_badge(:open, lr[:rsd.f + 4km], "LR");
