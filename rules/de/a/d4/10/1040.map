@@ -1,0 +1,1115 @@
+# DE 1040.  Neumünster - Flensburg
+#
+let nf = path("d3.de.1040");
+
+with detail = [4, 5] {
+    # point.de.Neumünster      de.1220
+    # point.de.Neumünster-Gbf  de.1220
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:neu.g, :asp - 1sw]);
+
+        with layer = -4 track(:first :double :removed,
+                path("d3.de.1040.neu")[:neu.h, :xneu]
+        );
+
+        with layer = 1 line_badge(:open, nf[:xneu + 0.7km], "1040");
+    }
+
+
+    with link = "point.de.Stover" {
+        with layer = -1 marker(:de.bk :removed :left, nf[:sto] << 0.5dt);
+        station(:left :right_align :removed, nf[:sto - 0.3sw] << 0.5dt << 2.0sh,
+            "Stover", "80,09 (79,34)"
+        );
+    }
+
+
+    with link = "point.de.Aspe" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:asp - 1sw, :asp + 1sw]
+        );
+        with layer = -1 marker(:de.bf :removed :right, nf[:asp] >> 0.5dt);
+        station(:right :left_align :removed, nf[:asp - 0.5sw] >> 0.5dt >> 1.4sh,
+            "Aspe", " 84,13 (83,38)"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:asp + 1sw, :nor.a]);
+    }
+
+
+    with link = "point.de.Nortorf" {
+        track(:first:station :double :cat:ac15 :pax, nf[:nor.a, :nor.f]);
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:nor.a + 350m] << 0.5dt
+                --  nf[:nor.a + 430m] >> 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:nor + 190m] >> 0.5dt
+                --  nf[:nor + 260m] << 0.5dt
+            );
+        marker(:de.bf :right, nf[:nor] >> 0.5dt);
+        station(:right :left_align, nf[:nor - 0.4sw] >> 0.5dt >> 1.4sh,
+            "Nortorf",
+            hbox(:left :base,
+                span(:xsmall, " 88,87 "),
+                span(:xsmall :removed, "(88,12)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:nor.f, :bok - 1sw]);
+    }
+
+
+    with link = "point.de.Bokel" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:bok - 1sw, :bok + 1sw]
+        );
+        with layer = -1 marker(:de.hp :removed:left, nf[:bok] << 0.5dt);
+        with layer = -2 marker(:de.bf :gone :left, nf[:bok] << 0.5dt);
+        station(:left :right_align :removed,
+            nf[:bok - 0.4sw] << 0.5dt << 1.8sh,
+            "Bokel", "95,13 (94,37)"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:bok - 1sw, :bos - 1sw]);
+    }
+
+
+    with link = "point.de.Bokelholm-Süd" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:bos - 1sw, :bos + 100m]
+        );
+        with layer = -4 marker(:de.bk :left :removed, nf[:bos] << 0.5dt);
+        station(:left :removed, nf[:bos - 0.2sw] << 0.5dt << 1.6sw,
+            "Bokelholm Süd", "??"
+        );
+    }
+
+
+    with link = "point.de.Bokelholm" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:bos + 100m, :bon - 100m]
+        )
+        with layer = -4 marker(:de.bf :right :removed, nf[:boh] >> 0.5dt);
+        station(:right :removed, nf[:boh - 0.4sw] >> 0.5dt >> 1.3sw,
+            "Bokelholm",  "99,53 (98,44)"
+        );
+    }
+
+
+    with link = "point.de.Bokelholm-Nord"  {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:bon - 100m, :bon + 1sw]
+        );
+        with layer = -4 marker(:de.bk :left :removed, nf[:bon] << 0.5dt);
+        station(:left :removed, nf[:bon - 1.2sw] << 0.5dt << 1.5sw,
+            "Bokelholm Nord", "??"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:bon + 1sw, :oro.a]);
+        with layer = 1 line_badge(:open, nf[:oro - 3.0km], "1040");
+    }
+
+
+    with link = "point.de.Osterrönfeld" {
+        # Str. 1040
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:oro.a, :oro.f]
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:oro.a + 160m] << 0.5dt
+                --  nf[:oro.a + 250m] >> 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:oro + 40m] >> 0.5dt
+                --  nf[:oro + 140m] << 0.5dt
+            );
+
+        # Str. 1022
+        with layer = -2 track(:first:station :pax,
+                nf[:ora + 100m, :oro - 0.5sw - 1.5dl] >> 1.5dt
+            --  nf[:oro - 0.5sw - 0.5dt, :oro - 0.5sw - 0.49dl] >> 0.5dt
+        );
+
+        marker(:de.bbf :right, nf[:oro] >> 0.5dt);
+        with layer = -4 marker(:de.bf :right :removed, nf[:oro] >> 0.5dt);
+        station(:left, nf[:oro - 1.0sw] << 0.5dt << 1.0sh,
+            span(:medium :bold, "Osterrönfeld"),
+            vbox(:center :top,
+                "1022: 30,96",
+                hbox(:center:base,
+                    "1040: 105,01 ",
+                    span(:removed, "(104,39)")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:oro.f, :orb - 300m]);
+    }
+
+
+    with link = "point.de.Osterrönfeld-Brücke" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:orb - 300m, :orb + 300m]
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:orb - 125m] << 0.5dt
+                --  nf[:orb - 25m] >> 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:orb + 25m] >> 0.5dt
+                --  nf[:orb + 125m] << 0.5dt
+            );
+        marker(:de.uest :right, nf[:orb] >> 0.5dt);
+        station(:left, nf[:orb + 0.5sw] << 2.0dt,
+            vbox(:right :top,
+                hbox(:center :base,
+                    span(:medium :light :removed, "O. "),
+                    span(:medium :removed, "Brücke")
+                ),
+                hbox(:center :base,
+                    span(:medium :light, "R. "),
+                    span(:medium, "Hochbrücke")
+                )
+            ),
+            "106,49"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        with layer = 3 track(:first :double :cat:ac15 :pax,
+                nf[:orb + 300m, :ren.a]
+        );
+        with layer = 1 casing(:first :double :cat:ac15 :pax,
+                nf[:bhbx - 1sw, :bhbx + 1sw]
+        );
+    }
+
+
+    with link = "point.de.Hochbrücke" {
+        with layer = 2 marker(:de.bk :removed :left, nf[:hbr] << 0.5dt);
+        station(:left :removed, nf[:hbr - .4sw] << 0.5dt << 1.4sh,
+            "Hochbrücke",
+            "(104,4+2856)"
+        )
+    }
+
+
+    with link = "point.de.Rendsburg-Brücke" {
+        with layer = 2 marker(:de.uest :removed :left, nf[:rbr] << 0.5dt);
+        station(:left :removed, nf[:rbr] << 0.5dt << 1.5sh,
+            hbox(:right :base,
+                span(:medium :light :removed, "R. "),
+                span(:medium :removed, "Brücke")
+            ),
+            "109,8"
+        )
+    }
+
+
+    with link = "point.de.Rendsburg-Schleife-Fehlstelle" {
+        marker(:statdt :removed, nf[:xren] >> 0.5dt);
+        marker(:statdt :removed, nf[:xren] << 0.5dt);
+        marker(:statdt :removed, nf[:xren] << 1.5dt);
+        guide(:removed,
+                nf[:xren] << 1.5dt
+            --  nf[:xren] << 1.5dt - (0dt, 1.5sw)
+        );
+        label(nf[:xren] << 0.5dt + (1.0sw, -2.0sw),
+            hbox(:right:base,
+                span(:xsmall :removed, "(104,4+4913 = 104,5)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Rendsburg-Schleife" {
+        with layer = 2 marker(:de.bk :removed :left, nf[:rsl] << 0.5dt);
+        station(:top :removed, nf[:rsl] << 0.5dt << 1.4sh,
+            "Schleife", "(105,11)"
+        );
+    }
+
+
+    with link = "point.de.Rendsburg" {
+        # Gl. 1.
+        track(:first:station :cat:ac15 :pax, nf[:ren.a, :bud.a] << 0.5dt);
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:ren.rf - 7dl] << .5dt
+                --  nf[:ren.rf - 6dl] >> .5dt
+            );
+
+        # Gl. 2
+        track(:station :cat:ac15 :pax,
+                nf[:ren - .2km - 1.1dl, :ren - .2km - 1dl] << 0.5dt
+            --  nf[:ren - .2km, :ren + .6sw] >> 0.5dt
+            --  nf[:ren + .6sw + 1dl, :ren + .6sw + 1.1dl] << 0.5dt
+        );
+
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                nf[:ren.a, :ren - 200m - 1.7dl] >> 0.5dt
+            --  nf[:ren - 200m - 0.7dl, :ren + .6sw + 0.7dl] >> 1.5dt
+            --  nf[:ren + .6sw + 1.7dl, :bud.a] >> .5dt
+        );
+            track(:station,
+                    nf[:ren.rf] >> .5dt
+                --  nf[:ren.rf + 1dl] << 0.5dt
+            );
+
+        # Gl. 4
+        with layer = -1 track(:station :cat:ac15,
+                nf[:ren.rf - 250m, :ren - 200m - 2.4dl] >> 1.5dt
+            --  nf[:ren - 200m - 1.4dl, :ren + .6sw + 3dl] >> 2.5dt
+            --  nf[:ren + .6sw + 4dl, :ren + .6sw + 5dl] >> 1.5dt
+            --  nf[:ren + .6sw + 6dl, :ren + .6sw + 6.1dl] >> 0.5dt
+        );
+            track(:station,
+                    nf[:ren.rf - 5dl] >> .5dt
+                --  nf[:ren.rf - 4dl] >> 1.5dt
+            );
+            with layer = -1 track(:station :removed,
+                    nf[:ren + .6sw + 5dl, :ren + .6sw + 8dl] >> 1.5dt
+            );
+
+        # Gl. 5
+        with layer = -4 track(:station :removed,
+                nf[:ren.rf - 2dl, :ren - 200m - 3.1dl] >> 2.5dt
+            --  nf[:ren - 200m - 2.1dl, :ren - .5sw] >> 3.5dt
+        );
+        with layer = -2 track(:station,
+                nf[:ren - .5sw, :ren + .6sw] >> 3.5dt
+            --  nf[:ren + .6sw + 1dl, :ren + .6sw + 1.1dl] >> 2.5dt
+        );
+
+        # Gl. 6
+        with layer = -4 track(:station :removed,
+                nf[:ren.rf - 1dl, :ren - 200m - 3.8dl] >> 3.5dt
+            --  nf[:ren - 200m - 2.8dl, :ren + .6sw + 1dl] >> 4.5dt
+        );
+
+        # Gl. 7
+        with layer = -4 track(:station :removed,
+                nf[:ren.rf - 3.1dl, :ren.rf - 3dl] >> 1.5dt
+            --  nf[:ren.rf - .1dl, :ren - 200m - 4.5dl] >> 4.5dt
+            --  nf[:ren - 200m - 3.5dl, :ren + .6sw] >> 5.5dt
+            --  nf[:ren + .6sw + 3dl, :ren + .6sw + 3.01dl] >> 2.5dt
+        );
+
+        marker(:de.bf :left, nf[:ren] << 0.5dt);
+        station(:left :right_align, nf[:ren - 0.2sw] << 0.5dt << 1.8sw,
+            span(:medium :bold, "Rendsburg"),
+            hbox(:center :base,
+                span(:xsmall, "1040: 113,87"),
+                span(:xsmall :removed, " (108,30)")
+            )
+        );
+    }
+
+
+    with link = "point.de.Büdelsdorf" {
+        track(:double :first :station, nf[:bud.a, :bud + 1sw]);
+
+        with layer = -1 {
+            # Gleiswechsel Südkopf
+            track(:station :removed,
+                    nf[:bud.a + 0.9dl, :bud.a + 1dl] << 0.5dt
+                --  nf[:bud.a + 2dl, :bud.a + 2.1dl] >> 0.5dt
+            );
+
+            # Gl. 5
+            track(:station :removed,
+                    nf[:bud.a + 2.9dl, :bud.a + 3dl] >> 0.5dt
+                --  nf[:bud.a + 4dl, :bud - .5sw] >> 1.5dt
+            );
+        }
+
+        # Strecke 1012.
+        track(:station,
+                nf[:bud + .499sw, :bud + .5sw] << 0.5dt
+            --  nf[:bud + .5sw + 1dl, :bud + 1sw] << 1.5dt
+        );
+
+        with layer = -1 marker(:de.bf :removed :left, nf[:bud] << 0.5dt);
+        with detail = 5 {
+            station(:left :closed, nf[:bud - .2sw] << 0.5dt << 1.8sh,
+                "Büdelsdorf",
+                hbox(:center :top :closed,
+                    vbox(:right :top,
+                        span(:xsmall, "1012: "), span(:xsmall, "1040: ")
+                    ),
+                    vbox(:right :top,
+                        span(:xsmall, "0,"), span(:xsmall, "115,")
+                    ),
+                    vbox(:left :top,
+                        span(:xsmall, "42"), span(:xsmall, "35")
+                    )
+                )
+            );
+        }
+        with detail = 4 {
+            station(:left :right_align :removed,
+                nf[:bud - .2sw] << 0.5dt << 1.8sh,
+                "Büdelsdorf",
+                hbox(:center:top :removed :xsmall,
+                    vbox(:right:top, "1012: ", "1040: "),
+                    vbox(:right:top, "0,", "115,"),
+                    vbox(:left:top, "42 ←", "35 ←"),
+                    vbox(:right:top, " 0,", " 115,", "(109,"),
+                    vbox(:left:top, "34", "27", "70)")
+                )
+            );
+        }
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:bud + 1sw, :adu - 1sw]);
+        with layer = 1 line_badge(:open, nf[:bud + 2.8km], "1040");
+    }
+
+
+    with link = "point.de.Alt-Duvenstedt" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:adu - 1sw, :adu + 2.5sw]
+        );
+        with layer = -2 track(:station :removed,
+                nf[:adu + .6sw, :adu + 2sw - 2dl] >> 1.5dt
+            --  nf[:adu + 2sw - 1dl, :adu + 2sw - 0.9dl] >> 0.5dt
+        );
+        with layer = -1 marker(:de.hst :removed :right, nf[:adu] >> 0.5dt);
+        with layer = -2 marker(:de.bf :gone :right, nf[:adu] >> 0.5dt);
+        station(:right :removed, nf[:adu - 0.4sw] >> .5dt >> 1.5sh,
+            "Alt Duvenstedt", "120,72 (115,19)"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:adu + 2.5sw, :ows.a]);
+    }
+
+
+    with link = "point.de.Owschlag" {
+        track(:double :first :station, nf[:ows.a, :ows.f]);
+        track(:station,
+                nf[:ows.a + .9dl, :ows.a + 1dl] >> 0.5dt
+            --  nf[:ows.a + 2dl, :ows.a + 2.1dl] << 0.5dt
+        );
+        track(:station,
+                nf[:ows.a + 2.9dl, :ows.a + 3dl] << 0.5dt
+            --  nf[:ows.a + 4dl, :ows.f - 4dl] << 1.5dt
+            --  nf[:ows.f - 3dl, :ows.f - 2.9dl] << 0.5dt
+        );
+        track(:station :removed, nf[:ows.f - 4dl, :ows.f + 2dl] << 1.5dt);
+        track(:station,
+                nf[:ows.f - 2.1dl, :ows.f - 2dl] << 0.5dt
+            --  nf[:ows.f - 1dl, :ows.f - 0.9dl] >> 0.5dt
+        );
+        track(:station :removed,
+                nf[:ows - .3km - 1.1dl, :ows - .3km - 1dl] << 1.5dt
+            --  nf[:ows - .3km, :ows + .5sw] << 2.5dt
+        );
+
+        marker(:de.bf, nf[:ows] >> 0.5dt);
+        station(:left :right_align, nf[:ows - 0.3sw] << 5.0dt,
+            span(:medium :bold, "Owschlag"),
+            hbox(:center :base,
+                span(:xsmall, "1040: 125,41 "),
+                span(:xsmall :removed, "(119,84)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:ows.f, :lot - 1sw]);
+    }
+
+
+    with link = "point.de.Lottorf" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:lot - 1sw, :lot + 1sw]
+        );
+        with layer = -1 marker(:de.uest :removed :right, nf[:lot] >> 0.5dt);
+        with layer = -2 marker(:de.bf :gone :right, nf[:lot] >> 0.5dt);
+        station(:right :removed, nf[:lot - .4sw] >> 0.5dt >> 1.3sh,
+            "Lottorf", "(126,92)"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:lot + 1sw, :sle.a]);
+        with layer = 2 line_badge(:open, nf[:sle - 1.8km], "1040");
+    }
+
+
+    with link = "point.de.Schleswig" {
+        track(:first:station :double :cat:ac15 :pax, nf[:sle.a, :sle.f]);
+
+        # Gleiswechsel Südseite
+        track(:station :cat:ac15,
+                nf[:sle.a + .9dl, :sle.a + 1dl] >> 0.5dt
+            --  nf[:sle.a + 2dl, :sle.a + 2.1dl] << 0.5dt
+        );
+
+        # Gl. 803
+        with layer = -1 track(:station :cat:ac15,
+                nf[:sle.a + 2.9dl, :sle.a + 3dl] << 0.5dt
+            --  nf[:sle.a + 4dl, :sle + .5sw] << 1.5dt
+            --  nf[:sle + .5sw + 1dl, :sle + .5sw + 1.1dl] << 0.5dt
+        );
+
+        # Gl.804
+        with layer = -4 track(:station :closed,
+                nf[:sle.a + 4dl, :sle.a + 4.1dl] << 1.5dt
+            --  nf[:sle.a + 5.1dl, :asla - 3dl] << 2.5dt
+        );
+
+        # Gl. 856
+        with layer = -4 track(:third :station :closed,
+                path("d3.de.9103")[:sle.ff, :sle.ff - 0.1dl]
+            ..  nf[:sle, :asla - 4dl] << 3.5dt
+            --  nf[:asla, :asla + .1dl] >> 0.5dt
+        );
+
+        # Ausfahrt nach Schleswig Altstadt
+        with layer = -4 track(:station :removed,
+                nf[:sle + .5sw + 1dl, :asla + 1dl] >> 1.5dt
+        );
+        with layer = -4 track(:second :station :removed,
+                nf[:asla - .1dl, :asla] >> 0.5dt
+            --  nf[:asla + 1dl, :asla + 2dl] >> 1.5dt
+            ..  path("d3.de.1010")[:a - 1dl, :a]
+        );
+
+        marker(:de.bf :right, nf[:sle] >> 0.5dt);
+        label(nf[:sle - 0.3sw] >> 0.5dt >> 1.5sh,
+            hbox(:middle :left,
+                span(:medium :bold, "Schleswig  "),
+                hbox(:center :top,
+                    vbox(:left :top,
+                        span(:xsmall :removed, "1010: "),
+                        span(:xsmall, "1040: ")
+                    ),
+                    vbox(:right :top,
+                        span(:xsmall :removed, "132,"),
+                        span(:xsmall, "138,")
+                    ),
+                    vbox(:left :top,
+                        span(:xsmall :removed, "82"),
+                        span(:xsmall, "39")
+                    ),
+                    vbox(:left :top,
+                        span(:xsmall :removed, ""),
+                        span(:xsmall :removed, " (132,82)")
+                    )
+                )
+            )
+        );
+
+        marker(:de.kbf :removed :left, nf[:sle] << 3.5dt);
+        station(:left :removed, nf[:sle - 0.3sw] << 3.5dt << 1.6sh,
+            span(:bold, "Schleswig-Friedrichsberg"),
+            "9103: ??"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:sle.f, :sub.a]);
+    }
+
+
+    with link = "point.de.Schuby" {
+        track(:first:station :double :cat:ac15 :pax, nf[:sub.a, :sub.f]);
+        with layer = -2 track(:station,
+                nf[:sub.f - 3dl, :sub.f + .3km] << 1.5dt
+        );
+        with layer = -2 track(:station,
+                nf[:sub.f - 2.1dl, :sub.f - 2dl] << 0.5dt
+            --  nf[:sub.f - 1dl, :sub.f - 0.9dl] << 1.5dt
+        );
+        with layer = -4 track(:station :removed,
+                nf[:sub.a + 0.9dl, :sub.a + 1dl] << 0.5dt
+            --  nf[:sub.a + 2dl, :sub - .5sw - 2dl] << 1.5dt
+            --  nf[:sub - .5sw - 1dl, :sub - .5sw - 0.9dl] << 0.5dt
+        );
+
+        with layer = -1 marker(:de.bf :left :removed, nf[:sub] << 0.5dt);
+        marker(:de.awanst :left, nf[:sub.f] << 1.5dt);
+        station(:left, nf[:sub.f] << 1.5dt << 2sh + (10pt, 0pt),
+            hbox(:center :top,
+                span(:medium, "Schuby "),
+                span(:medium :removed, "(Kr Schleswig)")
+            ),
+            hbox(:center :top,
+                "143,12 ",
+                span(:removed, "← 142,83 (137,26)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:sub.f, :jub.a]);
+        with layer = 2 line_badge(:open, nf[:sub + 3.5km], "1040");
+    }
+
+
+    with link = "point.de.Jübek" {
+        # Gl. 1
+        track(:first:station :cat:ac15 :pax, nf[:jub.a, :jub.f] << 0.5dt);
+            with layer = -2 track(:station :cat:ac15,
+                    nf[:jub.a + 320m] << 0.5dt
+                --  nf[:jub.a + 430m] >> 0.5dt
+            );
+
+        # Gl. 2
+        track(:first:station :cat:ac15 :pax, nf[:jub.a, :jub.f] >> 0.5dt);
+            track(:station :cat:ac15 :pax,
+                    nf[:jub.r - 100m] >> 0.5dt
+                --  nf[:jub.r] << 0.5dt
+            );
+
+        # Gl. 3
+        with layer = -2 track(:station :cat:ac15,
+                nf[:jub - 41m, :jub - 40m] >> 0.5dt
+            --  nf[:jub + 50m, :jub + 400m] >> 1.5dt
+            --  nf[:jub + 490m, :jub + 491m] >> 0.5dt
+        );
+
+        # Gl. 4
+        track(:station,
+                nf[:jub - 200m, :jub + 380m - 1.5dl] >> 2.5dt
+            --  nf[:jub + 380m, :jub + 381m] >> 1.5dt
+        );
+
+        # Gl. 5/6
+        with layer = -4 track(:station :removed,
+                nf[:jub.r - 400m, :jub.r] << 1.5dt
+        );
+
+        # Gl. 7/8
+        with layer = -4 track(:station :removed,
+                nf[:jub + 0.7sw, :jub.r - 2.7dl] << 2.5dt
+            --  nf[:jub.r - 1.7dl, :jub.r - 1.6dl] << 1.5dt
+        );
+
+        # Gl. 9
+        with layer = -4 track(:station :removed,
+                nf[:jub.a + .4km, :jub - .5sw - 4dl] << 1.5dt
+            --  nf[:jub - .5sw - 2dl, :jub - .5sw] << 3.5dt
+        );
+        with layer = -4 track(:second:station :removed,
+                nf[:jub - 0.5sw, :jub.r - 2dl] << 3.5dt
+            --  nf[:jub.r, :jub.r + 2dl] << 1.5dt
+        );
+
+        # Str. 1011
+        with layer = -1 track(:second:station :pax,
+                nf[:jub.r - 0.1dl, :jub.r] << 0.5dt
+            --  nf[:jub.r + 2dl, :jub.r + 3dl] << 1.5dt
+            ..  path("d3.de.1011")[:jub.g - 0.1dt, :jub.g]
+        );
+
+        with layer = 1 marker(:de.bf :left, nf[:jub] << 0.5dt);
+        station(:open :left :right_align, nf[:jub - .4sw] << .5dt << 2sh,
+            span(:medium :bold, "Jübek"),
+            hbox(:left :top,
+                vbox(:left :top,
+                    span(:xsmall, "1011: "), span(:xsmall, "1040: ")
+                ),
+                vbox(:right :top,
+                    span(:xsmall, "0,"), span(:xsmall, "149,")
+                ),
+                vbox(:left :top,
+                    span(:xsmall, "00"), span(:xsmall, "43")
+                ),
+                vbox(:right :top,
+                    span(:xsmall :removed, " (143,86)"),
+                    span(:xsmall :removed, " (143,86)")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:jub.f, :egb - 1sw]);
+        with layer = 2 line_badge(:open, nf[:jub + 4.0km], "1040");
+    }
+
+
+    with link = "point.de.Eggebek" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:egb - 1sw, :egb + 1sw]
+        );
+        with layer = -4 track(:station :removed,
+                nf[:egb + .6sw, :egb.eg] << 1.5dt
+        );
+        with layer = -4 track(:station :removed,
+                nf[:egb + .6sw + 0.9dl, :egb + .6sw + 1dl] << 0.5dt
+            --  nf[:egb + .6sw + 2dl, :egb + .6sw + 2.1dl] << 1.5dt
+        );
+        marker(:de.anst :removed:left, nf[:egb] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone:left, nf[:egb] << 0.5dt);
+        station(:right :left_align :removed, nf[:egb - 0.4sw] >> 2.0dt,
+            "Eggebek", " 156,75 (151,19)"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:egb + 1sw, :tar.a]);
+    }
+
+
+    with link = "point.de.Tarp" {
+        track(:first:station :double :cat:ac15 :pax, nf[:tar.a, :tar.f]);
+        with layer = -4 track(:station :removed,
+               nf[:tar.a + .9dl, :tar.a + 1dl] >> 0.5dt
+            -- nf[:tar.a + 2dl, :tar.a + 2.1dl] << 0.5dt
+        );
+        with layer = -4 track(:station :removed,
+               nf[:tar.ts - .51ssw, :tar.ts - .5ssw] << 0.5dt
+            -- nf[:tar.ts - .5ssw + 1dl, :tar.f] << 1.5dt
+            -- nf[:tar.f + 1sw, :tar.ff] << 2.5dt
+        );
+        with layer = -4 track(:station :removed,
+               nf[:tar.f - 4.1dl, :tar.f - 4dl] << 1.5dt
+            -- nf[:tar.f - 3dl, :tar.f - 2.9dl] << 0.5dt
+        );
+        with layer = -4 track(:station :removed,
+               nf[:tar.f - 2.1dl, :tar.f - 2dl] << .5dt
+            -- nf[:tar.f - 1dl, :tar.f - 0.9dl] >> .5dt
+        );
+        marker(:de.bf :removed, nf[:tar] >> .5dt);
+        with layer = 1 marker(:de.hp :open, nf[:tar] >> .5dt);
+        station(
+            :right :left_align, nf[:tar - 0.3sw] >> 0.5dt >> 1.6sw,
+            "Tarp",
+            hbox(:left :base,
+                span(:xsmall, "161,97"),
+                span(:xsmall :removed, " (156,42)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:tar.f, :bar - 1sw]);
+    }
+
+
+    with link = "point.de.Barderup" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:bar - 1sw, :bar + 1sw]
+        );
+        with layer = -4 marker(:de.hp :removed :left, nf[:bar] << .5dt);
+        with layer = -4 marker(:de.bk :removed :left, nf[:bar] << .5dt);
+        station(
+            :left :removed, nf[:bar - .4sw] << .5dt << 1.6sw,
+            "Barderup", "(162,15)"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:bar + 1sw, :flw.a]);
+        with layer = 1 line_badge(:open, nf[:bar + 1.6km], "1040");
+    }
+
+
+    with link = "point.de.Holzkrug" {
+        with layer = -4 marker(:de.bf :right :gone, nf[:hol] >> 0.5dt);
+        station(:right :gone, nf[:hol - 1.3sw] >> 1.3sw,
+            "Holzkrug", "??"
+        );
+    }
+
+
+    with link = "point.de.Flensburg-Weiche-Süd" {
+        # Gl. 1 (Richtungsgl. Str. 1040)
+        track(:first:station :cat:ac15 :pax,
+                nf[:flw.a, :flw.x] >> 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:fws - 120m] >> 0.5dt
+                --  nf[:fws - 20m] << 0.5dt
+            );
+
+        # Gl. 2 (Gegenrichtungsgl. Str. 1040)
+        track(:first:station :cat:ac15 :pax,
+                nf[:flw.a, :flw.x] << 0.5dt
+        );
+
+        # Gl. 32 (Str. 1000 rechts)
+        with layer = -1 track(:first:station :cat:ac15,
+                nf[:fws + 100m, :flw.wr2 + 2dl] << 1.5dt
+            ..  nf[:flw.x - 0.1dl, :flw.x] << 4.5dt
+        );
+        with layer = -2 casing(:first:station :cat:ac15,
+                nf[:flw.wr2 + 1.9dl, :flw.wr2 + 2dl] << 1.5dt
+            ..  nf[:flw.x - 0.1dl, :flw.x] << 4.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:flw.wr2] << 1.5dt
+                --  nf[:flw.wr2 + 2dl] << 3.5dt
+            );
+
+        # Gl. 34
+        with layer = 2 track(:station :cat:ac15,
+                nf[:fws + 200m, :flw.wr2 + 1dl] << 2.5dt
+        );
+
+        # Gl. 36 (Str. 1000 links)
+        with layer = -1 track(:first:station :cat:ac15,
+                nf[:fws - 0.1dl, :fws] << 0.5dt
+            --  nf[:fws + 300m, :flw.wr2 + 2dl] << 3.5dt
+            ..  nf[:flw.x - 0.1dl, :flw.x] << 5.5dt
+        );
+        with layer = -2 casing(:first:station :cat:ac15,
+                nf[:flw.wr2 + 1.9dl, :flw.wr2 + 2dl] << 3.5dt
+            ..  nf[:flw.x - 0.1dl, :flw.x] << 5.5dt
+        );
+
+        # Gl. 37/38/39/40
+        with layer = -4 track(:station :removed,
+                nf[:fws + 4dl, :flw.wr2 - 1dl] << 4.5dt
+        );
+
+        # Gl. 41/42/43/44
+        with layer = -4 track(:station :removed,
+                nf[:fws + 5dl, :flw.wr2 - 2dl] << 5.5dt
+        );
+
+        # Gl. 45/46/47/48
+        with layer = -4 track(:station :removed,
+                nf[:fws + 6dl, :flw.wr2 - 3dl] << 6.5dt
+        );
+
+        # Gl. 49/50/51/52
+        with layer = -4 track(:station :removed,
+                nf[:fws + 7dl, :flw.wr2 - 4dl] << 7.5dt
+        );
+
+        # Gl. 53/54/55/56
+        with layer = -4 track(:station :removed,
+                nf[:fws + 8dl, :flw.wr2 - 5dl] << 8.5dt
+        );
+
+        # Gl. 57/58/59/60
+        with layer = -4 track(:station :removed,
+                nf[:fws + 9dl, :flw.wr2 - 6dl] << 9.5dt
+        );
+
+        # Gl. 61/62/63/64
+        with layer = -4 track(:station :removed,
+                nf[:fws + 0.9dl, :fws + 1dl] << 1.5dt
+            --  nf[:fws + 10dl, :flw.wr2 - 7dl] << 10.5dt
+            --  nf[:flw.wr2, :flw.wr2 + 0.1dl] << 3.5dt
+        );
+
+        # Gl. 70
+        with layer = -2 track(:station,
+                nf[:fws - 250m, :fws + 100m] << 1.5dt
+        );
+
+        marker(:de.bft :right, nf[:fws] >> 0.5dt);
+        station(:right, nf[:fws + 0.3sw] >> 1.6sw,
+            "F. Süd", "??"
+        );
+    }
+
+
+    with link = "point.de.Flensburg-Weiche" {
+        let fp = path("d3.de.1000");
+        let fl = path("d3.de.1001");
+
+        # Gl. 1 (Str. 1040 rechts)
+        track(:first:station :cat:ac15 :pax, nf[:flw.x, :flw.f] >> 0.5dt);
+            with layer = -4 track(:station :removed,
+                    nf[:flw.x + 100m] >> 0.5dt
+                --  nf[:flw.x + 100m + 1dl] << 0.5dt
+            );
+
+        # Gl. 2 (Str. 1040 links)
+        track(:first:station :cat:ac15 :pax, nf[:flw.x, :flw.f] << 0.5dt);
+            with layer = -4 track(:station :removed,
+                    nf[:flw - 5dl] << 0.5dt
+                --  nf[:flw] << 5.5dt
+            );
+
+        # Gl. 3 (Str. A05)
+        with layer = -4 track(:second:station :removed,
+                nf[:flw.wr2 - 7.1dl, :flw.wr2 - 7dl] << 12dt
+            ..  nf[:flw.x - 0.5dl, :flw.f] << 1.5dt
+        );
+
+        # Gl. 4 (Str. 1101 alt)
+        with layer = -4 track(:second:station :removed,
+                fl[:flw.w130 + 6dt, :flw.w130 + 5.9dt]
+            ..  nf[:flw.x, :flw.f - 250m - 6dl] << 2.5dt
+        );
+
+        # Gl. 6/7
+        with layer = -4 track(:station :removed,
+                nf[:flw.x + 1.9dl, :flw.x + 2dl] << 4.5dt
+            --  nf[:flw.x + 3dl, :flw + 3dl] << 3.5dt
+            ..  nf[:flw + 400m - 0.51sw, :flw + 400m - 0.5sw] << 4.0dt
+        );
+
+        # Gl. 8 (Str. 1000 rechts)
+        with layer = -1 track(:first:station :cat:ac15,
+                nf[:flw.x, :flw] << 4.5dt
+            ..  fp[:ffle - 0.1dt, :ffle] >> 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:flw, :flw + 0.1dl] << 4.5dt
+                --  nf[:flw + 2dl, :flw + 2.1dl] << 3.5dt
+                --  nf[:flw.f - 250m - 6.1dl, :flw.f - 250m - 6dl] << 2.5dt
+                --  nf[:flw.f - 250m, :flw.f - 249m] >> 0.5dt
+            );
+
+        # Gl. 10
+        track(:station :cat:ac15,
+                nf[:flw.x, :flw.x + 1dl] << 5.5dt
+            --  nf[:flw.x + 2dl, :flw.x + 2.1dl] << 4.5dt
+        );
+        with layer = -4 track(:station :removed,
+                nf[:flw.x + 1dl, :flw + 1dl] << 5.5dt
+            ..  fp[:ffle - 0.1dt, :ffle] >> 0.5dt
+        );
+
+        # Gl. 11 (Str. 1000 links)
+        with layer = -4 track(:first:station :cat:ac15,
+                nf[:flw.x - 0.1dl, :flw.x] << 5.5dt
+            --  nf[:flw.x + 1dl, :flw] << 6.5dt
+            ..  fp[:ffle - 0.1dt, :ffle] << 0.5dt
+        );
+
+        # Gl. 12/13
+        with layer = -4 track(:station :removed,
+                nf[:flw.x + 1dl, :flw + 3dl] << 7.5dt
+        );
+
+        # Gl. 14/15
+        with layer = -2 track(:station,
+                nf[:flw.x - 0.1dl, :flw.x] << 6.5dt
+            --  nf[:flw.x + 2dl, :flw - 5dl] << 8.5dt
+        );
+        with layer = -4 track(:station :removed,
+                nf[:flw - 5dl, :flw - 2dl] << 8.5dt
+            --  nf[:flw + 3dl, :flw + 3.1dl] << 3.5dt
+        );
+
+        # Gl. 112 (Str. 1001 neu)
+        with layer = -2 track(:second:station :closed,
+                fl[:flw.c + 6dt, :flw.w130 + 6dt]
+        );
+        with layer = -1 track(:second:station,
+                fl[:flw.w130 + 6.1dt, :flw.w130 + 6dt]
+            ..  nf[:flw.x - 0.1dl, :flw.x + 1dl] << 6.5dt
+        );
+
+        marker(:de.bw :removed :left , nf[:flw + 400m] << 2.5dt);
+        marker(:de.bf :right, nf[:flw] >> 0.5dt);
+        station(:right :left_align, nf[:flw + 0.5sw] >> 1.2sw,
+            vbox(:left:top :bold,
+                span(:removed, "Nordschleswigsche Weiche"),
+                "Flensburg Weiche"
+            ),
+            hbox(:left:top,
+                "    ",
+                vbox(:right:top,
+                    "1000: ",
+                    span(:closed, "1001: "),
+                    span(:removed, "1002: "),
+                    "1040: ",
+                    span(:removed, "A05: ")
+                ),
+                vbox(:right:top,
+                    "172,",
+                    span(:closed, "167,"),
+                    span(:removed, "167,"),
+                    "172,",
+                    span(:removed, "45,")
+                ),
+                vbox(:left:top,
+                    "92",
+                    span(:closed, "01"),
+                    span(:removed, "34"),
+                    "92",
+                    span(:removed, "50")
+                ),
+                vbox(:left:top,
+                    span(:removed, " (167,34)"),
+                    "",
+                    "",
+                    span(:removed, " (167,34)"),
+                    ""
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:flw.f, :wil - 1sw]);
+    }
+
+
+    with link = "point.de.Flensburg-Wilhelminental" {
+        track(:first:station :double :cat:ac15 :pax,
+                nf[:wil - 1sw, :wil + 1sw]
+        );
+        with layer = -4 track(:second:station :removed,
+                nf[:wil - 1sw, :wil - 1dl] << 1.5dt
+        );
+        with layer = -3 track(:second:station :closed,
+                nf[:wil - 2.1dl, :wil - 2dl] << 0.5dt
+            --  nf[:wil - 1dl, :wil + 1sw] << 1.5dt
+        );
+        marker(:de.awanst :closed :left, nf[:wil] << 1.5dt);
+        station(:left :closed, nf[:wil - 0.8sw] << 1.5dt << 1.2sh,
+            vbox(:right:bottom, "F. Wilhel-", "minental"),
+            "174,86"
+        );
+    }
+
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:wil + 1sw, :fle.a]);
+    }
+
+
+    with link = "point.de.Flensburg" {
+        # Gl. 1/2/3/4
+        with layer = -4 track(:station :removed,
+                nf[:fle.fw - 1.1dl, :fle.fw - 1dl] << 1.5dt
+            --  nf[:fle.fw + 2dl, :fle.fo - 1.3dl] << 4.5dt
+            --  nf[:fle.fo - 0.3dl, :fle.fo - 0.2dl] << 3.5dt
+        );
+
+        # Gl. 5
+        track(:station :cat:ac15 :pax,
+                nf[:fle.fw + 1.9dl, :fle.fw + 2dl] << 2.5dt
+            --  nf[:fle.fw + 3.5dl, :fle.fo - 2dl] << 3.5dt
+            --  nf[:fle.fo - 1dl, :fle.fo - 0.9dl] << 2.5dt
+        );
+        with layer = -4 track(:station :removed,
+                nf[:fle.fo - 2dl, :fle.gg - 350m] << 3.5dt
+        );
+                
+        # Gl. 6/7 (Str. 1020)
+        track(:second:station :cat:ac15 :pax,
+                nf[:fle.fw - 2.1dl, :fle.fw - 2dl] << 0.5dt
+            --  nf[:fle.fw + 2dl, :fle.fo] << 2.5dt
+        );
+        with layer = -1 track(:second:station :pax,
+                nf[:fle.fo, :fle.g] << 2.5dt
+        );
+            track(:station :cat:ac15 :pax,
+                    nf[:fle.fo] << 2.5dt
+                --  nf[:fle.fo + 2dl] << 0.5dt
+            );
+
+        # Gl. 8
+        with layer = -4 track(:station :removed,
+                nf[:fle.a, :fle.fo + 3dl] << 1.5dt
+        );
+        with layer = -2 track(:station :cat:ac15,
+                nf[:fle.fo + 3dl, :fle.gg - 180m] << 1.5dt
+        );
+
+        # Gl. 9 (Str. 1040 links - Str. 1005)
+        track(:first:station :cat:ac15 :pax,
+                nf[:fle.a, :fle.r] << 0.5dt
+            ..  path("d3.de.1005")[:fle.f - 0.1dl, :fle.f]
+        );
+            track(:station :cat:ac15 :pax,
+                    nf[:fle.fw - 3dl] << 0.5dt
+                --  nf[:fle.fw - 1dl] >> 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    nf[:fle.r - 1dl] << 0.5dt
+                --  nf[:fle.r] << 1.5dt
+            );
+
+        # Gl. 10a (Str. 1040 rechts)
+        track(:first:station :cat:ac15 :pax,
+                nf[:fle.a, :fle.r - 4dl] >> 0.5dt
+            --  nf[:fle.r - 2dl, :fle.r - 1.9dl] << 0.5dt
+        );
+            track(:station :cat:ac15 :pax,
+                    nf[:fle.fw - 6dl] >> 0.5dt
+                --  nf[:fle.fw - 4dl] << 0.5dt
+            );
+
+        # Abstellgleise
+        track(:station :cat:ac15,
+                nf[:fle.r + 7dl, :fle.gg - 350m - 2dl] << 0.5dt
+        );
+        track(:station :cat:ac15,
+                nf[:fle.r + 5.9dl, :fle.r + 6dl] << 1.5dt
+            --  nf[:fle.r + 8dl, :fle.gg - 350m - 4dl] >> 0.5dt
+            --  nf[:fle.gg - 350m, :fle.gg - 349m] << 1.5dt
+        );
+
+        # Ga-Gleise
+        with layer = -4 track(:station :removed,
+                nf[:fle + 0.7sw, :fle.fo + 200m] << 8.5dt
+            --  nf[:fle.fo + 200m + 5dl, :fle.fo + 200m + 5.1dl] << 3.5dt
+        );
+        with layer = -4 track(:station :removed,
+                nf[:fle + 0.7sw, :fle.fo + 200m + 1dl] << 7.5dt
+        );
+        with layer = -4 track(:station :removed,
+                nf[:fle + 0.7sw, :fle.fo + 200m + 2dl] << 6.5dt
+        );
+
+        marker(:de.bf :left, nf[:fle] << 4.5dt);
+        label(nf[:fle.r + 1sw] << 4.0dt,
+            hbox(:left:bottom,
+                vbox(:center:bottom,
+                    span(:medium:bold, "Flensburg"),
+                    hbox(:xsmall :center:top,
+                        vbox(:right:top,
+                            "1005: ", "1020: ", "1040: ",
+                            span(:removed, "(")
+                        ),
+                        vbox(:right:top,
+                            "0,", "80,", "176,",
+                            span(:removed, "170,")
+                        ),
+                        vbox(:left:top,
+                            "00", "64", "23",
+                            span(:removed, "66)")
+                        )
+                    )
+                )
+            )
+        );
+    }
+}
+

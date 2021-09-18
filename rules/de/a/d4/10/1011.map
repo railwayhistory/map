@@ -1,0 +1,191 @@
+# DE 1011.  Jübeck - Husum
+#
+let jubhus = path("d3.de.1011");
+
+with detail = [4, 5] {
+    # point.de.Jübek  de.1040
+
+
+    with link = "line.de.1011" {
+        track(:second :pax, jubhus[:jub.g, :sol.a]);
+        with layer = 1 line_badge(:open, jubhus[:sol - 2km], "1011");
+    }
+
+
+    with link = "point.de.Sollbrück" {
+        track(:second :station :pax, jubhus[:sol.a, :sol + 1sw]);
+            with layer = -4 track(:station :removed,
+                    jubhus[:sol.a + 100m]
+                --  jubhus[:sol.a + 100m + 1dl] >> 1dt
+            );
+
+        with layer = -4 track(:station :removed,
+                jubhus[:sol.a + 100m - 1dl, :sol - .6sw] >> 1dt
+        );
+
+        with layer = -1 marker(:de.hst :closed :right, jubhus[:sol]);
+        with layer = -2 marker(:de.bf :gone :right, jubhus[:sol]);
+        station(:top :closed, jubhus[:sol] >> 1.4sh,
+            "Sollbrück", "5,03"
+        );
+    }
+
+
+    with link = "line.de.1011" {
+        track(:second :pax, jubhus[:sol + 1sw, :ahr - 1sw]);
+    }
+
+
+    with link = "point.de.Ahrenviöl" {
+        track(:second :station :pax, jubhus[:ahr - 1sw, :ahr + 1sw]);
+        with layer = -4 track(:station :removed,
+                jubhus[:ahr - .5sw - 2.1dl, :ahr - .5sw - 2dl]
+            --  jubhus[:ahr - .5sw - 1dl, :ahr + .6sw] << 1dt
+        );
+
+        with layer = -1 marker(:de.hst :closed :left, jubhus[:ahr] << 1dt);
+        with layer = -2 marker(:de.bf :gone :left, jubhus[:ahr] << 1dt);
+        station(:bottom :closed, jubhus[:ahr] << 1dt << 1.7sh + (3pt, 0pt),
+            "Ahrenviöl", "9,35"
+        );
+    }
+
+
+    with link = "line.de.1011" {
+        track(:second :pax, jubhus[:ahr + 1sw, :ohr.a]);
+        with layer = 1 line_badge(:open, jubhus[:ahr + 2.5km], "1011");
+    }
+}
+
+
+with detail = 4 {
+    with link = "point.de.Ohrstedt" {
+        # Gl. 1
+        with layer = -4 track(:station :removed,
+                jubhus[:ohr.a + 99m, :ohr.a + 100m]
+            --  jubhus[:ohr.a + 100m + 1dl, :ohr.f - 100m - 1dl] >> 1dt
+            --  jubhus[:ohr.f - 100m, :ohr.f - 99m]
+        );
+
+        # Gl. 2
+        track(:second :station :pax, jubhus[:ohr.a, :ohr.f]);
+
+        # Gl. 3
+        track(:station,
+                path("d3.de.1011.ohr")[:a, :f]
+            ..  jubhus[:ohr.r, :ohr + 170m] << 1dt
+        );
+            track(:station,
+                    jubhus[:ohr + 170m - 1.5dl] << 1dt
+                 -- jubhus[:ohr + 170m - 0.5dl]
+            );
+
+        marker(:de.awanst :right, jubhus[:ohr] >> 1dt);
+        with layer = -1 marker(:de.bf :gone :right, jubhus[:ohr] >> 1dt);
+        station(:top, jubhus[:ohr] >> 1dt >> 1.3sw,
+            "Ohrstedt", "14,16"
+        );
+    }
+}
+
+
+with detail = 5 {
+    with link = "point.de.Ohrstedt" {
+        # Gl. 1
+        with layer = -4 track(:station :removed,
+                jubhus[:ohr.a + 99m, :ohr.a + 100m]
+            ..  jubhus[:ohr.a + 160m, :ohr.f - 160m] >> 1dt
+            ..  jubhus[:ohr.f - 100m, :ohr.f - 99m]
+        );
+
+        # Gl. 2 -- Str. 1011
+        track(:second:station :pax, jubhus[:ohr.a, :ohr.f]);
+
+        # Gl. 3
+        with layer = -1 track(:station,
+                path("d3.de.1011.ohr")[:a, :f]
+            ..  jubhus[:ohr.r, :ohr + 160m] << 1dt
+        );
+            with layer = -1 track(:station,
+                    jubhus[:ohr + 110m] << 1dt
+                --  jubhus[:ohr + 170m]
+            );
+
+        # Gl. 4
+        with layer = -4 track(:station :removed,
+                jubhus[:ohr - 201m, :ohr - 200m] << 1dt
+            ..  jubhus[:ohr - 150m, :ohr + 50m] << 2dt
+            ..  jubhus[:ohr + 100m, :ohr + 101m] << 1dt
+        );
+
+        marker(:de.awanst :right, jubhus[:ohr] >> 1dt);
+        with layer = -1 marker(:de.bf :gone :right, jubhus[:ohr] >> 1dt);
+        station(:top, jubhus[:ohr] >> 1dt >> 1.3sw,
+            "Ohrstedt", "14,16"
+        );
+        slabel(:right, path("d3.de.1011.ohr")[:r] << 2dt,
+            vbox(:left :middle :italic,
+                span(:italic, "Materialwirtschaftszentrum"),
+                span(:italic, "Einsatz der Bundeswehr")
+            )
+        );
+    }
+}
+
+
+with detail = [4, 5] {
+    with link = "line.de.1011" {
+        track(:second :pax, jubhus[:ohr.f, :wes - 1sw]);
+    }
+
+
+    with link = "point.de.Wester-Ohrstedt" {
+        track(:second :station :pax, jubhus[:wes - 1sw, :wes + 1sw]);
+        with layer = -1 marker(:de.hp :removed:right, jubhus[:wes]);
+        station(:top :removed, jubhus[:wes] >> 1.3sw,
+            "Wester-Ohrstedt", "15,82"
+        );
+    }
+
+
+    with link = "line.de.1011" {
+        track(:second :pax, jubhus[:wes + 1sw, :swe - 1sw]);
+        with layer = 1 line_badge(:open, jubhus[:wes + 1.6km] >> .4pt, "1011");
+    }
+
+
+    with link = "point.de.Schwesing" {
+        track(:second :station :pax, jubhus[:swe - 1sw, :swe + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, jubhus[:swe]);
+        station(:top :removed, jubhus[:swe] >> 1.3sw,
+            "Schwesing", "20,50"
+        );
+    }
+
+
+    with link = "line.de.1011" {
+        track(:second :pax, jubhus[:swe + 1sw, :ros - 1sw]);
+        with layer = 1 line_badge(:open, jubhus[:ros - 1.0km], "1011");
+    }
+
+
+    with link = "point.de.Rosendahl" {
+        track(:second :station :pax, jubhus[:ros - 1sw, :ros + 1sw]);
+        with layer = -1 marker(:de.hp :removed :right, jubhus[:ros]);
+        station(:top :removed, jubhus[:ros] >> 1.3sw,
+            "Rosendahl", "22,96"
+        );
+    }
+
+
+    with link = "line.de.1011" {
+        track(:second :pax,
+                jubhus[:ros + 1sw, :hus.aa]
+            ..  jubhus[:hus.a - 1m, :hus.a] >> 2.5dt
+        );
+    }
+
+
+    # point.de.Husum  de.1210
+}
+

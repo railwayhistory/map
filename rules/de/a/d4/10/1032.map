@@ -1,0 +1,39 @@
+# DE 1032.  Meimersdorf Rbf - Kiel Hbf
+#
+let ak = path("d3.de.1220");
+
+with detail = [4, 5] {
+    #   point.de.Meimersdorf-Mitte  de.1031
+    #   point.de.Meimersdorf-Rbf    de.1031
+
+
+    with link = "point.de.Meimersdorf-Ost" {
+        # Str. 1232
+        with layer = -4 track(:first:station :removed,
+                ak[:meo, :meo + 0.5sw] >> 1.5dt
+        );
+        with layer = -2 track(:first:station :cat:ac15,
+                ak[:meo, :meo + 0.5sw - 1dl] >> 2.5dt
+            --  ak[:meo + 0.5sw, :meo + 1sw] >> 1.5dt
+        );
+
+        # Str. 1233
+        with layer = -3 track(:first:station,
+                ak[:meo + 0.5sw - 1dl, :meo + 1sw] >> 2.5dt
+        );
+
+        marker(:de.bft.abzw :right, ak[:meo + 0.3sw] >> 2.5dt);
+    }
+
+
+    with link = "line.de.1032" {
+        with layer = -2 track(:first :cat:ac15 :tight,
+                ak[:meo + 1sw, :kie.aa - 550m] >> 1.5dt
+            ..  ak[:kie.aa, :kie.a] >> 2.5dt
+        );
+    }
+
+
+    # point.de.Kiel-Hbf  de.1220
+}
+

@@ -1,0 +1,38 @@
+# DE 1002.  Flensburg Weiche (ausschl) - Flensburg Hafen Ost
+# DE 1003.  Flensburg Alter Bf - Flensburg Hafen West
+#
+let flafhw = path("d3.de.1003");
+let flwfho = path("d3.de.1002");
+let nf = path("d3.de.1040");
+
+with detail = 3 {
+    # point.de.Flensburg-Weiche  de.1040
+
+    with link = "line.de.1002" {
+        track(:second :removed, flwfho[:flw.f, :wil - 0.5ssw] << 1.5dt);
+    }
+
+    with link = "point.de.Flensburg-Wilhelminental" {
+        track(:second:station :removed, flwfho[:wil - 0.5ssw, :wil] << 1.5dt);
+        track(:second:station :closed, flwfho[:wil, :wil + 0.5ssw] << 1.5dt);
+        marker(:de.awanst :closed :left, flwfho[:wil] << 1.5dt);
+    }
+
+    with link = "line.de.1002" {
+        track(:second :closed,
+               nf[:wil + 0.5ssw, :fle - 1.5ssw] << 1.5dt
+            .. flwfho[:fla - 1.1ssw, :fla - 1ssw]
+        );
+    }
+
+    with link = "point.de.Flensburg-Alter-Bf" {
+        track(:second :station :closed, flwfho[:fla - 1ssw, :fla + .5ssw]);
+        track(:station :closed, flwfho[:fla + .5ssw, :f]);
+        track(:station :closed,
+                flwfho[:fla + .5ssw, :fla + .6ssw]
+            ..  flafhw[:afhw + 0.7km, :f]
+        )
+        marker(:de.bf :closed :left, flwfho[:fla]);
+    }
+}
+

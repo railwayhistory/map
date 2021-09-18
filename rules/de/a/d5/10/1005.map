@@ -1,0 +1,41 @@
+# DE 1005.  Flensburg (ausschl) - Flensburg Friedensweg (ausschl)
+#
+let flefri = path("d3.de.1005");
+
+with detail = 5 {
+    # point.de.Flensburg  de.1040
+
+
+    with link = "line.de.1005" {
+        track(:first :cat:ac15 :pax :flip, flefri[:fle.f, :fls.a]);
+    }
+
+
+    with link = "point.de.Flensburg-Süd" {
+        track(:first:station :cat:ac15 :pax, flefri[:fls.a, :fls.f]);
+        with layer = -4 track(:station :closed, flefri[:fls.a, :fls.f] >> 1dt);
+        with layer = -4 track(:station,
+                flefri[:fls - 0.1dl, :fls]
+            --  flefri[:fls + 1wl, :fls + 1.01wl] >> 1dt
+        );
+        marker(:de.awanst, flefri[:fls] >> 1dt);
+        station(
+            :right, flefri[:fls] << 1sw,
+            "Flensburg Süd", "1,69"
+        );
+    }
+
+
+    with link = "line.de.1005" {
+        with layer = 2 track(:first :cat:ac15 :pax :flip,
+                flefri[:fls.f, :fri.aa]
+            ..  flefri[:ffle, :fri.a] >> 1.5dt
+        );
+        with layer = 1 casing(:first :cat:ac15 :pax :flip,
+                flefri[:fls + 2km, :fls + 3km]
+        );
+        with layer = 3 line_badge(:open, flefri[:fls + 1.2km], "1005");
+    }
+}
+
+

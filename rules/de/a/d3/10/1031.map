@@ -1,0 +1,38 @@
+# DE 1031.  Meimersdorf Mf - Rbf Meimersdorf - Kiel-Hassee
+#
+let ak = path("d3.de.1220");
+let mh = path("d3.de.1031");
+
+with detail = 3 {
+    # point.de.Meimersdorf-Mf  de.1220
+
+    with link = "point.de.Meimersdorf-Rbf" {
+        with layer = 4 track(:first:station :cat:ac15,
+                ak[:mei + 1ssw, :meo - 2dl] << 1.5dt
+        );
+        with layer = 4 track(:first:station, ak[:meo - 2dl, :kie.aa] << 1.5dt);
+
+        marker(:de.bbf :left, ak[:meg] << 1.5dt);
+        slabel(:left, ak[:mei + 0.5ssw] << 2.5dt,
+            "Meimersdorf"
+        );
+    }
+
+    with link = "line.de.1031" {
+        with layer = -2 track(:first,
+                ak[:kie.aa, :kie.aa + 0.1dl] << 1.5dt
+            ..  mh[:khg - 0.51ssw, :khg - 0.5ssw] << 0.5dt
+        );
+    }
+
+    # point.de.Kiel-Hg  de.1022
+
+    with link = "line.de.1031" {
+        with layer = -2 track(:first,
+                mh[:khg + 0.5ssw, :has - 0.5ssw] << 0.5dt
+        );
+    }
+
+    # point.de.Kiel-Hassee  de.1022
+}
+

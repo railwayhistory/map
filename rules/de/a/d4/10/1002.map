@@ -1,0 +1,54 @@
+# DE 1002.  Flensburg Weiche - Flensburg Hafen Ost
+# DE 1003.  Flensburg Alter Bf - Flensburg Hafen West
+#
+let flwfho = path("d3.de.1002");
+let flafhw = path("d3.de.1003");
+
+with detail = 4 {
+    # point.de.Flensburg-Weiche  de.1040
+
+
+    with link = "line.de.1002" {
+        with layer = -4 track(:second :removed,
+                flwfho[:flw.f, :wil - 1sw] << 1.5dt
+        );
+    }
+
+
+    # point.de.Flensburg-Wilhelminental  de.1040
+
+
+    with link = "line.de.1002" {
+        track(:second :closed,
+               flwfho[:wil + 1sw, :afla] << 1.5dt
+            .. flwfho[:afle.f, :fla.a]
+        );
+        with layer = 1 line_badge(:closed, flwfho[:wil + .9km], "1002");
+    }
+
+
+    with link = "point.de.Flensburg-Alter-Bf" {
+        track(:second :closed :station, flwfho[:fla.a, :fla + .5sw]);
+        marker(:de.bf :closed :left, flwfho[:fla] << 1dt);
+        station(
+            :left :closed, flwfho[:fla - .4sw] << 1.5sw << 1dt,
+            "F. Alter Bf", "177,305"
+        );
+    }
+
+    
+    with link = "line.de.1002" {
+        track(:station :closed, flwfho[:fla + .5sw, :f]);
+        with layer = 1 line_badge(:closed, flwfho[:fla + 1.1km], "1002");
+    }
+
+    with link = "line.de.1003" {
+        track(:station :closed,
+               flwfho[:fla.a + .9dl, :fla.a + 1dl]
+            -- flwfho[:fla.a + 2dl, :fla + .5sw] << 1dt
+            .. flafhw[:aa, :f]
+        );
+        with layer = 1 line_badge(:closed, flafhw[:fla.g + .85km], "1003");
+    }
+}
+

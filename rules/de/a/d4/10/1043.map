@@ -1,0 +1,411 @@
+# DE 1043.  Neumünster - Bad Oldesloe
+#
+let no = path("d3.de.1043");
+
+with detail = [4, 5] {
+    # point.de.Neumünster  de.1220
+
+
+    with link = "point.de.Neumünster-Gr" {
+        marker(:de.dirgr :left, no[:nmg] << 1.5dt);
+        with layer = 1 label(no[:nmg] >> 2dt,
+            hbox(:right :middle,
+                span(:xsmall, "1043: "),
+                vbox(:center :middle,
+                    span(:xsmall, "DB"),
+                    hbar(0.3),
+                    span(:xsmall, "AKN")
+                ),
+                span(:xsmall, " 75,32")
+            )
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax,
+                no[:neu.a, :neu.a + 50m] << 1.5dt
+            ..  no[:nes.a - 0.1dl, :nes.a] << 0.5dt
+        );
+        with layer = -4 track(:first :removed,
+                no[:neu.a + 49m, :neu.a + 50m] << 0.5dt
+            ..  no[:nes.a - 0.1dl, :nes.a] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Neumünster-Süd-AKN" {
+        track(:first:station :pax, no[:nes.a, :nes.f] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                no[:nes.a, :nes.f] >> 0.5dt
+        );
+
+        # Nebengleise Nordseite
+        with layer = -1 track(:station,
+                no[:nes - 0.5sw - 1.1dl, :nes - 0.5sw - 1dl] << 0.5dt
+            --  no[:nes - 0.5sw, :nes.x] << 1.5dt
+        );
+        with layer = -1 track(:station,
+                no[:nes + 0.5sw + 0.9dl, :nes + 0.5sw + 1dl] << 1.5dt
+            --  no[:nes + 0.5sw + 2dl, :nes.x] << 2.5dt
+        );
+
+
+        # AKN
+        track(:second:station :pax,
+                no[:nes.a + 100m + 0.9dl, :nes.a + 100m + 1dl] << 0.5dt
+            --  no[:nes.a + 100m + 3dl, :nes.f] >> 1.5dt
+        );
+
+        with layer= -1 track(:station,
+                no[:nes + 0.5sw + 0.9dl, :nes + 0.5sw + 1dl] >> 1.5dt
+            --  no[:nes + 0.5sw + 2dl, :nes.f - 1dl] >> 2.5dt
+        );
+        with layer = -4 track(:station :removed,
+                no[:nes + 0.5sw, :nes + 0.5sw + 2dl] >> 2.5dt);
+        with layer = -1 track(:station,
+                no[:nes + 0.6sw, :nes.x - 1dl] >> 3.5dt
+        );
+        with layer = -1 track(:station,
+                no[:nes + 0.6sw, :nes.x - 2dl] >> 4.5dt
+            --  no[:nes.x, :nes.x + 0.1dl] >> 2.5dt
+        );
+
+        with layer = -1 marker(:de.bf :removed :left, no[:nes] << 1.5dt);
+        marker(:de.bf :right, no[:nes] >> 1.5dt);
+
+        station(:right :removed, no[:nes + 0.6sw] << 1.5dt << 1.2sh,
+            vbox(:center :bottom,
+                span(:medium :gone, "„AK“"),
+                span(:medium :removed, "Neumünster Süd")
+            ),
+            "1043: 76,70"
+        );
+        station(:left, no[:nes + 0.3sw] >> 1.5dt >> 2.2sh,
+            span(:medium :bold, "Neumünster Süd AKN"),
+            "9121: 66,87"
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:nes.f, :kku - 1sw] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:nes.f, :kku - 1sw] >> 0.5dt
+        );
+        with layer = 2 line_badge(:open, no[:kku - 2.4km], "1043");
+    }
+
+
+    with link = "point.de.Neumünster-Süd-Gr" {
+        marker(:statdt :right, no[:nsg]);
+        marker(:de.dirgr :left, no[:nsg]);
+        label(no[:nsg + 0.5dt] << 4.0dt,
+            hbox(:left :middle,
+                hbox(:center :middle,
+                    vbox(:center :middle,
+                        span(:xsmall, "  "),
+                        hbar(0.3),
+                        span(:xsmall, "")
+                    ),
+                    vbox(:center :middle,
+                        span(:xsmall, "AKN"),
+                        hbar(0.3),
+                        span(:xsmall, "DB")
+                    ),
+                    span(:xsmall, " 78,50")
+                )
+            )
+        );
+    }
+
+
+    with link = "point.de.Kleinkummerfeld" {
+        track(:first:station :pax, no[:kku - 1sw, :kku + 1sw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                no[:kku - 1sw, :kku + 1sw] >> 0.5dt
+        );
+        with layer = -2 marker(:de.bf :removed, no[:kku] >> 0.5dt);
+        station(:left :removed, no[:kku] >> 0.5dt >> 2.0sw,
+            "Kleinkummerfeld", "83,24"
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :open, no[:kku + 1sw, :rio - 1sw] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:kku + 1sw, :rio - 1sw] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Rickling-Ölweiche" {
+        track(:first:station :pax, no[:rio - 1sw, :rio + 1sw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                no[:rio - 1sw, :rio + 1sw] >> 0.5dt
+        );
+        with layer = -5 marker(:de.hp :gone :left, no[:rio] << 0.5dt);
+        with layer = -4 marker(:de.anst :removed :left, no[:rio] << 0.5dt);
+        station(:top :removed, no[:rio] << 0.5dt << 1.4sh,
+            "Rickling Ölweiche", "86,05"
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :open, no[:rio + 1sw, :rin - 1sw] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:rio + 1sw, :rin - 1sw] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Rickling" {
+        track(:first:station :pax, no[:rin - 1sw, :ric + 1sw] << 0.5dt);
+        with layer = -1 track(:first :station :removed,
+                no[:rin - 1sw, :ric + 1sw] >> 0.5dt
+        );
+        marker(:de.hp :left, no[:rin] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, no[:ric] << 0.5dt);
+        station(:right :left_align,
+            no[:ric + 0.3sw] << 0.5dt << 1.6sh,
+            "Rickling",
+            hbox(:left :base,
+                span(:xsmall, " 91,01"),
+                span(:xsmall :removed, " ← 91,09")
+            )
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:ric + 1sw, :wah - 1sw] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:ric + 1sw, :wah - 1sw] >> 0.5dt
+        );
+        with layer = 1 line_badge(:open, no[:ric + 3.0km], "1043");
+    }
+
+
+    with link = "point.de.Wahlstedt" {
+        track(:first:station :pax, no[:wah - 1sw, :wah + 1sw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                no[:wah - 1sw, :wah + 1sw] >> 0.5dt
+        );
+        marker(:de.hp :open :left, no[:wah] << 0.5dt);
+        station(:right :open, no[:wah + .5sw] << 0.5dt << 1.4sh,
+            "Wahlstedt", "96,83"
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:wah + 1sw, :fah.a] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:wah + 1sw, :fah.a] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Fahrenkrug" {
+        track(:first :station :pax, no[:fah.a, :fak + 1sw] << 0.5dt);
+        with layer = -4 track(:first :station :removed,
+                no[:fah.a, :fah.agl] >> 0.5dt
+        );
+        with layer = -1 track(:station,
+                no[:fah.agl, :fah.agl + 130m] >> 0.5dt
+        );
+        with layer = -4 track(:first :station :removed,
+                no[:fah.agl + 130m, :fak + 1sw] >> 0.5dt
+        );
+        with layer = -1 track(:station,
+                path("d3.de.1043.fah")[:f, :a]
+            ..  no[:fah.agl - 0.1dl, :fah.agl] >> 0.5dt
+            --  no[:fah.agl + 1dl, :fah.agl + 1.1dl] << 0.5dt
+        );
+
+        marker(:de.bft :left, no[:fak] << 0.5dt);
+        with layer = -2 marker(:de.bf :removed :right, no[:fah] >> 0.5dt);
+        station(:top, no[:fak] << 0.5dt << 1.4sh + (0.5sw, 0dt),
+            "Fahrenkrug",
+            hbox(:left :base,
+                span(:xsmall :closed, "99,26 → "),
+                span(:xsmall, "99,36")
+            )
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:fak + 1sw, :seg.a] << 0.5dt);
+        with layer = -1 track(:first :removed,
+                no[:fak + 1sw, :seg.a] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Bad-Segeberg" {
+        # Gl. 1
+        track(:first:station :pax, no[:seg.a, :seg.f] << 0.5dt);
+
+        # Gl. 2
+        with layer = -4 track(:first:station :removed,
+                no[:seg.a, :seg.a + 2dl] >> 0.5dt
+        );
+        track(:station :pax,
+                no[:seg.a + 0.9dl, :seg.a + 1.0dl] << 0.5dt
+            --  no[:seg.a + 2.0dl, :seg.f - 2.0dl] >> 0.5dt
+        );
+        with layer = -4 track(:first :station :removed,
+                no[:seg.f - 2dl, :seg.f] >> 0.5dt
+        );
+
+        # Gl. 3
+        with layer = -4 track(:station :removed,
+                no[:seg + 1.0dl, :seg.f - 4.0dl] >> 1.5dt
+        );
+
+        # Gl. 5 - Gl. 4
+        with layer = -1 track(:station,
+                no[:seg - 0.1dl, :seg] >> 0.5dt
+            --  no[:seg + 2.0dl, :sel + 2.1dl] >> 2.5dt
+        );
+        with layer = -1 track(:station,
+                no[:seg - 0.5sw, :seg.f - 5.0dl] >> 2.5dt
+            --  no[:seg.f - 4.0dl, :seg.f - 3.0dl] >> 1.5dt
+            --  no[:seg.f - 1.0dl, :seg.f - 0.9dl] << 0.5dt
+        );
+
+        # Gl. 6
+        with layer = -1 track(:station,
+                no[:seg + 180m, :seg.f - 7.0dl] >> 3.5dt
+        );
+
+        # Gl. 7
+        with layer = -1 track(:station,
+                no[:seg + 180m, :seg.f - 8.0dl] >> 4.5dt
+            --  no[:seg.f - 6.0dl, :seg.f - 5.9dl] >> 2.5dt
+        );
+
+        marker(:de.bf :left, no[:seb] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, no[:seg] << 0.5dt);
+        station(:left, no[:seb + 0.4sw] >> 3.5dt,
+            span(:medium :bold, "Bad Segeberg"),
+            hbox(:center :base,
+                span(:xsmall, "1043: 103,14"),
+                span(:xsmall :removed, " ← 103,41")
+            )
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:seg.f, :ago - 1sw] << 0.5dt);
+        with layer = -1 track(:first :removed,
+                no[:seg.f, :ago - 1sw] >> 0.5dt
+        );
+        with layer = 2 line_badge(:open, no[:ago - 1.4km], "1043");
+    }
+
+
+    with link = "point.de.Altengörs" {
+        track(:first:station :pax, no[:ago - 1sw, :ago + 1sw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                no[:ago - 1sw, :ago + 1sw] >> 0.5dt
+        );
+        marker(:de.hp :left, no[:ago] << 0.5dt);
+        station(:right, no[:ago + 0.45sw] << 0.5dt << 1.4sh,
+            "Altengörs", "180,17"
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:ago + 1sw, :wak - 1sw] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:ago + 1sw, :wak - 1sw] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Wakendorf" {
+        track(:first :station :pax, no[:wak - 1sw, :wak + 1sw] << 0.5dt);
+        with layer = -1 track(:first :station :removed,
+                no[:wak - 1sw, :wak + 1sw] >> 0.5dt
+        );
+        marker(:de.hpext :right, no[:wak] << 0.5dt);
+        marker(:de.hp :right, no[:wak] >> 0.5dt);
+        with layer = -2 marker(:de.bf :removed :right, no[:wak] >> 0.5dt);
+        station(:left, no[:wak + 0.3sw] >> 0.5dt >> 2.0sh,
+            "Wakendorf",
+            hbox(:left :base,
+                span(:xsmall :closed, "111,98 → "),
+                span(:xsmall, "112,01")
+            )
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:wak + 1sw, :frh - 1sw] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:wak + 1sw, :frh - 1sw] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Fresenburg" {
+        track(:first :station :pax, no[:frh - 1sw, :fre + 1sw] << 0.5dt);
+        with layer = -1 track(:first :station :removed,
+                no[:frh - 1sw, :fre + 1sw] >> 0.5dt
+        );
+        marker(:de.hp :open :right, no[:frh] >> 0.5dt);
+        marker(:de.hpext :open :right, no[:frh] << 0.5dt);
+        with layer = -2 marker(:de.bf :gone :right, no[:fre] >> 0.5dt);
+        station(:left :open, no[:frh + 0.4sw] >> 0.5dt >> 1.6sh,
+            "Fresenburg",
+            hbox(:left :base,
+                span(:xsmall, "115,32"),
+                span(:xsmall :closed, " ← 115,35")
+            )
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:fre + 1sw, :pog - 1sw] << 0.5dt);
+        with layer = -4 track(:first :removed,
+                no[:fre + 1sw, :pog - 1sw] >> 0.5dt
+        );
+        with layer = 2 line_badge(:open, no[:fre + 0.9km], "1043");
+    }
+
+
+    with link = "point.de.Poggensee" {
+        track(:first :station :pax, no[:pog - 1sw, :pog + 1sw] << 0.5dt);
+        with layer = -1 track(:first :station :removed,
+                no[:pog - 1sw, :pog + 1sw] >> 0.5dt
+        );
+        with layer = -2 marker(:de.hp :removed :left, no[:pog] << 0.5dt);
+        station(:left :removed, no[:pog + .4sw] >> 2.0dt,
+            "Poggensee", "117,18"
+        );
+    }
+
+
+    with link = "line.de.1043" {
+        track(:first :pax,
+                no[:pog + 1sw, :old.bb] << 0.5dt
+            ..  no[:old.b - 0.1dl, :old.b] << 0.5dt
+        );
+        with layer = -4 track(:first :removed,
+                no[:pog + 1sw, :old.bb] >> 0.5dt
+            ..  no[:old.b - 0.1dl, :old.b] >> 0.5dt
+        );
+    }
+
+
+    # point.de.Bad-Oldesloe  de.1120
+}
+

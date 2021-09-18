@@ -1,0 +1,126 @@
+# DE 1000.  Flensburg Weiche - Harrislee Grenze
+#
+let flwhag = path("d3.de.1000");
+
+with detail = 4 {
+    # point.de.Flensburg-Weiche  de.1040
+
+
+    with link = "line.de.1000" {
+        with layer = 1 track(:first :double :cat:ac15, flwhag[:ffle, :fri.a]);
+    }
+
+
+    with link = "point.de.Flensburg-Friedensweg" {
+        # Gl. 94
+        with layer = -1 track(:first:station :cat:ac15,
+                flwhag[:fri.a, :fri] << 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                flwhag[:fri - 171m, :fri - 170m] >> 1.5dt
+            --  flwhag[:fri - 30m, :fri + 100m] << 0.5dt
+        );
+
+        # Gl. 97 - 93
+        track(:first:station :cat:ac15 :pax,
+                flwhag[:fri.a, :fri - 70m] >> 1.5dt
+            --  flwhag[:fri, :fri + 100m] >> 0.5dt
+        );
+
+        # Gl. 95
+        with layer = -1 track(:first:station :cat:ac15,
+                flwhag[:fri.a, :fri - 260m] >> 0.5dt
+            --  flwhag[:fri - 180m, :fri - 179m] >> 1.5dt
+        );
+
+        marker(:statdt :right, flwhag[:fri] >> 0.5dt);
+        marker(:de.abzw :right, flwhag[:fri] >> 1.5dt);
+        station(
+            :left, flwhag[:fri - .4sw] << .5dt << 6bp,
+            hbox(:center :base,
+                span(:medium, "F. "),
+                span(:medium :bold, "Friedensweg")
+            ),
+            hbox(:right :top,
+                vbox(:left :top,
+                    span(:xsmall, "1000: "),
+                    span(:xsmall, "1005: ")
+                ),
+                vbox(:right :top,
+                    span(:xsmall, "174,57"),
+                    span(:xsmall, "5,49")
+                ),
+                vbox(:left :top,
+                    span(:xsmall :removed, " (168,75)")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1000" {
+        track(:first :double :cat:ac15 :pax, flwhag[:fri + 100m, :har - 1sw]);
+        with layer = 1 line_badge(:open, flwhag[:har - 1.5km], "1000");
+    }
+
+
+    with link = "point.de.Harrislee" {
+        track(:first:station :double :cat:ac15 :pax,
+                flwhag[:har - 1sw, :har.f]
+        );
+        with layer = -4 track(:station :removed,
+               flwhag[:har - 0.51sw, :har - 0.5sw] << 0.5dt
+            -- flwhag[:har - 0.5sw + 1dl, :har.x - 1dl] << 1.5dt
+            -- flwhag[:har.x + 4dl, :har.f] >> 3.5dt
+        );
+        with layer = -4 track(:station :removed,
+               flwhag[:har.x + 3dl, :har.f] >> 2.5dt
+        );
+
+        marker(:de.bf :removed, flwhag[:har] >> 0.5dt);
+        station(:right :left_align :removed, flwhag[:har - .4sw] >> 1.5sw,
+            "Harrislee", "177,44 (171,87)"
+        );
+    }
+
+
+    with link = "line.de.1000" {
+        track(:first :double :cat:ac15 :pax, flwhag[:har.f, :hag - 0.5sw]);
+    }
+
+    with link = "point.int.Harrislee-Padborg" {
+        track(:first:station :double :cat:ac15 :pax,
+                flwhag[:hag - 0.5sw, :hag + 0.5sw]
+        );
+
+        marker(:de.dirgr, flwhag[:hag] >> 0.5dt);
+        marker(:statdt, flwhag[:hag] << 0.5dt);
+        marker(:de.dirgr :left, flwhag[:hag] << 0.5dt);
+        label(
+            flwhag[:hag] << 5dt,
+            hbox(:right :middle,
+                vbox(:right :middle,
+                    span(:xsmall, "DK 26: "),
+                    hbar(0.3),
+                    span(:xsmall, "DE 1000: ")
+                ),
+                vbox(:right :middle,
+                    span(:xsmall, "110,"),
+                    hbar(0.3),
+                    span(:xsmall, "179,")
+                ),
+                vbox(:left :middle,
+                    span(:xsmall, "6"),
+                    hbar(0.3),
+                    span(:xsmall, "784")
+                ),
+                vbox(:left :middle,
+                    span(:xsmall, ""),
+                    hbar(0.3),
+                    span(:xsmall :removed, " (174,21)")
+                )
+            )
+        );
+    }
+}
+
