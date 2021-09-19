@@ -1,0 +1,101 @@
+# DE 2000.  Lünen Hbf - Münster (Westf) Hbf
+with detail = 2 {
+    let lm = path("d2.de.2000");
+
+    with link = "line.de.2000" {
+        track(:first :cat :pax, lm[:lun, :mun.aa]);
+        with layer = 1 line_badge(:open, lm[:lun + 20km], "2000");
+    }
+}
+
+
+# DE 2002.  Haltern am See - Wesel - Büderich
+with detail = 2 {
+    let hb = path("d2.de.2002");
+
+    with link = "line.de.2002" {
+        with layer = -4 track(:first :double :removed, hb[:hal.a, :wes]);
+        with layer = 1 line_badge(:removed, hb[:hal.a + 8km], "2002");
+        with layer = 1 line_badge(:removed, hb[:wes - 12km], "2002");
+
+        with layer = -4 track(:first :double :removed, hb[:wes.f, :bud]);
+        with layer = 1 line_badge(:removed, hb[:bud - 2.5km], "2002");
+    }
+
+    with link = "point.de.Büderich" {
+        with layer = 1 marker(:statdot :removed, hb[:bud]);
+#       slabel(:right :removed, hb[:bud] + (0dt, 4.0dt), "Büderich");
+    }
+}
+
+
+# DE 2010.  Mecklenbeck - Sudmühle
+with detail = 2 {
+    let ms = path("d2.de.2010");
+
+    with link = "line.de.2010" {
+        with layer = -1 track(:first :double :cat, ms[:mec.f, :kan]);
+        with layer = -1 track(:first :cat, ms[:kan, :ple]);
+        with layer = -1 track(:first :double :cat, ms[:ple, :sud]);
+    }
+}
+
+
+# DE 2013.  Münster (Westf) Hbf - Rheda-Wiedenbrück
+with detail = 2 {
+    let mr = path("d2.de.2013");
+
+    with link = "line.de.2013" {
+        track(:second :pax, mr[:mun.f, :rhe.f]);
+        with layer = 1 line_badge(:open, mr[:war - 11km] << 0.3dt, "2013");
+        with layer = 1 line_badge(:open, mr[:war + 12km], "2013");
+    }
+
+    with link = "point.de.Warendorf" {
+        with layer = 1 marker(:statdot :pax, mr[:war]);
+        slabel(:right, mr[:war] - (0.5dt, 1.7dt), "Warendorf");
+    }
+}
+
+
+# DE 2014.  Münster (Westf) Hbf - Gronau Grenze
+with detail = 2 {
+    let mg = path("d2.de.2014");
+
+    with link = "line.de.2014" {
+        with layer = -1 track(:second :pax, mg[:nev.f, :grog]);
+        with layer = 1 line_badge(:open, mg[:bur - 14km], "2014");
+        with layer = 1 line_badge(:open, mg[:gro - 5km], "2014");
+    }
+
+    with link = "point.de.Steinfurt-Burgsteinfurt" {
+        with layer = 1 marker(:statdot :pax, mg[:bur]);
+        slabel(:right, mg[:bur] + (2.0dt, 0dt),
+            vbox(:left:middle, "Steinfurt-", "  Burgsteinfurt")
+        );
+    }
+
+    with link = "point.de.Ochtrup" {
+        with layer = 1 marker(:statdot :pax, mg[:och]);
+        slabel(:top, mg[:och] - (1dt, 1.2dt), "Ochtrup");
+    }
+
+    with link = "point.de.Gronau-Westf" {
+        with layer = 1 marker(:statdot :pax, mg[:gro]);
+        slabel(:right, mg[:gro.b] + (0.5dt, 2.5dt),
+            vbox(:left:top, "Gronau", span(:light, "(Westf)"))
+        );
+    }
+}
+
+
+# DE 2020.  Ochtrup - Rheine
+with detail = 2 {
+    let or = path("d2.de.2020");
+
+    with link = "line.de.2020" {
+        with layer = -4 track(:second :removed, or[:och.a, :rhe.f]);
+        with layer = 1 line_badge(:removed, or[:och.a + 13km], "2020");
+    }
+}
+

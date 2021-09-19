@@ -1,0 +1,248 @@
+# DE 2910.  Bönen Autobahn - Hamm (Westf) Rbf Hda
+with detail = 2 {
+    with link = "line.de.2910" {
+        with layer = -1 track(:first :double :cat,
+                path("d2.de.2910")[:aut, :wee]
+        );
+    }
+}
+
+# DE 2930.  Soest - Hamm (Westf)
+with detail = 2 {
+    let sh = path("d2.de.2930");
+
+    with link = "line.de.2930" {
+        track(:first :double :cat :pax, sh[:soe.f, :ham.b]);
+        with layer = 1 line_badge(:open, sh[:soe.f + 6km], "2930");
+        with layer = 1 line_badge(:open, sh[:ham.b - 7km], "2930");
+    }
+
+    with link = "point.de.Welver" {
+        with layer = 1 marker(:statdot :pax, sh[:wel]);
+        slabel(:right, sh[:wel] - (1.2dt, 1.7dt), "Welver");
+    }
+}
+
+
+# DE 2931. Hamm (Westf) Pbf - Emden Süd
+with detail = 2 {
+    let he = path("d2.de.2931.e");
+
+    with link = "line.de.2931" {
+        track(:first :double :cat :pax, he[:ham.f, :rhe]);
+        with layer = 1 line_badge(:open, he[:boc + 15km], "2931");
+        with layer = 1 line_badge(:open, he[:nev + 18km], "2931");
+    }
+
+    with link = "point.de.Bockum-Hövel" {
+        with layer = 1 marker(:statdot :pax, he[:boc]);
+    }
+
+    with link = "point.de.Nevinghof" {
+        with layer = 1 marker(:statdot :pax, he[:nev]);
+    }
+}
+
+
+# DE 2932.  Unna - Hamm (Westf) Pbf
+with detail = 2 {
+    let uh = path("d2.de.2932");
+
+    with link = "line.de.2932" {
+        track(:first :double :cat :pax, uh[:unn.f, :ham.a]);
+        with layer = 1 line_badge(:open, uh[:aut - 3km], "2932");
+    }
+}
+
+
+# DE 2933.  Unna - Kamen
+with detail = 2 {
+    let uk = path("d2.de.2933");
+
+    with link = "line.de.2933" {
+        track(:first :cat :pax, uk[:unn.a, :kon.f]);
+        with layer = -4 track(:first :removed, uk[:kon.a, :kam.f]);
+    }
+}
+
+
+# DE 2940.  Neubeckum - Beckum Übergang WLE
+with detail = 2 {
+    let nb = path("d2.de.2940");
+
+    with link = "line.de.2940" {
+        with layer = -2 track(:second, nb[:nbe.f, :bec]);
+        track(:guide,
+                nb[:nbe.f + 3.0km] << 0.7dt
+            --  nb[:nbe.f + 3.5km] << 2.5dt
+        );
+        label(nb[:nbe.f + 3.5km] << 2.5dt,
+            hbox(:left:middle :badgesize, " 2940")
+        );
+    }
+
+    with link = "point.de.Beckum" {
+        with layer = 1 marker(:statdot, nb[:bec]);
+        slabel(:left, nb[:bec] + (-1.8dt, 1.8dt), "Beckum");
+    }
+}
+
+
+# DE 2950.  Brackwede - Osnabrück Hbf Po
+with detail = 2 {
+    let bo = path("d2.de.2950.e");
+
+    with link = "line.de.2950" {
+        with layer = -1 track(:second :pax, bo[:bra.f, :dis]);
+        with layer = 1 line_badge(:open, bo[:bra.f + 15.5km], "2950");
+    }
+}
+
+
+# DE 2951.  Lippstadt - Rheda-Wiedenbrück
+with detail = 2 {
+    let lr = path("d2.de.2951");
+
+    with link = "line.de.2951" {
+        with layer = -4 track(:second :removed, lr[:lip.b, :rhe.a]);
+        with layer = 1 line_badge(:removed, lr[:rhs - 9km], "2951");
+    }
+
+    with link = "point.de.Rheda-Wiedenbrück-Süd" {
+        with layer = 1 marker(:statdot :removed, lr[:rhs]);
+    }
+}
+
+
+# DE 2960.  Paderborn Hbf - Brackwede
+with detail = 2 {
+    let pb = path("d2.de.2960");
+
+    with link = "line.de.2960" {
+        with layer = -1 track(:second :pax, pb[:pkt, :bra.g]);
+        with layer = 1 line_badge(:open, pb[:hov + 10km], "2960");
+    }
+
+    with link = "point.de.Paderborn-Nord" {
+        with layer = 1 marker(:statdot :pax, pb[:pan]);
+    }
+
+    with link = "point.de.Sennelager" {
+        with layer = 1 marker(:statdot :pax, pb[:sen]);
+        slabel(:left, pb[:sen] + (-1.8dt, 3.0dt), "Sennelager");
+    }
+
+    with link = "point.de.Hövelhof" {
+        with layer = 1 marker(:statdot :pax, pb[:hov]);
+        slabel(:right, pb[:hov] + (1.8dt, 0dt), "Hövelhof");
+    }
+}
+
+
+# DE 2961.  Paderborn Hbf - Brilon Wald
+with detail = 2 {
+    let pb = path("d2.de.2961");
+
+    with link = "line.de.2961" {
+        with layer = -4 track(:second :removed, pb[:pad.f, :brs]);
+        with layer = 1 line_badge(:removed, pb[:pad.f + 11.8km] @ -15, "2961");
+        with layer = 1 line_badge(:removed, pb[:bur + 7km], "2961");
+
+        with layer = -1 track(:second :pax, pb[:brs, :brw.f]);
+    }
+
+    with link = "point.de.Büren-Westf" {
+        with layer = 1 marker(:statdot :removed, pb[:bur]);
+        slabel(:right :removed, pb[:bur] + (1.2dt, 2.5dt),
+            hbox(:left:base, "Büren ", span(:light, "(Westf)"))
+        );
+    }
+
+    with link = "point.de.Brilon-Stadt" {
+        with layer = 1 marker(:statdot :pax, pb[:brs]);
+        slabel(:left, pb[:brs] + (-1.8dt, 0.8dt), "Brilon Stadt");
+    }
+}
+
+
+# DE 2962.  Paderborn Nord - Bad Lippspringe
+with detail = 2 {
+    let pl = path("d2.de.2962");
+
+    with link = "line.de.2962" {
+        with layer = -2 track(:second, pl[:pan.f, :thi]);
+        with layer = -4 track(:second :removed, pl[:thi, :lip]);
+        with layer = 1 line_badge(:removed, pl[:thi], "2962");
+    }
+
+    with link = "point.de.Bad-Lippspringe" {
+        with layer = 1 marker(:statdot :removed, pl[:lip]);
+        slabel(:top :removed, pl[:lip] + (0dt, -1.2dt), "Bad Lippspringe");
+    }
+}
+
+
+# DE 2963.  Geseke - Büren (Westf)
+with detail = 2 {
+    let gb = path("d2.de.2963");
+
+    with link = "line.de.2963" {
+        with layer = -2 track(:second, gb[:ges.a, :mil]);
+        with layer = -4 track(:second :removed, gb[:mil, :bur.a]);
+        with layer = 1 line_badge(:removed, gb[:mil + 2.3km], "2963");
+    }
+}
+
+
+# DE 2980.  Herford - Himmighausen
+with detail = 2 {
+    let hh = path("d2.de.2980");
+
+    with link = "line.de.2980" {
+        track(:first :cat :pax, hh[:her.f, :him.a]);
+        with layer = 1 line_badge(:open, hh[:lag - 6km], "2980");
+        with layer = 1 line_badge(
+            :open, hh[:him - 7km] @ -15 << 0.3dt, "2980"
+        );
+    }
+
+    with link = "point.de.Lage-Lippe" {
+        with layer = 1 marker(:statdot :pax, hh[:lag]);
+        slabel(:right, hh[:lag] + (1.8dt, 3.8dt),
+            hbox(:left:base, "Lage ", span(:light, "(Lippe)"))
+        );
+    }
+
+    with link = "point.de.Detmold" {
+        with layer = 1 marker(:statdot :pax, hh[:det]);
+        slabel(:right, hh[:det] + (-1.5dt, -2.0dt), "Detmold");
+    }
+}
+
+
+# DE 2984.  Lage (Lippe) - Bielefeld Hbf
+with detail = 2 {
+    let lb = path("d2.de.2984");
+
+    with link = "line.de.2984" {
+        with layer = -1 track(:second :pax, lb[:lag.a, :bio]);
+        with layer = 1 line_badge(:open, lb[:lag.a + 6.5km], "2984");
+
+        track(:second :pax, lb[:bio, :bie.a]);
+    }
+
+    with link = "point.de.Bielefeld-Ost" {
+        with layer = 1 marker(:statdot :pax, lb[:bio]);
+    }
+}
+
+
+# DE 2985.  Bielefeld Ost - Bielefeld Kreisb
+with detail = 2 {
+    with link = "line.de.2985" {
+        with layer = -4 track(:second :removed,
+                path("d2.de.2985")[:bio.f, :bik]
+        );
+    }
+}
+

@@ -1,0 +1,272 @@
+# DE 2950.  Brackwede - Osnabrück Hbf Po
+with detail = 2 {
+    let bo = path("simple.de.2950.h");
+
+    with link = "line.de.2950" {
+        with layer = -1 track(:second :pax, bo[:dis, :hrn.a]);
+    }
+}
+
+
+# DE 2970.  Altenbeken - Warburg (Westf)
+with detail = 2 {
+    let aw = path("simple.de.2970");
+
+    with link = "line.de.2970" {
+        track(:first :double :cat :pax, aw[:abe, :war.a]);
+        with layer = 1 line_badge(:open, aw[:war.a - 11.5km], "2970");
+    }
+}
+
+
+# DE 2971.  Altenbeken Tunnel - Altenbeken Kurve
+with detail = 2 {
+    with link = "line.de.2971" {
+        with layer = -1 track(:first :cat,
+                path("simple.de.2971")[:atu, :aku]
+        );
+    }
+}
+
+
+# DE 2973.  Scherfede - Holzminden
+with detail = 2 {
+    let sh = path("simple.de.2973");
+
+    with link = "line.de.2973" {
+        with layer = -4 track(:first :removed, sh[:ser.f, :weh.f]);
+        with layer = 1 line_badge(:removed, sh[:ser.f + 16km], "2973");
+
+        with layer = -4 track(:first :removed, sh[:weh.a, :hox.f]);
+        with layer = 1 line_badge(:removed, sh[:weh.a + 3.5km], "2973");
+    }
+}
+
+
+# DE 2974.  Langeland - Holzminden
+with detail = 2 {
+    let lh = path("simple.de.2974");
+
+    with link = "line.de.2974" {
+        with layer = -1 track(:first :double :pax, lh[:lan.a, :ott.f]);
+        with layer = 1 line_badge(:open, lh[:lan.a + 13.0km] @ 10, "2974");
+
+        with layer = -1 track(:first :pax, lh[:ott.f, :hol]);
+        with layer = 1 line_badge(:open, lh[:ott.f + 5.5km], "2974");
+    }
+
+    with link = "point.de.Ottbergen" {
+        with layer = 1 marker(:statdot :pax, lh[:ott]);
+        slabel(:left, lh[:ott] + (1.5dt, -2.2dt), "Ottbergen");
+    }
+
+    with link = "point.de.Höxter" {
+        with layer = 1 marker(:statdot :pax, lh[:hox]);
+        slabel(:right, lh[:hox] + (1.8km, 1.2dt), "Höxter");
+    }
+}
+
+
+# DE 2975.  Ottbergen - Northeim (Han)
+with detail = 2 {
+    let on = path("simple.de.2975");
+
+    with link = "line.de.2975" {
+        with layer = -1 track(:first :pax, on[:ott.f, :bod]);
+        with layer = 1 line_badge(:open, on[:ott.f + 10.5km] >> 0.3dt, "2975");
+
+        with layer = -1 track(:first :double :pax, on[:bod, :ver]);
+
+        with layer = -1 track(:first :pax, on[:ver, :nor.f]);
+        with layer = 1 line_badge(:open, on[:usl + 10.0km], "2975");
+    }
+
+    with link = "point.de.Bodenfelde" {
+        with layer = 1 marker(:statdot :pax, on[:bod]);
+        slabel(:left, on[:bod] + (-1.8dt, 1.8dt), "Bodenfelde");
+    }
+
+    with link = "point.de.Uslar" {
+        with layer = 1 marker(:statdot :pax, on[:usl]);
+        slabel(:right, on[:usl] - (1.5dt, 1.6dt), "Uslar");
+    }
+}
+
+
+# DE 2976.  Wildberg - Steinberg
+with detail = 2 {
+    with link = "line.de.2976" {
+        with layer = -4 track(:first :removed,
+                path("simple.de.2976")[:wil, :ste]
+        );
+    }
+}
+
+
+# DE 2981.  Herford - Kirchlengern
+with detail = 2 {
+    let hk = path("simple.de.2981");
+
+    with link = "line.de.2981" {
+        track(:first :cat :pax, hk[:kir.b, :kir.a]);
+    }
+}
+
+
+# DE 2982.  Bünde (Westf) - Bassum
+with detail = 2 {
+    let bb = path("simple.de.2982");
+
+    with link = "line.de.2982" {
+        with layer = -1 track(:second :pax, bb[:bun.f, :rah.f]);
+        with layer = 1 line_badge(
+            :open, bb[:bun.f + 4km] @ -5 << 0.5dt, "2982"
+        );
+        with layer = 1 line_badge(:open, bb[:hol + 10km], "2982");
+
+        with layer = -4 track(:second :removed, bb[:rah.f, :bar]);
+        with layer = 1 line_badge(:removed, bb[:rah + 11.5km], "2982");
+
+        with layer = -2 track(:second, bb[:bar, :sul]);
+
+        with layer = -4 track(:second :removed, bb[:sul, :bas]);
+        with layer = 1 line_badge(:removed, bb[:bas - 7.5km], "2982");
+    }
+
+    with link = "point.de.Holzhausen-Heddinghausen" {
+        with layer = 1 marker(:statdot :pax, bb[:hol]);
+        slabel(:right, bb[:hol] + (-0.5dt, 1dt),
+            vbox(:left:top, "Holzhausen-", "Heddinghausen")
+        );
+    }
+
+    with link = "point.de.Lübbecke-Westf" {
+        with layer = 1 marker(:statdot :pax, bb[:lub]);
+        slabel(:left, bb[:lub] - (1.8dt, 0dt),
+            vbox(:right:bottom, "Lübbecke", span(:light, "(Westf)"))
+        );
+    }
+
+    with link = "point.de.Rahden-Lübbecke" {
+        with layer = 1 marker(:statdot :pax, bb[:rah]);
+        slabel(:left, bb[:rah] - (1.8dt, 0dt),
+            vbox(:right:middle, "Rahden", span(:light, "(Kr Lübbecke)"))
+        );
+    }
+
+    with link = "point.de.Sulingen" {
+        with layer =1 marker(:statdot, bb[:sul]);
+        slabel(:left, bb[:sul] + (-1.8dt, 0.5dt),
+            vbox(:right:bottom, "Sulingen", span(:light, "(Han)"))
+        );
+    }
+}
+
+
+# DE 2983.  Lage (Lippe) - Hameln
+with detail = 2 {
+    let lh = path("simple.de.2983");
+
+    with link = "line.de.2983" {
+        with layer = -1 track(:second :pax, lh[:lag.f, :lut]);
+
+        with layer = -2 track(:second, lh[:lut, :bar.f]);
+        with layer = 1 line_badge(:open, lh[:bar.f - 5.2km] << 0.2dt, "2983");
+
+        with layer = -4 track(:second :removed, lh[:bar.f, :ham]);
+        with layer = 1 line_badge(:removed, lh[:ham - 11km] @ 10, "2983");
+    }
+
+    with link = "point.de.Lemgo-Lüttfeld" {
+        with layer = 1 marker(:statdot :pax, lh[:lut]);
+        slabel(:top, lh[:lut] - (0dt, 1.2dt),
+            vbox(:center:bottom, "Lemgo-", "Lüttfeld")
+        );
+    }
+
+    with link = "point.de.Barntrup" {
+        with layer = 1 marker(:statdot, lh[:bar]);
+        slabel(:left, lh[:bar] + (1.0dt, 3.5dt), "Barntrup");
+    }
+}
+
+
+# DE 2986.  Noltehof - Blomberg
+with detail = 2 {
+    let nb = path("simple.de.2986");
+
+    with link = "line.de.2986" {
+        with layer = -4 track(:second :removed, nb[:nol, :blo]);
+    }
+
+    with link = "point.de.Blomberg" {
+        with layer = 1 marker(:statdot :removed, nb[:blo]);
+        slabel(:top :removed, nb[:blo] - (0dt, 1.0dt), "Blomberg");
+    }
+}
+
+
+# DE 2991.  Porta Po - Häverstädt Dorf
+with detail = 2 {
+    let ph = path("simple.de.2991");
+
+    with link = "line.de.2991" {
+        with layer = -4 track(:second :removed, ph[:ppo, :had]);
+    }
+
+    with link = "point.de.Häverstädt-Dorf" {
+        with layer = 1 marker(:statdot :removed, ph[:had]);
+        slabel(:left :removed, ph[:had] + (2.5dt, 4dt), "Häverstädt");
+    }
+}
+
+
+# DE 2992.  Löhne (Westf) - Rheine
+with detail = 2 {
+    let lr = path("simple.de.2992");
+
+    with link = "line.de.2992" {
+        track(:first :double :cat :pax, lr[:loh.f, :osn]);
+        with layer = 1 line_badge(:open, lr[:bun + 14.5km], "2992");
+
+        track(:first :double :cat :pax, lr[:osn, :rhe.a]);
+        with layer = 1 line_badge(:open, lr[:eve + 6.2km], "2992");
+        with layer = 1 line_badge(:open, lr[:rhe.a - 7km], "2992");
+    }
+
+    with link = "point.de.Kirchlengern" {
+        with layer = 1 marker(:statdot :pax, lr[:kir]);
+        slabel(:left, lr[:kir] + (1dt, 1dt),
+            vbox(:right:top, "Kirch-", "lengern")
+        );
+    }
+
+    with link = "point.de.Bünde-Westf" {
+        with layer = 1 marker(:statdot :pax, lr[:bun]);
+        slabel(:right, lr[:bun] - (3dt, 1.5dt),
+            vbox(:center:bottom, "Bünde", span(:light, "(Westf)"))
+        );
+    }
+
+    with link = "point.de.Osnabrück-Hbf" {
+        with layer = 1 marker(:statdot :pax, lr[:osn]);
+        slabel(:right, lr[:osn.a] + (0dt, -1.7dt), "Osnabrück Hbf");
+    }
+
+    with link = "point.de.Osnabrück-Eversburg" {
+        with layer = 1 marker(:statdot :pax, lr[:eve]);
+        slabel(:right, lr[:eve] - (0.5dt, 1.2dt),
+            vbox(:left:bottom, "O.-Evers-", "burg")
+        );
+    }
+
+    with link = "point.de.Velpe-Westf" {
+        with layer = 1 marker(:statdot, lr[:vel]);
+    }
+
+    with link = "point.de.Ibbenbüren" {
+        with layer = 1 marker(:statdot :pax, lr[:ibb]);
+        slabel(:left, lr[:ibb] + (-1.5dt, 2dt), "Ibbenbüren");
+    }
+}
+

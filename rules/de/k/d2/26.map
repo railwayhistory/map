@@ -1,0 +1,481 @@
+# DE 2600.  Köln Hbf - Aachen Süd Grenze
+with detail = 2 {
+    let ka = path("d2.de.2600");
+
+    with link = "line.de.2600" {
+        track(:first :double :cat :pax, ka[:kol, :aasg]);
+        with layer = 1 line_badge(:open, ka[:hor - 7km], "2600");
+        with layer = 1 line_badge(:open, ka[:hor + 8km], "2600");
+    }
+
+    with link = "point.de.Köln-Hbf" {
+        with layer = 1 marker(:statdot :pax, ka[:kol]);
+    }
+
+    with link = "point.de.Köln-Ehrenfeld" {
+        with layer = 1 marker(:statdot :pax, ka[:ehr]);
+    }
+
+    with link = "point.de.Horrem" {
+        with layer = 1 marker(:statdot :pax, ka[:hor]);
+        slabel(:left, ka[:hor] + (-1.8dt, 0dt), "Horrem");
+    }
+
+    with link = "point.de.Düren" {
+        with layer = 1 marker(:statdot :pax, ka[:dur]);
+        slabel(:left, ka[:dur + 2.0km] + (0dt, 3.5dt), "Düren");
+    }
+
+    with link = "point.de.Langerwehe" {
+        with layer = 1 marker(:statdot :pax, ka[:lwe]);
+    }
+
+    with link = "point.de.Stolberg-Rheinl-Hbf" {
+        with layer = 1 marker(:statdot :pax, ka[:sto]);
+        slabel(:right, ka[:sto] + (1.8dt, -0.5dt),
+            vbox(:left:top, "Stolberg", span(:light, " (Rheinl)"))
+        );
+    }
+
+    with link = "point.de.Aachen-Rothe-Erde" {
+        with layer = 1 marker(:statdot :pax, ka[:aro]);
+    }
+
+    with link = "point.de.Aachen-Hbf" {
+        with layer = 1 marker(:statdot :pax, ka[:aac]);
+    }
+
+    with link = "point.int.Aachen-Hergenrath" {
+        with layer = 1 marker(:refdt :left, ka[:aasg]);
+        with layer = 1 marker(:refdt :right, ka[:aasg]);
+    }
+}
+
+
+# DE 2601.  Mödrath - Rommerskirchen
+with detail = 2 {
+    let mr = path("d2.de.2601");
+
+    with link = "line.de.2601" {
+        with layer = -4 track(:second :removed, mr[:mod, :hor.f]);
+        with layer = -1 track(:second :pax, mr[:hor, :mar]);
+        with layer = -4 track(:second :removed, mr[:mar, :nau]);
+
+        with layer = -1 track(:second, mr[:nau, :rom.a]);
+        track(:guide,
+                mr[:nau + 3km] >> 0.7dt
+            --  mr[:nau + 3km] >> 2.5dt
+        );
+        label(mr[:nau + 3km] >> 2.5dt,
+            hbox(:left:middle :badgesize, "2601")
+        );
+    }
+
+    with link = "point.de.Mödrath" {
+        with layer = 1 marker(:statdot :removed, mr[:mod]);
+        slabel(:right :removed, mr[:mod] + (1.8dt, 3.0dt), "Mödrath");
+    }
+}
+
+
+# DE 2603.  Elsdorf (Rheinl) Ost - Zieverich
+with detail = 2 {
+    let ez = path("d2.de.2603");
+
+    with link = "line.de.2603" {
+        with layer = -4 track(:second :removed, ez[:els, :zie]);
+    }
+}
+
+
+# DE 2604.  Bergheim (Erft) - Niederaussem
+with detail = 2 {
+    let bn = path("d2.de.2604");
+
+    with link = "line.de.2604" {
+        with layer = -4 track(:second :removed, bn[:ber.f, :nau.a]);
+    }
+}
+
+
+# DE 2605.  Mödrath - Nörvenich
+with detail = 2 {
+    let mn = path("d2.de.2605");
+
+    with link = "line.de.2605" {
+        with layer = -4 track(:second :removed, mn[:mod, :nor]);
+        with layer = 1 line_badge(:removed, mn[:mod + 4.5km], "2605");
+    }
+
+    with link = "point.de.Nörvenich" {
+        with layer = 1 marker(:statdot :removed, mn[:nor]);
+        slabel(:right :removed, mn[:nor] + (1.8dt, 0.8dt), "Nörvenich");
+    }
+}
+
+
+# DE 2606.  Erftstadt - Mödrath
+with detail = 2 {
+    let em = path("d2.de.2606");
+
+    with link = "line.de.2606" {
+        with layer = -4 track(:second :removed, em[:erf.a, :mod]);
+        with layer = 1 line_badge(:removed, em[:mod - 6.5km] >> 0.2dt, "2606");
+    }
+}
+
+
+# DE 2607.  Benzelrath - Mödrath
+with detail = 2 {
+    let bm = path("d2.de.2607");
+
+    with link = "line.de.2607" {
+        with layer = -4 track(:second :removed, bm[:ben, :mod]);
+    }
+}
+
+
+# DE 2610.  Köln Hbf - Kranenburg Grenze
+with detail = 2 {
+    let kk = path("d2.de.2610");
+
+    with link = "line.de.2610" {
+        track(:first :double :cat :pax, kk[:kol.g, :neu.a]);
+        with layer = 1 line_badge(:open, kk[:nka.a - 10km], "2610");
+
+        track(:first :double :cat :pax, kk[:neu.f, :kre.a]);
+        with layer = 1 line_badge(:open, kk[:neu.f + 6km], "2610");
+
+        with layer = -1 track(:first :double :pax, kk[:kre.a, :gel]);
+        with layer = 1 line_badge(:open, kk[:kre.a + 5.5km], "2610");
+
+        with layer = -1 track(:first :pax, kk[:gel, :kle]);
+        with layer = 1 line_badge(:open, kk[:gel + 4.5km], "2610");
+        with layer = 1 line_badge(:open, kk[:goc + 5.5km], "2610");
+
+        with layer = -4 track(:first :double :removed, kk[:kle, :krag]);
+        with layer = 1 line_badge(:removed, kk[:kle + 6.5km], "2610");
+    }
+
+    with link = "point.de.Köln-Nippes" {
+        with layer = 1 marker(:statdot :pax, kk[:nip]);
+    }
+
+    with link = "point.de.Köln-Longerich" {
+        with layer = 1 marker(:statdot :pax, kk[:lon]);
+    }
+
+    with link = "point.de.Köln-Worringen" {
+        with layer = 1 marker(:statdot :pax, kk[:wor]);
+    }
+
+    with link = "point.de.Krefeld-Oppum" {
+        with layer = 1 marker(:statdot :pax, kk[:opp]);
+    }
+
+    with link = "point.de.Krefeld-Hbf" {
+        with layer = 1 marker(:statdot :pax, kk[:kre]);
+    }
+
+    with link = "point.de.Kempen-Niederrhein" {
+        with layer = 1 marker(:statdot :pax, kk[:kem]);
+        slabel(:left, kk[:kem] + (-2.2dt, 0.8dt),
+            hbox(:right:base, "Kempen ", span(:light, "(N.rh.)"))
+        );
+    }
+
+    with link = "point.de.Geldern" {
+        with layer = 1 marker(:statdot :pax, kk[:gel]);
+        slabel(:right, kk[:gel] + (2.5dt, 1.8dt), "Geldern");
+    }
+
+    with link = "point.de.Kevelaer" {
+        with layer = 1 marker(:statdot :pax, kk[:kev]);
+        slabel(:right, kk[:kev] + (1.8dt, 0dt), "Kevelaer");
+    }
+
+    with link = "point.de.Goch" {
+        with layer = 1 marker(:statdot :pax, kk[:goc]);
+        slabel(:right, kk[:goc] + (1.8dt, 0.5dt), "Goch");
+    }
+
+    with link = "point.de.Kleve" {
+        with layer = 1 marker(:statdot :pax, kk[:kle]);
+        slabel(:left, kk[:kle] + (-0.5dt, 3.5dt), "Kleve");
+    }
+}
+
+
+# DE 2611.  Köln-Ehrenfeld - Rheydt Hbf
+with detail = 2 {
+    let kr = path("d2.de.2611");
+
+    with link = "line.de.2611" {
+        track(:first :double :cat :pax, kr[:ehr.g, :rhe.a]);
+        with layer = 1 line_badge(:open, kr[:ehr.g + 6.5km], "2611");
+        with layer = 1 line_badge(:open, kr[:hnk - 4.5km], "2611");
+    }
+
+    with link = "point.de.Rommerskirchen" {
+        with layer = 1 marker(:statdot :pax, kr[:rom]);
+        slabel(:right, kr[:rom] + (2.0dt, -0.5dt),
+            vbox(:left:bottom, "Rommers-", "kirchen")
+        );
+    }
+
+    with link = "point.de.Grevenbroich" {
+        with layer = 1 marker(:statdot :pax, kr[:gre]);
+        slabel(:left, kr[:gre] + (0.5dt, -3.5dt),
+            vbox(:right:bottom, "Greven-", "broich")
+        );
+    }
+
+    with link = "point.de.Hochneukirch" {
+        with layer = 1 marker(:statdot :pax, kr[:hnk]);
+        slabel(:left, kr[:hnk] - (1.5dt, 0.5dt),
+            vbox(:right:top, "Hoch-", "neu- ", "kirch  ")
+        );
+    }
+
+    with link = "point.de.Rheydt-Odenkirchen" {
+        with layer = 1 marker(:statdot :pax, kr[:ode]);
+    }
+}
+
+
+# DE 2619.  Rommerskirchen - Holzheim
+with detail = 2 {
+    let rh = path("d2.de.2619");
+
+    with link = "line.de.2619" {
+        with layer = -4 track(:first :project :removed, rh[:rom.b, :hol.a]);
+        with layer = 1 line_badge(:removed, rh[:rom.b + 8km], "2619");
+    }
+}
+
+
+# DE 2620.  Köln Hbf - Köln-Worringen
+with detail = 2 {
+    let kw = path("d2.de.2620");
+
+    with link = "line.de.2620" {
+        track(:first :double :cat :pax, kw[:lon.f, :wor.a]);
+    }
+}
+
+
+# DE 2630.  Köln Hbf - Koblenz - Bingen (Rhein) Landesgrenze
+with detail = 2 {
+    let kb = path("d2.de.2630");
+
+    with link = "line.de.2630" {
+        track(:first :double :cat :pax, kb[:kol.f, :bin]);
+        with layer = 1 line_badge(:open, kb[:bru + 5km], "2630");
+        with layer = 1 line_badge(:open, kb[:and + 8km], "2630");
+        with layer = 1 line_badge(:open, kb[:bin - 18.5km], "2630");
+    }
+
+    with link = "point.de.Köln-West" {
+        with layer = 1 marker(:statdot :pax, kb[:kow]);
+    }
+
+    with link = "point.de.Köln-Süd" {
+        with layer = 1 marker(:statdot :pax, kb[:kos]);
+    }
+
+    with link = "point.de.Köln-Eifeltor" {
+        with layer = 1 marker(:statdot, kb[:kei]);
+    }
+
+    with link = "point.de.Hürth-Kalscheuren" {
+        with layer = 1 marker(:statdot :pax, kb[:hur]);
+    }
+
+    with link = "point.de.Brühl" {
+        with layer = 1 marker(:statdot :pax, kb[:bru]);
+    }
+
+    with link = "point.de.Bonn-Hbf" {
+        with layer = 1 marker(:statdot :pax, kb[:bon]);
+    }
+
+    with link = "point.de.Remagen" {
+        with layer = 1 marker(:statdot :pax, kb[:rem]);
+        slabel(:left, kb[:rem] + (-3.0dt, 1.0dt), "Remagen");
+    }
+
+    with link = "point.de.Brohl" {
+        with layer = 1 marker(:statdot :pax, kb[:bro]);
+        slabel(:left, kb[:bro] + (-2.0dt, 1.2dt), "Brohl");
+    }
+
+    with link = "point.de.Andernach" {
+        with layer = 1 marker(:statdot :pax, kb[:and]);
+        slabel(:left, kb[:and] + (-2.0dt, 1.5dt), "Andernach");
+    }
+
+    with link = "point.de.Koblenz-Lützel" {
+        with layer = 1 marker(:statdot :pax, kb[:lut]);
+    }
+
+    with link = "point.de.Koblenz-Hbf" {
+        with layer = 1 marker(:statdot :pax, kb[:kob]);
+    }
+
+    with link = "point.de.Boppard-Hbf" {
+        with layer = 1 marker(:statdot :pax, kb[:bop]);
+        slabel(:right, kb[:bop] + (4.0km, 1.5dt), "Boppard Hbf");
+    }
+}
+
+
+# DE 2631.  Hürth-Kalscheuren - Ehrang
+with detail = 2 {
+    let he = path("d2.de.2631.k");
+
+    with link = "line.de.2631" {
+        with layer = -1 track(:first :double :pax, he[:hur, :kal]);
+        with layer = 1 line_badge(:open, he[:eus - 10.2km], "2631");
+        with layer = 1 line_badge(:open, he[:eus + 10km], "2631");
+
+        with layer = -1 track(:first :pax, he[:kal, :net]);
+        with layer = -1 track(:first :double :pax, he[:net, :bla]);
+        with layer = -1 track(:first :pax, he[:bla, :smi]);
+        with layer = -1 track(:first :double :pax, he[:smi, :lis]);
+    }
+
+    with link = "point.de.Erftstadt" {
+        with layer = 1 marker(:statdot :pax, he[:erf]);
+    }
+
+    with link = "point.de.Euskirchen" {
+        with layer = 1 marker(:statdot :pax, he[:eus]);
+        slabel(:right, he[:eus] + (2.2km, -0.5dt),
+            vbox(:left:bottom, "Eus-", "kirchen")
+        );
+    }
+
+    with link = "point.de.Kall" {
+        with layer = 1 marker(:statdot :pax, he[:kal]);
+        slabel(:right, he[:kal] + (1.8dt, 1.8dt), "Kall");
+    }
+
+    with link = "point.de.Blankenheim-Wald" {
+        with layer = 1 marker(:statdot :pax, he[:bla]);
+        slabel(:left, he[:bla] + (-1.8dt, 0.2dt),
+            hbox(:right:base, "Blankenheim ", span(:light, "(Wald)"))
+        );
+    }
+
+    with link = "point.de.Jünkerath" {
+        with layer = 1 marker(:statdot :pax, he[:jun]);
+        slabel(:right, he[:jun] + (1.8dt, -0.8dt), "Jünkerath");
+    }
+}
+
+
+# DE 2633.  Köln Hbf - Köln Messe/Deutz
+with detail = 2 {
+    with link = "line.de.2633" {
+        track(:first :double :cat :pax, path("d2.de.2633")[:kol, :deu]);
+    }
+}
+
+
+# DE 2634.  Euskirchen - Bad Münstereifel
+with detail = 2 {
+    let em = path("d2.de.2634");
+
+    with link = "line.de.2634" {
+        with layer = -1 track(:second :pax, em[:eus.a, :mun]);
+        with layer = 1 line_badge(:open, em[:mun - 5km] >> 0.5dt @ -5, "2634");
+    }
+
+    with link = "point.de.Bad-Münstereifel" {
+        with layer = 1 marker(:statdot :pax, em[:mun]);
+        slabel(:bottom, em[:mun] + (0dt, 1.0dt), "Bad Münstereifel");
+    }
+}
+
+
+# DE 2635.  Kall - Hellenthal
+with detail = 2 {
+    let kh = path("d2.de.2635");
+
+    with link = "line.de.2635" {
+        with layer = -1 track(:second :pax, kh[:kal, :hel]);
+        track(:guide,
+                kh[:kal + 8km] >> 0.7dt
+            --  kh[:kal + 8km] >> 2.5dt
+        );
+        label(kh[:kal + 8km] >> 2.5dt,
+            hbox(:right:middle :badgesize, "2635 ")
+        );
+    }
+
+    with link = "point.de.Hellenthal" {
+        with layer = 1 marker(:statdot :pax, kh[:hel]);
+        slabel(:left, kh[:hel] + (-1.8dt, 1.0dt), "Hellenthal");
+    }
+}
+
+
+# DE 2636.  Rech - Erftstadt
+with detail = 2 {
+    let re = path("d2.de.2636");
+
+    with link = "line.de.2636" {
+        with layer = -4 track(:first :project :removed, re[:rea, :rhe.a]);
+        with layer = 1 line_badge(:removed, re[:rhe.a - 6km], "2636");
+
+        with layer = -4 track(:first :project :removed, re[:rhe.f, :wei.a]);
+        with layer = 1 line_badge(:removed, re[:rhe.f + 6km], "2636");
+    }
+}
+
+
+# DE 2637.  Ahrdorf (Ahr) - Blankenheim (Wald)
+with detail = 2 {
+    let ab = path("d2.de.2637");
+
+    with link = "line.de.2637" {
+        with layer = -4 track(:second :removed, ab[:ahr.f, :bla]);
+        with layer = 1 line_badge(:removed, ab[:ahr.f + 7.2km], "2637");
+    }
+}
+
+
+# DE 2641.  Köln Süd Abzw - Köln-Kalk Nord Ksf
+with detail = 2 {
+    let sk = path("d2.de.2641.k");
+
+    with link = "line.de.2641" {
+        track(:first :double :cat :pax, sk[:kos.f, :sbr]);
+    }
+
+    with link = "point.de.Köln-Bonntor" {
+        with layer = 1 marker(:statdot, sk[:bon]);
+    }
+}
+
+
+# DE 2645.  Bonn Hbf - Euskirchen
+with detail = 2 {
+    let be = path("d2.de.2645");
+
+    with link = "line.de.2645" {
+        with layer = -1 track(:first :double :pax, be[:bon.a, :wit]);
+        with layer = -1 track(:first :pax, be[:wit, :kot]);
+        with layer = -1 track(:first :double :pax, be[:kot, :rhe]);
+        with layer = 1 line_badge(:open, be[:kot], "2645");
+        with layer = -1 track(:first :pax, be[:rhe, :kuc]);
+        with layer = 1 line_badge(:open, be[:kuc - 4.5km] << 0.5dt, "2645");
+        with layer = -1 track(:first :double :pax, be[:kuc, :eus.a]);
+    }
+
+    with link = "point.de.Rheinbach" {
+        with layer = 1 marker(:statdot :pax, be[:rhe]);
+        slabel(:left, be[:rhe] + (1dt, 3.5dt), "Rheinbach");
+    }
+}
+
