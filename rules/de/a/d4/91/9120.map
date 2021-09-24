@@ -1,0 +1,340 @@
+# DE 9120.  Elmshorn - Bad Oldesloe
+#
+let eo = path("d4.de.9120");
+
+with detail = [4, 5] {
+    # point.de.Elmshorn  de.1220
+
+
+    with link = "line.de.9120" {
+        track(:third :pax,
+                eo[:elm.h, :elm.v] >> 1.5dt
+            ..  eo[:elm.vv + 1dt, :lmo - 1sw]
+        );
+    }
+
+
+    with link = "point.de.Elmshorn-Langenmoor" {
+        track(:third:station :pax, eo[:lmo - 1sw, :lmo + 1sw]);
+        marker(:de.hp :right, eo[:lmo]);
+        station(:right, eo[:lmo] >> 1.7sw,
+            "E. Langenmoor", "2,0"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:lmo + 1sw, :sib - 1sw]);
+    }
+
+
+    with link = "point.de.Sibirien" {
+        track(:third:station :pax, eo[:sib - 1sw, :sib + 1sw]);
+        with layer = -4 marker(:de.hp :left :removed, eo[:sib]);
+        station(:top :removed, eo[:sib] << 1.4sw,
+            "Sibirien", "2,5"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:sib + 1sw, :spa.a]);
+    }
+
+
+    with link = "point.de.Sparrieshoop" {
+        track(:third:station :pax, eo[:spa.a, :spa.f]);
+        track(:station :pax,
+                eo[:spa.a + 99m, :spa.a + 100m]
+            --  eo[:spa.a + 100m + 1dl, :spa.f - 100m - 1dl] >> 1dt
+            --  eo[:spa.f - 100m, :spa.f - 99m]
+        );
+        marker(:de.bf :left, eo[:spa]);
+        station(:top, eo[:spa] << 1.2sw,
+            "Sparrieshoop", "3,8"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:spa.f, :bok - 1sw]);
+        with layer = 1 line_badge(:open, eo[:spa.f + 0.7km], "9120");
+    }
+
+
+    with link = "point.de.Bokholt" {
+        track(:third:station :pax, eo[:bok - 1sw, :bok + 1sw]);
+        marker(:de.hp :left, eo[:bok]);
+        station(:top, eo[:bok] << 1.3sw, "Bokholt", "6,0");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:bok + 1sw, :vos - 1sw]);
+    }
+
+
+    with link = "point.de.Voßloch" {
+        track(:third:station :pax, eo[:vos - 1sw, :vos + 1sw]);
+        marker(:de.hp :right, eo[:vos]);
+        station(:bottom, eo[:vos] >> 1.3sw, "Voßloch", "7,4");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:vos + 1sw, :bab - 1sw]);
+    }
+
+
+    with link = "point.de.Barmstedt-Brunnenstraße" {
+        track(:third:station :pax, eo[:bab - 1sw, :bab + 1sw]);
+        marker(:de.hp :left, eo[:bab]);
+        station(:top, eo[:bab] << 1.2sw,
+            vbox(:center:bottom, "Barmstedt", "Brunnenstraße"),
+            "9,1"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:bab + 1sw, :bar.a]);
+    }
+
+
+    with link = "point.de.Barmstedt" {
+        # Gl. 1
+        track(:third:station :pax, eo[:bar.a, :bar.f]);
+
+        # Gl. 2
+        track(:station :pax,
+                eo[:bar.a + 229m, :bar.a + 230m]
+            --  eo[:bar.a + 230m + 1dl, :bar.f - 230m - 1dl] << 1dt
+            --  eo[:bar.f - 230m, :bar - 229m]
+        );
+            with layer = -1 track(:station,
+                    eo[:bar + 100m] << 1dt
+                --  eo[:bar + 100m + 1dl]
+            );
+
+        # Gl. 3
+        with layer = -1 track(:station, 
+                eo[:bar + 0.5sw, :bar.f - 230m - 2dl] >> 1dt
+        );
+
+        # Gl. 4
+        with layer = -1 track(:station,
+                eo[:bar + 150m, :bar.f - 230m - 3dl] >> 2dt
+            --  eo[:bar.f - 230m - 1dl, :bar.f - 230m - 0.9dl]
+        );
+
+        marker(:de.bf :right, eo[:bar]);
+        station(:bottom, eo[:bar] >> 1.2sw, "Barmstedt", "10,0");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:bar.f, :lab - 1sw]);
+        with layer = 1 line_badge(:open, eo[:lab - 2.0km], "9120");
+    }
+
+
+    with link = "point.de.Langeln-Holst-Bf" {
+        track(:third:station :pax, eo[:lab - 1sw, :lab + 1sw]);
+        with layer = -4 marker(:de.bf :left :removed, eo[:lab]);
+        station(:bottom :removed, eo[:lab] >> 1.2dt,
+            "Langeln", "15,4"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:lab + 1sw, :lah - 1sw]);
+    }
+
+
+    with link = "point.de.Langeln-Holst" {
+        track(:third:station :pax, eo[:lah - 1sw, :lah + 1sw]);
+        marker(:de.hp :left, eo[:lah]);
+        station(:top, eo[:lah] << 1.2sw,
+            hbox(:center:base, "Langeln ", span(:light, "(Holst)")),
+            "15,8"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:lah + 1sw, :hof - 1sw]);
+    }
+
+
+    with link = "point.de.Hoffnung" {
+        track(:third:station :pax, eo[:hof - 1sw, :hof + 1sw]);
+        with layer = -4 marker(:de.hp :right :removed, eo[:hof]);
+        station(:bottom :removed, eo[:hof] >> 1.2sw,
+            "Hoffnung", "16,7"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:hof + 1sw, :alv.a]);
+    }
+
+
+    with link = "point.de.Alveslohe" {
+        track(:third:station :pax, eo[:alv.a, :alv.f]);
+        with layer = -4 track(:station :removed,
+                eo[:alv.a + 99m, :alv.a + 100m]
+            --  eo[:alv.a + 100m + 1dl, :alv.f - 100m - 1dl] << 1dt
+            --  eo[:alv.f - 100m, :alv.f - 99m]
+        );
+        marker(:de.hp :right, eo[:alv]);
+        with layer = -4 marker(:de.bf :removed, eo[:alv]);
+        station(:bottom, eo[:alv] >> 1.2sw,
+            "Alveslohe", "19,4"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :pax, eo[:alv.f, :ulz.g]);
+        with layer = 1 line_badge(:open, eo[:ulz.g - 1.7km], "9120");
+    }
+
+
+    # point.de.Henstedt-Ulzburg  de.9121
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:ulz.b, :kis - 1sw]);
+    }
+
+
+    with link = "point.de.Henstedt-Kisdorf" {
+        track(:third:station :removed, eo[:kis - 1sw, :kis + 1sw]);
+        marker(:de.hp :left :removed, eo[:kis]);
+        station(:right :removed, eo[:kis + 0.6sw] << 1.2sw,
+            "Henstedt-Kisdorf", "26,6"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:kis + 1sw, :woh - 1sw]);
+        with layer = 1 line_badge(:removed, eo[:kis + 1.5km], "9120");
+    }
+
+
+    with link = "point.de.Henstedt-Wohld" {
+        track(:third:station :removed, eo[:woh - 1sw, :woh + 1sw]);
+        marker(:de.bf :right :removed, eo[:woh]);
+        station(:bottom :removed, eo[:woh] >> 1.4sw,
+            "Henstedt-Wohld", "29,1"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:woh + 1sw, :wak - 1sw]);
+    }
+
+
+    with link = "point.de.Wakendorf-Götzberg" {
+        track(:third:station :removed, eo[:wak - 1sw, :wak + 1sw]);
+        marker(:de.bf :right :removed, eo[:wak]);
+        station(:right :removed, eo[:wak - 0.1sw] >> 1.8sw,
+            "Wakendorf-Götzberg", "31,4"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:wak + 1sw, :nah - 1sw]);
+    }
+
+
+    with link = "point.de.Nahe" {
+        track(:third:station :removed, eo[:nah - 1sw, :nah + 1sw]);
+        marker(:de.bf :right :removed, eo[:nah]);
+        station(:bottom :removed, eo[:nah] >> 1.2sw, "Nahe", "36,4");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:nah + 1sw, :nat - 1sw]);
+    }
+
+
+    with link = "point.de.Nahe-Torfverladestelle" {
+        track(:third:station :removed, eo[:nat - 1sw, :nat + 1sw]);
+        marker(:de.ldst :left :removed, eo[:nat]);
+        station(:top :removed, eo[:nat] << 1.2sw,
+            "Nahe (Torfverladestelle)", "??"
+        );
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:nat + 1sw, :sul - 1sw]);
+        with layer = 1 line_badge(:removed, eo[:nat + 2.2km], "9120");
+    }
+
+
+    with link = "point.de.Sülfeld-Oldesloe" {
+        track(:third:station :removed, eo[:sul - 1sw, :sul + 1sw]);
+        marker(:de.bf :left :removed, eo[:sul]);
+        station(:top :removed, eo[:sul] << 1.2sw, "Sülfeld", "42,5");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:sul + 1sw, :gra - 1sw]);
+    }
+
+
+    with link = "point.de.Grabau" {
+        track(:third:station :removed, eo[:gra - 1sw, :gra + 1sw]);
+        marker(:de.bf :left :removed, eo[:gra]);
+        station(:top :removed, eo[:gra] << 1.2sw, "Grabau", "44,8");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :removed, eo[:gra + 1sw, :blu - 1.5sw]);
+    }
+
+
+    with link = "point.de.Blumendorf" {
+        track(:third:station :closed, eo[:blu - 1.5sw, :blu + 1sw]);
+        track(:station :closed,
+                eo[:blu - 1sw - 1.1dl, :blu - 1sw - 1dl]
+            --  eo[:blu - 1sw, :blu - 0.5sw - 1dl] >> 1dt
+            --  eo[:blu - 0.5sw, :blu - 0.49sw]
+        );
+        marker(:de.gbf :right :closed, eo[:blu]);
+        with layer = -4 marker(:de.bf :gone :closed, eo[:blu]);
+        station(:bottom :removed, eo[:blu] >> 1.2sw, "Blumendorf", "48,4");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :closed, eo[:blu + 1sw, :rum - 1sw]);
+        with layer = 1 line_badge(:closed, eo[:blu + 1.2km], "9120");
+    }
+
+
+    with link = "point.de.Rümpeler-Weg" {
+        track(:third:station :closed, eo[:rum - 1sw, :rum + 1sw]);
+        marker(:de.hp :left :removed, eo[:rum]);
+        station(:top :removed, eo[:rum] << 1.2sw, "Rümpeler Weg", "??");
+    }
+
+
+    with link = "line.de.9120" {
+        track(:third :closed, eo[:rum + 1sw, :old.g]);
+    }
+
+
+    # point.de.Bad-Oldesloe  de.1120
+}
+
