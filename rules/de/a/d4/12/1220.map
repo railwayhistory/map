@@ -1,0 +1,1147 @@
+# DE 1220.  Altona Palmaille - Kiel Altonaer Bf
+#
+let ak = path("d4.de.1220");
+
+with detail = [4, 5] {
+    with link = "point.de.Altona-Palmaille" {
+        track(:first :double :gone, ak[:pal, :pal + 0.5sw]);
+        marker(:de.bf :gone :bottom, ak[:pal]);
+    }
+
+
+    with link = "line.de.1220" {
+        with layer = -1 track(:first :double :gone, ak[:pal + 0.5sw, :alt]);
+    }
+}
+
+
+with detail = 4 {
+    with link = "point.de.Hamburg-Altona" {
+        # Richtungsgleis Strecke 1220
+        track(:first:station :cat, ak[:alt, :fbah] >> 0.5dt);
+
+        # Gegenrichtungsgleis Strecke 6100
+        with layer = 2 track(:first:station :cat,
+                ak[:alt, :aham - 100m] << 0.5dt
+        );
+
+        # Richtungsgleis Strecke 1231
+        track(:first:station :cat,
+                ak[:alt, :aham] << 1.5dt
+            ..  ak[:fhol, :fbah] << 0.5dt
+        );
+
+        # Mittelgleis Strecke 1231
+        track(:station :cat,
+                ak[:alt, :aham] << 2.5dt
+            ..  ak[:fbah - 1m, :fbah] << 0.5dt
+        );
+
+        # Abstellgleis
+        track(:station :cat, ak[:alt, :aham] << 3.5dt);
+        track(:station :cat,
+                ak[:aham - 141m, :aham - 140m] << 3.5dt
+            --  ak[:aham - 100m, :aham] << 4.5dt
+        );
+
+        # Gegenrichtungsgleis Strecke 1231
+        track(:first:station :cat,
+                ak[:alt, :atu] << 4.5dt
+            ..  ak[:aham - 101m, :aham - 100m] << 5.5dt
+            ..  ak[:fbah - 1m, :fbah] << 1.5dt
+        );
+
+        # Richtungsgleis Strecke 6100
+        with layer = 2 track(:first:station :cat,
+                ak[:alt, :atu] << 5.5dt
+            ..  ak[:aham - 101m, :aham - 100m] << 6.5dt
+        );
+
+        # Gegenrichtungsgleis Strecke 1220
+        track(:first:station :cat,
+                ak[:alt, :atu] << 6.5dt
+            ..  ak[:aham - 101m, :aham - 100m] << 7.5dt
+            ..  ak[:fbah - 1m, :fbah] << 2.5dt
+        );
+
+        area(:open,
+                ak[:alt - 1sh, :alt] >> 0.7dt
+            --  ak[:alt, :alt - 1sh] >> 6.7dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Altona-Gbf" {
+        # Richtungsgleis Strecke 1232
+        track(:first:station :cat, ak[:fbah, :alt.f] >> 3.5dt);
+
+        # Gegenrichtungsgleis Strecke 1232
+        track(:first:station :cat, ak[:fbah, :alt.f] >> 2.5dt);
+
+        # Richtungsgleis Strecke 1220
+        track(:first:station :cat,
+                ak[:fbah, :alt.f] >> 0.5dt
+        );
+
+        # Richtungsgleis Strecke 1231
+        track(:first:station :cat,
+                ak[:fbah, :alt.f] << 0.5dt
+        );
+
+        # Mittelgleis Strecke 1231
+        track(:station :cat,
+                ak[:fbah, :fbah + 1m] << 1.5dt
+            --  ak[:fbah + 100m, :alt.f - 160m] >> 1.5dt
+            --  ak[:alt.f - 100m, :alt.f - 99m] >> 2.5dt
+        );
+
+        # Gegenrichtungsgleis Strecke 1231
+        track(:first:station :cat,
+                ak[:fbah, :alt.f] << 1.5dt
+        );
+
+        # Gegenrichtungsgleis Strecke 1220
+        track(:first:station :cat, ak[:fbah, :alt.f] << 2.5dt);
+
+        # Strecke 1230
+        track(:first:station, ak[:fbah + 1sw, :alt.f] << 3.5dt);
+
+        marker(:de.bft :left, ak[:fbah + 1.5sw] << 3.5dt);
+    }
+
+
+    with link = "line.de.1220" {
+        with layer = 2 track(:first:station :cat,
+                ak[:alt.f, :alt.f + 1m] << 2.5dt
+            --  ak[:ala.a - 0.5dt, :ala.a] >> 3.5dt
+        );
+        with layer = 1 casing(:first:station :cat,
+                ak[:alt.f, :alt.f + 1m] << 2.5dt
+            --  ak[:ala.a - 0.5dt, :ala.a] >> 3.5dt
+        );
+    }
+    with link = "line.de.1230" {
+        with layer = 2 track(:first:station,
+                ak[:alt.f, :alt.f + 0.6dt] << 3.5dt
+            --  ak[:ala.a - 1m, :ala.a] >> 2.5dt
+        );
+        with layer = 1 casing(:first:station,
+                ak[:alt.f, :alt.f + 0.6dt] << 3.5dt
+            --  ak[:ala.a - 1m, :ala.a] >> 2.5dt
+        );
+    }
+    with link = "line.de.1232" {
+        track(:first:station,
+                ak[:alt.f, :alt.f + 1.2dt] >> 3.5dt
+            --  ak[:ala.a - 1m, :ala.a] >> 0.5dt
+        );
+        track(:first:station,
+                ak[:alt.f, :alt.f + 0.8dt] >> 2.5dt
+            --  ak[:ala.a - 0.5dt, :ala.a] << 0.5dt
+        );
+    }
+    with link = "line.de.1220" {
+        track(:first:station,
+                ak[:alt.f, :alt.f + 1dt] >> 0.5dt
+            --  ak[:ala.a - 1.0dt, :ala.a] << 1.5dt
+        );
+    }
+    with link = "line.de.1231" {
+        track(:first:station,
+                ak[:alt.f, :alt.f + 0.5dt] << 0.5dt
+            --  ak[:ala.a - 1.5dt, :ala.a] << 2.5dt
+        );
+        track(:first:station,
+                ak[:alt.f, :alt.f + 1m] << 1.5dt
+            --  ak[:ala.a - 2dt, :ala.a] << 3.5dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Langenfelde-Bbf" {
+        #--- Streckengleise
+
+        # Gl. 403 (Richtungsgleis Strecke 1220)
+        track(:first:station :cat,
+                ak[:ala.a, :ala.lr - 120m + 0.6dt] >> 3.5dt
+            --  ak[:ala.lr + 0.6dt, :ala - 240m] >> 1.5dt
+        );
+
+        # Strecke 1230
+        track(:first:station,
+                ak[:ala.a, :ala.lr - 120m] >> 2.5dt
+            --  ak[:ala.lr, :ala.lr + 1m] >> 0.5dt
+        );
+
+        # Gegenrichtungsgleis Strecke 1231
+        track(:first:station :cat,
+                ak[:ala.a, :ala.lr - 360m] << 3.5dt
+            --  ak[:ala.lr - 280m, :ala.lr - 279m] << 2.5dt
+        );
+
+        # Gl. 503 (Richtungsgleis Strecke 1232)
+        track(:first:station :cat, ak[:ala.a, :ala - 240m] >> 0.5dt);
+        with layer = -1 casing(:first:station :cat,
+                ak[:ala.a, :ala.lr] >> 0.5dt
+        );
+
+        # Gl. 513 (Gegenrichtungsgleis Strecke 1232)
+        track(:first:station :cat, ak[:ala.a, :ala - 240m] << 0.5dt);
+        with layer = -1 casing(:first:station :cat,
+                ak[:ala.a, :ala.lr] << 0.5dt
+        );
+            track(:station :cat,
+                    ak[:ala.a + 50m] >> 0.5dt
+                --  ak[:ala.a + 120m] << 0.5dt
+            );
+            track(:station :cat,
+                    ak[:ala.lr + 30m] >> 0.5dt
+                --  ak[:ala.lr + 90m] << 0.5dt
+            );
+
+        # Gl. 413 (Gegenrichtungsgleis Strecke 1220)
+        track(:first:station :cat, ak[:ala.a, :ala - 240m] << 1.5dt);
+        with layer = -1 casing(:first:station :cat,
+                ak[:ala.a, :ala.lr] << 1.5dt
+        );
+            track(:station :cat,
+                    ak[:ala.a + 140m] << 0.5dt
+                --  ak[:ala.a + 210m] << 1.5dt
+            );
+            track(:station :cat,
+                    ak[:ala.lr + 120m] << 0.5dt
+                --  ak[:ala.lr + 220m] << 1.5dt
+            );
+
+
+        #--- Bahnhofsgleise
+
+        # Gl. 1 (Richtungsgleis Strecke 1231)
+        track(:first:station :cat, ak[:ala.a, :ala - 220m] << 2.5dt);
+        with layer = -1 casing(:first:station :cat,
+                ak[:ala.a, :ala.lr] << 2.5dt
+        );
+            track(:station :cat,
+                    ak[:ala.a + 230m] << 1.5dt
+                --  ak[:ala.a + 290m] << 2.5dt
+            );
+            track(:station :cat,
+                    ak[:ala.lr + 250m] << 1.5dt
+                --  ak[:ala.lr + 310m] << 2.5dt
+            );
+
+        # Gl. 2/3/4/5
+        track(:station,
+                ak[:ala.lr - 160m, :ala - 140m - 3dt] << 3.5dt
+            --  ak[:ala - 60m - 3dt, :ala - 59m - 3dt] << 5.5dt
+        );
+
+        # Gl. 6/7/8/9
+        track(:station, ak[:ala.lr - 120m, :ala - 100m - 3dt] << 4.5dt);
+
+        # Gl. 10/11/12/13
+        track(:station, ak[:ala.lr - 80m, :ala + 400m - 0.3sw] << 5.5dt);
+            track(:station,
+                    ak[:ala + 20m + 1.5dt] << 5.5dt
+                --  ak[:ala + 140m + 1.5dt] << 2.5dt
+            );
+            track(:station,
+                    ak[:ala + 60m + 1.5dt] << 5.5dt
+                --  ak[:ala + 140m + 1.5dt] << 7.5dt
+            );
+
+        # Gl. 14/15/16/17
+        track(:station,
+                ak[:ala.lr - 40m, :ala - 100m - 6dt] << 6.5dt
+            --  ak[:ala - 60m - 6dt, :ala - 59m - 6dt] << 5.5dt
+        );
+
+        # Gl. 18/19/20/21
+        track(:station,
+                ak[:ala.lr - 201m, :ala.lr - 200m] << 2.5dt 
+            --  ak[:ala.lr - 160m] << 3.5dt
+            --  ak[:ala.lr - 80m] << 5.5dt
+            --  ak[:ala.lr, :ala - 140m - 4.5dt] << 7.5dt
+            --  ak[:ala - 60m - 4.5dt, :ala - 59m - 4.5dt] << 5.5dt
+        );
+
+        # Gl. 30
+        track(:station, ak[:ala - 220m, :laa - 230m] << 2.5dt);
+
+        # Gl. 31/32/33
+        track(:station,
+                ak[:ala - 181m, :ala - 180m] << 2.5dt
+            --  ak[:ala - 140m, :ala + 100m] << 3.5dt
+            --  ak[:ala + 140m, :ala + 141m] << 2.5dt
+        );
+
+        # Gl. 34/35/36/37
+        track(:station,
+                ak[:ala - 181m - 1.5dt, :ala - 180m - 1.5dt] << 2.5dt
+            --  ak[:ala - 100m - 1.5dt, :ala + 60m + 1.5dt] << 4.5dt
+        );
+
+        # Gl. 40/41/42/43
+        track(:station,
+                ak[:ala - 181m - 3dt, :ala - 180m - 3dt] << 8.5dt
+            --  ak[:ala - 100m - 3dt, :ala + 100m + 1.5dt] << 6.5dt
+        );
+
+        # Gl. 44/46/48/49 - Gl. 212/213/214
+        track(:station,
+                ak[:ala - 140m - 3dt, :ala.ln + 100m + 0.8dt] << 7.5dt
+            ..  ak[:ala.f - 800m + 0.8dt, :ala.f - 640m] << 4.5dt
+            --  ak[:ala.f - 600m, :ala.f - 599m] << 3.5dt
+        );
+
+        # Gl. 55/56/57
+        track(:station, ak[:ala.lr + 80m - 3dt, :ala + 260m] << 9.5dt);
+
+        # Gl. 120/63/64/65
+        track(:station,
+                ak[:ala.lr + 200m - 3.5dt, :ala.ln + 80m] << 13.5dt
+            --  ak[:ala.ln + 200m, :ala.ln + 201m] << 11.5dt
+        );
+
+        # Gl. 66/67/68/69
+        track(:station,
+                ak[:ala.lr + 240m - 3.5dt, :ala + 340m] << 14.5dt
+        );
+
+        # Gl. 70/71/72/73
+        track(:station,
+                ak[
+                    :ala.lr + 119m - 3.5dt,
+                    :ala.lr + 120m - 3.5dt
+                ] << 11.5dt
+            --  ak[:ala.lr + 280m - 3.5dt, :ala + 300m] << 15.5dt
+            --  ak[:ala + 380m, :ala + 381m] << 13.5dt
+        );
+
+        # Gl. 96 - Gl. 60/61
+        track(:station,
+                ak[:ala.lr - 100m] << 5.0dt
+            --  ak[:ala.lr + 40m - 3.3dt] << 9.5dt
+            --  ak[:ala.lr + 120m - 3.5dt, :ala.ln + 140m] << 11.5dt
+            ..  ak[:ala.f - 660m, :ala.f - 640m + 0.5dt] << 5.5dt
+            --  ak[:ala.f - 560m + 0.5dt, :ala.f - 559m + 0.5dt] << 3.5dt
+        );
+
+
+        # Gl. 97 - Gl. 58/59
+        track(:station,
+                ak[:ala.lr - 400m] << 3.5dt
+            --  ak[:ala.lr - 80m - 3dt] << 5.5dt
+            --  ak[:ala.lr + 120m - 3dt, :ala + 220m] << 10.5dt
+        );
+
+        # Gl. 98 - Gl. 52/53/54
+        with layer = -2 track(:station,
+                ak[:ala.a, :ala.a + 1m] >> 0.5dt
+            --  ak[:ala.a + 40m, :ala.a + 80m] >> 1.5dt
+            --  ak[:ala.lr - 80m - 1.5dt] << 5.5dt
+            --  ak[:ala.lr - 1.5dt] << 7.5dt
+            --  ak[:ala.lr + 40m - 1.5dt, :ala + 260m - 0.5dt] << 8.5dt
+            --  ak[:ala + 300m - 0.5dt, :ala + 301m - 0.5dt] << 7.5dt
+        );
+
+        # Gl. 101-107
+        track(:station,
+                ak[:ala + 220m + 1.3dt, :ala.ln + 100m] << 10.5dt
+            --  ak[:ala.ln + 140m, :ala.ln + 141m] << 11.5dt
+        );
+
+        # Gl. 116/117/118/119
+        track(:station,
+                ak[:ala.lr + 160m - 3.5dt, :ala + 300m] << 12.5dt
+            --  ak[:ala + 340m, :ala + 341m] << 13.5dt
+        );
+
+        # Gl. 131/132/133
+        track(:station,
+                ak[:ala + 179m + 1.3dt, :ala + 180m + 1.3dt] << 11.5dt
+            --  ak[:ala + 260m + 1.3dt, :ala + 610m] << 9.5dt
+            --  ak[:ala + 650m, :ala + 651m] << 10.5dt
+        );
+
+        # Gl. 200
+        track(:station,
+                ak[:laa - 230m, :ala.ln + 40m] << 2.5dt
+            --  ak[:ala.ln + 120m, :ala.ln + 121m] << 4.5dt
+        );
+
+        # Gl. 201/202/204
+        track(:station,
+                ak[:ala + 60m + 1.5dt, :ala + 400m - 0.3sw] << 4.5dt
+        );
+
+        # Gl. 214/215/216
+        track(:station,
+                ak[:ala + 179m, :ala + 180m] << 11.5dt
+            --  ak[:ala + 300m, :ala.ln + 60m] << 8.5dt
+            --  ak[:ala.ln + 100m, :ala.ln + 101m] << 7.5dt
+        );
+
+        # Gl. 217/218
+        track(:station,
+                ak[:ala + 609m + 0.5dt, :ala + 610m + 0.5dt] << 8.5dt
+            --  ak[:ala + 650m + 0.5dt, :ala.ln + 60m + 0.5dt] << 9.5dt
+            --  ak[:ala.ln + 140m + 1.5dt, :ala.ln + 141m + 1.5dt] << 7.2dt
+        );
+
+        # Gl. 221/222/223/224
+        track(:station,
+                ak[:ala + 299m + 0.5dt, :ala + 300m + 0.5dt] << 11.5dt
+            --  ak[:ala + 340m + 0.5dt, :ala.ln + 140m] << 12.5dt
+        );
+
+        # Gl. 201 - Gl. 401
+        track(:station,
+                ak[:ala + 400m + 0.3sw, :ala.ln + 140m] << 4.5dt
+             .. ak[:ala.f - 800m, :ala.f] << 2.5dt
+        );
+
+        # Gl. 207/208 - Gl. 402/403
+        track(:station,
+                ak[:ala + 400m + 0.3sw, :ala.ln + 140m + 0.4dt] << 5.5dt
+            ..  ak[:ala.f - 800m + 0.4dt, :ala.f - 120m] << 3.5dt
+            --  ak[:ala.f - 80m, :ala.f - 79m] << 2.5dt
+        );
+
+        marker(:de.bbf :left, ak[:ala] << 15.5dt);
+        marker(:de.bw :left, ak[:ala + 400m] << 3.5dt);
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :cat :tight, ak[:ala - 240m, :laa - 220m] >> 1.5dt);
+        track(:first :cat :flip :tight,
+                ak[:ala - 240m, :laa - 220m] << 1.5dt
+        );
+    }
+    with link = "line.de.1232" {
+        track(:first :double :cat, ak[:ala - 240m, :laa - 220m]);
+    }
+
+
+    with link = "point.de.Hamburg-Langenfelde-Abzw" {
+        # Gl. 404
+        track(:first:station :cat, ak[:laa - 220m, :laa +340m] >> 1.5dt);
+            track(:station,
+                    ak[:laa +  60m] >> 0.5dt
+                --  ak[:laa + 170m] >> 1.5dt
+            );
+
+        # Gl. 504
+        track(:first:station :cat, ak[:laa - 220m, :laa +340m] >> 0.5dt);
+            track(:station,
+                    ak[:laa - 130m] >> 1.5dt
+                --  ak[:laa -  10m] >> 0.5dt
+            );
+            track(:station,
+                    ak[:laa - 20m] << 0.5dt
+                --  ak[:laa + 40m] >> 0.5dt
+            );
+
+        # Gl. 514
+        track(:first:station :cat, ak[:laa - 220m, :laa +340m] << 0.5dt);
+            track(:station,
+                    ak[:laa - 100m] << 1.5dt
+                --  ak[:laa -  40m] << 0.5dt
+            );
+
+        # Gl. 414
+        track(:first:station :cat, ak[:laa - 220m, :laa +340m] << 1.5dt);
+            track(:station,
+                    ak[:laa - 230m] << 2.5dt
+                --  ak[:laa - 150m] << 1.5dt
+            );
+
+        with layer = -1 marker(:de.abzw.casing :right, ak[:laa] >> 1.5dt);
+        with layer = 1 marker(:de.abzw :right, ak[:laa] >> 1.5dt);
+    }
+
+    with link = "line.de.1220" {
+        track(:first :cat :tight, ak[:laa + 240m, :ala.f] >> 1.5dt);
+        track(:first :cat :flip :tight,
+                ak[:laa - 340m, :ala.f] << 1.5dt
+        );
+    }
+    with link = "line.de.1232" {
+        track(:first :double :cat, ak[:laa + 340m, :ala.f]);
+    }
+
+
+    with link = "point.de.Hamburg-Eidelstedt" {
+        # Gl. 1 (Gegenrichtungsgleis Strecke 1220)
+        track(:first:station :cat,
+                ak[:ala.f, :ala.f + 1dl] << 1.5dt
+            ..  ak[:frot + 300m, :eid.en - 700m] << 7.5dt
+            ..  ak[:eid.en - 2dl, :eid.en + 2dl] << 1.5dt
+            --  ak[:eid.en + 3dl, :eid.f] << 0.5dt
+        );
+        with layer = -1 casing(:first:station :cat,
+                ak[:ala.f, :ala.f + 1dl] << 1.5dt
+            ..  ak[:frot + 300m, :eid.ef] << 7.5dt
+        );
+
+        # Gl. 10
+        track(:station,
+                ak[:frot + 300m - 1.1dl, :frot + 300m - 1dl] << 7.5dt
+            --  ak[:frot + 300m, :eid.ef] << 6.5dt
+            --  ak[:eid.ef + 2dl, :eid.ef + 2.1dl] << 4.5dt
+        );
+
+        # Gl. 11/12/13
+        track(:station,
+                ak[:frot + 3dl, :frot + 300m - 3dl] << 2.5dt
+            --  ak[:frot + 300m, :eid.ef + 2dl] << 5.5dt
+        );
+
+        # Gl. 14/15/16/17
+        track(:station,
+                ak[:frot + 300m - 1dl, :eid.ef + 2dl] << 4.5dt
+        );
+
+        # Gl. 18/19/20/21
+        track(:station, ak[:frot + 300m - 2dl, :eid.ef] << 3.5dt);
+
+        # Gl. 28 etc.
+        track(:station,
+                ak[:eid.egs - 1.1dl, :eid.egs - 1dl] << 0.5dt
+            --  ak[:eid.egs + 1dl, :eid.en - 700m] << 2.5dt
+            ..  ak[:eid.en - 2dl, :eid.en + 1dl] << 0.5dt
+            --  ak[:eid.en + 2dl, :eid.en + 2.1dl] >> 0.5dt
+        );
+            track(:station,
+                    ak[:eid.ef - 1dl] << 2.5dt
+                --  ak[:eid.ef + 2dl] << 5.5dt
+            );
+            track(:station,
+                    ak[:eid.en - 1dl] << 0.5dt
+                --  ak[:eid.en] << 1.5dt
+            );
+
+        # Gl. 28+
+        track(:station,
+                ak[:eid.ef + 0.9dl, :eid.ef + 1.0dl] << 2.5dt
+            --  ak[:eid.ef + 2.0dl, :eid.eo - 400m - 1.0dl] << 3.5dt
+            --  ak[:eid.eo - 400m, :eid.eo - 399m] << 2.5dt
+        );
+
+        # Gl. 30 (Gegenrichtungsgleis Strecke 1232)
+        track(:first:station :cat,
+                ak[:ala.f, :ala.f + 1dl] << 0.5dt
+            ..  ak[:frot, :frot + 3dl] << 2.5dt
+        );
+            track(:station,
+                    ak[:eid.egs - 5dl] >> 0.5dt
+                --  ak[:eid.egs - 4dl] << 0.5dt
+            );
+            track(:station,
+                    ak[:frot] << 2.5dt
+                --  ak[:frot + 1dl] << 1.5dt
+            );
+
+        # Gl. 31 (Strecke 1234)
+        with layer = -4 track(:first:station :cat,
+                path("d4.de.1234")[:aa + 6dt, :aa]
+            ..  ak[:frot, :frot + 1dl] << 1.5dt
+            ..  ak[:eid.egs - 5dl, :eid.egs - 1dl] << 0.5dt
+        );
+            track(:station,
+                    ak[:eid.egs - 3dl] << 0.5dt
+                --  ak[:eid.egs - 2dl] >> 0.5dt
+            );
+
+        # Gl. „32“ (Richtungsgleis Strecke 1232)
+        track(:first:station :cat, ak[:ala.f, :eid.egs] >> 0.5dt);
+        with layer = -1 casing(:first :cat,
+                ak[:eis, :frot] >> 0.5dt
+        );
+
+        # Gl. 54/57/58
+        track(:station, ak[:eid.egs, :eid.eo] << 1.5dt)
+
+        # Gl. 59/60/61        
+        track(:station,
+                ak[:eid.egs - 1m, :eid.egs] >> 0.5dt
+            --  ak[:eid.egs + 1dl, :eid.eo] << 0.5dt
+            ..  ak[:eid.eo + 120m, :eid.eo + 300m + 3dl] >> 0.5dt
+        );
+            track(:station,
+                    ak[:eid.eo + 300m] >> 0.5dt
+                --  ak[:eid.eo + 300m + 1dl] >> 1.5dt
+            );
+
+        # Gl. 62 
+        track(:station,
+                ak[:eid.egs, :eid.eo - 2dl] >> 0.5dt
+            --  ak[:eid.eo, :eid.eo + 1m] << 1.5dt
+        );
+
+        # Gl. 281/282
+        track(:station, ak[:eid.eo, :eid.en - 1km] << 1.5dt);
+
+        # Gl. 283/284
+        track(:station,
+                ak[:eid.eo + 249m, :eid.eo + 250m] << 1.5dt
+            --  ak[:eid.eo + 250m + 1dl, :eid.en - 1km] << 0.5dt
+        );
+
+        # Gl. 400
+        with layer = -2 track(:station,
+                ak[:ala.f, :ala.f + 1dl] << 2.5dt
+            ..  ak[:frot, :frot + 4dl] << 3.5dt
+        );
+            track(:station,
+                    ak[:frot + 2dl] << 3.5dt
+                --  ak[:frot + 3dl] << 2.5dt
+            );
+
+        # Gl. 405 (Richtungsgleis Strecke 1220)
+        track(:first:station :cat,
+                ak[:ala.f, :esn - 1km] >> 1.5dt
+            ..  ak[:esn - 300m, :eid.f] >> 0.5dt
+        );
+        with layer = -1 casing(:first :cat,
+                ak[:eis, :frot] >> 1.5dt
+        );
+            track(:station,
+                    ak[:eid.f - 100m - 1dl] >> 0.5dt
+                --  ak[:eid.f - 100m] << 0.5dt
+            );
+
+        # Gl. 501/502/505/506
+        track(:station,
+                ak[:eid.ef + 2dl, :eid.ef + 3dl] << 5.5dt
+            ..  ak[:eid.eo - 400m, :eid.en - 700m] << 6.5dt
+        );
+
+        # Abstellgleise zwischen Eo and En
+        track(:station,
+                ak[:eid.eo + 800m + 2.9dl, :eid.eo + 800m + 3dl] << 6.5dt
+            --  ak[:eid.eo + 800m + 5dl, :eid.en - 700m] << 4.5dt
+        );
+        track(:station,
+                ak[:eid.eo + 800m + 4dl, :eid.en - 700m] << 5.5dt
+        );
+
+        # Gl. 507/508/509
+        track(:station,
+                ak[:eid.ef + 2dl, :eid.eo - 400m] << 4.5dt
+            --  ak[:eid.eo - 400m + 1dl, :eid.eo - 100m - 0.5sw] << 5.5dt
+        );
+        track(:station,
+                ak[:eid.eo - 100m + 0.5sw, :eid.eo + 800m] << 5.5dt
+            --  ak[:eid.eo + 800m + 1dl, :eid.eo + 800m + 1.1dl] << 6.5dt
+        );
+
+        # Gl. 510
+        track(:station,
+                ak[:eid.eo - 400m + 1.9dl, :eid.eo - 400m + 2dl] << 5.5dt
+            --  ak[:eid.eo - 400m + 3dl, :eid.eo - 100m - 0.5sw] << 4.5dt
+        );
+        track(:station,
+                ak[:eid.eo - 100m + 0.5sw, :eid.eo + 160m] << 4.5dt
+            --  ak[:eid.eo + 160m + 1dl, :eid.eo + 160m + 1.1dl] << 5.5dt
+        );
+
+        # Gl. 511/512/513
+        track(:station,
+                ak[:eid.eo - 401m, :eid.eo - 400m] << 4.5dt
+            --  ak[:eid.eo - 400m + 1dl, :eid.eo - 100m - 0.5sw] << 3.5dt
+        );
+        track(:station,
+                ak[:eid.eo - 100m + 0.5sw, :eid.eo + 160m + 1dl] << 3.5dt
+            --  ak[:eid.eo + 160m + 3dl, :eid.eo + 160m + 3.1dl] << 5.5dt
+        );
+
+        marker(:de.bft :left, ak[:eif] << 7.5dt);
+        marker(:de.bbf :left, ak[:eid] << 7.5dt);
+        marker(:de.bw :left, ak[:eid.eo - 100m] << 3.0dt);
+        marker(:de.bft :right, ak[:eio] >> 1.5dt);
+        with layer = -1 marker(:de.bft.casing :right, ak[:eio] >> 1.5dt);
+        marker(:de.bft :left, ak[:esn] << 0.5dt);
+    }
+}
+
+with detail = [4, 5] {
+    with link = "line.de.1220" {
+        track(:first :double :cat, ak[:eid.f, :pin.a]);
+        with layer = 1 badge(
+            ak[:hal + 0.9km] >> 1.0dt,
+            vbox(:center:middle :badgesize, "1225", "1220")
+        );
+    }
+
+
+    with link = "point.de.Thesdorf-Bk" {
+        with layer = -1 marker(:de.bk :removed :left, ak[:the] << 0.5dt);
+        station(:left :removed, ak[:the - 0.2sw] << 0.5dt << 1.8sh,
+            "Thesdorf", "13,81"
+        );
+    }
+}
+
+with detail = 4 {
+    with link = "point.de.Pinneberg" {
+        # Gl. 3
+        track(:station,
+                ak[:pin - 301m, :pin - 300m] >> 0.5dt
+            --  ak[:pin - 300m + 2dl, :pin + 320m] >> 1.5dt
+            --  ak[:pin + 320m + 2dl, :pin + 320m + 2.1dl] >> 0.5dt
+        );
+
+        # Gl. 4 (Richtungsgleis)
+        track(:first:station :cat, ak[:pin.a, :pin.f] >> 0.5dt);
+            track(:station,
+                    ak[:pin.a + 100m] >> 0.5dt
+                --  ak[:pin.a + 100m + 2dl] << 0.5dt
+            );
+            track(:station,
+                    ak[:pin + 320m] >> 0.5dt
+                --  ak[:pin + 320m + 2dl] << 0.5dt
+            );
+            track(:station,
+                    ak[:pin + 320m + 3dl] >> 0.5dt
+                --  ak[:pin + 320m + 5dl] << 0.5dt
+            );
+
+        # Gl. 5 (Gegenrichtungsgleis)
+        track(:first:station :cat, ak[:pin.a, :pin.f] << 0.5dt);
+            track(:station,
+                    ak[:pin.a + 100m + 3dl] << 0.5dt
+                --  ak[:pin.a + 100m + 5dl] >> 0.5dt
+            );
+            track(:station,
+                    ak[:pin.f - 100m - 2dl] << 0.5dt
+                --  ak[:pin.f - 100m] >> 0.5dt
+            );
+
+        # Gl. 6
+        track(:station,
+                ak[:pin - 301m, :pin - 300m] << 0.5dt
+            --  ak[:pin - 300m + 2dl, :pin.f - 100m - 5dl] << 1.5dt
+            --  ak[:pin.f - 100m - 3dl, :pin.f + 100m - 2.9dl] << 0.5dt
+        );
+
+        # Gl. 31
+        track(:station,
+                ak[:pin + 79m, :pin + 80m] >> 1.5dt
+            --  ak[:pin + 80m + 1dl, :pin + 350m] >> 2.5dt
+        );
+
+        marker(:de.bf :right, ak[:pin] >> 1.5dt);
+        station(:left, ak[:pin - 0.2sw] << 2.5dt << 2.8pt,
+            span(:bold, "Pinneberg"),
+            "1220: 15,95"
+        );
+    }
+}
+
+with detail = [4, 5] {
+    with link = "line.de.1220" {
+        track(:first :double :cat, ak[:pin.f, :pri - 1sw]);
+        with layer = 1 line_badge(:open, ak[:pri - 1.3km], "1220");
+    }
+
+
+    with link = "point.de.Prisdorf" {
+        track(:first:station :double :cat, ak[:pri - 1sw, :pri + 1sw]);
+        marker(:de.hp :right, ak[:pri] >> 0.5dt)
+        with layer = -1 marker(:de.bf :removed :right, ak[:pri] >> 0.5dt);
+        station(:top, ak[:pri - 0.2sw] >> 0.5dt >> 1.6sh,
+            "Prisdorf", "19,26"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, ak[:pri + 1sw, :tor.a]);
+    }
+
+
+    with link = "point.de.Tornesch" {
+        # Gl. 12, Gl. 22
+        track(:first:station :double :cat, ak[:tor.a, :tor + 1sw]);
+            track(:station,
+                    ak[:tor.a + 100m] >> 0.5dt
+                --  ak[:tor.a + 100m + 1dl] << 0.5dt
+            );
+            track(:station,
+                    ak[:tor - 300m + 1dl] << 0.5dt
+                --  ak[:tor - 300m + 2dl] >> 0.5dt
+            );
+
+        # Gl. 31
+        track(:station,
+                ak[:tor.a + 100m + 1.9dl, :tor.a + 100m + 2dl] << 0.5dt
+            --  ak[:tor.a + 100m + 3dl, :tor - 300m - 1dl] << 1.5dt
+            --  ak[:tor - 300m, :tor - 299m] << 0.5dt
+        );
+
+        # Gl. 4?
+        track(:station,
+                ak[:tor - 500m + 1dl, :tor - 130m - 1dl] << 2.5dt
+            --  ak[:tor - 130m, :tor - 129m] << 3.5dt
+        );
+
+        # Gl. 5? 
+        track(:third:station,
+                ak[:tor - 501m, :tor - 500m] << 1.5dt
+            --  ak[:tor - 500m + 2dl, :tor] << 3.5dt
+        );
+
+        marker(:de.bf :left, ak[:tor] << 0.5dt);
+        label(ak[:tor - 0.5sw] >> 0.5dt,
+            hbox(:left:bottom,
+                vbox(:center:bottom,
+                    span(:bold :medium, "Tornesch"),
+                    hbox(:left:top :xsmall,
+                        vbox(:right:top,
+                            span(:open, "1220: "),
+                            span(:open, "9129: ")
+                        ),
+                        vbox(:right:top,
+                            span(:open, "23,"),
+                            span(:open, "0,")
+                        ),
+                        vbox(:left:top,
+                            span(:open, "17"),
+                            span(:open, "0")
+                        )
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat, ak[:tor + 1sw, :els - 1sw]);
+        with layer = 1 line_badge(:open, ak[:els - 1.3km], "1220");
+    }
+
+
+    with link = "point.de.Himmel" {
+        with layer = -1 marker(:de.bk :removed :right, ak[:him] >> 0.5dt);
+        station(:right :removed, ak[:him - 0.4sw] >> 0.5dt >> 1.2sw,
+            "Himmel", "25,46"
+        );
+    }
+
+
+    with link = "point.de.Lieth" {
+        with layer = -1 marker(:de.bk :removed :right, ak[:lie] >> 0.5dt);
+        station(:right :removed, ak[:lie - 0.4sw] >> 0.5dt >> 1.2sw,
+            "Lieth", "27,20"
+        );
+    }
+
+    with link = "point.de.Elmshorn-Els" {
+        # Gl. 1/2 (Strecke 1220);
+        track(:first:station :double :cat:ac15 :pax, ak[:els - 1sw, :elm.r]);
+
+        # Gl. 12
+        with layer = -4 track(:station :removed,
+                ak[:els + 20m, :elm.r] >> 1.5dt
+        );
+            with layer = -4 track(:station :removed,
+                    ak[:els + 30m] >> 0.5dt
+                --  ak[:els + 90m] >> 1.5dt
+            );
+
+        with layer = -4 marker(:de.bft :removed :left, ak[:els] << 0.5dt);
+        station(:left :removed, ak[:els - 0.4sw] << 0.5dt << 1.4sw,
+            "Elmshorn (Els)", "29,20"
+        );
+    }
+
+
+    with link = "point.de.Elmshorn" {
+        let en = path("d4.de.1210");
+
+        # Gl. 101/202 (1/2 alt) (Strecke 1220)
+        track(:first:station :double :cat:ac15 :pax, ak[:elm.r, :elm.u]);
+            with layer = -1 track(:station :cat:ac15,
+                    ak[:elm - 750m] >> 0.5dt
+                --  ak[:elm - 690m] << 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    ak[:elm - 630m] << 0.5dt
+                --  ak[:elm - 570m] >> 0.5dt
+            );
+            track(:station :cat:ac15 :pax,
+                    ak[:elm - 550m] >> 0.5dt
+                --  ak[:elm - 490m] << 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    ak[:elm + 30m] >> 0.5dt
+                --  ak[:elm + 90m] << 0.5dt
+            );
+
+        # Gl. 106 (1W alt) (Richtungsgleis Strecke 1210)
+        track(:first:station :cat:ac15 :pax,
+                ak[:elm + 149m, :elm + 150m] << 0.5dt
+            --  ak[:elm + 210m, :elm + 211m] << 1.5dt
+            ..  en[:elw - 1.1sw, :elw - 1sw] >> 0.5dt
+        );
+
+        # Gl. 203 - 107 (3 - 2W alt) (Gegenrichtungsgleis Strecke 1210)
+        track(:first:station :cat:ac15 :pax,
+                ak[:elm - 551m, :elm - 550m] << 0.5dt
+            --  ak[:elm - 430m, :elm.t] << 2.5dt
+            ..  en[:elw - 1.1sw, :elw - 1sw] << 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ak[:elm + 180m] << 2.5dt
+                --  ak[:elm + 300m] << 0.5dt
+            );
+
+        # Gl. 4 (alt)
+        track(:station :removed, ak[:elm - 620m, :elm + 100m] << 3.5dt);
+            with layer = -1 track(:station :removed,
+                    ak[:elm - 240m] << 3.5dt
+                --  ak[:elm - 200m] << 2.5dt
+            );
+            with layer = -1 track(:station :removed,
+                    ak[:elm + 60m] << 3.5dt
+                --  ak[:elm + 100m] << 2.5dt
+            );
+
+        # Gl. 12 (alt)
+        with layer = -4 track(:station :removed,
+                ak[:elm.r, :elm - 0.6sw] >> 1.5dt
+        );
+
+        # Gl. 30 (alt)
+        with layer = -4 track(:station :removed,
+                ak[:elm - 610m, :elm - 0.5sw - 120m] >> 2.5dt
+        );
+
+        # Gl. 33 (alt)
+        with layer = -4 track(:station :removed,
+                ak[:elm - 651m, :elm - 650m] >> 1.5dt
+            --  ak[:elm - 570m, :elm - 0.5sw - 160m] >> 3.5dt
+            --  ak[:elm - 0.5sw, :elm - 0.49sw] << 0.5dt
+        );
+
+        # 9120
+        with layer = -2 track(:third:station :pax,
+                ak[:elm + 0.5sw, :elm.h] >> 1.5dt
+        );
+            with layer = -2 track(:station,
+                    ak[:elm + 480m] >> 0.5dt
+                --  ak[:elm + 480m + 1dl] >> 1.5dt
+            );
+
+        marker(:de.bf :right, ak[:elm] >> 0.5dt);
+        station(:right :left_align, ak[:elm - 0.4sw] >> 0.5dt >> 1.4sw,
+            span(:bold, "Elmshorn"),
+            hbox(:left:top,
+                vbox(:right:top,
+                    span(:open, "   1210: "),
+                    span(:open, "1220: "),
+                    span(:open, "9120: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "30,"),
+                    span(:open, "30,"),
+                    span(:open, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "07 "),
+                    span(:open, "07"),
+                    span(:open, "0")
+                ),
+                vbox(:left:top,
+                    span(:removed, "(0,07)"),
+                    span(:removed, ""),
+                    span(:removed, "")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Elmshorn-Nord" {
+        # Gl. 111/112 (Strecke 1220)
+        track(:first:station :double :cat:ac15 :pax, ak[:elm.u, :elm.f]);
+            track(:station,
+                    ak[:elm.f - 160m] << 0.5dt
+                --  ak[:elm.f - 100m] >> 0.5dt
+            );
+
+        # Gl. 113
+        with layer = -1 track(:station :cat:ac15,
+                ak[:elm + 210m, :eln + 100m] << 1.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ak[:elm + 480m] << 0.5dt
+                --  ak[:elm + 550m] << 1.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    ak[:eln + 40m] << 1.5dt
+                --  ak[:eln + 100m] << 0.5dt
+            );
+
+
+        with layer = 2 marker(:de.bft :right, ak[:eln] >> 0.5dt);
+        with layer = 1 marker(:de.bft.casing :right, ak[:eln] >> 0.5dt);
+        station(:right, ak[:eln - 0.8sw] >> 0.5dt >> 1.4sw,
+            "Elmshorn Nord", "32,05"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat:ac15 :pax, ak[:elm.f, :hot - 1sw]);
+        with layer = 1 line_badge(:open, ak[:eln + 2.0km], "1220");
+    }
+
+
+    # ...
+
+    with link = "point.de.Meimersdorf-Mf" {
+        # Gl. 1 (Richtungsgl. Str. 1220)
+        track(:first:station :cat:ac15 :pax, ak[:mei.a, :mef + 180m] >> 0.5dt);
+
+        # Gl. 2 (Gegenrichtungsgl. Str. 1220)
+        track(:first:station :cat:ac15 :pax, ak[:mei.a, :mef + 180m] << 0.5dt);
+
+        # Gl. 3
+        with layer = -1 track(:station :cat:ac15,
+                ak[:mef + 2.7dt, :mef + 400m] << 2.5dt
+        );
+
+        # Gl. 3a
+        with layer = -3 track(:station, ak[:mef - 2dl, :mef] << 1.5dt);
+
+        # Gl. 4 (Str. 1033)
+        with layer = -1 track(:first:station :cat:ac15,
+                ak[:mef + 1dl, :mef + 2.7dl] << 1.5dt
+            --  ak[:mef + 4.7dl, :mef + 400m] << 3.5dt
+        );
+
+        # Gl. 5 (Str. 1031)
+        with layer = -1 track(:first:station :cat:ac15,
+                ak[:mef - 1.1dl, :mef - 1dl] << 0.5dt
+            --  ak[:mef, :mef + 1dl] << 1.5dt
+            --  ak[:mef + 4dl, :mef + 400m] << 4.5dt
+        );
+
+        # Gl. 6
+        with layer = -1 track(:station,
+                ak[:mef + 3.9dl, :mef + 4dl] << 4.5dt
+            --  ak[:mef + 5dl, :mef + 400m] << 5.5dt
+        );
+
+        # Gl. 8
+        with layer = -4 track(:station :removed,
+                ak[:mef + 1.7dt, :mef + 400m] << 1.5dt
+        );
+
+        with layer = -4 marker(:de.bft :left:removed, ak[:mef] << 1.5dt);
+        station(:left :removed, ak[:mef - 0.4sw] << 1.5dt << 1.2sw,
+            "M. (Mf)", "100,17"
+        );
+    }
+
+
+    with link = "line.de.1220" {
+        track(:first :double :cat:ac15 :pax, ak[:mef + 180m, :kie.a]);
+    }
+
+    with link = "point.de.Kiel-Hbf" {
+        let ko = path("d4.de.1022");
+
+        # Gleis 1
+        track(:station,
+                ak[:kie.kp - 2.1dl, :kie.kp - 2dl] >> 1.5dt
+            --  ak[:kie.kp - 1dl, :kie] >> 2.5dt
+        );
+
+        # Gleis 2 - aus Neustadt
+        track(:first :station, ak[:kie.a, :kie] >> 1.5dt);
+
+        # Gleis 3 & 4 - aus Altona
+        track(:double :first :station, ak[:kie.a, :kie]);
+
+        # Gleis 5 - aus Hassee
+        with layer = -1 track(:first :station :removed,
+                ko[:khg.aa, :khg.aa - 1dl] >> 0.5dt
+            ..  ak[:fhas - .1dl, :fhas] << 1.5dt
+        );
+        track(:first :station, ak[:fhas, :kie] << 1.5dt);
+        
+        track(:station, ak[:kie.ko + 2dl, :fhas] << 1.5dt);
+
+        # Gleis 6 - nach Hassee
+        track(:first :station,
+                ko[:khg.aa, :khg.aa - 1dl] << 0.5dt
+            ..  ak[:fhas - .1dl, :kie] << 2.5dt
+        );
+
+        # Gleis 19
+        track(:first :station,
+                ak[:kie.a, :kie.ks + 4dl] >> 2.5dt
+            --  ak[:kie.ks + 5dl, :kie.ks + 5.1dl] >> 1.5dt
+        );
+        with layer = -1 track(:station :removed,
+                ak[:kie.ks + 4dl, :kie.kp - 3dl] >> 2.5dt
+        );
+
+        # Gleis 21
+        track(:station, ak[:kie.ko + 5dl, :kie.ks + 2dl] >> 3.5dt);
+
+        # Gleis 22
+        track(:station,
+                ak[:kie.ko + 3.9dl, :kie.ko + 4dl] >> 2.5dt
+            --  ak[:kie.ko + 6dl, :kie.ks + 1dl] >> 4.5dt
+            --  ak[:kie.ks + 3dl, :kie.ks + 3.1dl] >> 2.5dt
+        );
+
+        marker(:de.bft :right, ak[:kie.ko - 1.0dl - 0.3sw] >> 2.5dt);
+        with detail = 5 {
+            station(:right, ak[:kie.ko - 0.8sw] >> 2.5dt >> 1.2sh,
+                "K. Hbf Ko", "??"
+            );
+        }
+
+        area(:open,
+                ak[:kie, :kie + 1sh] >> 2.7dt
+            --  ak[:kie + 1sh, :kie] >> 2.7dt
+        );
+        label(ak[:kie - 0.2sw] << 3.5dt, hbox(:right:bottom,
+            vbox(:center:bottom,
+                hbox(:center:top :xsmall,
+                    vbox(:right:top,
+                        span(:open, "1022: "),
+                        span(:open, "1023: "),
+                        span(:open, "1032: "),
+                        span(:open, "1220: ")
+                    ),
+                    vbox(:right:top,
+                        span(:open, "0,"),
+                        span(:open, "0,"),
+                        span(:open, "?"),
+                        span(:open, "105,")
+                    ),
+                    vbox(:left:top,
+                        span(:open, "09"),
+                        span(:open, "05"),
+                        span(:open, "?"),
+                        span(:open, "59")
+                    )
+                ),
+                span(:medium :bold, "KIEL Hbf")
+            )
+        ));
+    }
+
+    with link = "point.de.Kiel-Altonaer-Bf" {
+        with layer = -2 track(:double :first :gone, ak[:kie, :kia]);
+        marker(:de.bf :top :gone, ak[:kia]);
+    }
+}
+

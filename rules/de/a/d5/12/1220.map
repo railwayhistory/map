@@ -1,27 +1,16 @@
 # DE 1220.  Altona Palmaille - Kiel Altonaer Bf
 #
-#   Hamburg-Eidelstedt ausschl. - Kiel Hbf ausschl: d45
-#
-let altkie = path("path.de.1220");
-let alg = path("path.de.1220.ag");
-let ala = path("path.de.1220.al");
+let ak = path("d4.de.1220");
 
 with detail = 5 {
-    with link = "point.de.Altona-Palmaille" {
-        track(:first :double :gone, altkie[:pal, :pal + 0.5sw]);
-        marker(:de.bf :gone :bottom, altkie[:pal]);
-    }
-
-
-    with link = "line.de.1220" {
-        with layer = -1 track(:first :double :gone, altkie[:pal + 0.5sw, :alt]);
-    }
-
+    let ala = path("d4.de.1220.al");
+    let alt = path("d4.de.1220.aa");
+    let alg = path("d4.de.1220.ag");
 
     #--- Hamburg-Altona ------------------------------------------------------
 
     with link = "point.de.Hamburg-Altona" {
-        let alt = path("path.de.1220.aa");
+        let sa  = path("d4.de.a.6100");
 
         let w1   = alt[:alt + 209m, :alt + 210m] << 5.5dt;
         let w2   = alt[:alt + 274m, :alt + 275m] << 9dt;
@@ -129,8 +118,8 @@ with detail = 5 {
                 -- alt[:alt + 935m] << 3.85dt;
         let w90  = alt[:alt + 990m, :alt + 991m] << 3dt;
         let w91  = alt[:alt + 999m, :alt + 1000m] << 3dt;
-        let w120 = altkie[:alg.a - 110m, :alg.a - 109m] >> 0.50dt;
-        let w127 = altkie[:alg.a - 40m, :alg.a - 41m] << 0.50dt;
+        let w120 = ak[:alg.a - 110m, :alg.a - 109m] >> 0.50dt;
+        let w127 = ak[:alg.a - 40m, :alg.a - 41m] << 0.50dt;
         let w799 = alt[:alt + 359m, :alt + 370m] << 12dt;
 
         # Gl. 5
@@ -155,12 +144,12 @@ with detail = 5 {
             ..  alt[:alt + 750m, :alt + 755m] << 29dt
             ..  alt[:alt + 920m] << 22.00dt
             --  alt[:alt + 940m] << 20.00dt
-            ..  path("path.de.6100")[:aeid + 1m, :aeid] << 0.5dt
+            ..  sa[:aeid + 1m, :aeid] << 0.5dt
         );
         with layer = 1 casing(:first:station :cat,
                 alt[:alt + 920m] << 22.00dt
             --  alt[:alt + 940m] << 20.00dt
-            ..  path("path.de.6100")[:aeid + 1m, :aeid] << 0.5dt
+            ..  sa[:aeid + 1m, :aeid] << 0.5dt
         );
 
         # Gl. 7
@@ -193,24 +182,24 @@ with detail = 5 {
         track(:first:station :cat,
                 alt[:alt, :alt + 850m] << 2dt
             ..  alt[:alt + 999m, :alt + 1000m] << 1dt
-            ..  altkie[:alg.a - 110m, :alg.a] << 0.5dt
+            ..  ak[:alg.a - 110m, :alg.a] << 0.5dt
         );
 
         # Gl. 11
         with layer = 2 track(:first:station :cat,
                 alt[:alt, :alt + 850m] << 1dt
-            ..  path("path.de.6100.ar")[:aeid, :aeid - 1m] >> 1.0dt
+            ..  path("d4.de.6100.ar")[:aeid, :aeid - 1m] >> 1.0dt
         );
         with layer = 1 casing(:first:station :cat,
                 alt[:alt + 849m, :alt + 850m] << 1dt
-            ..  path("path.de.6100.ar")[:aeid, :aeid - 1m] >> 1.0dt
+            ..  path("d4.de.6100.ar")[:aeid, :aeid - 1m] >> 1.0dt
         );
 
         # Gl. 12
         track(:first:station :cat,
                 alt[:alt + 20m, :alt + 340m] >> 1dt
             ..  alt[:alt + 410m, :alt + 1000m]
-            ..  altkie[:alg.a - 110m, :alg.a] >> 0.5dt
+            ..  ak[:alg.a - 110m, :alg.a] >> 0.5dt
         );
 
         # Gl. 111
@@ -394,7 +383,7 @@ with detail = 5 {
         track(:station :cat,
                 w64
             ..  alt[:alt + 640m, :alt + 1000m] << 3dt
-            ..  altkie[:alg.a - 60m, :alg.a] << 1.5dt
+            ..  ak[:alg.a - 60m, :alg.a] << 1.5dt
         );
 
         # Gl. 487
@@ -543,7 +532,6 @@ with detail = 5 {
     #--- Hamburg-Altona Gbf --------------------------------------------------
 
     with link = "point.de.Hamburg-Altona-Gbf" {
-        let alt = path("path.de.1220.aa");
         # Gl. WS150?
         track(:station,
                 alg[:alg - 170m, :alg + 60m] << 3.5dt
@@ -568,35 +556,35 @@ with detail = 5 {
 
         # Gl. 325
         track(:station :cat,
-                altkie[:alg.a, :fhol] << 1.5dt
+                ak[:alg.a, :fhol] << 1.5dt
             ..  alg[:alg - 100m, :alg - 99m] << 0.5dt
         );
 
         # Gl. 316 (Richtungsgleis Strecke 1231)
         track(:first:station :cat,
-                altkie[:alg.a, :fhol] << 0.5dt
+                ak[:alg.a, :fhol] << 0.5dt
             ..  alg[:alg - 100m, :alg + 300m] >> 0.5dt
             ..  alg[:alt.f - 1m, :alt.f] >> 3.5dt
         );
 
         # Gl. 315 (Gegenrichtungsgleis Strecke 1220)
         track(:first:station :cat,
-                altkie[:alg.a, :fhol] >> 0.5dt
+                ak[:alg.a, :fhol] >> 0.5dt
             ..  alg[:alg - 100m, :alg + 300m] >> 1.5dt
             ..  alg[:alt.f - 1m, :alt.f] >> 4.5dt
         );
 
         # Gl. 314
         track(:station :cat,
-                altkie[:alg.a, :alg.a + 1m] >> 0.5dt
-            ..  altkie[:fhol - 1m, :fhol] >> 1.5dt
+                ak[:alg.a, :alg.a + 1m] >> 0.5dt
+            ..  ak[:fhol - 1m, :fhol] >> 1.5dt
             ..  alg[:alg - 100m, :alg + 300m] >> 2.5dt
             ..  alg[:alt.f - 1m, :alt.f] >> 5.5dt
         );
 
         # Gl. 313 - W162 - W163 - W166
         track(:station :cat,
-                altkie[:fhol - 1m, :fhol] >> 1.5dt
+                ak[:fhol - 1m, :fhol] >> 1.5dt
             ..  alg[:alg - 100m, :alg + 300m] >> 3.5dt
             ..  alg[:alg + 360m] >> 3.0dt
             --  alg[:alg + 365m] >> 3.05dt
@@ -2022,488 +2010,160 @@ with detail = 5 {
         # Str. 1220 L
         track(:first :cat :tight :flip,
                 ala[:laa + 250m, :laa + 251m] << 2.5dt
-            ..  altkie[:stx, :eid.a] << 2.5dt
+            ..  ak[:stx, :eid.a] << 2.5dt
         );
 
         # Str. 1232 L/R
         track(:first :double :cat,
                 ala[:laa + 250m, :laa + 251m] << 1.0dt
-            ..  altkie[:stx, :eid.a] << 1.0dt
+            ..  ak[:stx, :eid.a] << 1.0dt
         );
 
         # Str. 1220 R
         track(:first :cat :tight,
                 ala[:laa + 250m, :laa + 251m] >> 0.5dt
-            ..  altkie[:stx, :eid.a] >> 0.5dt
+            ..  ak[:stx, :eid.a] >> 0.5dt
         );
     }
 
 
     #--- Hamburg-Eidelstedt-Ef -----------------------------------------------
     #
-    # altkie[:eif - 1370m, :eif + 400m]
+    # ak[:eif - 1370m, :eif + 400m]
 
     with link = "point.de.Hamburg-Eidelstedt-Ef" {
         # Gl. 31 (Streckengleis Strecke 1234)
         track(:first:station :cat,
-                path("path.de.1234")[:aa, :aa - 1m]
-            ..  altkie[:eif - 630m, :eif - 615m] << 5.5dt
-            ..  altkie[:eif - 560m] << 5.0dt
-            --  altkie[:eif - 400m] << 3.0dt
-            ..  altkie[:eif - 200m, :eif] << 1.5dt
+                path("d4.de.1234")[:aa, :aa - 1m]
+            ..  ak[:eif - 630m, :eif - 615m] << 5.5dt
+            ..  ak[:eif - 560m] << 5.0dt
+            --  ak[:eif - 400m] << 3.0dt
+            ..  ak[:eif - 200m, :eif] << 1.5dt
         );
 
         # Gl. 53
         track(:station :cat,
-                altkie[:eif - 630m, :eif - 615m] << 7.5dt
-            ..  altkie[:eif - 560m] << 7.0dt
-            --  altkie[:eif - 400m] << 5.0dt
-            ..  altkie[:eif - 200m, :eif + 20m] << 3.5dt
-            ..  altkie[:eif + 220m, :eif + 400m] << 9.5dt
+                ak[:eif - 630m, :eif - 615m] << 7.5dt
+            ..  ak[:eif - 560m] << 7.0dt
+            --  ak[:eif - 400m] << 5.0dt
+            ..  ak[:eif - 200m, :eif + 20m] << 3.5dt
+            ..  ak[:eif + 220m, :eif + 400m] << 9.5dt
         );
 
         # Gl. 62 (Richtungsgleis Strecke 1232)
         with layer = 2 track(:first:station :cat,
-                altkie[:eif - 1370m, :eif] << 0.5dt
+                ak[:eif - 1370m, :eif] << 0.5dt
         );
         with layer = 1 casing(:first:station :cat,
-                altkie[:eif - 950m, :eif - 650m] << 0.5dt
+                ak[:eif - 950m, :eif - 650m] << 0.5dt
         );
         track(:station :cat,
-                altkie[:eif, :eif + 400m] << 0.5dt
+                ak[:eif, :eif + 400m] << 0.5dt
         );
 
         # Gl. 405 (Richtungsgleis Strecke 1220)
         with layer = 2 track(:first:station :cat,
-                altkie[:eif - 1370m, :eif + 400m] >> 0.5dt
+                ak[:eif - 1370m, :eif + 400m] >> 0.5dt
         );
         with layer = 1 casing(:first :cat,
-                altkie[:eif - 950m, :eif - 650m] >> 0.5dt
+                ak[:eif - 950m, :eif - 650m] >> 0.5dt
         );
 
         # W1 - W2
         track(:station :cat,
-                altkie[:eif - 1320m] << 0.5dt
-            --  altkie[:eif - 1230m] << 1.5dt
+                ak[:eif - 1320m] << 0.5dt
+            --  ak[:eif - 1230m] << 1.5dt
         );
 
-        marker(:de.stw :left, altkie[:eid.egs] << 1.5dt);
-        marker(:de.bft :left, altkie[:eif] << 4.5dt);
+        marker(:de.stw :left, ak[:eid.egs] << 1.5dt);
+        marker(:de.bft :left, ak[:eif] << 4.5dt);
     }
+}
 
 
-    #--- Streckengleise ------------------------------------------------------
-
-    with link = "line.de.1220" {
-        track(:first :double :cat, altkie[:eid.f, :pin.a]);
-    }
-
-
-    #--- Bk Thesdorf ---------------------------------------------------------
-
-    with link = "point.de.Thesdorf-Bk" {
-        with layer = -1 marker(:de.bk :removed :left, altkie[:the] << 0.5dt);
-        station(:left :removed, altkie[:the - 0.2sw] << 0.5dt << 1.8sh,
-            "Thesdorf", "13,81"
-        );
-    }
-
-
+with detail = 5 {
     #--- Pinneberg -----------------------------------------------------------
 
     with link = "point.de.Pinneberg" {
         # Gl. 3 (W5 - W21 - W24)
         track(:station :cat,
-                altkie[:pin - 331m, :pin - 330m] >> 0.5dt
-            ..  altkie[:pin - 200m, :pin + 320m] >> 1.5dt
-            ..  altkie[:pin + 420m, :pin + 421m] >> 0.5dt
+                ak[:pin - 331m, :pin - 330m] >> 0.5dt
+            ..  ak[:pin - 200m, :pin + 320m] >> 1.5dt
+            ..  ak[:pin + 420m, :pin + 421m] >> 0.5dt
         );
 
         # Gl. 4 (Richtungsgleis Strecke 1220)
-        track(:first:station :cat, altkie[:pin.a, :pin.f] >> 0.5dt);
+        track(:first:station :cat, ak[:pin.a, :pin.f] >> 0.5dt);
 
         # Gl. 5 (Gegenrichtungsgleis Strecke 1220)
         track(:first:station :cat,
-                altkie[:pin.a, :pin - 220m] << 0.5dt
-            ..  altkie[:pin - 100m, :pin + 170m] << 1.5dt
-            ..  altkie[:pin + 330m, :pin.f] << 0.5dt
+                ak[:pin.a, :pin - 220m] << 0.5dt
+            ..  ak[:pin - 100m, :pin + 170m] << 1.5dt
+            ..  ak[:pin + 330m, :pin.f] << 0.5dt
         );
 
         # Gl. 6 (W7 - W34)
         track(:station :cat,
-                altkie[:pin - 221m, :pin - 220m] << 0.5dt
-            ..  altkie[:pin - 100m, :pin + 400m] << 2.5dt
-            ..  altkie[:pin + 480m, :pin + 530m] << 1.5dt
-            ..  altkie[:pin + 620m, :pin + 621m] << 0.5dt
+                ak[:pin - 221m, :pin - 220m] << 0.5dt
+            ..  ak[:pin - 100m, :pin + 400m] << 2.5dt
+            ..  ak[:pin + 480m, :pin + 530m] << 1.5dt
+            ..  ak[:pin + 620m, :pin + 621m] << 0.5dt
         );
 
         # Gl. 31 (ab W21)
         track(:station,
-                altkie[:pin + 59m, :pin + 60m] >> 1.5dt
-            ..  altkie[:pin + 120m, :pin + 310m] >> 2.5dt
+                ak[:pin + 59m, :pin + 60m] >> 1.5dt
+            ..  ak[:pin + 120m, :pin + 310m] >> 2.5dt
         );
 
         # W1 - W2
         track(:station :cat,
-                altkie[:pin - 550m] >> 0.5dt
-            --  altkie[:pin - 450m] << 0.5dt
+                ak[:pin - 550m] >> 0.5dt
+            --  ak[:pin - 450m] << 0.5dt
         );
 
         # W3 - W4
         track(:station :cat,
-                altkie[:pin - 440m] << 0.5dt
-            --  altkie[:pin - 340m] >> 0.5dt
+                ak[:pin - 440m] << 0.5dt
+            --  ak[:pin - 340m] >> 0.5dt
         );
 
         # W23 - W25
         track(:station :cat,
-                altkie[:pin + 320m] >> 0.5dt
-            --  altkie[:pin + 420m] << 0.5dt
+                ak[:pin + 320m] >> 0.5dt
+            --  ak[:pin + 420m] << 0.5dt
         );
 
         # W31 - W32
         track(:station :cat,
-                altkie[:pin + 450m] >> 0.5dt
-            --  altkie[:pin + 550m] << 0.5dt
+                ak[:pin + 450m] >> 0.5dt
+            --  ak[:pin + 550m] << 0.5dt
         );
 
         # W35 - W36
         track(:station :cat,
-                altkie[:pin + 630m] >> 0.5dt
-            --  altkie[:pin + 720m] << 0.5dt
+                ak[:pin + 630m] >> 0.5dt
+            --  ak[:pin + 720m] << 0.5dt
         );
 
         # Bahnsteig Gl 2/3
         platform(:open,
-                altkie[:pin - 200m, :pin + 20m] >> 1.9dt
-            --  altkie[:pin + 20m, :pin - 50m] << 2.5dt
-            --  altkie[:pin - 50m, :pin - 200m] << 3.1dt
+                ak[:pin - 200m, :pin + 20m] >> 1.9dt
+            --  ak[:pin + 20m, :pin - 50m] << 2.5dt
+            --  ak[:pin - 50m, :pin - 200m] << 3.1dt
         );
 
         # Bahnsteig Gl 4/5
         platform(:open,
-                altkie[:pin - 100m, :pin + 170m] >> 0.1dt
-            --  altkie[:pin + 170m, :pin - 100m] >> 1.1dt
+                ak[:pin - 100m, :pin + 170m] >> 0.1dt
+            --  ak[:pin + 170m, :pin - 100m] >> 1.1dt
         );
 
-        marker(:de.bf :right, altkie[:pin] >> 1.9dt);
-        station(:left, altkie[:pin] << 5.5dt,
+        marker(:de.bf :right, ak[:pin] >> 1.9dt);
+        station(:left, ak[:pin] << 5.5dt,
             span(:bold, "Pinneberg"),
             "1220: 15,95"
         );
-    }
-
-
-    # Pinneberg ausschl. - Kiel Hbf ausschl.: d45
-
-
-    with link = "point.de.Kiel-Hbf" {
-        let kie.ks = path("path.de.1220.ks");
-
-        # Gl. 1 (Kp >> 4.5dt)
-        track(:station,
-                altkie[:kie.kp - 211m, :kie.kp - 210m] >> 1.5dt
-            --  altkie[:kie.kp - 170m, :kie.kp - 140m] >> 2.5dt
-            ..  altkie[:kie.kp, :kie] >> 4.5dt
-        );
-        with layer = -1 track(:station :removed,
-                altkie[:kie.kp - 280m, :kie.kp - 170m] >> 2.5dt
-        );
-            # W 132 - W 135
-            with layer = -1 track(:station :removed,
-                    altkie[:kie.kp - 220m] >> 2.5dt
-                --  altkie[:kie.kp - 180m] >> 3.5dt
-            );
-            # W 3 - W 140
-            with layer = -1 track(:station :removed,
-                    altkie[:kie.kp] >> 4.5dt
-                --  altkie[:kie.kp + 30m] >> 5.5dt
-            );
-
-        # Gl. 2 (>> 1.5dt, Kp: >> 2.5dt)
-        track(:first:station,
-                altkie[:kie.a, :kie.kp - 100m] >> 1.5dt
-            ..  altkie[:kie.kp, :kie] >> 2.5dt
-        );
-            # W 7 - W 3
-            track(:station,
-                    altkie[:kie.kp - 100m] >> 1.5dt
-                --  altkie[:kie.kp - 85m] >> 2dt
-                ..  altkie[:kie.kp - 3m] >> 4.4dt
-                --  altkie[:kie.kp] >> 4.5dt
-            );
-
-        # Gl. 2B (Kp: >> 3.5dt)
-        track(:station,
-                altkie[:kie.kp - 50m] >> 2dt
-            --  altkie[:kie.kp - 40m] >> 2.25dt
-            ..  altkie[:kie.kp, :kie.kp + 120m] >> 3.5dt
-        );
-
-        # Gl. 3 (>> 0.5dt, Kp: >> 1.5dt)
-        track(:first:station,
-                altkie[:kie.a, :kie.kp - 100m] >> 0.5dt
-            ..  altkie[:kie.kp, :kie] >> 1.5dt
-        );
-            # W 13 - W 8
-            track(:station,
-                    altkie[:kie.kp - 170m] >> 0.5dt
-                --  altkie[:kie.kp - 130m] >> 1.5dt
-            );
-
-        # Gl. 4 (<< 0.5dt)
-        track(:first:station, altkie[:kie.a, :kie] << 0.5dt);
-            # W 10 - W 6
-            track(:station,
-                    altkie[:kie.kp - 140m] << 0.5dt
-                --  altkie[:kie.kp - 90m] << 1.5dt
-            );
-
-        # Gl. 5 (<< 1.5dt)
-        with layer = -1 track(:first:station :removed,
-                kie.ks[:kie.ks - 100m] << 21dt
-            --  kie.ks[:kie.ks - 90m] << 20dt
-            ..  altkie[:kie.kp - 270m] << 7.75dt
-            --  altkie[:kie.kp - 240m] << 7.25dt
-            ..  altkie[:kie.kp - 155m] << 3.5dt
-            --  altkie[:kie.kp - 115m] << 2.5dt
-        );
-        track(:first:station,
-                altkie[:kie.kp - 115m] << 2.5dt
-            --  altkie[:kie.kp - 95m] << 2dt
-            --  altkie[:kie.kp - 75m, :kie] << 1.5dt
-        );
-            # W 5 - W 2
-            track(:station,
-                    altkie[:kie.kp - 80m] << 1.5dt
-                --  altkie[:kie.kp - 25m] << 0.5dt
-            );
-            # W 4 - W 1
-            track(:station,
-                    altkie[:kie.kp - 40m] << 1.5dt
-                --  altkie[:kie.kp - 20m] << 2dt
-                ..  altkie[:kie.kp] << 2.5dt
-                --  altkie[:kie.kp + 40m] << 3.5dt
-            );
-
-        # Gl. 6 (<< 3.5dt)
-        track(:first:station,
-                kie.ks[:kie.ks - 85m] << 21.5dt
-            --  kie.ks[:kie.ks - 75m] << 20.5dt
-            ..  altkie[:kie.kp - 270m] << 8.75dt
-            --  altkie[:kie.kp - 240m] << 8.25dt
-            ..  altkie[:kie.kp - 150m] << 4.5dt
-            --  altkie[:kie.kp - 130m] << 4dt
-            ..  altkie[:kie.kp - 55m, :kie.kp - 50m] << 2.5dt
-            ..  altkie[:kie.kp + 10m, :kie] << 3.5dt
-        );
-            # W 41 - W P1
-            track(:station,
-                    altkie[:kie.kp - 130m] << 4dt
-                --  altkie[:kie.kp - 115m] << 2.5dt
-            );
-
-        # Gl. 6B (<< 2.5dt)
-        track(:station, altkie[:kie.kp - 50m, :kie.kp + 140m] << 2.5dt);
-
-        # Gl. 7 (>> 5.5dt)
-        with layer = -1 track(:station :removed,
-                altkie[:kie.kp - 240m, :kie.kp - 140m] >> 3.5dt
-            ..  altkie[:kie.kp, :kie] >> 5.5dt
-        );
-
-        # Gl. 8
-        track(:station,
-                altkie[:kie.ks + 85m] << 6.375dt
-            --  altkie[:kie.ks + 95m] << 6.875dt
-            ..  altkie[:kie.ks + 120m] << 7.125dt
-            --  altkie[:kie.ks + 135m] << 7dt
-            ..  altkie[:kie.kp - 300m] << 6.875dt
-            --  altkie[:kie.kp - 290m] << 6.7dt
-            ..  altkie[:kie.kp - 270m] << 5.75dt
-            --  altkie[:kie.kp - 265m] << 5.625dt
-        );
-
-        # Gl. 9
-        track(:station,
-                altkie[:kie.ks + 70m] << 6.5dt
-            --  altkie[:kie.ks + 100m] << 6.25dt
-            ..  altkie[:kie.kp - 280m] << 5.75dt
-            --  altkie[:kie.kp - 265m] << 5.625dt
-            ..  altkie[:kie.kp - 205m] << 4dt
-            --  altkie[:kie.kp - 160m] << 2.5dt
-            ..  altkie[:kie.kp - 140m] << 2dt
-            --  altkie[:kie.kp - 120m] << 1.5dt
-        );
-
-        # Gl. 10
-        track(:station,
-                altkie[:kie.ks + 95m] << 5.25dt
-            --  altkie[:kie.ks + 125m] << 5dt
-            ..  altkie[:kie.kp - 235m] << 4.25dt
-            --  altkie[:kie.kp - 205m] << 4dt
-        );
-
-        # Gl. 11
-        track(:station,
-                altkie[:kie.ks + 120m] << 4dt
-            --  altkie[:kie.ks + 150m] << 3.75dt
-            ..  altkie[:kie.kp - 190m] << 2.75dt
-            --  altkie[:kie.kp - 160m] << 2.5dt
-        );
-
-        # Gl. 12 (<< 1.5dt)
-        track(:station,
-                altkie[:kie.ks + 130m] << 2.25dt
-            --  altkie[:kie.ks + 140m] << 2dt
-            ..  altkie[:kie.ks + 190m, :kie.kp - 75m] << 1.5dt
-        );
-
-        # Gl. 47 (<< 1.5dt)
-        track(:station,
-                altkie[:kie.ks - 290m, :kie.ks - 50m] << 1.5dt
-            ..  altkie[:kie.ks - 15m] << 2dt
-            --  altkie[:kie.ks] << 2.5dt
-        );
-
-        # Gl. 48 (<< 2.5dt)
-        track(:station, altkie[:kie.ks - 260m, :kie.ks + 120m] << 2.5dt);
-
-        # Gl. 49 (<< 3.5dt)
-        track(:station,
-                altkie[:kie.ks - 230m, :kie.ks + 20m] << 3.5dt
-            ..  altkie[:kie.ks + 55m] << 3dt
-            --  altkie[:kie.ks + 70m] << 2.5dt
-        );
-
-        # Gl. 50 (<< 4.5dt)
-        track(:station, kie.ks[:kie.ks - 320m, :kie.ks + 40m] << 4.5dt);
-
-        # Gl. 51 (<< 5.5dt)
-        track(:station, kie.ks[:kie.ks - 320m, :kie.ks - 45m] << 5.5dt);
-
-        # Gl. 51a
-        track(:station,
-                altkie[:kie.ko + 30m, :kie.ks - 290m] << 1.5dt
-            --  kie.ks[:kie.ks - 200m, :kie.ks - 199m] << 4.5dt
-        );
-            # W S1 - W S2
-            with layer = -1 track(:station :removed,
-                    altkie[:kie.ks - 325m] << 1.5dt
-                --  kie.ks[:kie.ks - 190m] << 6.5dt
-            );
-
-        # Gl. 52 (<< 6.5dt)
-        with layer = -1 track(:station :removed,
-                altkie[:kie.a, :kie.ko - 60m] << 1.5dt
-            ..  altkie[:kie.ko, :kie.ks - 350m] << 2.5dt
-            ..  altkie[:kie.ks - 315m] << 3dt
-            --  altkie[:kie.ks - 270m] << 4.5dt
-            ..  kie.ks[:kie.ks - 190m, :kie.ks - 189m] << 6.5dt
-        );
-        track(:station,
-                kie.ks[:kie.ks - 190m, :kie.ks - 150m] << 6.5dt
-            ..  kie.ks[:kie.ks - 110m] << 6dt
-            --  kie.ks[:kie.ks - 90m] << 5.5dt
-        );
-
-        # Gl. 53 (<< 7.5dt)
-        track(:station,
-                kie.ks[:kie.ks - 320m, :kie.ks - 145m] << 7.5dt
-            ..  kie.ks[:kie.ks - 105m] << 7dt
-            --  altkie[:kie.ks - 5m] << 4.5dt
-        );
-
-        # Gl. 54 (<< 8.5dt)
-        track(:station,
-                kie.ks[:kie.ks - 320m, :kie.ks - 140m] << 8.5dt
-            ..  kie.ks[:kie.ks - 100m] << 8dt
-            --  kie.ks[:kie.ks -  40m] << 6.5dt
-            ..  altkie[:kie.ks +  40m] << 4.5dt
-            --  altkie[:kie.ks +  60m] << 4dt
-            ..  altkie[:kie.ks + 140m] << 2dt
-            --  altkie[:kie.ks + 185m] << 0.5dt
-        );
-
-        # Gl. 55 (<< 9.5dt)
-        track(:station, kie.ks[:kie.ks - 320m, :kie.ks - 100m] << 9.5dt);
-
-        # Gl. 56 (<< 10.5dt)
-        track(:station, kie.ks[:kie.ks - 320m, :kie.ks - 120m] << 10.5dt);
-
-        # Gl. 56A (<< 11.5dt)
-        track(:station, kie.ks[:kie.ks - 320m, :kie.ks - 140m] << 11.5dt);
-
-        # Gl. 56B (<< 12.5dt)
-        track(:station, kie.ks[:kie.ks - 220m, :kie.ks - 160m] << 12.5dt);
-
-        # Gl. 57 (<< 14.5dt)
-        track(:station,
-                kie.ks[:kie.ks - 230m, :kie.ks - 220m] << 14.5dt
-            ..  kie.ks[:kie.ks - 190m] << 14dt
-            --  kie.ks[:kie.ks - 160m] << 12.5dt
-            ..  kie.ks[:kie.ks - 100m] << 9.5dt
-            --  kie.ks[:kie.ks - 40m] << 6.5dt
-        );
-
-        # Gl. 58
-        track(:station,
-                kie.ks[:kie.ks - 230m] << 15dt
-            --  kie.ks[:kie.ks - 210m] << 15.5dt
-            ..  kie.ks[:kie.ks - 130m] << 13.5dt
-            --  kie.ks[:kie.ks - 120m] << 13dt
-        );
-
-        # Gl. 59
-        track(:station,
-                kie.ks[:kie.ks - 175m] << 18.5dt
-            --  kie.ks[:kie.ks - 125m] << 13.5dt
-            ..  kie.ks[:kie.ks -  95m] << 11.5dt
-            --  kie.ks[:kie.ks -  80m] << 11dt
-        );
-
-        # Gl. 60
-        track(:station,
-                kie.ks[:kie.ks - 160m] << 19dt
-            --  kie.ks[:kie.ks -  70m] << 10dt
-            ..  kie.ks[:kie.ks -  15m] << 7dt
-            --  kie.ks[:kie.ks +   5m] << 6.5dt
-            ..  kie.ks[:kie.ks +  85m] << 4.5dt
-            --  kie.ks[:kie.ks + 135m] << 3.25dt
-        );
-
-        # Gl. 61
-        track(:station,
-                kie.ks[:kie.ks - 145m] << 19.5dt
-            --  kie.ks[:kie.ks - 100m] << 15dt
-            ..  kie.ks[:kie.ks -  90m] << 13dt
-            --  kie.ks[:kie.ks -  90m] << 12dt
-        );
-
-        # Gl. 62
-        track(:station, 
-                kie.ks[:kie.ks - 130m] << 20dt
-            --  kie.ks[:kie.ks - 50m] << 12dt
-            ..  kie.ks[:kie.ks - 10m] << 9.25dt
-            --  kie.ks[:kie.ks] << 8.75dt
-            ..  kie.ks[:kie.ks + 55m] << 6dt
-            --  kie.ks[:kie.ks + 85m] << 4.5dt
-        );
-
-        # Gl. 65
-        track(:station, 
-                kie.ks[:kie.ks - 115m] << 20.5dt
-            --  kie.ks[:kie.ks -  35m] << 12.5dt
-            ..  kie.ks[:kie.ks -  10m] << 10.5dt
-            --  kie.ks[:kie.ks] << 10dt
-            ..  kie.ks[:kie.ks + 70m] << 6.5dt
-            --  kie.ks[:kie.ks + 95m] << 5.25dt
-            ..  kie.ks[:kie.ks + 120m] << 4dt
-            --  kie.ks[:kie.ks + 150m] << 2.5dt
-            ..  kie.ks[:kie.ks + 190m, :kie.ks + 191m] << 1.5dt
-        );
-
-        marker(:de.bw :bottom, kie.ks[:kie.ks - 230m] << 14.5dt);
     }
 }
 

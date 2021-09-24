@@ -1,0 +1,319 @@
+# DE 1225.  Hamburg-Holstenstraße - Pinneberg
+#
+let ak = path("d4.de.1220");
+let hp = path("d4.de.1225");
+
+with detail = 4, style = :de.sbahn {
+    # point.de.Hamburg-Holstenstrasse   de.1240
+    # point.de.Hamburg-Holstenstraße-D  de.1240
+    # point.de.Hamburg-Holstenstraße-H  de.1240
+
+
+    with link = "line.de.1225" {
+        let ba = path("d4.de.a.6100");
+
+        track(:first:station :rail:dc12 :pax,
+                ba[:rai + 0.2sw, :rai + 0.21sw] >> 3.5dt
+            ..  ak[:die - 221m, :die - 220m] >> 6.5dt
+        );
+        track(:first:station :rail:dc12 :pax,
+                ba[:rai + 0.2sw, :rai + 0.21sw] >> 2.5dt
+            ..  ak[:die - 221m, :die - 220m] >> 4.5dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Diebsteich" {
+        # Gleis Pinneberg - Holstenstraße/Altona
+        track(:first:station :rail:dc12 :pax,
+                ak[:die - 220m, :die + 1.0sw] >> 4.5dt
+        );
+
+        # Gleis Holstenstraße - Pinneberg
+        track(:first:station :rail:dc12 :pax,
+                ak[:die - 220m, :die + 1.0sw - 3dl] >> 6.5dt
+            --  ak[:die + 1.0sw - 2dl, :die + 1.0sw] >> 5.5dt
+        );
+
+        # Gleis Altona - Diebsteich
+        track(:first:station :rail:dc12 :pax,
+                ak[:die - 220m, :die - 200m] >> 5.5dt
+            --  ak[:die - 200m + 1dl, :die - 200m + 1.1dl] >> 6.5dt
+        );
+
+        marker(:de.bf :right, ak[:die] >> 6.5dt);
+        with layer = -1 marker(:de.bf.casing :right, ak[:die] >> 6.5dt);
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail:dc12 :pax,
+                hp[:die + 1sw, :die + 1.1sw] >> 5dt
+            ..  hp[:lan - 0.61sw, :lan - 0.6sw] >> 3dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Langenfelde-S-Bahn" {
+        track(:first:station :double :rail:dc12 :pax,
+                hp[:lan - 0.6sw, :lan + 0.6sw] >> 3.0dt
+        );
+        marker(:de.hp :right, hp[:lan] >> 3.5dt);
+        with layer = -1 marker(:de.hp.casing :right, hp[:lan] >> 3.5dt);
+    }
+
+
+    with link = "line.de.1225" {
+        with layer = -2 track(:first :double :rail:dc12 :pax,
+                hp[:lan + 0.6sw, :stg - 0.7sw] >> 3.0dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Gutenbergstraße-Abzw" {
+        track(:first:station :double :rail:dc12 :pax,
+                hp[:stg - 0.7sw, :stg + 0.7sw] >> 3dt
+        );
+        marker(:de.bft.abzw :left, hp[:stg] >> 2.5dt)
+    }
+
+
+    with link = "line.de.1225" {
+        with layer = -2 track(:first :double :rail:dc12 :pax,
+                hp[:stg + 0.7sw, :ste - 1sw] >> 3.0dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Stellingen-S-Bahn" {
+        track(:first:station :double :rail:dc12 :pax,
+                hp[:ste - 1sw, :ste + 1sw] >> 3.0dt
+        );
+        marker(:de.hp :right, hp[:ste] >> 3.5dt);
+        with layer = -1 marker(:de.hp.casing :right, hp[:ste] >> 3.5dt);
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail:dc12 :pax,
+                hp[:ste + 1sw, :eis - 500m] >> 3.0dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Eidelstedt-S-Bahn" {
+        # Gl. 1 (Str. 1225 rechts)
+        track(:first:station :rail:dc12 :pax,
+                ak[:eis - 500m, :eis - 500m + 1dl] >> 3.5dt
+            --  ak[:eis - 500m + 2dl, :elb.a - 2dl] >> 4.5dt
+            --  ak[:elb.a - 1dl, :elb.a] >> 3.5dt
+        );
+            with layer = -3 casing(:first:station :rail:dc12,
+                    ak[:eis, :frot - 1sw] >> 4.5dt
+            );
+            with layer = -1 casing(:first:station :rail:dc12,
+                    ak[:frot - 1sw, :elb.a - 2dl] >> 4.5dt
+            );
+
+        # Gl. 2 (Str. 1225 links)
+        track(:first:station :rail:dc12 :pax,
+                ak[:eis - 500m, :elb.a] >> 2.5dt
+        );
+            with layer = -3 casing(:first:station :rail:dc12,
+                    ak[:eis, :frot] >> 2.5dt
+            );
+        
+        # Gl. 3
+        track(:station :rail:dc12,
+                ak[:eis - 500m + 3dl, :eis - 0.5sw] >> 3.5dt
+        );
+            track(:station :rail:dc12,
+                    ak[:eis - 0.5sw - 3dl] >> 3.5dt
+                --  ak[:eis - 0.5sw - 2dl] >> 4.5dt
+            );
+            track(:station :rail:dc12,
+                    ak[:eis - 0.5sw - 2dl] >> 3.5dt
+                --  ak[:eis - 0.5sw - 1dl] >> 2.5dt
+            );
+
+        # Gl. Str. 9121
+        with style = :normal, layer = -2 track(:second:station :pax,
+                ak[:eis + 2.9dl, :eis + 3.0dl] >> 2.5dt
+            --  ak[:eis + 4.0dl, :elb.a - 5dl] >> 3.5dt
+            --  ak[:elb.a - 3dl, :elb.a - 2dl] >> 5.5dt
+        );
+        with layer = -3 casing(:second:station,
+                ak[:eis + 2.9dl, :eis + 3.0dl] >> 2.5dt
+            --  ak[:eis + 4.0dl, :frot - 1sw] >> 3.5dt
+        );
+        with style = :normal, layer = -2 track(:second:station :pax,
+                ak[:eis + 4.0dl] >> 4.5dt
+            --  ak[:eis + 5.0dl] >> 3.5dt
+        );
+
+        # Gl. 4/5
+        track(:second:station :rail:dc12,
+                ak[:eis - 250m, :eis + 2dl] >> 5.5dt
+            --  ak[:eis + 3dl, :eis + 3.1dl] >> 4.5dt
+        );
+            with style = :normal, layer = -2 track(:station,
+                    ak[:eis + 2dl, :eis + 3dl] >> 5.5dt
+            );
+
+        marker(:de.bf :right, ak[:eis - 0.5sw] >> 4.5dt);
+        with layer = -1 marker(:de.bf.casing, ak[:eis - 0.5sw] >> 4.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Elbgaustrasse", layer = -2 {
+        # Gleis Pinneberg - Holstenstraße
+        track(:first:station :rail, ak[:elb.a, :elb.f] >> 2.5dt);
+            track(:station :rail,
+                    ak[:elb + 0.5sw + 4dl] >> 2.5dt
+                --  ak[:elb + 0.5sw + 6dl] >> 4.5dt
+            );
+
+        # Gleis Holstenstraße - Pinneberg
+        track(:first:station :rail,
+                ak[:elb.a, :elb + 0.5sw + 1dl] >> 3.5dt
+            --  ak[:elb + 0.5sw + 4dl, :elb.bw - 0.5sw - 3dl] >> 5.5dt
+            --  ak[:elb.bw - 0.5sw - 2dl, :elb.bw + 0.7sw] >> 6.5dt
+            --  ak[:elb.bw + 0.7sw + 3dl, :elb.f] >> 3.5dt
+        );
+
+        # Bw
+        track(:station :rail,
+                ak[:elb + 0.5sw + 4dl, :elb.bw - 0.5sw] >> 3.5dt
+        );
+        track(:station :rail,
+                ak[:elb + 0.5sw + 2dl, :elb.bw - 0.5sw] >> 4.5dt
+        );
+            track(:station :rail,
+                    ak[:elb + 0.5sw + 3dl] >> 4.5dt
+                --  ak[:elb + 0.5sw + 4dl] >> 3.5dt
+            );
+        track(:station :rail,
+                ak[:elb.bw - 0.5sw - 3dl, :elb.bw - 0.5sw] >> 5.5dt
+        );
+
+        marker(:de.bf :right, ak[:elb] >> 3.5dt);
+        with layer = -3 marker(:de.bf.casing :right, ak[:elb] >> 3.5dt);
+        marker(:de.bw :right, ak[:elb.bw] >> 3.0dt);
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, ak[:elb.f, :kru - 1sw] >> 3dt);
+    }
+
+
+    with link = "point.de.Krupunder" {
+        track(:first:station :double :rail,
+                ak[:kru - 1sw, :kru + 1sw] >> 3dt
+        );
+        marker(:de.hp :right, ak[:kru] >> 3.5dt);
+        station(:right, ak[:kru - 0.4sw] >> 3.5dt >> 1.2sw,
+            "Krupunder", "9,59"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail,
+                ak[:kru + 1sw, :kru + 1.1sw] >> 3dt
+            ..  ak[:bic - 1.1sw, :bic - 1sw] >> 2dt
+        );
+    }
+
+
+    with link = "point.de.Bickbargen" {
+        track(:first:station :double :rail,
+                ak[:bic - 1sw, :bic + 1sw] >> 2dt
+        );
+            track(:station :rail,
+                    ak[:bic - 1.5dl] >> 1.5dt
+                --  ak[:bic - 0.5dl] >> 2.5dt
+            );
+            track(:station :rail,
+                    ak[:bic + 0.5dl] >> 2.5dt
+                --  ak[:bic + 1.5dl] >> 1.5dt
+            );
+        marker(:de.uest :right, ak[:bic] >> 2.5dt);
+        station(:right, ak[:bic - 0.4sw] >> 2.5dt >> 1.2sw,
+            "Bickbargen", "10,78"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, ak[:bic + 1sw, :hal - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Halstenbek" {
+        track(:first:station :double :rail,
+                ak[:hal - 1sw, :hal + 1sw] >> 2dt
+        );
+        marker(:de.hp :right, ak[:hal] >> 2.5dt);
+        with layer = -1 marker(:de.bf :gone :right, ak[:hal] >> 2.5dt);
+        station(:right, ak[:hal - 0.5sw] >> 2.5dt >> 1.3sw,
+            "Halstenbek", "11,98"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, ak[:hal + 1sw, :ths - 1sw] >> 2dt);
+    }
+
+
+    with link = "point.de.Thesdorf" {
+        track(:first:station :double :rail,
+                ak[:ths - 1sw, :ths + 1sw] >> 2dt
+        );
+        marker(:de.hp :right, ak[:ths] >> 2.5dt);
+        station(:right, ak[:ths - 0.5sw] >> 2.5dt >> 1.3sw,
+            "Thesdorf", "14,34"
+        );
+    }
+
+
+    with link = "line.de.1225" {
+        track(:first :double :rail, ak[:ths + 1sw, :pin.a] >> 2dt);
+    }
+
+
+    with link = "point.de.Pinneberg-S-Bahn" {
+        # Gegenrichtungsgleis
+        track(:first:station :rail,
+                ak[:pin.a, :pin - 1.6sw - 2dl] >> 1.5dt
+            --  ak[:pin - 1.6sw - 1dl, :pin - 0.6sw] >> 2.5dt
+        );
+            track(:station :rail,
+                    ak[:pin - 1.6sw - 4dl] >> 1.5dt
+                --  ak[:pin - 1.6sw - 3dl] >> 2.5dt
+            );
+
+        # Richtungsgleis
+        track(:first:station :rail,
+                ak[:pin.a, :pin - 1.6sw - 3dl] >> 2.5dt
+            --  ak[:pin - 1.6sw - 2dl, :pin - 0.6sw] >> 3.5dt
+        );
+            track(:station :rail,
+                    ak[:pin - 1.6sw - 6dl] >> 2.5dt
+                --  ak[:pin - 1.6sw - 5dl] >> 1.5dt
+            );
+
+        # Abstellgleis
+        track(:station :rail,
+                ak[:pin - 1.6sw - 8dl, :pin - 1.6sw - 5dl] >> 3.5dt
+            --  ak[:pin - 1.6sw - 4dl, :pin - 1.6sw - 3.9dl] >> 2.5dt
+        );
+
+        marker(:de.bf :right, ak[:pin - 1.1sw] >> 3.5dt);
+        station(:right, ak[:pin - 1.6sw] >> 3.5dt >> 1.3sw,
+            hbox(:left:base, span(:bold, "Pinneberg "), "(S-Bahn)"),
+            "1225: 14,34"
+        );
+    }
+}
+
