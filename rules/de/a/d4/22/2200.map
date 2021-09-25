@@ -1,0 +1,76 @@
+# DE 2200.  Wanne-Eickel Hbf - Hamburg Hbf
+# DE 1283.  Rothenburg (Wümme) - Buchholz (Nordheide)
+#
+let wh = path("d4.de.2200.a");
+
+with detail = [4, 5] {
+    # ...
+
+
+    with link = "line.de.2200" {
+        track(:first :cat:ac15 :pax :flip:tight,
+                wh[:spr + 1sw, :buc.a] << 0.5dt
+        );
+        track(:first :cat:ac15 :pax :tight, wh[:spr + 1sw, :buc.a] >> 1.5dt);
+    }
+    with link = "line.de.1283" {
+        track(:first :cat:ac15 :pax :tight, wh[:spr + 1sw, :buc.a] >> 0.5dt);
+    }
+
+
+    with link = "point.de.Buchholz-Nordheide" {
+        # Gl. 1
+        with layer = -1 track(:station :cat:ac15,
+                wh[:buc - 650m + 1dl, :buc - 220m + 1.5dl] >> 3.5dt
+            --  wh[:buc - 220m + 2.5dl, :buc + 300m - 2dl] >> 2.5dt
+            --  wh[:buc + 300m, :buc + 301m] >> 0.5dt
+        );
+
+        # Gl. 2
+        with layer = -1 track(:station :cat:ac15,
+                wh[:buc - 651m, :buc - 650m] >> 1.5dt
+            --  wh[:buc - 650m + 1dl, :buc - 220m - 1dl] >> 2.5dt
+            --  wh[:buc - 220m, :buc - 219m] >> 3.5dt
+        );
+
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                wh[:buc.a, :buc + 300m - 1dl] >> 1.5dt
+        );
+
+        # Gl. 6
+        track(:first:station :cat:ac15 :pax,
+                wh[:buc.a, :buc.f] >> 0.5dt
+        );
+
+        # Gl. 7
+        track(:first:station :cat:ac15 :pax,
+                wh[:buc.a, :buc.f] << 0.5dt
+        );
+
+        # Gl. 11
+        with layer = -1 track(:station :cat:ac15,
+                wh[:buc - 220m - 2.1dl, :buc - 220m - 2dl] >> 3.5dt
+            --  wh[:buc - 200m - 1dl, :buc + 0.5sw] >> 4.5dt
+        );
+
+        # Gl. 26
+        with layer = -1 track(:first:station :cat:ac15,
+                wh[:buc.bhf - 501m, :buc.bhf - 500m] >> 0.5dt
+            --  wh[:buc.bhf, :buc + 0.5sw] >> 5.5dt
+        );
+
+        # Gl. 27
+        with layer = -1 track(:first:station :cat:ac15,
+                wh[:buc - 650m, :buc + 0.5sw] >> 6.5dt
+        );
+
+        # Gl. 28/29
+        with layer = -1 track(:station :cat:ac15,
+                wh[:buc - 650m, :buc + 0.5sw] >> 7.5dt
+        );
+
+
+        marker(:de.inbf :right, wh[:buc] >> 2.5dt);
+    }
+}
