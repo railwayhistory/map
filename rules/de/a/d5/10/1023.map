@@ -46,3 +46,226 @@ with detail = 5 {
     }
 }
 
+
+with detail = 5 {
+    with link = "line.de.1023", layer = -2 {
+        with layer = -4 track(:first :gone,
+                kn[:neg.a - 211m, :neg.a - 210m]
+            ..  path("d4.de.1023.nst")[:a, :nst.w3 - 300m] >> 1dt
+        );
+    }
+
+
+    with link = "point.de.Neustadt-Holst-Gbf" {
+        let lp = path("d4.de.1100");
+
+        # Einfahrt aus Eutin
+        with layer = -4 track(:second :station :removed,
+                kn[:neg.a, :neg.ns - 40m]
+        );
+
+        # Gl. 7
+        track(:first:station :pax,
+                lp[:neg.b, :neg.b + 10m]
+            ..  kn[:neg.ns - 40m, :neg.nn]
+            ..  lp[:neg.g - 60m, :neg.g]
+        );
+
+        # Gl. 8 (>> 1dt)
+        track(:second:station :pax,
+                kn[:neg.ns, :neg.ns + 5m]
+            ..  kn[:neg.ns +  90m, :neg.nn + 90m] >> 1dt
+            ..  kn[:nst.a  -  10m, :nst.a]
+        );
+            # W45 - W47
+            with layer = -2 track(:station,
+                    kn[:neg.nn + 90m, :neg.nn + 91m] >> 1dt
+                ..  lp[:neg.g  - 60m, :neg.g  - 59m]
+            );
+
+        # Gl. 9 (>> 2dt)
+        with layer = -4 track(:station :removed,
+                lp[:neg.b, :neg.b + 10m] >> 1dt
+           ..   kn[:neg.ns - 40m, :neg.ns -  39m] >> 1dt
+           ..   kn[:neg.ns + 90m, :neg.ns + 140m] >> 2dt
+        );
+        with layer = -2 track(:station,
+                kn[:neg.ns + 140m, :neg.nn + 10m] >> 2dt
+           ..   kn[:neg.nn +  80m, :neg.nn + 81m] >> 1dt
+        );
+
+        # Gl. 10 (>> 3dt)
+        with layer = -2 track(:station,
+                kn[:neg.ns + 160m, :neg.nn - 10m] >> 3dt
+           ..   kn[:neg.nn +  80m, :neg.nn + 81m] >> 1dt
+        );
+
+        # Gl. 11 (>> 4dt)
+        with layer = -4 track(:station :removed,
+                kn[:neg.ns + 50m, :neg.ns + 180m] >> 4dt
+        );
+        with layer = -2 track(:station,
+                kn[:neg.ns + 180m, :neg.ns + 300m] >> 4dt
+        );
+        with layer = -4 track(:station :removed,
+                kn[:neg.ns + 300m, :neg.nn - 30m] >> 4dt
+           ..   kn[:neg.nn +  80m, :neg.nn + 81m] >> 1dt
+        );
+
+        # Gl. 12 (>> 5dt)
+        with layer = -4 track(:station :removed,
+                kn[:neg.ns + 50m, :neg.ns + 230m] >> 5dt
+        );
+        with layer = -2 track(:station,
+                kn[:neg.ns + 89m, :neg.ns + 90m] >> 1dt
+            ..  kn[:neg.ns + 230m, :neg.ns + 300m] >> 5dt
+        );
+        with layer = -4 track(:station :removed,
+                kn[:neg.ns + 300m, :neg.nn - 160m] >> 5dt
+        );
+        with layer = -2 track(:station,
+                kn[:neg.nn - 160m, :neg.nn - 60m] >> 5dt
+            ..  kn[:neg.nn +  80m, :neg.nn + 81m] >> 1dt
+        );
+
+        marker(:de.gbf :right, kn[:neg] >> 5dt);
+        station(:right, kn[:neg - .3sw] >> 5dt >> 1.6sh,
+            hbox(:left :base,
+                span(:medium :bold, "Neustadt "),
+                span(:medium, "(Holst) "),
+                span(:medium :bold, "Gbf")
+            ),
+            hbox(:center :base,
+                vbox(:right :top,
+                    span(:xsmall, "1023: "),
+                    span(:xsmall, "1100: ")
+                ),
+                vbox(:right :top,
+                    span(:xsmall, "62,"),
+                    span(:xsmall, "29,")
+                ),
+                vbox(:left :top,
+                    span(:xsmall, "02"),
+                    span(:xsmall, "07")
+                )
+            )
+        );
+
+        marker(:de.stw :left, kn[:neg.ns]);
+        slabel(:left, kn[:neg.ns - 1dt] << 3dt, "Ns");
+        marker(:de.stw :left, kn[:neg.nn]);
+        slabel(:left, kn[:neg.nn - 1dt] << 3dt, "Nn");
+
+        marker(:de.est :removed :bottom, kn[:neg.ns + 50m] >> 4.5dt);
+    }
+
+
+    with link = "point.de.Neustadt-Holst" {
+        let knn = path("d4.de.1023.nst");
+
+        # Streckengl. aus Oldenburg
+        with layer = -1 track(:second :station :removed,
+                path("d4.de.a32.nst")[:nst.f, :nst.f - 1m]
+            ..  kn[:fold - 20m] << 0.5dt
+            --  kn[:fold]
+        );
+
+        # Gl. 1 (Hauptgleis)
+        track(:first :station :pax, kn[:nst.a, :fold + 100m]);
+        with layer = -1 track(:first :station :removed,
+                kn[:fold + 100m, :nst + 120m]
+        );
+        track(:station :closed, kn[:nst + 120m, :nst.f]);
+
+        # Gl. 2 (>> 1dt)
+        with layer = -1 track(:station :removed,
+                knn[:nst.w3 - 300m, :nst.w3] >> 1dt
+            ..  kn[:fold, :fold + 40m] >> 1dt
+        );
+        track(:station :pax,
+                kn[:fold - 1m, :fold]
+            --  kn[:fold + 40m, :nst + 40m] >> 1dt
+        );
+        with layer = -1 track(:station:closed,
+                kn[:nst + 40m, :nst + 75m] >> 1dt
+        );
+            # W7 - W8
+            with layer = -1 track(:station:removed,
+                    kn[:fold + 40m] >> 1dt
+                --  kn[:fold + 80m] >> 2dt
+            );
+            # W10 - W11
+            with layer = -1 track(:station :removed,
+                    kn[:fold + 60m] >> 1dt
+                --  kn[:fold + 90m]
+            );
+
+        # Gl. 3 (>> 2dt)
+        track(:station :removed,
+                knn[:nst.w3 - 300m, :nst.w3] >> 2dt
+            ..  kn[:fold, :nst + 100m] >> 2dt
+        );
+            # W14 - W15
+            with layer = -1 track(:station:removed,
+                    kn[:nst.nk] >> 2dt
+                --  kn[:nst.nk + 30m] >> 3dt
+            );
+            # W18 - W21
+            with layer = -1 track(:station:removed,
+                    kn[:nst + 29m, :nst + 30m] >> 2dt
+                ..  kn[:nst + 60m] >> 1.5dt
+                --  kn[:nst + 75m] >> 1dt
+            );
+            with layer = -1 track(:station:closed,
+                    kn[:nst + 75m] >> 1dt
+                --  kn[:nst + 90m] >> 0.5dt
+                ..  kn[:nst + 120m, :nst + 121m]
+            );
+
+        # Gl. 4 (>> 3dt)
+        track(:station :removed,
+                kn[:fold + 30m] >> 2dt
+            --  kn[:fold + 45m] >> 2.5dt
+            ..  kn[:fold + 75m, :nst + 80m] >> 3dt
+            ..  kn[:nst.x - 1m, :nst.x]
+        );
+
+        # Gl. 5 (>> 4dt)
+        track(:station :removed,
+                kn[:nst.nk + 45m] >> 3dt
+            --  kn[:nst.nk + 60m] >> 3.5dt
+            ..  kn[:nst.nk + 75m, :nst + 60m] >> 4dt
+        );
+
+        marker(:de.stw :removed :left, kn[:nst.nk]);
+        slabel(:top :removed, kn[:nst.nk] << 2.5dt, "Nk");
+
+        with layer = -1 marker(:de.hp :pax :left, kn[:nst]);
+        with layer = -1 marker(:de.awanst :pax :left, kn[:nst]);
+        with layer = -2 marker(:de.bf :gone :left, kn[:nst]);
+        station(:right :pax, kn[:nst] >> 5dt >> 4pt,
+            hbox(:left :base,
+                span(:medium :bold, "Neustadt "),
+                span(:medium, "(Holst) ")
+            ),
+            hbox(:left :top,
+                vbox(:right :top,
+                    span(:xsmall, "1023: "),
+                    span(:xsmall :closed, "11001: "),
+                    span(:xsmall :closed, "A32: ")
+                ),
+                vbox(:right :top,
+                    span(:xsmall, "63,"),
+                    span(:xsmall :closed, "24,"),
+                    span(:xsmall :closed, "0,")
+                ),
+                vbox(:right :top,
+                    span(:xsmall, "31"),
+                    span(:xsmall :closed, "45"),
+                    span(:xsmall :closed, "00")
+                )
+            )
+        );
+    }
+}
+
