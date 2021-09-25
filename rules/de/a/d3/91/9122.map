@@ -1,0 +1,142 @@
+# DE 9122.  Ochsenzoll - Ulzburg Süd
+#
+let ou = path("d4.de.9122");
+
+with detail = 3, style = :tram {
+    with link = "point.de.Ochsenzoll" {
+        track(:first:station :rail:dc75 :pax,
+                ou[:och - 1ssw, :och + 1ssw] << 1.0dt
+        );
+        track(:first:station :rail:dc75 :pax,
+                ou[:och - 1ssw, :och + 1ssw] << 2.0dt
+        );
+        marker(:de.bf :pax :left, ou[:och] << 2dt);
+    }
+
+    with link = "line.de.9122" {
+        track(:first :double :rail:dc75 :pax,
+                ou[:och + 1ssw, :och + 1.1ssw] << 1.5dt
+            ..  ou[:gar - 1.1ssw, :gar - 1ssw]
+        );
+    }
+
+    with link = "point.de.Garstedt" {
+        track(:first:station :double :rail:dc75 :pax,
+                ou[:gar - 1ssw, :gar + 1ssw]
+        );
+        marker(:de.bf :left, ou[:gar] << 0.5dt);
+    }
+
+    with link = "line.de.9122" {
+        track(:first :double :rail:dc75 :pax, ou[:gar + 1ssw, :ric - 1ssw]);
+    }
+
+    with link = "point.de.Norderstedt-Richtweg" {
+        track(:first:station :double :rail:dc75 :pax,
+                ou[:ric - 1ssw, :ric + 1ssw]
+        );
+        marker(:de.hp :left :pax, ou[:ric] << 0.5dt);
+    }
+
+    with link = "line.de.9122" {
+        track(:first :double :rail:dc75 :pax, ou[:ric + 1ssw, :nom - 1ssw]);
+    }
+
+
+    with link = "point.de.Norderstedt-Mitte" {
+        track(:first:station :double :rail:dc75 :pax, ou[:nom - 1ssw, :nom]);
+    }
+}
+
+with detail = 3 {
+    with link = "point.de.Norderstedt-Mitte" {
+        track(:second:station :pax, ou[:nom, :nom + 1ssw]);
+        with layer = -1 marker(:de.bf :pax :left, ou[:nom] << 0.5dt);
+        slabel(:right :pax, ou[:nom - 0.5ssw] >> 1.5dt,
+            span(:bold, "Norderstedt Mitte")
+        );
+    }
+
+    with link = "line.de.9122" {
+        track(:second :pax, ou[:nom + 1ssw, :mor - 1ssw]);
+    }
+
+    with link = "point.de.Norderstedt-Moorbekhalle" {
+        track(:second:station :pax,
+                ou[:mor - 1ssw, :mor - 0.5ssw - 1dl]
+            --  ou[:mor - 0.5ssw, :mor + 1ssw] >> 0.5dt
+        );
+        track(:second:station :pax,
+                ou[:mor - 0.5ssw - 1.1dl, :mor - 0.5ssw - 1dl]
+            --  ou[:mor - 0.5ssw, :mor + 1ssw] << 0.5dt
+        );
+        marker(:de.bftp :pax :left, ou[:mor] << 0.5dt);
+        slabel(:right :pax, ou[:mor - 0.5ssw] >> 1.5dt,
+            "Moorbekhalle"
+        );
+    }
+
+    with link = "line.de.9122" {
+        track(:second:double :pax, ou[:mor + 1ssw, :fri - 1ssw]);
+    }
+
+    with link = "point.de.Friedrichsgabe" {
+        track(:second:station :double :pax, ou[:fri - 1ssw, :fri + 0.5ssw]);
+        marker(:de.hp :pax :right, ou[:fri] >> 0.5dt);
+        slabel(:right :pax, ou[:fri - 1.2ssw] >> 0.5dt >> 1.6ssw,
+                "Friedrichsgabe"
+        );
+    }
+
+    with link = "line.de.9122" {
+        track(:second:double :pax, ou[:fri + 0.5ssw, :qus - 0.5ssw]);
+    }
+
+    with link = "point.de.Norderstedt-Quickborner-Straße" {
+        track(:second:station :double :pax, ou[:qus - 0.5ssw, :qus + 1ssw]);
+        marker(:de.hp :pax :left, ou[:qus] << 0.5dt);
+        slabel(:right :pax, ou[:qus - 0.1ssw] >> 1.5dt,
+                "Quickborner Straße"
+        );
+    }
+
+    with link = "line.de.9122" {
+        track(:second:double :pax, ou[:qus + 1ssw, :has - 1ssw]);
+    }
+
+    with link = "point.de.Haslohfurth" {
+        track(:second:station :double :pax, ou[:has - 1ssw, :has + 1ssw]);
+        marker(:de.hp :pax :right, ou[:has] >> 0.5dt);
+        slabel(:right :pax, ou[:has - 0.8ssw] >> 0.5dt >> 1.6ssw,
+                "Haslohfurth"
+        );
+    }
+
+    with link = "line.de.9122" {
+        track(:second:double :pax, ou[:has + 1ssw, :mee - 1ssw]);
+    }
+
+
+    with link = "point.de.Meeschensee" {
+        track(:second:station :double :pax, ou[:mee - 1ssw, :mee + 1ssw]);
+        marker(:de.hp :pax :left, ou[:mee] << 0.5dt);
+        slabel(:right:pax, ou[:mee - 0.7ssw] >> 1.5dt,
+                "Meeschensee"
+        );
+    }
+
+    with link = "line.de.9122" {
+        track(:second:double :pax, ou[:mee + 1ssw, :ula - 1ssw]);
+    }
+
+    with link = "point.de.Ulzburg-Abzw" {
+        track(:second:station :pax,
+                ou[:ula - 1ssw, :ula - 1dl] << 0.5dt
+            ..  path("d4.de.9121")[:uls - 1.1ssw, :uls - 1ssw] >> 0.5dt
+        );
+        track(:second:station :pax,
+                ou[:ula - 1ssw, :ula - 2dl] >> 0.5dt
+            --  ou[:ula - 1dl, :ula - 0.9dl] << 0.5dt
+        );
+    }
+}
