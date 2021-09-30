@@ -1,0 +1,282 @@
+# DE 1103.  Fehmarnsund - Orth (Fehmarn)
+#
+let fo = path("d4.de.1103");
+
+with detail = 4 {
+    with link = "point.de.Fehmarnsund" {
+        # Gl. 1
+        track(:third:station :removed, fo[:feh.a, :feh.f]);
+
+        # Gl. 2 (<< 1dt)
+        track(:station :removed,
+                fo[:feh + 0.5sw + 0.9dl, :feh + 0.5sw + 1.0dl]
+            --  fo[:feh + 0.5sw + 2.0dl, :feh.f - 2.0dl] << 1dt
+        );
+
+        # Gl. 3 (<< 2dt)
+        track(:station :removed,
+                fo[:feh + 0.5sw + 1.0dl, :feh.f - 3.0dl] << 2dt
+            --  fo[:feh.f - 1.0dl, :feh.f - 0.9dl]
+        );
+
+        marker(:de.bf :removed :right, fo[:feh]);
+        station(:right :removed, fo[:feh - 0.3sw] >> 1.8sh,
+            span(:bold, "Fehmarnsund"),
+            "1103: 0,05"
+        );
+    }
+
+    with link = "line.de.1103" {
+        track(:third :removed, fo[:feh.f, :wul - 1sw]);
+        with layer = 1 line_badge(:removed, fo[:wul - 0.8km], "1103");
+    }
+
+
+    with link = "point.de.Wulfen-Fehmarn" {
+        track(:third:station :removed, fo[:wul - 1sw, :wul + 1sw]);
+        marker(:de.hp :removed :left, fo[:wul]);
+        station(:left :removed, fo[:wul - 0.4sw] << 1.2sh,
+            hbox(:center:base,
+                span(:regular, "Wulfen "),
+                span(:light, "(Fehmarn)")
+            ),
+            "2,57"
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        track(:third :removed, fo[:wul + 1sw, :bus - 1sw]);
+    }
+
+
+    with link = "point.de.Burgstaaken" {
+        track(:third:station :removed, fo[:bus - 1sw, :fbsh + 1sw]);
+        marker(:de.hp :removed :right, fo[:bus] << 0.1dt);
+        with layer = -1 marker(:de.hp.casing :right, fo[:bus]);
+        station(:left :removed, fo[:bus - 0.3sw] << 1dt,
+            "Burgstaaken", "5,30"
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        track(:third :removed, fo[:fbsh + 1sw, :bur.a]);
+        with layer = 1 line_badge(:removed, fo[:bus + 0.9km], "1103");
+    }
+
+
+    with link = "point.de.Burg-Fehmarn" {
+        # Gl. 1
+        track(:second:station :removed, fo[:bur.a, :bur.f]);
+
+        # Gl. 2 (<< 1dt)
+        track(:station :removed,
+                fo[:bur - 0.6sw, :buh + 0.5sw] << 1dt
+            --  fo[:buh + 0.5sw + 1dl, :buh + 0.5sw + 1.1dl]
+        );
+
+        # Gl. 3 (<< 2dt)
+        track(:station :removed,
+                fo[:bur - 0.6sw - 1.1dl, :bur - 0.6sw - 1dl]
+            --  fo[:bur - 0.6sw + 1dl, :buh - 0.5sw] << 2dt
+            --  fo[:buh - 0.5sw + 1dl, :buh - 0.5sw + 1.1dl] << 1dt
+        );
+
+        # Gl. 10 (>> 1dt)
+        track(:station :removed,
+                fo[:bur + 0.6sw, :buh + 0.5sw + 2dl] >> 1dt
+            --  fo[:buh + 0.5sw + 3dl, :buh + 0.5sw + 3.1dl]
+        );
+            track(:station :removed,
+                fo[:bur + 0.6sw + 2dl] -- fo[:bur + 0.6sw + 3dl] >> 1dt
+            );
+
+        marker(:de.bf :removed :right, fo[:bur]);
+
+        # Hp.
+        with layer = 1 {
+            track(:second:station :pax,
+                    fo[:buh - 0.4sw, :buh + 0.4sw] << 2dt
+                ..  fo[:bur.f - 0.1dl, :bur.f]
+            );
+
+            marker(:de.bftp :pax :right, fo[:buh] << 2dt);
+        }
+
+        station(:right :pax, fo[:bur + 0.4sw] >> 1.4sh,
+            vbox(:left:bottom,
+                hbox(:left:base :removed,
+                    span(:bold, "Burg "),
+                    span(:regular, "(Fehmarn)")
+                ),
+                span(:bold, "Fehmarn-Burg")
+            ),
+            hbox(:center:base,
+                span(:open, "1103: ?? "),
+                span(:removed, " ← 7,33")
+            )
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        track(:second:station :pax, fo[:bur.f, :bua]);
+
+        with layer = -2 {
+            let fo = path("d4.de.1103.bur");
+
+            track(:third:station :removed, fo[:fbur, :fbur + 150m]);
+            track(:third :removed, fo[:fbur + 150m, :lag - 4.5dt]);
+        }
+    }
+
+
+    with link = "point.de.Burg-Fehmarn-DB-Grenze" {
+        marker(:de.dirgr :left, fo[:bug]);
+    }
+
+
+    with link = "point.de.Burg-Fehmarn-Abzw" {
+        with layer = -2 marker(:de.abzw :right, fo[:bua]);
+        station(:right, fo[:bua - 0.5sw] >> 1.3sh,
+            hbox(:center:base,
+                span(:bold, "Burg "),
+                span(:regular, "(Fehmarn) "),
+                span(:bold, "Abzw")
+            ),
+            ""
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        with layer = -4 track(:third :removed, fo[:lag, :lan.a]);
+    }
+
+
+    with link = "point.de.Landkirchen" {
+        # Gl. 1
+        track(:third:station :removed, fo[:lan.a, :lan + 0.5sw]);
+
+        # Gl. 2 (<< 1dt)
+        track(:station :removed,
+                fo[:lan.a + 1.9dl, :lan.a + 2dl]
+            --  fo[:lan.a + 3dl, :lan - 0.5sw - 1dl] << 1dt
+            --  fo[:lan - 0.5sw, :lan - 0.49sw]
+        );
+
+        # Gl. 3 (>> 1dt)
+        track(:station :removed,
+                fo[:lan.a + 0.9dl, :lan.a + 1.0dl]
+            --  fo[:lan.a + 2.0dl, :lan + 0.5sw - 1dl] >> 1dt
+            --  fo[:lan + 0.5sw, :lan + 0.51sw]
+        );
+
+        marker(:de.bf :removed :left, fo[:lan]);
+        station(:bottom :removed, fo[:lan] << 1.3sh,
+            "Landkirchen", "10,68"
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        track(:third :removed, fo[:lan + 80m, :aje - 1sw]);
+        with layer = 1 line_badge(:removed, fo[:lan + 1.1km], "1103");
+    }
+
+    
+    with link = "point.de.Alt-Jellingsdorf" {
+        track(:third:station :removed, fo[:aje - 1sw, :aje + 1sw]);
+        marker(:de.hp :removed :left, fo[:aje]);
+        station(:left :removed, fo[:aje - 0.2sw] << 2.2sh,
+            "Alt Jellingsdorf", "12,78"
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        track(:third :removed, fo[:aje + 1sw, :lem - 1sw]);
+    }
+
+    
+    with link = "point.de.Lemkendorf" {
+        track(:third:station :removed, fo[:lem - 1sw, :lem + 1sw]);
+        marker(:de.hst :removed :right, fo[:lem]);
+        with layer = -1 marker(:de.bf :gone :right, fo[:lem]);
+        station(:right :removed, fo[:lem - 0.4sw] >> 1.4sh,
+            "Lemkendorf", "14,80"
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        track(:third :removed, fo[:lem + 1sw, :pet.a]);
+    }
+
+
+    with link = "point.de.Petersdorf-Fehmarn" {
+        # Gl. 1
+        track(:third:station :removed, fo[:pet.a, :pet.f]);
+
+        # Gl. 2 (>> 1dt)
+        track(:station :removed,
+                fo[:pet.r, :pet - 0.5sw - 1dl] >> 1dt
+            --  fo[:pet - 0.5sw, :pet - 0.49sw]
+        );
+            track(:station :removed,
+                fo[:pet.r + 1.0dl] -- fo[:pet.r + 2.0dl] >> 1dt
+            );
+
+        # Gl. 3 (>> 3dt)
+        track(:station :removed,
+                fo[:pet.r - 3.1dl, :pet.r - 3dl]
+            --  fo[:pet.r, :pet + 0.5sw] >> 3dt
+            --  fo[:pet + 0.5sw + 3dl, :pet + 0.5sw + 3.1dl]
+        );
+
+        marker(:de.bf :removed :right, fo[:pet]);
+        station(:top :removed, fo[:pet] >> 1.4sh,
+            hbox(:center:base,
+                span(:regular, "Petersdorf "),
+                span(:light, "(Fehmarn)")
+            ),
+            "16,89"
+        );
+    }
+
+
+    with link = "line.de.1103" {
+        track(:third :removed, fo[:pet.f, :ort.a]);
+        with layer = 1 line_badge(:removed, fo[:ort - 1.1km], "1103");
+    }
+
+
+    with link = "point.de.Orth-Fehmarn" {
+        # Gl. 1 - Gl. 4
+        track(:third:station :removed,
+                fo[:ort.a, :ort.a + 1dl]
+            ..  fo[:ort - 0.5sw, :ort.f] << 1dt
+        );
+
+        # Gl. 2 - Gl. 5
+        track(:station :removed,
+                fo[:ort.a + 1dl, :ort.f - 3dl]
+            --  fo[:ort.f - 2dl, :ort.f - 1.9dl] << 1dt
+        );
+            track(:station :removed,
+                fo[:ort] -- fo[:ort + 1dl] << 1dt
+            );
+
+        marker(:de.hst :removed :left, fo[:ort] << 1dt);
+        with layer = -1 marker(:de.bf :gone :left, fo[:ort] << 1dt);
+        station(:right :removed, fo[:ort + 0.4sw] << 1dt << 1.4sh,
+            hbox(:center:base,
+                span(:bold, "Orth "),
+                span(:regular, "(Fehmarn)")
+            ),
+            "1103: 20,73"
+        );
+    }
+}
+
