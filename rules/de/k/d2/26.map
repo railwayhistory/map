@@ -144,7 +144,6 @@ with detail = 2 {
         with layer = 1 line_badge(:open, kk[:nka.a - 10km], "2610");
 
         track(:first :double :cat :pax, kk[:neu.f, :kre.a]);
-        with layer = 1 line_badge(:open, kk[:neu.f + 6km], "2610");
 
         with layer = -1 track(:first :double :pax, kk[:kre.a, :gel]);
         with layer = 1 line_badge(:open, kk[:kre.a + 5.5km], "2610");
@@ -266,13 +265,12 @@ with detail = 2 {
 
 # DE 2630.  Köln Hbf - Koblenz - Bingen (Rhein) Landesgrenze
 with detail = 2 {
-    let kb = path("d2.de.2630");
+    let kb = path("d2.de.k.2630");
 
     with link = "line.de.2630" {
-        track(:first :double :cat :pax, kb[:kol.f, :bin]);
+        track(:first :double :cat :pax, kb[:kol.f, :bop]);
         with layer = 1 line_badge(:open, kb[:bru + 5km], "2630");
         with layer = 1 line_badge(:open, kb[:and + 8km], "2630");
-        with layer = 1 line_badge(:open, kb[:bin - 18.5km], "2630");
     }
 
     with link = "point.de.Köln-West" {
@@ -342,6 +340,11 @@ with detail = 2 {
         with layer = -1 track(:first :double :pax, he[:net, :bla]);
         with layer = -1 track(:first :pax, he[:bla, :smi]);
         with layer = -1 track(:first :double :pax, he[:smi, :lis]);
+
+        # Alter Verlauf bei Liblar
+        with layer = -4 track(:first :double :removed,
+                path("d2.de.2631.lib")[:lib.xx, :lib.x]
+        );
     }
 
     with link = "point.de.Erftstadt" {
@@ -388,7 +391,14 @@ with detail = 2 {
 
     with link = "line.de.2634" {
         with layer = -1 track(:second :pax, em[:eus.a, :mun]);
-        with layer = 1 line_badge(:open, em[:mun - 5km] >> 0.5dt @ -5, "2634");
+        with layer = 1 line_badge(
+            :open, em[:eus.a + 3.5km] @ -10 >> 0.2dt, "2634"
+        );
+    }
+
+    with link = "point.de.Bad-Münstereifel-Arloff" {
+        with layer = 1 marker(:statdot :pax, em[:arl]);
+        slabel(:right, em[:arl] + (2.0dt, 1.0dt), "B. M.-Arloff");
     }
 
     with link = "point.de.Bad-Münstereifel" {
