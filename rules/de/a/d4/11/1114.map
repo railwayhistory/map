@@ -1,0 +1,78 @@
+# DE 1114.  Lübeck-Travemünde Hafen (ausschl.) - Niendorf (Ostsee)
+#
+let tn = path("d4.de.1114");
+
+with detail = 5 {
+    with link = "line.de.1114" {
+        track(:second :removed,
+                tn[:trh + 1sw, :anie] << 1dt
+            ..  tn[:trn - 1.1sw, :trn - 1sw]
+         );
+    }
+
+    with link = "point.de.Lübeck-Travemünde-Nord" {
+        track(:second:station :removed, tn[:trn - 1sw, :trn + 1sw]);
+        marker(:de.hp :removed :left, tn[:trn]);
+        station(:left :removed, tn[:trn - 0.4sw] << 1.6sh,
+            "Lübeck-Travemünde Nord", "0,8"
+        );
+    }
+
+    with link = "line.de.1114" {
+        track(:second :removed, tn[:trn + 1sw, :bro - 1sw]);
+        with layer = 1 line_badge(:removed, tn[:trn + 0.9km], "1114");
+    }
+}
+
+with detail = 4 {
+    with link = "line.de.1114" {
+        track(:second :removed,
+                tn[:trh + 1sw, :anie] << 1dt
+            ..  tn[:anie + 1.4sw, :anie + 1.5sw]
+         );
+    }
+
+
+    with link = "point.de.Lübeck-Travemünde-Nord" {
+        track(:second:station :removed,
+            tn[:anie + 1.5sw, :anie + 3sw]);
+        marker(:de.hp :removed :left, tn[:anie + 2.25sw]);
+        station(:left :removed, tn[:anie + 1.9sw] << 1.6sh,
+            "Lübeck-Travemünde Nord", "0,8"
+        );
+    }
+
+    with link = "line.de.1114" {
+        track(:second :removed, tn[:anie + 3sw, :bro - 1sw]);
+        with layer = 1 line_badge(:removed, tn[:trn + 1.1km], "1114");
+    }
+} 
+
+
+with detail = [4, 5] {
+    with link = "point.de.Lübeck-Brodten" {
+        track(:second:station :removed, tn[:bro - 1sw, :bro + 1sw]);
+        marker(:de.hst :removed :right, tn[:bro]);
+        station(:right :removed, tn[:bro - 0.4sw] >> 1.2sw,
+            "Lübeck-Brodten", "2,66"
+        );
+    }
+
+
+    with link = "line.de.1114" {
+        track(:second :removed, tn[:bro + 1sw, :nie - 1sw]);
+    }
+
+
+    with link = "point.de.Niendorf-Ostsee" {
+        track(:second:station :removed, tn[:nie - 1sw, :f]);
+        marker(:de.bf :removed :right, tn[:nie]);
+        station(:top :removed, tn[:nie] >> 1.2sh,
+            hbox(:center:base,
+                span(:bold, "Niendorf "),
+                span(:regular, "(Ostsee)")
+            ),
+            "1114: 4,77"
+        );
+    }
+}

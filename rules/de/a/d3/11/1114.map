@@ -1,0 +1,54 @@
+# DE 1114.  Lübeck-Travemünde Hafen - Niendorf (Ostsee)
+#
+let tn = path("d4.de.1114");
+
+with detail = 3 {
+    with link = "point.de.Lübeck-Travemünde-Nord" {
+        with layer = -1 track(:second:station :removed,
+            tn[:anie, :anie + 2ssw]
+        );
+        marker(:de.hp :removed :left, tn[:anie + 1ssw]);
+        slabel(:left :removed, tn[:anie + 0.2ssw] << 1.8ssw,
+            "L.-T. Nord"
+        );
+    }
+
+    with link = "line.de.1114" {
+        track(:second :removed, tn[:anie + 2ssw, :bro - 1ssw]);
+
+        guide(:linenum :removed,
+                tn[:bro - 0.6km] << 0.7dt
+            --  tn[:bro - 0.6km] << 2.5dt
+        );
+        label(:linenum, tn[:bro - 0.6km] << 2.5dt,
+            hbox(:right:middle :badgesize :removed, "1114 ")
+        );
+    }
+
+    with link = "point.de.Lübeck-Brodten" {
+        track(:second:station :removed,
+            tn[:bro - 1ssw, :bro + 1ssw]
+        );
+        marker(:de.hst :removed :right, tn[:bro]);
+        slabel(:right :removed, tn[:bro - 0.7ssw] >> 1.4ssw,
+            "Lübeck-Brodten"
+        );
+    }
+
+    with link = "line.de.1114" {
+        track(:second :removed, tn[:bro + 1ssw, :nie - 1ssw]);
+    }
+
+    with link = "point.de.Niendorf-Ostsee" {
+        track(:second:station :removed, tn[:f - 2ssw, :f]);
+        marker(:de.bf :removed :right, tn[:f - 1ssw]);
+        slabel(:right :removed, tn[:f] >> 1.4ssw,
+            hbox(:center:base,
+                span(:bold, "Niendorf "),
+                "(Ostsee)"
+            )
+        );
+    }
+}
+
+

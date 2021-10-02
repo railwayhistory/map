@@ -1,0 +1,163 @@
+# DE 1110.  Eutin - Bad Schwartau Abzw (ausschl.)
+#
+let el = path("d4.de.1110");
+
+with detail = [4, 5] {
+    # point.de.Eutin  de.1023
+
+
+    with link = "line.de.1110" {
+        track(:first :pax,
+                el[:eut.f, :eut.x] >> 0.5dt
+            ..  el[:eut.gg + 1dt, :boc - 1sw]
+        );
+        with layer = 1 line_badge(:pax, el[:boc - 1.9km], "1110");
+    }
+
+
+    with link = "point.de.Bockholt" {
+        track(:first:station :pax, el[:boc - 1sw, :boc + 1sw]);
+        with layer = -1 marker(:de.hp :removed :right, el[:boc]);
+        station(:left :removed, el[:boc + 0.3sw] >> 1.7sh,
+            "Bockholt", "4,84"
+        );
+    }
+
+
+    with link = "line.de.1110" {
+        track(:first :pax, el[:boc + 1sw, :ott - 1sw]);
+        with detail = 5, layer = 1 {
+            line_badge(:pax, el[:boc + 2.0km], "1110");
+        }
+    }
+
+
+    with link = "point.de.Ottendorf-Holst" {
+        track(:first:station :pax, el[:ott - 1sw, :ott + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, el[:ott]);
+        station(:left :removed, el[:ott + 0.35sw] >> 1.5sh,
+            hbox(:right:base,
+                span(:regular, "Ottendorf "),
+                span(:light, "(Holst)")
+            ),
+            "8,72"
+        );
+    }
+
+
+    with link = "line.de.1110" {
+        track(:first :pax, el[:ott + 1sw, :pon.a]);
+        with layer = 1 line_badge(:pax, el[:ott + 1.7km], "1110");
+    }
+
+
+    with link = "point.de.Pönitz-Holst" {
+        # Gl. 1
+        track(:first :pax, el[:pon.a, :pon.f]);
+
+        # Gl. 2 (<< 1dt)
+        track(:station :pax,
+                el[:pon.a + 59m, :pon.a + 60m]
+            --  el[:pon.a + 120m, :pon.f - 120m] << 1dt
+            --  el[:pon.f - 60m, :pon.f - 59m]
+        );
+
+        with layer = -4 track(:second:station :removed,
+                el[:pon + 0.6sw, :aahr] >> 1dt
+            ..  path("d4.de.1111")[:pon.f - 10m, :pon.f]
+        );
+
+        marker(:de.bf :pax :right, el[:pon]);
+        label(el[:pon] << 2.5dt,
+            vbox(:left:middle :pax,
+                span(:medium:bold:removed, "Bahnhof Gleschendorf"),
+                hbox(:left:top,
+                    vbox(:center:top,
+                        hbox(:medium :center:base,
+                            span(:bold, "Ponitz "),
+                            span(:regular, "(Holst)")
+                        ),
+                        hbox(:xsmall :center:top,
+                            vbox(:right:top,
+                                span(:open, "1110: "),
+                                span(:removed, "1111: ")
+                            ),
+                            vbox(:right:top,
+                                span(:open, "11,"),
+                                span(:removed, "0,")
+                            ),
+                            vbox(:left:top,
+                                span(:open, "54"),
+                                span(:removed, "00")
+                            )
+                        )
+                    )
+                )
+            )
+       );
+    }
+
+
+    with link = "line.de.1110" {
+        track(:first :pax, el[:pon.f, :gle - 1sw]);
+        with layer = 1 line_badge(:pax, el[:pon + 1.3km], "1110");
+    }
+
+
+    with link = "point.de.Gleschendorf" {
+        track(:first:station :pax, el[:gle - 1sw, :gle + 1sw]);
+        with layer = -1 marker(:de.hp :removed :right, el[:gle]);
+        station(:right :removed, el[:gle + 0.4sw] << 1dt,
+            "Gleschendorf", "13,80"
+        );
+    }
+
+
+    with link = "line.de.1110" {
+        track(:first :pax, el[:gle + 1sw, :pan.a]);
+        with detail = 5, layer = 1 {
+            line_badge(:open, el[:gle + 3.0km], "1110");
+        }
+    }
+
+    with link = "point.de.Pansdorf" {
+        # Gl. 1
+        track(:station :pax,
+                el[:pan.a + 59m, :pan.a + 60m]
+            --  el[:pan.a + 120m, :pan.f - 120m] << 1dt
+            --  el[:pan.f - 60m, :pan.f - 59m]
+        );
+
+        # Gl. 2
+        track(:first:station :pax, el[:pan.a, :pan.a + 60m]);
+        with layer = -1 track(:first:station, el[:pan.a + 60m, :pan.f - 60m]);
+        track(:first:station :pax, el[:pan.f - 60m, :pan.f]);
+
+        marker(:de.bf :pax :left, el[:pan] << 1dt);
+        station(:right :pax, el[:pan + 0.4sw] << 1dt << 1.4sh,
+            "Pansdorf", "19,25"
+        );
+    }
+
+    with link = "line.de.1110" {
+        let lubput = path("d4.de.1100");
+        with detail = 4 {
+            track(:first :pax,
+                    el[:pan.f, :f]
+                ..  lubput[:aeut, :swa + 0.5sw + 3dl] >> 0.5dt
+            );
+            with layer = 1 line_badge(:pax, el[:pan + 2.7km], "1110");
+        }
+        with detail = 5 {
+            track(:first :pax,
+                    el[:pan.f, :f]
+                ..  lubput[:aeut, :swr.sn + 450m] >> 0.5dt
+            );
+            with layer = 1 line_badge(:pax, el[:swa - 1.85km], "1110");
+        }
+    }
+
+
+    # point.de.Bad-Schwartau-Abzw de.1100
+}
+

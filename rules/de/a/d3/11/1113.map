@@ -1,0 +1,138 @@
+# DE 1113.  Schwartau Waldhalle - Lübeck-Travemünde Strand
+#
+let wt = path("d4.de.1113");
+
+with detail = 3 {
+    # point.de.Schwartau-Waldhalle-Wr  de.1100
+
+    with link = "line.de.1113" {
+        track(:first :double :cat:ac15 :pax, wt[:aa, :dan - 1ssw]);
+    }
+
+    with link = "point.de.Lübeck-Dänischburg" {
+        track(:first:station :double :cat:ac15 :pax,
+                wt[:dan - 1ssw, :dan + 1ssw]
+        );
+        marker(:de.bf :pax :left, wt[:dan] << 0.5dt);
+        slabel(:bottom :pax, wt[:dan] >> 1dt,
+            vbox(:center:bottom,
+                span(:bold, "L.-"),
+                span(:bold, "Dänischbg.")
+            )
+        );
+    }
+
+    with link = "line.de.1113" {
+        track(:first :double :cat:ac15 :pax, wt[:dan + 1ssw, :kuc - 1ssw]);
+    }
+
+    with link = "point.de.Lübeck-Kücknitz" {
+        track(:first:station :double :cat:ac15 :pax,
+                wt[:kuc - 1ssw, :kua - 1ssw]
+        );
+        with layer = -1 marker(:de.bf :removed :left, wt[:kuc] << 0.5dt);
+    }
+
+    with link = "point.de.Lübeck-Kücknitz-Abzw" {
+        track(:first:station :cat:ac15 :pax,
+                wt[:kua - 1ssw, :kua + 0.5ssw] >> 0.5dt
+        );
+
+        track(:first:station :cat:ac15 :pax,
+                wt[:kua - 1ssw, :kua] << 0.5dt
+        );
+        with layer = -2 track(:first:station :cat:ac15,
+                wt[:kua, :kua + 0.5ssw] << 0.5dt
+        );
+
+        with layer = -2 marker(:de.abzw :left, wt[:kua] << 0.5dt);
+        label(wt[:kua - 0.5ssw] << 0.5dt << 1.2ssw,
+            hbox(:right:bottom,
+                vbox(:center:bottom :small,
+                    span(:bold, "L.-Kücknitz")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1113" {
+        track(:first :cat:ac15 :pax :tight,
+                wt[:kua + 0.5ssw, :kua + 0.51ssw] >> 0.5dt
+            ..  wt[:kur - 1.1ssw, :kur - 1ssw]
+        );
+        with layer = -1 casing(:first, wt[:kua.x - 200m, :kua.x + 400m]);
+    }
+
+
+    with link = "point.de.Lübeck-Kücknitz-Roter-Hahn" {
+        track(:first:station :cat:ac15 :pax, wt[:kur - 1ssw, :kur + 1ssw]);
+        marker(:de.hp :pax :right, wt[:kur]);
+        slabel(:right :pax, wt[:kur - 0.2ssw] >> 2.4ssw,
+            "L.-K. Roter Hahn"
+        );
+    }
+
+    with link = "line.de.1113" {
+        track(:first :cat:ac15 :pax, wt[:kur + 1ssw, :pop - 1ssw]);
+    }
+
+    with link = "point.de.Lübeck-Pöppendorf" {
+        track(:first:station :cat:ac15 :pax, wt[:pop - 1ssw, :pop + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, wt[:pop]);
+        slabel(:left :removed, wt[:pop - 0.4ssw] << 1.4ssw,
+            "L.-Pöppendorf"
+        );
+    }
+
+    with link = "line.de.1113" {
+        track(:first :cat:ac15 :pax, wt[:pop + 1ssw, :ska - 1ssw]);
+    }
+
+
+    with link = "point.de.Lübeck-Travemünde-Skandinavienkai" {
+        track(:first:station :cat:ac15 :pax, wt[:ska - 1ssw, :ska + 1ssw]);
+        marker(:de.hp :pax :left, wt[:ska]);
+        slabel(:right :pax, wt[:ska - 0.6ssw] >> 1dt + (0dt, 0.5dt),
+            "L.-T. Skandinavienkai"
+        );
+    }
+    
+    with link = "line.de.1113" {
+        track(:first :cat:ac15 :pax, wt[:ska + 1ssw, :trh - 1ssw]);
+
+        guide(:linenum :pax,
+                wt[:ska + 1ssw] << 1.0dt
+            --  wt[:ska + 1.2ssw] << 1.0dt - (2.0dt, 0dt)
+        );
+        label(:linenum, wt[:ska + 1.2ssw] << 1.0dt - (2.0dt, 0dt),
+            hbox(:right:middle :badgesize :pax, "1113 ")
+        );
+    }
+
+    with link = "point.de.Lübeck-Travemünde-Hafen" {
+        track(:first:station :cat:ac15 :pax, wt[:trh - 1ssw, :trh + 1ssw]);
+        marker(:de.hp :pax :right, wt[:trh]);
+        with layer = -1 marker(:de.bf :gone :right, wt[:trh]);
+        slabel(:right :pax, wt[:trh] >> 1ssw + (1.3ssw, 0ssw),
+            span(:bold, "L.-Travemünde Hafen")
+        );
+    }
+
+    with link = "line.de.1113" {
+        track(:first :cat:ac15 :pax, wt[:trh + 1ssw, :trs - 1ssw]);
+    }
+
+    with link = "point.de.Lübeck-Travemünde-Hafen" {
+        track(:first:station :cat:ac15 :pax, wt[:trs - 1ssw, :trs]);
+
+        marker(:de.hp :pax :top, wt[:trs]);
+        with layer = -1 marker(:de.bf :gone :top, wt[:trs]);
+        track(:first:pax, wt[:trs] << 0.5ssw -- wt[:trs] >> 0.5ssw);
+        slabel(:right :pax, wt[:trs] + (1.4ssw, -0.6ssw),
+            span(:bold, "Lübeck-Travemünde Strand")
+        );
+    }
+
+}
+

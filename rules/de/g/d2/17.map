@@ -1,0 +1,60 @@
+# DE 1700.  Hannover Hbf - Hamm (Westf)
+with detail = 2 {
+    let hh = path("d2.de.g.1700");
+
+    with link = "line.de.1700" {
+        track(:first :double :cat:ac15 :pax, hh[:mig.a, :her]);
+        with layer = 1 line_badge(:open, hh[:min + 8.5km], "1700");
+    }
+
+    with link = "point.de.Minden-Westf" {
+        with layer = 1 marker(:statdot :pax, hh[:min]);
+    }
+
+    with link = "point.de.Löhne-Westf-Pbf" {
+        with layer = 1 marker(:statdot :pax, hh[:loh]);
+    }
+}
+
+
+# DE 1743.  Nienburg (Weser) - Rahden (Lr Lübbecke)
+with detail = 2 {
+    let nr = path("d2.de.1743");
+
+    with link = "line.de.1743" {
+        with layer = -1 track(:second, nr[:nie.f, :lie]);
+
+        with layer = -2 track(:second :removed, nr[:lie, :uch]);
+        with layer = 1 line_badge(:removed, nr[:lie + 12km], "1743");
+
+        with layer = -1 track(:second, nr[:uch, :rah.f]);
+        with layer = 1 line_badge(:open, nr[:uch + 13km] << 0.5dt, "1743");
+    }
+
+    with link = "point.de.Liebenau-Han" {
+        with layer = 1 marker(:statdot, nr[:lie]);
+        slabel(:left, nr[:lie] + (-1.8dt, 0.8dt),
+            hbox(:right:base, "Liebenau ", span(:light, "(Han)"))
+        );
+    }
+
+    with link = "point.de.Uchte" {
+        with layer = 1 marker(:statdot, nr[:uch]);
+        slabel(:left, nr[:uch] + (-1.8dt, 0.8dt), "Uchte");
+    }
+}
+
+
+# DE 1744.  Nienburg Lohe - Diepholz
+with detail = 2 {
+    let nd = path("d2.de.1744");
+
+    with link = "line.de.1744" {
+        with layer = -2 track(:second :removed, nd[:loh, :sul.f]);
+        with layer = 1 line_badge(:removed, nd[:loh + 13km], "1744");
+
+        with layer = -1 track(:second, nd[:sul.a, :die.f]);
+        with layer = 1 line_badge(:open, nd[:sul.a + 20km], "1744");
+    }
+}
+
