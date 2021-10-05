@@ -1,0 +1,867 @@
+# DE 6100.  Berlin-Spandau - Hamburg-Altona
+#
+let ba = path("d4.de.a.6100");
+
+with detail = [4, 5] {
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:gsah + 0.5sw, :buc.a]);
+    }
+
+
+    with link = "point.de.Büchen" {
+        let ln = path("d4.de.1150");
+        let lb = path("d4.de.1121");
+
+        # Gl. 1
+        track(:station :cat:ac15 :pax,
+                ba[:buc - 441m, :buc - 440m] << 0.5dt
+            --  ba[:buc - 320m, :buc + 1.5dt] << 1.5dt
+            --  ba[:buc + 1.5dt + 1dl, :buc + 1.5dt + 1.1dl] << 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:buc - 440m, :buc - 320m] << 1.5dt
+            );
+            with layer = -2 track(:station,
+                    ba[:buc + 1.5dt, :buc + 1.5dt + 1.5dl] << 1.5dt
+            );
+
+        # Gl. 2 (Gegengl. Str. 6100)
+        track(:first:station :cat:ac15 :pax, ba[:buc.a, :buc.r] << 0.5dt);
+            with layer = -2 track(:station :cat:ac15,
+                    ba[:buc.a + 250m] << 0.5dt
+                --  ba[:buc.a + 400m] >> 0.5dt
+            );
+            track(:station :cat:ac15 :pax,
+                    ba[:buc + 1.5dt + 5dl] << 0.5dt
+                --  ba[:buc + 1.5dt + 6dl] >> 0.5dt
+            );
+
+        # Gl. 3 (Richtungsgl. Str. 6100)
+        track(:first:station :cat:ac15 :pax, ba[:buc.a, :buc.r] >> 0.5dt);
+            with layer = -2 track(:station :cat:ac15,
+                    ba[:buc - 580m] >> 0.5dt
+                --  ba[:buc - 460m] << 0.5dt
+            );
+
+        # Gl. 4
+        track(:station :cat:ac15 :pax,
+                ba[:buc - 441m, :buc - 440m] >> 0.5dt
+            --  ba[:buc - 320m, :buc + 1.5dt] >> 1.5dt
+            --  ba[:buc + 1.5dt  + 1dl, :buc + 1.5dt + 1.1dl] >> 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:buc - 440m, :buc - 320m] >> 1.5dt
+            );
+
+        # Gl. Str. 1121
+        with layer = -1 track(:first:station :pax,
+                ba[:buc + 1.5dt + 6.9dl, :buc + 1.5dt + 7dl] >> 0.5dt
+            ..  lb[:buc.g + 380m, :buc.g]
+        );
+
+        # Gl. 36/37
+        with layer = -2 track(:station,
+                ba[:buc - 450m, :buc - 350m] << 2.5dt
+            --  ba[:buc - 350m + 1dl, :buc - 350m + 1.1dl] << 3.5dt
+        );
+
+        # Gl. 38
+        with layer = -2 track(:station,
+                ba[:buc - 450m, :buc - 1.5dt] << 3.5dt
+        );
+
+        # Gl. 40 (Str. 1150)
+        with layer = -1 track(:first:station :pax,
+                ln[:buc.b, :buc.b + 600m]
+            ..  ba[:buc - 1.5dt, :buc + 1.5dt + 1dl] << 3.5dt
+            --  ba[:buc + 1.5dt + 4dl, :buc + 1.5dt + 4.1dl] << 0.5dt
+        );
+
+        # Gl. 41
+        with layer = -1 track(:station :pax,
+                ln[:buc.b + 600m - 2.1dl, :buc.b + 600m - 1dl]
+            --  ln[:buc.b + 600m, :buc.b + 601m] << 1dt
+            ..  ba[:buc - 1.5dt, :buc + 1.5dt] << 4.5dt
+            --  ba[:buc + 1.5dt + 1dl, :buc + 1.5dt + 1.1dl] << 3.5dt
+        );
+
+        # Gl. 64
+        with layer = -2 track(:station,
+                ba[:buc + 1.5dt, :buc + 1.5dt + 1.7dl] << 4.5dt
+            --  ba[:buc + 1.5dt + 4.7dl, :buc.r] << 1.5dt
+        );
+
+        # Gl. 124
+        with layer = -2 track(:station,
+                ba[:buc + 1.5dt, :buc + 1.5dt + 7dl] >> 1.5dt
+            ..  lb[:buc.g + 380m, :buc.g + 379m] >> 1dt
+            --  lb[:buc.g + 380m - 1dl, :buc.g + 380m - 0.9dl]
+        );
+
+        marker(:de.inbf :pax :left, ba[:buc] << 1.5dt);
+        station(:left :pax, ba[:buc - 1.5dt] << 4.5dt << 8pt,
+            span(:bold, "Büchen"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1121: "),
+                    span(:open, "1150: "),
+                    span(:open, "6100: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "47,"),
+                    span(:open, "161,"),
+                    span(:open, "238,")
+                ),
+                vbox(:left:top,
+                    span(:open, "59"),
+                    span(:open, "34"),
+                    span(:open, "92")
+                )
+            )
+        );
+    }
+
+
+    with link = "point.de.Büchen-Bbf" {
+        # Gl. 55
+        with layer = -1 track(:station :cat:ac15,
+                ba[:buc.r + 4.9dl, :buc.r + 5dl] >> 0.5dt
+            --  ba[:buc.r + 8dl, :buc.f - 450m - 2dl] << 1.5dt
+            --  ba[:buc.f - 450m, :buc.f - 449m] << 0.5dt
+        );
+        with layer = -2 track(:station,
+                ba[:buc.f - 450m - 2dl, :buc.f - 450m] << 1.5dt
+        );
+
+        # Gl. 56 (Gegenrichtungsgleis Str. 6100)
+        track(:first:station :cat:ac15 :pax, ba[:buc.r, :buc.f] << 0.5dt);
+
+        # Gl. 57 (Richtungsgleis Str. 6100)
+        track(:first:station :cat:ac15 :pax, ba[:buc.r, :buc.f] >> 0.5dt);
+
+        # Gl. 58
+        with layer = -1 track(:station :cat:ac15,
+                ba[:buc.r + 3.9dl, :buc.r + 4dl] >> 0.5dt
+            --  ba[:buc.r + 6dl, :buc.f - 450m - 4dl] >> 1.5dt
+            --  ba[:buc.f - 450m - 2dl, :buc.f - 450m - 1.9dl] >> 0.5dt
+        );
+        with layer = -2 track(:station,
+                ba[:buc.f - 450m - 4dl, :buc.f - 450m - 2dl] >> 1.5dt
+        );
+
+        # Gl. 64
+        with layer = -2 track(:station,
+                ba[:buc.r, :buc.r + 8dl] << 1.5dt
+        );
+
+        with layer = -1 marker(:de.bft :left, ba[:bcb] << 1.5dt);
+        station(:left, ba[:bcb + 0.5sw] << 1.5dt << 1.2sw,
+            hbox(:right:top, "Büchen Bbf"), "??"
+        );
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:buc.f, :stt - 350m]);
+    }
+
+    with link = "point.de.Büchen-Steinautal" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:stt - 350m, :stt + 350m]
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:stt - 1dl] << 0.5dt
+                --  ba[:stt + 1dl] >> 0.5dt
+            );
+
+        with layer = -1 marker(:de.uest :right, ba[:stt] >> 0.5dt);
+        station(:top, ba[:stt] >> 0.5dt >> 1.4sh,
+            vbox(:center:bottom,
+                span(:light, "Büchen"),
+                span(:regular, "Steinautal")
+            ),
+            "241,64"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:stt + 300m, :mus - 1sw]);
+        with layer = 1 line_badge(:cat:ac15 :pax, ba[:stt + 1.2km], "6100");
+    }
+
+
+    with link = "point.de.Müssen" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:mus - 1sw, :mus + 1sw]
+        );
+        marker(:de.hp :pax :left, ba[:mus] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, ba[:mus] << 0.5dt);
+        station(:bottom :pax, ba[:mus] << 0.5dt << 1.4sh,
+            "Müssen",
+            hbox(:center:base,
+                span(:removed, "244,07 → "),
+                span(:open, "244,02")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:mus + 1sw, :swa.a]);
+        with layer = 1 line_badge(:cat:ac15 :pax, ba[:swa - 2.0km], "6100");
+    }
+
+
+    with link = "point.de.Schwarzenbek" {
+        # Gl. 601
+        with layer = -1 track(:station :cat:ac15,
+                ba[:swa.a + 300m + 1.4dl, :swa.a + 300m + 1.5dl] << 0.5dt
+            --  ba[:swa.a + 300m + 3.0dl, :swa.x - 4dl] << 1.5dt
+            --  ba[:swa.x - 2.5dl, :swa.x - 2.49dl] << 0.5dt
+        );
+
+        # Gl. 602 (Gegenrichtungsgl. Str. 6100)
+        track(:first:station :cat:ac15 :pax, ba[:swa.a, :swa.f] << 0.5dt);
+
+        # Gl. 603 (Richtungsgl. Str. 6100)
+        track(:first:station :cat:ac15 :pax, ba[:swa.a, :swa.f] >> 0.5dt);
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:swa.f - 250m - 1.5dl] >> 0.5dt
+                --  ba[:swa.f - 250m] << 0.5dt
+            );
+
+        # Gl. 604
+        track(:station :cat:ac15 :pax,
+                ba[:swa - 300m + 2.19dl, :swa - 300m + 2.2dl] >> 0.5dt
+            --  ba[:swa - 300m + 3.7dl, :swa.x - 2.5dl] >> 1.5dt
+            --  ba[:swa.x - 1dl, :swa.x - 0.9dl] >> 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:swa - 300m + 1.7dl, :swa - 300m + 3.7dl] >> 1.5dt
+            );
+
+        # Gl. 605
+        with layer = -1 track(:station :cat:ac15,
+                ba[:swa.a + 299m, :swa.a + 300m] << 0.5dt
+            --  ba[:swa.a + 300m + 3dl, :swa - 300m] >> 1.5dt
+            --  ba[:swa - 300m + 1.5dl, :swa.x - 4dl] >> 2.5dt
+            --  ba[:swa.x - 2.5dl, :swa.x - 2.49dl] >> 1.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:swa.a + 300m + 1dl, :swa.a + 300m + 3dl] >> 1.5dt
+            );
+
+        # Str. 1141
+        with layer = -2 track(:second:station,
+                ba[:swa.x - 2.5dl, :swa.x - 0.5dl] >> 1.5dt
+        );
+        with layer = -4 track(:second:station :removed,
+                ba[:swa.x - 0.5dl, :swa.x] >> 1.5dt
+            ..  path("d4.de.1141")[:swa.gg - 0.1dl, :swa.gg]
+        );
+
+        marker(:de.bf :pax :left, ba[:swa] << 1.5dt);
+        station(:bottom :pax, ba[:swa + 1sw] << 1.5dt << 1.6sh,
+            span(:bold, "Schwarzenbek"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "1141: "),
+                    span(:open, "6100: ")
+                ),
+                vbox(:right:top,
+                    span(:removed, "249,26"),
+                    span(:removed, "249,26")
+                ),
+                vbox(:right:top,
+                    span(:removed, ""),
+                    span(:removed, " →")
+                ),
+                vbox(:right:top,
+                    span(:removed, ""),
+                    span(:open, " 249,23")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:swa.f, :frr - 1sw]);
+        with layer = 1 line_badge(:cat:ac15 :pax, ba[:rap + 1.8km], "6100");
+    }
+
+
+    with link = "point.de.Radekamp" {
+        with layer = -1 marker(:de.bk :removed :right, ba[:rap] >> 0.5dt);
+        station(:top :removed, ba[:rap - 0.2sw] >> 0.5dt >> 1.5sh,
+            "Radekamp", "251,86"
+        );
+    }
+
+
+    with link = "point.de.Sachsenwald" {
+        with layer = -1 marker(:de.bk :removed :right, ba[:sad] >> 0.5dt);
+        station(:top :removed, ba[:sad] >> 0.5dt >> 1.3sh,
+            "Sachsenwald", "255,20"
+        );
+    }
+
+
+    with link = "point.de.Friedrichsruh" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:frr - 1sw, :frr + 1sw]
+        );
+        marker(:de.hp :pax :right, ba[:frr] >> 0.5dt);
+        with layer = -4 marker(:de.bf :gone :right, ba[:frr] >> 0.5dt);
+        station(:top :pax, ba[:frr] >> 0.5dt >> 1.4sh,
+            "Friedrichsruh",
+            hbox(:center:base,
+                span(:open, "259,4+166 "),
+                span(:removed, "(259,57)")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:frr + 1sw, :aum.a]);
+    }
+}
+
+with detail = 4 {
+    with link = "point.de.Aumühle-Abzw" {
+        # Str. 6100 R
+        track(:first:station :cat:ac15 :pax,
+                ba[:aum.a, :aua + 1sw] >> 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:aua - 6dl] >> 0.5dt
+                --  ba[:aua - 4dl] << 0.5dt
+            );
+
+        # Str. 6100 L
+        track(:first:station :cat:ac15 :pax,
+                ba[:aum.a, :aua + 1sw] << 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:aua - 2dl] << 0.5dt
+                --  ba[:aua] >> 0.5dt
+            );
+
+        # Gl. 803
+        with layer = -1 track(:first:station :cat:ac15,
+                ba[:aua - 0.1dl, :aua] >> 0.5dt
+            --  ba[:aua + 2dl, :aum - 0.7dl] >> 1.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:aua + 4dl] >> 1.5dt
+                --  ba[:aua + 3dl] >> 2.5dt
+            );
+
+        with layer = -1 marker(:de.bft.abzw :left, ba[:aua] << 0.5dt);
+        station(:bottom, ba[:aua] << 0.5dt << 1.2sw,
+            span(:bold, "Aumühle Abzw"),
+            hbox(:center:top,
+                vbox(:right:top, "1285: ", "6100: "),
+                vbox(:right:top, "??", "??")
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:aua + 1sw, :ber - 920m]);
+    }
+
+
+    with link = "point.de.Hamburg-Mörkenweg" {
+        with layer = -1 marker(:de.bk :removed :left, ba[:mow] << 0.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf" {
+        # Gl. 701
+        track(:first:station :cat:ac15 :pax,
+                ba[:ber - 920m, :bek - 1sw] << 0.5dt
+        );
+            track(:station :cat:ac15,
+                    ba[:ber - 820m + 3dl] << 0.5dt
+                --  ba[:ber - 820m + 5dl] >> 0.5dt
+            );
+
+        # Gl. 702
+        track(:first:station :cat:ac15 :pax,
+                ba[:ber - 920m, :bek - 1sw] >> 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:ber - 820m] >> 0.5dt
+                --  ba[:ber - 820m + 2dl] << 0.5dt
+            );
+
+        marker(:de.bf :pax :left, ba[:ber] << 0.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf-Bk" {
+        # Gl. 710 (Str. 9123)
+        with layer = -2 track(:second:station,
+                ba[:bek, :bek + 1dl] << 2.5dt
+            --  ba[:bek + 2dl, :bek + 2.1dl] << 1.5dt
+        );
+        with layer = -2 track(:station,
+                ba[:bek + 1dl, :bek + 3dl] << 2.5dt
+        );
+
+        # Gl. 711 (Str. 6100 L)
+        track(:first:station :cat:ac15 :pax,
+                ba[:bek - 1sw, :bek - 1dl] << 0.5dt
+            --  ba[:bek, :bek + 2sw] << 1.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:bek + 4dl] << 1.5dt
+                --  ba[:bek + 5dl] << 0.5dt
+            );
+
+        # Gl. 712 (Str. 6100 R)
+        track(:first:station :cat:ac15 :pax,
+                ba[:bek - 1sw, :bek + 2sw] >> 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:bek + 5dl] >> 0.5dt
+                --  ba[:bek + 6dl] << 0.5dt
+            );
+
+        # Gl. 713
+        with layer = -1 track(:station :cat:ac15,
+                ba[:bek + 3dl, :bek + 2sw] << 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf-Gbf" {
+        # Gl. 711
+        track(:first:station :cat:ac15 :pax,
+                ba[:bek + 2sw, :bea - 1sw] << 1.5dt
+        );
+
+        # Gl. 712
+        track(:first:station :cat:ac15 :pax,
+                ba[:bek + 2sw, :bea - 1sw] >> 0.5dt
+        );
+
+        # Gl. 713
+        with layer = -1 track(:station :cat:ac15,
+                ba[:bek + 2sw, :bea - 1sw] << 0.5dt
+        );
+
+        with layer = -1 marker(:de.bft :left, ba[:beg] << 1.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Bergedorf-Ba" {
+        # Gl. 711 (Str. 6100 L)
+        track(:first:station :cat:ac15 :pax,
+                ba[:bea - 1sw, :bea + 1dl] << 1.5dt
+            --  ba[:bea + 2dl, :bea + 1sw] << 0.5dt
+        );
+
+        # Gl. 712 (Str. 6100 R)
+        track(:first:station :cat:ac15 :pax,
+                ba[:bea - 1sw, :bea + 1sw] >> 0.5dt
+        );
+
+        # Gl. 713
+        with layer = -1 track(:station :cat:ac15,
+                ba[:bea - 1sw, :bea] << 0.5dt
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:bea - 3dl] << 0.5dt
+                --  ba[:bea - 2dl] >> 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:bea - 2dl] << 0.5dt
+                --  ba[:bea - 1dl] << 1.5dt
+            );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:bea + 1sw, :all - 1.2sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Allermöhe" {
+        # Str. 6100 R
+        track(:first:station :cat:ac15 :pax,
+                ba[:all - 1.2sw, :all + 1sw] >> 0.5dt
+        );
+            track(:station :cat,
+                    ba[:all - 3dl] >> 0.5dt
+                --  ba[:all - 1dl] << 0.5dt
+            );
+
+        # Str. 6100 L
+        track(:first:station :cat:ac15 :pax,
+                ba[:all - 1.2sw, :all + 1sw] << 0.5dt
+        );
+
+        # Str. 1280
+        with layer = -1 track(:first:station :cat:ac15,
+                ba[:all - 0.1dl, :all] << 0.5dt
+            --  ba[:all + 2dl, :all + 1sw] << 1.5dt
+        );
+
+        with layer = -1 marker(:statdt :left, ba[:all] << 0.5dt);
+        with layer = -1 marker(:de.abzw :left, ba[:all] << 1.5dt);
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:all + 1sw, :bia - 1sw]);
+    }
+
+
+    # point.de.Hamburg-Billwerder-Moorfleet-Abzw: de.1280
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:bia + 1sw, :rtk - 1sw]);
+    }
+
+
+    # point.de.Hamburg-Rothenburgsort-Tk: de.1280
+
+
+    with link = "point.de.Hamburg-Rothenburgsort-Rop" {
+        # Str. 6100 R
+        track(:first:station :cat:ac15 :pax,
+                ba[:rop - 1sw, :rop + 1sw] >> 0.5dt
+        );
+
+        # Str. 6100 L
+        track(:first:station :cat:ac15 :pax,
+                ba[:rop - 1sw, :rop] << 0.5dt
+            --  ba[:rop + 2dl, :rop + 2.1dl] >> 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                ba[:rop, :rop + 1sw] << 0.5dt
+        );
+
+        # Str. 1291
+        track(:first:station :cat:ac15 :pax,
+                ba[:rop - 0.1dl, :rop] << 0.5dt
+            --  ba[:rop + 2dl, :rop + 3dl] << 1.5dt
+        );
+
+        with layer = -1 track(:station :cat:ac15,
+                ba[:rop - 3dl] >> 0.5dt
+            --  ba[:rop - 1dl] << 0.5dt
+        );
+
+#       with layer = 4 marker(:de.bft :right, ba[:rop] >> 0.5dt);
+#       with layer = 3 marker(:de.bft.casing :right, ba[:rop] >> 0.5dt);
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :cat:ac15 :pax, ba[:rop + 1sw, :anc - 1sw] >> 0.5dt);
+        track(:first :removed, ba[:rop + 1sw, :anc - 1sw] << 0.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Anckelmannsplatz" {
+        # Str. 6100 R
+        track(:first:station :cat:ac15 :pax,
+                ba[:anc - 1sw, :anc + 1sw] >> 0.5dt
+        );
+
+        # Str. 6100 L
+        with layer = -4 track(:first:station :removed,
+                ba[:anc - 1sw, :anc] << 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                ba[:anc - 2.1dt, :anc - 2dl] >> 0.5dt
+            --  ba[:anc, :anc + 1sw] << 0.5dt
+        );
+
+        with layer = -1 marker(:de.uest :left, ba[:anc] << 0.5dt);
+    }
+
+
+    with link = "line.de.6100" {
+        with layer = 2 track(:first :cat:ac15 :pax :tight,
+                ba[:anc + 100m, :btb] >> 0.5dt
+            ..  ba[:ham.a - 0.1dl, :ham.a] >> 1.5dt
+        );
+        with layer = 1 casing(:first :cat:ac15 :pax :tight,
+                ba[:anc + 100m, :btb] >> 0.5dt
+            ..  ba[:ham.a - 0.1dl, :ham.a] >> 1.5dt
+        );
+
+        with layer = 2 track(:first :cat:ac15 :pax :tight :flip,
+                ba[:anc + 100m, :anc + 110m] << 0.5dt
+            ..  ba[:ham.a - 0.1dl, :ham.a] << 1.5dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Hbf" {
+        let rh = path("d4.de.1245");
+        let wh = path("d4.de.a.2200");
+
+        # Gl. 5
+        track(:station :cat:ac15 :pax,
+                ba[:ham - 401m, :ham - 400m] >> 0.5dt
+            ..  ba[:ham.x, :ham + 120m] >> 1.5dt
+            --  ba[:ham + 120m + 1dl, :ham + 120m + 1.1dl] >> 0.5dt
+        );
+
+        # Gl. 6
+        track(:first:station :cat:ac15 :pax,
+                ba[:ham.a, :ham - 400m] >> 0.5dt
+            ..  ba[:ham.x, :ham.f - 180m] >> 0.5dt
+            --  ba[:ham.f - 180m + 1dl, :ham.f - 180m + 1.1dl] << 0.5dt
+        );
+
+        # Gl. 7
+        track(:first:station :cat:ac15 :pax,
+                ba[:ham.a, :ham - 400m] << 0.5dt
+            ..  ba[:ham.x, :ham.s + 5dl] << 0.5dt
+        );
+
+        # Gl. 8
+        track(:first:station :cat:ac15 :pax,
+                ba[:ham.a, :ham - 400m] << 1.5dt
+            ..  ba[:ham.x, :ham.s + 2dl] << 1.5dt
+        );
+
+        # Gl. 10
+        with layer = -2 track(:second:station,
+                rh[:ham.a, :ham.a + 400m]
+            ..  rh[:ber - 41m, :ber - 40m] << 1dt
+        );
+        with layer = -1 track(:second:station :cat:ac15,
+                rh[:ber - 40m, :klo] << 1dt
+        );
+        track(:second:station :cat:ac15 :pax,
+                wh[:klo - 2.1dt, :klo - 2dt] << 2.8dt
+            --  rh[:klo, :klo + 0.1dl] << 1dt
+            ..  ba[:ham.x, :ham.s + 5dl] << 2.5dt
+        );
+
+        # Gl. 11
+        track(:first:station :cat:ac15 :pax,
+                wh[:ham.a, :ham.a + 1m] << 1.5dt
+            ..  rh[:klo, :klo + 0.1dl] << 2dt
+            ..  ba[:ham.x, :ham] << 3.5dt
+            --  ba[:ham + 150m, :ham + 151m] << 4.0dt
+        );
+        track(:station :cat:ac15 :pax,
+                ba[:ham - 0.1dl, :ham] << 3.5dt
+            --  ba[:ham + 150m, :ham + 151m] << 2.5dt
+        );
+
+        # Gl. 12
+        track(:first:station :cat:ac15 :pax,
+                wh[:ham.a, :ham.a + 1m] << 2.5dt
+            ..  rh[:klo, :klo + 0.1dl] << 3dt
+            ..  ba[:ham.x, :ham] << 4.5dt
+            --  ba[:ham + 150m, :ham + 151m] << 4.0dt
+        );
+
+        # Gl. 13
+        track(:first:station :cat:ac15 :pax,
+                wh[:ham.a, :ham.a + 1m] << 3.5dt
+            ..  rh[:klo, :klo + 0.1dl] << 4dt
+            ..  ba[:ham.x, :ham] << 5.5dt
+            --  ba[:ham + 150m, :ham + 151m] << 4.0dt
+            --  ba[:ham.s + 2dl, :ham.s + 4dl] << 1.5dt
+            --  ba[:ham.s + 5dl, :ham.f - 100m] << 0.5dt
+            --  ba[:ham.f - 100m + 1dl, :ham.f] >> 0.5dt
+        );
+
+        # Gl. 14
+        track(:first:station :cat:ac15 :pax,
+                wh[:ham.a, :ham.a + 1m] << 4.5dt
+            ..  rh[:klo, :klo + 0.1dl] << 5dt
+            ..  ba[:ham.x, :ham + 1dl] << 6.5dt
+            --  ba[:ham + 150m + 2dl, :ham + 151m + 2dl] << 5.0dt
+            --  ba[:ham.s + 3dl, :ham.s + 5dl] << 2.5dt
+            --  ba[:ham.s + 6dl, :ham.f - 100m + 0.7dl] << 1.5dt
+            --  ba[:ham.f - 100m + 1.7dl, :ham.f] << 0.5dt
+        );
+            track(:station :cat:ac15 :pax,
+                    wh[:klo - 1.3dt] << 4.8dt
+                --  rh[:klo + 0.6dt] << 3dt
+            );
+
+        # Gl. 34
+        with layer = -1 track(:station :cat:ac15,
+                ba[:ham + 120m, :ham.s] >> 1.5dt
+        );
+
+        # Gl. 35
+        with layer = -1 track(:station :cat:ac15,
+                ba[:ham.f - 180m, :ham.f - 100m - 0.5dl] >> 0.5dt
+        );
+
+        # Gl. 67
+        with layer = -1 track(:station :cat:ac15,
+                rh[:ber - 30m, :ber + 300m - 2dl] << 4dt
+            --  rh[:ber + 300m + 2dl, :ber + 300m + 2.1dl] << 1dt
+        );
+
+        # Gl. 70
+        with layer = -1 track(:station :cat,
+                rh[:ber - 50m, :ber + 300m - 1dl] << 3dt
+        );
+
+        # Gl. 72
+        with layer = -1 track(:station :cat,
+                rh[:ber + 30m, :ber + 300m] << 2dt
+        );
+
+        # Gl. 79
+        with layer = -1 track(:station :cat,
+                rh[:ber - 40m, :ber + 300m]
+            --  rh[:ber + 300m + 1dl, :ber + 300m + 1.1dl] << 1dt
+        );
+
+        # Gl. 81
+        with layer = -1 track(:station :cat,
+                rh[:ber + 40m, :ber + 300m - 3dl] >> 1dt
+        );
+
+        # Gl. 83
+        with layer = -1 track(:station :cat,
+                rh[:ber + 40m, :ber + 300m - 4dl] >> 2dt
+            --  rh[:ber + 300m - 2dl, :ber + 300m - 1.9dl]
+        );
+
+        # Gl. 91
+        with layer = -2 track(:station,
+                rh[:ham.a + 100m + 0.9dl, :ham.a + 100m + 1dl]
+            --  rh[:ham.a + 100m + 2dl, :ham.a + 400m] >> 1dt
+            --  rh[:ham.a + 400m + 1dl, :ham.a + 401m + 1dl]
+        );
+
+        # Gl.96
+        with layer = -2 track(:station,
+                rh[:ham.a + 99m, :ham.a + 100m]
+            --  rh[:ham.a + 100m + 1dl, :ham.a + 400m - 1dl] << 1dt
+            --  rh[:ham.a + 400m, :ham.a + 401m]
+        );
+
+        # W330 - W332
+        track(:first:station :cat:ac15 :pax,
+                ba[:ham.a, :ham.a + 180m] >> 1.5dt
+            --  ba[:ham.a + 180m + 1dl, :ham.a + 180m + 1.1dl] >> 0.5dt
+        );
+
+        # W470 - W472
+        track(:first:station :cat:ac15 :pax,
+                ba[:ham.f - 180m - 0.5dl] << 0.5dt
+            --  ba[:ham.f - 180m + 0.5dl] << 1.5dt
+        );
+
+        marker(:de.bf :pax :left, ba[:ham - 0.5sw] << 6.5dt);
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:ham.f, :dam - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Dammtor" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:dam - 1sw, :dam + 1sw]
+        );
+        marker(:de.hp :pax :left, ba[:dam] << 0.5dt);
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:dam + 1sw, :ste.uest - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Sternschanze" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:ste.uest - 1sw, :ste + 1sw]
+        );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:ste.uest - 2.5dl] >> 0.5dt
+                --  ba[:ste.uest - 0.5dl] << 0.5dt
+            );
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:ste.uest + 0.5dl] << 0.5dt
+                --  ba[:ste.uest + 2.5dl] >> 0.5dt
+            );
+
+        with layer = -1 marker(:de.uest :left, ba[:ste.uest] << 0.5dt);
+        with layer = -4 marker(:de.bf :left :removed, ba[:ste] << 0.5dt);
+    }
+
+
+    with link = "point.de.Altona-Schulterblatt" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:ste + 1sw, :sul + 1sw]
+        );
+        with layer = -4 marker(:de.gbf :gone :left, ba[:sul] << 0.5dt);
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:sul + 1sw, :rai - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Rainweg" {
+        track(:first:station :cat:ac15 :pax,
+                ba[:rai - 1sw, :rai + 1sw] >> 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                ba[:rai - 1.1dl, :rai - 1dl] >> 0.5dt
+            --  ba[:rai, :rai + 1sw] << 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                ba[:rai - 1dl, :rai + 1sw] << 1.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                ba[:rai - 1sw, :rai - 2dl] << 0.5dt
+            --  ba[:rai, :rai + 1sw] << 2.5dt
+        );
+
+        with layer = -1 marker(:de.abzw :left, ba[:rai] << 2.5dt);
+    }
+
+    
+    with link = "line.de.6100" {
+        let ak = path("d4.de.1220");
+
+        # Richtungsgleis
+        with layer = 2 track(:first:station :cat:ac15 :pax,
+                ba[:rai + 1sw, :rai.x] >> 0.5dt
+            ..  ak[:aham - 99m, :aham - 100m] >> 6.5dt
+        );
+        with layer = 1 casing(:first:station :cat,
+                ba[:rai + 1sw, :rai.x] >> 0.5dt
+            ..  ak[:aham - 99m, :aham - 100m] >> 6.5dt
+        );
+
+        # Gegenrichtungsgleis
+        with layer = 2 track(:first:station :cat:ac15 :pax,
+                ba[:rai + 1sw, :rai + 1.1sw] << 2.5dt
+            ..  ak[:aham - 99m, :aham - 100m] >> 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat,
+                ba[:rai + 1sw, :rai + 1.1sw] << 2.5dt
+            ..  ak[:aham - 99m, :aham - 100m] >> 0.5dt
+        );
+    }
+
+    
+    # point.de.Hamburg-Altona: de.1220
+}
+
