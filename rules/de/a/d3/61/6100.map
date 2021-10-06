@@ -113,17 +113,22 @@ with detail = 3 {
 
     with link = "point.de.Hamburg-Bergedorf" {
         track(:first:station :double :cat:ac15 :pax,
-                ba[:ber - 1ssw, :ber + 1ssw]
+                ba[:ber - 1ssw, :ber.f]
         );
         marker(:de.bf :pax :left, ba[:ber] << 0.5dt);
         slabel(:right :pax,
-            ba[:ber + 0.3ssw] << 0.5dt << 2.0ssw + (0.5dt, 0dt),
+            ba[:ber] << 0.5dt + (2ssw, 0.7ssw),
             span(:bold, "H.-Bergedorf")
         );
     }
 
+    with link = "point.de.Hamburg-Bergedorf-Gbf" {
+        track(:first:station :double :cat:ac15 :pax, ba[:ber.f, :net + 1ssw]);
+        with layer = -1 marker(:de.bft :left, ba[:net] << 0.5dt);
+    }
+
     with link = "line.de.6100" {
-        track(:first :double :cat:ac15 :pax, ba[:ber + 1ssw, :all - 1ssw]);
+        track(:first :double :cat:ac15 :pax, ba[:net + 1ssw, :all - 1ssw]);
     }
 
     with link = "point.de.Hamburg-Allermöhe" {
