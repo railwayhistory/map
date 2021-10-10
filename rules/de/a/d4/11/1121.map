@@ -3,7 +3,7 @@
 let lb = path("d4.de.1121");
 
 with detail = [4, 5] {
-    # point.de.Lübeck-Hbf  de.1120
+    # point.de.Lübeck-Hbf        de.1120
 
 
     with link = "line.de.1121" {
@@ -14,6 +14,367 @@ with detail = [4, 5] {
     }
 
 
+    # point.de.Lübeck-Hgbf       de.1120
     # point.de.Lübeck-Hgbf-Abzw  de.1120
+
+
+    with link = "line.de.1121" {
+        track(:first :pax,
+                lb[:lua.j, :lua.yb] >> 1dt
+            ..  lb[:jur - 0.51sw, :jur - 0.5sw]
+        );
+    }
+
+
+    with link = "point.de.Lübeck-Jürgen-Bk" {
+        track(:first:station :pax, lb[:jur - 0.5sw, :jur + 0.5sw]);
+        with layer = -1 marker(:de.bk :removed :left, lb[:jur]);
+        station(:left :removed, lb[:jur + 0.5sw] >> 1.2sw,
+            "Jürgen", "3,19"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:jur + 0.5sw, :xjur - 0.5sw]);
+    }
+
+
+    with link = "point.de.Lübeck-Mönkhof-Fehlstelle" {
+        track(:first:station :pax, lb[:xjur - 0.5sw, :xjur + 0.5sw]);
+        with layer = 1 marker(:statdt :right, lb[:xjur]);
+        with layer = 1 marker(:statdt :left, lb[:xjur]);
+        label(lb[:xjur] >> 2.0dt,
+            hbox(:right:middle, span(:xsmall, "4,0+1890 = 4,2"))
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:xjur + 0.5sw, :hoc - 1sw]);
+    }
+
+
+    with link = "point.de.Lübeck-Hochschulstadtteil" {
+        track(:first:station :pax, lb[:hoc - 1sw, :hoc + 1sw]);
+        marker(:de.hp :pax :right, lb[:hoc]);
+        station(:left :pax, lb[:hoc + 0.4sw] >> 1.6sh,
+            "Lübeck Hochschulstadtteil", "4,51"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:hoc + 1sw, :flu - 1sw]);
+        with layer = 1 line_badge(:pax, lb[:hoc + 1.5km], "1121");
+    }
+
+
+    with link = "point.de.Lübeck-Flughafen" {
+        track(:first:station :pax, lb[:flu - 1sw, :flu + 100m]);
+        marker(:de.hp :pax :left, lb[:flu]);
+        station(:right :pax, lb[:flu + 0.4sw] << 1.5sh,
+            "Lübeck Flughafen", "7,41"
+        );
+     }
+
+
+    with link = "point.de.Lübeck-Blankensee" {
+        track(:first:station :pax, lb[:flu + 100m, :bla + 1sw]);
+        with layer = -1 marker(:de.bf :removed :left, lb[:bla]);
+        station(:left :removed, lb[:bla + 0.45sw] >> 2dt,
+            "Lübeck-Blankensee", "7,71"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:bla + 1sw, :sar - 1sw]);
+    }
+
+
+    with link = "point.de.Sarau" {
+        track(:first:station :pax, lb[:sar - 1sw, :sar + 1sw]);
+        with layer = -1 marker(:de.hp :removed :left, lb[:sar]);
+        station(:right :removed, lb[:sar + 0.4sw] << 1.4sh,
+            "Sarau", "12,67"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:sar + 1sw, :pog.a]);
+    }
+
+
+    with link = "point.de.Pogeez" {
+        # Gl. 1
+        track(:first:station :pax, lb[:pog.a, :pob - 60m]);
+
+        # Gl. 2
+        with layer = -1 track(:station,
+                lb[:pog.a + 99m, :pog.a + 100m]
+            --  lb[:pog.a + 100m + 1dl, :pob - 60m - 1dl] >> 1dt
+            --  lb[:pob - 60m, :pob - 59m]
+        );
+        with layer = -1 marker(:de.bbf :left, lb[:pog]);
+        station(:right, lb[:pog + 0.4sw] << 1.3sh,
+            "Pogeez", "13,57"
+        );
+    }
+
+
+    with link = "point.de.Pogeez-Bf" {
+        track(:first:station :pax, lb[:pob - 60m, :pob + 0.5sw]);
+        with layer = -1 marker(:statdt :removed :right, lb[:pob]);
+        with layer = -1 marker(:de.bk :removed :right, lb[:pob] >> 1dt);
+        station(:left :removed, lb[:pob + 0.4sw] >> 1dt >> 1.4sh,
+            "Pogeez", "14,06"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:pob + 0.5sw, :rat.a]);
+        with layer = 1 line_badge(:pax, lb[:rat - 1.5km], "1121");
+    }
+
+
+    with link = "point.de.Ratzeburg" {
+        # Gl. 1 (Str. 6928)
+        with layer = -4 track(:first:station :removed,
+                lb[:rat.rw - 0.5sw, :rat.f] << 3dt
+        );
+            with layer = -4 track(:station :removed,
+                    lb[:rat.rw] << 3dt
+                --  lb[:rat.rw + 3dl] << 6dt
+            );
+
+        # Gl. 2
+        with layer = -4 track(:station :removed,
+                lb[:rat.rw + 1dl, :rat.rf - 0.4dl] << 4dt
+        );
+            with layer = -4 track(:station :removed,
+                    lb[:rat + 0.5sw] << 4dt
+                --  lb[:rat + 0.5sw + 2dl] << 2dt
+            );
+
+        # Gl. 3
+        with layer = -4 track(:station :removed,
+                lb[:rat.rw + 2dl, :rat.rf - 1.2dl] << 5dt
+        );
+
+        # Gl. 4/6
+        with layer = -4 track(:station :removed,
+                lb[:rat.rw, :rat.rf - 2dl] << 6dt
+            --  lb[:rat.rf + 3dl, :rat.rf + 3.1dl]
+        );
+
+        # Gl. 7
+        with layer = -4 track(:station :removed,
+                lb[:rat + 0.6sw, :rat.f - 2dl] << 2dt
+        );
+
+        # Gl. 8
+        with layer = -4 track(:station :removed,
+                lb[:rat + 0.5sw + 3.9dl, :rat + 0.5sw + 4dl] << 2dt
+            --  lb[:rat + 0.5sw + 5dl, :rat.rf - 0.7dl] << 1dt
+        );
+
+        # Gl. 21 (neu: 1; Str. 1121)
+        track(:first:station :pax, lb[:rat.a, :rat.f]);
+            with layer = -4 track(:station :removed,
+                    lb[:rat + 0.5sw + 1dl]
+                --  lb[:rat + 0.5sw + 3dl] << 2dt
+            );
+            with layer = -4 track(:station :removed,
+                    lb[:rat.rf - 1.7dl] 
+                --  lb[:rat.rf + 1.3dl] << 3dt
+            );
+
+        # Gl. 22 (neu: 2)
+        track(:station :pax,
+                lb[:rat.a + 99m, :rat.a + 100m]
+            --  lb[:rat.a + 100m + 1dl, :rat.rf - 2.7dl] >> 1dt
+            --  lb[:rat.rf - 1.7dl, :rat.rf - 1.6dl]
+        );
+
+        # Gl. 23
+        with layer = -4 track(:station :removed,
+                lb[:rat.a + 100m + 0.99dl, :rat.a + 100m + 1dl] >> 1dt
+            --  lb[:rat.a + 100m + 2dl, :rat.rf - 2dl] >> 2dt
+            --  lb[:rat.rf, :rat.rf + 0.1dl]
+        );
+    
+        marker(:de.bf :pax :left, lb[:rat]);
+        station(:left :pax, lb[:rat + 0.3sw] >> 4.0dt,
+            hbox(:center:base,
+                span(:bold, "Ratzeburg "),
+                span(:bold :removed, "Land")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1121: "),
+                    span(:removed, "6928: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "19,"),
+                    span(:removed, "49,")
+                ),
+                vbox(:left:top,
+                    span(:open, "95"),
+                    span(:removed, "16")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:rat.f, :mol.a]);
+        with layer = 1 line_badge(:pax, lb[:rat + 4.6km], "1121");
+    }
+
+
+    with link = "point.de.Mölln-Lauenburg" {
+        # Gl. 1 (Str. 1121)
+        track(:first:station :pax, lb[:mol.a, :mol.yh]);
+
+        # Gl. 2
+        with layer = -1 track(:station,
+                lb[:mol - 221m, :mol - 220m]
+            --  lb[:mol - 220m + 1dl, :mol.mf + 230m - 1dl] >> 1dt
+            --  lb[:mol.mf + 230m, :mol.mf + 231m]
+        );
+
+        # Gl. 3
+        with layer = -4 track(:station :removed,
+                lb[:mol - 0.4sw, :mol.mf + 0.5dl] >> 2dt
+        );
+
+        # Gl. 4
+        with layer = -4 track(:station :removed,
+                lb[:mol + 0.4sw, :mol.mf - 0.5dl] >> 3dt
+            --  lb[:mol.mf + 3.5dl, :mol.mf + 3.6dl] << 1dt
+        );
+
+        # Gl. 13
+        with layer = -4 track(:station :removed,
+                lb[:mol + 0.6sw, :mol.mf + 1dl] << 2dt
+            --  lb[:mol.mf + 2dl, :mol.mf + 2.1dl] << 1dt
+        );
+
+        # Str. A50
+        with layer = -4 track(:second:station :removed,
+                lb[:mol.mf, :mol.yh] << 1dt
+        );
+
+        marker(:de.bf :pax :left, lb[:mol]);
+        station(:left :pax, lb[:mol + 0.4sw] >> 4.5dt,
+            hbox(:center:base,
+                span(:bold, "Mölln "),
+                span(:regular, "(Lauenburg)")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1121: "),
+                    span(:removed, "11421: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "29,"),
+                    span(:removed, "11,")
+                ),
+                vbox(:left:top,
+                    span(:open, "23"),
+                    span(:removed, "74")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:mol.yh, :moi - 0.5sw]);
+    }
+
+
+    with link = "point.de.Mölln-Lauenburg-Industriegleis" {
+        track(:first:station :pax, lb[:moi - 0.5sw, :moi + 0.5sw]);
+        with layer = -4 track(:station :removed,
+                lb[:moi - 450m, :moi - 330m] >> 4dt
+            ..  lb[:moi - 2dl, :moi - 1dl] >> 1dt
+            --  lb[:moi, :moi + 0.1dl]
+        );
+
+        marker(:de.awanst :right, lb[:moi]);
+        station(:left, lb[:moi + 0.4sw] >> 1.4sh,
+            "Mölln (b Lauenburg) Industriegleis", "??"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:moi + 0.5sw, :gub - 1sw]);
+    }
+
+
+    with link = "point.de.Güster-Bahnsteig" {
+        track(:first:station :pax, lb[:gub - 1sw, :gub + 1sw]);
+        with layer = -4 marker(:de.bftp :removed :left, lb[:gub]);
+        station(:right :removed, lb[:gub + 0.2sw] << 1.6sh,
+            "Güster Bahnsteig", "??"
+        );
+    }
+
+
+    with link = "point.de.Güster" {
+        track(:first:station :pax, lb[:gub + 1sw, :gus.f]);
+        with layer = -1 track(:station,
+                lb[:gub + 279m, :gub + 280m]
+            --  lb[:gub + 280m + 1dl, :gus.f - 100m - 1dl] << 1dt
+            --  lb[:gus.f - 100m, :gus.f - 99m]
+        );
+        marker(:de.bbf :left, lb[:gus] << 1dt);
+        station(:right, lb[:gus + 0.4sw] << 1dt << 1.9sh,
+            "Güster", "39,35"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:gus.f, :ros - 1sw]);
+    }
+
+
+    with link = "point.de.Roseburg" {
+        track(:first:station :pax, lb[:ros - 1sw, :ros + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, lb[:ros]);
+        station(:top :removed, lb[:ros] >> 1.6sh,
+            "Roseburg", "41,73"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:ros + 1sw, :nus - 1sw]);
+        with layer = 1 line_badge(:pax, lb[:nus - 2.0km], "1121");
+    }
+
+
+    with link = "point.de.Büchen-Nüssau" {
+        track(:first:station :pax, lb[:nus - 1sw, :nus + 1sw]);
+        with layer = -1 marker(:de.hp :removed :left, lb[:nus]);
+        station(:right :removed, lb[:nus + 0.4sw] << 1.4sh,
+            "Büchen-Nüssau", "45,50"
+        );
+    }
+
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:nus + 1sw, :buc.g]);
+    }
+
+
+    # point.de.Büchen  de.6100
 }
 

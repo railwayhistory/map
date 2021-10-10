@@ -17,9 +17,26 @@ with detail = 3 {
     }
 
     with link = "point.de.Lübeck-Hgbf-Abzw" {
+        let lb = path("d4.de.1121");
+
+        # Str. 1120
         track(:first:station :double :cat:ac15 :pax,
                 lh[:lua - 1ssw, :lua.k + 1ssw]
         );
+
+        # Str. 1121
+        with layer = -1 track(:first :pax,
+                lh[:lua.k, :lua.k + 0.1dl] << 0.5dt
+            ..  lb[:lua.yb - 0.1dl, :lua.yb] >> 1dt
+        );
+
+        # Str. 1122
+        with layer = -1 track(:first :pax,
+                lh[:lua - 0.1dl, :lua] << 0.5dt
+            --  lh[:lua + 1dl, :lua.k] << 1.5dt
+            ..  lb[:lua.yb - 0.1dl, :lua.yb]
+        );
+
         with layer = -1 marker(:de.abzw :right, lh[:lua] >> 0.5dt);
     }
 
