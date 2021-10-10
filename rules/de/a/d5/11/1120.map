@@ -1,0 +1,261 @@
+# DE 1120.  Lübeck Hbf - Hamburg Hbf
+#
+let lh = path("d4.de.1120");
+
+with detail = 5 {
+    with link = "point.de.Hamburg-Wandsbek-Wf" {
+        let w104 = lh[:waf - 205m] << 1.10dt
+                -- lh[:waf - 200m] << 1.20dt;
+        let w222 = lh[:waf + 95m] << 3.90dt
+                -- lh[:waf + 100m] << 4.00dt;
+        let w223 = lh[:waf + 155m] << 5.10dt
+                -- lh[:waf + 160m] << 5.20dt;
+        let w225 = lh[:waf + 215m] << 6.50dt
+                -- lh[:waf + 220m] << 6.65dt;
+        let w232 = lh[:waf + 670m] << 2.20dt
+                -- lh[:waf + 675m] << 2.10dt;
+        let w242 = lh[:waf + 595m] << 5.00dt
+                -- lh[:waf + 600m] << 4.90dt;
+        let w243 = lh[:waf + 599m, :waf + 600m] << 3.5dt;
+        let w244 = lh[:waf + 670m] << 3.20dt
+                -- lh[:waf + 675m] << 3.10dt;
+
+        # Gl. 1
+        track(:first:station :cat:ac15 :pax,
+                lh[:wan.a, :wan - 90m] >> 0.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :cat:ac15 :pax,
+                lh[:wan.a, :wan - 220m] << 0.5dt
+            ..  lh[:wan - 91m, :wan - 90m] << 1.5dt
+        );
+
+        # Gl. 3
+        with layer = -1 track(:first:station :cat:ac15,
+                lh[:waf - 271m, :waf - 270m] << 0.5dt
+            ..  w104
+            ..  lh[:waf - 150m, :wan - 220m] << 1.5dt
+            ..  lh[:wan - 91m, :wan - 90m] << 2.5dt
+        );
+
+        # Gl. 4
+        with layer = -1 track(:station :cat:ac15,
+                w104
+            ..  lh[:waf - 110m, :waf + 630m] << 2.5dt
+            ..  w232
+            ..  lh[:waf + 730m, :waf + 731m] << 1.5dt
+        );
+
+        # Gl. 5
+        track(:station,
+                lh[:waf - 180m, :waf + 600m] << 3.5dt
+            ..  w232
+        );
+
+        # Gl. 6
+        with layer = -2 track(:station,
+                lh[:waf + 59m, :waf + 60m] << 3.5dt
+            ..  w222
+            ..  lh[:waf + 150m, :waf + 520m] << 4.5dt
+            ..  w242
+        );
+
+        # Gl. 8
+        with layer = -2 track(:station,
+                lh[:waf + 249m, :waf + 250m] << 4.5dt
+            ..  lh[:waf + 330m, :waf + 550m] << 5.5dt
+            ..  w242
+            ..  w244
+            ..  lh[:waf + 750m, :waf + 780m] << 2.5dt
+        );
+
+        # Gl. 9
+        with layer = -2 track(:station,
+                w222
+            ..  w223
+            ..  lh[:waf + 200m, :waf + 250m] << 5.5dt
+            ..  lh[:waf + 330m, :waf + 550m] << 6.5dt
+            ..  lh[:waf + 670m] << 4.20dt
+            --  lh[:waf + 675m] << 4.10dt
+        );
+
+        # Gl. 11
+        with layer = -2 track(:station,
+                w223
+            ..  w225
+            ..  lh[:waf + 280m, :waf + 360m] << 7.5dt
+        );
+
+        # Gl. 12
+        with layer = -2 track(:station,
+                w225
+            ..  lh[:waf + 280m, :waf + 360m] << 8.5dt
+        );
+
+        # Gl. 14
+        with layer = -2 track(:station,
+                lh[:waf + 29m, :waf + 30m] << 3.5dt
+            ..  lh[:waf + 100m] << 4.8dt
+            --  lh[:waf + 220m] << 8.3dt
+        );
+
+        # W101 - W102
+        with layer = -1 track(:station :cat:ac15,
+                lh[:waf - 511m, :waf - 510m] >> 0.5dt
+            ..  lh[:waf - 430m, :waf - 429m] << 0.5dt
+        );
+
+        # W113 - W114
+        with layer = -1 track(:station :cat:ac15,
+                lh[:waf + 669m, :waf + 670m] >> 0.5dt
+            ..  lh[:waf + 730m, :waf + 731m] << 0.5dt
+        );
+
+        # W115 - W234
+        with layer = -1 track(:station :cat:ac15,
+                lh[:waf + 749m, :waf + 750m] << 0.5dt
+            ..  lh[:waf + 800m, :waf + 801m] << 1.5dt
+        );
+
+        # W117 - W118
+        with layer = -1 track(:station :cat:ac15,
+                lh[:wan - 221m, :wan - 220m] << 0.5dt
+            ..  lh[:wan - 140m, :wan - 139m] >> 0.5dt
+        );
+
+        # W235 - W116
+        with layer = -1 track(:station :cat:ac15,
+                lh[:wan - 301m, :wan - 300m] << 1.5dt
+            ..  lh[:wan - 250m, :wan - 249m] << 0.5dt
+        );
+
+        # W243 - W244
+        with layer = -2 track(:station, w243 .. w244);
+
+        marker(:de.bft :left, lh[:waf] << 3.5dt);
+        station(:right, lh[:waf + 1sw] << 3.5dt << 2.0sw,
+            "Hamburg-Wandsbek Wf",
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1120: "),
+                    span(:open, "1242: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "??"),
+                    span(:open, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Wandsbek" {
+        # Gl. 1
+        track(:first:station :cat:ac15 :pax,
+                lh[:wan - 90m, :wan.yh] >> 0.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :cat:ac15 :pax,
+                lh[:wan - 90m, :wan + 100m] << 1.5dt
+            ..  lh[:wan + 440m, :wan.yh] << 0.5dt
+        );
+
+        # Gl. 3
+        with layer = -1 track(:first:station :cat:ac15,
+                lh[:wan - 90m, :wan + 100m] << 2.5dt
+            ..  lh[:wan + 440m, :wan.yh] << 1.5dt
+        );
+
+        # Bahnsteig 1/2
+        platform(:open :pax,
+                lh[:wan - 90m, :wan + 100m] >> 0.1dt
+            --  lh[:wan + 100m, :wan - 90m] >> 1.1dt
+        );
+
+        marker(:de.bf :pax :right, lh[:wan] >> 0.5dt);
+        station(:top :pax, lh[:wan + 0.2sw] >> 0.5dt >> 1.6sh,
+            span(:bold, "Hamburg-Wandsbek"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1120: "),
+                    span(:open, "1242: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "58,20"),
+                    span(:open, "58,20")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1120" {
+        with layer = 2 track(:first :double :cat:ac15 :pax,
+                lh[:wan.yh, :has - 200m]);
+        with layer = 1 casing(:first :double :cat:ac15,
+                lh[:has.x - 1sw, :has.x + 1sw]
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Hasselbrook" {
+        track(:first:station :cat:ac15 :pax,
+                lh[:has - 200m, :has + 300m] >> 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                lh[:has - 200m, :has - 150m] << 0.5dt
+            ..  lh[:has, :has + 200m] << 1.5dt
+            ..  lh[:has + 290m, :has + 300m] << 0.5dt
+        );
+        platform(:open :pax,
+                lh[:has, :has + 200m] >> 0.1dt
+            --  lh[:has + 200m, :has] >> 1.1dt
+        );
+        marker(:de.hp :pax :left, lh[:has + 0.5sw] << 1.5dt);
+        station(:bottom :pax, lh[:has + 0.3sw] << 1.5dt << 1.6sw,
+            hbox(:center:base, span(:light, "H. "), "Hasselbrook "),
+            "59,69"
+        );
+            
+    }
+
+
+    with link = "line.de.1120" {
+        track(:first :double :cat:ac15 :pax, lh[:has + 300m, :btu - 180m]);
+    }
+
+
+    with link = "point.de.Hamburg-Berliner-Tor-Üst" {
+        track(:first:station :double :cat:ac15 :pax,
+                lh[:btu - 180m, :btu + 180m]
+        );
+
+        # W901 - W902
+        with layer = -1 track(:station :cat:ac15,
+                lh[:btu - 80m] >> 0.5dt
+            --  lh[:btu - 10m] << 0.5dt
+        );
+
+        # W903 - W904
+        with layer = -1 track(:station :cat:ac15,
+                lh[:btu + 10m] << 0.5dt
+            --  lh[:btu + 80m] >> 0.5dt
+        );
+
+        with layer = -1 marker(:de.uest :left, lh[:btu] << 0.5dt);
+        station(:right, lh[:btu + 2sw] << 0.5dt << 1.4sw,
+            "H. Berliner Tor (Üst)", "61,67"
+        );
+    }
+
+
+    with link = "line.de.1120" {
+        track(:first :double :cat:ac15 :pax, lh[:btu + 180m, :ham.a]);
+    }
+
+
+    # point.de.Hamburg-Hbf: de.6100
+}
+
