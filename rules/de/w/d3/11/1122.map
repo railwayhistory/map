@@ -1,0 +1,819 @@
+# DE 1122.  Lübeck Hbf - Strasburg (Meckl)
+#
+let ls = path("d4.de.w.1122");
+
+with detail = 3 {
+    with link = "point.de.Herrnburg-LGr" {
+        track(:first:station :pax, ls[:heg - 0.5ssw, :heg + 0.5ssw] >> 0.5dt);
+        track(:first:station :removed,
+                ls[:heg - 0.5ssw, :heg + 0.5ssw] << 0.5dt
+        );
+        with layer = -4 marker(:de.dirgr :removed :right, ls[:heg] << 0.5dt);
+        with layer = -4 marker(:de.dirgr :removed :left, ls[:heg] >> 0.5dt);
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:heg + 0.5ssw, :her - 1ssw] >> 0.5dt);
+        track(:first :removed, ls[:heg + 0.5ssw, :her - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Herrnburg" {
+        track(:first:station :pax, ls[:her - 1ssw, :her + 1ssw] >> 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:her - 1ssw, :her + 1ssw] << 0.5dt
+        );
+        marker(:de.bf :pax :right, ls[:her] >> 0.5dt);
+        slabel(:bottom :pax, ls[:her] >> 0.5dt >> 1.4ssw, "Herrnburg");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:her + 1ssw, :lud - 1ssw] >> 0.5dt);
+        track(:first :removed, ls[:her + 1ssw, :lud - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Lüdersdorf-Meckl" {
+        track(:first:station :pax, ls[:lud - 1ssw, :lud + 1ssw] >> 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:lud - 1ssw, :lud + 1ssw] << 0.5dt
+        );
+        marker(:de.hp :pax :right, ls[:lud] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :right, ls[:lud] >> 0.5dt);
+        slabel(:bottom :pax, ls[:lud] >> 0.5dt >> 1.2ssw,
+            vbox(:center:top,
+                span(:regular, "Lüdersdorf"),
+                span(:light, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:lud + 1ssw, :son - 1ssw] >> 0.5dt);
+        track(:first :removed, ls[:lud + 1ssw, :son - 1ssw] << 0.5dt);
+        with layer = 1 line_badge(:pax, ls[:lud + 5.0km], "1122");
+    }
+
+    with link = "point.de.Schönberg-Meckl" {
+        track(:first:station :pax, ls[:son - 1ssw, :snn + 1ssw] >> 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:son - 1ssw, :snn + 1ssw] << 0.5dt
+        );
+        marker(:de.bf :pax :right, ls[:son] >> 0.5dt);
+        slabel(:left :pax, ls[:son + 0.5ssw] << 1.5dt,
+            hbox(:center:base,
+                span(:bold, "Schönberg "),
+                span(:regular, "(Meckl)")
+            )
+        )
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax,
+                ls[:snn + 1ssw, :men.xaa] >> 0.5dt
+            --  ls[:men.xaa + 1dl, :men - 1ssw] << 0.5dt
+        );
+        with layer = -4 track(:first :removed,
+                ls[:snn + 1ssw, :men.xaa + 1dl] << 0.5dt
+        );
+        with layer = -4 track(:first :removed,
+                ls[:men.xaa, :men - 1ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.de.Menzendorf" {
+        track(:first:station :pax, ls[:men - 1ssw, :mnn + 1ssw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:men - 1ssw, :mnn + 1ssw] >> 0.5dt
+        );
+        with layer = -5 marker(:de.bbf :right, ls[:men] >> 0.5dt);
+        slabel(:bottom, ls[:men] >> 0.5dt >> 1.2ssw, "Menzendorf");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:men + 1ssw, :gri - 1ssw] << 0.5dt);
+        track(:first :removed, ls[:men + 1ssw, :gri - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Grieben-Meckl" {
+        track(:first:station :pax, ls[:gri - 1ssw, :gri + 1ssw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:gri - 1ssw, :gri + 1ssw] >> 0.5dt
+        );
+        marker(:de.bf :pax :left, ls[:gri] << 0.5dt);
+        slabel(:top :pax, ls[:gri] << 0.5dt << 1.4ssw,
+            vbox(:center:bottom,
+                span(:regular, "Grieben"),
+                span(:light, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:gri + 1ssw, :bor - 1ssw] << 0.5dt);
+        track(:first :removed, ls[:gri + 1ssw, :bor - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Börzow" {
+        track(:first:station :pax, ls[:bor - 1ssw, :bor + 1ssw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:bor - 1ssw, :bor + 1ssw] >> 0.5dt
+        );
+        with layer = -4 marker(:de.bf :removed :left, ls[:bor] << 0.5dt);
+        slabel(:bottom :removed, ls[:bor] >> 1.5dt, "Börzow");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:bor + 1ssw, :gre - 1ssw] << 0.5dt);
+        track(:first :removed, ls[:bor + 1ssw, :gre - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Grevesmühlen" {
+        track(:first:station :pax, ls[:gre - 1ssw, :gre + 1ssw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:gre - 1ssw, :gre + 1ssw] >> 0.5dt
+        );
+        marker(:de.bf :pax :left, ls[:gre] << 0.5dt);
+        slabel(:right :pax, ls[:gre - 1.5ssw] << 0.5dt << 1.6ssw,
+            span(:bold, "Grevesmühlen")
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:gre + 1ssw, :plu - 1ssw] << 0.5dt);
+        track(:first :removed, ls[:gre + 1ssw, :plu - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Plüschow" {
+        track(:first:station :pax, ls[:plu - 1ssw, :pln + 1ssw] << 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:plu - 1ssw, :pln + 1ssw] >> 0.5dt
+        );
+        with layer = -4 marker(:de.bf :removed :right, ls[:plu] >> 0.5dt);
+        marker(:de.hp :pax :left, ls[:pln] << 0.5dt);
+        slabel(:top :pax, ls[:pln] << 0.5dt << 1.2ssw + (1ssw, 0ssw),
+            "Plüschow"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax,
+                ls[:pln + 1ssw, :pln + 1.1ssw] << 0.5dt
+            --  ls[:pln + 1ssw + 1dl, :bob - 1ssw] >> 0.5dt
+        );
+        with layer = -4 track(:first :removed,
+                ls[:pln + 1ssw, :pln + 1ssw + 1dl] >> 0.5dt
+        );
+        with layer = -4 track(:first :removed,
+                ls[:pln + 1ssw, :bob - 1ssw] << 0.5dt
+        );
+        with layer = 1 line_badge(:pax, ls[:bob - 2.4km], "1122");
+    }
+
+    with link = "point.de.Bobitz" {
+        track(:first:station :pax, ls[:bob - 1ssw, :bob + 1ssw] >> 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:bob - 1ssw, :bob + 1ssw] << 0.5dt
+        );
+        marker(:de.bf :pax :right, ls[:bob] >> 0.5dt);
+        slabel(:bottom :pax, ls[:bob - 0.3ssw] >> 0.5dt >> 1.8ssw, "Bobitz");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:bob + 1ssw, :kle.a] >> 0.5dt);
+        track(:first :removed, ls[:bob + 1ssw, :kle.a] << 0.5dt);
+    }
+
+    with link = "point.de.Rambow" {
+        with layer = -4 marker(:de.bk :removed :left, ls[:ram] << 0.5dt);
+    }
+
+    # point.de.Bad-Kleinen  de.6441
+
+    with link = "line.de.1122" {
+        track(:first :double :cat:ac15 :pax, ls[:kle.f, :ven - 1ssw]);
+    }
+
+    with link = "point.de.Hohen-Viechteln" {
+        with layer = -4 marker(:de.bk :removed :left, ls[:hvi] << 0.5dt);
+    }
+
+    with link = "point.de.Ventschow" {
+        track(:first:station :double :cat:ac15 :pax,
+                ls[:ven - 1ssw, :ven + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :right, ls[:ven] >> 0.5dt);
+        marker(:de.uest :cat:ac15 :pax :right, ls[:ven] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :right, ls[:ven] >> 0.5dt);
+        slabel(:bottom :cat:ac15 :pax,
+                ls[:ven] >> 0.5dt >> 1.2ssw, "Ventschow"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :double :cat:ac15 :pax, ls[:ven + 1ssw, :bla - 1ssw]);
+        with layer = 1 line_badge(:cat:ac15 :pax, ls[:ven + 3.0km], "1122");
+    }
+
+    with link = "point.de.Bibow" {
+        with layer = -4 marker(:de.bk :removed :right, ls[:bib] >> 0.5dt);
+    }
+
+    with link = "point.de.Blankenberg-Meckl" {
+        track(:first:station :double :cat:ac15 :pax,
+                ls[:bla - 1ssw, :bla + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :right, ls[:bla] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, ls[:bla + 1.5ssw] >> 0.5dt >> 2.8ssw,
+            hbox(:center:base,
+                span(:bold, "Blankenburg "),
+                span(:regular, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :double :cat:ac15 :pax, ls[:bla + 1ssw, :fri - 1ssw]);
+    }
+
+    with link = "point.de.Friedrichswalde-Meckl" {
+        track(:first:station :double :cat:ac15 :pax,
+                ls[:fri - 1ssw, :fri + 1ssw]
+        );
+        with layer = -1 marker(:de.hp :removed :right, ls[:fri] >> 0.5dt);
+        with layer = -2 marker(:de.bf :gone :right, ls[:fri] >> 0.5dt);
+        slabel(:bottom :removed, ls[:fri] >> 0.5dt >> 1.2ssw,
+            hbox(:center:base,
+                span(:regular, "Friedrichswalde "),
+                span(:light, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :double :cat:ac15 :pax, ls[:fri + 1ssw, :war - 1ssw]);
+    }
+
+    with link = "point.de.Friedrichswalde-Meckl-Bk" {
+        with layer = -4 marker(:de.bk :right, ls[:frb] >> 0.5dt);
+    }
+
+    with link = "point.de.Eickelberg" {
+        with layer = -4 marker(:de.bk :removed :left, ls[:eic] << 0.5dt);
+    }
+
+    with link = "point.de.Warnow-Meckl" {
+        track(:first:station :double :cat:ac15 :pax,
+                ls[:war - 1ssw, :war + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, ls[:war] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, ls[:war + 1ssw] << 0.5dt << 1.4ssw,
+            hbox(:center:base,
+                span(:regular, "Warnow "),
+                span(:light, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :double :cat:ac15 :pax, ls[:war + 1ssw, :zer - 1ssw]);
+    }
+
+    with link = "point.de.Zernin" {
+        track(:first:station :double :cat:ac15 :pax,
+                ls[:zer - 1ssw, :zer + 1ssw]
+        );
+        with layer = -1 marker(:de.hp :removed :right, ls[:zer] >> 0.5dt);
+        slabel(:right :removed, ls[:zer - 1ssw] >> 0.5dt >> 2.4ssw,
+            "Zernin"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :double :cat:ac15 :pax, ls[:zer + 1ssw, :but - 1ssw]);
+    }
+
+    with link = "point.de.Bützow" {
+        track(:first:station :double :cat:ac15 :pax,
+                path("d4.de.6446")[:but - 1ssw, :but + 2.5ssw]
+        );
+        track(:first:station :cat:ac15 :pax,
+                ls[:but + 0.5ssw, :but + 0.51ssw] >> 0.5dt
+            ..  ls[:but.f + 1.5ssw, :but.f + 1.51ssw] << 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                ls[:but - 0.51ssw, :but - 0.5ssw] >> 0.5dt
+            --  ls[:but - 0.5ssw + 1dl, :but + 0.5ssw] >> 1.5dt
+            ..  ls[:but.f + 1.5ssw, :but.f + 1.51ssw] >> 0.5dt
+        );
+        marker(:de.bf :cat:ac15 :pax :left, ls[:but] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, ls[:but - 0.4sw] << 0.5dt << 1.2ssw,
+            span(:bold, "Bützow")
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :cat:ac15 :pax :flip,
+                ls[:but.f + 1.5ssw, :swi - 1ssw] << 0.5dt
+        );
+        track(:first :removed, ls[:but.f + 1.5ssw, :swi - 1ssw] >> 0.5dt);
+
+        with layer = 1 line_badge(:cat:ac15 :pax, ls[:swi - 2km], "1122");
+    }
+
+    with link = "point.de.Schwiesower-Forst" {
+        track(:first:station :cat:ac15 :pax,
+                ls[:swi - 1ssw, :swi + 1ssw] << 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                ls[:swi - 1ssw, :swi + 1ssw] >> 0.5dt
+        );
+        with layer = -4 marker(:de.bbf :removed :left, ls[:swi] << 0.5dt);
+        slabel(:top :removed, ls[:swi] << 0.5dt << 1.2ssw,
+            "Schwiesower Forst"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :cat:ac15 :pax,
+                ls[:swi.x - 1dl, :swi + 1ssw] >> 0.5dt
+        );
+        with layer = -4 track(:first :removed :flip,
+                ls[:swi.x - 1dl, :swi + 1ssw] << 0.5dt
+        );
+
+        track(:first:station :cat:ac15 :pax,
+                ls[:swi.x - 1dl, :swi.x] << 0.5dt
+            --  ls[:swi.x + 1dl, :swi.x + 2dl] >> 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                ls[:swi.x - 1dl, :swi.x + 1dl] >> 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                ls[:swi.x, :swi.x + 2dl] << 0.5dt
+        );
+
+        track(:first :cat:ac15 :pax,
+                ls[:swi.x + 2dl, :gug - 1ssw] >> 0.5dt
+        );
+        with layer = -4 track(:first :removed :flip,
+                ls[:swi.x + 2dl, :gug - 1ssw] << 0.5dt
+        );
+    }
+
+    with link = "point.de.Güstrow-Gbf" {
+        track(:first:station :cat:ac15 :pax, ls[:gug - 1ssw, :gus.r] << 1.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:gug - 1ssw, :gus.r] << 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax, ls[:gug - 1ssw, :gus.r] >> 0.5dt);
+        with layer = -1 marker(:de.bft :right, ls[:gug] >> 0.5dt);
+    }
+
+    with link = "point.de.Güstrow" {
+        track(:first:station :cat:ac15 :pax,
+                ls[:gus.r, :gus + 0.5ssw - 1dl] << 1.5dt
+            --  ls[:gus + 0.5ssw, :gus + 0.51ssw] << 0.5dt
+        );
+
+        with layer = -4 track(:first:station :removed,
+                ls[:gus.r, :gus + 0.5ssw] << 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                ls[:gus.r, :gus + 0.5ssw - 1dl] >> 0.5dt
+            --  ls[:gus + 0.5ssw, :gus + 1ssw] << 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                ls[:gus + 0.5ssw - 1dl, :gus + 1ssw] >> 0.5dt
+        );
+
+        track(:second:station :cat:ac15 :pax,
+                ls[:gus - 0.5ssw - 1.1dl, :gus - 0.5ssw - 1dl] >> 0.5dt
+            --  ls[:gus - 0.5ssw, :gus + 1ssw] >> 1.5dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :right, ls[:gus] >> 1.5dt);
+        slabel(:left :cat:ac15 :pax, ls[:gus] >> 1.5dt >> 2.2ssw,
+            span(:bold, "Güstrow")
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :cat:ac15 :pax :flip,
+                ls[:gus + 1ssw, :pri - 1ssw] << 0.5dt
+        );
+        with layer = -1 track(:first :removed,
+                ls[:gus + 1ssw, :pri - 1ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.de.Priemerburg" {
+        track(:first:station :cat:ac15 :pax,
+                ls[:pri - 1ssw, :pri + 1ssw] << 0.5dt
+        );
+        with layer = -4 track(:first:station :removed,
+                ls[:pri - 1ssw, :pri + 1ssw] >> 0.5dt
+        );
+        track(:second:station :cat:ac15 :pax,
+                ls[:pri - 1ssw, :pri + 1ssw] >> 1.5dt
+        );
+        marker(:de.bf :cat:ac15 :pax :right, ls[:pri] >> 1.5dt);
+        label(ls[:pri + 1ssw] >> 1.5dt >> 1.0ssw,
+            hbox(:right:top :cat:ac15 :pax,
+                vbox(:left:top :small,
+                    span(:bold, "Priemerburg – "),
+                    span(:bold, "NUP Güstrow")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :cat:ac15 :pax :flip,
+                ls[:pri + 1ssw, :prs - 0.5ssw] << 0.5dt
+        );
+        track(:first :removed, ls[:pri + 1ssw, :prs - 0.5ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Priemerwald-Süd" {
+        track(:first:station :cat:ac15 :pax :flip,
+            ls[:prs - 0.5ssw, :prs + 0.5ssw] << 0.5dt
+        );
+        track(:first:station :removed,
+            ls[:prs - 0.5ssw, :prs + 0.5ssw] >> 0.5dt
+        );
+        track(:second:station,
+            ls[:prs - 0.5ssw, :prs + 0.5ssw] >> 1.5dt
+        );
+        with layer = -1 marker(:de.abzw :removed :left, ls[:prs] << 0.5dt);
+        slabel(:right :removed, ls[:prs + 0.5ssw] << 0.5dt << 1.5ssw,
+            span(:bold, "Priemerwald Süd")
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :cat:ac15 :pax :flip,
+                ls[:prs + 0.5ssw, :dev - 0.5ssw] << 0.5dt
+        );
+        track(:first :removed, ls[:prs + 0.5ssw, :dev - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Devwinkel" {
+        track(:first:station :cat:ac15 :pax,
+                ls[:dev - 1ssw, :dev + 1ssw] << 0.5dt
+        );
+        track(:first:station :removed,
+                ls[:dev - 1ssw, :dev + 1ssw] >> 0.5dt
+        );
+        with layer = -4 marker(:de.bk :removed :right, ls[:dev] >> 0.5dt);
+        with layer = -5 marker(:de.bbf :gone :right, ls[:dev] >> 0.5dt);
+        slabel(:right :removed, ls[:dev + 0.5ssw] << 1.5dt, "Devwinkel");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :cat:ac15 :pax :flip,
+                ls[:dev + 0.5ssw, :nie - 1ssw] << 0.5dt
+        );
+        track(:first :removed, ls[:dev + 0.5ssw, :nie - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Nienhagen-Lalendorf" {
+        track(:first:station :cat:ac15 :pax,
+                ls[:nie - 1ssw, :nie + 1ssw] << 0.5dt
+        );
+        track(:first:station :removed,
+                ls[:nie - 1ssw, :nie + 1ssw] >> 0.5dt
+        );
+        with layer = -1 marker(:de.hp :removed :right, ls[:nie] >> 0.5dt);
+        slabel(:left :removed, ls[:nie + 2ssw] >> 0.5dt >> 2.4ssw,
+            "Nienhagen"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :cat:ac15 :pax :flip,
+                ls[:nie + 1ssw, :lal - 1ssw] << 0.5dt
+        );
+        track(:first :removed, ls[:nie + 1ssw, :lal - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Lalendorf" {
+        track(:first:station :cat:pax :ac15,
+                ls[:lal - 1ssw, :lal + 1ssw] << 0.5dt
+        );
+        
+        with layer = -4 track(:first:station :removed,
+                ls[:lal - 1ssw, :lal - 0.5ssw + 1dl] >> 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                ls[:lal - 0.51ssw, :lal - 0.5ssw] << 0.5dt
+            --  ls[:lal - 0.5ssw + 1dl, :lal + 1ssw] >> 0.5dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :left, ls[:lal] << 0.5dt);
+        slabel(:bottom :cat:ac15 :pax, ls[:lal] >> 1.5dt,
+            span(:bold, "Lalendorf")
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:lal + 1ssw, :nwo - 1ssw] << 0.5dt);
+        track(:first :removed, ls[:lal + 1ssw, :nwo - 1ssw] >> 0.5dt);
+        with layer = 1 line_badge(:pax, ls[:lal + 4.0km], "1122");
+    }
+
+    with link = "point.de.Neu-Wokern" {
+        track(:first:station :pax, ls[:nwo - 1ssw, :nwo + 1ssw] << 0.5dt);
+        with layer = -1 track(:first:station :removed,
+                ls[:nwo - 1ssw, :nwo + 1ssw] >> 0.5dt
+        );
+        marker(:de.hp :pax :right, ls[:nwo] >> 0.5dt);
+        marker(:de.hpext :pax :right, ls[:nwo] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, ls[:nwo] >> 0.5dt);
+        slabel(:bottom :pax, ls[:nwo] >> 0.5dt >> 1.2ssw,
+            "Neu Wokern"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:nwo + 1ssw, :tet - 1ssw] << 0.5dt);
+        track(:first :removed, ls[:nwo + 1ssw, :tet - 1ssw] >> 0.5dt);
+    }
+
+    with link = "point.de.Teterow" {
+        track(:first:station :pax, ls[:tet - 1ssw, :tet + 1ssw] << 0.5dt);
+        with layer = -1 track(:first:station :removed,
+                ls[:tet - 1ssw, :tet + 0.5ssw] >> 0.5dt
+            --  ls[:tet + 0.5ssw + 1dl, :tet + 0.5ssw + 1.1dl] << 0.5dt
+        );
+        marker(:de.bf :pax :left, ls[:tet] << 0.5dt);
+        slabel(:left :pax, ls[:tet + 1ssw] << 0.5dt << 1.2ssw,
+            span(:bold, "Teterow")
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax,
+                ls[:tet + 1ssw, :tet + 1.1ssw] << 0.5dt
+            ..  ls[:tet.ff + 1dt, :hmi - 1ssw]
+        );
+    }
+
+    with link = "point.de.Hohen-Mistorf" {
+        track(:first :pax, ls[:hmi - 1ssw, :hmi + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :left, ls[:hmi]);
+        slabel(:right :removed, ls[:hmi + 0.5ssw] << 1.3ssw,
+            "Hohen Mistorf"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:hmi + 1ssw, :reb - 1ssw]);
+    }
+
+    with link = "point.de.Remplin" {
+        track(:first :pax, ls[:reb - 1ssw, :rem + 1ssw]);
+        marker(:de.bk :removed :right, ls[:reb]);
+        with layer = -4 marker(:de.bf :gone :left, ls[:rem]);
+        slabel(:bottom :removed, ls[:reb] >> 1.0ssw,
+            "Remplin"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:rem + 1ssw, :mal - 1ssw]);
+    }
+
+    with link = "point.de.Malchin" {
+        track(:first:station :pax, ls[:mal - 1ssw, :mal + 1ssw]);
+        marker(:de.bf :pax :right, ls[:mal]);
+        slabel(:bottom :pax, ls[:mal] >> 1.4ssw,
+            span(:bold, "Malchin")
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:mal + 1ssw, :leu - 1ssw]);
+    }
+
+    with link = "point.de.Leuschentin" {
+        track(:first:station :pax, ls[:leu - 1ssw, :leu + 1ssw]);
+        with layer = -1 marker(:de.bk :removed :left, ls[:leu]);
+        with layer = -2 marker(:de.bf :gone :left, ls[:leu]);
+        slabel(:right :removed, ls[:leu + 0.6ssw] << 1.4ssw,
+            "Leutschentin"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:leu + 1ssw, :sar - 1ssw]);
+    }
+
+    with link = "point.de.Scharpzow" {
+        track(:first:station :pax, ls[:sar - 1ssw, :sar + 1ssw]);
+        with layer = -1 marker(:de.bbf :removed :left, ls[:sar]);
+        slabel(:left :removed, ls[:sar + 1ssw] >> 2.0ssw,
+            "Scharpzow"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:sar + 1ssw, :sta - 1ssw]);
+    }
+
+    with link = "point.de.Reuterstadt-Stavenhagen" {
+        track(:first:station :pax, ls[:sta - 1ssw, :sta + 1ssw]);
+        marker(:de.bf :pax :right, ls[:sta]);
+        slabel(:left :pax, ls[:sta + 1.5ssw] >> 2.4ssw,
+            "Reuterstadt Stavenhagen"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:sta + 1ssw, :grw - 1ssw]);
+        with layer = 1 line_badge(:pax, ls[:sta + 3.1km], "1122");
+    }
+
+
+    with link = "point.de.Grischow-Meckl" {
+        track(:first:station :pax, ls[:grw - 1ssw, :grw + 1ssw]);
+        marker(:de.bf :pax :right, ls[:grw]);
+        slabel(:left :pax, ls[:grw + 1.5ssw] >> 2.4ssw,
+            hbox(:center:base,
+                span(:regular, "Grischow "),
+                span(:light, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:grw + 1ssw, :kas - 1ssw]);
+    }
+
+    with link = "point.de.Kastorf-Meckl" {
+        track(:first:station :pax, ls[:kas - 1ssw, :kas + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, ls[:kas]);
+        slabel(:left :removed, ls[:kas + 0.6ssw] >> 1.6ssw,
+            hbox(:center:base,
+                span(:regular, "Kastorf "),
+                span(:light, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:kas + 1ssw, :kee - 1ssw]);
+    }
+
+    with link = "point.de.Kleeth" {
+        track(:first:station :pax, ls[:kee - 1ssw, :kee + 1ssw]);
+        with layer = -1 marker(:de.bbf :right, ls[:kee]);
+        with layer = -4 marker(:de.bf :removed :right, ls[:kee]);
+        slabel(:left, ls[:kee + 0.6ssw] >> 1.6ssw, "Kleeth");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:kee + 1ssw, :mol - 1ssw]);
+    }
+
+    with link = "point.de.Mölln-Meckl" {
+        track(:first:station :pax, ls[:mol - 1ssw, :mol + 1ssw]);
+        marker(:de.hp :pax :right, ls[:mol]);
+        with layer = -1 marker(:de.bf :removed :right, ls[:mol]);
+        slabel(:left :pax, ls[:mol + 0.3ssw] >> 2.2ssw,
+            hbox(:center:base,
+                span(:regular, "Mölln "),
+                span(:light, "(Meckl)")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:mol + 1ssw, :blh - 1ssw]);
+    }
+
+    with link = "point.de.Blankenhof" {
+        track(:first:station :pax, ls[:blh - 1ssw, :blh + 1ssw]);
+        with layer = -1 marker(:de.bbf :right, ls[:blh]);
+        with layer = -4 marker(:de.bf :removed :right, ls[:blh]);
+        slabel(:bottom, ls[:blh] >> 1.4ssw, "Blankenhof");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:blh + 1ssw, :wei - 1ssw]);
+    }
+
+    with link = "point.de.Weitin" {
+        track(:first:station :pax, ls[:wei - 1ssw, :wei + 1ssw]);
+        with layer = -1 marker(:de.bbf :removed :left, ls[:wei]);
+        slabel(:left :removed, ls[:wei - 0.5ssw] << 1.4ssw, "Weitin");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:wei + 1ssw, :nbr - 1ssw]);
+    }
+
+    with link = "point.de.Neubrandenburg" {
+        track(:first:station :cat:ac15 :pax, ls[:nbr - 1ssw, :nbr.b1]);
+        marker(:de.bf :cat:ac15 :pax :right, ls[:nbr]);
+        slabel(:bottom :cat:ac15 :pax, ls[:nbr] >> 1.4ssw,
+            span(:bold, "Neubrandenburg")
+        );
+    }
+
+    with link = "point.de.Neubrandenburg-Gbf" {
+        track(:first:station :cat:ac15 :pax, ls[:nbr.b1, :nbg + 1ssw]);
+        with layer = -1 marker(:de.bft :cat:ac15 :left, ls[:nbg]);
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:nbg + 1ssw, :kus - 1ssw]);
+    }
+
+    with link = "point.de.Küssow" {
+        track(:first:station :pax, ls[:kus - 1ssw, :kus + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, ls[:kus]);
+        slabel(:top :removed, ls[:kus] << 1.5dt, "Küssow");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:kus + 1ssw, :spo - 1ssw]);
+    }
+
+    with link = "point.de.Sponholz" {
+        track(:first:station :pax, ls[:spo - 1ssw, :spo + 1ssw]);
+        marker(:de.bf :pax :right, ls[:spo]);
+        slabel(:bottom :pax, ls[:spo] >> 1.2ssw, "Sponholz");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:spo + 1ssw, :ruh - 1ssw]);
+    }
+
+    with link = "point.de.Rühlow" {
+        track(:first:station :pax, ls[:ruh - 1ssw, :ruh + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, ls[:ruh]);
+        with layer = -2 marker(:de.bf :gone :left, ls[:ruh]);
+        slabel(:right :removed , ls[:ruh - 0.5ssw] << 1.6ssw, "Rühlow");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:ruh + 1ssw, :nee - 1ssw]);
+    }
+
+    with link = "point.de.Neetzka" {
+        track(:first:station :pax, ls[:nee - 1ssw, :nee + 1ssw]);
+        marker(:de.hp :pax :right, ls[:nee]);
+        with layer = -1 marker(:de.bf :removed :right, ls[:nee]);
+        slabel(:bottom :pax, ls[:nee] >> 1.5ssw, "Neetzka");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:nee + 1ssw, :oer - 1ssw]);
+        with layer = 1 line_badge(:pax, ls[:nee + 2.5km], "1122");
+    }
+
+    with link = "point.de.Oertzenhof" {
+        track(:first:station :pax, ls[:oer - 1ssw, :oer + 1ssw]);
+        marker(:de.bf :pax :right, ls[:oer]);
+        slabel(:bottom :pax, ls[:oer - 1ssw] >> 1.6ssw,
+            "Oertzenhof"
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:oer + 1ssw, :kre - 1ssw]);
+    }
+
+    with link = "point.de.Kreckow" {
+        track(:first:station :pax, ls[:kre - 1ssw, :kre + 1ssw]);
+        with layer = -1 marker(:de.bbf :removed :left, ls[:kre]);
+        slabel(:top :removed, ls[:kre] << 1.4ssw, "Kreckow");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:kre + 1ssw, :gda - 1ssw]);
+    }
+
+    with link = "point.de.Groß-Daberkow-Hp" {
+        track(:first:station :pax, ls[:gda - 1ssw, :gda + 1ssw]);
+        marker(:de.hp :removed :right, ls[:gda]);
+        slabel(:bottom :removed, ls[:gda] >> 1.2ssw, "Groß Daberkow");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:gda + 1ssw, :lau - 1ssw]);
+    }
+
+    with link = "point.de.Lauenhagen" {
+        track(:first:station :pax, ls[:lau - 1ssw, :lau + 1ssw]);
+        with layer = -1 marker(:de.bbf :removed :left, ls[:lau]);
+        slabel(:top :removed , ls[:lau] << 1.6ssw, "Lauenhagen");
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:lau + 1ssw, :stw]);
+    }
+
+    # point.de.Strasburg-Uckerm-Strw  de.6327
+    # point.de.Strasburg-Uckerm       de.6327
+}
+
