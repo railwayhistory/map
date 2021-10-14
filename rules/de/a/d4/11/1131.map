@@ -1,0 +1,135 @@
+# DE 1131.  Lübeck Hgbf - Lübeck-Schlutup
+#
+let lp = path("d4.de.1131");
+
+with detail = [4, 5] {
+    # point.de.Lübeck-Hgbf  de.1130
+
+
+    with link = "line.de.1131" {
+        track(:second :removed,
+                lp[:lua.k, :lua.k + 0.1dl] << 2.5dt
+            ..  lp[:lua.j, :lua.yb + 80m] << 1dt
+            ..  lp[:stn - 1.2km, :stn - 1sw] << 0.5dt
+        );
+    }
+
+
+    # point.de.Strecknitz  de.1122
+
+
+    with link = "line.de.1131" {
+        track(:second,
+                lp[:stn + 1sw, :stn.ys] << 1.5dt
+            ..  lp[:stn.yys + 3dt, :bra - 1sw]
+        );
+        with layer = 1 line_badge(:open, lp[:bra - 0.65km], "1131");
+    }
+
+
+    with link = "point.de.Brandenbaum" {
+        track(:second:station, lp[:bra - 1sw, :bra + 1sw]);
+        track(:second:station,
+                lp[:bra - 0.1dl, :bra]
+            ..  lp[:bra + 1dl, :bra + 1sw] << 1dt
+        );
+
+        marker(:de.abzw :right, lp[:bra]);
+        station(:right, lp[:bra - 0.35sw] >> 1.6sh,
+            span(:bold, "Brandenbaum"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1131: "),
+                    span(:open, "1137: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "8,"),
+                    span(:open, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "50"),
+                    span(:open, "00")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1131" {
+        track(:second :tight:flip, lp[:bra.yk, :bra + 1sw]);
+        track(:second, lp[:bra.yk, :kir - 0.5sw]);
+    }
+
+
+    with link = "point.de.Lübeck-Kirschenallee" {
+        track(:second:station, lp[:kir - 0.5sw, :kir + 0.5sw]);
+        with layer = -1 marker(:de.anst :removed :right, lp[:kir]);
+        station(:right :removed, lp[:kir - 0.3sw] >> 1.5sh,
+            "Lübeck Hgbf Kirschenallee", "??"
+        );
+    }
+
+
+    with link = "line.de.1131" {
+        track(:second, lp[:kir + 0.5sw, :tan - 0.5sw]);
+        with layer = 1 line_badge(:open, lp[:tan - 1.0km], "1131");
+    }
+
+
+    with link = "point.de.Lübeck-Schlutuper-Tannen" {
+        track(:second:station, lp[:tan - 0.5sw, :tan + 0.5sw]);
+        marker(:de.anst :left, lp[:tan]);
+        station(:right, lp[:tan - 0.3sw] >> 6pt,
+            hbox(:left:base,
+                span(:open, "Lübeck "),
+                span(:removed, "Hgbf "),
+                span(:open, "Schlutuper Tannen")
+            ),
+            "12,30"
+        );
+    }
+
+
+    with link = "line.de.1131" {
+        track(:second, lp[:tan + 0.5sw, :slu.w31 - 0.5sw]);
+    }
+
+
+    with link = "point.de.Lübeck-Schlutup" {
+        # Gl. 1 (Str. 1131)
+        track(:second:station, lp[:slu.w31 - 0.5sw, :f]);
+
+        # Gl. 2
+        track(:station, lp[:slu.w31 + 2dl, :slu + 0.5sw - 2dl] >> 1dt);
+
+        # Gl. 3
+        track(:station,
+                lp[:slu.w31 + 3.9dl, :slu.w31 + 4dl]
+            --  lp[:slu.w31 + 5dl, :slu + 0.5sw] << 1dt
+            --  lp[:slu + 0.5sw + 1dl, :slu + 0.5sw + 1.1dl]
+        );
+
+        # Gl. 11
+        track(:station,
+                lp[:slu.w31 + 0.9dl, :slu.w31 + 1dl]
+            --  lp[:slu.w31 + 3dl, :slu + 0.5sw - 3dl] >> 2dt
+            --  lp[:slu + 0.5sw - 1dl, :slu + 0.5sw - 0.9dl]
+        );
+
+        marker(:de.gbf :left, lp[:slu] << 1dt);
+        station(:right, lp[:slu - 0.3sw] >> 2dt >> 6pt,
+            span(:bold, "Lübeck-Schlutup"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1131: "),
+                    span(:open, "1132: ")
+                ),
+                vbox(:center:top,
+                    span(:open, "14,07"),
+                    span(:open, "??")
+                )
+            )
+        );
+    }
+}
+
