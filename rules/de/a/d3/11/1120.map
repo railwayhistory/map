@@ -5,15 +5,18 @@ let lh = path("d4.de.1120");
 with detail = 3 {
     with link = "point.de.Lübeck-Hbf" {
         track(:first:station :double :cat:ac15 :pax, lh[:lub.a, :lub.f]);
-        marker(:de.bf :pax :left, lh[:lub] << 0.5dt);
-        slabel(:right :pax, lh[:lub] << 0.5dt << 3.2ssw - (2ssw, 0ssw),
+        marker(:de.bf :cat:ac15 :pax :left, lh[:lub] << 0.5dt);
+        slabel(:right :cat:ac15 :pax,
+            lh[:lub] << 0.5dt << 3.2ssw - (2ssw, 0ssw),
             span(:bold, "Lübeck Hbf")
         );
     }
 
     with link = "point.de.Lübeck-Hgbf" {
         track(:first:station :double :cat:ac15 :pax, lh[:lub.f, :lua - 1ssw]);
-        with layer = -1 marker(:de.bbf :left, lh[:lua - 2ssw] << 0.5dt);
+        with layer = -1 marker(:de.bbf :cat:ac15 :left,
+            lh[:lua - 2ssw] << 0.5dt
+        );
     }
 
     with link = "point.de.Lübeck-Hgbf-Abzw" {
@@ -42,7 +45,7 @@ with detail = 3 {
             ..  lb[:lua.yb - 0.1dl, :lua.yb] << 1dt
         );
 
-        with layer = -1 marker(:de.abzw :right, lh[:lua] >> 0.5dt);
+        with layer = -1 marker(:de.abzw :cat:ac15 :right, lh[:lua] >> 0.5dt);
     }
 
     with link = "line.de.1120" {
@@ -71,8 +74,8 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:rei - 1ssw, :rei + 1ssw]
         );
-        marker(:de.bf :pax :right, lh[:rei] >> 0.5dt);
-        slabel(:left :pax, lh[:rei - 1ssw] >> 0.5dt >> 1.4ssw,
+        marker(:de.bf :cat:ac15 :pax :right, lh[:rei] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, lh[:rei - 1ssw] >> 0.5dt >> 1.4ssw,
             hbox(:center:base,
                 span(:regular, "Reinfeld "),
                 span(:light, "(Holst)")
@@ -108,8 +111,8 @@ with detail = 3 {
                 lh[:old + 0.5ssw, :old + 1ssw] >> 1.5dt
         );
 
-        marker(:de.bf :pax :right, lh[:old] >> 0.5dt);
-        slabel(:right :pax, lh[:old + 0.4ssw] << 2.0dt,
+        marker(:de.bf :cat:ac15 :pax :right, lh[:old] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, lh[:old + 0.4ssw] << 2.0dt,
             span(:bold, "Bad Oldesloe")
         );
     }
@@ -125,8 +128,8 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:kup - 1ssw, :kup + 1ssw]
         );
-        marker(:de.hp :pax :right, lh[:kup] >> 0.5dt);
-        slabel(:left :pax, lh[:kup + 0.6ssw] >> 0.5dt >> 1.4ssw,
+        marker(:de.hp :cat:ac15 :pax :right, lh[:kup] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, lh[:kup + 0.6ssw] >> 0.5dt >> 1.4ssw,
             "Kupfermühle"
         );
     }
@@ -143,15 +146,15 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:bar - 1ssw, :bar + 1ssw]
         );
-        marker(:de.bf :pax :right, lh[:bar] >> 0.5dt);
-        slabel(:left :pax, lh[:bar + 0.6ssw] >> 0.5dt >> 1.4ssw,
+        marker(:de.bf :cat:ac15 :pax :right, lh[:bar] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, lh[:bar + 0.6ssw] >> 0.5dt >> 1.4ssw,
             "Bargteheide"
         );
     }
 
     with link = "line.de.1120" {
         track(:first :double :cat:ac15 :pax, lh[:bar + 1ssw, :gar - 1ssw]);
-        with layer = 1 line_badge(:pax, lh[:bar + 1.7km], "1120");
+        with layer = 1 line_badge(:pax :cat:ac15, lh[:bar + 1.7km], "1120");
     }
 
     with link = "point.de.Delingsdorf" {
@@ -162,11 +165,10 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:gar - 1ssw, :gar + 1ssw]
         );
-        marker(:de.hp :pax :left, lh[:gar] << 0.5dt);
+        marker(:de.hp :cat:ac15 :pax :left, lh[:gar] << 0.5dt);
         label(lh[:gar] << 0.5dt << 1.6ssw,
-            vbox(:left:middle :pax :small,
-                span(:open, " Ahrensburg-"),
-                span(:open, "Gartenholz")
+            vbox(:left:middle :cat:ac15 :pax :small,
+                " Ahrensburg-", "Gartenholz"
             )
         );
     }
@@ -176,7 +178,7 @@ with detail = 3 {
     }
 
     with link = "point.de.Ahrensburg-Nord" {
-        with layer = -1 marker(:de.awanst :right, lh[:ahn] >> 0.5dt);
+        with layer = -1 marker(:de.awanst :cat:ac15 :right, lh[:ahn] >> 0.5dt);
     }
 
 
@@ -184,8 +186,8 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:ahr - 1ssw, :ahr + 1ssw]
         );
-        marker(:de.bf :pax :right, lh[:ahr] >> 0.5dt);
-        slabel(:left :pax, lh[:ahr + 0.8ssw] >> 0.5dt >> 1.4ssw,
+        marker(:de.bf :cat:ac15 :pax :right, lh[:ahr] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, lh[:ahr + 0.8ssw] >> 0.5dt >> 1.4ssw,
             "Ahrensburg"
         );
     }
@@ -202,15 +204,15 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:rab - 1ssw, :rab + 1ssw]
         );
-        with layer = -1 marker(:de.bft :right, lh[:rab] >> 0.5dt);
+        with layer = -1 marker(:de.bft :cat:ac15 :right, lh[:rab] >> 0.5dt);
     }
 
     with link = "point.de.Hamburg-Rahlstedt" {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:rab + 1ssw, :rah + 1ssw]
         );
-        marker(:de.bf :pax :left, lh[:rah] << 0.5dt);
-        slabel(:right :pax, lh[:rah + 0.3ssw] << 0.5dt << 2.0ssw,
+        marker(:de.bf :cat:ac15 :pax :left, lh[:rah] << 0.5dt);
+        slabel(:right :cat:ac15 :pax, lh[:rah + 0.3ssw] << 0.5dt << 2.0ssw,
             "Hamburg-Rahlstedt"
         );
     }
@@ -227,7 +229,7 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:ton - 1ssw, :ton + 1ssw]
         );
-        marker(:de.hp :pax :right, lh[:ton] >> 0.5dt);
+        marker(:de.hp :cat:ac15 :pax :right, lh[:ton] >> 0.5dt);
     }
 }
 
@@ -245,7 +247,7 @@ with detail = 3 {
         track(:first:station :double :cat:ac15 :pax,
                 lh[:wan - 1ssw, :wan + 1ssw]
         );
-        marker(:de.bf :pax :right, lh[:wan] >> 0.5dt);
+        marker(:de.bf :cat:ac15 :pax :right, lh[:wan] >> 0.5dt);
     }
 
     with link = "line.de.1120" {
