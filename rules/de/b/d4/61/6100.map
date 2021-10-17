@@ -1,0 +1,478 @@
+# DE 6100.  Berlin-Spandau - Hamburg-Altona
+#
+let ba = path("d4.de.b.6100");
+
+with detail = [4, 5] {
+    # point.de.Berlin-Spandau-Ost    de.6107
+    # point.de.Berlin-Spandau-Mitte  de.6107
+    # point.de.Berlin-Spandau        de.6107
+    # point.de.Berlin-Spandau-West   de.6107
+
+    with link = "line.de.6100" {
+        track(:first :cat:ac15 :pax :tight:flip,
+                ba[:szw - 0.2sw, :szw - 0.21sw] << 0.5dt
+           ..   ba[:sdu.yn, :sdu.f] << 1.5dt
+        );
+        track(:first :cat:ac15 :pax :tight,
+                ba[:szw - 0.2sw, :sdu.f] >> 0.5dt
+        );
+        track(:first :double :cat:ac15 :pax, ba[:szw - 0.2sw, :gahs - 0.5sw]);
+        with layer = 1 line_badge(:cat:ac15 :pax, ba[:szw + 0.8km], "6100");
+    }
+
+
+    with link = "point.de.Berlin-Spandau-Bk-27" {
+        with layer = -4 marker(:de.bk :removed :right, ba[:szw] >> 0.5dt);
+        station(:top :removed, ba[:szw] >> 0.5dt >> 1.2sh,
+            "Bk 27", "14,80"
+        );
+    }
+
+
+    with link = "point.de.Berlin-Albrechtshof-Gr" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:gahs - 0.5sw, :gahs + 0.5sw]
+        );
+        with layer = -1 {
+            marker(:de.lgr :removed :right, ba[:gahs] >> 0.5dt);
+            marker(:statdt :removed :right, ba[:gahs] << 0.5dt);
+            marker(:de.lgr :removed :left, ba[:gahs] << 0.5dt);
+        }
+        slabel(:top :removed, ba[:gahs] >> 4.5dt,
+            span(:xsmall, "16,350")
+        );
+    }
+
+
+    with link = "point.de.Berlin-Albrechtshof" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:gahs + 0.5sw, :alb.f]
+        );
+            with layer = -4 track(:station :removed,
+                    ba[:alb.a] >> 0.5dt
+                --  ba[:alb.a + 1.5dl] << 0.5dt
+            );
+            with layer = -4 track(:station :removed,
+                    ba[:alb.f - 250m - 1.5dt] << 0.5dt
+                --  ba[:alb.f - 250m] >> 0.5dt
+            );
+
+        marker(:de.hp :cat:ac15 :pax :right, ba[:alb.hp] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, ba[:alb] >> 0.5dt);
+        station(:right :cat:ac15 :pax, ba[:alb.hp + 0.4sw] >> 0.5dt >> 1.4sh,
+            hbox(:center:base,
+                span(:light, "Berlin-"),
+                span(:regular, "Albrechtshof")
+            ),
+            hbox(:center:base, "17,42 ", span(:removed, "← 17,24"))
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:alb.f, :see - 1sw]);
+    }
+
+
+    with link = "point.de.Seegefeld" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:see - 1sw, :see + 1sw]
+        );
+        marker(:de.hp :cat:ac15 :pax :right, ba[:see] >> 0.5dt);
+        station(:left :cat:ac15 :pax, ba[:see - 0.4sw] << 0.5dt << 7pt,
+            "Seegefeld", "18,32"
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:see + 1sw, :fal.a]);
+        with detail = 5 {
+            with layer = 1 line_badge(
+                :open :cat:ac15 :pax, ba[:see + 1.0km], "6100"
+            );
+        }
+    }
+
+
+    with link = "point.de.Falkensee" {
+        # Gl. 3 (Str. 6100 R)
+        track(:first:station :cat:ac15 :pax, ba[:fal.a, :fal.f] >> 0.5dt);
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:fal.f - 240m - 2dl] >> 0.5dt
+                --  ba[:fal.f - 240m] << 0.5dt
+            );
+
+        # Gl. 4 (Str. 6100 L)
+        track(:first:station :cat:ac15 :pax, ba[:fal.a, :fal.f] << 0.5dt);
+            with layer = -1 track(:station :cat:ac15,
+                    ba[:fal.a + 300m] << 0.5dt
+                --  ba[:fal.a + 300m + 2dl] >> 0.5dt
+            );
+
+        # Gl. 5
+        track(:station :cat:ac15 :pax,
+                ba[:fal - 571m, :fal - 570m] >> 0.5dt
+            --  ba[:fal - 570m + 1dl, :fal + 200m - 1dl] >> 1.5dt
+            --  ba[:fal + 200m, :fal + 201m] >> 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:fal - 570m - 0.5dl, :fal - 570m + 1dl] >> 1.5dt
+            );
+            with layer = -2 track(:station,
+                    ba[:fal + 200m - 1dl, :fal + 200m + 0.5dl] >> 1.5dt
+            );
+
+        # Gl. 6
+        track(:station :cat:ac15 :pax,
+                ba[:fal - 571m, :fal - 570m] << 0.5dt
+            --  ba[:fal - 570m + 1dl, :fal + 200m - 1dl] << 1.5dt
+            --  ba[:fal + 200m, :fal + 201m] << 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:fal - 570m - 0.5dl, :fal - 570m + 1dl] << 1.5dt
+            );
+            with layer = -2 track(:station,
+                    ba[:fal + 200m - 1dl, :fal + 200m + 0.5dl] << 1.5dt
+            );
+
+        marker(:de.bf :cat:ac15 :pax :right, ba[:fal] >> 1.5dt);
+        station(:top :cat:ac15 :pax, ba[:fal] >> 1.5dt >> 1.4sh,
+            vbox(:center:bottom,
+                span(:removed, "Seegefeld"),
+                "Falkensee"
+            ),
+            hbox(:center:base, span(:removed, "20,41 → "), "20,37")
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:fal.f, :fin.a]);
+    }
+
+
+    with link = "point.de.Finkenkrug" {
+        track(:first:station :double :cat:ac15 :pax, ba[:fin.a, :fin.f]);
+            with layer = -4 track(:station :removed,
+                    ba[:fin.a + 200m] << 0.5dt
+                --  ba[:fin.a + 200m + 1dl] >> 0.5dt
+            );
+            with layer = -4 track(:station :removed,
+                    ba[:fin.f - 200m - 1dl] >> 0.5dt
+                --  ba[:fin.f - 200m] << 0.5dt
+            );
+
+        marker(:de.hp :cat:ac15 :pax :right, ba[:fin.hp] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed, ba[:fin] >> 0.5dt);
+        station(:top :cat:ac15 :pax, ba[:fin.hp] >> 0.5dt >> 1.6sh,
+            "Finkenkrug",
+            hbox(:center:base, "23,10 ", span(:removed, "← 23,03"))
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:fin.f, :afi - 1sw]);
+    }
+
+
+    with link = "point.de.Finkenkrug-Afi" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:afi - 1sw, :afi + 1sw]
+        );
+            track(:station :cat:ac15 :pax,
+                    ba[:afi - 3dl] << 0.5dt
+                --  ba[:afi - 1dl] >> 0.5dt
+            );
+
+        track(:first:station :cat:ac15 :pax,
+                ba[:afi - 0.1dl, :afi] >> 0.5dt
+            --  ba[:afi + 2dl, :afi + 1sw] >> 1.5dt
+        );
+
+        marker(:statdt :cat:ac15 :pax :right, ba[:afi] >> 0.5dt);
+        marker(:de.abzw :cat:ac15 :pax :right, ba[:afi] >> 1.5dt);
+        label(ba[:afi + 1sw] >> 1.5dt >> 1.0sh,
+            hbox(:left:bottom :cat:ac15 :pax,
+                vbox(:center:bottom :xsmall,
+                    hbox(:center:bottom,
+                        vbox(:right:top,
+                            "6098: ",
+                            "6100: "
+                        ),
+                        vbox(:center:top,
+                            "??",
+                            "24,60"
+                        )
+                    ),
+                    span(:medium :bold, "Finkenkrug (Afi)")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:afi + 1sw, :bri.a]);
+    }
+
+
+    with link = "point.de.Brieselang" {
+        # Gl. 1
+        track(:station :cat:ac15 :pax,
+                ba[:bri.yb + 4.9dl, :bri.yb + 5dl] >> 0.5dt
+            --  ba[:bri.yb + 6.5dl, :bri.f - 300m - 3dl] >> 1.5dt
+            --  ba[:bri.f - 300m - 1.5dl, :bri.f - 300m - 1.49dl] >> 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:bri.yb + 5dl, :bri.yb + 6.5dl] >> 1.5dt
+            );
+
+        # Gl. 2
+        track(:station :cat:ac15 :pax,
+                ba[:bri.yb + 5.9dl, :bri.yb + 6dl] << 0.5dt
+            --  ba[:bri.yb + 7.5dl, :bri.f - 300m - 1.5dt] << 1.5dt
+            --  ba[:bri.f - 300m, :bri.f - 299m] << 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:bri.yb + 6dl, :bri.yb + 7.5dl] << 1.5dt
+            );
+
+        # Gl. 3 (Str. 6100 R)
+        track(:first:station :cat:ac15 :pax, ba[:bri.a, :bri.f] >> 0.5dt);
+            with layer = -1 track(:station :cat:ac15, # W5 - W7
+                    ba[:bri.yb + 3.5dl] >> 0.5dt
+                --  ba[:bri.yb + 5dl] << 0.5dt
+            );
+
+        # Gl. 4 (Str. 6100 L)
+        track(:first:station :cat:ac15 :pax, ba[:bri.a, :bri.f] << 0.5dt);
+            with layer = -1 track(:station :cat:ac15, # W3 - W4
+                    ba[:bri.yb + 1dl] << 0.5dt
+                --  ba[:bri.yb + 2.5dl] >> 0.5dt
+            );
+
+        # Str. 6099
+        with layer = -1 track(:first:station :cat:ac15,
+                ba[:bri.yb - 3dl, :bri.yb - 1.5dl] >> 1.5dt
+            --  ba[:bri.yb, :bri.yb + 0.1dl] >> 0.5dt
+        );
+
+        # Str. 6101
+        with layer = -1 track(:first:station :cat:ac15,
+                ba[:bri.yb - 3dl, :bri.yb - 1.5dl] << 1.5dt
+            --  ba[:bri.yb, :bri.yb + 0.1dl] << 0.5dt
+        );
+
+        # Anschlussgleise
+        let bab = path("d4.de.6100.bri");
+        with layer = -2 track(:station,
+                ba[:bri.f - 300m - 3dl, :bri.ya] >> 1.5dt
+            ..  bab[:r, :t - 2dl]
+            --  bab[:t - 1dl, :f] >> 1dt
+        );
+        track(:station,
+                bab[:r + 1dl, :s - 2dl] << 1dt
+            --  bab[:s - 1dl, :s - 0.9dl]
+        );
+        track(:station,
+                bab[:r + 2dl, :s] << 2dt
+        );
+        track(:station,
+                bab[:r - 0.1dl, :r]
+            --  bab[:r + 3dl, :s] << 3dt
+        );
+
+        track(:station,
+                bab[:s + 2dl, :t - 1dl] >> 1dt
+        );
+        track(:station,
+                bab[:s + 0.9dl, :s + 1dl]
+            --  bab[:s + 3dl, :t - 3dl] >> 2dt
+            --  bab[:t - 2dl, :t - 1.9dl] >> 1dt
+        );
+
+        track(:station,
+                bab[:t - 0.1dl, :t] >> 1dt
+            --  bab[:t + 1dl, :f]
+        );
+
+        slabel(:left, bab[:r + 300m] << 4.5dt,
+            hbox(:right:middle :italic, "Rigips")
+        );
+        slabel(:left, bab[:t - 100m] << 1.5dt,
+            hbox(:right:middle :italic, "Zalando")
+        );
+        slabel(:left, bab[:t + 200m] << 1.5dt,
+            hbox(:right:middle :italic, "Amazon")
+        );
+
+        with layer = -4 marker(:de.bf :removed :right, ba[:bri] >> 1.5dt);
+        marker(:de.bf :cat:ac15 :pax :right, ba[:bri.neu] >> 1.5dt);
+        station(:top :cat:ac15 :pax, ba[:bri.neu] >> 1.5dt >> 1.6sh,
+            span(:bold, "Brieselang"),
+            hbox(:center:bottom,
+                vbox(:left:top,
+                    "",
+                    "             ",
+                    ""
+                ),
+                vbox(:right:top,
+                    "6099: ",
+                    "6100: ",
+                    "6101: "
+                ),
+                vbox(:center:top,
+                    "??",
+                    "26,95",
+                    "??"
+                ),
+                vbox(:left:top,
+                    "",
+                    span(:removed, " ← 26,68"),
+                    ""
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:bri.f, :nau.a]);
+        with layer = 1 line_badge(:cat:ac15 :pax, ba[:bri + 3.0km], "6100");
+    }
+
+
+    with link = "point.de.Graben-Nauen" {
+        with layer = -1 marker(:de.bk :removed :right, ba[:gra] >> 0.5dt);
+        station(:top :removed, ba[:gra] >> 0.5dt >> 1.4sh,
+            "Graben", "31,26"
+        );
+    }
+
+
+    with link = "point.de.Nauen" {
+        # Gl. 1
+        track(:station :cat:ac15 :pax,
+                ba[:nau.a + 280m + 2.9dl, :nau.a + 280m + 3dl] >> 0.5dt
+            --  ba[:nau.a + 280m + 4dl, :nau.not - 3.7dl] >> 1.5dt
+            --  ba[:nau.not - 2.7dl, :nau.nau + 6.7dl] >> 2.5dt
+            --  ba[:nau.nau + 8.7dl, :nau.nau + 8.71dl] >> 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:nau.yv - 5.7dl] >> 1.5dt
+                --  ba[:nau.yv - 4.7dl] >> 2.5dt
+            );
+
+        # Gl. 2
+        track(:station :cat:ac15 :pax,
+                ba[:nau.not - 0.1dl, :nau.not] << 0.5dt
+            --  ba[:nau.not + 1dl, :nau.nau + 4dl] >> 0.5dt
+            --  ba[:nau.nau + 5dl, :nau.nau + 5.1dl] << 0.5dt
+        );
+            with layer = -2 track(:station,
+                    ba[:nau.not - 0.5dt, :nau.not + 1dl] >> 0.5dt
+            );
+            with layer = -2 track(:station,
+                    ba[:nau.nau + 4dl, :nau.nau + 5.5dl] >> 0.5dt
+            );
+
+        # Gl. 3 (Str. 6100 R)
+        track(:first:station :cat:ac15 :pax,
+                ba[:nau.a, :nau.not - 3dl] >> 0.5dt
+            --  ba[:nau.not - 2dl, :nau.nau + 6dl] >> 1.5dt
+            --  ba[:nau.nau + 7dl, :nau.f] >> 0.5dt
+        );
+
+        # Gl. 4 (Str. 6100 L)
+        track(:first:station :cat:ac15 :pax, ba[:nau.a, :nau.f] << 0.5dt);
+            with layer = -1 track(:station :cat:ac15, #  W1 - W2
+                    ba[:nau.a + 280m] << 0.5dt
+                --  ba[:nau.a + 280m + 2dl] >> 0.5dt
+            );
+
+        # Gl. 5
+        track(:station :cat:ac15 :pax,
+                ba[:nau.not + 0.9dl, :nau.not + 1dl] >> 2.5dt
+            --  ba[:nau.not + 2dl, :nau.nau] >> 3.5dt
+            --  ba[:nau.nau + 1dl, :nau.nau + 1.1dl] >> 2.5dt
+        );
+
+        # Gl. 6
+        with layer = -4 track(:station :removed,
+                ba[:nau.yv - 1dl, :nau.nau + 0.7dl] >> 4.5dt
+            --  ba[:nau.nau + 2.7dl, :nau.nau + 2.71dl] >> 2.5dt
+        );
+
+        # Gl. 7
+        with layer = -1 track(:station :cat:ac15,
+                ba[:nau.yv - 4.1dl, :nau.yv - 4dl] >> 1.5dt
+            --  ba[:nau.yv, :nau.nau + 1.4dl] >> 5.5dt
+            --  ba[:nau.nau + 4.4dl, :nau.nau + 4.41dl] >> 2.5dt
+        );
+
+        # Gl. 51
+        with layer = -2 track(:station,
+                ba[:nau.yv - 0.7dl, :nau - 50m] >> 6.5dt
+        );
+
+        # Gl. 52/53
+        with layer = -2 track(:station,
+                ba[:nau.yv - 1.71dl, :nau.yv - 1.7dl] >> 5.5dt
+            --  ba[:nau.yv + 0.3dl, :nau - 50m] >> 7.5dt
+        );
+
+        # Gl. 54
+        with layer = -2 track(:station,
+                ba[:nau.yv - 6.3dt, :nau.yv - 6.4dl] >> 2.5dt
+            --  ba[:nau.yv - 0.4dl, :nau - 80m] >> 8.5dt
+        );
+
+        # Gl. 60
+        with layer = -2 track(:station,
+                ba[:nau.a, :nau.yv - 4.7dl] >> 2.5dt
+            --  ba[:nau.yv - 1.7dl, :nau.yv] >> 5.5dt
+        );
+
+        # Gl. 80
+        with layer = -4 track(:station :removed,
+                ba[:nau.nau + 8.69dl, :nau.nau + 8.7dl] >> 2.5dt
+            --  ba[:nau.nau + 9.7dl, :nau.nau + 6.7dl + 280m] >> 1.5dt
+        );
+
+        # Gl. 81
+        with layer = -1 track(:station :ac15 :cat,
+                ba[:nau.nau + 6.7dl, :nau.nau + 6.7dl + 280m] >> 2.5dt
+        );
+
+        # Gl. 82
+        with layer = -4 track(:station :removed,
+                ba[:nau.nau + 7.69dl, :nau.nau + 7.7dl] >> 2.5dt
+            --  ba[:nau.nau + 8.7dl, :nau.nau + 6.7dl + 280m] >> 3.5dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :left, ba[:nau] << 0.5dt);
+        station(:bottom :cat:ac15 :pax, ba[:nau] << 0.5dt << 1.4sh,
+            span(:bold, "Nauen"),
+            hbox(:center:bottom,
+                vbox(:right:top,
+                    "6100: ",
+                    span(:removed, "6105: "),
+                    span(:removed, "6505: ")
+                ),
+                vbox(:right:top,
+                    "35,",
+                    span(:removed, "90,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    "37",
+                    span(:removed, "06"),
+                    span(:removed, "00")
+                )
+            )
+        );
+    }
+}
+

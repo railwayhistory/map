@@ -1,0 +1,115 @@
+# DE 6100.  Berlin-Spandau - Hamburg-Altona
+#
+let ba = path("d4.de.b.6100");
+
+with detail = 3 {
+    # point.de.Berlin-Spandau  de.6107
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:sdu + 1ssw, :alb - 1ssw]);
+    }
+
+    with link = "point.de.Berlin-Albrechtshof" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:alb - 1ssw, :alb.hp + 1ssw]);
+        marker(:de.hp :cat:ac15 :pax :right, ba[:alb.hp] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, ba[:alb] >> 0.5dt);
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:alb + 1ssw, :see - 1ssw]);
+    }
+
+    with link = "point.de.Seegefeld" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:see - 1ssw, :see + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :right, ba[:see] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, ba[:see - 0.4ssw] << 0.5dt << 6pt,
+            "Seegefeld"
+        );
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:see + 1ssw, :fal - 1ssw]);
+    }
+
+    with link = "point.de.Falkensee" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:fal - 1ssw, :fal + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :right, ba[:fal] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, ba[:fal + 1ssw] >> 0.5dt >> 1.3ssw,
+            "Falkensee"
+        );
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:fal + 1ssw, :fin - 1ssw]);
+    }
+
+    with link = "point.de.Finkenkrug" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:fin - 1ssw, :fin.hp + 1ssw]
+        );
+        with layer = -1 marker(:de.bf :removed :right, ba[:fin] >> 0.5dt);
+        marker(:de.hp :cat:ac15 :pax :right, ba[:fin.hp] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, ba[:fin.hp - 0.8ssw] >> 0.5dt >> 1.3ssw,
+            "Finkenkrug"
+        );
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax, ba[:fin.hp + 1ssw, :afi - 0.5sw]);
+    }
+
+    with link = "point.de.Finkenkrug-Afi" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:afi - 0.5sw, :afi + 0.5sw]
+        );
+        with layer = -1 marker(:de.abzw :cat:ac15 :right, ba[:afi] >> 0.5dt);
+        slabel(:right :cat:ac15, ba[:afi + 1ssw] >> 0.5dt >> 1.3ssw,
+            span(:bold, "Finkenkrug (Afi)")
+        );
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax,
+                ba[:afi + 0.5ssw, :bri.yb - 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Brieselang" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:bri.yb - 1ssw, :bri.neu + 1ssw]
+        );
+        with layer = -1 marker(:de.bf :cat:ac15 :pax :removed :right,
+            ba[:bri] >> 0.5dt
+        );
+        marker(:de.bf :cat:ac15 :pax :right, ba[:bri.neu] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, ba[:bri.neu - 0.5ssw] << 0.5dt << 6pt,
+            span(:bold, "Brieselang")
+        );
+    }
+
+    with link = "line.de.6100" {
+        track(:first :double :cat:ac15 :pax,
+                ba[:bri.neu + 1ssw, :nau - 1ssw]
+        );
+    }
+
+    with link = "point.de.Graben-Nauen" {
+        with layer = -1 marker(:de.bk :removed, ba[:gra] >> 0.5dt);
+    }
+
+    with link = "point.de.Nauen" {
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:nau - 1ssw, :nau + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, ba[:nau] << 0.5dt)
+        slabel(:bottom :cat:ac15 :pax, ba[:nau] << 0.5dt << 1.4ssw,
+            span(:bold, "Nauen")
+        );
+    }
+}
+
