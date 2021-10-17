@@ -3,19 +3,21 @@ with detail = 2 {
     let da = path("simple.be.90");
 
     with link = "line.de.90" {
-        track(:first :double :cat :pax, da[:den.a, :ath.f]);
-        with layer = 1 line_badge(:open, da[:den.a + 10km], "90");
-        with layer = 1 line_badge(:open, da[:les + 5km], "90");
+        track(:first :double :cat:dc30 :pax, da[:den.a, :ath.f]);
+        with layer = 1 line_badge(:cat:dc30 :pax, da[:den.a + 10km], "90");
+        with layer = 1 line_badge(:cat:dc30 :pax, da[:les + 5km], "90");
     }
 
     with link = "point.be.Geraardsbergen" {
-        with layer = 1 marker(:statdot :pax, da[:ger]);
-        slabel(:right, da[:ger] + (1.8dt, 1.2dt), "Geraardsbergen");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, da[:ger]);
+        slabel(:right :cat:dc30 :pax, da[:ger] + (1.8dt, 1.2dt),
+            "Geraardsbergen"
+        );
     }
 
     with link = "point.be.Lessines" {
-        with layer = 1 marker(:statdot :pax, da[:les]);
-        slabel(:left, da[:les] + (-1.8dt, 1.8dt), "Lessines");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, da[:les]);
+        slabel(:left :cat:dc30 :pax, da[:les] + (-1.8dt, 1.8dt), "Lessines");
     }
 }
 
@@ -25,15 +27,17 @@ with detail = 2 {
     let as = path("simple.be.90c");
 
     with link = "line.de.90C" {
-        track(:first :double :cat :pax, as[:ath.a, :jur.a]);
-        with layer = 1 line_badge(:open, as[:ath.a + 6km], "90C");
+        with layer = -1 track(:first :double :cat:dc30 :pax,
+             as[:ath.a, :jur.a]
+        );
+        with layer = 1 line_badge(:cat:dc30 :pax, as[:ath.a + 6km], "90C");
 
         with layer = -4 track(:first :removed, as[:erb, :sgh.a]);
         with layer = 1 line_badge(:removed, as[:erb + 3km], "90C");
     }
 
     with link = "point.be.Maffle" {
-        with layer = 1 marker(:statdot :pax, as[:maf]);
+        with layer = 1 marker(:statdot :cat:dc30 :pax, as[:maf]);
     }
 }
 
@@ -58,36 +62,39 @@ with detail = 2 {
     let hb = path("simple.be.94");
 
     with link = "line.de.94" {
-        track(:first :double :cat :pax, hb[:hal.f, :sil.a]);
-        with layer = 1 line_badge(:open, hb[:hal.f + 8km] >> 0.2dt, "94");
-        with layer = 1 line_badge(:open, hb[:leu - 4.5km], "94");
-        with layer = 1 line_badge(:open, hb[:fro.f + 3.5km], "94");
-
-        track(:first :double :cat :pax, hb[:sil.f, :blaf]);
+        with layer = -1 {
+            track(:first :double :cat:dc30 :pax, hb[:hal.f, :sil.a]);
+            track(:first :double :cat:dc30 :pax, hb[:sil.f, :blaf]);
+        }
+        with layer = 1 {
+            line_badge(:cat:dc30 :pax, hb[:hal.f + 8km] >> 0.2dt, "94");
+            line_badge(:cat:dc30 :pax, hb[:leu - 4.5km], "94");
+            line_badge(:cat:dc30 :pax, hb[:fro.f + 3.5km], "94");
+        }
     }
 
     with link = "point.be.Enghien" {
-        with layer = 1 marker(:statdot :pax, hb[:eng]);
+        with layer = 1 marker(:statdot :cat:dc30 :pax, hb[:eng]);
     }
 
     with link = "point.be.Ath" {
-        with layer = 1 marker(:statdot :pax, hb[:ath]);
-        slabel(:left, hb[:ath] - (3.0dt, 0.5dt), "Ath");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, hb[:ath]);
+        slabel(:left :cat:dc30 :pax, hb[:ath] - (3.0dt, 0.5dt), "Ath");
     }
 
     with link = "point.be.Leuze" {
-        with layer = 1 marker(:statdot :pax, hb[:leu]);
-        slabel(:left, hb[:leu] - (0.5dt, 1.0dt), "Leuze");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, hb[:leu]);
+        slabel(:left :cat:dc30 :pax, hb[:leu] - (0.5dt, 1.0dt), "Leuze");
     }
 
     with link = "point.be.Tournai" {
-        with layer = 1 marker(:statdot :pax, hb[:tou]);
-        slabel(:left, hb[:tou] + (-1.8dt, 3.0dt), "Tournai");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, hb[:tou]);
+        slabel(:left :cat:dc30 :pax, hb[:tou] + (-1.8dt, 3.0dt), "Tournai");
     }
 
     with link = "point.be.Froyennes" {
-        with layer = 1 marker(:statdot :pax, hb[:fro]);
-        slabel(:right, hb[:fro] + (1.8km, -0.5dt), "Froyennes");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, hb[:fro]);
+        slabel(:right :cat:dc30 :pax, hb[:fro] + (1.8km, -0.5dt), "Froyennes");
     }
 
     with link = "point.int.Baisieux-Blandain" {
@@ -120,70 +127,72 @@ with detail = 2 {
     let bq = path("simple.be.96");
 
     with link = "line.de.96" {
-        track(:first :double :cat :pax, bq[:bmz, :quef]);
-        with layer = 1 line_badge(:open, bq[:hal - 7km], "96");
-        with layer = 1 line_badge(:open, bq[:tub + 6km], "96");
-        with layer = 1 line_badge(:open, bq[:jur - 4km], "96");
-        with layer = 1 line_badge(:open, bq[:que - 4.5km], "96");
+        track(:first :double :cat:dc30 :pax, bq[:bmz, :quef]);
+        with layer = 1 line_badge(:cat:dc30 :pax, bq[:hal - 7km], "96");
+        with layer = 1 line_badge(:cat:dc30 :pax, bq[:tub + 6km], "96");
+        with layer = 1 line_badge(:cat:dc30 :pax, bq[:jur - 4km], "96");
+        with layer = 1 line_badge(:cat:dc30 :pax, bq[:que - 4.5km], "96");
     }
 
     with link = "point.be.Halle" {
-        with layer = 1 marker(:statdot :pax, bq[:hal]);
-        slabel(:right, bq[:hal] + (1.8dt, 1.8dt), "Halle");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:hal]);
+        slabel(:right :cat:dc30 :pax, bq[:hal] + (1.8dt, 1.8dt), "Halle");
     }
 
     with link = "point.be.Lembeek" {
-        with layer = 1 marker(:statdot :pax, bq[:lem]);
-        slabel(:right, bq[:lem] + (1.8dt, 1.8dt), "Lembeek");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:lem]);
+        slabel(:right :cat:dc30 :pax, bq[:lem] + (1.8dt, 1.8dt), "Lembeek");
     }
 
     with link = "point.be.Tubize" {
-        with layer = 1 marker(:statdot :pax, bq[:tub]);
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:tub]);
     }
 
     with link = "point.be.Braine-le-Comte" {
-        with layer = 1 marker(:statdot :pax, bq[:bra]);
-        slabel(:left, bq[:bra] + (-1.8dt, 0dt), "Braine-le-Comte");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:bra]);
+        slabel(:left :cat:dc30 :pax, bq[:bra] + (-1.8dt, 0dt),
+            "Braine-le-Comte"
+        );
     }
 
     with link = "point.be.Soignies" {
-        with layer = 1 marker(:statdot :pax, bq[:soi]);
-        slabel(:left, bq[:soi] - (1.8dt, 0.8dt), "Soignies");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:soi]);
+        slabel(:left :cat:dc30 :pax, bq[:soi] - (1.8dt, 0.8dt), "Soignies");
     }
 
     with link = "point.be.Jurbise" {
-        with layer = 1 marker(:statdot :pax, bq[:jur]);
-        slabel(:left, bq[:jur] - (1.8dt, 0dt), "Jurbise");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:jur]);
+        slabel(:left :cat:dc30 :pax, bq[:jur] - (1.8dt, 0dt), "Jurbise");
     }
 
     with link = "point.be.Ghlin" {
-        with layer = 1 marker(:statdot :pax, bq[:ghl]);
-        slabel(:right, bq[:ghl] - (0.5dt, 1.7dt), "Ghlin");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:ghl]);
+        slabel(:right :cat:dc30 :pax, bq[:ghl] - (0.5dt, 1.7dt), "Ghlin");
     }
 
     with link = "point.be.Mons" {
-        with layer = 1 marker(:statdot :pax, bq[:mon]);
-        slabel(:right, bq[:mon] + (1.8dt, 1.2dt), "Mons");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:mon]);
+        slabel(:right :cat:dc30 :pax, bq[:mon] + (1.8dt, 1.2dt), "Mons");
     }
 
     with link = "point.be.Cuesmes" {
-        with layer = 1 marker(:statdot, bq[:cue]);
-        slabel(:right, bq[:cue] + (1.8dt, 1.2dt), "Cuesmes");
+        with layer = 1 marker(:statdot :cat:dc30, bq[:cue]);
+        slabel(:right :cat:dc30, bq[:cue] + (1.8dt, 1.2dt), "Cuesmes");
     }
 
     with link = "point.be.Frameries" {
-        with layer = 1 marker(:statdot :pax, bq[:fra]);
-        slabel(:right, bq[:fra] + (1.8dt, 1.8dt), "Frameries");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:fra]);
+        slabel(:right :cat:dc30 :pax, bq[:fra] + (1.8dt, 1.8dt), "Frameries");
     }
 
     with link = "point.be.Quévy" {
-        with layer = 1 marker(:statdot :pax, bq[:que]);
-        slabel(:left, bq[:que] + (-1.8dt, 0.8dt), "Quévy");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, bq[:que]);
+        slabel(:left :cat:dc30 :pax, bq[:que] + (-1.8dt, 0.8dt), "Quévy");
     }
 
     with link = "point.int.Hautmont-Quévy" {
-        with layer = 1 marker(:refdt :left, bq[:quef]);
-        with layer = 1 marker(:refdt :right, bq[:quef]);
+        with layer = 1 marker(:refdt :cat:dc30 :pax :left, bq[:quef]);
+        with layer = 1 marker(:refdt :cat:dc30 :pax :right, bq[:quef]);
     }
 }
 
@@ -193,23 +202,23 @@ with detail = 2 {
     let mq = path("simple.be.97");
 
     with link = "line.de.97" {
-        track(:first :double :cat :pax, mq[:mon.f, :bou]);
-        with layer = 1 line_badge(:open, mq[:mon.f + 3km], "97");
+        track(:first :double :cat:dc30 :pax, mq[:mon.f, :bou]);
+        with layer = 1 line_badge(:cat:dc30 :pax, mq[:mon.f + 3km], "97");
 
-        track(:first :cat :pax, mq[:bou, :qui]);
-        with layer = 1 line_badge(:open, mq[:bou + 4km], "97");
+        track(:first :cat:dc30 :pax, mq[:bou, :qui]);
+        with layer = 1 line_badge(:cat:dc30 :pax, mq[:bou + 4km], "97");
 
         with layer = -4 track(:first :removed, mq[:qui, :quif]);
     }
 
     with link = "point.be.St-Ghislain" {
-        with layer = 1 marker(:statdot :pax, mq[:sgh]);
-        slabel(:left, mq[:sgh] + (-3.0km, 1.2dt), "St-Ghislain");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, mq[:sgh]);
+        slabel(:left :cat:dc30 :pax, mq[:sgh] + (-3.0km, 1.2dt), "St-Ghislain");
     }
 
     with link = "point.be.Quiévrain" {
-        with layer = 1 marker(:statdot :pax, mq[:qui]);
-        slabel(:left, mq[:qui] + (1.0dt, -1.7dt), "Quiévrain");
+        with layer = 1 marker(:statdot :cat:dc30 :pax, mq[:qui]);
+        slabel(:left :cat:dc30 :pax, mq[:qui] + (1.0dt, -1.7dt), "Quiévrain");
     }
 
     with link = "point.int.Quiévrain-Quiévrechain" {
