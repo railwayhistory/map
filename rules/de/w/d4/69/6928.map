@@ -1,0 +1,286 @@
+# DE 6928.  Hagenow Land - Bad Oldesloe
+#
+let ho = path("d4.de.w.6928");
+
+with detail = [4, 5] {
+    # point.de.Hagenow-Land  de.6928
+
+
+    with link = "point.de.Hagenow-Gr" {
+        with layer = -1 marker(:de.dirgr :right, ho[:ghag] >> 2dt @ -14);
+        label(ho[:ghag] >> 6dt,
+            vbox(:center:bottom :xsmall,
+                span(:open, "TME | DB"),
+                span(:open, "0,766")
+            )
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        track(:second :pax, ho[:hag.gg, :has.a]);
+        with layer = 1 line_badge(:pax, ho[:ghag + 1.2km], "6928");
+    }
+
+
+    with link = "point.de.Hagenow-Stadt" {
+        # Gl. 1
+        with layer = -1 track(:station,
+                ho[:has.hag - 0.1dl, :has.hag]
+            --  ho[:has.hag + 1dl, :has.haw - 1dl] >> 1dt
+            --  ho[:has.haw, :has.haw + 0.1dl]
+        );
+
+        # Gl. 2 (Str. 6928)
+        track(:second:station :pax, ho[:has.a, :has + 0.5sw]);
+        with layer = -1 track(:second:station, ho[:has + 0.5sw, :has.f]);
+
+        # Gl. 3
+        with layer = -1 track(:station,
+                ho[:has.hag + 3dl, :has - 0.6sw] >> 2dt
+        );
+
+        # Gl. 4
+        with layer = -1 track(:station,
+                ho[:has.hag + 4dl, :has - 0.6sw] >> 3dt
+        );
+
+        # Gl. 5
+        with layer = -1 track(:station,
+                ho[:has.hag + 1.9dl, :has.hag + 2dl] >> 1dt
+            --  ho[:has.hag + 5dl, :has - 0.6sw] >> 4dt
+        );
+
+        marker(:de.bf :pax, ho[:has] >> 1dt);
+        station(:left :pax, ho[:has - 0.4sw] << 3dt,
+            vbox(:center:bottom,
+                span(:removed, "Hagenow"),
+                "Hagenow Stadt"
+            ),
+            "3,56"
+        );
+
+        # Anschl. Bw
+        let hob = path("d4.de.6928.hbw");
+        track(:station, hob[:has.yb, :f]);
+        track(:station,
+                hob[:r - 0.1dl, :r]
+            --  hob[:r + 1dl, :r + 150m] << 1dt
+        );
+        slabel(:left, hob[:r - 0.5sw] << 1.5dt,
+            hbox(:left:top :italic, "Bundeswehr")
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        track(:second, ho[:has.f, :bob.a]);
+    }
+
+
+    with link = "point.de.Bobzin" {
+        # Gl. 1
+        with layer = -4 track(:station :removed,
+                ho[:bob.a + 100m + 1dl, :bob.f - 100m - 1dl] >> 1dt
+            --  ho[:bob.f - 100m, :bob.f - 99m]
+        );
+
+        # Gl. 2 (Str. 6928)
+        track(:second:station, ho[:bob.a, :bob.f]);
+
+        # Gl. 3/4/5
+        with layer = -4 track(:station :removed,
+                ho[:bob.a + 99m, :bob.a + 100m]
+            --  ho[:bob.a + 100m + 2dl, :bob - 0.5sw - 1dl] >> 2dt
+            --  ho[:bob - 0.5sw, :bob - 0.49sw] >> 1dt
+        );
+
+        marker(:de.hpext :right, ho[:bob]);
+        marker(:de.hp :right, ho[:bob] >> 1dt);
+        with layer = -1 marker(:de.bf :removed :right, ho[:bob] >> 1dt);
+        station(:top, ho[:bob] >> 1dt >> 1.5sh,
+            "Bobzin", "9,87"
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        track(:second, ho[:bob.f, :wab - 0.5sw]);
+        with layer = 1 line_badge(:open, ho[:bob + 1.6km], "6928");
+    }
+
+
+    with link = "point.de.Wittenburg-ABK" {
+        track(:second:station, ho[:wab - 0.5sw, :wab + 0.5sw]);
+        with layer = -1 marker(:de.awanst :removed :left, ho[:wab]);
+        station(:bottom :removed, ho[:wab] << 1.5sh,
+            "ABK", "13,02"
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        track(:second, ho[:wab - 0.5sw, :wac - 0.5sw]);
+    }
+
+
+    with link = "point.de.Wittenburg-Raiffeisen" {
+        track(:second:station, ho[:wac - 0.5sw, :wac + 0.5sw]);
+        marker(:de.anst :left, ho[:wac]);
+        with layer = -1 marker(:de.awanst :removed :left, ho[:wac]);
+        station(:right, ho[:wac - 0.5sw] >> 1.5dt,
+            hbox(:left:base,
+                span(:regular, "Wittenburg "),
+                span(:light, "(Meckl) "),
+                span(:regular, "Raiffeisen")
+            ),
+            "14,18"
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        track(:second, ho[:wac - 0.5sw, :wit.a]);
+    }
+
+
+    with link = "point.de.Wittenburg-Meckl" {
+        # Gl. 1 (Str. 6928)
+        track(:second:station, ho[:wit.a, :wit.f]);
+
+        # Gl. 2
+        track(:station,
+                ho[:wit.a + 199m, :wit.a + 200m]
+            --  ho[:wit.a + 200m + 1dl, :wit.f - 340m - 1dl] >> 1dt
+        );
+
+        # Gl. 3
+        track(:station,
+                ho[:wit.a + 200m + 3dl, :wit.f - 340m - 2dl] >> 2dt
+            --  ho[:wit.f - 340m, :wit.f - 339m]
+        );
+
+        # Gl. 5
+        track(:station,
+                ho[:wit.a + 200m + 2dl, :wit - 0.5sw - 1dl] << 1dt
+            --  ho[:wit - 0.5sw, :wit - 0.49sw]
+        );
+
+        # Gl. 8
+        track(:station,
+                ho[:wit.a + 200m + 0.9dl, :wit.a + 200m + 1dl]
+            --  ho[:wit.a + 200m + 3dl, :wit - 0.6sw] << 2dt
+        );
+
+        marker(:de.bf :left, ho[:wit]);
+        station(:left, ho[:wit - 0.4sw] << 1.8sh,
+            hbox(:left:base,
+                span(:regular, "Wittenburg "),
+                span(:light, "(Meckl) ")
+            ),
+            "15,44"
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        track(:second, ho[:wit.f, :ban.a]);
+    }
+
+
+    with link = "point.de.Bantin" {
+        # Gl. 1
+        with layer = -4 track(:station :removed,
+                ho[:ban.a + 150m + 1.9dl, :ban.a + 150m + 2dl]
+            --  ho[:ban.a + 150m + 3dl, :ban.f - 150m - 3dl] >> 1dt
+            --  ho[:ban.f - 150m - 2dl, :ban.f - 150m - 1.9dl]
+        );
+
+        # Gl. 2 (Str. 6928)
+        track(:second:station, ho[:ban.a, :ban.f]);
+
+        # Gl. 3
+        with layer = -4 track(:station :removed,
+                ho[:ban.a + 149m, :ban.a + 150m]
+            --  ho[:ban.a + 150m + 1dl, :ban.f - 150m - 5dl] << 1dt
+            --  ho[:ban.f - 150m - 4dl, :ban.f - 150m - 3.9dl]
+        );
+
+        # Gl. 4
+        with layer = -4 track(:station :removed,
+                ho[:ban.a + 150m + 5.9dl, :ban.a + 150m + 6dl] >> 1dt
+            --  ho[:ban.a + 150m + 7dl, :ban - 0.6sw] >> 2dt
+        );
+
+        marker(:de.hpext :right, ho[:ban - 0.5dl]);
+        marker(:de.hp :right, ho[:ban - 0.5dl] >> 1dt);
+        with layer = -4 marker(:de.bf :removed :right, ho[:ban - 0.5dl] >> 1dt);
+        station(:top, ho[:ban] >> 1dt >> 1.4sh,
+            "Bantin", "23,47"
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        track(:second, ho[:ban.f, :zar.a]);
+        with layer = 1 line_badge(:open, ho[:ban + 2.0km], "6928");
+    }
+
+
+    with link = "point.de.Zarrentin" {
+        # Gl. 1
+        track(:station,
+                ho[:zar.a + 250m + 1dl, :zar.f - 2dl] >> 1dt
+            --  ho[:zar.f - 1dl, :zar.f]
+        );
+
+        # Gl. 2 (Str. 6928)
+        track(:second:station, ho[:zar.a, :zar.f]);
+
+        # Gl. 3
+        track(:station,
+                ho[:zar.a + 250m + 2.9dl, :zar.a + 250m + 3dl]
+            --  ho[:zar.a + 250m + 4dl, :zar - 1dl] << 1dt
+            --  ho[:zar, :zar + 0.1dl]
+        );
+
+        # Gl. 4
+        with layer = -4 track(:station :removed,
+                ho[:zar.a + 250m + 2dl, :zar - 0.5sw - 2dl] >> 2dt
+        );
+
+        # Gl 5
+        track(:station,
+                ho[:zar.a + 249m, :zar.a + 250m]
+            --  ho[:zar.a + 250m + 3dl, :zar - 0.5sw - 3dl] >> 3dt
+            --  ho[:zar - 0.5sw - 1dl, :zar - 0.49sw - 1dl] >> 1dt
+        );
+
+        # Gl. 5a
+        track(:station,
+                ho[:zar - 0.5sw - 3dl, :zar - 0.5sw - 0.05dl] >> 3dt
+        );
+
+        marker(:de.bf :right, ho[:zar] >> 1dt);
+        station(:top, ho[:zar] >> 1.8sh,
+            hbox(:left:base, "Zarrentin ", span(:light, "(Meckl)")),
+            "27,45"
+        );
+    }
+
+
+    with link = "line.de.6928" {
+        with layer = -1 track(:second :removed, ho[:zar.f, :gzar - 0.5sw]);
+    }
+
+
+    with link = "point.de.Zarrentin-LGr" {
+        track(:second:station :removed, ho[:gzar - 0.5sw, :gzar + 0.5sw]);
+        marker(:de.dirgr :removed :right, ho[:gzar]);
+        marker(:de.dirgr :removed :left, ho[:gzar]);
+        label(ho[:gzar] >> 5dt,
+            hbox(:left:middle :xsmall, span(:removed, "31,31"))
+        );
+    }
+}
+

@@ -1,0 +1,104 @@
+# DE 6928.  Hagenow Land - Bad Oldesloe
+#
+let ho = path("d4.de.w.6928");
+
+with detail = 3 {
+    # point.de.Hagenow-Land  de.6928
+
+    with link = "line.de.6928" {
+        with layer = -2 track(:second :pax, ho[:hag.gg, :has - 1ssw]);
+    }
+
+    with link = "point.de.Hagenow-Stadt" {
+        track(:second:station :pax, ho[:has - 1ssw, :has + 1ssw]);
+        marker(:de.bf :pax :right, ho[:has]);
+        slabel(:left :pax, ho[:has - 0.3ssw] << 2.0dt, "Hagenow Stadt");
+    }
+
+    with link = "line.de.6928" {
+        track(:second, ho[:has - 1ssw, :bob - 1ssw]);
+    }
+
+    with link = "point.de.Bobzin" {
+        track(:second:station, ho[:bob - 1ssw, :bob + 1ssw]);
+        marker(:de.hp :right, ho[:bob]);
+        with layer = -1 marker(:de.bf :removed :right, ho[:bob]);
+        slabel(:right, ho[:bob - 0.5ssw] >> 1.5ssw, "Bobzin");
+    }
+
+    with link = "line.de.6928" {
+        track(:second, ho[:bob - 1ssw, :wab - 0.5ssw]);
+    }
+
+    with link = "point.de.Wittenburg-ABK" {
+        track(:second:station, ho[:wab - 0.5ssw, :wab + 0.5ssw]);
+        with layer = -1 marker(:de.awanst :removed :left, ho[:wab]);
+	}
+
+    with link = "line.de.6928" {
+        track(:second, ho[:wab - 0.5ssw, :wac - 0.5ssw]);
+    }
+
+    with link = "point.de.Wittenburg-Raiffeisen" {
+        track(:second:station, ho[:wac - 0.5ssw, :wac + 0.5ssw]);
+        marker(:de.anst :left, ho[:wac]);
+        with layer = -1 marker(:de.awanst :removed :left, ho[:wac]);
+    }
+
+    with link = "line.de.6928" {
+        track(:second, ho[:wac - 0.5ssw, :wit - 1ssw]);
+    }
+
+    with link = "point.de.Wittenburg-Meckl" {
+        track(:second:station, ho[:wit - 1ssw, :wit + 1ssw]);
+        marker(:de.bf :left, ho[:wit]);
+        slabel(:left, ho[:wit - 0.5ssw] << 1.8ssw,
+            hbox(:left:base,
+                span(:regular, "Wittenburg "),
+                span(:light, "(Meckl) ")
+            )
+        )
+    }
+
+    with link = "line.de.6928" {
+        track(:second, ho[:wit - 1ssw, :ban - 1ssw]);
+        with layer = 1 line_badge(:open, ho[:ban - 2.0km], "6928");
+    }
+
+    with link = "point.de.Bantin" {
+        track(:second:station, ho[:ban - 1ssw, :ban + 1ssw]);
+        marker(:de.hp :right, ho[:ban]);
+        with layer = -4 marker(:de.bf :removed :right, ho[:ban]);
+        slabel(:right, ho[:ban + 1ssw] >> 1.4ssw, "Bantin");
+    }
+
+    with link = "line.de.6928" {
+        track(:second, ho[:ban + 1ssw, :zar - 1ssw]);
+    }
+
+    with link = "point.de.Zarrentin" {
+        track(:second:station, ho[:zar - 1ssw, :zar + 1ssw]);
+        marker(:de.bf :right, ho[:zar]);
+        slabel(:right, ho[:zar + 1ssw] >> 1.4ssw,
+            hbox(:left:base,
+                span(:regular, "Zarrentin "),
+                span(:light, "(Meckl) ")
+            )
+        );
+    }
+
+    with link = "line.de.6928" {
+        with layer = -1 track(:second :removed,
+            ho[:zar.f, :gzar - 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Zarrentin-LGr" {
+        track(:second:station :removed,
+            ho[:gzar - 0.5ssw, :gzar + 0.5ssw]
+        );
+        marker(:de.dirgr :removed :right, ho[:gzar]);
+        marker(:de.dirgr :removed :left, ho[:gzar]);
+    }
+}
+
