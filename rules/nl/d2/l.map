@@ -54,19 +54,22 @@ with detail = 2 {
     let lr = path("simple.nl.lr");
 
     with link = "line.nl.LR" {
-        track(:first :double :cat :pax, lr[:zlw.x, :rsdg]);
-        with layer = 1 line_badge(:open, lr[:zlw.x + 12km], "LR");
-        with layer = 1 line_badge(:open, lr[:rsd + 4.5km], "LR");
+        track(:first :double :cat:dc15 :pax, lr[:zlw.x, :rsd.el]);
+        with layer = -1 track(:first :double :cat:dc30 :pax,
+            lr[:rsd.el, :rsdg]
+        );
+        with layer = 1 line_badge(:cat:dc15 :pax, lr[:zlw.x + 12km], "LR");
+        with layer = 1 line_badge(:cat:dc30 :pax, lr[:rsd + 4.5km], "LR");
     }
 
     with link = "point.nl.Roosendaal" {
-        with layer = 1 marker(:statdot, lr[:rsd]);
-        slabel(:left, lr[:rsd] - (2dt, 0dt), "Roosendaal");
+        with layer = 1 marker(:statdot :cat:dc15 :pax, lr[:rsd]);
+        slabel(:left :cat:dc15 :pax, lr[:rsd] - (2dt, 0dt), "Roosendaal");
     }
 
     with link = "point.int.Essen-Roosendaal" {
-        with layer = 1 marker(:refdt :right, lr[:rsdg]);
-        with layer = 1 marker(:refdt :left, lr[:rsdg]);
+        with layer = 1 marker(:refdt :cat:dc30 :pax :right, lr[:rsdg]);
+        with layer = 1 marker(:refdt :cat:dc30 :pax :left, lr[:rsdg]);
     }
 }
 
@@ -77,12 +80,12 @@ with detail = 2 {
 
     with link = "line.nl.LS" {
         with layer = -1 track(:first :pax, ls[:lw.x, :stv]);
-        with layer = 1 line_badge(:open, ls[:lw.x + 21.5km], "LS");
+        with layer = 1 line_badge(:pax, ls[:lw.x + 21.5km], "LS");
     }
 
     with link = "point.nl.Stavoren" {
-        with layer = 1 marker(:statdot, ls[:stv]);
-        slabel(:left, ls[:stv] + (-2.0dt, 0.9dt), "Stavoren");
+        with layer = 1 marker(:statdot :pax, ls[:stv]);
+        slabel(:left :pax, ls[:stv] + (-2.0dt, 0.9dt), "Stavoren");
     }
 }
 
@@ -108,23 +111,25 @@ with detail = 2 {
     let lw = path("simple.nl.lw");
 
     with link = "line.nl.LW" {
-        track(:first :double :cat :pax, lw[:lls, :htba]);
-        with layer = 1 line_badge(:open, lw[:lls + 24km], "LW");
+        track(:first :double :cat:dc15 :pax, lw[:lls, :htba]);
+        with layer = 1 line_badge(:cat:dc15 :pax, lw[:lls + 24km], "LW");
     }
 }
 
 
 # LZ.  Leidschendam aansl. - Zoetermeer Centrum West
-with style = :tram, detail = 2 {
+with detail = 2 {
     let lz = path("simple.nl.lz");
 
     with link = "line.nl.LZ" {
-        track(:first :double :cat :pax, lz[:ldda, :zcw]);
+        track(:tram :double :cat:dc75 :pax, lz[:ldda, :zcw]);
     }
 
     with link = "point.nl.Zoetermeer-Centrum-West" {
-        with layer = 1 marker(:statdot, lz[:zcw]);
-        slabel(:top, lz[:zcw] - (0dt, 1.8km), "Zoetermeer");
+        with layer = 1 marker(:statdot :tram :cat:dc15 :pax, lz[:zcw]);
+        slabel(:top :tram :cat:dc15 :pax, lz[:zcw] - (0dt, 1.8km),
+            "Zoetermeer"
+        );
     }
 }
 

@@ -1,15 +1,17 @@
 # SH.  Schiedam Centrum - Hoek van Holland.
-with style = :tram, detail = 2 {
+with detail = 2 {
     let sh = path("simple.nl.sh");
 
     with link = "line.nl.SH" {
-        with layer = -1 track(:first :double :cat :pax, sh[:sdm.x, :hhh]);
-        with layer = 1 line_badge(:open, sh[:sdm.x + 8km], "SH");
+        with layer = -1 track(:tram :double :cat:dc75 :pax, sh[:sdm.x, :hhh]);
+        with layer = 1 line_badge(:tram, sh[:sdm.x + 8km], "SH");
     }
 
     with link = "point.nl.Hoek-van-Holland-Haven" {
-        with layer = 1 marker(:statdot, sh[:hhh]);
-        slabel(:left, sh[:hhh] + (-2.0dt, 0.5dt), "Hoek van Holland Haven");
+        with layer = 1 marker(:statdot :tram, sh[:hhh]);
+        slabel(:left :tram, sh[:hhh] + (-2.0dt, 0.5dt),
+            "Hoek van Holland Haven"
+        );
     }
 }
 
@@ -34,25 +36,26 @@ with detail = 2 {
     let sl = path("simple.nl.sl");
 
     with link = "line.nl.SL" {
-        track(:first :double :cat :pax, sl[:std.x, :hrl]);
-        with layer = 1 line_badge(:open, sl[:std.x + 7.2km], "SL");
+        track(:first :double :cat:dc15 :pax, sl[:std.x, :hrl]);
+        with layer = 1 line_badge(:cat:dc15 :pax, sl[:std.x + 7.2km], "SL");
 
-        track(:first :cat :pax, sl[:hrl, :hang]);
+        track(:first :cat:dc15 :pax, sl[:hrl, :krr]);
+        track(:first :cat:ac15 :pax, sl[:krr, :hang]);
     }
 
     with link = "point.nl.Heerlen" {
-        with layer = 1 marker(:statdot, sl[:hrl]);
-        slabel(:bottom, sl[:hrl] + (1dt, 1dt), "Heerlen");
+        with layer = 1 marker(:statdot :cat:dc15 :pax, sl[:hrl]);
+        slabel(:bottom :cat:dc15 :pax, sl[:hrl] + (1dt, 1dt), "Heerlen");
     }
 
     with link = "point.nl.Landgraaf" {
-        with layer = 1 marker(:statdot, sl[:lg]);
-        slabel(:top, sl[:lg] - (0dt, 1.2dt), "Landgraaf");
+        with layer = 1 marker(:statdot :cat:dc15 :pax, sl[:lg]);
+        slabel(:top :cat:dc15 :pax, sl[:lg] - (0dt, 1.2dt), "Landgraaf");
     }
 
     with link = "point.int.Haanrade-Herzogenrath" {
-        with layer = 1 marker(:refdt :left, sl[:hang]);
-        with layer = 1 marker(:refdt :right, sl[:hang]);
+        with layer = 1 marker(:refdt :cat:ac15 :pax :left, sl[:hang]);
+        with layer = 1 marker(:refdt :cat:ac15 :pax :right, sl[:hang]);
     }
 }
 
@@ -80,22 +83,22 @@ with detail = 2 {
 
     with link = "line.nl.SR" {
         with layer = -1 track(:first :pax, sr[:swd.x, :eem]);
-        with layer = 1 line_badge(:open, sr[:wsm + 14.5km] << 0.5dt, "SR");
+        with layer = 1 line_badge(:pax, sr[:wsm + 14.5km] << 0.5dt, "SR");
     }
 
     with link = "point.nl.Winsum" {
-        with layer = 1 marker(:statdot, sr[:wsm]);
-        slabel(:left, sr[:wsm] + (-2dt, 1dt), "Winsum");
+        with layer = 1 marker(:statdot :pax, sr[:wsm]);
+        slabel(:left :pax, sr[:wsm] + (-2dt, 1dt), "Winsum");
     }
 
     with link = "point.nl.Roodeschool" {
-        with layer = 1 marker(:statdot, sr[:rd]);
-        slabel(:right, sr[:rd] + (2dt, 1.5dt), "Roodeschool");
+        with layer = 1 marker(:statdot :pax, sr[:rd]);
+        slabel(:right :pax, sr[:rd] + (2dt, 1.5dt), "Roodeschool");
     }
 
     with link = "point.nl.Eemshaven" {
-        with layer = 1 marker(:statdot, sr[:eem]);
-        slabel(:right, sr[:eem] + (2dt, 1.0dt), "Eemshaven");
+        with layer = 1 marker(:statdot :pax, sr[:eem]);
+        slabel(:right :pax, sr[:eem] + (2dt, 1.0dt), "Eemshaven");
     }
 }
 
