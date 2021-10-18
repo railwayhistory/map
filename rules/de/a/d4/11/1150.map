@@ -1,0 +1,186 @@
+# DE 1150.  Lüneburg - Büchen
+#
+let lb = path("d4.de.1150");
+
+with detail = [4, 5] {
+    # point.de.Lüneburg  de.1720
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:lun.kk, :jag - 1sw]);
+        with layer = 1 line_badge(:pax, lb[:jag - 1.0km], "1150");
+    }
+
+
+    with link = "point.de.Jäger" {
+        track(:first:station :pax, lb[:jag - 1sw, :jag + 1sw]);
+        with layer = -4 marker(:de.anst :removed :left, lb[:jag]);
+        with layer = -5 marker(:de.hp :gone:left, lb[:jag]);
+        station(:right :removed, lb[:jag - 0.2sw] >> 2.5dt,
+            "Jäger", "134,44"
+        );
+    }
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:jag + 1sw, :ade.a]);
+    }
+
+
+    with link = "point.de.Adendorf" {
+        # Gl. 1
+        with layer = -2 track(:station,
+                lb[:ade.a + 249m, :ade.a + 250m]
+            --  lb[:ade.a + 250m + 1dl, :ade.f - 250m - 1dl] << 1dt
+            --  lb[:ade.f - 250m, :ade.f - 249m]
+        );
+
+        # Gl. 2 (Str. 1150)
+        track(:first:station :pax, lb[:ade.a, :ade.f]);
+
+        with layer = -4 marker(:de.bbf :left, lb[:ade] << 1dt);
+        with layer = -5 marker(:de.bbf :removed :left, lb[:ade] << 1dt);
+        station(:left, lb[:ade - 0.4sw] << 1dt << 1.3sh,
+            "Adendorf", "135,93"
+        );
+    }
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:ade.f, :ech - 1sw]);
+    }
+
+
+    with link = "point.de.Echem" {
+        track(:first:station :pax, lb[:ech - 1sw, :ech + 1sw]);
+        with layer = -4 track(:second:station :removed,
+	        lb[:ech - 0.5sw - 1.1dl, :ech - 0.5sw - 1dl]
+            --  lb[:ech - 0.5sw, :ech + 1sw] >> 1dt
+        );
+
+        marker(:de.hp :pax :left, lb[:ech]);
+        with layer = -4 marker(:de.bf :removed :left, lb[:ech]);
+        station(:left :pax :right_align, lb[:ech - 0.4sw] << 1.5sh,
+            span(:bold, "Echem"), "1150: 135,93 "
+        );
+    }
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:ech + 1sw, :hoh - 1sw]);
+        with layer = 1 line_badge(:pax, lb[:hoh - 1.3km], "1150");
+    }
+
+
+    with link = "point.de.Hohnstorf" {
+        track(:first:station :pax, lb[:hoh - 1sw, :hoh + 1sw]);
+        with layer = -4 marker(:de.hp :removed :left, lb[:hoh]);
+        station(:left :removed, lb[:hoh - 0.4sw] << 1.5sh,
+            "Hohnstorf", "147,85"
+        );
+    }
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:hoh + 1sw, :lau - 0.5sw]);
+    }
+
+
+    with link = "point.de.Lauenburg-Elbe" {
+        # Gl. 2 (Str. 1150)
+        track(:first:station :pax, lb[:lau - 0.5sw, :lau.f]);
+
+        # Gl. 1
+        track(:station :pax,
+                lb[:lau - 0.6sw - 1.1dl, :lau - 0.6sw - 1dl]
+            --  lb[:lau - 0.6sw, :lau.f - 400m - 1dl] << 1dt
+            --  lb[:lau.f - 400m, :lau.f - 399m]
+        );
+
+        marker(:de.bf :pax :left, lb[:lau] << 1dt);
+        station(:top :pax, lb[:lau] << 1dt << 1.5sh,
+            hbox(:center:base,
+                span(:regular, "Lauenburg "),
+                span(:light, "(Elbe)")
+            ),
+            "148,54"
+        );
+
+        # Anschl.
+        let lbl = path("d4.de.1150.lau");
+        with layer = -2 track(:station,
+                lbl[:lau + 319m, :lau + 320m]
+            --  lbl[:lau + 320m + 1dl, :r] >> 1dt
+            ..  lbl[:s + 2dt, :f]
+        );
+        with layer = -2 track(:station,
+                lbl[:s + 1.99dt, :s + 2dt]
+            --  lbl[:s + 2dt + 1dl, :s + 360m - 1dl] >> 1dt
+            --  lbl[:s + 360m, :s + 361m]
+        );
+        slabel(:right, lbl[:s + 200m] >> 1.5dt,
+            hbox(:left:top :italic, "Stadt Lauenburg")
+        );
+    }
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:lau.f, :dak - 0.5sw]);
+    }
+
+
+    with link = "point.de.Dalldorf-Kreuz" {
+        track(:first:station :pax, lb[:dak - 0.5sw, :dak + 0.5sw]);
+        with layer = -4 marker(:de.bk :removed :left, lb[:dak]);
+        station(:left :removed, lb[:dak - 0.4sw] << 1.3sh,
+            "Dalldorf Kreuz",
+            "155,19"
+        );
+    }
+
+
+    with link = "point.de.Dalldorf" {
+        # Gl. 1 (Str. 1150)
+        track(:first:station :pax, lb[:dak + 0.5sw, :dal + 1sw]);
+
+        # Gl. 2
+        with layer = -2 track(:station,
+                lb[:dan - 381m, :dan - 380m]
+            --  lb[:dan - 380m + 1dl, :dan.f - 140m - 1dl] << 1dt
+            --  lb[:dan.f - 140m, :dan.f - 139m]
+        );
+
+        with layer = -2 marker(:de.bbf :right, lb[:dan]);
+        station(:right, lb[:dan - 0.3sw] >> 1.7sh,
+            "Dalldorf", "155,90"
+        );
+        with layer = -4 marker(:de.bf :removed :right, lb[:dal]);
+        station(:right :removed, lb[:dal - 0.3sw] >> 1.7sh,
+            "Dalldorf", "156,66"
+        );
+    }
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:dal + 1sw, :wit - 1sw]);
+    }
+
+
+    with link = "point.de.Witzeeze" {
+        track(:first:station :pax, lb[:wit - 1sw, :wit + 1sw]);
+        with layer = -1 marker(:de.hp :removed :right, lb[:wit]);
+        station(:left :removed, lb[:wit - 0.4sw] << 1.5dt,
+            "Witzeeze", "158,75"
+        );
+    }
+
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:wit + 1sw, :buc.b]);
+        with layer = 1 line_badge(:pax, lb[:wit + 1.0km], "1150");
+    }
+
+ 
+    # point.de.Büchen  de.6100
+}
+
