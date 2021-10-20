@@ -155,14 +155,20 @@ with detail = 3 {
     }
 
     with link = "line.de.6905" {
-        track(:second, sd[:saa + 1ssw, :daw - 1ssw]);
+        track(:second :flip, sd[:daw.yu, :saa + 1ssw]);
+        track(:second :tight, sd[:daw.yu, :daw - 1ssw]);
     }
     
     with link = "point.de.Dannenberg-West" {
         track(:second:station, sd[:daw - 1ssw, :daw + 1ssw]);
+        with layer = -4 track(:second:station :removed,
+                sd[:daw - 1ssw, :daw + 0.6ssw] << 1dt
+            --  sd[:daw + 0.6ssw + 1dl, :daw + 0.6ssw + 1.1dl]
+        );
+
         marker(:de.hp :right, sd[:daw]);
         with layer = -1 marker(:de.bf :gone :right, sd[:daw]);
-        slabel(:left, sd[:daw - 0.6ssw] << 1.0dt,
+        slabel(:left, sd[:daw - 0.2ssw] << 2.0dt,
             span(:bold, "Dannenberg West")
         );
     }
