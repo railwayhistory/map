@@ -398,19 +398,22 @@ with detail = [4, 5] {
         # Gl. 301 (Str. 1151)
         track(:second:station :pax,
                 wb[:lun.xa + 480m, :lun.xa + 481m] << 7.5dt
-            ..  wb[:fdan, :lun + 300m] << 6.5dt
+            ..  wb[:fdan, :lun - 250m - 1dl] << 6.5dt
+        );
+        track(:second:station :cat:ac15 :pax,
+                wb[:lun - 250m - 1dl, :lun + 300m] << 6.5dt
             ..  wb[:lkn - 101m, :lkn - 100m] << 1.5dt
         );
 
         # Gl. 302
-        track(:station :pax,
+        track(:station :cat:ac15 :pax,
                 wb[:lun - 250m + 0.9dl, :lun - 250m + 1dl] << 6.5dt
             --  wb[:lun - 250m + 2dl, :lun + 300m - 1dl] << 7.5dt
             --  wb[:lun + 300m, :lun + 301m] << 6.5dt
         );
 
         # Gl. 307 (Str. 9111)
-        track(:station,
+        with layer = -1 track(:station,
                 wb[:lun.xa + 480m, :lun.xa + 481m] << 9.5dt
             --  wb[:lun.xa + 480m + 1dl, :lun.xa + 481m + 1dl] << 8.5dt
             ..  wb[:fdan, :lun - 250m - 1dl] << 7.5dt
@@ -418,14 +421,16 @@ with detail = [4, 5] {
         );
 
         # Gl. 308
-        track(:station,
+        with layer = -1 track(:station,
                 wb[:fdan - 0.1dl, :fdan] << 7.5dt
             --  wb[:fdan + 1dl, :lun - 250m - 3dl] << 8.5dt
             --  wb[:lun - 250m - 2dl, :lun - 250m - 1.9dl] << 7.5dt
         );
 
-        with layer = -2 marker(:de.bftp :pax :right, wb[:lun] << 6.5dt);
-        station(:left :pax, wb[:lun] << 9dt,
+        with layer = -2 marker(:de.bftp :cat:ac15 :pax :right,
+                wb[:lun] << 6.5dt
+        );
+        station(:left :cat:ac15 :pax, wb[:lun] << 9dt,
             "Lüneburg Westseite", "1151: 228,973"
         );
     }

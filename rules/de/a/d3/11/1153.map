@@ -1,0 +1,60 @@
+# DE 1153.  Lüneburg - Stelle
+#
+let lc = path("d4.de.a.1720");
+
+with detail = 3 {
+    # point.de.Lüneburg-Nordkopf  de.1720
+
+    with link = "line.de.1153" {
+        track(:first :cat:ac15 :pax, lc[:lun.f, :bah - 1ssw] << 1.5dt);
+    }
+
+    with link = "point.de.Bardowick-Hp" {
+        track(:first:station :cat:ac15 :pax,
+                lc[:bah - 1ssw, :bah + 1ssw] << 1.5dt
+        );
+        marker(:de.hp :cat:ac15 :pax :left, lc[:bah] << 1.5dt);
+    }
+
+    with link = "line.de.1153" {
+        track(:first :cat:ac15 :pax, lc[:bah + 1ssw, :rad - 1ssw] << 1.5dt);
+    }
+
+    # point.de.Radbruch  de.1720
+
+    with link = "line.de.1153" {
+        track(:first :cat:ac15 :pax, lc[:rad + 1ssw, :win - 1ssw] << 1.5dt);
+    }
+
+    # point.de.Winsen-Luhe  de.1720
+
+    with link = "line.de.1153" {
+        track(:first :cat:ac15 :pax, lc[:win + 1ssw, :ash - 1ssw] << 1.5dt);
+    }
+
+    with link = "point.de.Ashausen" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:ash - 1ssw, :ash + 1ssw]
+        );
+        track(:first:station :cat:ac15 :pax,
+                lc[:ash - 1ssw, :ash + 1ssw] << 1.5dt
+        );
+        with layer = -1 track(:first:station :cat:ac15,
+                lc[:ash - 1.1dl, :ash - 1dl] >> 0.5dt
+            --  lc[:ash, :ash + 1ssw] >> 1.5dt
+        );
+        with layer = -1 marker(:de.abzw :cat:ac15 :right, lc[:ash] >> 1.5dt);
+        marker(:de.hp :cat:ac15 :pax :left, lc[:ash] << 1.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lc[:ash] << 1.5dt);
+        slabel(:left :cat:ac15 :pax, lc[:ash - 1ssw] << 1.5dt << 2.3ssw,
+            "Ashausen"
+        );
+    }
+
+    with link = "line.de.1153" {
+        track(:first :cat:ac15 :pax, lc[:ash + 1ssw, :ste - 1ssw] << 1.5dt);
+    }
+
+    # point.de.Stelle  de.1720
+}
+

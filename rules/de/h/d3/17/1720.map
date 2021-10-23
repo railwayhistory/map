@@ -1,0 +1,237 @@
+# DE 1720.  Lehrte - Cuxhaven
+#
+let lc = path("d4.de.h.1720");
+
+with detail = 3 {
+    # point.de.Lehrte: de.1730
+
+
+    with link = "point.de.Lehrte-Nord" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:leh + 400m, :leh.lnf + 1ssw]
+        );
+
+        with layer = -1 marker(:de.bft :cat:ac15 :right, lc[:len] >> 0.5dt);
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax,
+                lc[:leh.lnf + 1ssw, :ali - 1ssw]
+        );
+    }
+
+    with link = "point.de.Aligse" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:ali - 1ssw, :ali + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :left, lc[:ali] << 0.5dt);
+        with layer = -1 marker(
+            :de.bf :removed :left, lc[:ali - 85m] << 0.5dt
+        );
+        slabel(:left :cat:ac15 :pax, lc[:ali - 0.6ssw] << 0.5dt << 1.6ssw,
+            "Aligse"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:ali + 1ssw, :bur - 1ssw]);
+        with layer = 1 line_badge(:cat:ac15 :pax, lc[:ali + 2.5km], "1720");
+    }
+
+    with link = "point.de.Burgdorf-Han" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:bur - 1ssw, :bur + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :right, lc[:bur] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, lc[:bur - 0.4ssw] >> 0.5dt >> 2.0ssw,
+            hbox(:right:base, span(:bold, "Burgdorf "), "(Han)")
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:bur + 1ssw, :otz - 1ssw]);
+    }
+
+    with link = "point.de.Otze" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:otz - 1ssw, :otz + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :left, lc[:otz] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, lc[:otz] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, lc[:otz - 0.5ssw] << 0.5dt << 1.6ssw,
+            "Otze"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:otz + 1ssw, :ehl - 1ssw]);
+    }
+
+    with link = "point.de.Ehlershausen" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:ehl - 1ssw, :ehl + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :right, lc[:ehl] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, lc[:ehl - 0.5ssw] >> 0.5dt >> 1.8ssw,
+            "Ehlershausen"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:ehl + 1ssw, :cel.a]);
+        with layer = 1 line_badge(:cat:ac15 :pax, lc[:cel.a - 3.0km], "1720");
+    }
+
+    with link = "point.de.Celle" {
+        with layer = -1 track(:second:station :removed,
+                lc[:cel.a, :cel + 0.5ssw] << 3.5dt
+            --  lc[:cel + 0.5ssw + 1dl, :cel + 0.5ssw + 1.1dl] << 2.5dt
+        );
+
+        # Str. 1710 - 1720
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:cel.a, :cel.f] << 2dt
+        );
+
+        # Str. 1720 L
+        track(:first:station :cat:ac15 :pax,
+                lc[:cel.a, :cel.a + 2dl] << 0.5dt
+            --  lc[:cel.a + 4dl, :cel.a + 4.1dl] << 2.5dt
+        );
+
+        # Str. 1720 R
+        track(:first:station :cat:ac15 :pax,
+                lc[:cel.a, :cel.a + 3dl] >> 0.5dt
+            --  lc[:cel.a + 4dl, :cel + 0.5ssw + 1dl] << 0.5dt
+            --  lc[:cel + 0.5ssw + 2dl, :cel + 0.5ssw + 2.1dl] << 1.5dt
+        );
+
+        # Str. 1722/1724
+        with layer = -1 track(:second:station :removed,
+                lc[:cel.a, :cel.a + 4dl] >> 1.5dt
+            --  lc[:cel.a + 6dl, :cel.a + 6.1dl] << 0.5dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :right, lc[:cel] << 0.5dt);
+        slabel(:right :cat:ac15 :pax, lc[:cel - 0.5ssw] << 0.5dt >> 1.6ssw,
+            span(:bold, "Celle")
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax,
+                lc[:cel.f, :cel.f + 0.1dl] << 2dt
+            ..  lc[:cel.ff, :gar - 1ssw]
+        );
+    }
+
+    with link = "point.de.Garßen" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:gar - 1ssw, :gar + 1ssw]
+        );
+        marker(:de.bbf :cat:ac15 :left, lc[:gar] << 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, lc[:gar] << 0.5dt);
+        slabel(:right :cat:ac15, lc[:gar - 0.4ssw] >> 2.7dt, "Garßen");
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:gar + 1ssw, :ese - 1ssw]);
+        with layer = 1 line_badge(:cat:ac15 :pax, lc[:gar + 5.5km], "1720");
+    }
+
+    with link = "point.de.Eschede" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:ese - 1ssw, :ese + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :right, lc[:ese] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, lc[:ese - 0.3ssw] >> 0.5dt >> 2.2ssw,
+            "Eschede"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:ese + 1ssw, :ulu - 1ssw]);
+    }
+
+    with link = "point.de.Unterlüß" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:ulu - 1ssw, :ulu + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, lc[:ulu] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, lc[:ulu - 0.8ssw] << 0.5dt << 1.6ssw,
+            "Unterlüß"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:ulu + 1ssw, :sud - 1ssw]);
+        with layer = 1 line_badge(:cat:ac15 :pax, lc[:sud - 5.5km], "1720");
+    }
+
+    with link = "point.de.Suderburg" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:sud - 1ssw, :sud + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :right, lc[:sud] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, lc[:sud - 0.2ssw] >> 0.5dt >> 2.0ssw,
+            "Suderburg"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:sud + 1ssw, :ksu - 1ssw]);
+    }
+
+    with link = "point.de.Klein-Süstedt" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:ksu - 1ssw, :ksu + 1ssw]
+        );
+        marker(:de.bbf :cat:ac15 :left, lc[:ksu] << 0.5dt);
+        with layer = -1 marker(:de.bf :gone :left, lc[:ksu] << 0.5dt);
+        slabel(:left :cat:ac15, lc[:ksu - 0.6ssw] << 0.5dt << 1.6ssw,
+            "Klein Süstedt"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:ksu + 1ssw, :uel.a]);
+    }
+
+    with link = "point.de.Uelzen" {
+        # Str. 1720
+        track(:first:station :double :cat:ac15 :pax, lc[:uel.a, :uel + 1ssw]);
+
+        # Str. 6899 - 1960 R
+        track(:first:station :cat:ac15 :pax, lc[:uel.a, :uel + 1ssw] << 2.0dt);
+
+        # Str. 1960 L
+        track(:first:station :cat:ac15 :pax,
+                lc[:uel - 0.5ssw - 1.1dl, :uel - 0.5ssw - 1dl] << 2.0dt
+            --  lc[:uel - 0.5ssw, :uel + 1ssw] << 3.0dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :left, lc[:uel] << 0.5dt);
+        slabel(:right :cat:ac15 :pax, lc[:uel] >> 2.5dt,
+            span(:bold, "Uelzen")
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:uel + 1ssw, :emm - 1ssw]);
+    }
+
+    with link = "point.de.Emmendorf" {
+        track(:first:station :double :cat:ac15 :pax,
+                lc[:emm - 1ssw, :emm + 1ssw]
+        );
+        with layer = -1 marker(:de.bf :removed :right, lc[:emm] >> 0.5dt);
+        slabel(:right :removed, lc[:emm - 0.5ssw] >> 0.5dt >> 1.6ssw,
+            "Emmendorf"
+        );
+    }
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:gbevi, :emm + 1ssw]);
+    }
+}
+
