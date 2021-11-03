@@ -1,0 +1,651 @@
+# DE 2200.  Wanne-Eickel Hbf - Hamburg Hbf
+#
+let wh = path("d4.de.a.2200");
+let wh.har = path("d4.de.2200.har");
+
+with detail = 5 {
+    with link = "point.de.Hamburg-Harburg-Hga" {
+        # Str. 2200 AL/AR
+        with layer = 2 track(:first:station :double :removed :cat:ac15,
+                wh.har[:hga.x, :hga + 300m]
+        );
+        with layer = 1 casing(:first:station :double :removed :cat:ac15,
+                wh.har[:hga.x, :hga + 300m]
+        );
+
+        # Str. 2200 L
+        with layer = 4 track(:first:station :cat:ac15 :pax,
+                wh[:hga.a, :hga + 300m] << 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:ac15 :pax,
+                wh[:hga.a, :hga + 300m] << 0.5dt
+        );
+
+        # Str. 2200 R
+        with layer = 4 track(:first:station :cat:ac15 :pax,
+                wh[:hga.a, :hga + 300m] >> 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:ac15 :pax,
+                wh[:hga.a, :hga + 300m] >> 0.5dt
+        );
+
+        with layer = 2 marker(:de.bft :left :removed, wh[:hga] << 0.5dt);
+        with layer = 1 marker(:de.bft.casing :left, wh[:hga] << 0.5dt);
+        station(:left :removed, wh[:hga - 0.3sw] << 0.5dt << 1.4sw,
+            "Hga", "??"
+        );
+    }
+
+
+    with link = "line.de.2200" {
+        # Str. 2200 L/R
+        with layer = 2 track(:first :double :cat:ac15 :pax,
+                wh[:hga + 300m, :hrb - 450m]
+        );
+        with layer = 1 casing(:first :double :cat:ac15, wh[:hga, :har.ya]);
+
+        # Str. 2200 AL/AR
+        with layer = 2 track(:first :double :removed,
+                wh.har[:hga + 300m, :har.a - 100m]
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Harburg" {
+        let lc = path("d4.de.a.1720");
+
+        let w15  = wh[:hrb - 361m, :hrb - 360m] << 5.5dt;
+        let w16  = wh[:hrb - 275m, :hrb - 274m] << 4.5dt;
+        let w40  = wh[:hrb - 241m, :hrb - 240m] << 4.5dt;
+        let w41  = wh[:hrb - 165m, :hrb - 164m] << 3.5dt;
+        let w42  = wh[:hrb - 136m, :hrb - 135m] << 3.5dt;
+        let w43  = wh[:hrb -  40m, :hrb -  39m] << 1.5dt;
+        let w44  = wh[:hrb -  21m, :hrb -  20m] << 1.5dt;
+        let w45  = wh[:hrb + 125m, :hrb + 126m] << 0.5dt;
+        let w46  = wh[:hrb - 100m, :hrb -  99m] >> 0.5dt;
+        let w47  = wh[:hrb - 221m, :hrb - 220m] >> 1.5dt;
+        let w50  = wh[:hrb + 139m, :hrb + 140m] << 0.5dt;
+        let w51  = wh[:hrb +  50m, :hrb +  51m] << 0.5dt;
+        let w52  = wh[:hrb -  81m, :hrb -  80m] >> 0.5dt;
+        let w53  = wh[:hrb + 265m, :hrb + 266m] >> 0.5dt;
+        let w54  = wh[:hrb + 319m, :hrb + 320m] >> 0.5dt;
+        let w55  = wh[:hrb + 460m, :hrb + 461m] >> 1.5dt;
+        let w56  = wh[:hrb + 534m, :hrb + 535m] >> 1.5dt;
+        let w57  = wh[:hrb + 690m, :hrb + 691m] >> 2.5dt;
+        let w58  = wh[:har -  95m, :har -  94m] >> 5.5dt;
+        let w59  = wh[:har -  50m, :har -  49m] >> 4.5dt;
+        let w60  = wh[:har -  10m, :har -   9m] >> 4.5dt;
+        let w61  = wh[:har +  45m, :har +  46m] >> 3.5dt;
+        let w67  = wh[:hrb + 570m, :hrb + 571m] << 4.5dt;
+        let w68  = wh[:hrb + 519m, :hrb + 520m] << 4.5dt;
+        let w69  = wh[:hrb + 570m, :hrb + 571m] << 3.5dt;
+        let w70  = wh[:hrb + 229m, :hrb + 230m] << 0.5dt;
+        let w71  = wh[:hrb + 370m, :hrb + 371m] << 1.5dt;
+        let w72  = wh[:hrb + 434m, :hrb + 435m] << 1.5dt;
+        let w73  = wh[:hrb + 389m, :hrb + 390m] << 3.5dt;
+        let w74  = wh[:hrb + 550m, :hrb + 551m] << 2.5dt;
+        let w75  = wh[:hrb + 639m, :hrb + 640m] << 2.5dt;
+        let w76  = wh[:hrb + 569m, :hrb + 570m] << 2.5dt;
+        let w77  = wh[:hrb + 655m] << 4.20dt
+                -- wh[:hrb + 660m] << 4.25dt;
+        let w78  = wh[:hrb + 715m, :hrb + 716m] << 4.5dt;
+        let w79  = wh[:hrb + 630m] << 4.95dt
+                -- wh[:hrb + 635m] << 5.00dt;
+        let w80  = wh[:hrb + 655m] << 5.20dt
+                -- wh[:hrb + 660m] << 5.25dt;
+        let w83  = wh[:har - 1m, :har] << 8.5dt;
+        let w85  = wh[:har - 1m, :har] << 7.5dt;
+        let w86  = wh[:har -  31m, :har -  30m] << 6.5dt;
+        let w87  = wh[:har - 1m, :har] << 4.5dt;
+        let w88  = wh[:har + 25m] << 4.75dt
+                -- wh[:har + 30m] << 4.90dt;
+        let w90  = lc[:har.w92 + 10.9dt + 100m,
+                          :har.w92 + 11dt + 100m] << 0.5dt;
+        let w91  = lc[:har.w92 + 10.9dt + 10m,
+                          :har.w92 + 11dt + 10m] >> 0.5dt;
+        let w92  = lc[:har.w92 + 10.9dt, :har.w92 + 11dt] >> 0.5dt;
+        let w93  = wh[:har + 175m] << 8.05dt
+                -- wh[:har + 180m] << 8.00dt;
+        let w95  = wh[:har +  79m, :har +  80m] << 6.5dt;
+        let w96  = wh[:har + 145m] << 5.25dt
+                -- wh[:har + 150m] << 5.22dt;
+        let w98  = wh[:har + 195m] << 3.85dt
+                -- wh[:har + 200m] << 3.80dt;
+        let w99  = wh[:har + 345m] << 1.20dt
+                -- wh[:har + 350m] << 1.15dt;
+        let w100 = wh[:har + 345m] << 2.40dt
+                -- wh[:har + 350m] << 2.35dt;
+        let w101 = wh[:har + 480m, :har + 481m] << 0.5dt;
+        let w102 = wh[:har + 195m, :har + 200m] << 0.5dt;
+        let w103 = wh[:har + 525m, :har + 526m] << 0.5dt;
+        let w104 = wh[:har + 579m, :har + 580m] << 0.5dt;
+        let w105 = wh[:har + 375m] << 1.95dt
+                -- wh[:har + 380m] << 1.90dt;
+        let w106 = wh[:har + 480m, :har + 481m] << 1.5dt;
+        let w107 = wh[:har + 609m, :har + 610m] << 0.5dt;
+        let w108 = wh[:har + 670m, :har + 671m] << 1.5dt;
+        let w109 = wh[:har + 744m, :har + 745m] << 1.5dt;
+        let w110 = wh[:har + 815m, :har + 816m] << 2.5dt;
+        let w111 = wh[:har + 419m, :har + 420m] >> 2.5dt;
+        let w112 = wh[:har + 495m, :har + 496m] >> 1.5dt;
+        let w120 = wh[:har + 195m, :har + 200m] >> 0.5dt;
+        let w121 = wh[:har + 365m, :har + 366m] >> 2.5dt;
+        let w122 = wh[:har + 509m, :har + 510m] >> 2.5dt;
+        let w123 = wh[:har + 620m, :har + 621m] >> 3.5dt;
+        let w124 = wh[:har + 655m, :har + 656m] >> 2.5dt;
+        let w125 = wh[:har + 694m, :har + 695m] >> 3.5dt;
+        let w126 = wh[:har + 775m, :har + 776m] >> 4.5dt;
+        let w130 = wh[:har + 300m] >> 0.90dt
+                -- wh[:har + 305m] >> 0.95dt;
+        let w131 = wh[:har + 519m, :har + 520m] >> 1.5dt;
+        let w132 = wh[:har + 580m, :har + 581m] >> 0.5dt;
+        let w140 = wh[:har + 829m, :har + 830m] << 0.5dt;
+        let w141 = wh[:har + 1015m] >> 1.10dt
+                -- wh[:har + 1020m] >> 1.05dt;
+        let w142 = wh[:har + 1164m, :har + 1165m] >> 0.5dt;
+        let w143 = wh[:har + 1260m, :har + 1261m] << 0.5dt;
+        let w144 = wh[:har + 1075m] >> 0.58dt
+                -- wh[:har + 1080m] >> 0.55dt;
+        let w145 = wh[:har + 1210m, :har + 1211m] >> 1.5dt;
+        let w146 = wh[:har + 1374m, :har + 1375m] >> 1.5dt;
+        let w147 = wh[:har + 1450m, :har + 1451m] >> 2.5dt;
+        let w153 = wh[:hrb + 580m, :hrb + 581m] >> 7.5dt;
+
+        # Gl. 1
+        track(:first:station :cat:ac15 :pax,
+                wh[:hrb - 450m, :har - 420m] >> 1.5dt
+            ..  wh[:har - 170m, :har + 200m] >> 2.5dt
+            ..  wh[:har + 420m, :har + 870m] >> 2.5dt
+            ..  w141
+            ..  w144
+            ..  wh[:har + 1100m, :har.f] >> 0.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 100m, :har + 200m] >> 2.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :cat:ac15 :pax,
+                wh[:hrb - 450m, :har - 420m] >> 0.5dt
+            ..  wh[:har - 170m, :har + 200m] >> 0.5dt
+            ..  w130
+            ..  wh[:har + 420m, :har + 520m] >> 1.5dt
+            ..  w124
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 100m, :har + 200m] >> 0.5dt
+        );
+
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                wh[:hrb - 450m, :har - 420m] << 0.5dt
+            ..  wh[:har - 170m, :har + 200m] << 0.5dt
+            ..  wh[:har + 400m] >> 0.20dt
+            --  wh[:har + 405m] >> 0.20dt
+            ..  w103
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 100m, :har + 200m] << 0.5dt
+        );
+
+
+        # Gl. 4
+        track(:first:station :cat:ac15 :pax,
+                wh[:hrb - 450m, :har - 420m] << 1.5dt
+            ..  wh[:har - 50m, :har + 80m] << 3.5dt
+            ..  wh[:har + 225m] << 2.55dt
+            --  wh[:har + 230m] << 2.50dt
+            ..  w99
+            ..  wh[:har + 480m, :har.f] << 0.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 50m, :har + 80m] << 3.5dt
+            ..  wh[:har + 225m] << 2.55dt
+            --  wh[:har + 230m] << 2.50dt
+        );
+
+        # Gl. 5
+        track(:first:station :cat:ac15,
+                w72
+            ..  wh[:hrb + 550m, :har - 420m] << 2.5dt
+            ..  wh[:har - 50m, :har + 80m] << 4.5dt
+            ..  w98
+            ..  wh[:har + 225m] << 3.55dt
+            --  wh[:har + 230m] << 3.50dt
+            ..  w100
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 50m, :har + 80m] << 4.5dt
+            ..  w98
+        );
+
+        # Gl. 6
+        track(:first:station :cat:ac15,
+                w75
+            ..  wh[:hrb + 700m, :har - 420m] << 3.5dt
+            ..  wh[:har - 50m, :har + 80m] << 6.5dt
+            ..  wh[:har + 225m] << 5.55dt
+            --  wh[:har + 230m] << 5.50dt
+            ..  w100
+            ..  w105
+            ..  w101
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 50m, :har + 80m] << 6.5dt
+            ..  wh[:har + 225m] << 5.55dt
+            --  wh[:har + 230m] << 5.50dt
+        );
+
+        # Gl. 7
+        track(:first:station :cat:ac15,
+                wh[:hrb - 450m, :hrb + 571m] << 3.5dt
+            ..  w77
+            ..  wh[:hrb + 700m, :har - 420m] << 4.5dt
+            ..  wh[:har - 50m, :har + 80m] << 7.5dt
+            ..  wh[:har + 225m] << 6.55dt
+            --  wh[:har + 230m] << 6.50dt
+            ..  wh[:har + 480m, :har.f] << 1.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 50m, :har + 80m] << 7.5dt
+            ..  wh[:har + 225m] << 6.55dt
+            --  wh[:har + 230m] << 6.50dt
+        );
+
+        # Gl. 8
+        track(:first:station :cat:ac15,
+                wh[:hrb - 450m, :hrb + 571m] << 4.5dt
+            ..  w79
+            ..  w80
+            ..  wh[:hrb + 700m, :har - 420m] << 5.5dt
+            ..  wh[:har - 50m, :har + 80m] << 8.5dt
+            ..  w93
+            ..  wh[:har + 225m] << 7.55dt
+            --  wh[:har + 230m] << 7.50dt
+            ..  wh[:har + 480m, :har.f] << 2.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 50m, :har + 80m] << 8.5dt
+            ..  w93
+        );
+
+        # Gl. 9
+        track(:first:station :cat:ac15,
+                wh[:hrb - 450m, :har - 420m] >> 3.5dt
+            ..  wh[:har - 170m, :har + 200m] >> 4.5dt
+            ..  wh[:har + 420m, :har + 870m] >> 4.5dt
+            ..  wh[:har + 1100m, :har.f] >> 2.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 100m, :har + 200m] >> 4.5dt
+        );
+
+        # Gl. 9A
+        with layer = -1 track(:first:station :removed :cat:ac15,
+                wh.har[:har.a - 100m, :har.a] >> 0.5dt
+            ..  wh[:hrb + 700m, :hrb + 701m] >> 3.5dt
+        );
+
+        # Gl. 10
+        track(:first:station :cat:ac15,
+                wh[:hrb - 450m, :har - 420m] >> 2.5dt
+            ..  wh[:har - 170m, :har + 200m] >> 3.5dt
+            ..  wh[:har + 420m, :har + 870m] >> 3.5dt
+            ..  wh[:har + 1100m, :har.f] >> 1.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                wh[:har - 100m, :har + 200m] >> 3.5dt
+        );
+
+        # Gl. 10A
+        with layer = -1 track(:first:station :removed :cat:ac15,
+                wh.har[:har.a - 100m, :har.a] << 0.5dt
+            ..  wh[:hrb + 700m, :hrb + 701m] >> 2.5dt
+        );
+
+        # Gl. 124
+        track(:station :cat:ac15,
+                wh[:hrb - 200m, :hrb + 450m] << 6.5dt
+            ..  w67
+        );
+
+        # Gl. 154
+        track(:station,
+                wh[:hrb + 150m, :hrb + 500m] >> 6.5dt
+            ..  w153
+        );
+
+        # Gl. 185
+        track(:station :cat:ac15,
+                w88
+            ..  wh[:har + 75m, :har + 80m] << 5.5dt
+            ..  w96
+            ..  wh[:har + 225m] << 4.55dt
+            --  wh[:har + 230m] << 4.50dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                w88
+            ..  wh[:har + 75m, :har + 80m] << 5.5dt
+            ..  w96
+        );
+
+        # Gl. 191
+        track(:station :cat:ac15,
+                w104
+            ..  wh[:har + 650m, :har + 860m] >> 1.5dt
+        );
+
+        # Gl. 192
+        track(:station :cat:ac15,
+                wh[:har + 540m, :har + 850m] >> 0.5dt
+        );
+
+        # Gl. 300
+        track(:first:station :cat:ac15,
+                w83
+            ..  lc[:har.w92 + 11dt, :har.f + 11dt] << 0.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                w83
+            ..  lc[:har.w92 + 11dt, :har.w92 + 12dt] << 0.5dt
+        );
+
+        # Gl. 301
+        track(:first:station :cat:ac15,
+                w85
+            ..  lc[:har.w92 + 11dt, :har.f + 11dt] >> 0.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac15,
+                w85
+            ..  lc[:har.w92 + 11dt, :har.w92 + 12dt] >> 0.5dt
+        );
+
+        # Gl. 500
+        track(:station,
+                wh[:hrb + 420m, :hrb + 620m] >> 7.5dt
+            ..  wh[:har - 170m, :har - 50m] >> 5.5dt
+        );
+
+        # W15 - W16
+        track(:station :cat:ac15, w15 .. w16);
+
+        # W40 - W41
+        track(:station :cat:ac15, w40 .. w41);
+
+        # W42 - W43
+        track(:station :cat:ac15, w42 .. w43);
+
+        # W44 - W45
+        track(:station :cat:ac15, w44 .. w45);
+
+        # W47 - W46
+        track(:first:station :cat:ac15, w47 .. w46);
+
+        # W50 - W53
+        track(:first:station :cat:ac15, w50 .. w53);
+
+        # W52 - W51
+        track(:first:station :cat:ac15, w52 .. w51);
+
+        # W54 - W55
+        track(:station :cat:ac15, w54 .. w55);
+
+        # W56 - W57
+        track(:station :cat:ac15, w56 .. w57);
+
+        # W58 - W59
+        track(:station :cat:ac15, w58 .. w59);
+
+        # W60 - W61
+        track(:station :cat:ac15, w60 .. w61);
+        with layer = -1 casing(:station :cat:ac15, w60 .. w61);
+
+        # W68 - W69
+        track(:station :cat:ac15, w68 .. w69);
+
+        # W70 - W71
+        track(:first:station :cat:ac15, w70 .. w71);
+
+        # W73 - W74
+        track(:station :cat:ac15,
+                w73
+            ..  wh[:hrb + 480m, :hrb + 550m] << 2.5dt
+        );
+
+        # W76 - W77
+        track(:station :cat:ac15, w76 .. w77);
+
+        # W80 - W78
+        track(:station :cat:ac15, w80 .. w78);
+
+        # W87 - W92
+        track(:first :station :cat:ac15, w87 .. w88 .. w92);
+        with layer = -1 casing(:first :station :cat:ac15, w87 .. w88 .. w92);
+
+        # W91 - W90
+        track(:station :cat:ac15, w91 .. w90);
+
+        # W95 - W96
+        track(:station :cat:ac15, w95 .. w96);
+
+        # W98 - W99
+        track(:station :cat:ac15, w98 .. w99);
+
+        # W102 - W130
+        track(:station :cat:ac15, w102 .. w130);
+
+        # W105 - W106
+        track(:station :cat:ac15, w105 .. w106);
+
+        # W107 - W108
+        track(:station :cat:ac15, w107 .. w108);
+
+        # W109 - W110
+        track(:station :cat:ac15, w109 .. w110);
+
+        # W111 - W112
+        track(:station :cat:ac15, w111 .. w112);
+
+        # W120 - W121
+        track(:station :cat:ac15, w120 .. w121);
+
+        # W122 - W123
+        track(:station :cat:ac15, w122 .. w123);
+
+        # W125 - W126
+        track(:station :cat:ac15, w125 .. w126);
+
+        # W131 - W132
+        track(:station :cat:ac15, w131 .. w132);
+
+        # W140 - W141
+        track(:station :cat:ac15, w140 .. w141);
+
+        # W142 - W143
+        track(:station :cat:ac15, w142 .. w143);
+
+        # W144 - W145
+        track(:station :cat:ac15, w144 .. w145);
+
+        # W146 - W147
+        track(:station :cat:ac15, w146 .. w147);
+
+        # Bahnhof
+        marker(:de.bf :cat:ac15 :pax :left, wh[:har] << 0.5dt);
+        label(:cat:ac15 :pax, wh[:har + 0.5sw] + (20dt, 0dt),
+            hbox(:left:top,
+                vbox(:left:top,
+                    span(:medium:bold :removed, "Harburg Hbf"),
+                    span(:medium:bold :removed, "Harburg-Wilhelmsburg Hbf"),
+                    hbox(:left:top,
+                        vbox(:center:top,
+                            span(:medium:bold, "Hamburg-Harburg"),
+                            hbox(:center:top :xsmall,
+                                vbox(:right:top,
+                                    "1720: ", "1259: ", "1255: ",
+                                    span(:removed, "1250: "), "2200: ", "1280: "
+                                ),
+                                vbox(:right:top,
+                                   "169,", "??", "4,",
+                                   span(:removed, "343,"), "343,", "29,"
+                                ),
+                                vbox(:left:top,
+                                    "38", "", "80",
+                                    span(:removed, "30"), "30", "40"
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        );
+
+        # Stw. Hhf
+        marker(:de.stw :cat:ac15 :left, wh[:har - 45m] << 8.5dt);
+        slabel(:left :cat:ac15, wh[:har - 45m - 0.3sw] << 12dt, "Hhf");
+    }
+
+
+    with link = "point.de.Hamburg-Neuland" {
+        with layer = -1 marker(:de.bk :removed :right, wh[:nla] >> 2.5dt);
+        with layer = -2 marker(
+            :de.bk.casing :removed :right, wh[:nla] >> 2.5dt
+        );
+        station(:right :removed, wh[:nla - 0.3sw] >> 2.5dt >> 1.4sw,
+            "Neuland", "344,88"
+        );
+    }
+
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:har.f, :wla - 250m]);
+    }
+
+
+    # point.de.Hamburg-Wilhelmsburg-Abzw: de.1255
+
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:wla + 550m, :ved - 170m]);
+    }
+
+
+    with link = "point.de.Hamburg-Veddel" {
+        let w1  = wh[:ved -  81m, :ved -  80m] << 2.5dt;
+        let w2  = wh[:ved       , :ved +   1m] << 0.5dt;
+        let w3  = wh[:ved -  61m, :ved -  60m] >> 1.5dt;
+        let w4  = wh[:ved +  25m, :ved +  26m] >> 0.5dt;
+        let w5  = wh[:ved +   9m, :ved +  10m] >> 2.5dt;
+        let w6  = wh[:ved +  80m, :ved +  81m] >> 1.5dt;
+        let w11 = wh[:ved +  49m, :ved +  50m] >> 0.5dt;
+        let w12 = wh[:ved + 125m, :ved + 126m] >> 1.5dt;
+        let w13 = wh[:ved +  44m, :ved +  45m] << 0.5dt;
+        let w14 = wh[:ved + 130m, :ved + 131m] >> 0.5dt;
+        let w15 = wh[:ved + 144m, :ved + 145m] >> 0.5dt;
+        let w16 = wh[:ved + 215m, :ved + 216m] << 0.5dt;
+        let w17 = wh[:ved + 149m, :ved + 150m] >> 1.5dt;
+        let w18 = wh[:ved + 225m, :ved + 226m] >> 0.5dt;
+        let w19 = wh[:ved + 199m, :ved + 200m] >> 1.5dt;
+        let w20 = wh[:ved + 260m, :ved + 261m] >> 2.5dt;
+        let w22 = wh[:ved + 249m, :ved + 250m] >> 0.5dt;
+        let w23 = wh[:ved + 325m, :ved + 326m] >> 1.5dt;
+        let w24 = wh[:ved + 374m, :ved + 375m] >> 1.5dt;
+        let w25 = wh[:ved + 450m, :ved + 451m] >> 2.5dt;
+
+        # Str. 1248
+        track(:second:station :cat:ac15, wh[:ved - 170m, :ved - 80m] << 2.5dt);
+        track(:second:station, wh[:ved - 80m, :ved + 150m] << 2.5dt);
+
+        # Str. 1280 L
+        track(:first:station :cat:ac15, wh[:ved - 170m, :ved + 550m] >> 1.5dt);
+
+        # Str. 1280 R
+        track(:first:station :cat:ac15, wh[:ved - 170m, :ved + 550m] >> 2.5dt);
+
+        # Str. 2200 L
+        track(:first:station :cat:ac15 :pax,
+                wh[:ved - 170m, :ved + 550m] << 0.5dt
+        );
+
+        # Str. 2200 R
+        track(:first:station :cat:ac15 :pax,
+                wh[:ved - 170m, :ved + 550m] >> 0.5dt
+        );
+
+        # W1 - W2
+        track(:station :cat:ac15, w1 .. w2);
+
+        # W3 - W4
+        track(:station :cat:ac15, w3 .. w4);
+
+        # W5 - W6
+        track(:station :cat:ac15, w5 .. w6);
+
+        # W11 - W12
+        track(:station :cat:ac15, w11 .. w12);
+
+        # W13 - W14
+        track(:station :cat:ac15, w13 .. w14);
+
+        # W15 - W16
+        track(:station :cat:ac15, w15 .. w16);
+
+        # W17 - W18
+        track(:station :cat:ac15, w17 .. w18);
+
+        # W19 - W20
+        track(:station :cat:ac15, w19 .. w20);
+
+        # W22 - W23
+        track(:station :cat:ac15, w22 .. w23);
+
+        # W24 - W25
+        track(:station :cat:ac15, w24 .. w25);
+
+        marker(:de.abzw :cat:ac15 :left, wh[:ved] << 2.5dt);
+    }
+
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:ved + 550m, :oha - 100m]);
+    }
+
+
+    with link = "point.de.Hamburg-Norderelbbrücke" {
+        # Str. 2220 R
+        track(:first:station :cat:ac15 :pax,
+                wh[:oha - 100m, :oha + 100m] >> 0.5dt
+        );
+
+        # Str. 2220 L
+        track(:first:station :cat:ac15 :pax,
+                wh[:oha - 100m, :oha + 100m] << 0.5dt
+        );
+
+        # Str. 1292
+        track(:first:station :cat:ac15 :pax,
+                wh[:oha - 1m, :oha] << 0.5dt
+            ..  wh[:oha + 90m, :oha + 100m] << 1.5dt
+        );
+
+        marker(:de.abzw :cat:ac15 :left, wh[:oha] << 0.5dt);
+        station(:left :cat:ac15, wh[:oha - 0.5sw] << 0.5dt << 1.4sw,
+            hbox(:right:base, "H. ", span(:bold, "Norderelbbrücke")),
+            hbox(:center:top,
+                vbox(:right:top, "1292: 352,47", "2200: 352,47")
+            )
+        );
+    }
+
+    with link = "line.de.2200" {
+        with layer = 2 track(:first :double :cat:ac15 :pax,
+                wh[:oha + 100m, :eri.f]
+            ..  wh[:ham.a - 1m, :ham.a] << 8dt
+        );
+        with layer = 1 casing(:first :double :cat:ac15, wh[:eri.a, :eri.f]);
+    }
+
+    
+    # point.de.Hamburg-Hbf: de.6100
+}
+
