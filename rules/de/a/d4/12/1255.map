@@ -1,0 +1,350 @@
+# DE 1255.  Meckelfeld - Hamburg Süd
+#
+let lc = path("d4.de.a.1720");
+let wh = path("d4.de.a.2200");
+
+with detail = 4 {
+    with link = "line.de.1255" {
+        # Str. 1255 R
+        track(:first :cat:ac15 :tight,
+                lc[:meh + 300m, :har.ya - 350m] << 0.5dt
+        );
+
+        # Str. 1255 L
+        track(:first :cat:ac15 :tight :flip,
+                lc[:meh + 300m, :har.ya - 930m] << 3.5dt
+            ..  lc[:har.ya - 355m, :har.ya - 350m] << 1.5dt
+        );
+
+        # Str. 1255 L/R
+        track(:first :double :cat:ac15,
+                lc[:har.ya - 350m, :har.ya - 340m] << 1dt
+            ..  lc[:har.ya + 100m, :hrs - 180m] << 3dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Harburg-Bbf-Süd" {
+        # Gl. 7
+        track(:first:station :cat:ac15,
+                wh[:hrs - 180m, :hrb - 450m] << 2.5dt
+        );
+
+        # Gl. 8
+        track(:first:station :cat:ac15,
+                wh[:hrs - 180m, :hrb - 450m] << 3.5dt
+        );
+
+        # W1 - W2
+        track(:station :cat:ac15,
+                wh[:hrs - 2dl] << 2.5dt
+            --  wh[:hrs - 1dl] << 3.5dt
+        );
+
+        # W3 - W4
+        track(:station :cat:ac15,
+                wh[:hrs + 0.3sw + 1dl] << 3.5dt
+            --  wh[:hrs + 0.3sw + 2dl] << 4.5dt
+        );
+
+        # W18 - W17
+        track(:station :cat:ac15,
+                wh[:hrs + 0.3sw + 2dl] << 2.5dt
+            --  wh[:hrs + 0.3sw + 3dl] << 3.5dt
+        );
+
+        marker(:de.bft :cat:ac15 :left, wh[:hrs] << 3.5dt);
+        with layer = -1 marker(:de.bft.casing :left, wh[:hrs] << 3.5dt);
+        station(:left :cat:ac15, wh[:hrs - 1.7sw] << 3.5dt << 1.6sw,
+            "H.-Harburg Bbf", "1255: 2,86"
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Harburg-Bbf" {
+        # Gl. 180 - Gl. 125
+        with layer = -1 track(:station :cat:ac15,
+                wh[:hrs - 250m, :har.hst - 15dl] << 4.5dt
+            --  wh[:har.hst - 11dl, :har.hst] << 6.5dt
+        );
+            with layer = -1 track(:station :cat:ac15, # W15 - W16
+                    wh[:har.hst - 17dl] << 4.5dt
+                --  wh[:har.hst - 16dl] << 3.5dt
+            );
+            with layer = -1 track(:station :cat:ac15, # W29 - W79
+                    wh[:har.hst - 3dl] << 6.5dt
+                --  wh[:har.hst - 2dl] << 5.5dt
+            );
+
+        # Gl. 126/127
+        track(:station :cat:ac15,
+                wh[:hrs + 0.3sw + 9.0dl, :hrs + 0.3sw + 9.1dl] << 4.5dt
+            --  wh[:hrs + 0.3sw + 12.1dl, :har.hst - 5dl] << 7.5dt
+        );
+
+        # Gl. 128/129
+        track(:station :cat:ac15,
+                wh[:hrs + 0.3sw + 7.3dl, :hrs + 0.3sw + 7.4dl] << 4.5dt
+            --  wh[:hrs + 0.3sw + 11.4dl, :har.hst - 6dl] << 8.5dt
+        );
+
+        # Gl. 130/131
+        track(:station :cat:ac15,
+                wh[:hrs + 0.3sw + 5.6dl, :hrs + 0.3sw + 5.7dl] << 4.5dt
+            --  wh[:hrs + 0.3sw + 10.7dl, :har.hst - 7dl] << 9.5dt
+            --  wh[:har.hst - 4dl, :har.hst - 3.9dl] << 6.5dt
+        );
+
+        # Gl. 132/133
+        with layer = -2 track(:station,
+                wh[:hrs + 0.3sw + 3.9dl, :hrs + 0.3sw + 4dl] << 4.5dt
+            --  wh[:hrs + 0.3sw + 10dl, :har.hst - 8dl] << 10.5dt
+        );
+
+        # Gl. 138
+        with layer = -2 track(:station,
+                wh[:hrs + 0.3sw + 10dl, :har.hst - 9dl] << 11.5dt
+            --  wh[:har.hst - 7dl, :har.hst - 6.9dl] << 9.5dt
+        );
+
+        with layer = -6 marker(:de.bft :cat:ac15 :left, wh[:hrb] << 11.5dt);
+        station(:left :cat:ac15, wh[:hrb + 0.3sw] << 11.5dt << 1.6sw,
+            "H.-Harburg Bbf", "1255: 3,60"
+        );
+    }
+
+
+    # point.de.Hamburg-Harburg: de.2200
+
+
+    with link = "line.de.1255" {
+        track(:first :double :cat:ac15, wh[:har.f, :sel - 1sw] << 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Süderelbbrücke" {
+        let seldra = path("d4.de.1253");
+
+        # Str. 1255 L
+        track(:first:station :cat:ac15, wh[:sel - 1sw, :asaa + 1sw] << 2.5dt);
+
+        # Str. 1255 R
+        track(:first:station :cat:ac15, wh[:sel - 1sw, :asaa + 1sw] << 1.5dt);
+
+        # Str. 1253 L
+        track(:second:station :cat:ac15,
+                wh[:asaa - 0.6sw - 1.1dl, :asaa - 0.6sw - 1dl] << 2.5dt
+            --  wh[:asaa - 0.6sw, :asaa] << 3.5dt);
+
+        # W2 - W3
+        track(:second:station :cat:ac15,
+                seldra[:sel] << 1.5dt
+            --  seldra[:sel + 1dl] << 2.5dt
+        );
+
+        marker(:de.bft.abzw :cat:ac15 :left, wh[:asaa - 0.3sw] << 3.5dt);
+        station(:right :cat:ac15, wh[:asaa - 0.8sw] >> 5.5dt,
+            hbox(:left:base, "H. ", span(:bold, "Süderelbbrücke")),
+            hbox(:center:top,
+                vbox(:right:top, "1253: ", "1255: "),
+                vbox(:right:top, "0,", "7,"),
+                vbox(:left:top, "53", "51")
+            )
+        );
+    }
+
+
+    with link = "line.de.1255" {
+        track(:first :double :cat:ac15, wh[:asaa + 1sw, :sbr.y - 1sw] << 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Wilhelmsburg" {
+        # Gl. 1 (Str. 1255 R)
+        track(:first:station :cat:ac15, wh[:sbr.y - 1sw, :wil.x] << 1.5dt);
+
+        # Gl. 2 (Str. 1255 L)
+        track(:first:station :cat:ac15, wh[:sbr.y - 1sw, :wil.x] << 2.5dt);
+
+        # Gl. 3 (Str. 1254 R)
+        track(:second:station :cat:ac15,
+                path("d4.de.1254")[:sbr.y + 1sw, :sbr.y + 0.9sw] << 3.5dt
+            ..  wh[:sbr.y, :wil.x - 4dl] << 3.5dt
+            --  wh[:wil.x - 3dl, :wil.x - 2.9dl] << 2.5dt
+        );
+
+        # Gl. 4
+        track(:station :cat:ac15,
+                wh[:sbr.y + 6.9dl, :sbr.y + 7dl] << 3.5dt
+            --  wh[:sbr.y + 8dl, :wil.x - 3dl] << 4.5dt
+            --  wh[:wil.x - 1dl, :wil.x - 0.9dl] << 2.5dt
+        );
+
+        # W5 - W6
+        track(:station :cat:ac15,
+                wh[:sbr.y] << 3.5dt
+            --  wh[:sbr.y + 1dl] << 2.5dt
+        );
+
+        # W9 - W10
+        track(:station :cat:ac15,
+                wh[:sbr.y + 2dl] << 2.5dt
+            --  wh[:sbr.y + 3dl] << 1.5dt
+        );
+
+        # W12 - W13
+        track(:station :cat:ac15,
+                wh[:sbr.y + 3dl] << 3.5dt
+            --  wh[:sbr.y + 4dl] << 2.5dt
+        );
+
+        # W14 - W15
+        track(:station :cat:ac15,
+                wh[:sbr.y + 5dl] << 2.5dt
+            --  wh[:sbr.y + 6dl] << 3.5dt
+        );
+
+        marker(:de.bbf :cat:ac15 :left, wh[:wil.x - 300m] << 4.5dt);
+        station(:right :cat:ac15, wh[:wil.x - 300m - 0.4sw] >> 5.5dt,
+            span(:bold, "Hamburg-Wilhelmsburg"),
+            hbox(:center:top,
+                vbox(:right:top, "1254: ", "1255: "),
+                vbox(:right:top, "0,", "9,"),
+                vbox(:left:top, "53", "40")
+            )
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Wilhelmsburg-Abzw" {
+        # Gl. 1
+        with layer = -1 track(:first:station :cat:ac15,
+                wh[:wil.x, :wla - 3dl] << 1.5dt
+            --  wh[:wla - 1dl, :wla - 0.9dl] >> 0.5dt
+        );
+
+        # Gl. 2
+        with layer = -1 track(:first:station :cat:ac15,
+                wh[:wil.x, :wla - 2dl] << 2.5dt
+            --  wh[:wla - 1dl, :wla + 500m + 2dl] << 1.5dt
+            ..  wh[:sug - 450m - 3dl, :sug] << 2.5dt
+        );
+
+        # Gl. 3
+        with layer = -1 track(:first :station :cat:ac15,
+                wh[:wil.x + 0.9dl, :wil.x + 1dl] << 2.5dt
+            --  wh[:wil.x + 2dl, :wla - 1dl] << 3.5dt
+            --  wh[:wla, :wla + 500m + 2dl] << 2.5dt
+            ..  wh[:sug - 450m - 3dl, :sug] << 3.5dt
+        );
+
+        # Gl. 4
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wil.x + 1.9dl, :wil.x + 2dl] << 3.5dt
+            --  wh[:wil.x + 3dl, :wla + 500m - 2dl] << 4.5dt
+        );
+
+        # Gl. 5
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wil.x + 5dl, :wla + 500m - 3dl] << 5.5dt
+            --  wh[:wla + 500m, :wla + 501m] << 2.5dt
+        );
+
+        # Gl. 6
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wil.x + 3.9dl, :wil.x + 4dl] << 4.5dt
+            --  wh[:wil.x + 6dl, :wla + 500m - 2dl] << 6.5dt
+            --  wh[:wla + 500m + 1dl, :wla + 500m + 2dl] << 3.5dt
+            ..  wh[:sug - 450m - 4dl, :sug - 450m - 3dl] << 4.5dt
+            --  wh[:sug - 450m - 2dl, :sug - 450m - 1.9dl] << 3.5dt
+        );
+
+        # Gl. 400
+        with layer = -2 track(:station,
+                wh[:sug - 450m + 0.9dl, :sug - 450m + 1dl] << 2.5dt
+            --  wh[:sug - 450m + 2dl, :sug] << 1.5dt
+        );
+
+        # Str. 2200 L
+        track(:first:station :cat:ac15 :pax,
+                wh[:wla - 5dl, :wla + 8dl] << 0.5dt
+        );
+
+        # Str. 2200 R
+        track(:first:station :cat:ac15 :pax,
+                wh[:wla - 5dl, :wla + 8dl] >> 0.5dt
+        );
+
+        # Str. 1280 L
+        with layer = -1 track(:first:station :cat:ac15,
+                wh[:wla - 5dl, :wla + 8dl] >> 1.5dt
+        );
+
+        # Str. 1280 R
+        with layer = -1 track(:first:station :cat:ac15,
+                wh[:wla - 5dl, :wla + 8dl] >> 2.5dt
+        );
+
+        # W44 - W45
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wla - 5dl] << 1.5dt
+            --  wh[:wla - 4dl] << 2.5dt
+        );
+
+        # W60 - W61
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wil.x + 3dl] << 2.5dt
+            --  wh[:wil.x + 4dl] << 1.5dt
+        );
+
+        # W66 - W67
+        with layer = -1 track(:first:station :cat:ac15,
+                wh[:wla - 1dl] << 1.5dt
+            --  wh[:wla - 0dl] << 0.5dt
+        );
+
+        # W70 - W71
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wla + 0.5dl] >> 0.5dt
+            --  wh[:wla + 2.5dl] >> 2.5dt
+        );
+
+        # W73 - W75
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wla + 1dl] << 0.5dt
+            --  wh[:wla + 3dl] >> 1.5dt
+        );
+
+        # W80 - W81
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wla] >> 1.5dt
+            --  wh[:wla + 1dl] >> 2.5dt
+        );
+
+        # W82 - W83
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wla + 4dl] >> 0.5dt
+            --  wh[:wla + 5dl] >> 1.5dt
+        );
+
+        # W86 - W87
+        with layer = -1 track(:station :cat:ac15,
+                wh[:wla + 5dl] >> 2.5dt
+            --  wh[:wla + 6dl] >> 1.5dt
+        );
+
+        # W300 - W301
+        with layer = -1 track(:station :cat:ac15,
+                wh[:sug - 450m - 1dl] << 3.5dt
+            --  wh[:sug - 450m] << 2.5dt
+        );
+
+        marker(:de.bft.abzw :cat:ac15 :left, wh[:wla] << 6.5dt);
+        station(:left :cat:ac15, wh[:wla - 0.4sw] << 6.5dt << 1.4sw,
+            "H.-W. Abzw",
+            hbox(:center:top,
+                vbox(:right:top, "1255: ??", "2200: ??", "1280: ??")
+            )
+        );
+    }
+}

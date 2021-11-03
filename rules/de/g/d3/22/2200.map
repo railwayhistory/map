@@ -1,0 +1,593 @@
+# DE 2200.  Wanne-Eickel Hbf - Hamburg Hbf
+#
+let wh = path("d4.de.g.2200");
+
+with detail = 3 {
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:gnad, :nat - 1ssw]);
+    }
+
+    with link = "point.de.Natrup-Hagen" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:nat - 1ssw, :nat + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :right, wh[:nat] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :right, wh[:nat] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, wh[:nat - 0.4ssw] >> 0.5dt >> 1.8ssw,
+            "Natrup-Hagen"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:nat + 1ssw, :has - 1ssw]);
+    }
+
+    with link = "point.de.Leeden" {
+        with layer = -4 marker(:de.bk :removed :right, wh[:lee] >> 0.5dt);
+    }
+
+    with link = "point.de.Hasbergen-Osnabrück" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:has - 1ssw, :has + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, wh[:has] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:has + 1.5ssw] << 0.5dt << 1.6ssw,
+            hbox(:center:base, span(:bold, "Hasbergen "), "(Kr Osnabrück)")
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:has + 1ssw, :hor - 1ssw]);
+    }
+
+    with link = "point.de.Hellern" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:hel] << 0.5dt);
+    }
+
+    with link = "point.de.Hörne" {
+        # Str. 1601
+        with layer = -4 track(:first:station :removed,
+                wh[:hor - 0.6ssw - 1.1dl, :hor - 0.6ssw - 1dl] << 0.5dt
+            --  wh[:hor - 0.6ssw, :hor + 1ssw] << 1.5dt
+        );
+
+        # Str. 2200
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:hor - 1ssw, :hor + 1ssw]
+        );
+
+        # Str. 2950
+        track(:first:station :cat:ac15 :pax,
+                wh[:hor - 1ssw, :hor + 1ssw] >> 1.5dt
+        );
+        with layer = -6 marker(:de.bbf :cat:ac15 :left, wh[:hor] << 1.5dt);
+        slabel(:right :cat:ac15, wh[:hor - 0.2ssw] >> 4.0dt,
+            "Hörne"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:hor + 1ssw, :osn - 1ssw]);
+    }
+
+    with link = "point.de.Osnabrück-Hbf-Po" {
+        # Str. 1601
+        track(:first:station :cat:ac15,
+                wh[:osn - 1ssw, :oss - 1ssw] << 1.5dt
+        );
+
+        # Str. 2200
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:osn - 1ssw, :oss - 1ssw]
+        );
+
+        # Str. 1621 - 1600
+        track(:first:station :cat:ac15,
+                wh[:osn - 1ssw, :oss - 1ssw] >> 1.5dt
+        );
+        
+        with layer = -1 marker(:de.bf :cat:ac15 :pax :left, wh[:osn] << 1.5dt);
+    }
+
+    with link = "point.de.Osnabrück-Hbf-Schinkel" {
+        # Str. 1601
+        track(:first:station :cat:ac15,
+                wh[:oss - 1ssw, :osv - 1ssw] << 1.5dt
+        );
+
+        # Str. 2200
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:oss - 1ssw, :osv - 1ssw]
+        );
+
+        with layer = -1 marker(:de.bft :cat:ac15 :right, wh[:oss] >> 0.5dt);
+    }
+
+    with link = "point.de.Osnabrück-Hbf-Vorbahnhof" {
+        # Str. 1601
+        track(:first:station :cat:ac15,
+                wh[:osv - 1ssw, :osv + 0.6ssw] << 1.5dt
+            --  wh[:osv + 0.6ssw + 1dl, :osv + 0.6ssw + 1.1dl] << 0.5dt
+        );
+
+        # Str. 2200
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:osv - 1ssw, :osv + 1ssw]
+        );
+
+        with layer = -1 marker(:de.bft :cat:ac15 :left, wh[:osv] << 1.5dt);
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:osv + 1ssw, :bel - 1ssw]);
+    }
+
+    with link = "point.de.Schinkel-Osnabrück" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:sik] << 0.5dt);
+    }
+
+    with link = "point.de.Powe" {
+        with layer = -4 marker(:de.bk :removed :right, wh[:pow] >> 0.5dt);
+    }
+
+    with link = "point.de.Belm" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:bel - 1ssw, :bel + 1ssw]
+        );
+        with layer = -1 marker(:de.bbf :cat:ac15 :right, wh[:bel] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :right, wh[:bel] >> 0.5dt);
+        slabel(:right :cat:ac15, wh[:bel - 0.3ssw] >> 0.5dt >> 1.9ssw,
+            "Belm"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:bel + 1ssw, :veh - 1ssw]);
+    }
+
+    with link = "point.de.Wittekind" {
+        with layer = -4 marker(:de.bk :removed :right, wh[:wit] >> 0.5dt);
+    }
+
+    with link = "point.de.Vehrte" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:veh - 1ssw, :veh + 1ssw]
+        );
+        with layer = -1 marker(:de.bbf :cat:ac15 :right, wh[:veh] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :right, wh[:veh] >> 0.5dt);
+        slabel(:left :cat:ac15, wh[:veh + 1ssw] << 1.5dt,
+            "Vehrte"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:veh + 1ssw, :ost - 1ssw]);
+    }
+
+    with link = "point.de.Tannenberg-Bk" {
+        marker(:de.bk :removed :left, wh[:tan] << 0.5dt);
+    }
+
+    with link = "point.de.Krebsburg" {
+        marker(:de.bk :removed :left, wh[:kre] << 0.5dt);
+    }
+
+    with link = "point.de.Ostercappeln" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:ost - 1ssw, :ost + 1ssw]
+        );
+        with layer = -1 marker(:de.bbf :cat:ac15 :right, wh[:ost] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :right, wh[:ost] >> 0.5dt);
+        slabel(:top :cat:ac15, wh[:ost] << 2.0dt,
+            "Ostercappeln"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:ost + 1ssw, :boh - 1ssw]);
+    }
+
+    with link = "point.de.Oelingen" {
+        with layer = -4 marker(:de.bk :removed :right, wh[:oel] >> 0.5dt);
+    }
+
+    with link = "point.de.Wehrendorf-Bk" {
+        with layer = -4 marker(:de.bk :removed :right, wh[:weh] >> 0.5dt);
+    }
+
+    with link = "point.de.Bohmte" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:boh - 1ssw, :boh + 1ssw]
+        );
+        with layer = -1 marker(:de.bf :cat:ac15 :pax, wh[:boh] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, wh[:boh - 0.4ssw] >> 0.5dt >> 1.6ssw,
+            span(:bold, "Bohmte")
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:boh + 1ssw, :dro - 1ssw]);
+    }
+
+    with link = "point.de.Gräfte" {
+        marker(:de.bk :removed :left, wh[:gra] << 0.5dt);
+    }
+
+    with link = "point.de.Meyerhöfen" {
+        marker(:de.bk :removed :left, wh[:mey] << 0.5dt);
+    }
+
+    with link = "point.de.Drohne" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:dro - 1ssw, :dro + 1ssw]
+        );
+        with layer = -1 marker(:de.bbf :cat:ac15 :right, wh[:dro] >> 0.5dt);
+        with layer = -4 marker(:de.bbf :removed :left, wh[:dro.alt] << 0.5dt);
+        slabel(:right :cat:ac15, wh[:dro - 0.5ssw] >> 0.5dt >> 1.7ssw,
+            "Drohne"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:dro + 1ssw, :lem - 1ssw]);
+    }
+
+    with link = "point.de.Dielingen" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:dil] << 0.5dt);
+    }
+
+    with link = "point.de.Lemförde" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:lem - 1ssw, :lem + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax, wh[:lem] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, wh[:lem - 0.4ssw] >> 0.5dt >> 2.0ssw,
+            "Lemförde"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:lem + 1ssw, :leb - 1ssw]);
+    }
+
+    with link = "point.de.Marl" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:mar] << 0.5dt);
+    }
+
+    with link = "point.de.Sandbrink" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:san] << 0.5dt);
+    }
+
+    with link = "point.de.Lembruch" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:leb - 1ssw, :leb + 1ssw]
+        );
+        with layer = -1 marker(:de.bbf :cat:ac15 :left, wh[:leb] << 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, wh[:leb] << 0.5dt);
+        slabel(:left :cat:ac15, wh[:leb - 0.6ssw] << 0.5dt << 1.8ssw,
+            "Lembruch"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:leb + 1ssw, :die - 1ssw]);
+    }
+
+    with link = "point.de.Hunte" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:hun] << 0.5dt);
+    }
+
+    with link = "point.de.Graftlage" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:grl] << 0.5dt);
+    }
+
+    with link = "point.de.Diepholz" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:die - 1ssw, :die + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, wh[:die] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:die - 0.5ssw] << 0.5dt << 1.8ssw,
+            span(:bold, "Diepholz")
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:die + 1ssw, :dre - 1ssw]);
+    }
+
+    with link = "point.de.St-Hülfe-Bk" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:sth] << 0.5dt);
+    }
+
+    with link = "point.de.Speckel" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:spe] << 0.5dt);
+    }
+
+    with link = "point.de.Drebber" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:dre - 1ssw, :dre + 1ssw]
+        );
+        with layer = -1 marker(:de.bbf :cat:ac15 :left, wh[:dre] << 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, wh[:dre] << 0.5dt);
+        slabel(:left :cat:ac15 :right, wh[:dre - 0.6ssw] << 0.5dt << 1.5ssw,
+            "Drebber"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:dre + 1ssw, :bar - 1ssw]);
+    }
+
+    with link = "point.de.Dreeke" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:drk] << 0.5dt);
+    }
+
+    with link = "point.de.Rechtern" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:ret] << 0.5dt);
+    }
+
+    with link = "point.de.Barnstorf-Han" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:bar - 1ssw, :bar + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, wh[:bar] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:bar - 0.8ssw] << 0.5dt << 1.5ssw,
+            hbox(:center:base, "Barnstorf ", span(:light, "(Han)"))
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:bar + 1ssw, :drw - 1ssw]);
+    }
+
+    with link = "point.de.Schmolle" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:smo] << 0.5dt);
+    }
+
+    with link = "point.de.Drentwede" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:drw - 1ssw, :drw + 1ssw]
+        );
+        with layer = -1 marker(:de.bbf :cat:ac15 :left, wh[:drw] << 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, wh[:drw] << 0.5dt);
+        slabel(:left :cat:ac15, wh[:drw - 0.5ssw] << 0.5dt << 1.4ssw,
+            "Drentwede"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:drw + 1ssw, :twi - 1ssw]);
+    }
+
+    with link = "point.de.Ridderade" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:rid] << 0.5dt);
+    }
+
+    with link = "point.de.Borwede" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:bow] << 0.5dt);
+    }
+
+    with link = "point.de.Twistringen" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:twi - 1ssw, :twi + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, wh[:twi] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:twi - 0.8ssw] << 0.5dt << 1.5ssw,
+            "Twistringen"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:twi + 1ssw, :bas - 1ssw]);
+    }
+
+    with link = "point.de.Binghausen" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:bin] << 0.5dt);
+    }
+
+    with link = "point.de.Nienhaus" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:nie] << 0.5dt);
+    }
+
+    with link = "point.de.Bassum" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:bas - 1ssw, :bas + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, wh[:bas] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:bas - 0.6ssw] << 0.5dt << 1.6ssw,
+            span(:bold, "Bassum")
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:bas + 1ssw, :bra - 1ssw]);
+    }
+
+    with link = "point.de.Buente" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:bue] << 0.5dt);
+    }
+
+    with link = "point.de.Bramstedt-Syke" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:bra - 1ssw, :bra + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :left, wh[:bra] << 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, wh[:bra.alt] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:bra - 0.4ssw] << 0.5dt << 1.3ssw,
+            hbox(:center:base, "Bramstedt ", span(:light, "(b Syke)"))
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:bra + 1ssw, :syk - 1ssw]);
+    }
+
+    with link = "point.de.Westermark" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:wes] << 0.5dt);
+    }
+
+    with link = "point.de.Syke" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:syk - 1ssw, :syk + 1ssw]
+        );
+        with layer = -2 marker(:de.bf :cat:ac15 :pax, wh[:syk] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:syk - 0.5ssw] << 2.0dt,
+            span(:bold, "Syke")
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:syk + 1ssw, :brr.bf - 1ssw]);
+    }
+
+    with link = "point.de.Gessel" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:ges] << 0.5dt);
+    }
+
+    with link = "point.de.Barrien" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:brr.bf - 1ssw, :brr + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :right, wh[:brr] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :right, wh[:brr.bf] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, wh[:brr - 0.6ssw] >> 0.5dt >> 2.0ssw,
+            "Barrien"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:brr + 1ssw, :kir - 1ssw]);
+    }
+
+
+    with link = "point.de.Kirchweyhe" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:kir - 1ssw, :kir + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax, wh[:kir] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, wh[:kir - 0.4ssw] >> 0.5dt >> 2.0ssw,
+            "Kirchweyhe"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:kir + 1ssw, :dry - 1ssw]);
+    }
+
+    with link = "point.de.Dreye" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:dry - 1ssw, :dry + 1ssw]
+        );
+        marker(:de.hp :cat:ac15 :pax :left, wh[:dry] << 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, wh[:dry] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:dry - 0.4ssw] << 0.5dt << 1.4ssw,
+            "Dreye"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:dry + 1ssw, :gab - 1ssw]);
+    }
+
+    with link = "point.de.Bremen-Gabelung" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:gab - 1ssw, :gab + 1ssw]
+        );
+        with layer = -1 marker(:de.abzw :cat:ac15 :right, wh[:gab] >> 0.5dt);
+        with layer = -5 marker(:de.bbf :removed :right, wh[:gab] >> 0.5dt);
+        slabel(:right :cat:ac15, wh[:gab - 0.2ssw] >> 0.5dt >> 2.0ssw,
+            hbox(:center:base, "Bremen ", span(:bold, "Gabelung"))
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:gab + 1ssw, :hem - 1ssw]);
+    }
+
+    with link = "point.de.Bremen-Hemelingen" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:hem - 1ssw, :hem + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, wh[:hem] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, wh[:hem - 0.4ssw] << 0.5dt << 1.9ssw, 
+            "Bremen-Hemelingen"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:hem + 1ssw, :hat - 1ssw]);
+    }
+
+    with link = "point.de.Bremen-Hastedt" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:hat - 1ssw, :hat + 1ssw]
+        );
+        with layer = -1 marker(:de.abzw :cat:ac15 :right, wh[:hat] >> 0.5dt);
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax,
+                wh[:hat + 1ssw, :hat + 1.1ssw]
+            ..  wh[:vah - 1.1ssw, :vah - 1ssw] >> 1dt
+        );
+    }
+
+    # point.de.Bremen-Vahr  de.1740
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax,
+                wh[:vah + 1ssw, :bre - 1ssw] >> 1dt
+        );
+    }
+
+    # point.de.Bremen-Hbf   de.1740
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax,
+                wh[:bre + 1ssw, :bre.yu] >> 1dt
+            ..  wh[:uta - 1.1ssw, :uta - 1ssw]
+        );
+    }
+
+    with link = "point.de.Bremen-Utbremen-Abzw" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:uta - 1ssw, :uta + 1ssw]
+        );
+        with layer = -1 marker(:de.abzw :cat:ac15 :left, wh[:uta] << 0.5dt);
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:uta + 1ssw, :utb - 1ssw]);
+    }
+
+    with link = "point.de.Bremen-Utbremen" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:utb - 1ssw, :utb + 1ssw]
+        );
+        with layer = -4 marker(:de.ldst :removed :right, wh[:utb] >> 0.5dt);
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:utb + 1ssw, :obe - 1ssw]);
+    }
+
+    with link = "point.de.Bremen-Horn-Abzw" {
+        with layer = -4 marker(:de.bk :removed :left, wh[:hrn] << 0.5dt);
+    }
+
+    with link = "point.de.Bremen-Oberneuland" {
+        track(:first:station :double :cat:ac15 :pax,
+                wh[:obe - 1ssw, :obe + 1ssw]
+        );
+        marker(:de.bf :cat:ac15 :pax :right, wh[:obe] >> 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, wh[:obe.alt] << 0.5dt);
+        slabel(:top :cat:ac15 :pax, wh[:obe.alt + 1ssw] << 1.5dt << 1.7ssw,
+            "B.-Oberneuland"
+        );
+    }
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:gobl, :obe + 1ssw]);
+    }
+}
+

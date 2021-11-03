@@ -1,0 +1,36 @@
+# DE 2100.  Dortmund Hbf - Gronau (Westf)
+#
+let dg = path("d4.de.2100");
+
+with detail = [4, 5] {
+    # ...
+
+
+    with link = "point.de.Dülmen-hoch" {
+        # Gl. 31 (Str. 2100)
+        with layer = 3 track(:second:station :pax, dg[:dul.b, :dul.g]);
+        with layer = 1 casing(:second:station :pax,
+                dg[:dul.x - 5.5dt, :dul.x + 1.5dt + 1.2sw]
+        );
+
+        # Gl. 32
+        with layer = 2 track(:station,
+                dg[:dul - 80m - 1.1dl, :dul - 80m - 1dl]
+            --  dg[:dul - 80m, :dul + 600m] >> 1dt
+            --  dg[:dul + 600m + 1dl, :dul + 600m + 1.1dl]
+        );
+        with layer = 1 casing(:station,
+                dg[:dul - 80m - 1.1dl, :dul - 80m - 1dl]
+            --  dg[:dul - 80m, :dul.x + 1.5dt + 1.2sw] >> 1dt
+        );
+
+        marker(:de.bftp :pax :left, dg[:dul.x + 1.5dt + 1.8sw]);
+        label(:pax, dg[:dul.x + 1.5dt + 1.8sw] << 1.6sw,
+            hbox(:right:bottom, vbox(:center:bottom,
+                span(:xsmall, "2100: 44,61"),
+                span(:medium, "Dülmen (hoch)")
+            ))
+        );
+    }
+}
+
