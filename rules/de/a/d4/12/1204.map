@@ -1,0 +1,139 @@
+# DE 1204.  Abzw Hörn - Tönning
+#
+let ht = path("d4.de.1204");
+
+with detail = [4, 5] {
+    # point.de.Hörn  de.1210
+
+
+    with link = "line.de.1204" {
+        track(:second :pax,
+                path("d4.de.1210")[:hor - 60m, :hor - 61m] >> 1.5dt
+            ..  ht[:aa + 250m, :pla - 1sw]
+        );
+    }
+
+
+    with link = "point.de.Platenhörn" {
+        track(:second:station :pax, ht[:pla - 1sw, :pla + 1sw]);
+        with layer = -1 marker(:de.hp :removed :left, ht[:pla]);
+        station(:left :removed,
+            path("d4.de.a15")[:pla + 0.4sw] >> 1dt,
+            "Platenhörn",
+            "5,62 (176,02)"
+        );
+    }
+
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:pla + 1sw, :but - 1sw]);
+        with layer = 1 line_badge(:pax, ht[:pla + 2.0km], "1204");
+    }
+
+
+    with link = "point.de.Büttel" {
+        track(:second:station :pax, ht[:but - 1sw, :but + 1sw]);
+        with layer = -1 marker(:de.hst :removed :left, ht[:but]);
+        with layer = -2 marker(:de.bf :gone :left, ht[:but]);
+        station(:right :left_align :removed, ht[:but + 0.2sw] << 1.8sw,
+            "Büttel", "9,86 (180,25)"
+        );
+    }
+
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:but + 1sw, :wit - 1sw]);
+    }
+
+
+    with link = "point.de.Witzwort" {
+        track(:second:station :pax, ht[:wit - 1sw, :wit + 1sw]);
+        marker(:de.hp :pax :left, ht[:wit]);
+        station(:right :pax, ht[:wit + 0.2sw] << 1.8sw,
+            "Witzwort",
+            hbox(:center:base, "11,83 ", span(:removed, "(182,16)"))
+        );
+    }
+
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:wit + 1sw, :har - 1sw]);
+    }
+
+
+    with link = "point.de.Harblek" {
+        track(:second:station :pax, ht[:har - 1sw, :har + 1sw]);
+        marker(:de.hp :pax :right, ht[:har]);
+        with layer = -1 marker(:de.bf :removed :right, ht[:har]);
+        station(:right :pax :left_align, ht[:har + 0.3sw] << 2.5dt,
+            "Harblek",
+            hbox(:left:base, "15,35 ", span(:removed, "(185,73)"))
+        );
+    }
+
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:har + 1sw, :ton.a]);
+        with layer = 1 line_badge(:pax, ht[:har + 4.0km], "1204");
+    }
+
+
+    with link = "point.de.Tönning" {
+        # Gl. 1
+        track(:station :pax,
+                ht[:ton - 0.6sw - 1.1dl, :ton - 0.6sw - 1dl]
+            --  ht[:ton - 0.6sw, :ton.f - 3dl] << 1dt
+            --  ht[:ton.f - 2dl, :ton.f - 1.9dl]
+        );
+
+        # Gl. 2
+        track(:second:station :pax, ht[:ton.a, :ton.f]);
+
+        # Gl. 3?
+        track(:station,
+                ht[:ton - 0.61sw, :ton - 0.6sw]
+            --  ht[:ton - 0.6sw + 1dl, :ton.f - 4dl] >> 1dt
+        );
+
+        # Str. 1205
+        track(:second:station :pax,
+                path("d4.de.1205")[:ton.b, :ton.b - 0.1dl]
+            ..  ht[:ton - 0.6sw - 4dl, :ton - 0.6sw - 3dl] >> 1dt
+            --  ht[:ton - 0.6sw - 2dl, :ton - 0.6sw - 1.9dl]
+        );
+
+        marker(:de.bf :pax :left, ht[:ton] << 1dt);
+        label(:pax, ht[:ton],
+            hbox(:top:right,
+                vbox(:center:top,
+                    span(:medium :bold, "Tönning"),
+                    hbox(:center:top :xsmall,
+                        vbox(:right:top, "1204: ", "1205: "),
+                        vbox(:right:top, "21,", "21,"),
+                        vbox(:left:top, "19 ", "08 "),
+                        vbox(:right:top :removed, "(", "("),
+                        vbox(:right:top :removed, "191,", "0,"),
+                        vbox(:left:top :removed, "56)", "00)")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1204" {
+        with layer = -1 track(:station :removed,
+                ht[:ton.f - 4dl, :ton.f - 1dl] >> 1dt
+            ..  ht[:ton.ff, :toh - 1sw]
+        );
+    }
+
+
+    with link = "point.de.Tönning-Hafen" {
+        track(:station :removed, ht[:toh - 1sw, :f]);
+        slabel(:right :removed, ht[:toh + 140m] << 1.5dt - (2dt, 0dt),
+            span(:italic, "Tönning Hafen")
+        );
+    }
+}
+

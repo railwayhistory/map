@@ -1,0 +1,92 @@
+# DE 1207.  Weddinghusen - Karolinenkoog Landeplatz
+#
+let en = path("d4.de.1210");
+let wk = path("d4.de.1207");
+
+with detail = 3 {
+    # point.de.Weddinghusen  de.1206
+
+    with link = "line.de.1207" {
+        track(:second :removed,
+                en[:weh + 1ssw, :wed - 1sw] << 1.5dt
+        );
+    }
+
+    # point.de.Weddingstedt de.1210
+
+    with link = "line.de.1207" {
+        track(:second :removed,
+                en[:wed + 1sw, :akar] << 1.5dt
+            ..  wk[:ste - 1.01ssw, :ste - 1ssw] << 1.5dt
+        );
+    }
+
+    with link = "point.de.Stelle-Wittenwurth" {
+        track(:second:station :removed,
+                wk[:ste - 1ssw, :ste + 1ssw] << 1.5dt
+        );
+        with layer = -1 marker(:de.ldst :removed :right, wk[:ste] << 1.5dt);
+        with layer = -2 marker(:de.bf :gone :right, wk[:ste] << 1.5dt);
+        slabel(:left :removed, wk[:ste + 0.5ssw] << 2.0dt,
+            hbox(:right:top, "Stelle-Wittenwurth")
+        );
+    }
+
+    with link = "line.de.1207" {
+        track(:second :removed,
+                wk[:ste + 1ssw, :ste + 1.1ssw] << 1.5dt
+           ..   wk[:aaa + 2.0km, :hem - 1ssw]
+        );
+
+        guide(:linenum :removed,
+                wk[:aaa + 1.5km] << 0.5dt
+            --  wk[:aaa + 2km] << 3.0dt
+        );
+        label(:linenum :removed, wk[:aaa + 2km] << 3.0dt,
+            hbox(:right:middle :badgesize, "1207 ")
+        );
+    }
+
+    with link = "point.de.Hemme" {
+        track(:second:station :removed, wk[:hem - 1ssw, :hem + 1ssw]);
+        marker(:de.ldst :removed :right, wk[:hem]);
+        with layer = -1 marker(:de.bf :gone :right, wk[:hem]);
+        slabel(:left :removed, wk[:hem - 0.3ssw] << 5pt,
+            "Hemme"
+        );
+    }
+
+
+    with link = "line.de.1207" {
+        track(:second :removed, wk[:hem + 1ssw, :hew - 1ssw]);
+    }
+
+    with link = "point.de.Hemmerwurth" {
+        track(:second:station :removed, wk[:hew - 1ssw, :hew + 1ssw]);
+        marker(:de.ldst :removed :left, wk[:hew]);
+        with layer = -1 marker(:de.bf :gone :left, wk[:hew]);
+        slabel(:left :removed, wk[:hew - 0.3ssw] << 2.2ssw, "Hemmerwurth");
+    }
+
+    with link = "line.de.1207" {
+        track(:second :removed, wk[:hew + 1ssw, :kar - 1ssw]);
+    }
+
+    with link = "point.de.Karolinenkoog" {
+        track(:second:station :removed, wk[:kar - 1ssw, :kar + 1ssw]);
+        marker(:de.bf :removed :right, wk[:kar]);
+        slabel(:left:removed, wk[:kar - 2.0ssw] << 1.5dt,
+            span(:bold, "Karolinenkoog")
+        );
+    }
+
+    with link = "line.de.1207" {
+        track(:second :gone, wk[:kar + 1ssw, :f - 1.5ssw]);
+    }
+
+    with link = "point.de.Karolinenkoog-Landeplatz" {
+        track(:second:station :gone, wk[:f - 1.5ssw, :f]);
+        marker(:de.zst :gone :left, wk[:f - 0.5ssw]);
+    }
+}
+

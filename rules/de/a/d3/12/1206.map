@@ -1,0 +1,139 @@
+# DE 1206.  Heide (Holst) - Büsum
+#
+let hb = path("d4.de.1206");
+let en = path("d4.de.1210");
+
+with detail = 3 {
+    # point.de.Heide-Holst  de.1210
+
+    with link = "line.de.1206" {
+        with layer = -2 track(:second :pax,
+                en[:hei + 1ssw, :hei + 1.1ssw] >> 1.5dt
+            ..  en[:hei.f, :weh.x - 800m] >> 1.5dt
+            ..  en[:weh - 1.1ssw, :weh - 1ssw] << 1.5dt << 1ssw
+        );
+    }
+    with link = "point.de.Weddinghusen" {
+        track(:second:station :pax,
+                en[:weh - 1ssw, :weh + 0.5ssw] << 1.5dt << 1ssw
+        );
+        with layer = -1 track(:second:station :removed,
+                en[:weh - 0.5ssw, :weh + 1ssw] << 1.5dt
+        );
+        with layer = -1 marker(:de.bf :removed :left, en[:weh] << 1.5dt);
+        slabel(:right :removed, en[:weh - 0.6ssw] >> 1.0dt,
+            span(:bold, "Weddinghusen")
+        );
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax,
+                en[:weh + 0.5ssw, :weh + 0.51ssw] << 1.5dt << 1ssw
+            ..  hb[:weh.ff + 1200m, :del - 1ssw]
+        );
+    }
+
+    with link = "point.de.Dellweg" {
+        track(:second:station :pax, hb[:del - 1ssw, :del + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :right, hb[:del]);
+        slabel(:top :removed, hb[:del] >> 1.4ssw, "Dellweg");
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:del + 1ssw, :tie - 1ssw]);
+    }
+
+    with link = "point.de.Tiebensee" {
+        track(:second:station :pax, hb[:tie - 1ssw, :tie + 1ssw]);
+        marker(:de.hp :pax :left, hb[:tie]);
+        with layer = -1 marker(:de.bf :removed :left, hb[:tie.bf]);
+        slabel(:right :pax, hb[:tie + 1.5ssw] << 2.6ssw, "Tiebensee");
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:tie + 1ssw, :haf - 1ssw]);
+    }
+
+    with link = "point.de.Haferwisch" {
+        track(:second:station :pax, hb[:haf - 1ssw, :haf + 1ssw]);
+        with layer = -1 marker(:de.hp :removed :left, hb[:haf]);
+        with layer = -2 marker(:de.bf :gone :left, hb[:haf]);
+        slabel(:left :removed, hb[:haf - 1ssw] >> 1.0dt, "Haferwisch");
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:haf + 1ssw, :jar - 1ssw]);
+    }
+
+    with link = "point.de.Jarrenwisch" {
+        track(:second:station :pax, hb[:jar - 1ssw, :jar + 1ssw]);
+        marker(:de.hp :pax :left, hb[:jar]);
+        with layer = -1 marker(:de.bf :gone :left, hb[:jar]);
+        slabel(:right :pax, hb[:jar + 1.5ssw] << 2.4ssw, "Jarrenwisch");
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:jar + 1ssw, :wes - 1ssw]);
+    }
+
+    with link = "point.de.Wesselburen" {
+        track(:second:station :pax, hb[:wes - 1ssw, :wes + 1ssw]);
+        marker(:de.hp :pax :right, hb[:wes]);
+        with layer = -1 marker(:de.bf :removed :right, hb[:wes]);
+        slabel(:left :pax, hb[:wes - 1ssw] >> 1.4ssw, "Wesselburen");
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:wes + 1ssw, :sde - 1ssw]);
+    }
+
+    with link = "point.de.Süderdeich" {
+        track(:second:station :pax, hb[:sde - 1ssw, :sde + 1ssw]);
+        marker(:de.hp :pax :right, hb[:sde]);
+        with layer = -1 marker(:de.bf :gone :right, hb[:sde]);
+        slabel(:left :pax, hb[:sde + 0.3ssw] >> 1.4ssw, "Süderdeich");
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:sde + 1ssw, :rei - 1ssw]);
+    }
+
+    with link = "point.de.Reinsbüttel" {
+        track(:second:station :pax, hb[:rei - 1ssw, :rei + 1ssw]);
+        marker(:de.hp :pax :left, hb[:rei]);
+        with layer = -1 marker(:de.bf :removed :left, hb[:rei.bf]);
+        slabel(:right :pax, hb[:rei + 0.3ssw] << 2.0ssw, "Reinsbüttel");
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:rei + 1ssw, :oho - 1ssw]);
+
+        guide(:linenum :pax,
+                hb[:rei + 1.2km] >> 0.5dt
+            --  hb[:rei + 1.2km] >> 3.0dt
+        );
+        label(:linenum :pax, hb[:rei + 1.2km] >> 3.0dt,
+            hbox(:right:middle :badgesize, "1206 ")
+        );
+    }
+
+    with link = "point.de.Osterhof" {
+        track(:second:station :pax, hb[:oho - 1ssw, :oho + 1ssw]);
+        with layer = -1 marker(:de.hst :removed :left, hb[:oho]);
+        with layer = -2 marker(:de.bf :gone :left, hb[:oho]);
+        slabel(:right :removed, hb[:oho + 0.4ssw] << 1.6ssw,
+            "Osterhof"
+        );
+    }
+
+    with link = "line.de.1206" {
+        track(:second :pax, hb[:oho + 1ssw, :f - 1.6ssw]);
+    }
+
+    with link = "point.de.Büsum" {
+        track(:second:station :pax, hb[:f - 1.6ssw, :f]);
+        marker(:de.bf :pax :right, hb[:f - 0.6ssw]);
+        slabel(:left :pax, hb[:f] >> 1.4ssw, span(:bold, "Büsum"));
+    }
+}
+
