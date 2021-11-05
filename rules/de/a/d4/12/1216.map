@@ -1,0 +1,70 @@
+# DE 1216.  St Michaelisdonn - Marne
+#
+let sm = path("d4.de.1216");
+
+with detail = [4, 5] {
+    # point.de.St-Michaelisdonn  de.1210
+
+
+    with link = "line.de.1216" {
+        track(:second :closed,
+                sm[:a, :a + 1m] >> 2.5dt
+            ..  sm[:aa + 3dt, :vol - 1sw]
+        );
+        with layer = 1 line_badge(:closed, sm[:vol - 1.8km], "1216");
+    }
+
+
+    with link = "point.de.Volsemenhusen" {
+        track(:second:station :closed, sm[:vol - 1sw, :vol + 1sw]);
+        with layer = -1 marker(:de.hst :removed :right, sm[:vol]);
+        with layer = -2 marker(:de.bf :gone :right, sm[:vol]);
+        station(:top :removed, sm[:vol] >> 1.4sw,
+            "Volsemenhusen", "4,63"
+        );
+    }
+
+
+    with link = "line.de.1216" {
+        track(:second :closed, sm[:vol + 1sw, :mar.a]);
+        with layer = 1 line_badge(:closed, sm[:maw - 1.7km], "1216");
+    }
+
+
+    with link = "point.de.Marne-W11" {
+        track(:second:station :closed, sm[:mar.a, :maw + 0.5sw]);
+        with layer = -1 track(:second:station :removed,
+                sm[:maw - 1m, :maw]
+            ..  path("d4.de.1217")[:a - 1m, :a]
+        );
+
+        marker(:refdt :closed :left, sm[:maw]);
+        marker(:refdt :closed :right, sm[:maw]);
+        label(sm[:maw - 4pt] << 1dt,
+            hbox(:left:top :xsmall,
+                vbox(:right:top,
+                    span(:closed, "1216: "),
+                    span(:removed, "1217: ")
+                ),
+                vbox(:right:top,
+                    span(:closed, "7,"),
+                    span(:removed, "0,")
+                ),
+                vbox(:left:top,
+                    span(:closed, "60"),
+                    span(:removed, "00")
+                )
+           )
+        );
+    }
+
+    with link = "point.de.Marne" {
+        track(:second:station :closed, sm[:maw + 0.5sw, :f]);
+        marker(:de.bf :closed :left, sm[:mar]);
+        station(:bottom :closed, sm[:mar] << 1.4sw,
+            span(:bold, "Marne"),
+            "1216: 8,26"
+        );
+    }
+}
+

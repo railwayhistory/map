@@ -1,0 +1,138 @@
+# DE 1215.  St Michaelisdonn - Brunsbüttel Nord
+#
+let sb = path("d4.de.1215");
+
+with detail = 3 {
+    # point.de.St-Michaelisdonn  de.1210
+
+    with link = "line.de.1215" {
+        let en = path("d4.de.1210");
+
+        track(:second :station,
+                en[:fbru + 1m, :fbru] >> 0.5dt
+            ..  sb[:aa + 800m, :aa + 801m] << 0.5dt
+        );
+        track(:second, sb[:aa + 801m, :din - 1ssw] << 0.5dt);
+
+        
+        with layer = -1 track(:first :gone,
+                en[:fbru + 1m, :fbru] << 0.5dt
+            ..  sb[:aa, :aa + 801m] << 0.5dt
+        );
+        with layer = -1 track(:first :gone,
+                en[:fbru + 1m, :fbru] >> 0.5dt
+            ..  sb[:aa, :din - 1ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.de.Dingerdonn" {
+        with layer = -2 track(:first:station :gone,
+                sb[:din - 1ssw, :din + 1ssw] >> 0.5dt
+        );
+        track(:second:station, sb[:din - 1ssw, :din + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hpext :removed :right, sb[:din] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, sb[:din] >> 0.5dt);
+        slabel(:left :removed, sb[:din + 0.3ssw] >> 0.5dt >> 1.8ssw,
+            "Dingerdonn"
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:first :gone, sb[:din + 1ssw, :edd - 1ssw] >> 0.5dt);
+        track(:second, sb[:din + 1ssw, :edd - 1ssw] << 0.5dt);
+        with layer = 1 line_badge(:open, sb[:din + 1.2km], "1215");
+    }
+
+    with link = "point.de.Eddelak" {
+        with layer = -1 track(:first :gone,
+                sb[:edd - 1ssw, :edd + 1ssw] >> 0.5dt
+        );
+        track(:second:station, sb[:edd - 1ssw, :edd + 1ssw] << 0.5dt);
+
+        with layer = -2 marker(:de.anst :removed :right, sb[:edd] >> 0.5dt);
+        with layer = -3 marker(:de.bf :gone :right, sb[:edd] >> 0.5dt);
+        slabel(:left :removed, sb[:edd + 0.3ssw] >> 0.5dt >> 1.8ssw,
+            "Eddelack"
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:first :gone, sb[:edd + 1ssw, :ave - 1ssw] >> 0.5dt);
+        track(:second, sb[:edd + 1ssw, :ave - 1ssw] << 0.5dt);
+    }
+
+
+    with link = "point.de.Averlak" {
+        with layer = -2 track(:first:station :gone,
+                sb[:ave - 1ssw, :ave + 1ssw] >> 0.5dt
+        );
+        track(:second:station, sb[:ave - 1ssw, :ave + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hpext :removed :right, sb[:ave] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :right, sb[:ave] >> 0.5dt);
+        slabel(:left :removed, sb[:ave + 0.2ssw] >> 0.5dt >> 1.8ssw,
+            "Averlak"
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:first :gone, sb[:ave + 1ssw, :bla - 1ssw] >> 0.5dt);
+        track(:second, sb[:ave + 1ssw, :bla - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Blangenmoor" {
+        track(:first:station :gone, sb[:bla - 1ssw, :bla + 1ssw] >> 0.5dt);
+        track(:second:station, sb[:bla - 1ssw, :bla + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hst :removed :left, sb[:bla] << 0.5dt);
+        with layer = -2 marker(:de.bf :gone :left, sb[:bla] << 0.5dt);
+        slabel(:right :removed, sb[:bla] << 0.5dt << 1.2ssw,
+            vbox(:left:bottom,
+                span(:removed, "Blangen-"),
+                span(:removed, "moor")
+            )
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:second, sb[:bla + 1ssw, :ble - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Blangenmoor-Lehe" {
+        track(:second:station, sb[:ble - 1ssw, :ble + 1ssw] << 0.5dt);
+        with layer = -1 marker(:de.hp :removed :left, sb[:ble] << 0.5dt);
+        slabel(:left :removed, sb[:ble + 0.3ssw], "Blangenmoor-Lehe");
+    }
+
+    with link = "line.de.1215" {
+        track(:second,
+                sb[:ble + 1ssw, :ble + 1.1ssw] << 0.5dt
+            ..  sb[:con - 0.6ssw, :con - 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Brunsbüttel-Condea" {
+        track(:second:station, sb[:con - 0.5ssw, :con]);
+        with layer = -1 track(:second:station :removed,
+                sb[:con, :con + 1ssw]
+        );
+        marker(:de.anst :right, sb[:con]);
+        slabel(:left, sb[:con + 0.8ssw] >> 1.4ssw,
+            hbox(:center:base,
+                span(:light, "Brunsbüttel "),
+                span(:regular, "Condea")
+            )
+        );
+    }
+
+    with link = "line.de.1215" {
+        track(:second :removed, sb[:con + 1ssw, :bru - 1ssw]);
+    }
+
+    with link = "point.de.Brunsbüttel-Nord" {
+        track(:second:station :removed, sb[:bru - 1ssw, :f]);
+        marker(:de.bf :removed :left, sb[:bru]);
+        slabel(:left :removed, sb[:bru + 0.3ssw] >> 0.5dt,
+            span(:bold, "Brunsbüttel Nord")
+        );
+    }
+}
+
