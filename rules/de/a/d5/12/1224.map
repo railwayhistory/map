@@ -1,0 +1,271 @@
+# DE 1224.  Hamburg-Altona - Hamburg-Blankenese
+#
+let ab = path("d4.de.1224");
+
+with detail = 5 {
+    # point.de.Hamburg-Altona-S-Bahn: de.1270
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail:dc12 :pax, ab[:alt.x + 60dt, :baa - 100m]);
+    }
+
+
+    with link = "point.de.Hamburg-Bahrenfeld-Abzw" {
+        # Strecke 1230
+        with layer = -1, style = :de track(:first:station,
+                ab[:baa - 100m, :baa - 60m] >> 1.5dt
+            ..  ab[:baa, :baa + 1m] >> 0.5dt
+        );
+
+        track(:first:station :double :rail:dc12 :pax,
+                ab[:baa - 100m, :baa + 70m]
+        );
+            track(:station :rail:dc12,
+                    ab[:baa + 15m] >> 0.5dt
+                --  ab[:baa + 65m] << 0.5dt
+            );
+
+        marker(:de.abzw :rail:dc12 :left, ab[:baa] << 0.5dt);
+        station(:bottom :rail:dc12, ab[:baa] << 0.5dt << 1.2sh,
+            span(:bold, "H.-Bahrenfeld Abzw"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1224: "),
+                    span(:open, "1230: ")
+                ),
+                vbox(:right:top,
+                    span(:open, "2,"),
+                    span(:open, "0,")
+                ),
+                vbox(:left:top,
+                    span(:open, "53"),
+                    span(:open, "35")
+                )
+            )
+        );
+    }
+
+    
+    with link = "point.de.Hamburg-Bahrenfeld" {
+        # Gl. 1
+        track(:first:station :rail:dc12 :pax,
+                ab[:baa + 70m, :bah + 200m] << 0.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :rail:dc12 :pax,
+                ab[:baa + 70m, :baa + 75m] >> 0.5dt
+            ..  ab[:bah - 185m, :bah] >> 1.5dt
+            ..  ab[:bah + 100m, :bah + 200m] >> 0.5dt
+        );
+
+        platform(:open :rail:dc12 :pax,
+                ab[:bah - 185m, :bah] >> 1.1dt
+            --  ab[:bah, :bah - 185m] >> 0.1dt
+        );
+
+        marker(:de.hp :rail:dc12 :pax :right, ab[:bah] >> 1.5dt);
+        with layer = -1 marker(:de.bf :removed :right, ab[:bah] >> 1.5dt);
+        station(:top :rail:dc12 :pax, ab[:bah] >> 1.5dt >> 1.2sh,
+            "H.-Bahrenfeld",
+            hbox(:center:top,
+                vbox(:right:top,
+                    "1224: ",
+                    span(:removed, "1230: ")
+                ),
+                vbox(:center:top,
+                    "2,91",
+                    span(:removed, "??")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail:dc12 :pax, ab[:bah + 200m, :oth - 200m]);
+        with layer = 1 line_badge(:rail:dc12 :pax, ab[:bah + 0.8km], "1224");
+    }
+
+
+    with link = "point.de.Hamburg-Othmarschen" {
+        # Gl. 1
+        track(:first:station :rail:dc12 :pax,
+                ab[:oth - 200m, :oth - 100m] << 0.5dt
+            ..  ab[:oth, :oth + 440m] << 1.5dt
+            ..  ab[:oth + 550m, :oth + 650m] << 0.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :rail:dc12 :pax,
+                ab[:oth - 200m, :oth + 650m] >> 0.5dt
+        );
+
+        # Gl. 3
+        track(:station :rail:dc12,
+                ab[:oth + 220m, :oth + 440m] << 0.5dt
+        );
+            track(:station :rail:dc12,
+                    ab[:oth + 205m] >> 0.5dt
+                --  ab[:oth + 255m] << 0.5dt
+            );
+            track(:station :rail:dc12,
+                    ab[:oth + 205m] << 1.5dt
+                --  ab[:oth + 280m] << 0.5dt
+            );
+
+        platform(:rail:dc12 :pax,
+                ab[:oth + 20m, :oth + 190m] >> 0.1dt
+            --  ab[:oth + 190m, :oth + 20m] >> 1.1dt
+        );
+
+        marker(:de.bf :rail:dc12 :pax :left, ab[:oth] << 1.5dt);
+        station(:bottom :rail:dc12 :pax, ab[:oth] << 1.5dt << 1.2sh,
+            "H.-Othmarschen", "4,44"
+        );
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail:dc12 :pax, ab[:oth + 650m, :kfl - 550m]);
+    }
+
+
+    with link = "point.de.Hamburg-Klein-Flottbek" {
+        # Gl. 1
+        track(:first:station :rail:dc12 :pax,
+                ab[:kfl - 550m, :kfl - 320m] >> 0.5dt
+            ..  ab[:kfl - 140m, :kfl + 30m] >> 1.5dt
+            ..  ab[:kfl + 120m, :kfl + 300m] >> 0.5dt
+        );
+            track(:station :rail:dc12,
+                    ab[:kfl - 455m] >> 0.5dt
+                --  ab[:kfl - 395m] << 0.5dt
+            );
+
+        # Gl. 2
+        track(:first:station :rail:dc12 :pax,
+                ab[:kfl - 550m, :kfl + 300m] << 0.5dt
+        );
+            track(:station :rail:dc12,
+                    ab[:kfl + 125m] << 0.5dt
+                --  ab[:kfl + 195m] >> 0.5dt
+            );
+
+        platform(:rail:dc12 :pax,
+                ab[:kfl - 140m, :kfl + 30m] >> 1.1dt
+            --  ab[:kfl + 30m, :kfl - 140m] >> 0.1dt
+        );
+
+        marker(:de.bf :rail:dc12 :pax :left, ab[:kfl] << 0.5dt);
+        station(:bottom :rail:dc12 :pax, ab[:kfl] << 0.5dt << 1.4sh,
+            "H.-Klein Flottbek", "6,19"
+        );
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail:dc12 :pax, ab[:kfl + 300m, :hoc - 120m]);
+    }
+
+
+    with link = "point.de.Hamburg-Hochkamp" {
+        track(:first:station :rail:dc12 :pax,
+                ab[:hoc - 120m, :hoc - 115m] >> 0.5dt
+            ..  ab[:hoc - 20m, :hoc + 130m]  >> 1.0dt
+            ..  ab[:hoc + 305m, :hoc + 310m] >> 0.5dt
+        );
+        track(:first:station :rail:dc12 :pax,
+                ab[:hoc - 120m, :hoc - 115m] << 0.5dt
+            ..  ab[:hoc - 20m, :hoc + 130m]  << 1.0dt
+            ..  ab[:hoc + 305m, :hoc + 310m] << 0.5dt
+        );
+
+        platform(:rail:dc12 :pax,
+                ab[:hoc - 10m, :hoc + 130m] >> 0.6dt
+            --  ab[:hoc + 130m, :hoc - 10m] >> 0.6dt
+        );
+
+        marker(:de.hp :rail:dc12 :pax :right, ab[:hoc] >> 1.0dt);
+        station(:right :rail:dc12 :pax, ab[:hoc - 0.4sw] >> 1.0dt >> 1.4sh,
+            "H.-Hochkamp", "7,52"
+        );
+    }
+
+
+    with link = "line.de.1224" {
+        track(:first :double :rail:dc12 :pax, ab[:hoc + 310m, :fwed - 160m]);
+        with layer = 1 line_badge(:rail:dc12 :pax, ab[:hoc + 1.0km], "1224");
+    }
+
+
+    with link = "point.de.Hamburg-Blankenese" {
+        # Gl. 1
+        track(:station :rail:dc12,
+                ab[:fwed - 61m, :fwed - 60m] << 0.5dt
+            ..  ab[:fwed, :bla - 45m] << 1.5dt
+        );
+            track(:station :rail:dc12,
+                    ab[:bla - 90m] << 1.5dt
+                --  ab[:bla - 55m] << 0.5dt
+            );
+
+        # Gl. 2
+        track(:first:station :rail:dc12 :pax,
+                ab[:fwed - 160m, :bla - 50m] << 0.5dt
+        );
+        track(:first:station :rail:dc12,
+                ab[:bla - 50m, :f] << 0.5dt
+        );
+            track(:station :rail:dc12,
+                    ab[:bla - 40m] << 0.5dt
+                --  ab[:bla + 5m] >> 0.5dt
+            );
+
+        # Gl. 3
+        track(:first:station :rail:dc12 :pax,
+                ab[:fwed - 160m, :fwed] >> 0.5dt
+            ..  ab[:bla - 220m, :bla - 50m] >> 1.5dt
+        );
+        track(:first:station :rail:dc12,
+                ab[:bla - 50m, :bla - 49m] >> 1.5dt
+            ..  ab[:bla, :f] >> 0.5dt
+        );
+            track(:station :rail:dc12,
+                    ab[:fwed - 55m] >> 0.5dt
+                --  ab[:fwed + 45m] << 1.5dt
+            );
+
+        # Strecke 1226
+        track(:first:station :rail:dc12 :pax,
+                ab[:fwed - 50m, :fwed - 45m] >> 1.5dt
+            --  ab[:fwed + 45m, :fwed + 46m] << 0.5dt
+        );
+
+
+        # Bahnsteig 1
+        platform(:open :rail:dc12,
+                ab[:bla - 210m, :bla - 40m] << 1.9dt
+            --  ab[:bla - 40m, :bla - 210m] >> 2.6dt
+        );
+
+        # Bahnsteig 2/3
+        platform(:open :rail:dc12 :pax,
+                ab[:bla - 220m, :bla - 50m] >> 1.1dt
+            --  ab[:bla - 50m, :bla - 220m] >> 0.1dt
+        );
+
+        marker(:de.bf :rail:dc12 :pax :left, ab[:bla] << 0.5dt);
+        station(:bottom :rail:dc12 :pax, ab[:bla] << 0.5dt << 1.6sh,
+            span(:bold, "H.-Blankenese"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:open, "1224: 9,56"),
+                    span(:open, "1226: 9,56")
+                )
+            )
+        );
+    }
+}
+

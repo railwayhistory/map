@@ -1,0 +1,161 @@
+# DE 1226.  Hamburg-Blankenese - Wedel (Holst)
+#
+let bw = path("d4.de.1226");
+
+with detail = [4, 5] {
+    # point.de.Hamburg-Blankenese: de.1224
+
+
+    with link = "line.de.1226" {
+        with detail = 4 {
+            track(:first :rail:dc12 :pax,
+                    path("d4.de.1224")[:fwed - 0.1dl, :fwed - 0.2dl] << 1.5dt
+                ..  bw[:aa, :ise - 1sw]
+            );
+        }
+        with detail = 5 {
+            track(:first :rail:dc12 :pax,
+                    path("d4.de.1224")[:fwed - 50m, :fwed - 51m] << 1.5dt
+                ..  bw[:aa, :ise - 1sw]
+            );
+        }
+    }
+
+
+    with link = "point.de.Hamburg-Iserbrook" {
+        track(:first:station :rail:dc12 :pax, bw[:ise - 1sw, :ise + 1sw]);
+        marker(:de.hp :rail:dc12 :pax :right, bw[:ise]);
+        station(:top :rail:dc12 :pax, bw[:ise] >> 1.6sw,
+            hbox(:center:base, span(:light, "H.-"), "Iserbrook"),
+            "11,26"
+        );
+    }
+
+
+    with link = "line.de.1226" {
+        track(:first :rail:dc12 :pax, bw[:ise + 1sw, :sul.a]);
+    }
+
+
+    with link = "point.de.Hamburg-Sülldorf" {
+        track(:first:station :rail:dc12 :pax, bw[:sul.a, :sul.f]);
+        track(:station :rail:dc12 :pax,
+                bw[:sul.a + 99m, :sul.a + 100m]
+            --  bw[:sul.a + 100m + 1dl, :sul.f - 100m - 1dl] >> 1dt
+            --  bw[:sul.f - 100m, :sul.f - 99m]
+        );
+        marker(:de.bf :rail:dc12 :pax :left, bw[:sul]);
+        station(:bottom :rail:dc12 :pax, bw[:sul] << 1.2sw,
+            hbox(:center:base, span(:light, "H.-"), "Sülldorf"),
+            "12,62"
+        );
+    }
+
+
+    with link = "line.de.1226" {
+        track(:first :rail:dc12 :pax, bw[:sul.f, :riu - 1sw]);
+        with layer = 1 line_badge(:rail:dc12 :pax, bw[:sul + 1.0km], "1226");
+    }
+
+
+    with link = "point.de.Hamburg-Rissen-Üst" {
+        track(:first:station :rail:dc12 :pax, bw[:riu - 1sw, :riu + 1sw]);
+        track(:first:station :rail:dc12 :pax,
+                bw[:riu - 1m, :riu]
+            --  bw[:riu + 1dl, :riu + 1sw] >> 1dt
+        );
+        marker(:de.uest :rail:dc12 :left, bw[:riu]);
+        station(:top :rail:dc12, bw[:riu] >> 2.5dt,
+            "H.-Rissen Üst", "14,92"
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Rissen" {
+        track(:first:station :double :rail:dc12 :pax,
+                bw[:riu + 1sw, :ris + 1sw] >> 0.5dt
+        );
+        marker(:de.hp :rail:dc12 :pax :left, bw[:ris]);
+        with layer = -1 marker(:de.bf :gone :left, bw[:ris]);
+        label(:rail:dc12 :pax, bw[:ris - 1sw] << 1.0sw,
+            vbox(:right:top,
+                span(:medium :removed, "Rissen"),
+                hbox(:right:top,
+                    vbox(:center:top,
+                        hbox(:right:base :medium,
+                            span(:light, "H.-"), "Rissen Hp"
+                        ),
+                        span(:xsmall, "15,30")
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1226" {
+        track(:first :double :rail:dc12 :pax,
+                bw[:ris + 1sw, :ris.ff - 1dt] >> 0.5dt
+            ..  bw[:ris.fff + 1dt, :rio - 1sw] << 0.5dt
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Rissen-Ölweiche" {
+        track(:first:station :double :rail:dc12 :pax,
+                bw[:rio - 1sw, :rou - 1sw] << 0.5dt
+        );
+        marker(:de.gbf :rail:dc12 :left, bw[:rio] << 1dt);
+        station(:bottom :rail:dc12, bw[:rio] << 1dt << 1.2sw,
+            "H.-Rissen Ölweiche", "17,15"
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Rissen-Ölweiche-Üst" {
+        track(:first:station :rail:dc12 :pax, bw[:rou - 1sw, :rou + 1sw]);
+        track(:first:station :rail:dc12 :pax,
+                bw[:rou - 1sw, :rou - 1dl] << 1dt
+            --  bw[:rou, :rou + 0.1dl]
+        );
+        marker(:de.uest :rail:dc12 :right, bw[:rou]);
+        station(:top :rail:dc12, bw[:rou] >> 1.2sw,
+            "H.-Rissen Ölweiche (Üst)", "17,56"
+        );
+    }
+
+
+    with link = "line.de.1226" {
+        track(:first :rail:dc12 :pax, bw[:rou + 1sw, :wed.a]);
+    }
+
+
+    with link = "point.de.Wedel-Holst" {
+        # Gl. 1
+        track(:first:station :rail:dc12 :pax, bw[:wed.a, :wed - 250m - 3dl]);
+        track(:first:station :rail:dc12, bw[:wed - 250m - 3dl, :wed]);
+
+        # Gl. 2
+        track(:station :rail:dc12 :pax,
+                bw[:wed - 250m - 3.1dl, :wed - 250m - 3dl]
+            --  bw[:wed - 250m - 2dl, :wed] << 1dt
+        );
+
+        # Gl. 15
+        track(:station :rail:dc12, bw[:wed.a, :wed - 250m - 2dl] << 1dt);
+
+        # Gl. 18 - Gl. 20
+        track(:station :rail:dc12, bw[:wed.a, :wed] << 2dt);
+            track(:station :rail:dc12,
+                    bw[:wed - 250m - 2dl] << 2dt
+                --  bw[:wed - 250m]
+            );
+
+        marker(:de.bf :rail:dc12 :pax :right, bw[:wed - 0.5sw]);
+        station(:left :rail:dc12 :pax, bw[:wed] >> 1.2sw,
+            hbox(:right:base, span(:bold, "Wedel "), "(Holst)"),
+            "1226: 18,96"
+        );
+    }
+}
+

@@ -1,51 +1,53 @@
 # DE 1224.  Hamburg-Altona - Hamburg-Blankenese
 #
-let altbla = path("metro.de.hmb.1224");
-let altkie = path("metro.de.hmb.1220");
+let altbla = path("d3.de.1224");
+let altkie = path("d3.de.1220.hmb");
 
 with detail = 3, style = :de.sbahn {
     # point.de.Hamburg-Altona-S-Bahn: de.1270
 
     with link = "line.de.1224" {
-        with layer = 2 track(:first:station :double :rail,
+        with layer = 2 track(:first:station :double :rail:dc12 :pax,
                 altkie[:alt + 0.5ssw, :alt + 0.51ssw] << 4dt
             ..  altbla[:bah - 0.51ssw, :bah - 0.5ssw]
         );
     }
 
     with link = "point.de.Hamburg-Bahrenfeld" {
-        track(:first:station :double :rail,
+        track(:first:station :double :rail:dc12 :pax,
                 altbla[:bah - 0.5ssw, :bah + 0.5ssw]
         );
-        marker(:de.hp :right, altbla[:bah] >> 0.5dt);
+        marker(:de.hp :rail:dc12 :pax :right, altbla[:bah] >> 0.5dt);
     }
 
     with link = "line.de.1224" {
-        track(:first :double :rail,
+        track(:first :double :rail:dc12 :pax,
                 altbla[:bah + 0.5ssw, :bla - 1ssw]
         );
     }
 
     with link = "point.de.Hamburg-Othmarschen" {
-        marker(:de.bf :left, altbla[:oth] << 0.5dt);
+        marker(:de.bf :rail:dc12 :pax :left, altbla[:oth] << 0.5dt);
     }
 
     with link = "point.de.Hamburg-Klein-Flottbek" {
-        marker(:de.bf :left, altbla[:kfl] << 0.5dt);
+        marker(:de.bf :rail:dc12 :pax :left, altbla[:kfl] << 0.5dt);
     }
 
     with link = "point.de.Hamburg-Hochkamp" {
-        marker(:de.hp :right, altbla[:hoc] >> 0.5dt);
+        marker(:de.hp :rail:dc12 :pax :right, altbla[:hoc] >> 0.5dt);
     }
 
     with link = "point.de.Hamburg-Blankenese" {
-        track(:first:station :double :rail, altbla[:bla - 1ssw, :bla + 1ssw]);
-        marker(:de.bf :left, altbla[:bla] << 0.5dt);
-        slabel(:left, altbla[:bla] << 0.5dt << 2.8ssw + (2ssw, 0ssw),
+        track(:first:station :double :rail:dc12 :pax,
+                altbla[:bla - 1ssw, :bla + 1ssw]
+        );
+        marker(:de.bf :rail:dc12 :pax :left, altbla[:bla] << 0.5dt);
+        slabel(:left :rail:dc12 :pax,
+            altbla[:bla] << 0.5dt << 2.8ssw + (2ssw, 0ssw),
             span(:bold, "H.-Blankenese")
         );
     }
 
 }
-
 
