@@ -1,0 +1,171 @@
+# DE 1234.  Hamburg-Eidelstedt (Ef) - Hamburg Lübecker Gbf
+#
+let er = path("d4.de.1234");
+
+with detail = 4 {
+    # point.de.Hamburg-Eidelstedt: de.1220
+
+    
+    with link = "line.de.1234" {
+        with layer = -4 track(:first :cat:ac15, er[:aa + 6dt, :lok.a]);
+        with layer = 1 line_badge(:cat:ac15, er[:lok.a - 2.1km], "1234");
+    }
+
+
+    with link = "point.de.Hamburg-Lokstedt" {
+        # Gl. 401 (Streckengleis)
+        track(:first:station :cat:ac15, er[:lok.a, :lok.f]);
+
+        # Gl. 402 (<< 1dt)
+        track(:station :cat:ac15,
+                er[:lok.a + 185m - 2dl, :lok.f - 170m + 2dl] << 1dt);
+
+        # Gl. ? (>> 1dt)
+        with layer = -1 track(:station :closed,
+                er[:lok.a + 100m, :lok.a + 101m]
+            ..  er[:lok.a + 101m + 1dl, :lok - 100m] >> 1dt
+        );
+
+        # W415 - W414
+        track(:station :cat:ac15,
+                er[:lok.a + 185m - 1dl]
+            --  er[:lok.a + 185m] << 1dt
+        );
+
+        # W405 - W403
+        track(:station :cat:ac15,
+                er[:lok.f - 170m] << 1dt
+            --  er[:lok.f - 170m + 1dl]
+        );
+
+        marker(:de.gbf :cat:ac15 :left, er[:lok] << 1dt);
+        station(:top :cat:ac15, er[:lok] << 1dt << 1.2sw,
+            "H.-Lokstedt", "5,95"
+        );
+    }
+
+
+    with link = "line.de.1234" {
+        track(:first :cat:ac15,
+                er[:lok.f, :bar.aa - 2.5dt]
+            ..  er[:bar.a - 1m, :bar.a] >> 2.5dt
+        );
+        with layer = 1 line_badge(:cat:ac15, er[:lok.f + 1.8km], "1234");
+    }
+
+
+    with link = "point.de.Hamburg-Barmbek" {
+        # Gl. 301 (Streckengleis 1234)
+        track(:first:station :cat:ac15,
+                er[:bar.a, :bar.a + 4dl] >> 2.5dt
+            --  er[:bar.a + 5dl, :bar.f] >> 1.5dt
+        );
+
+        # Streckengleis 1243
+        track(:station,
+                er[:bar.a, :bar.a + 2dl] >> 1.5dt
+            --  er[:bar.a + 3dl, :bar.a + 3.1dl] >> 2.5dt
+        );
+
+        # Gl. 302
+        track(:station :cat:ac15,
+                er[:bar.a + 4dl, :bar.f - 250m - 1dl] >> 2.5dt
+            --  er[:bar.f - 250m, :bar.f - 249m] >> 1.5dt
+        );
+
+        # Gl. 2
+        track(:station,
+                er[:bar.f - 250m - 2.1dl, :bar.f - 250m - 2dl] >> 2.5dt
+            --  er[:bar.f - 250m - 1dl, :bar.f] >> 3dt
+        );
+
+        # Gl. 3
+        track(:station,
+                er[:bar.f - 251m, :bar.f - 250m] >> 3dt
+            --  er[:bar.f - 250m + 1dl, :bar.f] >> 4dt
+        );
+
+        marker(:de.gbf :cat:ac15 :right, er[:bar] >> 2.5dt);
+        station(:left :cat:ac15, er[:bar + 0.3sw] >> 2.5dt >> 1.4sw,
+            span(:bold, "H.-Barmbek"),
+            hbox(:center:top,
+                vbox(:right:top, "1234: ", "1243: "),
+                vbox(:right:center, "11,00", "??")
+            )
+        );
+    }
+
+
+    with link = "line.de.1234" {
+        track(:first :cat:ac15,
+                er[:bar.f, :bar.f + 1dl] >> 1.5dt
+            ..  er[:bar.ff, :gle - 1sw]
+        );
+    }
+
+    with link = "point.de.Hamburg-Barmbek-Gleichrichterwerk" {
+        track(:first:station :cat:ac15, er[:gle - 1sw, :gle + 1sw]);
+
+        with layer = -1 marker(:de.anst :closed :left, er[:gle]);
+    }
+
+
+    with link = "line.de.1234" {
+        track(:first:station :cat:ac15, er[:gle + 1sw, :hob - 1sw]);
+    }
+
+
+    with link = "point.de.Hamburg-Horn" {
+        # Gl. 210 - Gl. 294 (aus Wandsbek)
+        track(:first:station :cat:ac15, er[:hob, :hoa + 1sw] << 1dt);
+
+        # Gl. 399 - Gl. 291 (aus Eidelstedt)
+        track(:first:station :cat:ac15, er[:hob - 1sw, :hoa + 1sw]);
+
+        # W201 - W202
+        track(:station :cat:ac15,
+                er[:hoa - 3dl] << 1dt
+            --  er[:hoa - 2dl]
+        );
+
+        # W203 - W204
+        track(:station :cat:ac15,
+                er[:hoa - 1dl]
+            --  er[:hoa] << 1dt
+        );
+
+        marker(:de.abzw :cat:ac15 :left, er[:hoa] << 1dt);
+        with layer = -1 marker(:de.bbf :gone :left, er[:hoa] << 1dt);
+        station(:right :left_align :cat:ac15, er[:hoa + 0.3sw] << 1dt << 1.4sw,
+            hbox(:left:base, "H.-", span(:bold, "Horn")),
+            hbox(:left:top,
+                vbox(:right:top, " 1234: ", "1242: "),
+                vbox(:right:top, "16,", "59,"),
+                vbox(:left:top, "10 ", "64 "),
+                vbox(:right:top :removed, "(15,", "(59,"),
+                vbox(:left:top :removed, "96)", "50)")
+            )
+        );
+    }
+
+
+    with link = "line.de.1234" {
+        track(:first :double :cat:ac15,
+                er[:hoa + 1sw, :hoa + 1.1sw] << 0.5dt
+            ..  er[:hoa + 1200m, :rot.a]
+        );
+        with layer = 1 line_badge(:cat:ac15, er[:hoa + 1.6km], "1234");
+    }
+
+
+    # point.de.Hamburg-Rothenburgsort: de.1280
+
+
+    with link = "line.de.1234" {
+        with layer = -2 track(:first :gone, er[:ahar, :lug - 1sw]);
+    }
+ 
+
+    # point.de.Hamburg-Lübecker-Gbf: de.A71
+}
+
