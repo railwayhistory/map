@@ -1,0 +1,33 @@
+# DE 1247.  Hamburg-Ohlsdorf - Hamburg-Ochsenzoll
+#
+let oo = path("d4.de.1247");
+
+with detail = 3 {
+    # point.de.Hamburg-Ohlsdorf  de.1243, de.1241
+
+
+    with link = "line.de.1247" {
+        with layer = -1 track(:second :removed,
+                oo[:ohl - 0.5ssw, :ohl.ya] << 0.5dt
+            ..  oo[:aa, :lan - 1ssw]
+        );
+    }
+
+    with link = "point.de.Hamburg-Langenhorn" {
+        track(:second:station :removed, oo[:lan - 1ssw, :lan + 1ssw]);
+        marker(:de.ldst :removed :right, oo[:lan]);
+    }
+
+    with link = "line.de.1247" {
+        track(:second :removed, oo[:lan + 1ssw, :och - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Ochsenzoll" {
+        track(:second:station :removed, oo[:och - 1ssw, :och + 1ssw]);
+        marker(:de.gbf :removed :right, oo[:och]);
+        slabel(:right :removed, oo[:och + 0.6ssw] >> 1.6ssw,
+            span(:bold, "H.-Ochsenzoll")
+        );
+    }
+}
+

@@ -1,0 +1,87 @@
+# DE 1241.  Hamburg Hbf - Hamburg-Poppenbüttel
+#
+let hp = path("d3.de.1241");
+
+with detail = 3 {
+    # point.de.Hamburg-Hbf-S-Bahn  de.1240
+
+    with link = "line.de.1241" {
+        with layer = 2 track(:first:double :rail:dc12 :pax,
+                hp[:ham.aa, :has - 2dt] << 2dt
+            ..  hp[:wan + 2dt, :bap + 0.5ssw] << 2dt
+            ..  hp[:bap + 0.5ssw + 4dt, :ohl - 1ssw] >> 1dt
+        );
+        with layer = 1 casing(:first:double :rail:dc12 :pax,
+                hp[:bap, :bap + 0.5ssw] << 2dt
+            ..  hp[:bap + 0.5ssw + 4dt, :bap + 0.5ssw + 4.1dt] >> 1dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Landwehr" {
+        marker(:de.hp :rail:dc12 :pax :left, hp[:lan - 1dt] << 2.5dt);
+    }
+
+    with link = "point.de.Hamburg-Hasselbrook-S-Bahn" {
+        marker(:de.bf :rail:dc12 :pax :left, hp[:has - 2dt] << 2.5dt);
+    }
+
+    with link = "point.de.Hamburg-Wandsbeker-Chaussee" {
+        marker(:de.hp :rail:dc12 :pax :left, hp[:wan + 2dt] << 2.5dt);
+    }
+
+    with link = "point.de.Hamburg-Friedrichsberg" {
+        marker(:de.hp :rail:dc12 :pax :left, hp[:fri + 2dt] << 2.5dt);
+    }
+
+    with link = "point.de.Hamburg-Barmbek-S-Bahn" {
+        with layer = 2 marker(:de.bf :rail:dc12 :pax :left, hp[:bap] << 2.5dt);
+    }
+
+    with link = "point.de.Hamburg-Alte-Wöhr" {
+        with layer = 2 marker(:de.hp :rail:dc12 :pax :right, hp[:awo] >> 1.5dt);
+    }
+
+    with link = "point.de.Hamburg-Rübenkamp" {
+        marker(:de.hp :rail:dc12 :pax :right, hp[:rub] >> 1.5dt);
+    }
+
+    with link = "point.de.Hamburg-Ohlsdorf-S-Bahn" {
+        track(:first:station :double :rail:dc12 :pax,
+                hp[:ohl - 1ssw, :ohl.ya] >> 1dt
+        );
+        marker(:de.bf :rail:dc12 :pax :right, hp[:ohl] >> 1.5dt);
+        slabel(:right :rail:dc12 :pax, hp[:ohl - 0.5ssw] >> 1.5dt >> 1.8ssw,
+            hbox(:left:base, "H.-", span(:bold, "Ohlsdorf"))
+        );
+    }
+
+    with link = "line.de.1241" {
+        track(:first :double :rail:dc12 :pax,
+                hp[:ohl.ya - 0.1dl, :ohl.ya] >> 1dt
+            ..  hp[:kor - 1ssw, :pop - 1ssw]
+        );
+    }
+
+    with link = "point.de.Hamburg-Kornweg-Klein-Borstel" {
+        marker(:de.hp :rail:dc12 :pax :left, hp[:kor] << 0.5dt);
+    }
+
+    with link = "point.de.Hamburg-Hoheneichen" {
+        marker(:de.hp :rail:dc12 :pax :left, hp[:hoh] << 0.5dt);
+    }
+
+    with link = "point.de.Hamburg-Wellingsbüttel" {
+        marker(:de.hp :rail:dc12 :pax :right, hp[:wel] >> 0.5dt);
+    }
+
+    with link = "point.de.Hamburg-Poppenbüttel" {
+        track(:first:station :double :rail:dc12 :pax,
+                hp[:pop - 1ssw, :pop + 0.6ssw]
+        );
+        marker(:de.bf :rail:dc12 :pax :right, hp[:pop] >> 0.5dt);
+        slabel(:right :rail:dc12 :pax, hp[:pop - 0.4ssw] >> 0.5dt >> 1.8ssw,
+            hbox(:left:base, "H.-", span(:bold, "Poppenbüttel"))
+        );
+    }
+}
+

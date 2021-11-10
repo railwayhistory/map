@@ -1,0 +1,52 @@
+# DE 1243.  Hamburg-Barmbek - Hamburg-Ohlsdorf
+#
+let hp = path("d4.de.1241");
+
+with detail = 4 {
+    # point.de.Hamburg-Barmbek: de.1234
+
+
+    with link = "line.de.1243" {
+        track(:station, hp[:bar.a, :ohl.a] << 1.5dt);
+    }
+
+
+    with link = "point.de.Hamburg-Ohlsdorf" {
+        let oo = path("d4.de.1247");
+
+        track(:station,
+                hp[:ohl.a, :ohl - 610m - 3dl] << 1.5dt
+            --  hp[:ohl - 610m - 1dl, :ohl] << 3.5dt
+        );
+        track(:station,
+                hp[:ohl - 610m - 2dl, :ohl - 340m] << 2.5dt
+        );
+        track(:station,
+                hp[:ohl - 340m - 2dl] << 2.5dt
+            --  hp[:ohl - 340m - 1dl] << 3.5dt
+        );
+
+        with layer = 2 track(:second:station :removed,
+                hp[:ohl, :ohl.ya] << 3.5dt
+            ..  oo[:aa + 1.9dt, :aa + 2dt]
+        );
+        with layer = 1 casing(:second:station :removed,
+                hp[:ohl.ya - 0.1dl, :ohl.ya] << 3.5dt
+            ..  oo[:aa + 1.9dt, :aa + 2dt]
+        );
+
+        with layer = -1 marker(:de.gbf :removed :left, hp[:ohg] << 1.5dt);
+        label(:linenum :removed, hp[:ohg - 0.5sw] << 1.5dt << 1.6sw,
+            hbox(:right:bottom, vbox(:center:top,
+                hbox(:center:top :xsmall,
+                    vbox(:right:top, "1243: ", "1247: "),
+                    vbox(:right:top, "10,", "?"),
+                    vbox(:left:top, "52", "?")
+                ),
+                span(:bold :medium, "H.-Ohlsdorf")
+            ))
+        );
+    }
+}
+
+
