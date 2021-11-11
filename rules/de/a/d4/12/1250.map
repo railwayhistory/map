@@ -1,0 +1,50 @@
+# DE 1250.  Hamburg-Harburg Hga - Hamburg Hbf
+#
+let wh = path("d4.de.a.2200");
+
+with detail = 4 {
+    # point.de.Hamburg-Oberhafen: de.1280
+
+
+    with link = "line.de.1250" {
+        track(:first :double :cat:ac15 :pax,
+                wh[:oha + 1.5sw, :eri - 2sw] >> 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Ericus" {
+        # Str. 1250 L
+        track(:first:station :cat:ac15 :pax, wh[:eri - 2sw, :eri] >> 1.5dt);
+
+        # Str. 1250 R
+        track(:first:station :cat:ac15 :pax, wh[:eri - 2sw, :eri] >> 2.5dt);
+
+        # Str. 1291
+        track(:first:station :cat:ac15 :pax,
+                wh[:eri - 2sw, :eri - 3dl] >> 3.5dt
+            --  wh[:eri - 1dl, :eri - 0.9dl] >> 1.5dt
+        );
+
+        # Str. 1292
+        track(:first:station :cat:ac15 :pax,
+                wh[:eri - 2sw, :eri - 2dl] << 1.5dt
+            --  wh[:eri + 1dl, :eri + 1.1dl] >> 1.5dt
+        );
+
+        track(:station :cat:ac15 :pax,
+                wh[:eri - 4dl] >> 2.5dt
+            --  wh[:eri - 3dl] >> 1.5dt
+        );
+    }
+
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax,
+                wh[:eri - 0.1dl, :eri] >> 2dt
+            ..  wh[:ham.aa, :ham.a] << 2dt
+        );
+    }
+    
+}
+
+
