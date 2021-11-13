@@ -1,0 +1,81 @@
+# DE 1255.  Meckelfeld - Hamburg Süd
+#
+let lc = path("d4.de.a.1720");
+let wh = path("d4.de.a.2200");
+
+with detail = 5 {
+    # ...
+
+
+    with link = "line.de.1255" {
+        track(:first :double :cat:ac15, wh[:sel + 200m, :sbr.y - 100m] << 2dt);
+    }
+
+
+    with link = "point.de.Hamburg-Wilhelmsburg" {
+        let ws = path("d4.de.1254");
+
+        # Gl. 1 (Str. 1255 R)
+        track(:first:station :cat:ac15, wh[:sbr.y - 100m, :wil.x] << 1.5dt);
+
+        # Gl. 2 (Str. 1255 L)
+        track(:first:station :cat:ac15, wh[:sbr.y - 100m, :wil.x] << 2.5dt);
+
+        # Gl. 3 (Str. 1254 R)
+        track(:second:station :cat:ac15,
+                ws[:sbr.y + 100m, :sbr.y + 99m] << 3.5dt
+            ..  wh[:sbr.y, :wil.x - 200m] << 3.5dt
+            ..  wh[:wil.x - 125m, :wil.x - 124m] << 2.5dt
+        );
+        
+        # Gl. 4
+        track(:station :cat:ac15,
+                wh[:sbr.y + 289m, :sbr.y + 290m] << 3.5dt
+            ..  wh[:sbr.y + 360m, :wil.x - 125m] << 4.5dt
+            ..  wh[:wil.x - 20m, :wil.x - 19m] << 2.5dt
+        );
+
+        # Str. 1254 L
+        track(:second:station :cat:ac15,
+                ws[:sbr.y + 100m, :sbr.y + 99m] << 2.5dt
+            ..  wh[:sbr.y, :sbr.y + 0.1dl] << 2.5dt
+        );
+
+        # W5 - W6
+        track(:station :cat:ac15,
+                ws[:sbr.y + 41m, :sbr.y + 40m] << 3.5dt
+            ..  wh[:sbr.y + 20m, :sbr.y + 21m] << 2.5dt
+        );
+
+        # W9 - W10
+        track(:station :cat:ac15,
+                wh[:sbr.y + 99m, :sbr.y + 100m] << 2.5dt
+            ..  wh[:sbr.y + 160m, :sbr.y + 161m] << 1.5dt
+        );
+
+        # W12 - W13
+        track(:station :cat:ac15,
+                wh[:sbr.y + 79m, :sbr.y + 80m] << 3.5dt
+            ..  wh[:sbr.y + 150m, :sbr.y + 151m] << 2.5dt
+        );
+
+        # W14 - W15
+        track(:station :cat:ac15,
+                wh[:sbr.y + 159m, :sbr.y + 160m] << 2.5dt
+            ..  wh[:sbr.y + 280m, :sbr.y + 281m] << 3.5dt
+        );
+
+        marker(:de.bbf :cat:ac15 :left, wh[:wil.x - 300m] << 4.5dt);
+        station(:left:cat:ac15 , wh[:wil.x - 300m - 0.4sw] << 4.5dt << 1.4sw,
+            span(:bold, "Hamburg-Wilhelmsburg"),
+            hbox(:center:top,
+                vbox(:right:top, "1254: ", "1255: "),
+                vbox(:right:top, "0,", "9,"),
+                vbox(:left:top, "53", "40")
+            )
+        );
+    }
+
+
+}
+

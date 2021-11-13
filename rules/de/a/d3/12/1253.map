@@ -1,0 +1,71 @@
+# DE 1253.  Hamburg Süderelbbrücke - Hamburg-Waltershof Dradenau
+#
+let sd = path("d3.de.1253");
+
+with detail = 3 {
+    # point.de.Hamburg-Süderelbbrücke  de.1255
+
+    with link = "point.de.Hamburg-Hohe-Schaar" {
+        # Str. 1253
+        track(:second:station :double :cat:ac15,
+                sd[:sel - 0.5ssw, :sel] << 3dt
+            ..  sd[:hss - 0.5ssw, :hss] >> 2dt
+            ..  sd[:hsc - 1ssw, :hsc + 1ssw]
+        );
+
+        # Str. 1254
+        track(:second:station :cat:ac15,
+                path("d3.de.2200.hmb")[:sbr.y + 1.1dt, :sbr.y + 1dt] >> 3.5dt
+            ..  sd[:hss - 0.5ssw, :hss - 0.49ssw] >> 2.5dt
+        );
+
+        marker(:de.bft :cat:ac15 :left, sd[:hsc - 0.5ssw] << 0.5dt);
+    }
+
+    with link = "line.de.1253" {
+        track(:second :double :cat:ac15,
+                sd[:hsc + 1ssw, :hbm.yh - 4dt]
+        );
+    }
+
+    with link = "point.de.Hamburg-Hausbruch-Mitte" {
+        track(:second:station :double :cat:ac15,
+                sd[:hbm.yh - 4dt, :hbm.yh - 3.9dt]
+            ..  sd[:hbm.yh, :hbm.yw] >> 2dt
+            ..  sd[:hbm.yw + 3.9dt, :hbm.yw + 4dt]
+        );
+        marker(:de.bft :cat:ac15 :right, sd[:hbm] >> 2.5dt);
+    }
+
+    with link = "line.de.1253" {
+        track(:second :double :cat:ac15, sd[:hbm.yw + 4dt, :asu - 1ssw]);
+    }
+
+    with link = "point.de.Hamburg-Waltershof-Alte-Süderelbe" {
+        track(:second:station :double :cat:ac15,
+                sd[:asu - 1ssw, :asu + 1ssw]
+        );
+        marker(:de.bft :cat:ac15 :left, sd[:asu] << 0.5dt);
+    }
+
+    with link = "point.de.Hamburg-Waltershof-Umspannwerk" {
+        let wf = path("d3.de.1251");
+
+        # Str. 1251
+        track(:second:station :removed,
+                wf[:ffin, :ffin + 0.1dl] >> 0.5dt
+            ..  wf[:awes + 1dt, :awes + 1.5dt]
+        );
+                
+        # Str. 1253
+        track(:second:station :double :cat:ac15,
+                sd[:asu + 1ssw, :way]
+        );
+    }
+
+    with link = "point.de.Hamburg-Waltershof-Dradenau" {
+        track(:second:station :double :cat:ac15, sd[:way, :dra + 0.7ssw]);
+        marker(:de.bft :cat:ac15 :right, sd[:dra] >> 0.5dt);
+    }
+}
+

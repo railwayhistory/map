@@ -1,0 +1,40 @@
+# DE 1255.  Meckelfeld - Hamburg Süd
+#
+let ms = path("d3.de.1255");
+
+with detail = 3 {
+    with link = "line.de.1255" {
+        track(:first :double :cat:ac15, ms[:har.f, :sel - 1ssw] << 3dt);
+    }
+
+    with link = "point.de.Hamburg-Süderelbbrücke" {
+        track(:first:station :double :cat:ac15,
+                ms[:sel - 1ssw, :sbr.y + 2dt] << 3dt
+        );
+        marker(:de.abzw :cat:ac15 :left, ms[:sel - 0.5ssw] << 3.5dt);
+    }
+
+    with link = "line.de.1255" {
+        track(:first :double :cat:ac15, ms[:sbr.y + 2dt, :wil - 1ssw] << 3dt);
+    }
+
+    with link = "point.de.Hamburg-Wilhelmsburg" {
+        track(:first:station :double :cat:ac15,
+                ms[:wil - 1ssw, :wil + 1ssw] << 3dt
+        );
+        marker(:de.bbf :cat:ac15 :left, ms[:wil] << 3.5dt);
+    }
+
+    with link = "line.de.1255" {
+        track(:first :double :cat:ac15,
+                ms[:wil + 1ssw, :asud] << 3dt
+            ..  ms[:aa + 4dt, :aa + 4.5dt]
+        );
+    }
+
+    with link = "point.de.Hamburg-Süd" {
+        track(:first:station :double :cat:ac15, ms[:aa + 4.5dt, :sud + 1ssw]);
+        marker(:de.bbf :cat:ac15 :left, ms[:sud] << 0.5dt);
+    }
+}
+
