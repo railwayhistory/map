@@ -1,0 +1,149 @@
+# DE 1260.  Hesedorf - Stade
+#
+let hs = path("d4.de.1260");
+
+with detail = [4, 5] {
+    # point.de.Hesedorf  de.1300
+
+
+    with link = "line.de.1260" {
+        track(:second :flip,
+                hs[:hes.f + 2.5km, :hes.yys + 2dt]
+            ..  hs[:hes.ys, :hes.f] << 1dt
+        );
+        with layer = 1 line_badge(:open, hs[:hes.f + 2.5km], "1260");
+        track(:second,
+                hs[:hes.f + 2.5km, :ess - 1sw]
+        );
+    }
+
+
+    with link = "point.de.Essel" {
+        track(:second:station, hs[:ess - 1sw, :ess + 1sw]);
+        marker(:de.hp :right, hs[:ess]);
+        station(:right, hs[:ess - 1sw] >> 1.0sw,
+            hbox(:left:top,
+                hbox(:left:base, "Essel ", span(:light, "(Kr Stade)"))
+            ),
+            "5,46"
+        );
+    }
+
+
+    with link = "line.de.1260" {
+        track(:second, hs[:ess + 1sw, :mul.a]);
+    }
+
+
+    with link = "point.de.Mulsum-Essel" {
+        # Gl. 1
+        track(:station, hs[:mul - 0.6sw - 2dl, :mul + 270m + 1dl] << 1dt);
+            track(:station,
+                    hs[:mul + 270m - 1dl] << 1dt
+                --  hs[:mul + 270m]
+            );
+
+        # Gl. 2 (Str. 1260)
+        track(:second:station, hs[:mul.a, :mul.f]);
+            track(:station,
+                    hs[:mul - 0.6sw - 1dl]
+                --  hs[:mul - 0.6sw] << 1dt
+            );
+
+        marker(:de.bf :left, hs[:mul] << 1dt);
+        station(:top, hs[:mul] << 1dt << 1.4sw,
+            "Mulsum-Essel", "8,11"
+        );
+    }
+
+
+    with link = "line.de.1260" {
+        track(:second, hs[:mul.f, :fre - 1sw]);
+    }
+
+
+    with link = "point.de.Fredenbeck" {
+        track(:second:station, hs[:fre - 1sw, :fre + 1sw]);
+        marker(:de.hp :left, hs[:fre]);
+        station(:top, hs[:fre] << 1.3sw,
+            "Fredenbeck", "14,40"
+        );
+    }
+
+
+    with link = "line.de.1260" {
+        track(:second, hs[:fre + 1sw, :dei.a]);
+    }
+
+
+    with link = "point.de.Deinste" {
+        # Gl. 1
+        track(:station,
+                hs[:dei - 0.6sw - 1.1dl, :dei - 0.6sw - 1dl]
+            --  hs[:dei - 0.6sw, :dei + 300m - 1dl] >> 1dt
+            --  hs[:dei + 300m, :dei + 301m]
+        );
+
+        # Gl. 2 (Str. 1260)
+        track(:second:station, hs[:dei.a, :dei.f]);
+
+        # Gl. 3
+        track(:station,
+                hs[:dei - 0.6sw - 2.1dl, :dei - 0.6sw - 2dl]
+            --  hs[:dei - 0.6sw - 1dl, :dei + 500m - 1dl] << 1dt
+            --  hs[:dei + 500m, :dei + 501m]
+        );
+
+        marker(:de.bf :right, hs[:dei] >> 1dt);
+        station(:right, hs[:dei - 0.35sw] >> 1dt >> 1.7sw,
+            "Deinste", "18,07"
+        );
+    }
+
+
+    with link = "line.de.1260" {
+        track(:second, hs[:dei.f, :hag - 1sw]);
+    }
+
+
+    with link = "point.de.Hagen-Stade" {
+        track(:second:station, hs[:hag - 1sw, :hag + 1sw]);
+        marker(:de.hp :left, hs[:hag]);
+        station(:left, hs[:hag - 0.4sw] << 1.4sw,
+            hbox(:right:base, "Hagen ", span(:light, "(Kr Stade)")),
+            "20,38"
+        );
+    }
+
+    
+    with link = "line.de.1260" {
+        track(:second :flip,
+                hs[:hag + 2.5km, :hag + 1sw]
+        );
+        with layer = 1 line_badge(:open, hs[:hag + 2.5km], "1260");
+        track(:second,
+                hs[:hag + 2.5km, :sta.yyh - 3dt]
+            ..  hs[:sta.yh - 0.5sw - 2.1dl, :sta.yh - 0.5sw - 2dl] << 1.5dt
+        );
+    }
+
+
+    with link = "point.de.Stade-Gr" {
+        track(:second:station,
+                hs[:sta.yh - 0.5sw - 2dl, :sta.yh - 2dl] << 1.5dt
+        );
+        marker(:de.dirgr :left, hs[:sta.yh - 2dl] << 1.5dt);
+        label(hs[:sta.yh - 2dl] << 5.5dt,
+            hbox(:right:middle,
+                span(:xsmall, "1260: 25,61 "),
+                vbox(:center:middle :small,
+                    " DB ", hbar(0.2), " EVB "
+                )
+            )
+        );
+    }
+
+
+    # point.de.Stade  de.1720
+}
+
