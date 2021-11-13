@@ -4,6 +4,238 @@ let lc = path("d4.de.a.1720");
 
 with detail = 5 {
     with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:win.f, :asa.a]);
+    }
+
+
+    with link = "point.de.Ashausen-Abzw" {
+        # Gl. 1 (Str. 1720 L)
+        track(:first:station :cat:ac15 :pax, lc[:asa.a , :asa.f] << 0.5dt);
+
+        # Gl. 2 (Str. 1720 R)
+        track(:first:station :cat:ac15 :pax, lc[:asa.a , :asa.f] >> 0.5dt);
+
+        # Gl. 3 (Str. 1281)
+        track(:first:station :cat:ac15 :pax,
+                lc[:asa - 0.1dl, :asa] >> 0.5dt
+            ..  lc[:ash - 61m, :ash - 60m] >> 1.5dt
+        );
+
+        marker(:de.abzw :cat:ac15 :right, lc[:asa] >> 0.5dt);
+        station(:right :cat:ac15, lc[:asa + 0.5sw] >> 0.5dt >> 1.8sw,
+            span(:bold, "Ashausen Abzw"),
+            hbox(:center:top,
+                vbox(:right:top, "1281: ", "1720: "),
+                vbox(:right:top, "154,", "154,"),
+                vbox(:left:top, "76", "76")
+            )
+        );
+    }
+
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:asa.f, :ste.a]);
+    }
+
+
+    with link = "point.de.Stelle" {
+        let sm = path("d4.de.1284");
+
+        # Gl. 1 (Str. 1153 - 1284 L)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ste.a, :ste + 600m] << 2dt
+        );
+        track(:first:station :cat:ac15,
+                lc[:ste + 600m, :ste + 630m] << 2dt
+            ..  sm[:ste.ym + 35m, :ste.ym + 45m] << 2.5dt
+            ..  sm[:ste.g - 210m, :ste.g] << 1.5dt
+        );
+            track(:station :cat:ac15, # W8 - W9
+                    lc[:ste - 800m] << 2dt
+                --  lc[:ste - 650m] << 0.5dt
+            );
+            track(:station :cat:ac15 :pax, # W8 - W9
+                    lc[:ste + 600m] << 2dt
+                --  lc[:ste + 710m] << 0.5dt
+            );
+
+        # Gl. 2 (Str. 1720 L)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ste.a, :stg] << 0.5dt
+        );
+            track(:station :cat:ac15, # W1 - W3
+                    lc[:ste - 610m] << 0.5dt
+                --  lc[:ste - 480m] >> 0.5dt
+            );
+            track(:station :cat:ac15, # W2 - W5
+                    lc[:ste - 480m] << 0.5dt
+                --  lc[:ste - 330m] << 2.0dt
+            );
+
+        # Gl. 2a (Str. 1284 R)
+        track(:first:station :cat:ac15,
+                sm[:ste.ym - 0.1dl, :ste.ym] << 0.5dt
+            ..  sm[:ste.ym + 100m, :ste.ym + 120m] << 0.8dt
+            ..  sm[:ste.ym + 290m, :ste.g] << 0.5dt
+        );
+            track(:station :cat:ac15, # W28 - W29
+                    sm[:ste.ym + 120m] << 0.8dt
+                --  sm[:ste.g - 210m] << 1.5dt
+            );
+
+        # Gl. 2s
+        track(:station,
+                sm[:ste.ym + 40m] << 1.5dt
+            --  sm[:ste.ym + 100m] << 0.8dt
+        );
+
+        # Gl. 3 (Str. 1720 R)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ste.a, :stg] >> 0.5dt
+        );
+            track(:station :cat:ac15, # W4 - W6
+                    lc[:ste - 450m] >> 0.5dt
+                --  lc[:ste - 300m] >> 1.5dt
+            );
+            track(:station :cat:ac15, # W10 - W11
+                    lc[:ste - 310m] >> 0.5dt
+                --  lc[:ste - 190m] >> 1.5dt
+            );
+            track(:station :cat:ac15, # W23 - W25
+                    lc[:ste + 670m] >> 0.5dt
+                --  lc[:ste + 780m] << 0.5dt
+            );
+
+        # Gl. 4
+        track(:station :cat:ac15 :pax,
+                lc[:ste - 290m, :ste + 550m] >> 1.5dt
+                --  lc[:ste + 650m, :ste + 651m] >> 0.5dt  # W21
+        );
+        track(:station,
+                lc[:ste + 550m, :ste + 610m] >> 1.5dt
+        );
+
+        # Gl. 5 (Str. 1281)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ste.a, :ste - 290m] >> 1.5dt
+        );
+        track(:first:station :cat:ac15,
+                lc[:ste - 291m, :ste - 290m] >> 1.5dt
+            ..  lc[:ste - 100m, :ste] >> 4.5dt
+        );
+        with layer = 2 track(:first:station :cat:ac15,
+                lc[:ste, :ste + 550m] >> 4.5dt
+            ..  sm[:ste.g - 100m, :ste.g] >> 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:ac15,
+                lc[:ste + 549m, :ste + 550m] >> 4.5dt
+            ..  sm[:ste.g - 100m, :ste.g - 99m] >> 0.5dt
+        );
+
+        # Bahnsteig Gl. 1
+        platform(:cat:ac15 :pax,
+                lc[:ste - 150m, :ste + 110m] << 2.6dt
+            --  lc[:ste + 110m, :ste - 150m] >> 3.5dt
+        );
+
+        # Bahnsteig Gl. 4
+        platform(:cat:ac15 :pax,
+                lc[:ste - 115m, :ste + 110m] >> 2.1dt
+            --  lc[:ste + 110m, :ste - 115m] << 3.0dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :left, lc[:ste] << 3.5dt);
+        station(:bottom :cat:ac15 :pax, lc[:ste + 0.5sw] << 3.5dt << 1.8sw,
+            span(:bold, "Stelle"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    "1281: ", "1720: ", "1153: ", "1284: "
+                ),
+                vbox(:right:top,
+                    "158,", "158,", "158,", "18,"
+                ),
+                vbox(:left:top,
+                    "17", "17", "17", "15"
+                )
+            )
+        );
+    }
+
+
+    with link = "line.de.1720" {
+       track(:first :double :cat:ac15 :pax, lc[:stg, :mas.a - 200m]);
+       with layer = 1 line_badge(:cat:ac15 :pax, lc[:stg + 550m], "1720");
+    }
+
+
+    with link = "point.de.Maschen-Pbf" {
+        # Gl. 1 (Str. 1720 R)
+        track(:first:station :cat:ac15 :pax,
+                lc[:mas.a - 200m, :mas.a - 199m] >> 0.5dt
+            ..  lc[:mas.a + 500m, :mas + 330m] >> 3.5dt
+            ..  lc[:mas.f + 249m, :mas.f + 250m] >> 0.5dt
+        );
+
+        # Gl. 2
+        track(:station :cat:ac15 :pax,
+                lc[:mas.a + 499m, :mas.a + 500m] >> 3.5dt
+            --  lc[:mas.a + 650m, :mas + 250m] >> 2.5dt
+            --  lc[:mas + 330m, :mas + 331m] >> 3.5dt
+        );
+
+        # Gl. 21
+        track(:station,
+                lc[:mas + 250m, :mas + 300m] >> 2.5dt
+        );
+
+        # Gl. 3
+        track(:station :cat:ac15 :pax,
+                lc[:mas.a + 439m, :mas.a + 440m] << 0.5dt
+            --  lc[:mas.a + 530m, :mas + 60m] >> 0.5dt
+            --  lc[:mas + 180m, :mas + 181m] << 0.5dt # W12
+        );
+            track(:station :cat:ac15, # W4 - W5
+                    lc[:mas.a + 550m] >> 0.5dt
+                --  lc[:mas.a + 650m] >> 2.5dt
+            );
+            track(:station :cat:ac15, # W11 - 1W13
+                    lc[:mas + 60m] >> 0.5dt
+                --  lc[:mas + 180m] >> 2.5dt
+            );
+
+        # Gl. 31
+        track(:station :cat:ac15,
+                lc[:mas.a + 150m, :mas.a + 530m] >> 0.5dt
+        );
+
+        # Gl. 4 (Str. 1720 L)
+        track(:first:station :cat:ac15 :pax,
+                lc[:mas.a - 200m, :mas.f + 250m] << 0.5dt
+        );
+
+        # Bahnsteig
+        platform(:cat:ac15 :pax,
+                lc[:mas - 240m, :mas - 10m] >> 1.1dt
+            --  lc[:mas - 10m, :mas - 240m] << 1.9dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax, lc[:mas] >> 3.5dt);
+        station(:right:left_align :cat:ac15 :pax,
+            lc[:mas - 0.8sw] >> 3.5dt >> 1.2sw,
+            vbox(:left:bottom,
+                span(:removed, "Maschen"),
+                "Maschen Pbf"
+            ),
+            hbox(:left:base,
+                "  1720: ", span(:removed, "162,37 → "), "161,64"
+            )
+        );
+    }
+
+
+    # ...
+
+    with link = "line.de.1720" {
         # Str. 1720 L/R
         track(:first :double :cat:ac15 :pax,
             lc[:har.ya - 350m, :meh + 300m] << 1dt # reversed

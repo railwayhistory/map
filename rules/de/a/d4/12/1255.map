@@ -2,6 +2,7 @@
 #
 let lc = path("d4.de.a.1720");
 let wh = path("d4.de.a.2200");
+let ms = path("d4.de.1255");
 
 with detail = 4 {
     with link = "line.de.1255" {
@@ -227,7 +228,7 @@ with detail = 4 {
         with layer = -1 track(:first:station :cat:ac15,
                 wh[:wil.x, :wla - 2dl] << 2.5dt
             --  wh[:wla - 1dl, :wla + 500m + 2dl] << 1.5dt
-            ..  wh[:sug - 450m - 3dl, :sug] << 2.5dt
+            ..  wh[:sug - 450m - 3dl, :sug - 0.5sw] << 2.5dt
         );
 
         # Gl. 3
@@ -235,7 +236,7 @@ with detail = 4 {
                 wh[:wil.x + 0.9dl, :wil.x + 1dl] << 2.5dt
             --  wh[:wil.x + 2dl, :wla - 1dl] << 3.5dt
             --  wh[:wla, :wla + 500m + 2dl] << 2.5dt
-            ..  wh[:sug - 450m - 3dl, :sug] << 3.5dt
+            ..  wh[:sug - 450m - 3dl, :sug - 0.5sw] << 3.5dt
         );
 
         # Gl. 4
@@ -341,10 +342,255 @@ with detail = 4 {
 
         marker(:de.bft.abzw :cat:ac15 :left, wh[:wla] << 6.5dt);
         station(:left :cat:ac15, wh[:wla - 0.4sw] << 6.5dt << 1.4sw,
-            "H.-W. Abzw",
+            "H.-W.bg Abzw",
             hbox(:center:top,
                 vbox(:right:top, "1255: ??", "2200: ??", "1280: ??")
             )
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Süd-Gr" {
+        track(:first:station :double :cat:ac15,
+                ms[:sug - 0.5sw, :sug + 0.5sw] << 3dt
+        );
+
+        marker(:de.dirgr :cat:ac15 :left, ms[:sug] << 3.5dt);
+        marker(:refdt :cat:ac15 :right, ms[:sug] << 3.0dt);
+#       label(:cat:ac15, ms[:sug] << 7dt,
+#           hbox(:right:middle,
+#               span(:xsmall, "1255: 11,78 "),
+#               vbox(:center:middle :small,
+#                   "  HPA  ", hbar(0.2), "DB"
+#               )
+#           )
+#       );
+    }
+
+
+    with link = "point.de.Hamburg-Süd" {
+        let suf = path("d4.de.1255.suf");
+
+        # Gl. 1/2/3 (>> 1.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 0.9dl, :sud.xa + 1dl] >> 0.5dt
+            --  ms[:sud.xa + 2dl, :sud - 5dl] >> 1.5dt
+            --  ms[:sud - 1dl, :sud - 0.9dl] << 2.5dt
+        );
+
+        # Gl. 4/5 (>> 0.5dt)
+        track(:first:station :cat:ac15,
+                ms[:sud.xa, :sud - 4dl] >> 0.5dt
+        );
+
+        # Gl. 6/7/8 (<< 0.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 4.7dl, :sud.xa + 4.8dl] >> 1.5dt
+            --  ms[:sud.xa + 6.8dl, :sud - 4.7dl] << 0.5dt
+            --  ms[:sud - 1.7dl, :sud - 1.6dl] << 3.5dt
+        );
+
+        # Gl. 9/10/11 (<< 1.5dt)
+        track(:first:station :cat:ac15,
+                ms[:sud.xa, :sud.xa + 5.1dl] << 0.5dt
+            --  ms[:sud.xa + 6.1dl, :sud - 3.7dl] << 1.5dt
+        );
+
+        # Gl. 12/13/14 (<< 2.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 2.7dl, :sud.xa + 4.4dl] << 1.5dt
+            --  ms[:sud.xa + 5.4dl, :sud] << 2.5dt
+        );
+
+        # Gl. 15/16/17 (<< 3.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 4.7dl, :sud] << 3.5dt
+        );
+
+        # Gl. 18/19/20 (<< 4.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 1.6dl, :sud.xa + 1.7dl] << 0.5dt
+            --  ms[:sud.xa + 5.7dl, :sud - 3.7dl] << 4.5dt
+        );
+
+        # Gl. 21/22/23 (<< 5.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 5dl, :sud - 7.8dl] << 5.5dt
+            --  ms[:sud - 5.8dl, :sud - 2.6dl] << 3.5dt
+        );
+
+        # Gl. 24/25/26 (<< 6.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 6.6dl, :sud.xa + 6.7dl] << 5.5dt
+            --  ms[:sud.xa + 7.7dl, :sud - 7.1dl] << 6.5dt
+            --  ms[:sud - 5.1dl, :sud - 0.7dl] << 4.5dt
+        );
+
+        # Gl. 27/28/29 (<< 7.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa + 7dl, :sud - 6.4dl] << 7.5dt
+            --  ms[:sud - 3.4dl, :sud - 3.3dl] << 4.5dt
+        );
+
+        # Gl. 30 (<< 8.5dt)
+        track(:station,
+                ms[:sud.xa + 8dl, :sud.xa + 500m] << 8.5dt
+        );
+
+        # Gl. 31 (<< 9.5dt)
+        track(:station :cat:ac15,
+                ms[:sud.xa - 0.1dl, :sud.xa] << 0.5dt
+            --  ms[:sud.xa + 9dl, :sud - 6.7dl] << 9.5dt
+            --  ms[:sud - 1.7dl, :sud - 1.6dl] << 4.5dt
+        );
+
+
+        # Gl. 48 (Str. 1255 R)
+        track(:first:station :cat:ac15,
+                ms[:sug + 0.5sw, :wik.ys] << 2.5dt
+            ..  ms[:sud.xa - 1.3dl, :sud.xa] >> 0.5dt
+        );
+            track(:station :cat:ac15, # W308 - W309
+                    ms[:sug + 0.5sw] << 2.5dt
+                --  ms[:sug + 0.5sw + 1dl] << 3.5dt
+            );
+
+        # Gl. 49 (Str. 1255 L)
+        track(:first:station :cat:ac15,
+                ms[:sug + 0.5sw, :wik.ys] << 3.5dt
+            ..  ms[:sud.xa - 0.4dl, :sud.xa] << 0.5dt
+        );
+            track(:station :cat:ac15, # W312 - W313
+                    ms[:wik.ys - 2dl] << 3.5dt
+                --  ms[:wik.ys - 1dl] << 2.5dt
+            );
+
+        # Gl. 101 (>> 1.5dt)
+        track(:station,
+                ms[:sud - 5dl, :sud + 450m] >> 1.5dt
+            --  ms[:sud + 450m + 1dl, :sud + 450m + 1.1dl] >> 0.5dt
+        );
+
+        # Gl. 102/103/104/105 (>> 0.5dt)
+        track(:station,
+                ms[:sud - 5dl, :sud + 2.3dl] >> 0.5dt
+            --  ms[:sud + 3.3dl, :sud + 3.4dl] >> 1.5dt
+        );
+
+        # Gl. 106/107 (<< 0.5dt)
+        track(:station,
+                ms[:sud - 1.3dl, :sud + 1.5dl] << 0.5dt
+        );
+
+        # Gl. 108/109 (<< 1.5dt)
+        track(:station,
+                ms[:sud - 3.31dl, :sud - 3.3dl] >> 1.5dt
+            --  ms[:sud - 0.3dl, :sud + 0.5dl] << 1.5dt
+        );
+
+        # Gl. 241/242 (>> 0.5dt)
+        track(:station,
+                ms[:sud + 1.6dl, :sud + 1.7dl] << 3.5dt
+            --  ms[:sud + 5.7dl, :sud.xf - 60m] >> 0.5dt
+            ..  ms[:sud.xf + 60m, :sud.f] >> 0.5dt
+        );
+
+        # Gl. 243/244 (<< 0.5dt)
+        track(:station,
+                ms[:sud + 4.7dl, :sud.xf - 60m] << 0.5dt
+            ..  ms[:sud.xf + 60m, :sud.f] << 0.5dt
+        );
+
+        # Gl. 251/252/253/254 (<< 1.5dt)
+        track(:station,
+                ms[:sud + 4.3dl, :sud + 4.4dl] << 2.5dt
+            --  ms[:sud + 5.4dl, :sud.xf - 60m] << 1.5dt
+#           ..  ms[:sud.xf + 60m, :sud.xf + 61m] << 1.5dt
+#           --  ms[:sud.xf + 61m + 2dl, :sud.xf + 62m + 2dl] >> 0.5dt
+            --  ms[:sud.xf + 60m, :sud.xf + 61m] >> 0.5dt
+        );
+
+        # Gl. 255/256/257/258 (<< 2.5dt)
+        track(:station,
+                ms[:sud, :sud.xf - 60m + 0.7dl] << 2.5dt
+            --  ms[:sud.xf + 60m + 0.7dl, :sud.xf + 61m + 0.7dl] << 0.5dt
+        );
+            track(:station, # W103 - W179
+                    ms[:sud + 1dl] << 2.5dt
+                --  ms[:sud + 5dl] >> 1.5dt
+            );
+
+        # Gl. 262/263 (<< 3.5dt)
+        track(:station,
+                ms[:sud + 5.6dl, :sud + 6.7dl] << 5.5dt
+            --  ms[:sud + 8.7dl, :sud.xf - 60m - 4dl] << 3.5dt
+        );
+
+        # Gl. 264/265/266 (<< 4.5dt)
+        track(:station,
+                ms[:sud + 7.7dl, :sud.xf - 60m - 5dl] << 4.5dt
+            --  ms[:sud.xf - 60m - 3dl, :sud.xf - 60m - 2.9dl] << 2.5dt
+        );
+
+        # Gl. 267/268 (<< 5.5dt)
+        track(:station,
+                ms[:sud, :sud + 2.7dl] << 3.5dt
+            --  ms[:sud + 4.7dl, :sud.xf - 60m - 4dl] << 5.5dt
+        );
+
+        # Gl. 271/272/273 (<< 6.5dt)
+        track(:station,
+                ms[:sud + 6.7dl, :sud.xf - 60m - 6.7dl] << 6.5dt
+            --  ms[:sud.xf - 60m - 5.7dl, :sud.xf - 60m - 5.6dl] << 5.5dt
+        );
+
+        # Gl. 275/276/277 (<< 7.5dt)
+        track(:station,
+                ms[:sud + 5.6dl, :sud + 5.7dl] << 5.5dt
+            --  ms[:sud + 7.7dl, :sud.xf - 60m - 6dl] << 7.5dt
+            --  ms[:sud.xf - 60m - 1.3dl, :sud.xf - 59m - 1.3dl] << 2.5dt
+        );
+
+        # Gl. 281/282/283 (<< 8.5dt)
+        track(:station,
+                ms[:sud + 5dl, :sud.xf - 60m - 5.3dl] << 8.5dt
+            --  ms[:sud.xf - 60m + 0.7dl, :sud.xf - 59m + 0.7dl] << 2.5dt
+        );
+
+        # Gl. 284/285/286 (<< 9.5dt)
+        track(:station,
+                ms[:sud + 6.6dl, :sud + 6.7dl] << 8.5dt
+            --  ms[:sud + 7.6dl, :sud.xf - 60m - 4.6dl] << 9.5dt
+            --  ms[:sud.xf - 60m + 1.4dl] << 3.5dt
+            --  ms[:sud.xf + 60m + 2.4dl] << 0.5dt
+        );
+
+        # Gl. 287/288 (<< 10.5dt)
+        track(:station,
+                ms[:sud + 7dl, :sud.xf - 60m - 3.9dl] << 10.5dt
+            --  suf[:sud.xf - 60m + 1.1dl, :sud.xf - 60m + 1.2dl] << 5.5dt
+        );
+
+        # Gl. 291/292 (<< 11.5dt)
+        track(:station,
+                ms[:sud - 1.1dl, :sud - 1dl] << 2.5dt
+            --  ms[:sud + 8dl, :sud.xf - 60m - 3.2dl] << 11.5dt
+            --  suf[:sud.xf - 60m + 0.8dl, :sud.xf - 60m + 0.9dl] << 7.5dt
+        );
+
+
+        # Gl. 293/294/295 (<< 12.5dt)
+        track(:station,
+                ms[:sud - 0.8dl, :sud - 0.7dl] << 4.5dt
+            --  ms[:sud + 7.3dl, :sud.xf - 60m - 2.5dl] << 12.5dt
+            --  suf[:sud.xf - 60m + 0.5dl] << 9.5dt
+            --  suf[:sud.xf - 60m + 1.4dl] << 3.5dt
+        );
+
+        marker(:de.bft :cat:ac15 :right, ms[:sud] >> 1.5dt);
+        station(:top :cat:ac15, ms[:sud] >> 1.5dt >> 1.2sw,
+            span(:bold, "Hamburg Süd"),
+            "1255: 208,36"
         );
     }
 }
