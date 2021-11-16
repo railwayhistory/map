@@ -1,0 +1,54 @@
+# DE 1266.  Bützfleth - Bützfleth DOW-VAW
+#
+let bv = path("d4.de.1266");
+
+with detail = [4, 5] {
+    # point.de.Bützfleth  de.1263
+
+
+    with link = "line.de.1266" {
+        track(:station, bv[:but + 1sw, :but.yd - 1sw]);
+    }
+
+
+    with link  = "point.de.Bützfleth-DOW" {
+        track(:station, bv[:but.yd - 1sw, :but.yd + 1sw]);
+    }
+
+
+    with link = "line.de.1266" {
+        track(:station, bv[:but.yd + 1sw, :vaw.xa - 1ssw]);
+        with layer = 1 line_badge(:open, bv[:but.yd + 0.5km], "1266");
+    }
+
+
+    with link = "point.de.Bützfleth-VAW" {
+        track(:station, bv[:vaw.xa - 1ssw, :vaw.f]);
+
+        # rechtes Gleis
+        track(:station,
+                bv[:vaw.xa + 0.9dl, :vaw.xa + 1dl]
+            --  bv[:vaw.xa + 2dl, :vaw.xb - 2dl] >> 1dt
+            --  bv[:vaw.xb - 1dl, :vaw.xb - 0.9dl]
+        );
+            track(:station,
+                    bv[:vaw.xa + 280m - 1dl] >> 1dt
+                --  bv[:vaw.xa + 280m + 1dl] << 1dt
+            );
+
+        # linkes Gleis
+        track(:station,
+                bv[:vaw.xa + 1.9dl, :vaw.xa + 2dl]
+            --  bv[:vaw.xa + 3dl, :vaw.xb] << 1dt
+            --  bv[:vaw.xb + 1dl, :vaw.xb + 1.1dl]
+        );
+
+        slabel(:right, bv[:vaw.xa + 100m] >> 3dt,
+            vbox(:left:middle :italic,
+                span(:removed, "Vereinigte Aluminiumwerke"),
+                "Aluminium Oxid Stade"
+            )
+        );
+    }
+}
+

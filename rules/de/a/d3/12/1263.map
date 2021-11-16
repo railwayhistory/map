@@ -1,0 +1,35 @@
+# DE 1263.  Stade Hinterm Teich - Bützfleth
+#
+let sb = path("d4.de.1263");
+
+with detail = 3 {
+    # point.de.Stade  de.1720
+
+    with link = "line.de.1263" {
+        track(:station,
+                path("d4.de.a.1720")[:sta - 1.6ssw, :sta - 1.5ssw] >> 0.5dt
+            ..  sb[:stx.x, :sym - 1ssw]
+        );
+    }
+
+    with link = "point.de.Stade-Symphonie" {
+        track(:station,
+                sb[:sym - 1ssw, :sym + 1ssw]
+        );
+        track(:station,
+                path("d4.de.1262")[:sym, :sym + 1ssw]
+        );
+    }
+
+    with link = "line.de.1263" {
+        track(:station, sb[:sym + 1ssw, :but - 1ssw]);
+    }
+
+    with link = "point.de.Bützfleth" {
+        track(:station, sb[:but - 1ssw, :but]);
+        track(:station :removed, sb[:but, :but.f]);
+        marker(:de.anst :left, sb[:but]);
+    }
+
+}
+

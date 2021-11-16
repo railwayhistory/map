@@ -1,0 +1,34 @@
+# DE 1265.  Cuxhaven Cs - Cuxhaven Neuer Fischereihafen
+#
+let ca = path("d4.de.1264");
+let lc = path("d4.de.a.1720");
+
+with detail = [4, 5] {
+    # point.de.Cuxhaven-Cs   de.1720
+    # point.de.Cuxhaven-Gbf  de.1720
+
+
+    with link = "point.de.Cuxhaven-Gbf" {
+        marker(:de.dirgr :right, lc[:cuf + 3dl] >> 1.5dt);
+    }
+
+    with link = "line.de.1265" {
+        track(:station,
+                lc[:cuf + 3dl, :cuf - 560m] << 1.5dt
+            ..  ca[:cuf.xa, :cuf.xa + 0.1dl] << 1dt
+        );
+
+        with layer = 2 guide(:linenum,
+                lc[:cuf - 400m] >> 1.5dt
+            --  lc[:cuf - 400m - 3dt] << 4.5dt
+        );
+        with layer = 1 casing(:linenum :guide,
+                lc[:cuf - 400m - 0.25dt] >> 1dt
+            --  lc[:cuf - 400m - 3dt] << 4.5dt
+        );
+        label(:linenum :badgesize, lc[:cuf - 400m - 3dt] << 4.5dt,
+            hbox(:center:top, "1265 ")
+        );
+    }
+}
+

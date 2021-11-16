@@ -1,0 +1,86 @@
+# DE 1264.  Cuxhaven-Groden - Cuxhaven Amerika Bahnhof
+#
+let ca = path("d4.de.1264");
+let lc = path("d4.de.a.1720");
+
+with detail = [4, 5] {
+    # point.de.Cuxhaven-Groden  de.1720
+
+
+    with link = "point.de.Cuxhaven-Gr" {
+        marker(:de.dirgr :right, lc[:gro + 2dl] >> 1.5dt);
+        label(lc[:gro + 2dl - 1dt] >> 4.5dt,
+            hbox(:left:middle,
+                vbox(:center:middle :small, " NPorts", hbar(0.2), " DB "),
+                span(:xsmall, " 1264: 0,02")
+            )
+        );
+    }
+
+
+    with link = "point.de.Cuxhaven-Neuer-Fischereihafen" {
+        # Gl. 71 (Str. 1265)
+        track(:station,
+                ca[:cuf.xa, :cuf.xb - 1dl] << 1dt
+            --  ca[:cuf.xb, :cuf.xb + 0.1dl]
+        );
+
+        # Gl. 201 (Str. 1264)
+        track(:station,
+                lc[:gro + 2dl, :gro + 2.1dl] >> 1.5dt
+            ..  ca[:cuf.xa, :cuf.xf + 200m]
+        );
+
+        # Gl. 202
+        track(:station,
+                ca[:cuf.xa + 120m, :cuf.xf - 1.7dl] >> 1dt
+        );
+
+        # Gl. 203
+        track(:station,
+                ca[:cuf.xb + 2dl, :cuf.xf - 1dl] >> 2dt
+            --  ca[:cuf.xf, :cuf.xf + 160m] >> 1dt
+        );
+
+        # GL. 204/205/206
+        track(:station,
+                ca[:cuf.xb - 0.1dl, :cuf.xb]
+            --  ca[:cuf.xb + 3dl, :cuf.xf - 3.7dl] >> 3dt
+            --  ca[:cuf.xf - 0.7dl, :cuf.xf - 0.6dl]
+        );
+
+        # weitere Gl.
+        track(:station,
+                ca[:cuf.xb + 5dl, :cuf.xf] >> 5dt
+        );
+        track(:station,
+                ca[:cuf.xb + 2.9dl, :cuf.xb + 3dl] >> 3dt
+            --  ca[:cuf.xb + 6dl, :cuf.xf] >> 6dt
+        );
+    }
+
+
+    with link = "point.de.Cuxhaven-Amerika-Bahnhof" {
+        # Gl. 1A
+        track(:station, ca[:cuf.xf + 200m, :cua.f]);
+
+        # Gl. 2A
+        track(:station,
+                ca[:cua.xa + 1dl, :cua.f - 180m - 1dl] >> 1dt
+            --  ca[:cua.f - 180m, :cua.f - 179m]
+        );
+
+        # Gl. 10
+        track(:station,
+                ca[:cua.xa - 0.1dl, :cua.xa]
+            --  ca[:cua.xa + 2dl, :cua.f - 150m] >> 2dt
+        );
+
+        marker(:de.bft :left, ca[:cua]);
+        with layer = -1 marker(:de.bf :gone :left, ca[:cua]);
+        station(:left, ca[:cua - 0.4sw] << 1.4sw,
+            "Cuxhaven Amerika Bahnhof", "1264: 2,99"
+        );
+    }
+}
+

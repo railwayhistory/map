@@ -1,0 +1,66 @@
+# DE 1262.  Stade Symphonie - Stadersand NWK
+#
+let sn = path("d4.de.1262");
+
+with detail = [4, 5] {
+    # point.de.Stade-Symphonie  de.1263
+
+    
+    with link = "line.de.1262" {
+        track(:station, sn[:sym + 1sw, :sta - 1sw]);
+        with layer = 1 line_badge(:open, sn[:sym + 0.65km], "1262");
+    }
+
+
+    with link = "point.de.Stadersand" {
+        track(:station, sn[:sta - 1sw, :sta + 1sw]);
+        track(:station, path("d4.de.1267")[:sta, :sta + 1sw]);
+        marker(:de.anst :left, sn[:sta]);
+
+        guide(:open,
+                sn[:sta - 1dl] >> 1dt
+            --  sn[:sta] + (400m, 750m)
+        );
+        station(:right, sn[:sta] + (100m, 800m),
+            hbox(:left:top, "Stadersand"),
+            hbox(:center:top,
+                vbox(:right:top, "1262: ", "1267: "),
+                vbox(:right:top, "1,", "0,"),
+                vbox(:left:top, "35", "00")
+            )
+        );
+    }
+
+
+    with link = "line.de.1262" {
+        track(:station, sn[:sta + 1sw, :nwk.xa - 1dl]);
+    }
+
+
+    with link = "point.de.Stadersand-NWK" {
+        # rechtes Gl.
+        track(:station, sn[:nwk.xa - 1dl, :nwk.f]);
+            track(:station,
+                    sn[:nwk + 0.5dl]
+                --  sn[:nwk + 1.5dl] << 1dt
+            );
+
+        # linkes Gl.
+        track(:station,
+                sn[:nwk.xa, :nwk.xa + 0.1dl]
+            --  sn[:nwk.xa + 1.1dl, :nwk.f] << 1dt
+        );
+            track(:station,
+                    sn[:nwk - 1.5dl] << 1dt
+                --  sn[:nwk - 0.5dl]
+            );
+
+        slabel(:right, sn[:nwk.f] + (1.5dt, -0.5dt),
+            vbox(:left:middle :italic,
+                span(:removed, "Nordwestdeutsche Kraftwerke"),
+                "E.ON Energie"
+            )
+        );
+    }
+}
+
