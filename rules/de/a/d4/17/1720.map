@@ -988,9 +988,8 @@ with detail = 4 {
         marker(:de.bbf :cat:ac15 :left, lc[:haa] << 0.5dt);
         with layer = -1 marker(:de.bf.casing :left, lc[:haa] << 0.5dt);
     }
-}
 
-with detail = [4, 5] {
+
     with link = "point.de.Hamburg-Hausbruch-Pbf" {
         track(:first:station :double :cat:ac15 :pax, lc[:haa.f, :hau + 1sw]);
         with layer = -1 marker(:de.bf :removed :left, lc[:hau] << 0.5dt);
@@ -1004,23 +1003,31 @@ with detail = [4, 5] {
 
 
     with link = "point.de.Hamburg-Neugraben" {
+        # Gl. 1 (Str. 1271 L)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ngr.xf - 5dl, :ngr.xf - 2dl] << 5.5dt
+            --  lc[:ngr.xf + 3dl, :ngr.xf + 3.1dl] << 0.5dt
+        );
+
+        # Gl. 3 (Str. 1271 R)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ngr.xf - 5dl, :ngr.xf - 3dl] << 1.5dt
+            --  lc[:ngr.xf - 2dl, :ngr.xf - 1.9dl] << 0.5dt
+        );
+
         # Gl. 4 (Str. 1720 L)
         track(:first:station :cat:ac15 :pax, lc[:ngr.a, :ngr.f] << 0.5dt);
+            track(:station :cat:ac15, # W21 - W22
+                    lc[:ngr - 440m] >> 0.5dt
+                --  lc[:ngr - 440m + 2dl] << 0.5dt
+            );
+            track(:station :cat:ac15, # W28 - W29
+                    lc[:ngr.xf - 1dl] << 0.5dt
+                --  lc[:ngr.xf] >> 0.5dt
+            );
 
-        # Gl. 5 (Str. 1720 5)
+        # Gl. 5 (Str. 1720 R)
         track(:first:station :cat:ac15 :pax, lc[:ngr.a, :ngr.f] >> 0.5dt);
-
-        # W21 - W22
-        track(:station :cat:ac15,
-                lc[:ngr.a + 100m] >> 0.5dt
-            --  lc[:ngr.a + 100m + 1dl] << 0.5dt
-        );
-
-        # W28 - W29
-        track(:station :cat:ac15,
-                lc[:ngr.f - 100m - 3dl] << 0.5dt
-            --  lc[:ngr.f - 100m - 2dl] >> 0.5dt
-        );
 
         marker(:de.bf :cat:ac15 :pax :right, lc[:ngr] >> 0.5dt);
         station(:top :cat:ac15 :pax, lc[:ngr] >> 0.5dt >> 1.2sw,
@@ -1028,6 +1035,9 @@ with detail = [4, 5] {
             "1720: 179,33"
         );
     }
+}
+
+with detail = [4, 5] {
 
 
     with link = "line.de.1720" {

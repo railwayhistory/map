@@ -309,18 +309,18 @@ with detail = 5 {
 
         marker(:de.bbf :cat:ac15 :left, lc[:unt] << 0.5dt);
         with layer = -1 marker(:de.bf :removed :left, lc[:unt] << 0.5dt);
-        label(:cat:ac15, lc[:unt] << 0.5dt << 1.5sw + (1.5sw, 0sw),
-            hbox(:right:top,
-                vbox(:right:top,
+        label(:cat:ac15, lc[:unt - 0.5sw] >> 3dt,
+            hbox(:left:middle,
+                vbox(:left:top,
                     span(:medium :bold :removed, "Harburg-Wilhelmsburg U E"),
-                    vbox(:center:top,
+                    hbox(:left:top, vbox(:center:top,
                         span(:medium :bold, "Hamburg Unterelbe"),
                         hbox(:center:top :xsmall,
                             vbox(:right:top, "1252: ", "1720: "),
                             vbox(:right:top, "0,", "170,"),
                             vbox(:left:top, "00", "78")
                         )
-                    )
+                    ))
                 )
             )
         );
@@ -350,7 +350,7 @@ with detail = 5 {
         with layer = -1 marker(
             :de.bk :removed :right, lc[:tem + 1.1sw] >> 0.5dt
         );
-        station(:bottom :removed, lc[:tem + 2.1sw] << 2.0dt,
+        station(:bottom :removed, lc[:tem + 2.1sw] << 4.0dt,
             "Heimfeld", "173,93"
         );
     }
@@ -406,13 +406,74 @@ with detail = 5 {
         track(:station :cat:ac15, w16 .. w17);
 
         marker(:de.bbf :cat:ac15 :right, lc[:haa] >> 1.5dt);
-        station(:bottom :cat:ac15, lc[:haa] << 4dt,
-            span(:bold, "Hamburg-Hausbruch"),
+        station(:left :cat:ac15, lc[:haa - 1sw] << 4.0dt,
+            hbox(:right:top :bold, "Hamburg-Hausbruch"),
             hbox(:center:top,
                 vbox(:right:top, "1292: ", "1720: "),
                 vbox(:right:top, "174,", "175,"),
                 vbox(:left:top, "88", "02")
             )
+        );
+    }
+
+
+    with link = "point.de.Hamburg-Hausbruch-Pbf" {
+        track(:first:station :double :cat:ac15 :pax, lc[:haa.f, :hau + 1sw]);
+        with layer = -1 marker(:de.bf :removed :left, lc[:hau] << 0.5dt);
+        with layer = -2 marker(:de.bf.casing :left, lc[:hau] << 0.5dt);
+        station(:bottom :removed, lc[:hau] << 0.5dt << 1.2sw,
+            hbox(:center:base, span(:light, "H.-"), "Hausbruch"),
+            "176,57"
+        );
+    }
+
+
+    with link = "line.de.1720" {
+        track(:first :double :cat:ac15 :pax, lc[:hau + 1sw, :ngr.a]);
+    }
+
+
+    with link = "point.de.Hamburg-Neugraben" {
+        # Gl. 1 (Str. 1271 L)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ngr + 1020m] << 4.40dt
+            --  lc[:ngr + 1030m] << 4.10dt
+            ..  lc[:ngr + 1230m, :ngr + 1231m] << 0.5dt
+        );
+
+        # Gl. 3 (Str. 1271 R)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ngr + 770m, :ngr + 830m] << 1.5dt
+            ..  lc[:ngr + 930m, :ngr + 931m] << 0.5dt
+        );
+
+        # Gl. 4 (Str. 1720 L)
+        track(:first:station :cat:ac15 :pax, lc[:ngr.a, :ngr.f] << 0.5dt);
+            track(:station :cat:ac15 :pax, # W28 - W29
+                    lc[:ngr + 960m] << 0.5dt
+                --  lc[:ngr + 1050m] >> 0.5dt
+            );
+
+        # Gl. 5 (Str. 1720 R)
+        track(:first:station :cat:ac15 :pax,
+                lc[:ngr.a, :ngr - 440m] >> 0.5dt
+            ..  lc[:ngr - 100m, :ngr + 200m] >> 1.5dt
+            ..  lc[:ngr + 360m, :ngr.f] >> 0.5dt
+        );
+            track(:station :cat:ac15, # W21 - W22
+                    lc[:ngr - 440m] >> 0.5dt
+                --  lc[:ngr - 360m] << 0.5dt
+            );
+    
+        platform(:cat:ac15 :pax,
+                lc[:ngr - 100m, :ngr + 200m] << 0.1dt
+            --  lc[:ngr + 200m, :ngr - 100m] << 1.1dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :right, lc[:ngr] >> 1.5dt);
+        station(:top :cat:ac15 :pax, lc[:ngr] >> 1.5dt >> 1.2sw,
+            span(:bold, "Hamburg-Neugraben"),
+            "1720: 179,33"
         );
     }
 }

@@ -17,7 +17,7 @@ with detail = 4 {
         );
 
         # Gl. 2
-        track(:first:station :rail:dc12 :pax,
+        with layer = 2 track(:first:station :rail:dc12 :pax,
                 ba[:ham.a, :ham.a + 260m] >> 4.5dt
             ..  ba[:ham - 100m, :ham.s] >> 4.5dt
         );
@@ -37,6 +37,17 @@ with detail = 4 {
         with layer = -1 casing(:first:station :rail:dc12 :pax,
                 ba[:ham.s, :ham.s + 0.1dl] >> 2.5dt
             ..  ba[:ham.f - 0.1dl, :ham.f] >> 1.5dt
+        );
+
+        # Str. 1271
+        let hn = path("d4.de.1271");
+        with layer = 2 track(:first:station :double :rail:dc12 :pax,
+                hn[:ham.yh - 0.1dl, :ham.yh] << 4dt
+            ..  hn[:ham.yyh, :ham.yyh + 0.1dl]
+        );
+        with layer = 1 casing(:first:station :double :rail:dc12 :pax,
+                hn[:ham.yh - 0.1dl, :ham.yh] << 4dt
+            ..  hn[:ham.yyh, :ham.yyh + 0.1dl]
         );
 
         marker(:de.bf :rail:dc12 :pax :right, ba[:ham] >> 5.5dt);
