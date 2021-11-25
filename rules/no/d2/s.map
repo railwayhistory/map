@@ -1,0 +1,199 @@
+# SF.  Solbergfossbanen.  Askim - Solbergfoss.
+with detail = 2 {
+    let sf = path("d2.no.sf");
+
+    with link = "line.no.SF" {
+        with layer = -1 track(:first :removed, sf[:ask, :sol]);
+        with layer = 1 line_badge(:removed, sf[:ask + 2.4km], "SF");
+    }
+
+    with link = "point.no.Solbergfoss" {
+        with layer = 1 marker(:statdot :removed, sf[:sol]);
+        slabel(:top :removed, sf[:sol] - (0dt, 1.2dt), "Solbergfoss");
+    }
+}
+
+
+# NO SI.  Sperillbanen.  Hen - Sperillen.
+with detail = 2 {
+    let si = path("d2.no.si");
+
+    with link = "line.no.SI" {
+        with layer = -2 track(:second :removed, si[:hen.x, :spe]);
+        with layer = 1 line_badge(:removed, si[:hen.x + 9.7km], "SI");
+    }
+
+    with link = "point.no.Sperillen" {
+        with layer = 1 marker(:statdot :removed, si[:spe]);
+        slabel(:top :removed, si[:spe] + (0dt, -1.2dt), "Sperillen");
+    }
+}
+
+
+# NO SK.  Spikkestadlinjen.  Asker - Brakerøya.
+with detail = 2 {
+    let sk = path("d2.no.sk");
+
+    with link = "line.no.SK" {
+        track(:first :cat:ac15 :pax, sk[:ask.y, :spi]);
+        with layer = 1 line_badge(
+            :cat:ac15 :pax, sk[:ask.y + 7.5km] >> 0.2dt, "SK"
+        );
+        track(:first :removed, sk[:spi, :bra.x]);
+    }
+
+    with link = "point.no.Spikkestad" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sk[:spi]);
+        slabel(:right :cat:ac15 :pax, sk[:spi] + (-1.5dt, 1.5dt),
+            hbox(:top:left, "Spikkestad")
+        );
+    }
+
+    with link = "point.no.Lier" {
+        with layer = 1 marker(:statdot :removed, sk[:lie]);
+        slabel(:left :removed, sk[:lie] + (-1.5dt, 1.0dt), "Lier");
+    }
+}
+
+
+# NO SL. Sørlandsbanen.  Drammen - Stavanger.
+with detail = 2 {
+    let sl1 = path("d2.no.sl.1");
+    let sl2 = path("d2.no.sl.2");
+
+    with link = "line.no.SL" {
+        track(:first :cat:ac15 :pax, sl1[:dra, :nor]);
+        with layer = 1 line_badge(:cat:ac15 :pax, sl1[:hok - 5km], "SL");
+        with layer = 1 line_badge(
+            :cat:ac15 :pax, sl1[:hok + 10.5km] @ -5, "SL"
+        );
+        with layer = 1 line_badge(:cat:ac15 :pax, sl1[:hju - 16.5km], "SL");
+
+        track(:first :cat:ac15 :pax, sl1[:nor, :nel]);
+        with layer = 1 line_badge(
+            :cat:ac15 :pax, sl1[:nel - 54km] >> 0.3dt, "SL"
+        );
+
+        track(:first :cat:ac15 :pax, sl1[:nel, :kri]);
+        with layer = 1 line_badge(:cat:ac15 :pax, sl1[:kri - 43.7km], "SL");
+
+        track(:first :cat:ac15 :pax, sl2[:kri.x, :sir]);
+        with layer = 1 line_badge(:cat:ac15 :pax, sl2[:sir - 44km], "SL");
+
+        track(:first :cat:ac15 :pax, sl2[:sir, :ske]);
+        with layer = 1 line_badge(:cat:ac15 :pax, sl2[:sta - 42km], "SL");
+
+        track(:first :double :cat:ac15 :pax, sl2[:ske, :sta]);
+    }
+
+    with link = "point.no.Hokksund" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl1[:hok]);
+        slabel(:right :cat:ac15 :pax, sl1[:hok] + (0.8dt, -1.2dt), "Hokksund");
+    }
+
+    with link = "point.no.Kongsberg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl1[:kon]);
+        slabel(:right :cat:ac15 :pax, sl1[:kon] + (0.8dt, -1.2dt), "Kongsberg");
+    }
+
+    with link = "point.no.Hjuksebø" {
+        with layer = 1 marker(:statdot :cat:ac15, sl1[:hju]);
+        slabel(:right :cat:ac15, sl1[:hju] + (1.8dt, 1.2dt), "Hjuksebø");
+    }
+
+    with link = "point.no.Nordagutu" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl1[:nor]);
+        slabel(:left :cat:ac15 :pax, sl1[:nor] + (-1.8dt, 1.2dt), "Nordagutu");
+    }
+
+    with link = "point.no.Neslandsvatn" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl1[:nes]);
+        slabel(:left :cat:ac15 :pax, sl1[:nes] + (-1.8dt, 1.0dt),
+            "Neslandsvatn"
+        );
+    }
+
+    with link = "point.no.Nelaug" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl1[:nel]);
+        slabel(:left :cat:ac15 :pax, sl1[:nel] + (-2.0km, -1.5dt), "Nelaug");
+    }
+
+    with link = "point.no.Kristiansand" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl1[:kri]);
+        slabel(:right :cat:ac15 :pax, sl1[:kri] + (1.5dt, 1.0dt),
+            "Kristiansand"
+        );
+    }
+
+    with link = "point.no.Sira" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl2[:sir]);
+        slabel(:left :cat:ac15 :pax, sl2[:sir] + (-1.8dt, 0.8dt), "Sira");
+    }
+
+    with link = "point.no.Ganddal" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl2[:gan]);
+        slabel(:left :cat:ac15 :pax, sl2[:gan] + (-1.8dt, 0.5dt), "Ganddal");
+    }
+
+    with link = "point.no.Stavanger" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl2[:sta]);
+        slabel(:left :cat:ac15 :pax, sl2[:sta] + (-1.8dt, 0.8dt), "Stavanger");
+    }
+}
+
+
+# NO SO.  Solørbanen.  Kongsvinger - Elverum.
+with detail = 2 {
+    let so = path("d2.no.so");
+
+    with link = "line.no.SO" {
+        with layer = -2 track(:first, so[:kon.a, :elv.z]);
+        with layer = 1 line_badge(:open, so[:kon.a + 12km], "SO");
+        with layer = 1 line_badge(:open, so[:nam + 5km], "SO");
+        with layer = 1 line_badge(:open, so[:elv.z - 15km], "SO");
+    }
+}
+
+
+# NO SR.  Skreiabanen.  Reinsvoll - Skreia.
+with detail = 2 {
+    let sr = path("d2.no.sr");
+
+    with link = "line.no.SR" {
+        with layer = -2 track(:second :removed, sr[:rei.x, :skr]);
+        with layer = 1 line_badge(:removed, sr[:rei.x + 12.2km], "SR");
+    }
+
+    with link = "point.no.Skreia" {
+        with layer = 1 marker(:statdot :removed, sr[:skr]);
+        slabel(:bottom :removed, sr[:skr] + (0dt, 1.0dt), "Skreia");
+    }
+}
+
+
+# SU.  Sulitjelmabanen.  Finneid - Fagerli.
+with detail = 2 {
+    let su = path("d2.no.su");
+
+    with link = "line.no.SU" {
+        track(:first :removed, su[:fin, :fag]);
+        with layer = 1 line_badge(:removed, su[:fin + 13.5km], "SU");
+    }
+
+    with link = "point.no.Fagerli" {
+        with layer = 1 marker(:statdot :removed, su[:fag]);
+        slabel(:right :removed, su[:fag] + (1.8dt, 1.2dt), "Fagerli");
+    }
+}
+
+
+# SV.  Stavnebanen.  Marienborg - Leangen.
+with detail = 2 {
+    let sv = path("d2.no.sv");
+
+    with link = "line.no.SV" {
+        track(:first :pax, sv[:mar.z, :lea.z]);
+        with layer = 1 line_badge(:pax, sv[:mar.z + 3km], "SV");
+    }
+}
+

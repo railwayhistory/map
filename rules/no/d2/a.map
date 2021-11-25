@@ -1,0 +1,66 @@
+# NO AL.  Alnabrubanen.  Grefsen - Alnabru.
+with detail = 2 {
+    let al = path("d2.no.al");
+
+    with link = "line.no.AL" {
+        track(:first :cat:ac15, al[:gre.x, :aln.x]);
+        with layer = 1 line_badge(:cat:ac15, al[:gre.x + 1.6km], "AL");
+    }
+}
+
+
+# NO AR.  Arendalsbanen.  Nelaug - Arendal.
+with detail = 2 {
+    let ar = path("d2.no.ar");
+
+    with link = "line.no.AR" {
+        track(:second :cat:ac15 :pax, ar[:nel.x, :are]);
+        with layer = 1 line_badge(:cat:ac15 :pax, ar[:are - 19km] @ 10, "AR");
+    }
+
+    with link = "point.no.Rise" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ar[:ris]);
+        slabel(:left :cat:ac15 :pax, ar[:ris] + (-1.8dt, 1.0dt), "Rise");
+    }
+
+    with link = "point.no.Arendal" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ar[:are]);
+        slabel(:right :cat:ac15 :pax, ar[:are] + (1.7dt, 1.0dt), "Arendal");
+    }
+}
+
+
+# NO AS.  Askerbanen.  Lysaker - Asker.
+with detail = 2 {
+    let as = path("d2.no.as");
+
+    with link = "line.no.AS" {
+        track(:first :double :cat:ac15 :pax, as[:lys.x, :san.x]);
+        track(:first :double :cat:ac15 :pax, as[:san.y, :hva.x]);
+        track(:first :double :cat:ac15 :pax, as[:hva.x, :ask.x]);
+
+        guide(:linenum :cat:ac15 :pax,
+                as[:lys.x + 3.2km] >> 1dt
+            --  as[:lys.x + 3.2km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, as[:lys.x + 3.2km] >> 3dt,
+            hbox(:center:bottom :badgesize, "AS")
+        );
+    }
+}
+
+# NO ÅL.  Ålgårdbanen.  Ganddal - Ålgård.
+with detail = 2 {
+    let al = path("d2.no.ål");
+
+    with link = "line.no.ÅL" {
+        track(:third :removed, al[:gan, :alg]);
+        with layer = 1 line_badge(:removed, al[:gan + 5.7km], "ÅL");
+    }
+
+    with link = "point.no.Ålgård" {
+        with layer = 1 marker(:statdot :removed, al[:alg]);
+        slabel(:right :removed, al[:alg] + (1.8dt, 1.3dt), "Ålgård");
+    }
+}
+

@@ -1,0 +1,113 @@
+# NO TE.  Tønsberg-Eidsgossbanen. Jarlsberg points - Eidsfoss.
+with detail = 2 {
+    let te = path("d2.no.te");
+
+    with link = "line.no.TE" {
+        with layer = -1 track(:second :removed, te[:jar, :eid]);
+        with layer = 1 line_badge(:removed, te[:jar + 14.5km], "TE");
+        with layer = 1 line_badge(:removed, te[:eid - 4.3km] @ -10, "TE");
+    }
+
+    with link = "point.no.Hildestad" {
+        with layer = 1 marker(:statdot :removed, te[:hil]);
+        slabel(:left :removed, te[:hil] + (-1.0dt, 0dt),
+            vbox(:right:top, "Hilde-", "stad  ")
+        );
+    }
+
+    with link = "point.no.Hof" {
+        with layer = 1 marker(:statdot :removed, te[:hof]);
+        slabel(:right :removed, te[:hof] + (1.5dt, 0dt), "Hof");
+    }
+
+    with link = "point.no.Eidsfoss" {
+        with layer = 1 marker(:statdot :removed, te[:eid]);
+        slabel(:top :removed, te[:eid] + (0dt, -1.0dt), "Eidsfoss");
+    }
+}
+
+
+# NO TH.  Thamshavnbanen.  Thamshavn - Bårdshaug - Løkken.
+with detail = 2 {
+    let th = path("d2.no.th");
+
+    with link = "line.no.TH" {
+        with layer = -4 track(:second :removed :cat:ac6k6 :narrow,
+                th[:tha, :baa]
+        );
+
+        with layer = -1 track(:second :cat:ac6k6 :narrow, th[:baa, :lok]);
+        with layer = 1 line_badge(:cat:ac6k6, th[:baa + 13.5km], "TH");
+    }
+
+    with link = "point.no.Thamshavn" {
+        with layer = 1 marker(:statdot :removed, th[:tha]);
+        slabel(:top :removed, th[:tha] + (0dt, -1.2dt), "Thamshavn");
+    }
+
+    with link = "point.no.Bårdshaug" {
+        with layer = 1 marker(:statdot :cat:ac6k6, th[:baa]);
+        slabel(:left :cat:ac6k6, th[:baa] + (-1.8dt, 0.8dt), "Bårdshaug");
+    }
+
+    with link = "point.no.Løkken" {
+        with layer = 1 marker(:statdot :cat:ac6k6, th[:lok]);
+        slabel(:left :cat:ac6k6, th[:lok] + (-1.8dt, 0.8dt), "Løkken");
+    }
+}
+
+
+# NO TN.  Tinnosbanen.  Tinnoset - Hjuksebø.
+with detail = 2 {
+    let tn = path("d2.no.tn");
+
+    with link = "line.no.TN" {
+        track(:second :cat:ac15, tn[:tin, :not]);
+        with layer = 1 line_badge(:cat:ac15, tn[:tin + 15km], "TN");
+
+        track(:second :cat:ac15 :pax, tn[:not, :hju.x]);
+
+        guide(:linenum :cat:ac15 :pax,
+                tn[:not + 3km] >> 0.7dt
+            --  tn[:not + 3km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, tn[:not + 3km] >> 3dt,
+            hbox(:right:middle :badgesize, "TN ")
+        );
+    }
+
+    with link = "point.no.Tinnoset" {
+        with layer = 1 marker(:statdot :cat:ac15, tn[:tin]);
+        slabel(:top :cat:ac15, tn[:tin] + (0dt, -1.0dt), "Tinnoset");
+    }
+
+    with link = "point.no.Notodden" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tn[:not]);
+        slabel(:left :cat:ac15 :pax, tn[:not] + (-1.5dt, 0.5dt),
+            hbox(:right:top, "Notodden")
+        );
+    }
+}
+
+
+# NO TR.  Treungenbanen.  Nelaug - Treungen.
+with detail = 2 {
+    let tr = path("d2.no.tr");
+
+    with link = "line.no.TR" {
+        track(:station, tr[:nel.y, :sim]);
+        track(:second :removed, tr[:sim, :tre]);
+        with layer = 1 line_badge(:removed, tr[:sim + 22km], "TR");
+    }
+
+    with link = "point.no.Simonstad" {
+        with layer = 1 marker(:statdot, tr[:sim]);
+        slabel(:right, tr[:sim] + (-1.0dt, -1.6dt), "Simonstad");
+    }
+
+    with link = "point.no.Treungen" {
+        with layer = 1 marker(:statdot :removed, tr[:tre]);
+        slabel(:top :removed, tr[:tre] + (0dt, -1.0dt), "Treungen");
+    }
+}
+

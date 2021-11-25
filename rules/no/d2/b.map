@@ -1,0 +1,84 @@
+# NO BG.  Bergensbanen.  Hønefoss - Bergen.
+with detail = 2 {
+    let bg = path("d2.no.bg");
+
+    with link = "line.no.BG" {
+        track(:first :cat:ac15 :pax, bg[:hon, :nes]);
+        with layer = 1 line_badge(:cat:ac15 :pax, bg[:hon + 20.7km], "BG");
+        with layer = 1 line_badge(:cat:ac15 :pax, bg[:nes - 1km], "BG");
+
+        track(:first :cat:ac15 :pax, bg[:nes, :myr]);
+        with layer = 1 line_badge(:cat:ac15 :pax, bg[:myr - 23km], "BG");
+
+        track(:first :cat:ac15 :pax, bg[:myr, :ber]);
+        with layer = 1 line_badge(:cat:ac15 :pax, bg[:vos + 33km], "BG");
+    }
+
+    with link = "point.no.Myrdal" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bg[:myr]);
+        slabel(:left :cat:ac15 :pax, bg[:myr] + (-2.0dt, -0.5dt), "Myrdal");
+    }
+
+    with link = "point.no.Voss" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bg[:vos]);
+        slabel(:left :cat:ac15 :pax, bg[:vos] + (1.5dt, -1.5dt), "Voss");
+    }
+
+    with link = "point.no.Bergen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bg[:ber]);
+        slabel(:left :cat:ac15 :pax, bg[:ber] + (-1.8dt, 0.8dt), "Bergen");
+    }
+}
+
+
+# NO BR.  Bratsbergbanen.  Nordagatu - Eidanger
+with detail = 2 {
+    let br = path("d2.no.br");
+
+    with link = "line.no.BR" {
+        track(:first :cat:ac15 :pax, br[:nor.x, :myr]);
+        with layer = -1 track(:first :cat:ac15, br[:myr, :eid]);
+
+        with layer = 1 line_badge(
+            :cat:ac15 :pax, br[:nor + 17.0km] @ 5 << 0.4dt, "BR"
+        );
+        with layer = 1 line_badge(
+            :cat:ac15 :pax, br[:ski + 4.0km], "BR"
+        );
+    }
+
+    with link = "point.no.Skien" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, br[:ski]);
+        slabel(:left :cat:ac15 :pax, br[:ski] + (-2dt, 1.5dt), "Skien");
+    }
+
+    with link = "point.no.Myrane" {
+        with layer = 1 marker(:statdot :cat:ac15, br[:myr]);
+        slabel(:left :cat:ac15, br[:myr] + (-2dt, 1.5dt), "Myrane");
+    }
+}
+
+
+# NO BV.  Brevikbanen.  Eidanger - Brevik.
+with detail = 2 {
+    let bv = path("d2.no.bv");
+
+    with link = "line.no.BV" {
+        track(:first :cat:ac15, bv[:eid, :orv]);
+        track(:first :removed, bv[:orv, :bre]);
+
+        guide(:linenum :cat:ac15,
+                bv[:orv - 2km] << 0.7dt
+            --  bv[:orv - 2km] << 3dt
+        );
+        label(:linenum :cat:ac15, bv[:orv - 2km] << 3dt,
+            hbox(:left:middle :badgesize, " BV")
+        );
+    }
+
+    with link = "point.no.Brevik" {
+        with layer = 1 marker(:statdot :removed, bv[:bre]);
+        slabel(:bottom :removed, bv[:bre] + (0dt, 1.0dt), "Brevik");
+    }
+}
+
