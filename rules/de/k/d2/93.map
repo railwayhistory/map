@@ -1,0 +1,82 @@
+# DE 9302.  Brohl Umladebf - Kempenich
+with detail = 2 {
+    let bk = path("d2.de.9302");
+
+    with link = "line.de.9302" {
+        with layer = -2 track(:second :narrow:g1000, bk[:bro, :eng]);
+        with layer = 1 line_badge(
+            :open, bk[:eng - 5.52km] @ 5 << 0.7dt, "9302"
+        );
+
+        with layer = -4 track(:second :narrow:g1000 :removed,
+                bk[:eng, :kem]
+        );
+    }
+
+    with link = "point.de.Engeln-Brohlt" {
+        with layer = 1 marker(:statdot, bk[:eng]);
+        slabel(:right, bk[:eng] + (2.0dt, -1dt),
+            vbox(:top:left, "Engeln", span(:light, "(Brohlt)"))
+        );
+    }
+
+    with link = "point.de.Kempenich" {
+        with layer = 1 marker(:statdot :removed, bk[:kem]);
+        slabel(:left :removed, bk[:kem] + (-2.0dt, 0.3dt), "Kempenich");
+    }
+}
+
+
+# DE 9303.  Jülich - Linnich
+with detail = 2 {
+    let jl = path("d2.de.9303");
+
+    with link = "line.de.9303" {
+        track(:second :pax, jl[:jul, :lin]);
+        with layer = 1 line_badge(:pax, jl[:jul.a + 4km] @ -3, "9303");
+    }
+
+    with link = "point.de.Linnich" {
+        with layer = 1 marker(:statdot :pax, jl[:lin]);
+        slabel(:left :pax, jl[:lin] + (-1.3dt, 2.5dt), "Linnich");
+    }
+}
+
+# DE 9304.  Jülich - Düren
+with detail = 2 {
+    let jd = path("d2.de.9304");
+
+    with link = "line.de.9304" {
+        track(:second :pax, jd[:jul, :dur.yj]);
+        with layer = 1 line_badge(:pax, jd[:jul + 8km], "9304");
+    }
+
+    with link = "point.de.Jülich" {
+        with layer = 1 marker(:statdot :pax, jd[:jul]);
+        slabel(:right :pax, jd[:jul] + (1.5dt, 1.8dt), "Jülich");
+    }
+}
+
+# DE 9306.  Düren - Heimbach (Eifel)
+with detail = 2 {
+    let dh = path("d2.de.9306");
+
+    with link = "line.de.9306" {
+        track(:second :pax, dh[:dur.yh, :hei]);
+        guide(:linenum :pax,
+                dh[:dur.yh + 13km] >> 0.7dt
+            --  dh[:dur.yh + 13km] >> 3.0dt
+        );
+        label(:linenum :pax, dh[:dur.yh + 13km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "9306  ")
+        );
+    }
+
+    with link = "point.de.Heimbach-Eifel" {
+        with layer = 1 marker(:statdot :pax, dh[:hei]);
+        slabel(:pax :bottom, dh[:hei] + (0dt, 1.2dt),
+            vbox(:center:top, "Heimbach", span(:light, "(Eifel)"))
+        );
+    }
+}
+
