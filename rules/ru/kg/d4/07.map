@@ -230,9 +230,12 @@ with detail = [4, 5] {
         );
 
         # KG 21
-        track(:second:station,
+        track(:second:station :pax,
                 tjasow[:sow - 1sw, :sow.f - 200m] << 1.5dt
-            --  tjasow[:sow.f - 100m, :sow.f - 99m] >> 0.5dt
+        );
+        track(:second:station,
+                tjasow[:sow.f - 200m] << 1.5dt
+            --  tjasow[:sow.f - 100m] >> 0.5dt
         );
 
         # KG 29
@@ -241,26 +244,31 @@ with detail = [4, 5] {
             --  tjasow[:sow.f - 150m, :sow.f - 149m] >> 0.5dt
         );
 
-        marker(:de.bf :right, tjasow[:sow] >> 1.5dt);
-        station(:right, tjasow[:sow - 0.6sw] >> 1.5dt >> 1.6sw,
+        marker(:de.bf :pax :right, tjasow[:sow] >> 1.5dt);
+        station(:right :pax, tjasow[:sow - 0.6sw] >> 1.5dt >> 1.6sw,
             vbox(:center:bottom :bold,
                 span(:gone, "Tilsit"),
-                span(:open, "Советск")
+                "Советск"
             ),
             hbox(:center:top,
                 vbox(:right:top,
-                    span(:open, "КГ 7: "),
-                    span(:open, "КГ 21: "),
-                    span(:open, "КГ 29: ")
+                    span(:open, "КГ "),
+                    "КГ ",
+                    span(:open, "КГ ")
+                ),
+                vbox(:right:top,
+                    span(:open, "7: "),
+                    "21: ",
+                    span(:open, "29: ")
                 ),
                 vbox(:right:top,
                     span(:open, "53,"),
-                    span(:open, "??"),
+                    "??",
                     span(:open, "0,")
                 ),
                 vbox(:left:top,
                     span(:open, "8"),
-                    span(:open, ""),
+                    "",
                     span(:open, "0")
                 )
             )

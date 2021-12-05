@@ -11,59 +11,41 @@ with detail = [4, 5] {
         track(:first:station :removed,
                 kalmam[:kal + 0.5sw, :kal + 1sw] >> 0.5dt
         );
-        track(:first:station, kalmam[:kal - 0.5sw, :kal + 1sw] << 0.5dt);
+        track(:first:station :pax, kalmam[:kal - 0.5sw, :kal + 1sw] << 0.5dt);
 
         # KG 2
         track(:first:station :removed,
                 kalter[:kal + 0.5sw, :kal + 1sw] >> 0.5dt
         );
-        track(:first:station, kalter[:kal - 0.5sw, :kal + 1sw] << 0.5dt);
+        track(:first:station :pax, kalter[:kal - 0.5sw, :kal + 1sw] << 0.5dt);
 
         # KG 4
-        track(:first:station, kalmam[:kal - 0.5sw, :abal] >> 2.5dt);
+        track(:first:station :pax, kalmam[:kal - 0.5sw, :abal] >> 2.5dt);
         track(:first:station :removed, kalmam[:kal - 0.5sw, :abal] >> 1.5dt);
 
         # KG 5
-        track(:first:station, kalter[:kal - 0.5sw, :kal + 1sw] >> 1.5dt);
+        track(:first:station :pax, kalter[:kal - 0.5sw, :kal + 1sw] >> 1.5dt);
 
         # KG 21
-        track(:second:station :cat, kalmam[:kal - 0.5sw, :abal] >> 3.5dt);
+        track(:second:station :cat:dc30 :pax,
+                kalmam[:kal - 0.5sw, :abal] >> 3.5dt
+        );
 
-        marker(:de.bf :right, kalmam[:kal] >> 3.5dt);
-        station(:right, kalmam[:kal - 0.5sw] >> 3.5dt >> 1.2sw,
+        marker(:de.bf :cat:dc30 :pax :right, kalmam[:kal] >> 3.5dt);
+        station(:right :cat:dc30 :pax, kalmam[:kal - 0.5sw] >> 3.5dt >> 1.2sw,
             vbox(:bottom:left,
                 hbox(:base:left :gone,
-                    span(:bold, "KÖNIGSBERG "),
+                    span(:bold, "Königsberg "),
                     span(:regular, "(Pr) "),
                     span(:bold, "Hbf")
                 ),
-                span(:open :bold, "КАЛИНИНГРАД-Пассажирский")
+                span(:bold, "Калининград-Пассажирский")
             ),
             hbox(:center:top,
-                vbox(:right:top,
-                    span(:open, "КГ "),
-                    span(:open, "КГ "),
-                    span(:open, "КГ "),
-                    span(:open, "КГ ")
-                ),
-                vbox(:right:top,
-                    span(:open, "1: "),
-                    span(:open, "2: "),
-                    span(:open, "3: "),
-                    span(:open, "21: ")
-                ),
-                vbox(:right:top,
-                    span(:open, "1285"),
-                    span(:open, "1285"),
-                    span(:open, "0"),
-                    span(:open, "0")
-                ),
-                vbox(:left:top,
-                    span(:open, ",1"),
-                    span(:open, ",1"),
-                    span(:open, ",0"),
-                    span(:open, ",0")
-                )
+                vbox(:right:top, "КГ ", "КГ ", "КГ ", "КГ "),
+                vbox(:right:top, "1: ", "2: ", "3: ", "21: "),
+                vbox(:right:top, "1285", "1285", "0", "0"),
+                vbox(:left:top, ",1", ",1", ",0", ",0")
             )
         );
     }
@@ -71,21 +53,21 @@ with detail = [4, 5] {
 
     with link = "line.ru.kg.1" {
         track(:first :removed, kalmam[:kal + 1sw, :kie - 1sw] >> 0.5dt);
-        track(:first, kalmam[:kal + 1sw, :kie - 1sw] << 0.5dt);
+        track(:first :pax, kalmam[:kal + 1sw, :kie - 1sw] << 0.5dt);
     }
 
 
     with link = "point.ru.Калининград-Киевская" {
         track(:first :removed, kalmam[:kie - 1sw, :kie + 1sw] >> 0.5dt);
-        track(:first, kalmam[:kie - 1sw, :kie + 1sw] << 0.5dt);
-        marker(:de.hp :left, kalmam[:kie] << 0.5dt);
-        label(kalmam[:kie] << 0.5dt << 1.8sh,
+        track(:first :pax, kalmam[:kie - 1sw, :kie + 1sw] << 0.5dt);
+        marker(:de.hp :pax :left, kalmam[:kie] << 0.5dt);
+        label(:pax, kalmam[:kie] << 0.5dt << 1.8sh,
             vbox(:left:middle,
                 span(:medium :gone, "Königsberg-Ponarth"),
                 hbox(:left:top,
                     vbox(:center:top,
-                        span(:medium :open, "Киевская"),
-                        span(:xsmall :open, "1288,0")
+                        span(:medium, "Киевская"),
+                        span(:xsmall, "1288,0")
                     )
                 )
             )
@@ -95,14 +77,14 @@ with detail = [4, 5] {
 
     with link = "line.ru.kg.1" {
         track(:first :removed, kalmam[:kie + 1sw, :las - 1sw] >> 0.5dt);
-        track(:first, kalmam[:kie + 1sw, :las - 1sw] << 0.5dt);
-        with layer = 1 line_badge(:open, kalmam[:kie + 1.8km], "КГ 1");
+        track(:first :pax, kalmam[:kie + 1sw, :las - 1sw] << 0.5dt);
+        with layer = 1 line_badge(:pax, kalmam[:kie + 1.8km], "КГ 1");
     }
 
 
     with link = "point.ru.Ласкино" {
         track(:first :removed, kalmam[:las - 1sw, :las + 1sw] >> 0.5dt);
-        track(:first, kalmam[:las - 1sw, :las + 1sw] << 0.5dt);
+        track(:first :pax, kalmam[:las - 1sw, :las + 1sw] << 0.5dt);
         with layer = -1 marker(:de.hp :removed :left, kalmam[:las] << 0.5dt);
         label(kalmam[:las] << 0.5dt << 1.8sh,
             vbox(:medium :left:middle,
@@ -115,20 +97,20 @@ with detail = [4, 5] {
 
     with link = "line.ru.kg.1" {
         track(:first :removed, kalmam[:las + 1sw, :gol - 1sw] >> 0.5dt);
-        track(:first, kalmam[:las + 1sw, :gol - 1sw] << 0.5dt);
+        track(:first :pax, kalmam[:las + 1sw, :gol - 1sw] << 0.5dt);
     }
 
 
     with link = "point.ru.Голубево" {
-        track(:first:station :double, kalmam[:gol - 1sw, :gol + 1sw]);
-        marker(:de.bf :right, kalmam[:gol] >> 0.5dt);
-        label(kalmam[:gol] >> 0.5dt >> 1.7sh,
+        track(:first:station :double :pax, kalmam[:gol - 1sw, :gol + 1sw]);
+        marker(:de.bf :pax :right, kalmam[:gol] >> 0.5dt);
+        label(:pax, kalmam[:gol] >> 0.5dt >> 1.7sh,
             vbox(:right:middle,
                 span(:medium :gone, "Seepothen"),
                 hbox(:right:top,
                     vbox(:center:top,
-                        span(:medium :open, "Голубево"),
-                        span(:xsmall :open, "1296,0")
+                        span(:medium, "Голубево"),
+                        span(:xsmall, "1296,0")
                     )
                 )
             )
@@ -137,41 +119,43 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:gol + 1sw, :op1298 - 1sw]);
+        track(:first :double :pax, kalmam[:gol + 1sw, :op1298 - 1sw]);
     }
 
 
     with link = "point.ru.kg.1.Оп-1298-км" {
-        track(:first:station :double, kalmam[:op1298 - 1sw, :op1298 + 1sw]);
-        marker(:de.hp :right, kalmam[:op1298] >> 0.5dt);
-        station(:left, kalmam[:op1298 + 0.5sw] >> 0.5dt >> 1.3sw,
+        track(:first:station :double :pax,
+                kalmam[:op1298 - 1sw, :op1298 + 1sw]
+        );
+        marker(:de.hp :pax :right, kalmam[:op1298] >> 0.5dt);
+        station(:left :pax, kalmam[:op1298 + 0.5sw] >> 0.5dt >> 1.3sw,
             "1298 км", "1297,9"
         );
     }
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:op1298 + 1sw, :swe - 1sw]);
-        with layer = 1 line_badge(:open, kalmam[:op1298 + 1.8km], "КГ 1");
+        track(:first :double :pax, kalmam[:op1298 + 1sw, :swe - 1sw]);
+        with layer = 1 line_badge(:open :pax, kalmam[:op1298 + 1.8km], "КГ 1");
     }
         
 
     with link = "point.ru.Светлое" {
-        track(:first:station :double, kalmam[:swe - 1sw, :swe + 1sw]);
-        marker(:de.hp :left, kalmam[:swe] << 0.5dt);
+        track(:first:station :double :pax, kalmam[:swe - 1sw, :swe + 1sw]);
+        marker(:de.hp :pax :left, kalmam[:swe] << 0.5dt);
         with layer = -1 marker(:de.bf :removed :left, kalmam[:swe] << 0.5dt);
-        station(:right :left_align, kalmam[:swe + 0.3sw] << 0.5dt << 2.2sw,
+        station(:right :left_align :pax, kalmam[:swe + 0.3sw] << 0.5dt << 2.2sw,
             vbox(:left:bottom :bold,
                 span(:gone, "  Kobbelbude"),
-                span(:open, "Светлое")
+                "Светлое"
             ),
             hbox(:left:top,
                 vbox(:right:top,
-                    span(:open, "КГ 1: "),
+                    "КГ 1: ",
                     span(:removed, "КГ 4: ")
                 ),
                 vbox(:center:top,
-                    span(:open, "1301,0"),
+                    "1301,0",
                     span(:removed, "??")
                 )
             )
@@ -180,47 +164,53 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:swe + 1sw, :op1305 - 1sw]);
-        with layer = 1 line_badge(:open, kalmam[:swe + 1.0km], "КГ 1");
+        track(:first :double :pax, kalmam[:swe + 1sw, :op1305 - 1sw]);
+        with layer = 1 line_badge(:open :pax, kalmam[:swe + 1.0km], "КГ 1");
     }
 
 
     with link = "point.ru.kg.1.Оп-1305-км" {
-        track(:first:station :double, kalmam[:op1305 - 1sw, :op1305 + 1sw]);
-        marker(:de.hp :left, kalmam[:op1305] << 0.5dt);
-        station(:right, kalmam[:op1305 + 0.5sw] << 0.5dt << 1.8sw,
+        track(:first:station :double :pax,
+                kalmam[:op1305 - 1sw, :op1305 + 1sw]
+        );
+        marker(:de.hp :left :pax, kalmam[:op1305] << 0.5dt);
+        station(:right :pax, kalmam[:op1305 + 0.5sw] << 0.5dt << 1.8sw,
             "1305 км", "1304,9"
         );
     }
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:op1305 + 1sw, :op1307 - 1sw]);
+        track(:first :double :pax, kalmam[:op1305 + 1sw, :op1307 - 1sw]);
     }
 
 
     with link = "point.ru.kg.1.Оп-1307-км" {
-        track(:first:station :double, kalmam[:op1307 - 1sw, :op1307 + 1sw]);
-        marker(:de.hp :left, kalmam[:op1307] << 0.5dt);
-        station(:bottom, kalmam[:op1307] << 0.5dt << 1.2sw,
+        track(:first:station :double :pax,
+                kalmam[:op1307 - 1sw, :op1307 + 1sw]
+        );
+        marker(:de.hp :pax :left, kalmam[:op1307] << 0.5dt);
+        station(:bottom :pax, kalmam[:op1307] << 0.5dt << 1.2sw,
             "1307 км", "КГ 1: 1306,5"
         );
     }
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:op1307 + 1sw, :op1312 - 1sw]);
-        with layer = 1 line_badge(:open, kalmam[:op1307 + 2.5km], "КГ 1");
+        track(:first :double :pax, kalmam[:op1307 + 1sw, :op1312 - 1sw]);
+        with layer = 1 line_badge(:open :pax, kalmam[:op1307 + 2.5km], "КГ 1");
     }
 
 
     with link = "point.ru.kg.1.Оп-1312-км" {
-        track(:first:station :double, kalmam[:op1312 - 1sw, :op1312 + 1sw]);
-        marker(:de.hp :right, kalmam[:op1312] >> 0.5dt);
-        station(:top, kalmam[:op1312] >> 0.5dt >> 1.6sh,
+        track(:first:station :double :pax,
+                kalmam[:op1312 - 1sw, :op1312 + 1sw]
+        );
+        marker(:de.hp :pax :right, kalmam[:op1312] >> 0.5dt);
+        station(:top :pax, kalmam[:op1312] >> 0.5dt >> 1.6sh,
             vbox(:center:bottom,
                 span(:gone, "Pörschken"),
-                span(:open, "1312 км")
+                "1312 км"
             ),
             "1311,6"
         );
@@ -228,17 +218,17 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:op1312 + 1sw, :lad - 1sw]);
+        track(:first :double :pax, kalmam[:op1312 + 1sw, :lad - 1sw]);
     }
 
 
     with link = "point.ru.Ладушкин" {
-        track(:first:station :double, kalmam[:lad - 1sw, :lad + 1sw]);
-        marker(:de.bf :right, kalmam[:lad] >> 0.5dt);
-        station(:top, kalmam[:lad] >> 0.5dt >> 1.6sh,
+        track(:first:station :double :pax, kalmam[:lad - 1sw, :lad + 1sw]);
+        marker(:de.bf :pax :right, kalmam[:lad] >> 0.5dt);
+        station(:top :pax, kalmam[:lad] >> 0.5dt >> 1.6sh,
             vbox(:right:bottom,
                 span(:gone, "Ludwigsort"),
-                span(:open, "Ладушкин")
+                "Ладушкин"
             ),
             "1314,1"
         );
@@ -246,33 +236,33 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:lad + 1sw, :sos - 1sw]);
+        track(:first :double :pax, kalmam[:lad + 1sw, :sos - 1sw]);
     }
 
 
     with link = "point.ru.Сосновый-Бор" {
-        track(:first:station :double, kalmam[:sos - 1sw, :sos + 1sw]);
-        marker(:de.hp :right, kalmam[:sos] >> 0.5dt);
-        station(:left, kalmam[:sos - 0.3sw] >> 0.5dt >> 1.4sw,
+        track(:first:station :double :pax, kalmam[:sos - 1sw, :sos + 1sw]);
+        marker(:de.hp :pax :right, kalmam[:sos] >> 0.5dt);
+        station(:left :pax, kalmam[:sos - 0.3sw] >> 0.5dt >> 1.4sw,
             "Сосновый Бор", "1318,0"
         );
     }
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:sos + 1sw, :pri - 1sw]);
-        with layer = 1 line_badge(:open, kalmam[:sos + 2.0km], "КГ 1");
+        track(:first :double :pax, kalmam[:sos + 1sw, :pri - 1sw]);
+        with layer = 1 line_badge(:open :pax, kalmam[:sos + 2.0km], "КГ 1");
     }
 
 
     with link = "point.ru.Приморское-Новое" {
-        track(:first:station :double, kalmam[:pri - 1sw, :pri + 1sw]);
-        marker(:de.hp :left, kalmam[:pri] << 0.5dt);
+        track(:first:station :double :pax, kalmam[:pri - 1sw, :pri + 1sw]);
+        marker(:de.hp :pax :left, kalmam[:pri] << 0.5dt);
         with layer = -1 marker(:de.bf :removed :left, kalmam[:pri] << 0.5dt);
-        station(:left, kalmam[:pri] >> 1.5dt,
+        station(:left :pax, kalmam[:pri] >> 1.5dt,
             vbox(:center:bottom,
                 span(:gone, "Wolittnick"),
-                span(:open, "Приморское Новое")
+                "Приморское Новое"
             ),
             "1322,0"
         );
@@ -280,21 +270,21 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:pri + 1sw, :sna - 1sw]);
+        track(:first :double :pax, kalmam[:pri + 1sw, :sna - 1sw]);
     }
 
 
     with link = "point.ru.Знаменка" {
-        track(:first:station :double, kalmam[:sna - 1sw, :sna + 1sw]);
-        marker(:de.hp :right, kalmam[:sna] >> 0.5dt);
+        track(:first:station :double :pax, kalmam[:sna - 1sw, :sna + 1sw]);
+        marker(:de.hp :pax :right, kalmam[:sna] >> 0.5dt);
         with layer = -1 marker(:de.bf :removed :right, kalmam[:sna] >> 0.5dt);
-        label(kalmam[:sna] >> 0.5dt >> 1.6sw,
+        label(:pax, kalmam[:sna] >> 0.5dt >> 1.6sw,
             vbox(:right:middle,
                 span(:medium :gone, "Groß Hoppenbruch"),
                 hbox(:right:top,
                     vbox(:center:top,
-                        span(:medium :open, "Знаменка"),
-                        span(:xsmall :open, "1327,0")
+                        span(:medium, "Знаменка"),
+                        span(:xsmall, "1327,0")
                     )
                 )
             )
@@ -303,43 +293,45 @@ with detail = [4, 5] {
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:sna + 1sw, :op1333 - 1sw]);
+        track(:first :double :pax, kalmam[:sna + 1sw, :op1333 - 1sw]);
     }
 
 
     with link = "point.ru.kg.1.Оп-1333-км" {
-        track(:first:station :double, kalmam[:op1333 - 1sw, :op1333 + 1sw]);
-        marker(:de.hp :right, kalmam[:op1333] >> 0.5dt);
-        station(:left, kalmam[:op1333 + 0.4sw] >> 0.5dt >> 1.2sw,
+        track(:first:station :double :pax,
+                kalmam[:op1333 - 1sw, :op1333 + 1sw]
+        );
+        marker(:de.hp :pax :right, kalmam[:op1333] >> 0.5dt);
+        station(:left :pax, kalmam[:op1333 + 0.4sw] >> 0.5dt >> 1.2sw,
             "1333 км", "1332,4"
         );
     }
 
 
     with link = "line.ru.kg.1" {
-        track(:first :double, kalmam[:op1333 + 1sw, :mam - 1sw]);
+        track(:first :double :pax, kalmam[:op1333 + 1sw, :mam - 1sw]);
     }
 
 
     with link = "point.ru.Мамоново" {
-        track(:first:station :double, kalmam[:mam - 1sw, :mam + 1sw]);
-        marker(:de.bf :left, kalmam[:mam] << 0.5dt);
-        station(:right :left_align, kalmam[:mam] << 0.5dt << 2.0sw,
+        track(:first:station :double :pax, kalmam[:mam - 1sw, :mam + 1sw]);
+        marker(:de.bf :pax :left, kalmam[:mam] << 0.5dt);
+        station(:right :pax :left_align, kalmam[:mam] << 0.5dt << 2.0sw,
             vbox(:left:bottom,
-                span(:former :bold, " Heiligenbeil"),
-                span(:open :bold, "Мамоново")
+                span(:gone :bold, " Heiligenbeil"),
+                span(:bold, "Мамоново")
             ),
             hbox(:left:top,
                 vbox(:right:top,
-                    span(:open, "КГ "),
+                    span(:pax, "КГ "),
                     span(:removed, "КГ ")
                 ),
                 vbox(:right:top,
-                    span(:open, "1: "),
+                    span(:pax, "1: "),
                     span(:removed, "31: ")
                 ),
                 vbox(:center:top,
-                    span(:open, "1334,6 "),
+                    span(:pax, "1334,6 "),
                     span(:removed, "??")
                 ),
                 vbox(:center:top,
