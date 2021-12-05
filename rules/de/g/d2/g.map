@@ -1,8 +1,18 @@
-# DE G00.  Ellenserdamm - Ellenserdammersiel
+# DE G00.  Bremerhaven-Geestemünde - Bremerhaven Zollauslandsbf
 with detail = 2 {
-    let ee = path("d2.de.g00");
+    let gz = path("d2.de.g00");
 
     with link = "line.de.G00" {
+        with layer = -4 track(:first :removed, gz[:gee.yz, :zau]);
+    }
+}
+
+
+# DE G20.  Ellenserdamm - Ellenserdammersiel
+with detail = 2 {
+    let ee = path("d2.de.g20");
+
+    with link = "line.de.G20" {
         with layer = -4 track(:second :removed, ee[:ell.f, :els]);
     }
 
@@ -12,13 +22,13 @@ with detail = 2 {
 }
 
 
-# DE GB0.  Nordenham Kleinb - Eckwarderhörne
+# DE GA1.  Nordenham Kleinb - Eckwarderhörne
 with detail = 2 {
-    let ne = path("d2.de.gb0");
+    let ne = path("d2.de.ga1");
 
-    with link = "line.de.GB0" {
+    with link = "line.de.GA1" {
         with layer = -4 track(:third :removed, ne[:nor.a, :eck]);
-        with layer = 1 line_badge(:removed, ne[:eck - 7km], "GB0");
+        with layer = 1 line_badge(:removed, ne[:eck - 7km], "GA1");
     }
 
     with link = "point.de.Eckwarderhörne" {
@@ -26,6 +36,22 @@ with detail = 2 {
         slabel(:bottom :removed, ne[:eck] + (0dt, 1dt),
             vbox(:center:top, "Eckwarder-", "hörne")
         );
+    }
+}
+
+
+# DE GB1.  Bremen Parkbf - Tarmstedt
+with detail = 2 {
+    let bt = path("d2.de.gb1");
+
+    with link = "line.de.GB1" {
+        with layer = -4 track(:third :removed, bt[:par, :utb.yp]);
+        with layer = -4 track(:third :removed, bt[:hor, :tar]);
+        with layer = 1 line_badge(:removed, bt[:hor + 10.7km], "GB1");
+    }
+
+    with link = "point.de.Bremen-Parkbf" {
+        with layer = 1 marker(:statdot :removed, bt[:par]);
     }
 }
 
@@ -58,6 +84,40 @@ with detail = 2 {
     with link = "point.de.Greetsiel" {
         with layer = 1 marker(:statdot :removed, eg[:gre]);
         slabel(:top :removed, eg[:gre] - (0dt, 1.0dt), "Greetsiel");
+    }
+}
+
+
+# DE GF1.  Bremerhaven-Wulsdorf - Bremen-Farge Ost
+with detail = 2 {
+    let wf = path("d2.de.gf1");
+
+    with link = "line.de.GF1" {
+        with layer = -4 track(:third :removed, wf[:wul.yf, :fao]);
+        with layer = 1 line_badge(:removed, wf[:fao - 12km], "GF1");
+    }
+}
+
+
+# DE GK1.  Hohenkirchen - Schillig
+with detail = 2 {
+    let hs = path("d2.de.gk1");
+
+    with link = "line.de.GK1" {
+        with layer = -4 track(:third :removed, hs[:hki.f, :sil]);
+        
+        track(:guide :removed,
+                hs[:hki.f + 5.5km] >> 0.7dt
+            --  hs[:hki.f + 5.5km] >> 3.0dt
+        );
+        label(hs[:hki.f + 5.5km] >> 3.0dt,
+            hbox(:left:middle :badgesize :removed, " GK1")
+        );
+    }
+
+    with link = "point.de.Schillig" {
+        with layer = 1 marker(:statdot :removed, hs[:sil]);
+        slabel(:right :removed, hs[:sil] + (1.3dt, 0.8dt), "Schillig");
     }
 }
 
@@ -98,25 +158,24 @@ with detail = 2 {
 }
 
 
-# DE GM0.  Hohenkirchen - Schillig
+# DE GM1.  Kutenhausen - Wegholm
 with detail = 2 {
-    let hs = path("d2.de.gm0");
+    let kw = path("d2.de.gm1");
 
-    with link = "line.de.GM0" {
-        with layer = -4 track(:third :removed, hs[:hki.f, :sil]);
-        
-        track(:guide :removed,
-                hs[:hki.f + 5.5km] >> 0.7dt
-            --  hs[:hki.f + 5.5km] >> 3.0dt
+    with link = "line.de.GM1" {
+        track(:third :removed, kw[:kut.yw, :weg]);
+        guide(:linenum :removed,
+                kw[:weg - 2km] << 0.7dt
+            --  kw[:weg - 2km] << 3.0dt
         );
-        label(hs[:hki.f + 5.5km] >> 3.0dt,
-            hbox(:left:middle :badgesize :removed, " GM0")
+        label(:linenum :removed, kw[:weg - 2km] << 3.0dt,
+            hbox(:right:middle :badgesize, "GM1 ")
         );
     }
 
-    with link = "point.de.Schillig" {
-        with layer = 1 marker(:statdot :removed, hs[:sil]);
-        slabel(:right :removed, hs[:sil] + (1.3dt, 0.8dt), "Schillig");
+    with link = "point.de.Wegholm" {
+        with layer = 1 marker(:statdot :removed, kw[:weg]);
+        slabel(:top :removed, kw[:weg] + (0dt, -1.0dt), "Wegholm");
     }
 }
 
@@ -125,7 +184,7 @@ with detail = 2 {
 with detail = 2 {
     let lq = path("d2.de.gq0");
 
-    with link = "lne.de.GQ0" {
+    with link = "line.de.GQ0" {
         with layer = -4 track(:third :removed, lq[:lin.f, :qua]);
         with layer = 1 line_badge(:removed, lq[:lin.f + 28km], "GQ0");
     }
@@ -136,7 +195,7 @@ with detail = 2 {
 with detail = 2 {
     let lk = path("d2.de.gq1");
 
-    with link = "lne.de.GQ1" {
+    with link = "line.de.GQ1" {
         with layer = -4 track(:third :removed, lk[:lin.f, :kan]);
     }
 

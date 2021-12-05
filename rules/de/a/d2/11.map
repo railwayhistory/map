@@ -1,0 +1,425 @@
+# DE 1100.  Lübeck Hbf – Puttgarden.
+with detail = 2 {
+    let lp = path("d2.de.1100");
+
+    with link = "line.de.1100" {
+        track(:first :double :cat:ac15 :pax, lp[:lub, :wal]);
+        track(:first :double :pax, lp[:wal, :swr.ye]);
+        track(:first :pax, lp[:swr.ye, :put]);
+
+        with layer = 1 line_badge(:pax, lp[:swr + 12.5km], "1100");
+        with layer = 1 line_badge(
+            :pax, lp[:neg + 15.5km] @ -5 << 0.5dt, "1100"
+        );
+        with layer = 1 line_badge(:pax, lp[:buw + 3.5km], "1100");
+    }
+
+    with link = "point.de.Bad-Schwartau" {
+        with layer = 1 marker(:statdot :pax, lp[:swr]);
+        slabel(:left :pax, lp[:swr] << 1.2dt,
+            vbox(:center:bottom, "Bad ", "Schwartau")
+        );
+    }
+
+    with link = "point.de.Großenbrode" {
+        with layer = 1 marker(:statdot :pax, lp[:gbr]);
+        label(:pax, lp[:gbr] >> 2.0dt,
+            hbox(:left:middle :small, "Großenbrode")
+        );
+    }
+
+    with link = "point.de.Burg-Fehmarn-West" {
+        with layer = 1 marker(:statdot, lp[:buw]);
+    }
+
+    with link = "point.de.Puttgarden" {
+        with layer = 1 marker(:statdot :pax, lp[:put]);
+        slabel(:top :pax, lp[:put] - (0dt, 1.5dt), "Puttgarden");
+    }
+}
+
+
+# DE 1103.  Fehmarnsund – Orth (Fehmarn).
+with detail = 2 {
+    let fo = path("d2.de.1103");
+
+    with link = "line.de.1103" {
+        with layer = -2 track(:third:removed, fo[:feh, :bur]);
+        track(:second, fo[:bur, :buw.ys]);
+        with layer = -2 track(:third:removed, fo[:buw.yo, :ort]);
+
+        guide(:linenum :removed,
+                fo[:feh + 3.5km] >> 0.7dt
+            --  fo[:feh + 3.5km] >> 3.0dt
+        );
+        label(:linenum :removed, fo[:feh + 3.5km] >> 3.0dt + (0dt, 0.2dt),
+            hbox(:left:middle :badgesize, " 1103")
+        );
+
+        with layer = 1 line_badge(
+            :removed, fo[:ort - 7.5km] @ -2 << 0.8dt, "1103"
+        );
+    }
+
+    with link = "point.de.Fehmarnsund" {
+        with layer = 1 marker(:statdot :removed, fo[:feh]);
+        label(fo[:feh] - (2.2dt, 0.2dt),
+            hbox(:right:middle :small :removed, "Fehmarnsund")
+        );
+    }
+
+    with link = "point.de.Burg-Fehmarn" {
+        with layer = 1 marker(:statdot :pax, fo[:bur]);
+        label(:pax, fo[:bur] + (1.5dt, -0.5dt),
+            hbox(:left:bottom :small,
+                hbox(:left:base, "Burg ", span(:light, "(Fehmarn)"))
+            )
+        );
+    }
+
+    with link = "point.de.Orth-Fehmarn" {
+        with layer = -1 marker(:statdot :removed, fo[:ort]);
+        label(fo[:ort] + (-1.5dt, -0.2dt),
+            hbox(:right:middle :small :removed,
+                hbox(:left:base, "Orth ", span(:light, "(Fehmarn)"))
+            )
+        );
+    }
+}
+
+
+# DE 1110.  Eutin – Lübeck Hbf.
+#
+with detail = 2 {
+    let el = path("d2.de.1110");
+
+    with link = "line.de.1110" {
+        track(:first :pax, el[:eut, :swr.ye]);
+
+        with layer = 1 line_badge(:pax, el[:swr - 10.0km] @ 3, "1110");
+    }
+
+    with link = "point.de.Pönitz-Holst" {
+        with layer = 1 marker(:statdot :pax, el[:pon]);
+        label(:pax, el[:pon] - (1.5dt, 0.5dt),
+            hbox(:right:bottom :small,
+                hbox(:right:base, "Pönitz ", span(:light, "(Holst)"))
+            )
+        );
+    }
+}
+
+
+# DE 1111.  Pönitz (Holst) – Ahrensbök.
+#
+with detail = 2 {
+    let po = path("d2.de.1111");
+
+    with link = "line.de.1111" {
+        with layer = -1 track(:second :removed, po[:pon.y, :ahr]);
+
+        guide(:linenum :removed,
+                po[:ahr - 2.2km] >> 0.7dt
+            --  po[:ahr - 2.2km] >> 3.0dt
+        );
+        label(:linenum :removed, po[:ahr - 2.2km] >> 3.0dt,
+            hbox(:right:middle :badgesize, "1111 ")
+        );
+    }
+
+    with link = "point.de.Ahrensbök" {
+        with layer = 1 marker(:statdot :removed, po[:ahr]);
+        label(po[:ahr] - (1.5dt, 0.2dt),
+            hbox(:right:middle :small :removed, "Ahrensbök")
+        );
+    }
+}
+
+
+# DE 1112.  Malente-Gremsmühlen – Lütjenburg
+#
+with detail = 2 {
+    let ml = path("d2.de.1112");
+
+    with link = "line.de.1112" {
+        with layer = -1 track(:second :closed, ml[:mal, :lut]);
+
+        with layer = 1 line_badge(
+            :closed, ml[:mal + 10km] @ -20 << 0.5dt, "1112"
+        );
+    }
+
+    with link = "point.de.Lütjenburg" {
+        with layer = 1 marker(:statdot :closed, ml[:lut]);
+        slabel(:right :closed, ml[:lut] >> 1.5dt, "Lütjenburg");
+    }
+}
+
+
+# DE 1113.  Schwartau-Waldhalle (Wr) – Lübeck-Travemünde Strand.
+with detail = 2 {
+    let wt = path("d2.de.1113");
+
+    with link = "line.de.1113" {
+        track(:first :double :cat:ac15 :pax, wt[:wal.y, :kuc]);
+        track(:first :cat:ac15 :pax, wt[:kuc, :trs]);
+
+        guide(:linenum :cat:ac15 :pax,
+                wt[:dan + 2.2km] << 1dt
+            --  wt[:dan + 2.2km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, wt[:dan + 2.2km] << 3dt,
+            hbox(:center:bottom :badgesize, "1113")
+        );
+    }
+
+    with link = "point.de.Lübeck-Dänischburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wt[:dan]);
+    }
+
+    with link = "point.de.Lübeck-Kücknitz" {
+        with layer = 1 marker(:statdot :cat:ac15, wt[:kuc]);
+    }
+
+    with link = "point.de.Lübeck-Travemünde-Hafen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wt[:trh]);
+    }
+
+    with link = "point.de.Lübeck-Travemünde-Strand" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wt[:trs]);
+        label(:cat:ac15 :pax, wt[:trs] + (1.5dt, 0dt),
+            hbox(:left:top :small, "L.-Travemünde")
+        );
+    }
+}
+
+
+# DE 1114.  Lübeck-Travemünde Hafen – Niendorf (Ostsee).
+with detail = 2 {
+    let tn = path("d2.de.1114");
+
+    with link = "line.de.1114" {
+        with layer = -1 track(:second :removed, tn[:trh.yn, :nie]);
+
+        track(:guide :removed,
+                tn[:trh + 2.5km] >> 0.8dt
+            --  tn[:trh + 2.5km] >> 3.0dt
+        );
+        label(tn[:trh + 2.5km] >> 3.5dt,
+            hbox(:left:middle :badgesize :removed, "1114")
+        );
+    }
+
+    with link = "point.de.Niendorf-Ostsee" {
+        with layer = 1 marker(:statdot :removed, tn[:nie]);
+        slabel(:right :removed, tn[:nie] - (4dt, 1.5dt),
+            hbox(:right:base, "Niendorf ", span(:light, "(Ostsee)"))
+        );
+    }
+}
+
+
+# DE 1115.  Lübeck-Dänischburg – Lübeck-Herrenwyk.
+with detail = 2 {
+    with link = "line.de.1115" {
+        track(:station, path("d2.de.1115")[:dan.yh, :her]);
+    }
+}
+
+
+# DE 1117
+#
+with detail = 2 {
+    let ks = path("d2.de.1117");
+
+    with link = "line.de.1117" {
+        track(:second :cat:ac15, ks[:kua.y, :ska]);
+    }
+
+    with link = "point.de.Lübeck-Skandinavienkai" {
+        with layer = 1 marker(:statdot :cat:ac15, ks[:ska]);
+        label(:cat:ac15, ks[:ska] + (1.5dt, 0dt),
+            hbox(:left:middle :small, "L. Skandinavienkai")
+        );
+    }
+}
+
+
+# DE 1120.  Lübeck Hbf – Hamburg Hbf.
+with detail = 2 {
+    let lh = path("d2.de.1120");
+
+    with link = "line.de.1120" {
+        track(:first :double :cat:ac15 :pax, lh[:lub, :ham.yo]);
+
+        with layer = 1 line_badge(:cat:ac15 :pax, lh[:old - 5.7km], "1120");
+        with layer = 1 line_badge(:cat:ac15 :pax, lh[:old + 15.0km], "1120");
+    }
+
+    with link = "point.de.Lübeck-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, lh[:lub]);
+        with layer = 2 label(:cat:ac15 :pax, lh[:lub + 2.8km] >> 2.5dt,
+            hbox(:right:bottom :medium:bold, "Lübeck")
+        );
+    }
+
+    with link = "point.de.Bad-Oldesloe" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, lh[:old]);
+        label(:cat:ac15 :pax, lh[:old] << 2.0dt,
+            hbox(:left:middle :small, "Bad Oldesloe")
+        );
+    }
+
+    with link = "point.de.Hamburg-Rahlstedt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, lh[:rah]);
+    }
+
+    with link = "point.de.Hamburg-Wandsbek" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, lh[:wan]);
+    }
+
+    with link = "point.de.point.de.Hamburg-Hasselbrook" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, lh[:has]);
+    }
+}
+
+
+# DE 1121
+#
+with detail = 2 {
+    let lb = path("d2.de.1121");
+
+    with link = "line.de.1121" {
+        track(:first :pax, lb[:lua.yb, :buc.yl]);
+
+        with layer = 1 line_badge(:pax, lb[:rat - 11.0km], "1121");
+        with layer = 1 line_badge(:pax, lb[:mol + 11.3km], "1121");
+    }
+
+    with link = "point.de.Ratzeburg" {
+        with layer = 1 marker(:statdot :pax, lb[:rat]);
+        label(:pax, lb[:rat] - (2.0dt, 0dt),
+            hbox(:right:middle :small, "Ratzeburg")
+        );
+    }
+
+    with link = "point.de.Mölln-Lauenburg" {
+        with layer = 1 marker(:statdot :pax, lb[:mol]);
+        label(:pax, lb[:mol] - (2.0dt, 0dt),
+            hbox(:right:middle :small, "Mölln ", span(:light, "(Lauenb.)"))
+        );
+    }
+}
+
+
+# DE 1122.  Lübeck Hbf – Strasburg (Uckerm).
+with detail = 2 {
+    let ls = path("d2.de.a.1122");
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:lua.yk, :heg]);
+    }
+}
+
+
+# DE 1131.  Lübeck Hgbf – Lübeck-Schlutup.
+#
+with detail = 2 {
+    let ls = path("d2.de.1131");
+
+    with link = "line.de.1131" {
+        track(:second, ls[:stn.ys, :slu]);
+
+        guide(:linenum,
+                ls[:slu - 2.0km] >> 0.5dt
+            --  ls[:slu - 2.0km] >> 3.0dt
+        );
+        label(:linenum, ls[:slu - 2.0km] >> 3.0dt + (1.0dt, 0dt),
+            hbox(:left:middle :badgesize, "1131")
+        );
+    }
+
+    with link = "point.de.Lübeck-Schlutup" {
+        with layer = 1 marker(:statdot, ls[:slu]);
+        label(ls[:slu] + (1.8dt, 0dt),
+            hbox(:left:middle :small, "L.-Schlutup")
+        );
+    }
+}
+
+
+# DE 1137.  Brandenbaum – Lübeck Konstinbahnhof.
+with detail = 2 {
+    with link = "line.de.1137" {
+        track(:station, path("d2.de.1137")[:bra.yk, :kon]);
+    }
+}
+
+
+# DE 1141.  Schwarzenbek – Bad Oldesloe.
+with detail = 2 {
+    let so = path("d2.de.1141");
+
+    with link = "line.de.1141" {
+        with layer = -1 track(:second :removed, so[:swa.yo, :old.ys]);
+
+        with layer = 1 line_badge(:removed, so[:swa + 7.0km], "1141");
+        with layer = 1 line_badge(:removed, so[:tri + 12.5km], "1141");
+    }
+
+    with link = "point.de.Trittau" {
+        with layer = 1 marker(:statdot :removed, so[:tri]);
+        slabel(:right :removed, so[:tri] + (1.8dt, 0.5dt), "Trittau");
+    }
+}
+
+
+# DE 1150
+#
+with detail = 2 {
+    let lb = path("d2.de.1150");
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:lun.yb, :buc]);
+
+        with layer = 1 line_badge(:pax, lb[:ech - 6.0km], "1150");
+        with layer = 1 line_badge(:pax, lb[:buc - 8.0km], "1150");
+    }
+
+    with link = "point.de.Echem" {
+        with layer = 1 marker(:statdot :pax, lb[:ech]);
+        slabel(:left :pax, lb[:ech - 1dt] << 1.2dt, "Echem");
+    }
+}
+
+
+# DE 1151.  Wittenberge – Buchholz (Nordheide).
+#
+with detail = 2 {
+    let wb = path("d2.de.a.1151");
+
+    with link = "line.de.1151" {
+        with layer = -1 track(:first :removed, wb[:dog, :dan]);
+        track(:first :pax, wb[:dan, :lun.yw]);
+        with layer = -1 track(:second :removed, wb[:lun.yj, :jes.yl]);
+
+        with layer = 1 line_badge(:pax, wb[:dah - 9.0km], "1151");
+        with layer = 1 line_badge(:pax, wb[:dah + 10.0km], "1151");
+        with layer = 1 line_badge(:removed, wb[:wul - 7.0km], "1151");
+    }
+
+    with link = "point.de.Dannenberg-Ost" {
+        with layer = 1 marker(:statdot :pax, wb[:dan]);
+        label(:pax, wb[:dan + 1.5dt] << 1.5dt,
+            hbox(:left:top :small, "Dannenberg")
+        );
+    }
+
+    with link = "point.de.Dahlenburg" {
+        with layer = 1 marker(:statdot :pax, wb[:dah]);
+        label(:pax, wb[:dah - 2dt] << 0.8dt,
+            hbox(:right:top :small, "Dahlenburg")
+        );
+    }
+}
+

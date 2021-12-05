@@ -1,0 +1,54 @@
+# DE 1404.  Bremen Gabelung - Sagehorn
+with detail = 2 {
+    let gs = path("d2.de.1404");
+
+    with link = "line.de.1404" {
+        track(:first :double :cat:ac15 :pax, gs[:gab, :sag.yg]);
+        with layer = 1 line_badge(:cat:ac15 :pax, gs[:sag.yg - 3.5km], "1404");
+    }
+}
+
+
+# DE 1423.  Bremen-Burg - Bremen-Vegesack
+with detail = 2 {
+    let bv = path("d2.de.1423");
+
+    with link = "line.de.1423" {
+        track(:first :double :cat:ac15 :pax, bv[:bur.yv, :veg]);
+
+        guide(:linenum :cat:ac15 :pax,
+                bv[:bur.yv + 3.0km] >> 1dt
+            --  bv[:bur.yv + 3.0km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, bv[:bur.yv + 3.0km] >> 3dt,
+            hbox(:center:bottom :badgesize, "1423")
+        );
+    }
+
+    with link = "point.de.Bremen-Vegesack" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bv[:veg]);
+    }
+}
+
+
+# DE 1424.  Bremen-Utbremen Abzw - Bremen Rbf Bve
+with detail = 2 {
+    with link = "line.de.1424" {
+        track(:first :cat:ac15, path("d2.de.1424")[:utb, :brb.yu]);
+    }
+}
+
+
+# DE 1425.  Bremen Inlandshafen W K11 - Bremen Stahlwerke
+with detail = 2 {
+    let bs = path("d2.de.1425");
+
+    with link = "line.de.1425" {
+        track(:second :cat:ac15, bs[:inl.ys, :sta]);
+    }
+
+    with link = "point.de.Bremen-Stahlwerke" {
+        with layer = 1 marker(:statdot :cat:ac15, bs[:sta]);
+    }
+}
+

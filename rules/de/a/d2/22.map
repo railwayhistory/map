@@ -1,0 +1,46 @@
+# DE 2200.  Wanne-Eickel Hbf - Hamburg Hbf
+with detail = 2 {
+    let wh = path("d2.de.a.2200");
+
+    with link = "line.de.2200" {
+        track(:first :double :cat:ac15 :pax, wh[:sag, :ham]);
+        with layer = 1 line_badge(:cat:ac15 :pax, wh[:sag + 8km], "2200");
+        with layer = 1 line_badge(:cat:ac15 :pax, wh[:rot + 19km], "2200");
+        guide(:linenum :cat:ac15 :pax,
+                wh[:buc + 8km] << 1dt
+            --  wh[:buc + 8km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, wh[:buc + 8km] << 3dt + (0dt, -0.2dt),
+            hbox(:right:middle :badgesize, "2200 ")
+        );
+    }
+
+    with link = "point.de.Sagehorn" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wh[:sag]);
+        slabel(:right :cat:ac15 :pax, wh[:sag] + (1.0dt, 3.0dt), "Sagehorn");
+    }
+
+    with link = "point.de.Rotenburg-Wümme" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wh[:rot]);
+        slabel(:bottom :cat:ac15 :pax, wh[:rot] + (2dt, 3.2dt),
+            vbox(:center:top, "Rotenburg", span(:light, "(Wümme)"))
+        );
+    }    
+
+    with link = "point.de.Tostedt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wh[:tos]);
+        slabel(:right :cat:ac15 :pax, wh[:tos] >> 3.0dt, "Tostedt");
+    }
+
+    with link = "point.de.Buchholz-Nordheide" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wh[:buc]);
+        slabel(:left :cat:ac15 :pax, wh[:buc - 0.5dt] + (0.5dt, -1dt),
+            vbox(:right:bottom, "Buchholz ", span(:light, "(Nordh.)"))
+        );
+    }
+
+    with link = "point.de.Hamburg-Harburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wh[:har]);
+    }
+}
+

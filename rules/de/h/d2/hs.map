@@ -1,0 +1,96 @@
+# DE H25.  Lehrte - Lehrte Gabelung
+with detail = 2 {
+    with link = "line.de.H25" {
+        track( :first :double :removed, path("d2.de.h25")[:leh.s, :leg]);
+    }
+}
+
+
+# DE H30.  Hannover Südbf - Hannover-Linden/Fischerhof
+with detail = 2 {
+    with link = "line.de.H30" {
+        track(:first :double :removed, path("d2.de.h30")[:sud.f, :fis]);
+    }
+}
+
+
+# DE H35.  Hannover-Linden - Hannover-Linden Küchengarten
+with detail = 2 {
+    let lk = path("d2.de.h35");
+
+    with link = "line.de.H35" {
+        with layer = -4 track(:first :removed, lk[:lin.f, :kuc]);
+    }
+
+    with link = "point.de.Hannover-Linden-Küchengarten" {
+        with layer = 1 marker(:statdot :removed, lk[:kuc]);
+    }
+}
+
+
+# DE H40.  Braunschweig Hbf alt - Braunschweig Gabelung Süd
+with detail = 2 {
+    let bs = path("d2.de.h40");
+
+    with link = "line.de.H40" {
+        with layer = -4 track(:first :double :removed, bs[:bsa, :bgs]);
+    }
+
+    with link = "point.de.Braunschweig-Hbf-alt" {
+        with layer = 1 marker(:statdot :removed, bs[:bsa]);
+    }
+}
+
+
+# DE H50.  Braunschweig West - Braunschweig Hbf alt
+with detail = 2 {
+    with link = "line.de.H50" {
+        track(:second :removed, path("d2.de.h50")[:wes.s, :bsa.f]);
+    }
+}
+
+
+# DE H59.  Büddenstedt - Trendelbusch
+with detail = 2 {
+    let bt = path("d2.de.h59");
+
+    with link = "line.de.H59" {
+        with layer = -4 track(:second :removed, bt[:bud, :tre]);
+    }
+
+    with link = "point.de.Trendelbusch" {
+        with layer = 1 marker(:statdot :removed, bt[:tre]);
+        slabel(:left :removed, bt[:tre] + (-1.8dt, 0.8dt), "Trendelbusch");
+    }
+}
+
+
+# DE H60.  Vienenburg Wiedelah - Vienenburg
+with detail = 2 {
+    with link = "line.de.H60" {
+        track(:first :double :removed, path("d2.de.h60")[:viw, :vie.r]);
+    }
+}
+
+
+# DE H95.  Höxter - Zementfabrik Eichwald
+with detail = 2 {
+    let hz = path("d2.de.h95");
+
+    with link = "line.de.H95" {
+        with layer = -4 track(:second :removed, hz[:hox, :zem]);
+
+        guide(:linenum :removed,
+                hz[:hox + 1.3km] >> 0.7dt
+            --  hz[:hox + 1.3km] >> 3.0dt
+        );
+        label(:linenum :removed, hz[:hox + 1.3km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "H95")
+        );
+    }
+
+    with link = "point.de.Zementfabrik-Eichwald" {
+        with layer = 1 marker(:statdot :removed, hz[:zem]);
+    }
+}
+

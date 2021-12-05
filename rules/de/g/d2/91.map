@@ -1,3 +1,65 @@
+# DE 9130.  Bremerhaven Seehafen DB-Grenze - Bremerhaven Seehafen Columbusbf
+with detail = 2 {
+    let bc = path("d2.de.9130");
+
+    with link = "line.de.9130" {
+        with layer = 1 track(:first :double :cat:ac15, bc[:spe.yc, :kai]);
+        track(:second, bc[:kai, :col]);
+    }
+
+    with link = "point.de.Bremerhaven-Kaiserhafen" {
+        with layer = 2 marker(:statdot :cat:ac15, bc[:kai]);
+    }
+
+    with link = "point.de.Bremerhaven-Seehafen-Columbusbf" {
+        with layer = 2 marker(:statdot, bc[:col]);
+    }
+}
+
+
+# DE 9131  Bremerhaven Kaiserhafen - Bremerhafen Freihafen
+with detail = 2 {
+    let kf = path("d2.de.9131");
+
+    with link = "line.de.9131" {
+        with layer = -1 track(:second :removed, kf[:kai, :fre]);
+    }
+
+    with link = "point.de.Bremerhaven-Freihafen" {
+        with layer = 1 marker(:statdot :removed, kf[:fre]);
+    }
+}
+
+
+# DE 9133.  Bremerhaven-Speckenbüttel - Bremerhaven Imsumer Deich
+with detail = 2 {
+    let bi = path("d2.de.9133");
+    
+    with link = "line.de.9133" {
+        track(:second :double :cat:ac15, bi[:spe.yc, :wed]);
+        track(:second :cat:ac15, bi[:wed, :ims]);
+    }
+
+    with link = "point.de.Bremerhaven-Imsumer-Deich" {
+        with layer = 1 marker(:statdot :cat:ac15, bi[:ims]);
+    }
+}
+
+
+# DE 9134.  Weddewarden - Weddewarder Tief
+with detail = 2 {
+    let bw = path("d2.de.9134");
+
+    with link = "line.de.9134" {
+        track(:second :cat:ac15, bw[:wed, :wet]);
+    }
+
+    with link = "point.de.Bremerhaven-Weddewarder-Tief" {
+        with layer = 1 marker(:statdot :cat:ac15, bw[:wet]);
+    }
+}
+
+
 # DE 9142.  Hoya - Syke
 with detail = 2 {
     let hosy = path("d2.de.9142");
@@ -34,6 +96,92 @@ with detail = 2 {
     with link = "point.de.Asendorf" {
         with layer = 1 marker(:statdot, bvas[:ase]);
         slabel(:left, bvas[:ase] + (2dt, 3.8dt), "Asendorf");
+    }
+}
+
+
+# DE 9144.  Bremen-Huchting - Thedinghausen
+with detail = 2 {
+    let ht = path("d2.de.9144");
+
+    with link = "line.de.9144" {
+        track(:third, ht[:huc.yt, :the]);
+        with layer = 1 line_badge(:open, ht[:huc.yt + 5.5km], "9144");
+        with layer = 1 line_badge(:open, ht[:the - 4.5km], "9144");
+    }
+
+    with link = "point.de.Thedinghausen" {
+        with layer = 1 marker(:statdot, ht[:the]);
+        slabel(:bottom, ht[:the] + (0dt, 1dt), "Thedinghausen");
+    }
+}
+
+
+# DE 9145.  Bremen-Vegesack - Bremen-Farge
+with detail = 2 {
+    let vf = path("d2.de.9145");
+
+    with link = "line.de.9145" {
+        track(:second :cat:ac15 :pax, vf[:veg.yf, :far]);
+        guide(:linenum :cat:ac15 :pax,
+                vf[:far - 3km] >> 0.7dt
+            --  vf[:far - 3.5km] >> 2.5dt
+        );
+        label(:linenum :cat:ac15 :pax, vf[:far - 3.5km] >> 2.5dt,
+            hbox(:left:middle :badgesize, " 9145")
+        );
+    }
+
+    with link = "point.de.Bremen-Farge-Ost" {
+        with layer = 1 marker(:statdot :cat:ac15, vf[:fao]);
+    }
+
+    with link = "point.de.Bremen-Farge" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, vf[:far]);
+        slabel(:right :cat:ac15 :pax, vf[:fao] + (0.5dt, -1.8dt), "B.-Farge");
+    }
+}
+
+
+# DE 9146.  Bremen Inlandshafen EGr - Bremen Zollausschluß
+with detail = 2 {
+    let bz = path("d2.de.9146");
+
+    with link = "line.de.9146" {
+        track(:second :double :cat:ac15, bz[:brb.yi, :inl]);
+        track(:second, bz[:inl, :zol]);
+    }
+
+    with link = "point.de.Bremen-Inlandshafen" {
+        with layer = 1 marker(:statdot :cat:ac15, bz[:inl]);
+    }
+
+    with link = "point.de.Bremen-Zollausschluß" {
+        with layer = 1 marker(:statdot, bz[:zol]);
+    }
+}
+
+
+# DE 9147.  Bremen Hbf Bwn - Bremen Zollausschluß
+with detail = 2 {
+    let wo = path("d2.de.9147");
+
+    with link = "line.de.9147" {
+        track(:second, wo[:bwn, :zol]);
+    }
+}
+
+
+# DE 9149.  Bremen-Neustadt DB-Grenze - Bremen-Grolland Rablinghausen
+with detail = 2 {
+    let bg = path("d2.de.9149");
+
+    with link = "line.de.9149" {
+        track(:second, bg[:bng, :rab]);
+    }
+
+    with link = "point.de.Bremen-Grolland" {
+        with layer = 1 marker(:statdot, bg[:gro]);
     }
 }
 
