@@ -1,0 +1,33 @@
+# DE 3322.  Langmeil (Pfalz) - Morschheim Landesgrenze
+with detail = 2 {
+    let lm = path("d2.de.3322");
+
+    with link = "line.de.3322" {
+        track(:second :pax, lm[:lan.ym, :mar.ym]);
+        line_badge(:pax, lm[:lan.ym + 4km] @ -5, "3322");
+
+        track(:second :removed, lm[:mar.ym, :kir]);
+        
+        track(:second :pax, lm[:kir, :mog]);
+        guide(:linenum :pax,
+                lm[:mog - 2.5km] >> 0.7dt
+            --  lm[:mog - 2.5km] >> 3.0dt
+        );
+        label(:linenum :pax, lm[:mog - 2.5km] >> 3.0dt + (0dt, 0.1dt),
+            hbox(:left:middle :badgesize, " 3322")
+        );
+    }
+
+    with link = "point.de.Marnheim" {
+        with layer = 1 marker(:statdot :pax, lm[:mar]);
+        slabel(:left :pax, lm[:mar] + (-1.8dt, 0.8dt), "Marnheim");
+    }
+
+    with link = "point.de.Kirchheimbolanden" {
+        with layer = 1 marker(:statdot :pax, lm[:kir]);
+        slabel(:left :pax, lm[:kir] + (-1.8dt, 0.8dt),
+            vbox(:right:middle, "Kirchheim- ", "bolanden")
+        );
+    }
+}
+
