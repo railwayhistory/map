@@ -1,0 +1,456 @@
+# DE 3400. Schifferstadt - Berg (Pfalz) Grenze
+with detail = 2 {
+    let sl = path("d2.de.3400");
+
+    with link = "line.de.3400" {
+        track(:first :double :cat:ac15 :pax, sl[:sif, :wor.yg]);
+        line_badge(:cat:ac15 :pax, sl[:spe + 7km], "3400");
+        line_badge(:cat:ac15 :pax, sl[:wor - 7km], "3400");
+
+        track(:first :pax, sl[:wor.yl, :beg]);
+        guide(:linenum :pax,
+                sl[:beg - 5km] >> 0.7dt
+            --  sl[:beg - 5km] >> 3.0dt
+        );
+        label(:linenum :pax, sl[:beg - 5km] >> 3.0dt + (0dt, -0.1dt),
+            hbox(:right:middle :badgesize, "3400 ")
+        );
+    }
+
+    with link = "point.de.Speyer-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl[:spe]);
+        slabel(:left :cat:ac15 :pax, sl[:spe] + (-3.0dt, 0dt),
+            "Speyer Hbf"
+        );
+    }
+
+    with link = "point.de.Germersheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sl[:ger]);
+        slabel(:left :cat:ac15 :pax, sl[:ger] + (-1.8dt, 1.5dt),
+            vbox(:right:middle, "Germers-", "heim")
+        );
+    }
+
+    with link = "point.int.Berg-Pfalz-Lauterbourg" {
+        marker(:refdt :right, sl[:beg]);
+        marker(:refdt :left, sl[:beg]);
+    }
+}
+
+
+# DE 3401.  Böhl-Iggelheim-Abzw - Mannheim Hbf
+with detail = 2 {
+    let bm = path("d2.de.3401");
+
+    with link = "line.de.3401" {
+        track(:first :double :cat:ac15 :pax, bm[:bia, :lim.ys]);
+    }
+
+    with link = "point.de.Schifferstadt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bm[:sif]);
+        slabel(:right :cat:ac15 :pax, bm[:sif] + (1.8dt, 1.2dt),
+            "Schifferstadt"
+        );
+    }
+}
+
+
+# DE 3402.  Ludwigshafen-Mundenheim - Ludwigshafen (Rhein) BASF
+with detail = 2 {
+    let mb = path("d2.de.3402");
+
+    with link = "line.de.3402" {
+        track(:station, mb[:mun.yb, :mun.xb]);
+        track(:station :removed, mb[:mun.xb, :bsf.yl]);
+        track(:second :cat:ac15 :pax, mb[:bsf.yl, :bsn]);
+        track(:second :cat:ac15, mb[:bsn, :bsf]);
+    }
+
+    with link = "point.de.Ludwigshafen-Rhein-BASF-Pbf-Nord" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mb[:bsn]);
+    }
+
+    with link = "point.de.Ludwigshafen-Rhein-BASF" {
+        with layer = 1 marker(:statdot :cat:ac15, mb[:bsf]);
+    }
+}
+
+
+# DE 3405.  Ludiwgshafen (Rhein) Hbf tief - Ludwigshafen (Rhein) BASF Südtor
+with detail = 2 {
+    with link = "line.de.3405" {
+        track(:second :cat:ac15 :pax, path("d2.de.3405")[:lud.yb, :bsf.yl]);
+    }
+}
+
+
+# DE 3411.  Ludwigshafen-Oggersheim - Ludwigshafen (Rhein) BASF Gbf
+with detail = 2 {
+    with link = "line.de.3411" {
+        track(:second :cat:ac15, path("d2.de.3411")[:ogg.yb, :bsf]);
+    }
+}
+
+
+# DE 3413.  Ludwigshafen Lokalbahnhof - Großkarlbach
+with detail = 2 {
+    let lg = path("d2.de.3413");
+
+    with link = "line.de.3413" {
+        track(:second :narrow:g1000 :removed, lg[:lul, :fra.yl]);
+        track(:second :narrow:g1000 :removed, lg[:fra.yg, :gka]);
+        guide(:linenum :removed,
+                lg[:gka - 5.5km] >> 0.7dt
+            --  lg[:gka - 5.5km] >> 3.0dt
+        );
+        label(:linenum :removed, lg[:gka - 5.5km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "3413")
+        );
+    }
+
+    with link = "point.de.Großkarlbach" {
+        with layer = 1 marker(:statdot :removed, lg[:gka]);
+    }
+}
+
+
+# DE 3414.  Ludwigshafen Lokalbahnhof - Meckenheim (Pfalz)
+with detail = 2 {
+    let lm = path("d2.de.3414");
+
+    with link = "line.de.3414" {
+        track(:second :narrow:g1000 :removed, lm[:lul, :mec]);
+        line_badge(:removed, lm[:mec - 5km], "3414");
+    }
+
+    with link = "point.de.Meckenheim-Pfalz" {
+        with layer = 1 marker(:statdot :removed, lm[:mec]);
+        slabel(:bottom :removed, lm[:mec] + (2dt, 1.0dt), "Meckenheim");
+    }
+}
+
+
+# DE 3420.  Grünstadt - Enkenbach
+with detail = 2 {
+    let ge = path("d2.de.3420");
+
+    with link = "line.de.3420" {
+        track(:second :pax, ge[:gru.ye, :eis]);
+        guide(:linenum :pax,
+                ge[:eis - 2km] >> 0.7dt
+            --  ge[:eis - 2km] >> 3.0dt
+        );
+        label(:linenum :pax, ge[:eis - 2km] >> 3.0dt + (-0.1dt, 0dt),
+            hbox(:center:bottom :badgesize, "3420")
+        );
+
+        track(:second :removed, ge[:eis, :enk.yg]);
+    }
+
+    with link = "point.de.Ebertsheim" {
+        with layer = 1 marker(:statdot :pax, ge[:ebe]);
+        slabel(:left :pax, ge[:ebe] + (-1.5dt, -0.5dt), "Ebertsheim");
+    }
+
+    with link = "point.de.Ramsen-Eiswoog" {
+        with layer = 1 marker(:statdot :pax, ge[:eis]);
+    }
+}
+
+
+# DE 3421.  Ebertsheim (Abzw) - Hettenleidelheim
+with detail = 2 {
+    let eh = path("d2.de.3421");
+
+    with link = "line.de.3421" {
+        track(:second :removed, eh[:eba, :het]);
+    }
+
+    with link = "point.de.Hettenleidelheim" {
+        with layer = 1 marker(:statdot :removed, eh[:het]);
+    }
+}
+
+
+# DE 3422.  Grünstadt - Altleiningen
+with detail = 2 {
+    let ga = path("d2.de.3422");
+
+    with link = "line.de.3422" {
+        track(:second :removed, ga[:gru.ya, :ale]);
+        line_badge(:removed, ga[:gru.ya + 4.3km] @ 5 << 0.2dt, "3422");
+    }
+
+    with link = "point.de.Altleiningen" {
+        with layer = 1 marker(:statdot :removed, ga[:ale]);
+    }
+}
+
+
+# DE 3423.  Grünstadt - Offstein Landesgrenze
+with detail = 2 {
+    let go = path("d2.de.3423");
+
+    with link = "line.de.3423" {
+        track(:second, go[:gru.yo, :nof]);
+        track(:second :removed, go[:nof, :ofg]);
+    }
+}
+
+
+# DE 3430.  Bad Dürkheim - Monsheim
+with detail = 2 {
+    let dm = path("d2.de.3430");
+
+    with link = "line.de.3430" {
+        track(:first :pax, dm[:dur.ym, :mon.yd]);
+        guide(:linenum :pax,
+                dm[:fre + 2.1km] << 0.7dt
+            --  dm[:fre + 2.1km] << 3.0dt
+        );
+        label(:linenum :pax, dm[:fre + 2.1km] << 3.0dt,
+            hbox(:right:middle :badgesize, "3430 ")
+        );
+        guide(:linenum :pax,
+                dm[:gru.yo + 3.6km] << 0.7dt
+            --  dm[:gru.yo + 3.6km] << 3.0dt
+        );
+        label(:linenum :pax, dm[:gru.yo + 3.6km] << 3.0dt + (0dt, -0.2dt),
+            hbox(:right:middle :badgesize, "3430 ")
+        );
+    }
+
+    with link = "point.de.Freinsheim" {
+        with layer = 1 marker(:statdot :pax, dm[:fre]);
+        slabel(:left :pax, dm[:fre] + (-1.5dt, -1.0dt),
+            vbox(:left:top, "Freins-", "heim")
+        );
+    }
+
+    with link = "point.de.Grünstadt" {
+        with layer = 1 marker(:statdot :pax, dm[:gru]);
+        slabel(:left :pax, dm[:gru.yo] + (-1.8dt, -1.5dt), "Grünstadt");
+    }
+}
+
+
+# DE 3432.  Lambrecht (Pfalz) - Elmstein
+with detail = 2 {
+    let le = path("d2.de.3432");
+
+    with link = "line.de.3432" {
+        track(:second, le[:lam.ye, :elm]);
+        guide(:linenum,
+                le[:lam.ye + 4.2km] >> 0.7dt
+            --  le[:lam.ye + 4.2km] >> 3.0dt
+        );
+        label(:linenum, le[:lam.ye + 4.2km] >> 3.0dt,
+            hbox(:right:bottom :badgesize, "3432")
+        );
+    }
+
+    with link = "point.de.Elmstein" {
+        with layer = 1 marker(:statdot, le[:elm]);
+        slabel(:left, le[:elm] + (-1.8dt, 0.8dt), "Elmstein");
+    }
+}
+
+
+# DE 3433.  Neustadt (Weinstr) Hbf - Kapsweyer Grenze
+with detail = 2 {
+    let nw = path("d2.de.3433");
+
+    with link = "line.de.3433" {
+        track(:first :double :pax, nw[:nst.yl, :win]);
+        line_badge(:pax, nw[:lan - 10.5km], "3433");
+
+        track(:first :pax, nw[:win, :kag]);
+        line_badge(:pax, nw[:win + 7km], "3433");
+    }
+
+    with link = "point.de.Landau-Pfalz-Hbf" {
+        with layer = 1 marker(:statdot :pax, nw[:lan]);
+        slabel(:left :pax, nw[:lan] + (-0.5dt, 1.5km),
+            hbox(:right:top,
+                hbox(:right:base, "Landau ", span(:light, "(Pfalz)"), " Hbf")
+            )
+        );
+    }
+
+    with link = "point.de.Rohrbach-Pfalz" {
+        with layer = 1 marker(:statdot :pax, nw[:roh]);
+        slabel(:right :pax, nw[:roh] + (1.0dt, 2.5dt),
+            vbox(:left:middle, " Rohrbach", span(:light, "(Pfalz)"))
+        );
+    }
+
+    with link = "point.de.Winden-Pfalz" {
+        with layer = 1 marker(:statdot :pax, nw[:win]);
+        slabel(:left :pax, nw[:win] + (-1.8dt, 0.5dt),
+            hbox(:right:top, "Winden", span(:light, "(Pfalz)"))
+        );
+    }
+
+    with link = "point.int.Kapsweyer-Wissembourg" {
+        marker(:refdt :right, nw[:kag]);
+        marker(:refdt :left, nw[:kag]);
+    }
+}
+
+
+# DE 3435.  Freinsheim - Frankenthal Hbf
+with detail = 2 {
+    let ff = path("d2.de.3435");
+
+    with link = "line.de.3435" {
+        track(:second :pax, ff[:fre.yf, :fra.yf]);
+        line_badge(:pax, ff[:fre.yf + 6km], "3435");
+    }
+}
+
+
+# DE 3436.  Neustadt (Weinstr) Hbf - Bad Dürkheim
+with detail = 2 {
+    let nd = path("d2.de.3436");
+
+    with link = "line.de.3436" {
+        track(:first :pax, nd[:nst.yd, :dur]);
+        line_badge(:pax, nd[:nst.yd + 6.2km] << 0.1dt, "3436");
+    }
+
+    with link = "point.de.Bad-Dürkheim" {
+        with layer = 1 marker(:statdot :pax, nd[:dur]);
+        slabel(:left :pax, nd[:dur] + (-1.8dt, -1.8dt),
+            vbox(:right:top, "Bad", "Dürkheim")
+        );
+    }
+}
+
+
+# DE 3440.  Landau (Pflaz) Hbf - Herxheim (b Landau)
+with detail = 2 {
+    let lh = path("d2.de.3440");
+
+    with link = "line.de.3440" {
+        track(:second :removed, lh[:lan.yh, :her]);
+        guide(:linenum :removed,
+                lh[:lan.yh + 4.6km] << 0.7dt
+            --  lh[:lan.yh + 4.6km] << 3.0dt
+        );
+        label(:linenum :removed,
+            lh[:lan.yh + 4.6km] << 3.0dt + (0.4dt, -0.2dt),
+            hbox(:center:bottom :badgesize, "3440")
+        );
+    }
+
+    with link = "point.de.Herxheim-Landau" {
+        with layer = 1 marker(:statdot :removed, lh[:her]);
+    }
+}
+
+
+# DE 3441.  Rohrbach (Pfalz) - Klingenmünster
+with detail = 2 {
+    let rk = path("d2.de.3441");
+
+    with link = "line.de.3441" {
+        track(:second :removed, rk[:roh.yk, :kli]);
+        line_badge(:removed, rk[:roh.yk + 4.0km] @ 10 << 0.4dt, "3441");
+    }
+
+    with link = "point.de.Klingenmünster" {
+        with layer = 1 marker(:statdot :removed, rk[:kli]);
+        slabel(:left :removed, rk[:kli] + (-1.8dt, 0.8dt), "Klingenmünster");
+    }
+}
+
+
+# DE 3442.  Winden (Pfalz) - Bad Bergzabern
+with detail = 2 {
+    let wb = path("d2.de.3442");
+
+    with link = "line.de.3442" {
+        track(:second :pax, wb[:win.yb, :bza]);
+        line_badge(:pax, wb[:win.yb + 4.5km], "3442");
+    }
+
+    with link = "point.de.Bad-Bergzabern" {
+        with layer = 1 marker(:statdot :pax, wb[:bza]);
+        slabel(:left :pax, wb[:bza] + (-1.3dt, -1.5dt),
+            vbox(:right:middle, "Bad Berg-", "zabern ")
+        );
+    }
+}
+
+
+# DE 3443.  Winden (Pfalz) - Karlsruhe Hbf
+with detail = 2 {
+    let wk = path("d2.de.3443");
+
+    with link = "line.de.3443" {
+        track(:first :pax, wk[:win.yw, :wor.yg]);
+        guide(:linenum :pax,
+                wk[:win.yw + 6.1km] >> 0.7dt
+            --  wk[:win.yw + 6.1km] >> 3.0dt
+        );
+        label(:linenum :pax, wk[:win.yw + 6.1km] >> 3.0dt,
+            hbox(:center:top :badgesize, "3443")
+        );
+
+        track(:first :double :cat:ac15 :pax, wk[:wor.yg, :kar.yw]);
+        guide(:linenum :cat:ac15 :pax,
+                wk[:kni - 2.8km] >> 0.7dt
+            --  wk[:kni - 2.8km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax,
+            wk[:kni - 2.8km] >> 3.0dt + (-0.3dt, 0dt),
+            hbox(:center:top :badgesize, "3443")
+        );
+    }
+
+    with link = "point.de.Wörth-Rhein" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wk[:wor]);
+        slabel(:left :cat:ac15 :pax, wk[:wor] + (-1.8dt, 2.8dt),
+            hbox(:left:base, "Wörth ", span(:light, "(Rhein)"))
+        );
+    }
+
+    with link = "point.de.Karlsruhe-Knielingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wk[:kni]);
+    }
+
+    with link = "point.de.Karlsruhe-Mühlburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wk[:muh]);
+    }
+}
+
+
+# DE 3450.  Rheinsheim Strw - Rohrbach (Saar)
+with detail = 2 {
+    let rr = path("d2.de.r.3450");
+
+    with link = "line.de.3450" {
+        track(:first :cat:ac15 :pax, rr[:rhg, :ger.yg]);
+        
+        track(:first :double :removed, rr[:ger.yl, :lan.yg]);
+        line_badge(:removed, rr[:lan.yg - 5.5km], "3450");
+
+        track(:first :pax, rr[:lan.yp, :hau]);
+        guide(:linenum :pax,
+                rr[:lan.yp + 10.5km] >> 0.7dt
+            --  rr[:lan.yp + 10.5km] >> 3.0dt
+        );
+        label(:linenum :pax, rr[:lan.yp + 10.5km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "3450")
+        );
+    }
+}
+
+
+# DE 3451.  Speyer Hbf - Speyer Hafen
+with detail = 2 {
+    with link = "line.de.3451" {
+        track(:station, path("d2.de.3451")[:spe.yh, :haf]);
+    }
+}
+
