@@ -1,0 +1,754 @@
+# DE 3500.  Wiesbaden Hbf - Dietz
+with detail = 2 {
+    let wd = path("d2.de.3500");
+
+    with link = "line.de.3500" {
+        track(:second :removed, wd[:wie.yz, :lan]);
+        track(:second :closed, wd[:waa, :die.yz]);
+        line_badge(:closed, wd[:xla], "3500");
+    }
+
+    with link = "point.de.Zollhaus-Nass" {
+        with layer = 1 marker(:statdot :closed, wd[:zol]);
+        slabel(:right :closed, wd[:zol] + (1.8dt, -1.5dt),
+            vbox(:left:top, "Zollhaus", span(:light, "(Nass)"))
+        );
+    }
+}
+
+
+# DE 3501.  Wiesbaden Hbf - Niedernhausen (Taunus)
+with detail = 2 {
+    let wn = path("d2.de.3501");
+
+    with link = "line.de.3501" {
+        track(:first :pax, wn[:kin, :nha.yw]);
+        guide(:linenum :pax,
+                wn[:nha.yw - 6.5km] << 0.7dt
+            --  wn[:nha.yw - 6.5km] << 3.0dt
+        );
+        label(:linenum :pax, wn[:nha.yw - 6.5km] << 3.0dt + (0dt, -0.1dt),
+            hbox(:right:middle :badgesize, "3501 ")
+        );
+    }
+}
+
+
+# DE 3504.  Wiesbaden Ost - Wiesbaden West
+with detail = 2 {
+    let ww = path("d2.de.3504");
+
+    with link = "line.de.3504" {
+        track(:second, ww[:wos, :waa]);
+        track(:second :removed, ww[:waa, :wwe]);
+    }
+
+    with link = "point.de.Wiesbaden-West" {
+        with layer = 1 marker(:statdot :removed, ww[:wwe]);
+    }
+}
+
+
+# DE 3505.  Wiesbaden Hbf - Wiesbaden-Biebrich
+with detail = 2 {
+    with link = "line.de.3505" {
+        track(:first :double :cat:ac15 :pax,
+                path("d2.de.3505")[:sal.yb, :bie.yw]
+        );
+    }
+}
+
+
+# DE 3507.  Wiesbaden Ost - Niederlahnstein
+with detail = 2 {
+    let wn = path("d2.de.3507");
+
+    with link = "line.de.3507" {
+        track(:first :double :cat:ac15 :pax, wn[:wos, :nlay]);
+
+        guide(:linenum :cat:ac15 :pax,
+                wn[:elt + 9km] >> 1.0dt
+            --  wn[:elt + 9km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, wn[:elt + 9km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "3507")
+        );
+
+        guide(:linenum :cat:ac15 :pax,
+                wn[:sgo - 9.2km] >> 1.0dt
+            --  wn[:sgo - 9.2km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, wn[:sgo - 9.2km] >> 3.0dt - (0dt, 0.2dt),
+            hbox(:left:middle :badgesize, " 3507")
+        );
+
+        guide(:linenum :cat:ac15 :pax,
+                wn[:nla - 8.5km] >> 1.0dt
+            --  wn[:nla - 8.5km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, wn[:nla - 8.5km] >> 3.0dt,
+            hbox(:left:middle :badgesize, " 3507")
+        );
+    }
+
+    with link = "point.de.Wiesbaden-Biebrich" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wn[:bie]);
+    }
+
+    with link = "point.de.Eltville" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wn[:elt]);
+        slabel(:left :cat:ac15 :pax, wn[:elt] + (-1.5dt, -0.5dt), "Eltville");
+    }
+
+    with link = "point.de.St-Goarshausen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wn[:sgo]);
+        slabel(:right :cat:ac15 :pax, wn[:sgo] + (2.8dt, 0dt),
+            hbox(:left:top, "St Goarshausen")
+        );
+    }
+
+    with link = "point.de.Oberlahnstein" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wn[:ola]);
+    }
+
+    with link = "point.de.Niederlahnstein" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wn[:nla]);
+    }
+}
+
+
+# DE 3509.  Breckenheim - Wiesbaden Hbf
+with detail = 2 {
+    let bw = path("d2.de.3509");
+
+    with link = "line.de.3509" {
+        track(:first :double :cat:ac15 :pax, bw[:bre, :wie.yz]);
+        line_badge(:cat:ac15 :pax, bw[:bre + 4km] @ 8, "3509");
+    }
+}
+
+
+# DE 3510.  Bingen (Rhein) Landesgrenze - Mainz Hbf
+with detail = 2 {
+    let bm = path("d2.de.3510");
+
+    with link = "line.de.3510" {
+        track(:first :double :cat:ac15 :pax, bm[:bil, :mai]);
+        line_badge(:cat:ac15 :pax, bm[:mom - 6.5km], "3510");
+    }
+
+    with link = "point.de.Bingen-Rhein-Stadt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bm[:bis]);
+    }
+
+    with link = "point.de.Gau-Algesheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bm[:gau]);
+    }
+
+    with link = "point.de.Ingelheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bm[:ing]);
+    }
+
+    with link = "point.de.Mainz-Mombach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bm[:mom]);
+    }
+
+    with link = "point.de.Mainz-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bm[:mai]);
+    }
+}
+
+
+# DE 3512.  Gau Algesheim - Bad Kreuznach
+with detail = 2 {
+    let gk = path("d2.de.3512");
+
+    with link = "line.de.3512" {
+        track(:first :double :pax, gk[:gau.yk, :kre]);
+        guide(:linenum :pax,
+                gk[:gau.yk + 2.5km] << 1dt
+            --  gk[:gau.yk + 2.5km] << 3dt
+        );
+        label(:linenum :pax, gk[:gau.yk + 2.5km] << 3dt,
+            hbox(:center:top :badgesize, "3512")
+        );
+        line_badge(:pax, gk[:kre - 4km], "3512");
+    }
+
+    with link = "point.de.Büdesheim-Dromersheim" {
+        with layer = 1 marker(:statdot, gk[:bud]);
+    }
+
+    with link = "point.de.Gensingen-Horrweiler" {
+        with layer = 1 marker(:statdot :pax, gk[:gen]);
+    }
+}
+
+
+# DE 3513.  Rochusberg - Wasserwerk
+with detail = 2 {
+    let rw = path("d2.de.3513");
+
+    with link = "line.de.3514" {
+        track(:first :removed, rw[:roc, :ock.yr]);
+        track(:first :removed, rw[:ock.yw, :was]);
+    }
+}
+
+
+# DE 3514.  Rüdesheim (Rhein) Floß - Sarmsheim
+with detail = 2 {
+    with link = "line.de.3514" {
+        track(:first :double :removed, path("d2.de.3514")[:flo, :shm]);
+    }
+}
+
+
+# DE 3520.  Mainz Hbf - Frankfurt (Main) Hbf
+with detail = 2 {
+    let mf = path("d2.de.3520");
+
+    with link = "line.de.3520" {
+        track(:first :double :cat:ac15 :pax, mf[:mai, :fra]);
+    }
+
+    with link = "point.de.Mainz-Römisches-Theater" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mf[:mar]);
+    }
+
+    with link = "point.de.Mainz-Bischofsheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mf[:bis]);
+    }
+
+    with link = "point.de.Kelsterbach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mf[:kel]);
+    }
+
+    with link = "point.de.Frankfurt-Main-Stadion" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mf[:sta]);
+    }
+
+    with link = "point.de.Frankfurt-Niederrad" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mf[:nra]);
+    }
+
+    with link = "point.de.Frankfurt-Main-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mf[:fra]);
+    }
+}
+
+
+# DE 3522.  Mainz Hbf - Mannheim Hbf
+with detail = 2 {
+    let mm = path("d2.de.f.3522");
+
+    with link = "line.de.3522" {
+        track(:first :double :cat:ac15 :pax, mm[:mar.yw, :wog]);
+        line_badge(:cat:ac15 :pax, mm[:nie + 4.3km], "3522");
+    }
+
+    with link = "point.de.Bodenheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mm[:bod]);
+        slabel(:right :cat:ac15 :pax, mm[:bod] + (1.5dt, -0.5dt),
+            "Bodeheim"
+        );
+    }
+
+    with link = "point.de.Nierstein" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mm[:nie]);
+        slabel(:right :cat:ac15 :pax, mm[:nie] + (1.5dt, -0.5dt),
+            "Nierstein"
+        );
+    }
+
+    with link = "point.de.Guntersblum" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mm[:gun]);
+        slabel(:left :cat:ac15 :pax, mm[:gun] + (-1.8dt, 0.5dt),
+            "Guntersblum"
+        );
+    }
+
+    with link = "point.de.Osthofen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mm[:oho]);
+        slabel(:left :cat:ac15 :pax, mm[:oho] + (-1.0dt, 1.0dt),
+            hbox(:right:top, "Osthofen")
+        );
+    }
+
+    with link = "point.de.Worms-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mm[:wor]);
+    }
+}
+
+
+# DE 3523.  Morschheim Landesgrenze - Mainz Hbf
+with detail = 2 {
+    let mm = path("d2.de.3523");
+
+    with link = "line.de.3523" {
+        track(:second :pax, mm[:mog, :alz.ym]);
+        guide(:linenum :pax,
+                mm[:mog + 3km] << 0.7dt
+            --  mm[:mog + 3km] << 3.0dt
+        );
+        label(:linenum :pax, mm[:mog + 3km] << 3.0dt,
+            hbox(:right:middle :badgesize, "3523 ")
+        );
+
+        track(:first :pax, mm[:arm.ym, :mai.yw]);
+        line_badge(:pax, mm[:mai.yw - 19.7km] @ -8 << 0.4dt, "3523");
+    }
+}
+
+
+# DE 3524.  Mainz Hbf - Mainz Zollhafen
+with detail = 2 {
+    with layer = 2 {
+        track(:station, path("d2.de.3524")[:mai.yh, :zol]);
+    }
+}
+
+
+# DE 3525.  Mainz-Mombach - Mainz-Bischofsheim Überltg I
+with detail = 2 {
+    with link = "line.de.3525" {
+        track(:first :double :cat:ac15, path("d2.de.3525")[:kai, :bis]);
+    }
+}
+
+
+# DE 3527.  Mainz Hbf - Mainz Kaiserbrücke
+with detail = 2 {
+    with link = "line.de.3527" {
+        track(:first :double :cat:ac15, path("d2.de.3527")[:mai.yw, :kai]);
+    }
+}
+
+
+# DE 3530.  Mainz-Bischofsheim Pbf - Darmstadt Hbf
+with detail = 2 {
+    let mb = path("d2.de.3530");
+
+    with link = "line.de.3530" {
+        track(:first :double :cat:ac15 :pax, mb[:bis.yd, :dar.ym]);
+        line_badge(:cat:ac15 :pax, mb[:bis.yd + 6km], "3530");
+    }
+
+    with link = "point.de.Groß-Gerau" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mb[:gge]);
+        slabel(:left :cat:ac15 :pax, mb[:gge] + (-1.8dt, 0dt),
+            hbox(:left:top, "Groß Gerau")
+        );
+    }
+}
+
+
+# DE 3541.  Riedstadt-Goddelau - Darmstadt Hbf
+with detail = 2 {
+    let gd = path("d2.de.3541");
+
+    with link = "line.de.3541" {
+        track(:first :double :removed, gd[:god.yd, :dar.yg]);
+        line_badge(:removed, gd[:god.yd + 6.3km], "3541");
+    }
+}
+
+
+# DE 3543.  Darmstadt-Eberstadt - Pfungstadt
+with detail = 2 {
+    let ep = path("d2.de.3543");
+
+    with link = "line.de.3543" {
+        track(:second :pax, ep[:ebe.yp, :pfu]);
+    }
+
+    with link = "point.de.Pfungstadt" {
+        with layer = 1 marker(:statdot :pax, ep[:pfu]);
+        slabel(:left :pax, ep[:pfu] + (-1.3dt, 0dt),
+            vbox(:right:middle, "Pfung-", "stadt ")
+        );
+    }
+}
+
+
+# DE 3554.  Darmstadt Hbf - Groß-Umstadt-Wiebelsbach
+with detail = 2 {
+    let du = path("d2.de.3554");
+
+    with link = "line.de.3554" {
+        track(:second :pax, du[:dno.yo, :gum.yd]);
+        line_badge(:pax, du[:dos + 8km] @ 20 >> 0.3dt, "3554");
+    }
+
+    with link = "point.de.Darmstadt-Ost" {
+        with layer = 1 marker(:statdot :pax, du[:dos]);
+    }
+
+    with link = "point.de.Reinheim-Odenw" {
+        with layer = 1 marker(:statdot :pax, du[:rei]);
+    }
+}
+
+
+# DE 3555.  Darmstadt Ost - Groß Zimmern
+with detail = 2 {
+    let dz = path("d2.de.3555");
+
+    with link = "line.de.3555" {
+        track(:second :removed, dz[:dos.yz, :gzo.yd]);
+        guide(:linenum :removed,
+                dz[:dos.yz + 5.4km] << 0.7dt
+            --  dz[:dos.yz + 5.4km] << 3.0dt
+        );
+        label(:linenum :removed, dz[:dos.yz + 5.4km] << 3.0dt,
+            hbox(:center:bottom :badgesize, "3555")
+        );
+    }
+}
+
+
+# DE 3557.  Darmstadt Hbf - Aschaffenburg Hbf
+with detail = 2 {
+    let da = path("d2.de.3557");
+
+    with link = "line.de.3557" {
+        track(:first :double :cat:ac15 :pax, da[:dar.yn, :asa.yd]);
+        line_badge(:cat:ac15 :pax, da[:dno + 7km], "3557");
+        line_badge(:cat:ac15 :pax, da[:bab + 4.5km], "3557");
+    }
+
+    with link = "point.de.Darmstadt-Nord" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, da[:dno]);
+    }
+
+    with link = "point.de.Dieburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, da[:die]);
+        slabel(:right :cat:ac15 :pax, da[:die] + (1.3dt, 0.5dt),
+            hbox(:left:top, "Dieburg")
+        );
+    }
+
+    with link = "point.de.Babenhausen-Hess" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, da[:bab]);
+        slabel(:left :cat:ac15 :pax, da[:bab] + (-1.3dt, -0.5dt),
+            vbox(:right:bottom, "Baben-", "hausen", span(:light, "(Hess)"))
+        );
+    }
+}
+
+
+# DE 3558.  Babenhausen (Hess) - Zellhausen Industriegebiet
+with detail = 2 {
+    with link = "line.de.3558" {
+        track(:station :removed, path("d2.de.3558")[:bab.yz, :ind]);
+    }
+}
+
+
+# DE 3560.  Worms Hbf - Büdesheim-Dromersheim
+with detail = 2 {
+    let wb = path("d2.de.3560");
+
+    with link = "line.de.3560" {
+        track(:first :double :pax, wb[:wor.ym, :mon]);
+        track(:first :pax, wb[:mon, :alz.ym]);
+        line_badge(:pax, wb[:alz.ym - 4.9km], "3560");
+        track(:first :double :pax, wb[:alz.ym, :arm.ym]);
+        track(:first :pax, wb[:arm.ym, :gen.ya]);
+        line_badge(:pax, wb[:spr - 3.9km] @ 5 << 0.1dt, "3560");
+    }
+
+    with link = "point.de.Monsheim" {
+        with layer = 1 marker(:statdot :pax, wb[:mon]);
+    }
+
+    with link = "point.de.Alzey" {
+        with layer = 1 marker(:statdot :pax, wb[:alz]);
+        slabel(:left :pax, wb[:alz] + (-1.8dt, 0.8dt), "Alzey");
+    }
+
+    with link = "point.de.Armsheim" {
+        with layer = 1 marker(:statdot :pax, wb[:arm]);
+    }
+
+    with link = "point.de.Sprendlingen-Rheinhess" {
+        with layer = 1 marker(:statdot :pax, wb[:spr]);
+        slabel(:right :pax, wb[:spr] + (0dt, -1.5dt), "Sprendlingen");
+    }
+}
+
+
+# DE 3561.  Marnheim - Monsheim
+with detail = 2 {
+    let mm = path("d2.de.3561");
+
+    with link = "line.de.3561" {
+        track(:second :pax, mm[:mar.ym, :mon.ym]);
+        guide(:linenum :pax,
+                mm[:mon.ym - 5km] << 0.7dt
+            --  mm[:mon.ym - 5km] << 3.0dt
+        );
+        label(:linenum :pax, mm[:mon.ym - 5km] << 3.0dt,
+            hbox(:center:bottom :badgesize, "3561")
+        )
+    }
+}
+
+
+# DE 3562.  Armsheim - Wendelsheim
+with detail = 2 {
+    let aw = path("d2.de.3562");
+
+    with link = "line.de.3562" {
+        track(:second :removed, aw[:arm.yw, :wen]);
+        guide(:linenum :removed,
+                aw[:wen - 2.8km] >> 0.7dt
+            --  aw[:wen - 2.8km] >> 3.0dt
+        );
+        label(:linenum :removed, aw[:wen - 2.8km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "3562")
+        );
+    }
+
+    with link = "point.de.Wendelsheim" {
+        with layer = 1 marker(:statdot :removed, aw[:wen]);
+        slabel(:bottom :removed, aw[:wen] + (-1dt, 1.0dt),
+            vbox(:center:top, "Wendels-", "heim")
+        );
+    }
+}
+
+
+# DE 3563.  Bodenheim - Alzey
+with detail = 2 {
+    let ba = path("d2.de.3563");
+
+    with link = "line.de.3563" {
+        track(:second :removed, ba[:bod.yu, :alz.yg]);
+        line_badge(:removed, ba[:bod.yu + 6.4km] >> 0.2dt, "3563");
+        guide(:linenum :removed,
+                ba[:alz.yg - 4km] << 0.7dt
+            --  ba[:alz.yg - 4km] << 3.0dt
+        );
+        label(:linenum :removed, ba[:alz.yg - 4km] << 3.0dt + (0.2dt, 0dt),
+            hbox(:center:top :badgesize, "3563")
+        );
+    }
+
+    with link = "point.de.Undenheim-Köngernheim" {
+        with layer = 1 marker(:statdot :removed, ba[:und]);
+    }
+
+    with link = "point.de.Gau-Odernheim" {
+        with layer = 1 marker(:statdot :removed, ba[:gau]);
+    }
+}
+
+
+# DE 3564.  Gau Odernheim - Osthofen
+with detail = 2 {
+    let go = path("d2.de.3564");
+
+    with link = "line.de.3564" {
+        track(:second :removed, go[:gau.yo, :oho]);
+        guide(:linenum :removed,
+                go[:oho - 8.2km] >> 0.7dt
+            --  go[:oho - 8.2km] >> 3.0dt
+        );
+        label(:linenum :removed, go[:oho - 8.2km] >> 3.0dt + (0dt, 0.2dt),
+            hbox(:right:middle :badgesize, "3564 ")
+        );
+    }
+}
+
+
+# DE 3565.  Worms Hbf - Gundheim
+with detail = 2 {
+    let wg = path("d2.de.3565");
+
+    with link = "line.de.3565" {
+        track(:second :removed, wg[:wor.yb, :gun]);
+        line_badge(:removed, wg[:wor.yb + 5.8km] @ 3, "3565");
+    }
+
+    with link = "point.de.Gundheim" {
+        with layer = 1 marker(:statdot :removed, wg[:gun]);
+    }
+}
+
+
+# DE 3566.  Worms Hbf - Offstein Landesgrenze
+with detail = 2 {
+    let wo = path("d2.de.3566");
+
+    with link = "line.de.3566" {
+        track(:second :removed, wo[:wor.yo, :ofg]);
+        guide(:linenum :removed,
+                wo[:off - 5km] << 0.7dt
+            --  wo[:off - 5km] << 3.0dt
+        );
+        label(:linenum :removed, wo[:off - 5km] << 3.0dt,
+            hbox(:center:top :badgesize, "3566")
+        );
+    }
+
+    with link = "point.de.Offstein" {
+        with layer = 1 marker(:statdot :removed, wo[:off]);
+    }
+}
+
+
+# DE 3567.  Undenheim-Kongernheim - Nierstein
+with detail = 2 {
+    let un = path("d2.de.3567");
+
+    with link = "line.de.3567" {
+        track(:second :removed, un[:und.yn, :nie.yu]);
+        guide(:linenum :removed,
+                un[:nie.yu - 6km] >> 0.7dt
+            --  un[:nie.yu - 6km] >> 3.0dt
+        );
+        label(:linenum :removed, un[:nie.yu - 6km] >> 3.0dt,
+            hbox(:center:top :badgesize, "3567")
+        );
+    }
+}
+
+
+# DE 3568.  Sprendlingen (Rheinhess) - Fürfeld
+with detail = 2 {
+    let sf = path("d2.de.3568");
+
+    with link = "line.de.3568" {
+        track(:second :removed, sf[:spr.yf, :fur]);
+        guide(:linenum :removed,
+                sf[:spr.yf + 4km] >> 0.7dt
+            --  sf[:spr.yf + 4km] >> 3.0dt
+        );
+        label(:linenum :removed, sf[:spr.yf + 4km] >> 3.0dt,
+            hbox(:right:middle :badgesize, "3568 ")
+        );
+    }
+
+    with link = "point.de.Fürfeld" {
+        with layer = 1 marker(:statdot :removed, sf[:fur]);
+        slabel(:bottom :removed, sf[:fur] + (0dt, 1.0dt), "Fürfeld");
+    }
+}
+
+
+# DE 3569.  Büdesheim-Dromersheim - Bingen (Rhein) Stadt
+with detail = 2 {
+    with link = "line.de.3569" {
+        track(:first :pax, path("d2.de.3569")[:bud, :bis.yb]);
+    }
+}
+
+
+# DE 3570.  Worms Hbf - Biblis
+with detail = 2 {
+    let wb = path("d2.de.3570");
+
+    with link = "line.de.3570" {
+        track(:first :double :cat:ac15 :pax, wb[:wor.yb, :bib.yw]);
+    }
+
+    with link = "point.de.Hofheim-Ried" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wb[:hof]);
+    }
+}
+
+
+# DE 3571.  Hofheim (Ried) - Bensheim
+with detail = 2 {
+    let hb = path("d2.de.3571");
+
+    with link = "line.de.3571" {
+        track(:first :pax, hb[:hof.yb, :ben.yh]);
+        line_badge(:pax, hb[:lor - 4.2km], "3571");
+    }
+
+    with link = "point.de.Lorsch" {
+        with layer = 1 marker(:statdot :pax, hb[:lor]);
+        slabel(:left :pax, hb[:lor] + (1.0dt, -1.5dt), "Lorsch");
+    }
+}
+
+
+# DE 3572.  Osthofen - Guntersblum
+with detail = 2 {
+    let og = path("d2.de.3572");
+
+    with link = "line.de.3572" {
+        track(:second, og[:oho.yg, :ind]);
+        track(:second :removed, og[:ind, :gun.yo]);
+        line_badge(:removed, og[:ind + 4km], "3572");
+    }
+}
+
+
+# DE 3574.  Worms Hbf - Worms Hafen
+with detail = 2 {
+    with link = "line.de.3574" {
+        track(:second, path("d2.de.3574")[:wor.yh, :haf]);
+    }
+}
+
+
+# DE 3575.  Lampertheim - Hofheim (Ried) Landdamm
+with detail = 2 {
+    let lh = path("d2.de.3575");
+
+    with link = "line.de.3575" {
+        track(:second :removed, lh[:lam.yw, :lda]);
+        line_badge(:removed, lh[:lam.yw + 3.5km], "3575");
+    }
+}
+
+
+# DE 3577.  Lorsch - Heppenheim (Bergstr)
+with detail = 2 {
+    let lh = path("d2.de.3577");
+
+    with link = "line.de.3577" {
+        track(:second :removed, lh[:lor.yh, :hep.yl]);
+        guide(:linenum :removed,
+                lh[:hep.yl - 2km] >> 0.7dt
+            --  lh[:hep.yl - 2km] >> 3.0dt
+        );
+        label(:linenum :removed, lh[:hep.yl - 2km] >> 3.0dt + (-0.3dt, 0dt),
+            hbox(:center:top :badgesize, "3577")
+        );
+    }
+}
+
+
+# DE 3578.  Lampertheim - Weinheim (Bergstr)
+with detail = 2 {
+    let lw = path("d2.de.3578");
+
+    with link = "line.de.3578" {
+        track(:second :removed, lw[:lam.yv, :vie.x]);
+        line_badge(:removed, lw[:lam.yv + 5.5km], "3578");
+
+        track(:station, lw[:vie.x, :wei.yl]);
+    }
+}
+
+
+# DE 3579.  Mörlenbach - Wahlen
+with detail = 2 {
+    let mw = path("d2.de.3579");
+
+    with link = "line.de.3579" {
+        track(:second :closed, mw[:mor, :owa]);
+        line_badge(:closed, mw[:mor + 4km] @ 5 << 0.4dt, "3579");
+        track(:second :removed, mw[:owa, :wah]);
+    }
+
+    with link = "point.de.Wahlen" {
+        with layer = 1 marker(:statdot :removed, mw[:wah]);
+        slabel(:right :removed, mw[:wah] + (1.5dt, 0.5dt), "Wahlen");
+    }
+}
+
