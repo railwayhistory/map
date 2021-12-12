@@ -285,13 +285,16 @@ with detail = 2 {
 
 # DE 1732.  Hannover Hbf - Kassel Hbf
 with detail = 2 {
-    let hk = path("d2.de.1732");
+    let hk = path("d2.de.h.1732");
 
     with link = "line.de.1732" {
         track(:first :double :cat:ac15 :pax, hk[:ret.f, :har.a]);
         with layer = 1 line_badge(
             :cat:ac15 :pax, hk[:ban + 11.1km] >> 0.8dt, "1732"
         );
+
+        with layer = -2 track(:first :double :removed, hk[:got.ym, :mun.a]);
+        with layer = 1 line_badge(:removed, hk[:mun.a - 9km], "1732");
     }
 
     with link = "point.de.Nordstemmen" {
@@ -342,7 +345,8 @@ with detail = 2 {
         track(:first :double :cat:ac15 :pax, hw[:han.f, :edn]);
         with layer = 1 line_badge(:cat:ac15 :pax, hw[:lat + 23km], "1733");
 
-        track(:first :double :cat:ac15 :pax, hw[:eds, :got]);
+        track(:first :double :cat:ac15 :pax, hw[:eds, :ihr.ym]);
+        with layer = 1 line_badge(:cat:ac15 :pax, hw[:got + 9km], "1733");
     }
 
     with link = "point.de.Hannover-Messe-Laatzen" {
