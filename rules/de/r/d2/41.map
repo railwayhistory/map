@@ -1,0 +1,350 @@
+# DE 4100.  Heidelberg Hbf - Heidelberg-Altstadt
+with detail = 2 {
+    with link = "line.de.4100" {
+        track(:first :double :cat:ac15 :pax,
+                path("d2.de.4100")[:hei.yn, :hal]
+        );
+    }
+}
+
+
+# DE 4101.  Heidelberg-Wieblingen - Heidelberg Rbf
+with detail = 2 {
+    let hr = path("d2.de.4101");
+
+    with link = "line.de.4101" {
+        track(:first :double :removed, hr[:wib.yr, :her]);
+    }
+
+    with link = "point.de.Heidelberg-Rbf" {
+        with layer = 1 marker(:statdot :removed, hr[:her]);
+    }
+}
+
+
+# DE 4102.  Heidelberg Rbf - Heidelberg Königstuhl
+with detail = 2 {
+    with link = "line.de.4102" {
+        track(:first :double :removed, path("d2.de.4102")[:her, :kst]);
+    }
+}
+
+
+# DE 4103.  Heidelberg Hbf - Schwetzingen
+with detail = 2 {
+    let hs = path("d2.de.4103");
+
+    with link = "line.de.4103" {
+        track(:first :removed, hs[:hei.ys, :swe.yh]);
+    }
+}
+
+
+# DE 4104.  Weinheim (Bergstr) - Fürth (Odenw) 
+with detail = 2 {
+    let wf = path("d2.de.4104");
+
+    with link = "line.de.4104" {
+        track(:second :pax, wf[:wei.yf, :fur]);
+        guide(:linenum :pax,
+                wf[:fur - 3km] >> 0.7dt
+            --  wf[:fur - 3km] >> 3.0dt
+        );
+        label(:linenum :pax, wf[:fur - 3km] >> 3.0dt + (0dt, 0.4dt),
+            hbox(:left:middle :badgesize, " 4104")
+        );
+    }
+
+    with link = "point.de.Mörlenbach" {
+        with layer = 1 marker(:statdot :pax, wf[:mor]);
+        slabel(:left :pax, wf[:mor] + (0.5dt, -1.0dt),
+            vbox(:right:bottom, "Mörlen-", "bach ")
+        );
+    }
+
+    with link = "point.de.Fürth-Odenw" {
+        with layer = 1 marker(:statdot :pax, wf[:fur]);
+        slabel(:top :pax, wf[:fur] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Fürth", span(:light, "(Odenw)"))
+        );
+    }
+}
+
+
+# DE 4110.  Heidelberg Hbf alt - Mosbach (Baden)
+with detail = 2 {
+    let hm = path("d2.de.4110");
+
+    with link = "line.de.4110" {
+        track(:first :removed, hm[:hea, :hal]);
+        track(:first :double :cat:ac15 :pax, hm[:hal, :mec]);
+        guide(:linenum :cat:ac15 :pax,
+                hm[:mec - 5km] >> 1dt
+            --  hm[:mec - 5km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, hm[:mec - 5km] >> 3dt,
+            hbox(:right:middle :badgesize, "4110 ")
+        );
+
+        track(:second :cat:ac15 :pax, hm[:mec, :agl]);
+        guide(:linenum :cat:ac15 :pax,
+                hm[:agl - 2km] << 0.7dt
+            --  hm[:agl - 2km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, hm[:agl - 2km] << 3dt,
+            hbox(:right:middle :badgesize, "4110 ")
+        );
+
+        track(:second :removed, hm[:agl, :nel.ym]);
+        track(:second :removed, hm[:nel.ya, :mow.ya]);
+    }
+
+    with link = "point.de.Heidelberg-Hbf-alt" {
+        with layer = 1 marker(:statdot :removed, hm[:hea]);
+    }
+
+    with link = "point.de.Heidelberg-Altstadt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hm[:hal]);
+    }
+
+    with link = "point.de.Neckargemünd" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hm[:nge]);
+        slabel(:right :cat:ac15 :pax, hm[:nge] + (2.0dt, 0.5dt),
+            hbox(:left:top, "Neckargemünd")
+        );
+    }
+
+    with link = "point.de.Meckesheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hm[:mec]);
+        slabel(:right :cat:ac15 :pax, hm[:mec] + (0.5dt, -1.3dt),
+            vbox(:left:bottom, "Meckes-", "heim")
+        );
+    }
+
+    with link = "point.de.Neckarbischofsheim-Nord" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hm[:nbn]);
+    }
+
+    with link = "point.de.Aglasterhausen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hm[:agl]);
+        slabel(:top :cat:ac15 :pax, hm[:agl] + (-4dt, -1.5dt),
+            "Aglasterhausen"
+        );
+    }
+}
+
+
+# DE 4111.  Neckargemünd - Bad Friedrichshall Hbf
+with detail = 2 {
+    let nf = path("d2.de.4111");
+
+    with link = "line.de.4111" {
+        track(:first :double :cat:ac15 :pax, nf[:nge.ym, :fri.yn]);
+        guide(:linenum :cat:ac15 :pax,
+                nf[:nst + 5km] >> 1dt
+            --  nf[:nst + 5km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, nf[:nst + 5km] >> 3dt,
+            hbox(:left:middle :badgesize, " 4111")
+        );
+        guide(:linenum :cat:ac15 :pax,
+                nf[:ebe + 9km] << 1dt
+            --  nf[:ebe + 9km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, nf[:ebe + 9km] << 3dt + (0dt, -0.2dt),
+            hbox(:left:middle :badgesize, " 4111")
+        );
+        guide(:linenum :cat:ac15 :pax,
+                nf[:nel.ym + 5.4km] << 1dt
+            --  nf[:nel.ym + 5.4km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax,
+            nf[:nel.ym + 5.4km] << 3dt + (0dt, -0.2dt),
+            hbox(:left:middle :badgesize, " 4111")
+        );
+    }
+
+    with link = "point.de.Neckarsteinach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:nst]);
+    }
+
+    with link = "point.de.Eberbach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:ebe]);
+        slabel(:right :cat:ac15 :pax, nf[:ebe] + (2.0dt, 1.0dt), "Eberbach");
+    }
+
+    with link = "point.de.Mosbach-Neckarelz" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:mne]);
+    }
+}
+
+
+# DE 4112.  Neckarsteinach - Schönau (b Heidelberg)
+with detail = 2 {
+    let ns = path("d2.de.4112");
+
+    with link = "line.de.4112" {
+        track(:second :removed, ns[:nst.ys, :son]);
+    }
+
+    with link = "point.de.Schönau-Heidelberg" {
+        with layer = 1 marker(:statdot :removed, ns[:son]);
+        slabel(:top :removed, ns[:son] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Schönau", span(:light, "(b Hdlb.)"))
+        );
+    }
+}
+
+
+# DE 4114.  Meckesheim - Bad Friedrichshall Hbf
+with detail = 2 {
+    let mf = path("d2.de.4114");
+
+    with link = "line.de.4114" {
+        track(:first :cat:ac15 :pax, mf[:mec.ys, :fri.ys]);
+        line_badge(:cat:ac15 :pax, mf[:ste - 3.8km], "4114");
+        line_badge(:cat:ac15 :pax, mf[:ste + 9km] << 0.2dt, "4114");
+    }
+
+    with link = "point.de.Steinsfurt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mf[:ste]);
+        slabel(:right :cat:ac15 :pax, mf[:ste] + (0.5dt, -1.3dt),
+            "Steinsfurt"
+        );
+    }
+}
+
+
+# DE 4115.  Steinsfurt - Stebbach
+with detail = 2 {
+    let se = path("d2.de.4115");
+
+    with link = "line.de.4115" {
+        track(:second :cat:ac15 :pax, se[:ste.ye, :stb]);
+        line_badge(:cat:ac15 :pax, se[:ste.ye + 6km] @ 10, "4115");
+    }
+}
+
+
+# DE 4120.  Mosbach-Neckarelz - Würzburg-Heidingsfeld West Ültg
+with detail = 2 {
+    let mw = path("d2.de.r.4120");
+
+    with link = "line.de.4120" {
+        track(:first :double :cat:ac15 :pax, mw[:mne.ym, :obu]);
+    }
+
+    with link = "point.de.Mosbach-Baden" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mw[:mos]);
+        slabel(:right :cat:ac15 :pax, mw[:mos] + (1.5dt, 0.5dt),
+            vbox(:left:middle, " Mos-", "bach", span(:light, "(Bad.)"))
+        );
+    }
+
+    with link = "point.de.Oberschefflenz" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mw[:ose]);
+    }
+
+    with link = "point.de.Seckach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mw[:sec]);
+        slabel(:right :cat:ac15 :pax, mw[:sec] + (0.5dt, -1.5dt), "Seckach");
+    }
+}
+
+
+# DE 4123.  Mosbach (Baden) - Mudau
+with detail = 2 {
+    let mm = path("d2.de.4123");
+
+    with link = "line.de.4123" {
+        track(:second :removed, mm[:mos.ym, :mud]);
+        line_badge(:removed, mm[:mud - 11.8km] @ -22, "4123");
+    }
+
+    with link = "point.de.Mudau" {
+        with layer = 1 marker(:statdot :removed, mm[:mud]);
+        slabel(:top :removed, mm[:mud] + (0dt, -1.0dt), "Mudau");
+    }
+}
+
+
+# DE 4124.  Seckach - Schneeberg Strw
+with detail = 2 {
+    let sm = path("d2.de.4124");
+
+    with link = "line.de.4124" {
+        track(:second :pax, sm[:sec.ym, :snx]);
+        guide(:linenum :pax,
+                sm[:sec.ym + 9.5km] >> 0.7dt
+            --  sm[:sec.ym + 9.5km] >> 3.0dt
+        );
+        label(:linenum :pax, sm[:sec.ym + 9.5km] >> 3.0dt,
+            hbox(:left:middle :badgesize, " 4124")
+        );
+        guide(:linenum :pax,
+                sm[:wal + 5.5km] >> 0.7dt
+            --  sm[:wal + 5.5km] >> 3.0dt
+        );
+        label(:linenum :pax, sm[:wal + 5.5km] >> 3.0dt,
+            hbox(:left:bottom :badgesize, "4124")
+        );
+    }
+    
+    with link = "point.de.Walldürn" {
+        with layer = 1 marker(:statdot :pax, sm[:wal]);
+        slabel(:left :pax, sm[:wal] + (-1.8dt, 0.8dt), "Walldürn");
+    }
+}
+
+
+# DE 4125.  Walldürn - Hardheim
+with detail = 2 {
+    let wh = path("d2.de.4125");
+
+    with link = "line.de.4125" {
+        track(:second :removed, wh[:wal.yh, :har]);
+        guide(:linenum :removed,
+                wh[:har - 2.3km] << 0.7dt
+            --  wh[:har - 2.3km] << 3.0dt
+        );
+        label(:linenum :removed, wh[:har - 2.3km] << 3.0dt,
+            hbox(:center:bottom :badgesize, "4125")
+        );
+    }
+
+    with link = "point.de.Hardheim" {
+        with layer = 1 marker(:statdot :removed, wh[:har]);
+        slabel(:bottom :removed, wh[:har] + (2dt, 1.0dt), "Hardheim");
+    }
+}
+
+
+# DE 4130.  Bruchsal - Bretten Streckenwechsel
+with detail = 2 {
+    let bb = path("d2.de.4130");
+
+    with link = "line.de.4130" {
+        track(:first :double :cat:ac15 :pax, bb[:bru.yb, :brx]);
+        line_badge(:cat:ac15 :pax, bb[:bru.yb + 8.2km] @ -5 << 0.7dt, "4130");
+    }
+
+    with link = "point.de.Bretten" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bb[:bre]);
+        slabel(:left :cat:ac15 :pax, bb[:bre] + (-2.5km, 0dt), "Bretten");
+    }
+}
+
+
+# DE 4132.  Bruchsal - Rheinsheim Strw
+with detail = 2 {
+    let br = path("d2.de.4132");
+
+    with link = "line.de.4132" {
+        track(:first :double :cat:ac15 :pax, br[:bru.yg, :gra.ye]);
+        line_badge(:cat:ac15 :pax, br[:bru.yg + 4.3km], "4132");
+
+        track(:first :cat:ac15 :pax, br[:gra.yr, :rhg]);
+        line_badge(:cat:ac15 :pax, br[:gra.yr + 5.0km] @ -8, "4132");
+    }
+}
+
