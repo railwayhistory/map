@@ -1,0 +1,318 @@
+# DE 4200.  Karlsruhe Hbf - Mühlacker
+with detail = 2 {
+    let km = path("d2.de.r.4200");
+
+    with link = "line.de.4200" {
+        track(:first :double :cat:ac15 :pax, km[:dur.yp, :pfo.yc]);
+    }
+
+    with link = "point.de.Grötzingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, km[:gro]);
+    }
+
+    with link = "point.de.Söllingen-Karlsruhe" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, km[:sol]);
+    }
+}
+
+
+# DE 4201.  Grötzingen - Stebbach
+with detail = 2 {
+    let ge = path("d2.de.4201");
+
+    with link = "line.de.4201" {
+        track(:second :cat:ac15 :pax, ge[:gro.ye, :jwe]);
+        track(:second :double :cat:ac15 :pax, ge[:jwe, :wos]);
+        guide(:linenum :cat:ac15 :pax,
+                ge[:wos - 0.8km] >> 1dt
+            --  ge[:wos - 0.8km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, ge[:wos - 0.8km] >> 3dt,
+            hbox(:center:top :badgesize, "4201")
+        );
+
+        track(:second :cat:ac15 :pax, ge[:wos, :bre.yg]);
+        track(:second :cat:ac15 :pax, ge[:bre.ye, :ewe]);
+        line_badge(:cat:ac15 :pax, ge[:epp - 10km] @ 5 << 0.3dt, "4201");
+        track(:second :double :cat:ac15 :pax, ge[:ewe, :stb]);
+    }
+
+    with link = "point.de.Eppingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ge[:epp]);
+        slabel(:left :cat:ac15 :pax, ge[:epp] + (0.5dt, -1.5dt), "Eppingen");
+    }
+}
+
+
+# DE 4210.  Karlsruhe Gbf - Karlsruhe-Hagsfeld
+with detail = 2 {
+    let kh = path("d2.de.4210");
+
+    with link = "line.de.4210" {
+        track(:first :double :cat:ac15, kh[:kag, :hag.yg]);
+    }
+
+    with link = "point.de.Karlsruhe-Gbf" {
+        with layer = 1 marker(:statdot :cat:ac15, kh[:kag]);
+    }
+}
+
+
+# DE 4214.  Karlsruhe Gbf - Karlsruhe-Dammerstock
+with detail = 2 {
+    with link = "line.de.4214" {
+        track(:first :double :cat:ac15, path("d2.de.4214")[:kag, :dam]);
+    }
+}
+
+
+# DE 4220.  Karlsruhe West - Karlsruhe Hafen C-Gruppe
+with detail = 2 {
+    with link = "line.de.4220" {
+        track(:second :cat:ac15, path("d2.de.4220")[:kaw.yh, :f]);
+    }
+}
+
+
+# DE 4221.  Karlruhe Hafen - Karlsruhe Hafen A-Gruppe
+with detail = 2 {
+    with link = "line.de.4221" {
+        track(:second :cat:ac15, path("d2.de.4221")[:kha, :f]);
+    }
+}
+
+
+# DE 4228.  Karlsruhe Rheinbrücke - Karlsruhe Rheinbrücke Raffinierien
+with detail = 2 {
+    with link = "line.de.4228" {
+        track(:second :cat:ac15, path("d2.de.4228")[:rhb, :f]);
+    }
+}
+
+
+# DE 4240.  Rastatt - Freudenstadt Hbf
+with detail = 2 {
+    let rf = path("d2.de.4240");
+
+    with link = "line.de.4240" {
+        track(:second :cat:ac15 :pax, rf[:ras.yf, :fre.yr]);
+        line_badge(:cat:ac15 :pax, rf[:fre.yr - 17.5km] @ 20 >> 0.5dt, "4240");
+    }
+}
+
+
+# DE 4241.  Baden-Baden - Baden-Baden (Alt)
+with detail = 2 {
+    let ob = path("d2.de.4241");
+
+    with link = "line.de.4241" {
+        track(:first :double :removed, ob[:oos.yb, :bad]);
+        guide(:linenum :removed,
+                ob[:bad - 2km] >> 1dt
+            --  ob[:bad - 2km] >> 3dt
+        );
+        label(:linenum :removed, ob[:bad - 2km] >> 3dt + (-0.4dt, 0dt),
+            hbox(:center:top :badgesize, "4241")
+        );
+    }
+
+    with link = "point.de.Baden-Baden-Alt" {
+        with layer = 1 marker(:statdot :removed, ob[:bad]);
+    }
+}
+
+
+# DE 4242.  Rastatt - Windersdorf (Baden) DB-Grenze
+with detail = 2 {
+    let rw = path("d2.de.4242");
+
+    with link = "line.de.4242" {
+        track(:second, rw[:ras.yw, :win]);
+        guide(:linenum,
+                rw[:win - 2km] << 0.7dt
+            --  rw[:win - 2km] << 3.0dt
+        );
+        label(:linenum, rw[:win - 2km] << 3.0dt + (-0.4dt, 0dt),
+            hbox(:center:top :badgesize, "4242")
+        );
+
+        track(:second :removed, rw[:win, :wig]);
+    }
+
+    with link = "point.de.Wintersdorf-Baden" {
+        with layer = 1 marker(:statdot, rw[:win]);
+    }
+}
+
+
+# DE 4250.  Offenburg - Singen (Hohentwiel)
+with detail = 2 {
+    let os = path("d2.de.4250");
+
+    with link = "line.de.4250" {
+        track(:first :double :cat:ac15 :pax, os[:off.yh, :sin.yh]);
+        line_badge(:cat:ac15 :pax, os[:hau - 5km] @ -15, "4250");
+        line_badge(:cat:ac15 :pax, os[:don + 10km] @ -22 << 0.3dt, "4250");
+        line_badge(:cat:ac15 :pax, os[:sin.yh - 10km] >> 0.2dt, "4250");
+    }
+
+    with link = "point.de.Biberach-Baden" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, os[:bib]);
+        slabel(:left :cat:ac15 :pax, os[:bib] + (-1.8dt, 0dt),
+            vbox(:right:middle, "Biberach", span(:light, "(Baden)"))
+        );
+    }
+
+    with link = "point.de.Hausach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, os[:hau]);
+        slabel(:left :cat:ac15 :pax, os[:hau] + (2dt, -1.8dt), "Hausach");
+    }
+
+    with link = "point.de.Villingen-Schwarzw" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, os[:vil]);
+        slabel(:left :cat:ac15 :pax, os[:vil] + (-1.8dt, -1.0dt),
+            vbox(:right:top, "Villingen", span(:light, "(Schwarzw)"))
+        );
+    }
+
+    with link = "point.de.Marbach-Baden" {
+        with layer = 1 marker(:statdot :removed, os[:mar]);
+    }
+
+    with link = "point.de.Donaueschingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, os[:don]);
+        slabel(:right :cat:ac15 :pax, os[:don] + (1.0dt, -0.5dt),
+            vbox(:left:bottom, "Donau-", "eschingen")
+        );
+    }
+
+    with link = "point.de.Immendingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, os[:imm]);
+        slabel(:left :cat:ac15 :pax, os[:imm] + (1.5dt, -1.3dt),
+            vbox(:right:bottom, "Immen-", "dingen ")
+        );
+    }
+
+    with link = "point.de.Immendingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, os[:imm]);
+    }
+}
+
+
+# DE 4251.  Hausach - Schiltach
+with detail = 2 {
+    let hs = path("d2.de.4251");
+
+    with link = "line.de.4251" {
+        track(:second :pax, hs[:hau.ys, :sil]);
+        guide(:linenum :pax,
+                hs[:sil - 5.5km] >> 0.7dt
+            --  hs[:sil - 5.5km] >> 3.0dt
+        );
+        label(:linenum :pax, hs[:sil - 5.5km] >> 3.0dt,
+            hbox(:center:top :badgesize, "4251")
+        );
+    }
+
+    with link = "point.de.Schiltach" {
+        with layer = 1 marker(:statdot :pax, hs[:sil]);
+        slabel(:left :pax, hs[:sil] + (2.0dt, -2.0dt), "Schiltach");
+    }
+}
+
+
+# DE 4252.  Schiltach - Schramberg
+with detail = 2 {
+    let sr = path("d2.de.4252");
+
+    with link = "line.de.4252" {
+        track(:second :removed, sr[:sil.ys, :sra]);
+        guide(:linenum :removed,
+                sr[:sra - 5km] << 0.7dt
+            --  sr[:sra - 5km] << 3.0dt
+        );
+        label(:linenum :removed, sr[:sra - 5km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 4252")
+        );
+    }
+
+    with link = "point.de.Schramberg" {
+        with layer = 1 marker(:statdot :removed, sr[:sra]);
+        slabel(:bottom :removed, sr[:sra] + (0dt, 1.0dt), "Schramberg");
+    }
+}
+
+
+# DE 4253.  Marbach (Baden) - Bad Dürrheim
+with detail = 2 {
+    let md = path("d2.de.4253");
+
+    with link = "line.de.4253" {
+        track(:second :removed, md[:mar.yd, :dur]);
+    }
+
+    with link = "point.de.Bad-Dürrheim" {
+        with layer = 1 marker(:statdot :removed, md[:dur]);
+        slabel(:bottom :removed, md[:dur] + (3dt, 1.0dt), "Bad Dürrheim");
+    }
+}
+
+
+# DE 4260.  Appenweier - Kehl (DB-Grenze)
+with detail = 2 {
+    let ak = path("d2.de.4260");
+
+    with link = "line.de.4260" {
+        track(:first :double :cat:ac15 :pax, ak[:app.yk, :keg]);
+        line_badge(:cat:ac15 :pax, ak[:apk + 5km], "4260");
+    }
+
+    with link = "point.de.Kehl" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ak[:keh]);
+        slabel(:left :cat:ac15 :pax, ak[:keh] + (1.0dt, -1.5dt), "Kehl");
+    }
+}
+
+
+# DE 4262.  Appenweier - Bad Griesbach
+with detail = 2 {
+    let ag = path("d2.de.4262");
+
+    with link = "line.de.4262" {
+        track(:second :pax, ag[:app.yg, :gri]);
+        line_badge(:pax, ag[:gri - 13.5km] @ -8 << 0.4dt, "4262");
+    }
+
+    with link = "point.de.Bad-Griesbach" {
+        with layer = 1 marker(:statdot :pax, ag[:gri]);
+        slabel(:top :pax, ag[:gri] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Bad", "Griesbach")
+        );
+    }
+}
+
+
+# DE 4264.  Lahr (Schwarzwald) - Lahr Stadt
+with detail = 2 {
+    let ls = path("d2.de.4264");
+
+    with link = "line.de.4264" {
+        track(:second :removed, ls[:lah.ys, :las]);
+    }
+
+    with link = "point.de.Lahr-Stadt" {
+        with layer = 1 marker(:statdot :removed, ls[:las]);
+    }
+}
+
+
+# DE 4280.  Bashaide - Haltingen
+with detail = 2 {
+    let sh = path("d2.de.4280.1");
+
+    with link = "line.de.4280" {
+        track(:first :double :cat:ac15 :pax, sh[:sli.y, :eim.y]);
+        line_badge(:cat:ac15 :pax, sh[:sli.y + 6km], "4280");
+    }
+}
+
