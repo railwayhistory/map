@@ -1,0 +1,407 @@
+# DE 4800.  Stuttgart Hbf - Bretten Streckenwechsel
+with detail = 2 {
+    let sb = path("d2.de.4800");
+
+    with link = "line.de.4800" {
+        track(:first :double :cat:ac15 :pax, sb[:stu.yk, :ser.yv]);
+        guide(:linenum :cat:ac15 :pax,
+                sb[:ser.yv - 2.8km] >> 1dt
+            --  sb[:ser.yv - 2.8km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, sb[:ser.yv - 2.8km] >> 3dt,
+            hbox(:center:bottom :badgesize, "4800")
+        );
+
+        track(:first :double :removed, sb[:ser.yv, :ill.yv]);
+
+        track(:first :double :cat:ac15 :pax, sb[:ill.yv, :brx]);
+        guide(:linenum :cat:ac15 :pax,
+                sb[:brx - 3km] << 1dt
+            --  sb[:brx - 3km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, sb[:brx - 3km] << 3dt,
+            hbox(:right:middle :badgesize, "4800 ")
+        );
+    }
+
+    with link = "point.de.Stuttgart-Zuffenhausen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sb[:zuf]);
+    }
+
+    with link = "point.de.Kornwestheim-Pbf" {
+        with layer = 2 marker(:statdot :cat:ac15 :pax, sb[:kor]);
+    }
+
+    with link = "point.de.Ludwigsburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sb[:lud]);
+    }
+
+    with link = "point.de.Bietigheim-Bissingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sb[:bie]);
+    }
+
+    with link = "point.de.Vaihingen-Enz-Nord" {
+        with layer = 1 marker(:statdot :removed, sb[:van]);
+    }
+
+    with link = "point.de.Mühlacker" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sb[:muh]);
+        slabel(:left :cat:ac15 :pax, sb[:muh] + (-2.3km, 0.5dt), "Mühlacker");
+    }
+
+    with link = "point.de.Maulbronn-West" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sb[:maw]);
+        slabel(:left :cat:ac15 :pax, sb[:maw] + (-1.3dt, 0dt),
+            hbox(:right:top, "Maulbronn")
+        );
+    }
+}
+
+
+# DE 4810.  Stuttgart-Zuffenhausen - Calw
+with detail = 2 {
+    let zc = path("d2.de.4810");
+
+    with link = "line.de.4810" {
+        track(:first :double :cat:ac15 :pax, zc[:zuf, :mal]);
+        guide(:linenum :cat:ac15 :pax,
+                zc[:kor + 10.3km] << 1dt
+            --  zc[:kor + 10.3km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, zc[:kor + 10.3km] << 3dt,
+            hbox(:left:middle :badgesize, " 4810")
+        );
+
+        track(:first :cat:ac15 :pax, zc[:mal, :wei]);
+        track(:second :removed, zc[:wei, :cal.yw]);
+        line_badge(:removed, zc[:wei + 11km] @ 10 >> 0.4dt, "4810");
+    }
+
+    with link = "point.de.Korntal" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, zc[:kor]);
+    }
+
+    with link = "point.de.Renningen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, zc[:ren]);
+        slabel(:right :cat:ac15 :pax, zc[:ren] + (2.5dt, 1.3dt), "Renningen");
+    }
+
+    with link = "point.de.Weil-der-Stadt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, zc[:wei]);
+        slabel(:left :cat:ac15 :pax, zc[:wei] + (-2.0dt, 1dt),
+            vbox(:right:bottom, "Weil", "der Stadt")
+        );
+    }
+}
+
+
+# DE 4820.  Stuttgart-Zazenhausen - Kornwestheim Rbf - Ludwigsburg
+with detail = 2 {
+    let zl = path("d2.de.4820");
+
+    with link = "line.de.4820" {
+        track(:first :double :cat:ac15, zl[:zaz, :kor.yr]);
+    }
+
+    with link = "point.de.Kornwestheim Rbf" {
+        with layer = 1 marker(:statdot :cat:ac15, zl[:krr]);
+    }
+}
+
+
+# DE 4831.  Ludwigsburg - Markgröningen
+with detail = 2 {
+    let lm = path("d2.de.4831");
+
+    with link = "line.de.4831" {
+        track(:second :removed, lm[:lud.yb, :mar]);
+    }
+
+    with link = "point.de.Markgröningen" {
+        with layer = 1 marker(:statdot :removed, lm[:mar]);
+    }
+}
+
+
+# DE 4841.  Maulbronn West - Maulbronn
+with detail = 2 {
+    let mm = path("d2.de.4841");
+
+    with link = "line.de.4841" {
+        track(:second, mm[:maw.ym, :mas]);
+    }
+
+    with link = "point.de.Maulbronn" {
+        with layer = 1 marker(:statdot, mm[:mas]);
+    }
+}
+
+
+# DE 4842.  Sersheim Strw - Illingen (Württ)
+with detail = 2 {
+    with link = "line.de.4842" {
+        track(:first :double :cat:ac15 :pax,
+            path("d2.de.4842")[:ser.yv, :vai.ys]
+        );
+    }
+}
+
+
+# DE 4850.  Pforzheim Hbf - Hochdorf (b Horb)
+with detail = 2 {
+    let ph = path("d2.de.4850");
+
+    with link = "line.de.4850" {
+        track(:first :double :cat:ac15 :pax, ph[:pfo.yc, :brm]);
+        track(:first :pax, ph[:brm, :hdo]);
+        guide(:linenum :pax,
+                ph[:brm + 10km] << 0.7dt
+            --  ph[:brm + 10km] << 3.0dt
+        );
+        label(:linenum :pax, ph[:brm + 10km] << 3.0dt + (0dt, -0.2dt),
+            hbox(:left:middle :badgesize, " 4850")
+        );
+        guide(:linenum :pax,
+                ph[:cal + 10km] >> 0.7dt
+            --  ph[:cal + 10km] >> 3.0dt
+        );
+        label(:linenum :pax, ph[:cal + 10km] >> 3.0dt,
+            hbox(:right:middle :badgesize, "4850 ")
+        );
+    }
+
+    with link = "point.de.Brötzingen-Mitte" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ph[:brm]);
+    }
+
+    with link = "point.de.Calw" {
+        with layer = 1 marker(:statdot :pax, ph[:cal]);
+        slabel(:left :pax, ph[:cal] + (-1.8dt, 1.0dt), "Calw");
+    }
+
+    with link = "point.de.Nagold" {
+        with layer = 1 marker(:statdot :pax, ph[:nag]);
+        slabel(:left :pax, ph[:nag] + (-1.3dt, 2.0dt),
+            hbox(:right:top, "Nagold")
+        );
+    }
+}
+
+
+# DE 4851.  Brötzingen Mitte - Bad Wildbad
+with detail = 2 {
+    let bw = path("d2.de.4851");
+
+    with link = "line.de.4851" {
+        track(:second :cat:ac15 :pax, bw[:brm.yw, :wil]);
+        guide(:linenum :cat:ac15 :pax,
+                bw[:wil - 8.8km] << 0.7dt
+            --  bw[:wil - 8.8km] << 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, bw[:wil - 8.8km] << 3.0dt + (0dt, 0.2dt),
+            hbox(:left:middle :badgesize, " 4851")
+        );
+    }
+
+    with link = "point.de.Bad-Wildbad" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bw[:wil]);
+        slabel(:right :cat:ac15 :pax, bw[:wil] + (1.8dt, 1.3dt),
+            "Bad Wildbad"
+        );
+    }
+}
+
+
+# DE 4852.  Nagold - Altensteig
+with detail = 2 {
+    let na = path("d2.de.4852");
+
+    with link = "line.de.4852" {
+        track(:second :narrow:g1000 :removed, na[:nag.ya, :ast]);
+        guide(:linenum :removed,
+                na[:ast - 6km] >> 0.7dt
+            --  na[:ast - 6km] >> 3.0dt
+        );
+        label(:linenum :removed, na[:ast - 6km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "4852")
+        );
+    }
+
+    with link = "point.de.Altensteig" {
+        with layer = 1 marker(:statdot :removed, na[:ast]);
+        slabel(:left :removed, na[:ast] + (-1.8dt, 1.2dt), "Altensteig");
+    }
+}
+
+
+# DE 4860.  Stuttgart Hbf - Horb
+with detail = 2 {
+    let sh = path("d2.de.4860");
+
+    with link = "line.de.4860" {
+        track(:first :double :cat:ac15 :pax, sh[:stu.yv, :hor]);
+        line_badge(:cat:ac15 :pax, sh[:bob + 8.5km] @ -5 << 0.4dt, "4860");
+    }
+
+    with link = "point.de.Stuttgart-Vaihingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sh[:vai]);
+    }
+
+    with link = "point.de.Böblingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sh[:bob]);
+        slabel(:left :cat:ac15 :pax, sh[:bob] + (-1.8dt, -0.5dt),
+            "Böblingen"
+        );
+    }
+
+    with link = "point.de.Herrenberg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sh[:her]);
+        slabel(:right :cat:ac15 :pax, sh[:her] + (1.8dt, 0.5dt),
+            "Herrenberg"
+        );
+    }
+
+    with link = "point.de.Eutingen-Gäu" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sh[:eut]);
+        slabel(:right :cat:ac15 :pax, sh[:eut] + (-1.0dt, 1.0dt),
+            vbox(:left:top, "Eutingen")
+        );
+    }
+}
+
+
+# DE 4861.  Stuttgart Hbf - Filderstadt
+with detail = 2 {
+    let sf = path("d2.de.4861");
+
+    with link = "line.de.4861" {
+        track(:first :double :cat:ac15 :pax, sf[:stu, :vai.ys]);
+        track(:first :double :cat:ac15 :pax, sf[:vai.yf, :flu]);
+        track(:first :cat:ac15 :pax, sf[:flu, :fil]);
+    }
+
+    with link = "point.de.Stuttgart-Schwabstraße" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sf[:swa]);
+    }
+
+    with link = "point.de.Leinfelden" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sf[:lei]);
+    }
+
+    with link = "point.de.Filderstadt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sf[:fil]);
+        slabel(:bottom :cat:ac15 :pax, sf[:fil] + (0.5dt, 1.0dt),
+            vbox(:center:top, "Filder-", "stadt")
+        );
+    }
+}
+
+
+# DE 4863.  Leinfelden - Waldenbuch
+with detail = 2 {
+    let lw = path("d2.de.4863");
+
+    with link = "line.de.4863" {
+        track(:second :removed, lw[:lei.yw, :wal]);
+        line_badge(:removed, lw[:wal - 5km] @ 3 >> 0.4dt, "4863");
+    }
+
+    with link = "point.de.Waldenbuch" {
+        with layer = 1 marker(:statdot :removed, lw[:wal]);
+        slabel(:right :removed, lw[:wal] + (-3dt, 1.0dt),
+            hbox(:top:left, "Waldenbuch")
+        );
+    }
+}
+
+
+# DE 4870.  Böblingen - Renningen
+with detail = 2 {
+    let br = path("d2.de.4870");
+
+    with link = "line.de.4870" {
+        track(:second :cat:ac15 :pax, br[:bob.yr, :sin]);
+        track(:second :double :cat:ac15 :pax, br[:sin, :ren.yb]);
+        guide(:linenum :cat:ac15 :pax,
+                br[:sin + 6.3km] >> 1dt
+            --  br[:sin + 6.3km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, br[:sin + 6.3km] >> 3dt + (0dt, -0.2dt),
+            hbox(:left:middle :badgesize, " 4870")
+        );
+    }
+}
+
+
+# DE 4871.  Böblingen - Dettenhausen
+with detail = 2 {
+    let bd = path("d2.de.4871");
+
+    with link = "line.de.4871" {
+        track(:second :double :cat:ac15 :pax, bd[:bob.yd, :dan]);
+        track(:second :cat:ac15 :pax, bd[:dan, :zim]);
+        track(:second :double :cat:ac15 :pax, bd[:zim, :hul]);
+        track(:second :cat:ac15 :pax, bd[:hul, :det]);
+        line_badge(:cat:ac15 :pax, bd[:det - 5.5km] @ -5, "4871");
+    }
+
+    with link = "point.de.Böblingen-Zimmerschlag" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:zim]);
+    }
+
+    with link = "point.de.Dettenhausen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:det]);
+        slabel(:bottom :cat:ac15 :pax, bd[:det] + (0dt, 0.8dt),
+            "Dettenhausen"
+        );
+    }
+}
+
+
+# DE 4872.  Böblingen Zimmerschlag - Schönaich
+with detail = 2 {
+    let zs = path("d2.de.4872");
+
+    with link = "line.de.4872" {
+        track(:second :removed, zs[:zim, :son]);
+    }
+
+    with link = "point.de.Schönaich" {
+        with layer = 1 marker(:statdot :removed, zs[:son]);
+    }
+}
+
+
+# DE 4880.  Eutingen im Gäu - Schiltach
+with detail = 2 {
+    let es = path("d2.de.4880");
+
+    with link = "line.de.4880" {
+        track(:second :cat:ac15 :pax, es[:eut.yh, :fre]);
+        line_badge(:cat:ac15 :pax, es[:hdo + 12km] @ 15, "4880");
+
+        track(:second :pax, es[:fre, :sil.ys]);
+        guide(:linenum :pax,
+                es[:fre + 13km] >> 0.7dt
+            --  es[:fre + 13km] >> 3.0dt
+        );
+        label(:linenum :pax, es[:fre + 13km] >> 3.0dt,
+            hbox(:right:middle :badgesize, "4880 ")
+        );
+    }
+
+    with link = "point.de.Hochdorf-Horb" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, es[:hdo]);
+        slabel(:right :cat:ac15 :pax, es[:hdo] + (-1.0dt, -1.3dt),
+            vbox(:left:bottom, "Hochdorf")
+        );
+    }
+
+    with link = "point.de.Freudenstadt-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, es[:fre]);
+        slabel(:left :cat:ac15 :pax, es[:fre] + (-1.5dt, -0.5dt),
+            vbox(:right:top, "Freuden-", "stadt Hbf ")
+        );
+    }
+}
+

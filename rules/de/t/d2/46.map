@@ -1,0 +1,304 @@
+# DE 4600.  Plochingen - Horb - Immendingen
+with detail = 2 {
+    let pi = path("d2.de.4600");
+
+    with link = "line.de.4600" {
+        track(:first :double :cat:ac15 :pax, pi[:plo.yt, :tub]);
+        track(:first :pax, pi[:tub, :hor]);
+        line_badge(:pax, pi[:tub + 7km], "4600");
+        track(:first :cat:ac15 :pax, pi[:hor, :tut.yh]);
+        line_badge(:cat:ac15 :pax, pi[:hor + 14.7km] @ -5, "4600");
+        line_badge(:cat:ac15 :pax, pi[:spa - 5.7km] @ -5 << 0.2dt, "4600");
+        track(:first :pax, pi[:tut.yh, :imm.yt]);
+    }
+
+    with link = "point.de.Wendlingen-Neckar" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:wen]);
+        slabel(:left :cat:ac15 :pax, pi[:wen] + (-1.8dt, 2.0dt),
+            vbox(:right:bottom, "Wendlingen", span(:light, "(Neckar)"))
+        );
+    }
+
+    with link = "point.de.Nürtingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:nur]);
+    }
+
+    with link = "point.de.Metzingen-Württ" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:met]);
+        slabel(:left :cat:ac15 :pax, pi[:met] + (-2.0dt, 1.3dt),
+            vbox(:right:bottom, "Metzingen   ", span(:light, "(Württ)"))
+        );
+    }
+
+    with link = "point.de.Reutlingen-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:reu]);
+    }
+
+    with link = "point.de.Tübingen-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:tub]);
+    }
+
+    with link = "point.de.Eyach" {
+        with layer = 1 marker(:statdot :pax, pi[:eya]);
+        slabel(:right :pax, pi[:eya] + (-0.5dt, 1.5dt),
+            hbox(:left:top, "Eyach")
+        );
+    }
+
+    with link = "point.de.Horb" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:hor]);
+        slabel(:right :cat:ac15 :pax, pi[:hor] + (-0.5dt, 0.8dt),
+            hbox(:left:top, "Horb")
+        );
+    }
+
+    with link = "point.de.Rottweil" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:rot]);
+        slabel(:left :cat:ac15 :pax, pi[:rot] + (-0.8dt, 0.8dt),
+            hbox(:right:top, "Rottweil")
+        );
+    }
+
+    with link = "point.de.Spaichingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:spa]);
+        slabel(:right :cat:ac15 :pax, pi[:spa] + (2.5dt, -0.5dt),
+            "Spaichingen"
+        );
+    }
+
+    with link = "point.de.Tuttlingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, pi[:tut]);
+        slabel(:right :cat:ac15 :pax, pi[:tut] + (1.5dt, 2.2dt),
+            "Tuttlingen"
+        );
+    }
+}
+
+
+# DE 4610. Wendlingen (Neckar) - Oberlenningen
+with detail = 2 {
+    let wo = path("d2.de.4610");
+    
+    with link = "line.de.4610" {
+        track(:second :cat:ac15 :pax, wo[:wen.yo, :kir]);
+        track(:second :pax, wo[:kir, :ole]);
+        line_badge(:pax, wo[:kir + 4.5km] @ -3 >> 0.2dt, "4610");
+    }
+
+    with link = "point.de.Kirchheim-Teck" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, wo[:kir]);
+        slabel(:right :cat:ac15 :pax, wo[:kir] + (-0.5dt, -1.0dt),
+            vbox(:left:bottom, "Kirchheim", span(:light, "(Teck)"))
+        );
+    }
+
+    with link = "point.de.Oberlenningen" {
+        with layer = 1 marker(:statdot :pax, wo[:ole]);
+        slabel(:bottom :pax, wo[:ole] + (0dt, 1.0dt),
+            vbox(:center:top, "Ober-", "lenningen")
+        );
+    }
+}
+
+
+# DE 4611.  Kirchheim (Teck) - Weilheim (Teck)
+with detail = 2 {
+    let kw = path("d2.de.4611");
+
+    with link = "line.de.4611" {
+        track(:second :removed, kw[:kir.yw, :wei]);
+        line_badge(:removed, kw[:wei - 3km] @ 20, "4611");
+    }
+
+    with link = "point.de.Weilheim-Teck" {
+        with layer = 1 marker(:statdot :removed, kw[:wei]);
+        slabel(:bottom :removed, kw[:wei] + (1dt, 1.3dt),
+            vbox(:center:top, "Weilheim", span(:light, "(Teck)"))
+        );
+    }
+}
+
+
+# DE 4620.  Reutlingen Hbf - Schelklingen
+with detail = 2 {
+    let rs = path("d2.de.4620");
+
+    with link = "line.de.4620" {
+        track(:second :removed, rs[:reu.ye, :eng]);
+        guide(:linenum :removed,
+                rs[:eng - 6.3km] << 0.7dt
+            --  rs[:eng - 6.3km] << 3.0dt
+        );
+        label(:linenum :removed, rs[:eng - 6.3km] << 3.0dt + (0dt, -0.2dt),
+            hbox(:left:middle :badgesize, " 4620")
+        );
+
+        track(:second :pax, rs[:eng, :sel.ye]);
+        line_badge(:pax, rs[:sel.ye - 12.3km] @ 16 >> 0.4dt, "4620");
+    }
+
+    with link = "point.de.Engstingen" {
+        with layer = 1 marker(:statdot :pax, rs[:eng]);
+        slabel(:right :pax, rs[:eng] + (-0.5dt, 1.0dt),
+            hbox(:left:top, "Engstingen")
+        );
+    }
+}
+
+# DE 4621.  Metzingen (Württ) - Bad Urach
+with detail = 2 {
+    let mu = path("d2.de.4621");
+
+    with link = "line.de.4621" {
+        track(:second :pax, mu[:met.yu, :ura]);
+        guide(:linenum :pax,
+                mu[:ura - 4km] >> 0.7dt
+            --  mu[:ura - 4km] >> 3.0dt
+        );
+        label(:linenum :pax, mu[:ura - 4km] >> 3.0dt,
+            hbox(:right:middle :badgesize, "4621 ")
+        );
+    }
+
+    with link = "point.de.Bad-Urach" {
+        with layer = 1 marker(:statdot :pax, mu[:ura]);
+        slabel(:right :pax, mu[:ura] + (1.5dt, 1.0dt), "Bad Urach");
+    }
+}
+
+
+# DE 4630.  Tübingen Hbf - Sigmaringen
+with detail = 2 {
+    let ts = path("d2.de.4630");
+
+    with link = "line.de.4630" {
+        track(:first :pax, ts[:tub.ys, :sig]);
+        guide(:linenum :pax,
+                ts[:hec - 10km] >> 0.7dt
+            --  ts[:hec - 10km] >> 3.0dt
+        );
+        label(:linenum :pax, ts[:hec - 10km] >> 3.0dt,
+            hbox(:right:bottom :badgesize, "4630")
+        );
+        line_badge(:pax, ts[:bal + 6km] @ 5 >> 0.3dt, "4630");
+        guide(:linenum :pax,
+                ts[:sig - 13.1km] >> 0.7dt
+            --  ts[:sig - 13.1km] >> 3.0dt
+        );
+        label(:linenum :pax, ts[:sig - 13.1km] >> 3.0dt,
+            hbox(:right:middle :badgesize, "4630 ")
+        );
+    }
+
+    with link = "point.de.Hechingen" {
+        with layer = 1 marker(:statdot :pax, ts[:hec]);
+        slabel(:right :pax, ts[:hec] + (2.5dt, 0dt), "Hechingen");
+    }
+
+    with link = "point.de.Balingen-Württ" {
+        with layer = 1 marker(:statdot :pax, ts[:bal]);
+        slabel(:left :pax, ts[:bal] + (-1.0dt, 1.0dt),
+            vbox(:right:bottom, "Balingen", span(:light, "(Württ) "))
+        );
+    }
+
+    with link = "point.de.Albstadt-Ebingen" {
+        with layer = 1 marker(:statdot :pax, ts[:ebi]);
+        slabel(:left :pax, ts[:ebi] + (1.5dt, 1.0dt),
+            vbox(:right:top, "Albstadt-", "Ebingen  ")
+        );
+    }
+
+    with link = "point.de.Inzigkofen" {
+        with layer = 1 marker(:statdot, ts[:inz]);
+    }
+}
+
+
+# DE 4633.  Tübingen Hbf - Herrenberg
+with detail = 2 {
+    let th = path("d2.de.4633");
+
+    with link = "line.de.4633" {
+        track(:second :pax, th[:tub.yh, :her.yt]);
+        guide(:linenum :pax,
+                th[:tub.yh + 7.5km] << 0.7dt
+            --  th[:tub.yh + 7.5km] << 3.0dt
+        );
+        label(:linenum :pax, th[:tub.yh + 7.5km] << 3.0dt + (0dt, 0.1dt),
+            hbox(:right:middle :badgesize, "4633 ")
+        );
+    }
+}
+
+
+# DE 4634.  Balingen (Württ) - Rottweil
+with detail = 2 {
+    let br = path("d2.de.4634");
+
+    with link = "line.de.4634" {
+        track(:second, br[:bal.yr, :som]);
+        line_badge(:open, br[:bal.yr + 5km] @ -15, "4634");
+        track(:second :removed, br[:som, :rot.yb]);
+    }
+
+    with link = "point.de.Schömberg-Balingen" {
+        with layer = 1 marker(:statdot, br[:som]);
+        slabel(:left, br[:som] + (0dt, -0.5dt),
+            vbox(:bottom:right, "Schömberg", span(:light, "(b Balingen)"))
+        );
+    }
+}
+
+
+# DE 4650.  Rottweil - Villingen (Schwarzw)
+with detail = 2 {
+    let rv = path("d2.de.4650");
+
+    with link = "line.de.4650" {
+        track(:first :pax, rv[:rot.yv, :vil.yr]);
+        guide(:linenum :pax,
+                rv[:vil.yr - 7.2km] << 0.7dt
+            --  rv[:vil.yr - 7.2km] << 3.0dt
+        );
+        label(:linenum :pax, rv[:vil.yr - 7.2km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 4650")
+        );
+    }
+
+    with link = "point.de.Trossingen-Bahnhof" {
+        with layer = 1 marker(:statdot :pax, rv[:tro]);
+        slabel(:left :pax, rv[:tro] + (-1.5dt, 1.5dt),
+            vbox(:right:bottom, "Trossingen", "Bahnhof")
+        );
+    }
+}
+
+
+# DE 4660.  Tuttlingen - Inzigkofen
+with detail = 2 {
+    let ti = path("d2.de.4660");
+
+    with link = "line.de.4660" {
+        track(:second :pax, ti[:tut.yi, :inz.yt]);
+        line_badge(:pax, ti[:tut.yi + 8km] @ -10, "4660");
+    }
+}
+
+
+# DE 4661.  Tuttlingen - Hattingen Abzw
+with detail = 2 {
+    let th = path("d2.de.4661");
+
+    with link = "line.de.4661" {
+        track(:first :cat:ac15 :pax, th[:tut.yh, :hat.yt]);
+        guide(:linenum :cat:ac15 :pax,
+                th[:tut.yh + 1.5km] << 0.7dt
+            --  th[:tut.yh + 1.5km] << 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, th[:tut.yh + 1.5km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 4661")
+        );
+    }
+}
+
