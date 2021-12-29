@@ -1,0 +1,473 @@
+# DE 9400.  Weinheim (Bergstr) OEG - Mannheim Hbf OEG
+with detail = 2 {
+    let wm = path("d2.de.9400");
+
+    with link = "line.de.9400" {
+        track(:second :double :cat:dc75 :pax, wm[:wei, :kaf]);
+        line_badge(:cat:dc75 :pax, wm[:kaf - 5km] @ -18 >> 0.4dt, "9400");
+
+        track(:tram :double :cat:dc75 :pax, wm[:kaf, :man]);
+    }
+
+    with link = "point.de.Mannheim-Käfertal-OEG" {
+        with layer = 1 marker(:statdot :cat:dc75 :pax, wm[:kaf]);
+    }
+}
+
+
+# DE 9401.  Heidelberg Bismarckplatz - Weinheim (Bergstr) OEG
+with detail = 2 {
+    let hw = path("d2.de.9401");
+
+    with link = "line.de.9401" {
+        track(:tram :double :cat:dc75 :pax, hw[:hei, :bur]);
+        track(:second :double :cat:dc75 :pax, hw[:bur, :wei]);
+        line_badge(:cat:dc75 :pax, hw[:bur + 5km] @ 5 >> 0.3dt, "9401");
+    }
+}
+
+
+# DE 9402.  Mannheim Kurpfalzbrücke - Heidelberg Bismarckplatz
+with detail = 2 {
+    let kh = path("d2.de.9402");
+
+    with link = "line.de.9402" {
+        track(:second :double :cat:dc75 :pax, kh[:kur, :hei]);
+        line_badge(:cat:dc75 :pax, kh[:hei - 8km], "9402");
+    }
+}
+
+
+# DE 9403.  Heddesheim (Baden) Ort - Mannheim-Käfertal OEG
+with detail = 2 {
+    let hk = path("d2.de.9403");
+    
+    with link = "line.de.9403" {
+        track(:second :cat:dc75 :pax, hk[:hed, :kaf]);
+    }
+
+    with link = "point.de.Heddesheim-Baden-Ort" {
+        with layer = 1 marker(:statdot :cat:dc75 :pax, hk[:hed]);
+    }
+}
+
+
+# DE 9404.  Mannheim-Waldhof - Mannheim-Sandhofen
+with detail = 2 {
+    let ws = path("d2.de.9404");
+
+    with link = "line.de.9404" {
+        track(:second :removed, ws[:wal.ys, :san]);
+    }
+
+    with link = "point.de.Mannheim-Sandhofen" {
+        with layer = 1 marker(:statdot :removed, ws[:san]);
+    }
+}
+
+
+# DE 9410.  Neckarbischofsheim Nord - Hüffenhardt
+with detail = 2 {
+    let nh = path("d2.de.9410");
+
+    with link = "line.de.9410" {
+        track(:second :pax, nh[:nbn.yh, :huf]);
+        line_badge(:pax, nh[:nbn.yh + 6km] @ -2 << 0.2dt, "9410");
+    }
+
+    with link = "point.de.Hüffenhardt" {
+        with layer = 1 marker(:statdot :pax, nh[:huf]);
+        slabel(:left :pax, nh[:huf] + (5dt, -1.5dt), "Hüffenhardt");
+    }
+}
+
+
+# DE 9411.  Wiesloch Stadt - Waldangelloch
+with detail = 2 {
+    let ww = path("d2.de.9411");
+
+    with link = "line.de.9411" {
+        track(:second :removed, ww[:wis, :wal]);
+        guide(:linenum :removed,
+                ww[:wal - 2km] << 0.7dt
+            --  ww[:wal - 2km] << 3.0dt
+        );
+        label(:linenum :removed, ww[:wal - 2km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 9411")
+        );
+    }
+
+    with link = "point.de.Waldangelloch" {
+        with layer = 1 marker(:statdot :removed, ww[:wal]);
+        slabel(:bottom :removed, ww[:wal] + (0.5dt, 1.3dt),
+            vbox(:center:top, "Wald-", "angelloch")
+        );
+    }
+}
+
+
+# DE 9412.  Bruchsal - Hilsbach
+with detail = 2 {
+    let bh = path("d2.de.9412");
+
+    with link = "line.de.9412" {
+        track(:second :cat:ac15 :pax, bh[:bru.yu, :ode]);
+        line_badge(:cat:ac15 :pax, bh[:ubo + 6km] @ -9 << 0.5dt, "9412");
+        track(:second :removed, bh[:ode, :hil]);
+    }
+
+    with link = "point.de.Ubstadt-Ort" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bh[:ubo]);
+    }
+
+    with link = "point.de.Odenheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bh[:ode]);
+        slabel(:top :cat:ac15 :pax, bh[:ode] + (0dt, -1.5dt), "Odenheim");
+    }
+
+    with link = "point.de.Hilsbach" {
+        with layer = 1 marker(:statdot :removed, bh[:hil]);
+        slabel(:top :removed, bh[:hil] + (0dt, -1.0dt), "Hilsbach");
+    }
+}
+
+
+# DE 9413.  Ubstadt Ort - Menzingen (Baden)
+with detail = 2 {
+    let um = path("d2.de.9413");
+
+    with link = "line.de.9413" {
+        track(:second :cat:ac15 :pax, um[:ubo.ym, :men]);
+        line_badge(:cat:ac15 :pax, um[:ubo.ym + 6.5km] @ 20 >> 0.2dt, "9413");
+    }
+
+    with link = "point.de.Menzingen-Baden" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, um[:men]);
+        slabel(:top :cat:ac15 :pax, um[:men] + (2dt, -1.0dt),
+            hbox(:center:bottom, "Menzingen ", span(:light, "(B.)"))
+        );
+    }
+}
+
+
+# DE 9414.  Wiesloch-Walldorf - Meckesheim
+with detail = 2 {
+    let wm = path("d2.de.9414");
+
+    with link = "line.de.9414" {
+        track(:second :removed, wm[:wie.ym, :mec.yw]);
+        guide(:linenum :removed,
+                wm[:mec.yw - 5.5km] << 0.7dt
+            --  wm[:mec.yw - 5.5km] << 3.0dt
+        );
+        label(:linenum :removed, wm[:mec.yw - 5.5km] << 2.8dt + (-0.2dt, 0dt),
+            hbox(:center:bottom :badgesize, "9414")
+        );
+    }
+
+    with link = "point.de.Wiesloch-Stadt" {
+        with layer = 1 marker(:statdot :removed, wm[:wis]);
+    }
+}
+
+
+# DE 9420.  Karlsruhe Albtalbf - Bad Herrenalb
+with detail = 2 {
+    let kh = path("d2.de.9420");
+
+    with link = "line.de.9420" {
+        track(:second :double :cat:dc75 :pax, kh[:kal, :bus]);
+        track(:second :cat:dc75 :pax, kh[:bus, :her]);
+        line_badge(:cat:dc75 :pax, kh[:bus + 7km] @ -12 >> 0.4dt, "9420");
+    }
+
+    with link = "point.de.Ettlingen-Stadt" {
+        with layer = 1 marker(:statdot :cat:dc75 :pax, kh[:ets]);
+        slabel(:right :cat:dc75 :pax, kh[:ets] + (1dt, -2dt), "Ettlingen");
+    }
+
+    with link = "point.de.Busenbach" {
+        with layer = 1 marker(:statdot :cat:dc75 :pax, kh[:bus]);
+        slabel(:right :cat:dc75 :pax, kh[:bus] + (1.4dt, -0.3dt),
+            "Busenbach"
+        );
+    }
+
+    with link = "point.de.Bad-Herrenalb" {
+        with layer = 1 marker(:statdot :cat:dc75 :pax, kh[:her]);
+        slabel(:bottom :cat:dc75 :pax, kh[:her] + (2dt, 1.0dt),
+            vbox(:center:top, "Bad Herrenalb")
+        );
+    }
+}
+
+
+# DE 9421.  Busenbach - Ittersbach Rathaus
+with detail = 2 {
+    let bi = path("d2.de.9421");
+
+    with link = "line.de.9421" {
+        track(:second :cat:dc75 :pax, bi[:bus.yi, :itr]);
+        guide(:linenum :cat:dc75 :pax,
+                bi[:itr - 6km] << 0.7dt
+            --  bi[:itr - 6km] << 3.0dt
+        );
+        label(:linenum :cat:dc75 :pax, bi[:itr - 6km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 9421")
+        );
+    }
+
+    with link = "point.de.Ittersbach-Rathaus" {
+        with layer = 1 marker(:statdot :cat:dc75 :pax, bi[:itr]);
+        slabel(:bottom :cat:dc75 :pax, bi[:itr] + (0dt, 1.0dt),
+            vbox(:center:top, "Itters-", "bach")
+        );
+    }
+}
+
+
+# DE 9423.  Bühl (Baden) F - Stollhofen DOW
+with detail = 2 {
+    let bs1 = path("d2.de.9423.1");
+    let bs2 = path("d2.de.9423.2");
+
+    with link = "line.de.9423" {
+        track(:second, bs1[:buh, :swa]);
+        guide(:linenum,
+                bs1[:buh + 4.5km] >> 0.7dt
+            --  bs1[:buh + 4.5km] >> 3.0dt
+        );
+        label(:linenum, bs1[:buh + 4.5km] >> 3.0dt + (0.5dt, 0dt),
+            hbox(:center:bottom :badgesize, "9423")
+        );
+
+        track(:second, bs2[:swa.ys, :dow]);
+    }
+
+    with link = "point.de.Schwarzach-Baden" {
+        with layer = 1 marker(:statdot, bs1[:swa]);
+        slabel(:left, bs1[:swa] + (-4.0dt, -0.8dt),
+            hbox(:top:left, vbox(:center:top,
+                "Schwarzach", span(:light, "(Baden) ")
+            ))
+        );
+    }
+
+    with link = "point.de.Stollhofen" {
+        with layer = 1 marker(:statdot, bs2[:sto]);
+        slabel(:left, bs2[:sto] + (-2.0dt, -0.3dt), "Stollhofen");
+    }
+
+    with link = "point.de.Stollhofen-DOW" {
+        with layer = 1 marker(:statdot, bs2[:dow]);
+    }
+}
+
+
+# DE 9424.  Kehl Nb - Schwarzach (Baden)
+with detail = 2 {
+    let ks = path("d2.de.9424");
+
+    with link = "line.de.9424" {
+        track(:second :removed, ks[:keh, :swa]);
+        line_badge(:removed, ks[:swa - 13km] @ 9 >> 0.4dt, "9424");
+    }
+}
+
+
+# DE 9426.  Achern - Ottenhöfen
+with detail = 2 {
+    let ao = path("d2.de.9426");
+
+    with link = "line.de.9426" {
+        track(:second :pax, ao[:ach.yo, :ott]);
+        line_badge(:pax, ao[:ott - 4.7km] @ 15, "9426");
+    }
+
+    with link = "point.de.Ottenhöfen" {
+        with layer = 1 marker(:statdot :pax, ao[:ott]);
+        slabel(:right :pax, ao[:ott] + (1.5dt, 1.1dt), "Ottenhöfen");
+    }
+}
+
+
+# DE 9427.  Biberach (Baden) - Oberharmersbach-Riersbach
+with detail = 2 {
+    let bo = path("d2.de.9427");
+
+    with link = "line.de.9427" {
+        track(:second :pax, bo[:bib.yo, :ori]);
+        line_badge(:pax, bo[:ori - 4.5km], "9427");
+    }
+
+    with link = "point.de.Oberharmersbach-Riersbach" {
+        with layer = 1 marker(:statdot :pax, bo[:ori]);
+        slabel(:top :pax, bo[:ori] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Oberharmersbach-", "Riersbach")
+        );
+    }
+}
+
+
+# DE 9428.  Stollhofen - Söllingen (b Rastatt)
+with detail = 2 {
+    let so = path("d2.de.9428");
+
+    with link = "line.de.9428" {
+        track(:second, so[:sto.ys, :sol]);
+    }
+
+    with link = "point.de.Söllingen-Rastatt" {
+        with layer = 1 marker(:statdot, so[:sol]);
+        slabel(:left, so[:sol] + (0dt, -1.5dt),
+            hbox(:right:base, "Söllingen ", span(:light, "(b R.)"))
+        );
+    }
+}
+
+
+# DE 9429.  Eggenstein Bahnhof - Linkenheim-Hochstetten
+with detail = 2 {
+    let eh = path("d2.de.9429");
+
+    with link = "line.de.9429" {
+        track(:second :cat:dc75 :pax, eh[:nrx, :hoc]);
+        line_badge(:cat:dc75 :pax, eh[:nrx + 4.0km], "9429");
+    }
+
+    with link = "point.de.Linkenheim-Hochstetten" {
+        with layer = 1 marker(:statdot :cat:dc75 :pax, eh[:hoc]);
+        slabel(:left :cat:dc75 :pax, eh[:hoc] + (-1.5dt, 0dt),
+            vbox(:right:middle, "L.-Hoch-", "stetten ")
+        );
+    }
+}
+
+
+# DE 9430.  Hüfingen Mitte - Furtwangen
+with detail = 2 {
+    let hf = path("d2.de.9430");
+
+    with link = "line.de.9430" {
+        track(:second :pax, hf[:hum.yf, :bra]);
+        track(:second :removed, hf[:bra, :fur]);
+        line_badge(:removed, hf[:fur - 10.3km] @ -20, "9430");
+    }
+
+    with link = "point.de.Bräunlingen-Bahnhof" {
+        with layer = 1 marker(:statdot :pax, hf[:bra]);
+        slabel(:left :pax, hf[:bra] + (1.0dt, 0.8dt),
+            hbox(:right:top, "Bräunlingen")
+        );
+    }
+
+    with link = "point.de.Furtwangen" {
+        with layer = 1 marker(:statdot :removed, hf[:fur]);
+        slabel(:left :removed, hf[:fur] + (-1.5dt, 1.0dt), "Furtwangen");
+    }
+}
+
+
+# DE 9431.  Riegel-Malterdingen - Breisach
+with detail = 2 {
+    let rb = path("d2.de.9431");
+
+    with link = "line.de.9431" {
+        track(:second :cat:ac15 :pax, rb[:rie.yb, :bre.yr]);
+        guide(:linenum :cat:ac15 :pax,
+                rb[:rio + 9.7km] >> 0.7dt
+            --  rb[:rio + 9.7km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, rb[:rio + 9.7km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "9431")
+        );
+    }
+
+    with link = "point.de.Riegel-Kaiserstuhl-Ort" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rb[:rio]);
+        slabel(:left :cat:ac15 :pax, rb[:rio] + (-1.0dt, -0.5dt),
+            vbox(:right:bottom, "Riegel", "Ort")
+        );
+    }
+}
+
+
+# DE 9432.  Riegel am Kaiserstuhl Ort - Gottenheim
+with detail = 2 {
+    let rg = path("d2.de.9432");
+
+    with link = "line.de.9432" {
+        track(:second :cat:ac15 :pax, rg[:rio.yg, :got.yr]);
+        line_badge(:cat:ac15 :pax, rg[:got.yr - 5km] @ 20, "9432");
+    }
+}
+
+
+# DE 9433.  Bad Krozingen - Sulzburg
+with detail = 2 {
+    let ks = path("d2.de.9433");
+
+    with link = "line.de.9433" {
+        track(:second :cat:ac15 :pax, ks[:kro.ys, :sta]);
+        guide(:linenum :cat:ac15 :pax,
+                ks[:sta - 2km] << 0.7dt
+            --  ks[:sta - 2km] << 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, ks[:sta - 2km] << 3.0dt + (0dt, -0.2dt),
+            hbox(:left:middle :badgesize, " 9433")
+        );
+
+        track(:second :removed, ks[:sta.ym, :sul]);
+    }
+
+    with link = "point.de.Staufen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ks[:sta]);
+        slabel(:right :cat:ac15 :pax, ks[:sta] + (1.5dt, 0.8dt), "Staufen");
+    }
+
+    with link = "point.de.Sulzburg" {
+        with layer = 1 marker(:statdot :removed, ks[:sul]);
+        slabel(:bottom :removed, ks[:sul] + (-3dt, 1.0dt), "Sulzburg");
+    }
+}
+
+
+# DE 9434.  Staufen - Münstertal (Schwarzw)
+with detail = 2 {
+    let sm = path("d2.de.9434");
+
+    with link = "line.de.9434" {
+        track(:second :cat:ac15 :pax, sm[:sta.ym, :mun]);
+        guide(:cat:ac15 :pax,
+                sm[:mun - 2km] >> 0.7dt
+            --  sm[:mun - 1.5km] >> 2.5dt
+        );
+        label(:cat:ac15 :pax, sm[:mun - 1.5km] >> 2.5dt + (0.5dt, 0dt),
+            hbox(:center:top :badgesize, "9434")
+        );
+    }
+
+    with link = "point.de.Münstertal-Schwarzw" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, sm[:mun]);
+        slabel(:right :cat:ac15 :pax, sm[:mun] + (1.5dt, 0.8dt),
+            "Münstertal"
+        );
+    }
+}
+
+
+# DE 9440.  Haltingen - Kandern
+with detail = 2 {
+    let hk = path("d2.de.9440");
+
+    with link = "line.de.9440" {
+        track(:second, hk[:hal.yk, :kan]);
+        line_badge(:open, hk[:hal.yk + 5.5km] << 0.3dt, "9440");
+    }
+
+    with link = "point.de.Kandern" {
+        with layer = 1 marker(:statdot, hk[:kan]);
+        slabel(:top, hk[:kan] + (0dt, -0.8dt), "Kandern");
+    }
+}
+
