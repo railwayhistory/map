@@ -1,0 +1,879 @@
+# DE 5000.  Bayreuth Hbf - Warmensteinach
+with detail = 2 {
+    let bw = path("d2.de.5000");
+
+    with link = "line.de.5000" {
+        track(:second :pax, bw[:bay.yw, :wei]);
+        track(:second :removed, bw[:wei, :war]);
+        line_badge(:removed, bw[:wei + 5.3km] @ -15 << 0.3dt, "5000");
+    }
+
+    with link = "point.de.Weidenberg" {
+        with layer = 1 marker(:statdot :pax, bw[:wei]);
+        slabel(:right :pax, bw[:wei] + (-3dt, 1.3dt),
+            vbox(:left:top, "Weiden-", " berg")
+        );
+    }
+
+    with link = "point.de.Warmensteinach" {
+        with layer = 1 marker(:statdot :removed, bw[:war]);
+        slabel(:left :removed, bw[:war] + (3dt, -1.5dt), "Warmensteinach");
+    }
+}
+
+
+# DE 5001.  Schnabelwaid - Bayreuth Hbf
+with detail = 2 {
+    let sb = path("d2.de.5001");
+
+    with link = "line.de.5001" {
+        track(:first :pax, sb[:sna.yb, :bay]);
+        line_badge(:pax, sb[:sna.yb + 6.5km] @ -3, "5001");
+    }
+
+    with link = "point.de.Bayreuth-Hbf" {
+        with layer = 1 marker(:statdot :pax, sb[:bay]);
+        slabel(:left :pax, sb[:bay] + (-3.4km, 0.8dt), "Bayreuth");
+    }
+}
+
+
+# DE 5002.  Bayreuth Kreuzstein - Hollfeld
+with detail = 2 {
+    let bh = path("d2.de.5002");
+
+    with link = "line.de.5002" {
+        track(:second :removed, bh[:kre, :hol]);
+        line_badge(:removed, bh[:bal + 13.2km] @ 8 >> 0.2dt, "5002");
+    }
+
+    with link = "point.de.Bayreuth-Altstadt" {
+        with layer = 1 marker(:statdot :removed, bh[:bal]);
+    }
+
+    with link = "point.de.Hollfeld" {
+        with layer = 1 marker(:statdot :removed, bh[:hol]);
+        slabel(:top :removed, bh[:hol] + (0dt, -1.0dt), "Hollfeld");
+    }
+}
+
+
+# DE 5003.  Bayreuth Altstadt - Kulmbach
+with detail = 2 {
+    let bk = path("d2.de.5003");
+
+    with link = "line.de.5003" {
+        track(:second :removed, bk[:bal.yk, :kul.yb]);
+        guide(:linenum :removed,
+                bk[:bal.yk + 18.8km] << 0.7dt
+            --  bk[:bal.yk + 18.8km] << 3.0dt
+        );
+        label(:linenum :removed, bk[:bal.yk + 18.8km] << 3.0dt,
+            hbox(:center:top :badgesize, "5003")
+        );
+    }
+}
+
+
+# DE 5004.  Untersteinach (b Stadtsteinach) - Stadtsteinach
+with detail = 2 {
+    let us = path("d2.de.5004");
+
+    with link = "line.de.5004" {
+        track(:second, us[:ust.ys, :sst]);
+        guide(:linenum,
+                us[:sst - 3km] >> 0.7dt
+            --  us[:sst - 3km] >> 3.0dt
+        );
+        label(:linenum, us[:sst - 3km] >> 3.0dt + (0dt, -0.2dt),
+            hbox(:left:middle :badgesize, " 5004")
+        );
+    }
+
+    with link = "point.de.Stadtsteinach" {
+        with layer = 1 marker(:statdot, us[:sst]);
+        slabel(:top, us[:sst] + (0dt, -1.0dt), "Stadtsteinach");
+    }
+}
+
+
+# DE 5005.  Falls - Gefrees
+with detail = 2 {
+    let fg = path("d2.de.5005");
+
+    with link = "line.de.5005" {
+        track(:second :removed, fg[:fal.yg, :gef]);
+        guide(:linenum :removed,
+                fg[:gef - 2.5km] << 0.7dt
+            --  fg[:gef - 2.5km] << 3.0dt
+        );
+        label(:linenum :removed, fg[:gef - 2.5km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 5005")
+        );
+    }
+
+    with link = "point.de.Gefrees" {
+        with layer = 1 marker(:statdot :removed, fg[:gef]);
+        slabel(:right :removed, fg[:gef] + (1.5dt, 0.8dt), "Gefrees");
+    }
+}
+
+
+# DE 5006.  Neuenmarkt-Wirsberg - Bischofsgrün
+with detail = 2 {
+    let nb = path("d2.de.5006");
+
+    with link = "line.de.5006" {
+        track(:second :removed, nb[:nma.yb, :bis]);
+        line_badge(:removed, nb[:nma.yb + 5km] @ -5, "5006");
+    }
+
+    with link = "point.de.Bischofsgrün" {
+        with layer = 1 marker(:statdot :removed, nb[:bis]);
+        slabel(:right :removed, nb[:bis] + (1.5dt, 0dt),
+            vbox(:left:middle, "Bischofs-", "grün")
+        );
+    }
+}
+
+
+# DE 5007.  Neuenmarkt-Wirsberg Süd - Neuenmarkt-Wirsberg Ost
+with detail = 2 {
+    with link = "line.de.5007" {
+        track(:first :pax, path("d2.de.5007")[:nms, :nmo]);
+    }
+}
+
+
+# DE 5010.  Hochstadt-Marktzeuln - Probstzella Streckenwechsel
+with detail = 2 {
+    let hp = path("d2.de.5010");
+
+    with link = "line.de.5010" {
+        track(:first :double :cat:ac15 :pax, hp[:hst.yp, :prx]);
+        guide(:linenum :cat:ac15 :pax,
+                hp[:hst.yp + 4.3km] >> 1dt
+            --  hp[:hst.yp + 4.3km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax,
+            hp[:hst.yp + 4.3km] >> 3dt + (0dt, 0.3dt),
+            hbox(:left:middle :badgesize, " 5010")
+        );
+        guide(:linenum :cat:ac15 :pax,
+                hp[:pre + 10km] >> 1dt
+            --  hp[:pre + 10km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, hp[:pre + 10km] >> 3dt,
+            hbox(:left:middle :badgesize, " 5010")
+        );
+    }
+
+    with link = "point.de.Neuses-Kronach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hp[:nse]);
+    }
+
+    with link = "point.de.Kronach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hp[:kro]);
+        slabel(:left :cat:ac15 :pax, hp[:kro] + (-1.8dt, 0.5dt), "Kronach");
+    }
+
+    with link = "point.de.Stockheim-Oberfr" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hp[:sto]);
+        slabel(:right :cat:ac15 :pax, hp[:sto] + (1.8dt, 0dt),
+            vbox(:left:middle, "Stockheim", span(:light, " (Oberfr)"))
+        );
+    }
+
+    with link = "point.de.Pressig-Rothenkirchen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hp[:pre]);
+        slabel(:right :cat:ac15 :pax, hp[:pre] + (1.3dt, 0dt),
+            vbox(:left:middle, "  Pressig-", "Rothenkirchen")
+        );
+    }
+
+    with link = "point.de.Ludwigsstadt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hp[:lud]);
+        slabel(:left :cat:ac15 :pax, hp[:lud] + (-2.0dt, 1.0dt),
+            "Ludwigstadt"
+        );
+    }
+}
+
+
+# DE 5011. Neuses (b Kronach) - Weißenbrunn
+with detail = 2 {
+    let nw = path("d2.de.5011");
+
+    with link = "line.de.5011" {
+        track(:second :removed, nw[:nse.yw, :wei]);
+        guide(:linenum :removed,
+                nw[:wei - 2km] >> 0.7dt
+            --  nw[:wei - 2km] >> 3.0dt
+        );
+        label(:linenum :removed, nw[:wei - 2km] >> 3.0dt,
+            hbox(:center:top :badgesize, "5011")
+        );
+    }
+
+    with link = "point.de.Weißenbrunn" {
+        with layer = 1 marker(:statdot :removed, nw[:wei]);
+        slabel(:right :removed, nw[:wei] + (1.8dt, 1.0dt), "Weißenbrunn");
+    }
+}
+
+
+# DE 5012.  Kronach - Nordhalben
+with detail = 2 {
+    let kn = path("d2.de.5012");
+
+    with link = "line.de.5012" {
+        track(:second :removed, kn[:kro.yn, :ste]);
+        line_badge(:removed, kn[:kro.yn + 8km], "5012");
+
+        track(:second :museum, kn[:ste, :nha]);
+    }
+
+    with link = "point.de.Steinwiesen" {
+        with layer = 1 marker(:statdot :museum, kn[:ste]);
+        slabel(:right :museum, kn[:ste] + (1.5dt, 1.0dt), "Steinwiesen");
+    }
+
+    with link = "point.de.Nordhalben" {
+        with layer = 1 marker(:statdot :museum, kn[:nha]);
+        slabel(:top :museum, kn[:nha] + (-2dt, -0.8dt), "Nordhalben");
+    }
+}
+
+
+# DE 5013.  Sonneberg (Thür) Ost - Stockheim (Oberfr)
+with detail = 2 {
+    let st = path("d2.de.5013");
+
+    with link = "line.de.5013" {
+        track(:second :removed, st[:soo, :sto.ys]);
+        guide(:linenum :removed,
+                st[:soo + 4km] << 0.7dt
+            --  st[:soo + 4km] << 3.0dt
+        );
+        label(:linenum :removed, st[:soo + 4km] << 3.0dt,
+            hbox(:center:bottom, "5013")
+        );
+    }
+}
+
+
+# DE 5014.  Pressig-Rothenkirchen - Tettau
+with detail = 2 {
+    let pt = path("d2.de.5014");
+
+    with link = "line.de.5014" {
+        track(:second :removed, pt[:pre, :tet]);
+        line_badge(:removed, pt[:tet - 5.5km] @ -5 << 0.6dt, "5014");
+    }
+
+    with link = "point.de.Tettau" {
+        with layer = 1 marker(:statdot :removed, pt[:tet]);
+        slabel(:right :removed, pt[:tet] + (1.5dt, 0.8dt), "Tettau");
+    }
+}
+
+
+# DE 5015.  Ludwigstadt - Lehesten
+with detail = 2 {
+    let ll = path("d2.de.5015");
+
+    with link = "line.de.5015" {
+        track(:second :removed, ll[:lud.yl, :leh]);
+        guide(:linenum :removed,
+                ll[:lud.yl + 2.1km] << 0.7dt
+            --  ll[:lud.yl + 2.1km] << 3.0dt
+        );
+        label(:linenum :removed, ll[:lud.yl + 2.1km] << 3.0dt + (0.3dt, 0dt),
+            hbox(:center:bottom :badgesize, "5015")
+        );
+    }
+
+    with link = "point.de.Lehesten" {
+        with layer = 1 marker(:statdot :removed, ll[:leh]);
+        slabel(:right :removed, ll[:leh] + (1.5dt, 0.8dt), "Lehesten");
+    }
+}
+
+
+# DE 5021.  Hof Hbf - Bad Steben
+with detail = 2 {
+    let hs = path("d2.de.5021");
+
+    with link = "line.de.5021" {
+        track(:second :pax, hs[:hne, :ste]);
+        line_badge(:pax, hs[:hne + 5km] << 0.5dt, "5021");
+    }
+
+    with link = "point.de.Selbitz" {
+        with layer = 1 marker(:statdot :pax, hs[:sel]);
+        slabel(:right :pax, hs[:sel] + (-2dt, -1.8dt), "Selbitz");
+    }
+
+    with link = "point.de.Naila" {
+        with layer = 1 marker(:statdot :pax, hs[:nai]);
+        slabel(:left :pax, hs[:nai] + (-1.8dt, 0.8dt), "Naila");
+    }
+
+    with link = "point.de.Marxgrün" {
+        with layer = 1 marker(:statdot :pax, hs[:mar]);
+        slabel(:left :pax, hs[:mar] + (-1.3dt, 2.5dt), "Marxgrün");
+    }
+
+    with link = "point.de.Bad-Steben" {
+        with layer = 1 marker(:statdot :pax, hs[:ste]);
+        slabel(:left :pax, hs[:ste] + (-1.8dt, -2.0dt),
+            vbox(:right:middle, "Bad", "Steben")
+        );
+    }
+}
+
+
+# DE 5023.  Naila - Schwarzenbach a Wald
+with detail = 2 {
+    let ns = path("d2.de.5023");
+
+    with link = "line.de.5023" {
+        track(:second :removed, ns[:nai.ys, :swa]);
+        line_badge(:removed, ns[:nai.ys + 4.0km] @ -8 << 0.2dt, "5023");
+    }
+
+    with link = "point.de.Schwarzenbach-Wald" {
+        with layer = 1 marker(:statdot :removed, ns[:swa]);
+        slabel(:bottom :removed, ns[:swa] + (-3dt, 1.0dt),
+            vbox(:center:top, "Schwarzenbach", span(:light, "a Wald"))
+        );
+    }
+}
+
+
+# DE 5024.  Selbitz - Helmbrechts
+with detail = 2 {
+    let sh = path("d2.de.5024");
+
+    with link = "line.de.5024" {
+        track(:second :removed, sh[:sel.yh, :hel]);
+        line_badge(:removed, sh[:hel - 6.2km] @ -20, "5024");
+    }
+}
+
+
+# DE 5025.  Münchberg - Helmbrechts
+with detail = 2 {
+    let mh = path("d2.de.5025");
+
+    with link = "line.de.5025" {
+        track(:second :pax, mh[:mun.yh, :hel]);
+        line_badge(:pax, mh[:hel - 4.3km] @ -15 << 0.3dt, "5025");
+    }
+
+    with link = "point.de.Helmbrechts" {
+        with layer = 1 marker(:statdot :pax, mh[:hel]);
+        slabel(:left :pax, mh[:hel] + (-2.2dt, 0dt), "Helmbrechts");
+    }
+}
+
+
+# DE 5026.  Münchberg - Zell (Oberfr)
+with detail = 2 {
+    let mz = path("d2.de.5026");
+
+    with link = "line.de.5026" {
+        track(:second :removed, mz[:mun.yz, :zel]);
+        guide(:linenum :removed,
+                mz[:mun.yz + 3.6km] << 0.7dt
+            --  mz[:mun.yz + 3.6km] << 3.0dt
+        );
+        label(:linenum :removed, mz[:mun.yz + 3.6km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 5026")
+        );
+    }
+
+    with link = "point.de.Zell-Oberfr" {
+        with layer = 1 marker(:statdot :removed, mz[:zel]);
+        slabel(:left :removed, mz[:zel] + (-1.5dt, -0.5dt),
+            vbox(:right:middle, "Zell", span(:light, "(Oberfr)"))
+        );
+    }
+}
+
+
+# DE 5027.  Selb-Plößberg Grenze - Oberkotzau
+with detail = 2 {
+    let so = path("d2.de.5027");
+
+    with link = "line.de.5027" {
+        track(:second :pax, so[:seg, :oko]);
+        line_badge(:pax, so[:sep + 5.7km] @ -5 >> 0.2dt, "5027");
+    }
+
+    with link = "point.de.Selb-Plößberg" {
+        with layer = 1 marker(:statdot :pax, so[:sep]);
+    }
+}
+
+
+# DE 5030.  Neusorg - Fichtelberg
+with detail = 2 {
+    let nf = path("d2.de.5030");
+
+    with link = "line.de.5030" {
+        track(:second :removed, nf[:nso.yf, :fic]);
+        guide(:linenum :removed,
+                nf[:fic - 7km] << 0.7dt
+            --  nf[:fic - 7km] << 3.0dt
+        );
+        label(:linenum :removed, nf[:fic - 7km] << 3.0dt,
+            hbox(:right:top :badgesize, "5030")
+        );
+    }
+
+    with link = "point.de.Fichtelberg" {
+        with layer = 1 marker(:statdot :removed, nf[:fic]);
+        slabel(:right :removed, nf[:fic] + (-5.0dt, -1.5dt), "Fichtelberg");
+    }
+}
+
+
+# DE 5031.  Wunsiedel-Holenbrunn - Leopoldsdorf
+with detail = 2 {
+    let hl = path("d2.de.5031");
+
+    with link = "line.de.5031" {
+        track(:second :removed, hl[:hol.yl, :leo]);
+        guide(:linenum :removed,
+                hl[:hol.yl + 5km] << 0.7dt
+            --  hl[:hol.yl + 5km] << 3.0dt
+        );
+        label(:linenum :removed, hl[:hol.yl + 5km] << 3.0dt,
+            hbox(:center:top :badgesize, "5031")
+        );
+    }
+
+    with link = "point.de.Leopoldsdorf" {
+        with layer = 1 marker(:statdot :removed, hl[:leo]);
+        slabel(:top :removed, hl[:leo] + (-2dt, -1.0dt), "Leopoldsdorf");
+    }
+}
+
+
+# DE 5032.  Wunsiedel-Holenbrunn - Selb Stadt
+with detail = 2 {
+    let hs = path("d2.de.5032");
+
+    with link = "line.de.5032" {
+        track(:second :removed, hs[:hol.ys, :sel]);
+        line_badge(:removed, hs[:hol.ys + 5.5km], "5032");
+    }
+}
+
+
+# DE 5033.  Selb-Plößberg - Selb Stadt
+with detail = 2 {
+    let ps = path("d2.de.5033");
+    
+    with link = "line.de.5033" {
+        track(:second :pax, ps[:sep.ys, :sel]);
+        guide(:linenum :pax,
+                ps[:sep.ys + 1.3km] << 0.7dt
+            --  ps[:sep.ys + 1.3km] << 3.0dt
+        );
+        label(:linenum :pax, ps[:sep.ys + 1.3km] << 3.0dt,
+            hbox(:left:middle :badgesize, " 5033")
+        );
+    }
+   
+    with link = "point.de.Selb-Stadt" {
+        with layer = 1 marker(:statdot :pax, ps[:sel]);
+        slabel(:left :pax, ps[:sel] + (-2.5dt, 0dt), "Selb");
+    }
+} 
+
+
+# DE 5034.  Selb Stadt - Ludwigsmühle
+with detail = 2 {
+    let sl = path("d2.de.5034");
+
+    with link = "line.de.5034" {
+        track(:second :removed, sl[:sel.yl, :lud]);
+    }
+
+    with link = "point.de.Ludwigsmühle" {
+        with layer = 1 marker(:statdot :removed, sl[:lud]);
+        slabel(:right :removed, sl[:lud] + (-2dt, 1dt),
+            vbox(:left:top, "Ludwigs-", "mühle")
+        );
+    }
+}
+
+
+# DE 5035.  Kirchenlamitz Ost - Weißenstadt
+with detail = 2 {
+    let kw = path("d2.de.5035");
+
+    with link = "line.de.5035" {
+        track(:second :removed, kw[:kio.yw, :wei]);
+        guide(:linenum :removed,
+                kw[:kio.yw + 5km] >> 0.7dt
+            --  kw[:kio.yw + 5km] >> 3.0dt
+        );
+        label(:linenum :removed, kw[:kio.yw + 5km] >> 3.0dt,
+            hbox(:center:bottom :badgesize, "5035")
+        );
+    }
+
+    with link = "point.de.Weißenstadt" {
+        with layer = 1 marker(:statdot :removed, kw[:wei]);
+        slabel(:bottom :removed, kw[:wei] + (1dt, 0.8dt), "Weißenstadt");
+    }
+}
+
+
+# DE 5040.  Wiesau (Oberpf) - Waldsassen Grenze
+with detail = 2 {
+    let ww = path("d2.de.5040");
+
+    with link = "line.de.5040" {
+        track(:station, ww[:wie.yw, :grb]);
+        track(:second :removed, ww[:grb, :wag]);
+        guide(:linenum :removed,
+                ww[:wie.yw + 5.5km] << 0.7dt
+            --  ww[:wie.yw + 5.5km] << 3.0dt
+        );
+        label(:linenum :removed, ww[:wie.yw + 5.5km] << 3.0dt,
+            hbox(:right:bottom :badgesize, "5040")
+        );
+    }
+
+    with link = "point.de.Waldsassen" {
+        with layer = 1 marker(:statdot :removed, ww[:wal]);
+        slabel(:right :removed, ww[:wal] + (1.8dt, 1.5dt), "Waldsassen");
+    }
+}
+
+
+# DE 5041.  Wiesau (Oberpf) - Bärnau (Oberpf)
+with detail = 2 {
+    let wb = path("d2.de.5041");
+
+    with link = "line.de.5041" {
+        track(:second :removed, wb[:wie.yb, :bar]);
+        line_badge(:removed, wb[:bar - 10.8km], "5041");
+    }
+
+    with link = "point.de.Bärnau-Oberpf" {
+        with layer = 1 marker(:statdot :removed, wb[:bar]);
+        slabel(:bottom :removed, wb[:bar] + (0dt, 1.0dt),
+            vbox(:top:center, "Bärnau", span(:light, "(Oberpf)"))
+        );
+    }
+}
+
+
+# DE 5042.  Reuth (b Erbendorf) - Erbendorf Nord
+with detail = 2 {
+    let re = path("d2.de.5042");
+
+    with link = "line.de.5042" {
+        track(:second :removed, re[:reu.ye, :ern]);
+        guide(:linenum :removed,
+                re[:reu.ye + 2.5km] << 0.7dt
+            --  re[:reu.ye + 2.5km] << 3.0dt
+        );
+        label(:linenum :removed, re[:reu.ye + 2.5km] << 3.0dt,
+            hbox(:center:top :badgesize, "5042")
+        );
+    }
+
+    with link = "point.de.Erbendorf-Nord" {
+        with layer = 1 marker(:statdot :removed, re[:ern]);
+        slabel(:top :removed, re[:ern] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Erbendorf", "Nord")
+        );
+    }
+}
+
+
+# DE 5050.  Weiden (Oberpf) - Oberkotzau
+with detail = 2 {
+    let wo = path("d2.de.5050");
+
+    with link = "line.de.5050" {
+        track(:first :double :pax, wo[:wei, :oko.ym]);
+        line_badge(:pax, wo[:nst + 8km] @ 21 << 0.2dt, "5050");
+        line_badge(:pax, wo[:kio - 6.5km] @ 5 >> 0.4dt, "5050");
+    }
+
+    with link = "point.de.Weiden-Oberpf" {
+        with layer = 1 marker(:statdot :pax, wo[:wei]);
+        slabel(:right :pax, wo[:wei] + (1.8dt, -1.3dt),
+            vbox(:top:left, "Weiden", span(:light, "(Oberpf)"))
+        );
+    }
+
+    with link = "point.de.Neustadt-Waldnaab" {
+        with layer = 1 marker(:statdot, wo[:nst]);
+        slabel(:left, wo[:nst] + (-1.8dt, 1.8dt),
+            vbox(:right:bottom, "Neustadt", span(:light, "(Waldnaab)"))
+        );
+    }
+
+    with link = "point.de.Reuth-Erbendorf" {
+        with layer = 1 marker(:statdot :pax, wo[:reu]);
+        slabel(:right :pax, wo[:reu] + (1.8dt, -2.0dt),
+            vbox(:left:top, "Reuth", span(:light, "    (b Erbendorf)"))
+        );
+    }
+
+    with link = "point.de.Wiesau-Oberpf" {
+        with layer = 1 marker(:statdot :pax, wo[:wie]);
+        slabel(:right :pax, wo[:wie] + (1.8dt, 0.5dt),
+            hbox(:left:base, "Wiesau ", span(:light, "(Oberpf)"))
+        );
+    }
+
+    with link = "point.de.Marktredwitz" {
+        with layer = 1 marker(:statdot :pax, wo[:mar]);
+        slabel(:right :pax, wo[:mar] + (2.8km, 0.8dt), "Marktredwitz");
+    }
+
+    with link = "point.de.Wunsiedel-Holenbrunn" {
+        with layer = 1 marker(:statdot :pax, wo[:hol]);
+        slabel(:right :pax, wo[:hol] + (2.0dt, 1.5dt),
+            "Wunsiedel-Holenbrunn"
+        );
+    }
+
+    with link = "point.de.Kirchenlamitz-Ost" {
+        with layer = 1 marker(:statdot :pax, wo[:kio]);
+        slabel(:right :pax, wo[:kio] + (-0.5dt, 0.5dt),
+            vbox(:left:bottom, "Kirchen-", " lamitz", "   Ost")
+        );
+    }
+}
+
+
+# DE 5051.  Weiden (Oberpf) - Neuenmarkt-Wirsberg
+with detail = 2 {
+    let wn = path("d2.de.5051");
+
+    with link = "line.de.5051" {
+        track(:first :pax, wn[:wei.yk, :kir.yw]);
+        line_badge(:pax, wn[:pre - 6km], "5051");
+
+        track(:first :pax, wn[:kir.yb, :nma.yw]);
+        guide(:linenum :pax,
+                wn[:kre - 7.0km] << 0.7dt
+            --  wn[:kre - 7.0km] << 3.0dt
+        );
+        label(:linenum :pax, wn[:kre - 7.0km] << 3.0dt + (-0.4dt, 0dt),
+            hbox(:center:top :badgesize, "5051")
+        );
+    }
+
+    with link = "point.de.Pressath" {
+        with layer = 1 marker(:statdot :pax, wn[:pre]);
+        slabel(:right :pax, wn[:pre] + (1.5dt, 0dt), "Pressath");
+    }
+}
+
+
+# DE 5052.  Pressath - Kirchenthumbach
+with detail = 2 {
+    let pk = path("d2.de.5052");
+
+    with link = "line.de.5052" {
+        track(:second, pk[:pre.yk, :gra]);
+        track(:second :removed, pk[:gra, :kir]);
+        line_badge(:removed, pk[:gra + 3km], "5052");
+    }
+
+    with link = "point.de.Grafenwöhr" {
+        with layer = 1 marker(:statdot, pk[:gra]);
+        slabel(:left, pk[:gra] + (-1.5dt, 1.0dt),
+            hbox(:right:top, "Grafenwöhr")
+        );
+    }
+
+    with link = "point.de.Kirchenthumbach" {
+        with layer = 1 marker(:statdot :removed, pk[:kir]);
+        slabel(:left :removed, pk[:kir] + (-1.3dt, 0dt),
+            vbox(:right:middle, "Kirchen-", "thumbach ")
+        );
+    }
+}
+
+
+# DE 5053.  Grafenwöhr - Grafenwöhr Lager
+with detail = 2 {
+    let gl = path("d2.de.5053");
+
+    with link = "line.de.5053" {
+        track(:station, gl[:gra, :grl]);
+    }
+
+    with link = "point.de.Grafenwöhr-Lager" {
+        with layer = 1 marker(:statdot, gl[:grl]);
+    }
+}
+
+
+# DE 5054.  Neustadt (Waldnaab) - Eslarn
+with detail = 2 {
+    let ne = path("d2.de.5054");
+
+    with link = "line.de.5054" {
+        track(:second :removed, ne[:nst, :esl]);
+        guide(:linenum :removed,
+                ne[:nst + 5.8km] << 0.7dt
+            --  ne[:nst + 5.8km] << 3.0dt
+        );
+        label(:linenum :removed, ne[:nst + 5.8km] << 3.0dt,
+            hbox(:center:bottom :badgesize, "5054")
+        );
+        line_badge(:removed, ne[:esl - 11km] @ -10 >> 0.2dt, "5054");
+    }
+
+    with link = "point.de.Floß" {
+        with layer = 1 marker(:statdot :removed, ne[:flo]);
+        slabel(:left :removed, ne[:flo] + (0dt, 0.8dt),
+            hbox(:right:top, "Floh")
+        );
+    }
+
+    with link = "point.de.Eslarn" {
+        with layer = 1 marker(:statdot :removed, ne[:esl]);
+        slabel(:bottom :removed, ne[:esl] + (0dt, 1.0dt), "Eslarn");
+    }
+}
+
+
+# DE 5055.  Floß - Flossenbürg
+with detail = 2 {
+    let ff = path("d2.de.5055");
+
+    with link = "line.de.5055" {
+        track(:second :removed, ff[:flo.yf, :flb]);
+        guide(:linenum :removed,
+                ff[:flb - 1.9km] << 0.7dt
+            --  ff[:flb - 1.9km] << 3.0dt
+        );
+        label(:linenum :removed, ff[:flb - 1.9km] << 3.0dt,
+            hbox(:center:bottom :badgesize, "5055")
+        );
+    }
+
+    with link = "point.de.Flossenbürg" {
+        with layer = 1 marker(:statdot :removed, ff[:flb]);
+        slabel(:right :removed, ff[:flb] + (1.8dt, 0.8dt), "Flossenbürg");
+    }
+}
+
+
+# DE 5060.  Neukirchen (b Sulzbach-Rosenberg) - Weiden (Oberpf)
+with detail = 2 {
+    let nw = path("d2.de.5060");
+
+    with link = "line.de.5060" {
+        track(:first :pax, nw[:nki.yw, :wei.yn]);
+        line_badge(:pax, nw[:vil + 6.5km], "5060");
+    }
+
+    with link = "point.de.Vilseck" {
+        with layer = 1 marker(:statdot :pax, nw[:vil]);
+        slabel(:right :pax, nw[:vil] + (1.5dt, 1.3dt), "Vilseck");
+    }
+}
+
+
+# DE 5061.  Vilseck - Vilseck Lager
+with detail = 2 {
+    let vv = path("d2.de.5061");
+
+    with link = "line.de.5061" {
+        track(:station, vv[:vil.yl, :vla]);
+    }
+
+    with link = "point.de.Vilseck-Lager" {
+        with layer = 1 marker(:statdot, vv[:vla]);
+        slabel(:top, vv[:vla] + (0dt, -1.3dt),
+            vbox(:center:bottom, "Vilseck", "Lager")
+        );
+    }
+}
+
+
+# DE 5062.  Amberg - Schnaittenbach
+with detail = 2 {
+    let as = path("d2.de.5062");
+
+    with link = "line.de.5062" {
+        track(:second, as[:amb.ys, :sna]);
+        guide(:linenum,
+                as[:sna - 6.9km] >> 0.7dt
+            --  as[:sna - 6.9km] >> 3.0dt
+        );
+        label(:linenum, as[:sna - 6.9km] >> 3.0dt,
+            hbox(:center:top, "5062")
+        );
+    }
+
+    with link = "point.de.Schnaittenbach" {
+        with layer = 1 marker(:statdot, as[:sna]);
+        slabel(:top, as[:sna] + (0dt, -1.0dt), "Schnaittenbach");
+    }
+}
+
+
+# DE 5063.  Amberg - Schmidmühlen
+with detail = 2 {
+    let as = path("d2.de.5063");
+
+    with link = "line.de.5063" {
+        track(:second :removed, as[:amb.yd, :smi]);
+        guide(:linenum :removed,
+                as[:smi - 10km] >> 0.7dt
+            --  as[:smi - 10km] >> 3.0dt
+        );
+        label(:linenum :removed, as[:smi - 10km] >> 3.0dt,
+            hbox(:right:middle, "5063 ")
+        );
+    }
+
+    with link = "point.de.Drahthammer" {
+        with layer = 1 marker(:statdot :removed, as[:dra]);
+        slabel(:left :removed, as[:dra] + (-1.5dt, -0.3dt), "Drahthammer");
+    }
+
+    with link = "point.de.Schmidmühlen" {
+        with layer = 1 marker(:statdot :removed, as[:smi]);
+        slabel(:left :removed, as[:smi] + (-1.8dt, 1.0dt), "Schmidmühlen");
+    }
+}
+
+
+# DE 5064.  Drahthammer - Lauterhofen
+with detail = 2 {
+    let dl = path("d2.de.5064");
+
+    with link = "line.de.5064" {
+        track(:second :removed, dl[:dra.yl, :lau]);
+        guide(:linenum :removed,
+                dl[:dra.yl + 11.2km] >> 0.7dt
+            --  dl[:dra.yl + 11.2km] >> 3.0dt
+        );
+        label(:linenum :removed, dl[:dra.yl + 11.2km] >> 3.0dt,
+            hbox(:right:bottom, "5064")
+        );
+    }
+
+    with link = "point.de.Lauterhofen" {
+        with layer = 1 marker(:statdot :removed, dl[:lau]);
+        slabel(:bottom :removed, dl[:lau] + (0dt, 1.0dt), "Lauterhofen");
+    }
+}
+
