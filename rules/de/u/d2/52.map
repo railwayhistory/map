@@ -1,0 +1,28 @@
+# DE 5240.  Schweinfurt Hbf - Meiningen
+with detail = 2 {
+    let sm = path("d2.de.u.5240");
+
+    with link = "line.de.5240" {
+        track(:first :pax, sm[:ren, :mei.ys]);
+        guide(:linenum :pax,
+                sm[:rit - 4km] >> 0.7dt
+            --  sm[:rit - 4km] >> 3.0dt
+        );
+        label(:linenum :pax, sm[:rit - 4km] >> 3.0dt + (0dt, -0.2dt),
+            hbox(:left:middle, " 5240")
+        );
+    }
+
+    with link = "point.de.Rentwertshausen" {
+        with layer = 1 marker(:statdot :pax, sm[:ren]);
+        slabel(:left :pax, sm[:ren] + (0dt, -1.0dt),
+            vbox(:right:bottom, "Rentwerts-    ", "hausen")
+        );
+    }
+
+    with link = "point.de.Ritschenhausen" {
+        with layer = 1 marker(:statdot :pax, sm[:rit]);
+        slabel(:left :pax, sm[:rit] + (-1.8dt, 1.3dt), "Ritschenhausen");
+    }
+}
+
