@@ -1,0 +1,78 @@
+# DE 5320.  Treuchtlingen - Nürnberg Hbf
+with detail = 2 {
+    let tn = path("d2.de.5320");
+
+    with link = "line.de.5320" {
+        track(:first :double :cat:ac15 :pax, tn[:tre, :nur]);
+        line_badge(:cat:ac15 :pax, tn[:tre + 7.5km], "5320");
+    }
+
+    with link = "point.de.Pleinfeld" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tn[:ple]);
+        slabel(:right :cat:ac15 :pax, tn[:ple] + (0.8dt, 0.5dt),
+            hbox(:left:top, "Pleinfeld")
+        );
+    }
+
+    with link = "point.de.Roth" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tn[:rot]);
+        slabel(:left :cat:ac15 :pax, tn[:rot] + (-2.0dt, 0dt), "Roth");
+    }
+}
+
+
+# DE 5321.  Treuchtlingen - Würzburg Hbf
+with detail = 2 {
+    let tw = path("d2.de.5321");
+
+    with link = "line.de.5321" {
+        track(:first :double :cat:ac15 :pax, tw[:tre.yn, :wur]);
+        line_badge(:cat:ac15 :pax, tw[:gun - 10.5km], "5321");
+        line_badge(:cat:ac15 :pax, tw[:ste - 12km] @ 8 >> 0.1dt, "5321");
+        guide(:linenum :cat:ac15 :pax,
+                tw[:och + 8km] << 1dt
+            --  tw[:och + 8km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, tw[:och + 8km] << 3dt,
+            hbox(:right:top, "5321")
+        );
+    }
+
+    with link = "point.de.Gunzenhausen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tw[:gun]);
+        slabel(:left :cat:ac15 :pax, tw[:gun] + (-2.0dt, 0dt),
+            "Gunzenhausen"
+        );
+    }
+
+    with link = "point.de.Ansbach" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tw[:ans]);
+        slabel(:right :cat:ac15 :pax, tw[:ans] + (-1.0dt, -1.8dt), "Ansbach");
+    }
+
+    with link = "point.de.Steinach-Rothenburg-Tauber" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tw[:ste]);
+        slabel(:left :cat:ac15 :pax, tw[:ste] + (-2.0dt, 0.5dt),
+            vbox(:right:bottom, "Steinach ", span(:light, "(b R.o.d.T.)"))
+        );
+    }
+
+    with link = "point.de.Ochsenfurt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tw[:och]);
+        slabel(:right :cat:ac15 :pax, tw[:och] + (-2.5dt, 1.0dt),
+            vbox(:left:top, "Ochsen-", " furt")
+        );
+    }
+}
+
+
+# DE 5330.  Nördlingen - Pleinfeld
+with detail = 2 {
+    let np = path("d2.de.n.5330");
+
+    with link = "line.de.5330" {
+        track(:second :pax, np[:gun.yp, :ple.yg]);
+        line_badge(:pax, np[:gun.yp + 4.5km], "5330");
+    }
+}
+
