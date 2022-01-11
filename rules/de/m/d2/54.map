@@ -1,0 +1,437 @@
+# DE 5400.  Kempten (Allgäu) Hbf - Neu Ulm
+with detail = 2 {
+    let ku = path("d2.de.5400");
+
+    with link = "line.de.5400" {
+        track(:first :pax, ku[:kem.ym, :mem.yl]);
+        line_badge(:pax, ku[:mem.yl - 12km], "5400");
+        track(:first :pax, ku[:mem.yb, :fin]);
+        line_badge(:pax, ku[:sen - 8km], "5400");
+        track(:first :double :pax, ku[:fin, :nul.ym]);
+    }
+
+    with link = "point.de.Memmingen" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ku[:mem]);
+        slabel(:left :cat:ac15 :pax, ku[:mem.yb] + (-2.0dt, -1.5dt),
+            "Memmingen"
+        );
+    }
+
+    with link = "point.de.Kellmünz" {
+        with layer = 1 marker(:statdot :pax, ku[:kel]);
+        slabel(:left :pax, ku[:kel] + (-1.8dt, 1.3dt), "Kellmünz");
+    }
+
+    with link = "point.de.Senden" {
+        with layer = 1 marker(:statdot :pax, ku[:sen]);
+        slabel(:left :pax, ku[:sen] + (-1.8dt, 1.3dt), "Senden");
+    }
+}
+
+
+# DE 5401.  Kempten (Allgäu) Hbf - Isny
+with detail = 2 {
+    let ki = path("d2.de.5401");
+
+    with link = "line.de.5401" {
+        track(:second :removed, ki[:kem.yi, :isn.yk]);
+        guide(:linenum :removed,
+                ki[:kem.yi + 22km] << 0.7dt
+            --  ki[:kem.yi + 22km] << 3.0dt
+        );
+        label(:linenum :removed, ki[:kem.yi + 22km] << 3.0dt,
+            hbox(:center:top, "5401")
+        );
+    }
+}
+
+
+# DE 5402.  Immenstadt - Oberstdorf
+with detail = 2 {
+    let io = path("d2.de.5402");
+
+    with link = "line.de.5402" {
+        track(:second :pax, io[:imm.yo, :obe]);
+        guide(:linenum :pax,
+                io[:son + 5.75km] >> 0.7dt
+            --  io[:son + 5.75km] >> 3.0dt
+        );
+        label(:linenum :pax, io[:son + 5.75km] >> 3.0dt,
+            hbox(:right:middle, "5402 ")
+        );
+    }
+
+    with link = "point.de.Sonthofen" {
+        with layer = 1 marker(:statdot :pax, io[:son]);
+        slabel(:left :pax, io[:son] + (-1.8dt, 0.8dt), "Sonthofen");
+    }
+
+    with link = "point.de.Oberstdorf" {
+        with layer = 1 marker(:statdot :pax, io[:obe]);
+        slabel(:bottom :pax, io[:obe] + (0dt, 0.8dt), "Oberstdorf");
+    }
+}
+
+
+# DE 5403.  Kempten (Allgäu) Hbf - Pfronten-Steinach Grenze
+with detail = 2 {
+    let kp = path("d2.de.5403");
+
+    with link = "line.de.5403" {
+        track(:second :pax, kp[:kem.yp, :pfg]);
+        line_badge(:pax, kp[:pfs - 8km] @ -10 << 0.4dt, "5403");
+    }
+
+    with link = "point.de.Pfronten-Steinach" {
+        with layer = 1 marker(:statdot :pax, kp[:pfs]);
+        slabel(:left :pax, kp[:pfs] + (-1.8dt, 1.3dt), "Pfronten-Steinach");
+    }
+
+    with link = "point.int.Pfronten-Steinach-Schönbichl-Tirol" {
+        marker(:refdt :right, kp[:pfg]);
+        marker(:refdt :left, kp[:pfg]);
+    }
+}
+
+
+# DE 5410.  Kellmünz - Babenhausen (Schwab)
+with detail = 2 {
+    let kb = path("d2.de.5410");
+
+    with link = "line.de.5410" {
+        track(:second :removed, kb[:kel.yb, :bab]);
+        line_badge(:removed, kb[:kel.yb + 4km], "5410");
+    }
+
+    with link = "point.de.Babenhausen-Schwab" {
+        with layer = 1 marker(:statdot :removed, kb[:bab]);
+        slabel(:top :removed, kb[:bab] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Babenhausen", span(:light, "(Schwab)"))
+        );
+    }
+}
+
+
+# DE 5411.  Memmingen - Legau (Allgäu)
+with detail = 2 {
+    let ml = path("d2.de.5411");
+
+    with link = "line.de.5411" {
+        track(:second :removed, ml[:mem.ys, :leg]);
+        line_badge(:removed, ml[:mem.ys + 6km] >> 0.1dt, "5411");
+    }
+
+    with link = "point.de.Legau-Allgäu" {
+        with layer = 1 marker(:statdot :removed, ml[:leg]);
+        slabel(:right :removed, ml[:leg] + (1.5dt, 0dt),
+            vbox(:left:middle, "Legau", span(:light, "(Allgäu)"))
+        );
+    }
+}
+
+
+# DE 5412.  Ungerhausen - Ottobeuren
+with detail = 2 {
+    let uo = path("d2.de.5412");
+
+    with link = "line.de.5412" {
+        track(:second :removed, uo[:ung.yo, :ott]);
+        guide(:linenum :removed,
+                uo[:ott - 4km] << 0.7dt
+            --  uo[:ott - 4km] << 3.0dt
+        );
+        label(:linenum :removed, uo[:ott - 4km] << 3.0dt,
+            hbox(:left :middle, " 5412")
+        );
+    }
+
+    with link = "point.de.Ottobeuren" {
+        with layer = 1 marker(:statdot :removed, uo[:ott]);
+        slabel(:right :removed, uo[:ott] + (-4dt, 0.8dt),
+            hbox(:left:top, "Ottobeuren")
+        );
+    }
+}
+
+
+# DE 5420.  Lindau Hbf - Lindau-Reutin Grenze
+with detail = 2 {
+    let lg = path("d2.de.5420");
+
+    with link = "line.de.5420" {
+        track(:first :double :cat:ac15 :pax, lg[:lin.yr, :lig]);
+        guide(:linenum :cat:ac15 :pax,
+                lg[:reu + 1.5km] << 1dt
+            --  lg[:reu + 1.5km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, lg[:reu + 1.5km] << 3dt,
+            hbox(:left:bottom, "5420")
+        );
+    }
+
+    with link = "point.de.Lindau-Reutin" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, lg[:reu]);
+    }
+
+    with link = "point.int.Lindau-Reutin-Lochau-Hörbranz" {
+        marker(:refdt :cat:ac15 :right, lg[:lig]);
+        marker(:refdt :cat:ac15 :left, lg[:lig]);
+    }
+}
+
+
+# DE 5430.  Röthenbach (Allgäu) - Scheidegg
+with detail = 2 {
+    let rs = path("d2.de.5430");
+
+    with link = "line.de.5430" {
+        track(:second :removed, rs[:rot.ys, :sei]);
+        line_badge(:removed, rs[:rot.ys + 5km] @ -18, "5430");
+    }
+
+    with link = "point.de.Scheidegg" {
+        with layer = 1 marker(:statdot :removed, rs[:sei]);
+        slabel(:bottom :removed, rs[:sei] + (0dt, 1.0dt),
+            vbox(:center:top, "Scheid-", "egg")
+        );
+    }
+}
+
+
+# DE 5431.  Röthenbach (Allgäu) - Weiler (Allgäu)
+with detail = 2 {
+    let rw = path("d2.de.5431");
+
+    with link = "line.de.5431" {
+        track(:second :removed, rw[:rot.yw, :wei]);
+        guide(:linenum :removed,
+                rw[:wei - 2.5km] << 0.7dt
+            --  rw[:wei - 2.8km] << 3.0dt
+        );
+        label(:linenum :removed, rw[:wei - 2.8km] << 3.0dt + (0dt, 0.2dt),
+            hbox(:left:middle, " 5431")
+        );
+    }
+
+    with link = "point.de.Weiler-Allgäu" {
+        with layer = 1 marker(:statdot :removed, rw[:wei]);
+        slabel(:right :removed, rw[:wei] + (-0.5dt, 1.0dt),
+            vbox(:left:top, "Weiler", span(:light, "(Allgäu)"))
+        );
+    }
+}
+
+
+# DE 5440.  Biessenhofen - Marktoberdorf
+with detail = 2 {
+    let bm = path("d2.de.5440");
+
+    with link = "line.de.5440" {
+        track(:second :pax, bm[:bie.ym, :mar]);
+        guide(:linenum :pax,
+                bm[:bie.ym + 2km] << 0.7dt
+            --  bm[:bie.ym + 2km] << 3.0dt
+        );
+        label(:linenum :pax, bm[:bie.ym + 2km] << 3.0dt,
+            hbox(:left:middle, " 5440")
+        );
+    }
+
+    with link = "point.de.Marktoberdorf" {
+        with layer = 1 marker(:statdot :pax, bm[:mar]);
+        slabel(:right :pax, bm[:mar] + (1.8dt, 0.8dt), "Marktoberdorf");
+    }
+}
+
+
+# DE 5441.  Marktoberdorf - Füssen
+with detail = 2 {
+    let mf = path("d2.de.5441");
+
+    with link = "line.de.5441" {
+        track(:second :pax, mf[:mar, :fus]);
+        guide(:linenum :pax,
+                mf[:mar + 13km] >> 0.7dt
+            --  mf[:mar + 13km] >> 3.0dt
+        );
+        label(:linenum :pax, mf[:mar + 13km] >> 3.0dt,
+            hbox(:right:middle, "5441 ")
+        );
+    }
+
+    with link = "point.de.Füssen" {
+        with layer = 1 marker(:statdot :pax, mf[:fus]);
+        slabel(:right :pax, mf[:fus] + (1.5dt, 0.8dt), "Füssen");
+    }
+}
+
+
+# DE 5442.  Marktoberdorf - Lechbruck
+with detail = 2 {
+    let ml = path("d2.de.5442");
+
+    with link = "line.de.5442" {
+        track(:second :removed, ml[:mar, :lec]);
+        line_badge(:removed, ml[:mar + 12km] @ -10 >> 0.5dt, "5442");
+    }
+
+    with link = "point.de.Lechbruck" {
+        with layer = 1 marker(:statdot :removed, ml[:lec]);
+        slabel(:top :removed, ml[:lec] + (0dt, -0.8dt), "Lechbruck");
+    }
+}
+
+
+# DE 5443.  Kaufbeuren - Schongau
+with detail = 2 {
+    let ks = path("d2.de.5443");
+
+    with link = "line.de.5443" {
+        track(:second :removed, ks[:kau.ys, :son.yk]);
+        guide(:linenum :removed,
+                ks[:kau.ys + 10.5km] << 0.7dt
+            --  ks[:kau.ys + 10.5km] << 3.0dt
+        );
+        label(:linenum :removed, ks[:kau.ys + 10.5km] << 3.0dt,
+            hbox(:left:bottom, "5443")
+        );
+    }
+}
+
+
+# DE 5444.  Schongau - Peißenberg
+with detail = 2 {
+    let sp = path("d2.de.5444");
+
+    with link = "line.de.5444" {
+        track(:second :pax, sp[:son, :pei]);
+        guide(:linenum :pax,
+                sp[:son + 6.5km] >> 0.7dt
+            --  sp[:son + 6.5km] >> 3.0dt
+        );
+        label(:linenum :pax, sp[:son + 6.5km] >> 3.0dt,
+            hbox(:center:top, "5444")
+        );
+    }
+}
+
+
+# DE 5450.  Weilheim (Oberbay) - Peißenberg
+with detail = 2 {
+    let wp = path("d2.de.5450");
+
+    with link = "line.de.5450" {
+        track(:second :pax, wp[:wei.yp, :pei]);
+        guide(:linenum :pax,
+                wp[:wei.yp + 2.5km] >> 0.7dt
+            --  wp[:wei.yp + 2.5km] >> 3.0dt
+        );
+        label(:linenum :pax, wp[:wei.yp + 2.5km] >> 3.0dt,
+            hbox(:right:bottom, "5450")
+        );
+    }
+
+    with link = "point.de.Peißenberg" {
+        with layer = 1 marker(:statdot :pax, wp[:pei]);
+        slabel(:left :pax, wp[:pei] + (-1.5dt, 0dt),
+            vbox(:right:bottom, "Peißen-", "berg")
+        );
+    }
+}
+
+
+# DE 5451.  Murnau - Oberammergau
+with detail = 2 {
+    let mo = path("d2.de.5451");
+
+    with link = "line.de.5451" {
+        track(:second :cat:ac15 :pax, mo[:mur.yo, :oam]);
+        line_badge(:cat:ac15 :pax, mo[:mur.yo + 10.2km] @ 8, "5451");
+    }
+
+    with link = "point.de.Oberammergau" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mo[:oam]);
+        slabel(:left :cat:ac15 :pax, mo[:oam] + (4dt, 0.8dt),
+            vbox(:right:top, "Oberammergau")
+        );
+    }
+}
+
+
+# DE 5452.  Garmisch-Partenkirchen - Griesen (Oberbay) Grenze
+with detail = 2 {
+    let gg = path("d2.de.5452");
+
+    with link = "line.de.5452" {
+        track(:second :cat:ac15 :pax, gg[:gar.yg, :grg]);
+        guide(:linenum :cat:ac15 :pax,
+                gg[:gar.yg + 7km] >> 0.7dt
+            --  gg[:gar.yg + 7km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, gg[:gar.yg + 7km] >> 3.0dt,
+            hbox(:center:bottom, "5452")
+        );
+    }
+
+    with link = "point.de.Griesen-Oberbay" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, gg[:gri]);
+        slabel(:left :cat:ac15 :pax, gg[:gri] + (1.0dt, -1.0dt),
+            vbox(:right:bottom, "Griesen", span(:light, "(Oberbay)"))
+        );
+    }
+}
+
+
+# DE 5453.  Tutzing - Kochel
+with detail = 2 {
+    let tk = path("d2.de.5453");
+
+    with link = "line.de.5453" {
+        track(:first :cat:ac15 :pax, tk[:tut.yk, :bic]);
+        guide(:linenum :cat:ac15 :pax,
+                tk[:tut.yk + 15km] >> 0.7dt
+            --  tk[:tut.yk + 15km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, tk[:tut.yk + 15km] >> 3.0dt,
+            hbox(:right:middle, "5453 ")
+        );
+        track(:second :cat:ac15 :pax, tk[:bic, :koc]);
+        guide(:linenum :cat:ac15 :pax,
+                tk[:bic + 4.2km] << 0.7dt
+            --  tk[:bic + 4.2km] << 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, tk[:bic + 4.2km] << 3.0dt,
+            hbox(:left:middle, " 5453")
+        );
+    }
+
+    with link = "point.de.Penzberg-Pbf" {
+        with layer = 2 marker(:statdot :cat:ac15 :pax, tk[:pen]);
+        slabel(:left :cat:ac15 :pax, tk[:pen] + (0dt, 0.8dt),
+            hbox(:right:top, "Penzberg")
+        );
+    }
+
+    with link = "point.de.Bichl" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tk[:bic]);
+        slabel(:right :cat:ac15 :pax, tk[:bic] + (1.8dt, 1.0dt), "Bichl");
+    }
+
+    with link = "point.de.Kochel" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tk[:koc]);
+        slabel(:bottom :cat:ac15 :pax, tk[:koc] + (0dt, 0.8dt), "Kochel");
+    }
+}
+
+
+# DE 5454.  Penzberg Abzw - Penzberg Gbf
+with detail = 2 {
+    let pp = path("d2.de.5454");
+
+    with link = "line.de.5454" {
+        track(:second :removed, pp[:pea, :peg]);
+    }
+
+    with layer = 1 marker(:statdot :removed, pp[:peg]);
+}
+
