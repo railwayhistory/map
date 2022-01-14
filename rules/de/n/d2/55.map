@@ -1,0 +1,31 @@
+# DE 5500.  München Hbf - Regensburg Hbf
+with detail = 2 {
+    let mr = path("d2.de.n.5500");
+
+    with link = "line.de.5500" {
+        track(:first :double :cat:ac15 :pax, mr[:egg, :reg]);
+        guide(:linenum :cat:ac15 :pax,
+                mr[:egg + 5km] << 1dt
+            --  mr[:egg + 5km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, mr[:egg + 5km] << 3dt,
+            hbox(:right:middle, "5500 ")
+        );
+    }
+
+    with link = "point.de.Obertraubling" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:otr]);
+        slabel(:right :cat:ac15 :pax, mr[:otr] + (1.8dt, 0dt),
+            "Obertraubling"
+        );
+    }
+
+    with link = "point.de.Regensburg-Ost" {
+        with layer = 1 marker(:statdot :cat:ac15, mr[:reo]);
+    }
+
+    with link = "point.de.Regensburg-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:reg]);
+    }
+}
+
