@@ -1,0 +1,38 @@
+# DE 5634.  Landshut (Bay) Hbf - Bayerisch Eisenstein Grenze
+with detail = 2 {
+    let le = path("d2.de.n.5634");
+
+    with link = "line.de.5634" {
+        track(:first :cat:ac15 :pax, le[:lau, :pla.yl]);
+        track(:second :pax, le[:pla.ye, :beg]);
+
+        line_badge(:cat:ac15 :pax, le[:pla.yl - 6.3km] @ -5 << 0.4dt, "5634");
+        line_badge(:pax, le[:got + 12km] @ 10, "5634");
+        line_badge(:pax, le[:zwi + 7.5km] @ 22, "5634");
+    }
+
+    with link = "point.de.Deggendorf-Hbf" {
+        with layer = 1 marker(:statdot :pax, le[:deg]);
+        slabel(:right :pax, le[:deg] + (1.8dt, 0.8dt), "Deggendorf Hbf");
+    }
+
+    with link = "point.de.Gotteszell" {
+        with layer = 1 marker(:statdot :pax, le[:got]);
+        slabel(:left :pax, le[:got] + (-1.8dt, 0.8dt), "Gotteszell");
+    }
+
+    with link = "point.de.Zwiesel-Bay" {
+        with layer = 1 marker(:statdot :pax, le[:zwi]);
+        slabel(:right :pax, le[:zwi] + (1.8dt, 0.8dt),
+            hbox(:left:base, "Zwiesel ", span(:light, "(Bay)"))
+        );
+    }
+
+    with link = "point.de.Bayerisch-Eisenstein" {
+        with layer = 1 marker(:statdot :pax, le[:bei]);
+        slabel(:left :pax, le[:bei] + (-1.8dt, -0.3dt),
+            "Bayerisch Eisenstein"
+        );
+    }
+}
+

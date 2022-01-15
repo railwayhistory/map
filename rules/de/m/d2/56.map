@@ -1,0 +1,358 @@
+# DE 5600.  München Ost Pbf - Simbach (Inn) Grenze
+with detail = 2 {
+    let ms = path("d2.de.5600");
+
+    with link = "line.de.5600" {
+        track(:first :double :cat:ac15 :pax, ms[:mor.ym, :msw]);
+        track(:first :pax, ms[:msw, :amp]);
+        track(:first :double :pax, ms[:amp, :muh]);
+        track(:first :pax, ms[:muh, :sig]);
+
+        line_badge(:cat:ac15 :pax, ms[:msw - 6km], "5600");
+        guide(:linenum :pax,
+                ms[:amp - 5km] >> 0.7dt
+            --  ms[:amp - 5km] >> 3.0dt
+        );
+        label(:linenum :pax, ms[:amp - 5km] >> 3.0dt + (-0.2dt, 0dt),
+            hbox(:center:top, "5600")
+        );
+        guide(:linenum :pax,
+                ms[:not + 9.5km] << 0.7dt
+            --  ms[:not + 9.5km] << 3.0dt
+        );
+        label(:linenum :pax, ms[:not + 9.5km] << 3.0dt,
+            hbox(:center:bottom, "5600")
+        );
+    }
+
+    with link = "point.de.Feldkirchen-München" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ms[:fel]);
+    }
+
+    with link = "point.de.Markt-Schwaben" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ms[:msw]);
+        slabel(:right :cat:ac15 :pax, ms[:msw] + (0.8dt, 0.3dt),
+            hbox(:left:top, "Markt Schwaben")
+        );
+    }
+
+    with link = "point.de.Thann-Matzbach" {
+        with layer = 1 marker(:statdot :pax, ms[:tha]);
+        slabel(:right :pax, ms[:tha] + (-2dt, -1.0dt),
+            vbox(:left:bottom, " Thann-", "Matzbach")
+        );
+    }
+
+    with link = "point.de.Dorfen-Bahnhof" {
+        with layer = 1 marker(:statdot :pax, ms[:dor]);
+        slabel(:right :pax, ms[:dor] + (-1dt, 1.0dt),
+            vbox(:left:top, "Dorfen", "Bahnhof")
+        );
+    }
+
+    with link = "point.de.Mühldorf-Oberbay" {
+        with layer = 1 marker(:statdot :pax, ms[:muh]);
+        slabel(:left :pax, ms[:muh] + (0.5dt, -2.0dt),
+            vbox(:right:bottom, "Mühldorf", span(:light, "(Oberbay)"))
+        );
+    }
+
+    with link = "point.de.Neuötting" {
+        with layer = 1 marker(:statdot :pax, ms[:not]);
+        slabel(:left :pax, ms[:not] + (1.8dt, -1.8dt), "Neuötting");
+    }
+
+    with link = "point.de.Simbach-Inn" {
+        with layer = 1 marker(:statdot :pax, ms[:sim]);
+        slabel(:left :pax, ms[:sim] + (1dt, -1.0dt),
+            vbox(:right:bottom, "Simbach", span(:light, "(Inn)"))
+        );
+    }
+}
+
+
+# DE 5601.  Markt Schwaben - Erding
+with detail = 2 {
+    let me = path("d2.de.5601");
+
+    with link = "line.de.5601" {
+        track(:first :cat:ac15 :pax, me[:msw.ye, :erd]);
+        guide(:linenum :cat:ac15 :pax,
+                me[:erd - 5km] << 0.7dt
+            --  me[:erd - 5km] << 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, me[:erd - 5km] << 3.0dt + (0dt, -0.1dt),
+            hbox(:right:middle, "5601 ")
+        );
+    }
+
+    with link = "point.de.Erding" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, me[:erd]);
+        slabel(:right :cat:ac15 :pax, me[:erd] + (1.5dt, 1.0dt), "Erding");
+    }
+}
+
+
+# DE 5602.  München-Johanneskirchen Nordost - Feldkirchen (b München)
+with detail = 2 {
+    with link = "line.de.5602" {
+        track(:first :removed, path("d2.de.5602")[:joh.ym, :fel.yn]);
+    }
+}
+
+
+# DE 5620.  Holzkirchen - Schliersee
+with detail = 2 {
+    let hs = path("d2.de.5620");
+
+    with link = "line.de.5620" {
+        track(:first :pax, hs[:hol.ys, :sli]);
+        guide(:linenum :pax,
+                hs[:hol.ys + 11km] >> 0.7dt
+            --  hs[:hol.ys + 11km] >> 3.0dt
+        );
+        label(:linenum :pax, hs[:hol.ys + 11km] >> 3.0dt + (0dt, 0.1dt),
+            hbox(:right:middle, "5620 ")
+        );
+    }
+
+    with link = "point.de.Schliersee" {
+        with layer = 1 marker(:statdot :pax, hs[:sli]);
+        slabel(:right :pax, hs[:sli] + (1.5dt, 0.8dt), "Schliersee");
+    }
+}
+
+
+# DE 5621.  Schliersee - Bayrischzell
+with detail = 2 {
+    let sb = path("d2.de.5621");
+
+    with link = "line.de.5621" {
+        track(:second :pax, sb[:sli.yb, :bze]);
+        guide(:linenum :pax,
+                sb[:bze - 4km] << 0.7dt
+            --  sb[:bze - 4km] << 3.0dt
+        );
+        label(:linenum :pax, sb[:bze - 4km] << 3.0dt,
+            hbox(:center:bottom, "5621")
+        );
+    }
+
+    with link = "point.de.Fischhausen-Neuhaus" {
+        with layer = 1 marker(:statdot :pax, sb[:fis]);
+    }
+
+    with link = "point.de.Bayrischzell" {
+        with layer = 1 marker(:statdot :pax, sb[:bze]);
+        slabel(:right :pax, sb[:bze] + (-3dt, 0.8dt),
+            hbox(:left:top, "Bayrischzell")
+        );
+    }
+}
+
+
+# DE 5622.  Holzkirchen - Rosenheim
+with detail = 2 {
+    let hr = path("d2.de.5622");
+
+    with link = "line.de.5622" {
+        track(:first :cat:ac15 :pax, hr[:hol.yk, :ros.yh]);
+
+        guide(:linenum :cat:ac15 :pax,
+                hr[:kre - 2km] >> 0.7dt
+            --  hr[:kre - 2km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, hr[:kre - 2km] >> 3.0dt + (0dt, 0.2dt),
+            hbox(:left:middle, " 5622")
+        );
+        line_badge(:cat:ac15 :pax, hr[:aib - 4.5km], "5622");
+    }
+
+    with link = "point.de.Kreuzstraße" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:kre]);
+        slabel(:right :cat:ac15 :pax, hr[:kre.ym + 2.3km] + (0dt, -1.1dt),
+            "Kreuzstraße"
+        );
+    }
+
+    with link = "point.de.Bad-Aibling" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:aib]);
+        slabel(:left :cat:ac15 :pax, hr[:aib] + (-2.0dt, 0dt),
+            hbox(:right:top, "Bad Aibling")
+        );
+    }
+}
+
+
+# DE 5630.  Neufahrn (Niederbay) - Radldorf (Niederbay)
+with detail = 2 {
+    let nr = path("d2.de.5630");
+
+    with link = "line.de.5630" {
+        track(:second :pax, nr[:nfn.yr, :rad.yn]);
+        line_badge(:pax, nr[:nfn.yr + 8km] @ -2 << 0.2dt, "5630");
+    }
+}
+
+
+# DE 5631.  Eggmühl - Langquaid (b Eggmühl)
+with detail = 2 {
+    let el = path("d2.de.5631");
+
+    with link = "line.de.5631" {
+        track(:second, el[:egg.yl, :lan]);
+        guide(:linenum,
+                el[:lan - 3.5km] >> 0.7dt
+            --  el[:lan - 3.5km] >> 3.0dt
+        );
+        label(:linenum, el[:lan - 3.5km] >> 3.0dt,
+            hbox(:center:bottom, "5631")
+        );
+    }
+
+    with link = "point.de.Langquaid-Eggmühl" {
+        with layer = 1 marker(:statdot, el[:lan]);
+        slabel(:bottom, el[:lan] + (-0.5dt, 1.0dt),
+            vbox(:center:top, "Langquaid", span(:light, "(b Eggmühl)"))
+        );
+    }
+}
+
+
+# DE 5632.  Landshut (Bay) Hbf - Rottenburg (Laaber)
+with detail = 2 {
+    let lr = path("d2.de.5632");
+
+    with link = "line.de.5632" {
+        track(:second, lr[:lan.yr, :nha]);
+        track(:second :removed, lr[:nha, :rot]);
+
+        guide(:linenum,
+                lr[:nha - 4km] >> 0.7dt
+            --  lr[:nha - 4km] >> 3.0dt
+        );
+        label(:linenum, lr[:nha - 4km] >> 3.0dt,
+            hbox(:left:bottom, "5632")
+        );
+    }
+
+    with link = "point.de.Neuhausen-Landshut" {
+        with layer = 1 marker(:statdot, lr[:nha]);
+        slabel(:left, lr[:nha] + (-1.8dt, -2.0dt),
+            vbox(:right:top, "Neuhausen", span(:light, "(b Landshut)"))
+        );
+    }
+
+    with link = "point.de.Rottenburg-Laaber" {
+        with layer = 1 marker(:statdot :removed, lr[:rot]);
+        slabel(:left :removed, lr[:rot] + (2dt, -1.0dt),
+            vbox(:right:bottom, "Rottenburg", span(:light, "(Laaber)"))
+        );
+    }
+}
+
+
+# DE 5633.  Langenbach (Oberbay) - Enzelhausen
+with detail = 2 {
+    let le = path("d2.de.5633");
+
+    with link = "line.de.5633" {
+        track(:second, le[:lba.ye, :ang]);
+        track(:second :removed, le[:ang, :enz.yl]);
+
+        guide(:linenum :removed,
+                le[:ang + 6km] << 0.7dt
+            --  le[:ang + 6km] << 3.0dt
+        );
+        label(:linenum :removed, le[:ang + 6km] << 3.0dt,
+            hbox(:right:middle, "5633 ")
+        );
+    }
+
+    with link = "point.de.Anglberg" {
+        with layer = 1 marker(:statdot, le[:ang]);
+        slabel(:left, le[:ang] + (1dt, 1dt),
+            hbox(:right:top, "Anglberg")
+        );
+    }
+}
+
+
+# DE 5634.  Landshut (Bay) Hbf - Bayerisch Eisenstein Grenze
+with detail = 2 {
+    let le = path("d2.de.m.5634");
+
+    with link = "line.de.5634" {
+        track(:first :cat:ac15 :pax, le[:lan.yp, :lau]);
+
+        line_badge(:cat:ac15 :pax, le[:lan.yp + 20.5km], "5634");
+    }
+
+    with link = "point.de.Pilsting" {
+        with layer = 1 marker(:statdot :removed, le[:pil]);
+        slabel(:left :removed, le[:pil] + (-1.3dt, -1.0dt), "Pilsting");
+    }
+
+    with link = "point.de.Landau-Isar" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, le[:lau]);
+        slabel(:right :cat:ac15 :pax, le[:lau] + (3.0dt, 0.8dt),
+            hbox(:left:base, "Landau ", span(:light, "(Isar)"))
+        );
+    }
+}
+
+
+# DE 5640.  Landau (Isar) - Arnstorf (Niederbay)
+with detail = 2 {
+    let la = path("d2.de.5640");
+
+    with link = "line.de.5640" {
+        track(:second :removed, la[:lau.ya, :arn]);
+
+        guide(:linenum :removed,
+                la[:lau.ya + 6km] >> 0.7dt
+            --  la[:lau.ya + 6km] >> 3.0dt
+        );
+        label(:linenum :removed, la[:lau.ya + 6km] >> 3.0dt,
+            hbox(:right:top, "5640")
+        );
+        guide(:linenum :removed,
+                la[:auf + 6.5km] >> 0.7dt
+            --  la[:auf + 6.5km] >> 3.0dt
+        );
+        label(:linenum :removed, la[:auf + 6.5km] >> 3.0dt,
+            hbox(:right:middle, "5640 ")
+        );
+    }
+
+    with link = "point.de.Aufhausen-Landau-Isar" {
+        with layer = 1 marker(:statdot :removed, la[:auf]);
+        slabel(:right :removed, la[:auf] + (1.0dt, -0.3dt),
+            vbox(:left:top, "Aufhausen", span(:light, "(b Landau/Isar)"))
+        );
+    }
+
+    with link = "point.de.Arnstorf-Niederbay" {
+        with layer = 1 marker(:statdot :removed, la[:arn]);
+        slabel(:bottom :removed, la[:arn] + (0dt, 1.0dt),
+            vbox(:center:top, "Arnstorf", span(:light, "(Niederbay)"))
+        );
+    }
+}
+
+
+# DE 5641.  Aufhausen (b Landau/Isar) - Kröhstorf
+with detail = 2 {
+    let ak = path("d2.de.5641");
+
+    with link = "line.de.5641" {
+        track(:second :removed, ak[:auf.yk, :kro]);
+        line_badge(:removed, ak[:auf.yk + 7.3km] @ 5 >> 0.2dt, "5641");
+    }
+
+    with link = "point.de.Kröhstorf" {
+        with layer = 1 marker(:statdot :removed, ak[:kro]);
+        slabel(:right :removed, ak[:kro] + (1.5dt, 1.0dt), "Kröhstorf");
+    }
+}
+
