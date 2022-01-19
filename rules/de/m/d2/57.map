@@ -1,0 +1,618 @@
+# DE 5700.  Rosenheim - Pilsting
+with detail = 2 {
+    let rp = path("d2.de.5700");
+
+    with link = "line.de.5700" {
+        track(:first :pax, rp[:ros.ym, :muh.yr]);
+        track(:first :pax, rp[:muh.yn, :nma]);
+        track(:second :closed, rp[:els, :fro]);
+        track(:second :removed, rp[:fro, :pil.yn]);
+
+        line_badge(:pax, rp[:ros.ym + 13km] << 0.2dt, "5700");
+        line_badge(:pax, rp[:muh.yr - 14.3km], "5700");
+        line_badge(:pax, rp[:muh.yn + 8km], "5700");
+        line_badge(:closed, rp[:els + 12km] << 0.2dt, "5700");
+        line_badge(:closed, rp[:pil.yn - 8.5km] @ 5, "5700");
+    }
+
+    with link = "point.de.Wasserburg-Inn-Bahnhof" {
+        with layer = 1 marker(:statdot :pax, rp[:was]);
+        slabel(:right :pax, rp[:was] + (1.5dt, -1.5dt),
+            hbox(:left:base, "Wasserburg ", span(:light, "(Inn)"))
+        );
+    }
+
+    with link = "point.de.Neumarkt-St-Veit" {
+        with layer = 1 marker(:statdot :pax, rp[:nma]);
+        slabel(:right :pax, rp[:nma] + (1.5dt, 2.0dt), "Neumarkt-St Veit");
+    }
+
+    with link = "point.de.Frontenhausen-Marklkofen" {
+        with layer = 1 marker(:statdot :closed, rp[:fro]);
+        slabel(:left :closed, rp[:fro] + (-0.5dt, 0dt),
+            vbox(:right:top, "Frontenhausen-", "Marklkofen ")
+        );
+    }
+}
+
+
+# DE 5701.  Bad Aibling - Feilnbach
+with detail = 2 {
+    let af = path("d2.de.5701");
+
+    with link = "line.de.5701" {
+        track(:second :removed, af[:aib, :fei]);
+        line_badge(:removed, af[:fei - 4km] @ 3 >> 0.2dt, "5701");
+    }
+
+    with link = "point.de.Feilnbach" {
+        with layer = 1 marker(:statdot :removed, af[:fei]);
+        slabel(:bottom :removed, af[:fei] + (0dt, 1.0dt), "Feilnbach");
+    }
+}
+
+
+# DE 5702.  Rosenheim - Kufstein Grenze
+with detail = 2 {
+    let rk = path("d2.de.5702");
+
+    with link = "line.de.5702" {
+        track(:first :double :cat:ac15 :pax, rk[:ros, :kig]);
+
+        guide(:linenum :cat:ac15 :pax,
+                rk[:bra - 7km] >> 1dt
+            --  rk[:bra - 7km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, rk[:bra - 7km] >> 3dt,
+            hbox(:right:middle, "5702 ")
+        );
+        guide(:linenum :cat:ac15 :pax,
+                rk[:bra + 7km] << 1dt
+            --  rk[:bra + 7km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, rk[:bra + 7km] << 3dt,
+            hbox(:left:middle, " 5702")
+        );
+    }
+
+    with link = "point.de.Brannenburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rk[:bra]);
+        slabel(:right :cat:ac15 :pax, rk[:bra] + (2.5dt, 1dt),
+            "Brannenburg"
+        );
+    }
+
+    with link = "point.de.Kiefersfelden" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rk[:kie]);
+        slabel(:right :cat:ac15 :pax, rk[:kie] + (1.8dt, 1.5dt),
+            "Kiefersfelden"
+        );
+    }
+
+    with link = "point.int.Kiefersfelden-Kufstein" {
+        marker(:refdt :left :cat:ac15, rk[:kig]);
+        marker(:refdt :right :cat:ac15, rk[:kig]);
+    }
+}
+
+
+# DE 5703.  Rosenheim - Salzburg Grenze
+with detail = 2 {
+    let rs = path("d2.de.5703");
+
+    with link = "line.de.5703" {
+        track(:first :double :cat:ac15 :pax, rs[:ros.ys, :sag]);
+
+        line_badge(:cat:ac15 :pax, rs[:ros.ys + 6km] @ -5 << 0.1dt, "5703");
+        line_badge(:cat:ac15 :pax, rs[:fre - 14.7km] @ 32, "5703");
+    }
+
+    with link = "point.de.Bad-Endorf-Oberbay" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rs[:end]);
+        slabel(:right :cat:ac15 :pax, rs[:end] + (1.5dt, -0.5dt),
+            hbox(:left:base, "Bad Endorf ", span(:light, "(Oberbay)"))
+        );
+    }
+
+    with link = "point.de.Prien-am-Chiemsee" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rs[:pri]);
+        slabel(:left :cat:ac15 :pax, rs[:pri] + (-1.5dt, -1.3dt),
+            vbox(:right:middle,
+                hbox(:right:base, "Prien ", span(:light, "am")),
+                span(:light, "Chiemsee")
+            )
+        );
+    }
+
+    with link = "point.de.Übersee" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rs[:ube]);
+        slabel(:top :cat:ac15 :pax, rs[:ube] + (-2dt, -1.0dt), "Übersee");
+    }
+
+    with link = "point.de.Traunstein" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rs[:tra]);
+        slabel(:left :cat:ac15 :pax, rs[:tra] + (-1.5dt, -0.5dt),
+            "Traunstein"
+        );
+    }
+
+    with link = "point.de.Freilassing" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rs[:fre]);
+        slabel(:left :cat:ac15 :pax, rs[:fre] + (-2.8dt, 1.0dt),
+            hbox(:right:top, "Freilassing")
+        );
+    }
+}
+
+
+# DE 5704.  Landl (Oberbay) Abzw - Frasdorf
+with detail = 2 {
+    let lf = path("d2.de.5704");
+
+    with link = "line.de.5704" {
+        track(:second :cat:ac15, lf[:laa, :roh]);
+        track(:second :removed, lf[:roh, :fra]);
+
+        guide(:linenum :cat:ac15,
+                lf[:laa + 4km] << 0.7dt
+            --  lf[:laa + 4km] << 3.0dt
+        );
+        label(:linenum :cat:ac15, lf[:laa + 4km] << 3.0dt,
+            hbox(:left:middle, " 5704")
+        );
+    }
+
+    with link = "point.de.Rohrdorf-Oberbay" {
+        with layer = 1 marker(:statdot :cat:ac15, lf[:roh]);
+        slabel(:bottom :cat:ac15, lf[:roh] + (0dt, 1.5dt),
+            vbox(:center:top, "Rohrdorf", span(:light, "(Oberbay)"))
+        );
+    }
+
+    with link = "point.de.Frasdorf" {
+        with layer = 1 marker(:statdot :removed, lf[:fra]);
+        slabel(:left :removed, lf[:fra] + (2dt, -1.0dt),
+            vbox(:right:bottom, "Fras-", "dorf ")
+        );
+    }
+}
+
+
+# DE 5705.  Bad Endorf (Oberbay) - Obing
+with detail = 2 {
+    let eo = path("d2.de.5705");
+
+    with link = "line.de.5705" {
+        track(:second :museum, eo[:end.yo, :obi]);
+
+        line_badge(:museum, eo[:end.yo + 7.5km], "5705");
+    }
+
+    with link = "point.de.Obing" {
+        with layer = 1 marker(:statdot :museum, eo[:obi]);
+        slabel(:top :museum, eo[:obi] + (0dt, -0.8dt), "Obing");
+    }
+}
+
+
+# DE 5706.  Prien am Chiemsee - Aschau (Chiemgau)
+with detail = 2 {
+    let pa = path("d2.de.5706");
+
+    with link = "line.de.5706" {
+        track(:second :pax, pa[:pri.ya, :asa]);
+
+        guide(:linenum :pax,
+                pa[:asa - 2.5km] << 0.7dt
+            --  pa[:asa - 2.5km] << 3.0dt
+        );
+        label(:linenum :pax, pa[:asa - 2.5km] << 3.0dt,
+            hbox(:left:middle, " 5706")
+        );
+    }
+
+    with link = "point.de.Aschau-Chiemgau" {
+        with layer = 1 marker(:statdot :pax, pa[:asa]);
+        slabel(:bottom :pax, pa[:asa] + (0dt, 1.0dt),
+            vbox(:center:top, "Aschau", span(:light, "(Chiemgau)"))
+        );
+    }
+}
+
+
+# DE 5710.  Grafing Bahnhof - Wasserburg (Inn) Bahnhof
+with detail = 2 {
+    let gw = path("d2.de.5710");
+
+    with link = "line.de.5710" {
+        track(:second :cat:ac15 :pax, gw[:gra.yw, :ebe]);
+        track(:second :pax, gw[:ebe, :was.yg]);
+
+        line_badge(:pax, gw[:ebe + 7km] >> 0.2dt, "5710");
+    }
+
+    with link = "point.de.Ebersberg-Oberbay" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, gw[:ebe]);
+        slabel(:left :cat:ac15 :pax, gw[:ebe] + (2.5dt, -1.2dt),
+            vbox(:right:bottom, "Ebersberg", span(:light, "(Oberbay)"))
+        );
+    }
+}
+
+
+# DE 5711.  Wasserburg (Inn) Bahnhof - Wasserburg (Inn) Stadt
+with detail = 2 {
+    let ww = path("d2.de.5711");
+
+    with link = "line.de.5711" {
+        track(:second :removed, ww[:was.yg, :wst]);
+
+        guide(:linenum :removed,
+                ww[:was.yg + 1.5km] >> 0.7dt
+            --  ww[:was.yg + 1.5km] >> 3.0dt
+        );
+        label(:linenum :removed, ww[:was.yg + 1.5km] >> 3.0dt,
+            hbox(:center:top, "5711")
+        );
+    }
+
+    with link = "point.de.Wasserburg-Inn-Stadt" {
+        with layer = 1 marker(:statdot :removed, ww[:wst]);
+    }
+}
+
+
+# DE 5720.  Neumarkt-St Veit - Landshut (Bay) Hbf
+with detail = 2 {
+    let nl = path("d2.de.5720");
+
+    with link = "line.de.5720" {
+        track(:first :pax, nl[:nma.yl, :lan.yn]);
+
+        line_badge(:pax, nl[:lan.yn - 13km] @ 4 << 0.4dt, "5720");
+    }
+}
+
+
+# DE 5721.  Dorfen Bahnhof - Velden (Vils)
+with detail = 2 {
+    let dv = path("d2.de.5721");
+
+    with link = "line.de.5721" {
+        track(:second :removed, dv[:dor, :vel]);
+
+        line_badge(:removed, dv[:vel - 6.5km] @ -13 << 0.1dt, "5721");
+    }
+
+    with link = "point.de.Velden-Vils" {
+        with layer = 1 marker(:statdot :removed, dv[:vel]);
+        slabel(:top :removed, dv[:vel] + (0dt, -0.8dt),
+            hbox(:center:base, "Velden ", span(:light, "(Vils)"))
+        );
+    }
+}
+
+
+# DE 5722.  Thann-Matzbach - Haag (Oberbay)
+with detail = 2 {
+    let th = path("d2.de.5722");
+
+    with link = "line.de.5722" {
+        track(:second :removed, th[:tha, :haa]);
+
+        line_badge(:removed, th[:tha + 5.3km] @ 8 << 0.2dt, "5722");
+    }
+
+    with link = "point.de.Haag-Oberbay" {
+        with layer = 1 marker(:statdot :removed, th[:haa]);
+        slabel(:right :removed, th[:haa] + (1.5dt, 2.0dt),
+            vbox(:left:bottom, "Haag", span(:light, "(Oberbay)"))
+        );
+    }
+}
+
+
+# DE 5723.  Mühldorf (Oberbay) - Freilassing
+with detail = 2 {
+    let mf = path("d2.de.5723");
+
+    with link = "line.de.5723" {
+        track(:first :pax, mf[:mul.yf, :fre.ym]);
+
+        line_badge(:pax, mf[:gar + 9.5km], "5723");
+        line_badge(:pax, mf[:fre.ym - 9.5km] @ -7, "5723");
+    }
+
+    with link = "point.de.Tüßling" {
+        with layer = 1 marker(:statdot :pax, mf[:tus]);
+        slabel(:left :pax, mf[:tus] + (-2.0dt, 1.0dt), "Tüßling");
+    }
+
+    with link = "point.de.Garching-Alz" {
+        with layer = 1 marker(:statdot :pax, mf[:gar]);
+        slabel(:left :pax, mf[:gar] + (-1.8dt, 1.0dt),
+            hbox(:right:base, "Garching ", span(:light, "(Alz)"))
+        );
+    }
+
+    with link = "point.de.Tittmoning-Wiesmühl" {
+        with layer = 1 marker(:statdot :pax, mf[:wie]);
+        slabel(:left :pax, mf[:wie] + (-1.0dt, -0.5dt),
+            vbox(:right:top, "Tittmoning-", "Wiesmühl ")
+        );
+    }
+}
+
+
+# DE 5724.  Tittmoning-Wiesmühl - Tittmoning
+with detail = 2 {
+    let wt = path("d2.de.5724");
+
+    with link = "line.de.5724" {
+        track(:second :removed, wt[:wie.yt, :tit]);
+
+        guide(:linenum :removed,
+                wt[:wie.yt + 3km] >> 0.7dt
+            --  wt[:wie.yt + 3km] >> 3.0dt
+        );
+        label(:linenum :removed, wt[:wie.yt + 3km] >> 2.8dt,
+            hbox(:left:top, "5724")
+        );
+    }
+
+    with link = "point.de.Tittmoning" {
+        with layer = 1 marker(:statdot :removed, wt[:tit]);
+        slabel(:right :removed, wt[:tit] + (-3dt, -1.5dt), "Tittmoning");
+    }
+}
+
+
+# DE 5725.  Tüßling - Burghausen
+with detail = 2 {
+    let tb = path("d2.de.5725");
+
+    with link = "line.de.5725" {
+        track(:second :pax, tb[:tus.yb, :bur]);
+
+        line_badge(:pax, tb[:tus.yb + 12.5km] >> 0.2dt, "5725");
+    }
+
+    with link = "point.de.Burghausen" {
+        with layer = 2 marker(:statdot :pax, tb[:bur]);
+        slabel(:right :pax, tb[:bur] + (1.8dt, 1.0dt), "Burghausen");
+    }
+}
+
+
+# DE 5726.  Burghausen - Burghausen Wackerwerk
+with detail = 2 {
+    let bw = path("d2.de.5726");
+
+    with link = "line.de.5726" {
+        track(:second, bw[:bur.yw, :wac]);
+    }
+
+    with link = "point.de.Burghausen-Wackerwerk" {
+        with layer = 1 marker(:statdot, bw[:wac]);
+    }
+}
+
+
+# DE 5727.  Simbach (Inn) - Pocking
+with detail = 2 {
+    let sp = path("d2.de.5727");
+
+    with link = "line.de.5727" {
+        track(:second :removed, sp[:sim.yp, :poc.ys]);
+
+        line_badge(:removed, sp[:sim.yp + 7.6km] << 0.1dt, "5727");
+    }
+
+    with link = "point.de.Tutting" {
+        with layer = 1 marker(:statdot :removed, sp[:tut]);
+        slabel(:right :removed, sp[:tut] + (1.5dt, 1.5dt), "Tutting");
+    }
+}
+
+
+# DE 5728.  Tutting - Kößlarn
+with detail = 2 {
+    let tk = path("d2.de.5728");
+
+    with link = "line.de.5728" {
+        track(:second :removed, tk[:tut, :kos]);
+
+        guide(:linenum :removed,
+                tk[:kos - 4km] >> 0.7dt
+            --  tk[:kos - 4km] >> 3.0dt
+        );
+        label(:linenum :removed, tk[:kos - 4km] >> 3.0dt,
+            hbox(:center:bottom, "5728")
+        );
+    }
+
+    with link = "point.de.Kößlarn" {
+        with layer = 1 marker(:statdot :removed, tk[:kos]);
+        slabel(:left :removed, tk[:kos] + (-1.8dt, 0.8dt), "Kößlarn");
+    }
+}
+
+
+# DE 5730.  Traunstein - Garching (Alz)
+with detail = 2 {
+    let tg = path("d2.de.5730");
+
+    with link = "line.de.5730" {
+        track(:second :pax, tg[:tra.yg, :gar.yt]);
+
+        line_badge(:pax, tg[:hor - 7km] @ 5 >> 0.1dt, "5730");
+        line_badge(:pax, tg[:hor + 10km] @ 10 >> 0.1dt, "5730");
+    }
+
+    with link = "point.de.Hörpolding" {
+        with layer = 1 marker(:statdot :pax, tg[:hor]);
+        slabel(:left :pax, tg[:hor] + (-1.8dt, 1.0dt), "Hörpolding");
+    }
+}
+
+
+# DE 5731.  Hörpolding - Traunreut
+with detail = 2 {
+    let ht = path("d2.de.5731");
+
+    with link = "line.de.5731" {
+        track(:second, ht[:hor.yt, :tra]);
+    }
+
+    with link = "point.de.Traunreut" {
+        with layer = 1 marker(:statdot, ht[:tra]);
+        slabel(:right, ht[:tra] + (1.3dt, 0.8dt), "Traunreut");
+    }
+}
+
+
+# DE 5732.  Übersee - Marquartstein
+with detail = 2 {
+    let um = path("d2.de.5732");
+
+    with link = "line.de.5732" {
+        track(:second :removed, um[:ube.ym, :mar]);
+
+        line_badge(:removed, um[:mar - 3.5km] @ -10 << 0.35dt, "5732");
+    }
+
+    with link = "point.de.Marquartstein" {
+        with layer = 1 marker(:statdot :removed, um[:mar]);
+        slabel(:bottom :removed, um[:mar] + (0dt, 1.0dt),
+            vbox(:center:top, "Marquart-", "stein ")
+        );
+    }
+}
+
+
+# DE 5733.  Traunstein - Ruhpolding
+with detail = 2 {
+    let tr = path("d2.de.5733");
+
+    with link = "line.de.5733" {
+        track(:second :cat:ac15 :pax, tr[:tra, :ruh]);
+
+        guide(:linenum :cat:ac15 :pax,
+                tr[:tra + 5km] << 0.7dt
+            --  tr[:tra + 5km] << 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, tr[:tra + 5km] << 3.0dt,
+            hbox(:left:middle, " 5733")
+        );
+    }
+
+    with link = "point.de.Ruhpolding" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, tr[:ruh]);
+        slabel(:right :cat:ac15 :pax, tr[:ruh] + (1.5dt, 1.0dt),
+            "Ruhpolding"
+        );
+    }
+}
+
+
+# DE 5734.  Hufschlag Abzw - Waging
+with detail = 2 {
+    let hw = path("d2.de.5734");
+
+    with link = "line.de.5734" {
+        track(:second :pax, hw[:hua, :wag]);
+        line_badge(:pax, hw[:hua + 3.3km] @ -5 << 0.4dt, "5734");
+    }
+
+    with link = "point.de.Waging" {
+        with layer = 1 marker(:statdot :pax, hw[:wag]);
+        slabel(:right :pax, hw[:wag] + (-2dt, -1.5dt), "Waging");
+    }
+}
+
+
+# DE 5740.  Freilassing - Bad Reichenhall
+with detail = 2 {
+    let fr = path("d2.de.5740");
+
+    with link = "line.de.5740" {
+        track(:first :cat:ac15 :pax, fr[:fre.ym, :rei]);
+        line_badge(:cat:ac15 :pax, fr[:rei - 6km] @ -8 >> 0.4dt, "5740");
+    }
+
+    with link = "point.de.Bad-Reichenhall" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, fr[:rei]);
+        slabel(:left :cat:ac15 :pax, fr[:rei] + (-1.8dt, 0.8dt),
+            "Bad Reichenhall"
+        );
+    }
+}
+
+
+# DE 5741.  Bad Reichenhall - Berchtesgaden Hbf
+with detail = 2 {
+    let rb = path("d2.de.5741");
+
+    with link = "line.de.5741" {
+        track(:second :cat:ac15 :pax, rb[:rei, :ber]);
+
+        guide(:linenum :cat:ac15 :pax,
+                rb[:rei + 10km] >> 0.7dt
+            --  rb[:rei + 10km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, rb[:rei + 10km] >> 3.0dt,
+            hbox(:right:middle, "5741 ")
+        );
+    }
+
+    with link = "point.de.Berchtesgaden-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rb[:ber]);
+        slabel(:cat:ac15 :pax, rb[:ber] + (1.5dt, 1.2dt),
+            "Berchtesgaden Hbf"
+        );
+    }
+}
+
+
+# DE 5742.  Berchtesgaden Hbf - Schellenberg Grenze
+with detail = 2 {
+    let bs = path("d2.de.5742");
+
+    with link = "line.de.5742" {
+        track(:second :removed, bs[:ber, :seg]);
+
+        guide(:linenum :removed,
+                bs[:ber + 7km] >> 0.7dt
+            --  bs[:ber + 7km] >> 3.0dt
+        );
+        label(:linenum :removed, bs[:ber + 7km] >> 3.0dt + (0dt, 0.1dt),
+            hbox(:left:middle, " 5742")
+        );
+    }
+}
+
+
+# DE 5743.  Berchtesgaden Königsseer Bf - Königssee (Oberbay)
+with detail = 2 {
+    let bk = path("d2.de.5743");
+
+    with link = "line.de.5743" {
+        track(:second :removed, bk[:ber, :kon]);
+
+        guide(:linenum :removed,
+                bk[:ber + 2.5km] >> 0.7dt
+            --  bk[:ber + 2.5km] >> 3.0dt
+        );
+        label(:linenum :removed, bk[:ber + 2.5km] >> 3.0dt,
+            hbox(:right:middle, "5743 ")
+        );
+    }
+
+    with link = "point.de.Königssee-Oberbay" {
+        with layer = 1 marker(:statdot :removed, bk[:kon]);
+        slabel(:bottom :removed, bk[:kon] + (0dt, 1.0dt),
+            vbox(:center:top, "Königssee", span(:light, "(Oberbay)"))
+        );
+    }
+}
+
