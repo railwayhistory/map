@@ -1,0 +1,44 @@
+# DE 5832.  Passau Gbf - Neumarkt-St Veit
+with detail = 2 {
+    let pn = path("d2.de.5832");
+
+    with link = "line.de.5832" {
+        track(:second :pax, pn[:pas.yp, :nma]);
+
+        guide(:linenum :pax,
+                pn[:pas.yp + 9.8km] << 0.7dt
+            --  pn[:pas.yp + 9.8km] << 3.0dt
+        );
+        label(:linenum :pax, pn[:pas.yp + 9.8km] << 3.0dt,
+            hbox(:left:middle, " 5832")
+        );
+        line_badge(:pax, pn[:poc + 30km] @ -5, "5832");
+    }
+
+    with link = "point.de.Pocking" {
+        with layer = 1 marker(:statdot :pax, pn[:poc]);
+        slabel(:right :pax, pn[:poc] + (-1.0dt, 0.8dt),
+            hbox(:left:top, "Pocking")
+        );
+    }
+}
+
+
+# DE 5851.  Regensburg Hbf - Ingolstadt Nord
+with detail = 2 {
+    let ri = path("d2.de.m.5851");
+
+    with link = "line.de.5851" {
+        track(:first :cat:ac15 :pax, ri[:saa, :ing.yr]);
+
+        line_badge(:cat:ac15 :pax, ri[:saa + 19km], "5851");
+    }
+
+    with link = "point.de.point.de.Ernsgaden" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, ri[:ern]);
+        slabel(:right :cat:ac15 :pax, ri[:ern] + (-1.5dt, 0.8dt),
+            hbox(:left:top, "Ernsgaden")
+        );
+    }
+}
+
