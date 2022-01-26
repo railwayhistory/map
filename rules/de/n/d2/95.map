@@ -1,0 +1,99 @@
+# DE 9520.  Aschaffenburg-Nilkheim - Aschaffenburg Hafen
+with detail = 2 {
+    let ah = path("d2.de.9520");
+
+    with link = "line.de.9520" {
+        track(:second, ah[:nil.y, :haf]);
+    }
+
+    with link = "point.de.Aschaffenburg-Hafen" {
+        with layer = 1 marker(:statdot, ah[:haf]);
+    }
+}
+
+
+# DE 9580.  Bad Kötzting - Lam
+with detail = 2 {
+    let kl = path("d2.de.9580");
+
+    with link = "line.de.9580" {
+        track(:second :pax, kl[:kot, :lam]);
+        line_badge(:pax, kl[:lam - 10km] @ 5 << 0.4dt, "9580");
+    }
+
+    with link = "point.de.Lam" {
+        with layer = 1 marker(:statdot :pax, kl[:lam]);
+        slabel(:right :pax, kl[:lam] + (1.5dt, 0.8dt), "Lam");
+    }
+}
+
+
+# DE 9581.  Gotteszell - Blaibach (Oberpf)
+with detail = 2 {
+    let gb = path("d2.de.9581");
+
+    with link = "line.de.9581" {
+        track(:second, gb[:got.yv, :vie]);
+        track(:second :removed, gb[:vie, :bla.yv]);
+
+        guide(:linenum,
+                gb[:vie - 4.6km] << 0.7dt
+            --  gb[:vie - 4.6km] << 3.0dt
+        );
+        label(:linenum, gb[:vie - 4.6km] << 3.0dt,
+            hbox(:center:top, "9581")
+        );
+    }
+
+    with link = "point.de.Viechtach" {
+        with layer = 1 marker(:statdot, gb[:vie]);
+        slabel(:left, gb[:vie] + (0dt, 0.5dt), hbox(:right:top, "Viechtach"));
+    }
+}
+
+
+# DE 9582.  Deggendorf Hbf - Metten Bf
+with detail = 2 {
+    let dm = path("d2.de.9582");
+
+    with link = "line.de.9582" {
+        track(:second :removed, dm[:deg.ym, :met]);
+
+        guide(:linenum :removed,
+                dm[:met - 1.3km] << 0.7dt
+            --  dm[:met - 1.3km] << 3.0dt
+        );
+        label(:linenum :removed, dm[:met - 1.3km] << 2.8dt,
+            hbox(:right:top, "9582")
+        );
+    }
+
+    with link = "point.de.Metten-Bf" {
+        with layer = 1 marker(:statdot :removed, dm[:met]);
+        slabel(:left :removed, dm[:met] + (-1.5dt, 0.8dt), "Metten Bf");
+    }
+}
+
+
+# DE 9585.  Ebermannstadt - Behringersmühle
+with detail = 2 {
+    let eb = path("d2.de.9585");
+
+    with link = "line.de.9585" {
+        track(:second :museum, eb[:ebe, :beh]);
+
+        guide(:linenum :museum,
+                eb[:ebe + 9.1km] << 0.7dt
+            --  eb[:ebe + 9.1km] << 3.0dt
+        );
+        label(:linenum :museum, eb[:ebe + 9.1km] << 2.7dt,
+            hbox(:left:bottom, "9585")
+        );
+    }
+
+    with link = "point.de.Behringersmühle" {
+        with layer = 1 marker(:statdot :museum, eb[:beh]);
+        slabel(:bottom :museum, eb[:beh] + (0dt, 1.5dt), "Behringersmühle");
+    }
+}
+

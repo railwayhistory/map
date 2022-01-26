@@ -1,0 +1,151 @@
+# DE 9530.  Augsburg Hbf - Ausgburg Ring
+with detail = 2 {
+    let ar = path("d2.de.9530");
+
+    with link = "line.de.9530" {
+        track(:second, ar[:aug.yr, :rin]);
+    }
+
+    with link = "point.de.Augsburg-Ring" {
+        with layer = 1 marker(:statdot, ar[:rin]);
+    }
+}
+
+
+# DE 9531.  Augsburg Ring - Augsburg-Haunstetten
+with detail = 2 {
+    let ah = path("d2.de.9531");
+
+    with link = "line.de.9531" {
+        track(:second, ah[:rin, :spi]);
+        track(:second :removed, ah[:spi, :hau]);
+    }
+
+    with link = "point.de.Augsburg-West" {
+        with layer = 1 marker(:statdot, ah[:awe]);
+    }
+
+    with link = "point.de.Augsburg-Haunstetten" {
+        with layer = 1 marker(:statdot :removed, ah[:hau]);
+    }
+}
+
+
+# DE 9532.  Augsburg Lech - Augsburg-Lechhausen
+with detail = 2 {
+    let al = path("d2.de.9532");
+
+    with link = "line.de.9532" {
+        track(:second, al[:rin.yl, :lec]);
+    }
+}
+
+
+# DE 9533.  Augsburg Hessenbachstraße - Augsburg-Pfersee
+with detail = 2 {
+    with link = "line.de.9533" {
+        track(:second :removed, path("d2.de.9533")[:hes.y, :pfe]);
+    }
+}
+
+
+# DE 9534.  Augsburg Stadion - Augsburg-Göggingen
+with detail = 2 {
+    with link = "line.de.9534" {
+        track(:second :removed, path("d2.de.9534")[:sta, :gog]);
+    }
+}
+
+
+# DE 9540.  Garmisch-Partenkirchen - Zugspitzplatt
+with detail = 2 {
+    let gz = path("d2.de.9540");
+
+    with link = "line.de.9540" {
+        track(:second :narrow:g1000 :cat:dc15 :pax,
+                gz[:gar, :gar.yz] >> 0.4dt
+            ..  gz[:gar.yz + 800m, :zug]
+        );
+
+        guide(:linenum :cat:dc15 :pax,
+                gz[:gar.yz + 6.3km] << 0.7dt
+            --  gz[:gar.yz + 6.3km] << 3.0dt
+        );
+        label(:linenum :cat:dc15 :pax,
+            gz[:gar.yz + 6.3km] << 3.0dt - (0.5dt, 0dt),
+            hbox(:left:top, "9540")
+        );
+    }
+
+    with link = "point.de.Zugspitzplatt" {
+        with layer = 1 marker(:statdot :cat:dc15 :pax, gz[:zug]);
+        slabel(:bottom :cat:dc15 :pax, gz[:zug] + (0dt, 1.0dt),
+            "Zugspitzplatt"
+        );
+    }
+}
+
+
+# DE 9560.  Schaftlach - Tegernsee
+with detail = 2 {
+    let st = path("d2.de.9560");
+
+    with link = "line.de.9560" {
+        track(:second :pax, st[:saf.yt, :teg]);
+
+        guide(:linenum :pax,
+                st[:saf.yt + 5km] >> 0.7dt
+            --  st[:saf.yt + 5km] >> 3.0dt
+        );
+        label(:linenum :pax, st[:saf.yt + 5km] >> 3.0dt,
+            hbox(:right:middle, "9560 ")
+        );
+    }
+
+    with link = "point.de.Tegernsee" {
+        with layer = 1 marker(:statdot :pax, st[:teg]);
+        slabel(:bottom :pax, st[:teg] + (0dt, 0.8dt), "Tegernsee");
+    }
+}
+
+
+# DE 9570.  Brannenburg - Wendelstein
+with detail = 2 {
+    let bw = path("d2.de.9570");
+
+    with link = "line.de.9570" {
+        track(:second :removed, bw[:bra, :wac]);
+        track(:second :narrow:g1000 :cat:dc15 :pax, bw[:wac, :wen]);
+
+        guide(:linenum :cat:dc15 :pax,
+                bw[:wac + 3km] << 0.7dt
+            --  bw[:wac + 3km] << 3.0dt
+        );
+        label(:linenum :cat:dc15 :pax, bw[:wac + 3km] << 3.0dt,
+            hbox(:center:top, "9570")
+        );
+    }
+
+    with link = "point.de.Waching" {
+        with layer = 1 marker(:statdot :cat:dc15 :pax, bw[:wac]);
+    }
+
+    with link = "point.de.Wendelstein" {
+        with layer = 1 marker(:statdot :cat:dc15 :pax, bw[:wen]);
+    }
+}
+
+
+# DE 9571.  Prien am Chiemsee - Prien-Stock
+with detail = 2 {
+    let ps = path("d2.de.9571");
+
+    with link = "line.de.9571" {
+        track(:second :narrow:g1000 :pax, ps[:pri, :sto]);
+    }
+
+    with link = "point.de.Prien-Stock" {
+        with layer = 1 marker(:statdot :pax, ps[:sto]);
+    }
+}
+
