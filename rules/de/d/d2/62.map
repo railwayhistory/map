@@ -1,0 +1,826 @@
+# DE 6200.  Kamenz (Sachs) - Pirna
+with detail = 2 {
+    let kp = path("d2.de.6200");
+
+    with link = "line.de.6200" {
+        track(:first :pax, kp[:kam, :arn.yk]);
+        track(:second :removed, kp[:arn.yd, :dur.yn]);
+        track(:second :pax, kp[:dur.yn, :pir.yd]);
+
+        line_badge(:pax, kp[:kam + 8.2km] @ 2 >> 0.3dt, "6200");
+        guide(:linenum :removed,
+                kp[:dur - 5km] << 0.7dt
+            --  kp[:dur - 5km] << 3.0dt
+        );
+        label(:linenum :removed, kp[:dur - 5km] << 3.0dt,
+            hbox(:left:middle, " 6200")
+        );
+        guide(:linenum :pax,
+                kp[:dur + 4km] << 0.7dt
+            --  kp[:dur + 4km] << 3.0dt
+        );
+        label(:linenum :pax, kp[:dur + 4km] << 3.0dt,
+            hbox(:left:middle, " 6200")
+        );
+    }
+
+    with link = "point.de.Kamenz-Sachs" {
+        with layer = 1 marker(:statdot :pax, kp[:kam]);
+        slabel(:right :pax, kp[:kam] + (1.5dt, 0.8dt),
+            hbox(:left:base, "Kamenz ", span(:light, "(Sachs)"))
+        );
+    }
+
+    with link = "point.de.Dürrröhrsdorf" {
+        with layer = 1 marker(:statdot :pax, kp[:dur]);
+        slabel(:right :pax, kp[:dur] + (1.5dt, 1.2dt), "Dürrröhrsdorf");
+    }
+}
+
+
+# DE 6210.  Görlitz Abzw Svt - Schlauroth
+with detail = 2 {
+    with link = "line.de.6210" {
+        track(:first :removed, path("d2.de.6210")[:svt.y, :sla]);
+    }
+}
+
+
+# DE 6211.  Görlitz Grenze - Görlitz
+with detail = 2 {
+    let gg = path("d2.de.6211");
+
+    with link = "line.de.6211" {
+        track(:first :double :pax, gg[:gog, :gor]);
+    }
+
+    with link = "point.int.Görlitz-Zgorzelec" {
+        marker(:refdt :pax :right, gg[:gog]);
+        marker(:refdt :pax :left, gg[:gog]);
+    }
+}
+
+
+# DE 6212.  Görlitz - Dresden-Neustadt
+with detail = 2 {
+    let gd = path("d2.de.6212");
+
+    with link = "line.de.6212" {
+        track(:first :double :pax, gd[:gor, :klo.yf]);
+        track(:first :double :cat:ac15 :pax, gd[:klo.yf, :dne.yk]);
+
+        line_badge(:pax, gd[:sla + 7.5km] @ -5, "6212");
+        line_badge(:pax, gd[:bis - 7.3km], "6212");
+        line_badge(:pax, gd[:arn + 8km] @ 4 << 0.4dt, "6212");
+    }
+
+    with link = "point.de.Görlitz" {
+        with layer = 1 marker(:statdot :pax, gd[:gor]);
+        slabel(:left :pax, gd[:sla] + (1dt, -2.0dt), "Görlitz");
+    }
+
+    with link = "point.de.Schlauroth" {
+        with layer = 1 marker(:statdot :removed, gd[:sla]);
+    }
+
+    with link = "point.de.Löbau-Sachs" {
+        with layer = 1 marker(:statdot :pax, gd[:lob]);
+        slabel(:right :pax, gd[:lob] + (-1.0dt, 1.3dt),
+            hbox(:left:top, hbox(:left:base,
+                "Löbau ", span(:light, "(Sachs)")
+            ))
+        );
+    }
+
+    with link = "point.de.Bautzen" {
+        with layer = 1 marker(:statdot :pax, gd[:bau]);
+        slabel(:right :pax, gd[:bau] + (1.5dt, 0dt), "Bautzen");
+    }
+
+    with link = "point.de.Bischofswerda" {
+        with layer = 1 marker(:statdot :pax, gd[:bis]);
+        slabel(:left :pax, gd[:bis] + (0.5dt, -1.3dt), "Bischofswerda");
+    }
+
+    with link = "point.de.Arnsdorf-Dresden" {
+        with layer = 1 marker(:statdot :pax, gd[:arn]);
+        slabel(:left :pax, gd[:arn] + (-1.5dt, 0.5dt),
+            vbox(:right:top, "Arnsdorf", span(:light, "(b Dresden)"))
+        );
+    }
+
+    with link = "point.de.Dresden-Klotzsche" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, gd[:klo]);
+    }
+}
+
+
+# DE 6214. Zittau Grenze - Löbau (Sachs)
+with detail = 2 {
+    let zl = path("d2.de.6214");
+
+    with link = "line.de.6214" {
+        track(:first :pax, zl[:zig, :zit]);
+        track(:first :double :pax, zl[:zit, :ooa]);
+        track(:second :removed, zl[:ooa.y, :ncu]);
+        track(:second, zl[:ncu, :lob.yn]);
+
+        guide(:linenum :pax,
+                zl[:ooa - 3km] >> 1dt
+            --  zl[:ooa - 3km] >> 3dt
+        );
+        label(:linenum :pax, zl[:ooa - 3km] >> 3dt + (0dt, -0.1dt),
+            hbox(:left:middle, " 6214")
+        );
+        guide(:linenum :removed,
+                zl[:her - 3.3km] >> 0.7dt
+            --  zl[:her - 3.3km] >> 3.0dt
+        );
+        label(:linenum :removed, zl[:her - 3.3km] >> 3.0dt,
+            hbox(:left:middle, " 6214")
+        );
+        guide(:linenum,
+                zl[:lob.yn - 3.5km] << 0.7dt
+            --  zl[:lob.yn - 3.5km] << 3.0dt
+        );
+        label(:linenum, zl[:lob.yn - 3.5km] << 3.0dt + (0dt, -0.2dt),
+            hbox(:right:middle, "6214 ")
+        );
+    }
+
+    with link = "point.de.Zittau" {
+        with layer = 1 marker(:statdot :pax, zl[:zit]);
+        slabel(:left :pax, zl[:zit] + (1.5dt, -1.5dt), "Zittau");
+    }
+
+    with link = "point.de.Herrnhut" {
+        with layer = 1 marker(:statdot :removed, zl[:her]);
+        slabel(:right :removed, zl[:her] + (1.5dt, 1.5dt), "Herrnhut");
+    }
+
+    with link = "point.de.Niedercunnersdorf" {
+        with layer = 1 marker(:statdot, zl[:ncu]);
+        slabel(:right, zl[:ncu] + (0.5dt, -0.8dt),
+            vbox(:left:middle, "Niedercunners-", "     dorf")
+        );
+    }
+}
+
+
+# DE 6215.  Oberoderwitz Abzw - Wilthen
+with detail = 2 {
+    let ow = path("d2.de.6215");
+
+    with link = "line.de.6215" {
+        track(:first :pax, ow[:ooa, :wil.yb]);
+
+        guide(:linenum :pax,
+                ow[:eib + 1.5km] >> 0.7dt
+            --  ow[:eib + 1.5km] >> 3.0dt
+        );
+        label(:linenum :pax, ow[:eib + 1.5km] >> 3.0dt,
+            hbox(:center:bottom, "6215")
+        );
+        guide(:linenum :pax,
+                ow[:wil - 5km] << 0.7dt
+            --  ow[:wil - 5km] << 3.0dt
+        );
+        label(:linenum :pax, ow[:wil - 5km] << 3.0dt,
+            hbox(:right:middle, "6215 ")
+        );
+    }
+
+    with link = "point.de.Eibau" {
+        with layer = 1 marker(:statdot :pax, ow[:eib]);
+        slabel(:right :pax, ow[:eib] + (0.3dt, -1.5dt), "Eibau");
+    }
+
+    with link = "point.de.Ebersbach-Sachs" {
+        with layer = 1 marker(:statdot :pax, ow[:ebe]);
+        slabel(:left :pax, ow[:ebe] + (-1.5dt, 2.8dt),
+            vbox(:right:bottom, "Ebersbach   ", span(:light, "(Sachs)"))
+        );
+    }
+
+    with link = "point.de.Taubenheim-Spree" {
+        with layer = 1 marker(:statdot :pax, ow[:tau]);
+        slabel(:left :pax, ow[:tau] + (1.5dt, 0.8dt),
+            hbox(:right:top, hbox(:right:base,
+                "Taubenheim ", span(:light, "(Spree)")
+            ))
+        );
+    }
+}
+
+
+# DE 6216.  Bautzen - Bad Schandau
+with detail = 2 {
+    let bs = path("d2.de.6216");
+
+    with link = "line.de.6216" {
+        track(:first :removed, bs[:bau.yw, :wil.yb]);
+        track(:first :pax, bs[:wil.yb, :nkw.yb]);
+        track(:second, bs[:nkw.yb, :eur]);
+        track(:second :removed, bs[:eur, :nst]);
+        track(:second :pax, bs[:nst, :san.ys]);
+
+        guide(:linenum :removed,
+                bs[:bau.yw + 2km] << 0.7dt
+            --  bs[:bau.yw + 2km] << 3.0dt
+        );
+        label(:linenum :removed, bs[:bau.yw + 2km] << 3.0dt,
+            hbox(:left:middle, " 6216")
+        );
+        line_badge(:removed, bs[:nst - 4km] @ -6, "6216");
+        guide(:linenum :pax,
+                bs[:nst + 6km] << 0.7dt
+            --  bs[:nst + 6km] << 3.0dt
+        );
+        label(:linenum :pax, bs[:nst + 6km] << 3.0dt,
+            hbox(:left:middle, " 6216")
+        );
+    }
+
+    with link = "point.de.Großpostwitz" {
+        with layer = 1 marker(:statdot :removed, bs[:gpo]);
+        slabel(:right :removed, bs[:gpo] + (1.0dt, -0.5dt), "Großpostwitz");
+    }
+
+    with link = "point.de.Wilthen" {
+        with layer = 1 marker(:statdot :pax, bs[:wil]);
+        slabel(:left :pax, bs[:wil] + (1.5dt, -2.0dt), "Wilthen");
+    }
+
+    with link = "point.de.Neukirch-Lausitz-West" {
+        with layer = 1 marker(:statdot :pax, bs[:nkw]);
+        slabel(:right :pax, bs[:nkw] + (-0.8dt, 1.0dt),
+            vbox(:left:top,
+                "Neukirch",
+                hbox(:left :base, span(:light, "(L.)"), " West")
+            )
+        );
+    }
+
+    with link = "point.de.Neustadt-Sachs" {
+        with layer = 1 marker(:statdot :pax, bs[:nst]);
+        slabel(:right :pax, bs[:nst] + (2.0dt, 2.5dt),
+            hbox(:left:base, "Neustadt ", span(:light, "(Sachs)"))
+        );
+    }
+
+    with link = "point.de.Sebnitz-Sachs" {
+        with layer = 1 marker(:statdot :pax, bs[:seb]);
+        slabel(:right :pax, bs[:seb] + (-2dt, 2.0dt),
+            vbox(:left:top, "Sebnitz", span(:light, "(Sachs)"))
+        );
+    }
+
+    with link = "point.de.Goßdorf-Kohlmühle" {
+        with layer = 1 marker(:statdot :pax, bs[:gos]);
+        slabel(:right :pax, bs[:gos] + (-2dt, 0.5dt),
+            vbox(:left:top, "Goßdorf-", "            Kohlmühle")
+        );
+    }
+}
+
+
+# DE 6217.  Neukirch (Lausitz) West - Bischofswerda
+with detail = 2 {
+    let nb = path("d2.de.6217");
+
+    with link = "line.de.6217" {
+        track(:first :pax, nb[:nkw.yb, :bis.yn]);
+
+        guide(:linenum :pax,
+                nb[:bis.yn - 3.5km] << 0.7dt
+            --  nb[:bis.yn - 3.5km] << 3.0dt
+        );
+        label(:linenum :pax, nb[:bis.yn - 3.5km] << 3.0dt,
+            hbox(:right:top, "6217")
+        );
+    }
+}
+
+
+# DE 6228.  Arnsdorf Nord - Arnsdorf West
+with detail = 2 {
+    with link = "line.de.6228" {
+        track(:first :pax, path("d2.de.6228")[:ano.y, :arw.y]);
+    }
+}
+
+
+# DE 6240.  Bad Schandau Grenze - Dresden-Neustadt
+with detail = 2 {
+    let bd = path("d2.de.6240");
+
+    with link = "line.de.6240" {
+        track(:first :double :cat:ac15 :pax, bd[:sog, :dne]);
+
+        guide(:linenum :cat:ac15 :pax,
+                bd[:san + 6km] << 1dt
+            --  bd[:san + 6km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, bd[:san + 6km] << 3dt + (-0.4dt, 0dt),
+            hbox(:center:top, "6240")
+        );
+    }
+
+    with link = "point.de.Schöna" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:son]);
+        slabel(:right :cat:ac15 :pax, bd[:son] + (1.5dt, 0.8dt), "Schöna");
+    }
+
+    with link = "point.de.Bad-Schandau" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:san]);
+        slabel(:bottom :cat:ac15 :pax, bd[:san] + (-1dt, 1.3dt),
+            vbox(:center:top, "Bad", "Schandau")
+        );
+    }
+
+    with link = "point.de.Pirna" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:pir]);
+        slabel(:left :cat:ac15 :pax, bd[:pir] + (0.5dt, 1.3dt),
+            hbox(:right:top, "Pirna")
+        );
+    }
+
+    with link = "point.de.Heidenau" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:hei]);
+        slabel(:left :cat:ac15 :pax, bd[:hei] + (-1dt, 0dt),
+            hbox(:right:top, "Heidenau")
+        );
+    }
+
+    with link = "point.de.Dresden-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:dre]);
+    }
+
+    with link = "point.de.Dresden-Neustadt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, bd[:dne]);
+    }
+}
+
+
+# DE 6243.  Dresden Freiberger Straße - Dresden-Altstadt
+with detail = 2 {
+    with link = "line.de.6243" {
+        track(:first :double :cat:ac15, path("d2.de.6243")[:dfs.ys, :dal.y]);
+    }
+}
+
+
+# DE 6244.  Dresden-Friedrichstadt - Dresden Freiberger Straße
+with detail = 2 {
+    with link = "line.de.6244" {
+        track(:first :double :cat:ac15 :pax,
+                path("d2.de.6244")[:dfs.yn, :dfr]
+        );
+    }
+}
+
+
+# DE 6246.  Dresden-Pieschen Abzw - Dresden-Neustadt Stw 8/6
+with detail = 2 {
+    let pn = path("d2.de.6246");
+
+    with link = "line.de.6246" {
+        track(:first :cat:ac15, pn[:pia, :dne.yg]);
+    }
+
+    with link = "point.de.Dresden-Neustadt-Gbf" {
+        with layer = 1 marker(:statdot, pn[:dng]);
+    }
+}
+
+
+# DE 6247.  Dresden-Friedrichstadt - Dresden Mitte
+with detail = 2 {
+    with link = "line.de.6247" {
+        track(:first :double :cat:ac15, path("d2.de.6247")[:dfr.ym, :dmi.yf]);
+    }
+}
+
+
+# DE 6248.  Dresden-Friedrichstadt - Elsterwerda Strw
+with detail = 2 {
+    let de = path("d2.de.6248");
+
+    with link = "line.de.6248" {
+        track(:first :double :cat:ac15 :pax, de[:dfr, :elx]);
+
+        line_badge(:cat:ac15 :pax, de[:grb + 7km] @ -2 << 0.1dt, "6248");
+    }
+
+    with link = "point.de.Großenhain-Berl-Bf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, de[:grb]);
+    }
+}
+
+
+# DE 6250.  Großenhain Berl Bf - Großenhain Cottb Bf
+with detail = 2 {
+    with link = "line.de.6250" {
+        track(:first :cat:ac15, path("d2.de.6250")[:grb.yc, :grc.yb]);
+    }
+}
+
+
+# DE 6252.  Großenhain Cottb Bf - Priestewitz
+with detail = 2 {
+    let gp = path("d2.de.6252");
+
+    with link = "line.de.6252" {
+        track(:first :cat:ac15 :pax, gp[:grc, :pri.yg]);
+    }
+}
+
+
+# DE 6254.  Röderau - Riesa
+with detail = 2 {
+    with link = "line.de.6254" {
+        track(:first :cat:ac15, path("d2.de.6254")[:rod.yr, :rob]);
+    }
+}
+
+
+# DE 6255.  Riesa - Chemnitz Hbf
+with detail = 2 {
+    let rc = path("d2.de.6255");
+
+    with link = "line.de.6255" {
+        track(:first :double :cat:ac15 :pax, rc[:rie, :che.yr]);
+
+        line_badge(:cat:ac15 :pax, rc[:rie + 11km] @ 2, "6255");
+        line_badge(:cat:ac15 :pax, rc[:wal + 6.5km] @ 15 >> 0.2dt, "6255");
+    }
+
+    with link = "point.de.Döbeln-Gärtitz" {
+        with layer = 1 marker(:statdot :removed, rc[:gar]);
+    }
+
+    with link = "point.de.Döbeln-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rc[:dob]);
+        slabel(:right :cat:ac15 :pax, rc[:dob] + (1.5km, -0.3dt),
+            hbox(:left:middle, "Döbeln")
+        );
+    }
+
+    with link = "point.de.Waldheim" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rc[:wal]);
+        slabel(:right :cat:ac15 :pax, rc[:wal] + (1.8dt, 0.8dt), "Waldheim");
+    }
+
+    with link = "point.de.Mittweida" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, rc[:mit]);
+        slabel(:left :cat:ac15 :pax, rc[:mit] + (-1.8dt, 1.0dt),
+            "Mittweida"
+        );
+    }
+}
+
+
+# DE 6256.  Riesa Rbf - Riesa Stw 4
+with detail = 2 {
+    with link = "line.de.6256" {
+        track(:first :double :cat:ac15, path("d2.de.6256")[:rir.yd, :rie.iv]);
+    }
+}
+
+
+# DE 6257.  Chemitz-Hilbersdorf Strw - Chemnitz Hbf Strw
+with detail = 2 {
+    with link = "line.de.6256" {
+        track(:first :double :cat:ac15 :pax,
+                path("d2.de.6257")[:hil, :che.yr]
+        );
+    }
+}
+
+
+# DE 6258.  Dresden Hbf - Werdau Bogendreieck
+with detail = 2 {
+    let dw = path("d2.de.6258");
+
+    with link = "line.de.6258" {
+        track(:first :double :cat:ac15 :pax, dw[:dre.yt, :hil]);
+        track(:first :double :removed, dw[:hil, :che.yr]);
+        track(:first :double :cat:ac15 :pax, dw[:che.yr, :wbn]);
+
+        guide(:linenum :cat:ac15 :pax,
+                dw[:kli - 4km] >> 1dt
+            --  dw[:kli - 4km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, dw[:kli - 4km] >> 3dt - (0.1dt, 0dt),
+            hbox(:center:bottom, "6258")
+        );
+        guide(:linenum :cat:ac15 :pax,
+                dw[:fre + 11.5km] >> 1dt
+            --  dw[:fre + 11.5km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, dw[:fre + 11.5km] >> 3dt - (0.1dt, 0dt),
+            hbox(:center:bottom, "6258")
+        );
+        line_badge(:cat:ac15 :pax, dw[:chs + 6km] @ 2 >> 0.2dt, "6258");
+        guide(:linenum :cat:ac15 :pax,
+                dw[:mos + 3km] >> 1dt
+            --  dw[:mos + 3km] >> 3dt
+        );
+        label(:linenum :cat:ac15 :pax, dw[:mos + 3km] >> 3dt,
+            hbox(:right:middle, "6258 ")
+        );
+    }
+
+    with link = "point.de.Dresden-Altstadt" {
+        with layer = 1 marker(:statdot :cat:ac15, dw[:dal]);
+    }
+
+    with link = "point.de.Freital-Ost" {
+        with layer = 1 marker(:statdot :cat:ac15, dw[:fos]);
+    }
+
+    with link = "point.de.Freital-Potschappel" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:pot]);
+    }
+
+    with link = "point.de.Freital-Hainsberg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:hai]);
+    }
+
+    with link = "point.de.Tharandt" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:tha]);
+        slabel(:left :cat:ac15 :pax, dw[:tha] + (1.0dt, -1.5dt), "Tharandt");
+    }
+
+
+    with link = "point.de.Klingenberg-Colmnitz" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:kli]);
+        slabel(:right :cat:ac15 :pax, dw[:kli] + (1.5dt, 0.5dt),
+            vbox(:left:top, "Klingenberg-", "   Colmnitz")
+        );
+    }
+
+    with link = "point.de.Freiberg-Sachs" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:fre]);
+        slabel(:left :cat:ac15 :pax, dw[:fre] + (1.5dt, -2.0dt),
+            vbox(:right:bottom, "Freiberg", span(:light, "(Sachs)"))
+        );
+    }
+
+    with link = "point.de.Flöha" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:flo]);
+        slabel(:left :cat:ac15 :pax, dw[:flo] + (1.0dt, 1.0dt),
+            hbox(:right:top, "Flöha")
+        );
+    }
+
+    with link = "point.de.Niederwiesa" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:nwi]);
+        slabel(:right :cat:ac15 :pax, dw[:nwi.yr] + (1dt, -1.0dt),
+            vbox(:left:bottom, "   Nieder-", "wiesa")
+        );
+    }
+
+    with link = "point.de.Chemnitz-Hilbersdorf" {
+        with layer = 1 marker(:statdot :removed, dw[:hir]);
+    }
+
+    with link = "point.de.Chemnitz-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:che]);
+        slabel(:right :cat:ac15 :pax, dw[:che] + (1.5dt, 1dt),
+            hbox(:left:top :medium :bold, "Chemnitz")
+        );
+    }
+
+    with link = "point.de.Chemnitz-Süd" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:chs]);
+    }
+
+    with link = "point.de.Wüstenbrand" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:wus]);
+        slabel(:left :cat:ac15 :pax, dw[:wus] + (1.0dt, -1.5dt),
+            "Wüstenbrand"
+        );
+    }
+
+    with link = "point.de.St-Egidien" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:seg]);
+        slabel(:left :cat:ac15 :pax, dw[:seg] + (1.0dt, 0.8dt),
+            hbox(:right:top, "St Egidien")
+        );
+    }
+
+    with link = "point.de.Glauchau-Sachs" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:gla]);
+        slabel(:right :cat:ac15 :pax, dw[:gla] + (1.8km, -0.3dt),
+            hbox(:left:base, "Glauchau ", span(:light, "(Sachs)"))
+        );
+    }
+
+    with link = "point.de.Mosel" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:mos]);
+        slabel(:left :cat:ac15 :pax, dw[:mos] + (-1.5dt, 0.8dt), "Mosel");
+    }
+
+    with link = "point.de.Zwickau-Sachs-Hbf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, dw[:zwi]);
+        slabel(:right :cat:ac15 :pax, dw[:zwi] + (2.3dt, 0dt),
+            vbox(:left:middle, "Zwickau", span(:light, "    (Sachs)"))
+        );
+    }
+}
+
+
+# DE 6264.  Schwarzenberg (Erzgeb) - Zwickau (Sachs)
+with detail = 2 {
+    let sz = path("d2.de.6264");
+
+    with link = "line.de.6264" {
+        track(:first :pax, sz[:swa, :sle]);
+        track(:first :double :pax, sz[:sle, :zwi]);
+
+        guide(:linenum :pax,
+                sz[:swa + 2.5km] << 0.7dt
+            --  sz[:swa + 2.5km] << 2.0dt
+        );
+        label(:linenum :pax, sz[:swa + 2.5km] << 2.0dt,
+            hbox(:right:middle, "6264 ")
+        );
+        line_badge(:pax, sz[:wil - 6.7km] @ -8, "6264");
+    }
+
+    with link = "point.de.Schwarzenberg-Erzgeb" {
+        with layer = 1 marker(:statdot :pax, sz[:swa]);
+        slabel(:left :pax, sz[:swa] + (0dt, 0.5dt),
+            vbox(:right:top,
+                "Schwarzen-", "berg   ", span(:light, "(Erzgeb)   ")
+            )
+        );
+    }
+
+    with link = "point.de.Aue-Sachs" {
+        with layer = 1 marker(:statdot :pax, sz[:aue]);
+        slabel(:left :pax, sz[:aue] + (-1.0dt, 2.3dt), "Aue");
+    }
+
+    with link = "point.de.Bad-Schlema" {
+        with layer = 1 marker(:statdot :pax, sz[:sle]);
+        slabel(:left :pax, sz[:sle] + (-1.5dt, 1.0dt), "Bad Schlema");
+    }
+
+    with link = "point.de.Wilkau-Haßlau" {
+        with layer = 1 marker(:statdot :pax, sz[:wil]);
+        slabel(:right :pax, sz[:wil] + (-0.5dt, -1.5dt), "Wilkau-Haßlau");
+    }
+}
+
+
+# DE 6265.  Glauchau-Schönbörnchen - Gößnitz
+with detail = 2 {
+    let gg = path("d2.de.6265");
+
+    with link = "line.de.6265" {
+        track(:first :cat:ac15 :pax, gg[:gso.y, :gos.yg]);
+
+        guide(:linenum :cat:ac15 :pax,
+                gg[:gos.yg - 5.4km] >> 0.7dt
+            --  gg[:gos.yg - 5.4km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax,
+            gg[:gos.yg - 5.4km] >> 3.0dt + (0dt, -0.2dt),
+            hbox(:left:middle, " 6265")
+        );
+    }
+}
+
+
+# DE 6266.  Lehndorf (Kr Altenburg) - Saara
+with detail = 2 {
+    with link = "line.de.6266" {
+        track(:first :pax, path("d2.de.6266")[:leh.ys, :saa]);
+    }
+}
+
+
+# DE 6267.  Werdau Bogendreieck Zwickauer Spitze - Werdauer Spitze
+with detail = 2 {
+    with link = "line.de.6267" {
+        track(:first :double :cat:ac15 :pax, path("d2.de.6267")[:wbz, :wbw]);
+    }
+}
+
+
+# DE 6268.  Gößnitz - Gera Süd
+with detail = 2 {
+    let gg = path("d2.de.6268");
+
+    with link = "line.de.6268" {
+        track(:first :pax, gg[:gos.yr, :deb.yr]);
+
+        line_badge(:pax, gg[:saa + 7km] >> 0.4dt, "6268");
+    }
+
+    with link = "point.de.Ronneburg-Thür" {
+        with layer = 1 marker(:statdot :pax, gg[:ron]);
+    }
+}
+
+
+# DE 6269.  Wolfsgefährt Bf - Weischlitz
+with detail = 2 {
+    let gw = path("d2.de.d.6269");
+
+    with link = "line.de.6269" {
+        track(:first :pax, gw[:gre, :wei.yg]);
+
+        guide(:linenum :pax,
+                gw[:pcr - 4km] << 0.7dt
+            --  gw[:pcr - 4km] << 3.0dt
+        );
+        label(:linenum :pax, gw[:pcr - 4km] << 3.0dt,
+            hbox(:left:middle, " 6269")
+        );
+    }
+
+    with link = "point.de.Plauen-Vogtl-Chrieschwitz" {
+        with layer = 1 marker(:statdot, gw[:pcr]);
+    }
+
+    with link = "point.de.Plauen-Vogtl-unt-Bf" {
+        with layer = 1 marker(:statdot :pax, gw[:plu]);
+    }
+}
+
+
+# DE 6270.  Plauen (Vogtl) ob Bf - Bad Brambach Grenze
+with detail = 2 {
+    let pb = path("d2.de.6270");
+
+    with link = "line.de.6270" {
+        track(:first :pax, pb[:plo.yb, :pir]);
+        track(:first :double :pax, pb[:pir, :ado]);
+        track(:first :pax, pb[:ado, :rau]);
+        track(:first :double :pax, pb[:rau, :bra]);
+        track(:first :pax, pb[:bra, :brg]);
+
+        line_badge(:pax, pb[:oel + 5km] @ -12 << 0.2dt, "6270");
+        guide(:linenum :pax,
+                pb[:rau - 2km] << 0.7dt
+            --  pb[:rau - 2km] << 3.0dt
+        );
+        label(:linenum :pax, pb[:rau - 2km] << 3.0dt,
+            hbox(:left:middle, " 6270")
+        );
+    }
+
+    with link = "point.de.Weischlitz" {
+        with layer = 1 marker(:statdot :pax, pb[:wei]);
+        slabel(:right :pax, pb[:wei] + (1.5dt, 1.0dt), "Weischlitz");
+    }
+
+    with link = "point.de.Oelsnitz-Vogtl" {
+        with layer = 1 marker(:statdot :pax, pb[:oel]);
+        slabel(:left :pax, pb[:oel] + (0.5dt, 1.0dt),
+            vbox(:right:top, "Oelsnitz", span(:light, "(Vogtl)"))
+        );
+    }
+
+    with link = "point.de.Adorf-Vogtl" {
+        with layer = 1 marker(:statdot :pax, pb[:ado]);
+        slabel(:right :pax, pb[:ado] + (1.5dt, 1.5dt),
+            vbox(:left:bottom, "Adorf", span(:light, "(Vogtl)"))
+        );
+    }
+
+    with link = "point.de.Bad-Brambach" {
+        with layer = 1 marker(:statdot :pax, pb[:bra]);
+        slabel(:right :pax, pb[:bra] + (0dt, -1.5dt), "Bad Brambach");
+    }
+
+    with link = "point.int.Bad-Brambach-Plesná-I" {
+        marker(:refdt :right, pb[:brg]);
+        marker(:refdt :left, pb[:brg]);
+    }
+}
+
+
+# DE 6273.  Zeithain Bogendreieck - Elsterwerda
+with detail = 2 {
+    let ze = path("d2.de.6273");
+
+    with link = "line.de.6273" {
+        track(:first :double :cat:ac15 :pax, ze[:zei.ye, :els.yz]);
+        line_badge(:cat:ac15 :pax, ze[:zei.ye + 9km], "6273");
+    }
+}
+
+
+# DE 6274.  Leckwitz - Kottewitz
+with detail = 2 {
+    let lk = path("d2.de.6274");
+
+    with link = "line.de.6274" {
+        track(:first :double :cat:ac15 :pax, lk[:lec.y, :kot.y]);
+    }
+}
+

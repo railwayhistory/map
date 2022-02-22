@@ -1,0 +1,43 @@
+# DE 6311.  Eisenach - Lichtenfels
+with detail = 2 {
+    let el = path("d2.de.n.6311");
+
+    with link = "line.de.6311" {
+        track(:first :removed, el[:eif.ys, :cob.ys]);
+        track(:first :cat:ac15 :pax, el[:cob, :cog]);
+        track(:first :double :cat:ac15 :pax, el[:cog, :lic.yc]);
+
+        guide(:linenum :removed,
+                el[:eif.ys + 6.2km] >> 0.7dt
+            --  el[:eif.ys + 6.2km] >> 3.0dt
+        );
+        label(:linenum :removed, el[:eif.ys + 6.2km] >> 3.0dt,
+            hbox(:right:middle, "6311 ")
+        );
+        guide(:linenum :cat:ac15 :pax,
+                el[:ebe + 3.8km] << 1dt
+            --  el[:ebe + 3.8km] << 3dt
+        );
+        label(:linenum :cat:ac15 :pax, el[:ebe + 3.8km] << 3dt,
+            hbox(:left:middle, " 6311")
+        );
+    }
+
+    with link = "point.de.Coburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, el[:cob]);
+        slabel(:left :cat:ac15 :pax, el[:cob] + (-1.8dt, 0.3dt), "Coburg");
+    }
+
+    with link = "point.de.Creidlitz" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, el[:cre]);
+        slabel(:left :cat:ac15 :pax, el[:cre] + (-1.8dt, 1.3dt), "Creidlitz");
+    }
+
+    with link = "point.de.Ebersdorf-Coburg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, el[:ebe]);
+        slabel(:top :cat:ac15 :pax, el[:ebe] + (2dt, -2.0dt),
+            vbox(:center:bottom, "Ebersdorf", span(:light, "(b Coburg)"))
+        );
+    }
+}
+

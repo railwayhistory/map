@@ -1,0 +1,248 @@
+# DE 6205.  Cottbus - Forst (Lausitz) Grenze
+with detail = 2 {
+    let cf = path("d2.de.6205");
+
+    with link = "line.de.6205" {
+        track(:first :pax, cf[:cot.yf, :fog]);
+
+        line_badge(:pax, cf[:for - 8km], "6205");
+    }
+
+    with link = "point.de.Forst-Lausitz" {
+        with layer = 1 marker(:statdot :pax, cf[:for]);
+        slabel(:right :pax, cf[:for] + (-1.5dt, -1.0dt),
+            vbox(:left:bottom, "Forst", span(:light, "(Lausitz)"))
+        );
+    }
+
+    with link = "point.int.Forst-Lausitz-Zasieki" {
+        marker(:refdt :right, cf[:fog]);
+        marker(:refdt :left, cf[:fog]);
+    }
+}
+
+
+# DE 6206.  Guben - Guben Grenze
+with detail = 2 {
+    let gg = path("d2.de.6206");
+
+    with link = "line.de.6206" {
+        track(:first, gg[:gub.yn, :gug]);
+    }
+
+    with link = "point.int.Guben-Gubin" {
+        marker(:refdt :right, gg[:gug]);
+        marker(:refdt :left, gg[:gug]);
+    }
+}
+
+
+# DE 6207.  Horka Grenze - Roßlau (Elbe)
+with detail = 2 {
+    let hr = path("d2.de.b.6207");
+
+    with link = "line.de.6207" {
+        track(:first :double :cat:ac15, hr[:hog, :sar]);
+        track(:first :double :cat:ac15 :pax, hr[:sar, :ruh.yh]);
+        track(:first :double :cat:ac15 :pax, hr[:ruh.yf, :fax]);
+
+        line_badge(:cat:ac15 :pax, hr[:sar + 15km], "6207");
+        line_badge(:cat:ac15 :pax, hr[:hoy + 7km], "6207");
+        line_badge(:cat:ac15 :pax, hr[:bie + 7.5km], "6207");
+    }
+
+    with link = "point.de.Knappenrode" {
+        with layer = 1 marker(:statdot :cat:ac15, hr[:kna]);
+        slabel(:left :cat:ac15, hr[:kna] + (1.5dt, 1.0dt),
+            vbox(:right:top, "Knappen-", "rode ")
+        );
+    }
+
+    with link = "point.de.Hoyerswerda" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:hoy]);
+        slabel(:right :cat:ac15 :pax, hr[:hoy] + (-1.0dt, -1.8dt),
+            "Hoyerswerda"
+        );
+    }
+
+    with link = "point.de.Hosena" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:hos]);
+        slabel(:right :cat:ac15 :pax, hr[:hos] + (1.5dt, -1.0dt), "Hosena");
+    }
+
+    with link = "point.de.Lauchhammer" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:lau]);
+        slabel(:bottom :cat:ac15 :pax, hr[:lau] + (0dt, 1.0dt),
+            vbox(:center:top, "Lauch-", "hammer")
+        );
+    }
+
+    with link = "point.de.Elsterwerda-Biehla" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:bie + 0.5dt]);
+    }
+}
+
+
+# DE 6209.  Särichen - Mückenhain
+with detail = 2 {
+    with link = "line.de.6209" {
+        track(:first :pax, path("d2.de.6209")[:sar, :muc.y]);
+    }
+}
+
+
+# DE 6218.  Knappenrode - Sornoer Buden West
+with detail = 2 {
+    let ks = path("d2.de.6218");
+
+    with link = "line.de.6218" {
+        track(:first :cat:ac15, ks[:kna.ys, :spr]);
+        track(:first :removed, ks[:spr, :swa]);
+        track(:first :double :removed, ks[:swa, :saw]);
+        track(:first :removed, ks[:saw, :sbw]);
+
+        line_badge(:cat:ac15, ks[:wei + 3.5km], "6218");
+        line_badge(:removed, ks[:sbw - 8km], "6218");
+    }
+
+    with link = "point.de.Spreewitz" {
+        with layer = 1 marker(:statdot :cat:ac15, ks[:spr]);
+        slabel(:left :cat:ac15, ks[:spr] + (-1.8dt, 1.0dt), "Spreewitz");
+    }
+}
+
+
+# DE 6219.  Sornoer Buden Ost - Sornoer Buden Nord
+with detail = 2 {
+    with link = "line.de.6219" {
+        track(:first :removed, path("d2.de.6219")[:sbo, :sbn]);
+    }
+}
+
+
+# DE 6220.  Merzdorf Strw - Peitz Ost Strw
+with detail = 2 {
+    let mp = path("d2.de.6220");
+
+    with link = "line.de.6220" {
+        track(:first :double :cat:ac15 :pax, mp[:mex, :pox]);
+    }
+}
+
+
+# DE 6221.  Knappenrode Süd - Knappenrode
+with detail = 2 {
+    with link = "line.de.6221" {
+        track(:first :removed, path("d2.de.6221")[:kns.y, :kna.ys]);
+    }
+}
+
+
+# DE 6222.  Spreewitz Süd - Graustein
+with detail = 2 {
+    let sg = path("d2.de.6222");
+
+    with link = "line.de.6222" {
+        track(:first, sg[:sps, :gra.ys]);
+
+        guide(:linenum,
+                sg[:gra.ys - 4km] << 0.7dt
+            --  sg[:gra.ys - 4km] << 3.0dt
+        );
+        label(:linenum, sg[:gra.ys - 4km] << 3.0dt + (0dt, -0.2dt),
+            hbox(:right:middle, "6222 ")
+        );
+    }
+}
+
+
+# DE 6223.  Spreewitz - Spreewitz Nord
+with detail = 2 {
+    with link = "line.de.6223" {
+        track(:first :removed, path("d2.de.6223")[:spr, :spn]);
+    }
+}
+
+
+# DE 6224.  Graustein Süd - Graustein Ost
+with detail = 2 {
+    with link = "line.de.6224" {
+        track(:first :removed, path("d2.de.6224")[:grs, :gro]);
+    }
+}
+
+
+# DE 6225.  Lindthal - Altdöbern Süd
+with detail = 2 {
+    let la = path("d2.de.6225");
+
+    with link = "line.de.6225" {
+        track(:first :cat:ac15, la[:lin, :ads]);
+
+        line_badge(:cat:ac15, la[:lin + 6km], "6225");
+    }
+}
+
+
+# DE 6253.  Großenhain Cottb Bf - Frankfurt (Oder) Pbf
+with detail = 2 {
+    let gf = path("d2.de.6253");
+
+    with link = "line.de.6253" {
+        track(:first :cat:ac15 :pax, gf[:grc, :ruh.yf]);
+        track(:first :double :cat:ac15 :pax, gf[:ruh.yf, :cot.yr]);
+        track(:first :removed, gf[:wil.yp, :gru.yb]);
+        track(:second :pax, gf[:gru.yb, :fra.yg]);
+
+        line_badge(:cat:ac15 :pax, gf[:grc + 19km] << 0.4dt, "6253");
+        line_badge(:cat:ac15 :pax, gf[:npe + 7km], "6253");
+        line_badge(:removed, gf[:jam + 6km], "6253");
+        line_badge(:pax, gf[:gru + 13km], "6253");
+    }
+
+    with link = "point.de.Großenhain-Cottb-Bf" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, gf[:grc]);
+        slabel(:right :cat:ac15 :pax, gf[:grc] + (1.5dt, 2.0dt),
+            "Großenhain"
+        );
+    }
+
+    with link = "point.de.Ruhland" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, gf[:ruh]);
+        slabel(:right :cat:ac15 :pax, gf[:ruh] + (0.5dt, 1.0dt),
+            hbox(:left:top, "Ruhland")
+        );
+    }
+
+    with link = "point.de.Brieske" {
+        with layer = 1 marker(:statdot :cat:ac15, gf[:bri]);
+    }
+
+    with link = "point.de.Senftenberg" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, gf[:sen]);
+        slabel(:right :cat:ac15 :pax, gf[:sen] + (1.5dt, 2.0dt),
+            "Senftenberg"
+        );
+    }
+
+    with link = "point.de.Neupetershain" {
+        with layer = 1 marker(:statdot :cat:ac15 :pax, gf[:npe]);
+        slabel(:left :cat:ac15 :pax, gf[:npe] + (-0.5dt, -0.3dt),
+            vbox(:right:bottom, "Neupeters-", "hain ")
+        );
+    }
+
+    with link = "point.de.Jamlitz" {
+        with layer = 1 marker(:statdot :removed, gf[:jam]);
+        slabel(:right :removed, gf[:jam] + (1.6dt, 0.8dt), "Jamlitz");
+    }
+
+    with link = "point.de.Grunow-Niederlausitz" {
+        with layer = 1 marker(:statdot :pax, gf[:gru]);
+        slabel(:right :pax, gf[:gru] + (1.8dt, 0dt),
+            vbox(:left:middle, "Grunow", span(:light, "(Niederlausitz)"))
+        );
+    }
+}
+
+
