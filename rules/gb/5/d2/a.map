@@ -1,0 +1,60 @@
+# GB ABF.  Buchlyvie Junction - Aberfoyle
+with detail = 2 {
+    let abf = path("d2.gb.abf");
+
+    with link = "line.gb.ABF" {
+        track(:first :removed, abf[:buj, :abe]);
+
+        guide(:linenum :removed,
+                abf[:buj + 4km] << 0.7dt
+            --  abf[:buj + 4km] << 3.0dt
+        );
+        label(:linenum :removed, abf[:buj + 4km] << 3.0dt,
+            hbox(:right:middle, "ABF ")
+        );
+    }
+
+    with link = "point.gb.Aberfoyle" {
+        with layer = 1 marker(:statdot :removed, abf[:abe]);
+        slabel(:left :removed, abf[:abe] + (-1.5dt, 0.8dt), "Aberfoyle");
+    }
+}
+
+
+# GB ABG.  St Vigean's Junction - Guthrie
+with detail = 2 {
+    let abg = path("d2.gb.abg");
+
+    with link = "line.gb.ABG" {
+        track(:first :double :removed, abg[:svi.y, :gut.ya]);
+
+        guide(:linenum :removed,
+                abg[:svi.y + 5km] << 1dt
+            --  abg[:svi.y + 5km] << 3dt
+        );
+        label(:linenum :removed, abg[:svi.y + 5km] << 3dt,
+            hbox(:right:middle, "ABG ")
+        );
+    }
+}
+
+
+# GB ABX.  Clarkston - Bathgate
+with detail = 2 {
+    let abx = path("d2.gb.abx");
+
+    with link = "line.gb.ABX" {
+        track(:first :double :cat:ac25 :pax, abx[:clj, :bat]);
+
+        line_badge(:cat:ac25 :pax, abx[:wcr - 5km], "ABX");
+    }
+
+    with link = "point.gb.Westcraigs" {
+        with layer = 1 marker(:statdot :removed, abx[:wcr]);
+    }
+
+    with link = "point.gb.Bathgate" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, abx[:bat]);
+    }
+}
+
