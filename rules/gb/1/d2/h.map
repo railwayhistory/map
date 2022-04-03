@@ -11,3 +11,33 @@ with detail = 2 {
     }
 }
 
+
+# GB HIB.  Bedford - Hitchin.
+with detail = 2 {
+    let hib = path("d2.gb.hib");
+
+    with link = "line.gb.HIB" {
+        track(:first :double :removed, hib[:bed.yh, :hit.yn]);
+        line_badge(:removed, hib[:bed.yh + 9.5km], "HIB");
+    }
+}
+
+
+# GB HIS.  Highdyke Junction - Stainby
+with detail = 2 {
+    let his = path("d2.gb.his");
+
+    with link = "line.gb.HIS" {
+        track(:first :removed, his[:hij.y, :sta]);
+        
+        guide(:linenum :removed,
+                his[:skj.y - 3km] << 0.7dt
+            --  his[:skj.y - 3km] << 3.0dt
+        );
+        label(:linenum :removed, his[:skj.y - 3km] << 2.9dt - (1dt, 0dt),
+            hbox(:left:top, "HIS")
+        );
+        
+    }
+}
+

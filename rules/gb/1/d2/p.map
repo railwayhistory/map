@@ -1,0 +1,27 @@
+# GB PMJ.  Manton Junction - Peterborough
+with detail = 2 {
+    let pmj = path("d2.gb.pmj");
+
+    with link = "line.gb.PMJ" {
+        track(:first :double :pax,
+                pmj[:maj, :hel.ym - 4dt]
+            ..  pmj[:hel.ym, :pet] >> 1dt
+        );
+        line_badge(:pax, pmj[:luf + 4.7km] << 0.1dt, "PMJ");
+    }
+
+    with link = "point.gb.Luffenham" {
+        with layer = 1 marker(:statdot :removed, pmj[:luf]);
+        slabel(:top :removed, pmj[:luf] + (0dt, -1.3dt),
+            vbox(:center:bottom, " Luffen-", "ham")
+        );
+    }
+
+    with link = "point.gb.Stamford-Lincs" {
+        with layer = 1 marker(:statdot :pax, pmj[:sta]);
+        slabel(:left :pax, pmj[:sta] + (0dt, -1dt),
+            vbox(:right:bottom, "Stamford", span(:light, "(Lincs)"))
+        );
+    }
+}
+
