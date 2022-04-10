@@ -1,0 +1,32 @@
+# DE 6504.  Kremmen - Meyenburg
+with detail = 2 {
+    let kw = path("d2.de.6504");
+
+    with link = "line.de.6504" {
+        track(:first :pax, kw[:kre, :wis]);
+        track(:second :removed, kw[:wis.yp, :mey.yw]);
+
+        line_badge(:pax, kw[:kre + 12km], "6504");
+        line_badge(:pax, kw[:wis - 17km], "6504");
+        guide(:linenum :removed,
+                kw[:wis + 15km] >> 0.7dt
+            --  kw[:wis + 15km] >> 3.0dt
+        );
+        label(:linenum :removed, kw[:wis + 15km] >> 3.0dt,
+            hbox(:left:middle, " 6504")
+        );
+    }
+
+    with link = "point.de.Neuruppin" {
+        with layer = 1 marker(:statdot :pax, kw[:nru]);
+        slabel(:left :pax, kw[:nru] + (4dt, -2.0dt), "Neuruppin");
+    }
+
+    with link = "point.de.Wittstock" {
+        with layer = 1 marker(:statdot :pax, kw[:wis]);
+        slabel(:right :pax, kw[:wis] + (1.5km, 0.5dt),
+            hbox(:left:top, "Wittstock")
+        );
+    }
+}
+

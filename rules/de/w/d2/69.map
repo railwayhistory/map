@@ -1,3 +1,67 @@
+# DE 6920.  Rostock Warnowbrücke Ost - Rostock Gbf
+with detail = 2 {
+    with link = "line.de.6920" {
+        track(:second :removed, path("d2.de.6920")[:wao.y, :rog.yo]);
+    }
+}
+
+
+# DE 6921.  Wismar - Rostock Hbf
+with detail = 2 {
+    let wr = path("d2.de.6921");
+
+    with link = "line.de.6921" {
+        track(:second :pax, wr[:wis.yr, :ros.yw]);
+        line_badge(:pax, wr[:dob - 20km] @ -2, "6921");
+        line_badge(:pax, wr[:dob + 7km], "6921");
+    }
+
+    with link = "point.de.Hornstorf" {
+        with layer = 1 marker(:statdot :pax, wr[:hor]);
+        slabel(:left :pax, wr[:hor] + (1.0dt, -1.5dt), "Hornstorf");
+    }
+
+    with link = "point.de.Bad-Doberan" {
+        with layer = 1 marker(:statdot :pax, wr[:dob]);
+        slabel(:right :pax, wr[:dob] + (1.0dt, -1.5dt), "Bad Doberan");
+    }
+}
+
+
+# DE 6925.  Bentwisch - Rostock Seehafen Süd
+with detail = 2 {
+    with link = "line.de.6925" {
+        track(:second :cat:ac15, path("d2.de.6925")[:ben.ys, :ses])
+    }
+}
+
+
+# DE 6926.  Priemerburg - Plaaz
+with detail = 2 {
+    let pp = path("d2.de.6926");
+
+    with link = "line.de.6926" {
+        track(:second :cat:ac15 :pax, pp[:pri, :pla.yp]);
+
+        guide(:linenum :cat:ac15 :pax,
+                pp[:pla.yp - 4.5km] << 0.7dt
+            --  pp[:pla.yp - 4.5km] << 3.0dt
+        );
+        label(:linenum :cat:ac15 :pax, pp[:pla.yp - 4.5km] << 3.0dt,
+            hbox(:center:bottom, "6926")
+        );
+    }
+}
+
+
+# DE 6927.  Priemerwald Süd - Priemerwald Ost
+with detail = 2 {
+    with link = "line.de.6927" {
+        track(:second :removed, path("d2.de.6927")[:prs.a, :pro.y]);
+    }
+}
+
+
 # DE 6928.  Hagenow Land - Bad Oldesloe
 with detail = 2 {
     let ho = path("d2.de.w.6928");
@@ -17,6 +81,662 @@ with detail = 2 {
     with link = "point.de.Zarrentin" {
         with layer = 1 marker(:statdot, ho[:zar]);
         slabel(:right, ho[:zar + 1dt] >> 1.5dt, "Zarrentin");
+    }
+}
+
+
+# DE 6929.  Rostock Hbf - Tribsees
+with detail = 2 {
+    let rt = path("d2.de.6929");
+
+    with link = "line.de.6929" {
+        track(:second :pax, rt[:dal.yt, :san.yt]);
+        track(:second :removed, rt[:san.yt, :tri]);
+
+        line_badge(:pax, rt[:dal.yt + 6.7km] @ 2, "6929");
+        line_badge(:removed, rt[:tri - 12.9km] @ 1 << 0.1dt, "6929");
+    }
+
+    with link = "point.de.Sanitz-Rostock" {
+        with layer = 1 marker(:statdot :pax, rt[:san]);
+        slabel(:top :pax, rt[:san] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Sanitz", span(:light, "(b Rostock)   "))
+        );
+    }
+
+    with link = "point.de.Tribsees" {
+        with layer = 1 marker(:statdot :removed, rt[:tri]);
+        slabel(:right :removed, rt[:tri] + (1.1km, -1.3dt), "Tribsees");
+    }
+}
+
+
+# DE 6930.  Sanitz (b Rostock) - Tessin
+with detail = 2 {
+    let st = path("d2.de.6930");
+
+    with link = "line.de.6930" {
+        track(:second :pax, st[:san.yt, :tes]);
+
+        guide(:linenum :pax,
+                st[:san.yt + 3.2km] >> 0.7dt
+            --  st[:san.yt + 3.2km] >> 3.0dt
+        );
+        label(:linenum :pax, st[:san.yt + 3.2km] >> 3.0dt + (0dt, 0.1dt),
+            hbox(:right:middle, "6930 ")
+        );
+    }
+
+    with link = "point.de.Tessin" {
+        with layer = 1 marker(:statdot :pax, st[:tes]);
+        slabel(:right :pax, st[:tes] + (1.5dt, 0.8dt), "Tessin");
+    }
+}
+
+
+# DE 6931.  Grevesmühlen - Klütz (Meckl)
+with detail = 2 {
+    let gk = path("d2.de.6931");
+
+    with link = "line.de.6931" {
+        track(:second :removed, gk[:gre.yk, :gut]);
+        track(:second :narrow:g600 :museum, gk[:gut, :klu]);
+
+        guide(:linenum :museum,
+                gk[:klu - 3km] << 0.7dt
+            --  gk[:klu - 3km] << 3.0dt
+        );
+        label(:linenum :museum, gk[:klu - 3km] << 3.0dt,
+            hbox(:right:middle, "6931 ")
+        );
+    }
+
+    with link = "point.de.Hof-Gutow" {
+        with layer = 1 marker(:statdot :museum, gk[:gut]);
+        slabel(:right :museum, gk[:gut] + (1.5dt, 0.8dt), "Hof Gutow");
+    }
+
+    with link = "point.de.Klütz-Meckl" {
+        with layer = 1 marker(:statdot :museum, gk[:klu]);
+        slabel(:top :museum, gk[:klu] + (0dt, -1.0dt),
+            vbox(:center:bottom, "Klütz", span(:light, "(Meckl)"))
+        );
+    }
+}
+
+
+# DE 6932.  Schwerin Hbf - Rehna
+with detail = 2 {
+    let sr = path("d2.de.6932");
+
+    with link = "line.de.6932" {
+        track(:second :pax, sr[:swe.yr, :reh]);
+        line_badge(:pax, sr[:reh - 14km], "6932");
+    }
+
+    with link = "point.de.Rehna" {
+        with layer = 1 marker(:statdot :pax, sr[:reh]);
+        slabel(:left :pax, sr[:reh] + (-1.5dt, 0.5dt), "Rehna");
+    }
+}
+
+
+# DE 6933.  Schwerin-Görries - Parchim
+with detail = 2 {
+    let sp = path("d2.de.6933");
+
+    with link = "line.de.6933" {
+        track(:second :pax, sp[:gor.yp, :par]);
+        line_badge(:pax, sp[:gor.yp + 24km] @ 3 >> 0.2dt, "6933");
+    }
+}
+
+
+# DE 6935.  Ludwigslust - Waren (Müritz)
+with detail = 2 {
+    let lw = path("d2.de.6935");
+
+    with link = "line.de.6935" {
+        track(:second :pax, lw[:lud.yp, :par.ys]);
+        track(:second :museum, lw[:par.ys, :ima]);
+        track(:second :pax, lw[:ima, :war.yk]);
+
+        line_badge(:pax, lw[:par - 13km], "6935");
+        line_badge(:museum, lw[:par + 16.5km], "6935");
+        line_badge(:pax, lw[:war.yk - 13.5km] @ 2, "6935");
+    }
+
+    with link = "point.de.Parchim" {
+        with layer = 1 marker(:statdot :pax, lw[:par]);
+        slabel(:right :pax, lw[:par] + (2.0dt, 1.5dt), "Parchim");
+    }
+
+    with link = "point.de.Karow-Meckl" {
+        with layer = 1 marker(:statdot :museum, lw[:kar]);
+        slabel(:right :museum, lw[:kar] + (1.5dt, 0.5dt),
+            vbox(:left:bottom, "Karow", span(:light, "(Meckl)"))
+        );
+    }
+
+    with link = "point.de.Inselstadt-Malchow" {
+        with layer = 1 marker(:statdot :pax, lw[:ima]);
+        slabel(:bottom :pax, lw[:ima] + (0dt, 0.8dt),
+            vbox(:center:top, "Inselstadt", "Malchow")
+        );
+    }
+}
+
+
+# DE 6936.  Hornstorf - Karow (Meckl)
+with detail = 2 {
+    let hk = path("d2.de.6936");
+
+    with link = "line.de.6936" {
+        track(:second :removed, hk[:hor.yb, :bla.yh]);
+        track(:second, hk[:bla.yk, :dab]);
+        track(:second :closed, hk[:dab, :daf]);
+        track(:second, hk[:daf, :kar.yb]);
+
+        line_badge(:removed, hk[:hor.yb + 8km] @ -12, "6936");
+        line_badge(:closed, hk[:dab + 8km], "6936");
+    }
+
+    with link = "point.de.Dabel" {
+        with layer = 1 marker(:statdot, hk[:dab]);
+        slabel(:left, hk[:dab] + (0.8dt, 1.0dt),
+            hbox(:right:top, "Dabel")
+        );
+    }
+}
+
+
+# DE 6937.  Teterow - Gnoien
+with detail = 2 {
+    let tg = path("d2.de.6937");
+
+    with link = "line.de.6937" {
+        track(:second :removed, tg[:tet.yg, :gno]);
+        line_badge(:removed, tg[:gno - 9km], "6937");
+    }
+
+    with link = "point.de.Gnoien" {
+        with layer = 1 marker(:statdot :removed, tg[:gno]);
+        slabel(:right :removed, tg[:gno] + (1.5dt, 0.8dt), "Gnoien");
+    }
+}
+
+
+# DE 6938.  Neustadt (Dosse) - Meyenburg LGr
+with detail = 2 {
+    let nm = path("d2.de.6938");
+
+    with link = "line.de.6938" {
+        track(:second :pax, nm[:nst.yp, :pri.yn]);
+        track(:second :pax, nm[:pri.ym, :mey]);
+
+        line_badge(:pax, nm[:kyr + 14km], "6938");
+        line_badge(:pax, nm[:mey - 8.8km], "6938");
+    }
+
+    with link = "point.de.Kyritz" {
+        with layer = 1 marker(:statdot :pax, nm[:kyr]);
+        slabel(:right :pax, nm[:kyr] + (1.5dt, 0.8dt), "Kyritz");
+    }
+
+    with link = "point.de.Meyenburg" {
+        with layer = 1 marker(:statdot :pax, nm[:mey]);
+        slabel(:left :pax, nm[:mey] + (-1.8dt, 0.5dt), "Meyenburg");
+    }
+}
+
+
+# DE 6939.  Meyenburg - Güstrow
+with detail = 2 {
+    let mg = path("d2.de.6939");
+
+    with link = "line.de.6939" {
+        track(:second :museum, mg[:mey, :kar.yw]);
+        track(:second,
+                mg[:kar.yp, :prs - 3dt]
+            ..  mg[:prs, :pri] << 0.6dt
+        );
+        track(:second :cat:ac15,
+                mg[:pri, :gus] << 0.6dt
+        );
+
+        guide(:linenum :museum,
+                mg[:mey + 4km] << 0.7dt
+            --  mg[:mey + 4km] << 3.0dt
+        );
+        label(:linenum :museum, mg[:mey + 4km] << 3.0dt,
+            hbox(:right:middle, "6939 ")
+        );
+        guide(:linenum :museum,
+                mg[:gan + 9.3km] << 0.7dt
+            --  mg[:gan + 9.3km] << 3.0dt
+        );
+        label(:linenum :museum, mg[:gan + 9.3km] << 3.0dt,
+            hbox(:right:middle, "6939 ")
+        );
+        line_badge(:open, mg[:prs - 11km] @ -4 << 0.2dt, "6939");
+    }
+
+    with link = "point.de.Ganzlin" {
+        with layer = 1 marker(:statdot :museum, mg[:gan]);
+        slabel(:left :museum, mg[:gan] + (-1.5dt, 0.8dt), "Ganzlin");
+    }
+}
+
+
+# DE 6940.  Ganzlin - Röbel (Meckl)
+with detail = 2 {
+    let gr = path("d2.de.6940");
+
+    with link = "line.de.6940" {
+        track(:second :removed, gr[:gan.yr, :rob]);
+        line_badge(:removed, gr[:rob - 8.5km] << 0.2dt, "6940");
+    }
+
+    with link = "point.de.Röbel-Meckl" {
+        with layer = 1 marker(:statdot :removed, gr[:rob]);
+        slabel(:top :removed, gr[:rob] + (0dt, -0.8dt),
+            vbox(:center:bottom, "Röbel", span(:light, "(Meckl)"))
+        );
+    }
+}
+
+
+# DE 6941.  Wittenberge - Buschhof (b Neustrelitz)
+with detail = 2 {
+    let wb = path("d2.de.6941");
+
+    with link = "line.de.6941" {
+        track(:first :pax, wb[:wit.yp, :wis.yp]);
+        track(:second :removed, wb[:wis.yb, :bus]);
+
+        line_badge(:pax, wb[:per + 8km], "6941");
+        guide(:linenum :pax,
+                wb[:pri + 8km] << 0.7dt
+            --  wb[:pri + 8km] << 3.0dt
+        );
+        label(:linenum :pax, wb[:pri + 8km] << 3.0dt,
+            hbox(:center:bottom, "6941")
+        );
+        line_badge(:removed, wb[:wis + 8km], "6941");
+    }
+
+    with link = "point.de.Perleberg" {
+        with layer = 1 marker(:statdot :pax, wb[:per]);
+        slabel(:left :pax, wb[:per] + (-1.3dt, 0.8dt),
+            vbox(:right:bottom, "Perle-  ", "berg ")
+        );
+    }
+
+    with link = "point.de.Pritzwalk" {
+        with layer = 1 marker(:statdot :pax, wb[:pri]);
+        slabel(:left :pax, wb[:pri] + (1.3dt, -0.8dt),
+            vbox(:right:bottom, "Pritz-", "walk ")
+        );
+    }
+}
+
+
+# DE 6942.  Buschhof (b Neustrelitz) - Strasburg (Uckerm)
+with detail = 2 {
+    let bs = path("d2.de.6942");
+
+    with link = "line.de.6942" {
+        track(:second :removed, bs[:bus, :mir]);
+        track(:second :pax, bs[:mir, :nst.ym]);
+        track(:second, bs[:nst.ys, :thu.yf]);
+        track(:second :removed, bs[:thu.yf, :bla.yf]);
+        track(:second :removed, bs[:bla.ys, :gda.ys]);
+
+        line_badge(:removed, bs[:bus + 3.3km] @ -1 << 0.1dt, "6942");
+        line_badge(:pax, bs[:bur.yh - 4km], "6942");
+        line_badge(:removed, bs[:bla.ys + 14km], "6942");
+    }
+
+    with link = "point.de.Buschhof-Neustrelitz" {
+        with layer = 1 marker(:statdot :removed, bs[:bus]);
+        slabel(:left :removed, bs[:bus] + (-1.5dt, 0.5dt),
+            vbox(:right:bottom, "Buschhof", span(:light, "(b Neustrelitz)"))
+        );
+    }
+
+    with link = "point.de.Mirow" {
+        with layer = 1 marker(:statdot :pax, bs[:mir]);
+        slabel(:bottom :pax, bs[:mir] + (0dt, 1dt), "Mirow");
+    }
+
+    with link = "point.de.Thurow-Meckl" {
+        with layer = 1 marker(:statdot, bs[:thu]);
+        slabel(:bottom, bs[:thu] + (0dt, 1.5km),
+            vbox(:center:top, "Thurow", span(:light, "(Meckl)"))
+        );
+    }
+
+    with link = "point.de.Groß-Daberkow" {
+        with layer = 1 marker(:statdot :removed, bs[:gda]);
+        slabel(:left :removed, bs[:gda] + (-1.8dt, 1.5dt),
+            "Groß Daberkow"
+        );
+    }
+}
+
+
+# DE 6943.  Rövershagen - Graal-Müritz
+with detail = 2 {
+    let rg = path("d2.de.6943");
+
+    with link = "line.de.6943" {
+        track(:second :pax, rg[:rov, :gra]);
+        line_badge(:pax, rg[:rov + 5.5km], "6943");
+    }
+
+    with link = "point.de.Graal-Müritz" {
+        with layer = 1 marker(:statdot :pax, rg[:gra]);
+        slabel(:top :pax, rg[:gra] + (0dt, -0.8dt), "Graal-Müritz");
+    }
+}
+
+
+# DE 6944.  Perleberg Süd - Berge (Prign) - Perleberg Nord
+with detail = 2 {
+    let pp = path("d2.de.6944");
+
+    with link = "line.de.6944" {
+        track(:third :removed, pp[:per.yn, :kat.yp]);
+        track(:third :removed, pp[:kat.yb, :pen.yb]);
+
+        guide(:linenum :removed,
+                pp[:per.yn + 7.5km] >> 0.7dt
+            --  pp[:per.yn + 7.5km] >> 3.0dt
+        );
+        label(:linenum :removed, pp[:per.yn + 7.5km] >> 3.0dt,
+            hbox(:center:bottom, "6944")
+        );
+        guide(:linenum :removed,
+                pp[:kat.yb + 3km] >> 0.7dt
+            --  pp[:kat.yb + 3km] >> 3.0dt
+        );
+        label(:linenum :removed, pp[:kat.yb + 3km] >> 3.0dt,
+            hbox(:left:middle, " 6944")
+        );
+        guide(:linenum :removed,
+                pp[:ber + 8.5km] >> 0.7dt
+            --  pp[:ber + 8.5km] >> 3.0dt
+        );
+        label(:linenum :removed, pp[:ber + 8.5km] >> 3.0dt,
+            hbox(:right:middle, "6944 ")
+        );
+    }
+
+    with link = "point.de.Perleberg-Nord" {
+        with layer = 1 marker(:statdot :removed, pp[:pen]);
+    }
+
+    with link = "point.de.Berge-Prign" {
+        with layer = 1 marker(:statdot :removed, pp[:ber]);
+        slabel(:left :removed, pp[:ber] + (-1.0dt, -0.8dt),
+            hbox(:right:base, "Berge ", span(:light, "(Prign)"))
+        );
+    }
+}
+
+
+# DE 6945.  Pritzwalk - Suckow
+with detail = 2 {
+    let ps = path("d2.de.6945");
+
+    with link = "line.de.6945" {
+        track(:second :closed, ps[:pri.yp, :laa]);
+        track(:second, ps[:laa, :put]);
+        track(:second :removed, ps[:put, :suc]);
+
+        guide(:linenum :closed,
+                ps[:laa - 2km] << 0.7dt
+            --  ps[:laa - 2km] << 3.0dt
+        );
+        label(:linenum :closed, ps[:laa - 2km] << 3.0dt,
+            hbox(:right:middle, "6945 ")
+        );
+        guide(:linenum :closed,
+                ps[:put + 5km] >> 0.7dt
+            --  ps[:put + 5km] >> 3.0dt
+        );
+        label(:linenum :closed, ps[:put + 5km] >> 3.0dt,
+            hbox(:left:middle, " 6945")
+        );
+    }
+
+    with link = "point.de.Putlitz" {
+        with layer = 1 marker(:statdot, ps[:put]);
+        slabel(:right, ps[:put] + (1.5dt, 1.0dt), "Putlitz");
+    }
+
+    with link = "point.de.Suckow-Parchim" {
+        with layer = 1 marker(:statdot :removed, ps[:suc]);
+        slabel(:right :removed, ps[:suc] + (-1.5dt, -1.0dt),
+            vbox(:left:bottom, "Suckow", span(:light, "(Kr Parchim)"))
+        );
+    }
+}
+
+
+# DE 6946.  Neustadt (Dosse) - Herzberg (Mark)
+with detail = 2 {
+    let nh = path("d2.de.6946");
+
+    with link = "line.de.6946" {
+        track(:second, nh[:nst, :nru.yn]);
+        track(:second, nh[:nru.yh, :her.yh]);
+
+        guide(:linenum,
+                nh[:nst + 15km] >> 0.7dt
+            --  nh[:nst + 15km] >> 3.0dt
+        );
+        label(:linenum, nh[:nst + 15km] >> 3.0dt,
+            hbox(:center:top, "6946")
+        );
+        guide(:linenum,
+                nh[:nru.yh + 5.2km] << 0.7dt
+            --  nh[:nru.yh + 5.2km] << 3.0dt
+        );
+        label(:linenum, nh[:nru.yh + 5.2km] << 3.0dt,
+            hbox(:center:bottom, "6946")
+        );
+    }
+}
+
+
+# DE 6947.  Köritz - Barsikow
+with detail = 2 {
+    with link = "line.de.6947" {
+        track(:second :removed, path("d2.de.6947")[:kor.y, :bar.y]);
+    }
+}
+
+
+# DE 6948.  Paulinenaue - Neuruppin
+with detail = 2 {
+    let pn = path("d2.de.6948");
+
+    with link = "line.de.6948" {
+        track(:second :removed, pn[:pau.yn, :nru.yp]);
+        line_badge(:removed, pn[:pau.yn + 13km], "6948");
+    }
+}
+
+
+# DE 6949.  Bentwisch - Poppendorf
+with detail = 2 {
+    let bp = path("d2.de.6949");
+
+    with link = "line.de.6949" {
+        track(:second :cat:ac15, bp[:ben.yp, :pop]);
+
+        guide(:linenum :cat:ac15,
+                bp[:pop - 2km] >> 0.7dt
+            --  bp[:pop - 2km] >> 3.0dt
+        );
+        label(:linenum :cat:ac15, bp[:pop - 2km] >> 3.0dt + (-0.2dt, 0dt),
+            hbox(:center:top, "6949")
+        );
+    }
+
+    with link = "point.de.Poppendorf" {
+        with layer = 1 marker(:statdot :cat:ac15, bp[:pop]);
+        slabel(:right :cat:ac15, bp[:pop] + (1.5dt, 0.9dt), "Poppendorf");
+    }
+}
+
+
+# DE 6954.  Sassnitz-Mukran/Borchtitz - Sassnitz-Mukran Pbf
+with detail = 2 {
+    let sm = path("d2.de.6954");
+
+    with link = "line.de.6954" {
+        track(:first :cat:ac15, sm[:muk.yf, :sam]);
+    }
+
+    with link = "point.de.Sassnitz-Mukran-Pbf" {
+        with layer = 1 marker(:statdot :cat:ac15, sm[:sam]);
+        slabel(:right :cat:ac15, sm[:sam] + (1.5dt, 1.0dt),
+            "Sassnitz Fährhafen"
+        );
+    }
+}
+
+
+# DE 6955.  Malliß - Conow
+with detail = 2 {
+    let mc = path("d2.de.6955");
+
+    with link = "line.de.6955" {
+        track(:second :removed, mc[:mal.yc, :con]);
+    }
+
+    with link = "point.de.Conow" {
+        with layer = 1 marker(:statdot :removed, mc[:con]);
+        slabel(:left :removed, mc[:con] + (-1.8dt, 0.5dt), "Conow");
+    }
+}
+
+
+# DE 6956.  Rheinsberg (Mark) - Rheinsberg Stechlinsee
+with detail = 2 {
+    let rs = path("d2.de.6956");
+
+    with link = "line.de.6956" {
+        track(:second :museum, rs[:rhe.ys, :ste]);
+
+        guide(:linenum :museum,
+                rs[:rhe.ys + 5km] << 0.7dt
+            --  rs[:rhe.ys + 5km] << 3.0dt
+        );
+        label(:linenum :museum, rs[:rhe.ys + 5km] << 3.0dt,
+            hbox(:right:middle, "6956 ")
+        );
+    }
+
+    with link = "point.de.Rheinsberg-Stechlinsee" {
+        with layer = 1 marker(:statdot :museum, rs[:ste]);
+        slabel(:left :museum, rs[:ste] + (2.0dt, -0.8dt),
+            vbox(:right:bottom, "Rheinsberg-", "Stechlinsee ")
+        );
+    }
+}
+
+
+# DE 6957.  Thurow (Meckl) - Feldberg (Meckl)
+with detail = 2 {
+    let tf = path("d2.de.6957");
+
+    with link = "line.de.6957" {
+        track(:second, tf[:thu.yf, :fel]);
+        line_badge(:open, tf[:thu.yf + 8km] @ 8 << 0.3dt, "6957");
+    }
+
+    with link = "point.de.Feldberg-Meckl" {
+        with layer = 1 marker(:statdot, tf[:fel]);
+        slabel(:bottom, tf[:fel] + (0dt, 1dt),
+            vbox(:center:top, "Feldberg", span(:light, "(Meckl)"))
+        );
+    }
+}
+
+
+# DE 6959.  Boizenburg (Elbe) - Boizenburg (Elbe) Stadt
+with detail = 2 {
+    let bb = path("d2.de.6959");
+
+    with link = "line.de.6959" {
+        track(:third :removed, bb[:boi.ys, :bos]);
+    }
+
+    with link = "point.de.Boizenburg-Stadt" {
+        with layer = 1 marker(:statdot :removed, bb[:bos]);
+        slabel(:left :removed, bb[:bos] + (-1.5dt, 1.0dt), "B. Stadt");
+    }
+}
+
+
+# DE 6982.  Altefähr Landesb - Göhren (Rügen)
+with detail = 2 {
+    let ag1 = path("d2.de.6982.1");
+    let ag2 = path("d2.de.6982.2");
+
+    with link = "line.de.6982" {
+        track(:third :narrower:g750 :removed, ag1[:afa.yp, :put.ya]);
+        track(:third :narrower:g750 :pax, ag2[:put.yg, :goh]);
+
+        guide(:linenum :removed,
+                ag1[:put.ya - 12.2km] << 0.7dt
+            --  ag1[:put.ya - 12.2km] << 3.0dt
+        );
+        label(:linenum :removed, ag1[:put.ya - 12.2km] << 3.0dt,
+            hbox(:right:middle, "6982 ")
+        );
+        guide(:linenum :pax,
+                ag2[:goh - 10.5km] >> 0.7dt
+            --  ag2[:goh - 10.5km] >> 3.0dt
+        );
+        label(:linenum :pax, ag2[:goh - 10.5km] >> 3.0dt,
+            hbox(:center:top, "6982")
+        );
+    }
+
+    with link = "point.de.Göhren-Rügen" {
+        with layer = 1 marker(:statdot :pax, ag2[:goh]);
+        slabel(:right :pax, ag2[:goh] + (1.5dt, 0dt),
+            vbox(:left:middle, "Göhren", span(:light, "(Rügen)"))
+        );
+    }
+}
+
+
+# DE 6996.  Bad Doberan - Ostseebad Kühlungsborn West
+with detail = 2 {
+    let dk = path("d2.de.6996");
+
+    with link = "line.de.6996" {
+        track(:second :narrow:g900 :pax, dk[:dob, :kuw]);
+
+        guide(:linenum :pax,
+                dk[:dob + 6.5km] >> 0.7dt
+            --  dk[:dob + 6.5km] >> 3.0dt
+        );
+        label(:linenum :pax, dk[:dob + 6.5km] >> 3.0dt,
+            hbox(:center:bottom, "6996")
+        );
+    }
+
+    with link = "point.de.Ostseebad-Kühlungsborn-West" {
+        with layer = 1 marker(:statdot :pax, dk[:kuw]);
+        slabel(:left :pax, dk[:kuw] + (1dt, -1dt),
+            vbox(:right:bottom, "Ostseebad", "Kühlungsborn")
+        );
     }
 }
 

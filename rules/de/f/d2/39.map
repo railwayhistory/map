@@ -55,7 +55,7 @@ with detail = 2 {
     with link = "point.de.Zimmersrode" {
         with layer = 1 marker(:statdot :cat:ac15 :pax, kf[:zim]);
         slabel(:right :cat:ac15 :pax, kf[:zim] + (0dt, 1.0dt),
-            hbox(:left:top, "Zimmersrode")
+            vbox(:left:top, "Zimmers-", " rode")
         );
     }
 
@@ -143,17 +143,23 @@ with detail = 2 {
     with link = "line.de.3901" {
         track(:second :cat:ac15, kw[:wil.yw, :bet]);
         track(:second, kw[:bet, :kin]);
-
         track(:second :cat:dc6 :pax, kw[:kin, :lic.yl]);
+        track(:second :removed, kw[:lic.yl, :wka]);
+
         guide(:linenum :cat:dc6 :pax,
                 kw[:kin + 9.3km] >> 0.7dt
             --  kw[:kin + 9.3km] >> 3.0dt
         );
-        label(:left :cat:dc6 :pax, kw[:kin + 9.3km] >> 3.0dt + (0dt, 0.2dt),
-            hbox(:right:middle :badgesize, "3901 ")
+        label(:linenum :cat:dc6 :pax, kw[:kin + 9.3km] >> 3.0dt + (0dt, 0.2dt),
+            hbox(:right:middle, "3901 ")
         );
-
-        track(:second :removed, kw[:lic.yl, :wka]);
+        guide(:linenum :removed,
+                kw[:wka - 5.5km] >> 0.7dt
+            --  kw[:wka - 5.5km] >> 0.7dt + (-2dt, 1dt)
+        );
+        label(:linenum :removed, kw[:wka - 5.5km] >> 0.7dt + (-2dt, 1dt),
+            hbox(:right:middle, "3901 ")
+        );
     }
 
     with link = "point.de.Kassel-Bettenhausen" {
@@ -165,11 +171,6 @@ with detail = 2 {
         slabel(:left :removed, kw[:wal] + (-0.5dt, 1.5dt),
             hbox(:right:top, "Walburg")
         );
-    }
-
-    with link = "point.de.Waldkappel" {
-        with layer = 1 marker(:statdot :removed, kw[:wka]);
-        slabel(:left :removed, kw[:wka] + (-2.5dt, 1.5dt), "Waldkappel");
     }
 }
 

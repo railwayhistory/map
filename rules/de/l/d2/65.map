@@ -1,0 +1,34 @@
+# DE 6508.  Nauen Osth E - Ketzin
+with detail = 2 {
+    let nk = path("d2.de.6508");
+
+    with link = "line.de.6508" {
+        track(:third, nk[:nau.yr, :bsh]);
+        track(:third :removed, nk[:bsh, :rot.yn]);
+    }
+}
+
+
+# DE 6512.  Brandenburg Hbf - Neustadt (Dosse)
+with detail = 2 {
+    let bn = path("d2.de.6512");
+
+    with link = "line.de.6512" {
+        track(:second :pax,
+                bn[:bra.yr, :rat.yb - 2dt]
+            ..  bn[:rat.yb, :rat.yb + 0.1dt] >> 1dt
+        );
+        track(:second :removed,
+                bn[:rat, :rat + 600m] >> 1dt
+            ..  bn[:rat + 1.5km, :nst.yr]
+        );
+        
+        line_badge(:pax, bn[:rat.yb - 14.7km], "6512");
+        line_badge(:removed, bn[:rat + 15.5km] << 0.1dt, "6512");
+    }
+
+    with link = "point.de.Brandenburg-Altstadt" {
+        with layer = 1 marker(:statdot :pax, bn[:bal]);
+    }
+}
+
