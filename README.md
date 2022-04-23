@@ -1,5 +1,8 @@
 # map
+
 The map data for the railway history map.
+
+See https://map.railwayhistory.org/ for a rendered version of the map.
 
 ## Progress
 
