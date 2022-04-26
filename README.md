@@ -50,7 +50,7 @@ given a VzG number are also included.
 | region             | overview    | detail      |
 | ------------------ | ----------- | ----------- |
 | A (Hamburg)        | complete    | in progress |
-| B (Berlin)         | in progress | not started |
+| B (Berlin)         | complete    | not started |
 | D (Dresden)        | in progress | not started |
 | E (Essen)          | in progress | not started |
 | F (Frankfurt/Main) | in progress | not started |
