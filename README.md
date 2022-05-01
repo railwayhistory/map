@@ -51,8 +51,8 @@ given a VzG number are also included.
 | ------------------ | ----------- | ----------- |
 | A (Hamburg)        | complete    | in progress |
 | B (Berlin)         | complete    | not started |
-| D (Dresden)        | in progress | not started |
-| E (Essen)          | in progress | not started |
+| D (Dresden)        | complete    | not started |
+| E (Essen)          | complete    | not started |
 | F (Frankfurt/Main) | in progress | not started |
 | G (Oldenburg/Oldb) | in progress | not started |
 | H (Hannover)       | in progress | not started |
