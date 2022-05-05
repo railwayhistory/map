@@ -1,0 +1,87 @@
+# DE F02.  Wiesbaden Ost - Wiesbaden-Biebrich Rheinbf
+with detail = 2 {
+    let wr = path("d2.de.f02");
+
+    with link = "line.de.F02" {
+        track(:first :removed, wr[:wos, :bir]);
+    }
+
+    with link = "point.de.Wiesbaden-Biebrich-Rheinbf" {
+        with layer = 1 marker(:statdot :removed, wr[:bir]);
+    }
+}
+
+
+# DE F20.  Rosengarten (Rhein) Gabelung - Rosengarten (Rhein)
+with detail = 2 {
+    with link = "line.de.F20" {
+        track(:first :gone, path("d2.de.f20")[:rog, :ros.yl]);
+    }
+}
+
+
+# DE F21.  Worms Hbf - Rosengarten (Rhein) - Hofheim (Ried)
+with detail = 2 {
+    let wh.1 = path("d2.de.f21.1");
+    let wh.2 = path("d2.de.f21.2");
+
+    with link = "line.de.F21" {
+        track(:first :gone, wh.1[:wor.yt, :woh]);
+        track(:first :gone, wh.2[:ros, :hof.yr]);
+    }
+
+    with link = "point.de.Rosengarten-Rhein" {
+        with layer = 1 marker(:statdot :gone, wh.2[:ros]);
+    }
+}
+
+
+# DE F39.  Bickenbach (Bergstr) - Seeheim (Bergstr)
+with detail = 2 {
+    let bs = path("d2.de.f39");
+
+    with link = "line.de.F39" {
+        track(:second :removed, bs[:bic.ys, :see]);
+
+        guide(:linenum :removed,
+                bs[:see - 2km] >> 0.7dt
+            --  bs[:see - 2km] >> 3.0dt
+        );
+        label(:linenum :removed, bs[:see - 2km] >> 2.8dt,
+            hbox(:left:top, "F39")
+        );
+    }
+
+    with link = "point.de.Seeheim-Bergstr" {
+        with layer = 1 marker(:statdot :removed, bs[:see]);
+        slabel(:right :removed, bs[:see] + (1.5dt, 0dt),
+            vbox(:left:middle, "Seeheim", span(:light, "(Bergstr)"))
+        );
+    }
+}
+
+
+# DE F75.  Limburg (Lahn) - Staffel
+with detail = 2 {
+    with link = "line.de.F75" {
+        track(:first :removed, path("d2.de.f75")[:lim.yl, :sta.yl]);
+    }
+}
+
+
+# DE F80.  Villingen (Oberhess) - Ruppertsburg
+with detail = 2 {
+    let vr = path("d2.de.f80");
+
+    with link = "line.de.F80" {
+        track(:second :removed, vr[:vil.yr, :rup]);
+    }
+
+    with link = "point.de.Ruppertsburg" {
+        with layer = 1 marker(:statdot :removed, vr[:rup]);
+        slabel(:right :removed, vr[:rup] + (1.5dt, 1.0dt),
+            vbox(:left:middle, "Rupperts-", "burg")
+        );
+    }
+}
+
