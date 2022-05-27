@@ -56,7 +56,7 @@ given a VzG number are also included.
 | F (Frankfurt/Main) | complete    | not started |
 | G (Oldenburg/Oldb) | complete    | not started |
 | H (Hannover)       | complete    | not started |
-| K (Köln)           | in progress | not started |
+| K (Köln)           | complete    | not started |
 | L (Halle/Saale)    | in progress | not started |
 | M (München)        | in progress | not started |
 | N (Nürnberg)       | in progress | not started |
