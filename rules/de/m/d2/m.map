@@ -1,0 +1,176 @@
+# DE M00.  Ingolstadt Hbf - Weichering
+with detail = 2 {
+    let iw = path("d2.de.m00");
+
+    with link = "line.de.M00" {
+        track(:first :removed, iw[:ing.yw, :wei.yi]);
+        line_badge(:removed, iw[:wei.yi - 3.3km], "M00");
+    }
+}
+
+
+# DE M01.  Ingolstadt Hbf - Zuchering
+with detail = 2 {
+    let iz = path("d2.de.m01");
+
+    with link = "line.de.M01" {
+        track(:first :removed, iz[:ing.yr, :zuc]);
+    }
+}
+
+
+# DE M10.  Fünfstetten - Monheim (Schwab)
+with detail = 2 {
+    let fm = path("d2.de.m10");
+
+    with link = "line.de.M10" {
+        track(:second :removed, fm[:fun.ym, :mon]);
+        guide(:linenum :removed,
+                fm[:fun.ym + 2.4km] >> 0.7dt
+            --  fm[:fun.ym + 2.4km] >> 3.0dt
+        );
+        label(:linenum :removed, fm[:fun.ym + 2.4km] >> 3.0dt,
+            hbox(:center:top, "M10")
+        );
+    }
+
+    with link = "point.de.Monheim-Schwab" {
+        with layer = 1 marker(:statdot :removed, fm[:mon]);
+        slabel(:right :removed, fm[:mon] + (1.5dt, 0dt),
+            vbox(:left:middle, "Monheim", span(:light, "(Schwab)"))
+        );
+    }
+}
+
+
+# DE M15.  Pfaffenhausen - Kirchheim (Schwab)
+with detail = 2 {
+    let pk = path("d2.de.m15");
+
+    with link = "line.de.M15" {
+        track(:second :removed, pk[:pfa.yk, :kir]);
+        guide(:linenum :removed,
+                pk[:pfa.yk + 3.5km] >> 0.7dt
+            --  pk[:pfa.yk + 3.5km] >> 3.0dt
+        );
+        label(:linenum :removed, pk[:pfa.yk + 3.5km] >> 3.0dt,
+            hbox(:left:middle, " M15")
+        );
+    }
+
+    with link = "point.de.Kirchheim-Schwab" {
+        with layer = 1 marker(:statdot :removed, pk[:kir]);
+        slabel(:top :removed, pk[:kir] + (0dt, -1dt),
+            vbox(:center:bottom, "Kirchheim", span(:light, "(Schwab)"))
+        );
+    }
+}
+
+
+# DE M30.  Kempten (Allgäu) Stw I - Kempten-Hegge
+with detail = 2 {
+    let kk = path("d2.de.m30");
+
+    with link = "line.de.M30" {
+        track(:first :double :removed, kk[:kem.ya, :kea]);
+    }
+
+    with link = "point.de.Kempten-Allgäu-Hbf-alt" {
+        with layer = 1 marker(:statdot :removed, kk[:kea]);
+    }
+}
+
+
+# DE M35.  Sonthofen Gabelung Nord - Sonthofen alt
+with detail = 2 {
+    let sn = path("d2.de.m35");
+
+    with link = "line.de.M35" {
+        track(:second :gone, sn[:sgn, :soa]);
+    }
+
+    with link = "point.de.Sonthofen-alt" {
+        with layer = 1 marker(:statdot :gone, sn[:soa]);
+    }
+}
+
+
+# DE M36.  Sonthofen alt - Sonthofen Gabelung Süd
+with detail = 2 {
+    with link = "line.de.M36" {
+        track(:second :gone, path("d2.de.m36")[:soa.ys, :sgs]);
+    }
+}
+
+
+# DE M50.  München Hbf - München-Feldmoching
+with detail = 2 {
+    with link = "line.de.M50" {
+        track(:first :double :gone, path("d2.de.m50")[:mun.yf, :oly]);
+    }
+}
+
+
+# DE M70.  Grafing Bahnhof - Glonn
+with detail = 2 {
+    let gg = path("d2.de.m70");
+
+    with link = "line.de.M70" {
+        track(:second :removed, gg[:gra.yg, :glo]);
+
+        guide(:linenum :removed,
+                gg[:gra.yg + 5.4km] >> 0.7dt
+            --  gg[:gra.yg + 5.4km] >> 3.0dt
+        );
+        label(:linenum :removed, gg[:gra.yg + 5.4km] >> 3.0dt + (0dt, -0.2dt),
+            hbox(:right:middle, "M70 ")
+        );
+    }
+
+    with link = "point.de.Glonn" {
+        with layer = 1 marker(:statdot :removed, gg[:glo]);
+        slabel(:bottom :removed, gg[:glo] + (0dt, 0.8dt), "Glonn");
+    }
+}
+
+
+# DE M80.  Neuötting - Altötting Kapellenplatz
+with detail = 2 {
+    let na = path("d2.de.m80");
+
+    with link = "line.de.M80" {
+        track(:second :narrow:g1000 :removed, na[:not, :aot]);
+
+        guide(:linenum :removed,
+                na[:not + 2.2km] >> 0.7dt
+            --  na[:not + 2.2km] >> 3.0dt
+        );
+        label(:linenum :removed, na[:not + 2.2km] >> 3.0dt,
+            hbox(:right:middle, "M80 ")
+        );
+    }
+
+    with link = "point.de.Altötting-Kapellenplatz" {
+        with layer = 1 marker(:statdot :removed, na[:aot]);
+    }
+}
+
+
+# DE MW1.  Ruhpolding Waldbahnhof - Reit im Winkel
+with detail = 2 {
+    let mw1 = path("d2.de.mw1");
+
+    with link = "line.de.MW1" {
+        track(:second :removed, mw1[:ruh, :rei]);
+
+        line_badge(:removed, mw1[:rei - 10.7km] @ -3 >> 0.1dt, "MW1");
+    }
+
+    with link = "point.de.Reit-Winkel" {
+        with layer = 1 marker(:statdot :removed, mw1[:rei]);
+        slabel(:left :removed, mw1[:rei] + (-1.5dt, 0dt),
+            vbox(:right:middle, "Reit im", "Winkel")
+        );
+    }
+}
+
