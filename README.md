@@ -58,7 +58,7 @@ given a VzG number are also included.
 | H (Hannover)       | complete    | not started |
 | K (Köln)           | complete    | not started |
 | L (Halle/Saale)    | complete    | not started |
-| M (München)        | in progress | not started |
+| M (München)        | complete    | not started |
 | N (Nürnberg)       | in progress | not started |
 | P (Wuppertal)      | in progress | not started |
 | R (Karlsruhe)      | in progress | not started |
