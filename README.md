@@ -59,7 +59,7 @@ given a VzG number are also included.
 | K (Köln)           | complete    | not started |
 | L (Halle/Saale)    | complete    | not started |
 | M (München)        | complete    | not started |
-| N (Nürnberg)       | in progress | not started |
+| N (Nürnberg)       | complete    | not started |
 | P (Wuppertal)      | in progress | not started |
 | R (Karlsruhe)      | in progress | not started |
 | S (Saarbrücken)    | in progress | not started |
