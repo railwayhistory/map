@@ -60,7 +60,7 @@ given a VzG number are also included.
 | L (Halle/Saale)    | complete    | not started |
 | M (München)        | complete    | not started |
 | N (Nürnberg)       | complete    | not started |
-| P (Wuppertal)      | in progress | not started |
+| P (Wuppertal)      | complete    | not started |
 | R (Karlsruhe)      | in progress | not started |
 | S (Saarbrücken)    | in progress | not started |
 | T (Stuttgart)      | in progress | not started |
