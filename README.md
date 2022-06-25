@@ -1,6 +1,7 @@
-# map
+# The Railway History Map
 
-The map data for the railway history map.
+This repository contains the paths and rendering rules for the Railway
+History Map.
 
 See https://map.railwayhistory.org/ for a rendered version of the map.
 
@@ -61,7 +62,7 @@ given a VzG number are also included.
 | M (München)        | complete    | not started |
 | N (Nürnberg)       | complete    | not started |
 | P (Wuppertal)      | complete    | not started |
-| R (Karlsruhe)      | in progress | not started |
+| R (Karlsruhe)      | complete    | not started |
 | S (Saarbrücken)    | in progress | not started |
 | T (Stuttgart)      | in progress | not started |
 | U (Erfurt)         | in progress | not started |
