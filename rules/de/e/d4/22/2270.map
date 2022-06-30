@@ -1,0 +1,311 @@
+# DE 2270.  Oberhausen Hbf - Emmerich Grenze
+#
+let oe = path("d4.de.2270");
+
+with detail = [4, 5] {
+    
+
+    with link = "point.de.Praest" {
+        track(:first:station :double :cat:ac15 :pax,
+                oe[:pra - 260m, :pra + 0.7sw]
+        );
+
+        platform(:cat:ac15 :pax,
+                oe[:pra - 210m, :pra - 30m] >> 0.5dt
+            --  oe[:pra - 30m, :pra - 210m] << 1.2dt
+        );
+        platform(:cat:ac15 :pax,
+                oe[:pra - 210m, :pra - 30m] << 0.5dt
+            --  oe[:pra - 30m, :pra - 210m] >> 1.2dt
+        );
+
+        marker(:de.hp :cat:ac15 :pax :left, oe[:pra] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, oe[:pra] << 0.5dt);
+        station(:bottom :cat:ac15 :pax, oe[:pra + 0.1sw] << 0.5dt << 1.2sw,
+            "Praest", "54,57"
+        );
+    }
+
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac15 :pax, oe[:pra + 0.7sw, :emm.a]);
+    }
+
+
+    with link = "point.de.Emmerich" {
+        # Gl. 1
+        track(:first:station :cat:ac15 :pax,
+                oe[:emm - 741m, :emm - 740m] << 0.5dt
+            --  oe[:emm - 680m, :emm - 0.5sw] << 1.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :cat:ac15 :pax, oe[:emm.a, :emm.f] << 0.5dt);
+            # 2/3 O
+            track(:station :cat:ac15,
+                    oe[:emm - 820m] << 0.5dt
+                --  oe[:emm - 730m] >> 0.5dt
+            );
+            # 2/66 W
+            track(:station :cat:ac15,
+                    oe[:emm + 600m] << 0.5dt
+                --  oe[:emm + 660m] << 1.5dt
+            );
+
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax, oe[:emm.a, :emm.f] >> 0.5dt);
+            # 3/2 O
+            track(:station :cat:ac15,
+                    oe[:emm - 960m] >> 0.5dt
+                --  oe[:emm - 860m] << 0.5dt
+            );
+            # 3/2 W
+            track(:station :cat:ac15,
+                    oe[:emm + 510m] >> 0.5dt
+                --  oe[:emm + 570m] << 0.5dt
+            );
+
+        # Gl. 4
+        track(:station :cat:ac15,
+                oe[:emm - 610m, :emm + 390m] >> 2.5dt
+        );
+            # 4/53 W
+            track(:station :cat:ac15,
+                    oe[:emm + 130m] >> 2.5dt
+                --  oe[:emm + 190m] >> 1.5dt
+            );
+
+        # Gl. 5
+        track(:station :cat:ac15,
+                oe[:emm - 560m, :emm + 140m] >> 3.5dt
+            --  oe[:emm + 190m, :emm + 191m] >> 4.5dt
+        );
+
+        # Gl. 6
+        track(:station :cat:ac15,
+                oe[:emm - 511m + 0.5dl, :emm - 510m + 0.5dl] >> 3.5dt
+            --  oe[:emm - 460m + 0.5dl, :emm + 290m] >> 4.5dt
+        );
+
+        # Gl. 8
+        track(:station :cat:ac15,
+                oe[:emm - 460m, :emm + 190m - 0.5dl] >> 5.5dt
+            --  oe[:emm + 240m - 0.5dl, :emm + 241m - 0.5dl] >> 4.5dt
+        );
+
+        # Gl. 9
+        track(:station :cat:ac15,
+                oe[:emm - 711m, :emm - 710m] >> 0.5dt
+            --  oe[:emm - 410m, :emm + 190m] >> 6.5dt
+            --  oe[:emm + 490m, :emm + 491m] >> 0.5dt
+        );
+
+        # Gl. 17
+        track(:station :cat:ac15,
+                oe[:emm - 810m, :emm - 660m] >> 1.5dt
+        );
+
+        # Gl. 25
+        track(:station :cat:ac15,
+                oe[:emm + 450m, :emm + 520m] >> 1.5dt
+        );
+
+        # Gl. 24 - 31
+        track(:station :cat:ac15,
+                oe[:emm.a + 60m, :emm - 850m] << 1.5dt
+            --  oe[:emm - 600m, :emm - 400m] << 6.5dt
+        );
+            # 24/3 O
+            track(:station :cat:ac15,
+                    oe[:emm - 880m] << 1.5dt
+                --  oe[:emm - 830m] << 0.5dt
+            );
+
+        # Gl. 25
+        track(:station :cat:ac15,
+                oe[:emm - 810m, :emm - 750m] >> 2.5dt
+            --  oe[:emm - 700m, :emm - 699m] >> 1.5dt
+        );
+
+        # Gl. 33 - 47
+        track(:station :cat:ac15,
+                oe[:emm - 650m, :emm - 0.5sw] << 5.5dt
+        );
+
+        # Gl. 34
+        track(:station :cat:ac15,
+                oe[:emm - 700m, :emm - 500m - 0.5dl] << 4.5dt
+            --  oe[:emm - 450m - 0.5dl, :emm - 399m] << 5.5dt
+        );
+
+        # Gl. 35
+        track(:station :cat:ac15,
+                oe[:emm - 750m, :emm - 500m] << 3.5dt
+            --  oe[:emm - 400m, :emm - 399m] << 5.5dt
+        );
+
+        # Gl. 37
+        track(:station :cat:ac15,
+                oe[:emm - 691m, :emm - 690m] << 3.5dt
+            --  oe[:emm - 630m, :emm - 520m] << 2.5dt
+            --  oe[:emm - 430m, :emm - 429m] << 1.5dt
+        );
+
+        # Gl. 38
+        track(:station,
+                oe[:emm - 400m, :emm - 200m] << 6.5dt
+        );
+
+        # Gl. 43
+        track(:station :cat:ac15,
+                oe[:emm - 550m, :emm - 400m] >> 1.5dt
+            --  oe[:emm - 330m, :emm - 329m] >> 0.5dt
+        );
+            # 43/4 O
+            track(:station :cat:ac15,
+                    oe[:emm - 400m] >> 1.5dt
+                --  oe[:emm - 330m] >> 2.5dt
+            );
+
+        # Gl. 53
+        track(:station :cat:ac15,
+                oe[:emm + 129m, :emm + 130m] >> 0.5dt
+            --  oe[:emm + 190m, :emm + 370m] >> 1.5dt
+        );
+
+        # Gl. 66
+        track(:station :cat:ac15,
+                oe[:emm + 300m, :emm + 970m] << 1.5dt
+        );
+
+        # Bahnsteig 1/2
+        platform(:cat:ac15 :pax,
+                oe[:emm - 250m, :emm - 20m] << 1.5dt
+            --  oe[:emm - 20m, :emm + 30m] << 1.0dt
+            --  oe[:emm + 30m, :emm - 250m] >> 0.5dt
+        );
+
+        # Bahnsteig 3/4
+        platform(:cat:ac15 :pax,
+                oe[:emm - 300m, :emm + 100m] >> 0.5dt
+            --  oe[:emm + 100m, :emm - 300m] << 1.2dt
+        );
+        platform(:cat:ac15 :pax,
+                oe[:emm - 300m, :emm + 100m] >> 1.7dt
+            --  oe[:emm + 100m, :emm - 300m] << 2.5dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :left, oe[:emm] << 0.5dt);
+        station(:bottom :cat:ac15 :pax, oe[:emm] << 8.0dt,
+            "Emmerich", "60,81"
+        );
+    }
+
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac15 :pax, oe[:emm.f, :elt.el - 0.5sw]);
+    }
+
+
+    with link = "point.de.Emmerich-Spannungswechsel" {
+        track(:first:station :double :cat:ac15 :pax,
+                oe[:elt.el - 0.5sw, :elt.el]
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                oe[:elt.el, :elt.el + 0.5sw]
+        );
+
+        guide(:cat:ac15,
+                oe[:elt.el] << 4.5dt
+            --  oe[:elt.el] >> 3dt
+        );
+        label(:xsmall, oe[:elt.el] >> 3dt,
+            hbox(:left:middle,
+                vbox(:center:middle,
+                    span(:cat:ac25, "25 kV 50 Hz"),
+                    hbar(0.3),
+                    span(:cat:ac15, "   15 kV 16,7 Hz ")
+                )
+            )
+        );
+        label(:xsmall :cat:ac15, oe[:elt.el] << 4.5dt,
+            hbox(:center:top, "67,46")
+        );
+    }
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac25 :pax,
+                oe[:elt.el + 0.5sw, :elt - 170m]
+        );
+    }
+
+
+    with link = "point.de.Emmerich-Elten" {
+        track(:first:station :double :cat:ac25 :pax,
+                oe[:elt - 170m, :elt + 170m]
+        );
+
+        platform(:cat:ac25 :pax,
+                oe[:elt - 120m, :elt - 20m] << 0.5dt
+            --  oe[:elt - 20m, :elt - 120m] >> 1.2dt
+        );
+        platform(:cat:ac25 :pax,
+                oe[:elt + 20m, :elt + 120m] >> 0.5dt
+            --  oe[:elt + 120m, :elt + 20m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:ac25 :pax :right, oe[:elt] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, oe[:elt] >> 0.5dt);
+        station(:right :cat:ac25 :pax, oe[:elt - 0.6sw] >> 0.5dt >> 1.2sw,
+            vbox(:center:bottom, span(:removed, "Elten"), "Emmerich-Elten"),
+            hbox(:center:base, "69,39", span(:removed, " ← 69,42"))
+        );
+    }
+
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac25 :pax, oe[:elt + 170m, :emg - 0.5sw]);
+        line_badge(:cat:ac25 :pax, oe[:emg - 1.7km], "2270");
+    }
+
+
+    with link = "point.int.Emmerich-Zevenaar" {
+        track(:first:station :cat:ac25 :pax,
+                oe[:emg, :emg + 0.5sw] >> 1.5dt
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                oe[:emg - 0.5sw, :emg + 0.5sw]
+        );
+
+        marker(:de.dirgr :cat:ac25 :left, oe[:emg] << 0.5dt);
+        marker(:refdt :cat:ac25 :right, oe[:emg] << 0.5dt);
+        marker(:refdt :cat:ac25 :right, oe[:emg] >> 0.5dt);
+        marker(:de.dirgr :cat:ac25 :right, oe[:emg] >> 1.5dt);
+
+        label(:cat:ac25, oe[:emg - 0.3sw] >> 5dt,
+            hbox(:left:middle :xsmall,
+                vbox(:right:middle,
+                    " NL ",
+                    hbar(0.3),
+                    " DE "
+                ),
+                vbox(:right:middle,
+                    "AE: ",
+                    hbar(0.3),
+                    "2270: "
+                ),
+                vbox(:right:middle,
+                    "111,",
+                    hbar(0.3),
+                    "72,"
+                ),
+                vbox(:right:middle,
+                    "031 ",
+                    hbar(0.3),
+                    "613 "
+                )
+            )
+        );
+    }
+}
+
