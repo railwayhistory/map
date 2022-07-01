@@ -1,0 +1,93 @@
+# DE T60.  Stuttgart-Wangen - Stuttgart-Gaisburg Gaswerk
+with detail = 2 {
+    with link = "line.de.T60" {
+        track(:second :removed, path("d2.de.t60")[:wan.yg, :gas]);
+    }
+}
+
+
+# DE TA1.  Aalen Härtsfeld Pbf - Dillingen (Donau)
+with detail = 2 {
+    let ad = path("d2.de.ta1");
+
+    with link = "line.de.TA1" {
+        track(:second :narrow:g1000 :removed, ad[:aal.yd, :ner]);
+        track(:second :narrow:g1000 :museum, ad[:ner, :kat]);
+        track(:second :narrow:g1000 :removed, ad[:kat, :dil]);
+
+        guide(:linenum :removed,
+                ad[:ner - 12.3km] >> 0.7dt
+            --  ad[:ner - 12.3km] >> 3.0dt
+        );
+        label(:linenum :removed, ad[:ner - 12.3km] >> 3.0dt,
+            hbox(:right:top, "TA1")
+        );
+        line_badge(:removed, ad[:kat + 11.5km] @ -10 << 0.4dt, "TA1");
+    }
+
+    with link = "point.de.Neresheim" {
+        with layer = 1 marker(:statdot :museum, ad[:ner]);
+        slabel(:right :museum, ad[:ner] + (1.5dt, 0.5dt), "Neresheim");
+    }
+
+    with link = "point.de.Katzenstein" {
+        with layer = 1 marker(:statdot :museum, ad[:kat]);
+        slabel(:right :museum, ad[:kat] + (1.5dt, 0.8dt), "Katzenstein");
+    }
+}
+
+
+# DE TR1.  Reutlingen Hbf - Gönningen
+with detail = 2 {
+    let rg1 = path("d2.de.tr1.1");
+    let rg2 = path("d2.de.tr1.2");
+
+    with link = "line.de.TR1" {
+        track(:second :removed, rg1[:reu.yg, :gom]);
+        track(:second :removed, rg2[:gom.yg, :gon]);
+
+        guide(:linenum :removed,
+                rg1[:gom - 4.2km] << 0.7dt
+            --  rg1[:gom - 4.2km] << 3.0dt
+        );
+        label(:linenum :removed, rg1[:gom - 4.2km] << 3.0dt + (0dt, 0.2dt),
+            hbox(:left:middle, " TR1")
+        );
+    }
+
+    with link = "point.de.Gönningen" {
+        with layer = 1 marker(:statdot :removed, rg2[:gon]);
+        slabel(:bottom :removed, rg2[:gon] + (0dt, 1dt), "Gönningen");
+    }
+}
+
+
+# DE TS1.  Stuttgart Marienplatz - Stuttgart-Degerloch Zahnradbf
+with detail = 2 {
+    let md = path("d2.de.ts1");
+
+    with link = "line.de.TS1" {
+        track(:tram :narrow:g1000 :cat:dc75 :pax, md[:mar, :deg]);
+    }
+
+    with link = "point.de.Stuttgart-Marienplatz" {
+        with layer = 1 marker(:statdot :tram :cat:dc75 :pax, md[:mar]);
+    }
+}
+
+
+# DE TS3.  Unteraichen - Neuhausen (Filder)
+with detail = 2 {
+    let un = path("d2.de.ts3");
+
+    with link = "line.de.TS3" {
+        track(:second :removed, un[:uai, :ech.yu]);
+        track(:second :removed, un[:ech.yu, :fil.ye]);
+        track(:second :removed, un[:fil, :nha]);
+    }
+
+    with link = "point.de.Neuhausen-Filder" {
+        with layer = 1 marker(:statdot :removed, un[:nha]);
+    }
+}
+
