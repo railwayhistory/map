@@ -1,0 +1,80 @@
+# FR 205.  Soissons - Givet frontière
+with detail = 2 {
+    let sg = path("d2.fr.0.205");
+
+    with link = "line.fr.205" {
+        track(:first, sg[:soi.yb, :ven]);
+        track(:first :double :removed, sg[:ven, :baz.yf]);
+        track(:first :double, sg[:baz.yf, :fis]);
+        track(:first :double :pax, sg[:fis, :rei.ye]);
+
+        line_badge(:removed, sg[:ven + 7.5km], "205");
+        line_badge(:pax, sg[:fis + 8km], "205");
+    }
+
+    with link = "point.fr.Venizel" {
+        with layer = 1 marker(:statdot, sg[:ven]);
+        slabel(:bottom, sg[:ven] + (0dt, 0.8dt), "Venizel");
+    }
+
+    with link = "point.fr.Bazoches" {
+        with layer = 1 marker(:statdot, sg[:baz]);
+        slabel(:right, sg[:baz] + (-1.5dt, 0.8dt),
+            hbox(:left:top, "Bazoches")
+        );
+    }
+
+    with link = "point.fr.Fismes" {
+        with layer = 1 marker(:statdot :pax, sg[:fis]);
+        slabel(:top :pax, sg[:fis] + (0dt, -0.8dt), "Fismes");
+    }
+
+    with link = "point.fr.Reims" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, sg[:rei]);
+        slabel(:left :cat:ac25 :pax, sg[:rei.ye] + (-1.5km, 0dt),
+            hbox(:right:top :bold, "Reims")
+        );
+    }
+}
+
+
+# FR 210.  Amagne-Lucquy - Revigny
+with detail = 2 {
+    let ar = path("d2.fr.0.210");
+
+    with link = "line.fr.210" {
+        track(:first :removed, ar[:sme.yr, :rev.ym]);
+        line_badge(:removed, ar[:sme.yr + 21km] @ 6 >> 0.3dt, "210");
+    }
+}
+
+
+# FR 226.310.  Raccordement d'interconnexion nord-sud (LGV)
+with detail = 2 {
+    let vc = path("d2.fr.0.226.310");
+
+    with link = "line.fr.226.310" {
+        track(:first :double :cat:ac25 :v200 :pax, vc[:mes, :che]);
+    }
+}
+
+
+# FR 226.321.  Raccordement d'Annet
+with detail = 2 {
+    with link = "line.fr.226.320" {
+        track(:first :double :cat:ac25 :pax,
+                path("d2.fr.226.320")[:jab, :cla]
+        );
+    }
+}
+
+
+# FR 226.321.  Raccordement de Messy.
+with detail = 2 {
+    with link = "line.fr.226.321" {
+        track(:first :double :cat:ac25 :pax,
+                path("d2.fr.226.321")[:mes, :cla]
+        );
+    }
+}
+
