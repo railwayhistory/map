@@ -3,68 +3,96 @@
 let hz = path("path.nl.hz");
 
 with detail = 4 {
-    # point.nl.Haarlem: nl.ar
+    # point.nl.Haarlem: nl.AR
 
 
     with link = "line.nl.hz" {
-        track(:first :double :cat, hz[:hlm.z, :ovn - 130m]);
-        with layer = 1 line_badge(:open, hz[:ovn - 600m], "HZ");
+        track(:first :double :cat:dc15 :pax, hz[:hlm.fz, :ovn - 1sw]);
+        with layer = 1 line_badge(:cat:dc15 :pax, hz[:ovn - 600m], "HZ");
     }
 
 
     with link = "point.nl.Overveen" {
-        track(:first:station :double :cat, hz[:ovn - 130m, :ovn + 310m]);
+        track(:first:station :double :cat:dc15 :pax,
+                hz[:ovn - 1sw, :ovn + 280m]
+        );
 
-        marker(:de.hp :right, hz[:ovn] >> 0.5dt);
-        station(:top, hz[:ovn] >> 0.5dt >> 1.4sw,
-            "Overveen", "HZ: 2,17"
+        platform(:cat:dc15 :pax,
+                hz[:ovn - 50m, :ovn + 230m] >> 0.5dt
+            --  hz[:ovn + 230m, :ovn - 50m] >> 0.5dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, hz[:ovn] >> 0.5dt);
+        station(:top :cat:dc15 :pax, hz[:ovn] >> 0.5dt >> 1.4sw,
+            vbox(:center:bottom,
+                span(:gone, "Overveen-Bloemendaal"),
+                "Overveen"
+            ),
+            "HZ: 2,17"
         );
     }
 
 
     with link = "line.nl.hz" {
-        track(:first :double :cat, hz[:ovn + 310m, :zvt.a]);
-        with layer = 1 line_badge(:open, hz[:zvt - 3.0km], "HZ");
+        track(:first :double :cat:dc15 :pax, hz[:ovn + 230m, :zvt.a]);
+        line_badge(:cat:dc15 :pax, hz[:zvt - 3.0km], "HZ");
+    }
+
+
+    with link = "point.nl.Zandvoort-Dorp" {
+        marker(:de.hp :removed :left, hz[:zvd] << 0.5dt);
+        station(:bottom :removed, hz[:zvd] << 0.5dt << 1.2sw,
+            vbox(:center:top, "Zandvoort", "Dorp"), "7,9"
+        );
     }
 
 
     with link = "point.nl.Zandvoort-aan-Zee" {
         # Spoor 1
-        track(:first:station :cat, hz[:zvt.a, :zvt] << 0.5dt);
+        track(:first:station :cat:dc15 :pax, hz[:zvt.a, :zvt] << 0.5dt);
 
         # Spoor 2
-        track(:first:station :cat,
+        track(:first:station :cat:dc15 :pax,
                 hz[:zvt.a, :zvt.a + 2dl] >> 0.5dt
             --  hz[:zvt.a + 3dl, :zvt] >> 1.5dt
         );
 
         # Spoor 3
-        track(:station :cat,
+        track(:station :cat:dc15,
                 hz[:zvt.a + 5.9dl, :zvt.a + 6dl] >> 1.5dt
             --  hz[:zvt.a + 7dl, :zvt - 250m - 1dl] >> 0.5dt
             --  hz[:zvt - 250m, :zvt - 250m + 0.1dl] >> 1.5dt
         );
 
         # 251A - 251B
-        track(:station :cat,
+        track(:station :cat:dc15 :pax,
                 hz[:zvt.a + 1dl] << 0.5dt
             --  hz[:zvt.a + 2dl] >> 0.5dt
         );
 
         # 253A - 253B
-        track(:station :cat,
+        track(:station :cat:dc15 :pax,
                 hz[:zvt.a + 4dl] >> 1.5dt
             --  hz[:zvt.a + 6dl] << 0.5dt
         );
 
         # 257A - 257B
-        track(:station :cat,
+        track(:station :cat:dc15,
                 hz[:zvt - 250m - 2dl] >> 0.5dt
             --  hz[:zvt - 250m - 1dl] << 0.5dt
         );
 
-        marker(:de.bf :top, hz[:zvt] >> 0.5dt);
-        station(:left, hz[:zvt] + (-1.3sw, -0.3sw),
+        platform(:cat:dc15 :pax,
+                hz[:zvt - 260m, :zvt] << 0.5dt
+            --  hz[:zvt, :zvt - 260m] << 0.2dt
+        );
+        platform(:cat:dc15 :pax,
+                hz[:zvt - 230m, :zvt] >> 1.5dt
+            --  hz[:zvt, :zvt - 230m] << 0.8dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :top, hz[:zvt] >> 0.5dt);
+        station(:left :cat:dc15 :pax, hz[:zvt] + (-1.3sw, -0.3sw),
             span(:bold, "Zandvoort aan Zee"),
             "HZ: 8,19"
         );
