@@ -64,8 +64,8 @@ given a VzG number are also included.
 | P (Wuppertal)      | complete    | not started |
 | R (Karlsruhe)      | complete    | not started |
 | S (Saarbrücken)    | complete    | not started |
-| T (Stuttgart)      | in progress | not started |
-| U (Erfurt)         | in progress | not started |
+| T (Stuttgart)      | complete    | not started |
+| U (Erfurt)         | complete    | not started |
 | W (Schwerin)       | in progress | not started |
 
 
