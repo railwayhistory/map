@@ -1,0 +1,670 @@
+# NL AE.  Amsterdam Weesperpoort - Zevenaar grens
+#
+let ae = path("d4.nl.ae");
+
+with detail = 3 {
+    with link = "point.nl.Amsterdam-Amstel" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:asa - 1sw, :asa + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, ae[:asa] << 0.5dt);
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax,
+                ae[:asa + 1sw, :dvd - 1sw]
+        );
+    }
+
+    with link = "point.nl.Duivendrecht" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:dvd - 1sw, :dvaz]
+        );
+        marker(:de.bf :cat:dc15 :pax :right,
+                ae[:dvd + 0.5dt + 0.5sw] >> 0.5dt
+        );
+    }
+
+    with link = "point.nl.Duivendrecht-Aansluiting-Zuid" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:dvaz, :asb.yr]
+        );
+        marker(:de.abzw :cat:dc15 :left, ae[:dvaz] << 0.5dt);
+    }
+
+    with link = "point.nl.Amsterdam-Bijlmer" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:asb.yr, :asb + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:asb.yr, :asb + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:asb.yr, :asb + 1sw] >> 1.5dt
+        );
+        marker(:de.bf :cat:dc15 :pax :right, ae[:asb] >> 1.5dt);
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:asb + 1sw, :ashd - 1sw] << 1.5dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:asb + 1sw, :ashd - 1sw] << 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:asb + 1sw, :ashd - 1sw] >> 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:asb + 1sw, :ashd - 1sw] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Amsterdam-Holendrecht" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ashd - 1sw, :ashd + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ashd - 1sw, :ashd + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ashd - 1sw, :ashd + 1sw] >> 1.5dt
+        );
+        marker(:de.bf :cat:dc15 :pax :right, ae[:ashd] >> 1.5dt);
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:ashd + 1sw, :ac - 1sw] << 1.5dt
+        );
+        track(:first :cat:dc15 :double :pax,
+                ae[:ashd + 1sw, :ac - 1sw]
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:ashd + 1sw, :ac - 1sw] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Abcoude" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac - 1sw, :ac + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ac - 1sw, :ac + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac - 1sw, :ac + 1sw] >> 1.5dt
+        );
+        marker(:de.bf :cat:dc15 :pax :right, ae[:ac] >> 1.5dt);
+        slabel(:left :cat:dc15 :pax, ae[:ac + 0.3sw] >> 1.5dt >> 1.8sw,
+            "Abcoude"
+        );
+    }
+
+    with link = "point.nl.Abcoude-overloop" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac + 1sw, :ac.f] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ac + 1sw, :ac.f]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac + 1sw, :ac.f] >> 1.5dt
+        );
+        marker(:de.uest :cat:dc15 :right, ae[:ac.f - 0.5sw] >> 1.5dt);
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:bkl - 1.5sw, :ac.f] << 1.5dt
+        );
+        track(:first :cat:dc15 :double :pax,
+                ae[:bkl - 1.5sw, :ac.f]
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:bkl - 1.5sw, :ac.f] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Vreeland" {
+        marker(:de.hp :removed :right, ae[:vrl] >> 1.5dt);
+        slabel(:left :removed, ae[:vrl + 0.65sw] >> 1.5dt >> 1.6sw,
+            "Vreeland"
+        );
+    }
+
+    with link = "point.nl.Nieuwersluis-Loenen" {
+        marker(:de.bf :removed :right, ae[:nws] >> 1.5dt);
+        slabel(:left :removed, ae[:nws] >> 1.5dt >> 1.4sw,
+            vbox(:right:middle :bold, "Nieuwersluis-", "Loenen  ")
+        );
+    }
+
+    with link = "point.nl.Breukelen" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl - 1.5sw, :bkl - 1.0sw - 0.7dl] << 1.5dt
+            --  ae[:bkl - 1.0sw + 0.3dl, :bkl + 0.5sw] << 2.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl - 1.5sw, :bkl - 1.0sw] << 0.5dt
+            --  ae[:bkl - 1.0sw + 1dl, :bkl + 0.5sw] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl - 1.5sw, :bkl - 1.0sw] >> 0.5dt
+            --  ae[:bkl - 1.0sw + 1dl, :bkl + 0.5sw] >> 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl - 1.5sw, :bkl - 1.0sw - 0.7dl] >> 1.5dt
+            --  ae[:bkl - 1.0sw + 0.3dl, :bkl + 0.5sw] >> 2.5dt
+        );
+        marker(:de.bf :cat:dc15 :pax :left, ae[:bkl] << 2.5dt);
+        slabel(:right :cat:dc15 :pax, ae[:bkl + 0.6sw] << 2.5dt << 1.6sw,
+            span(:bold, "Breukelen")
+        );
+    }
+
+    with link = "point.nl.Breukelen-aansl" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 0.5sw, :bkla.yw + 0.7dl] << 2.5dt
+            --  ae[:bkla.yw + 1.7dl, :bkla.yw + 5dl] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 0.5sw, :bkla.yw] << 1.5dt
+            --  ae[:bkla.yw + 1dl, :bkla.yw + 5dl] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 0.49sw, :bkl + 0.5sw] << 1.5dt
+            --  ae[:bkl + 0.5sw + 1dl, :bkla.yw] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 0.49sw, :bkl + 0.5sw] >> 1.5dt
+            --  ae[:bkl + 0.5sw + 1dl, :bkla.yw] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 0.5sw, :bkla.yw] >> 1.5dt
+            --  ae[:bkla.yw + 1dl, :bkla.yw + 5dl] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 0.5sw, :bkla.yw + 0.7dl] >> 2.5dt
+            --  ae[:bkla.yw + 1.7dl, :bkla.yw + 5dl] >> 1.5dt
+        );
+        marker(:de.abzw :cat:dc15 :right, ae[:bkla.yw] >> 2.5dt);
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:mas - 1sw, :bkla.yw] << 1.5dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                ae[:mas - 1sw, :bkla.yw]
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:mas - 1sw, :bkla.yw] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Maarssen" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:mas - 1sw, :mas + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:mas - 1sw, :mas + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:mas - 1sw, :mas + 1sw] >> 1.5dt
+        );
+        marker(:de.bf :cat:dc15 :pax :right, ae[:mas] >> 1.5dt);
+        slabel(:right :cat:dc15 :pax, ae[:mas + 0.6sw] << 3dt, "Maarssen");
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:mas + 1sw, :utz - 1sw] << 1.5dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                ae[:mas + 1sw, :utz - 1sw]
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:mas + 1sw, :utz - 1sw] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Utrecht-Zuilen" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz - 1sw, :utz + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:utz - 1sw, :utz + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz - 1sw, :utz + 1sw] >> 1.5dt
+        );
+        marker(:de.bf :cat:dc15 :pax :right, ae[:utz] >> 1.5dt);
+    }
+
+    with link = "point.nl.Utrecht-Centraal" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz + 1sw, :ut.aa] << 1.5dt
+            ..  ae[:ut.yn, :ut] << 4.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:utz + 1sw, :ut.aa]
+            ..  ae[:ut.yn, :ut + 2sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz + 1sw, :ut.aa] >> 1.5dt
+            ..  ae[:ut.yn, :ut] >> 1.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, ae[:ut] << 4.5dt);
+    }
+
+    with link = "point.nl.Utrecht-Vaartsche-Rijn" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ut + 2sw, :utvr + 1sw] << 2.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ut + 2sw, :utvr + 1sw] << 1dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ut + 2sw, :utvr + 1sw] >> 1dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ut + 2sw, :utvr + 1sw] >> 2.5dt
+        );
+        marker(:de.hp :cat:dc15 :pax :right, ae[:utvr] >> 2.5dt);
+    }
+
+
+    with link = "point.nl.Utrecht-Zuid-aansl" {
+        let ub = path("d4.nl.ub");
+
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr + 1sw, :utla.yb] << 2.5dt
+            ..  ub[:utl, :utl + 0.1dl] << 0.5dt 
+        );
+        with layer = 1 casing(:first:station :double :cat:dc15 :pax,
+                ae[:utla.yb - 0.1dl, :utla.yb] << 1dt
+            ..  ae[:utla.fa - 0.1dl, :utla.fa]
+        );
+        with layer = 2 track(:first:station :double :cat:dc15 :pax,
+                ae[:utvr + 1sw, :utla.yb] << 1dt
+            ..  ae[:utla.fa - 0.1dl, :utla.fa]
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:utvr + 1sw, :utla.yb] >> 1dt
+            ..  ub[:utl, :utl + 0.1dl] >> 1dt 
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr + 1sw, :utla.yb] >> 2.5dt
+            ..  ub[:utl, :utl + 0.1dl] >> 2.5dt 
+        );
+    }
+
+    with link = "line.nl.AE" {
+        with layer = 2 track(:first :double :cat:dc15 :pax,
+                ae[:utla.fa, :bnk - 1sw]
+        );
+    }
+
+
+    with link = "point.nl.Meerveldscheweg" {
+        marker(:de.hp :removed :right, ae[:utla.fa] >> 0.5dt);
+    }
+
+    with link = "point.nl.Vechten" {
+        marker(:de.hp :removed :left, ae[:vn] << 0.5dt);
+    }
+
+    with link = "point.nl.Bunnik" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:bnk - 1sw, :bnk + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, ae[:bnk] << 0.5dt);
+        slabel(:top :cat:dc15 :pax, ae[:bnk + 0.5sw] << 0.5dt << 1.2sw,
+            "Bunnik"
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:bnk + 1sw, :db - 1sw]);
+        line_badge(:cat:dc15 :pax, ae[:bnk + 2.2km], "AE");
+    }
+
+    with link = "point.nl.Driebergen-Zeist" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:db - 1sw, :db + 1sw]
+        );
+        marker(:de.bf :cat:dc15 :right :pax, ae[:db] >> 0.5dt);
+        slabel(:bottom :cat:dc15 :pax, ae[:db] >> 0.5dt >> 1.1sw,
+            vbox(:center:top, " Driebergen-", "Zeist")
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:db + 1sw, :mrg - 1sw]);
+    }
+
+    with link = "point.nl.Driebergen-Austerlitz" {
+        marker(:de.hp :removed :right, ae[:dba] >> 0.5dt);
+        slabel(:top :removed, ae[:dba] << 1.8dt,
+            vbox(:center:top, " Driebergen-", "Austerlitz")
+        );
+    }
+
+    with link = "point.nl.Maarn-Goederen" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:mrg - 1sw, :mrn - 1sw]
+        );
+        marker(:de.gbf :cat:dc15 :right, ae[:mrg] >> 0.5dt);
+        slabel(:bottom :cat:dc15, ae[:mrg] >> 0.5dt >> 1.0sw,
+            vbox(:center:top, "Maarn", "Goederen")
+        );
+        marker(:de.bf :removed :left, ae[:mrn.oud] << 0.5dt);
+    }
+
+    with link = "point.nl.Maarn" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:mrn - 1sw, :mrn + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, ae[:mrn] << 0.5dt);
+        slabel(:right :cat:dc15 :pax, ae[:mrn - 1.5sw] << 0.5dt << 1.3sw,
+            "Maarn"
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:mrn + 1sw, :har - 1sw]);
+    }
+
+    with link = "point.nl.Maarsbergen" {
+        marker(:de.bf :removed :left, ae[:mb] << 0.5dt);
+        slabel(:right :removed, ae[:mb - 1sw] << 0.5dt << 1.0sw,
+            vbox(:left:bottom, "Maars-", "bergen")
+        );
+    }
+
+    with link = "point.nl.De-Haar" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:har - 1.21dl, :har - 1.2dl] << 0.5dt
+            --  ae[:har - 0.2dl, :har + 0.2dl] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:har - 1sw, :har + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:har - 1.21dl, :har - 1.2dl] >> 0.5dt
+            --  ae[:har - 0.2dl, :har + 0.2dl] >> 1.5dt
+        );
+        with layer = 2 marker(
+            :de.abzw :cat:dc15 :pax :left, ae[:har] << 1.5dt
+        );
+        slabel(:left :cat:dc15, ae[:har] >> 2.0dt,
+            hbox(:right:top, "De Haar")
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:har + 1sw, :klp - 1sw]);
+        line_badge(:cat:dc15 :pax, ae[:hvg + 2.5km], "AE");
+    }
+
+    with link = "point.nl.Heuvelsche-Steeg" {
+        marker(:de.hp :removed :left, ae[:hvg] << 0.5dt);
+        slabel(:right :removed, ae[:hvg - 1sw] << 0.5dt << 1.2sw,
+            vbox(:left:bottom, "Heuvelsche", "Steeg")
+        );
+    }
+
+    with link = "point.nl.Veenendaal-De-Klomp" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:klp - 1sw, :klp + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, ae[:klp] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, ae[:klp] << 0.5dt);
+        slabel(:top :cat:dc15 :pax, ae[:klp] << 0.5dt << 1.2sw + (1sw, 0dt),
+            vbox(:center:bottom, " Veenendaal-", "De Klomp")
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:klp + 1sw, :ed.yl - 1sw]);
+    }
+
+    with link = "point.nl.Ede-Wageningen" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ed.yl, :ed.yl + 1.5sw] << 1.5dt
+            --  ae[:ed.yl + 1.5sw + 1dl, :ed.yl + 1.5sw + 1.1dl] << 0.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ed.yl - 1sw, :ed.yl + 2.5sw]
+        );
+        marker(:de.bf :cat:dc15 :pax :left, ae[:ed.yl + 1.0sw] << 1.5dt);
+        slabel(:left :cat:dc15 :pax, ae[:ed.yl + 1sw] >> 0.5dt,
+            hbox(:right:top :bold, "Ede-Wageningen")
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:ed.yl + 2.5sw, :wf - 1sw]);
+        line_badge(:cat:dc15 :pax, ae[:ed + 4.0km], "AE");
+    }
+
+    with link = "point.nl.Buunderkamp" {
+        marker(:de.hp :removed :right, ae[:bkp] >> 0.5dt);
+        slabel(:left :removed, ae[:bkp + 1sw] >> 0.5dt >> 0.5sw,
+            hbox(:right:top, "Buunderkamp")
+        );
+    }
+
+    with link = "point.nl.Wolfheze" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:wf - 1sw, :wf + 1sw]
+        );
+        marker(:de.bf :cat:dc15 :pax :right, ae[:wf] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, ae[:wf - 0.5sw] << 1.5dt, "Wolfheze");
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:wf + 1sw, :otb - 1sw]);
+    }
+
+    with link = "point.nl.Oosterbeek" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:otb - 1sw, :otb + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, ae[:otb] << 0.5dt);
+        slabel(:right :cat:dc15 :pax, ae[:otb - 1sw] << 0.5dt << 1.2sw,
+            hbox(:left:base, "Oosterbeek ", span(:removed, "Hoog"))
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:otb + 1sw, :ahwa - 1sw]);
+    }
+
+    with link = "point.nl.Arnhem-West" {
+        with layer = 2 track(:first:station :double :cat:dc15 :pax,
+                ae[:ahwa - 1sw, :ahwa + 1.1sw]
+        );
+        with layer = 2 track(:first:station :double :cat:dc15 :pax,
+                ae[:ahwa - 0.5sw, :ahwa + 1.1sw] >> 2dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa - 1.1dl, :ahwa - 1dl] >> 2.5dt
+            --  ae[:ahwa, :ahwa + 1sw] >> 3.5dt
+        );
+        marker(:de.abzw :cat:dc15 :right, ae[:ahwa] >> 3.5dt);
+    }
+
+    with link = "point.nl.Arnhem-Centraal" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa + 1sw, :ahwa + 1.1sw] >> 3.5dt
+            --  ae[:ahwa + 1sw + 5dl, :ah - 1dl] << 1.5dt
+            --  ae[:ah - 0.1dl, :ah] << 0.5dt
+        );
+        with layer = 1 casing(:first:station :double :cat:dc15 :pax,
+                ae[:ahwa + 1sw, :ah - 0.5sw]
+        );
+        with layer = 1 casing(:first:station :double :cat:dc15 :pax,
+                ae[:ahwa + 1sw, :ah - 0.5sw] >> 2dt
+        );
+        with layer = 2 track(:first:station :double :cat:dc15 :pax,
+                ae[:ahwa + 1sw, :ah + 1sw]
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:ahwa + 1sw, :ah - 1dl] >> 1.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:ahwa + 1sw, :ah - 2dl] >> 2.5dt
+            --  ae[:ah - 0.1dl, :ah] >> 0.5dt
+        );
+        with layer = 2 marker(
+            :de.bf :cat:dc15 :pax, ae[:ah - 2dl - 0.5sw] >> 2.5dt
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:ah + 1sw, :ahp - 1sw]);
+    }
+
+    with link = "point.nl.Arnhem-Velperpoort" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ahp - 1sw, :ahp + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :right, ae[:ahp] >> 0.5dt);
+    }
+
+    with link = "point.nl.Velperbroek" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ahp + 1sw, :va + 1.5sw]
+        );
+        track(:first:station :cat:dc15,
+                ae[:va + 199m, :va + 200m] >> 0.5dt
+            --  ae[:va + 200m + 1dl, :va + 1.5sw] >> 1.5dt
+        );
+        marker(:de.abzw :cat:dc15 :right, ae[:va] >> 0.5dt);
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:va + 1.5sw, :ijb - 1sw]);
+    }
+
+    with link = "point.nl.IJsselbrug" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ijb - 1sw, :ijb + 1sw]
+        );
+        marker(:de.uest :cat:dc15 :left, ae[:ijb] << 0.5dt);
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:ijb + 1sw, :wtv - 1sw]);
+    }
+
+    with link = "point.nl.Westervoort" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:wtv - 1sw, :wtv + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, ae[:wtv] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, ae[:wtv] << 0.5dt);
+        slabel(:right :cat:dc15 :pax, ae[:wtv + 0.8sw] << 0.5dt << 1.3sw,
+            "Westervoort"
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:wtv + 1sw, :dvn - 1sw]);
+        line_badge(:cat:dc15 :pax, ae[:wtv + 1.7km], "AE");
+    }
+
+    with link = "point.nl.Duiven" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:dvn - 1sw, :dvn + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, ae[:dvn] << 0.5dt);
+        marker(:de.bf :removed :left, ae[:dvn] << 0.5dt);
+        slabel(:right :cat:dc15 :pax, ae[:dvn + 0.6sw] << 0.5dt << 1.3sw,
+            "Duiven"
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:dvn + 1sw, :zv - 1sw]);
+    }
+
+    with link = "point.nl.Zevenaar" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:zv - 0.5sw - 1.21dl, :zv - 0.5sw - 1.2dl] << 0.5dt
+            --  ae[:zv - 0.5sw - 0.2dl, :zv + 0.5sw] << 1.5dt
+        );
+        track(:first:station :pax,
+                ae[:zv + 0.5sw, :zv.yd] << 1.5dt
+        );
+
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:zv - 1sw, :zvba.a]
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, ae[:zv] << 1.5dt);
+        slabel(:top :cat:dc15 :pax, ae[:zv] << 1.5dt << 1.2sw,
+            span(:bold, "Zevenaar")
+        );
+    }
+
+    with link = "point.nl.Zevenaar-Betuweroute" {
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba.a, :zvba + 1sw] << 0.5dt
+        );
+
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba.a, :zvba + 1sw] >> 0.5dt
+        );
+
+        track(:first:station :cat:ac25,
+                ae[:zvba.a, :zvba - 0.7sw - 2.7dl] >> 2.5dt
+            --  ae[:zvba - 0.7sw - 0.7dl, :zvba - 0.7sw - 0.69dl] >> 0.5dt
+        );
+
+        track(:first:station :cat:ac25,
+                ae[:zvba.a, :zvba - 0.7sw - 2dl] >> 3.5dt
+            --  ae[:zvba - 0.7sw, :zvba + 1sw] >> 1.5dt
+        );
+
+        marker(:de.abzw :cat:ac25, ae[:zvba] >> 1.5dt);
+    }
+
+    with link = "point.nl.Zevenaar-Oost" {
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba + 1sw, :zvo + 0.5sw] << 0.5dt
+        );
+        track(:first:station :cat:ac25,
+                ae[:zvo + 0.5sw, :zvo + 1.5sw] << 0.5dt
+        );
+
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba + 1sw, :zvo + 1.5sw] >> 0.5dt
+        );
+
+        track(:first:station :cat:ac25,
+                ae[:zvba + 1sw, :zvo + 0.5sw] >> 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvo + 0.5sw, :zvo + 1.5sw] >> 1.5dt
+        );
+
+        marker(:de.bbf :cat:ac25 :right, ae[:zvo] >> 1.5dt);
+        slabel(:left :cat:ac25, ae[:zvo + 1.5sw] >> 1.5dt >> 0.4sw,
+            hbox(:right:top, "Zevenaar Oost")
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :cat:ac25 :flip:tight,
+                ae[:zvo + 1.5sw, :zvg] << 0.5dt
+        );
+        track(:first :double :cat:ac25 :pax,
+                ae[:zvo + 1.5sw, :zvg] >> 1dt
+        );
+    }
+}
+

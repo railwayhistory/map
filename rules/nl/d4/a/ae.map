@@ -1,0 +1,2394 @@
+# NL AE.  Amsterdam Weesperpoort - Zevenaar grens
+#
+let ae = path("d4.nl.ae");
+
+with detail = 5 {
+    with link = "point.nl.Amsterdam-Weesperpoort" {
+        track(:first:station :double :removed,
+                ae[:asp - 0.5sw, :asp + 1sw] << 2dt
+        );
+        marker(:de.bf :removed :left, ae[:asp] << 2.5dt);
+        station(:left :removed, ae[:asp + 0.3sw] >> 0.5dt,
+            span(:bold, "Amsterdam Weesperpoort"),
+            "AE: 0,00"
+        );
+    }
+
+    with link = "line.nl.AE" {
+        track(:first :double :removed, ae[:asp, :asa.ym] << 2dt);
+        line_badge(:removed, ae[:asp + 0.3km] << 2dt, "AE");
+    }
+}
+
+
+with detail = [4, 5] {
+    with link = "point.nl.Amsterdam-Amstel" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:asa - 210m, :asa + 180m] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:asa - 210m, :asa + 180m] >> 1.5dt
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:asa - 160m, :asa + 180m] << 1.5dt
+            --  ae[:asa + 180m, :asa - 160m] >> 1.0dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:asa - 160m, :asa + 180m] >> 1.5dt
+            --  ae[:asa + 180m, :asa - 160m] << 1.0dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, ae[:asa] << 1.5dt);
+        station(:left :cat:dc15 :pax, ae[:asa + 0.3sw] >> 3.5dt,
+            "Amsterdam Amstel",
+            hbox(:center:top,
+                vbox(:right:top, "ACA: ", "AE: "),
+                vbox(:right:top, "105,", "1,"),
+                vbox(:left:top, "85", "46")
+            )
+        );
+    }
+
+    
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:asa + 180m, :dvd - 1sw] << 1.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:asa + 180m, :asa + 181m] >> 1.5dt
+            ..  ae[:slw - 200m - 0.5dl, :dvd - 1sw] >> 3.5dt
+        );
+    }
+
+
+    with link = "point.nl.Duivendrecht" {
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:dvd - 1sw, :dvd + 200m] << 1.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:dvd - 1sw, :dvd + 230m] << 1.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:dvd - 1sw, :dvd + 230m] >> 3.5dt
+        );
+
+        with layer = 2 platform(:cat:dc15 :pax,
+                ae[:dvd - 120m, :dvd + 220m] << 1.5dt
+            --  ae[:dvd + 220m, :dvd - 120m] >> 0.7dt
+        );
+        with layer = 2 platform(:cat:dc15 :pax,
+                ae[:dvd - 120m, :dvd + 220m] >> 3.5dt
+            --  ae[:dvd + 220m, :dvd - 120m] << 2.7dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, ae[:dvd + 2.5dt] >> 3.5dt);
+    }
+
+    
+    with link = "point.nl.Duivendrecht-Aansluiting-Zuid" {
+        # Lijn vaan Diemen Zuid
+        track(:first:station :cat:dc15 :pax,
+                ae[:dvaz.yd - 100m] << 2.5dt
+            --  ae[:dvaz.yd] << 1.5dt
+        );
+
+        track(:first:station :cat:dc15 :pax,
+                ae[:dvd + 230m, :dvaz] << 1.5dt
+            ..  ae[:asb.yr - 0.1dl, :asb.yr] << 2.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:dvaz - 0.1dl, :dvaz] << 1.5dt
+            ..  ae[:asb.yr - 0.1dl, :asb.yr] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:dvd + 230m, :dvaz] >> 3.5dt
+            ..  ae[:asb.yr - 0.1dl, :asb.yr] >> 4.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:dvaz - 0.1dl, :dvaz] >> 3.5dt
+            ..  ae[:asb.yr - 0.1dl, :asb.yr] >> 2.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :left, ae[:dvaz] << 1.5dt);
+        station(:right :cat:dc15, ae[:dvaz + 0.4sw] << 1.5dt << 1.2sw,
+            "D. Aansl. Zuid",
+            "AE: 5,40"
+        );
+    }
+
+    
+    with link = "point.nl.Amsterdam-Bijlmer" {
+        # Spoor 601
+        track(:first:station :cat:dc15 :pax,
+                ae[:asb.yr, :asb.f] << 2.5dt
+        );
+
+        # Spoor 602
+        track(:first:station :cat:dc15 :pax,
+                ae[:asb.yr, :asb.f] << 1.5dt
+        );
+
+        # Spoor 603
+        track(:first:station :cat:dc15 :pax,
+                ae[:asb.yr, :asb.f - 350m] << 0.5dt
+            ..  ae[:asb.f - 150m, :asb.f - 149m] << 1.5dt
+        );
+
+        # Spoor 606
+        track(:first:station :cat:dc15 :pax,
+                ae[:asb.yr, :asb.f - 350m] >> 2.5dt
+            ..  ae[:asb.f - 150m, :asb.f - 149m] >> 3.5dt
+        );
+
+        # Spoor 607
+        track(:first:station :cat:dc15 :pax, ae[:asb.yr, :asb.f] >> 3.5dt);
+
+        # Spoor 608
+        track(:first:station :cat:dc15 :pax,
+                ae[:asb.yr, :asb.f] >> 4.5dt
+        );
+
+        # Perron 601
+        platform(:cat:dc15 :pax,
+                ae[:asb - 230m, :asb + 120m] << 2.5dt
+            --  ae[:asb + 120m, :asb - 230m] >> 3.2dt
+        );
+
+        # Perron 602/603
+        platform(:cat:dc15 :pax,
+                ae[:asb - 230m, :asb + 120m] << 1.5dt
+            --  ae[:asb + 120m, :asb - 230m] >> 0.5dt
+        );
+
+        # Perron 606/607
+        platform(:cat:dc15 :pax,
+                ae[:asb - 250m, :asb + 100m] >> 2.5dt
+            --  ae[:asb + 100m, :asb - 250m] << 3.5dt
+        );
+
+        # Perron 608
+        platform(:cat:dc15 :pax,
+                ae[:asb - 250m, :asb + 100m] >> 4.5dt
+            --  ae[:asb + 100m, :asb - 250m] << 5.2dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, ae[:asb] >> 4.5dt);
+        station(:left :cat:dc15 :pax, ae[:asb + 0.2sw] >> 4.5dt >> 1.6sw,
+            "Amsterdam Bijlmer", "AE: 5,87"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:asb.f, :blw + 400m] << 2.5dt
+            ..  ae[:ashd - 1.1sw, :ashd - 1sw] << 1.5dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:asb.f, :blw + 400m] << 1.5dt
+            ..  ae[:ashd - 1.1sw, :ashd - 1sw] << 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:asb.f, :blw + 400m] >> 3.5dt
+            ..  ae[:ashd - 1.1sw, :ashd - 1sw] >> 2.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:asb.f, :blw + 400m] >> 4.5dt
+            ..  ae[:ashd - 1.1sw, :ashd - 1sw] >> 3.5dt
+        );
+    }
+
+    
+    with link = "point.nl.Amsterdam-Holendrecht" {
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:ashd.yg, :ashd.f - 0.5dl] << 1.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:ashd - 1sw, :ashd.f] << 1.5dt
+        );
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:ashd.yg, :ashd.f - 0.5dl] << 0.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:ashd - 1sw, :ashd.f] << 0.5dt
+        );
+            with layer = 1 casing(:station :cat:dc15,
+                    ae[:ashd.f - 330m] << 0.5dt
+                --  ae[:ashd.f - 100m] >> 2.5dt
+            );
+            with layer = 2 track(:station :cat:dc15,
+                    ae[:ashd.f - 330m] << 0.5dt
+                --  ae[:ashd.f - 100m] >> 2.5dt
+            );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:ashd - 1sw, :ashd.f] >> 2.5dt
+        );
+            with layer = 1 casing(:station :cat:dc15,
+                    ae[:ashd.f - 330m] >> 2.5dt
+                --  ae[:ashd.f - 100m] << 0.5dt
+            );
+            with layer = 2 track(:station :cat:dc15,
+                    ae[:ashd.f - 330m] >> 2.5dt
+                --  ae[:ashd.f - 100m] << 0.5dt
+            );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:ashd - 1sw, :ashd.f] >> 3.5dt
+        );
+
+        with layer = 2 platform(:cat:dc15 :pax,
+                ae[:ashd - 110m, :ashd + 150m] << 0.5dt
+            --  ae[:ashd + 150m, :ashd - 110m] >> 1.0dt
+        );
+        with layer = 2 platform(:cat:dc15 :pax,
+                ae[:ashd - 110m, :ashd + 150m] >> 2.5dt
+            --  ae[:ashd + 150m, :ashd - 110m] << 3.0dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, ae[:ashd] >> 3.5dt);
+        station(:left :cat:dc15 :pax, ae[:ashd + 0.3sw] >> 3.5dt >> 1.6sw,
+            "Amsterdam Holendrecht", "8,00"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:ashd.f, :ashd.f + 0.1dl] << 1.5dt
+            ..  ae[:ac - 431m, :ac - 430m] << 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:ashd.f, :ashd.f + 0.1dl] << 0.5dt
+            ..  ae[:ac - 431m, :ac - 430m] >> 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:ashd.f, :ashd.f + 0.1dl] >> 2.5dt
+            ..  ae[:ac - 431m, :ac - 430m] >> 1.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:ashd.f, :ashd.f + 0.1dl] >> 3.5dt
+            ..  ae[:ac - 431m, :ac - 430m] >> 2.5dt
+        );
+    }
+
+    
+    with link = "point.nl.Abcoude" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac - 430m, :ac.f - 150m] << 0.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:ac - 380m] << 0.5dt
+                --  ae[:ac - 280m] >> 0.5dt
+            );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac - 430m, :ac.f - 150m] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac - 430m, :ac.f - 150m] >> 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac - 430m, :ac.f - 150m] >> 2.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:ac - 380m] >> 2.5dt
+                --  ae[:ac - 280m] >> 1.5dt
+            );
+
+        platform(:cat:dc15 :pax,
+                ae[:ac - 240m, :ac + 10m] >> 0.5dt
+            --  ae[:ac + 10m, :ac - 240m] << 1.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, ae[:ac] >> 2.5dt);
+        station(:left :cat:dc15 :pax, ae[:ac + 0.3sw] >> 2.5dt >> 1.6sw,
+            "Abcoude", "10,10"
+        );
+    }
+
+
+    with link = "point.nl.Abcoude-overloop" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac.f - 150m, :ac.f] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac.f - 150m, :ac.f] >> 0.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:ac.f - 150m] >> 0.5dt
+                --  ae[:ac.f - 50m] << 0.5dt
+            );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac.f - 150m, :ac.f] >> 1.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:ac.f - 150m] >> 1.5dt
+                --  ae[:ac.f - 50m] >> 2.5dt
+            );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ac.f - 150m, :ac.f] >> 2.5dt
+        );
+
+        marker(:de.uest :cat:dc15 :right, ae[:ac.f - 100m] >> 2.5dt);
+        station(:left :cat:dc15, ae[:ac.f - 100m + 0.3sw] >> 2.5dt >> 1.6sw,
+            "Abcoude overloop", "11,21"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:ac.f, :vrl.aa] << 0.5dt
+            ..  ae[:vrl.a, :nws.a] << 1.5dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                ae[:ac.f, :vrl.aa] >> 1dt
+            ..  ae[:vrl.a, :nws.a]
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:ac.f, :vrl.aa] >> 2.5dt
+            ..  ae[:vrl.a, :nws.a] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.nl.Vreeland" {
+        marker(:de.hp :removed :right, ae[:vrl] >> 1.5dt);
+        label(:removed, ae[:vrl - 0.1sw] >> 1.5dt >> 1.5sw,
+            vbox(:right:middle,
+                span(:medium :gone, "Loenen-Vreeland"),
+                vbox(:center:top,
+                    span(:medium, "Vreeland"),
+                    span(:xsmall, "16,20")
+                )
+            )
+        );
+    }
+
+
+    with link = "point.nl.Nieuwersluis-Loenen" {
+        # Spoorlijn AE
+        track(:first:station :cat:dc15 :pax,
+                ae[:nws.a, :nws + 1sw] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:nws.a, :nws + 1sw] << 0.5dt
+        );
+            track(:station :removed,
+                    ae[:nws.yu - 2dl] << 0.5dt
+                --  ae[:nws.yu + 2dl] >> 3.5dt
+            );
+        track(:first:station :cat:dc15 :pax,
+                ae[:nws.a, :nws + 1sw] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:nws.a, :nws + 1sw] >> 1.5dt
+        );
+
+        # Spoorlijn MN
+        track(:second:station :removed,
+                ae[:nws.yu, :nws - 0.5sw] >> 2.5dt
+        );
+        track(:station :removed,
+                ae[:nws.yu, :nws - 0.5sw] >> 3.5dt
+        );
+        track(:station :removed,
+                ae[
+                    :nws - 0.5sw - 100m - 2.1dl,
+                    :nws - 0.5sw - 100m - 2dl
+                ] >> 2.5dt
+            -- ae[:nws - 0.5sw - 100m, :nws - 0.5sw] >> 4.5dt
+        );
+
+        marker(:de.bf :removed :right, ae[:nws] >> 1.5dt);
+        station(:left :removed, ae[:nws + 0.6sw] >> 1.5dt >> 1.5sw,
+            vbox(:center:bottom,
+                span(:bold :gone, "Nieuwersluis"),
+                span(:bold, "Nieuwersluis-Loenen")
+            ),
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "MN: "),
+                vbox(:right:top, "18,", "22,"),
+                vbox(:left:top, "9", "0")
+            )
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:nws + 1sw, :bkl.a - 400m] << 1.5dt
+            ..  ae[:bkl.a - 0.1dl, :bkl.a] << 2.0dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:nws + 1sw, :bkl.a - 400m] << 0.5dt
+            ..  ae[:bkl.a - 0.1dl, :bkl.a] << 1.0dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:nws + 1sw, :bkl.a - 400m] >> 0.5dt
+            ..  ae[:bkl.a - 0.1dl, :bkl.a] >> 1.0dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:nws + 1sw, :bkl.a - 400m] >> 1.5dt
+            ..  ae[:bkl.a - 0.1dl, :bkl.a] >> 2.0dt
+        );
+    }
+
+
+    with link = "point.nl.Breukelen" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl.a, :bkl.xa + 100m] << 2.0dt
+            ..  ae[:bkl - 150m, :bkl + 150m] << 2.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:bkl.xa] << 2.0dt
+                --  ae[:bkl.xa + 100m] << 1.0dt
+            );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl.a, :bkl.xa + 100m] << 1.0dt
+            ..  ae[:bkl - 150m, :bkl + 150m] << 1.5dt
+        );
+
+        track(:station :cat:dc15, ae[:bkl.a, :bkl.xa]);
+            track(:station :cat:dc15,
+                    ae[:bkl.a + 480m]
+                --  ae[:bkl.a + 580m] >> 1.0dt
+            );
+            track(:station :cat:dc15,
+                    ae[:bkl.xa - 100m]
+                --  ae[:bkl.xa] << 1.0dt
+            );
+
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl.a, :bkl.xa + 100m] >> 1.0dt
+            ..  ae[:bkl - 150m, :bkl + 150m] >> 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl.a, :bkl.xa + 100m] >> 2.0dt
+            ..  ae[:bkl - 150m, :bkl + 150m] >> 2.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:bkl.xa] >> 2.0dt
+                --  ae[:bkl.xa + 100m] >> 1.0dt
+            );
+
+        platform(:cat:dc15 :pax,
+                ae[:bkl - 140m, :bkl + 110m] << 1.5dt
+            --  ae[:bkl + 110m, :bkl - 140m] >> 0.7dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:bkl - 140m, :bkl + 110m] >> 1.5dt
+            --  ae[:bkl + 110m, :bkl - 140m] << 0.7dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, ae[:bkl] << 2.5dt);
+        station(:right :cat:dc15 :pax, ae[:bkl + 0.35sw] << 2.5dt << 1.4sw,
+            span(:bold, "Breukelen"),
+            "AE: 22,83"
+        );
+    }
+
+
+    with link = "point.nl.Breukelen-aansl" {
+        # Spoor 1
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 150m, :bkla.yw + 500m] << 2.5dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 150m, :bkla.yw + 500m] << 1.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:bkla - 75m] << 1.5dt
+                --  ae[:bkla + 25m] << 2.5dt
+            );
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 150m, :bkla.yw + 500m] >> 1.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:bkla - 200m] >> 1.5dt
+                --  ae[:bkla - 100m] >> 2.5dt
+            );
+
+        # Spoor 4
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 150m, :bkla.yw + 500m] >> 2.5dt
+        );
+
+        # Spoor 11 (Lijn BH)
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 250m, :bkl + 251m] << 1.5dt
+            --  ae[:bkla, :bkla.yw] << 0.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:bkla] << 0.5dt
+                --  ae[:bkla + 70m] >> 0.5dt
+            );
+
+        # Spoor 12 (Lijn BH)
+        track(:first:station :cat:dc15 :pax,
+                ae[:bkl + 150m, :bkl + 151m] >> 1.5dt
+            --  ae[:bkla, :bkla.yw] >> 0.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:bkla + 100m] >> 0.5dt
+                --  ae[:bkla + 200m] << 0.5dt
+            );
+
+        marker(:de.abzw :cat:dc15 :right, ae[:bkla] >> 2.5dt);
+        station(:left :cat:dc15, ae[:bkla + 0.35sw] >> 2.5dt >> 1.5sw,
+            "Breukelen aansl.",
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "BH: "),
+                vbox(:right:top, "23,", "0,"),
+                vbox(:left:top, "00", "00")
+            )
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight,
+                ae[:bkla.xu  + 0.1dl, :bkla.xu] >> 2dt
+            ..  ae[:bkla.yw + 501m, :bkla.yw + 500m] >> 2.5dt
+        );
+        track(:first :cat:dc15 :pax,
+                ae[:bkla.xu  + 0.1dl, :bkla.xu] >> 1dt
+            ..  ae[:bkla.yw + 501m, :bkla.yw + 500m] >> 1.5dt
+        );
+        track(:first :cat:dc15 :pax :flip,
+                ae[:bkla.xu  + 0.1dl, :bkla.xu] << 1dt
+            ..  ae[:bkla.yw + 501m, :bkla.yw + 500m] << 1.5dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:bkla.xu  + 0.1dl, :bkla.xu] << 2dt
+            ..  ae[:bkla.yw + 501m, :bkla.yw + 500m] << 2.5dt
+        );
+
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:bkla.xu + 0.1dl, :mas.a] << 2dt
+        );
+        track(:first :cat:dc15 :pax:flip,
+                ae[:bkla.xu + 0.1dl, :mas.a] << 1dt
+        );
+        track(:first :cat:dc15 :pax,
+                ae[:bkla.xu + 0.1dl, :mas.a] >> 1dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:bkla.xu + 0.1dl, :mas.a] >> 2dt
+        );
+    }
+
+
+    with link = "point.nl.Maarssen" {
+        # Spoor 1
+        track(:first:station :cat:dc15 :pax, ae[:mas.a, :mas.f] << 2dt);
+            track(:station :cat:dc15,
+                    ae[:mas.a + 60m] << 2dt
+                --  ae[:mas.a + 160m] << 1dt
+            );
+            track(:station,
+                    ae[:mas.xs] << 2dt
+                --  ae[:mas.xs + 80m] << 3dt
+            );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax, ae[:mas.a, :mas.f] << 1dt);
+            track(:station :cat:dc15,
+                    ae[:mas + 30m] << 1dt
+                --  ae[:mas + 170m]
+            );
+            track(:station :cat:dc15,
+                    ae[:mas.xs - 130m] << 1dt
+                --  ae[:mas.xs - 30m] << 2dt
+            );
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax, ae[:mas.a, :mas.f] >> 1dt);
+            track(:station :cat:dc15,
+                    ae[:mas + 90m] >> 1dt
+                --  ae[:mas + 230m]
+            );
+            track(:station :cat:dc15,
+                    ae[:mas.xs - 30m] >> 1dt
+                --  ae[:mas.xs + 60m] >> 2dt
+            );
+
+        # Spoor 4
+        track(:first:station :cat:dc15 :pax, ae[:mas.a, :mas.f] >> 2dt);
+            track(:station :cat:dc15,
+                    ae[:mas.a + 60m] >> 2dt
+                --  ae[:mas.a + 160m] >> 1dt
+            );
+
+        # Spoor 13
+        track(:station :cat:dc15, ae[:mas + 25m, :mas.xs + 50m]);
+            track(:station :cat:dc15,
+                    ae[:mas.xs - 310m]
+                --  ae[:mas.xs - 190m] << 1dt
+            );
+            track(:station :cat:dc15,
+                    ae[:mas.xs - 240m]
+                --  ae[:mas.xs - 100m] >> 1dt
+            );
+            track(:station,
+                    ae[:mas.f - 120m] >> 2dt
+                --  ae[:mas.f + 60m] >> 3dt
+            );
+
+        # Spoor 22
+        track(:station, ae[:mas.xs - 370m, :mas.xs + 410m] << 3dt);
+
+        # Spoor 35
+        track(:station, ae[:mas.f - 100m, :mas.f + 310m] >> 3dt);
+        track(:station :removed, ae[:mas.f + 310m, :mas.f + 610m] >> 3dt);
+
+        platform(:cat:dc15 :pax,
+                ae[:mas - 240m, :mas + 10m] << 1dt
+            --  ae[:mas + 10m, :mas - 240m] >> 0.2dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:mas - 240m, :mas + 10m] >> 1dt
+            --  ae[:mas + 10m, :mas - 240m] << 0.2dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, ae[:mas] >> 2dt);
+        station(:left :cat:dc15 :pax, ae[:mas + 0.3sw] >> 2dt >> 1.7sw,
+            "Maarssen", "27,79"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:mas.f, :utz - 1.4km] << 2dt
+            ..  ae[:utz - 800m, :utz - 250m] << 1.5dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ae[:mas.f, :utz - 1.4km] << 1dt
+            ..  ae[:utz - 800m, :utz - 250m] << 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:mas.f, :utz - 1.4km] >> 1dt
+            ..  ae[:utz - 800m, :utz - 250m] >> 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ae[:mas.f, :utz - 1.4km] >> 2dt
+            ..  ae[:utz - 800m, :utz - 250m] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.nl.Utrecht-Zuilen" {
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz - 250m, :ut.aa] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz - 250m, :ut.aa] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz - 250m, :ut.aa] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:utz - 250m, :ut.aa] >> 1.5dt
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:utz - 130m, :utz + 130m] << 0.5dt
+            --  ae[:utz + 130m, :utz - 130m] << 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, ae[:utz] >> 1.5dt);
+        station(:top :cat:dc15 :pax, ae[:utz + 0.5dt] << 4dt,
+            vbox(:center:bottom, "Utrecht", "Zuilen"), "33,03"
+        );
+    }
+
+
+    with link = "point.nl.Utrecht-Centraal" {
+        let ur = path("d4.nl.ur");
+        let uz = path("d4.nl.uz");
+
+        # Spoor 1
+        track(:first:station :cat:dc15 :pax,
+                uz[:ut.yn + 420m, :ut.yn - 120m] << 5.5dt
+            --  uz[:ut.yn - 240m, :ut + 0.5sw] << 7.5dt
+        );
+
+        # Spoor 2
+        track(:station :cat:dc15 :pax,
+                uz[:ut.yn - 119m - 0.7dl, :ut.yn - 120m - 0.7dl] << 4.5dt
+            --  uz[:ut.yn - 240m - 0.7dl, :ut + 0.5sw] << 6.5dt
+        );
+
+        # Spoor 3
+        track(:station :cat:dc15 :pax,
+                ae[:ut.yn + 120m, :ut - 0.5sw] << 5.5dt
+        );
+
+        # Spoor 4
+        track(:first:station :cat:dc15 :pax,
+                uz[:ut.yn + 420m, :ut - 110m] << 4.5dt
+        );
+
+        # Spoor 5
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:ut.xa - 0.1dl, :ut.xa] << 1.5dt
+            ..  uz[:ut.yn + 80m, :ut.yn + 79m] << 3.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:ut.aa, :ut.xa] << 1.5dt
+            ..  uz[:ut.yn + 80m, :utvr - 75m] << 3.5dt
+        );
+            # 5/7 Z
+            track(:station :cat:dc15,
+                    ae[:ut + 620m] << 3.5dt
+                --  ae[:ut + 720m] << 2.5dt
+            );
+
+        # Spoor 7
+        track(:first :station :cat:dc15 :pax,
+                ae[:ut.yn + 119m - 0.5dl, :ut.yn + 120m - 0.5dl] << 3.5dt
+            --  ae[:ut.yn + 180m - 0.5dl, :utvr - 75m] << 2.5dt
+        );
+            # 7/5 Z
+            track(:station :cat:dc15,
+                    ae[:ut + 480m] << 2.5dt
+                --  ae[:ut + 580m] << 3.5dt
+            );
+
+        # Spoor 8
+        track(:first:station :cat:dc15 :pax,
+                uz[:ut.yn + 420m, :ut - 240m + 1.5dl] << 1.5dt
+            --  ae[:ut + 300m - 1.5dl, :ut + 301m - 1.5dl] << 2.5dt
+        );
+            # 8/9 N
+            track(:station :cat:dc15 :pax,
+                    ae[:ut - 260m + 0.5dl] << 1.5dt
+                --  ae[:ut - 200m + 0.5dl] << 0.5dt
+            );
+
+        # Spoor 9
+        track(:first:station :cat:dc15 :pax,
+                uz[:ut.yn + 420m, :ut - 240m + 1dl] << 0.5dt
+            --  ae[:ut + 300m - 1dl, :utvr - 75m] << 1.5dt
+        );
+            # 9/12 N
+            track(:station :cat:dc15 :pax,
+                    ae[:ut - 320m] << 0.5dt
+                --  ae[:ut - 200m] >> 1.5dt
+            );
+
+        # Spoor 11
+        track(:station :cat:dc15 :pax,
+                ae[:ut - 260m, :ut + 180m - 1dl] >> 0.5dt
+            --  ae[:ut + 240m - 1dl, :ut + 241m - 1dl] << 0.5dt
+        );
+
+        # Spoor 12
+        with layer = 1 casing(:first :station :cat:dc15 :pax,
+                ur[:ut.xg + 400m, :ut.xg] >> 0.5dt
+            ..  ae[:ut.yn, :ut.yn + 0.5dl] >> 0.5dt
+        );
+        with layer = 2 track(:first :station :cat:dc15 :pax,
+                ur[:ut.ag, :ut.xg] >> 0.5dt
+            ..  ae[:ut.yn, :ut - 320m - 0.5dl] >> 0.5dt
+            --  ae[:ut - 260m - 0.5dl, :ut + 180m - 0.5dl] >> 1.5dt
+        );
+            # 12/21 N
+            track(:station :cat:dc15,
+                    ur[:ut.ag - 150m] << 0.5dt
+                --  ur[:ut.ag - 250m] << 1.5dt
+            );
+
+        # Spoor 14
+        track(:first :station :cat:dc15 :pax,
+                ae[:ut.aa, :ut.xa] << 0.5dt
+            ..  ae[:ut.yn, :ut - 320m - 1.0dl] >> 1.5dt
+            --  ae[:ut - 260m - 1.0dl, :ut + 120m - 0.5dl] >> 2.5dt
+            --  ae[:ut + 360m - 0.5dt, :ut + 361m - 0.5dl] << 1.5dt
+        );
+
+        # Spoor 15
+        track(:first :station :cat:dc15 :pax,
+                ae[:ut.aa, :ut.xa] >> 0.5dt
+            ..  ae[:ut.yn, :ut - 320m - 1.5dl] >> 2.5dt
+            --  ae[:ut - 260m - 1.5dl, :ut + 120m] >> 3.5dt
+            --  ae[:ut + 360m, :utvr - 75m] << 0.5dt
+        );
+            # 15/14 N
+            track(:station :cat:dc15,
+                    ae[:ut.aa + 40m] >> 0.5dt
+                --  ae[:ut.aa + 140m] << 0.5dt
+            );
+            # 15/9 Z
+            track(:station :cat:dc15,
+                    ae[:ut + 480m] << 0.5dt
+                --  ae[:ut + 580m] << 1.5dt
+            );
+
+        # Spoor 18
+        track(:first :station :cat:dc15 :pax,
+                ae[:ut.aa, :ut.xa] >> 1.5dt
+            ..  ae[:ut.yn, :ut - 320m - 2.0dl] >> 3.5dt
+            --  ae[:ut - 260m - 2.0dl, :ut.xs - 180m - 1dl] >> 4.5dt
+            ..  ae[:utvr - 76m, :utvr - 75m] >> 0.5dt
+        );
+            track(:station :cat:dc15 :pax,
+                    ae[:ut.yn] >> 3.5dt
+                --  ae[:ut.yn + 100m] >> 2.5dt
+            );
+
+        # Spoor 19
+        track(:first:station :cat:dc15 :pax,
+                ae[:ut - 261m - 2.0dl, :ut - 260m - 2.0dl] >> 4.5dt
+            --  ae[:ut - 200m - 2.0dl, :ut.xs - 180m - 0.5dl] >> 5.5dt
+            ..  ae[:utvr - 76m, :utvr - 75m] >> 1.5dt
+        );
+
+        # Spoor 20
+        track(:first :station :cat:dc15 :pax,
+                ur[:ut.ag, :ut.ag - 250m] << 1.5dt
+            ..  ae[:ut.xa - 0.1dl, :ut.xa] >> 2.5dt
+            ..  ae[:ut.yn, :ut - 320m - 2.5dl] >> 4.5dt
+            --  ae[:ut - 200m - 2.5dl, :ut.xs - 180m] >> 6.5dt
+            ..  ae[:utvr - 76m, :utvr - 75m] >> 2.5dt
+        );
+            # 20/21 N
+            track(:station :cat:dc15,
+                    ae[:ut.yn + 20m] >> 4.5dt
+                --  ae[:ut.yn + 120m] >> 5.5dt
+            );
+            # 20/238 Z
+            track(:station :cat:dc15,
+                    ae[:ut + 300m] >> 6.5dt
+                --  ae[:ut + 400m] >> 7.5dt
+            );
+            # 20/21 Z
+            track(:station :cat:dc15,
+                    ae[:ut.xs - 320m] >> 6.5dt
+                --  ae[:ut.xs - 220m] >> 8.5dt
+            );
+
+        # Spoor 21
+        track(:first :station :cat:dc15 :pax,
+                ur[:ut.ag, :ut.xg + 400m] >> 1.5dt
+            ..  ae[:ut.yn, :ut - 320m - 3.0dl] >> 5.5dt
+            --  ae[:ut - 200m - 3.0dl, :ut + 300m] >> 7.5dt
+            --  ae[:ut + 360m, :ut.xs - 220m] >> 8.5dt
+            ..  ae[:utvr - 76m, :utvr - 75m] >> 3.5dt
+        );
+            # 21/20 N
+            track(:station :cat:dc15,
+                    ae[:ut.yn + 20m] >> 5.5dt
+                --  ae[:ut.yn + 120m] >> 4.5dt
+            );
+            # 21/20 Z
+            track(:station :cat:dc15,
+                    ae[:ut.xs - 320m] >> 8.5dt
+                --  ae[:ut.xs - 220m] >> 6.5dt
+            );
+
+        # Spoor 95
+        track(:station :cat:dc15,
+                ur[:ut.ag - 350m, :ut.ag - 450m] << 2.5dt
+            --  ur[:ut.ag - 500m, :ut.ag - 501m] << 3.5dt
+        );
+
+        # Spoor 102
+        track(:station :cat:dc15,
+                ae[:ut + 360m, :ut.xs] >> 0.5dt
+        );
+
+        # Spoor 105
+        track(:station :cat:dc15,
+                ae[:ut + 360m, :ut.xs] >> 1.5dt
+        );
+
+        # Spoor 107
+        track(:station :cat:dc15,
+                ae[:ut + 420m, :ut.xs - 150m] >> 2.5dt
+            --  ae[:ut.xs - 100m, :ut.xs - 99m] >> 1.5dt
+        );
+
+        # Spoor 109
+        track(:station :cat:dc15,
+                ae[:ut + 359m, :ut + 360m] << 1.5dt
+            --  ae[:ut + 660m, :ut.xs - 150m] >> 3.5dt
+        );
+
+        # Spoor 201
+        track(:station :cat:dc15,
+                uz[:ut.yn + 420m, :ut.yn + 120m] << 8.5dt
+            --  uz[:ut.yn - 60m, :ut.yn - 61m] << 5.5dt
+        );
+
+        # Spoor 202
+        track(:station :cat:dc15,
+                uz[:ut.yn + 420m, :ut.yn + 120m + 0.5dl] << 7.5dt
+            --  uz[:ut.yn - 120m + 0.5dl, :ut.yn - 121m + 0.5dl] << 3.5dt
+        );
+
+        # Spoor 203
+        track(:station :cat:dc15,
+                uz[:ut.yn + 420m, :ut.yn + 60m + 0.7dl] << 6.5dt
+        );
+
+        # Spoor 211
+        with layer = 1 casing(:first :station :cat:dc15 :pax,
+                ur[:ut.xg + 400m, :ut.xg] << 0.5dt
+            ..  ae[:ut.yn, :ut.yn + 1dl] << 2.5dt
+        );
+        with layer = 2 track(:first :station :cat:dc15 :pax,
+                ur[:ut.ag, :ut.xg] << 0.5dt
+            ..  ae[:ut.yn, :ut.yn + 120m - 1dl] << 2.5dt
+            --  ae[:ut.yn + 180m - 1dl, :ut.yn + 181m - 1dl] << 1.5dt
+        );
+            # 211/9 N
+            with layer = 2 track(:first :station :cat:dc15 :pax,
+                    ur[:ut.xg + 0.1dl, :ut.xg] << 0.5dt
+                ..  ae[:ut.yn, :ut.yn + 0.1dl] << 0.5dt
+            );
+            # 211/20 N
+            track(:station :cat:dc15,
+                    ur[:ut.ag - 150m] >> 0.5dt
+                --  ur[:ut.ag - 250m] >> 1.5dt
+            );
+
+        # Spoor 238
+        track(:station :cat:dc15,
+                ae[:ut + 300m, :ut.xs - 320m] >> 7.5dt
+        );
+
+        # Spoor 260
+        track(:station :cat:dc15,
+                ur[:ut.ag - 140m, :ut.ag - 250m] << 4.5dt
+            --  ur[:ut.ag - 300m, :ut.ag - 301m] << 3.5dt
+        );
+
+        # Spoor 270
+        track(:station :cat:dc15,
+                ur[:ut.ag - 140m, :ut.ag - 500m] << 3.5dt
+            ..  ae[:ut.xa - 0.1dl, :ut.xa] >> 1.5dt
+        );
+
+        # Spoor 272
+        track(:station :cat:dc15,
+                ur[:ut.ag - 140m, :ut.ag - 250m] << 2.5dt
+            --  ur[:ut.ag - 300m, :ut.ag - 301m] << 3.5dt
+        );
+
+        # Perron 1/2
+        platform(:cat:dc15 :pax,
+                ae[:ut.yn + 240m + 1dl, :ut - 0.5sw] << 7.5dt
+            --  ae[:ut - 0.5sw, :ut.yn + 240m + 1dl] >> 6.5dt
+        );
+
+        # Perron 3/4
+        platform(:cat:dc15 :pax,
+                ae[:ut.yn + 240m + 1dl, :ut - 0.5sw] << 5.5dt
+            --  ae[:ut - 0.5sw, :ut + 110m] << 5.2dt
+            --  ae[:ut + 110m, :ut.yn + 240m + 1dl] >> 4.5dt
+        );
+
+        # Perron 5/7
+        platform(:cat:dc15 :pax,
+                ae[:ut - 200m, :ut + 200m] << 3.5dt
+            --  ae[:ut + 200m, :ut - 200m] >> 2.5dt
+        );
+
+        # Perron 8/9
+        platform(:cat:dc15 :pax,
+                ae[:ut - 160m, :ut + 160m] << 1.5dt
+            --  ae[:ut + 160m, :ut - 160m] >> 0.5dt
+        );
+
+        # Perron 11/12
+        platform(:cat:dc15 :pax,
+                ae[:ut - 180m, :ut + 130m] >> 0.5dt
+            --  ae[:ut + 130m, :ut - 180m] << 1.5dt
+        );
+
+        # Perron 14/15
+        platform(:cat:dc15 :pax,
+                ae[:ut - 220m, :ut + 100m] >> 2.5dt
+            --  ae[:ut + 100m, :ut - 220m] << 3.5dt
+        );
+
+        # Perron 18/19
+        platform(:cat:dc15 :pax,
+                ae[:ut - 220m, :ut + 100m] >> 4.5dt
+            --  ae[:ut + 100m, :ut - 220m] << 5.5dt
+        );
+
+        # Perron 20/21
+        platform(:cat:dc15 :pax,
+                ae[:ut - 220m, :ut + 100m] >> 6.5dt
+            --  ae[:ut + 100m, :ut - 220m] << 7.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, ae[:ut] << 4.5dt);
+        station(:right :cat:dc15 :pax, ae[:ut + 0.5sw] << 4.5dt << 1.2sw,
+            span(:bold, "Utrecht Centraal"),
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "UB: ", "UR: ", "UZ: "),
+                vbox(:right:top, "35,",  "−0,",     "−0,",     "−0,"),
+                vbox(:left:top, "39", "14", "10", "10")
+            )
+        );
+    }
+
+
+    with link = "point.nl.Utrecht-Vaartsche-Rijn" {
+        # Spoor FA
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] << 3.5dt
+        );
+
+        # Spoor 240
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] << 2.5dt
+        );
+
+        # Spoor 241
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] << 1.5dt
+        );
+
+        # Spoor 242
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] << 0.5dt
+        );
+
+        # Spoor 243
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] >> 0.5dt
+        );
+
+        # Spoor SA
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] >> 1.5dt
+        );
+
+        # Spoor SE
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] >> 2.5dt
+        );
+
+        # Spoor SJ
+        track(:first:station :cat:dc15 :pax,
+                ae[:utvr - 75m, :utla.a] >> 3.5dt
+        );
+
+        # Perron 241/242
+        with layer = -1 platform(:cat:dc15 :pax,
+                ae[:utvr - 75m, :utvr + 200m] << 1.5dt
+            --  ae[:utvr + 200m, :utvr - 75m] >> 0.5dt
+        );
+
+        # Perron SE/SJ
+        with layer = -1 platform(:cat:dc15 :pax,
+                ae[:utvr - 75m, :utvr + 200m] >> 2.5dt
+            --  ae[:utvr + 200m, :utvr - 75m] << 3.5dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, ae[:utvr] >> 3.5dt);
+        station(:left :cat:dc15 :pax, ae[:utvr + 0.5sw] >> 3.5dt >> 1.9sw,
+            "Utr. Vaartsche Rijn",
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "UB: "),
+                vbox(:right:top, "??", "??")
+            )
+        );
+    }
+
+
+    with link = "point.nl.Utrecht-Zuid-aansl" {
+        let ub = path("d4.nl.ub");
+
+        # Spoor AA
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:utla.yb - 201m, :utla.yb - 200m] << 1.5dt
+            ..  ae[:utla.xa, :utla.xa + 0.1dl] << 2.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb - 200m] << 1.5dt
+            ..  ae[:utla.xa, :utla.fa] << 2.5dt
+        );
+            # AA/FE
+            track(:station :cat:dc15 :pax,
+                    ae[:utla.a + 280m] << 1.5dt
+                --  ae[:utla.a + 380m] << 2.5dt
+            );
+
+
+        # Spoor AO
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:utla.yb - 201m, :utla.yb - 200m] << 0.5dt
+            ..  ae[:utla.xa, :utla.xa + 0.1dl] << 1.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb - 200m] << 0.5dt
+            ..  ae[:utla.xa, :utla.fa] << 1.5dt
+        );
+            # AO/SN
+            track(:station :cat:dc15 :pax,
+                    ae[:utla.a + 100m] << 0.5dt
+                --  ae[:utla.a + 200m] >> 0.5dt
+            );
+
+        # Spoor FA
+        track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb - 200m] << 3.5dt
+            ..  ae[:utla.xa, :utla.xa + 0.1dl] << 3.5dt
+            --  ae[:utla.xa + 130m, :utla.xa + 131m] << 2.5dt
+        );
+
+        # Spoor FE
+        track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb] << 2.5dt
+            ..  ub[:utla.xb, :utla.xb + 0.1dl] << 1.5dt
+        );
+
+        # Spoor SA
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:utla.yb - 201m, :utla.yb - 200m] >> 1.5dt
+            ..  ae[:utla.xa, :utla.xa + 0.1dl] << 0.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb - 200m] >> 1.5dt
+            ..  ae[:utla.xa, :utla.xa + 0.1dl] << 0.5dt
+            --  ae[:utla.xa + 130m, :utla.xa + 131m] << 1.5dt
+        );
+
+        # Spoor SE
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:utla.yb - 1dl, :utla.yb - 0.5dl] >> 2.5dt
+            ..  ub[:utla.xb, :utla.xb + 0.1dl] << 0.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb - 0.5dl] >> 2.5dt
+            ..  ub[:utla.xb, :utla.xb + 0.1dl] << 0.5dt
+        );
+
+        # Spoor SJ
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:utla.yb - 0.1dl, :utla.yb] >> 3.5dt
+            ..  ub[:utla.xb, :utla.xb + 0.1dl] >> 0.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb] >> 3.5dt
+            ..  ub[:utla.xb, :utla.xb + 0.1dl] >> 0.5dt
+        );
+
+        # Spoor SN
+        track(:first:station :cat:dc15 :pax,
+                ae[:utla.a, :utla.yb] >> 0.5dt
+            ..  ub[:utla.xb, :utla.xb + 0.1dl] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.nl.Meerveldscheweg" {
+        with layer = -1 marker(:de.hp :removed :right, ae[:utla.fa] << 1.5dt);
+        station(:right :removed, ae[:utla.fa - 1sw] << 4dt,
+            "Meerveldscheweg", "38,7"
+        );
+    }
+
+    
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax,
+                ae[:utla.fa, :utla.ffa] << 2dt
+            ..  ae[:vn.x, :bnk - 200m]
+        );
+        line_badge(:cat:dc15 :pax, ae[:utla.fa + 0.8km] << 2dt, "AE");
+    }
+
+    
+    with link = "point.nl.Vechten" {
+        marker(:de.hp :removed :left, ae[:vn] @ 5 << 0.9dt);
+        station(:top :removed, ae[:vn + 0.1sw] << 0.9dt << 1.0sw,
+            "Vechten", "40,5"
+        );
+    }
+
+
+    with link = "point.nl.Bunnik" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:bnk - 200m, :bnk + 0.7sw]
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:bnk - 180m, :bnk + 20m] << 0.5dt
+            --  ae[:bnk + 20m, :bnk - 180m] >> 1.2dt
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:bnk - 180m, :bnk + 20m] >> 0.5dt
+            --  ae[:bnk + 20m, :bnk - 180m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, ae[:bnk] << 0.5dt);
+        station(:top :cat:dc15 :pax, ae[:bnk] << 0.5dt << 1.1sw,
+            "Bunnik", "42,00"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:bnk + 0.7sw, :db.a]);
+    }
+
+
+    with link = "point.nl.Driebergen-Zeist" {
+        # Spoor 800
+        track(:first:station :cat:dc15 :pax,
+                ae[:db.a - 0.1dl, :db.a] << 0.5dt
+            ..  ae[:db - 400m, :db + 150m] << 1.5dt
+            --  ae[:db + 300m, :db.f] << 0.5dt
+        );
+            # 800/803
+            track(:station :cat:dc15,
+                    ae[:db.f - 300m] >> 0.5dt
+                --  ae[:db.f - 200m] << 0.5dt
+            );
+
+        # Spoor 801
+        track(:station :cat:dc15 :pax,
+                ae[:db - 401m, :db - 400m] << 1.5dt
+            --  ae[:db - 300m, :db + 300m] << 0.5dt
+        );
+            # 801/802
+            track(:station :cat:dc15,
+                    ae[:db + 150m] << 0.5dt
+                --  ae[:db + 250m] >> 0.5dt
+            );
+
+        # Spoor 802
+        track(:station :cat:dc15 :pax,
+                ae[:db - 401m, :db - 400m] >> 1.5dt
+            --  ae[:db - 300m, :db + 150m - 0.5dl] >> 0.5dt
+            --  ae[:db + 250m - 0.5dl, :db + 251m - 0.5dl] >> 1.5dt
+        );
+
+        # Spoor 803
+        track(:first:station :cat:dc15 :pax,
+                ae[:db.a - 0.1dl, :db.a] >> 0.5dt
+            ..  ae[:db - 400m, :db + 560m] >> 1.5dt
+            ..  ae[:db.f - 700m, :db.f] >> 0.5dt
+        );
+            # 803/800
+            track(:station :cat:dc15,
+                    ae[:db.f - 180m] << 0.5dt
+                --  ae[:db.f - 80m] >> 0.5dt
+            );
+
+        # Spoor 804
+        track(:station :cat:dc15,
+                ae[:db + 150m - 0.5dl, :db + 560m] >> 0.5dt
+        );
+
+        # Perron 801/802
+        platform(:cat:dc15 :pax,
+                ae[:db - 220m, :db + 110m] << 0.5dt
+            --  ae[:db + 110m, :db - 220m] << 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :right :pax, ae[:db] >> 1.5dt);
+        station(:bottom :cat:dc15 :pax, ae[:db] >> 1.5dt >> 1.1sw,
+            "Driebergen-Zeist", "46,54"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:db.f, :mrg.a]);
+        line_badge(:cat:dc15 :pax, ae[:db.f + 1.0km], "AE");
+    }
+
+
+    with link = "point.nl.Driebergen-Austerlitz" {
+        marker(:de.hp :removed :right, ae[:dba] >> 0.5dt);
+        station(:bottom :removed, ae[:dba] >> 0.5dt >> 1.0sw,
+            "Driebergen-Austerlitz", "50,2"
+        );
+    }
+
+
+    with link = "point.nl.Maarn-Goederen" {
+        # Spoor 811
+        track(:first:station :cat:dc15 :pax, ae[:mrg.a, :mrg.f] << 0.5dt);
+
+        # Spoor 812
+        track(:first:station :cat:dc15 :pax, ae[:mrg.a, :mrg.f] >> 0.5dt);
+
+        # Spoor 813a
+        track(:station,
+                ae[:mrg - 700m] >> 2.5dt
+            --  ae[:mrg - 630m] >> 1.5dt
+        );
+        track(:station :cat:dc15,
+                ae[:mrg - 630m, :mrg - 90m] >> 1.5dt
+            --  ae[:mrg - 40m, :mrg - 39m] >> 2.5dt
+        );
+
+        # Spoor 813b
+        track(:station :cat:dc15,
+                ae[:mrg - 90m, :mrg + 680m] >> 1.5dt
+            --  ae[:mrg + 750m, :mrg + 751m] >> 0.5dt
+        );
+
+        # Spoor 4
+        track(:station,
+                ae[:mrg - 830m, :mrg - 220m - 0.5dl] >> 2.5dt
+            --  ae[:mrg - 170m - 0.5dl, :mrg - 169m - 0.5dl] >> 1.5dt
+        );
+
+        # Spoor 5
+        track(:station,
+                ae[:mrg - 731m, :mrg - 730m] >> 2.5dt
+            --  ae[:mrg - 660m, :mrg - 220m] >> 3.5dt
+            --  ae[:mrg - 120m, :mrg - 119m] >> 1.5dt
+        );
+
+        # Spoor 7
+        track(:station,
+                ae[:mrg + 50m, :mrg + 580m] >> 3.5dt
+        );
+
+        # Spoor 8 - 13c
+        track(:station,
+                ae[:mrg + 50m, :mrg + 530m] >> 4.5dt
+            --  ae[:mrg + 680m, :mrg + 860m] >> 1.5dt
+        );
+
+        marker(:de.gbf :cat:dc15 :right, ae[:mrg] >> 4.5dt);
+        station(:bottom :cat:dc15, ae[:mrg] >> 4.5dt >> 1.0sw,
+            "Maarn Goederen", "52,17"
+        );
+
+        marker(:de.bf :removed :left, ae[:mrn.oud] << 0.5dt);
+        station(:top :removed, ae[:mrn.oud] << 0.5dt << 1.2sw,
+            "Maarn", "52,2"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:mrg.f, :mrn - 250m]);
+    }
+
+
+    with link = "point.nl.Maarn" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:mrn - 250m, :mrn + 0.7sw]
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:mrn - 230m, :mrn + 30m] << 0.5dt
+            --  ae[:mrn + 30m, :mrn - 230m] >> 1.2dt
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:mrn - 160m, :mrn + 60m] >> 0.5dt
+            --  ae[:mrn + 60m, :mrn - 160m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, ae[:mrn] << 0.5dt);
+        station(:top :cat:dc15 :pax, ae[:mrn] << 0.5dt << 1.4sw,
+            "Maarn", "54,15"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:mrn + 0.7sw, :mb - 250m]);
+    }
+
+
+    with link = "point.nl.Maarsbergen" {
+        # Spoor 1
+        track(:first:station :cat:dc15 :pax,
+                ae[:mb - 250m, :mb + 690m] << 0.5dt
+        );
+            track(:station :removed,
+                    ae[:mb - 200m] << 0.5dt
+                --  ae[:mb - 140m] >> 0.5dt
+            );
+            track(:station :removed,
+                    ae[:mb + 80m] << 0.5dt
+                --  ae[:mb + 120m] << 1.5dt
+            );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax,
+                ae[:mb - 250m, :mb + 690m] >> 0.5dt
+        );
+            track(:station :removed,
+                    ae[:mb + 580m] >> 0.5dt
+                --  ae[:mb + 640m] << 0.5dt
+            );
+
+        # Spoor 3
+        track(:station :removed,
+                ae[:mb - 121m, :mb - 120m] >> 0.5dt
+            --  ae[:mb - 60m, :mb + 500m] >> 1.5dt
+            --  ae[:mb + 560m, :mb + 561m] >> 0.5dt
+        );
+
+        # Spoor 4
+        track(:station :removed,
+                ae[:mb + 0.5sw, :mb + 350m] << 1.5dt
+        );
+            track(:station :removed,
+                    ae[:mb + 260m] << 2.5dt
+                --  ae[:mb + 350m] << 0.5dt
+            );
+
+        marker(:de.bf :removed :left, ae[:mb] << 0.5dt);
+        station(:top :removed, ae[:mb] << 0.5dt << 1.2sw,
+            "Maarsbergen", "57,3"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:mb + 690m, :har.a]);
+        line_badge(:cat:dc15 :pax, ae[:har.a - 1.2km], "AE");
+    }
+
+
+    with link = "point.nl.De-Haar" {
+        let ka = path("d4.nl.ka");
+
+        # AG - AH
+        track(:first:station :cat:dc15 :pax, ae[:har.a, :har.f] << 0.5dt);
+            track(:station :cat:dc15,
+                    ae[:har - 600m] << 0.5dt
+                --  ae[:har - 500m] >> 0.5dt
+            );
+
+        # AU - AV
+        track(:first:station :cat:dc15 :pax, ae[:har.a, :har.f] >> 0.5dt);
+            track(:station :cat:dc15,
+                    ae[:har - 460m] >> 0.5dt
+                --  ae[:har - 360m] << 0.5dt
+            );
+
+        # VA
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:har - 25m] << 1.4dt
+            --  ae[:har] << 1.5dt
+            ..  ka[:har.ya, :har.ya - 0.1dl] << 0.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:har - 250m] << 0.5dt
+            --  ae[:har] << 1.5dt
+            ..  ka[:har.ya, :har.ya - 0.1dl] << 0.5dt
+        );
+
+        # VN
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:har + 49m, :har + 50m] >> 0.5dt
+            ..  ka[:har.ya, :har.ya - 0.1dl] >> 0.5dt
+        );
+
+        # ex KA
+        with layer = 1 casing(:first:station :double :removed,
+                ka[:har.ya, :har.ya + 700m]
+        );
+        with layer = 2 track(:first:station :double :removed,
+                ka[:har.ya, :har.ya + 700m]
+        );
+
+        with layer = 2 marker(
+            :de.abzw :cat:dc15 :pax :left, ae[:har] << 1.5dt
+        );
+        station(:left :cat:dc15 :pax, ae[:har] + (1dt, 1.3dt),
+            hbox(:top:right :bold, "De Haar"),
+            hbox(:top:right,
+                vbox(:right:top, "AE: ", "RA: "),
+                vbox(:right:top, "61,", "37,"),
+                vbox(:left:top, "16", "89")
+            )
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:har.a, :klp - 410m]);
+        line_badge(:cat:dc15 :pax, ae[:hvg + 1.5km], "AE");
+    }
+
+
+    with link = "point.nl.Heuvelsche-Steeg" {
+        marker(:de.hp :removed :left, ae[:hvg] << 0.5dt);
+        station(:top :removed, ae[:hvg + 0.1sw] << 0.5dt << 1.2sw,
+            "Heuvelsche Steeg", "62,7"
+        );
+    }
+
+
+    with link = "point.nl.Veenendaal-De-Klomp" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:klp - 410m, :klp + 400m]
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:klp - 360m, :klp - 20m] << 0.5dt
+            --  ae[:klp - 20m, :klp - 360m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:klp, :klp + 350m] >> 0.5dt
+            --  ae[:klp + 350m, :klp] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, ae[:klp] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, ae[:klp] << 0.5dt);
+        station(:top :cat:dc15 :pax, ae[:klp] << 0.5dt << 1.2sw,
+            "Veenendaal-De Klomp", "68,37"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:klp + 400m, :ed.au]);
+        line_badge(:cat:dc15 :pax, ae[:ed.au - 1.8km], "AE");
+    }
+
+
+    with link = "point.nl.Ede-Wageningen" {
+        let ne = path("d4.nl.ne");
+
+        # Spoor 821
+        track(:first:station :cat:dc15 :pax,
+                ne[:ed.al - 0.1dl, :ed.al]
+            ..  ae[:ed.yl - 120m, :ed + 730m] << 2.5dt
+            --  ae[:ed + 910m, :ed + 911m] >> 0.5dt
+        );
+            # 821/823 W
+            track(:first:station :cat:dc15,
+                    ae[:ed.yl - 120m] << 2.5dt
+                --  ae[:ed.yl - 10m] << 0.5dt
+            );
+
+        # Spoor 822
+        track(:station :cat:dc15,
+                ae[:ed.yl - 1m, :ed.yl] << 2.5dt
+            --  ae[:ed.yl + 60m, :ed + 790m] << 1.5dt
+        );
+
+        # Spoor 823
+        track(:first:station :cat:dc15 :pax, ae[:ed.au, :ed.f] << 0.5dt);
+            # 823/824 W
+            track(:station :cat:dc15,
+                    ae[:ed - 200m] << 0.5dt
+                --  ae[:ed - 140m] >> 0.5dt
+            );
+            # 823/822 W
+            track(:station :cat:dc15,
+                    ae[:ed - 160m] << 0.5dt
+                --  ae[:ed - 100m] << 1.5dt
+            );
+
+        # Spoor 824
+        track(:first:station :cat:dc15 :pax, ae[:ed.au, :ed.f] >> 0.5dt);
+            # 824/825a W
+            track(:station :cat:dc15,
+                    ae[:ed.au + 60m] >> 0.5dt
+                --  ae[:ed.au + 120m] << 0.5dt
+            );
+            # 824/825a W
+            track(:station :cat:dc15,
+                    ae[:ed - 90m] >> 0.5dt
+                --  ae[:ed - 30m] >> 1.5dt
+            );
+
+        # Spoor 825a
+        track(:station :cat:dc15,
+                ae[:ed - 90m, :ed + 690m] >> 1.5dt
+            --  ae[:ed + 740m, :ed + 741m] >> 0.5dt
+        );
+
+        # Spoor 825n
+        track(:station,
+                ae[:ed - 690m, :ed + 950m] >> 1.5dt
+        );
+
+        # Spoor 6
+        track(:station,
+                ae[:ed + 60m, :ed + 650m] >> 2.5dt
+        );
+
+        # Spoor 7a
+        track(:station,
+                ae[:ed + 80m, :ed + 190m] >> 3.5dt
+            --  ae[:ed + 230m, :ed + 231m] >> 2.5dt
+        );
+
+        # Spoor 7c
+        track(:station,
+                ae[:ed + 299m, :ed + 300m] >> 1.5dt
+            --  ae[:ed + 380m, :ed + 760m] >> 3.5dt
+        );
+
+        # Spoor 8
+        track(:station,
+                ae[:ed - 90m, :ed] >> 2.5dt
+            --  ae[:ed + 60m, :ed + 570m] >> 4.5dt
+            --  ae[:ed + 690m, :ed + 691m] >> 1.5dt
+        );
+
+        # Perron 821
+        platform(:cat:dc15 :pax,
+                ae[:ed - 160m, :ed + 220m] << 2.5dt
+            --  ae[:ed + 220m, :ed - 160m] >> 3.2dt
+        );
+
+        # Perron 823/824
+        platform(:cat:dc15 :pax,
+                ae[:ed - 100m, :ed + 260m] << 0.5dt
+            --  ae[:ed + 260m, :ed - 100m] << 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, ae[:ed] << 2.5dt);
+        station(:left :cat:dc15 :pax, ae[:ed - 0.5sw] >> 5.5dt,
+            span(:bold, "Ede-Wageningen"),
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "NE: "),
+                vbox(:right:top, "75,", "29,"),
+                vbox(:left:top, "44", "67")
+            )
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:ed.f, :wf.a - 400m]);
+        line_badge(:cat:dc15 :pax, ae[:ed.f + 1.8km], "AE");
+    }
+
+
+    with link = "point.nl.Buunderkamp" {
+        marker(:de.hp :removed :right, ae[:bkp] >> 0.5dt);
+        station(:bottom :removed, ae[:bkp] >> 0.5dt >> 1.2sw,
+            "Buunderkamp", "82,0"
+        );
+    }
+
+
+    with link = "point.nl.Wolfheze" {
+        # Spoor 831
+        track(:first:station :cat:dc15 :pax, ae[:wf.a - 400m, :wf.f] >> 0.5dt);
+            track(:station :cat:dc15 :pax,
+                    ae[:wf.a + 90m] >> 0.5dt
+                --  ae[:wf.a + 150m] << 0.5dt
+            );
+
+        # Spoor 832
+        track(:station :cat:dc15 :pax,
+                ae[:wf.a + 39m, :wf.a + 40m] << 1.5dt
+            --  ae[:wf.a + 110m, :wf + 390m] << 0.5dt
+            --  ae[:wf + 450m, :wf + 451m] >> 0.5dt
+        );
+            track(:station :cat:dc15 :pax,
+                    ae[:wf + 360m] << 0.5dt
+                --  ae[:wf + 430m] << 1.5dt
+            );
+
+        # Spoor 833
+        track(:first:station :cat:dc15 :pax,
+                ae[:wf.a - 400m, :wf.a - 399m] << 0.5dt
+            ..  ae[:wf.a, :wf + 430m] << 1.5dt
+            ..  ae[:wf.f - 0.1dl, :wf.f] << 0.5dt
+        );
+
+        # Perron 821
+        platform(:cat:dc15 :pax,
+                ae[:wf - 180m, :wf + 30m] >> 0.5dt
+            --  ae[:wf + 30m, :wf - 180m] << 1.2dt
+        );
+
+        # Perron 832/833
+        platform(:cat:dc15 :pax,
+                ae[:wf - 190m, :wf + 20m] << 1.5dt
+            --  ae[:wf + 20m, :wf - 190m] >> 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, ae[:wf] >> 0.5dt);
+        station(:bottom :cat:dc15 :pax, ae[:wf - 0.2sw] >> 0.5dt >> 1.3sw,
+            "Wolfheze", "84,19"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:wf.f, :otb - 290m]);
+    }
+
+
+    with link = "point.nl.Oosterbeek" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:otb - 290m, :otb + 0.7sw]
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:otb - 240m, :otb + 20m] << 0.5dt
+            --  ae[:otb + 20m, :otb - 240m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:otb - 240m, :otb + 20m] >> 0.5dt
+            --  ae[:otb + 20m, :otb - 240m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, ae[:otb] << 0.5dt);
+        station(:top :cat:dc15 :pax, ae[:otb + 0.1sw] << 0.5dt << 1.4sw,
+            hbox(:center:base, "     Oosterbeek", span(:removed, " Hoog")),
+            "87,57"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:otb + 0.7sw, :ahwa.ae]);
+        line_badge(:cat:dc15 :pax, ae[:ahwa.ae - 1.2km], "AE");
+    }
+
+
+    with link = "point.nl.Arnhem-West" {
+        let an = path("d4.nl.an");
+
+        # Spoor 21
+        track(:first:station :cat:dc15 :pax,
+                an[:ahwa.an, :ahwa.f] >> 3.5dt
+        );
+
+        # Spoor 22
+        track(:first:station :cat:dc15 :pax,
+                an[:ahwa.an, :ahwa.f] >> 2.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:ahwa - 70m] >> 2.5dt
+                --  ae[:ahwa + 80m] >> 0.5dt
+            );
+
+        # Spoor 23
+        track(:station :cat:dc15,
+                ae[:ahwa - 100m, :ahwa] >> 1.5dt
+        );
+        track(:first:station :cat:dc15,
+                ae[:ahwa - 101m, :ahwa - 100m] >> 0.5dt
+            --  ae[:ahwa, :ahwa.f] >> 1.5dt
+        );
+
+        # Spoor 24
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa.ae, :ahwa.f] >> 0.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:ahwa + 100m] >> 0.5dt
+                --  ae[:ahwa + 200m] << 0.5dt
+            );
+
+        # Spoor 25
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa.ae, :ahwa.f] << 0.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:ahwa - 230m] << 0.5dt
+                --  ae[:ahwa - 130m] >> 0.5dt
+            );
+
+        # Spoor 26
+        track(:first:station :cat:dc15 :pax,
+                an[:ahwa.yn, :ahwa.yn - 0.1dl] >> 3.5dt
+            --  an[:ahwa.yn - 100m, :ahwa.f + 50m] >> 4.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :right, ae[:ahwa] >> 4.5dt);
+    }
+
+
+    with link = "point.nl.Arnhem-Centraal" {
+        let ahw = path("d4.nl.ae.ahw");
+        let aho = path("d4.nl.ae.aho");
+
+        # Spoor 2
+        track(:station :cat:dc15,
+                ae[:ah.xw - 221m - 1dl, :ah.xw - 220m - 1dl] >> 3.5dt
+            --  ae[:ah.xw - 160m - 1dl, :ah.xw - 0.5dl] >> 4.5dt
+            --  ahw[:ah.xw + 160m - 0.5dl, :ah - 20m] >> 6.5dt
+            --  ahw[:ah + 60m, :ah + 61m] >> 4.5dt
+        );
+
+        # Spoor 3
+        track(:station :cat:dc15 :pax,
+                ae[:ah.xw + 79m, :ah.xw + 80m] >> 4.5dt
+            --  ae[:ah.xw + 160m, :ah + 20m] >> 5.5dt
+        );
+
+        # Spoor 21 - 4
+        with layer = -1 casing(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ahb] >> 3.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ah.xw] >> 3.5dt
+            --  ahw[:ah.xw + 80m, :ah + 60m] >> 4.5dt
+            --  ahw[:ah + 100m] >> 3.5dt
+            --  ahw[:ah + 140m] >> 2.5dt
+            --  aho[:ah.f - 350m, :ah.f] >> 0.5dt
+        );
+            # 21/22 W
+            track(:station :cat:dc15 :pax,
+                    ae[:ah.xw - 300m - 1dl] >> 3.5dt
+                --  ae[:ah.xw - 220m - 1dl] >> 2.5dt
+            );
+            # 4/7 F
+            track(:station :cat:dc15 :pax,
+                    aho[:ah.f - 170m] >> 0.5dt
+                --  aho[:ah.f - 120m] << 0.5dt
+            );
+
+        # Spoor 5a
+        track(:station :cat:dc15,
+                ae[:ah.xw, :ah.xw + 240m] >> 3.5dt
+        );
+            # 5a/4 W
+            track(:station :cat:dc15,
+                    ae[:ah.xw + 120m] >> 3.5dt
+                --  ae[:ah.xw + 220m] >> 4.5dt
+            );
+
+        # Spoor 5b
+        track(:station :cat:dc15 :pax,
+                ae[:ah - 141m, :ah - 140m] >> 2.5dt
+            --  ae[:ah - 80m, :ah + 100m] >> 3.5dt
+        );
+            # 5b/6 O
+            track(:station :cat:dc15 :pax,
+                    ae[:ah + 10m - 0.5dl] >> 3.5dt
+                --  ae[:ah + 50m - 0.5dl] >> 2.5dt
+            );
+
+        # Spoor 6
+        track(:station :cat:dc15 :pax,
+                ae[:ah - 401m, :ah - 400m] >> 1.5dt
+            --  ahw[:ah - 340m, :ah + 140m] >> 2.5dt
+        );
+            # 6/7 O
+            track(:station :cat:dc15 :pax,
+                    ae[:ah + 70m - 0.5dl] >> 2.5dt
+                --  ae[:ah + 120m - 0.5dl] >> 1.5dt
+            );
+
+
+        # Spoor 22 - 7
+        with layer = -1 casing(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ahb] >> 2.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ah.xw - 140m] >> 2.5dt
+            --  ae[:ah.xw - 40m, :ah + 120m - 0.5dl] >> 1.5dt
+            --  ae[:ah + 180m - 0.5dl, :ah + 181m - 0.5dl] >> 0.5dt
+            --  aho[:ah.f - 350m - 0.5dt, :ah.f] << 0.5dt
+        );
+            # 22/21 W
+            track(:station :cat:dc15 :pax,
+                    ae[:ah.xw - 220m - 0.5dl] >> 2.5dt
+                --  ae[:ah.xw - 160m - 0.5dl] >> 3.5dt
+            );
+            # 22/8 W
+            track(:station :cat:dc15 :pax,
+                    ae[:ah.xw - 40m] >> 1.5dt
+                --  ae[:ah.xw + 40m] >> 0.5dt
+            );
+            # 22/8 M
+            track(:station :cat:dc15,
+                    ae[:ah.xw + 210m] >> 1.5dt
+                --  ae[:ah.xw + 290m] >> 0.5dt
+            );
+            # 7/5a W
+            track(:station :cat:dc15,
+                    ae[:ah.xw - 40m] >> 1.5dt
+                --  ae[:ah.xw + 100m] >> 3.5dt
+            );
+            # 7/4 O
+            track(:station :cat:dc15 :pax,
+                    aho[:ah.f - 340m] << 0.5dt
+                --  aho[:ah.f - 280m] >> 0.5dt
+            );
+            # 7/4 F
+            track(:station :cat:dc15 :pax,
+                    aho[:ah.f - 100m] << 0.5dt
+                --  aho[:ah.f - 40m] >> 0.5dt
+            );
+
+        # Spoor 24 - 8
+        with layer = -1 casing(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ahb] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ah + 180m - 0.5dl] >> 0.5dt
+        );
+            # 24/25 W
+            track(:station :cat:dc15 :pax,
+                    ae[:ah.xw - 240m] >> 0.5dt
+                --  ae[:ah.xw - 150m] << 0.5dt
+            );
+            # 25/22 W
+            track(:station :cat:dc15,
+                    ae[:ah.xw + 100m] >> 0.5dt
+                --  ae[:ah.xw + 170m] >> 1.5dt
+            );
+
+        # Spoor 25 - 9
+        with layer = -1 casing(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ahb] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f, :ah] << 0.5dt
+            ..  aho[:ah.f - 350m, :ah.f - 349m] << 0.5dt
+        );
+            # 25/26 W
+            track(:station :cat:dc15 :pax,
+                    ae[:ah.xw - 340m] << 0.5dt
+                --  ae[:ah.xw - 220m] << 1.5dt
+            );
+            # 25/24 W
+            track(:station :cat:dc15,
+                    ae[:ah.xw + 20m] << 0.5dt
+                --  ae[:ah.xw + 90m] >> 0.5dt
+            );
+
+        # Spoor 10
+        track(:station :cat:dc15 :pax,
+                ae[:ah.xw + 59m + 0.5dl, :ah.xw + 60m + 0.5dl] << 0.5dt
+            --  ae[:ah.xw + 160m + 0.5dl, :ah] << 1.5dt
+            ..  aho[:ah.f - 350m, :ah.f - 240m] << 1.5dt
+        );
+
+        # Spoor 26 - 11
+        with layer = -2 track(:first:station :cat:dc15 :pax,
+                ae[:ahwa.f - 50m, :ahwa.f - 49m] >> 4.5dt
+            ..  ae[:ahb - 80m, :ahb] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahb, :ah.xw + 60m] << 1.5dt
+            --  ae[:ah.xw + 160m, :ah] << 2.5dt
+            ..  aho[:ah.f - 350m, :ah.f - 300m] << 2.5dt
+            --  aho[:ah.f - 180m, :ah.f - 179m] << 0.5dt
+        );
+            # 26/25 W
+            track(:station :cat:dc15,
+                    ae[:ah.xw - 60m] << 1.5dt
+                --  ae[:ah.xw] << 0.5dt
+            );
+
+        # Spoor 23
+        with layer = -1 casing(:first:station :cat:dc15,
+                ae[:ahwa.f, :ahb] >> 1.5dt
+        );
+        track(:first:station :cat:dc15,
+                ae[:ahwa.f, :ah.xw - 220m] >> 1.5dt
+            --  ae[:ah.xw - 160m, :ah.xw - 159m] >> 2.5dt
+        );
+
+        # Spoor 30
+        track(:station :cat:dc15,
+                ae[:ah.xw - 700m, :ah.xw + 60m - 0.5dl] << 2.5dt
+            --  ae[:ah.xw + 160m - 0.5dl, :ah.xw + 160m] << 3.5dt
+        );
+
+        # Spoor 55
+        track(:station :cat:dc15,
+                ae[:ah.xw - 700m, :ah.xw - 160m] << 3.5dt
+            --  ae[:ah.xw - 80m, :ah.xw + 81m] << 1.5dt
+        );
+
+        # Spoor 56
+        track(:station :cat:dc15,
+                ae[:ah.xw - 700m, :ah.xw - 240m - 1dl] << 4.5dt
+        );
+
+        # Spoor 58
+        track(:station,
+                ae[:ah.xw - 700m, :ah.xw - 280m - 1dl] << 5.5dt
+        );
+
+        # Spoor 60
+        track(:station,
+                ae[:ah.xw - 700m, :ah.xw - 320m - 1dl] << 6.5dt
+            --  ae[:ah.xw - 200m - 1dl, :ah.xw - 199m - 1dl] << 3.5dt
+        );
+
+        # Spoor 62
+        track(:station,
+                ae[:ah.xw - 700m, :ah.xw - 320m] << 7.5dt
+        );
+
+        # Spoor 65
+        track(:station,
+                ae[:ah.xw - 700m, :ah.xw - 360m] << 8.5dt
+        );
+
+        # Spoor 70
+        track(:station,
+                ae[:ah.xw - 700m, :ah.xw - 400m] << 9.5dt
+            --  ae[:ah.xw - 160m, :ah.xw - 159m] << 3.5dt
+        );
+
+        # Perron 3/4
+        platform(:cat:dc15 :pax,
+                ae[:ah - 320m, :ah] >> 5.5dt
+            --  ae[:ah, :ah - 320m] << 4.5dt
+        );
+
+        # Perron 6/7
+        platform(:cat:dc15 :pax,
+                ae[:ah - 320m, :ah] >> 2.5dt
+            --  ae[:ah, :ah - 320m] << 1.5dt
+        );
+
+        # Perron 8/9
+        platform(:cat:dc15 :pax,
+                ae[:ah - 260m, :ah + 120m] >> 0.5dt
+            --  ae[:ah + 120m, :ah - 260m] >> 0.5dt
+        );
+
+        # Perron 10/11
+        platform(:cat:dc15 :pax,
+                ae[:ah - 260m, :ah + 120m] << 1.5dt
+            --  ae[:ah + 120m, :ah - 260m] >> 2.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax, ae[:ah - 0.5sw] >> 6.5dt);
+        station(:bottom :cat:dc15 :pax,
+            ae[:ah - 0.5sw] >> 6.5dt >> 1.2sw + (-1.5sw, 0dt),
+            span(:bold, "Arnhem Centraal"),
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "AN: "),
+                vbox(:right:top, "91,", "−1,"),
+                vbox(:left:top, "93", "53")
+            )
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:ah.f, :ahp - 160m]);
+    }
+
+
+    with link = "point.nl.Arnhem-Velperpoort" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ahp - 160m, :ahp + 140m]
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:ahp - 110m, :ahp + 60m] << 0.5dt
+            --  ae[:ahp + 60m, :ahp - 110m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:ahp - 110m, :ahp + 60m] >> 0.5dt
+            --  ae[:ahp + 60m, :ahp - 110m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, ae[:ahp] >> 0.5dt);
+        station(:bottom :cat:dc15 :pax,
+            ae[:ahp - 0.5sw] >> 0.5dt >> 1.4sw + (-0.5sw, 0dt),
+            vbox(:center:bottom, "Arnhem", "Velperpoort"), "93,20"
+        );
+    }
+
+
+    with link = "point.nl.Velperbroek" {
+        let al = path("d4.nl.al");
+
+        # Spoor E
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahp + 140m, :va.fe] << 0.5dt
+        );
+            track(:station :cat:dc15,
+                    ae[:va - 100m] << 0.5dt
+                --  ae[:va - 30m] >> 0.5dt
+            );
+
+        # Spoor F
+        track(:first:station :cat:dc15 :pax,
+                ae[:ahp + 140m, :va.fe] >> 0.5dt
+        );
+
+        # Spoor N
+        track(:first:station :cat:dc15 :pax,
+                al[:va, :va.fz + 100m] >> 0.5dt
+        );
+
+        # Spoor R
+        track(:first:station :cat:dc15 :pax,
+                al[:va, :va.fz + 100m] << 0.5dt
+        );
+
+        # Spoor 970
+        track(:first:station :cat:dc15,
+                ae[:va + 219m, :va + 220m] >> 0.5dt
+            --  ae[:va + 280m, :va.yw] >> 1.5dt
+        );
+
+        # Spoor 971
+        track(:first:station :cat:dc15,
+                ae[:va.yo - 70m, :va.yo - 60m] >> 1.5dt
+            --  ae[:va.yo, :va.yo + 0.1dl] >> 0.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :right, ae[:va] >> 0.5dt);
+        station(:top :cat:dc15 :pax, ae[:va + 0.2sw] << 3.0dt,
+            span(:bold, "Velperbroek"),
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "AL: "),
+                vbox(:right:top, "93,", "0,"),
+                vbox(:left:top, "65,", "00")
+            )
+        );
+    }
+
+
+    with link = "point.nl.IJsselbrug" {
+        track(:first:station :double :cat:dc15 :pax, ae[:va.fe, :ijb + 160m]);
+            track(:station :cat:dc15,
+                    ae[:ijb - 110m] >> 0.5dt
+                --  ae[:ijb - 10m] << 0.5dt
+            );
+            track(:station :cat:dc15,
+                    ae[:ijb + 10m] << 0.5dt
+                --  ae[:ijb + 110m] >> 0.5dt
+            );
+
+        marker(:de.uest :cat:dc15 :left, ae[:ijb] << 0.5dt);
+        station(:right :cat:dc15, ae[:ijb + 0.4sw] << 0.5dt << 1.2sw,
+            "IJsselbrug", "96,90"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:ijb + 160m, :wtv - 150m]);
+        line_badge(:cat:dc15 :pax, ae[:wtv - 0.8km], "AE");
+    }
+
+
+    with link = "point.nl.Westervoort" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:wtv - 150m, :wtv + 170m]
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:wtv - 50m, :wtv + 120m] << 0.5dt
+            --  ae[:wtv + 120m, :wtv - 50m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:wtv - 50m, :wtv + 120m] >> 0.5dt
+            --  ae[:wtv + 120m, :wtv - 50m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, ae[:wtv] << 0.5dt);
+        with layer = -1 marker(:de.bf :removed :left, ae[:wtv] << 0.5dt);
+        station(:right :cat:dc15 :pax, ae[:wtv + 0.4sw] << 0.5dt << 1.2sw,
+            "Westervoort", "97,62"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:wtv + 170m, :dvn - 150m]);
+    }
+
+
+    with link = "point.nl.Duiven" {
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:dvn - 150m, :dvn + 210m]
+        );
+
+        platform(:cat:dc15 :pax,
+                ae[:dvn - 20m, :dvn + 160m] << 0.5dt
+            --  ae[:dvn + 160m, :dvn - 20m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                ae[:dvn - 20m, :dvn + 160m] >> 0.5dt
+            --  ae[:dvn + 160m, :dvn - 20m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, ae[:dvn] << 0.5dt);
+        marker(:de.bf :removed :left, ae[:dvn] << 0.5dt);
+        station(:top :cat:dc15 :pax, ae[:dvn + 0.1sw] << 0.5dt << 1.4sw,
+            "Duiven", "101,28"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax, ae[:dvn + 210m, :zv.a]);
+        line_badge(:cat:dc15 :pax, ae[:zv.a - 1km], "AE");
+    }
+
+
+    with link = "point.nl.Groessen" {
+        marker(:de.hp :removed :right, ae[:gsn] >> 0.5dt);
+        station(:right :removed, ae[:gsn + 0.4sw] << 2.0dt,
+            "Groessen", "  102,8"
+        );
+    }
+
+
+    with link = "point.nl.Zevenaar" {
+        let wz = path("d4.nl.wz");
+
+        # Spoor 901
+        track(:first:station :cat:dc15 :pax,
+                ae[:zv - 461m, :zv - 460m] << 0.5dt
+            --  ae[:zv - 360m, :zv + 120m] << 1.5dt
+        );
+        track(:first:station :pax,
+                ae[:zv + 120m, :zv + 180m] << 1.5dt
+            ..  wz[:zv.yd + 100m, :zv.yd] << 2.5dt
+        );
+
+        # Spoor 902
+        track(:first:station :cat:dc15 :pax, ae[:zv.a, :zvba.a] << 0.5dt);
+            # 902/903 W
+            track(:station :cat:dc15,
+                    ae[:zv.a + 120m] << 0.5dt
+                --  ae[:zv.a + 210m] >> 0.5dt
+            );
+
+        track(:first :pax,
+                ae[:zv.yd - 201m, :zv.yd - 200m] << 0.5dt
+            --  ae[:zv.yd - 100m, :zv.yd] << 1.5dt
+        );
+
+        # Spoor 903
+        track(:first:station :cat:dc15 :pax,
+                ae[:zv.a, :zv + 280m] >> 0.5dt
+            --  ae[:zv + 400m, :zv + 401m] >> 1.5dt
+        );
+
+        # Spoor 904
+        track(:first:station :cat:dc15 :pax,
+                ae[:zv - 601m, :zv - 600m] >> 0.5dt
+            --  ae[:zv - 360m, :zvba.a - 400m] >> 1.5dt
+            ..  ae[:zvba.a - 140m, :zvba.a] >> 0.5dt
+        );
+
+        # Perron 901
+        platform(:cat:dc15 :pax,
+                ae[:zv - 200m, :zv - 40m] << 1.5dt
+            --  ae[:zv - 40m, :zv - 200m] >> 2.2dt
+        );
+
+        # Perron 902/903
+        platform(:cat:dc15 :pax,
+                ae[:zv - 200m, :zv] << 0.5dt
+            --  ae[:zv, :zv - 200m] << 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, ae[:zv] << 1.5dt);
+        station(:top :cat:dc15 :pax, ae[:zv + 0.2sw] << 1.5dt << 1.3sw,
+            span(:bold, "Zevenaar"),
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "WZ: "),
+                vbox(:right:top, "105,", "49,"),
+                vbox(:left:top, "94", "88")
+            )
+        );
+    }
+
+
+    with link = "point.nl.Zevenaar-Betuweroute" {
+        # Spoor 810
+        track(:first:station :cat:dc15 :pax,
+                ae[:zvba.a, :zvba.a + 100m] >> 0.5dt
+            ..  ae[:zvba - 550m, :zvba - 500m] >> 1dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba - 500m, :zvba - 200m] >> 1dt
+        );
+
+        # Spoor 813
+        track(:first:station :cat:ac25,
+                ae[:zvba.a, :zvba - 750m + 0.5dl] >> 4.5dt
+            ..  ae[:zvba - 300m + 0.5dl] >> 2.5dt
+            --  ae[:zvba + 100m + 0.5dl] >> 0.5dt
+        );
+        track(:first:station :cat:ac25,
+                ae[:zvba - 100m + 0.5dl, :zvba.f - 250m] >> 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba.f - 461m, :zvba.f - 460m] >> 0.5dt
+            --  ae[:zvba.f - 250m, :zvba.f] >> 1.5dt
+        );
+
+        # Spoor 814
+        track(:first:station :cat:ac25,
+                ae[:zvba.a, :zvba - 750m] >> 3.5dt
+            ..  ae[:zvba - 300m] >> 1.5dt
+            --  ae[:zvba - 200m] >> 1dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba - 200m] >> 1dt
+            --  ae[:zvba + 100m] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba - 100m, :zvba.f] >> 0.5dt
+        );
+            # 814/815 O
+            track(:station :cat:ac25,
+                    ae[:zvba.f - 680m] >> 0.5dt
+                --  ae[:zvba.f - 510m] << 0.5dt
+            );
+
+        # Spoor 815
+        track(:first:station :cat:dc15 :pax,
+                ae[:zvba.a, :zvba - 500m] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ae[:zvba - 500m, :zvba.f - 460m + 0.5dl] << 0.5dt
+            --  ae[:zvba.f - 250m + 0.5dl, :zvba.f - 249m + 0.5dl] >> 0.5dt
+        );
+        track(:first:station :cat:ac25,
+                ae[:zvba.f - 460m + 0.5dl, :zvba.f] << 0.5dt
+        );
+
+        marker(:de.abzw :cat:ac25, ae[:zvba] >> 1.5dt);
+        station(:left :cat:ac25, ae[:zvba + 1sw] >> 1.5dt >> 0.8sw,
+            hbox(:right:top :bold, "Zevenaar Betuweroute Aansl."),
+            hbox(:center:top,
+                vbox(:right:top, "AE: ", "RZ: "),
+                vbox(:right:top, "107,", "107,"),
+                vbox(:left:top, "70", "67")
+            )
+        );
+    }
+
+
+    with link = "point.nl.Zevenaar-Oost" {
+        marker(:de.bbf :cat:ac25 :right, ae[:zvo] >> 1.5dt);
+        station(:left :cat:ac25, ae[:zvo + 1.5sw] >> 1.5dt >> 1.6sw,
+            "Zevenaar Oost", "??"
+        );
+    }
+
+
+    with link = "line.nl.AE" {
+        track(:first :double :cat:ac25 :pax,
+                ae[:zvba.f, :zvba.f + 0.1dl] >> 1dt
+            ..  ae[:zvg - 0.51sw, :zvg - 0.5sw]
+        );
+        track(:first :cat:ac25 :flip:tight,
+                ae[:zvba.f, :zvba.f + 0.1dl] << 0.5dt
+            ..  ae[:zvg - 0.51sw, :zvg - 0.5sw] << 1.5dt
+        );
+        line_badge(:cat:dc15 :pax, ae[:zv.a - 1km], "AE");
+    }
+}
