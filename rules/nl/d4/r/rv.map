@@ -1,17 +1,17 @@
 # NL RV.  Roosendaal - Vlissingen
 #
-let rv = path("d3.nl.rv");
+let rv = path("d4.nl.rv");
 
 with detail = [4, 5] {
     # point.nl.Roosendaal: nl.LR
 
     
     with link = "line.nl.RV" {
-        track(:first :double :cat :dc15 :pax,
+        track(:first :double :cat:dc15 :pax,
                 rv[:rsd.f, :rsd.y] >> 2dt
-            ..  rv[:rsd.yy, :bgn.a]
+            ..  rv[:rsd.yy, :kraga - 150m]
         );
-        with layer = 1 line_badge(:open, rv[:rsd.f + 4km], "RV");
+        with layer = 1 line_badge(:cat:dc15 :pax, rv[:rsd.f + 4km], "RV");
     }
 
 
@@ -20,6 +20,46 @@ with detail = [4, 5] {
         station(:bottom :removed, rv[:wow] << 0.5dt << 1.2sw,
             "Wouw", "6,58"
         );
+    }
+
+
+    with link = "point.nl.Kragge-aansl" {
+        track(:first:station :double :cat:dc15 :pax,
+                rv[:kraga - 150m, :kraga + 150m]
+        );
+            track(:station :cat:dc15,
+                    rv[:kraga - 80m] >> 0.5dt
+                --  rv[:kraga] << 0.5dt
+            );
+        track(:station,
+                rv[:kraga + 29m, :kraga + 30m] << 0.5dt
+            --  rv[:kraga + 110m, :kraga + 150m] << 1.5dt
+        );
+
+        marker(:left :refdt :cat:dc15, rv[:kraga] << 0.5dt);
+        marker(:left :de.abzw :cat:dc15, rv[:kraga] << 1.5dt);
+        station(:top :cat:dc15, rv[:kraga - 0.1sw] >> 1.5dt,
+            "Kragge aansl.", "8,30"
+        );
+    }
+
+
+    with link = "point.nl.Kragge" {
+        track(:station, rv[:kraga + 150m, :krag + 420m] << 1.5dt);
+        track(:station,
+                rv[:krag - 0.1dl, :krag] << 1.5dt
+            --  rv[:krag + 50m, :krag + 330m] << 2.5dt
+            --  rv[:krag + 380m, :krag + 381m] << 1.5dt
+        );
+        marker(:left :de.gbf, rv[:krag + 50m + 0.5sw] << 2.5dt);
+        station(:bottom, rv[:krag + 50m + 0.5sw] << 2.5dt << 1.0sw,
+            "Kragge", "8,60"
+        );
+    }
+
+
+    with link = "line.nl.RV" {
+        track(:first :double :cat:dc15 :pax, rv[:kraga + 150m, :bgn.a]);
     }
 
 
@@ -32,7 +72,7 @@ with detail = [4, 5] {
         );
 
         # Spoor 2 + 3
-        track(:first :double :cat :dc15 :pax :station, rv[:bgn.a, :bgn.f]);
+        track(:first :double :cat:dc15 :pax :station, rv[:bgn.a, :bgn.f]);
 
         # Spoor 4
         track(:cat :dc15 :station,
@@ -45,9 +85,14 @@ with detail = [4, 5] {
             --  rv[:bgn + 600m] >> 0.5dt
         );
 
-        marker(:de.bf :right, rv[:bgn] >> 1.5dt);
-        station(:left, rv[:bgn + 0.4sw] >> 1.5dt >> 1.3sw,
-            "Bergen op Zoom", "12,60"
+        platform(:cat:dc15 :pax,
+                rv[:bgn - 100m, :bgn + 260m] >> 0.5dt
+            --  rv[:bgn + 260m, :bgn - 100m] >> 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, rv[:bgn] >> 1.5dt);
+        station(:left :cat:dc15 :pax, rv[:bgn + 0.4sw] >> 1.5dt >> 1.3sw,
+            "Bergen op Zoom", "12,53"
         );
     }
 
@@ -90,7 +135,7 @@ with detail = [4, 5] {
 
     with link = "line.nl.RV" {
         track(:first :double :cat :dc15 :pax, rv[:wsd + 250m, :rb.a]);
-        with layer = 1 line_badge(:open, rv[:rb.a - 4km], "RV");
+        line_badge(:cat:dc15 :pax, rv[:rb.a - 4km], "RV");
     }
 
 
@@ -116,9 +161,18 @@ with detail = [4, 5] {
             --  rv[:rb - 100m - 0.5dl] >> 0.5dt
         );
 
-        marker(:de.bf :right, rv[:rb] >> 0.5dt);
-        station(:top, rv[:rb] >> 0.5dt >> 1.2sw,
-            "Rilland-Bath", "28,18"
+        platform(:cat:dc15 :pax,
+                rv[:rb - 230m, :rb - 20m] << 0.5dt
+            --  rv[:rb - 20m, :rb - 230m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                rv[:rb + 30m, :rb + 250m] >> 0.5dt
+            --  rv[:rb + 250m, :rb + 30m] << 1.2dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, rv[:rb] >> 0.5dt);
+        station(:top :cat:dc15 :pax, rv[:rb] >> 0.5dt >> 1.2sw,
+            "Rilland-Bath", "28,12"
         );
     }
 
@@ -134,11 +188,11 @@ with detail = [4, 5] {
 
         # Spoor 3
         with layer = -1 track(:station :removed,
-                rv[:kbd.a + 100m + 1dl, :kbd.f - 100m] >> 1.5dt
+                rv[:kbd.a + 150m + 1dl, :kbd.f - 100m] >> 1.5dt
         );
         with layer = -1 track(:station :removed,
-                rv[:kbd.a + 100m] << 0.5dt
-            --  rv[:kbd.a + 100m + 2dl] >> 1.5dt
+                rv[:kbd.a + 150m] << 0.5dt
+            --  rv[:kbd.a + 150m + 2dl] >> 1.5dt
         );
         with layer = -1 track(:station :removed,
                 rv[:kbd.f - 100m - 1dl] >> 1.5dt
@@ -158,17 +212,26 @@ with detail = [4, 5] {
             --  rv[:kbd.f - 170m] >> 0.5dt
         );
 
-        marker(:de.hp :left, rv[:kbd] << 0.5dt);
+        platform(:cat:dc15 :pax,
+                rv[:kbd.a + 50m, :kbd] << 0.5dt
+            --  rv[:kbd, :kbd.a + 50m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                rv[:kbd + 20m, :kbd + 210m] >> 0.5dt
+            --  rv[:kbd + 210m, :kbd + 20m] << 1.1dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, rv[:kbd] << 0.5dt);
         with layer = -1 marker(:de.bf :removed :left, rv[:kbd] << 0.5dt);
-        station(:left, rv[:kbd - 1.5sw] << 0.5dt << 1.6sw,
-            "Krabbendijke", "31,50"
+        station(:left :cat:dc15 :pax, rv[:kbd - 1.5sw] << 0.5dt << 1.6sw,
+            "Krabbendijke", "31,48"
         );
     }
 
 
     with link = "line.nl.RV" {
         track(:first :double :cat :dc15 :pax, rv[:kbd.f, :krg.a]);
-        with layer = 1 line_badge(:open, rv[:krg.a - 1.2km], "RV");
+        with layer = 1 line_badge(:cat:dc15 :pax, rv[:krg.a - 1.2km], "RV");
     }
 
 
@@ -182,35 +245,40 @@ with detail = [4, 5] {
     
     with link = "point.nl.Kruiningen-Yerseke" {
         # Hoofdsporen
-        track(:first :double :cat :dc15 :pax :station, rv[:krg.a, :krg.f]);
+        track(:first :double :cat:dc15 :pax :station, rv[:krg.a, :krg.f]);
 
         # Spoor >> 1.5dt
         track(:station :cat :dc15,
-                rv[:krg - 601m, :krg - 600m] << 0.5dt
-            --  rv[:krg - 600m + 2dl, :krg + 480m - 3dl] >> 1.5dt
-            --  rv[:krg + 480m - 2dl, :krg + 480m - 1.9dl] >> 0.5dt
+                rv[:krg - 661m, :krg - 660m] << 0.5dt
+            --  rv[:krg - 660m + 2dl, :krg + 420m - 3dl] >> 1.5dt
+            --  rv[:krg + 420m - 2dl, :krg + 420m - 1.9dl] >> 0.5dt
         );
         track(:station :cat :dc15,
-                rv[:krg + 480m - 1dl] >> 0.5dt
-            --  rv[:krg + 480m] << 0.5dt
+                rv[:krg + 420m - 1dl] >> 0.5dt
+            --  rv[:krg + 420m] << 0.5dt
         );
 
         # Spoor << 1.5dt
         with layer = -1 track(:station :removed,
-                rv[:krg + 0.5sw, :krg + 480m - 1dl] << 1.5dt
+                rv[:krg + 0.5sw, :krg + 420m - 1dl] << 1.5dt
         );
         with layer = -1 track(:station :removed,
                 rv[:krg + 0.5sw] << 0.5dt
             --  rv[:krg + 0.5sw + 1dl] << 1.5dt
         );
         with layer = -1 track(:station :removed,
-                rv[:krg + 480m - 3dl] << 1.5dt
-            --  rv[:krg + 480m - 1dl] >> 0.5dt
+                rv[:krg + 420m - 3dl] << 1.5dt
+            --  rv[:krg + 420m - 1dl] >> 0.5dt
         );
 
-        marker(:de.bf :left, rv[:krg] << 0.5dt);
-        station(:left, rv[:krg - 1.5sw] << 0.5dt << 1.6sw,
-            "Kruiningen-Yerseke", "38,06"
+        platform(:cat:dc15 :pax,
+                rv[:krg - 270m, :krg] >> 0.5dt
+            --  rv[:krg, :krg - 270m] >> 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, rv[:krg] << 0.5dt);
+        station(:left :cat:dc15 :pax, rv[:krg - 1.5sw] << 0.5dt << 1.6sw,
+            "Kruiningen-Yerseke", "38,12"
         );
     }
 
@@ -259,7 +327,7 @@ with detail = [4, 5] {
         );
 
         # Hoofdsporen << 0.5dt en >> 0.5dt
-        track(:first :double :cat :dc15 :pax :station, rv[:bzl.a, :bzl.f]);
+        track(:first :double :cat:dc15 :pax :station, rv[:bzl.a, :bzl.f]);
 
         # Spoor >> 1.5dt
         with layer = -1 track(:station :removed,
@@ -274,10 +342,19 @@ with detail = [4, 5] {
             --  rv[:bzl - 0.5sw] >> 0.5dt
         );
 
-        marker(:de.hp :right, rv[:bzl] >> 0.5dt);
+        platform(:cat:dc15 :pax,
+                rv[:bzl - 100m, :bzl + 130m] >> 0.5dt
+            --  rv[:bzl + 130m, :bzl - 100m] << 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                rv[:bzl - 100m, :bzl + 100m] << 0.5dt
+            --  rv[:bzl + 100m, :bzl - 100m] >> 1.1dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, rv[:bzl] >> 0.5dt);
         with layer = -1 marker(:de.bf :removed :right, rv[:bzl] >> 0.5dt);
-        station(:right, rv[:bzl + 1sw] >> 0.5dt >> 1.2sw,
-            "Kapelle-Biezelinge", "44,20"
+        station(:right :cat:dc15 :pax, rv[:bzl + 1sw] >> 0.5dt >> 1.2sw,
+            "Kapelle-Biezelinge", "44,18"
         );
     }
 
@@ -290,7 +367,7 @@ with detail = [4, 5] {
         # Toestand 2021
         #
         # Hoofdsporen << 0.5dt en >> 0.5dt
-        track(:first :double :cat :dc15 :pax :station, rv[:gs.a, :gs.f]);
+        track(:first :double :cat:dc15 :pax :station, rv[:gs.a, :gs.f]);
         track(:station :cat :dc15,
                 rv[:gs.f - 120m - 3dl] >> 0.5dt
             --  rv[:gs.f - 120m - 2dl] << 0.5dt
@@ -314,7 +391,7 @@ with detail = [4, 5] {
             --  rv[:gs.f - 50m + 2dl, :gs.f + 220m] << 3.5dt
         );
 
-        # Goederenterrein westsijde
+        # Goederenterrein westzijde
         track(:station, rv[:gs.f - 200m, :gs.f + 250m] >> 2.5dt);
         track(:station, rv[:gs.f - 200m, :gs.f - 50m + 1dl] >> 1.5dt);
         track(:station,
@@ -322,14 +399,22 @@ with detail = [4, 5] {
             --  rv[:gs.f - 50m + 2dl] >> 2.5dt
         );
 
-        marker(:de.bf :right, rv[:gs] >> 0.5dt);
-        station(:top, rv[:gs] >> 0.5dt >> 1.2sw, "Goes", "49,15");
+        # Perron
+        platform(:cat:dc15 :pax,
+                rv[:gs - 180m, :gs + 90m] >> 0.5dt
+            --  rv[:gs + 90m, :gs - 180m] >> 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, rv[:gs] >> 0.5dt);
+        station(:top :cat:dc15 :pax, rv[:gs] >> 0.5dt >> 1.2sw,
+            "Goes", "49,18"
+        );
     }
 
 
     with link = "line.nl.RV" {
-        track(:first :double :cat :dc15 :pax, rv[:gs.f, :ha.a]);
-        with layer = 1 line_badge(:open, rv[:gs.f + 2.2km], "RV");
+        track(:first :double :cat:dc15 :pax, rv[:gs.f, :ha.a]);
+        with layer = 1 line_badge(:cat:dc15 :pax, rv[:gs.f + 2.2km], "RV");
     }
 
     
@@ -338,30 +423,30 @@ with detail = [4, 5] {
         #
         # Hoofdsporen << 0.5dt en >> 0.5dt
         track(:first :double :cat :dc15 :pax :station, rv[:ha.a, :ha.f]);
-        track(:station :cat :dc15,
-                rv[:ha - 350m - 1dl] >> 0.5dt
-            --  rv[:ha - 350m] << 0.5dt
+        track(:station :cat:dc15,
+                rv[:ha.x - 350m - 1dl] >> 0.5dt
+            --  rv[:ha.x - 350m] << 0.5dt
         );
 
         # Spoor Lijn AV
         with layer = -1 track(:first :removed,
-                rv[:ha - 351m, :ha - 350m] << 0.5dt
-            --  rv[:ha - 350m + 3dl, :ha + 180m] << 0.5dt << 1sh
+                rv[:ha + 0.49sw, :ha + 0.5sw] << 0.5dt
+            --  rv[:ha + 0.5sw + 2dl, :ha.yv] << 2.5dt
         );
 
         # Toestand 1909
         #
         # Spoor >> 1.5dt
         with layer = -1 track(:station :removed,
-                rv[:ha - 350m, :ha.f - 50m] >> 1.5dt
+                rv[:ha.x - 350m, :ha.f - 50m] >> 1.5dt
         );
         with layer = -1 track(:station :removed,
-                rv[:ha - 0.5sw - 2dl] << 0.5dt
-            --  rv[:ha - 0.5sw] >> 1.5dt
+                rv[:ha.x - 0.5sw - 2dl] << 0.5dt
+            --  rv[:ha.x - 0.5sw] >> 1.5dt
         );
         with layer = -1 track(:station :removed,
-                rv[:ha - 0.5sw - 1dl] >> 1.5dt
-            --  rv[:ha - 0.5sw] >> 0.5dt
+                rv[:ha.x - 0.5sw - 1dl] >> 1.5dt
+            --  rv[:ha.x - 0.5sw] >> 0.5dt
         );
         with layer = -1 track(:station :removed,
                 rv[:ha.f - 100m - 1dl] >> 1.5dt
@@ -370,16 +455,16 @@ with detail = [4, 5] {
 
         # Spoor << 1.5dt
         with layer = -1 track(:station :removed,
-                rv[:ha + 0.5sw, :ha.f - 100m - 2dl] << 1.5dt
+                rv[:ha.x + 0.5sw, :ha.f - 100m - 2dl] << 1.5dt
         );
         with layer = -1 track(:station :removed,
                 rv[:ha.f - 100m - 3dl] << 1.5dt
             --  rv[:ha.f - 100m - 1dl] >> 0.5dt
         );
 
-        marker(:de.uest :left, rv[:ha] << 0.5dt);
+        marker(:de.uest :cat:dc15 :left, rv[:ha] << 0.5dt);
         with layer = -1 marker(:de.bf :removed :left, rv[:ha] << 0.5dt);
-        station(:top, rv[:ha] >> 2.5dt,
+        station(:top :cat:dc15, rv[:ha] >> 2.5dt,
             span(:bold, "’s-Heer Arendskerke"),
             hbox(:center:top,
                 vbox(:right:top, "RV: ", "AV: "),
@@ -421,7 +506,7 @@ with detail = [4, 5] {
 
 
     with link = "point.nl.Lewedorp-aansluiting" {
-        track(:first :double :cat :dc15 :pax :station, rv[:lwda.a, :lwda.f]);
+        track(:first :double :cat:dc15 :pax :station, rv[:lwda.a, :lwda.f]);
         track(:first :cat :dc15 :station,
                 rv[:lwda - 0.1dl, :lwda] << 0.5dt
             --  rv[:lwda + 1dl, :lwda + 2dl] << 1.5dt
@@ -432,8 +517,8 @@ with detail = [4, 5] {
             --  rv[:lwda - 1dl] << 0.5dt
         );
 
-        marker(:de.abzw :right, rv[:lwda] >> 0.5dt);
-        station(:top, rv[:lwda] >> 0.5dt >> 1.2sw,
+        marker(:de.abzw :cat:dc15 :right, rv[:lwda] >> 0.5dt);
+        station(:top :cat:dc15, rv[:lwda] >> 0.5dt >> 1.2sw,
             span(:bold, "Lewedorp"),
             hbox(:center:top,
                 vbox(:right:top, "RV: ", "LV :"),
@@ -453,7 +538,7 @@ with detail = [4, 5] {
         # Toestand 1912
         #
         # Hoofdsporen
-        track(:first :double :cat :dc15 :pax :station, rv[:arn.a, :arn.f]);
+        track(:first :double :cat:dc15 :pax :station, rv[:arn.a, :arn.f]);
         with layer = -1 track(:station :removed,
                 rv[:arn + 0.5sw] << 0.5dt
             --  rv[:arn + 0.5sw + 1dl] >> 0.5dt
@@ -466,10 +551,19 @@ with detail = [4, 5] {
             --  rv[:arn.f - 100m, :arn.f - 99m] >> 0.5dt
         );
 
-        marker(:de.hp :left, rv[:arn] << 0.5dt);
+        platform(:cat:dc15 :pax,
+                rv[:arn - 260m, :arn - 30m] << 0.5dt
+            --  rv[:arn - 30m, :arn - 260m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                rv[:arn + 20m, :arn + 210m] >> 0.5dt
+            --  rv[:arn + 210m, :arn + 20m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, rv[:arn] << 0.5dt);
         with layer = -1 marker(:de.bf :removed :left, rv[:arn] << 0.5dt);
-        station(:bottom, rv[:arn] << 0.5dt << 1.2sw,
-            "Arnemuiden", "64,49"
+        station(:bottom :cat:dc15 :pax, rv[:arn] << 0.5dt << 1.2sw,
+            "Arnemuiden", "64,54"
         );
     }
 
@@ -483,47 +577,47 @@ with detail = [4, 5] {
         # Toestand 1913
 
         # Hoofdsporen
-        track(:first :double :cat :dc15 :pax :station, rv[:mdb.a, :mdb.f]);
+        track(:first :double :cat:dc15 :pax :station, rv[:mdb.a, :mdb.f]);
 
         # Kruising a-zijde
         track(:station :cat :dc15,
-                rv[:mdb - 550m - 1dl] >> 0.5dt
-            --  rv[:mdb - 550m + 1dl] << 0.5dt
+                rv[:mdb.x - 550m - 1dl] >> 0.5dt
+            --  rv[:mdb.x - 550m + 1dl] << 0.5dt
         );
         track(:station :cat :dc15,
-                rv[:mdb - 550m - 1dl] << 0.5dt
-            --  rv[:mdb - 550m + 1dl] >> 0.5dt
+                rv[:mdb.x - 550m - 1dl] << 0.5dt
+            --  rv[:mdb.x - 550m + 1dl] >> 0.5dt
         );
 
         # Kruising f-zijde
         track(:station :cat :dc15,
-                rv[:mdb + 0.5sw + 2dl] >> 0.5dt
-            --  rv[:mdb + 0.5sw + 4dl] << 0.5dt
+                rv[:mdb.x + 0.5sw + 2dl] >> 0.5dt
+            --  rv[:mdb.x + 0.5sw + 4dl] << 0.5dt
         );
         track(:station :cat :dc15,
-                rv[:mdb + 0.5sw + 2dl] << 0.5dt
-            --  rv[:mdb + 0.5sw + 4dl] >> 0.5dt
+                rv[:mdb.x + 0.5sw + 2dl] << 0.5dt
+            --  rv[:mdb.x + 0.5sw + 4dl] >> 0.5dt
         );
 
         # Eerste inhaalspoor links
         with layer = -1 track(:station :removed,
-                rv[:mdb - 850m, :mdb + 200m] << 1.5dt
+                rv[:mdb.x - 850m, :mdb.x + 200m] << 1.5dt
         );
 
         # Twede inhaalspoor links
         with layer = -1 track(:station :removed, 
-                rv[:mdb - 550m + 0.9dl, :mdb - 550m + 1dl] << 0.5dt
-            --  rv[:mdb - 550m + 3dl, :mdb + 0.5sw] << 2.5dt
-            --  rv[:mdb + 0.5sw + 2dl, :mdb + 0.5sw + 2.1dl] << 0.5dt
+                rv[:mdb.x - 550m + 0.9dl, :mdb.x - 550m + 1dl] << 0.5dt
+            --  rv[:mdb.x - 550m + 3dl, :mdb.x + 0.5sw] << 2.5dt
+            --  rv[:mdb.x + 0.5sw + 2dl, :mdb.x + 0.5sw + 2.1dl] << 0.5dt
         );
 
         # Goederensporen rechts a-zijde
         with layer = -1 track(:station :removed, 
-                rv[:mdb - 850m, :mdb - 0.5sw] >> 1.5dt
+                rv[:mdb.x - 850m, :mdb - 0.5sw] >> 1.5dt
         );
         with layer = -1 track(:station :removed, 
-                rv[:mdb - 550m + 0.9dl, :mdb - 550m + 1dl] >> 0.5dt
-            --  rv[:mdb - 550m + 3dl, :mdb - 0.5sw] >> 2.5dt
+                rv[:mdb.x - 550m + 0.9dl, :mdb.x - 550m + 1dl] >> 0.5dt
+            --  rv[:mdb.x - 550m + 3dl, :mdb - 0.5sw] >> 2.5dt
         );
         with layer = -1 track(:station :removed, 
                 rv[:mdb - 0.5sw - 2dl] >> 2.5dt
@@ -532,27 +626,49 @@ with detail = [4, 5] {
 
         # Opstelspoor rechts f-zijde
         with layer = -1 track(:station :removed,
-                rv[:mdb + 0.49sw, :mdb + 0.5sw] >> 0.5dt
-            --  rv[:mdb + 0.5sw + 1dl, :mdb + 220m] >> 1.5dt
+                rv[:mdb + 199m, :mdb + 200m] >> 0.5dt
+            --  rv[:mdb + 200m + 1dl, :mdb + 350m] >> 1.5dt
         );
 
-        marker(:de.bf :right, rv[:mdb] >> 0.5dt);
-        station(:left, rv[:mdb + 0.4sw] >> 0.5dt >> 1.3sw,
-            "Middelburg", "68,23"
+        platform(:cat:dc15 :pax,
+                rv[:mdb - 10m, :mdb + 260m] >> 0.5dt
+            --  rv[:mdb + 260m, :mdb - 10m] << 1.1dt
+        );
+        platform(:cat:dc15 :pax,
+                rv[:mdb - 10m, :mdb + 260m] << 0.5dt
+            --  rv[:mdb + 260m, :mdb - 10m] >> 1.1dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, rv[:mdb] >> 0.5dt);
+        station(:top :cat:dc15 :pax, rv[:mdb + 0.2sw] >> 0.5dt >> 1.4sw,
+            "Middelburg", "68,08"
         );
     }
 
 
     with link = "line.nl.RV" {
-        track(:first :double :cat :dc15 :pax, rv[:mdb.f, :vs.a]);
-        with layer = 1 line_badge(:open, rv[:mdb.f + 1.5km], "RV");
+        track(:first :double :cat :dc15 :pax, rv[:mdb.f, :vss - 350m]);
+        line_badge(:cat:dc15 :pax, rv[:mdb.f + 1.5km], "RV");
     }
 
 
     with link = "point.nl.Vlissingen-Souburg" {
-        marker(:de.hp :left, rv[:vss] << 0.5dt);
-        station(:right, rv[:vss + 0.3sw] << 0.5dt << 1.5sw,
-            "Vlissingen Souburg", "72,16"
+        track(:first:station :double :cat:dc15 :pax,
+                rv[:vss - 350m, :vs.a]
+        );
+
+        platform(:cat:dc15 :pax,
+                rv[:vss - 290m, :vss - 20m] << 0.5dt
+            --  rv[:vss - 20m, :vss - 290m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                rv[:vss + 30m, :vss + 300m] >> 0.5dt
+            --  rv[:vss + 300m, :vss + 30m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, rv[:vss] << 0.5dt);
+        station(:right :cat:dc15 :pax, rv[:vss + 0.3sw] << 0.5dt << 1.5sw,
+            "Vlissingen Souburg", "72,02"
         );
     }
 
@@ -563,13 +679,13 @@ with detail = [4, 5] {
                 rv[:vs - 330m + 0.9dl, :vs - 330m + 1dl] << 0.5dt
             --  rv[:vs - 330m + 2dl, :vs.f] << 1.5dt
         );
-        track(:station :cat :dc15 :pax,
-                rv[:vs - 330m - 3dl] >> 0.5dt
-            --  rv[:vs - 330m - 2dl] << 0.5dt
-        );
-        track(:station :cat :dc15 :pax,
-                rv[:vs - 330m] << 0.5dt
-            --  rv[:vs - 330m + 1dl] >> 0.5dt
+            track(:station :cat :dc15 :pax,
+                    rv[:vs - 330m - 3dl] >> 0.5dt
+                --  rv[:vs - 330m - 2dl] << 0.5dt
+            );
+            track(:station :cat :dc15 :pax,
+                    rv[:vs - 330m] << 0.5dt
+                --  rv[:vs - 330m + 1dl] >> 0.5dt
         );
 
         # Spoor (711 -) 702
@@ -615,10 +731,23 @@ with detail = [4, 5] {
             --  rv[:vs - 200m + 1dl, :vs.f] << 4.5dt
         );
 
-        marker(:de.bf :top, rv[:vs.f]);
-        station(:bottom, rv[:vs.f + 1.2sw],
+        # Perron 701
+        platform(:cat:dc15 :pax,
+                rv[:vs - 330m + 2.5dl, :vs.f] << 1.5dt
+            --  rv[:vs.f, :vs - 150m] >> 2.2dt
+            --  rv[:vs - 150m, :vs - 330m + 2.5dl] >> 2.0dt
+        );
+
+        # Perron 702/703
+        platform(:cat:dc15 :pax,
+                rv[:vs - 330m + 2.5dl, :vs.f] << 0.5dt
+            --  rv[:vs.f, :vs - 330m + 2.5dl] << 0.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :top, rv[:vs.f]);
+        station(:bottom :cat:dc15 :pax, rv[:vs.f + 1.2sw],
             span(:bold, "Vlissingen"),
-            "RV: 74,23"
+            "RV: 74,04"
         );
     }
 }

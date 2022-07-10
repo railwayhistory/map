@@ -1,0 +1,26 @@
+# NL 1053.  Amsterdamse Metro: Van der Madeweg - Gaasperplas
+#
+let mg = path("d4.nl.1053");
+
+with detail = [4, 5] {
+    # point.nl.Amsterdam-Van-der-Madeweg: nl.1054
+
+    with link = "line.nl.1053" {
+        track(:tram :double :rail:rc75 :pax,
+                mg[:mdw + 300m, :mdw.yg] >> 1dt
+            ..  mg[:vpd.ym, :vpd - 120m] >> 3dt
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Venserpolder" {
+        track(:tram:station :double :rail:rc75 :pax,
+                mg[:vpd - 120m, :vpd + 120m] >> 3dt
+        );
+        platform(:tram :rail:rc75 :pax,
+                mg[:vpd - 75m, :vpd + 75m] >> 2.5dt
+            --  mg[:vpd + 75m, :vpd - 75m] << 3.5dt
+        );
+    }
+}
+

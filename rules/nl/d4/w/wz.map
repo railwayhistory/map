@@ -1,0 +1,45 @@
+# NL WZ.  Winterswijk - Zevenaar
+#
+let wz = path("d4.nl.wz");
+
+with detail = [4, 5] {
+
+
+    with link = "line.nl.WZ" {
+        track(:first :pax, wz[:wl.f, :did.a]);
+    }
+
+
+    with link = "point.nl.Didam" {
+        track(:first:station :pax, wz[:did.a, :did.f]);
+        track(:first:station :pax,
+                wz[:did - 401m, :did - 400m]
+            --  wz[:did - 280m, :did.f] << 1dt
+        );
+
+        platform(:pax,
+                wz[:did - 200m, :did + 10m]
+            --  wz[:did + 10m, :did - 200m] << 0.7dt
+        );
+
+        platform(:pax,
+                wz[:did - 190m, :did + 40m] << 1.0dt
+            --  wz[:did + 40m, :did - 190m] >> 1.7dt
+        );
+
+        marker(:de.bf :pax :right, wz[:did]);
+        station(:top :pax, wz[:did] >> 1.2sw,
+            "Didam", "45,42"
+        );
+    }
+
+
+    with link = "line.nl.WZ" {
+        track(:first :double :pax,
+                wz[:did.f, :zv.ffd] << 0.5dt
+            ..  wz[:zv.yd, :zv.yd + 0.1dl] >> 2dt
+        );
+        line_badge(:pax, wz[:zv.ffd - 0.8km] << 0.5dt, "WZ");
+    }
+}
+

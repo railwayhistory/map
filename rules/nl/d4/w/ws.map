@@ -1,0 +1,38 @@
+# WS.  Weesp - Leiden
+with detail = 4 {
+    let ws = path("d4.nl.ws");
+
+    
+    # point.nl.Gaasperdammerweg: nl.az
+
+
+    with link = "point.nl.De-Diem" {
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ws[:gpda.xa, :ddm + 150m] << 2.5dt
+        );
+            with layer = 2 track(:station :cat:dc15,
+                    ws[:ddm] << 2.5dt
+                --  ws[:ddm + 100m] << 3.5dt
+            );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ws[:gpda.xa, :ddm + 150m] << 3.5dt
+        );
+            with layer = 2 track(:station :cat:dc15,
+                    ws[:ddm - 100m] << 3.5dt
+                --  ws[:ddm - 20m] << 2.5dt
+            );
+
+        marker(:de.uest :cat:dc15 :left, ws[:ddm] << 3.5dt);
+        station(:left :cat:dc15, ws[:ddm + 0.5dt] << 3.5dt << 1.0sh,
+            hbox(:right:top, "De Diem"), "WS: 146,13"
+        );
+    }
+
+    
+    with link = "line.nl.WS" {
+        track(:first :double :cat:dc15 :pax,
+                ws[:ddm + 150m, :wgmo.f] << 3dt
+            ..  ws[:mdsa.y - 150m, :mdsa.y - 100m]
+        );
+    }
+}

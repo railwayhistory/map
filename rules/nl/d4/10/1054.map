@@ -1,0 +1,391 @@
+# NL 1054.  Amsterdamse Metro: Centraal Station - Gein
+#
+let cg = path("d4.nl.1054");
+
+with detail = [4, 5] {
+    with link = "point.nl.Amsterdam-Wibautstraat" {
+        track(:tram:station :double :rail:rc75 :pax,
+                cg[:wbs - 100m, :wbs + 170m]
+        );
+        platform(:tram :rail:rc75 :pax,
+                cg[:wbs - 50m, :wbs + 120m] << 0.5dt
+            --  cg[:wbs + 120m, :wbs - 50m] << 0.5dt
+        );
+        slabel(:left :tram, cg[:wbs + 1.0dt] >> 2.0dt, "Wibautstraat");
+    }
+
+    with link = "line.nl.1054" {
+        track(:tram :double :rail:rc75 :pax, cg[:wbs + 170m, :asa - 250m]);
+    }
+
+    with link = "point.nl.Amstedam-Amstel" {
+        track(:tram:station :double :rail:rc75 :pax,
+                cg[:asa - 250m, :asa + 180m]
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:asa - 175m] << 0.5dt
+                --  cg[:asa - 125m] >> 0.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:asa - 175m] >> 0.5dt
+                --  cg[:asa - 125m] << 0.5dt
+            );
+
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:asa - 70m, :asa + 100m] << 0.5dt
+            --  cg[:asa + 100m, :asa - 70m] >> 1dt
+        );
+        platform(:tram :rail:rc75 :pax,
+                cg[:asa - 70m, :asa + 100m] >> 0.5dt
+            --  cg[:asa + 100m, :asa - 70m] << 1dt
+        );
+    }
+
+    with link = "line.nl.1054" {
+        track(:tram :rail:rc75 :pax :flip,
+                cg[:asa + 180m, :slw - 200m] << 0.5dt
+        );
+        track(:tram :rail:rc75 :pax,
+                cg[:asa + 180m, :asa + 180m + 0.5dl] >> 0.5dt
+            ..  cg[:slw - 200m, :slw - 199m] >> 2.5dt
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Spaklerweg" {
+        track(:tram:station :rail:rc75 :pax,
+                cg[:slw - 200m, :slw.yz] << 0.5dt
+        );
+
+        track(:tram:station :rail:rc75 :pax,
+                cg[:slw - 200m, :slw - 199m] << 0.5dt
+            --  cg[:slw - 150m, :slw.yz] >> 0.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:slw + 40m] >> 0.5dt
+                --  cg[:slw + 90m] << 0.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:slw + 170m] >> 0.5dt
+                --  cg[:slw + 220m] >> 1.5dt
+            );
+
+        track(:tram:station :rail:rc75 :pax,
+                cg[:slw - 200m, :slw - 199m] >> 2.5dt
+            --  cg[:slw - 150m, :slw.yz] >> 1.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:slw + 40m] >> 1.5dt
+                --  cg[:slw + 90m] >> 2.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:slw + 170m] >> 1.5dt
+                --  cg[:slw + 220m] >> 0.5dt
+            );
+
+        track(:tram:station :rail:rc75 :pax,
+                cg[:slw - 200m, :slw.yz] >> 2.5dt
+        );
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:slw - 150m, :slw] << 0.5dt
+            --  cg[:slw, :slw - 130m] << 0.5dt
+        );
+        platform(:tram :rail:rc75 :pax,
+                cg[:slw - 150m, :slw] >> 2.5dt
+            --  cg[:slw, :slw - 130m] << 1.5dt
+        );
+        
+        slabel(:left :tram, cg[:slw - 0.5dt] >> 5.5dt, "Spaklerweg");
+    }
+
+
+    with link = "line.nl.1054" {
+        track(:tram :rail:rc75 :pax :tight:flip,
+                cg[:slw.yz, :mdw.yz] << 0.5dt
+        );
+        track(:tram :rail:rc75 :pax :tight,
+                cg[:slw.yz, :mdw.yz] >> 2.5dt
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Van-der-Madeweg" {
+        track(:tram:station :rail:rc75 :pax,
+                cg[:mdw.yz, :mdw + 300m] << 0.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw - 250m] << 0.5dt
+                --  cg[:mdw - 150m] >> 0.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw + 160m] << 0.5dt
+                --  cg[:mdw + 260m] >> 0.5dt
+            );
+        track(:tram:station :rail:rc75 :pax,
+                cg[:mdw.yz, :mdw + 300m] >> 0.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw - 250m] >> 0.5dt
+                --  cg[:mdw - 150m] << 0.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw + 60m] >> 0.5dt
+                --  cg[:mdw + 260m] >> 2.5dt
+            );
+        track(:tram:station :rail:rc75 :pax,
+                cg[:mdw.yz, :mdw + 300m] >> 1.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw - 250m] >> 1.5dt
+                --  cg[:mdw - 150m] >> 2.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw + 60m] >> 1.5dt
+                --  cg[:mdw + 260m] << 0.5dt
+            );
+        track(:tram:station :rail:rc75 :pax,
+                cg[:mdw.yz, :mdw + 300m] >> 2.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw - 250m] >> 2.5dt
+                --  cg[:mdw - 150m] >> 1.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:mdw + 160m] >> 2.5dt
+                --  cg[:mdw + 260m] >> 1.5dt
+            );
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:mdw - 120m, :mdw + 30m] << 0.5dt
+            --  cg[:mdw + 30m, :mdw - 120m] << 0.5dt
+        );
+        platform(:tram :rail:rc75 :pax,
+                cg[:mdw - 120m, :mdw + 30m] >> 2.5dt
+            --  cg[:mdw + 30m, :mdw - 120m] << 1.5dt
+        );
+
+        slabel(:right :tram :rail:rc75 :pax, cg[:mdw] << 2.5dt,
+            vbox(:left:bottom, "Van der", "Madeweg")
+        );
+    }
+
+
+    with link = "line.nl.1054" {
+        with layer = 1 casing(:tram :rail:rc75 :pax :tight:flip,
+                cg[:dvd - 301m, :dvd - 300m] << 0.5dt
+            ..  cg[:dvd - 101m, :dvd - 100m] >> 0.5dt
+        );
+        with layer = 2 track(:tram :rail:rc75 :pax :tight:flip,
+                cg[:mdw + 300m, :dvd - 300m] << 0.5dt
+            ..  cg[:dvd - 101m, :dvd - 100m] >> 0.5dt
+        );
+        track(:tram :rail:rc75 :pax :tight,
+                cg[:mdw + 300m, :dvd - 300m] >> 2.5dt
+            ..  cg[:dvd - 101m, :dvd - 100m] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.nl.Duivendrecht" {
+        with layer = 1 casing (:tram:station :double :rail:rc75 :pax,
+                cg[:dvd - 100m, :dvd + 200m] >> 1dt
+        );
+        with layer = 2 track(:tram:station :double :rail:rc75 :pax,
+                cg[:dvd - 100m, :dvd + 230m] >> 1dt
+        );
+
+        with layer = 2 platform(:tram :rail:rc75 :pax,
+                cg[:dvd - 75m, :dvd + 75m] >> 0.5dt
+            --  cg[:dvd + 75m, :dvd - 75m] >> 0.2dt
+        );
+        with layer = 2 platform(:tram :rail:rc75 :pax,
+                cg[:dvd - 75m, :dvd + 75m] >> 1.5dt
+            --  cg[:dvd + 75m, :dvd - 75m] << 2.2dt
+        );
+    }
+
+
+    with link = "line.nl.1054" {
+        track(:tram :double :rail:rc75 :pax,
+                cg[:dvd + 230m, :dvaz.yd] >> 1dt
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Strandvliet" {
+        track(:tram:station :double :rail:rc75 :pax,
+                cg[:dvaz.yd, :dvaz + 120m] >> 1dt
+        );
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:dvaz - 75m, :dvaz + 75m] >> 0.5dt
+            --  cg[:dvaz + 75m, :dvaz - 75m] << 1.5dt
+        );
+        slabel(:left :tram :rail:rc75 :pax, cg[:dvaz + 0.1sw] >> 5.5dt,
+            "Strandvliet"
+        );
+    }
+
+
+    with link = "line.nl.1054" {
+        track(:tram :double :rail:rc75 :pax,
+                cg[:dvaz + 120m, :asb.yr] >> 1dt
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Bijlmer" {
+        track(:tram:station :double :rail:rc75 :pax,
+                cg[:asb.yr, :asb + 120m] >> 1dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:asb.yr + 50m] >> 0.5dt
+                --  cg[:asb.yr + 150m] >> 1.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:asb.yr + 50m] >> 1.5dt
+                --  cg[:asb.yr + 150m] >> 0.5dt
+            );
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:asb - 75m, :asb + 75m] >> 0.5dt
+            --  cg[:asb + 75m, :asb - 75m] << 1.5dt
+        );
+    }
+
+
+    with link = "line.nl.1054" {
+        track(:tram :double :rail:rc75 :pax,
+                cg[:asb + 120m, :blw - 140m] >> 1dt
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Bullewijk" {
+        track(:tram:station :rail:rc75 :pax,
+                cg[:blw - 140m, :blw + 150m] >> 0.5dt
+            --  cg[:blw + 200m, :blw + 400m]
+        );
+        track(:tram:station :rail:rc75 :pax,
+                cg[:blw - 140m, :blw + 150m] >> 1.5dt
+            --  cg[:blw + 200m, :blw + 400m] >> 2dt
+        );
+
+            track(:tram:station :rail:rc75,
+                    cg[:blw + 150m] >> 1.5dt
+                --  cg[:blw + 200m] >> 1dt
+            );
+
+        track(:tram:station :rail:rc75,
+                cg[:blw + 149m, :blw + 150m] >> 0.5dt
+            --  cg[:blw + 200m, :blw + 380m] >> 1dt
+        );
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:blw - 90m, :blw + 60m] >> 0.5dt
+            --  cg[:blw + 60m, :blw - 90m] << 1.5dt
+        );
+        slabel(:left :tram :rail:rc75 :pax, cg[:blw + 0.1sw] >> 7dt,
+            "Bullewijk"
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Holendrecht" {
+        track(:tram:station :rail:rc75 :pax,
+                cg[:blw + 400m, :blw + 401m]
+            ..  cg[:ashd - 400m, :ashd.yg] >> 0.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:ashd - 380m] >> 0.5dt
+                --  cg[:ashd - 280m] >> 1.5dt
+            );
+
+        track(:tram:station :rail:rc75 :pax,
+                cg[:blw + 400m, :blw + 401m] >> 2dt
+            ..  cg[:ashd - 400m, :ashd.yg] >> 1.5dt
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:ashd - 250m] >> 1.5dt
+                --  cg[:ashd - 150m] >> 0.5dt
+            );
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:ashd - 100m, :ashd + 50m] >> 0.5dt
+            --  cg[:ashd + 50m, :ashd - 100m] << 1.5dt
+        );
+    }   
+
+
+    with link = "line.nl.1054" {
+        track(:tram :double :rail:rc75 :pax,
+                cg[:ashd.yg - 0.1dl, :ashd.yg] >> 1dt
+            ..  cg[:ashd.yyg, :rgb - 150m]
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Reigersbos" {
+        track(:tram:station :double :rail:rc75 :pax,
+                cg[:rgb - 150m, :rgb + 100m]
+        );
+        platform(:tram :rail:rc75 :pax,
+                cg[:rgb - 100m, :rgb + 50m] << 0.5dt
+            --  cg[:rgb + 50m, :rgb - 100m] << 0.5dt
+        );
+        slabel(:top :tram :rail:rc75 :pax, cg[:rgb] << 1.5dt,
+            vbox(:center:bottom, " Reigers-", "bos")
+        );
+    }
+
+
+    with link = "line.nl.1054" {
+        track(:tram :double :rail:rc75 :pax, cg[:rgb + 100m, :gen - 400m]);
+    }
+
+
+    with link = "point.nl.Amsterdam-Gein" {
+        track(:tram:station :double :rail:rc75 :pax,
+                cg[:gen - 400m, :gen + 80m]
+        );
+            track(:tram:station :rail:rc75,
+                    cg[:gen - 360m] << 0.5dt
+                --  cg[:gen - 300m] >> 0.5dt
+            );
+            track(:tram:station :rail:rc75,
+                    cg[:gen - 250m] >> 0.5dt
+                --  cg[:gen - 190m] << 0.5dt
+            );
+
+        platform(:tram :rail:rc75 :pax,
+                cg[:gen - 70m, :gen + 80m] << 0.5dt
+            --  cg[:gen + 80m, :gen - 70m] << 0.5dt
+        );
+
+        track(:tram:station :rail:rc75,
+                cg[:gen + 129m, :gen + 130m] >> 0.5dt
+            --  cg[:gen + 250m, :gen.f] << 1.5dt
+        );
+
+        track(:tram:station :rail:rc75,
+                cg[:gen + 80m, :gen.f] << 0.5dt
+        );
+
+        track(:tram:station :rail:rc75,
+                cg[:gen + 80m, :gen.f] >> 0.5dt
+        );
+
+        track(:tram:station :rail:rc75,
+                cg[:gen + 129m, :gen + 130m] << 0.5dt
+            --  cg[:gen + 250m, :gen.f] >> 1.5dt
+        );
+
+        slabel(:top :tram :rail:rc75 :pax, cg[:gen] << 1.5dt,
+            span(:bold, "Gein")
+        );
+    }
+            
+}
+

@@ -1,6 +1,6 @@
 # NL BR.  Breda - Rotterdam Centraal
 #
-let br = path("d3.nl.br");
+let br = path("d4.nl.br");
 
 with detail = [4, 5] {
     # point.nl.Breda: nl.RB
@@ -27,8 +27,18 @@ with detail = [4, 5] {
         track(:first :station :double :cat:dc15 :pax,
                 br[:bdpb - 1sw, :bdpb + 300m]
         );
-        marker(:de.hp :right, br[:bdpb] >> 0.5dt);
-        station(:right, br[:bdpb - 0.4sw] >> 0.5dt >> 1.2sw,
+
+        platform(:cat:dc15 :pax,
+                br[:bdpb - 50m, :bdpb + 210m] << 0.5dt
+            --  br[:bdpb + 210m, :bdpb - 50m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:bdpb - 60m, :bdpb + 200m] >> 0.5dt
+            --  br[:bdpb + 200m, :bdpb - 60m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, br[:bdpb] >> 0.5dt);
+        station(:right :cat:dc15 :pax, br[:bdpb - 0.4sw] >> 0.5dt >> 1.2sw,
             "Breda-Prinsenbeek", "4,74"
         );
     }
@@ -39,7 +49,7 @@ with detail = [4, 5] {
                 br[:bdpb + 300m, :nvbr - 1km]
             ..  br[:nvbr - 1.5sw, :nvbr - 1sw] >> 1dt
         );
-#       with layer = 1 line_badge(:open, br[:bdpb + 1.5km], "BR");
+        line_badge(:cat:dc15 :pax, br[:bdpb + 1.5km] >> 0.2dt, "BR");
     }
 
 
@@ -58,10 +68,10 @@ with detail = [4, 5] {
             );
         }
 
-        with layer = 2 marker(:de.uest :left, br[:nvbr] >> 0.5dt);
+        with layer = 2 marker(:de.uest :cat:dc15 :left, br[:nvbr] >> 0.5dt);
         with layer = 1 marker(:de.uest.casing :left, br[:nvbr] >> 0.5dt);
-        station(:right, br[:nvbr - 0.4sw] >> 3.0dt,
-            "Nieuwe Veerbrug", "BR: 8,62"
+        station(:right :cat:dc15, br[:nvbr - 0.4sw] >> 3.0dt,
+            "Nieuwe Veerbrug Overloopw", "BR: 8,62"
         );
     }
 
@@ -84,8 +94,8 @@ with detail = [4, 5] {
             ..  br[:hszha.r - 0.1dl, :hszha.r] << 3.5dt
         );
 
-        marker(:de.abzw :right, br[:zha] >> 1.5dt);
-        station(:right, br[:zha - 0.4sw] >> 1.5dt >> 1.3sw,
+        marker(:de.abzw :cat:dc15 :right, br[:zha] >> 1.5dt);
+        station(:right :cat:dc15, br[:zha - 0.4sw] >> 1.5dt >> 1.3sw,
             "Zevenbergschenhoek aansl.",
             hbox(:center:top,
                 vbox(:right:top, "BR: ", "RNZ: "),
@@ -169,10 +179,30 @@ with detail = [4, 5] {
             --  br[:zlw - 100m + 1dl, :zlw + 1200m] << 1.5dt
             --  br[:zlw + 1200m + 2dl, :zlw + 1200m + 2.1dl] >> 0.5dt
         );
-        
-        with layer = 4 marker(:de.bf :left, br[:zlw + 1dl] << 1.5dt);
+
+        # Perron 901
+        platform(:cat:dc15 :pax,
+                br[:zlw, :zlw + 300m] << 0.5dt
+            --  br[:zlw + 300m, :zlw] >> 1.0dt
+        );
+
+        # Perron 902/903
+        platform(:cat:dc15 :pax,
+                br[:zlw, :zlw + 300m] >> 0.5dt
+            --  br[:zlw + 300m, :zlw] << 1.5dt
+        );
+
+        # Perron 904
+        platform(:cat:dc15 :pax,
+                br[:zlw, :zlw + 260m] >> 2.5dt
+            --  br[:zlw + 260m, :zlw] << 3.0dt
+        );
+
+        with layer = 4 marker(:de.bf :cat:dc15 :pax:left,
+                br[:zlw + 1dl] << 1.5dt
+        );
         with layer = 3 marker(:de.bf.casing :left, br[:zlw + 1dl] << 1.5dt);
-        station(:left, br[:zlw - 0.1sw] << 1.5dt << 1.7sw,
+        station(:left :cat:dc15 :pax, br[:zlw - 0.1sw] << 1.5dt << 1.7sw,
             span(:bold, "Lage Zwaluwe"),
             hbox(:center:top,
                 vbox(:right:top, "BR: ", "LH: ", "LM: ", "LR: "),
@@ -218,19 +248,21 @@ with detail = [4, 5] {
                 br[:zlw.a, :mdbz.f] << 0.5dt
         );
 
-        with layer = 3 marker(:de.abzw :right, br[:mdbz + 160m] >> 0.5dt);
+        with layer = 3 marker(:de.abzw :cat:dc15 :right,
+                br[:mdbz + 160m] >> 0.5dt
+        );
         with layer = -1 marker(:de.abzw.casing :right,
                 br[:mdbz + 160m] >> 0.5dt
         );
-        station(:right, br[:mdbz + 160m - 0.4sw] >> 0.5dt >> 1.5sw,
-            "Moerdijkbrug Zuid", "BR: 17,30"
+        station(:right :cat:dc15, br[:mdbz + 160m - 0.4sw] >> 0.5dt >> 1.5sw,
+            "Moerdijkbrug Zuid aansl.", "BR: 17,30"
         );
     }
 
 
     with link = "line.nl.BR" {
         track(:first :double :cat:dc15 :pax, br[:mdbz.f, :wld - 200m]);
-        with layer = 1 line_badge(:open, br[:mdbz.f + 0.8km], "BR");
+        with layer = 1 line_badge(:cat:dc15 :pax, br[:mdbz.f + 0.8km], "BR");
     }
 
 
@@ -252,8 +284,8 @@ with detail = [4, 5] {
             "Willemsdorp", "20,35"
         );
 
-        marker(:de.uest :right, br[:wld] >> 0.5dt);
-        station(:right, br[:wld - 0.3sw] >> 0.5dt >> 1.5sw,
+        marker(:de.uest :cat:dc15 :right, br[:wld] >> 0.5dt);
+        station(:right :cat:dc15, br[:wld - 0.3sw] >> 0.5dt >> 1.5sw,
             "Willemsdorp", "21,20"
         );
     }
@@ -261,7 +293,7 @@ with detail = [4, 5] {
 
     with link = "line.nl.BR" {
         track(:first :double :cat:dc15 :pax, br[:wld + 200m, :ddzd - 300m]);
-        with layer = 1 line_badge(:open, br[:ddzd - 1.5km], "BR");
+        line_badge(:cat:dc15, br[:ddzd - 1.5km], "BR");
     }
 
 
@@ -269,8 +301,18 @@ with detail = [4, 5] {
         track(:first:station :double :cat:dc15 :pax,
                 br[:ddzd - 300m, :ddzd + 1sw]
         );
-        marker(:de.hp :right, br[:ddzd] >> 0.5dt);
-        station(:right, br[:ddzd - 0.3sw] >> 0.5dt >> 1.6sw,
+
+        platform(:cat:dc15 :pax,
+                br[:ddzd - 210m, :ddzd + 50m] << 0.5dt
+            --  br[:ddzd + 50m, :ddzd - 210m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:ddzd - 210m, :ddzd + 50m] >> 0.5dt
+            --  br[:ddzd + 50m, :ddzd - 210m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, br[:ddzd] >> 0.5dt);
+        station(:right :cat:dc15 :pax, br[:ddzd - 0.3sw] >> 0.5dt >> 1.6sw,
             "Dordrecht Zuid", "26,92"
         );
     }
@@ -282,7 +324,7 @@ with detail = [4, 5] {
 
 
     with link = "point.nl.Dordrecht" {
-        let ed = path("d3.nl.ed");
+        let ed = path("d4.nl.ed");
 
         # Spoor 1
         track(:first:station :cat:dc15 :pax, ed[:ddr.b, :ddr.f] >> 0.5dt);
@@ -366,8 +408,26 @@ with detail = [4, 5] {
                 --  br[:ddr.a + 150m + 1dl, :ddr.a + 150m + 1.1dl] << 0.5dt
             );
 
-        marker(:de.bf :right, br[:ddr] >> 0.5dt);
-        station(:top, br[:ddr] >> 0.5dt >> 1.3sw,
+        # Perron 1/15/20
+        platform(:cat:dc15 :pax,
+                br[:ddr - 260m, :ddr + 340m] >> 0.5dt
+            --  br[:ddr + 340m, :ddr - 260m] << 1.5dt
+        );
+
+        # Perron 2/3
+        platform(:cat:dc15 :pax,
+                br[:ddr - 180m, :ddr + 290m] << 0.5dt
+            --  br[:ddr + 290m, :ddr - 180m] >> 1.5dt
+        );
+
+        # Perron 4/5
+        platform(:cat:dc15 :pax,
+                br[:ddr - 180m, :ddr + 250m] << 2.5dt
+            --  br[:ddr + 250m, :ddr - 180m] >> 3.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, br[:ddr] >> 0.5dt);
+        station(:top :cat:dc15 :pax, br[:ddr] >> 0.5dt >> 1.3sw,
             span(:bold, "Dordrecht"),
             hbox(:center:top,
                 vbox(:right:top, "ED: ", "BR: "),
@@ -379,12 +439,34 @@ with detail = [4, 5] {
 
 
     with link = "point.nl.Zwijndrecht" {
-        track(:first:station :cat:dc15 :pax, br[:ddr.f, :zwd + 0.5sw] >> 0.5dt);
-        track(:first:station :cat:dc15 :pax, br[:ddr.f, :zwd + 0.5sw] << 0.5dt);
-        track(:first:station :cat:dc15 :pax, br[:ddr.f, :zwd + 0.5sw] << 1.5dt);
-        track(:first:station :cat:dc15 :pax, br[:ddr.f, :zwd + 0.5sw] << 2.5dt);
-        marker(:de.bf :right, br[:zwd] >> 0.5dt);
-        station(:right, br[:zwd - 0.6sw] >> 0.5dt >> 1.2sw,
+        track(:first:station :cat:dc15 :pax,
+                br[:ddr.f, :zwd + 0.5sw] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                br[:ddr.f, :zwd + 0.5sw] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                br[:ddr.f, :zwd + 0.5sw] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                br[:ddr.f, :zwd + 0.5sw] << 2.5dt
+        );
+
+        platform(:cat:dc15 :pax,
+                br[:zwd - 190m, :zwd + 80m] >> 0.5dt
+            --  br[:zwd + 80m, :zwd - 190m] << 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:zwd - 260m, :zwd + 40m] << 0.5dt
+            --  br[:zwd + 40m, :zwd - 260m] >> 1.5dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:zwd - 180m, :zwd + 90m] << 2.5dt
+            --  br[:zwd + 90m, :zwd - 180m] >> 3.2dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, br[:zwd] >> 0.5dt);
+        station(:right :cat:dc15 :pax, br[:zwd - 0.6sw] >> 0.5dt >> 1.2sw,
             "Zwijndrecht", "31,59"
         );
     }
@@ -459,8 +541,8 @@ with detail = [4, 5] {
             ..  br[:kfhaz.f - 800m, :kfhaz.f - 780m] << 6.5dt
         );
 
-        marker(:de.abzw :right, br[:kfhaz] >> 0.5dt);
-        station(:right, br[:kfhaz - 0.6sw] >> 0.5dt >> 1.2sw,
+        marker(:de.abzw :cat:dc15 :right, br[:kfhaz] >> 0.5dt);
+        station(:right :cat:dc15, br[:kfhaz - 0.6sw] >> 0.5dt >> 1.2sw,
             "Kijfhoek aansl. Zuid", "32,50"
         );
     }
@@ -473,7 +555,7 @@ with detail = [4, 5] {
         track(:first :cat:dc15 :pax :flip:tight,
                 br[:kfhaz.f, :brd - 250m] << 2.5dt
         );
-        with layer = 1 line_badge(:open, br[:brd - 2.0km] << 1dt, "BR");
+        line_badge(:cat:dc15 :pax, br[:brd - 2.0km] << 1dt, "BR");
     }
 
 
@@ -490,8 +572,22 @@ with detail = [4, 5] {
         track(:first:station :cat:dc15 :pax,
                 br[:brd - 250m, :brd + 250m] << 2.5dt
         );
-        marker(:de.hp :right, br[:brd] >> 0.5dt);
-        station(:right, br[:brd - 0.6sw] >> 0.5dt >> 1.2sw,
+
+        platform(:cat:dc15 :pax,
+                br[:brd - 150m, :brd + 150m] >> 0.5dt
+            --  br[:brd + 150m, :brd - 150m] << 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:brd - 150m, :brd + 150m] << 0.5dt
+            --  br[:brd + 150m, :brd - 150m] >> 1.5dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:brd - 150m, :brd + 150m] << 2.5dt
+            --  br[:brd + 150m, :brd - 150m] >> 3.0dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, br[:brd] >> 0.5dt);
+        station(:right :cat:dc15 :pax, br[:brd - 0.6sw] >> 0.5dt >> 1.2sw,
             "Barendrecht", "39,11"
         );
     }
@@ -720,32 +816,71 @@ with detail = [4, 5] {
                 --  br[:rlb - 370m + 1dl] << 1.5dt
             );
 
-        marker(:de.bf :right, br[:rlb] >> 2.5dt);
-        station(:right, br[:rlb - 0.4sw] >> 2.5dt >> 1.2sw,
+        # Perron H/J
+        platform(:cat:dc15 :pax,
+                br[:rlb - 140m - 2.7dl, :rlb + 200m - 2.7dl] << 2.5dt
+            --  br[:rlb + 200m - 2.7dl, :rlb - 140m - 2.7dl] >> 1.5dt
+        );
+
+        # Perron K/L
+        platform(:cat:dc15 :pax,
+                br[:rlb - 140m - 2.7dl, :rlb + 200m - 2.7dl] >> 0.5dt
+            --  br[:rlb + 200m - 2.7dl, :rlb - 140m - 2.7dl] << 1.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :right, br[:rlb] >> 2.5dt);
+        station(:right :cat:dc15 :pax, br[:rlb - 0.4sw] >> 2.5dt >> 1.2sw,
             span(:bold, "Rotterdam Lombardijen"),
             hbox(:center:top,
                 vbox(:right:top, "BR: ", "RN: "),
-                vbox(:right:top, "42,", "7,"),
+                vbox(:right:top, "42,", "207,"),
                 vbox(:left:top, "20", "0")
             )
         );
     }
 
     with link = "point.nl.Rotterdam-Stadion" {
-        marker(:de.hp :right, br[:rtst] >> 3.5dt);
-        station(:right, br[:rtst - 0.4sw] >> 3.5dt >> 1.2sw,
+        platform(:cat:dc15 :pax,
+                br[:rtst - 400m, :rtst] >> 0.5dt
+            --  br[:rtst, :rtst - 400m] >> 0.5dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, br[:rtst] >> 3.5dt);
+        station(:right :cat:dc15 :pax, br[:rtst - 0.4sw] >> 3.5dt >> 1.2sw,
             "Rotterdam Stadion", "44,18"
         );
     }
 
 
     with link = "point.nl.Rotterdam-Zuid" {
-        track(:first:station :cat:dc15 :pax, br[:rlb.f, :rtz + 250m] >> 0.5dt);
-        track(:first:station :cat:dc15 :pax, br[:rlb.f, :rtz + 250m] << 0.5dt);
-        track(:first:station :cat:dc15 :pax, br[:rlb.f, :rtz + 250m] << 1.5dt);
-        track(:first:station :cat:dc15 :pax, br[:rlb.f, :rtz + 250m] << 2.5dt);
-        marker(:de.hp :right, br[:rtz] >> 0.5dt);
-        station(:right, br[:rtz - 0.4sw] >> 0.5dt >> 1.2sw,
+        track(:first:station :cat:dc15 :pax,
+                br[:rlb.f, :rtz + 250m] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                br[:rlb.f, :rtz + 250m] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                br[:rlb.f, :rtz + 250m] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                br[:rlb.f, :rtz + 250m] << 2.5dt
+        );
+
+        platform(:cat:dc15 :pax,
+                br[:rtz - 130m, :rtz + 150m] >> 0.5dt
+            --  br[:rtz + 150m, :rtz - 130m] << 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:rtz - 130m, :rtz + 150m] << 0.5dt
+            --  br[:rtz + 150m, :rtz - 130m] >> 1.5dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:rtz - 130m, :rtz + 150m] << 2.5dt
+            --  br[:rtz + 150m, :rtz - 130m] >> 3.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, br[:rtz] >> 0.5dt);
+        station(:right :cat:dc15 :pax, br[:rtz - 0.4sw] >> 0.5dt >> 1.2sw,
             "Rotterdam Zuid", "45,12"
         );
     }
@@ -777,8 +912,18 @@ with detail = [4, 5] {
         track(:first:station :cat:dc15 :pax,
             br[:rtb - 300m, :rtb + 150m] << 2.5dt
         );
-        marker(:de.hp :right, br[:rtb] >> 0.5dt);
-        station(:right, br[:rtb - 0.4sw] >> 0.5dt >> 1.2sw,
+
+        platform(:cat:dc15 :pax,
+                br[:rtb - 215m, :rtb + 50m] >> 0.5dt
+            --  br[:rtb + 50m, :rtb - 215m] >> 0.5dt
+        );
+        platform(:cat:dc15 :pax,
+                br[:rtb - 215m, :rtb + 50m] << 1.5dt
+            --  br[:rtb + 50m, :rtb - 215m] >> 2.5dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, br[:rtb] >> 0.5dt);
+        station(:right :cat:dc15 :pax, br[:rtb - 0.4sw] >> 0.5dt >> 1.2sw,
             "Rotterdam Blaak", "47,49"
         );
     }

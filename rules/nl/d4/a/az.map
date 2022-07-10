@@ -1,3 +1,703 @@
 # NL AZ.  Amsterdam Centraal - Zutphen.
 #
+let az = path("d4.nl.az");
+
+with detail = [4, 5] {
+    with link = "point.nl.Amsterdam-Centraal" {
+        # Sp. 2/3
+        track(:station :cat:dc15 :pax, az[:asd - 400m, :asd + 300m] >> 4.5dt);
+
+        # Sp. 4
+        track(:station :cat:dc15 :pax, az[:asd - 400m, :asd + 300m] >> 3.5dt);
+
+        # Sp. 2/3
+        track(:first :station :cat:dc15 :pax, az[:asd - 400m, :asd.f] >> 2.5dt);
+
+        # Sp. 4
+        track(:first :station :cat:dc15 :pax, az[:asd - 400m, :asd.f] >> 1.5dt);
+
+        # Sp. 5/6
+        track(:first :station :cat:dc15 :pax, az[:asd - 400m, :asd.f] >> 0.5dt);
+
+        # Sp. 7
+        track(:first :station :cat:dc15 :pax, az[:asd - 400m, :asd.f] << 0.5dt);
+
+        # Sp. 
+        track(:first :station :cat:dc15 :pax, az[:asd - 400m, :asd.f] << 1.5dt);
+
+        # Sp. 
+        track(:first :station :cat:dc15 :pax, az[:asd - 400m, :asd.f] << 2.5dt);
+
+        # Sp. 
+        track(:station :cat:dc15 :pax, az[:asd - 400m, :asd + 300m] << 3.5dt);
+
+        # Sp. 
+        track(:station :cat:dc15 :pax, az[:asd - 400m, :asd + 300m] << 4.5dt);
+
+        marker(:de.bf :cat:dc15 :pax :right, az[:asd] >> 4.5dt);
+        station(:left :cat:dc15 :pax, az[:asd + 1sw] >> 4.5dt >> 0.8sh,
+            hbox(:right:top :bold, "Amsterdam Centraal"),
+            hbox(:center:top,
+                vbox(:right:top, "ACA: ", "AR: ", "AS: ", "AZ: ", "HA: "),
+                vbox(:right:top, "100,", "−1,", "47,", "0,", "80,"),
+                vbox(:left:top, "00", "4", "2", "00", "8")
+            )
+        );
+    }
+
+
+    with link = "point.nl.Dijksgracht-Westzijde" {
+        # Lijn AZ
+        track(:first :station :cat:dc15,
+                az[:asd.f, :asd.f + 0.1dl] << 2.5dt
+            ..  az[:dgrw, :dgrw + 0.9dl] << 3.5dt
+            --  az[:dgrw + 1.9dl, :dgrw + 300m] << 4.5dt
+        );
+            track(:station :cat:dc15,
+                    az[:dgrw + 3.7dl] << 4.5dt
+                --  az[:dgrw + 5.7dl] << 2.5dt
+            );
+
+        track(:first :station :cat:dc15,
+                az[:asd.f, :asd.f + 0.1dl] << 1.5dt
+            ..  az[:dgrw, :dgrw + 1.6dl] << 2.5dt
+            --  az[:dgrw + 2.6dl, :dgrw + 300m] << 3.5dt
+        );
+            track(:station :cat:dc15,
+                    az[:dgrw + 1.6dl, :dgrw + 3.3dl] << 2.5dt
+            );
+
+        track(:first :station :cat:dc15 :pax,
+                az[:asd.f, :asd.f + 0.1dl] << 0.5dt
+            ..  az[:dgrw, :dgrw + 2.3dl] << 1.5dt
+            --  az[:dgrw + 3.3dl, :dgrw + 300m] << 2.5dt
+        );
+            track(:station :cat:dc15,
+                    az[:dgrw + 0.7dl] << 1.5dt
+                --  az[:dgrw + 1.8dl] << 0.5dt
+            );
+            track(:station :cat:dc15,
+                    az[:dgrw + 4dl] << 2.5dt
+                --  az[:dgrw + 5dl] << 1.5dt
+            );
+
+        track(:first :station :cat:dc15 :pax,
+                az[:asd.f, :asd.f + 0.1dl] >> 0.5dt
+            ..  az[:dgrw, :dgrw + 3dl] << 0.5dt
+            --  az[:dgrw + 4dl, :dgrw + 300m] << 1.5dt
+        );
+            track(:station :cat:dc15 :removed,
+                    az[:dgrw] << 0.5dt
+                --  az[:dgrw + 1dl] >> 0.5dt
+            );
+
+        # Dijksgracht
+        track(:station,
+                az[:dgrw + 3dl, :dgrw + 300m] << 0.5dt
+        );
+        track(:station :removed,
+                az[:dgrw - 1.1dl, :dgrw - 1dl] >> 1.5dt
+            --  az[:dgrw, :dgrw + 300m] >> 0.5dt
+        );
+            track(:station :removed,
+                    az[:dgrw + 3.7dl] >> 0.5dt
+                --  az[:dgrw + 4.7dl] << 0.5dt
+            );
+
+        # Lijn AE
+        track(:first :station :cat:dc15 :pax,
+                az[:asd.f, :dgrw + 300m] >> 1.5dt
+        );
+        track(:first :station :cat:dc15 :pax,
+                az[:asd.f, :dgrw + 300m] >> 2.5dt
+        );
+            track(:station :cat:dc15,
+                    az[:dgrw - 2dl] >> 2.5dt
+                --  az[:dgrw - 1dl] >> 1.5dt
+            );
+
+        marker(:statdt :cat:dc15 :left, az[:dgrw] << 3.5dt);
+        marker(:de.abzw :cat:dc15 :left, az[:dgrw] << 4.5dt);
+        station(:top :cat:dc15, az[:dgrw] << 4.5dt << 1.2sh,
+            "Dijksgracht Westzijde",
+            hbox(:center:top,
+                vbox(:right:top, "ACA: ", "AZ: "),
+                vbox(:right:top, "101,", "1,"),
+                vbox(:left:top, "08", "08")
+            )
+        );
+    }
+
+
+    with link = "point.nl.Dijksgracht-Kattenburg" {
+        track(:first:station :cat:dc15,
+                az[:dgrw + 300m, :dgok + 110m] << 4.5dt
+        );
+        track(:first:station :cat:dc15,
+                az[:dgrw + 300m, :dgok + 110m] << 3.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:dgrw + 300m, :dgok + 110m] << 2.5dt
+        );
+            track(:station :cat:dc15,
+                    az[:dgok - 140m] << 2.5dt
+                --  az[:dgok - 40m] << 1.5dt
+            );
+        track(:first:station :cat:dc15 :pax,
+                az[:dgrw + 300m, :dgok + 110m] << 1.5dt
+        );
+            track(:station :cat:dc15,
+                    az[:dgok] << 1.5dt
+                --  az[:dgok + 100m] << 2.5dt
+            );
+
+        marker(:de.uest :cat:dc15 :left, az[:dgok] << 4.5dt);
+        station(:right :cat:dc15, az[:dgok - 1sw] << 4.5dt << 1.2sh,
+            "Dijksgracht Kattenburg",
+            "AZ: 1,5"
+        );
+    }
+
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15,
+                az[:dgok + 110m, :dgok + 111m] << 4dt
+            ..  az[:dgro - 121m, :dgro - 120m] << 3dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                az[:dgok + 110m, :dgok + 111m] << 2dt
+            ..  az[:dgro - 121m, :dgro - 120m] << 1dt
+        );
+        track(:station,
+                az[:dgrw + 300m, :dgok + 111m] << 0.5dt
+            ..  az[:dgro - 121m, :dgro - 120m] >> 0.5dt
+        );
+                
+    }
+
+
+    with link = "point.nl.Dijksgracht-Oostzijde" {
+        track(:first:station :double :cat:dc15,
+                az[:dgro - 120m, :dgro + 50m] << 3dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                az[:dgro - 120m, :dgro + 50m] << 1dt
+        );
+
+        track(:station,
+                az[:dgro - 120m, :dgro - 50m] >> 0.5dt
+            --  az[:dgro + 20m, :dgro + 21m] << 0.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :left, az[:dgro] << 3.5dt);
+        station(:right :cat:dc15, az[:dgro + 0.2sw] << 3.5dt << 1.4sh,
+            "Dijksgracht Oostzijde",
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "ACA: "), "AZ: "),
+                vbox(:right:top, span(:removed, "102,"), "2,"),
+                vbox(:left:top, span(:removed, "56"), "56")
+            )
+        );
+    }
+
+
+    with link = "line.de.AZ" {
+        track(:first :double :cat:dc15,
+                az[:dgro + 50m, :dgro + 51m] << 3dt
+            ..  az[:asdma - 121m, :asdma - 120m] << 2dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                az[:dgro + 50m, :dgro + 51m] << 1dt
+            ..  az[:asdma - 121m, :asdma - 120m]
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Muiderpoort-aansl" {
+        # Spoorlijn AZ (MZ, MY)
+        track(:first:station :double :cat:dc15,
+                az[:asdma - 120m, :asdma + 50m] << 2dt
+        );
+
+        # Spoorlijn AZ (MD, MB)
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asdma - 120m, :asdma + 50m]
+        );
+
+        # Spoorlijn AE (MV, MU)
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asdma - 120m, :asdma + 50m] >> 2dt
+        );
+            track(:station :cat:dc15,
+                    az[:asdma - 120m] >> 1.5dt
+                --  az[:asdma] << 0.5dt
+            );
+            track(:station :cat:dc15,
+                    az[:asdma - 120m + 0.7dl] >> 2.5dt
+                --  az[:asdma + 0.7dl] >> 0.5dt
+            );
+
+        marker(:de.abzw :cat:dc15 :right, az[:asdma] >> 2.5dt);
+        station(:left :cat:dc15, az[:asdma + 0.5sw] >> 2.5dt >> 1.2sh,
+            "A. Muiderpoort aansl",
+            hbox(:center:top,
+                vbox(:right:top, "ACA: ", "AZ: "),
+                vbox(:right:top, "102,", "2,"),
+                vbox(:left:top, "76", "76")
+            )
+        );
+    }
+
+
+    with link = "line.de.AZ" {
+        track(:first :double :cat:dc15,
+                az[:asdma + 50m, :asdmw - 60m] << 2dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                az[:asdma + 50m, :asdmw - 60m]
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Muiderpoort-West" {
+        # Spoor MZ - WZ
+        track(:first:station :cat:dc15,
+                az[:asdmw - 60m, :asdmw - 40m] << 2.5dt
+            --  az[:asdmw + 170m, :asdmw + 191m] << 5.5dt
+        );
+            track(:station :cat:dc15, # 429B - 433B
+                az[:asdmw - 40m, :asdmw + 140m] << 2.5dt
+            );
+
+        # Spoor MY - WY
+        track(:first:station :cat:dc15,
+                az[:asdmw - 60m, :asdmw - 20m] << 1.5dt
+            --  az[:asdmw + 190m, :asdmw + 191m] << 4.5dt
+        );
+
+        # Spoor WX
+        track(:first:station :cat:dc15,
+                az[:asdmw + 120m, :asdmw + 191m] << 3.5dt
+        );
+
+        # Spoor ME - 204
+        track(:first:station :cat:dc15 :pax,
+                az[:asdmw - 60m, :asdmw] << 0.5dt
+            --  az[:asdmw + 140m, :asdm.a] << 2.5dt
+        );
+
+        # Spoor 203
+        track(:station :cat:dc15 :pax,
+                az[:asdmw + 70m, :asdm.a] << 1.5dt
+        );
+
+        # Spoor 202
+        track(:station :cat:dc15 :pax,
+                az[:asdmw + 69m, :asdm.a - 70m] >> 0.5dt
+            --  az[:asdm.a - 0.1dl, :asdm.a] << 0.5dt
+        );
+
+        # Spoor MC - 201
+        track(:first:station :cat:dc15 :pax,
+                az[:asdmw - 60m, :asdm.a] >> 0.5dt
+        );
+
+        marker(:statdt :cat:dc15 :left, az[:asdmw - 40m] << 3.5dt);
+        marker(:statdt :cat:dc15 :left, az[:asdmw - 40m] << 2.5dt);
+        marker(:de.abzw :cat:dc15 :left, az[:asdmw - 40m] << 4.5dt);
+        station(:right :cat:dc15, az[:asdmw - 40m + 0.4sw] << 4.5dt << 1.4sw,
+            "A. Muiderpoort West",
+            "AZ: 3,41"
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Muiderpoort" {
+        # Spoor WZ
+        track(:first:station :cat:dc15 :pax,
+                az[:asdmw + 191m, :asdm.f - 200m + 0.9dt] << 5.5dt
+            --  az[:asdm.f - 130m + 0.9dt, :asdm.f] << 4.5dt
+        );
+
+        # Spoor WY
+        track(:first:station :cat:dc15 :pax,
+                az[:asdmw + 191m, :asdm.f - 200m + 0.6dt] << 4.5dt
+            --  az[:asdm.f - 130m + 0.6dt, :asdm.f] << 3.5dt
+        );
+
+        # Spoor WX
+        track(:first:station :cat:dc15 :pax,
+                az[:asdmw + 191m, :asdm.f - 200m + 0.3dt] << 3.5dt
+            --  az[:asdm.f - 60m + 0.3dt, :asdm.f] << 1.5dt
+        );
+
+        # Spoor 204
+        track(:first:station :cat:dc15 :pax,
+                az[:asdm.a, :asdm.f - 200m] << 2.5dt
+            --  az[:asdm.f - 60m, :asdm.f] << 0.5dt
+        );
+
+        # Spoor 203
+        track(:station :cat:dc15 :pax,
+                az[:asdm.a, :asdm.f - 130m] << 1.5dt
+        );
+            track(:station :cat:dc15,
+                    az[:asdm.f - 200m - 0.3dt] << 1.5dt
+                --  az[:asdm.f - 130m - 0.3dt] << 0.5dt
+            );
+
+        # Spoor 202
+        track(:station :cat:dc15 :pax,
+                az[:asdm.a, :asdm.f - 130m - 0.3dt] << 0.5dt
+            --  az[:asdm.f - 60m - 0.3dt, :asdm.f - 59m - 0.3dt] >> 0.5dt
+        );
+
+        # Spoor 201
+        track(:first:station :cat:dc15 :pax,
+                az[:asdm.a, :asdm.f] >> 0.5dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :right, az[:asdm] >> 0.5dt);
+    }
+
+
+    with link = "point.nl.Watergraafsmeer-West" {
+        # Spoor WZ
+        track(:first:station :cat:dc15,
+                az[:asdm.f, :wgmw] << 4.5dt
+        );
+
+        # Spoor WY
+        track(:first:station :cat:dc15,
+                az[:asdm.f, :asdm.f + 30m] << 3.5dt
+            --  az[:asdm.f + 130m, :wgmw] << 5.5dt
+        );
+
+        # Spoor 210
+        track(:station :cat:dc15,
+                az[:asdm.f, :wgmw] << 2.5dt
+        );
+            track(:station :cat:dc15, # 7A - 7B
+                    az[:asdm.f + 50m] << 2.5dt
+                --  az[:asdm.f + 150m] << 4.5dt
+            );
+
+        # Spoor WX
+        track(:first:station :cat:dc15,
+                az[:asdm.f, :wgmw] << 1.5dt
+        );
+            track(:station :cat:dc15, # 9A - 9B
+                    az[:wgmw - 50m] << 1.5dt
+                --  az[:wgmw] << 2.5dt
+            );
+
+        # Spoorlijn AZ (GA, GK)
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asdm.f, :wgmw + 1sw]
+        );
+            track(:station :cat:dc15, # 463A - 463B
+                    az[:asdm.f + 30m] >> 0.5dt
+                --  az[:asdm.f + 80m] << 0.5dt
+            );
+            track(:station :cat:dc15, # 465 - 13
+                    az[:wgmw - 50m] << 0.5dt
+                --  az[:wgmw] << 1.5dt
+            );
+        
+        marker(:de.abzw :cat:dc15 :pax, az[:wgmw] >> 0.5dt);
+    }
+
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:wgmw + 1sw, :assp - 140m]);
+    }
+
+
+    with link = "point.nl.Amsterdam-Science-Park" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:assp - 140m, :assp + 120m]
+        );
+        marker(:de.hp :cat:dc15 :pax :right, az[:assp] >> 0.5dt);
+        station(:left :cat:dc15 :pax, az[:assp + 1sw] >> 0.5dt >> 0.6sh,
+            hbox(:right:top, "A. Science Park"), "5,17"
+        );
+    }
+
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:assp + 120m, :dmn.a]);
+    }
+
+
+    with link = "point.nl.Diemen" {
+        track(:station :removed,
+                az[:dmn.a, :dmn + 200m] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:dmn.a, :dmn + 50m] << 0.5dt
+            ..  az[:dmn + 200m, :dmn.f] << 1.5dt
+        );
+        track(:station :cat:dc15,
+                az[:dmn + 249m, :dmn + 250m] << 1.5dt
+            --  az[:dmn + 310m, :dmn.f] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax, az[:dmn.a, :dmn.f] >> 0.5dt);
+
+        marker(:de.bf :cat:dc15 :pax :right, az[:dmn] >> 0.5dt);
+        station(:left :cat:dc15 :pax, az[:dmn + 1sw] >> 0.5dt >> 0.6sh,
+            hbox(:right:top, "Diemen"), "6,71"
+        );
+    }
+
+
+    with link = "point.nl.Watergraafsmeer-Oost" {
+        track(:first:station :cat:dc15,
+                az[:wgmo.y, :wgmo - 120m] << 2.5dt
+            ..  az[:wgmo, :wgmo + 0.1dl] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:dmn.f, :wgmo + 120m] << 1.5dt
+            ..  az[:wgmo + 280m, :wgmo.f] << 0.5dt
+        );
+        track(:station :cat:dc15,
+                az[:dmn.f, :wgmo + 120m] << 0.5dt
+            --  az[:wgmo + 190m, :wgmo + 191m] >> 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:dmn.f, :wgmo.f] >> 0.5dt
+        );
+
+        marker(:statdt :cat:dc15 :left, az[:wgmo] << 1.5dt);
+        marker(:de.abzw :cat:dc15 :left, az[:wgmo] << 2.5dt);
+        station(:right :cat:dc15, az[:wgmo + 0.4sw] << 2.5dt << 1.2sw,
+            "Watergraafsmeer Oost",
+            "AZ: 7,64"
+        );
+    }
+
+
+    with link = "point.nl.Gaasperdammerweg" {
+        # Spoor 1
+        track(:first:station :cat:dc15 :pax,
+                az[:gpda.xa - 181m, :gpda.xa - 180m] << 0.5dt
+            ..  az[:gpda.xa - 0.1dl, :gpda.xa] << 1.5dt
+            ..  az[:gpda.xb, :gpda.xc] << 4dt
+            ..  az[:gpda.xd, :gpda.f - 370m] << 2.5dt
+            ..  az[:gpda.f - 170m, :gpda.f] << 1.5dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax,
+                az[:wgmo.f, :gpda.f] << 0.5dt
+        );
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax,
+                az[:wgmo.f, :gpda.f] >> 0.5dt
+        );
+
+        # Spoor 4
+        track(:first:station :cat:dc15 :pax,
+                az[:gpda.xa - 181m, :gpda.xa - 180m] >> 0.5dt
+            ..  az[:gpda.xa - 0.1dl, :gpda.xa] >> 1.5dt
+            ..  az[:gpda.xb, :gpda.xc] >> 4dt
+            ..  az[:gpda.xd, :gpda.f - 370m] >> 2.5dt
+            ..  az[:gpda.f - 170m, :gpda.f] >> 1.5dt
+        );
+
+        # Spoor 5
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                az[:gpda.xa - 0.1dl, :gpda.xa] >> 2.5dt
+            ..  az[:gpda.xb, :gpda.xc] << 2.25dt
+            ..  az[:gpda.xd, :gpda.f - 170m] << 1.5dt
+        );
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                az[:gpda.xa - 0.1dl, :gpda.xa] >> 2.5dt
+            ..  az[:gpda.xb, :gpda.xc] << 2.25dt
+        );
+            track(:first:station :cat:dc15 :pax,
+                    az[:gpda.f - 371m, :gpda.f - 370m] << 1.5dt
+                ..  az[:gpda.f - 170m, :gpda.f - 169m] << 0.5dt
+            );
+
+        # Spoor 6
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                az[:gpda.xa - 0.1dl, :gpda.xa] >> 3.5dt
+            ..  az[:gpda.xb, :gpda.xc] >> 2.25dt
+            ..  az[:gpda.xd, :gpda.f - 170m] >> 1.5dt
+        );
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                az[:gpda.xa - 0.1dl, :gpda.xa] >> 3.5dt
+            ..  az[:gpda.xb, :gpda.xc] >> 2.25dt
+        );
+            track(:first:station :cat:dc15 :pax,
+                    az[:gpda.f - 371m, :gpda.f - 370m] >> 1.5dt
+                ..  az[:gpda.f - 170m, :gpda.f - 169m] >> 0.5dt
+            );
+
+        marker(:de.abzw :cat:dc15 :right, az[:gpda] >> 2.5dt);
+        station(:left :cat:dc15, az[:gpda + 1.0sw] >> 2.5dt >> 0.6sw,
+            hbox(:right:top :bold, "Gaasperdammerweg"),
+            hbox(:center:top,
+                vbox(:right:top, "AZ: ", "WS: "),
+                vbox(:right:top, "9,", "145,"),
+                vbox(:left:top, "79", "80")
+            )
+        );
+    }
+
+
+    with link = "line.nl.AZ" {
+        track(:first :cat:dc15 :pax :tight:flip, az[:gpda.f, :wp.a] << 1.5dt);
+        track(:first :double :cat:dc15 :pax, az[:gpda.f, :wp.a]);
+        track(:first :cat:dc15 :pax :tight, az[:gpda.f, :wp.a] >> 1.5dt);
+    }
+
+
+    with link = "point.nl.Weesp" {
+        # Spoor 1
+        track(:station :cat:dc15 :pax,
+                az[:wp - 461m, :wp - 460m] >> 1.5dt
+            ..  az[:wp - 340m, :wp] >> 2.5dt
+            ..  az[:wp + 140m, :wp + 141m] >> 1.5dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax,
+                az[:wp.a, :wp.f] >> 1.5dt
+        );
+            track(:station :cat:dc15 :pax, # (9A - 9B)
+                    az[:wp.a + 40m] >> 1.5dt
+                --  az[:wp.a + 160m] >> 0.5dt
+            );
+            track(:station :cat:dc15 :pax, # (61A - 61B)
+                    az[:wp - 10m] >> 1.5dt
+                --  az[:wp + 100m] >> 0.5dt
+            );
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax,
+                az[:wp.a, :wp.f] >> 0.5dt
+        );
+            track(:station :cat:dc15, # (7A - 7B)
+                    az[:wp.a + 180m] >> 0.5dt
+                --  az[:wp.a + 280m] << 0.5dt
+            );
+            track(:station :cat:dc15, # (29A - 29B)
+                    az[:wp.a + 490m] >> 0.5dt
+                --  az[:wp.a + 640m] >> 1.5dt
+            );
+            track(:station :cat:dc15 :pax, # (65A - 65B)
+                    az[:wp + 120m] >> 0.5dt
+                --  az[:wp + 230m] >> 1.5dt
+            );
+
+        # Spoor 4
+        track(:first:station :cat:dc15 :pax,
+                az[:wp.a, :wp.f] << 0.5dt
+        );
+            track(:station :cat:dc15, # (21A - 21B)
+                    az[:wp.a + 300m] << 0.5dt
+                --  az[:wp.a + 430m] << 1.5dt
+            );
+            track(:station :cat:dc15, # (23A - 23B)
+                    az[:wp.a + 360m] << 0.5dt
+                --  az[:wp.a + 460m] >> 0.5dt
+            );
+            track(:station :cat:dc15, # (25A - 25B)
+                    az[:wp.a + 550m] << 0.5dt
+                --  az[:wp.a + 730m] << 1.5dt
+            );
+            track(:station :cat:dc15 :pax, # (71A - 71B)
+                    az[:wp.f - 165m] << 0.5dt
+                --  az[:wp.f - 65m] << 1.5dt
+            );
+
+        # Spoor 5
+        track(:first:station :cat:dc15 :pax,
+                az[:wp.a, :wp.f] << 1.5dt
+        );
+            track(:station :cat:dc15, # (5A - 5B)
+                    az[:wp.a + 90m] << 1.5dt
+                --  az[:wp.a + 220m] << 0.5dt
+            );
+            track(:station :cat:dc15 :pax, # (55A - 55B)
+                    az[:wp] << 1.5dt
+                --  az[:wp + 130m] << 0.5dt
+            );
+
+        # Spoor 6
+        track(:station :cat:dc15 :pax,
+                az[:wp - 501m, :wp - 500m] << 1.5dt
+            ..  az[:wp - 380m, :wp] << 2.5dt
+            ..  az[:wp + 140m, :wp + 141m] << 1.5dt
+        );
+
+        # Spoor 10
+        track(:station,
+                az[:wp.a, :wp.a + 200m] >> 3.5dt
+            --  az[:wp.a + 250m, :wp.a + 251m] >> 2.5dt
+        );
+
+        # Spoor 11 - 14
+        track(:station,
+                az[:wp.a, :wp - 340m] >> 2.5dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax, az[:wp - 0.5sw] >> 2.5dt);
+        station(:left :cat:dc15 :pax, az[:wp - 0.3sw] >> 2.5dt >> 1.0sh,
+            hbox(:right:top :bold, "Weesp"),
+            hbox(:center:top,
+                vbox(:right:top, "AZ: ", "WY: "),
+                vbox(:right:top, "13,", "−0,"),
+                vbox(:left:top, "19", "39")
+            )
+        );
+    }
+
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:wp.f, :kv.y]);
+        with layer = -1 casing(:first :double :cat:dc15 :pax, az[:wp.f, :kv.y]);
+    }
+
+
+    with link = "point.nl.Keverdijk-aansl" {
+        # Spoor GE
+        track(:first:station :cat:dc15 :pax, az[:kv.y, :kv + 160m] >> 0.5dt);
+            track(:station :cat:dc15,
+                    az[:kv - 115m] >> 0.5dt
+                --  az[:kv - 15m] << 0.5dt
+            );
+
+        # Spoor GP
+        track(:first:station :cat:dc15 :pax, az[:kv.y, :kv + 160m] << 0.5dt);
+            track(:station :cat:dc15,
+                    az[:kv + 10m] << 0.5dt
+                --  az[:kv + 110m] >> 0.5dt
+            );
+
+        # Spoor 891
+        track(:first:station :cat:dc15 :pax,
+                az[:kv.y, :kv.y + 30m] << 1.5dt
+            ..  az[:kv.y + 230m, :kv.y + 231m] << 0.5dt
+        );
+
+        # Spoor 893
+        track(:first:station :cat:dc15 :pax,
+                az[:kv.y, :kv - 300m] >> 1.5dt
+            ..  az[:kv - 175m, :kv - 174m] >> 0.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :right, az[:kv] >> 0.5dt);
+        station(:left :cat:dc15, az[:kv + 1sw] >> 0.5dt >> 0.7sw,
+            hbox(:right:top :bold, "Keverdijk"),
+            hbox(:center:top,
+                vbox(:right:top, "AZ: ", "MKO: ", "MKN: "),
+                vbox(:right:top, "16,", "199,", "149,"),
+                vbox(:left:top, "60", "82", "17")
+            )
+        );
+    }
+}
 

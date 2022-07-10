@@ -1,0 +1,39 @@
+# NL RZ.  Kijfhoek - Zevenaar
+#
+let rz = path("d4.nl.rz");
+
+with detail = [4, 5] {
+
+
+    with link = "line.nl.RZ" {
+        track(:first :double :cat:ac25, rz[:brvalo.f, :brdvno.a]);
+    }
+
+    
+    with link = "point.nl.Betuweroute-Duiven-overloop" {
+        track(:first:station :double :cat:ac25, rz[:brdvno.a, :brdvno.f]);
+        track(:station :cat:ac25,
+                rz[:brdvno - 130m] << 0.5dt
+            --  rz[:brdvno - 20m] >> 0.5dt
+        );
+        track(:station :cat:ac25,
+                rz[:brdvno + 20m] >> 0.5dt
+            --  rz[:brdvno + 130m] << 0.5dt
+        );
+        marker(:de.uest :cat:ac25 :left, rz[:brdvno] << 0.5dt);
+        station(:top :cat:ac25, rz[:brdvno] << 0.5dt << 1.2sw,
+            vbox(:center:bottom, "Betuweroute", "Duiven overloop"),
+            "101,80"
+        );
+    }
+
+
+    with link = "line.nl.RZ" {
+        track(:first :double :cat:ac25,
+                rz[:brdvno.f, :zv.aa]
+            ..  rz[:zv.a, :zvba.a] >> 4dt
+        );
+        line_badge(:cat:ac25, rz[:zv.aa], "RZ");
+    }
+}
+

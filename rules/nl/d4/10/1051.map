@@ -1,0 +1,58 @@
+# NL 1051.  Amsterdamse Metro: Spaklerweg - Isolatorweg
+#
+let si = path("d4.nl.1051");
+
+with detail = [4, 5] {
+    # point.nl.Amsterdam-Spaklerweg: nl.1054
+
+
+    with link = "line.nl.10551" {
+        with layer = 1 casing(:tram :double :rail:rc75 :pax,
+                si[:slw.yz - 0.1dl, :slw.yz] >> 1dt
+            ..  si[:oam.ym, :oam.ym + 0.1dl]
+        );
+        with layer = 2 track(:tram :double :rail:rc75 :pax,
+                si[:slw.yz - 0.1dl, :slw.yz] >> 1dt
+            ..  si[:oam.ym, :oam.ym + 0.1dl]
+        );
+    }
+
+
+    with link = "point.nl.Amsterdam-Overamstel" {
+        track(:tram:station :rail:rc75 :pax,
+                si[:oam.ym, :oam + 90m] >> 1.5dt
+            --  si[:oam + 170m, :oam + 171m] >> 0.5dt
+        );
+        track(:tram:station :rail:rc75 :pax,
+                si[:oam.ym, :oam + 190m] >> 0.5dt
+        );
+        track(:tram:station :rail:rc75 :pax,
+                si[:oam.ym, :oam + 190m] << 0.5dt
+        );
+        track(:tram:station :rail:rc75 :pax,
+                si[:oam.ym, :oam - 190m] << 1.5dt
+            --  si[:oam - 90m, :oam - 89m] << 0.5dt
+        );
+
+        platform(:tram :rail:rc75 :pax,
+                si[:oam - 50m, :oam + 70m] >> 1.5dt
+            --  si[:oam + 70m, :oam - 50m] << 0.5dt
+        );
+        platform(:tram :rail:rc75 :pax,
+                si[:oam - 50m, :oam + 70m] << 0.5dt
+            --  si[:oam + 70m, :oam - 50m] >> 1.2dt
+        );
+        slabel(:left :tram :rail:rc75 :pax, si[:oam] >> 1.5dt,
+            vbox(:right:bottom, "Over-", "amstel ")
+        );
+    }
+
+
+    with link = "line.nl.1051" {
+        track(:tram :double :rail:rc75 :pax,
+                si[:oam + 190m, :oam + 191m]
+            ..  si[:rai.yo, :rai] >> 3dt
+        );
+    }
+}
+
