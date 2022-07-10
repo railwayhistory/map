@@ -1,0 +1,76 @@
+# NL LW.  Lelystad - Hattemerbroek
+with detail = 3 {
+    let lw = path("d4.nl.lw");
+
+    # point.nl.Lelystad                           nl.WY
+    
+    # point.nl.Lelystad-Opstelterrein-Aansl       nl.WY
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax,
+                lw[:llsoa.x + 1ssw, :dron - 1ssw]
+        );
+
+        guide(:linenum :cat:dc15,
+                lw[:llsoa.f] >> 1dt
+            --  lw[:llsoa.f] >> 3dt
+        );
+        label(:linenum :cat:dc15, lw[:llsoa.f] >> 3.0dt,
+            hbox(:left:middle, " LW")
+        );
+        line_badge(:cat:dc15 :pax, lw[:dron - 6km], "LW");
+    }
+
+    with link = "point.nl.Swifterbant" {
+        marker(:de.abzw :cat:dc15 :left, lw[:stb] << 0.5dt);
+    }
+
+    with link = "point.nl.Dronten" {
+        track(:first:station :double :cat:dc15 :pax,
+                lw[:dron - 1ssw, :dron + 1ssw]
+        );
+        marker(:de.bf :cat:dc15 :pax :left, lw[:dron] << 0.5dt);
+        slabel(:right :cat:dc15 :pax, lw[:dron - 1.5ssw] << 0.5dt << 1.2ssw,
+            "Dronten"
+        );
+    }
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax, lw[:dron + 1ssw, :drmt.a]);
+        marker(:tunnel.r :cat:dc15 :pax :top, lw[:drmt.a] >> 0.5dt);
+        marker(:tunnel.dt :cat:dc15 :pax, lw[:drmt.a] << 0.5dt);
+        marker(:tunnel.l :cat:dc15 :pax :top, lw[:drmt.a] << 0.5dt);
+
+        marker(:tunnel.r :cat:dc15 :pax :bottom, lw[:drmt.f] << 0.5dt);
+        marker(:tunnel.dt :cat:dc15 :pax, lw[:drmt.f] << 0.5dt);
+        marker(:tunnel.l :cat:dc15 :pax :bottom, lw[:drmt.f] >> 0.5dt);
+        track(:first :double :cat:dc15 :pax, lw[:drmt.f, :kpnz - 1ssw]);
+    }
+
+    with link = "point.nl.Kampen-Zuid-Overloopw-West" {
+        marker(:de.uest :cat:dc15 :left, lw[:kpnzow] << 0.5dt);
+    }
+
+    with link = "point.nl.Kampen-Zuid" {
+        track(:first:station :double :cat:dc15 :pax,
+                lw[:kpnz - 1ssw, :kpnz + 1ssw]
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, lw[:kpnz] << 0.5dt);
+        slabel(:right :cat:dc15 :pax, lw[:kpnz - 1.5ssw] << 0.5dt << 0.8ssw,
+            "Kampen Zuid"
+        );
+    }
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax, lw[:kpnz + 1ssw, :htba - 1ssw]);
+        line_badge(:cat:dc15 :pax, lw[:kpnzoo + 4km], "LW");
+    }
+
+    with link = "point.nl.Kampen-Zuid-Overloopw-Oost" {
+        marker(:de.uest :cat:dc15 :left, lw[:kpnzoo] << 0.5dt);
+    }
+
+    # point.nl.Hattemerbroek-Aansl:  nl.UK
+}
+

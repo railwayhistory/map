@@ -1,0 +1,219 @@
+# NL WY.  Weesp - Lelystad opstel
+with detail = 3 {
+    let wy = path("d4.nl.wy");
+
+    # point.nl.Weesp: nl.AZ
+
+    with link = "line.nl.WY" {
+        let az = path("d4.nl.az");
+
+        # Spoor FB
+        with layer = -2 track(:first :cat:dc15 :pax :tight:flip,
+                wy[:mbga.y + 0.1dl, :mbga.y] << 0.5dt
+            ..  az[:wp.ya + 0.1dl, :wp.ya] << 1.8dt
+            ..  az[:wp.f + 0.1dl, :wp.f] << 1.5dt
+        );
+        with layer = -3 casing(:first :cat:dc15 :pax :tight:flip,
+                wy[:mbga.y + 0.1dl, :mbga.y] << 0.5dt
+            ..  az[:wp.ya + 0.1dl, :wp.ya] << 1.8dt
+        );
+
+        # Spoor FN
+        track(:first :cat:dc15 :pax :tight,
+                wy[:mbga.y + 0.1dl, :mbga.y] >> 0.5dt
+            ..  az[:wp.ya, :wp.f] >> 1.5dt
+        );
+        with layer = -1 casing(:first :cat:dc15 :pax :tight,
+                wy[:mbga.y + 0.1dl, :mbga.y] >> 0.5dt
+            ..  az[:wp.ya, :wp.f] >> 1.5dt
+        );
+    }
+
+    with link = "point.nl.Muiderberg" {
+        # Spoor FB
+        track(:first:station :cat:dc15 :pax, wy[:mbga.y, :mbga.f] >> 0.5dt);
+
+        # Spoor FN
+        track(:first:station :cat:dc15 :pax, wy[:mbga.y, :mbga.f] << 0.5dt);
+
+        # Spoor 893
+        track(:first:station :cat:dc15 :pax,
+                wy[:mbga.y, :mbga] << 1.5dt
+            --  wy[:mbga + 1dl, :mbga + 1.1dl] << 0.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :left, wy[:mbga] << 1.5dt);
+        slabel(:right :cat:dc15, wy[:mbga - 0.2sw] >> 3.2dt,
+            span(:bold, "Muiderberg")
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:mbga.f, :ampo - 1ssw]);
+        line_badge(:cat:dc15 :pax, wy[:mbga.f + 3.0km], "WY");
+    }
+
+    with link = "point.nl.Almere-Poort" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:ampo - 1ssw, :ampo + 1ssw]
+        );
+        marker(:de.hp :cat:dc15 :pax, wy[:ampo] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, wy[:ampo - 0.6ssw] >> 0.5dt >> 1.6ssw,
+            "Almere Poort"
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:ampo + 1ssw, :almm - 1ssw]);
+    }
+
+    with link = "point.nl.Almere-Muziekwijk-overloopw" {
+        marker(:de.uest :cat:dc15 :left, wy[:ammo] << 0.5dt);
+    }
+
+    with link = "point.nl.Almere-Muziekwijk" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:almm - 1ssw, :almm + 1ssw]
+        );
+        marker(:de.hp :cat:dc15 :pax :right, wy[:almm] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, wy[:almm + 0.2ssw] >> 0.5dt >> 1.0ssw,
+            hbox(:left:top, "Almere Muziekwijk")
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:almm + 1ssw, :alm - 1ssw]);
+    }
+
+    with link = "point.nl.Almere-Centrum" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:alm - 1ssw, :alm + 1ssw]
+        );
+        marker(:de.bf :cat:dc15 :pax :right, wy[:alm] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, wy[:alm + 1.0ssw] >> 1.3dt,
+            hbox(:left:top, "Almere Centrum")
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:alm + 1ssw, :almp - 1ssw]);
+    }
+
+    with link = "point.nl.Almere-Parkwijk" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:almp - 1ssw, :almp + 1ssw]
+        );
+        marker(:de.hp :cat:dc15 :pax :left, wy[:almp] << 0.5dt);
+        slabel(:left :cat:dc15 :pax, wy[:almp + 1ssw] << 0.5dt << 1.4ssw,
+            "Almere Parkwijk"
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:almp + 1ssw, :almb - 1ssw]);
+    }
+
+    with link = "point.nl.Almere-Buiten" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:almb - 1ssw, :almb + 1ssw]
+        );
+        marker(:de.hp :cat:dc15 :pax :right, wy[:almb] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, wy[:almb - 0.3ssw] >> 0.5dt >> 2.0ssw,
+            "Almere Buiten"
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:almb + 1ssw, :almo - 1ssw]);
+    }
+
+    with link = "point.nl.Almere-Oostvaarders" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:almo - 1ssw, :almo + 1ssw]
+        );
+        marker(:de.bf :cat:dc15 :pax :right, wy[:almo] >> 0.5dt);
+        slabel(:left :cat:dc15 :pax, wy[:almo - 0.5ssw] << 1.3dt,
+            "Almere Oostvaarders"
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:almo + 1ssw, :llsz - 1ssw]);
+        line_badge(:cat:dc15 :pax, wy[:almo.f + 5.5km], "WY");
+    }
+
+    with link = "point.nl.Lelystad-Zuid" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:llsz - 1ssw, :llsz + 1ssw]
+        );
+        marker(:de.hp :cat:dc15 :right, wy[:llsz] >> 0.5dt);
+        slabel(:right :cat:dc15, wy[:llsz - 0.2ssw] >> 0.5dt >> 2.0ssw,
+            "Lelystad Zuid"
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:llsz + 1ssw, :lls - 1ssw]);
+    }
+
+    with link = "point.nl.Lelystad-Centrum" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:lls - 1ssw, :lls + 1ssw]
+        );
+        marker(:de.bf :cat:dc15 :pax :right, wy[:lls] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, wy[:lls - 0.6ssw] >> 0.5dt >> 1.6ssw,
+            "Lelystad Centrum"
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15 :pax, wy[:lls + 1ssw, :llsoa - 1ssw]);
+    }
+
+    with link = "point.nl.Lelystad-Opstelterrein-Aansl" {
+        track(:first:station :double :cat:dc15 :pax,
+                wy[:llsoa - 1ssw, :llsoa.x + 1ssw]
+        );
+        track(:first:station :cat:dc15,
+                wy[:llsoa + 0.49ssw, :llsoa + 0.5ssw] << 0.5dt
+            --  wy[:llsoa + 0.5ssw + 2.5dl, :llsoa.x + 1ssw] << 3.0dt
+        );
+        track(:first:station :cat:dc15,
+                wy[:llsoa + 0.5ssw + 0.6dl, :llsoa + 0.5ssw + 0.7dl] >> 0.5dt
+            --  wy[:llsoa + 0.5ssw + 3.2dl, :llsoa.x + 1ssw] << 2dt
+        );
+        marker(:de.abzw :cat:dc15 :right, wy[:llsoa] >> 0.5dt);
+        slabel(:right :cat:dc15, wy[:llsoa - 0.6ssw] >> 0.5dt >> 1.6ssw,
+            span(:bold, "Lelystad Opstelterrein Aansl")
+        );
+    }
+
+    with link = "line.nl.WY" {
+        track(:first :double :cat:dc15,
+                wy[:llsoa.x + 1ssw, :llso - 1ssw] << 2.5dt
+        );
+        guide(:linenum :cat:dc15,
+                wy[:llsoa.f] << 3.7dt
+            --  wy[:llsoa.f] << 6.0dt
+        );
+        label(:linenum :cat:dc15, wy[:llsoa.f] << 6.0dt,
+            hbox(:right:middle, "WY ")
+        );
+    }
+
+    with link = "point.nl.Lelystad-overloopw" {
+        marker(:de.uest :cat:dc15 :left, wy[:llsow] << 3.0dt);
+    }
+
+    with link = "point.nl.Lelystad-opstel" {
+        track(:first:station :double :cat:dc15,
+                wy[:llso - 1ssw, :llso + 1ssw] << 2.5dt
+        );
+        marker(:de.bbf :cat:dc15 :left, wy[:llso] << 3dt);
+        slabel(:top :cat:dc15, wy[:llso] << 3dt << 1.5ssw,
+            span(:bold, "Lelystad opstel")
+        );
+    }
+}
+    
+

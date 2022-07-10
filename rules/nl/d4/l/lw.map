@@ -1,0 +1,204 @@
+# NL LW.  Lelystad - Hattemerbroek
+with detail = 4 {
+    let lw = path("d4.nl.lw");
+
+    # point.nl.Lelystad                           nl.WY
+    
+    # point.nl.Lelystad-Opstelterrein-Aansl       nl.WY
+
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax, lw[:llsoa.f, :stb.a]);
+
+        guide(:linenum :cat:dc15,
+                lw[:llsoa.f + 0.3km] >> 1.5dt
+            --  lw[:llsoa.f + 0.3km] >> 4.0dt
+        );
+        label(:linenum :cat:dc15, lw[:llsoa.f + 0.3km] >> 4.0dt,
+            hbox(:left:middle, " LW")
+        );
+    }
+
+
+    with link = "point.nl.Swifterbant" {
+        # Spoor 1
+        track(:station :cat:dc15,
+                lw[:stb.a + 39m, :stb.a + 40m] << 0.5dt
+            ..  lw[:stb.a + 220m, :stb.f - 230m] << 1.5dt
+            ..  lw[:stb.f - 50m, :stb.f - 49m] << 0.5dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax, lw[:stb.a, :stb.f] << 0.5dt);
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax, lw[:stb.a, :stb.f] >> 0.5dt);
+
+        # Spoor 4
+        track(:station :cat:dc15,
+                lw[:stb.a + 39m, :stb.a + 40m] >> 0.5dt
+            ..  lw[:stb.a + 220m, :stb.f - 230m] >> 1.5dt
+            ..  lw[:stb.f - 50m, :stb.f - 49m] >> 0.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :left, lw[:stb] << 1.5dt);
+        station(:top :cat:dc15, lw[:stb] << 1.5dt << 1.2sw,
+            "Swifterbant", "LW: 9,15"
+        );
+    }
+
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax, lw[:stb.f, :dron.a]);
+        line_badge(:cat:dc15 :pax, lw[:stb.f + 5km], "LW");
+    }
+
+
+    with link = "point.nl.Dronten" {
+        # Spoor 1
+        track(:station :cat:dc15 :pax,
+                lw[:dron - 211m, :dron - 210m] << 0.5dt
+            --  lw[:dron - 110m, :dron + 240m] << 1.5dt
+            --  lw[:dron + 340m, :dron + 341m] << 0.5dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax, lw[:dron.a , :dron.f] << 0.5dt);
+            track(:station :cat:dc15,
+                    lw[:dron.a + 300m] << 0.5dt
+                --  lw[:dron.a + 400m] >> 0.5dt
+            );
+            track(:station :cat:dc15,
+                    lw[:dron.f - 280m] << 0.5dt
+                --  lw[:dron.f - 180m] >> 0.5dt
+            );
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax, lw[:dron.a , :dron.f] >> 0.5dt);
+            track(:station :cat:dc15,
+                    lw[:dron.a + 170m] >> 0.5dt
+                --  lw[:dron.a + 270m] << 0.5dt
+            );
+            track(:station :cat:dc15,
+                    lw[:dron.f - 420m] >> 0.5dt
+                --  lw[:dron.f - 320m] << 0.5dt
+            );
+
+        # Spoor 4
+        track(:station :cat:dc15 :pax,
+                lw[:dron - 211m, :dron - 210m] >> 0.5dt
+            --  lw[:dron - 110m, :dron + 240m] >> 1.5dt
+            --  lw[:dron + 340m, :dron + 341m] >> 0.5dt
+        );
+
+        platform(:cat:dc15 :pax,
+                lw[:dron - 100m, :dron + 230m] << 1.5dt
+            --  lw[:dron + 230m, :dron - 100m] >> 2.2dt
+        );
+        platform(:cat:dc15 :pax,
+                lw[:dron - 100m, :dron + 230m] >> 1.5dt
+            --  lw[:dron + 230m, :dron - 100m] << 2.2dt
+        );
+
+        marker(:de.bf :cat:dc15 :pax :left, lw[:dron] << 1.5dt);
+        station(:top :cat:dc15 :pax, lw[:dron] << 1.5dt << 1.2sw,
+            "Dronten", "20,60"
+        );
+    }
+
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax, lw[:dron.f, :drmt.a]);
+        marker(:tunnel.r :cat:dc15 :pax :top, lw[:drmt.a] >> 0.5dt);
+        marker(:tunnel.dt :cat:dc15 :pax, lw[:drmt.a] << 0.5dt);
+        marker(:tunnel.l :cat:dc15 :pax :top, lw[:drmt.a] << 0.5dt);
+
+        marker(:tunnel.r :cat:dc15 :pax :bottom, lw[:drmt.f] << 0.5dt);
+        marker(:tunnel.dt :cat:dc15 :pax, lw[:drmt.f] << 0.5dt);
+        marker(:tunnel.l :cat:dc15 :pax :bottom, lw[:drmt.f] >> 0.5dt);
+        track(:first :double :cat:dc15 :pax, lw[:drmt.f, :kpnzow - 170m]);
+    }
+
+
+    with link = "point.nl.Kampen-Zuid-Overloopw-West" {
+        track(:first:station :double :cat:dc15 :pax,
+                lw[:kpnzow - 170m, :kpnzow + 170m]
+        );
+            track(:station :cat:dc15,
+                    lw[:kpnzow - 120m] >> 0.5dt
+                --  lw[:kpnzow - 20m] << 0.5dt
+            );
+            track(:station :cat:dc15,
+                    lw[:kpnzow + 20m] << 0.5dt
+                --  lw[:kpnzow + 120m] >> 0.5dt
+            );
+
+        marker(:de.uest :cat:dc15 :left, lw[:kpnzow] << 0.5dt);
+        station(:top :cat:dc15, lw[:kpnzow + 0.2sw] << 0.5dt << 1.4sw,
+            "Kampen Zuid Overloopw. West", "31,72"
+        );
+    }
+
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax,
+                lw[:kpnzow + 170m, :kpnz - 250m]
+        );
+    }
+
+
+    with link = "point.nl.Kampen-Zuid" {
+        track(:first:station :double :cat:dc15 :pax,
+                lw[:kpnz - 250m, :kpnz + 190m]
+        );
+
+        platform(:cat:dc15 :pax,
+                lw[:kpnz - 200m, :kpnz + 130m] << 0.5dt
+            --  lw[:kpnz + 130m, :kpnz - 200m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                lw[:kpnz - 200m, :kpnz + 130m] >> 0.5dt
+            --  lw[:kpnz + 130m, :kpnz - 200m] << 1.2dt
+        );
+
+        marker(:de.hp :cat:dc15 :pax :left, lw[:kpnz] << 0.5dt);
+        station(:top :cat:dc15 :pax, lw[:kpnz] << 0.5dt << 1.4sw,
+            "Kampen Zuid", "34,15"
+        );
+    }
+
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax,
+                lw[:kpnz + 190m, :kpnzoo - 180m]
+        );
+    }
+
+
+    with link = "point.nl.Kampen-Zuid-Overloopw-Oost" {
+        track(:first:station :double :cat:dc15 :pax,
+                lw[:kpnzoo - 180m, :kpnzoo + 180m]
+        );
+            track(:station :cat:dc15,
+                    lw[:kpnzoo - 130m] >> 0.5dt
+                --  lw[:kpnzoo - 30m] << 0.5dt
+            );
+            track(:station :cat:dc15,
+                    lw[:kpnzoo + 30m] << 0.5dt
+                --  lw[:kpnzoo + 130m] >> 0.5dt
+            );
+        marker(:de.uest :cat:dc15 :left, lw[:kpnzoo] << 0.5dt);
+        station(:right :cat:dc15, lw[:kpnzoo + 0.5sw] << 0.5dt << 1.4sw,
+            "Kampen Zuid Overloopw. Oost", "35,41"
+        );
+    }
+
+
+    with link = "line.nl.LW" {
+        track(:first :double :cat:dc15 :pax,
+                lw[:kpnzoo + 180m, :htba - 500m]
+        );
+        line_badge(:cat:dc15 :pax, lw[:htba - 5.5km], "LW");
+    }
+}
+
