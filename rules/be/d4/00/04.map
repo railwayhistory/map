@@ -1,31 +1,31 @@
 # BE 4.  (Antwerpen) Y.Luchtbal - Meer-grens
 #
-let lm = path("d3.be.4");
+let lm = path("d4.be.4");
 
 with detail = [4, 5] {
     # point.be.Y-Luchtbal  be.12
 
 
     with link = "line.be.4" {
-        track(:first :double :cat:dc3 :pax,
-                path("d3.be.12")[:ndo - 1sw, :ndo - 0.9sw] >> 1dt
-            ..  lm[:lus - 0.1dl, :lus]
+        track(:first :double :cat:dc30 :pax,
+                lm[:lus, :lus - 0.1dl]
+            ..  path("d4.be.12")[:ndo - 0.9sw, :ndo - 1sw] << 1dt
         );
     }
 
 
     with link = "point.be.Luchtbal-Spanningssluis" {
-        marker(:refdt :left, lm[:lus] << 0.5dt);
-        marker(:refdt :right, lm[:lus] << 0.5dt);
-        marker(:refdt :right, lm[:lus] >> 0.5dt);
-        guide(:open,
+        marker(:refdt :cat:dc30 :left, lm[:lus] << 0.5dt);
+        marker(:refdt :cat:dc30 :right, lm[:lus] << 0.5dt);
+        marker(:refdt :cat:dc30 :right, lm[:lus] >> 0.5dt);
+        guide(:cat:dc30,
                 lm[:lus] >> 1.5dt
             --  lm[:lus] >> 4.5dt
         );
-        label(lm[:lus] >> 4.5dt,
+        label(:cat:dc30, lm[:lus] >> 4.5dt,
             hbox(:left:middle,
                 vbox(:center:middle :small,
-                    "  25 kV 50 Hz ",
+                    span(:cat:ac25, "  25 kV 50 Hz "),
                     hbar(0.3),
                     "3000 V="
                 )
@@ -36,7 +36,7 @@ with detail = [4, 5] {
 
     with link = "line.be.4" {
         track(:first :double :cat:ac25 :pax, lm[:lus, :nke.a]);
-        with layer = 1 line_badge(:open, lm[:lus + 1.5km], "4");
+        line_badge(:cat:ac25 :pax, lm[:lus + 1.5km], "4");
     }
 
 
@@ -80,16 +80,25 @@ with detail = [4, 5] {
             --  lm[:nke + 250m, :nke + 400m] << 2.5dt
         );
 
-        marker(:de.bf :left, lm[:nke + 130m - 0.8sw] << 1.5dt);
-        station(:left, lm[:nke + 130m - 1.3sw] << 1.5dt << 1.3sw,
-            "Noorderkempen", "67,7"
+        platform(:cat:ac25 :pax,
+                lm[:nke - 300m, :nke + 50m] << 1.5dt
+            --  lm[:nke + 50m, :nke - 300m] >> 2.2dt
+        );
+        platform(:cat:ac25 :pax,
+                lm[:nke - 300m, :nke + 50m] >> 1.5dt
+            --  lm[:nke + 50m, :nke - 300m] << 2.2dt
+        );
+
+        marker(:de.bf :cat:ac25 :pax :left, lm[:nke + 130m - 0.8sw] << 1.5dt);
+        station(:left :cat:ac25 :pax, lm[:nke + 130m - 1.3sw] << 1.5dt << 1.3sw,
+            "Noorderkempen", "67,81"
         );
     }
 
 
     with link = "line.be.4" {
         track(:first :double :cat:ac25 :pax, lm[:nke.f, :merg - 0.5sw]);
-        with layer = 1 line_badge(:open, lm[:merg - 5km], "4");
+        line_badge(:cat:ac25 :pax, lm[:merg - 5km], "4");
     }
 }
 

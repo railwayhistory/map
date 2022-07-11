@@ -1,6 +1,6 @@
 # BE 29.  Y.Noord driehoek Aarschot - Weelde-grens
 #
-let aw = path("d3.be.29");
+let aw = path("d4.be.29");
 
 with detail = [4, 5] {
     # point.be.Y-Noord-Driehoek-Aarschot  be.16
@@ -109,7 +109,7 @@ with detail = [4, 5] {
         with layer = 1 line_badge(:removed, aw[:ywo - 1.0km], "29");
 
         with layer = -5 track(:first :gone,
-                path("d3.be.29.her")[:xve, :her.x - 600m]
+                path("d4.be.29.her")[:xve, :her.x - 600m]
             ..  aw[:her.x - 0.1dl, :her.x] >> 0.5dt
         );
     }
@@ -127,71 +127,90 @@ with detail = [4, 5] {
 
 
     with link = "line.be.29" {
-        track(:first :cat:dc3 :pax, aw[:ykr + 1sw, :tie.a]);
-        with layer = 1 line_badge(:open, aw[:ykr + 1.8km], "29");
+        track(:first :cat:dc30 :pax, aw[:ykr + 1sw, :tie.a]);
+        line_badge(:cat:dc30 :pax, aw[:ykr + 1.8km], "29");
     }
 
 
     with link = "point.be.Lichtaart" {
         with layer = -1 marker(:de.hp :removed :right, aw[:lic]);
         station(:right :removed, aw[:lic - 0.3sw] >> 1.8sw,
-            "Lichtaart", "??"
+            "Lichtaart", "32,10"
         );
     }
 
 
     with link = "point.be.Tielen" {
         # Spoor 1
-        track(:first:station :cat:dc3 :pax, aw[:tie.a, :tie.f]);
+        track(:first:station :cat:dc30 :pax, aw[:tie.a, :tie.f]);
 
         # Spoor 2
-        track(:station :cat:dc3 :pax,
+        track(:station :cat:dc30 :pax,
                 aw[:tie - 251m, :tie - 250m]
             --  aw[:tie - 150m, :tie + 420m] << 1dt
             --  aw[:tie + 520m, :tie + 521m]
         );
 
-        marker(:de.bf :right, aw[:tie]);
-        station(:right, aw[:tie - 0.2sw] >> 1.8sw,
+        platform(:cat:dc30 :pax,
+                aw[:tie - 50m, :tie + 295m]
+            --  aw[:tie + 295m, :tie - 50m] << 0.7dt
+        );
+        platform(:cat:dc30 :pax,
+                aw[:tie + 50m, :tie + 295m] << 1dt
+            --  aw[:tie + 295m, :tie + 50m] >> 1.7dt
+        );
+
+        marker(:de.bf :cat:dc30 :pax :right, aw[:tie]);
+        station(:right :cat:dc30 :pax, aw[:tie - 0.2sw] >> 1.8sw,
             "Tielen", "34,36"
         );
     }
 
 
     with link = "line.be.29" {
-        track(:first :cat:dc3 :pax, aw[:tie.f, :tur.a]);
-        with layer = 1 line_badge(:open, aw[:tur.a - 3km], "29");
+        track(:first :cat:dc30 :pax :flip, aw[:tur.a - 3km, :tie.f]);
+        line_badge(:cat:dc30 :pax, aw[:tur.a - 3km] << 0.3dt, "29");
+        track(:first :cat:dc30 :pax, aw[:tur.a - 3km, :tur.a]);
     }
 
 
     with link = "point.be.Turnhout" {
-        track(:first:station :cat:dc3 :pax, aw[:tur.a, :tur + 350m - 1dl]);
+        track(:first:station :cat:dc30 :pax, aw[:tur.a, :tur + 350m - 1dl]);
         with layer = -4 track(:first:station :removed,
                 aw[:tur + 350m - 1dl, :tur + 800m]
         );
 
-        track(:station :cat:dc3 :pax,
+        track(:station :cat:dc30 :pax,
                 aw[:tur - 261m, :tur - 260m]
             --  aw[:tur - 200m, :tur + 350m - 2dl] << 1dt
             --  aw[:tur + 350m - 1dl, :tur + 350m - 0.9dl]
         );
 
-        track(:station :cat:dc3,
+        track(:station :cat:dc30,
                 aw[:tur + 350m - 2dl, :tur + 750m - 2dl] >> 1dt
             --  aw[:tur + 750m, :tur + 751m] >> 3dt 
         );
 
-        track(:station :cat:dc3,
+        track(:station :cat:dc30,
                 aw[:tur + 350m + 1dl, :tur + 750m - 1dl] >> 2dt
         );
 
-        track(:station :cat:dc3,
+        track(:station :cat:dc30,
                 aw[:tur + 350m - 1.1dl, :tur + 350m - 1dl]
             --  aw[:tur + 350m + 2dl, :tur + 900m] >> 3dt
         );
 
-        marker(:de.bf :right, aw[:tur]);
-        station(:right, aw[:tur - 0.4sw] >> 1.6sw,
+        platform(:cat:dc30 :pax,
+                aw[:tur - 155m, :tur + 170m]
+            --  aw[:tur + 170m, :tur - 155m] << 0.7dt
+        );
+        platform(:cat:dc30 :pax,
+                aw[:tur - 155m, :tur + 170m] << 1.0dt
+            --  aw[:tur + 170m, :tur - 155m] >> 1.7dt
+        );
+
+        marker(:de.bf :cat:dc30 :pax :right, aw[:tur]);
+        station(:right :cat:dc30 :pax, aw[:tur - 0.4sw] >> 1.6sw,
             "Turnhout", "44,60"
         );
     }
