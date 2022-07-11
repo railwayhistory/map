@@ -40,5 +40,53 @@ with detail = [4, 5] {
             "Utr. Lunetten", "UB: 3,60"
         );
     }
+
+
+    with link = "line.nl.UB" {
+        track(:first :cat:dc15 :pax :tight,
+                ub[:utl + 0.6sw, :htn.a] >> 1.5dt
+        );
+        track(:first :cat:dc15 :pax :tight,
+                ub[:utl + 0.6sw, :htn.a] >> 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ub[:utl + 0.6sw, :htn.a] << 0.5dt
+        );
+        track(:first :cat:dc15 :pax :tight:flip,
+                ub[:utl + 0.6sw, :htn.a] << 1.5dt
+        );
+    }
+
+
+    with link = "point.nl.Houten" {
+        track(:first:station :double :cat:dc15 :pax,
+                ub[:htn.a, :htn.f] << 1dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                ub[:htn.a, :htn.f] >> 1dt
+        );
+            track(:station :cat:dc15,
+                    ub[:htn.a + 50m] << 1.5dt
+                --  ub[:htn.a + 200m] << 0.5dt
+            );
+            track(:station :cat:dc15,
+                    ub[:htn.a + 50m] >> 1.5dt
+                --  ub[:htn.a + 200m] >> 0.5dt
+            );
+            track(:station :cat:dc15,
+                    ub[:htn.f - 260m] << 0.5dt
+                --  ub[:htn.f - 80m] >> 0.5dt
+            );
+
+        platform(:cat:dc15 :pax,
+                ub[:htn - 80m, :htn + 190m] << 0.5dt
+            --  ub[:htn + 190m, :htn - 80m] << 0.5dt
+        );
+
+        marker(:left :de.bf :cat:dc15 :pax, ub[:htn] << 1.5dt);
+        station(:right :cat:dc15 :pax, ub[:htn + 0.45sw] << 1.5dt << 1.3sw,
+            "Houten", "9,46"
+        );
+    }
 }
 

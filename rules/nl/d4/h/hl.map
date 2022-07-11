@@ -1,0 +1,120 @@
+# NL HL.  Hilversum - Lunetten
+#
+let hl = path("d4.nl.hl");
+
+with detail = [4, 5] {
+
+
+    with link = "line.nl.HL" {
+        track(:first :double :cat:dc15 :pax,
+                hl[:hor + 330m, :bln - 200m]
+        );
+        line_badge(:cat:dc15 :pax, hl[:bln - 2km], "HL");
+    }
+    
+
+    with link = "point.nl.Blauwkappel-Noord" {
+        track(:first:station :double :cat:dc15 :pax,
+                hl[:bln - 200m, :bln]
+        );
+        track(:first:station :double :removed,
+                hl[:bln, :bkp - 100m]
+        );
+        marker(:right :de.uest :cat:dc15, hl[:bln] >> 0.5dt);
+    }
+
+
+    with link = "point.nl.Blauwkappel" {
+        track(:first:station :double :removed,
+                hl[:bkp - 100m, :blz - 150m]
+        );
+    }
+
+
+    with link = "point.nl.Blauwkappel-Zuid" {
+        track(:first:station :removed,
+                hl[:blz - 150m, :blz + 50m] >> 0.5dt
+        );
+
+        track(:first:station :removed,
+                hl[:blz - 150m, :blz.f] << 0.5dt
+        );
+
+        track(:first:station :cat:dc15 :pax,
+                hl[:blz - 150m, :blz - 50m] << 1.5dt
+            --  hl[:blz + 50m, :blz.f] >> 0.5dt
+        );
+
+        track(:first:station :removed,
+                hl[:blz - 150m, :blz - 50m + 0.7dl] << 2.5dt
+            --  hl[:blz + 50m + 0.7dl, :blz + 50m + 0.71dl] << 0.5dt
+        );
+        marker(:right :de.uest :cat:dc15, hl[:blz] >> 0.5dt);
+    }
+
+
+    with link = "line.nl.HL" {
+        track(:first :cat:dc15 :pax, hl[:blz.f, :utm.a] >> 0.5dt);
+        track(:first :cat:dc15 :closed :flip, hl[:blz.f, :utm.a] << 0.5dt);
+    }
+
+
+    with link = "point.nl.Utrecht-Maliebaan" {
+        # Spoor 1
+        track(:station,
+                hl[:utm - 191m, :utm - 190m] >> 0.5dt
+            --  hl[:utm - 115m, :utm + 240m] >> 1.5dt
+            --  hl[:utm + 350m, :utm + 351m] >> 0.5dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax, hl[:utm.a, :utm + 75m] >> 0.5dt);
+
+        # Spoor 3
+        track(:station :closed,
+                hl[:utm.a, :utm - 360m] << 0.5dt
+        );
+        track(:station :cat:dc15,
+                hl[:utm - 401m, :utm - 400m] >> 0.5dt
+            --  hl[:utm - 360m, :utm.f] << 0.5dt
+        );
+
+        # Spoor 5 - 10
+        track(:station,
+                hl[:utm - 310m, :utm - 130m] << 1.5dt
+            --  hl[:utm - 10m, :utm + 60m] << 3.5dt
+        );
+
+        # Spoor 9
+        track(:station,
+                hl[:utm - 231m, :utm - 230m] << 1.5dt
+            --  hl[:utm - 170m, :utm - 130m] << 2.5dt
+            --  hl[:utm - 70m, :utm + 200m] << 1.5dt
+            --  hl[:utm + 250m, :utm + 251m] << 0.5dt
+        );
+
+        # Spoor 10
+        track(:station,
+                hl[:utm - 70m, :utm + 60m] << 2.5dt
+        );
+
+        # Spoor 409
+        track(:station, hl[:utm + 110m, :utm.f] >> 0.5dt);
+
+        platform(:cat:dc15 :pax,
+                hl[:utm - 115m, :utm + 75m] >> 0.5dt
+            --  hl[:utm + 75m, :utm - 115m] >> 0.5dt
+        );
+
+        marker(:right :de.bf :cat:dc15 :pax, hl[:utm] >> 1.5dt);
+        station(:right :cat:dc15 :pax, hl[:utm + 0.3sw] << 5.5dt,
+            "Utrecht Maliebaan", "16,48"
+        );
+    }
+
+
+    with link = "line.nl.HL" {
+        track(:first :double :removed, hl[:utm.f, :utla.ym]);
+    }
+}
+

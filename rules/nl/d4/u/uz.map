@@ -19,5 +19,216 @@ with detail = [4, 5] {
             ..  uz[:ut.yn + 421m, :ut.yn + 420m] << 5dt
         );
     }
+
+
+    with link = "point.nl.Utrecht-Overvecht" {
+        # Spoor 1
+        track(:first:station :cat:dc15 :pax,
+                uz[:uto.a, :uto.f] >> 1.5dt
+        );
+            track(:station :cat:dc15,
+                    uz[:uto + 390m] >> 1.5dt
+                --  uz[:uto + 480m] >> 0.5dt
+            );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax,
+                uz[:uto.a, :uto.f] >> 0.5dt
+        );
+            track(:station :removed,
+                    uz[:uto - 260m] >> 0.5dt
+                --  uz[:uto - 160m] >> 1.5dt
+            );
+            track(:station :cat:dc15,
+                    uz[:uto + 260m] >> 0.5dt
+                --  uz[:uto + 350m] >> 1.5dt
+            );
+
+        # Spoor 3
+        track(:first:station :cat:dc15 :pax,
+                uz[:uto - 201m, :uto - 200m] >> 0.5dt
+            --  uz[:uto - 100m, :uto + 190m] << 0.5dt
+            ..  uz[:uto + 445m, :uto + 446m] << 1.5dt
+        );
+
+        # Spoor BC
+        track(:first:station :cat:dc15 :pax,
+                uz[:uto.a, :uto - 350m] << 0.5dt
+            ..  uz[:uto - 80m, :uto.f] << 1.5dt
+        );
+            track(:station :cat:dc15,
+                    uz[:uto - 450m] << 0.5dt
+                --  uz[:uto - 280m] >> 0.5dt
+            );
+            track(:station :cat:dc15,
+                    uz[:uto + 530m] << 1.5dt
+                --  uz[:uto + 630m] << 2.5dt
+            );
+
+        # Spoor BN
+        track(:first:station :cat:dc15 :pax,
+                uz[:uto.a, :uto - 350m - 0.5dl] << 1.5dt
+            ..  uz[:uto - 80m - 0.5dl, :uto.f] << 2.5dt
+        );
+
+        # Perron 1
+        platform(:cat:dc15 :pax,
+                uz[:uto - 80m, :uto + 130m] >> 1.5dt
+            --  uz[:uto + 130m, :uto - 80m] << 2.2dt
+        );
+
+        # Perron 2/3
+        platform(:cat:dc15 :pax,
+                uz[:uto - 80m, :uto + 130m] >> 0.5dt
+            --  uz[:uto + 130m, :uto - 80m] >> 0.5dt
+        );
+
+        marker(:right :de.bf :cat:dc15 :pax, uz[:uto] >> 1.5dt);
+        station(:bottom :cat:dc15 :pax, uz[:uto + 0.2sw] >> 1.5dt >> 1.3sw,
+            vbox(:center:top, "Utrecht", "Overvecht"),
+            "UZ: 3,00"
+        );
+    }
+
+
+    with link = "point.nl.Blauwkappel-West" {
+        track(:first:station :double :cat:dc15 :pax,
+                uz[:uto.f, :blw + 300m] >> 1dt
+        );
+        marker(:right :de.uest :cat:dc15, uz[:blw] >> 1.5dt);
+    }
+
+
+    with link = "point.nl.Blauwkappel" {
+        track(:first:station :double :cat:dc15 :pax,
+                uz[:blw + 300m, :blo - 180m] >> 1dt
+        );
+    }
+
+
+    with link = "point.nl.Blauwkappel-Oost" {
+        track(:first:station :double :cat:dc15 :pax,
+                uz[:blo - 180m, :blo + 100m] >> 1dt
+        );
+        marker(:right :de.uest :cat:dc15, uz[:blo] >> 1.5dt);
+    }
+
+
+    with link = "line.nl.UZ" {
+        with layer = 2 track(:first :double :cat:dc15 :pax,
+                uz[:blo + 100m, :uto.f] >> 2dt
+        );
+        with layer = 1 casing(:first:station :double :cat:dc15 :pax,
+                uz[:blo + 50m, :uto.f + 50m] >> 2dt
+        );
+
+        with layer = 2 track(:first :cat:dc15 :pax :flip:tight,
+                uz[:blo + 100m, :blo + 500m] << 2.5dt
+            ..  uz[:bloa - 101m, :bloa - 100m] >> 2.5dt
+        );
+        with layer = 1 casing(:first :cat:dc15 :pax :flip:tight,
+                uz[:blo + 499m, :blo + 500m] << 2.5dt
+            ..  uz[:bloa - 101m, :bloa - 100m] >> 2.5dt
+        );
+        track(:first :cat:dc15 :pax,
+                uz[:blo + 100m, :blo + 101m] << 1.5dt
+            ..  uz[:blo + 500m, :blo + 501m] << 0.5dt
+            ..  uz[:bloa - 101m, :bloa - 100m] << 1.5dt
+        );
+        track(:first:double :cat:dc15 :pax,
+                uz[:blo + 100m, :blo + 500m] >> 1.0dt
+            ..  uz[:bloa - 101m, :bloa - 100m]
+        );
+    }
+
+
+    with link = "point.nl.Blauwkappel-Oost-aansl" {
+        track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 100m, :bloa] << 1.5dt
+            --  uz[:bloa + 180m, :bloa.f] << 0.5dt
+        );
+            track(:station :cat:dc15,
+                    uz[:bloa.f - 450m] << 0.5dt
+                --  uz[:bloa.f - 350m] >> 0.5dt
+            );
+        track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 100m, :bloa] << 0.5dt
+            --  uz[:bloa + 90m, :bloa + 91m] << 1.0dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 100m, :bloa.f] >> 0.5dt
+        );
+            track(:station :cat:dc15,
+                    uz[:bloa.f - 330m] >> 0.5dt
+                --  uz[:bloa.f - 230m] << 0.5dt
+            );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 100m, :bloa] >> 2.5dt
+            ..  uz[:bloa + 450m, :bloa + 451m] >> 0.5dt 
+        );
+
+        marker(:left :de.abzw :cat:dc15, uz[:bloa] << 1.5dt);
+    }
+
+
+    with link = "line.nl.UZ" {
+        track(:first :double :cat:dc15 :pax, uz[:bloa.f + 0.8km, :bloa.f]);
+        line_badge(:cat:dc15 :pax, uz[:bloa.f + 0.8km], "UZ");
+        track(:first :double :cat:dc15 :pax, uz[:bloa.f + 0.8km, :bhv.a]);
+    }
+
+
+    with link = "point.nl.Bilthoven" {
+        # Spoor 1
+        track(:first:station :cat:dc15 :pax,
+                uz[:bhv.a, :bhv.a + 0.1dl] << 0.5dt
+            ..  uz[:bhv - 180m, :bhv.f] << 1.0dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat:dc15 :pax,
+                uz[:bhv.a, :bhv.a + 0.1dl] >> 0.5dt
+            ..  uz[:bhv - 180m, :bhv.f] >> 1.0dt
+        );
+            track(:first:station :cat:dc15,
+                    uz[:bhv + 220m] >> 1.0dt
+                --  uz[:bhv + 300m]
+            );
+
+        # Spoor C
+        track(:first:station :cat:dc15,
+                uz[:bhv + 179m, :bhv + 180m] << 1.0dt
+            --  uz[:bhv + 260m, :bhv.f]
+        );
+
+        # Perron 1/2
+        platform(:cat:dc15 :pax,
+                uz[:bhv - 180m, :bhv + 50m] << 1.0dt
+            --  uz[:bhv + 50m, :bhv - 180m] >> 0.3dt
+        );
+        platform(:cat:dc15 :pax,
+                uz[:bhv - 180m, :bhv + 50m] >> 1.0dt
+            --  uz[:bhv + 50m, :bhv - 180m] << 0.3dt
+        );
+
+        marker(:left :de.bf :cat:dc15 :pax, uz[:bhv] << 1.0dt);
+        station(:top :cat:dc15 :pax, uz[:bhv] << 1.0dt << 1.3sw,
+            vbox(:center:bottom :bold,
+                span(:removed, "De Bilt"), "Bilthoven"
+            ),
+            hbox(:center:top, 
+                vbox(:right:top, "UZ: ", "BZ: "),
+                vbox(:right:top, "8,", "0,"),
+                vbox(:left:top, "93", "00")
+            )
+        );
+    }
+
+
+    with link = "line.nl.UZ" {
+        track(:first :cat:dc15 :pax :flip, uz[:bhv.f, :dld.a] << 1.0dt);
+        track(:first :cat:dc15, uz[:bhv.f, :dld.a]);
+        track(:first :cat:dc15 :pax, uz[:bhv.f, :dld.a] >> 1.0dt);
+    }
 }
 
