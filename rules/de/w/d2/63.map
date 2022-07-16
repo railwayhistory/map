@@ -114,7 +114,7 @@ with detail = 2 {
         line_badge(:cat:ac15 :pax, nw[:nst.yr + 12.5km] @ 2 << 0.1dt, "6325");
         line_badge(:cat:ac15 :pax, nw[:lao - 8km] << 0.1dt, "6325");
         line_badge(:cat:ac15 :pax, nw[:pla + 7km], "6325");
-        line_badge(:cat:ac15 :pax, nw[:ros + 5km], "6325");
+        line_badge(:cat:ac15 :pax, nw[:ros + 4km], "6325");
     }
 
     with link = "point.de.Kargow" {
@@ -149,11 +149,14 @@ with detail = 2 {
 
     with link = "point.de.Rostock-Hbf" {
         with layer = 1 marker(:statdot :cat:ac15 :pax, nw[:ros]);
+        slabel(:left :cat:ac15 :pax, nw[:ros] + (-2dt, 2dt),
+            vbox(:right:top :medium :bold, "Rostock")
+        );
     }
 
     with link = "point.de.Warnemünde" {
         with layer = 1 marker(:statdot :cat:ac15 :pax, nw[:wam]);
-        slabel(:top :cat:ac15 :pax, nw[:wam] + (0dt, -1.0dt), "Warnemünde");
+        slabel(:left :cat:ac15 :pax, nw[:wam] + (1dt, -1.5dt), "Warnemünde");
     }
 }
 
@@ -165,7 +168,13 @@ with detail = 2 {
     with link = "line.de.6326" {
         track(:second, sl[:son, :lug]);
 
-        line_badge(:open, sl[:son + 7km], "6326");
+        guide(:linenum,
+                sl[:lug - 8km] >> 0.7dt
+            --  sl[:lug - 8km] >> 3.0dt
+        );
+        label(:linenum, sl[:lug - 8km] >> 3.0dt + (0dt, 0.2dt),
+            hbox(:left:middle, " 6326")
+        );
     }
 
     with link = "point.de.Lubmin-Gbf" {
