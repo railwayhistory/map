@@ -66,7 +66,7 @@ given a VzG number are also included.
 | S (Saarbrücken)    | complete    | not started |
 | T (Stuttgart)      | complete    | not started |
 | U (Erfurt)         | complete    | not started |
-| W (Schwerin)       | in progress | not started |
+| W (Schwerin)       | complete    | not started |
 
 
 ### FR: France
@@ -78,7 +78,7 @@ The overview map currently only covers current and previous lines of the RFN.
 
 | region             | overview    | detail      |
 | ------------------ | ----------- | ----------- |
-| 0                  | complete    | not started |
+| 0                  | in progress | not started |
 | 1                  | in progress | not started |
 | 2                  | not started | not started |
 | 3                  | not started | not started |
