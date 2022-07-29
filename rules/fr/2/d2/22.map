@@ -1,0 +1,334 @@
+# FR 220.  Valleroy-Moineville - Villerupt-Micheville
+with detail = 2 {
+    let vv = path("d2.fr.220");
+
+    with link = "line.fr.220" {
+        track(:first :removed, vv[:val.ya, :tuc]);
+        track(:first :closed, vv[:tuc, :aud.yv]);
+        track(:first :closed, vv[:aud.ym, :vil.ya]);
+
+        guide(:linenum :removed,
+                vv[:val.ya + 11km] << 0.7dt
+            --  vv[:val.ya + 11km] << 3.0dt
+        );
+        label(:linenum :removed, vv[:val.ya + 11km] << 3.0dt,
+            hbox(:right:middle, "220 ")
+        );
+        guide(:linenum :closed,
+                vv[:vil.ya - 5km] << 0.7dt
+            --  vv[:vil.ya - 5km] << 3.0dt
+        );
+        label(:linenum :closed, vv[:vil.ya - 5km] << 3.0dt,
+            hbox(:right:middle, "220 ")
+        );
+    }
+}
+
+
+# FR 221.  Tournes - Auvillers
+with detail = 2 {
+    let ta = path("d2.fr.221");
+
+    with link = "line.fr.221" {
+        track(:first :removed, ta[:tou.ya, :auv.yt]);
+        line_badge(:removed, ta[:tou.ya + 10.5km] @ -2 << 0.2dt, "221");
+    }
+}
+
+
+# FR 222.  Liart - Tournes
+with detail = 2 {
+    let lt = path("d2.fr.222");
+
+    with link = "line.fr.222" {
+        track(:first :double :cat:ac25 :pax, lt[:lia, :tou.yl]);
+
+        guide(:linenum :cat:ac25 :pax,
+                lt[:lia.yc + 10km] >> 1dt
+            --  lt[:lia.yc + 10km] >> 3dt
+        );
+        label(:linenum :cat:ac25 :pax, lt[:lia.yc + 10km] >> 3.0dt,
+            hbox(:center:top, "222")
+        );
+    }
+}
+
+
+# FR 223. Charleville-Mézières - Hirson
+with detail = 2 {
+    let ch = path("d2.fr.223");
+
+    with link = "line.fr.223" {
+        track(:first :double :cat:ac25 :pax, ch[:cha, :tou.yl]);
+        track(:first :removed, ch[:tou.yl, :hir.yt]);
+
+        guide(:linenum :cat:ac25 :pax,
+                ch[:cha + 5km] >> 1dt
+            --  ch[:cha + 5km] >> 3dt
+        );
+        label(:linenum :cat:ac25 :pax, ch[:cha + 5km] >> 3dt + (-0.5dt, 0dt),
+            hbox(:left:bottom, "223")
+        );
+        guide(:linenum :removed,
+                ch[:tou.ya + 8km] >> 0.7dt
+            --  ch[:tou.ya + 8km] >> 3dt
+        );
+        label(:linenum :removed, ch[:tou.ya + 8km] >> 3dt + (0.2dt, 0dt),
+            hbox(:center:bottom, "223")
+        );
+        line_badge(:removed, ch[:hir.yt - 8km] @ 4 >> 0.3dt, "223");
+    }
+
+    with link = "point.fr.Tournes" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, ch[:tou]);
+        slabel(:left :cat:ac25 :pax, ch[:tou] + (0.5dt, 0.8dt),
+            hbox(:right:top, "Tournes")
+        );
+    }
+
+    with link = "point.fr.Auvillers" {
+        with layer = 1 marker(:statdot :removed, ch[:auv]);
+        slabel(:right :removed, ch[:auv] + (-1dt, -1.5dt), "Auvillers");
+    }
+}
+
+
+# FR 224.  Monthermé - Phades
+with detail = 2 {
+    let mp = path("d2.fr.224");
+
+    with link = "line.fr.224" {
+        track(:first :removed, mp[:mon.yp, :pha]);
+    }
+
+    with link = "point.fr.Phades" {
+        with layer = 1 marker(:statdot :removed, mp[:pha]);
+        slabel(:right :removed, mp[:pha] + (-1.0dt, -1.5dt), "Phades");
+    }
+}
+
+
+# FR 225.  Remilly-Aillicourt - Raucourt
+with detail = 2 {
+    let rr = path("d2.fr.225");
+
+    with link = "line.fr.225" {
+        track(:first :removed, rr[:rem, :rau]);
+
+        guide(:linenum :removed,
+                rr[:rau - 2km] >> 0.7dt
+            --  rr[:rau - 2km] >> 3.0dt
+        );
+        label(:linenum :removed, rr[:rau - 2km] >> 3.0dt,
+            hbox(:right:middle, "225 ")
+        );
+
+    }
+
+    with link = "point.fr.Raucourt" {
+        with layer = 1 marker(:statdot :removed, rr[:rau]);
+        slabel(:bottom :removed, rr[:rau] + (0dt, 0.8dt), "Raucourt");
+    }
+}
+
+
+# FR 226.  Gonesse - Lille-Frontière (LGV)
+with detail = 2 {
+    let gl = path("d2.fr.226");
+
+    with link = "line.fr.226" {
+        track(:first :double :cat:ac25 :v300 :pax, gl[:gon, :lif]);
+
+        line_badge(:cat:ac25 :v300 :pax, gl[:gon + 7.5km], "226");
+        line_badge(:cat:ac25 :v300 :pax, gl[:mou + 18km], "226");
+        line_badge(:cat:ac25 :v300 :pax, gl[:mou + 52km], "226");
+        line_badge(:cat:ac25 :v300 :pax, gl[:cro - 30km], "226");
+        line_badge(:cat:ac25 :v300 :pax, gl[:cro + 18km], "226");
+        line_badge(:cat:ac25 :v300 :pax, gl[:peb + 5km] >> 0.2dt, "226");
+    }
+}
+
+
+# FR 226.301.  Raccordement de Vémars
+with detail = 2 {
+    with link = "line.fr.226.301" {
+        track(:first :double :cat:ac25 :pax,
+                path("d2.fr.226.301")[:che, :epi]
+        );
+    }
+}
+
+
+# FR 226.306.  Croissilles - Arras-Sud
+with detail = 2 {
+    with link = "line.fr.226.306" {
+        track(:first :double :cat:ac25 :pax,
+                path("d2.fr.226.306")[:cro, :arb]
+        );
+    }
+}
+
+
+# FR 226.310.  Raccordement d'interconnexion nord-sud (LGV)
+with detail = 2 {
+    let vc = path("d2.fr.2.226.310");
+
+    with link = "line.fr.226.310" {
+        track(:first :double :cat:ac25 :v200 :pax, vc[:mou, :mes]);
+    }
+
+    with link = "point.fr.Aéroport-Charles-de-Gaulle-2-TGV" {
+        with layer = 1 marker(:statdot :cat:ac25 :v200 :pax, vc[:cdg]);
+    }
+}
+
+
+# FR 227.  Ormoy-Villers - Mareuil-sur-Ourcq
+with detail = 2 {
+    let om = path("d2.fr.227");
+
+    with link = "line.fr.227" {
+        track(:first :removed, om[:orm.ym, :mar.yo]);
+        line_badge(:removed, om[:orm.ym + 11.5km] @ 3 >> 0.1dt, "227");
+    }
+}
+
+
+# FR 228.  Laon - Liart
+with detail = 2 {
+    let ll = path("d2.fr.228");
+
+    with link = "line.fr.228" {
+        track(:first, ll[:lao.ym, :mon]);
+        track(:first :removed, ll[:mon, :lia.ym]);
+
+        line_badge(:open, ll[:mon - 13.5km], "228");
+        line_badge(:removed, ll[:mon + 14.5km], "228");
+    }
+
+    with link = "point.fr.Montcornet" {
+        with layer = 1 marker(:statdot, ll[:mon]);
+        slabel(:right, ll[:mon] + (-2dt, 0.8dt),
+            hbox(:left:top, "Montcornet")
+        );
+    }
+}
+
+
+# FR 229.  La Plaine - Anor frontière
+with detail = 2 {
+    let pa = path("d2.fr.229");
+
+    with link = "line.fr.229" {
+        track(:first :double :cat:ac25 :pax, pa[:lpl, :cre]);
+        track(:first :double :pax, pa[:cre, :lao.yr]);
+        track(:first :pax, pa[:lao.yr, :hir.ya]);
+        track(:first :double :cat:ac25 :pax, pa[:hir.ya, :ano.ya]);
+        track(:first :removed, pa[:ano.ya, :anf]);
+
+        line_badge(:cat:ac25 :pax, pa[:aul + 23km], "229");
+        line_badge(:pax, pa[:cre + 7km], "229");
+        line_badge(:pax, pa[:ani - 7.3km] @ -2 >> 0.2dt, "229");
+        line_badge(:pax, pa[:lao - 6km], "229");
+        line_badge(:pax, pa[:lao + 5.5km], "229");
+        line_badge(:pax, pa[:ver + 6km] @ -2, "229");
+        guide(:linenum :cat:ac25 :pax,
+                pa[:hir + 4.5km] >> 1dt
+            --  pa[:hir + 4.5km] >> 3dt
+        );
+        label(:linenum :cat:ac25 :pax, pa[:hir + 4.5km] >> 3dt,
+            hbox(:left:middle, " 229")
+        );
+        guide(:linenum :cat:ac25 :pax,
+                pa[:hir + 4.5km] << 1dt
+            --  pa[:hir + 4.5km] << 3dt
+        );
+        label(:linenum :cat:ac25 :pax, pa[:hir + 4.5km] << 3dt,
+            hbox(:right:middle, "267 ")
+        );
+
+        guide(:linenum :removed,
+                pa[:ano.ya + 3km] >> 0.7dt
+            --  pa[:ano.ya + 3km] >> 3.0dt
+        );
+        label(:linenum :removed, pa[:ano.ya + 3km] >> 3.0dt,
+            hbox(:left:top, "229")
+        );
+    }
+
+    with link = "point.fr.Aulnay-sous-Bois" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, pa[:aul]);
+    }
+
+    with link = "point.fr.Ormoy-Villers" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, pa[:orm]);
+        slabel(:right :cat:ac25 :pax, pa[:orm] + (2.8dt, -0.3dt),
+            "Ormoy-Villers"
+        );
+    }
+
+    with link = "point.fr.Crépy-en-Valois" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, pa[:cre]);
+        slabel(:right :cat:ac25 :pax, pa[:cre] + (-1.5dt, -1.0dt),
+            vbox(:left:bottom, "Crépy-en-", " Valois")
+        );
+    }
+
+    with link = "point.fr.Villers-Cotterêts" {
+        with layer = 1 marker(:statdot :pax, pa[:vil]);
+        slabel(:right :pax, pa[:vil] + (1dt, -3.0dt),
+            vbox(:left:bottom, "Villers-", "Cotterêts")
+        );
+    }
+
+    with link = "point.fr.Soissons" {
+        with layer = 1 marker(:statdot :pax, pa[:soi]);
+        slabel(:left :pax, pa[:soi] + (-2.0km, 0.8km), 
+            hbox(:right:top, "Soissons")
+        );
+    }
+
+    with link = "point.fr.Anizy-Pinon" {
+        with layer = 1 marker(:statdot :pax, pa[:ani]);
+        slabel(:right :pax, pa[:ani] + (0dt, 0.8dt),
+            hbox(:left:top, "Anizy-Pinon")
+        );
+    }
+
+    with link = "point.fr.Laon" {
+        with layer = 1 marker(:statdot :pax, pa[:lao]);
+        slabel(:right :pax, pa[:lao] + (-2.5dt, 1.0dt),
+            hbox(:left:top, "Laon")
+        );
+    }
+
+    with link = "point.fr.Dercy-Mortiers" {
+        with layer = 1 marker(:statdot, pa[:der]);
+        slabel(:right, pa[:der] + (1.5dt, 1.0dt), "Dercy-Mortier");
+    }
+
+    with link = "point.fr.Marle-sur-Serre" {
+        with layer = 1 marker(:statdot :pax, pa[:mar]);
+        slabel(:left :pax, pa[:mar] + (-1.0dt, 1.0dt),
+            vbox(:right:bottom, "Marle-", "sur-Serre ")
+        );
+    }
+
+    with link = "point.fr.Vervins" {
+        with layer = 1 marker(:statdot :pax, pa[:ver]);
+        slabel(:right :pax, pa[:ver] + (-1dt, 0.8dt),
+            hbox(:left:top, "Vervins")
+        );
+    }
+
+    with link = "point.fr.Hirson" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, pa[:hir]);
+        slabel(:right :cat:ac25 :pax, pa[:hir] + (1.0km, -0.8km), "Hirson");
+    }
+
+    with link = "point.fr.Anor" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, pa[:ano]);
+        slabel(:left :cat:ac25 :pax, pa[:ano] + (-1.8dt, 1.0dt), "Anor");
+    }
+}
+
