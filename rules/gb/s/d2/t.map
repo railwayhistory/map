@@ -1,0 +1,31 @@
+# GB TRL3.  Dagenham Junction - Eurotunnel
+with detail = 2 {
+    let trl3 = path("d2.gb.trl3");
+
+    with link = "line.gb.TRL3" {
+        track(:first :double :cat:ac25 :pax,
+                trl3[:dej, :ash.ys - 4dt]
+            ..  trl3[:ash.ys, :con.yc] << 0.5dt
+            ..  trl3[:fol.ys, :fol.yc]
+        );
+
+        line_badge(:cat:ac25 :pax, trl3[:ebi + 5.3km], "TRL3");
+        line_badge(:cat:ac25 :pax, trl3[:ash.ys - 12km], "TRL3");
+        guide(:linenum :cat:ac25 :pax,
+                trl3[:san - 6km] << 1.5dt
+            --  trl3[:san - 6km] << 3.5dt
+        );
+        label(:linenum :cat:ac25 :pax, trl3[:san - 6km] << 3.5dt,
+            hbox(:center:bottom, "TRL3")
+        );
+    }
+
+    with link = "point.gb.Ebbsfleet-International" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, trl3[:ebi]);
+        slabel(:left :cat:ac25 :pax, trl3[:ebi] + (-1.5dt, -2dt),
+            vbox(:right:top, "Ebbsfleet ", "International")
+        );
+    }
+
+}
+
