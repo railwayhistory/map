@@ -1,0 +1,107 @@
+# GB GSM1.  Kettering - Manton
+with detail = 2 {
+    let gsm1 = path("d2.gb.gsm1");
+
+    with link = "line.gb.GSM1" {
+        track(:first :double :cat:ac25 :pax, gsm1[:gls, :cor]);
+        track(:first :double :pax, gsm1[:cor, :maj]);
+
+        guide(:linenum :cat:ac25 :pax,
+                gsm1[:gls + 3.5km] >> 1dt
+            --  gsm1[:gls + 3.5km] >> 3dt
+        );
+        label(:linenum :cat:ac25 :pax, gsm1[:gls + 3.5km] >> 3dt,
+            hbox(:left:top, "GSM1")
+        );
+        guide(:linenum :pax,
+                gsm1[:cor + 5km] >> 1dt
+            --  gsm1[:cor + 5km] >> 3dt
+        );
+        label(:linenum :pax, gsm1[:cor + 5km] >> 3dt,
+            hbox(:left:middle, " GSM1")
+        );
+    }
+
+    with link = "point.gb.Corby" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, gsm1[:cor]);
+        slabel(:left :cat:ac25 :pax, gsm1[:cor] + (-1.5dt, 0.8dt), "Corby");
+    }
+
+    with link = "point.gb.Manton" {
+        with layer = 1 marker(:statdot :pax, gsm1[:man]);
+        slabel(:left :pax, gsm1[:man] + (-1.5dt, 0.8dt), "Manton");
+    }
+}
+
+
+# GB GSM2.  Manton - Melton Mowbray
+with detail = 2 {
+    let gsm2 = path("d2.gb.gsm2");
+
+    with link = "line.gb.GSM2" {
+        track(:first :double :pax, gsm2[:maj, :mej]);
+
+        guide(:linenum :pax,
+                gsm2[:maj + 5.5km] << 1dt
+            --  gsm2[:maj + 5.5km] << 3dt
+        );
+        label(:linenum :pax, gsm2[:maj + 5.5km] << 3dt,
+            hbox(:right:middle, "GSM2 ")
+        );
+    }
+
+    with link = "point.gb.Saxby" {
+        with layer = 1 marker(:statdot :removed, gsm2[:sax]);
+        slabel(:top :removed, gsm2[:sax] + (0dt, -0.8dt), "Saxby");
+    }
+
+    with link = "point.gb.Melton-Mowbray" {
+        with layer = 1 marker(:statdot :pax, gsm2[:mel]);
+        slabel(:right :pax, gsm2[:mel] + (-1.0dt, 1.0dt),
+            vbox(:left:top, "Melton", "Mowbray")
+        );
+    }
+}
+
+
+# GB GSM3.  Syston - Melton Mowbray
+with detail = 2 {
+    let gsm3 = path("d2.gb.gsm3");
+
+    with link = "line.gb.GSM3" {
+        track(:first :pax, gsm3[:sys.ym, :sej]);
+        track(:first :double :pax, gsm3[:sej, :mej]);
+
+        guide(:linenum :pax,
+                gsm3[:sej + 5.5km] >> 1dt
+            --  gsm3[:sej + 5.5km] >> 3dt
+        );
+        label(:linenum :pax, gsm3[:sej + 5.5km] >> 3dt,
+            hbox(:center:top, "GSM3")
+        );
+    }
+}
+
+
+# GB GSM4.  Melton Mowbray - Nottingham
+with detail = 2 {
+    let gsm4 = path("d2.gb.gsm4");
+
+    with link = "line.gb.GSM4" {
+        track(:first, gsm4[:mej, :edw.x]);
+        track(:first :removed, gsm4[:edw.x, :not.ym]);
+
+        line_badge(:open, gsm4[:edw.x - 8km], "GSM4");
+    }
+}
+
+
+# GB GSM4.  Asfordby Junction - Asfordby Business Park
+with detail = 2 {
+    let gsmz = path("d2.gb.gsmz");
+
+    with link = "line.gb.GSMZ" {
+        track(:first, gsmz[:asj, :abp]);
+    }
+}
+
