@@ -1,0 +1,301 @@
+# FR 261.  Amiens - Laon
+with detail = 2 {
+    let al = path("d2.fr.261");
+
+    with link = "line.fr.261" {
+        track(:first :double :pax, al[:ami.yl, :lon.ya]);
+        track(:first :double :pax, al[:lon.yl, :men.yc]);
+        track(:first :double :pax, al[:ter.yl, :lao.yt]);
+
+        line_badge(:pax, al[:lon.ya + 16km], "261");
+        line_badge(:pax, al[:ham - 7km], "261");
+        line_badge(:pax, al[:lao.yt - 8km], "261");
+    }
+
+    with link = "point.fr.Chaulnes" {
+        with layer = 1 marker(:statdot :pax, al[:cha]);
+        slabel(:left :pax, al[:cha] + (-3.5dt, 2.3dt), "Chaulnes");
+    }
+
+    with link = "point.fr.Ham" {
+        with layer = 1 marker(:statdot :pax, al[:ham])
+        slabel(:bottom :pax, al[:ham] + (-1dt, 0.8dt), "Ham");
+    }
+
+    with link = "point.fr.La-Fère" {
+        with layer = 1 marker(:statdot :pax, al[:fer]);
+        slabel(:right :pax, al[:fer] + (-1.5dt, -1.3dt),
+            vbox(:left:bottom, "La", "Fère")
+        );
+    }
+
+    with link = "point.fr.Versigny" {
+        with layer = 1 marker(:statdot :pax, al[:ver]);
+        slabel(:left :pax, al[:ver] + (1.0dt, 0.8dt),
+            vbox(:right:top, "Ver-", "signy ")
+        );
+    }
+}
+
+
+# FR 262.  Douai - Blanc-Misseron-Frontière
+with detail = 2 {
+    let dv = path("d2.fr.262.a");
+    let vb = path("d2.fr.262.b");
+
+    with link = "line.fr.262" {
+        track(:first :double :cat:ac25 :pax, dv[:dou.ys, :beu.ys]);
+        track(:first, vb[:sau.yb, :bla]);
+        track(:first :removed, vb[:bla, :blf]);
+    }
+
+    with link = "point.fr.Somain" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, dv[:som]);
+        slabel(:left :cat:ac25 :pax, dv[:som] + (2dt, -1.8dt), "Somain");
+    }
+
+    with link = "point.fr.Wallers" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, dv[:wal]);
+        slabel(:left :cat:ac25 :pax, dv[:wal] + (-0.8dt, -1.3dt), "Wallers");
+    }
+
+    with link = "point.fr.Blanc-Misseron" {
+        with layer = 1 marker(:statdot, vb[:bla]);
+        slabel(:bottom, vb[:bla] + (0dt, 1dt),
+            vbox(:right:top, "Blanc", "Misseron  ")
+        );
+    }
+
+    with link = "point.int.Quiévrain-Quiévrechain" {
+        marker(:refdt :left :removed, vb[:blf]);
+        marker(:refdt :right :removed, vb[:blf]);
+    }
+}
+
+
+# FR 263.300.  Raccordement de Beuvrages
+with detail = 2 {
+    let bv = path("d2.fr.263.300");
+
+    with link = "line.fr.263.300" {
+        track(:first :double :cat:ac25, bv[:beu.yv, :jar]);
+        track(:first :cat:ac25, bv[:jar, :val.yb]);
+    }
+}
+
+
+# FR 264.  Pont-de-la-Deûle - Bachy-Mouchin-Frontière
+with detail = 2 {
+    let pb = path("d2.fr.264");
+
+    with link = "line.fr.264" {
+        track(:first :removed, pb[:pon.yo, :orc.yp]);
+        track(:first :removed, pb[:nom.yb, :baf]);
+
+        line_badge(:removed, pb[:orc.yp - 6km], "264");
+        guide(:linenum :removed,
+                pb[:bac - 1.5km] << 0.7dt
+            --  pb[:bac - 1km] << 2.5dt
+        );
+        label(:linenum :removed, pb[:bac - 1km] << 2.3dt,
+            hbox(:center:bottom, "264")
+        );
+    }
+
+    with link = "point.fr.Bachy-Mouchin" {
+        with layer = 1 marker(:statdot :removed, pb[:bac]);
+        slabel(:right:removed, pb[:bac] + (2.3dt, 2.3dt),
+            vbox(:left:bottom, "   Bachy-", "Mouchin")
+        );
+    }
+
+    with link = "point.int.Bachy-Mouchin-Rumes" {
+        marker(:refdt :right :removed, pb[:baf]);
+        marker(:refdt :left :removed, pb[:baf]);
+    }
+}
+
+
+# FR 265.  Templeuve - Don-Sainghin
+with detail = 2 {
+    let td = path("d2.fr.265");
+
+    with link = "line.fr.265" {
+        track(:first :removed, td[:tem.ys, :sec.yt]);
+        track(:first :removed, td[:sec.yd, :don.ys]);
+
+        guide(:linenum :removed,
+                td[:tem.ys + 2km] << 0.7dt
+            --  td[:tem.ys + 2km] << 3.0dt
+        );
+        label(:linenum :removed, td[:tem.ys + 2km] << 3.0dt,
+            hbox(:center:top, "265")
+        );
+        line_badge(:removed, td[:sec.yd + 4.5km] @ 3.5 >> 0.1dt, "265");
+    }
+
+    with link = "point.fr.Pont-à-Marcq" {
+        with layer = 1 marker(:statdot :removed, td[:pon]);
+    }
+}
+
+
+# FR 266.300.  Raccordement de Lezennes.
+with detail = 2 {
+    with link = "line.fr.266.300" {
+        track(:first :cat:ac25, path("d2.fr.266.300")[:mte, :ate]);
+    }
+}
+
+
+# FR 267.  Fives - Hirson
+with detail = 2 {
+    let fa = path("d2.fr.267.a");
+    let ah = path("d2.fr.267.b");
+
+    with link = "line.fr.267" {
+        track(:first :double :cat:ac25 :pax, fa[:fiv.yo, :aul.yv]);
+        track(:first :double :cat:ac25 :pax, ah[:aul.yh, :ano.ya]);
+
+        line_badge(:cat:ac25 :pax, fa[:orc + 6km], "267");
+        line_badge(:cat:ac25 :pax, fa[:que - 6km], "267");
+        line_badge(:cat:ac25 :pax, fa[:aul.yv - 4km], "267");
+        guide(:linenum :cat:ac25 :pax,
+                ah[:ave + 7km] >> 1dt
+            --  ah[:ave + 7km] >> 3dt
+        );
+        label(:linenum :cat:ac25 :pax, ah[:ave + 7km] >> 3dt,
+            hbox(:right:middle, "267 ")
+        );
+
+    }
+
+    with link = "point.fr.Lesquin" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fa[:les]);
+    }
+
+    with link = "point.fr.Templeuve" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fa[:tem]);
+    }
+
+    with link = "point.fr.Orchies" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fa[:orc]);
+        slabel(:left :cat:ac25 :pax, fa[:orc] + (-2.0dt, 1.8dt), "Orchies");
+    }
+
+    with link = "point.fr.Saint-Amand-les-Eaux" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fa[:sam]);
+        slabel(:right :cat:ac25 :pax, fa[:sam] + (1.5dt, 0dt),
+            vbox(:left:bottom, "  Saint-", "Amand")
+        );
+    }
+
+    with link = "point.fr.Beuvrages" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fa[:beu]);
+    }
+
+    with link = "point.fr.Valenciennes" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fa[:val]);
+        slabel(:right :cat:ac25 :pax, fa[:val] + (1.5dt, 1.8dt),
+            "Valenciennes"
+        );
+    }
+
+    with link = "point.fr.Valenciennes-Faubourg-de-Paris" {
+        with layer = 1 marker(:statdot :removed, fa[:vaf]);
+    }
+
+    with link = "point.fr.Le-Quesnoy" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fa[:que]);
+        slabel(:left :cat:ac25 :pax, fa[:que] + (-2.0km, 1.3dt),
+            "Le Quesnoy"
+        );
+    }
+
+    with link = "point.fr.Avesnes" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, ah[:ave]);
+        slabel(:left :cat:ac25 :pax, ah[:ave] + (-1.5dt, -0.5dt),
+            hbox(:right:top, "Avesnes")
+        );
+    }
+
+    with link = "point.fr.Fourmies" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, ah[:fou]);
+        slabel(:left :cat:ac25 :pax, ah[:fou] + (-1.5dt, 1.0dt), "Fourmies");
+    }
+}
+
+
+# FR 268.  Somain - Halluin-Frontière
+with detail = 2 {
+    let sa = path("d2.fr.268.a");
+    let ah = path("d2.fr.268.b");
+
+    with link = "line.fr.268" {
+        track(:first :removed, sa[:som.yo, :orc.ys]);
+        track(:first :closed, sa[:orc.ya, :asc.yo]);
+        track(:first :removed, ah[:asc.yt, :tou.ya]);
+        track(:first :removed, ah[:tou.yh, :haf]);
+
+        line_badge(:removed, sa[:som.yo + 7.5km], "268");
+        guide(:linenum :closed,
+                sa[:asc.yo - 3km] >> 0.7dt
+            --  sa[:asc.yo - 3km] >> 3.0dt
+        );
+        label(:linenum :closed, sa[:asc.yo - 3km] >> 3.0dt,
+            hbox(:left:middle, " 268")
+        );
+        guide(:linenum :removed,
+                ah[:rob - 4km] >> 0.7dt
+            --  ah[:rob - 4km] >> 3.0dt
+        );
+        label(:linenum :removed, ah[:rob - 4km] >> 3.0dt,
+            hbox(:left:middle, " 268")
+        );
+        guide(:linenum :removed,
+                ah[:hal - 4.7km] >> 0.7dt
+            --  ah[:hal - 4.7km] >> 3.0dt
+        );
+        label(:linenum :removed, ah[:hal - 4.7km] >> 3.0dt,
+            hbox(:left:middle, " 268")
+        );
+    }
+
+    with link = "point.fr.Nomain-Ouvignies" {
+        with layer = 1 marker(:statdot :closed, sa[:nom]);
+        slabel(:right :closed, sa[:nom] + (1.5dt, -2.0dt),
+            vbox(:left:top, "Nomain-", "  Ouvignies")
+        );
+    }
+
+    with link = "point.fr.Roubaix-Wattrelos" {
+        with layer = 1 marker(:statdot :closed, ah[:rob]);
+    }
+
+    with link = "point.fr.Halluin" {
+        with layer = 1 marker(:statdot :closed, ah[:hal]);
+        slabel(:left :closed, ah[:hal] + (-1.7dt, 1.7km), "Halluin");
+    }
+
+    with link = "point.int.Halluin-Menen" {
+        marker(:refdt :left :removed, ah[:haf]);
+    }
+}
+
+
+# FR 269.  Fives - Baisieux-Frontière
+with detail = 2 {
+    let fb = path("d2.fr.269");
+
+    with link = "line.fr.269" {
+        track(:first :double :cat:ac25 :pax, fb[:fiv.ya, :baf]);
+
+        line_badge(:cat:ac25 :pax, fb[:asc + 4.7km], "269");
+    }
+
+    with link = "point.fr.Ascq" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, fb[:asc]);
+        slabel(:bottom :cat:ac25 :pax, fb[:asc] + (-0.5dt, 0.8dt), "Ascq");
+    }
+}
+

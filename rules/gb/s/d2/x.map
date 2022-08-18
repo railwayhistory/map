@@ -1,0 +1,99 @@
+# GB XTD.  London Charing Cross - Dover Western Docks
+with detail = 2 {
+    let xtd = path("d2.gb.s.xtd");
+
+    with link = "line.gb.XTD" {
+        track(:first :double :rail:rc75 :pax, xtd[:orp, :ton]);
+        track(:first :double :rail:rc75 :pax,
+                xtd[:ton, :ash.yo - 500m - 2dt]
+            ..  xtd[:ash.yo, :con.yc] >> 0.5dt
+            ..  xtd[:con.yc + 600m + 2dt, :arc]
+        );
+        track(:first :double :removed, xtd[:arc, :dot]);
+
+        guide(:linenum :rail:rc75 :pax,
+                xtd[:sev + 4km] << 1dt
+            --  xtd[:sev + 4km] << 3dt
+        );
+        label(:linenum :rail:rc75 :pax, xtd[:sev + 4km] << 3dt,
+            hbox(:left:middle, " XTD")
+        );
+        line_badge(:rail:rc75 :pax, xtd[:pad + 8km], "XTD");
+        guide(:linenum :rail:rc75 :pax,
+                xtd[:san - 6km] >> 1.5dt
+            --  xtd[:san - 6km] >> 3.5dt
+        );
+        label(:linenum :rail:rc75 :pax, xtd[:san - 6km] >> 3.5dt,
+            hbox(:center:top, "XTD")
+        );
+        guide(:linenum :rail:rc75 :pax,
+                xtd[:foe + 5km] >> 1dt
+            --  xtd[:foe + 5km] >> 3dt
+        );
+        label(:linenum :rail:rc75 :pax, xtd[:foe + 5km] >> 3dt,
+            hbox(:center:top, "XTD")
+        );
+    }
+
+    with link = "point.gb.Orpington" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:orp]);
+        slabel(:right :rail:rc75 :pax, xtd[:orp] + (1.5dt, 0.3dt),
+            "Orpington"
+        );
+    }
+
+    with link = "point.gb.Dunton-Green" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:dun]);
+        slabel(:left :rail:rc75 :pax, xtd[:dun] + (-1.8dt, 0.3dt),
+            "Dunton Green"
+        );
+    }
+
+    with link = "point.gb.Sevenoaks" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:sev]);
+        slabel(:right :rail:rc75 :pax, xtd[:sev] + (1.8dt, 0.5dt),
+            "Sevenoaks"
+        );
+    }
+
+    with link = "point.gb.Tonbridge" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:ton]);
+        slabel(:right :rail:rc75 :pax, xtd[:ton] + (0dt, -1.4dt),
+            "Tonbridge"
+        );
+    }
+
+    with link = "point.gb.Paddock-Wood" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:pad]);
+        slabel(:left :rail:rc75 :pax, xtd[:pad] + (1.0dt, 1.0dt),
+            vbox(:right:top, "Paddock", "Wood")
+        );
+    }
+
+    with link = "point.gb.Headcorn" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:hea]);
+        slabel(:right :rail:rc75 :pax, xtd[:hea] + (-0.5dt, -1.4dt),
+            "Headcorn"
+        );
+    }
+
+    with link = "point.gb.Ashford-International" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:ash] >> 0.5dt);
+    }
+
+    with link = "point.gb.Sandling" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:san] >> 0.5dt);
+    }
+
+    with link = "point.gb.Folkestone-West" {
+        with layer = 1 marker(:statdot :rail:rc75 :pax, xtd[:fow]);
+    }
+
+    with link = "point.gb.Folkestone-East" {
+        with layer = 1 marker(:statdot :rail:rc75, xtd[:foe]);
+    }
+
+    with link = "point.gb.Dover-Town" {
+        with layer = 1 marker(:statdot :removed, xtd[:dot]);
+    }
+}

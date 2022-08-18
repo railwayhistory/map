@@ -1,0 +1,50 @@
+# GB MBD.  Melton Mowbray - Bottesford North Junction.
+with detail = 2 {
+    let mbd = path("d2.gb.mbd");
+
+    with link = "line.gb.MBD" {
+        track(:first :double :removed, mbd[:mel, :bon]);
+
+        guide(:linenum :removed,
+                mbd[:sca + 2.8km] << 1.0dt
+            --  mbd[:sca + 2.8km] << 3.0dt
+        );
+        label(:linenum :removed, mbd[:sca + 2.8km] << 3.0dt,
+            hbox(:right:middle, "MBD ")
+        );
+        guide(:linenum :removed,
+                mbd[:bot - 3km] << 1.0dt
+            --  mbd[:bot - 3km] << 3.0dt
+        );
+        label(:linenum :removed, mbd[:bot - 3km] << 2.9dt,
+            hbox(:right:bottom, "MBD")
+        );
+    }
+
+    with link = "point.gb.Scalford" {
+        with layer = 1 marker(:statdot :removed, mbd[:sca]);
+    }
+
+    with link = "point.gb.Harby-Stathern" {
+        with layer = 1 marker(:statdot :removed, mbd[:har]);
+        slabel(:left :removed, mbd[:har] + (-1.5dt, 0dt),
+            vbox(:right:middle, "Harby &", "Stathern ")
+        );
+    }
+
+    with link = "point.gb.Bottesford-South" {
+        with layer = 1 marker(:statdot :removed, mbd[:bot]);
+    }
+}
+
+
+# GB MSG.  March - Spalding.
+with detail = 2 {
+    let msg = path("d2.gb.msg");
+
+    with link = "line.gb.MSG" {
+        track(:first :double :removed, msg[:mar.ys, :spa.ym]);
+        line_badge(:removed, msg[:spa.ym - 14.5km], "MSG");
+    }
+}
+

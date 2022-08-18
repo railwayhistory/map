@@ -66,7 +66,7 @@ given a VzG number are also included.
 | S (Saarbrücken)    | complete    | not started |
 | T (Stuttgart)      | complete    | not started |
 | U (Erfurt)         | complete    | not started |
-| W (Schwerin)       | in progress | not started |
+| W (Schwerin)       | complete    | not started |
 
 
 ### FR: France
@@ -78,7 +78,7 @@ The overview map currently only covers current and previous lines of the RFN.
 
 | region             | overview    | detail      |
 | ------------------ | ----------- | ----------- |
-| 0                  | complete    | not started |
+| 0                  | in progress | not started |
 | 1                  | in progress | not started |
 | 2                  | not started | not started |
 | 3                  | not started | not started |
@@ -92,27 +92,28 @@ The overview map currently only covers current and previous lines of the RFN.
 
 ### GB: United Kingdom
 
-The UK has been split into regions based on Network Rail’s regions. These
-have been numbered 0 to 9. Northern Ireland forms its own region labelled
-NI. Note that these are solely used for map editing purposes and lines are
-assigned to regions based on convenience rather than historical accuracy.
+The UK has been split into regions roughly based on British Rail’s original
+regions with quite a few liberties taken to arrive at continuous areas.
+Greater London has been given its own region with somewhat arbitrarily
+chosen borders. A sketch of the borders of these regions is provided by
+the file `research/gb/regions.osm` in this repository.
 
-The overview map currently aims to contain all lines that have an
-Engineer’s Line Reference (ELR).
+In addition, Northern Ireland forms its own region.
 
-| region                   | overview    | detail      |
-| ------------------------ | ----------- | ----------- |
-| 0 (Greater London)       | in progress | not started |
-| 1 (Anglia, East Midland) | in progress | not started |
-| 2 (North East)           | not started | not started |
-| 3 (North West)           | not started | not started |
-| 4 (Central, West Coast)  | not started | not started |
-| 5 (Scotland)             | not started | not started |
-| 6 (Kent, Sussex)         | not started | not started |
-| 7 (Wessex)               | not started | not started |
-| 8 (Wales)                | not started | not started |
-| 9 (Western)              | not started | not started |
-| NI (Northern Ireland)    | not started | not started |
+For Great Britain, the overview map currently aims to contain all lines that
+have an Engineer’s Line Reference (ELR) as well as all London Underground
+lines.
+
+| region                          | overview    | detail      |
+| ------------------------------- | ----------- | ----------- |
+| A (Scottish Region – “Alba”)    | not started | not started |
+| E (Eastern Region)              | not started | not started |
+| L (Greater London)              | not started | not started |
+| M (London Midland Region)       | not started | not started |
+| N (North Eastern Region)        | not started | not started |
+| S (Southern Region)             | not started | not started |
+| U (Northern Ireland – “Ulster”) | not started | not started |
+| W (Western Region)              | not started | not started |
 
 
 ### LU: Luxembourg
