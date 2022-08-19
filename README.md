@@ -80,8 +80,8 @@ The overview map currently only covers current and previous lines of the RFN.
 | ------------------ | ----------- | ----------- |
 | 0                  | in progress | not started |
 | 1                  | in progress | not started |
-| 2                  | not started | not started |
-| 3                  | not started | not started |
+| 2                  | in progress | not started |
+| 3                  | in progress | not started |
 | 4                  | not started | not started |
 | 5                  | not started | not started |
 | 6                  | not started | not started |

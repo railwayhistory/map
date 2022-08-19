@@ -1,0 +1,69 @@
+# FR 317.  Rochy-Condé - Soissons
+with detail = 2 {
+    let re = path("d2.fr.2.317.a");
+    let es = path("d2.fr.2.317.b");
+
+    with link = "line.fr.317" {
+        track(:first, re[:cle.ye, :avr]);
+        track(:first :removed, re[:avr, :est.yr]);
+        track(:first :pax, es[:est, :com.ye]);
+        track(:first, es[:com.ys, :lam]);
+        track(:first :closed, es[:lam, :vic]);
+        track(:first :removed, es[:vic, :soi.ye]);
+
+        line_badge(:open, re[:cle.ye + 6km] @ -2 << 0.2dt, "317");
+        guide(:linenum,
+                es[:com.ye - 6km] >> 0.7dt
+            --  es[:com.ye - 6km] >> 3.0dt
+        );
+        label(:linenum, es[:com.ye - 6km] >> 3.0dt + (-0.4dt, 0dt),
+            hbox(:center:top, "317")
+        );
+        line_badge(:removed, es[:vic + 5.8km] << 0.2dt, "317");
+    }
+
+    with link = "point.fr.Avrigny" {
+        with layer = 1 marker(:statdot, re[:avr]);
+        slabel(:right, re[:avr] + (-1dt, 0.8dt),
+            hbox(:left:top, "Avrigny")
+        );
+    }
+
+    with link = "point.fr.Rethondes" {
+        with layer = 1 marker(:statdot, es[:ret]);
+        slabel(:right, es[:ret] + (-1dt, -1.4dt), "Rethondes");
+    }
+
+    with link = "point.fr.Lamotte-Breuil" {
+        with layer = 1 marker(:statdot, es[:lam]);
+        slabel(:bottom, es[:lam] + (0dt, 1dt),
+            vbox(:center:top, " Lamotte-", "Breuil")
+        );
+    }
+}
+
+
+# FR 319.  Breteuil-Embranchement - Breteuil-Ville
+with detail = 2 {
+    let bb = path("d2.fr.319");
+
+    with link = "line.fr.319" {
+        track(:first, bb[:bre.yb, :brv]);
+
+        guide(:linenum,
+                bb[:brv - 2.5km] << 0.7dt
+            --  bb[:brv - 2.5km] << 3.0dt
+        );
+        label(:linenum, bb[:brv - 2.5km] << 3.0dt,
+            hbox(:center:top, "319")
+        );
+    }
+
+    with link = "point.fr.Breteuil-Ville" {
+        with layer = 1 marker(:statdot, bb[:brv]);
+        slabel(:left, bb[:brv] + (-1.0dt, 0dt),
+            vbox(:right:middle, "Breteuil-", "Ville ")
+        );
+    }
+}
+
