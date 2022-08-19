@@ -68,10 +68,11 @@ with detail = 2 {
     let lh = path("d2.de.4403");
 
     with link = "line.de.4403" {
-        track(:second, lh[:lau, :zol]);
+        track(:second :pax, lh[:lau, :stu]);
+        track(:second :museum, lh[:stu, :zol]);
         track(:second :pax, lh[:zol, :hin]);
 
-        line_badge(:open, lh[:lau + 10km] @ 3 << 0.3dt, "4403");
+        line_badge(:pax, lh[:lau + 10km] @ 3 << 0.3dt, "4403");
         guide(:linenum :pax,
                 lh[:hin - 7km] >> 0.7dt
             --  lh[:hin - 7km] >> 3.0dt
@@ -80,6 +81,11 @@ with detail = 2 {
             hbox(:left:middle :badgesize, " 4403")
         );
     }
+
+    with link = "point.de.Stühlingen" {
+        with layer = 1 marker(:statdot :pax, lh[:stu]);
+        slabel(:left :pax, lh[:stu] + (-1.5dt, 0.3dt), "Stühlingen");
+    };
 
     with link = "point.de.Blumberg-Zollhaus" {
         with layer = 1 marker(:statdot :pax, lh[:zol]);
