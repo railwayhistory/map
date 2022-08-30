@@ -941,16 +941,38 @@ with detail = [4, 5] {
 
         # 9120
         with layer = -2 track(:third:station :pax,
-                ak[:elm + 0.5sw, :elm.h] >> 1.5dt
+                ak[:elm - 30m, :elm.h] >> 1.5dt
         );
             with layer = -2 track(:station,
                     ak[:elm + 480m] >> 0.5dt
                 --  ak[:elm + 480m + 1dl] >> 1.5dt
             );
 
-        marker(:de.bf :cat:ac15 :pax :right, ak[:elm] >> 0.5dt);
+        # Bahnsteig 1
+        platform(:cat:ac15 :pax,
+                ak[:elm - 380m, :elm - 30m] >> 0.5dt
+            --  ak[:elm - 30m, :elm - 380m] << 1.2dt
+        );
+
+        # Bahnsteig 2/3
+        platform(:cat:ac15 :pax,
+                ak[:elm - 310m, :elm - 10m] << 0.5dt
+            --  ak[:elm - 10m, :elm - 310m] >> 1.2dt
+        );
+        platform(:cat:ac15 :pax,
+                ak[:elm - 225m, :elm + 80m] << 2.5dt
+            --  ak[:elm + 80m, :elm - 225m] >> 1.8dt
+        );
+
+        # Bahnsteig 8
+        platform(:pax,
+                ak[:elm - 30m, :elm + 90m] >> 1.5dt
+            --  ak[:elm + 90m, :elm - 30m] << 2.0dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :right, ak[:elm] >> 1.5dt);
         station(:right:left_align :cat:ac15 :pax,
-            ak[:elm - 0.4sw] >> 0.5dt >> 1.4sw,
+            ak[:elm - 0.4sw] >> 1.5dt >> 1.4sw,
             span(:bold, "Elmshorn"),
             hbox(:left:top,
                 vbox(:right:top,
@@ -1017,7 +1039,7 @@ with detail = [4, 5] {
         track(:first:station :double :cat:ac15 :pax,
                 ak[:hot - 1sw, :hot + 1sw]
         );
-        marker(:de.hp :cat:ac15 :pax :left, ak[:hot] << 0.5dt);
+        with layer = 1 marker(:de.hp :cat:ac15 :pax :left, ak[:hot] << 0.5dt);
         station(:right :cat:ac15 :pax, ak[:hot - 0.3sw] >> 2.0dt,
             "Horst in Holstein", "36,24"
         );

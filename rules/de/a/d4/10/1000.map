@@ -34,7 +34,7 @@ with detail = 4 {
         );
 
         marker(:statdt :cat:ac15 :right, flwhag[:fri] >> 0.5dt);
-        marker(:de.abzw :cat:ac15 :right, flwhag[:fri] >> 1.5dt);
+        marker(:de.abzw :cat:ac15 :right, flwhag[:fri] >> 1.0dt);
         station(
             :left :cat:ac15, flwhag[:fri - .4sw] << .5dt << 6bp,
             hbox(:center :base,
@@ -59,8 +59,13 @@ with detail = 4 {
 
 
     with link = "line.de.1000" {
-        track(:first :double :cat:ac15 :pax, flwhag[:fri + 100m, :har - 1sw]);
+        track(:first :double :cat:ac15 :pax,
+                flwhag[:har - 1.5km, :fri + 100m]
+        );
         with layer = 1 line_badge(:pax :cat:ac15, flwhag[:har - 1.5km], "1000");
+        track(:first :double :cat:ac15 :pax,
+                flwhag[:har - 1.5km, :har - 1sw]
+        );
     }
 
 
@@ -77,9 +82,18 @@ with detail = 4 {
                flwhag[:har.x + 3dl, :har.f] >> 2.5dt
         );
 
-        marker(:de.bf :removed, flwhag[:har] >> 0.5dt);
-        station(:right :left_align :removed, flwhag[:har - .4sw] >> 1.5sw,
-            "Harrislee", "177,44 (171,87)"
+        platform(:removed,
+                flwhag[:har - 40m, :har + 40m] >> 0.5dt
+            --  flwhag[:har + 40m, :har - 40m] << 1.2dt
+        );
+        platform(:removed,
+                flwhag[:har - 30m, :har + 50m] << 0.5dt
+            --  flwhag[:har + 50m, :har - 30m] << 0.1dt
+        );
+
+        marker(:de.bf :removed, flwhag[:har] >> 1.0dt);
+        station(:right :left_align :removed, flwhag[:har - .4sw] >> 1.6sw,
+            "Harrislee", " 177,44 (171,87)"
         );
     }
 

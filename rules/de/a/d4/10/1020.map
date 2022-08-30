@@ -7,19 +7,26 @@ with detail = 4 {
 
 
     with link = "line.de.1020" {
-        track(:second :pax,
-                hasfle[:has.f, :has.f + .1dl] >> 0.5dt
-            ..  hasfle[:has.ff, :kro - 1sw]
+        track(:second :pax :flip,
+                hasfle[:kro - 0.9km, :has.ff]
+            ..  hasfle[:has.f + .1dl, :has.f] << 0.5dt
         );
-        with layer = 1 line_badge(:pax, hasfle[:kro - 1.15km], "1020");
+        with layer = 1 line_badge(:pax, hasfle[:kro - 0.9km], "1020");
+        track(:second :pax, hasfle[:kro - 0.9km, :kro - 1sw]);
     }
 
 
     with link = "point.de.Kronshagen" {
         track(:second:station :pax, hasfle[:kro - 1sw, :kro + 1sw]);
-        with layer = -1 marker(:de.bf :gone :left, hasfle[:kro]);
+
+        platform(:pax,
+                hasfle[:kro - 60m, :kro + 55m]
+            --  hasfle[:kro + 55m, :kro - 60m] << 0.7dt
+        );
+
         marker(:de.hp :pax :left, hasfle[:kro]);
-        station(:left :pax, hasfle[:kro - 0.3sw] << 1.7sh,
+        marker(:de.exbf :pax :left, hasfle[:kro]);
+        station(:left :pax, hasfle[:kro - 0.4sw] << 1.9sh,
             "Kronshagen", "5,60"
         );
     }
@@ -40,13 +47,18 @@ with detail = 4 {
         # Gl. 2
         track(:second:station :pax, hasfle[:suc.a, :awik]);
 
+        platform(:pax,
+                hasfle[:suc - 140m, :suc + 15m] << 1dt
+            --  hasfle[:suc + 15m, :suc - 140m]
+        );
+
         marker(:de.bf:pax :left, hasfle[:suc] << 1dt);
         station(:left :pax :right_align, hasfle[:suc - .4sw] << 1dt << 1.3sh,
             span(:medium :bold, "Suchsdorf"),
             hbox(:center :base,
                 span(:regular, "1020: "),
                 span(:closed, "7,82 → "),
-                span(:regular, "7,75")
+                span(:regular, "7,75 ")
             )
         );
     }
@@ -99,8 +111,8 @@ with detail = 4 {
         );
 
         marker(:de.bbf :left, hasfle[:nwi] << 1dt);
-        with layer = -1 marker(:de.bf :removed :left, hasfle[:nwi] << 1dt);
-        station(:left, hasfle[:nwi - 0.3sw] << 1dt << 2.0sh,
+        marker(:de.exbf :left, hasfle[:nwi] << 1dt);
+        station(:left, hasfle[:nwi - 0.3sw] << 1dt << 2.2sh,
             span(:medium :bold, "Neuwittenbek"),
             hbox(:right :top,
                 vbox(:right :top,
@@ -130,8 +142,9 @@ with detail = 4 {
 
 
     with link = "line.de.1020" {
-        track(:second :pax, hasfle[:nwi.f, :get.a]);
-        with layer = 1 line_badge(:pax, hasfle[:nwi + 3km], "1020");
+        track(:second :pax :flip, hasfle[:nwi + 2.8km, :nwi.f]);
+        line_badge(:pax, hasfle[:nwi + 2.8km], "1020");
+        track(:second :pax, hasfle[:nwi + 2.8km, :get.a]);
     }
 
 
@@ -142,6 +155,12 @@ with detail = 4 {
             --  hasfle[:get.a + 2dl, :get.f - 2dl] >> 1dt
             --  hasfle[:get.f - 1dl, :get.f - 0.9dl]
         );
+
+        platform(:pax,
+                hasfle[:get - 100m, :get + 30m]
+            --  hasfle[:get + 30m, :get - 100m] << 1dt
+        );
+
         marker(:de.bf:pax :right, hasfle[:get] >> 1dt);
         station(:pax :right, hasfle[:get - 0.4sw] >> 1dt >> 1.4sh,
             "Gettorf", "19,15"
@@ -157,7 +176,7 @@ with detail = 4 {
     with link = "point.de.Neudorf" {
         track(:second:station :pax, hasfle[:ndo - 1sw, :ndo + 1sw]);
         with layer = -1 marker(:de.ldst :gone :left, hasfle[:ndo]);
-        station(:left :gone, hasfle[:ndo] << 1.8sh,
+        station(:left :gone, hasfle[:ndo - 0.2sw] << 2.0sh,
             "Neudorf", "22,80"
         );
     }
@@ -170,9 +189,9 @@ with detail = 4 {
 
     with link = "point.de.Altenhof-Schlesw" {
         track(:second :station :pax, hasfle[:aho - 1sw, :aho + 1sw]);
-        with layer = -1 marker(:de.bf :gone :right, hasfle[:aho]);
-        marker(:de.hp:pax :right, hasfle[:aho])
-        station(:pax :right, hasfle[:aho - 0.6sw] >> 1.5sh,
+        marker(:de.hp :removed :right, hasfle[:aho])
+        marker(:de.exbf :removed :right, hasfle[:aho])
+        station(:right :pax :removed, hasfle[:aho - 0.6sw] >> 1.7sh,
             hbox(:left :base,
                 span(:medium, "Altenhof "),
                 span(:medium :light, "(Schlesw)")
@@ -232,7 +251,17 @@ with detail = 4 {
             ..  hasfle[:ecs.en + 0.5sw - 1dl, :ecs + 1sw] << 3dt
         );
 
-        marker(:de.bf:pax :right, hasfle[:ecs]);
+        platform(:pax,
+                hasfle[:ecs, :ecs + 160m]
+            --  hasfle[:ecs + 160m, :ecs] << 0.7dt
+        );
+
+        platform(:pax,
+                hasfle[:ecs, :ecs + 160m] << 1.0dt
+            --  hasfle[:ecs + 160m, :ecs] >> 1.5dt
+        );
+
+        marker(:de.bf:pax :right, hasfle[:ecs] >> 0.5dt);
         station(:pax :right, hasfle[:ecs - 0.5sw] >> 1.5sh,
             span(:medium :bold, "Eckernförde"),
             "1020: 31,10"
@@ -241,9 +270,12 @@ with detail = 4 {
 
     
     with link = "line.de.1020" {
-        with layer = 2 track(:second :pax, hasfle[:ecs.f, :rie - 1sw]);
-        with layer = 1 casing(:second, hasfle[:ecs.xn - 1sw, :ecs.xn + 1sw]);
-        with layer = 3 line_badge(:pax, hasfle[:ecs + 3.2km], "1020");
+        with layer = 2 track(:second :pax :flip, hasfle[:rie - 3.3km, :ecs.f]);
+        with layer = 1 casing(
+            :second :flip, hasfle[:ecs.xn + 1sw, :ecs.xn - 1sw]
+        );
+        with layer = 3 line_badge(:pax, hasfle[:rie - 3.3km] << 0.2dt, "1020");
+        with layer = 2 track(:second :pax, hasfle[:rie - 3.3km, :rie - 1sw]);
     }
 
 
@@ -258,10 +290,15 @@ with detail = 4 {
             --  hasfle[:rie - 1.5sw + 3dl, :rie - .6sw] >> 2dt
         );
 
-        marker(:de.hp:pax, hasfle[:rie]);
-        with layer = -1 marker(:de.bf :gone, hasfle[:rie] >> 1dt);
-        station(:pax :right, hasfle[:rie - .35sw] >> 1dt >> 1.6sh,
-            "Rieseby", "39.74"
+        platform(:pax,
+                hasfle[:rie - 90m, :rie + 55m]
+            --  hasfle[:rie + 55m, :rie - 90m] << 0.7dt
+        );
+
+        marker(:de.hp :pax, hasfle[:rie] >> 1dt);
+        marker(:de.exbf :pax, hasfle[:rie] >> 1dt);
+        station(:pax :right, hasfle[:rie - .35sw] >> 1dt >> 1.8sh,
+            "Rieseby", "39,74"
         );
     }
 
@@ -279,28 +316,34 @@ with detail = 4 {
                 span(:medium :light, "Boren "),
                 span(:medium, "Schleibrücke")
             ),
-            "??"
+            "44,55"
         );
     }
 
 
     with link = "point.de.Lindaunis" {
         track(:second :station :pax, hasfle[:lin - 1sw, :lin.f]);
-        with layer = -1 {
-            track(:station :removed,
-                    hasfle[:lin - 1sw + 0.9dl, :lin - 1sw + 1dl] 
-                --  hasfle[:lin - 1sw + 2dl, :lin.f] >> 1dt
-            );
-            track(:station :removed,
-                    hasfle[:lin.f - 2.1dl, :lin.f - 2dl] >> 1dt
-                --  hasfle[:lin.f - 1dl, :lin.f - 0.9dl]
-            );
 
-            marker(:de.bf :removed, hasfle[:lin] >> 1dt);
-            station(:right :removed, hasfle[:lin - 0.4sw] >> 1dt >> 1.4sh,
-                "Lindaunis", "44,81"
-            );
-        }
+        track(:station :removed,
+                hasfle[:lin - 1sw + 0.9dl, :lin - 1sw + 1dl] 
+            --  hasfle[:lin - 1sw + 2dl, :lin.f] >> 1dt
+        );
+        track(:station :removed,
+                hasfle[:lin.f - 2.1dl, :lin.f - 2dl] >> 1dt
+            --  hasfle[:lin.f - 1dl, :lin.f - 0.9dl]
+        );
+
+        platform(:pax,
+                hasfle[:lin + 50m, :lin + 100m]
+            --  hasfle[:lin + 100m, :lin + 50m] << 0.7dt
+        );
+
+        marker(:de.hp :museum, hasfle[:lin] >> 1dt);
+        marker(:de.exbf :museum, hasfle[:lin] >> 1dt);
+        station(:right :museum, hasfle[:lin - 0.4sw] >> 1dt >> 1.6sh,
+            "Lindaunis",
+            hbox(:center:base, "44,89", span(:removed, " ← 44,81"))
+        );
     }
 
 
@@ -363,8 +406,17 @@ with detail = 4 {
                 hasfle[:sud + .6sw, :sud.sn - 1dl] >> 1dt
         );
 
-        marker(:de.bf:pax :right, hasfle[:sud]);
-        station(:pax :right, hasfle[:sud - .3sw] >> 1.4sh,
+        platform(:pax,
+                hasfle[:sud - 50m, :sud + 120m]
+            --  hasfle[:sud + 120m, :sud - 50m] << 0.7dt
+        );
+        platform(:pax,
+                hasfle[:sud, :sud + 150m] << 1.0dt
+            --  hasfle[:sud + 150m, :sud] >> 1.6dt
+        );
+
+        marker(:de.bf:pax :right, hasfle[:sud] >> 0.5dt);
+        station(:pax :right, hasfle[:sud - .3sw] >> 0.5dt >> 1.4sh,
             span(:medium :bold, "Süderbrarup"),
             hbox(:left :top,
                 vbox(:right :top,
@@ -385,8 +437,9 @@ with detail = 4 {
 
 
     with link = "line.de.1020" {
-        track(:second :pax, hasfle[:sud.f, :moh - 1sw]);
-        with layer = 1 line_badge(:pax, hasfle[:sud + 3km], "1020");
+        track(:second :pax :flip, hasfle[:sud + 3km, :sud.f]);
+        line_badge(:pax, hasfle[:sud + 3km] >> 0.2dt, "1020");
+        track(:second :pax, hasfle[:sud + 3km, :moh - 1sw]);
     }
 
 
@@ -398,10 +451,10 @@ with detail = 4 {
             --  hasfle[:moh.f - 1dl, :moh.f - 0.9dl]
         );
         marker(:de.bf :removed, hasfle[:moh] >> 1dt);
-        station(:right, hasfle[:moh - .4sw] >> 1dt >> 1.4sh,
+        station(:right :closed, hasfle[:moh - .4sw] >> 1dt >> 1.4sh,
             hbox(:left :base,
-                span(:medium :closed, "Mohrkirch"),
-                span(:medium :gone, "osterholz")
+                "Mohrkirch",
+                span(:gone, "osterholz")
             ),
             "57,08"
         );
@@ -435,8 +488,14 @@ with detail = 4 {
                 --  hasfle[:sor + .5sw + 1dl, :sor + .5sw + 1.1dl] << 1dt
             );
         }
+
+        platform(:pax,
+                hasfle[:sor - 150m, :sor] >> 1dt
+            --  hasfle[:sor, :sor - 150m]
+        );
+
         marker(:de.bf:pax :right, hasfle[:sor] >> 1dt);
-        station(:pax :top, hasfle[:sor] >> 1dt >> 1.5sw,
+        station(:pax :top, hasfle[:sor] >> 1dt >> 1.5sh + (1dt, 0dt),
             span(:medium :bold, "Sörup"),
             "1020: 62,50"
         );
@@ -450,9 +509,9 @@ with detail = 4 {
 
     with link = "point.de.Winderatt" {
         track(:second:station :pax, hasfle[:win - 1sw, :win + 1sw]);
-        with layer = -1 marker(:de.hp :removed, hasfle[:win]);
-        with layer = -2 marker(:de.bf :gone, hasfle[:win]);
-        station(:right :removed, hasfle[:win - .4sw] >> 1.2sw,
+        marker(:de.hp :removed, hasfle[:win]);
+        marker(:de.exbf :removed, hasfle[:win]);
+        station(:right :removed, hasfle[:win - .4sw] >> 1.4sw,
             "Winderatt", "65,60"
         );
     }
@@ -465,19 +524,24 @@ with detail = 4 {
 
     with link = "point.de.Husby" {
         track(:second:station :pax, hasfle[:hus.a, :huh + 1sw]);
-        with layer = -4 {
-            track(:station :removed,
-                    hasfle[:hus.a + 2dl, :huh + 1sw - 2dl] >> 1dt
-                --  hasfle[:huh + 1sw - 1dl, :huh + 1sw - .9dl]
-            );
-            track(:station :removed,
-                    hasfle[:hus.a + .9dl, :hus.a + 1dl]
-                --  hasfle[:hus.a + 3dl, :hus - .6sw] >> 2dt
-            );
-        }
-        with layer = -2 marker(:de.bf :removed :right, hasfle[:hus] >> 1dt);
-        marker(:de.hp:pax :left, hasfle[:huh]);
-        station(:pax :top, hasfle[:hus] >> 1dt >> 1.4sw,
+
+        track(:station :removed,
+                hasfle[:hus.a + 2dl, :huh + 1sw - 2dl] >> 1dt
+            --  hasfle[:huh + 1sw - 1dl, :huh + 1sw - .9dl]
+        );
+        track(:station :removed,
+                hasfle[:hus.a + .9dl, :hus.a + 1dl]
+            --  hasfle[:hus.a + 3dl, :hus - .6sw] >> 2dt
+        );
+
+        platform(:pax,
+                hasfle[:huh - 80m, :huh + 75m]
+            --  hasfle[:huh + 75m, :huh - 80m] >> 0.7dt
+        );
+
+        marker(:de.bf :removed :right, hasfle[:hus] >> 1dt);
+        marker(:de.hp:pax :left, hasfle[:huh] << 0.5dt);
+        station(:pax :top, hasfle[:hus] >> 1dt >> 1.2sh,
             "Husby",
             hbox(:center :top,
                 span(:xsmall, "70,64 "),
@@ -488,8 +552,9 @@ with detail = 4 {
 
 
     with link = "line.de.1020" {
-        track(:second :pax, hasfle[:huh + 1sw, :maa - 1sw]);
-        with layer = 1 line_badge(:pax, hasfle[:huh + 1.8km], "1020");
+        track(:second :pax :flip, hasfle[:huh + 1.7km, :huh + 1sw]);
+        line_badge(:pax, hasfle[:huh + 1.7km] >> 0.2dt, "1020");
+        track(:second :pax, hasfle[:huh + 1.7km, :maa - 1sw]);
     }
 
 
@@ -497,7 +562,7 @@ with detail = 4 {
         track(:second:station :pax, hasfle[:maa - 1sw, :maa + 1sw]);
         with layer = -1 marker(:de.bf :removed :left, hasfle[:maa]);
         station(
-            :bottom :removed, hasfle[:maa] << 1.5sw - (15pt, 0pt),
+            :bottom :removed, hasfle[:maa] << 1.4sh - (15pt, 0pt),
             hbox(:left :base,
                 span(:medium :removed, "Maasbüll "),
                 span(:medium :light :removed, "(Angeln)")
@@ -509,13 +574,16 @@ with detail = 4 {
 
     with link = "line.de.1020" {
         track(:second :pax :flip,
-                hasfle[:fle.gg, :fle.gg - 0.1dl] << 2.5dt
-            ..  hasfle[:fle.aaa, :maa + 1sw]
+                hasfle[:mag + 1.4km, :maa + 1sw]
+        );
+        line_badge(:pax, hasfle[:mag + 1.4km] >> 0.2dt, "1020");
+        track(:second :pax,
+                hasfle[:mag + 1.4km, :fle.aaa]
+            ..  hasfle[:fle.gg - 0.1dl, :fle.gg] >> 2.5dt
         );
         track(:second :pax :tight,
                 hasfle[:fle.gg, :fle.g] >> 2.5dt
         );
-        with layer = 1 line_badge(:pax, hasfle[:mag + 1.4km], "1020");
     }
 
 

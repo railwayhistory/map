@@ -1,40 +1,43 @@
 # DE 1005.  Flensburg (ausschl) - Flensburg Friedensweg (ausschl)
 #
-let flefri = path("d4.de.1005");
+let ff = path("d4.de.1005");
 
 with detail = 4 {
     # point.de.Flensburg  de.1040
 
 
     with link = "line.de.1005" {
-        track(:first :cat:ac15 :pax :flip, flefri[:fle.f, :fls.a - 0.3sw]);
+        track(:first :cat:ac15 :pax :flip, ff[:fle.f, :fls.a - 0.3sw]);
     }
 
 
     with link = "point.de.Flensburg-Süd" {
-        track(:first:station :cat:ac15 :pax, flefri[:fls.a - 0.3sw, :fls.f]);
-        with layer = -4 track(:station :closed, flefri[:fls.a, :fls.f] >> 1dt);
+        track(:first:station :cat:ac15 :pax, ff[:fls.a - 0.3sw, :fls.f]);
+        with layer = -4 track(:station :closed, ff[:fls.a, :fls.f] >> 1dt);
         with layer = -4 track(:station,
-                flefri[:fls + 0.9dl, :fls + 1dl]
-            --  flefri[:fls + 2dl, :fls + 2.1dl] >> 1dt
+                ff[:fls + 0.9dl, :fls + 1dl]
+            --  ff[:fls + 2dl, :fls + 2.1dl] >> 1dt
         );
-        marker(:de.awanst :cat:ac15, flefri[:fls] >> 1dt);
-        station(:right :cat:ac15, flefri[:fls] << 1sw,
+        marker(:de.awanst :cat:ac15, ff[:fls] >> 1dt);
+        station(:right :cat:ac15, ff[:fls] << 1sw,
             "F. Süd", "1,69"
         );
     }
 
 
     with link = "line.de.1005" {
+        with layer = 2 track(:first :cat:ac15 :pax,
+                ff[:fls + 1.2km, :fls.f]
+        );
         with layer = 2 track(:first :cat:ac15 :pax :flip,
-                flefri[:fls.f, :fri.aa]
-            ..  flefri[:ffle, :fri - 1sw] >> 1.5dt
+                ff[:fls + 1.2km, :fri.aa]
+            ..  ff[:ffle, :fri.a] >> 1.5dt
         );
         with layer = 1 casing(:first :cat:ac15 :pax :flip,
-                flefri[:fls + 2km, :fls + 3km]
+                ff[:fls + 2km, :fls + 3km]
         );
         with layer = 3 line_badge(:pax :cat:ac15,
-            flefri[:fls + 1.2km], "1005"
+            ff[:fls + 1.2km] >> 0.2dt, "1005"
         );
     }
 

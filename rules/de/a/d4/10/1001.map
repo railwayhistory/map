@@ -7,85 +7,141 @@ with detail = [4, 5] {
 
 
     with link = "line.de.1001" {
-        with layer = -4 track(:second :closed,
-                flwlin[:flw.c + 6dt, :han - 1sw]
+        with layer = -4 track(:second :closed :flip,
+                flwlin[:flw.c + 2km, :flw.c + 6dt]
         );
-        with layer = 1 line_badge(:closed, flwlin[:flw.c + 2km], "1001");
+        line_badge(:closed, flwlin[:flw.c + 2km], "1001");
+        track(:second :closed,
+                flwlin[:flw.c + 2km, :han - 400m]
+        );
     }
 
  
     with link = "point.de.Handewitt" {
-        with layer = -4 track(:second:station :closed,
-                flwlin[:han - 1sw, :han + 1sw]
+        # Gl. 1
+        track(:second:station :closed,
+                flwlin[:han - 400m, :han + 300m]
         );
-        with layer = -4 marker(:de.hst :closed :left, flwlin[:han]);
-        station(:bottom :closed, flwlin[:han] << 1.3sw,
+
+        # Gl. 2
+        track(:station :removed,
+                flwlin[:han - 300m, :han - 140m] << 1dt
+            --  flwlin[:han - 100m, :han - 99m]
+        );
+
+        # Bst Ri Flensburg
+        platform(:removed,
+                flwlin[:han - 50m, :han + 60m]
+            --  flwlin[:han + 60m, :han - 50m] >> 0.7dt
+        );
+
+        # Bst Ri Lindholm
+        platform(:removed,
+                flwlin[:han + 160m, :han + 260m]
+            --  flwlin[:han + 260m, :han + 160m] >> 0.7dt
+        );
+
+        marker(:de.hst :closed :left, flwlin[:han] << 0.5dt);
+        station(:bottom :closed, flwlin[:han] << 0.5dt << 1.2sh,
             "Handewitt", "5,74 (172,74)"
         );
     }
 
 
     with link = "line.de.1001" {
-        with layer = -4 track(:second :closed, flwlin[:han + 1sw, :una - 1sw]);
+        track(:second :closed, flwlin[:han + 300m, :una - 1sw]);
     }
 
 
     with link = "point.de.Unaften" {
-        with layer = -4 track(:second:station :closed,
+        track(:second:station :closed,
                 flwlin[:una - 1sw, :una + 1sw]
         );
-        with layer = -4 marker(:de.hp :closed :right, flwlin[:una]);
-        station(:top :closed, flwlin[:una] >> 1.3sw,
+        
+        platform(:removed,
+                flwlin[:una - 50m, :una + 50m]
+            --  flwlin[:una + 50m, :una - 50m] << 0.7dt
+        );
+
+        with layer = -4 marker(:de.hp :closed :right, flwlin[:una] >> 0.5dt);
+        station(:top :closed, flwlin[:una] >> 0.5dt >> 1.3sh,
             "Unaften", "7,74 (174,74)"
         );
     }
 
 
     with link = "line.de.1001" {
-        with layer = -4 track(:second :closed, flwlin[:una + 1sw, :wal.a]);
+        track(:second :closed, flwlin[:una + 1sw, :wal - 480m]);
     }
 
 
     with link = "point.de.Wallsbüll" {
-        with layer = -4 track(:second:station :closed,
-                flwlin[:wal.a, :wal.f]
+        # Gl. 1
+        track(:second:station :closed,
+                flwlin[:wal - 480m, :wal + 280m]
         );
-        with layer = -5 track(:station :removed,
-               flwlin[:wal.a + 49m, :wal.a + 50m]
-            -- flwlin[:wal.a + 50m + 1dl, :wal.f - 50m - 1dl] >> 1dt
-            -- flwlin[:wal.f - 50m, :wal.f - 49m]
+
+        # Gl. 2
+        track(:station :removed,
+               flwlin[:wal - 361m, :wal - 360m]
+            -- flwlin[:wal - 310m, :wal + 190m] >> 1dt
+            -- flwlin[:wal + 240m, :wal + 241m]
         );
-        with layer = -4 track(:station :closed,
-                flwlin[:wal.a + 69m, :wal.a + 70m]
-            --  flwlin[:wal.a + 70m + 1dl, :wal - 0.6sw - 1dl] << 1dt
-            --  flwlin[:wal - 0.6sw, :wal - 0.59sw]
+
+        # Gl. 3
+        track(:station :closed,
+                flwlin[:wal - 321m, :wal - 320m]
+            --  flwlin[:wal - 270m, :wal - 110m] << 1dt
+            --  flwlin[:wal - 60m, :wal - 59m]
         );
-        with layer = -4 marker(:de.bf :closed :left, flwlin[:wal]);
-        station(:bottom :closed, flwlin[:wal] << 1.3sw + (8bp, 0bp),
+
+        # Anschl. Bw
+        track(:station :removed,
+                flwlin[:wal - 420m] >> 10dt
+            --  flwlin[:wal - 320m] >> 5dt
+            ..  flwlin[:wal - 160m, :wal] >> 2dt
+            --  flwlin[:wal + 50m, :wal + 51m] >> 1dt
+        );
+
+        # Bahnsteig 1
+        platform(:removed,
+                flwlin[:wal - 40m, :wal + 70m]
+            --  flwlin[:wal + 70m, :wal - 40m] >> 0.7dt
+        );
+
+        # Bahnsteig 2
+        platform(:removed,
+                flwlin[:wal - 70m, :wal + 70m] >> 1.0dt
+            --  flwlin[:wal + 70m, :wal - 70m] << 0.4dt
+        );
+
+        marker(:de.bf :closed :left, flwlin[:wal] << 0.7dt);
+        station(:bottom :closed, flwlin[:wal] << 0.7dt << 1.2sh + (8bp, 0bp),
             "Wallsbüll", "11,43 (178,44)"
         );
     }
 
 
     with link = "line.de.1001" {
-        with layer = -4 track(:second :closed, flwlin[:wal.f, :saf - 1sw]);
+        track(:second :closed, flwlin[:wal + 280m, :saf - 1sw]);
     }
 
 
     with link = "point.de.Schafflund" {
-        with layer = -4 track(:second:station :closed,
+        track(:second:station :closed,
                 flwlin[:saf - 1sw, :saf + 1sw]
         );
-        with layer = -4 marker(:de.hst :closed :left, flwlin[:saf]);
-        station(:bottom :closed, flwlin[:saf] << 1.3sw,
+        marker(:de.hst :closed :left, flwlin[:saf]);
+        station(:bottom :closed, flwlin[:saf] << 1.2sh,
             "Schafflund", "15,56 (182,57)"
         );
     }
 
 
     with link = "line.de.1001" {
-        with layer = -4 track(:second :closed, flwlin[:saf + 1sw, :spr - 1sw]);
-        with layer = 1 line_badge(:closed, flwlin[:saf + 3km], "1001");
+        track(:second :closed :flip, flwlin[:saf + 3km, :saf + 1sw]);
+        line_badge(:closed, flwlin[:saf + 3km], "1001");
+        track(:second :closed, flwlin[:saf + 3km, :spr - 1sw]);
     }
 
 
@@ -94,7 +150,7 @@ with detail = [4, 5] {
                 flwlin[:spr - 1sw, :spr + 1sw]
         );
         with layer = -4 marker(:de.bf :closed :right, flwlin[:spr]);
-        station(:top :closed, flwlin[:spr] >> 1.3sw,
+        station(:top :closed, flwlin[:spr] >> 1.2sh,
             "Sprakebüll", "21,93 (188,90)"
         );
     }
@@ -106,11 +162,9 @@ with detail = [4, 5] {
 
 
     with link = "point.de.Achtrup" {
-        with layer = -4 track(:second:station :closed,
-                flwlin[:ach - 1sw, :ach + 1sw]
-        );
-        with layer = -4 marker(:de.hst :removed :left, flwlin[:ach]);
-        station(:bottom :removed, flwlin[:ach] << 1.3sw,
+        track(:second:station :closed, flwlin[:ach - 1sw, :ach + 1sw]);
+        marker(:de.hst :removed :left, flwlin[:ach]);
+        station(:bottom :removed, flwlin[:ach] << 1.2sh,
             "Achtrup", "25,44 (192,44)"
         );
     }
@@ -122,20 +176,18 @@ with detail = [4, 5] {
 
 
     with link = "point.de.Leck" {
-        with layer = -4 track(:second:station :closed,
-                flwlin[:lec - 1sw, :lec + 1sw]
-        );
-        with layer = -4 marker(:de.bf :closed :left, flwlin[:lec]);
-        station(
-            :bottom :closed, flwlin[:lec] << 1.3sw,
+        track(:second:station :closed, flwlin[:lec - 1sw, :lec + 1sw]);
+        marker(:de.bf :closed :left, flwlin[:lec]);
+        station(:bottom :closed, flwlin[:lec] << 1.2sh,
             "Leck", "28,79 (195,79)"
         );
     }
 
 
     with link = "line.de.1001" {
-        with layer = -4 track(:second :closed, flwlin[:lec + 1sw, :lin.aa]);
-        with layer = 1 line_badge(:closed, flwlin[:lin.aa - 3km], "1001");
+        track(:second :closed :flip, flwlin[:lin.aa - 3km, :lec + 1sw]);
+        line_badge(:closed, flwlin[:lin.aa - 3km], "1001");
+        track(:second :closed, flwlin[:lin.aa - 3km, :lin.aa]);
     }
 
 
