@@ -2,11 +2,6 @@
 
 ## Updates
 
-### Upcoming
-
-*  Lines BE 96 between Quévy and the border and FR 247 are set to loose
-   passenger service 2022-12.
-
 ### 2022-08-31
 
 *  Line _DE 1100_ north between _Neustadt (Holst) Gbf_ and line _DE 1103_
@@ -20,6 +15,8 @@
 (No corrections tracked before 2022-08-30.)
 
 ## New Additions
+
+| 2022-09-07 | Added detail 2 of lines FR 4xx. |
 
 (No additions tracked before 2022-08-30.)
 

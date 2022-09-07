@@ -1,0 +1,264 @@
+# FR 400.  Échauffour - Bernay
+with detail = 2 {
+    let eb = path("d2.fr.400");
+
+    with link = "line.fr.400" {
+        track(:first :removed, eb[:ech.yb, :ber.ye]);
+
+        guide(:linenum :removed,
+                eb[:tri - 11km] >> 0.7dt
+            --  eb[:tri - 11km] >> 3.0dt
+        );
+        label(:linenum :removed, eb[:tri - 11km] >> 3.5dt,
+            hbox(:left:middle, "400")
+        );
+        guide(:linenum :removed,
+                eb[:tri + 9.4km] >> 0.7dt
+            --  eb[:tri + 9.4km] >> 3.0dt
+        );
+        label(:linenum :removed, eb[:tri + 9.4km] >> 3.5dt,
+            hbox(:left:middle, "400")
+        );
+    }
+
+    with link = "point.fr.La-Trinité-de-Réville" {
+        with layer = 1 marker(:statdot :removed, eb[:tri]);
+        slabel(:right :removed, eb[:tri] + (1.5dt, 1.5dt),
+            "La Trinité-de-Réville"
+        );
+    }
+}
+
+
+# FR 401.  La Trinité-de-Réville - Lisieux
+with detail = 2 {
+    let tl = path("d2.fr.401");
+
+    with link = "line.fr.401" {
+        track(:first :removed, tl[:tri.yl, :lis.ys]);
+
+        guide(:linenum :removed,
+                tl[:tri.yl + 10km] << 0.7dt
+            --  tl[:tri.yl + 10km] << 3.0dt
+        );
+        label(:linenum :removed, tl[:tri.yl + 10km] << 3.5dt,
+            hbox(:right:middle, "401")
+        );
+    }
+}
+
+
+# FR 402.  Sainte-Gauburge - Mesnil-Mauger
+with detail = 2 {
+    let gm = path("d2.fr.402");
+
+    with link = "line.fr.402" {
+        track(:first :removed, gm[:sga.ym, :mes.ye]);
+
+        guide(:linenum :removed,
+                gm[:ech + 20km] >> 0.7dt
+            --  gm[:ech + 20km] >> 3.0dt
+        );
+        label(:linenum :removed, gm[:ech + 20km] >> 3.5dt,
+            hbox(:left:middle, "402")
+        );
+        guide(:linenum :removed,
+                gm[:mes.ye - 8km] >> 0.7dt
+            --  gm[:mes.ye - 8km] >> 3.0dt
+        );
+        label(:linenum :removed, gm[:mes.ye - 8km] >> 3.0dt + (1dt, 0dt),
+            hbox(:center:bottom, "402")
+        );
+    }
+
+    with link = "point.fr.Échauffour" {
+        with layer = 1 marker(:statdot :removed, gm[:ech]);
+        slabel(:left :removed, gm[:ech] + (-1.5dt, 1.0dt), "Échauffour");
+    }
+}
+
+
+# FR 403.300. Raccordement de Surdon
+with detail = 2 {
+    let cc = path("d2.fr.403.300");
+
+    with link = "line.fr.403.300" {
+        track(:first :removed, cc[:chn, :cha]);
+        track(:station, cc[:cha, :chs]);
+    }
+}
+
+
+# FR 405.  Argentan - Granville
+with detail = 2 {
+    let ag = path("d2.fr.405");
+
+    with link = "line.fr.405" {
+        track(:first :pax, ag[:arg.yb, :shi]);
+        track(:first :double :pax, ag[:shi, :fle]);
+        track(:first :pax, ag[:fle, :vie]);
+        track(:first :double :pax, ag[:vie, :fou]);
+        track(:first :pax, ag[:fou, :fol]);
+        track(:first :double :pax, ag[:fol, :gra]);
+
+        guide(:linenum :pax,
+                ag[:arg.yb + 9km] << 0.7dt
+            --  ag[:arg.yb + 9km] << 3.0dt
+        );
+        label(:linenum :pax, ag[:arg.yb + 9km] << 3.0dt,
+            hbox(:center:top, "405")
+        );
+        line_badge(:pax, ag[:bri + 8.8km] @ -1, "405");
+        guide(:linenum :pax,
+                ag[:mon + 5.5km] << 0.7dt
+            --  ag[:mon + 5.5km] << 3.0dt
+        );
+        label(:linenum :pax, ag[:mon + 5.5km] << 3.0dt + (-0.5dt, 0dt),
+            hbox(:center:top, "405")
+        );
+        guide(:linenum :pax,
+                ag[:fou + 19.6km] >> 0.7dt
+            --  ag[:fou + 19.6km] >> 3.0dt
+        );
+        label(:linenum :pax, ag[:fou + 19.6km] >> 3.0dt,
+            hbox(:center:bottom, "405")
+        );
+        line_badge(:pax, ag[:fol + 6km], "405");
+    }
+
+    with link = "point.fr.Briouze" {
+        with layer = 1 marker(:statdot :pax, ag[:bri]);
+        slabel(:right :pax, ag[:bri] + (-2dt, -1.5dt), "Briouze");
+    }
+
+    with link = "point.fr.Flers" {
+        with layer = 1 marker(:statdot :pax, ag[:fle]);
+        slabel(:right :pax, ag[:fle] + (1.5dt, -0.3dt), "Flers");
+    }
+
+    with link = "point.fr.Cerisi-Belle-Étoile" {
+        with layer = 1 marker(:statdot :removed, ag[:cer]);
+        slabel(:right :removed, ag[:cer] + (1.3dt, -0.3dt),
+            "Cerisi-Belle-Étoile"
+        );
+    }
+
+    with link = "point.fr.Montsecret-Vassy" {
+        with layer = 1 marker(:statdot :removed, ag[:mon]);
+        slabel(:top :removed, ag[:mon] + (0dt, -0.8dt),
+            vbox(:center:bottom, " Montsecret-", "Vassy")
+        );
+    }
+
+    with link = "point.fr.Vire" {
+        with layer = 1 marker(:statdot :pax, ag[:vir]);
+        slabel(:bottom :pax, ag[:vir] + (1.5dt, 0.8dt), "Vire");
+    }
+
+    with link = "point.fr.Folligny" {
+        with layer = 1 marker(:statdot :pax, ag[:fol]);
+        slabel(:right :pax, ag[:fol] + (1dt, -1dt), "Folligny");
+    }
+
+    with link = "point.fr.Granville" {
+        with layer = 1 marker(:statdot :pax, ag[:gra]);
+        slabel(:bottom :pax, ag[:gra] + (-2dt, 1dt), "Granville");
+    }
+}
+
+
+# FR 408.  Connerré - Rennes (LGV)
+with detail = 2 {
+    let cr = path("d2.fr.408");
+
+    with link = "line.fr.408" {
+        track(:first :double :cat:ac25 :v300 :pax, cr[:con, :ren.yl]);
+
+        line_badge(:cat:ac25 :v300 :pax, cr[:con + 8km], "408");
+        line_badge(:cat:ac25 :v300 :pax, cr[:poi - 13km] @ 1 >> 0.2dt, "408");
+        line_badge(
+            :cat:ac25 :v300 :pax, cr[:ren.yl - 44km] @ -3 >> 0.2dt, "408"
+        );
+    }
+}
+
+
+# FR 408.340.  Raccordement de Sablé-sur-Sarthe
+with detail = 2 {
+    let rs = path("d2.fr.408.340");
+
+    with link = "line.fr.408.340" {
+        track(:first :double :cat:ac25 :pax, rs[:poi, :sab.yl]);
+
+        guide(:linenum :cat:ac25 :pax,
+                rs[:poi.ys + 1km] >> 1dt
+            --  rs[:poi.ys + 1km] >> 3dt
+        );
+        label(:linenum :cat:ac25 :pax, rs[:poi.ys + 1km] >> 3.5dt,
+            hbox(:right:middle, "408.340")
+        );
+    }
+}
+
+
+# FR 408.345.  Raccordement de virgule de Sablé-sur-Sarthe
+with detail = 2 {
+    with link = "line.fr.408.345" {
+        track(:first :cat:ac25,
+                path("d2.fr.408.345")[:poi.yo, :poi.ys]
+        );
+    }
+}
+
+
+# FR 408.370.  Raccordement de Laval-Ouest
+with detail = 2 {
+    with link = "line.fr.408.370" {
+        track(:first :double :cat:ac25 :pax,
+                path("d2.fr.408.370")[:lav.y, :sbe.yl]
+        );
+    }
+}
+
+
+# FR 409.  Chartres - Dreux
+with detail = 2 {
+    let cd = path("d2.fr.409");
+
+    with link = "line.fr.409" {
+    }
+}
+
+
+# FR 409.  Chartres - Dreux
+with detail = 2 {
+    let cd = path("d2.fr.409");
+
+    with link = "line.fr.409" {
+        track(:first :closed, cd[:cha.yd, :ssa]);
+        track(:first :removed, cd[:ssa, :aun]);
+        track(:first, cd[:aun, :dre.yc]);
+
+        line_badge(:closed, cd[:cha.yd + 10km], "409");
+        guide(:linenum,
+                cd[:aun + 4km] >> 0.7dt
+            --  cd[:aun + 4km] >> 3.0dt
+        );
+        label(:linenum, cd[:aun + 4km] >> 3.5dt,
+            hbox(:left:middle, "409")
+        );
+    }
+
+    with link = "point.fr.Saint-Sauveur-Châteauneuf" {
+        with layer = 1 marker(:statdot :closed, cd[:ssa]);
+        slabel(:right :closed, cd[:ssa] + (1.5dt, 0.8dt),
+            vbox(:left:bottom, "Saint-Sauveur-", "Châteauneuf")
+        );
+    }
+
+    with link = "point.fr.Aunay-Tréon" {
+        with layer = 1 marker(:statdot, cd[:aun]);
+        slabel(:left, cd[:aun] + (-1.3dt, -0.5dt), "Aunay-Tréon");
+    }
+}
+

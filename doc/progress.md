@@ -75,7 +75,7 @@ digit of the line number of the RFN.
 | 1                  | in progress | not started |
 | 2                  | in progress | not started |
 | 3                  | in progress | not started |
-| 4                  | not started | not started |
+| 4                  | in progress | not started |
 | 5                  | not started | not started |
 | 6                  | not started | not started |
 | 7                  | not started | not started |

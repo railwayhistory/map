@@ -1,0 +1,29 @@
+# FR 431.  Paris-Montparnasse - Monts (LGV)
+with detail = 2 {
+    let pm = path("d2.fr.431");
+
+    with link = "line.fr.431" {
+        track(:first :double :cat:dc15 :pax, pm[:pam.ym, :scs]);
+        track(:first :double :cat:ac25 :v200 :pax, pm[:scs, :mat]);
+        track(:first :double :cat:ac25 :v300 :pax,
+                pm[:mat, :aun.yl - 4dt]
+            ..  pm[:aun.yl, :vov.yn] << 1dt
+            ..  pm[:vov.yn + 4dt, :vov.yo - 4dt]
+            ..  pm[:vov.yo, :mor.yl] >> 1dt
+            ..  pm[:mor.yl + 4dt, :cou]
+        );
+        track(:first :double :cat:ac25 :v300 :pax, pm[:cou, :sav]);
+        track(:first :double :removed, pm[:sav, :mon.yl]);
+    }
+
+    with link = "point.fr.Courtalain" {
+        marker(:left :refdt :cat:ac25 :v300 :pax, pm[:cou]);
+        marker(:right :refdt :cat:ac25 :v300 :pax, pm[:cou]);
+    }
+
+    with link = "point.fr.Saint-Avertin" {
+        marker(:left :refdt :cat:ac25 :v300 :pax, pm[:sav]);
+        marker(:right :refdt :cat:ac25 :v300 :pax, pm[:sav]);
+    }
+}
+
