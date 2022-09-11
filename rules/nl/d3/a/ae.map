@@ -1,8 +1,8 @@
 # NL AE.  Amsterdam Weesperpoort - Zevenaar grens
 #
-let ae = path("d4.nl.ae");
 
 with detail = 3 {
+    let ae = path("d3.nl.ae");
     with link = "point.nl.Amsterdam-Amstel" {
         track(:first:station :double :cat:dc15 :pax,
                 ae[:asa - 1sw, :asa + 1sw]
@@ -18,29 +18,28 @@ with detail = 3 {
 
     with link = "point.nl.Duivendrecht" {
         track(:first:station :double :cat:dc15 :pax,
-                ae[:dvd - 1sw, :dvaz]
+                ae[:dvd - 1sw, :dvd + 1sw]
         );
         marker(:de.bf :cat:dc15 :pax :right,
                 ae[:dvd + 0.5dt + 0.5sw] >> 0.5dt
         );
     }
 
-    with link = "point.nl.Duivendrecht-Aansluiting-Zuid" {
-        track(:first:station :double :cat:dc15 :pax,
-                ae[:dvaz, :asb.yr]
+    with link = "line.nl.AE" {
+        track(:first :double :cat:dc15 :pax,
+                ae[:dvd + 1sw, :asb - 1sw]
         );
-        marker(:de.abzw :cat:dc15 :left, ae[:dvaz] << 0.5dt);
     }
 
     with link = "point.nl.Amsterdam-Bijlmer" {
         track(:first:station :cat:dc15 :pax,
-                ae[:asb.yr, :asb + 1sw] << 1.5dt
+                ae[:asb - 1sw, :asb + 1sw] << 1.5dt
         );
         track(:first:station :double :cat:dc15 :pax,
-                ae[:asb.yr, :asb + 1sw]
+                ae[:asb - 1sw, :asb + 1sw]
         );
         track(:first:station :cat:dc15 :pax,
-                ae[:asb.yr, :asb + 1sw] >> 1.5dt
+                ae[:asb - 1sw, :asb + 1sw] >> 1.5dt
         );
         marker(:de.bf :cat:dc15 :pax :right, ae[:asb] >> 1.5dt);
     }
@@ -72,6 +71,10 @@ with detail = 3 {
         );
         marker(:de.bf :cat:dc15 :pax :right, ae[:ashd] >> 1.5dt);
     }
+}
+
+with detail = 3 {
+    let ae = path("d4.nl.ae");
 
     with link = "line.nl.AE" {
         track(:first :cat:dc15 :pax :tight:flip,
