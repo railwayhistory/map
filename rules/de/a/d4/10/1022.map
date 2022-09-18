@@ -101,6 +101,18 @@ with detail = 4 {
                 --  ko[:has.hn - 130m - 2dl] << 0.5dt
             );
 
+        # Bahnsteig 2
+        platform(:pax,
+                ko[:has + 155m, :has + 345m] << 0.5dt
+            --  ko[:has + 345m, :has + 155m] >> 1.1dt
+        );
+
+        # Bahnsteig 3
+        platform(:pax,
+                ko[:has + 155m, :has + 345m] >> 0.5dt
+            --  ko[:has + 345m, :has + 155m] << 1.1dt
+        );
+
         marker(:de.bf:pax :left, ko[:has + 0.3sw] << 0.5dt);
         station(:pax :left, ko[:has] + (0sw, 2.5sw),
             vbox(:center:bottom,
@@ -134,14 +146,18 @@ with detail = 4 {
 with detail = [4, 5] {
     with link = "line.de.1022" {
         track(:first :pax, ko[:has.f, :rus - 1sw]);
-        with layer = 1 line_badge(:pax, ko[:has.f + 0.22km], "1022");
+        with layer = 1 line_badge(:pax, ko[:has.f + 0.22km] >> 0.3dt, "1022");
     }
 
 
     with link = "point.de.Russee" {
         track(:first:station :pax, ko[:rus - 1sw, :rus + 1sw]);
-        marker(:de.hp:pax :right, ko[:rus]);
-        station(:top :pax, ko[:rus] >> 1.4sh,
+        platform(:pax,
+                ko[:rus - 55m, :rus + 55m]
+            --  ko[:rus + 55m, :rus - 55m] >> 0.7dt
+        );
+        marker(:left :de.hp :pax, ko[:rus] << 0.5dt);
+        station(:top :pax, ko[:rus] >> 1dt,
             "Kiel-Russee", "5,34"
         );
     }
@@ -168,9 +184,13 @@ with detail = [4, 5] {
 
     with link = "point.de.Melsdorf" {
         track(:first:station :pax, ko[:meh - 1sw, :mel + 1sw]);
-        marker(:de.hp:pax, ko[:meh]);
-        with layer = -1 marker(:de.bf :removed, ko[:mel]);
-        station(:top :pax, ko[:meh] >> 1.4sh,
+        platform(:pax,
+                ko[:meh - 55m, :meh + 55m]
+            --  ko[:meh + 55m, :meh - 55m] << 0.7dt
+        );
+        marker(:de.hp :pax, ko[:meh] >> 0.5dt);
+        marker(:de.exbf :pax, ko[:meh] >> 0.5dt);
+        station(:top :pax, ko[:meh] >> 0.5dt >> 1.5sh,
             "Melsdorf",
             hbox(:center :top,
                 span(:xsmall :removed, "8,07 → "),
@@ -187,9 +207,9 @@ with detail = [4, 5] {
 
     with link = "point.de.Flemhude" {
         track(:first:station :pax, ko[:fle - 1sw, :fle + 1sw]);
-        with layer = -1 marker(:de.hst :removed :right, ko[:fle]);
-        with layer = -2 marker(:de.bf :gone :right, ko[:fle]);
-        station(:top :removed, ko[:fle] >> 1.4sh,
+        marker(:de.hst :removed :right, ko[:fle]);
+        marker(:de.exbf :removed :right, ko[:fle]);
+        station(:top :removed, ko[:fle] >> 1.5sh,
             "Flemhude", "11,59"
         );
     }
@@ -202,8 +222,12 @@ with detail = [4, 5] {
 
     with link = "point.de.Achterwehr" {
         track(:first:station :pax, ko[:ach - 1sw, :ach + 1sw]);
-        marker(:de.hp:pax :left, ko[:ach]);
-        with layer = -1 station(:left :pax, ko[:ach + .3sw] >> 1dt,
+        platform(:pax,
+                ko[:ach - 55m, :ach + 55m]
+            --  ko[:ach + 55m, :ach - 55m] >> 0.7dt
+        );
+        marker(:left :de.hp :pax , ko[:ach] << 0.5dt);
+        station(:right :pax, ko[:ach + 0.3sw] << 0.5dt << 1.7sh,
             "Achterwehr", "12,58"
         );
     }
@@ -217,6 +241,10 @@ with detail = [4, 5] {
     with link = "point.de.Felde-Brandsbek" {
         # Gl. 1
         track(:first:station :pax, ko[:fel.a, :fel.f]);
+        platform(:pax,
+                ko[:fel - 80m, :fel + 55m]
+            --  ko[:fel + 55m, :fel - 80m] >> 0.7dt
+        );
 
         # Gl. 2
         track(:station :pax,
@@ -224,8 +252,13 @@ with detail = [4, 5] {
             --  ko[:fel.a + 100m + 1dl, :fel.f - 100m - 1dl] >> 1dt
             --  ko[:fel.f - 100m, :fel.f - 99m]
         );
-        marker(:de.bf:pax :left, ko[:fel]);
-        station(:bottom :pax, ko[:fel] << 1.2sh,
+        platform(:pax,
+                ko[:fel - 100m, :fel + 30m] >> 1.0dt
+            --  ko[:fel + 30m, :fel - 100m] << 1.7dt
+        );
+
+        marker(:de.bf:pax :left, ko[:fel] << 0.5dt);
+        station(:bottom :pax, ko[:fel] << 0.5dt << 1.2sh,
             vbox(:center :top,
                 span(:medium :removed, "Brandsbek"),
                 span(:medium, "Felde-Brandsbek")
@@ -240,13 +273,17 @@ with detail = [4, 5] {
 
     with link = "line.de.1022" {
         track(:first :pax, ko[:fel.f, :bre - 1sw]);
-        with layer = 1 line_badge(:pax, ko[:fel + 2.5km], "1022");
+        with layer = 1 line_badge(:pax, ko[:fel + 2.5km] @ -2 >> 0.2dt, "1022");
     }
 
 
     with link = "point.de.Bredenbek" {
         track(:first:station :pax, ko[:bre - 1sw, :bre + 1sw]);
-        marker(:de.hp:pax :left, ko[:bre]);
+        platform(:pax,
+                ko[:bre - 60m, :bre + 50m]
+            --  ko[:bre + 50m, :bre - 60m] >> 0.7dt
+        );
+        marker(:de.hp:pax :left, ko[:bre] << 0.5dt);
         station(:bottom :pax, ko[:bre] << 1.4sh,
             "Bredenbek", "19.16"
         );
@@ -261,7 +298,7 @@ with detail = [4, 5] {
     with link = "point.de.Kronsburg" {
         track(:first:station :pax, ko[:kro - 1sw, :kro + 1sw]);
         with layer = -1 marker(:de.bf :removed, ko[:kro]);
-        station(:top :removed, ko[:kro] >> 1.4sh,
+        station(:top :removed, ko[:kro] >> 1.3sh,
             "Kronsburg", "20,42"
         );
     }
@@ -274,9 +311,9 @@ with detail = [4, 5] {
 
     with link = "point.de.Ostenfeld-Rendsburg" {
         track(:first:station :pax, ko[:ost - 1sw, :ost + 1sw]);
-        with layer = -1 marker(:de.hst :closed, ko[:ost]);
-        with layer = -2 marker(:de.bf :gone, ko[:ost]);
-        with layer = -1 station(:top :removed, ko[:ost] >> 1.5sh,
+        marker(:de.hst :removed, ko[:ost]);
+        marker(:de.exbf :removed, ko[:ost]);
+        station(:top :removed, ko[:ost] >> 1.6sh,
             vbox(:center :bottom,
                 span(:medium :removed, "Ostenfeld"),
                 span(:medium :light :removed, "(Kr Rendsburg)")
@@ -293,9 +330,13 @@ with detail = [4, 5] {
 
     with link ="point.de.Schülldorf" {
         track(:first:station :pax, ko[:sul - 1sw, :suh + 1sw]);
-        with layer = -4 marker(:de.bf :right :removed, ko[:sul]);
-        marker(:de.hp :pax :right, ko[:suh]);
-        station(:top :pax, ko[:sul + 0.5sw] >> 1.7sh,
+        platform(:pax,
+                ko[:suh - 55m, :suh + 55m]
+            --  ko[:suh + 55m, :suh - 55m] << 0.7dt
+        );
+        marker(:de.bf :right :removed, ko[:sul] >> 0.5dt);
+        marker(:de.hp :pax :right, ko[:suh] >> 0.5dt);
+        station(:top :pax, ko[:sul + 0.5sw] >> 0.5dt >> 1.7sh,
             "Schülldorf",
             hbox(:center :base,
                 span(:xsmall, "27,38 "),
@@ -310,7 +351,7 @@ with detail = [4, 5] {
                 ko[:suh + 1sw, :oro.r]
             ..  ko[:oro.s, :ora - 100m] >> 1.5dt
         );
-        with layer = 1 line_badge(:pax, ko[:suh + 1.0km], "1022");
+        with layer = 1 line_badge(:pax, ko[:suh + 1.0km] >> 0.1dt, "1022");
     }
 
 

@@ -64,14 +64,22 @@ with detail = [4, 5] {
 
 
     with link = "point.de.Kiel-Elmschenhagen" {
+        # Gl. 1
         track(:first:station :pax, kn[:elm.a, :elm.f]);
-        with layer = -2 track(:station,
+
+        # Gl. 2
+        track(:station :pax,
                 kn[:elm.a + 0.9dl, :elm.a + 1dl]
             --  kn[:elm.a + 2dl, :elm.f - 2dl] << 1dt
             --  kn[:elm.f - 1dl, :elm.f - 0.9dl]
         );
-        marker(:de.bf :pax :left, kn[:elh] << 1dt);
-        with layer = -1 station(:pax :right, kn[:elh] << 1dt << 1.2sh,
+        platform(:pax,
+                kn[:elm - 200m, :elm - 60m] << 1dt
+            --  kn[:elm - 60m, :elm - 200m] >> 1.7dt
+        );
+
+        marker(:de.bf :pax :left, kn[:elh] << 1.5dt);
+        with layer = -1 station(:pax :right, kn[:elh] << 1.5dt << 1.2sh,
             vbox(:center :bottom,
                 span(:medium :removed, "Elschenhagen"),
                 span(:medium, "Kiel-Elmschenhagen")
@@ -92,7 +100,7 @@ with detail = [4, 5] {
     with link = "point.de.Kroog" {
         track(:first:station :pax, kn[:kro - 1sw, :kro + 1sw]);
         with layer = -4 marker(:de.hp :right :removed, kn[:kro]);
-        station(:bottom :removed, kn[:kro] >> 1.4sh,
+        station(:bottom :removed, kn[:kro] >> 1.2sh,
             "Kroog", "6,45"
         );
     }
@@ -110,23 +118,26 @@ with detail = [4, 5] {
         # Anschlussgleis
         track(:station,
                 path("d4.de.1023.raw")[:a, :aa]
-            ..  kn[:raw - 1dl, :raw + 280m] << 1dt
+            ..  kn[:raw - 60m, :raw + 280m] << 1dt
         );
             with layer = -2 track(:station,
-                    kn[:raw - 1dl] << 1dt
+                    kn[:raw - 60m] << 1dt
                 --  kn[:raw]
             );
 
         # Umfahrgleis
         track(:station,
-                kn[:raw - 0.1dl, :raw] << 1dt
-            --  kn[:raw + 1dl, :raw + 180m - 1dl] << 2dt
-            --  kn[:raw + 180m, :raw + 181m] << 1dt
+                kn[:raw - 41m, :raw - 40m] << 1dt
+            --  kn[:raw, :raw + 160m] << 2dt
+            --  kn[:raw + 200m, :raw + 201m] << 1dt
         );
 
-        marker(:de.awanst :right, kn[:raw]);
-        station(:bottom, kn[:raw] >> 1.2sw,
-            "Raisdorf West", "8,06"
+        marker(:de.awanst :left, kn[:raw] << 2dt);
+        label(kn[:raw] << 2dt << 1.1sw + (-1.5sw, 0sw),
+            vbox(:left:bottom,
+                span(:medium, "Raisdorf West"),
+                span(:xsmall, "    8.06")
+            )
         );
     }
 
@@ -143,15 +154,23 @@ with detail = [4, 5] {
             --  kn[:rai.a + 100m + 1dl, :rai.f - 100m - 1dl] >> 1dt
             --  kn[:rai.f - 100m, :rai.f - 99m]
         );
+        platform(:pax,
+                kn[:rai - 30m, :rai + 190m] >> 1dt
+            --  kn[:rai + 190m, :rai - 30m] << 1.7dt
+        );
 
         # Gl. 2
         track(:first:station :pax, kn[:rai.a, :rai.f]);
+        platform(:pax,
+                kn[:rai - 30m, :rai + 180m]
+            --  kn[:rai + 180m, :rai - 30m] >> 0.7dt
+        );
 
-        marker(:de.bf :pax :right, kn[:rai] >> 1dt);
-        station(:right :pax :left_align, kn[:rai - .5sw] << 1dt + (2dt, 0dt),
+        marker(:de.bf :pax :right, kn[:rai] >> 1.5dt);
+        station(:right :pax :left_align, kn[:rai] + (2.2dt, 0dt),
             "Raisdorf",
             hbox(:left :base,
-                span(:xsmall, "9,52"),
+                span(:xsmall, "  9,52"),
                 span(:xsmall :removed, " (117,28)")
             )
         );
@@ -173,10 +192,18 @@ with detail = [4, 5] {
             --  kn[:pre.a + 100m + 1dl, :pre.f - 100m - 1dl] << 1dt
             --  kn[:pre.f - 100m, :pre.f - 99m]
         );
+        with layer =  -1 platform(:pax,
+                kn[:pre - 30m, :pre + 175m] << 1dt
+            --  kn[:pre + 175m, :pre - 30m] >> 1.6dt
+        );
 
         # Gl. 2
         with layer = 2 track(:first:station :pax,
                 kn[:pre.a, :pre.f]
+        );
+        platform(:pax,
+                kn[:pre - 50m, :pre + 155m]
+            --  kn[:pre + 155m, :pre - 50m] << 0.6dt
         );
 
         # Gl. 3
@@ -199,8 +226,8 @@ with detail = [4, 5] {
             --  kn[:pre.f - 100m + 1.7dl, :pre.f - 100m + 1.8dl]
         );
 
-        marker(:de.bf :pax :left, kn[:pre] << 1dt);
-        station(:right :pax :left_align, kn[:pre + 1sw] << 1dt << 1.4sh,
+        marker(:de.bf :pax :left, kn[:pre] << 1.5dt);
+        station(:right :pax :left_align, kn[:pre + 1sw] << 1.5dt << 1.4sh,
             "Preetz",
             hbox(:left :base,
                 span(:xsmall, "15,38"),
@@ -211,26 +238,42 @@ with detail = [4, 5] {
 
 
     with link = "line.de.1023" {
-        track(:first :pax, kn[:pre.f, :kuh - 1sw]);
+        track(:first :pax, kn[:pre.f, :kuh - 210m]);
     }
 
 
     with link = "point.de.Kühren-Holst" {
-        track(:first:station :pax, kn[:kuh - 1sw, :kuh.f]);
-        with layer = -1 {
-            track(:station :removed,
-                    kn[:kuh - 1.5sw + .9dl, :kuh - 1.5sw + 1dl]
-                --  kn[:kuh - 1.5sw + 2dl, :kuh.f] << 1dt
-            );
-            track(:station :removed,
-                    kn[:kuh - .5sw - 1.1dl, :kuh - .5sw - 1dl] << 1dt
-                --  kn[:kuh - .5sw, :kuh.f - 4dl] << 2dt
-                --  kn[:kuh.f - 2dl, :kuh.f - 1.9dl]
-            );
+        # Gl. 1
+        track(:first:station :pax, kn[:kuh - 210m, :kuh.f]);
+        platform(:removed,
+                kn[:kuh - 100m, :kuh + 50m]
+            --  kn[:kuh + 50m, :kuh - 100m] << 0.7dt
+        );
 
-            marker(:de.bf :removed :right, kn[:kuh]);
-        }
-        with layer = -2 station(:left, kn[:kuh + .3sw] >> 1.8sh,
+        # Gl. 2
+        track(:station :removed,
+                kn[:kuh - 161m, :kuh - 160m]
+            --  kn[:kuh - 120m, :kuh.f - 50m] << 1dt
+        );
+            track(:station :removed,
+                    kn[:kuh + 70m] << 1dt
+                --  kn[:kuh + 110m]
+            );
+        platform(:removed,
+                kn[:kuh - 100m, :kuh + 50m] << 1.0dt
+            --  kn[:kuh + 50m, :kuh - 100m] >> 0.4dt
+        );
+
+        # Gl. 3
+        track(:station :removed,
+                kn[:kuh - 81m, :kuh - 80m] << 1dt
+            --  kn[:kuh - 50m, :kuh + 10m] << 2dt
+            --  kn[:kuh + 50m, :kuh + 51m] << 1dt
+        );
+
+        marker(:de.bf :removed :right, kn[:kuh] >> 0.5dt);
+
+        with layer = -2 station(:left, kn[:kuh + .2sw] >> 0.5dt >> 1.6sh,
             hbox(:center :base,
                 span(:medium :removed, "Kühren "),
                 span(:medium :light :removed, "(Holst)")
@@ -254,7 +297,7 @@ with detail = [4, 5] {
         station(:right :removed, kn[:wah + .5sw] << 1.5sh,
             "Wahlstorf",
             hbox(:center :base,
-                span(:xsmall :removed, "21,65 "),
+                span(:xsmall :removed, " 21,65 "),
                 span(:xsmall :gone, "(105,15)")
             )
         );
@@ -266,7 +309,7 @@ with detail = [4, 5] {
                 kn[:wah + 1sw, :asc.aa - 2dt]
             ..  kn[:asc.a - 0.1dl, :asc.a] << 1dt
         );
-        with layer = 1 line_badge(:pax, kn[:asc - 2km], "1023");
+        with layer = 1 line_badge(:pax, kn[:asc - 2km] << 0.1dt, "1023");
     }
 
 
@@ -282,6 +325,10 @@ with detail = [4, 5] {
         # Gl. 2
         track(:first:station :pax,
                 kn[:asc.a, :asc.f] << 1dt
+        );
+        platform(:pax,
+                kn[:asc - 120m, :asc + 180m] << 1dt
+            --  kn[:asc + 180m, :asc - 120m] >> 2dt
         );
 
         # Gl. 3
@@ -299,7 +346,7 @@ with detail = [4, 5] {
         );
 
         with layer = -1 marker(:de.bf :pax :right, kn[:asc]);
-        station(:bottom :pax, kn[:asc] >> 1.5sh + (1.5sw, 0sw),
+        station(:bottom :pax, kn[:asc] >> 1.3sh + (1.4sw, 0sw),
             hbox(:center :base,
                 span(:medium :bold, "Ascheberg "),
                 span(:medium, "(Holst)")
@@ -330,19 +377,38 @@ with detail = [4, 5] {
                 kn[:asc.f, :asc.f + 50m] << 1dt
             ..  kn[:asc.ff, :plo.a]
         );
-        with layer = 1 line_badge(:pax, kn[:asc + 3km] >> .5pt, "1023");
+        guide(:linenum :pax,
+                kn[:asc + 3km] << 0.7dt
+            --  kn[:asc + 3km] << 3dt
+        );
+        label(:linenum :pax, kn[:asc + 3km] << 3dt,
+            hbox(:center:bottom, "1023")
+        );
     }
 
 
     with link = "point.de.Plön" {
-        track(:first:station :pax, kn[:plo.a, :plo.f]);
-        with layer = -2 track(:station,
+        # Gl. 1
+        track(:station :pax,
                 kn[:plo.a + .9dl, :plo.a + 1dl]
             --  kn[:plo.a + 2dl, :plo.f - 2dl] << 1dt
             --  kn[:plo.f - 1dl, :plo.f - .9dl]
         );
-        with layer = -4 marker(:de.bf :pax :left, kn[:plo] << 1dt);
-        station(:top :pax :right_align, kn[:plo] << 1dt << 1.4sh + (1sw, 0sw),
+        platform(:pax,
+                kn[:plo - 25m, :plo + 120m] << 1dt
+            --  kn[:plo + 120m, :plo - 25m] >> 1.7dt
+        );
+
+        # Gl. 2
+        track(:first:station :pax, kn[:plo.a, :plo.f]);
+        platform(:pax,
+                kn[:plo - 25m, :plo + 120m]
+            --  kn[:plo + 120m, :plo - 25m] >> 0.6dt
+        );
+
+        with layer = -4 marker(:de.bf :pax :left, kn[:plo] << 1.5dt);
+        station(:top :pax :right_align,
+            kn[:plo] << 1.5dt << 1.4sh + (1sw, 0sw),
             "Plön",
             hbox(:center :base,
                 span(:xsmall, "33,06 "),
@@ -375,7 +441,7 @@ with detail = [4, 5] {
                 kn[:tim + 1sw, :mal.a - .4km]
             ..  kn[:mal.a - .1dl, :mal.a] >> 0.5dt
         );
-        with layer = 1 line_badge(:pax, kn[:tim + 1.8km], "1023");
+        with layer = 1 line_badge(:pax, kn[:tim + 1.8km] << 0.1dt, "1023");
     }
 
 

@@ -940,10 +940,17 @@ with detail = [4, 5] {
             ..  nf[:flw.x - 0.1dl, :flw.x + 1dl] << 6.5dt
         );
 
+        # Bahnsteig 1/2
+        platform(:cat:ac15,
+                nf[:flw - 225m, :flw] >> 0.5dt
+            --  nf[:flw, :flw - 225m] >> 0.5dt
+        );
+
         marker(:de.bw :removed :left , nf[:flw + 400m] << 2.5dt);
-        with layer = -4 marker(:de.bf :removed :right, nf[:flw] >> 0.5dt);
         marker(:de.bbf :cat:ac15 :right, nf[:flw] >> 0.5dt);
-        station(:right :cat:ac15 :left_align, nf[:flw + 0.5sw] >> 1.2sw,
+        marker(:de.exbf :cat:ac15 :right, nf[:flw] >> 0.5dt);
+        station(:right :cat:ac15 :left_align,
+            nf[:flw + 0.5sw] >> 0.5dt >> 1.2sw,
             vbox(:left:top :bold,
                 span(:removed, "Nordschleswigsche Weiche"),
                 "Flensburg Weiche"
@@ -1095,6 +1102,18 @@ with detail = [4, 5] {
         );
         with layer = -4 track(:station :removed,
                 nf[:fle + 0.7sw, :fle.fo + 200m + 2dl] << 6.5dt
+        );
+
+        # Bahnsteig 1/2
+        platform(:cat:ac15 :pax,
+                nf[:fle - 150m, :fle + 170m] >> 0.5dt
+            --  nf[:fle + 170m, :fle - 150m] >> 0.5dt
+        );
+
+        # Bahnsteig 4/5
+        platform(:cat:ac15 :pax,
+                nf[:fle - 30m, :fle + 170m] << 3.5dt
+            --  nf[:fle + 170m, :fle - 30m] >> 2.5dt
         );
 
         marker(:de.bf :cat:ac15 :pax :left, nf[:fle] << 4.5dt);
