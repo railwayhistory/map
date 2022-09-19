@@ -3,6 +3,61 @@
 let hl = path("d4.nl.hl");
 
 with detail = [4, 5] {
+    # point.nl.Hilversum: nl.AZ
+
+
+    with link = "point.nl.Hilversum-Sportpark" {
+        track(:first:station :double :cat:dc15 :pax,
+                hl[:hvs.fu, :hvsp + 300m]
+        );
+
+        platform(:cat:dc15 :pax,
+                hl[:hvsp - 245m, :hvsp - 25m] << 0.5dt
+            --  hl[:hvsp - 25m, :hvsp - 245m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                hl[:hvsp + 25m, :hvsp + 245m] >> 0.5dt
+            --  hl[:hvsp + 245m, :hvsp + 25m] << 1.2dt
+        );
+
+        marker(:right :de.hp :cat:dc15 :pax, hl[:hvsp] >> 1dt);
+        station(:left :cat:dc15 :pax, hl[:hvsp + 1.0sw] >> 1dt >> 1.4sw,
+            vbox(:center:bottom,
+                span(:removed, "Soestdijker Straatweg"),
+                "Hilversum Sportpark"
+            ),
+            "1,18"
+        );
+    }
+
+
+    with link = "line.nl.HL" {
+        track(:first :double :cat:dc15 :pax,
+                hl[:hvsp + 300m, :hor - 280m]
+        );
+        line_badge(:cat:dc15 :pax, hl[:hvsp + 1.8km], "HL");
+    }
+
+
+    with link = "point.nl.Hollandsche-Rading" {
+        track(:first:station :double :cat:dc15 :pax,
+                hl[:hor - 280m, :hor + 330m]
+        );
+
+        platform(:cat:dc15 :pax,
+                hl[:hor - 225m, :hor] << 0.5dt
+            --  hl[:hor, :hor - 225m] >> 1.2dt
+        );
+        platform(:cat:dc15 :pax,
+                hl[:hor + 60m, :hor + 280m] >> 0.5dt
+            --  hl[:hor + 280m, :hor + 60m] << 1.2dt
+        );
+
+        marker(:right :de.hp :cat:dc15 :pax, hl[:hor] >> 1dt);
+        station(:left :cat:dc15 :pax, hl[:hor + 0.4sw] >> 1.0dt >> 1.4sh,
+            "Hollandsche Rading", "5,50"
+        );
+    }
 
 
     with link = "line.nl.HL" {
@@ -10,6 +65,22 @@ with detail = [4, 5] {
                 hl[:hor + 330m, :bln - 200m]
         );
         line_badge(:cat:dc15 :pax, hl[:bln - 2km], "HL");
+    }
+
+
+    with link = "point.nl.Maartensdijk" {
+        marker(:left :de.bf :removed, hl[:mtk] << 0.5dt);
+        station(:right :removed, hl[:mtk + 0.35sw] << 0.5dt << 1.5sw,
+            "Maartensdijk", "7,5"
+        );
+    }
+
+
+    with link = "point.nl.Nieuwe-Wetering" {
+        marker(:left :de.hp :removed, hl[:nw] << 0.5dt);
+        station(:right :removed, hl[:nw + 0.3sw] << 0.5dt << 1.5sw,
+            "Nieuwe Wetering", "9,8"
+        );
     }
     
 
@@ -21,6 +92,14 @@ with detail = [4, 5] {
                 hl[:bln, :bkp - 100m]
         );
         marker(:right :de.uest :cat:dc15, hl[:bln] >> 0.5dt);
+        label(:cat:dc15, hl[:bln] >> 0.5dt >> 1.2sh,
+            hbox(:right:bottom,
+                vbox(:center:bottom,
+                    span(:xsmall, "12,73"),
+                    span(:medium, "Blauwkappel Noord")
+                )
+            )
+        );
     }
 
 
@@ -50,6 +129,9 @@ with detail = [4, 5] {
             --  hl[:blz + 50m + 0.7dl, :blz + 50m + 0.71dl] << 0.5dt
         );
         marker(:right :de.uest :cat:dc15, hl[:blz] >> 0.5dt);
+        station(:right :cat:dc15, hl[:blz + 0.4sw] << 4.0dt,
+            "Blauwkappel Zuid", "13,85"
+        );
     }
 
 

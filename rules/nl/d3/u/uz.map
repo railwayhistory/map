@@ -1,0 +1,158 @@
+# NL UZ.  Utrecht Centraal - Zwolle
+#
+let uz = path("d4.nl.uz");
+
+with detail = 3 {
+    # point.nl.Utrecht-Centraal: nl.AE
+
+    with link = "line.nl.UZ" {
+        track(:first :double :cat:dc15 :pax,
+                uz[:ut.yn, :ut.yn + 0.1dl] >> 2dt
+            ..  uz[:uto.a, :uto.a + 0.1dl] << 1dt
+        );
+        with layer = 2 track(:first :double :cat:dc15 :pax,
+                uz[:ut.yn, :ut.yn + 0.1dl] >> 4dt
+            ..  uz[:uto.a, :uto.a + 0.1dl] >> 1dt
+        );
+    }
+
+    with link = "point.nl.Utrecht-Overvecht" {
+        track(:first:station :double :cat:dc15 :pax,
+                uz[:uto.a, :uto + 1sw] << 1dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                uz[:uto.a, :uto + 1sw] >> 1dt
+        );
+
+        marker(:right :de.bf :cat:dc15 :pax, uz[:uto] >> 1.5dt);
+    }
+
+
+    with link = "point.nl.Blauwkappel" {
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                uz[:uto + 1sw, :bloa - 6dl] << 1.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                uz[:uto + 1sw, :bloa - 1sw] << 0.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                uz[:uto + 1sw, :bloa - 1sw] >> 1dt
+        );
+    }
+
+    with link = "point.nl.Blauwkappel-Oost-aansl" {
+        track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 1sw, :bloa] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 1sw, :bloa - 1dl] >> 0.5dt
+            --  uz[:bloa, :bloa + 4dl] << 0.5dt
+        );
+        track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 1sw, :bloa] >> 1.5dt
+            --  uz[:bloa + 1dl, :bloa + 4dl] >> 0.5dt
+        );
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                uz[:bloa - 6dl, :bloa - 5dl] << 1.5dt
+            --  uz[:bloa - 1dl, :bloa + 1dl] >> 2.5dt
+            --  uz[:bloa + 3dl, :bloa + 3.1dl] >> 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                uz[:bloa - 5dl] << 1.5dt
+            --  uz[:bloa - 1dl] >> 2.5dt
+        );
+
+        marker(:left :de.abzw :cat:dc15, uz[:bloa + 1dl] << 0.5dt);
+    }
+
+    with link = "line.nl.UZ" {
+        track(:first :double :cat:dc15 :pax, uz[:bloa + 4dl, :bhv - 1sw]);
+    }
+
+    with link = "point.nl.Bilthoven" {
+        track(:first:station :cat:dc15 :pax,
+                uz[:bhv - 1sw, :bhv - 0.5sw - 1dl] << 0.5dt
+            --  uz[:bhv - 0.5sw, :bhv + 1sw] << 1dt
+        );
+        track(:first:station :cat:dc15,
+                uz[:bhv + 0.49sw, :bhv + 0.5sw] << 1dt
+            --  uz[:bhv + 0.5sw + 1dl, :bhv + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                uz[:bhv - 1sw, :bhv - 0.5sw - 1dl] >> 0.5dt
+            --  uz[:bhv - 0.5sw, :bhv + 1sw] >> 1dt
+        );
+            track(:first:station :cat:dc15,
+                    uz[:bhv + 0.5sw] >> 1dt
+                --  uz[:bhv + 0.5sw + 1dl]
+            );
+
+        marker(:left :de.bf :cat:dc15 :pax, uz[:bhv] << 1dt);
+    }
+
+    with link = "line.nl.UZ" {
+        track(:first :cat:dc15 :pax :flip, uz[:bhv + 1sw, :dld - 1sw] << 1dt);
+        with layer = -1 track(:first :cat:dc15, uz[:bhv + 1sw, :dld - 1sw]);
+        track(:first :cat:dc15 :pax, uz[:bhv + 1sw, :dld - 1sw] >> 1dt);
+    }
+
+    with link = "point.nl.Den-Dolder" {
+        # UZ links
+        track(:first:station :cat:dc15 :pax,
+                uz[:dld - 1sw, :dld + 0.5sw] << 1dt
+            --  uz[:dld + 0.5sw + 1dl, :dld + 0.5sw + 4dl]
+        );
+        # DB
+        track(:first:station :cat:dc15 :pax,
+                uz[:dld + 0.5sw + 1.9dl, :dld + 0.5sw + 2dl]
+            --  uz[:dld + 0.5sw + 3dl, :dld + 0.5sw + 4dl] << 1dt
+        );
+        # UZ midden
+        track(:first:station :cat:dc15,
+                uz[:dld - 1sw, :dld - 0.5sw - 1dl]
+            --  uz[:dld - 0.5sw, :dld - 0.49sw] << 1dt
+        );
+            track(:first:station :cat:dc15,
+                    uz[:dld - 0.5sw - 1dl]
+                --  uz[:dld - 0.5sw] >> 1dt
+            );
+        # UZ rechts
+        track(:first:station :cat:dc15 :pax,
+                uz[:dld - 1sw, :dld + 0.5sw + 4dl] >> 1dt
+        );
+
+        marker(:left :de.bf :cat:dc15 :pax, uz[:dld] << 1dt);
+        slabel(:right :cat:dc15 :pax, uz[:dld] >> 1.3dt,
+            hbox(:left:top :bold, "Den Dolder")
+        );
+    }
+
+    with link = "line.nl.UZ" {
+        track(:first :double :cat:dc15 :pax,
+                uz[:dld + 0.5sw + 4dl, :dld + 0.5sw + 4.1dl] >> 0.5dt
+            ..  uz[:dld.yb + 1km, :amfva - 0.5sw]
+        );
+    }
+
+    with link = "point.nl.Amersfoort-Vlasakkers" {
+        track(:station,
+                uz[:amfv - 1.5km, :amfva - 0.5sw] >> 1.5dt
+        );
+        marker(:right :de.gbf, uz[:amfva - 1sw] >> 1.5dt);
+        slabel(:bottom, uz[:amfva - 1sw] >> 1.5dt >> 1.2sh,
+            vbox(:center:top, "Amersfoort", "Vlasakkers")
+        );
+    }
+
+    with link = "point.nl.Amersfoort-Vlasakkers-aansl" {
+        track(:first:station :double :cat:dc15 :pax,
+                uz[:amfva - 0.5sw, :amfva + 0.5sw]
+        );
+        track(:station,
+                uz[:amfva - 0.5sw, :amfva] >> 1.5dt
+            --  uz[:amfva + 1dl, :amfva + 1.1dl] >> 0.5dt
+        );
+        marker(:left :de.abzw :cat:dc15, uz[:amfva] << 0.5dt);
+    }
+}
+

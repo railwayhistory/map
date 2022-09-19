@@ -83,8 +83,8 @@ with detail = [4, 5] {
             --  uz[:uto + 130m, :uto - 80m] >> 0.5dt
         );
 
-        marker(:right :de.bf :cat:dc15 :pax, uz[:uto] >> 1.5dt);
-        station(:bottom :cat:dc15 :pax, uz[:uto + 0.2sw] >> 1.5dt >> 1.3sw,
+        marker(:right :de.bf :cat:dc15 :pax, uz[:uto] >> 2.0dt);
+        station(:bottom :cat:dc15 :pax, uz[:uto + 0.2sw] >> 2.0dt >> 1.3sw,
             vbox(:center:top, "Utrecht", "Overvecht"),
             "UZ: 3,00"
         );
@@ -96,6 +96,9 @@ with detail = [4, 5] {
                 uz[:uto.f, :blw + 300m] >> 1dt
         );
         marker(:right :de.uest :cat:dc15, uz[:blw] >> 1.5dt);
+        station(:left :cat:dc15, uz[:blw] << 4.0dt,
+            "Blauwkappel West", "3,87"
+        );
     }
 
 
@@ -111,6 +114,10 @@ with detail = [4, 5] {
                 uz[:blo - 180m, :blo + 100m] >> 1dt
         );
         marker(:right :de.uest :cat:dc15, uz[:blo] >> 1.5dt);
+        station(:right :cat:dc15, uz[:blo + 0.8sw] >> 1.5dt >> 0.4sw,
+            hbox(:left:top, "Blauwkappel Oost"),
+            "4,51"
+        );
     }
 
 
@@ -168,6 +175,10 @@ with detail = [4, 5] {
         );
 
         marker(:left :de.abzw :cat:dc15, uz[:bloa] << 1.5dt);
+        station(:top :cat:dc15, uz[:bloa] << 1.5dt << 1.2sw,
+            vbox(:center:bottom, "Blauwkappel", "Oost aansl."),
+            "5,70"
+        );
     }
 
 
@@ -229,6 +240,152 @@ with detail = [4, 5] {
         track(:first :cat:dc15 :pax :flip, uz[:bhv.f, :dld.a] << 1.0dt);
         track(:first :cat:dc15, uz[:bhv.f, :dld.a]);
         track(:first :cat:dc15 :pax, uz[:bhv.f, :dld.a] >> 1.0dt);
+    }
+
+
+    with link = "point.nl.Den-Dolder" {
+        # Sp. 1
+        track(:first:station :cat:dc15 :pax,
+                uz[:dld.a, :dld + 85m] << 1dt
+            --  uz[:dld + 360m, :dld.f]
+        );
+            # 113A - 113B
+            track(:station :cat:dc15 :pax,
+                    uz[:dld.f - 225m]
+                --  uz[:dld.f - 145m] >> 1dt
+            );
+
+        # Sp. CB
+        track(:first:station :cat:dc15,
+                uz[:dld.a, :dld.a + 205m]
+            --  uz[:dld.a + 285m, :dld.a + 286m] >> 1dt
+        );
+            # 95A - 95B
+            track(:station :cat:dc15,
+                    uz[:dld.a + 100m]
+                --  uz[:dld.a + 285m] << 1dt
+            );
+
+        # Sp. 2
+        track(:first:station :cat:dc15 :pax, uz[:dld.a, :dld.f] >> 1dt);
+            # 113A - 113B
+            track(:station :cat:dc15 :pax,
+                    uz[:dld.f - 375m] >> 1dt
+                --  uz[:dld.f - 295m]
+            );
+
+        # Sp. YA (- Baarn)
+        track(:first:station :cat:dc15 :pax,
+                uz[:dld.f - 276m, :dld.f - 275m]
+            --  uz[:dld.f - 180m, :dld.f] << 1dt
+        );
+
+        # Perron
+        platform(:cat:dc15 :pax,
+                uz[:dld - 130m, :dld + 80m] << 1dt
+            --  uz[:dld + 80m, :dld - 130m] << 1dt
+        );
+
+        marker(:left :de.bf :cat:dc15 :pax, uz[:dld] << 1dt);
+        station(:top :cat:dc15 :pax, uz[:dld] << 1dt << 1.5sh,
+            span(:bold, "Den Dolder"),
+            hbox(:center:top,
+                vbox(:right:top, "DB: ", "UZ: "),
+                vbox(:right:top, "11,", "0,"),
+                vbox(:left:top, "83", "16")
+            )
+        );
+    }
+
+
+    with link = "line.nl.UZ" {
+        track(:first :double :cat:dc15 :pax,
+                uz[:dld.f, :dld.yb] >> 0.5dt
+            ..  uz[:dld.yb + 850m, :amfva - 300m]
+        );
+
+        line_badge(:cat:dc15 :pax, uz[:dld.yb + 2.2km], "UZ");
+    }
+
+
+    with link = "point.nl.Amersfoort-Vlasakkers" {
+        let av = path("d4.nl.uz.amfv");
+
+        # Sp. 1/2
+        track(:station,
+                av[:r + 225m, :s + 90m] >> 2.5dt
+        );
+
+        # Sp. 3/4
+        track(:station,
+                av[:r + 150m, :s + 90m] >> 3.5dt
+        );
+
+        # Sp. 5
+        track(:station,
+                av[:a, :s - 110m] >> 4.5dt
+        );
+            track(:station,
+                    av[:a + 399m, :a + 400m] >> 4.5dt
+                --  av[:a + 450m, :a + 451m] >> 5.5dt
+            );
+
+        # Sp. 6
+        track(:station,
+                av[:a + 39m, :a + 40m] >> 4.5dt
+            --  av[:a + 80m, :s - 170m] >> 5.5dt
+        );
+
+        # Sp. 7/8
+        track(:station,
+                av[:r + 149m + 0.7dl, :r + 150m + 0.7dl] >> 5.5dt
+            --  av[:r + 225m + 0.7dl, :s - 170m] >> 6.5dt
+        );
+
+        # Sp. 9
+        track(:station,
+                av[:r - 0.1dl, :r] >> 4.5dt
+            --  av[:r + 225m, :s - 170m] >> 7.5dt
+        );
+
+        # Sp. 23
+        track(:station,
+                av[:r - 0.1dl, :r] >> 5.5dt
+            --  av[:r + 300m, :amfv + 30m] >> 1.5dt
+        );
+
+        marker(:right :de.gbf, av[:amfv] >> 1.5dt);
+        station(:bottom, av[:s] >> 10dt,
+            "Amersfoort Vlasakkers", "19,00"
+        );
+    }
+
+
+    with link = "point.nl.Amersfoort-Vlasakkers-aansl" {
+        # Sp. 23
+        track(:station,
+                uz[:amfv + 30m, :amfva - 20m] >> 1.5dt
+            --  uz[:amfva + 40m, :amfva + 41m] >> 0.5dt
+        );
+
+        # Sp. 24
+        track(:first:station :cat:dc15 :pax,
+                uz[:amfva - 300m, :amfva + 750m] >> 0.5dt
+        );
+            track(:station :cat:dc15,
+                    uz[:amfva + 60m] >> 0.5dt
+                --  uz[:amfva + 110m] << 0.5dt
+            );
+
+        # Sp. 25
+        track(:first:station :cat:dc15 :pax,
+                uz[:amfva - 300m, :amfva + 750m] << 0.5dt
+        );
+
+        marker(:left :de.abzw :cat:dc15, uz[:amfva] << 0.5dt);
+        station(:left :cat:dc15, uz[:amfva - 0.4sw] << 0.5dt << 1.2sh,
+            "Amersfoort Vlasakkers aansl.", "19,10"
+        );
     }
 }
 

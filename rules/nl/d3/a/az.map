@@ -1,0 +1,273 @@
+# NL AZ.  Amsterdam Centraal - Zutphen.
+#
+with detail = 3 {
+    let az = path("d3.nl.az");
+
+    with link = "point.nl.Amsterdam-Centraal" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asd - 1sw, :asd + 1sw] << 2dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asd - 1sw, :asd + 1sw]
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asd - 1sw, :asd + 1sw] >> 2dt
+        );
+
+        marker(:right :de.bf :cat:dc15 :pax, az[:asd] >> 2.5dt);
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15,
+                az[:asd + 1sw, :asdm.y] << 2dt
+        );
+        track(:first :double :cat:dc15 :pax,
+                az[:asd + 1sw, :asdm.y]
+        );
+    }
+
+    with link = "point.nl.Amsterdam-Muiderpoort" {
+        let aca = path("d3.nl.aca");
+
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asdm.y, :asdm.y + 1sw] << 2dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                az[:asdm.y, :asdm.y + 1sw]
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                aca[:asdm.y, :asdm.y + 1sw] >> 2dt
+        );
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:asdm.y + 1sw, :assp - 1sw]);
+    }
+
+    with link = "point.nl.Amsterdam-Science-Park" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:assp - 1sw, :assp + 1sw]
+        );
+        marker(:de.hp :cat:dc15 :pax :right, az[:assp] >> 0.5dt);
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:assp + 1sw, :dmn - 1sw]);
+    }
+
+    with link = "point.nl.Diemen" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:dmn - 1sw, :dmn + 1sw]
+        );
+        marker(:right :de.bf :cat:dc15 :pax, az[:dmn] >> 0.5dt);
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:dmn + 1sw, :gdpa - 1sw]);
+    }
+
+    with link = "point.nl.Gaasperdammerweg" {
+        track(:first:station :cat:dc15 :pax,
+                az[:gdpa - 1sw, :gdpa + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                az[:gdpa - 1sw, :gdpa + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:gdpa - 1sw, :gdpa + 1sw] >> 1.5dt
+        );
+        marker(:right :de.abzw :cat:dc15 :pax, az[:gdpa] >> 1.5dt);
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :cat:dc15 :pax :flip :tight,
+                az[:gdpa + 1sw, :wp - 1sw] << 1.5dt
+        );
+        track(:first :double :cat:dc15 :pax, az[:gdpa + 1sw, :wp - 1sw]);
+        track(:first :cat:dc15 :pax :tight,
+                az[:gdpa + 1sw, :wp - 1sw] >> 1.5dt
+        );
+    }
+}
+
+with detail = 3 {
+    let az = path("d4.nl.az");
+
+    with link = "point.nl.Weesp" {
+        track(:first:station :cat:dc15 :pax,
+                az[:wp - 1sw, :wp.f] << 1.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                az[:wp - 1sw, :wp.f]
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:wp - 1sw, :wp.f] >> 1.5dt
+        );
+
+        marker(:right :de.bf :cat:dc15 :pax, az[:wp] >> 1.5dt);
+        slabel(:left :cat:dc15 :pax, az[:wp + 0.5sw] >> 1.5dt >> 2.0sh,
+            span(:bold, "Weesp")
+        );
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:wp.f, :kv - 1sw]);
+        with layer = -1 casing(:first :double :cat:dc15 :pax,
+                az[:wp.f, :kv - 1sw]
+        );
+    }
+
+    with link = "point.nl.Keverdijk-aansl" {
+        track(:first:station :cat:dc15 :pax,
+                az[:kv - 1sw, :kv] << 1.5dt
+            --  az[:kv + 1dl, :kv + 1.1dl] << 0.5dt
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                az[:kv - 1sw, :kv + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:kv - 1sw, :kv] >> 1.5dt
+            --  az[:kv + 1dl, :kv + 1.1dl] >> 0.5dt
+        );
+
+        marker(:de.abzw :cat:dc15 :right, az[:kv] >> 1.5dt);
+        slabel(:left :cat:dc15, az[:kv + 0.2sw] >> 1.5dt >> 1.0sw,
+            hbox(:right:top, "Keverdijk")
+        );
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:kv + 2.5km, :kv + 1sw]);
+        line_badge(:cat:dc15 :pax, az[:kv + 2.5km], "AZ");
+        track(:first :double :cat:dc15 :pax, az[:kv + 2.5km, :ndb - 1sw]);
+    }
+
+    with link = "point.nl.Naarden-Bussum" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:ndb - 1sw, :ndb + 1sw]
+        );
+        marker(:left :de.bf :cat:dc15 :pax, az[:ndb] << 0.5dt);
+        slabel(:right :cat:dc15 :pax, az[:ndb + 0.5sw] << 0.5dt << 1.5sh,
+            "Naarden-Bussum"
+        );
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:ndb + 1sw, :bsmz - 1sw]);
+    }
+
+    with link = "point.nl.Bussum-Zuid" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:craw - 2sw, :craw - 0.5sw]
+        );
+        marker(:right :de.bf :cat:dc15 :pax, az[:craw - 1sw] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, az[:craw - 0.6sw] << 1.5dt,
+            "Bussum Zuid"
+        );
+    }
+
+    with link = "point.nl.Crailoo-Aansl-West" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:craw - 0.5sw, :craw + 1sw]
+        );
+        marker(:right :de.abzw :cat:dc15, az[:craw] >> 0.5dt);
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:craw + 1sw, :crao - 1sw]);
+    }
+
+    with link = "point.nl.Centraal-Magazijn-Bovenbouw" {
+        track(:station,
+                az[:craw - 0.1dl, :craw] << 0.5dt
+            --  az[:craw + 1dl, :crao - 1dl] << 1.5dt
+            --  az[:crao, :crao + 0.1dl] << 0.5dt
+        );
+        marker(:left :de.gbf, az[:cmb] << 1.5dt);
+        slabel(:right, az[:cmb + 0.5sw] << 1.5dt << 1.4sw,
+            "Centraal Magazijn Bovenbouw"
+        );
+    }
+
+    with link = "point.nl.Crailoo-Aansl-Oost" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:crao - 1sw, :crao + 1sw]
+        );
+        marker(:right :de.abzw :cat:dc15, az[:crao] >> 0.5dt);
+    }
+
+    with link = "point.nl.Hilversum-Media-Park" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:crao - 1sw, :hvsm + 1sw]
+        );
+        marker(:right :de.hp :cat:dc15 :pax, az[:hvsm] >> 0.5dt);
+        slabel(:right :cat:dc15 :pax, az[:hvsm + 0.5sw] << 1.5dt,
+            "Hilversum Media Park"
+        );
+    }
+
+    with link = "point.nl.Hilversum" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:hvsm + 1sw, :hvs.fa]
+        );
+        track(:first:station :double :cat:dc15 :pax,
+                path("d4.nl.hl")[:hvs.yu, :hvsp - 0.5sw]
+        );
+        marker(:right :de.bf :cat:dc15 :pax, az[:hvs] >> 0.5dt);
+        slabel(:left :cat:dc15 :pax :bold,
+            az[:hvs + 0.25sw] >> 0.5dt >> 1.8sw,
+            "Hilversum"
+        );
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:zwa + 1.4km, :hvs.fa]);
+        line_badge(:cat:dc15 :pax, az[:zwa + 1.4km], "AZ");
+        track(:first :double :cat:dc15 :pax, az[:zwa + 1.4km, :brn - 1sw]);
+    }
+
+    with link = "point.nl.Zwarte-Weg" {
+        marker(:left :de.hp :removed, az[:zwa] << 0.5dt);
+        slabel(:right :removed, az[:zwa - 1.5sw] << 0.5dt << 1.1sh,
+            "Zwarte Weg"
+        );
+    }
+
+    with link = "point.nl.Baarn" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:brn - 1sw, :brn + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:brn - 0.5sw, :brn + 1sw] >> 1.5dt
+        );
+        marker(:left :de.bf :cat:dc15 :pax, az[:brn] << 0.5dt);
+        slabel(:right :cat:dc15 :pax :bold,
+            az[:brn - 0.5sw] << 0.5dt << 1.2sw,
+            "Baarn"
+        );
+    }
+
+    with link = "point.nl.Baarn-aansl" {
+        track(:first:station :double :cat:dc15 :pax,
+                az[:brn + 1sw, :brna + 1sw]
+        );
+        track(:first:station :cat:dc15 :pax,
+                az[:brn + 1sw, :brna + 1sw] >> 1.5dt
+        );
+        marker(:left :de.abzw :cat:dc15, az[:brna] << 0.5dt);
+    }
+
+    with link = "line.nl.AZ" {
+        track(:first :double :cat:dc15 :pax, az[:gmw + 2km, :brna + 1sw]);
+        line_badge(:cat:dc15 :pax, az[:gmw + 2.0km], "AZ");
+        track(:first :double :cat:dc15 :pax, az[:gmw + 2km, :amf.a]);
+    }
+
+    with link = "point.nl.Groote-Melmweg" {
+        marker(:left :de.hp :removed, az[:gmw] << 0.5dt);
+        slabel(:right :removed, az[:gmw + 0.5sw] << 0.5dt << 1.3sh,
+            "Groote Melmweg"
+        );
+    }
+}
+

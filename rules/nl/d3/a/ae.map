@@ -246,20 +246,38 @@ with detail = 3 {
     }
 
     with link = "point.nl.Utrecht-Centraal" {
+        # Spr UZ
         track(:first:station :cat:dc15 :pax,
-                ae[:utz + 1sw, :ut.aa] << 1.5dt
-            ..  ae[:ut.yn, :ut] << 4.5dt
+                ae[:ut.yn, :ut - 0.5sw] << 4.5dt
         );
+
+        # IC AE naar Breukelen
+        with layer = 2 track(:first:station :cat:dc15 :pax,
+                ae[:utz + 1sw, :ut.aa] << 1.5dt
+            ..  ae[:ut.yn, :ut + 2sw] << 3.5dt
+        );
+        with layer = 1 casing(:first:station :cat:dc15 :pax,
+                ae[:utz + 1sw, :ut.aa] << 1.5dt
+            ..  ae[:ut.yn, :ut.yn + 0.1dl] << 3.5dt
+        );
+
+        # IC UZ
+        track(:first:station :double :cat:dc15 :pax,
+                ae[:ut.yn, :ut.xs] << 2dt
+        );
+
+        # Spr AE
         track(:first:station :double :cat:dc15 :pax,
                 ae[:utz + 1sw, :ut.aa]
             ..  ae[:ut.yn, :ut + 2sw]
         );
+        # IC AE van Breukelen
         track(:first:station :cat:dc15 :pax,
                 ae[:utz + 1sw, :ut.aa] >> 1.5dt
             ..  ae[:ut.yn, :ut] >> 1.5dt
         );
 
-        marker(:de.bf :cat:dc15 :pax :left, ae[:ut] << 4.5dt);
+        marker(:de.bf :cat:dc15 :pax :left, ae[:ut] << 3.5dt);
     }
 
     with link = "point.nl.Utrecht-Vaartsche-Rijn" {
