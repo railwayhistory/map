@@ -1,0 +1,87 @@
+# DE 2270.  Oberhausen Hbf - Emmerich Grenze
+#
+let oe = path("d4.de.2270");
+
+with detail = 3 {
+
+    with link = "point.de.Praest" {
+        track(:first:station :double :cat:ac15 :pax,
+                oe[:pra - 1sw, :pra + 1sw]
+        );
+        marker(:de.hp :cat:ac15 :pax :left, oe[:pra] << 0.5dt);
+        marker(:de.exbf :cat:ac15 :pax :left, oe[:pra] << 0.5dt);
+        slabel(:bottom :cat:ac15 :pax, oe[:pra + 0.1sw] << 1.0dt << 1.2sw,
+            "Praest"
+        );
+    }
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac15 :pax, oe[:pra + 1sw, :emm - 1sw]);
+    }
+
+
+    with link = "point.de.Emmerich" {
+        track(:first:station :double :cat:ac15 :pax,
+                oe[:emm - 1sw, :emm + 1sw]
+        );
+        marker(:de.bf :cat:ac15 :pax :left, oe[:emm] << 0.5dt);
+        slabel(:bottom :cat:ac15 :pax, oe[:emm] << 0.5dt << 1.1sh,
+            "Emmerich"
+        );
+    }
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac15 :pax, oe[:emm + 1sw, :elt.el - 0.5sw]);
+        line_badge(:cat:ac15 :pax, oe[:emm + 3.2km], "2270");
+    }
+
+    with link = "point.de.Emmerich-Spannungswechsel" {
+        track(:first:station :double :cat:ac15 :pax,
+                oe[:elt.el - 0.5sw, :elt.el]
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                oe[:elt.el, :elt.el + 0.5sw]
+        );
+        marker(:right :ref :cat:ac15, oe[:elt.el] >> 0.5dt);
+        marker(:right :refdt :cat:ac15, oe[:elt.el] << 0.5dt);
+        marker(:left :ref :cat:ac15, oe[:elt.el] << 0.5dt);
+    }
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac25 :pax,
+                oe[:elt.el + 0.5sw, :elt - 1sw]
+        );
+    }
+
+    with link = "point.de.Emmerich-Elten" {
+        track(:first:station :double :cat:ac25 :pax,
+                oe[:elt - 1sw, :elt + 1sw]
+        );
+        marker(:de.hp :cat:ac25 :pax :right, oe[:elt] >> 0.5dt);
+        marker(:de.exbf :cat:ac25 :pax :right, oe[:elt] >> 0.5dt);
+        slabel(:right :cat:ac25 :pax, oe[:elt - 0.5sw] >> 1.0dt >> 1.6sw,
+            span(:bold, "Emmerich-Elten")
+        );
+    }
+
+    with link = "line.de.2270" {
+        track(:first :double :cat:ac25 :pax,
+                oe[:elt + 1sw, :emg.aa]
+            ..  oe[:emg - 0.51sw, :emg - 0.5sw] << 1dt
+        );
+    }
+
+    with link = "point.int.Emmerich-Zevenaar" {
+        track(:first:station :cat:ac25 :pax,
+                oe[:emg, :emg + 0.5sw] >> 0.5dt
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                oe[:emg - 0.5sw, :emg + 0.5sw] << 1dt
+        );
+        marker(:de.dirgr :cat:ac25 :left, oe[:emg] << 1.5dt);
+        marker(:refdt :cat:ac25 :right, oe[:emg] << 1.5dt);
+        marker(:refdt :cat:ac25 :right, oe[:emg] << 0.5dt);
+        marker(:de.dirgr :cat:ac25 :right, oe[:emg] >> 0.5dt);
+    }
+}
+
