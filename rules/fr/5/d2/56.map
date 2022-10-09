@@ -1,0 +1,107 @@
+# FR 560.  Sargé-sur-Braye - Vouvray
+with detail = 2 {
+    let sv = path("d2.fr.560");
+
+    with link = "line.fr.560" {
+        track(:first :removed, sv[:sar.ym, :mon.ys]);
+        track(:first :removed, sv[:mon.yv, :chr.ym]);
+        track(:first :removed, sv[:chr.yv, :vou.ym]);
+
+        guide(:linenum :removed,
+                sv[:sar.ym + 7.8km] << 0.8dt
+            --  sv[:sar.ym + 7.8km] << 3.0dt
+        );
+        label(:linenum :removed, sv[:sar.ym + 7.8km] << 3.5dt,
+            hbox(:left:middle, "560")
+        );
+        guide(:linenum :removed,
+                sv[:mon.yv + 8.5km] >> 0.8dt
+            --  sv[:mon.yv + 8.5km] >> 3.0dt
+        );
+        label(:linenum :removed, sv[:mon.yv + 8.5km] >> 3.5dt,
+            hbox(:right:middle, "560")
+        );
+        line_badge(:removed, sv[:vou.ym - 12.1km] >> 0.2dt, "560");
+    }
+}
+
+
+# FR 561.  Tours - Le Mans
+with detail = 2 {
+    let tm = path("d2.fr.561");
+
+    with link = "line.fr.561" {
+        track(:first :double :pax, tm[:tou.ym, :man.yt]);
+
+        line_badge(:pax, tm[:mem + 14.5km], "561");
+        line_badge(:pax, tm[:man.yt - 13km], "561");
+    }
+
+    with link = "point.fr.La-Membrolle-sur-Choisille" {
+        statdot(:pax, tm[:mem]);
+        slabel(:left :pax, tm[:mem] + (-1.0dt, 0dt),
+            vbox(:right:middle, "La-Membrolle-", "sur-Choisille  ")
+        );
+    }
+
+    with link = "point.fr.Château-du-Loir" {
+        statdot(:pax, tm[:chl]);
+        slabel(:top :pax, tm[:chl] + (0dt, -0.8dt),
+            vbox(:center:bottom, " Château-", "du-Loir")
+        );
+    }
+
+    with link = "point.fr.Aubigné-Racan" {
+        statdot(:pax, tm[:aub]);
+        slabel(:right :pax, tm[:aub] + (0dt, -1dt),
+            vbox(:left:bottom, " Aubigné-", "Racan")
+        );
+    }
+}
+
+
+# FR 566.  Ligne SEA-Atlantique (LGV)
+with detail = 2 {
+    let ag = path("d2.fr.566");
+
+    with link = "line.fr.566" {
+        track(:first :double :cat:ac25 :pax, ag[:sav, :fon.ys]);
+        track(:first :double :cat:ac25 :pax,
+                ag[:fon.ys, :gue.yn - 3km]
+            ..  ag[:gue.yn, :aub.ys] << 1dt
+            ..  ag[:aub.ys + 3km, :gor.yn]
+        );
+    }
+}
+
+
+# FR 568.  Lormont - Bordeaux-Bastide
+with detail = 2 {
+    let lb = path("d2.fr.568");
+
+    with link = "line.fr.568" {
+        track(:first, lb[:lor.yb, :bas]);
+    }
+
+    with link = "point.fr.Bordeaux-Bastide" {
+        statdot(:removed, lb[:bas]);
+    }
+}
+
+
+# FR 569.  Les Aubrais-Orléans - Orléans
+with detail = 2 {
+    let ao = path("d2.fr.569");
+
+    with link = "line.fr.569" {
+        track(:first :double :cat:dc15 :pax, ao[:aub.yo, :orl]);
+    }
+
+    with link = "point.fr.Orléans" {
+        statdot(:cat:dc15 :pax, ao[:orl]);
+        slabel(:cat:dc15 :pax :medium :bold, ao[:orl] + (3.5km, 2.0km),
+            hbox(:left:top, "Orléans")
+        );
+    }
+}
+

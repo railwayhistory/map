@@ -1,0 +1,341 @@
+# FR 550.  Brétigny - La Membrolle-sur-Choisille
+with detail = 2 {
+    let bm = path("d2.fr.550");
+
+    with link = "line.fr.550" {
+        track(:first :double :cat:dc15 :pax, bm[:bre.yd, :dof]);
+        track(:first :pax, bm[:dof, :chd]);
+        track(:first :pax,
+                bm[:chd, :ven.yyb]
+            ..  bm[:ven.yb, :ven] >> 0.6dt
+        );
+        track(:first :pax, bm[:ven, :mem.yv]);
+
+        line_badge(:cat:dc15 :pax, bm[:arp + 8km] >> 0.4dt, "550");
+        guide(:linenum :pax,
+                bm[:san + 7km] >> 0.8dt
+            --  bm[:san + 7km] >> 3.0dt
+        );
+        label(:linenum :pax, bm[:san + 7km] >> 3.5dt,
+            hbox(:right:middle, "550")
+        );
+        line_badge(:pax, bm[:chd + 4.5km], "550");
+        line_badge(:pax, bm[:chr - 9km], "550");
+        line_badge(:pax, bm[:chr + 12.5km] >> 0.1dt, "550");
+    }
+
+    with link = "point.fr.Arpajon" {
+        statdot(:cat:dc15 :pax, bm[:arp]);
+        slabel(:left :cat:dc15 :pax, bm[:arp] + (1.0dt, -1.3dt), "Arpajon");
+    }
+
+    with link = "point.fr.Dourdan-La-Forêt" {
+        statdot(:cat:dc15 :pax, bm[:dof]);
+        slabel(:right :cat:dc15 :pax, bm[:dof] + (-2dt, 1.5dt),
+            vbox(:center:top, "Dourdan-", "La Forêt")
+        );
+    }
+
+    with link = "point.fr.Auneau" {
+        statdot(:pax, bm[:aun]);
+        slabel(:right :pax, bm[:aun] + (1.8dt, 2.0dt), "Auneau");
+    }
+
+    with link = "point.fr.Santeuil" {
+        statdot(:removed, bm[:san]);
+        slabel(:right :removed, bm[:san] + (1.8dt, 2.0dt), "Santeuil");
+    }
+
+    with link = "point.fr.Voves" {
+        statdot(:pax, bm[:vov]);
+        slabel(:left :pax, bm[:vov] + (-2.0dt, -1dt), "Voves");
+    }
+
+    with link = "point.fr.Bonneval" {
+        statdot(:pax, bm[:bon]);
+        slabel(:right :pax, bm[:bon] + (1.5dt, 1.5dt), "Bonneval");
+    }
+
+    with link = "point.fr.Châteaudun" {
+        statdot(:pax, bm[:chd]);
+        slabel(:right :pax, bm[:chd] + (1.0dt, -2.2km), "Châteaudun");
+    }
+
+    with link = "point.fr.Vendôme" {
+        statdot(:pax, bm[:ven] >> 0.3dt);
+        slabel(:right :pax, bm[:ven] + (2.1km, -1.0dt), "Vendôme");
+    }
+
+    with link = "point.fr.Château-Renault" {
+        statdot(:pax, bm[:chr]);
+        slabel(:left :pax, bm[:chr] + (-1.5dt, 0.8dt),
+            "Château-Renault"
+        );
+    }
+}
+
+
+# FR 551. Bourg-la-Reine - Robinson
+with detail = 2 {
+    let br = path("d2.fr.551");
+
+    with link = "line.fr.551" {
+        track(:first :double :cat:dc15 :pax, br[:bou, :rob]);
+    }
+
+    with link = "point.fr.Robinson" {
+        statdot(:cat:dc15 :pax, br[:rob]);
+    }
+}
+
+
+# FR 552.  Châtelet-Les Halles - Limours
+with detail = 2 {
+    let cl = path("d2.fr.552");
+
+    with link = "line.fr.552" {
+        track(:first :double :cat:dc15 :pax,
+                cl[:cha, :mat.yyn]
+            ..  cl[:mat.yn, :mat.ys] >> 1dt
+            ..  cl[:mat.yys, :sre]
+        );
+        track(:first :double :removed, cl[:sre, :lim]);
+
+        guide(:linenum :removed,
+                cl[:sre + 3.7km] >> 1dt
+            --  cl[:sre + 3.7km] >> 3dt
+        );
+        label(:linenum :removed, cl[:sre + 3.7km] >> 3.5dt,
+            hbox(:right:middle, "552")
+        );
+    }
+
+    with link = "point.fr.Châtelet-Les-Halles" {
+        statdot(:cat:dc15 :pax, cl[:cha]);
+    }
+
+    with link = "point.fr.Bourg-la-Reine" {
+        statdot(:cat:dc15 :pax, cl[:bou]);
+    }
+
+    with link = "point.fr.Massy" {
+        with layer = 2 statdot(:over :cat:dc15 :pax, cl[:mat] >> 1dt);
+        with layer = 1 statdot(:casing, cl[:mat] >> 1dt);
+    }
+
+    with link = "point.fr.St-Rémy-lès-Chevreuse" {
+        statdot(:cat:dc15 :pax, cl[:sre]);
+        slabel(:top :cat:dc15 :pax, cl[:sre] + (0dt, -0.8dt),
+            "St-Rémy-l.-C."
+        );
+    }
+
+    with link = "point.fr.Limours-PO" {
+        statdot(:removed, cl[:lim]);
+        slabel(:left :removed, cl[:lim] + (-1.7km, 1.5dt), "Limours");
+    }
+}
+
+
+# FR 553.  Ouest-Ceinture - Chartres
+with detail = 2 {
+    let oc = path("d2.fr.553");
+
+    with link = "line.fr.553" {
+        track(:first :double :removed, oc[:mat.yc, :gal]);
+        track(:first, oc[:gal, :cha.yg]);
+
+        line_badge(:removed, oc[:lim - 4km] >> 0.2dt, "553");
+        line_badge(:removed, oc[:gal - 16km] >> 0.1dt, "553");
+        line_badge(:open, oc[:gal + 6km] >> 0.2dt, "553");
+    }
+
+    with link = "point.fr.Gallardon-Pont" {
+        statdot(:medium, oc[:gal]);
+        slabel(:right, oc[:gal] + (-0.8dt, -1.0dt),
+            vbox(:left:bottom, "Gallardon-", "Pont")
+        );
+    }
+}
+
+
+# FR 554.  Auneau-Ville - Dreux
+with detail = 2 {
+    let ad = path("d2.fr.5.554");
+
+    with link = "line.fr.554" {
+        track(:first :removed, ad[:auv.yg, :gal.ya]);
+        track(:first :removed, ad[:gal.ym, :mai.yg]);
+
+        guide(:linenum :removed,
+                ad[:gal.ym - 5.4km] << 0.8dt
+            --  ad[:gal.ym - 5.4km] << 3.0dt
+        );
+        label(:linenum :removed, ad[:gal.ym - 5.4km] << 3.5dt,
+            hbox(:right:middle, "554")
+        );
+        guide(:linenum :removed,
+                ad[:mai.yg - 3.0km] >> 0.8dt
+            --  ad[:mai.yg - 3.0km] >> 3.0dt
+        );
+        label(:linenum :removed, ad[:mai.yg - 3.0km] >> 3.5dt,
+            hbox(:left:middle, "554")
+        );
+    }
+}
+
+
+# FR 555.  Beaulieu-le-Coudray - Auneau
+with detail = 2 {
+    let ba = path("d2.fr.555");
+
+    with link = "line.fr.555" {
+        track(:first :removed, ba[:bea.ya, :auv]);
+        track(:first :removed, ba[:auv, :aun.yb]);
+
+        line_badge(:removed, ba[:bea.ya + 8.5km] @ 2 << 0.1dt, "555");
+    }
+
+    with link = "point.fr.Auneau-Ville" {
+        statdot(:medium, ba[:auv]);
+        slabel(:right, ba[:auv] + (-0.5dt, -1.3dt),
+            vbox(:left:bottom, "Auneau-", "Ville")
+        );
+    }
+}
+
+
+# FR 556.  Chartres - Orléans
+with detail = 2 {
+    let co = path("d2.fr.556");
+
+    with link = "line.fr.556" {
+        track(:first :pax, co[:cha.yd, :vov.yc]);
+        track(:first, co[:vov.yp, :orl.yv]);
+
+        line_badge(:pax, co[:vov.yc - 9km], "556");
+        line_badge(:open, co[:pat - 9km], "556");
+        line_badge(:open, co[:pat + 11km], "556");
+    }
+
+    with link = "point.fr.Beaulieu-le-Coudray" {
+        statdot(:medium, co[:bea]);
+        slabel(:left, co[:bea] + (1.0dt, 1.0dt),
+            vbox(:right:top, "Beaulieu-", "le-Coudray ")
+        );
+    }
+
+    with link = "point.fr.Patay" {
+        statdot(:medium, co[:pat]);
+        slabel(:right, co[:pat] + (1.5dt, 0.5dt), "Patay");
+    }
+}
+
+
+# FR 557.  Voves - Toury
+with detail = 2 {
+    let vt = path("d2.fr.557");
+
+    with link = "line.fr.557" {
+        track(:first :removed, vt[:vov.yt, :jan]);
+        track(:first, vt[:jan, :tou.yv]);
+
+        line_badge(:removed, vt[:jan - 6.3km], "557");
+    }
+
+    with link = "point.fr.Janville" {
+        statdot(:medium, vt[:jan]);
+        slabel(:left, vt[:jan] + (-1.4km, 0.8dt), "Janville");
+    }
+}
+
+
+# FR 558.  Courtalain-St-Pellerin - Patay
+with detail = 2 {
+    let cp = path("d2.fr.558");
+
+    with link = "line.fr.558" {
+        track(:first :removed, cp[:cou.yp, :chd.yc]);
+        track(:first, cp[:chd.yp, :pat.yc]);
+
+        guide(:linenum :removed,
+                cp[:cou.yp + 6.4km] >> 0.8dt
+            --  cp[:cou.yp + 6.4km] >> 3.0dt
+        );
+        label(:linenum :removed, cp[:cou.yp + 6.4km] >> 3.0dt,
+            hbox(:center:top, "558")
+        );
+        line_badge(:open, cp[:pat.yc - 13km], "558");
+    }
+}
+
+
+# FR 559.  Pont-de-Braye - Blois
+with detail = 2 {
+    let pb = path("d2.fr.559");
+
+    with link = "line.fr.559" {
+        track(:first :removed, pb[:pbr.yv, :tro]);
+        track(:first,
+                pb[:tro, :mod.yp - 800m]
+            ..  pb[:mod.yp, :ven] << 0.6dt
+        );
+        track(:first, pb[:ven, :sel]);
+        track(:first :removed, pb[:sel, :vil]);
+        track(:first, pb[:vil, :blo.yv]);
+
+        guide(:linenum,
+                pb[:mon - 2.5km] >> 0.8dt
+            --  pb[:mon - 2.5km] >> 3.0dt
+        );
+        label(:linenum, pb[:mon - 2.5km] >> 3.8dt,
+            hbox(:right:middle, "559")
+        );
+        guide(:linenum,
+                pb[:mon + 6.7km] >> 0.8dt
+            --  pb[:mon + 6.7km] >> 3.0dt
+        );
+        label(:linenum, pb[:mon + 6.7km] >> 3.0dt,
+            hbox(:center:top, "559")
+        );
+        guide(:linenum,
+                pb[:sel - 3.8km] << 0.8dt
+            --  pb[:sel - 3.8km] << 3.0dt
+        );
+        label(:linenum, pb[:sel - 3.8km] << 3.5dt,
+            hbox(:left:middle, "559")
+        );
+        guide(:linenum,
+                pb[:vil + 6.5km] << 0.8dt
+            --  pb[:vil + 6.5km] << 3.0dt
+        );
+        label(:linenum, pb[:vil + 6.5km] << 3.0dt + (0.4dt, 0dt),
+            hbox(:center:bottom, "559")
+        );
+    }
+
+    with link = "point.fr.Troo" {
+        statdot(:medium, pb[:tro]);
+        slabel(:top, pb[:tro] + (-1dt, -0.8dt), "Troo");
+    }
+
+    with link = "point.fr.Montoire-sur-le-Loir" {
+        statdot(:medium, pb[:mon]);
+        slabel(:right, pb[:mon] + (-1dt, -0.8dt),
+            vbox(:left:bottom,
+                "Montoire-", "sur-le-", "Loir"
+            )
+        );
+    }
+
+    with link = "point.fr.Selommes" {
+        statdot(:medium, pb[:sel]);
+        slabel(:right, pb[:sel] + (1.5dt, 0.5dt), "Selommes");
+    }
+
+    with link = "point.fr.Villefrancœur" {
+        statdot(:medium, pb[:vil]);
+        slabel(:left, pb[:vil] + (-1.5dt, 1.0dt), "Villefrancœur");
+    }
+}
+
