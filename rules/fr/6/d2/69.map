@@ -1,0 +1,234 @@
+# FR 690.  Vierzon-Forges - Saincaize
+with detail = 2 {
+    let vs = path("d2.fr.690");
+
+    with link = "line.fr.690" {
+        track(:first :double :cat:dc15 :pax, vs[:vif, :bos]);
+        track(:first :double :cat:ac25 :pax, vs[:bos, :sai.yb]);
+
+        line_badge(:cat:dc15 :pax, vs[:vif + 7km], "690");
+        line_badge(:cat:ac25 :pax, vs[:sge + 17.5km] << 0.1dt, "690");
+        guide(:linenum :cat:ac25 :pax,
+                vs[:gue + 5.3km] >> 1dt
+            --  vs[:gue + 5.3km] >> 3dt
+        );
+        label(:linenum :cat:ac25 :pax, vs[:gue + 5.3km] >> 3dt,
+            hbox(:center:top, "690")
+        );
+    }
+
+    with link = "point.fr.Marmagne" {
+        statdot(:cat:dc15 :pax, vs[:mar]);
+        slabel(:left :cat:dc15 :pax, vs[:mar] + (-0.5dt, 0dt),
+            hbox(:right:top, "Marmagne")
+        );
+    }
+
+    with link = "point.fr.Bourges" {
+        statdot(:cat:dc15 :pax, vs[:bou] >> 0.2dt);
+        slabel(:bottom :cat:dc15 :pax, vs[:bou] + (0dt, 0.8dt), "Bourges");
+    }
+
+    with link = "point.fr.St-Germain-du-Puy" {
+        statdot(:cat:ac25 :pax, vs[:sge]);
+        slabel(:right :cat:ac25 :pax, vs[:sge] + (3.2km, 0.5dt),
+            "St-Germain-du-Puy"
+        );
+    }
+
+    with link = "point.fr.La-Guerche-sur-l-Aubois" {
+        statdot(:cat:ac25 :pax, vs[:gue]);
+        slabel(:left :cat:ac25 :pax, vs[:gue] + (1.0dt, 0.5dt),
+            vbox(:right:top, "La Guerche-", "sur-l’Aubois ")
+        );
+    }
+}
+
+
+# FR 690.306.  Raccordement de Bourges au poste C de Pont-Vert
+with detail = 2 {
+    let pb = path("d2.fr.690.306");
+
+    with link = "line.fr.690.306" {
+        track(:first :pax,
+                pb[:pvc - 1.1dt, :pvc - 1dt]
+            ..  pb[:bou.ym, :bou] >> 0.8dt
+        );
+    }
+}
+
+
+# FR 691.  St-Florent-sur-Cher - Issoudun
+with detail = 2 {
+    let fi = path("d2.fr.691");
+
+    with link = "line.fr.691" {
+        track(:first :removed, fi[:sfl.yi, :iss.yf]);
+
+        guide(:linenum :removed,
+                fi[:iss.yf - 10km] >> 0.8dt
+            --  fi[:iss.yf - 10km] >> 3.0dt
+        );
+        label(:linenum :removed, fi[:iss.yf - 10km] >> 3.0dt,
+            hbox(:center:bottom, "691")
+        );
+    }
+}
+
+
+# FR 693.  Salbris - Argent
+with detail = 2 {
+    let sa = path("d2.fr.693");
+
+    with link = "line.fr.693" {
+        track(:first :narrow:g1000 :removed, sa[:sal.ya, :arg.ys]);
+
+        line_badge(:removed, sa[:arg.ys - 19km] << 0.2dt, "693");
+    }
+}
+
+
+# FR 695.  Bif. de Marmagne - Miécaze
+with detail = 2 {
+    let bm = path("d2.fr.6.695");
+
+    with link = "line.fr.695" {
+        track(:first :double :pax, bm[:mar.ym, :sfl]);
+        track(:first :pax, bm[:sfl, :mlu]);
+
+        guide(:linenum :pax,
+                bm[:sfl - 7km] << 1dt
+            --  bm[:sfl - 7km] << 3dt
+        );
+        label(:linenum :pax, bm[:sfl - 7km] << 3.5dt,
+            hbox(:left:middle, "695")
+        );
+        guide(:linenum :pax,
+                bm[:sfl + 18.3km] >> 0.8dt
+            --  bm[:sfl + 18.3km] >> 3dt
+        );
+        label(:linenum :pax, bm[:sfl + 18.3km] >> 3.5dt,
+            hbox(:right:middle, "695")
+        );
+        line_badge(:pax, bm[:vil - 18.5km] @ 3 >> 0.3dt, "695");
+    }
+
+    with link = "point.fr.St-Florent-sur-Cher" {
+        statdot(:pax, bm[:sfl]);
+        slabel(:right :pax, bm[:sfl] + (1.5dt, 0.8dt), "St-Florent-sur-Cher");
+    }
+
+    with link = "point.fr.St-Amand-Montrond-Orval" {
+        statdot(:pax, bm[:sam]);
+        slabel(:right :pax, bm[:sam] + (0dt, -0.5dt),
+            vbox(:left:bottom, "St-Amand-", "Montrond-", "Orval")
+        );
+    }
+
+    with link = "point.fr.La-Ville-Gozet" {
+        statdot(:pax, bm[:vil]);
+        slabel(:right :pax, bm[:vil] + (1.5dt, 0dt), "La Ville-Gozet");
+    }
+
+    with link = "point.fr.Montluçon-Ville" {
+        statdot(:pax, bm[:mlu]);
+        slabel(:left :pax, bm[:mlu] + (0dt, 0.5dt),
+            hbox(:right:top, "Montluçon-Ville")
+        );
+    }
+}
+
+
+# FR 696.  Châteauroux - La Ville-Gozet
+with detail = 2 {
+    let cv = path("d2.fr.696");
+
+    with link = "line.fr.696" {
+        track(:first :closed, cv[:chr.yv, :cht]);
+        track(:first :removed, cv[:cht, :vil.yc]);
+
+        line_badge(:closed, cv[:cht - 12.5km] @ 4 << 0.2dt, "696");
+        guide(:linenum :removed,
+                cv[:chm + 26km] << 0.8dt
+            --  cv[:chm + 26km] << 3.0dt
+        );
+        label(:linenum :removed, cv[:chm + 26km] << 3.7dt,
+            hbox(:left:middle, "696")
+        );
+    }
+
+    with link = "point.fr.La-Châtre" {
+        statdot(:closed, cv[:cht]);
+        slabel(:right :closed, cv[:cht] + (1.3dt, -0.5dt), "La Châtre");
+    }
+
+    with link = "point.fr.Champillet-Urciers" {
+        statdot(:removed, cv[:chm]);
+        slabel(:top :removed, cv[:chm] + (0dt, -1dt),
+            vbox(:center:bottom, " Champillet-", "Urciers")
+        );
+    }
+}
+
+
+# FR 697.  Argenton-sur-Creuse - La Chaussée
+with detail = 2 {
+    let ac = path("d2.fr.697");
+
+    with link = "line.fr.697" {
+        track(:first :removed, ac[:arg.yc, :chs.ya]);
+
+        guide(:linenum :removed,
+                ac[:chs.ya - 12.5km] << 0.8dt
+            --  ac[:chs.ya - 12.5km] << 3.0dt
+        );
+        label(:linenum :removed, ac[:chs.ya - 12.5km] << 3.0dt,
+            hbox(:center:bottom, "697")
+        );
+    }
+}
+
+
+# FR 698.  La Châtre - Guéret
+with detail = 2 {
+    let cg = path("d2.fr.698");
+
+    with link = "line.fr.698" {
+        track(:first :removed, cg[:cht.yg, :gue.yc]);
+
+        guide(:linenum :removed,
+                cg[:cht.yg + 2km] >> 0.8dt
+            --  cg[:cht.yg + 2km] >> 3.0dt
+        );
+        label(:linenum :removed, cg[:cht.yg + 2km] >> 3.8dt,
+            hbox(:right:middle, "698")
+        );
+        line_badge(:removed, cg[:chs + 22.7km] @ 3, "698");
+    }
+
+    with link = "point.fr.La-Chaussée" {
+        statdot(:removed, cg[:chs]);
+        slabel(:left :removed, cg[:chs] + (-2.2km, 0.5dt),
+            vbox(:right:top, "La Chaussée")
+        );
+    }
+}
+
+
+# FR 699.  Champillet-Urciers - Lavaufranche
+with detail = 2 {
+    let cl = path("d2.fr.699");
+
+    with link = "line.fr.699" {
+        track(:first :removed, cl[:chm.yl, :lav.yc]);
+
+        guide(:linenum :removed,
+                cl[:chm.yl + 14.8km] << 0.8dt
+            --  cl[:chm.yl + 14.8km] << 3.0dt
+        );
+        label(:linenum :removed, cl[:chm.yl + 14.8km] << 3.5dt,
+            hbox(:left:middle, "699")
+        );
+    }
+}
+

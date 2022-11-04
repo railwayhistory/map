@@ -1,0 +1,60 @@
+# FR 600.  Salbris - Le Blanc
+with detail = 2 {
+    let sb = path("d2.fr.600");
+
+    with link = "line.fr.600" {
+        track(:first :narrow:g1000 :pax, sb[:sal.yr, :gie.yr]);
+        track(:first :narrow:g1000 :pax, sb[:gie.yb, :val]);
+        track(:first :narrow:g1000, sb[:val, :luc]);
+        track(:first :narrow:g1000 :museum, sb[:luc, :arg]);
+        track(:first :narrow:g1000, sb[:arg, :buz.yg]);
+        track(:first :narrow:g1000 :removed, sb[:buz.yb, :bla.yb]);
+
+        line_badge(:pax, sb[:sal.yr + 15km] @ -20, "600");
+        guide(:linenum :pax,
+                sb[:gie.yr - 3.8km] >> 0.8dt
+            --  sb[:gie.yr - 3.8km] >> 3.0dt
+        );
+        label(:linenum :pax, sb[:gie.yr - 3.8km] >> 3.5dt,
+            hbox(:right:middle, "600")
+        );
+        guide(:linenum :pax,
+                sb[:gie.yb + 8.5km] >> 0.8dt
+            --  sb[:gie.yb + 8.5km] >> 3.0dt
+        );
+        label(:linenum :pax, sb[:gie.yb + 8.5km] >> 3.5dt,
+            hbox(:right:middle, "600")
+        );
+        guide(:linenum :museum,
+                sb[:arg - 14km] << 0.8dt
+            --  sb[:arg - 14km] << 3.0dt
+        );
+        label(:linenum :museum, sb[:arg - 14km] << 3.5dt,
+            hbox(:left:middle, "600")
+        );
+        line_badge(:removed, sb[:bla.yb - 22.7km], "600");
+    }
+
+    with link = "point.fr.Romorantin" {
+        statdot(:pax, sb[:rom]);
+        slabel(:left :pax, sb[:rom] + (-1.8dt, 1.0dt), "Romorantin");
+    }
+
+    with link = "point.fr.Valençay" {
+        statdot(:pax, sb[:val]);
+        slabel(:right :pax, sb[:val] + (1.5dt, 1.3dt), "Valençay");
+    }
+
+    with link = "point.fr.Luçay-le-Mâle" {
+        statdot(:museum, sb[:luc]);
+        slabel(:left :museum, sb[:luc] + (-1.5dt, 0.5dt),
+            "Luçay-le-Mâle"
+        );
+    }
+
+    with link = "point.fr.Argy" {
+        statdot(:museum, sb[:arg]);
+        slabel(:right :museum, sb[:arg] + (1.5dt, 0.8dt), "Argy");
+    }
+}
+

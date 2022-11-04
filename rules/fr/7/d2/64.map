@@ -1,0 +1,75 @@
+# FR 640.  Bordeaux-Saint-Jean - Sète
+with detail = 2 {
+    let bs = path("d2.fr.7.640");
+
+    with link = "line.fr.640" {
+        track(:first :double :cat:dc15 :pax, bs[:nar, :set]);
+
+        line_badge(:cat:dc15 :pax, bs[:nar + 6km] << 0.2dt, "640");
+        line_badge(:cat:dc15 :pax, bs[:via - 7km] << 0.1dt, "640");
+        line_badge(:cat:dc15 :pax, bs[:set - 9km] << 0.2dt, "640");
+    }
+
+    with link = "point.fr.Colombiers" {
+        statdot(:cat:dc15, bs[:col]);
+        slabel(:right :cat:dc15, bs[:col] + (0.5dt, 3.0dt), "Colombiers");
+    }
+
+    with link = "point.fr.Béziers" {
+        statdot(:cat:dc15 :pax, bs[:bez]);
+        slabel(:right :cat:dc15 :pax, bs[:bez] + (2.5km, 0dt), "Béziers");
+    }
+
+    with link = "point.fr.Vias" {
+        statdot(:cat:dc15 :pax, bs[:via]);
+        slabel(:left :cat:dc15 :pax, bs[:via] + (0.5dt, 0.8dt),
+            hbox(:right:top, "Vias")
+        );
+    }
+
+    with link = "point.fr.Agde" {
+        statdot(:cat:dc15 :pax, bs[:agd]);
+        slabel(:right :cat:dc15 :pax, bs[:agd] + (-1.8dt, 1.3dt),
+            hbox(:right:top, "Agde")
+        );
+    }
+
+    with link = "point.fr.Sète" {
+        statdot(:cat:dc15 :pax, bs[:set]);
+        slabel(:right :cat:dc15 :pax, bs[:set] + (-1.0dt, 0.8dt),
+            hbox(:right:top :bold, "Sète")
+        );
+    }
+}
+
+
+# FR 640.100.  Colombiers - Cazouls-lès-Béziers
+with detail = 2 {
+    let cc = path("d2.fr.640.100");
+
+    with link = "line.fr.640.100" {
+        track(:first, cc[:col.yc, :mau]);
+        track(:first :removed, cc[:mau, :caz]);
+
+        guide(:linenum,
+                cc[:col.yc + 3km] << 0.8dt
+            --  cc[:col.yc + 3km] << 3.0dt
+        );
+        label(:linenum, cc[:col.yc + 3km] << 3.5dt,
+            hbox(:right:middle, "640.100")
+        );
+    }
+
+    with link = "point.fr.Maureilhan" {
+        statdot(:medium, cc[:mau]);
+        slabel(:left, cc[:mau] + (-1.7dt, 1.3dt), "Maureilhan");
+    }
+
+    with link = "point.fr.Cazouls-lès-Béziers" {
+        statdot(:removed, cc[:caz]);
+        slabel(:left :removed, cc[:caz] + (-1.7dt, 0.8dt),
+            "Cazouls-lès-Béziers"
+        );
+    }
+}
+
