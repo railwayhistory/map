@@ -1,0 +1,69 @@
+# GB TAH1.  Junction Road - South Tottenham
+#
+let jt = path("d4.gb.tah1");
+
+with detail = 4 {
+    with link = "point.gb.Crouch-Hill" {
+        track(:first:station :double :cat:ac25 :pax,
+                jt[:cro - 95m, :cro + 95m]
+        );
+        platform(:cat:ac25 :pax,
+                jt[:cro - 45m, :cro + 45m] << 0.5dt
+            --  jt[:cro + 45m, :cro - 45m] >> 1.3dt
+        );
+        platform(:cat:ac25 :pax,
+                jt[:cro - 45m, :cro + 45m] >> 0.5dt
+            --  jt[:cro + 45m, :cro - 45m] << 1.3dt
+        );
+        marker(:right :de.hp :cat:ac25 :pax, jt[:cro] >> 1.0dt);
+        station(:left :cat:ac25 :pax, jt[:cro - 0.5sw] << 2.0dt,
+            "Crouch Hill", "3.65"
+        );
+    }
+
+    with link = "line.gb.TAH1" {
+        track(:first :double :cat:ac25 :pax, jt[:cro + 95m, :hpj - 105m]);
+    }
+
+    with link = "point.gb.Harringay-Park-Jn" {
+        with layer = -2 track(:first:station :double :cat:ac25 :pax,
+                jt[:hpj - 105m, :hpj + 150m]
+        );
+            with layer = -2 track(:station :cat:ac25,
+                    jt[:hpj - 55m] >> 0.5dt
+                --  jt[:hpj] << 0.5dt
+            );
+        with layer = -2 track(:first:station :cat:ac25,
+                jt[:hpj + 14m, :hpj + 15m] << 0.5dt
+            --  jt[:hpj + 70m, :hpj + 150m] << 1.5dt
+        );
+        marker(:left :statdt :cat:ac25, jt[:hpj] << 0.5dt);
+        marker(:left :de.abzw :cat:ac25, jt[:hpj] << 1.5dt);
+    }
+
+    with link = "line.gb.TAH1" {
+        with layer = -2 track(:first :double :cat:ac25 :pax,
+                jt[:hpj + 150m, :hag - 85m]
+        );
+    }
+
+    with link = "point.gb.Harringay-Green-Lanes" {
+        track(:first:station :double :cat:ac25 :pax,
+                jt[:hag - 85m, :hag + 110m]
+        );
+        platform(:cat:ac25 :pax,
+                jt[:hag - 35m, :hag + 60m] << 0.5dt
+            --  jt[:hag + 60m, :hag - 35m] >> 1.3dt
+        );
+        platform(:cat:ac25 :pax,
+                jt[:hag - 35m, :hag + 60m] >> 0.5dt
+            --  jt[:hag + 60m, :hag - 35m] << 1.3dt
+        );
+        marker(:right :de.hp :cat:ac25 :pax, jt[:hag] >> 1.0dt);
+        station(:right :cat:ac25 :pax, jt[:hag - 0.6sw] >> 1.0dt >> 0.9sw,
+            vbox(:left:top, "Harringay", "Green Lanes"),
+            "4,61"
+        );
+    }
+}
+

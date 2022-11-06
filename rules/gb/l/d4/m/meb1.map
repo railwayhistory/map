@@ -1,0 +1,56 @@
+# GB MEB1.  Moorgate - Finsbury Park
+#
+let mf = path("d4.gb.meb1");
+
+with detail = 4 {
+
+    line_badge(:rail:rc75, mf[:dra - 200m - 3.5dt] << 0.5dt, "MEB1");
+
+    with link = "point.gb.Drayton-Park" {
+        track(:first:station :rail:rc75 :pax,
+                mf[:dra - 200m, :dra + 80m] >> 1dt
+        );
+            track(:station :rail:rc75,
+                    mf[:dra - 130m] >> 1dt
+                --  mf[:dra - 60m]
+            );
+        with layer = -4 track(:first:station :cat:ac25 :pax,
+                mf[:dra + 80m, :dra + 260m] >> 1dt
+        );
+            track(:station :cat:ac25,
+                    mf[:dra + 80m] >> 1dt
+                --  mf[:dra + 150m]
+            );
+        track(:first:station :rail:rc75 :pax,
+                mf[:dra - 200m, :dra + 80m]
+        );
+        with layer = -4 track(:first:station :cat:ac25 :pax,
+                mf[:dra + 80m, :dra + 260m]
+        );
+
+        platform(:rail:rc75 :pax,
+                mf[:dra - 40m, :dra + 100m]
+            --  mf[:dra + 100m, :dra - 40m] << 1dt
+        );
+
+        marker(:left :de.bf :rail:rc75 :pax, mf[:dra]);
+        station(:right :rail:rc75 :pax, mf[:dra - 0.4sw] >> 3.5dt,
+            "Drayton Park", "MEB1: 2.56"
+        );
+    }
+
+    with link = "line.gb.MEB1" {
+        let ks = path("d4.gb.l.ecm1");
+
+        with layer = -2 track(:first:station :cat:ac25 :pax,
+                mf[:dra + 260m, :dra + 360m] >> 1dt
+            ..  ks[:fpj - 351m, :fpj - 350m] >> 2.5dt
+        );
+
+        with layer = -2 track(:first:station :cat:ac25 :pax,
+                mf[:dra + 260m, :dra + 360m]
+            ..  ks[:fpj - 320m, :fpj - 140m] << 2.5dt
+        );
+    }
+}
+

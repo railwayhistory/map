@@ -1,0 +1,28 @@
+# GB TAH1.  Junction Road - South Tottenham
+#
+let jt = path("d4.gb.tah1");
+
+with detail = 5 {
+
+    with link = "point.gb.Harringay-Park-Jn" {
+        with layer = -2 track(:first:station :double :cat:ac25 :pax,
+                jt[:hpj - 105m, :hpj + 150m]
+        );
+            with layer = -2 track(:station :cat:ac25,
+                    jt[:hpj - 55m] >> 0.5dt
+                --  jt[:hpj] << 0.5dt
+            );
+        with layer = -2 track(:first:station :cat:ac25,
+                jt[:hpj + 14m, :hpj + 15m] << 0.5dt
+            ..  jt[:hpj + 70m, :hpj.yh - 30m] << 2dt
+        );
+        marker(:left :statdt :cat:ac25, jt[:hpj] << 0.5dt);
+        marker(:left :de.abzw :cat:ac25, jt[:hpj] << 1.5dt);
+        station(:left :right_align :cat:ac25,
+            jt[:hpj + 1sw] << 1.5dt << 2.0sh,
+            "Harringay Park Jn.", "HPW: 0.25 · TAH1: 4.15  "
+        );
+    }
+
+}
+

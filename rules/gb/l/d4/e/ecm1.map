@@ -1,0 +1,335 @@
+# GB ECM1.  London King’s Cross - Shaftholme Junction
+#
+let ks = path("d4.gb.l.ecm1");
+
+with detail = 4 {
+    with link = "point.gb.London-Kings-Cross" {
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 420m] >> 4.5dt);
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 420m] >> 3.5dt);
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 420m] >> 2.5dt);
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 420m] >> 1.5dt);
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 420m] >> 0.5dt);
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 420m] << 0.5dt);
+
+        marker(:bottom :de.bf :cat:ac25 :pax, ks[:kgx] >> 2dt);
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first :double :cat:ac25 :pax,
+            ks[:kgx + 420m, :bel - 250m] >> 4dt
+        );
+        track(:first :double :cat:ac25 :pax,
+            ks[:kgx + 420m, :bel - 250m] >> 2dt
+        );
+        track(:first :double :cat:ac25 :pax,
+            ks[:kgx + 420m, :bel - 250m]
+        );
+    }
+
+    with link = "point.gb.Belle-Isle-Jn" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel - 250m, :bel - 150m] >> 4.5dt
+            --  ks[:bel + 60m, :bel + 61m] >> 2.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel - 250m, :bel - 150m - 0.7dl] >> 3.5dt
+            --  ks[:bel + 60m - 0.7dl, :bel + 61m - 0.7dl] >> 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel - 250m, :bel + 60m] >> 2.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel - 250m, :bel + 60m] >> 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel - 250m, :bel + 60m] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel - 250m, :bel + 60m] << 0.5dt
+        );
+    }
+
+    with link = "point.gb.Copenhagen-Jn" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel + 60m, :cop + 120m] >> 2.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel + 60m, :cop + 120m] >> 1.5dt
+        );
+            track(:station :cat:ac25 :pax,
+                    ks[:cop + 20m] >> 1.5dt
+                --  ks[:cop + 80m] >> 2.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel + 60m, :cop + 120m] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:bel + 60m, :cop + 120m] << 0.5dt
+        );
+            track(:station :cat:ac25 :pax,
+                    ks[:cop + 20m] << 0.5dt
+                --  ks[:cop + 80m] >> 0.5dt
+            );
+    }
+
+    with link = "line.gb.ECM1" {
+        with layer = -2 track(:first:station :cat:ac25 :pax,
+                ks[:cop + 60m, :cop + 560m] >> 2.5dt
+            ..  ks[:hos - 140m, :hos - 120m] >> 0.5dt
+        );
+        with layer = -2 track(:first:station :cat:ac25 :pax,
+                ks[:cop + 60m, :cop + 560m] >> 1.5dt
+            ..  ks[:hos - 140m, :hos - 120m] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:cop + 60m, :cop + 560m] >> 0.5dt
+            ..  ks[:hos - 140m, :hos - 120m] >> 1.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac25 :pax,
+                ks[:cop + 60m, :cop + 560m] >> 0.5dt
+            ..  ks[:hos - 140m, :hos - 120m] >> 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:cop + 60m, :cop + 560m] << 0.5dt
+            ..  ks[:hos - 140m, :hos - 120m] << 1.5dt
+        );
+    }
+
+    with link = "point.gb.Holloway-South-Jn" {
+        track(:first:station :cat:ac25,
+                ks[:hos + 539m - 0.5dl, :hos + 540m - 0.5dl] >> 1.5dt
+            --  ks[:hos + 640m - 0.5dl, :hos + 780m] >> 2.5dt
+        );
+            with layer = -1 casing(:first:station :cat:ac25 :pax,
+                    ks[:hos + 539m - 0.5dl, :hos + 540m - 0.5dl] >> 1.5dt
+                --  ks[:hos + 640m - 0.5dl, :hos + 780m] >> 2.5dt
+            );
+
+        track(:first:station :cat:ac25 :pax,
+                ks[:hos - 120m, :hos + 780m] >> 1.5dt
+        );
+            with layer = -1 casing(:first:station :cat:ac25 :pax,
+                    ks[:hos - 120m, :hos + 780m] >> 1.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hos + 30m] >> 1.5dt
+                --  ks[:hos + 120m] >> 0.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hos - 120m, :hos + 780m] >> 0.5dt
+        );
+            with layer = -1 casing(:first:station :cat:ac25 :pax,
+                    ks[:hos - 120m, :hos + 780m] >> 0.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hos - 90m] >> 0.5dt
+                --  ks[:hos] >> 1.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hos + 540m] >> 0.5dt
+                --  ks[:hos + 640m] >> 1.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hos - 120m, :hos + 780m] << 0.5dt
+        );
+            with layer = -1 casing(:first:station :cat:ac25 :pax,
+                    ks[:hos - 120m, :hos + 780m] << 0.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hos - 120m] << 0.5dt
+                --  ks[:hos - 30m] << 1.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hos - 120m, :hos + 780m] << 1.5dt
+        );
+            with layer = -1 track(:first:station :cat:ac25 :pax,
+                    ks[:hos - 120m, :hos + 780m] << 1.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hos + 270m] << 1.5dt
+                --  ks[:hos + 360m] << 0.5dt
+            );
+
+        track(:first:station :cat:ac25,
+                ks[:hos + 399m, :hos + 400m] << 1.5dt
+            --  ks[:hos + 580m, :hos + 780m] << 3.5dt
+        );
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first:station :cat:ac25,
+                ks[:hos + 780m, :hos + 781m] >> 2.5dt
+            ..  ks[:fpj - 351m, :fpj - 350m] >> 4.5dt
+        );
+            with layer = -1 casing(:first:station :cat:ac25 :pax,
+                    ks[:hos + 780m, :hos + 781m] >> 2.5dt
+                ..  ks[:fpj - 351m, :fpj - 350m] >> 4.5dt
+            );
+        track(:first :double :cat:ac25 :pax,
+                ks[:hos + 780m, :fpj - 350m] >> 1dt
+        );
+            with layer = -1 casing(:first :double :cat:ac25 :pax,
+                    ks[:hos + 780m, :fpj - 350m] >> 1dt
+            );
+        track(:first :double :cat:ac25 :pax,
+                ks[:hos + 780m, :fpj - 350m] << 1dt
+        );
+            with layer = -1 casing(:first :double :cat:ac25 :pax,
+                    ks[:hos + 780m, :fpj - 350m] << 1dt
+            );
+        track(:first:station :cat:ac25,
+                ks[:hos + 780m, :hos + 781m] << 3.5dt
+            ..  ks[:fpj - 320m, :fpj - 140m] << 4.5dt
+        );
+    }
+
+    with link = "point.gb.Finsbury-Park" {
+        # ECM1
+        track(:first:station :cat:ac25,
+                ks[:fpj - 350m, :fpj - 100m] >> 4.5dt
+            --  ks[:fpj + 60m, :fpj + 100m] >> 2.5dt
+        );
+
+        # CFP
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 350m, :fpj - 100m - 0.7dl] >> 3.5dt
+            --  ks[:fpj + 60m - 0.7dl, :fpj + 61m - 0.7dl] >> 1.5dt
+        );
+            track(:station :cat:ac25 :pax,
+                    ks[:fpj - 100m - 0.7dl, :fpj - 20m] >> 3.5dt
+            );
+
+        # MEB1
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 350m, :fpj - 20m - 0.7dl] >> 2.5dt
+        );
+
+        # ECM1
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 350m, :fpj + 100m] >> 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 350m, :fpj + 100m] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 350m, :fpj + 100m] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 350m, :fpj + 100m] << 1.5dt
+        );
+
+        # MEB1
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 140m, :fpj + 100m] << 2.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:fpj - 60m] << 2.5dt
+                --  ks[:fpj - 10m] << 1.5dt
+            );
+
+        # CFP
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj - 140m, :fpj - 80m] << 3.5dt
+        );
+        track(:first:station :cat:ac25,
+                ks[:fpj - 80m, :fpj + 100m] << 3.5dt
+        );
+
+        # ECM1
+        track(:first:station :cat:ac25,
+                ks[:fpj - 140m, :fpj - 130m] << 4.5dt
+            --  ks[:fpj + 30m, :fpj + 31m] << 2.5dt
+        );
+
+        track(:first:station :cat:ac25,
+                ks[:fpj + 100m, :fin + 600m] >> 2.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:fin + 385m] >> 2.5dt
+                --  ks[:fin + 450m] >> 1.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj + 100m, :fin + 600m] >> 1.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:fin + 350m] >> 1.5dt
+                --  ks[:fin + 450m] >> 0.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj + 100m, :fin + 600m] >> 0.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:fin + 200m] >> 0.5dt
+                --  ks[:fin + 250m] << 0.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj + 100m, :fin + 600m] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj + 100m, :fin + 600m] << 1.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:fin + 150m] << 1.5dt
+                --  ks[:fin + 220m] << 2.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:fin + 340m] << 1.5dt
+                --  ks[:fin + 450m] << 0.5dt
+            );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fpj + 100m, :fin + 430m] << 2.5dt
+            --  ks[:fin + 540m, :fin + 541m] << 1.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:fin + 240m] << 2.5dt
+                --  ks[:fin + 310m] << 3.5dt
+            );
+        track(:first:station :cat:ac25,
+                ks[:fpj + 100m, :fin + 480m] << 3.5dt
+            --  ks[:fin + 599m, :fin + 600m] << 2.5dt
+        );
+
+        platform(:cat:ac25 :pax,
+                ks[:fin - 80m, :fin + 160m] >> 2.5dt
+            --  ks[:fin + 160m, :fin - 80m] << 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:fin - 95m, :fin + 160m] >> 1.5dt
+            --  ks[:fin + 160m, :fin - 95m] << 0.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:fin - 110m, :fin + 130m] << 0.5dt
+            --  ks[:fin + 130m, :fin - 110m] >> 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:fin - 110m, :fin + 60m] << 1.5dt
+            --  ks[:fin + 60m, :fin - 110m] >> 2.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:fin] >> 2.5dt);
+        station(:right :left_align :cat:ac25 :pax,
+            ks[:fin - 0.4sw] >> 2.5dt >> 1.4sw,
+            span(:bold, "Finsbury Park"),
+            "ECM1: 2.33 · MEB1: 3.45 · CFP: 4.41"
+        );
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :tight,
+                ks[:fin + 600m, :har - 280m] >> 2.5dt
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:fin + 600m, :har - 280m] >> 1.5dt
+        );
+        track(:first:double :cat:ac25 :pax,
+                ks[:fin + 600m, :har - 280m]
+        );
+        track(:first :cat:ac25 :pax :tight :flip,
+                ks[:fin + 600m, :har - 280m] << 1.5dt
+        );
+        track(:first :cat:ac25 :tight :flip,
+                ks[:fin + 600m, :har - 280m] << 2.5dt
+        );
+    }
+}
+
