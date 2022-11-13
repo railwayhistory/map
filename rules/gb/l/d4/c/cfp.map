@@ -1,44 +1,26 @@
-# Canonbury West Junction - Finsbury Park
+# GB CFP.  Canonbury - Finsbury Park
 #
-let cf = path("d4.gb.cfp");
+let mf = path("d4.gb.meb1");
 
-with detail = 5 {
-    # Canonbury West Junction: GB BOK1
-
+with detail = 4 {
+    
     with link = "line.gb.CFP" {
-        track(:first :cat:ac25 :tunnel,
-                cf[:cat.a, :cat.a + 0.1dl]
-            ..  cf[:cat.y, :cat.f] >> 2.5dt
+        let ks = path("d4.gb.l.ecm1");
+
+        with layer = -2 track(:first:station :cat:ac25 :pax,
+                mf[:dra - 460m, :dra + 360m] >> 2dt
+            ..  ks[:fpj - 351m, :fpj - 350m] >> 3.5dt
         );
 
-        marker(:top :tunnel.r :cat:ac25, cf[:cat.a]);
-        marker(:top :tunnel.l :cat:ac25, cf[:cat.a]);
-        marker(:bottom :tunnel.r :cat:ac25, cf[:cat.f] >> 2.5dt);
-        marker(:bottom :tunnel.l :cat:ac25, cf[:cat.f] >> 2.5dt);
-
-        guide(:linenum :cat:ac25 :tunnel,
-                cf[:cat.f - 200m] >> 3.2dt
-            --  cf[:cat.f - 200m] >> 5.5dt
+        with layer = -2 track(:first:station :cat:ac25 :pax,
+                mf[:dra + 99m, :dra + 100m] >> 2dt
+            --  mf[:dra + 260m, :dra + 360m] << 1dt
+            ..  ks[:fpj - 320m, :fpj - 140m] << 3.5dt
         );
-        label(:linenum :cat:ac25 :tunnel, cf[:cat.f - 200m] >> 6.0dt,
-            hbox(:left:middle, "CFP")
-        );
-
-        track(:first :cat:ac25,
-                cf[:cat.f, :dra - 30m] >> 2.5dt
-        );
-
-        track(:first:station :cat:ac25,
-                cf[:dra - 30m, :dra.f] >> 2.5dt
-        );
-        track(:first:station :cat:ac25,
-                cf[:dra + 79m, :dra + 80m] >> 2.5dt
-            ..  cf[:dra.f - 0.1dl, :dra.f] << 1.5dt
-        );
-        with layer = -1 casing(:first:station :cat:ac25,
-                cf[:dra + 79m, :dra + 80m] >> 2.5dt
-            ..  cf[:dra.f - 0.1dl, :dra.f] << 1.5dt
-        );
+            with layer = -3 casing(:first:station :cat:ac25 :pax,
+                    mf[:dra + 99m, :dra + 100m] >> 2dt
+                --  mf[:dra + 260m, :dra + 360m] << 1dt
+            );
     }
 }
 

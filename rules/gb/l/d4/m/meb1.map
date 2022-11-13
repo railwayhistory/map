@@ -3,8 +3,99 @@
 let mf = path("d4.gb.meb1");
 
 with detail = 4 {
+    with link = "point.gb.Moorgate" {
+        track(:first:station :double :rail:rc75 :pax :tunnel,
+                mf[:moo, :moo + 280m]
+        );
+            track(:station :rail:rc75 :pax :tunnel,
+                    mf[:moo + 100m] << 0.5dt
+                --  mf[:moo + 160m] >> 0.5dt
+            );
+            track(:station :rail:rc75 :pax :tunnel,
+                    mf[:moo + 100m] >> 0.5dt
+                --  mf[:moo + 160m] << 0.5dt
+            );
 
-    line_badge(:rail:rc75, mf[:dra - 200m - 3.5dt] << 0.5dt, "MEB1");
+        platform(:rail:rc75 :pax :tunnel,
+                mf[:moo, :moo + 80m] >> 0.5dt
+            --  mf[:moo + 80m, :moo] >> 0.5dt
+        );
+
+        marker(:right :de.bf :rail:rc75 :pax :tunnel,
+            mf[:moo + 0.5sw] >> 0.5dt
+        );
+    }
+
+
+    with link = "line.gb.MEB1" {
+        track(:first :double :rail:rc75 :pax :tunnel,
+                mf[:moo + 280m, :old - 140m]
+        );
+    }
+
+
+    with link = "point.gb.Old-Street" {
+        track(:first:station :double :rail:rc75 :pax :tunnel,
+                mf[:old - 140m, :old + 140m]
+        );
+        platform(:rail:rc75 :pax :tunnel,
+                mf[:old - 40m, :old + 40m] << 0.5dt
+            --  mf[:old + 40m, :old - 40m] << 0.5dt
+        );
+        marker(:right :de.hp :rail:rc75 :pax :tunnel, mf[:old] >> 0.5dt);
+    }
+
+
+    with link = "line.gb.MEB1" {
+        track(:first :double :rail:rc75 :pax :tunnel,
+                mf[:old + 140m, :ess - 140m]
+        );
+    }
+
+
+    with link = "point.gb.Essex-Road" {
+        track(:first:station :double :rail:rc75 :pax :tunnel,
+                mf[:ess - 140m, :ess + 140m]
+        );
+        platform(:rail:rc75 :pax :tunnel,
+                mf[:ess - 40m, :ess + 40m] << 0.5dt
+            --  mf[:ess + 40m, :ess - 40m] << 0.5dt
+        );
+        marker(:left :de.hp :rail:rc75 :pax :tunnel, mf[:ess] << 0.5dt);
+    }
+
+
+    with link = "line.gb.MEB1" {
+        track(:first :double :rail:rc75 :pax :tunnel,
+                mf[:ess + 140m, :ess + 141m]
+            ..  mf[:hig - 320m, :hig - 140m] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.gb.Highbury-Islington" {
+        with layer = -2 track(:first:station :rail:rc75 :pax :tunnel,
+                mf[:hig - 140m, :hig + 140m]
+        );
+        with layer = -2 platform(:rail:rc75 :pax :tunnel,
+                mf[:hig - 40m, :hig + 40m]
+            --  mf[:hig + 40m, :hig - 40m] >> 0.6dt
+        );
+
+        with layer = -2 track(:first:station :rail:rc75 :pax :tunnel,
+                mf[:hig - 140m, :hig + 140m] >> 1dt
+        );
+        with layer = -2 platform(:rail:rc75 :pax :tunnel,
+                mf[:hig - 40m, :hig + 40m] >> 1.0dt
+            --  mf[:hig + 40m, :hig - 40m] << 0.4dt
+        );
+    }
+
+    with link = "line.gb.MEB1" {
+        track(:first :double :rail:rc75 :pax :tunnel,
+                mf[:hig + 140m, :dra - 190m] >> 0.5dt
+        );
+    }
 
     with link = "point.gb.Drayton-Park" {
         track(:first:station :rail:rc75 :pax,

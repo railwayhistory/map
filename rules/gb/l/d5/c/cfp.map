@@ -1,0 +1,44 @@
+# Canonbury West Junction - Finsbury Park
+#
+let cf = path("d4.gb.cfp");
+
+with detail = 5 {
+    # Canonbury West Junction: GB BOK1
+
+    with link = "line.gb.CFP" {
+        track(:first :cat:ac25 :tunnel,
+                cf[:cat.a, :cat.a + 0.1dl]
+            ..  cf[:cat.y, :cat.f] >> 2.5dt
+        );
+
+        marker(:top :tunnel.r :cat:ac25, cf[:cat.a]);
+        marker(:top :tunnel.l :cat:ac25, cf[:cat.a]);
+        marker(:bottom :tunnel.r :cat:ac25, cf[:cat.f] >> 2.5dt);
+        marker(:bottom :tunnel.l :cat:ac25, cf[:cat.f] >> 2.5dt);
+
+        guide(:linenum :cat:ac25 :tunnel,
+                cf[:cat.f - 200m] >> 3.2dt
+            --  cf[:cat.f - 200m] >> 5.5dt
+        );
+        label(:linenum :cat:ac25 :tunnel, cf[:cat.f - 200m] >> 6.0dt,
+            hbox(:left:middle, "CFP")
+        );
+
+        track(:first :cat:ac25,
+                cf[:cat.f, :dra - 30m] >> 2.5dt
+        );
+
+        track(:first:station :cat:ac25,
+                cf[:dra - 30m, :dra.f] >> 2.5dt
+        );
+        track(:first:station :cat:ac25,
+                cf[:dra + 79m, :dra + 80m] >> 2.5dt
+            ..  cf[:dra.f - 0.1dl, :dra.f] << 1.5dt
+        );
+        with layer = -1 casing(:first:station :cat:ac25,
+                cf[:dra + 79m, :dra + 80m] >> 2.5dt
+            ..  cf[:dra.f - 0.1dl, :dra.f] << 1.5dt
+        );
+    }
+}
+

@@ -529,7 +529,9 @@ with detail = 5 {
         );
 
         # Down Slow
-        track(:first :cat:ac25 :pax :flip:tight, ks[:fin.f, :har.a] << 1.5dt);
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:fin.f, :har.a] << 1.5dt
+        );
 
         # Fast
         track(:first :double :cat:ac25 :pax, ks[:fin.f, :har.a]);
@@ -544,64 +546,1191 @@ with detail = 5 {
 
     with link = "point.gb.Harringay-Jn" {
         # ECM1 Down Goods
-        track(:first:station :cat:ac25, ks[:har.a, :har] << 2.5dt);
+        track(:first:station :cat:ac25,
+                ks[:har.a, :har.a + 40m] << 2.5dt
+            ..  ks[:haj, :har] << 3.5dt
+        );
 
         # HPW
         track(:first:station :cat:ac25,
-                path("d4.gb.hpw")[:haj, :haj + 80m] >> 2.5dt
+                path("d4.gb.hpw")[:haj, :haj + 80m] >> 3.5dt
         );
 
-        marker(:left :de.abzw :cat:ac25, ks[:haj] << 2.5dt);
+        marker(:left :de.abzw :cat:ac25, ks[:haj] << 3.5dt);
         station(:left :right_align :cat:ac25,
-            ks[:haj + 1sw] << 2.5dt << 1.2sw,
+            ks[:haj + 1sw] << 3.5dt << 1.2sw,
             "Harringay Jn.", "HPW: 0.00 · ECM1: 3.32  "
         );
     }
 
 
     with link = "point.gb.Harringay" {
+        # Down Goods
+        track(:first:station :cat:ac25,
+                ks[:har, :har + 50m] << 3.5dt
+            ..  ks[:har + 180m, :har.xf - 220m] << 2.5dt
+            ..  ks[:har.xf, :hor - 500m] << 4.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:har + 50m, :har + 180m] << 3.5dt
+            );
+
         # Down Slow
         track(:first:station :cat:ac25 :pax,
-                ks[:har.a, :har] << 1.5dt
+                ks[:har.a, :har.a + 40m] << 1.5dt
+            ..  ks[:haj, :har + 50m] << 2.5dt
+            ..  ks[:har + 180m, :hor - 500m] << 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:har - 85m, :har + 45m] << 2.1dt
+            --  ks[:har + 45m, :har - 85m] >> 1.4dt
         );
 
         # Down Fast
         track(:first:station :cat:ac25 :pax,
-                ks[:har.a, :har.a + 40m] << 0.5dt
-            ..  ks[:har - 90m, :har] >> 0.5dt
+                ks[:har.a, :hor - 500m] << 0.5dt
         );
 
         # Up Fast
         track(:first:station :cat:ac25 :pax,
-                ks[:har.a, :har.a + 40m] >> 0.5dt
-            ..  ks[:har - 90m, :har] >> 1.5dt
+                ks[:har.a, :hor - 500m] >> 0.5dt
         );
 
         # Up Slow
         track(:first:station :cat:ac25 :pax,
-                ks[:har.a, :har.a + 40m] >> 1.5dt
-            ..  ks[:har - 90m, :har] >> 2.5dt
+                ks[:har.a, :hor - 500m] >> 1.5dt
         );
             track(:station :cat:ac25,
                     ks[:har.a + 40m] >> 1.5dt
-                --  ks[:har.a + 100m] >> 3.2dt
+                --  ks[:har.a + 100m] >> 2.6dt
             );
+        platform(:cat:ac25 :pax,
+                ks[:har - 85m, :har + 45m] >> 1.9dt
+            --  ks[:har + 45m, :har - 85m] << 2.6dt
+        );
 
         # Up Goods
         track(:first:station :cat:ac25,
-                ks[:har.a, :har.a + 40m] >> 2.5dt
-            ..  ks[:har - 90m, :har] >> 4.5dt
+                ks[:har.a, :har.a + 80m] >> 2.5dt
+            ..  ks[:har - 90m, :har + 50m] >> 3.5dt
+            ..  ks[:har + 200m, :hor - 500m] >> 2.5dt
         );
             track(:station :cat:ac25,
                     ks[:har.a + 40m] >> 2.5dt
-                --  ks[:har.a + 100m] >> 4.35dt
+                --  ks[:har.a + 100m] >> 3.6dt
+            );
+            track(:station :cat:ac25,
+                    ks[:har.a + 79m, :har.a + 80m] >> 2.5dt
+                ..  ks[:har - 45m, :har - 44m] >> 5.5dt
             );
 
-        # Up Rev Sidings
+        # EMU Sidings Access (1)
         track(:station :cat:ac25,
-                ks[:har.a - 300m, :har.a + 35m] >> 3.5dt
-            ..  ks[:har - 95m, :har] >> 5.5dt
+                ks[:har.a + 79m, :har.a + 80m] >> 3.5dt
+            ..  ks[:har - 95m, :har + 230m] >> 4.5dt
+        );
+
+        # EMU Sidings Access (2)
+        track(:station :cat:ac25,
+                ks[:har + 50m, :har + 230m] >> 5.5dt
+        );
+
+        # EMU Sidings Access (2)
+        track(:station :cat:ac25,
+                ks[:har - 41m, :har - 40m] >> 5.5dt
+            ..  ks[:har + 65m, :har + 230m] >> 6.5dt
+        );
+
+        # Up Rev Sidings
+        with layer = 2 track(:station :cat:ac25,
+                ks[:har.a - 300m, :har.a + 80m] >> 3.5dt
+            ..  ks[:har - 95m, :har - 40m] >> 5.5dt
+            ..  ks[:har + 65m, :har + 160m] >> 7.5dt
+            ..  ks[:har.xf, :hor - 500m] << 3.5dt
+        );
+        with layer = 1 casing(:station :cat:ac25,
+                ks[:har + 159m, :har + 160m] >> 7.5dt
+            ..  ks[:har.xf, :hor - 500m] << 3.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:har] >> 7dt);
+        station(:right :cat:ac25 :pax, ks[:har - 0.3sw] >> 7dt >> 1.4sh,
+            "Harringay", "ECM1: 3.32"
         );
     }
+
+
+    with link = "point.gb.Ferme-Park-Carriage-Sidings" {
+        # 1
+        track(:station :cat:ac25,
+                ks[:har + 49m, :har + 50m] << 4.5dt
+            ..  ks[:har + 180m, :har.xf - 220m] << 3.5dt
+            ..  ks[:har.xf - 195m] << 3.55dt --  ks[:har.xf - 190m] << 3.6dt
+            ..  ks[:har.xf, :har.xf + 250m] << 5.5dt
+            ..  ks[:har.xf + 290m, :har.xf + 291m] << 6.5dt
+        );
+
+        # 2
+        track(:station :cat:ac25,
+                ks[:har.xf - 195m] << 3.55dt --  ks[:har.xf - 190m] << 3.6dt
+            ..  ks[:har.xf, :har.xf + 430m] << 6.5dt
+            ..  ks[:hor - 140m, :hor - 120m] << 5.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:har.xf + 429m, :har.xf + 430m] << 6.5dt
+                ..  ks[:hor - 140m, :hor - 139m] << 4.5dt
+            );
+
+        # 3
+        track(:station :cat:ac25,
+                ks[:har.xf - 165m] << 4.6dt
+            --  ks[:har.xf - 160m] << 4.8dt
+            ..  ks[:har.xf - 90m] << 6.75dt
+            --  ks[:har.xf - 80m] << 6.9dt
+            ..  ks[:har.xf, :har.xf + 270m] << 7.5dt
+            ..  ks[:har.xf + 320m, :har.xf + 321m] << 6.5dt
+        );
+
+        # 4
+        track(:station :cat:ac25,
+                ks[:har.xf - 90m] << 6.75dt
+            --  ks[:har.xf - 80m] << 6.9dt
+            ..  ks[:har.xf, :har.xf + 270m] << 8.5dt
+            ..  ks[:har.xf + 320m] << 8dt
+            --  ks[:har.xf + 330m] << 7.5dt
+        );
+
+        # 5
+        track(:station :cat:ac25,
+                ks[:har.xf - 221m, :har.xf - 220m] << 3.5dt
+            ..  ks[:har.xf - 180m] << 4.0dt
+            --  ks[:har.xf - 130m] << 6.0dt
+            ..  ks[:har.xf - 70m] << 8.2dt
+            --  ks[:har.xf - 60m] << 8.55dt
+            ..  ks[:har.xf, :har.xf + 210m] << 9.5dt
+            ..  ks[:har.xf + 260m, :har.xf + 261m] << 8.5dt
+        );
+
+        # 6
+        track(:station :cat:ac25,
+                ks[:har.xf - 70m] << 8.2dt
+            --  ks[:har.xf - 60m] << 8.55dt
+            ..  ks[:har.xf, :har.xf + 210m] << 10.5dt
+            ..  ks[:har.xf + 295m, :har.xf + 296m] << 8.5dt
+        );
+
+        # 7
+        track(:station :cat:ac25,
+                ks[:har.xf - 60m] << 11.85dt
+            --  ks[:har.xf - 50m] << 12.1dt
+            ..  ks[:har.xf, :har.xf + 210m] << 11.5dt
+            ..  ks[:har.xf + 250m] << 11.4dt
+            --  ks[:har.xf + 255m] << 11.35dt
+            ..  ks[:har.xf + 280m] << 10.5dt
+            --  ks[:har.xf + 285m] << 10.1dt
+        );
+
+        # 8
+        track(:station :cat:ac25,
+                ks[:har.xf - 110m] << 8.7dt
+            --  ks[:har.xf - 100m] << 9.7dt
+            ..  ks[:har.xf - 60m] << 11.85dt
+            --  ks[:har.xf - 50m] << 12.1dt
+            ..  ks[:har.xf, :har.xf + 200m] << 12.5dt
+            ..  ks[:har.xf + 250m] << 11.4dt
+            --  ks[:har.xf + 255m] << 11.35dt
+        );
+
+        # 9
+        track(:station :cat:ac25,
+                ks[:har.xf - 60m] << 12.7dt
+            --  ks[:har.xf - 50m] << 13.2dt
+            ..  ks[:har.xf, :har.xf + 210m] << 13.5dt
+            ..  ks[:har.xf + 250m] << 12.7dt
+            --  ks[:har.xf + 255m] << 12.35dt
+        );
+
+        # 10
+        track(:station :cat:ac25,
+                ks[:har.xf - 175m] << 4.2dt
+            --  ks[:har.xf - 170m] << 4.4dt
+            ..  ks[:har.xf - 110m] << 8.7dt
+            --  ks[:har.xf - 100m] << 9.7dt
+            ..  ks[:har.xf - 60m] << 12.7dt
+            --  ks[:har.xf - 50m] << 13.2dt
+            ..  ks[:har.xf, :har.xf + 150m] << 14.5dt
+            ..  ks[:har.xf + 209m, :har.xf + 210m] << 13.5dt
+        );
+
+        # 11
+        track(:station :cat:ac25,
+                ks[:har.xf, :har.xf + 170m] << 15.5dt
+            ..  ks[:har.xf + 250m] << 12.7dt
+            --  ks[:har.xf + 255m] << 12.35dt
+            ..  ks[:har.xf + 280m] << 10.5dt
+            --  ks[:har.xf + 285m] << 10.1dt
+            ..  ks[:har.xf + 320m] << 8dt
+            --  ks[:har.xf + 330m] << 7.5dt
+            ..  ks[:har.xf + 380m, :har.xf + 381m] << 6.5dt
+        );
+
+        # 12
+        track(:station :cat:ac25,
+                ks[:har.xf, :har.xf + 170m] << 16.5dt
+            ..  ks[:har.xf + 420m, :har.xf + 421m] << 6.5dt
+        );
+
+        slabel(:left :italic :cat:ac25, ks[:har.xf + 80m] << 18.5dt,
+            "Ferme Park Carriage Sidings"
+        );
+    }
+
+
+    with link = "point.gb.Hornsey-EMU-Depot" {
+        # 1
+        track(:station :cat:ac25,
+                ks[:har + 230m, :hor + 110m + 1dt] >> 4.5dt
+            ..  ks[:hor + 180m + 1dt, :ale.xd] >> 3.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:hor + 240m] >> 3.5dt
+                --  ks[:hor + 280m] >> 4.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:ale.xd - 65m] >> 3.5dt
+                --  ks[:ale.xd] >> 2.5dt
+            );
+
+        # 2
+        track(:station :cat:ac25,
+                ks[:har + 230m, :hor + 110m + 1.5dt] >> 5.5dt
+            ..  ks[:hor + 180m + 1.5dt, :ale.xd - 130m] >> 4.5dt
+            ..  ks[:ale.xd - 75m, :ale.xd - 74m] >> 3.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:hor + 109m + 1.5dt, :hor + 110m + 1.5dt] >> 5.5dt
+                ..  ks[:hor + 180m + 1dt, :hor + 181m + 1dt] >> 3.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hor + 340m] >> 4.5dt
+                --  ks[:hor + 400m] >> 3.5dt
+            );
+
+        # 3
+        track(:station :cat:ac25,
+                ks[:hor - 531m + 4dt, :hor - 530m + 4dt] >> 5.5dt
+            ..  ks[:hor - 442m + 4dt, :hor - 100m - 3dt] >> 6.5dt
+            ..  ks[:hor + 10m - 3dt, :hor + 11m - 3dt] >> 5.5dt
+        );
+
+        # 4
+        track(:station :cat:ac25,
+                ks[:hor - 563m + 3.5dt, :hor - 562m + 3.5dt] >> 5.5dt
+            ..  ks[:hor - 452m + 3.5dt, :hor - 100m - 2.5dt] >> 7.5dt
+            ..  ks[:hor + 32m - 2.5dt, :hor + 33m - 2.5dt] >> 5.5dt
+        );
+
+        # 5
+        track(:station :cat:ac25,
+                ks[:hor - 585m + 3dt, :hor - 584m + 3dt] >> 5.5dt
+            ..  ks[:hor - 552m + 3dt] >> 6.5dt
+            --  ks[:hor - 549.8m + 3dt] >> 6.6dt
+            ..  ks[:hor - 442m + 3dt, :hor - 100m - 2dt] >> 8.5dt
+            ..  ks[:hor + 54m - 2dt, :hor + 55m - 2dt] >> 5.5dt
+        );
+
+        # 6
+        track(:station :cat:ac25,
+                ks[:hor - 607m + 2.5dt, :hor - 606m + 2.5dt] >> 5.5dt
+            ..  ks[:hor - 574m + 2.5dt] >> 6.5dt
+            --  ks[:hor - 552m + 2.5dt] >> 7.5dt
+            ..  ks[:hor - 442m + 2.5dt, :hor - 100m - 1.5dt] >> 9.5dt
+            ..  ks[:hor + 10m - 1.5dt] >> 7.5dt
+            --  ks[:hor + 12.2m - 1.5dt] >> 7.4dt
+            ..  ks[:hor + 76m - 1.5dt, :hor + 77m - 1.5dt] >> 5.5dt
+        );
+
+        # 7
+        track(:station :cat:ac25,
+                ks[:hor - 629m + 2dt, :hor - 628m + 2dt] >> 5.5dt
+            ..  ks[:hor - 596m + 2dt] >> 6.5dt
+            --  ks[:hor - 552m + 2dt] >> 8.5dt
+            ..  ks[:hor - 442m + 2dt, :hor - 100m - 1dt] >> 10.5dt
+            ..  ks[:hor + 10m - 1dt] >> 8.5dt
+            --  ks[:hor + 32m - 1dt] >> 7.5dt
+            ..  ks[:hor + 98m - 1dt, :hor + 99m - 1dt] >> 5.5dt
+        );
+
+        # 8
+        track(:station :cat:ac25,
+                ks[:hor - 554.2m + 1.5dt] >> 9.4dt
+            --  ks[:hor - 552m + 1.5dt] >> 9.5dt
+            ..  ks[:hor - 442m + 1.5dt, :hor - 100m - 0.5dt] >> 11.5dt
+            ..  ks[:hor + 10m - 0.5dt] >> 9.5dt
+            --  ks[:hor + 12.2m - 0.5dt] >> 9.4dt
+        );
+
+        # 9
+        track(:station :cat:ac25,
+                ks[:hor - 651m + 1.5dt, :hor - 650m + 1.5dt] >> 5.5dt
+            ..  ks[:hor - 596m + 1.5dt] >> 7.5dt  # 22m per dt
+            --  ks[:hor - 530m + 1.5dt] >> 10.5dt
+            ..  ks[:hor - 442m + 1.5dt, :hor - 100m - 0.5dt] >> 12.5dt
+            ..  ks[:hor - 12m - 0.5dt] >> 10.5dt
+            --  ks[:hor + 54m - 0.5dt] >> 7.5dt
+            ..  ks[:hor + 120m - 0.5dt, :hor + 121m - 0.5dt] >> 5.5dt
+        );
+
+        # 10
+        track(:station :cat:ac25,
+                ks[:hor - 532.2m + 1dt] >> 11.4dt
+            --  ks[:hor - 530m + 1dt] >> 11.5dt
+            ..  ks[:hor - 442m + 1dt, :hor - 170m - 2dt] >> 13.5dt
+            ..  ks[:hor - 12m] >> 11.5dt
+            --  ks[:hor - 9.8m] >> 11.4dt
+        );
+
+        # 11
+        track(:station :cat:ac25,
+                ks[:hor - 689m + 1dt, :hor - 678m + 1dt] >> 5.5dt
+            ..  ks[:hor - 618m + 1dt] >> 7.5dt  # 22m per dt
+            --  ks[:hor - 508m + 1dt] >> 12.5dt
+            ..  ks[:hor - 420m, :hor - 170m - 1.5dt] >> 14.5dt
+            ..  ks[:hor - 34m] >> 12.5dt
+            --  ks[:hor - 31.8m] >> 12.4dt
+        );
+
+        # 12
+        track(:station :cat:ac25,
+                ks[:hor - 510.2m + 0.5dt] >> 13.4dt
+            --  ks[:hor - 508m + 0.5dt] >> 13.5dt
+            ..  ks[:hor - 438m + 0.5dt, :hor - 170m - 1dt] >> 15.5dt
+            ..  ks[:hor - 56m] >> 13.5dt
+            --  ks[:hor - 53.8m] >> 13.4dt
+        );
+
+        # 13
+        track(:station :cat:ac25,
+                ks[:hor - 412m + 1dt, :hor - 411m + 1dt] >> 15.5dt
+            ..  ks[:hor - 372m + 1.5dt, :hor - 170m - 0.5dt] >> 16.5dt
+            ..  ks[:hor - 78m] >> 14.5dt
+            --  ks[:hor - 75.8m] >> 14.4dt
+        );
+
+        # 14
+        track(:station :cat:ac25,
+                ks[:hor - 451m + 1dt, :hor - 450m + 1dt] >> 15.5dt
+            ..  ks[:hor - 372m + 1dt, :hor - 170m] >> 17.5dt
+            ..  ks[:hor - 100m] >> 15.5dt
+            --  ks[:hor + 76m] >> 7.5dt
+            ..  ks[:hor + 110m + 1.5dt, :hor + 111m + 1.5dt] >> 5.5dt
+        );
+
+        # 15
+        track(:station :cat:ac25,
+                ks[:hor - 444.2m + 0.5dt] >> 16.4dt
+            --  ks[:hor - 442m + 0.5dt] >> 16.5dt
+            ..  ks[:hor - 372m + 0.5dt, :hor - 170m] >> 18.5dt
+            ..  ks[:hor - 80m, :hor - 60m] >> 19.5dt
+            ..  ks[:hor + 220m + 1.5dt, :hor + 221m + 1.5dt] >> 4.5dt
+        );
+
+        # 16
+        track(:station :cat:ac25,
+                ks[:hor - 381m + 0.5dt, :hor - 380m + 0.5dt] >> 18.5dt
+            ..  ks[:hor - 330m + 0.5dt, :hor - 200m] >> 19.5dt
+        );
+
+        # 17
+        track(:station :cat:ac25,
+                ks[:hor - 400.2m + 0.5dt] >> 18.4dt
+            --  ks[:hor - 398m + 0.5dt] >> 18.5dt
+            ..  ks[:hor - 328m + 0.5dt, :hor - 170m] >> 20.5dt
+        );
+
+        # 18
+        track(:station :cat:ac25,
+                ks[:hor - 711m + 0.5dt, :hor - 710m + 0.5dt] >> 5.5dt
+            ..  ks[:hor - 640m + 0.5dt] >> 7.5dt  # 22m per dt
+            --  ks[:hor - 376m + 0.5dt] >> 19.5dt
+            ..  ks[:hor - 306m + 0.5dt, :hor - 170m] >> 21.5dt
+        );
+
+        # 19
+        track(:station :cat:ac25,
+                ks[:hor - 378.2m] >> 20.4dt
+            --  ks[:hor - 376m] >> 20.5dt
+            ..  ks[:hor - 306m, :hor - 170m] >> 22.5dt
+        );
+
+        # 20
+        track(:station :cat:ac25,
+                ks[:hor - 356.2m] >> 21.4dt
+            --  ks[:hor - 354m] >> 21.5dt
+            ..  ks[:hor - 284m, :hor - 170m] >> 23.5dt
+        );
+
+        # 21
+        track(:station :cat:ac25,
+                ks[:hor - 334.2m] >> 22.4dt
+            --  ks[:hor - 332m] >> 22.5dt
+            ..  ks[:hor - 262m, :hor - 170m] >> 24.5dt
+        );
+
+        # 22
+        track(:station :cat:ac25,
+                ks[:hor - 312.2m] >> 23.4dt
+            --  ks[:hor - 310m] >> 23.5dt
+            ..  ks[:hor - 240m, :hor - 170m] >> 25.5dt
+        );
+
+        # 23
+        track(:station :cat:ac25,
+                ks[:hor - 290.2m] >> 24.4dt
+            --  ks[:hor - 288m] >> 24.5dt
+            ..  ks[:hor - 218m, :hor - 150m] >> 26.5dt
+        );
+
+        # 24
+        track(:station :cat:ac25,
+                ks[:hor - 268.2m] >> 25.4dt
+            --  ks[:hor - 266m] >> 25.5dt
+            ..  ks[:hor - 196m, :hor - 90m] >> 27.5dt
+        );
+
+        # 25
+        track(:station :cat:ac25,
+                ks[:hor - 246.2m] >> 26.4dt
+            --  ks[:hor - 244m] >> 26.5dt
+            ..  ks[:hor - 174m, :hor - 90m] >> 28.5dt
+        );
+
+        # 26
+        track(:station :cat:ac25,
+                ks[:hor - 224.2m] >> 27.4dt
+            --  ks[:hor - 222m] >> 27.5dt
+            ..  ks[:hor - 152m, :hor - 90m] >> 29.5dt
+        );
+
+        # 27
+        track(:station :cat:ac25,
+                ks[:har + 230m, :hor - 710m] >> 6.5dt
+            ..  ks[:hor - 640m] >> 8.5dt  # 22m per dt
+            --  ks[:hor - 200m] >> 28.5dt
+            ..  ks[:hor - 130m, :hor - 90m] >> 30.5dt
+        );
+
+        # 31
+        track(:station :cat:ac25,
+                ks[:hor + 289m, :hor + 290m] >> 4.5dt
+            ..  ks[:hor + 340m, :hor + 700m] >> 5.5dt
+        );
+
+        # 32
+        track(:station :cat:ac25,
+                ks[:hor + 399m + 0.5dt, :hor + 400m + 0.5dt] >> 5.5dt
+            ..  ks[:hor + 450m + 0.5dt, :hor + 700m] >> 6.5dt
+        );
+
+        # 33
+        track(:station :cat:ac25,
+                ks[:hor + 349m, :hor + 350m] >> 5.5dt
+            ..  ks[:hor + 450m, :hor + 700m] >> 7.5dt
+        );
+
+        slabel(:right:italic :cat:ac25, ks[:hor - 100m] >> 32.5dt,
+            "Hornsey EMU Depot"
+        );
+    }
+
+
+    with link = "point.gb.Hornsey" {
+        # Ferme Park Sidings Access
+        track(:station :cat:ac25,
+                ks[:hor - 120m, :hor - 50m] << 5.5dt
+            ..  ks[:hor + 229m, :hor + 230m] << 3.5dt
+        );
+
+        # Down Goods
+        track(:first:station :cat:ac25,
+                ks[:hor - 500m, :hor - 50m] << 4.5dt
+            ..  ks[:hor + 229m, :hor + 230m] << 2.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:hor - 460m] << 4.5dt
+                --  ks[:hor - 410m] << 3.5dt
+            );
+
+        # EMU Reversing Siding 2
+        track(:station :cat:ac25,
+                ks[:hor - 500m, :hor - 60m] << 3.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:hor - 400m] << 3.5dt
+                --  ks[:hor - 340m] << 4.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hor - 350m] << 3.5dt
+                --  ks[:hor - 290m] << 2.5dt
+            );
+
+        # EMU Reversing Siding 1
+        track(:station :cat:ac25,
+                ks[:hor - 501m, :hor - 500m] << 3.5dt
+            ..  ks[:hor - 460m, :hor - 180m] << 2.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:hor - 400m] << 2.5dt
+                --  ks[:hor - 340m] << 3.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:hor - 370m] << 2.5dt
+                --  ks[:hor - 310m] << 1.5dt
+            );
+
+        # Down Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor - 500m, :hor + 230m] << 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:hor - 120m, :hor] << 1.9dt
+            --  ks[:hor, :hor - 120m] >> 2.6dt
+        );
+            track(:station :cat:ac25,
+                    ks[:hor - 500m] << 1.5dt
+                --  ks[:hor - 410m] << 2.5dt
+            );
+
+        # Fast
+        track(:first:station :double :cat:ac25 :pax,
+                ks[:hor - 500m, :hor + 230m]
+        );
+
+        # Up Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor - 500m, :hor - 250m] >> 1.5dt
+            ..  ks[:hor - 120m, :hor + 110m] >> 2.5dt
+            ..  ks[:hor + 180m, :hor + 230m] >> 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:hor - 120m, :hor] >> 2.1dt
+            --  ks[:hor, :hor - 120m] << 1.4dt
+        );
+
+        # Up Goods
+        track(:first:station :cat:ac25,
+                ks[:hor - 500m, :hor - 250m - 0.5dl] >> 2.5dt
+            ..  ks[:hor - 120m - 0.5dl, :hor + 110m + 0.5dl] >> 3.5dt
+            ..  ks[:hor + 180m + 0.5dl, :hor + 230m] >> 2.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:hor + 410m] >> 2.5dt
+                --  ks[:hor + 510m] >> 3.5dt
+            );
+
+        marker(:left :de.bf :cat:ac25 :pax, ks[:hor] << 5.5dt);
+        station(:left :cat:ac25 :pax, ks[:hor - 0.2sw] << 5.5dt << 1.7sh,
+            "Hornsey", "4.04"
+        )
+    }
+
+
+    with link = "point.gb.Alexandra-Palace" {
+        let as = path("d4.gb.hdb");
+
+        # Ferme Park Sidings Access
+        track(:station :cat:ac25,
+                ks[:hor + 230m, :ale - 370m] << 3.5dt
+            ..  ks[:ale - 270m, :ale - 269m] << 2.5dt
+        );
+
+        # Down Goods/Down HDB
+        track(:first:station :cat:ac25,
+                ks[:hor + 230m, :ale - 320m] << 2.5dt
+        );
+        with layer = 2 track(:first:station :cat:ac25 :pax,
+                ks[:ale - 391m, :ale - 390m] << 1.5dt
+            --  ks[:ale - 320m, :ale - 180m] << 2.5dt
+            ..  ks[:ale - 75m, :ale + 170m] << 3.5dt
+            ..  ks[:ale + 364m, :ale + 365m] << 4.5dt
+            ..  as[:ale.xh, :bow - 85m] << 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:ac25 :pax,
+                ks[:ale + 364m, :ale + 365m] << 4.5dt
+            ..  as[:ale.xh, :ale.xh + 1m] << 0.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:ale - 75m, :ale + 95m] << 3.1dt
+            --  ks[:ale + 95m, :ale + 65m] >> 2.7dt
+            --  ks[:ale + 65m, :ale + 95m] << 2.3dt
+            --  ks[:ale + 95m, :ale - 75m] >> 1.9dt
+        );
+            track(:station :cat:ac25,
+                    ks[:ale - 185m] << 2.5dt
+                --  ks[:ale - 90m] << 1.5dt
+            );
+
+        # Down Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 230m, :ale.f] << 1.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:ale - 280m] << 1.5dt
+                --  ks[:ale - 220m] << 2.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:ale + 520m] << 1.5dt
+                --  ks[:ale + 660m] << 0.5dt
+            );
+
+        # Down Fast
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 230m, :ale.f] << 0.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:ale - 390m + 0.5dl] << 0.5dt
+                --  ks[:ale - 320m + 0.5dl] << 1.5dt
+            );
+
+        # Up Fast
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 230m, :ale.f] >> 0.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:ale - 300m] >> 0.5dt
+                --  ks[:ale - 220m] >> 1.5dt
+            );
+
+        # Up Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 230m, :ale - 160m] >> 1.5dt
+            ..  ks[:ale - 65m, :ale.f] >> 2.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:ale - 65m, :ale + 105m] >> 2.1dt
+            --  ks[:ale + 105m, :ale - 65m] << 1.3dt
+        );
+            track(:station :cat:ac25,
+                    ks[:ale - 380m] >> 1.5dt
+                --  ks[:ale - 300m] >> 2.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:ale + 300m] >> 2.5dt
+                --  ks[:ale + 380m] >> 3.5dt
+            );
+
+        # Up Goods/Up HDB
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 230m, :ale - 160m] >> 2.5dt
+            ..  ks[:ale - 65m, :ale + 380m] >> 3.5dt
+            ..  as[:ale.xh, :bow - 85m] >> 0.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:ale - 65m, :ale + 105m] >> 3.9dt
+            --  ks[:ale + 105m, :ale - 65m] << 4.7dt
+        );
+            track(:station :cat:ac25,
+                    ks[:ale - 161m, :ale - 160m] >> 2.5dt
+                ..  ks[:ale - 65m, :ale - 64m] >> 5.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:ale + 170m] >> 3.5dt
+                --  ks[:ale + 260m] >> 2.5dt
+            );
+
+        # Bounds Green Depot Access
+        track(:station :cat:ac25,
+                ks[:ale - 300m, :ale - 160m] >> 3.5dt
+            ..  ks[:ale - 65m, :ale + 65m] >> 5.5dt
+            ..  ks[:ale + 150m, :ale + 380m] >> 4.5dt
+            ..  as[:ale.xh, :ale.xh + 210m] >> 1.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:ale] >> 5.5dt);
+        station(:left :cat:ac25 :pax, ks[:ale - 0.3sw] << 5.5dt,
+            span(:bold, "Alexandra Palace"),
+            hbox(:center:top,
+                vbox(:right:top, "ECM1: ", "HBD: "),
+                vbox(:right:top, "4.78", "4.78")
+            )
+        );
+
+        slabel(:right :cat:ac25, ks[:ale + 380m] >> 7.0dt,
+            vbox(:left:middle,
+                "Bounds Green Depot",
+                span(:italic, "   not yet depicted")
+            )
+        );
+    }
+
+
+    with link = "line.gb.ECM1" {
+        # Down Slow
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:ale.f, :ale.f + 0.1dl] << 1.5dt
+            ..  ks[:wgt.a - 0.1dl, :wgt.a] << 2.5dt
+        );
+
+        # Fast
+        track(:first :double :cat:ac25 :pax, ks[:ale.f, :wgt.a]);
+
+        # Up Slow
+        track(:first :cat:ac25 :pax :tight, ks[:ale.f, :wgt.a] >> 2.5dt);
+
+        marker(:top :tunnel.l :cat:ac25 :pax, ks[:wgt.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.a] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.a] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.a] >> 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.a] >> 1.5dt);
+        marker(:top :tunnel.r :cat:ac25 :pax, ks[:wgt.a] >> 2.5dt);
+
+        track(:first :cat:ac25 :pax :flip :tunnel, ks[:wgt.a, :wgt.f] << 2.5dt);
+        track(:first :double :cat:ac25 :pax :tunnel, ks[:wgt.a, :wgt.f]);
+        track(:first :cat:ac25 :pax :tunnel, ks[:wgt.a, :wgt.f] >> 2.5dt);
+
+        marker(:bottom :tunnel.r :cat:ac25 :pax, ks[:wgt.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.f] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.f] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.f] >> 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:wgt.f] >> 1.5dt);
+        marker(:bottom :tunnel.l :cat:ac25 :pax, ks[:wgt.f] >> 2.5dt);
+
+        slabel(:left :cat:ac25 :pax, ks[:wgt.a + 300m] << 5dt,
+            span(:italic, "Wood Green Tunnel")
+        );
+
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:wgt.f, :wgt.f + 0.1dl] << 2.5dt
+            ..  ks[:wgt.f + 160m, :nso - 270m] << 1.5dt
+        );
+        track(:first :double :cat:ac25 :pax, ks[:wgt.f, :nso - 270m]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:wgt.f, :wgt.f + 0.1dl] >> 2.5dt
+            ..  ks[:wgt.f + 160m, :nso - 270m] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.gb.New-Southgate" {
+        # Down Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:nso - 270m, :nso - 269m] << 1.5dt
+            ..  ks[:nso - 100m, :nso + 65m] << 2.5dt
+            ..  ks[:nso + 180m, :nso + 400m] << 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:nso - 100m, :nso + 65m] << 2.1dt
+            --  ks[:nso + 65m, :nso - 100m] >> 0.9dt
+        );
+
+        # Down Fast
+        track(:first:station :cat:ac25 :pax,
+                ks[:nso - 270m, :nso + 400m] << 0.5dt
+        );
+
+        # Up Fast
+        track(:first:station :cat:ac25 :pax,
+                ks[:nso - 270m, :nso + 400m] >> 0.5dt
+        );
+
+        # Up Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:nso - 270m, :nso - 269m] >> 1.5dt
+            ..  ks[:nso - 100m, :nso + 65m] >> 2.5dt
+            ..  ks[:nso + 180m, :nso + 400m] >> 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:nso - 100m, :nso + 65m] >> 2.1dt
+            --  ks[:nso + 65m, :nso - 100m] << 0.9dt
+        );
+            track(:station :cat:ac25,
+                    ks[:nso + 240m] >> 1.5dt
+                --  ks[:nso + 340m] >> 0.5dt
+            );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:nso] >> 2.5dt);
+        station(:right :cat:ac25 :pax, ks[:nso - 0.4sw] >> 2.5dt >> 1.4sh,
+            "New Southgate", "6.35"
+        );
+    }
+
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:nso + 400m, :bat.a - 180m] << 1.5dt
+            ..  ks[:bat.a - 0.1dl, :bat.a] << 2.5dt
+        );
+        track(:first :double :cat:ac25 :pax, ks[:nso + 400m, :bat.a]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:nso + 400m, :bat.a - 180m] >> 1.5dt
+            ..  ks[:bat.a - 0.1dl, :bat.a] >> 2.5dt
+        );
+
+        marker(:top :tunnel.l :cat:ac25 :pax, ks[:bat.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.a] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.a] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.a] >> 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.a] >> 1.5dt);
+        marker(:top :tunnel.r :cat:ac25 :pax, ks[:bat.a] >> 2.5dt);
+
+        track(:first :cat:ac25 :pax :flip :tunnel, ks[:bat.a, :bat.f] << 2.5dt);
+        track(:first :double :cat:ac25 :pax :tunnel, ks[:bat.a, :bat.f]);
+        track(:first :cat:ac25 :pax :tunnel, ks[:bat.a, :bat.f] >> 2.5dt);
+
+        marker(:bottom :tunnel.r :cat:ac25 :pax, ks[:bat.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.f] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.f] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.f] >> 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:bat.f] >> 1.5dt);
+        marker(:bottom :tunnel.l :cat:ac25 :pax, ks[:bat.f] >> 2.5dt);
+
+        slabel(:left :cat:ac25 :pax, ks[:bat.a + 240m] << 5dt,
+            span(:italic, "Barnet Tunnel")
+        );
+
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:bat.f, :bat.f + 0.1dl] << 2.5dt
+            ..  ks[:bat.f + 180m, :oak - 200m] << 1.5dt
+        );
+        track(:first :double :cat:ac25 :pax, ks[:bat.f, :oak - 200m]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:bat.f, :bat.f + 0.1dl] >> 2.5dt
+            ..  ks[:bat.f + 180m, :oak - 200m] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.gb.Oakleigh-Park" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:oak - 200m, :oak - 199m] << 1.5dt
+            ..  ks[:oak - 80m, :oak + 95m] << 2.5dt
+            ..  ks[:oak + 249m, :oak + 250m] << 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:oak - 80m, :oak + 95m] << 2.1dt
+            --  ks[:oak + 95m, :oak - 80m] >> 0.9dt
+        );
+
+        track(:first:station :double :cat:ac25 :pax,
+                ks[:oak - 200m, :oak + 250m]
+        );
+
+        track(:first:station :cat:ac25 :pax,
+                ks[:oak - 200m, :oak - 199m] >> 1.5dt
+            ..  ks[:oak - 80m, :oak + 95m] >> 2.5dt
+            ..  ks[:oak + 249m, :oak + 250m] >> 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:oak - 80m, :oak + 95m] >> 2.1dt
+            --  ks[:oak + 95m, :oak - 80m] << 0.9dt
+        );
+
+        marker(:right :de.hp :cat:ac25 :pax, ks[:oak] >> 2.5dt);
+        station(:right :cat:ac25 :pax, ks[:oak - 0.4sw] >> 2.5dt >> 1.2sw,
+            "Oakleigh Park", "8.30"
+        );
+    }
+
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:oak + 250m, :nba - 500m] << 1.5dt
+        );
+        track(:first:double :cat:ac25 :pax, ks[:oak + 250m, :nba - 500m]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:oak + 250m, :nba - 500m] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.gb.New-Barnet" {
+        # Down Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:nba - 500m, :nba - 460m] << 1.5dt
+            ..  ks[:nba - 120m, :nba + 60m] << 2.5dt
+            ..  ks[:nba + 200m, :nba + 250m] << 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:nba - 100m, :nba + 60m] << 2.1dt
+            --  ks[:nba + 60m, :nba + 70m] << 1.5dt
+            --  ks[:nba + 70m, :nba - 100m] >> 0.9dt
+        );
+            track(:station :cat:ac25,
+                    ks[:nba + 60m] << 2.5dt
+                --  ks[:nba + 150m] << 0.5dt
+            );
+
+        # Down Fast
+        track(:first:station :cat:ac25 :pax,
+                ks[:nba - 500m, :nba + 250m] << 0.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:nba - 225m] << 0.5dt
+                --  ks[:nba - 120m] << 2.5dt
+            );
+
+        # Up Fast
+        track(:first:station :cat:ac25 :pax,
+                ks[:nba - 500m, :nba + 250m] >> 0.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:nba - 360m] >> 0.5dt
+                --  ks[:nba - 290m] >> 1.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:nba - 310m] >> 0.5dt
+                --  ks[:nba - 250m] << 0.5dt
+            );
+
+        # Up Slow
+        track(:first:station :cat:ac25 :pax,
+                ks[:nba - 500m, :nba - 290m] >> 1.5dt
+            ..  ks[:nba - 110m, :nba + 60m] >> 2.5dt
+            ..  ks[:nba + 240m, :nba + 250m] >> 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:nba - 100m, :nba + 60m] >> 2.1dt
+            --  ks[:nba + 60m, :nba - 100m] << 0.9dt
+        );
+            track(:station :cat:ac25,
+                    ks[:nba - 450m] >> 1.5dt
+                --  ks[:nba - 380m] >> 0.5dt
+            );
+
+        marker(:left :de.bf :cat:ac25 :pax, ks[:nba] << 2.5dt);
+        station(:left :cat:ac25 :pax, ks[:nba - 0.4sw] << 2.5dt << 1.5sh,
+            "New Barnet", "9.12"
+        );
+    }
+
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:nba + 250m, :hst.a - 420m] << 1.5dt
+            ..  ks[:hst.a - 0.1dl, :hst.a] << 2.5dt
+        );
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:nba + 250m, :hst.a - 420m] << 0.5dt
+            ..  ks[:hst.a - 0.1dl, :hst.a] << 1.5dt
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:nba + 250m, :hst.a] >> 0.5dt
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:nba + 250m, :hst.a] >> 1.5dt
+        );
+
+        marker(:top :tunnel.l :cat:ac25 :pax, ks[:hst.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.a] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.a] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.a] >> 0.5dt);
+        marker(:top :tunnel.r :cat:ac25 :pax, ks[:hst.a] >> 1.5dt);
+
+        track(:first :cat:ac25 :pax :flip:tight :tunnel,
+                ks[:hst.a, :hst.f] << 2.5dt
+        );
+        track(:first :cat:ac25 :pax :flip:tight :tunnel,
+                ks[:hst.a, :hst.f] << 1.5dt
+        );
+        track(:first :cat:ac25 :pax :tight :tunnel,
+                ks[:hst.a, :hst.f] >> 0.5dt
+        );
+        track(:first :cat:ac25 :pax :tight :tunnel,
+                ks[:hst.a, :hst.f] >> 1.5dt
+        );
+
+        marker(:bottom :tunnel.r :cat:ac25 :pax, ks[:hst.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.f] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.f] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hst.f] >> 0.5dt);
+        marker(:bottom :tunnel.l :cat:ac25 :pax, ks[:hst.f] >> 1.5dt);
+
+        slabel(:left :cat:ac25 :pax, ks[:hst.a + 150m] << 4.5dt,
+            span(:italic, "Hadley Wood South Tunnel")
+        );
+    }
+
+
+    with link = "point.gb.Hadley-Wood" {
+        track(:first:station :cat:ac25 :pax, ks[:hst.f, :hnt.a] << 2.5dt);
+        platform(:cat:ac25 :pax,
+                ks[:had - 20m, :had + 165m] << 2.9dt
+            --  ks[:had + 165m, :had - 20m] >> 3.7dt
+        );
+
+        track(:first:station :cat:ac25 :pax, ks[:hst.f, :hnt.a] << 1.5dt);
+        track(:first:station :cat:ac25 :pax, ks[:hst.f, :hnt.a] >> 0.5dt);
+        platform(:cat:ac25 :pax,
+                ks[:had - 10m, :had + 115m] << 1.1dt
+            --  ks[:had + 115m, :had - 10m] << 0.1dt
+        );
+
+        track(:first:station :cat:ac25 :pax, ks[:hst.f, :hnt.a] >> 1.5dt);
+        platform(:cat:ac25 :pax,
+                ks[:had - 70m, :had + 115m] >> 1.9dt
+            --  ks[:had + 115m, :had - 70m] << 2.7dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, ks[:had] << 3.5dt);
+        station(:left :cat:ac25 :pax, ks[:had - 0.4sw] << 3.5dt << 1.4sh,
+            "Hadley Wood", "10.46"
+        );
+    }
+
+
+    with link = "line.gb.ECM1" {
+        marker(:top :tunnel.l :cat:ac25 :pax, ks[:hnt.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.a] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.a] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.a] >> 0.5dt);
+        marker(:top :tunnel.r :cat:ac25 :pax, ks[:hnt.a] >> 1.5dt);
+
+        track(:first :cat:ac25 :pax :flip:tight :tunnel,
+                ks[:hnt.a, :hnt.f] << 2.5dt
+        );
+        track(:first :cat:ac25 :pax :flip:tight :tunnel,
+                ks[:hnt.a, :hnt.f] << 1.5dt
+        );
+        track(:first :cat:ac25 :pax :tight :tunnel,
+                ks[:hnt.a, :hnt.f] >> 0.5dt
+        );
+        track(:first :cat:ac25 :pax :tight :tunnel,
+                ks[:hnt.a, :hnt.f] >> 1.5dt
+        );
+
+        marker(:bottom :tunnel.r :cat:ac25 :pax, ks[:hnt.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.f] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.f] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:hnt.f] >> 0.5dt);
+        marker(:bottom :tunnel.l :cat:ac25 :pax, ks[:hnt.f] >> 1.5dt);
+
+        slabel(:left :cat:ac25 :pax, ks[:hnt.a + 100m] << 4.5dt,
+            span(:italic, "Hadley Wood North Tunnel")
+        );
+
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:hnt.f, :pbt.a] << 2.5dt
+        );
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:hnt.f, :pbt.a] << 1.5dt
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:hnt.f, :pbt.a] >> 0.5dt
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:hnt.f, :pbt.a] >> 1.5dt
+        );
+
+        marker(:top :tunnel.l :cat:ac25 :pax, ks[:pbt.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.a] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.a] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.a] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.a] >> 0.5dt);
+        marker(:top :tunnel.r :cat:ac25 :pax, ks[:pbt.a] >> 1.5dt);
+
+        track(:first :cat:ac25 :pax :flip:tight :tunnel,
+                ks[:pbt.a, :pbt.f] << 2.5dt
+        );
+        track(:first :cat:ac25 :pax :flip:tight :tunnel,
+                ks[:pbt.a, :pbt.f] << 1.5dt
+        );
+        track(:first :cat:ac25 :pax :tight :tunnel,
+                ks[:pbt.a, :pbt.f] >> 0.5dt
+        );
+        track(:first :cat:ac25 :pax :tight :tunnel,
+                ks[:pbt.a, :pbt.f] >> 1.5dt
+        );
+
+        marker(:bottom :tunnel.r :cat:ac25 :pax, ks[:pbt.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.f] << 2.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.f] << 1.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.f] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax, ks[:pbt.f] >> 0.5dt);
+        marker(:bottom :tunnel.l :cat:ac25 :pax, ks[:pbt.f] >> 1.5dt);
+
+        slabel(:right :cat:ac25 :pax, ks[:pbt.a + 550m] >> 3.5dt,
+            span(:italic, "Potters Bar Tunnel")
+        );
+
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:pbt.f, :pbt.f + 0.1dl] << 2.5dt
+            ..  ks[:pot - 750m, :pot - 520m] << 1.5dt
+        );
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:pbt.f, :pbt.f + 0.1dl] << 1.5dt
+            ..  ks[:pot - 750m, :pot - 520m] << 0.5dt
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:pbt.f, :pot - 520m] >> 1.5dt
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:pbt.f, :pot - 520m] >> 0.5dt
+        );
+    }
+
+
+    with link = "point.gb.Potters-Bar" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:pot - 520m, :pot - 160m] << 1.5dt
+            ..  ks[:pot - 80m, :pot + 85m] << 2.5dt
+            ..  ks[:pot + 280m, :pot.f] << 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:pot - 80m, :pot + 85m] << 2.1dt
+            --  ks[:pot + 85m, :pot - 80m] >> 0.9dt
+        );
+            track(:station :cat:ac25,
+                    ks[:pot + 430m] << 1.5dt
+                --  ks[:pot + 530m] << 0.5dt
+            );
+
+        track(:first:station :cat:ac25 :pax,
+                ks[:pot - 520m, :pot.f] << 0.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:pot - 240m] << 0.5dt
+                --  ks[:pot - 160m] << 1.5dt
+            );
+
+        track(:first:station :cat:ac25 :pax,
+                ks[:pot - 520m, :pot.f] >> 0.5dt
+        );
+            track(:station :cat:ac25,
+                    ks[:pot - 310m] >> 0.5dt
+                --  ks[:pot - 260m] << 0.5dt
+            );
+            track(:station :cat:ac25,
+                    ks[:pot - 240m] >> 0.5dt
+                --  ks[:pot - 160m] >> 1.5dt
+            );
+
+        track(:first:station :cat:ac25 :pax,
+                ks[:pot - 520m, :pot - 160m] >> 1.5dt
+            ..  ks[:pot - 80m, :pot + 85m] >> 2.5dt
+            ..  ks[:pot + 280m, :pot.f] >> 1.5dt
+        );
+        platform(:cat:ac25 :pax,
+                ks[:pot - 80m, :pot + 85m] >> 2.1dt
+            --  ks[:pot + 85m, :pot - 80m] << 0.9dt
+        );
+            track(:station :cat:ac25,
+                    ks[:pot - 460m] >> 1.5dt
+                --  ks[:pot - 340m] >> 0.5dt
+            );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:pot] >> 2.5dt);
+        station(:right :cat:ac25 :pax, ks[:pot - 0.45sw] >> 2.5dt >> 1.2sw,
+            "Potters Bar", "12.57"
+        );
+    }
+
 }
 

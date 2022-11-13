@@ -1,0 +1,258 @@
+# GB ECM1.  London King’s Cross - Shaftholme Junction
+#
+let ks = path("d4.gb.l.ecm1");
+
+with detail = 3 {
+    with link = "point.gb.London-Kings-Cross" {
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 0.5sw] << 1.5dt);
+        track(:first:station :double :cat:ac25 :pax, ks[:kgx, :kgx + 0.5sw]);
+        track(:first:station :cat:ac25 :pax, ks[:kgx, :kgx + 0.5sw] >> 1.5dt);
+
+        marker(:bottom :de.bf :cat:ac25 :pax, ks[:kgx]);
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :tight:flip,
+                ks[:kgx + 0.5sw, :fin.yd] << 1.5dt
+        );
+        track(:first :double :cat:ac25 :pax,
+                ks[:kgx + 0.5sw, :fin.yd]
+        );
+        track(:first :cat:ac25 :pax :tight,
+                ks[:kgx + 0.5sw, :fin.yd] >> 1.5dt
+        );
+    }
+
+    with link = "point.gb.Finsbury-Park" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin.yd, :fin + 1sw] << 2.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin.yd, :fin + 1sw] << 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin.yd, :fin + 1sw] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin.yd, :fin + 1sw] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin.yd, :fin + 1sw] >> 1.5dt
+        );
+        track(:first:station :cat:ac25,
+                ks[:fin.yd, :fin + 1sw] >> 2.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:fin] >> 2.5dt);
+    }
+
+    with link = "point.gb.Harringay" {
+        track(:first:station :cat:ac25,
+                ks[:fin + 1sw, :hor - 500m] << 2.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin + 1sw, :hor - 500m] << 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin + 1sw, :hor - 500m] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin + 1sw, :hor - 500m] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:fin + 1sw, :hor - 500m] >> 1.5dt
+        );
+        track(:first:station :cat:ac25,
+                ks[:fin + 1sw, :hor - 500m] >> 2.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:har] >> 2.5dt);
+    }
+
+    with link = "point.gb.Hornsey" {
+        track(:first:station :cat:ac25,
+                ks[:hor - 500m, :hor + 500m] << 2.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor - 500m, :hor + 500m] << 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor - 500m, :hor + 500m] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor - 500m, :hor + 500m] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor - 500m, :hor + 500m] >> 1.5dt
+        );
+        track(:first:station :cat:ac25,
+                ks[:hor - 500m, :hor + 500m] >> 2.5dt
+        );
+
+        marker(:left :de.bf :cat:ac25 :pax, ks[:hor] << 2.5dt);
+    }
+
+    with link = "point.gb.Alexandra-Palace" {
+        let as = path("d4.gb.hdb");
+
+        track(:first:station :cat:ac25,
+                ks[:hor + 500m, :ale - 0.5sw] << 2.5dt
+        );
+        with layer = 2 track(:first:station :cat:ac25 :pax,
+                ks[:ale - 0.5sw, :ale + 200m] << 2.5dt
+            ..  as[:ale.xh + 3dt, :ale.xh + 4dt] << 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:ac25 :pax,
+                ks[:ale + 199m, :ale + 200m] << 2.5dt
+            ..  as[:ale.xh + 3dt, :ale.xh + 3.1dt] << 0.5dt
+        );
+
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 500m, :ale.f] << 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 500m, :ale.f] << 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 500m, :ale.f] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:hor + 500m, :ale.f] >> 1.5dt
+        );
+        track(:first:station :cat:ac25,
+                ks[:hor + 500m, :ale - 0.5sw] >> 2.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:ale - 0.5sw, :ale + 0.5sw] >> 2.5dt
+            ..  as[:ale.xh + 3dt, :ale.xh + 4dt] >> 0.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:ale] >> 2.5dt);
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:ale.f, :nso - 1sw] << 1.5dt
+        );
+        track(:first :double :cat:ac25 :pax, ks[:ale.f, :nso - 1sw]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:ale.f, :nso - 1sw] >> 1.5dt
+        );
+    }
+
+    with link = "point.gb.New-Southgate" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:nso - 1sw, :nso + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                ks[:nso - 1sw, :nso + 1sw]
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:nso - 1sw, :nso + 1sw] >> 1.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:nso] >> 1.5dt);
+        slabel(:left :cat:ac25 :pax, ks[:nso - 0.2sw] << 3.5dt,
+            "New Southgate"
+        );
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:nso + 1sw, :oak - 1sw] << 1.5dt
+        );
+        track(:first :double :cat:ac25 :pax, ks[:nso + 1sw, :oak - 1sw]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:nso + 1sw, :oak - 1sw] >> 1.5dt
+        );
+    }
+
+    with link = "point.gb.Oakleigh-Park" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:oak - 1sw, :oak + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                ks[:oak - 1sw, :oak + 1sw]
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:oak - 1sw, :oak + 1sw] >> 1.5dt
+        );
+
+        marker(:right :de.hp :cat:ac25 :pax, ks[:oak] >> 1.5dt);
+        slabel(:left :cat:ac25 :pax, ks[:oak - 0.2sw] << 3.5dt,
+            "Oakleigh Park"
+        );
+    }
+
+    with link = "point.gb.New-Barnet" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:oak + 1sw, :nba + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                ks[:oak + 1sw, :nba + 1sw]
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:oak + 1sw, :nba + 1sw] >> 1.5dt
+        );
+
+        marker(:left :de.bf :cat:ac25 :pax, ks[:nba] << 1.5dt);
+        slabel(:left :cat:ac25 :pax, ks[:nba - 0.4sw] << 1.5dt << 1.8sh,
+            "New Barnet"
+        );
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:nba + 1sw, :had - 1sw] << 1.5dt
+        );
+        track(:first :double :cat:ac25 :pax, ks[:nba + 1sw, :had - 1sw]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:nba + 1sw, :had - 1sw] >> 1.5dt
+        );
+    }
+
+    with link = "point.gb.Hadley-Wood" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:had - 1sw, :had + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                ks[:had - 1sw, :had + 1sw]
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:had - 1sw, :had + 1sw] >> 1.5dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, ks[:had] << 1.5dt);
+        slabel(:left :cat:ac25 :pax, ks[:had - 0.4sw] << 1.5dt << 1.6sh,
+            "Hadley Wood"
+        );
+    }
+
+    with link = "line.gb.ECM1" {
+        track(:first :cat:ac25 :pax :flip:tight,
+                ks[:had + 1sw, :pot - 1sw] << 1.5dt
+        );
+        track(:first :double :cat:ac25 :pax, ks[:had + 1sw, :pot - 1sw]);
+        track(:first :cat:ac25 :pax :tight,
+                ks[:had + 1sw, :pot - 1sw] >> 1.5dt
+        );
+    }
+
+    with link = "point.gb.Potters-Bar" {
+        track(:first:station :cat:ac25 :pax,
+                ks[:pot - 1sw, :pot + 1sw] << 1.5dt
+        );
+        track(:first:station :double :cat:ac25 :pax,
+                ks[:pot - 1sw, :pot + 1sw]
+        );
+        track(:first:station :cat:ac25 :pax,
+                ks[:pot - 1sw, :pot + 1sw] >> 1.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, ks[:pot] >> 1.5dt);
+        slabel(:right :cat:ac25 :pax, ks[:pot - 0.6sw] >> 1.5dt >> 1.4sh,
+            "Potters Bar"
+        );
+    }
+}
+
