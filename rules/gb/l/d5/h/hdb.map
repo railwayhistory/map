@@ -1,0 +1,354 @@
+# GB HDB.  Alexandra Palace - Stevenage
+#
+let as = path("d4.gb.l.hdb");
+let ge = path("d4.gb.hdb.enf");
+
+with detail = 5 {
+    # point.gb.Alexandra-Palace: gb.ECM1
+
+
+    with link = "point.gb.Bowes-Park" {
+        # Up
+        track(:first:station :cat:ac25 :pax,
+                as[:bow - 250m, :bow - 150m] << 0.5dt
+            ..  as[:bow - 80m, :bow + 500m] << 1.5dt
+            ..  as[:bow + 659m, :bow + 660m] << 0.5dt
+        );
+            track(:station :cat:ac25,
+                    as[:bow + 95m] << 1.5dt
+                --  as[:bow + 155m] << 0.5dt
+            );
+
+        # Reversing track
+        track(:station :cat:ac25,
+                as[:bow + 60m, :bow + 490m] << 0.5dt
+        );
+
+        # Down
+        track(:first:station :cat:ac25 :pax,
+                as[:bow - 250m, :bow + 660m] >> 0.5dt
+        );
+            track(:station :cat:ac25,
+                    as[:bow - 210m] >> 0.5dt
+                --  as[:bow - 150m] << 0.5dt
+            );
+            track(:station :cat:ac25,
+                    as[:bow + 60m] >> 0.5dt
+                --  as[:bow + 120m] << 0.5dt
+            );
+
+        platform(:cat:ac25 :pax,
+                as[:bow - 80m, :bow + 50m] << 1.1dt
+            --  as[:bow + 50m, :bow - 80m] << 0.1dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, as[:bow] >> 0.5dt);
+        station(:right :cat:ac25 :pax, as[:bow - 0.3sw] >> 0.5dt >> 1.6sh,
+            "Bowes Park", "5.55"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:pal - 420m, :bow + 660m]);
+        line_badge(:cat:ac25 :pax, as[:pal - 420m], "HDB");
+        track(:first :double :cat:ac25 :pax, as[:pal - 420m, :pal - 75m]);
+    }
+
+
+    with link = "point.gb.Palmers-Green" {
+        track(:first:station :double :cat:ac25 :pax,
+                as[:pal - 75m, :pal + 165m]
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:pal - 25m, :pal + 115m] << 0.9dt
+            --  as[:pal + 115m, :pal - 25m] >> 1.7dt
+        );
+        platform(:cat:ac25 :pax,
+                as[:pal - 25m, :pal + 115m] >> 0.9dt
+            --  as[:pal + 115m, :pal - 25m] << 1.7dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, as[:pal] << 1.5dt);
+        label(as[:pal] << 1.5dt << 1.5sh,
+            vbox(:right:middle :cat:ac25 :pax,
+                span(:medium :removed, "Palmer’s Green & Southgate"),
+                vbox(:center:top,
+                    span(:medium, "Palmers Green"),
+                    span(:xsmall, "6.50")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:pal + 165m, :win - 65m]);
+    }
+
+
+    with link = "point.gb.Winchmore-Hill" {
+        track(:first:station :double :cat:ac25 :pax,
+                as[:win - 65m, :win + 170m]
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:win - 15m, :win + 110m] << 0.9dt
+            --  as[:win + 110m, :win - 15m] >> 1.7dt
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:win - 15m, :win + 120m] >> 0.9dt
+            --  as[:win + 120m, :win - 15m] << 1.7dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, as[:win] << 1.5dt);
+        station(:left :cat:ac25 :pax, as[:win - 0.5sw] << 1.5dt << 1.3sh,
+            "Winchmore Hill", "7.63"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:win + 530m, :win + 170m]);
+        line_badge(:cat:ac25 :pax, as[:win + 530m], "HDB");
+        track(:first :double :cat:ac25 :pax, as[:win + 530m, :gra - 70m]);
+    }
+
+
+    with link = "point.gb.Grange-Park" {
+        track(:first:station :double :cat:ac25 :pax,
+                as[:gra - 70m, :gra + 160m]
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:gra - 20m, :gra + 110m] << 0.9dt
+            --  as[:gra + 110m, :gra - 20m] >> 1.7dt
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:gra - 20m, :gra + 110m] >> 0.9dt
+            --  as[:gra + 110m, :gra - 20m] << 1.7dt
+        );
+
+        marker(:right :de.hp :cat:ac25 :pax, as[:gra] >> 1.5dt);
+        station(:right :cat:ac25 :pax, as[:gra - 0.4sw] >> 1.5dt >> 1.5sh,
+            "Grange Park", "8.35"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:gra + 160m, :enf - 155m]);
+    }
+
+    with link = "line.gb.HDB" {
+        track(:first :double :removed, ge[:gra.ye, :enf - 130m]);
+    }
+
+    with link = "point.gb.Enfield-Chase" {
+        track(:first:station :double :removed, ge[:enf - 130m, :enf]);
+        marker(:top :de.bf :removed, ge[:enf]);
+        station(:left :removed, ge[:enf - 0.2sw] << 3.5dt,
+            "Enfield", "9.12"
+        );
+    }
+
+
+    with link = "point.gb.Enfield-Chase" {
+        track(:first:station :double :cat:ac25 :pax,
+                as[:enf - 155m, :enf + 70m]
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:enf - 105m, :enf + 20m] << 0.9dt
+            --  as[:enf + 20m, :enf - 105m] >> 1.7dt
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:enf - 105m, :enf + 20m] >> 0.9dt
+            --  as[:enf + 20m, :enf - 105m] << 1.7dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, as[:enf] << 1.5dt);
+        station(:right :cat:ac25 :pax, as[:enf - 0.5sw] >> 3.5dt,
+            vbox(:left:bottom,
+                span(:removed, "Enfield"),
+                "Enfield Chase"
+            ),
+            "9.09"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:enf + 70m, :gor - 470m]);
+    }
+
+
+    with link = "point.gb.Gordon-Hill" {
+        # Up/Down
+        track(:first:station :double :cat:ac25 :pax,
+                as[:gor - 470m, :gor + 90m]
+        );
+            track(:station :cat:ac25,
+                    as[:gor - 420m] << 0.5dt
+                --  as[:gor - 340m] >> 0.5dt
+            );
+            track(:station :cat:ac25,
+                    as[:gor - 240m] >> 0.5dt
+                --  as[:gor - 180m] >> 1.5dt
+            );
+
+        # Reversing Track
+        track(:station :cat:ac25,
+                as[:gor - 245m, :gor - 180m] >> 1.5dt
+            ..  as[:gor - 105m, :gor + 40m] >> 2.5dt
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:gor - 105m, :gor + 20m] << 0.9dt
+            --  as[:gor + 20m, :gor - 105m] >> 1.7dt
+        );
+        platform(:cat:ac25 :pax,
+                as[:gor - 105m, :gor + 20m] >> 0.9dt
+            --  as[:gor + 20m, :gor - 105m] << 2.1dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, as[:gor] >> 2.5dt);
+        station(:right :cat:ac25 :pax, as[:gor - 0.4sw] >> 2.5dt >> 1.4sh,
+            "Gordon Hill", "9.69"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:gor + 90m, :cre - 70m]);
+
+        guide(:cat:ac25 :pax,
+                as[:rev.a - 0.6dt, :rev.a - 0.5dt] >> 2.5dt
+            --  as[:rev.a, :rev.f] >> 1.5dt
+            --  as[:rev.f + 0.5dt, :rev.f + 0.6dt] >> 2.5dt
+        );
+        guide(:cat:ac25 :pax,
+                as[:rev.a - 0.6dt, :rev.a - 0.5dt] << 2.5dt
+            --  as[:rev.a, :rev.f] << 1.5dt
+            --  as[:rev.f + 0.5dt, :rev.f + 0.6dt] << 2.5dt
+        );
+        slabel(:left :cat:ac25 :pax, as[:rev.a + 65m] << 4.0dt,
+            span(:italic, "Rendlesham Viaduct")
+        );
+    }
+
+
+    with link = "point.gb.Crews-Hill" {
+        track(:first:station :double :cat:ac25 :pax,
+                as[:cre - 70m, :cre + 160m]
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:cre - 20m, :cre + 110m] << 0.9dt
+            --  as[:cre + 110m, :cre - 20m] >> 1.7dt
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:cre - 20m, :cre + 110m] >> 0.9dt
+            --  as[:cre + 110m, :cre - 20m] << 1.7dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, as[:cre] << 1.5dt);
+        station(:left :cat:ac25 :pax, as[:cre - 0.4sw] << 1.5dt << 1.6sh,
+            "Crews Hill", "11.40"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:cre + 160m, :cuf - 90m]);
+    }
+
+
+    with link = "point.gb.Cuffley" {
+        track(:first:station :double :cat:ac25 :pax,
+                as[:cuf - 90m, :cuf + 650m]
+        );
+            track(:station :cat:ac25,
+                    as[:cuf + 440m] >> 0.5dt
+                --  as[:cuf + 490m] << 0.5dt
+            );
+            track(:station :cat:ac25,
+                    as[:cuf + 550m] << 0.5dt
+                --  as[:cuf + 600m] >> 0.5dt
+            );
+
+        platform(:cat:ac25 :pax,
+                as[:cuf - 40m, :cuf + 85m] << 0.9dt
+            --  as[:cuf + 85m, :cuf - 40m] >> 1.7dt
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:cuf - 40m, :cuf + 85m] >> 0.9dt
+            --  as[:cuf + 85m, :cuf - 40m] << 1.7dt
+        );
+
+        marker(:left :de.bf :cat:ac25 :pax, as[:cuf] << 1.5dt);
+        station(:left :cat:ac25 :pax, as[:cuf - 0.4sw] << 1.5dt << 1.4sh,
+            "Cuffley", "13.17"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:cuf + 650m, :pot.a]);
+
+        marker(:top :tunnel.l :cat:ac25 :pax,as[:pot.a] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax,as[:pot.a] << 0.5dt);
+        marker(:top :tunnel.r :cat:ac25 :pax,as[:pot.a] >> 0.5dt);
+
+        track(:first :double :cat:ac25 :pax :tunnel, as[:pot.a, :pot.f]);
+
+        marker(:bottom :tunnel.r :cat:ac25 :pax,as[:pot.f] << 0.5dt);
+        marker(:right :tunnel.dt :cat:ac25 :pax,as[:pot.f] << 0.5dt);
+        marker(:bottom :tunnel.l :cat:ac25 :pax,as[:pot.f] >> 0.5dt);
+
+        slabel(:left :cat:ac25 :pax, as[:pot.a + 1.2km] << 3.0dt,
+            hbox(:right:middle,
+                vbox(:center:top,
+                    span(:italic, "Ponsbourne Tunnel"),
+                    span(:xsmall, "1 mi 924 yd · 2454 m")
+                )
+            )
+        );
+
+        track(:first :double :cat:ac25 :pax, as[:pot.f, :bay - 70m]);
+    }
+
+
+    with link = "point.gb.Bayford" {
+        track(:first:station :double :cat:ac25 :pax,
+                as[:bay - 70m, :bay + 155m]
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:bay - 20m, :bay + 105m] << 0.9dt
+            --  as[:bay + 105m, :bay - 20m] >> 1.7dt
+        );
+
+        platform(:cat:ac25 :pax,
+                as[:bay - 20m, :bay + 105m] >> 0.9dt
+            --  as[:bay + 105m, :bay - 20m] << 1.7dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, as[:bay] << 1.5dt);
+        station(:left :cat:ac25 :pax, as[:bay - 0.4sw] << 1.5dt << 1.4sh,
+            "Bayford", "16.56"
+        );
+    }
+
+
+    with link = "line.gb.HDB" {
+        track(:first :double :cat:ac25 :pax, as[:bay + 155m, :her.a]);
+    }
+}
+
