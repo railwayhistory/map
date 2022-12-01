@@ -1,0 +1,249 @@
+# FR 780.  St-Etienne-La Terrasse - St-Etienne-Pont de l'Ane
+with detail = 2 {
+    with link = "line.fr.780" {
+        track(:first :removed, path("d2.fr.780")[:str.yp, :spa]);
+    }
+}
+
+
+# FR 782.  Lyon-St-Paul - Montbrison
+with detail = 2 {
+    let lm = path("d2.fr.782");
+
+    with link = "line.fr.782" {
+        track(:first :double :cat:dc15 :pax, lm[:lsp, :lgl]);
+        track(:first :cat:dc15 :pax, lm[:lgl, :ecu]);
+        track(:first :double :cat:dc15 :pax, lm[:ecu, :tas]);
+        track(:first :cat:dc15 :pax,
+                lm[:tas, :arb.yt - 3dt]
+            ..  lm[:arb.yt, :arb.ym] << 0.6dt
+            ..  lm[:arb.ym + 3dt, :sbe]
+        );
+        track(:first :museum, lm[:sbe, :sfo]);
+        track(:first :removed, lm[:sfo, :mbr.yl]);
+
+        line_label(:left:ne :cat:dc15 :pax, lm[:tas + 6.5km], "782");
+        line_label(:right:se :museum, lm[:sbe + 8km], "782");
+        line_badge(:removed, lm[:mbr.yl - 6km] >> 0.2dt, "782");
+    }
+
+    with link = "point.fr.Lyon-St-Paul" {
+        statdot(:cat:dc15 :pax, lm[:lsp]);
+    }
+
+    with link = "point.fr.Sain-Bel" {
+        statdot(:cat:dc15 :pax, lm[:sbe]);
+        slabel(:left :cat:dc15 :pax, lm[:sbe] + (-2.0dt, 1.5dt), "Sain Bel");
+    }
+
+    with link = "point.fr.Sainte-Foy-l-Argentière" {
+        statdot(:museum, lm[:sfo]);
+        slabel(:left :museum, lm[:sfo] + (-0.8dt, 1.3dt),
+            vbox(:right:bottom, "Sainte-Foy-", "l’Argentière ")
+        );
+    }
+}
+
+
+# FR 783.  Le Coteau - St-Germain-au-Mont-d’Or
+with detail = 2 {
+    let cg = path("d2.fr.783");
+
+    with link = "line.fr.783" {
+        track(:first :double :pax, cg[:cot.yg, :sge.yc]);
+
+        line_label(:right:n :double :pax, cg[:cot.yg + 9.2km], "783");
+        line_label(:right:n :double :pax, cg[:tar + 4km], "783");
+        line_label(:left:s :double :pax, cg[:sge.yc - 5km], "783");
+    }
+
+    with link = "point.fr.Régny" {
+        statdot(:pax, cg[:reg]);
+        slabel(:left :pax, cg[:reg] + (0dt, -1.5dt), "Régny");
+    }
+
+    with link = "point.fr.St-Victor-Thizy" {
+        statdot(:pax, cg[:svi]);
+        slabel(:right :pax, cg[:svi] + (1.3dt, 0dt),
+            "St-Victor-Thizy"
+        );
+    }
+
+    with link = "point.fr.Amplepuis" {
+        statdot(:pax, cg[:amp]);
+        slabel(:left :pax, cg[:amp] + (-1.3dt, 2.5dt), "Amplepuis");
+    }
+
+    with link = "point.fr.Tarare" {
+        statdot(:pax, cg[:tar]);
+        slabel(:left :pax, cg[:tar] + (1.0dt, 0.5dt),
+            hbox(:right:top, "Tarare")
+        );
+    }
+
+    with link = "point.fr.L-Arbresle" {
+        statdot(:cat:dc15 :pax, cg[:arb]);
+        slabel(:left :cat:dc15 :pax, cg[:arb] + (-2.3dt, -0.5dt),
+            hbox(:right:top, "L’Arbresle")
+        );
+    }
+
+    with link = "point.fr.Lozanne" {
+        statdot(:pax, cg[:loz]);
+        slabel(:left :pax, cg[:loz] + (-2.8km, -0.5dt), "Lozanne");
+    }
+}
+
+
+# FR 784.  Clermont-Ferrand - St-Just-sur-Loire
+with detail = 2 {
+    let cj = path("d2.fr.784");
+
+    with link = "line.fr.784" {
+        track(:first :pax, cj[:cle.yj, :thi]);
+        track(:first :closed, cj[:thi, :boe]);
+        track(:first :pax, cj[:boe, :sju.yc]);
+
+        line_badge(:pax, cj[:cle.yj + 5km] << 0.1dt, "784");
+        line_label(:right:n :pax, cj[:pon - 8km], "784");
+        line_label(:left:s :closed, cj[:thi + 6km], "784");
+        line_label(:right:e :pax, cj[:mbr - 7km], "784");
+        line_badge(:pax, cj[:bon - 6km] << 0.2dt, "784");
+    }
+
+    with link = "point.fr.Vertaizon" {
+        statdot(:pax, cj[:ver]);
+        slabel(:left :pax, cj[:ver] + (0.5dt, 0.5dt),
+            hbox(:right:top, "Vertaizon")
+        );
+    }
+
+    with link = "point.fr.Pont-de-Dore" {
+        statdot(:pax, cj[:pon]);
+        slabel(:left :pax, cj[:pon] + (-1.6dt, 1.0dt), "Pont-de-Dore");
+    }
+
+    with link = "point.fr.Courty" {
+        statdot(:removed, cj[:cou]);
+        slabel(:left :removed, cj[:cou] + (-1.5dt, 0.8dt), "Courty");
+    }
+
+    with link = "point.fr.Thiers" {
+        statdot(:pax, cj[:thi]);
+        slabel(:right :pax, cj[:thi] + (-1.0dt, 0.8dt),
+            hbox(:left:top, "Thiers")
+        );
+    }
+
+    with link = "point.fr.Boën" {
+        statdot(:pax, cj[:boe]);
+        slabel(:right :pax, cj[:boe] + (1.5dt, 0.3dt), "Boën");
+    }
+
+    with link = "point.fr.Montbrison" {
+        statdot(:pax, cj[:mbr]);
+        slabel(:left :pax, cj[:mbr] + (-1.5dt, 1.0dt), "Montbrison");
+    }
+
+    with link = "point.fr.Bonson" {
+        statdot(:pax, cj[:bon]);
+        slabel(:right :pax, cj[:bon] + (-2.5dt, -1.5dt), "Bonson");
+    }
+}
+
+
+# FR 785.  St-Germain-des-Fossés - Darsac
+with detail = 2 {
+    let gd = path("d2.fr.785");
+
+    with link = "line.fr.785" {
+        track(:first :double :cat:ac25 :pax, gd[:sge.yv, :vic.yr]);
+        track(:first, gd[:vic.yr, :puy]);
+        track(:first :removed, gd[:puy, :cou.yv]);
+        track(:first, gd[:pon.yd, :cop]);
+        track(:first :museum, gd[:cop, :sem]);
+        track(:first, gd[:sem, :dar.yv]);
+
+        line_label(:right:e :double :cat:ac25 :pax, gd[:vic.yc - 2.5km], "785");
+        line_label(:left:w, gd[:vic.yr + 7.5km], "785");
+        line_label(:right:ne :removed, gd[:cou.yv - 6km], "785");
+        line_label(:left:w, gd[:pon.yd + 5.5km], "785");
+        line_badge(:museum, gd[:sem - 39km], "785");
+        line_label(:right:e, gd[:sem + 8km], "785");
+    }
+
+    with link = "point.fr.Vichy" {
+        statdot(:cat:ac25 :pax, gd[:vic]);
+        slabel(:left :cat:ac25 :pax, gd[:vic] + (-1.8dt, 1.5dt), "Vichy");
+    }
+
+    with link = "point.fr.Puy-Guillaume" {
+        statdot(:medium, gd[:puy]);
+        slabel(:right, gd[:puy] + (1.5dt, 1.0dt), "Puy-Guillaume");
+    }
+
+    with link = "point.fr.Courpière" {
+        statdot(:museum, gd[:cop]);
+        slabel(:right :museum, gd[:cop] + (1.5dt, 0.8dt), "Courpière");
+    }
+
+    with link = "point.fr.Sembadel" {
+        statdot(:museum, gd[:sem]);
+        slabel(:left :museum, gd[:sem] + (-1.8dt, 2.0dt), "Sembadel");
+    }
+}
+
+
+# FR 786.  Vichy - Cusset
+with detail = 2 {
+    let vc = path("d2.fr.786");
+
+    with link = "line.fr.786" {
+        track(:first, vc[:vic.yc, :cus]);
+
+        line_label(:left:s, vc[:cus - 0.9km], " 786");
+    }
+
+    with link = "point.fr.Cusset" {
+        statdot(:medium, vc[:cus]);
+        slabel(:right, vc[:cus] + (1.5dt, 0.8dt), "Cusset");
+    }
+}
+
+
+# FR 787.  Vichy - Riom-Châtel-Guyon
+with detail = 2 {
+    let vr = path("d2.fr.787");
+
+    with link = "line.fr.787" {
+        track(:first :double :cat:ac25 :pax, vr[:vic.yr, :rio.yv]);
+
+        line_label(:right:e :double :cat:ac25 :pax, vr[:vic.yr + 7.5km], "787");
+        line_label(:left:nw :double :cat:ac25 :pax, vr[:rio.yv - 8.5km], "787");
+    }
+}
+
+
+# FR 789.  La Ferté-Hauterive - Gannat
+with detail = 2 {
+    let fg = path("d2.fr.789");
+
+    with link = "line.fr.789" {
+        track(:first, fg[:fer.yg, :spo]);
+        track(:first :removed, fg[:spo, :bay]);
+        track(:first :closed, fg[:bay, :gan.yf]);
+
+        line_label(:left:w :removed, fg[:spo + 3.5km], "789");
+    }
+
+    with link = "point.fr.St-Pourçain-sur-Sioule" {
+        statdot(:medium, fg[:spo]);
+        slabel(:left, fg[:spo] + (-1.5dt, 0.5dt), "St-Pourçain-sur-Sioule");
+    }
+
+    with link = "point.fr.Bayet" {
+        statdot(:closed, fg[:bay]);
+        slabel(:left :closed, fg[:bay] + (-1.5dt, 0.8dt), "Bayet");
+    }
+}
+
