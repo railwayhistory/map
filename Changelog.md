@@ -2,6 +2,12 @@
 
 ## Updates
 
+### 2022-12-11
+
+* Lines _DE 4813_ and _DE 4615_ (high speed line Wendlingen – Ulm) opened for
+  commercial service.
+* Passenger service on lines _BE 96_ south of Quévy and _FR 247_ discontinued.
+
 ### 2022-09-10
 
 * Lines _BE 162_ south of Hatrival and _BE 167_ switched electrification
