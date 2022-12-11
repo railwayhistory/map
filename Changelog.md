@@ -6,6 +6,8 @@
 
 * Lines _DE 4813_ and _DE 4615_ (high speed line Wendlingen – Ulm) opened for
   commercial service.
+* Passenger service started on lines _DE 2250_ between Buer Nord and
+  Blumenthal and on line _DE 2223_.
 * Passenger service on lines _BE 96_ south of Quévy and _FR 247_ discontinued.
 
 ### 2022-09-10
