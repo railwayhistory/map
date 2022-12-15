@@ -1,0 +1,207 @@
+# FR 880.  Mouchard - Bourg-en-Bresse
+with detail = 2 {
+    let mb = path("d2.fr.880");
+
+    with link = "line.fr.880" {
+        track(:first :cat:ac25 :pax, mb[:mou.yb, :sas]);
+        track(:first :cat:dc15 :pax, mb[:sas, :sam.yd]);
+        track(:first :double :cat:dc15 :pax, mb[:sam.yd, :bou.ym]);
+
+        line_label(:right:e :cat:ac25 :pax, mb[:mou.yb + 6.5km], "880");
+        line_label(:left:w :cat:ac25 :pax, mb[:pol + 16.7km], "880");
+        line_label(:left:w :cat:ac25 :pax, mb[:sas - 6km], "880");
+        line_label(:right:e :double :cat:dc15 :pax, mb[:sam + 11km], "880");
+    }
+
+    with link = "point.fr.Poligny" {
+        statdot(:cat:ac25 :pax, mb[:pol]);
+        slabel(:right :cat:ac25 :pax, mb[:pol] + (1.5dt, 1.0dt), "Poligny");
+    }
+
+    with link = "point.fr.Lons-le-Saunier" {
+        statdot(:cat:ac25 :pax, mb[:lon]);
+        slabel(:left :cat:ac25 :pax, mb[:lon] + (3.3dt, -2.0dt),
+            vbox(:right:bottom, "Lons-le-", "Saunier ")
+        );
+    }
+
+    with link = "point.fr.St-Amour" {
+        statdot(:cat:dc15 :pax, mb[:sam]);
+        slabel(:right :cat:dc15 :pax, mb[:sam] + (1.5dt, 0.8dt), "St-Amour");
+    }
+}
+
+
+# FR 881.  St-Germain-du-Plain - Lons-le-Saunier
+with detail = 2 {
+    let gl = path("d2.fr.881");
+
+    with link = "line.fr.881" {
+        track(:first :removed, gl[:sge.yl, :lon.yg]);
+
+        line_label(:right:n :removed, gl[:sge.yl + 8.5km], "881 ");
+        line_label(:right:n :removed, gl[:lon.yg - 14km], " 881");
+    }
+}
+
+
+# FR 882.  Chalon-sur-Saône - Bourg-en-Bresse
+with detail = 2 {
+    let cb = path("d2.fr.882");
+
+    with link = "line.fr.882" {
+        track(:first :removed, cb[:cln.yb, :bou.ym]);
+
+        line_badge(:removed, cb[:cln.yb + 9km] << 0.1dt, "882");
+        line_label(:left:w :removed, cb[:bou.ym - 19km], "882");
+    }
+
+    with link = "point.fr.St-Germain-du-Plain" {
+        statdot(:removed, cb[:sge]);
+        slabel(:right :removed, cb[:sge] + (-1.0dt, -1.5dt),
+            vbox(:left:bottom, "St-Germain-", "du-Plain")
+        );
+    }
+}
+
+
+# FR 883.  Mâcon-Ville - Ambérieu
+with detail = 2 {
+    let ma = path("d2.fr.883");
+
+    with link = "line.fr.883" {
+        track(:first :double :cat:dc15 :pax, ma[:mac.ya, :amb.ym]);
+
+        line_badge(:cat:dc15 :pax, ma[:bou - 14.2km] << 0.2dt, "883");
+        line_badge(:cat:dc15 :pax, ma[:bou + 13km] << 0.1dt, "883");
+    }
+
+    with link = "point.fr.Pont-de-Veyle" {
+        statdot(:cat:dc15 :pax, ma[:pov]);
+        slabel(:right :cat:dc15 :pax, ma[:pov] + (1.0dt, -0.5dt),
+            "Pont-de-Veyle"
+        );
+    }
+
+    with link = "point.fr.Bourg-en-Bresse" {
+        statdot(:cat:dc15 :pax, ma[:bou]);
+        slabel(:left :cat:dc15 :pax, ma[:bou] + (-1.5dt, 1.0dt),
+            "Bourg-en-Bresse"
+        );
+    }
+}
+
+
+# FR 883.306  Raccordement d'Ambérieu
+with detail = 2 {
+    with link = "line.fr.883.306" {
+        track(:first :double :cat:dc15 :pax,
+                path("d2.fr.883.306")[:amb.yn, :amb.ye]
+        );
+    }
+}
+
+
+# FR 884.  Bourg-en-Bresse - Bellegarde
+with detail = 2 {
+    let bb = path("d2.fr.884");
+
+    with link = "line.fr.884" {
+        track(:first :cat:dc15 :pax, bb[:bou.yb, :bos]);
+        track(:first :cat:ac25 :pax, bb[:bos, :bel.yb]);
+
+        line_label(:left:s :cat:ac25 :pax, bb[:bri - 12km], "884");
+        line_label(:right:n :cat:ac25 :pax, bb[:clu + 14km], "884");
+    }
+
+    with link = "point.fr.Brion-Montréal-la-Cluse" {
+        statdot(:cat:ac25 :pax, bb[:bri]);
+        slabel(:left :cat:ac25 :pax, bb[:bri] + (-0.5dt, 0dt),
+            vbox(:right:top, "Brion-", "Montréal-", "la-Cluse ")
+        );
+    }
+
+    with link = "point.fr.La-Cluse" {
+        statdot(:removed, bb[:clu]);
+        slabel(:right :removed, bb[:clu] + (1.5dt, 0.5dt), "La Cluse");
+    }
+}
+
+
+# FR 886.  Lyon-St-Clair - Bourg-en-Bresse
+with detail = 2 {
+    let lb = path("d2.fr.886");
+
+    with link = "line.fr.886" {
+        track(:first :pax,
+                lb[:sat, :sat.yl] >> 0.7dt
+            ..  lb[:sat.yl + 2dt, :ech]
+        );
+        track(:first :double :pax, lb[:ech, :vil]);
+        track(:first :pax, lb[:vil, :bou.yl]);
+
+        line_badge(:pax, lb[:vil - 8km], "886");
+        line_badge(:pax, lb[:bou.yl - 8.5km] << 0.1dt, "886");
+    }
+
+    with link = "point.fr.Sathonay-Rillieux" {
+        statdot(:cat:dc15 :pax, lb[:sat] >> 0.3dt);
+    }
+
+    with link = "point.fr.Villars-les-Dombes" {
+        statdot(:pax, lb[:vil]);
+        slabel(:right :pax, lb[:vil] + (1.5dt, 1.8dt), "Villars-les-Dombes");
+    }
+
+    with link = "point.fr.Marlieux-Châtillon" {
+        statdot(:pax, lb[:mar]);
+        slabel(:right :pax, lb[:mar] + (1.3dt, 1.8dt), "Marlieux-Châtillon");
+    }
+}
+
+
+# FR 887.  Lyon-Croix-Rousse - Trévoux
+with detail = 2 {
+    let lt = path("d2.fr.887");
+
+    with link = "line.fr.887" {
+        track(:first :removed, lt[:lcr, :sat.yr]);
+        track(:first :closed, lt[:sat.yt, :neu]);
+        track(:first :removed, lt[:neu, :tre]);
+    }
+
+    with link = "point.fr.Lyon-Croix-Rousse" {
+        statdot(:removed, lt[:lcr]);
+    }
+
+    with link = "point.fr.Trévoux" {
+        statdot(:removed, lt[:tre]);
+        slabel(:top :removed, lt[:tre] + (0dt, -0.6dt), "Trévoux");
+    }
+}
+
+
+# FR 889.  Ambérieu - Montalieu-Vercieu
+with detail = 2 {
+    let am = path("d2.fr.889");
+
+    with link = "line.fr.889" {
+        track(:first, am[:amb.yl, :lag]);
+        track(:first :removed, am[:lag, :mal]);
+
+        line_label(:right:ne :removed, am[:lag + 5km], "889");
+    }
+
+    with link = "point.fr.Lagnieu" {
+        statdot(:medium, am[:lag]);
+        slabel(:left, am[:lag] + (-1.5dt, 1.0dt), "Lagnieu");
+    }
+
+    with link = "point.fr.Montalieu-Vercieu" {
+        statdot(:removed, am[:mal]);
+        slabel(:right :removed, am[:mal] + (1.6dt, 0dt),
+            vbox(:left:middle, "Montalieu-", "Vercieu")
+        );
+    }
+}
+

@@ -1,0 +1,290 @@
+# FR 850.  Dijon-Ville - Vallorbe-Frontière
+with detail = 2 {
+    let dv = path("d2.fr.850");
+
+    with link = "line.fr.850" {
+        track(:first :double :cat:dc15 :pax, dv[:dij.yv, :dos]);
+        with layer = 1 track(:first :double :cat:dc15 :pax, dv[:vil.yb, :vil]);
+        track(:first :double :cat:dc15 :pax, dv[:vil, :dos]);
+        track(:first :double :cat:ac25 :pax, dv[:dos, :dol.yb]);
+        track(:first :cat:ac25 :pax, dv[:dol.yb, :arc]);
+        track(:first :double :cat:ac25 :pax, dv[:arc, :mou]);
+        track(:first :cat:ac25 :pax, dv[:mou, :pon]);
+        track(:first :double :cat:ac25 :pax, dv[:pon, :and]);
+        track(:first :cat:ac25 :pax, dv[:and, :bou]);
+        track(:first :double :cat:ac25 :pax, dv[:bou, :fra]);
+        track(:first :cat:ac25 :pax, dv[:fra, :vaf]);
+
+        line_badge(:cat:dc15 :pax, dv[:vil.yb - 12km], "850");
+        line_label(:right:e :double :cat:dc15 :pax, dv[:dos - 6km], "850");
+        line_label(:left:s :cat:ac25 :pax, dv[:dol + 14km], " 850");
+        line_label(:left:s :cat:ac25 :pax, dv[:and - 10km], "  850");
+        line_label(:left:w :double :cat:ac25 :pax, dv[:arc + 2.7km], "850");
+        line_label(:left:s :double :cat:ac25 :pax, dv[:fra - 6.7km], "850");
+        line_label(:right:e :cat:ac25 :pax, dv[:vaf - 8.8km], "850");
+    }
+
+    with link = "point.fr.Villers-les-Pots" {
+        with layer = 1 statdot(:cat:dc15, dv[:vil]);
+        slabel(:right :cat:dc15, dv[:vil] + (2.5dt, 0.5dt),
+            "Villers-les-Pots"
+        );
+    }
+
+    with link = "point.fr.Dole" {
+        statdot(:cat:ac25 :pax, dv[:dol]);
+        slabel(:top :cat:ac25 :pax, dv[:dol] + (-0.5dt, -1.0km),
+            span(:bold, "Dole")
+        );
+    }
+
+    with link = "point.fr.Arc-et-Senans" {
+        statdot(:cat:ac25 :pax, dv[:arc]);
+        slabel(:right :cat:ac25 :pax, dv[:arc] + (2.0dt, 0.8dt),
+            "Arc-et-Senans"
+        );
+    }
+
+    with link = "point.fr.Mouchard" {
+        statdot(:cat:ac25 :pax, dv[:mou]);
+        slabel(:right :cat:ac25 :pax, dv[:mou] + (1.0dt, -1.0dt), "Mouchard");
+    }
+
+    with link = "point.fr.Andelot" {
+        statdot(:cat:ac25 :pax, dv[:and]);
+        slabel(:right :cat:ac25 :pax, dv[:and] + (-1.5dt, -2.0dt), "Andelot");
+    }
+
+    with link = "point.fr.Frasne" {
+        statdot(:cat:ac25 :pax, dv[:fra]);
+        slabel(:left :cat:ac25 :pax, dv[:fra] + (1.5dt, 0.8dt),
+            hbox(:right:top, "Frasne")
+        );
+    }
+
+    with link = "point.int.Les-Longevilles-Rochejean-Vallorbe" {
+        marker(:right :ref :cat:ac25 :pax, dv[:vaf]);
+        marker(:left :ref :cat:ac25 :pax, dv[:vaf]);
+    }
+}
+
+
+# FR 851.  Gray - St-Jean-de-Losne
+with detail = 2 {
+    let gv = path("d2.fr.851.1");
+    let vj = path("d2.fr.851.2");
+
+    with link = "line.fr.851" {
+        track(:first, gv[:gra, :vil.yg]);
+        track(:first :closed, vj[:vil.yj, :sje.yv]);
+
+        line_label(:right:e, gv[:gra + 11km], "851");
+        line_badge(:open, gv[:vil.yg - 10km] >> 0.15dt, "851");
+        line_label(:right:e :closed, vj[:vil.yj + 7km], "851");
+    }
+
+    with link = "point.fr.Gray" {
+        statdot(:medium, gv[:gra]);
+        slabel(:bottom, gv[:gra] + (3dt, 0.4dt), "Gray");
+    }
+}
+
+
+# FR 852.  Dole - Belfort
+with detail = 2 {
+    let db = path("d2.fr.852");
+
+    with link = "line.fr.852" {
+        track(:first :double :cat:ac25 :pax, db[:dol.yb, :bel.yd]);
+
+        line_label(:left:s :double :cat:ac25 :pax, db[:dol.yb + 7.3km], "852");
+        line_badge(:cat:ac25 :pax, db[:fra - 11km] << 0.15dt, "852");
+        line_label(:left:s :double :cat:ac25 :pax, db[:bes + 12km], "852");
+        line_label(:right:n :double :cat:ac25 :pax, db[:vou - 10.5km], "852");
+        line_label(:left:s :double :cat:ac25 :pax, db[:mon + 8.8km], "852");
+    }
+
+    with link = "point.fr.Labarre" {
+        statdot(:cat:ac25, db[:lab]);
+        slabel(:left :cat:ac25, db[:lab] + (-0.5dt, -1.3dt), "Labarre");
+    }
+
+    with link = "point.fr.Franois" {
+        statdot(:cat:ac25 :pax, db[:fra]);
+        slabel(:top :cat:ac25 :pax, db[:fra] + (-2dt, -0.8dt), "Franois");
+    }
+
+    with link = "point.fr.Besançon-Viotte" {
+        statdot(:cat:ac25 :pax, db[:bes]);
+        slabel(:right :cat:ac25 :pax, db[:bes] + (2km, 2.5dt),
+            "Besançon-Viotte"
+        );
+    }
+
+    with link = "point.fr.Voujeaucourt" {
+        statdot(:cat:ac25 :pax, db[:vou]);
+        slabel(:left :cat:ac25 :pax, db[:vou] + (-1.5dt, -0.5dt),
+            "Voujeaucourt"
+        );
+    }
+
+    with link = "point.fr.Montbéliard" {
+        statdot(:cat:ac25 :pax, db[:mon]);
+        slabel(:left :cat:ac25 :pax, db[:mon] + (-1.7dt, 1.0dt),
+            "Montbéliard"
+        );
+    }
+}
+
+
+# FR 853.  Gray - Fraisans
+with detail = 2 {
+    let gf = path("d2.fr.853");
+
+    with link = "line.fr.853" {
+        track(:first :removed, gf[:gra.yf, :fra]);
+
+        line_label(:left:w :removed, gf[:gra.yf + 9km], "853");
+        line_label(:right:e :removed, gf[:mon + 10km], "853");
+        line_label(:right:n :removed, gf[:fra - 3km], "853");
+    }
+
+    with link = "point.fr.Montagney" {
+        statdot(:removed, gf[:mon]);
+        slabel(:left :removed, gf[:mon] + (-1.8dt, 1.2dt), "Montagney");
+    }
+
+    with link = "point.fr.Fraisans" {
+        statdot(:removed, gf[:fra]);
+        slabel(:right :removed, gf[:fra] + (1.5dt, 0.9dt), "Fraisans");
+    }
+}
+
+
+# FR 854.  Belfort - Delle-Frontière
+with detail = 2 {
+    let bd = path("d2.fr.854");
+
+    with link = "line.fr.854" {
+        track(:first :cat:ac25 :pax, bd[:bel.yb, :del]);
+        track(:first :cat:ac15 :pax, bd[:del, :def]);
+
+        line_label(:left:w :cat:ac25 :pax, bd[:del - 3km], "854");
+    }
+
+    with link = "point.fr.Morvillars" {
+        statdot(:cat:ac25 :pax, bd[:mor]);
+        slabel(:right :cat:ac25 :pax, bd[:mor] + (1.5dt, -0.5dt), "Morvillars");
+    }
+
+    with link = "point.fr.Delle" {
+        statdot(:cat:ac25 :pax, bd[:del]);
+        slabel(:left :cat:ac25 :pax, bd[:del] + (-1.6dt, 1.0dt), "Delle");
+    }
+}
+
+
+# FR 855.  Montagney - Miserey-Salines
+with detail = 2 {
+    let mm = path("d2.fr.855");
+
+    with link = "line.fr.855" {
+        track(:first :removed, mm[:mon.ym, :mis.ym]);
+
+        line_label(:left:s :removed, mm[:mon.ym + 6km], "855");
+    }
+}
+
+
+# FR 856.  Besançon-Viotte - Vesoul
+with detail = 2 {
+    let bv = path("d2.fr.856");
+
+    with link = "line.fr.856" {
+        track(:first :cat:ac25 :pax, bv[:bes.yv, :bee]);
+        track(:first, bv[:bee, :dev]);
+        track(:first :removed, bv[:dev, :ves.yb]);
+
+        line_label(:right:w :cat:ac25 :pax, bv[:bes.yv + 3.3km], "856");
+        line_label(:right:w :removed, bv[:dev + 18km], "856");
+        line_label(:right:w :removed, bv[:mbo + 11km], "856");
+    }
+
+    with link = "point.fr.Miserey-Salines" {
+        statdot(:cat:ac25 :pax, bv[:mis]);
+        slabel(:left :cat:ac25, bv[:mis] + (0.3dt, 1dt),
+            vbox(:right:top, "Miserey-Salines")
+        );
+    }
+
+    with link = "point.fr.Devecey" {
+        statdot(:medium, bv[:dev]);
+        slabel(:right, bv[:dev] + (1.3dt, -0.5dt),
+            hbox(:left:top, "Devecey")
+        );
+    }
+
+    with link = "point.fr.Montbozon" {
+        statdot(:removed, bv[:mbo]);
+        slabel(:left :removed, bv[:mbo] + (-1.5dt, 1.0dt), "Montbozon");
+    }
+}
+
+
+# FR 856.300.  Raccordement EST de Besançon TGV
+with detail = 2 {
+    with link = "d2.fr.856.300" {
+        track(:first :cat:ac25 :pax,
+                path("d2.fr.856.300")[:bee, :ben]
+        );
+    }
+}
+
+
+# FR 857.  Montbozon - Lure
+with detail = 2 {
+    let ml = path("d2.fr.857");
+
+    with link = "line.fr.857" {
+        track(:first :removed, ml[:mbo.yl, :lur.ym]);
+
+        line_label(:right:n :removed, ml[:mbo.yl + 9km], "857");
+        line_label(:right:w :removed, ml[:lur.ym - 8.5km], "857");
+    }
+}
+
+
+# FR 858.  Montbéliard - Morvillars
+with detail = 2 {
+    let mm = path("d2.fr.858");
+
+    with link = "line.fr.858" {
+        track(:first :removed, mm[:mon.ym, :mor.ym]);
+
+        line_label(:left:e :removed, mm[:mor.ym - 4km], "858");
+    }
+}
+
+
+# FR 859.  Voujeaucourt - St-Hippolyte
+with detail = 2 {
+    let vh = path("d2.fr.859");
+
+    with link = "line.fr.859" {
+        track(:first :closed, vh[:vou.yh, :pon]);
+        track(:first :removed, vh[:pon, :shi]);
+
+        line_label(:left:w :closed, vh[:vou.yh + 10km], "859");
+    }
+
+    with link = "point.fr.Pont-de-Roide" {
+        statdot(:closed, vh[:pon]);
+        slabel(:left :closed, vh[:pon] + (-1.5dt, 0.8dt), "Pont-de-Roide");
+    }
+
+    with link = "point.fr.St-Hippolyte" {
+        statdot(:removed, vh[:shi]);
+        slabel(:bottom :removed, vh[:shi] + (0dt, 0.8dt), "St-Hippolyte");
+    }
+}
+
