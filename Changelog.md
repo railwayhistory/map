@@ -33,6 +33,7 @@
 
 | Date | Update |
 | ---- | ------ |
+| 2022-12-31 | Added detail 2 of lines FR 9xx. |
 | 2022-12-15 | Added detail 2 of lines FR 8xx. |
 | 2022-12-01 | Added detail 2 of lines FR 7xx. |
 | 2022-11-13 | Added lines GB ECM1 and GB HDB in London region. |

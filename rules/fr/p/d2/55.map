@@ -1,0 +1,57 @@
+# FR 551. Bourg-la-Reine - Robinson
+with detail = 2 {
+    let br = path("d2.fr.551");
+
+    with link = "line.fr.551" {
+        track(:first :double :cat:dc15 :pax, br[:bou, :rob]);
+    }
+
+    with link = "point.fr.Robinson" {
+        statdot(:cat:dc15 :pax, br[:rob]);
+    }
+}
+
+
+# FR 552.  Châtelet-Les Halles - Limours
+with detail = 2 {
+    let cl = path("d2.fr.552");
+
+    with link = "line.fr.552" {
+        track(:first :double :cat:dc15 :pax,
+                cl[:cha.yl, :mat.yyn]
+            ..  cl[:mat.yn, :mat.ys] >> 1dt
+            ..  cl[:mat.yys, :sre]
+        );
+        track(:first :double :removed, cl[:sre, :lim]);
+
+        guide(:linenum :removed,
+                cl[:sre + 3.7km] >> 1dt
+            --  cl[:sre + 3.7km] >> 3dt
+        );
+        label(:linenum :removed, cl[:sre + 3.7km] >> 3.5dt,
+            hbox(:right:middle, "552")
+        );
+    }
+
+    with link = "point.fr.Bourg-la-Reine" {
+        statdot(:cat:dc15 :pax, cl[:bou]);
+    }
+
+    with link = "point.fr.Massy" {
+        with layer = 2 statdot(:over :cat:dc15 :pax, cl[:mat] >> 1dt);
+        with layer = 1 statdot(:casing, cl[:mat] >> 1dt);
+    }
+
+    with link = "point.fr.St-Rémy-lès-Chevreuse" {
+        statdot(:cat:dc15 :pax, cl[:sre]);
+        slabel(:top :cat:dc15 :pax, cl[:sre] + (0dt, -0.8dt),
+            "St-Rémy-l.-C."
+        );
+    }
+
+    with link = "point.fr.Limours-PO" {
+        statdot(:removed, cl[:lim]);
+        slabel(:left :removed, cl[:lim] + (-1.7km, 1.5dt), "Limours");
+    }
+}
+
