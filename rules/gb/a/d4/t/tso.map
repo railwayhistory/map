@@ -1,0 +1,73 @@
+# GB TSO.  Georgemas Jn - Thurso
+#
+let gt = path("d4.gb.tso");
+
+with detail = [4, 5] {
+    # point.gb.Georgemas-Jn  gb.WCK
+
+    with link = "line.gb.TSO" {
+        track(:first :pax, gt[:geo.yt + 240m, :hoy - 70m]);
+    }
+
+    with link = "point.gb.Hoy" {
+        track(:first:station :pax, gt[:hoy - 70m, :hoy + 110m]);
+        platform(:removed,
+                gt[:hoy - 20m, :hoy + 60m]
+            --  gt[:hoy + 60m, :hoy - 20m] << 0.7dt
+        );
+        marker(:right :de.hp :removed, gt[:hoy] >> 0.5dt);
+        station(:left :removed, gt[:hoy - 0.3sw] << 2dt,
+            "Hoy", "??"
+        );
+    }
+
+    with link = "line.gb.TSO" {
+        track(:first :pax, gt[:hoy + 110m, :thu - 370m]);
+        line_badge(:pax, gt[:hoy + 4.3km], "TSO");
+    }
+
+    with link = "point.gb.Thurso" {
+        track(:station,
+                gt[:thu - 281m, :thu - 280m]
+            ..  gt[:thu - 190m, :thu - 40m] << 1dt
+        );
+
+        track(:first:station :pax, gt[:thu - 370m, :thu + 20m]);
+
+        track(:station :removed,
+                gt[:thu - 310m]
+            --  gt[:thu - 290m] >> 0.5dt
+            ..  gt[:thu - 130m, :thu] >> 1.0dt
+        );
+        track(:station :removed,
+                gt[:thu - 290m] >> 0.5dt
+            --  gt[:thu - 250m] >> 1.5dt
+            ..  gt[:thu - 130m, :thu - 20m] >> 2.0dt
+        );
+        track(:station :removed,
+                gt[:thu - 250m] >> 1.5dt
+            --  gt[:thu - 210m] >> 2.5dt
+            ..  gt[:thu - 80m, :thu - 50m] >> 3dt
+        );
+        track(:station :removed,
+                gt[:thu - 210m] >> 2.5dt
+            --  gt[:thu - 170m] >> 3.5dt
+            ..  gt[:thu - 80m, :thu - 50m] >> 4dt
+        );
+
+        platform(:removed,
+                gt[:thu - 180m, :thu - 140m]
+            --  gt[:thu - 140m, :thu - 180m] >> 1dt
+        );
+        platform(:pax,
+                gt[:thu - 140m, :thu + 20m]
+            --  gt[:thu + 20m, :thu - 140m] >> 1dt
+        );
+
+        marker(:left :de.bf :pax, gt[:thu - 0.3sw] << 1dt);
+        station(:left :pax, gt[:thu - 0.7sw] << 1dt << 1.4sh,
+            span(:bold, "Thurso"), "TSO: 6 50"
+        );
+    }
+}
+
