@@ -1,0 +1,287 @@
+# LU 1.  Luxembourg - Troisvierges-frontière
+#
+let lt = path("d4.lu.1");
+
+with detail = [4, 5] {
+    with link = "point.lu.Luxembourg" {
+        # Voie 3
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux.fe] << 0.5dt
+        );
+
+        # Voie 4
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux.fe] >> 0.5dt
+        );
+            # 305 - 307
+            track(:station :cat:ac25 :pax,
+                    lt[:lux + 300m - 1.4dl] >> 0.5dt
+                --  lt[:lux + 340m - 1.4dl] << 0.5dt
+            );
+            # 311 (?) - 312
+            track(:station :cat:ac25 :pax,
+                    lt[:lux + 340m] >> 0.5dt
+                --  lt[:lux + 380m] >> 1.5dt
+            );
+
+        # Voie 5
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 300m - 0.7dl] >> 1.5dt
+        );
+
+        # Voie 7
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 260m - 0.7dl] >> 2.5dt
+        );
+
+        # Voie 8
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 220m - 0.7dl] >> 3.5dt
+        );
+
+        # Voie 9
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 180m - 0.7dl] >> 4.5dt
+            --  lt[:lux + 380m - 0.7dl, :lux + 381m - 0.7dl] << 0.5dt
+        );
+
+        # Voie 10
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 180m] >> 5.5dt
+        );
+
+        # Voie 11
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 140m] >> 6.5dt
+        );
+
+        # Voie 12
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 100m] >> 7.5dt
+            --  lt[:lux + 340m, :lux.fe] >> 1.5dt
+        );
+            track(:station :cat:ac25 :pax,
+                    lt[:lux + 380m] >> 1.5dt
+                --  lt[:lux + 430m] >> 0.5dt
+            );
+
+        # Voie 13
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 100m] >> 8.5dt
+        );
+
+        # Voie 14
+        track(:first:station :cat:ac25 :pax,
+                lt[:lux, :lux + 100m] >> 9.5dt
+        );
+
+
+        # Quai 1
+        platform(:cat:ac25 :pax,
+                lt[:lux - 150m, :lux + 300m] << 0.5dt
+            --  lt[:lux + 300m, :lux - 150m] >> 1.2dt
+        );
+
+        # Quai 2
+        platform(:cat:ac25 :pax,
+                lt[:lux - 150m, :lux + 240m - 1dl] >> 0.5dt
+            --  lt[:lux + 240m - 1dl, :lux - 150m] << 1.5dt
+        );
+
+        # Quai 3
+        platform(:cat:ac25 :pax,
+                lt[:lux - 150m, :lux + 200m - 1dl] >> 2.5dt
+            --  lt[:lux + 200m - 1dl, :lux - 150m] << 3.5dt
+        );
+
+        # Quai 4
+        platform(:cat:ac25 :pax,
+                lt[:lux - 150m, :lux + 160m - 1dl] >> 4.5dt
+            --  lt[:lux + 160m - 1dl, :lux - 150m] << 5.5dt
+        );
+
+        # Quai 5
+        platform(:cat:ac25 :pax,
+                lt[:lux - 150m, :lux + 100m] >> 6.5dt
+            --  lt[:lux + 100m, :lux - 150m] << 7.5dt
+        );
+
+        # Quai 6
+        platform(:cat:ac25 :pax,
+                lt[:lux - 150m, :lux + 100m] >> 8.5dt
+            --  lt[:lux + 100m, :lux - 150m] << 9.5dt
+        );
+
+
+        marker(:left :de.bf :cat:ac25 :pax, lt[:lux] << 1dt);
+        station(:left :cat:ac25 :pax, lt[:lux - 0.5sw] << 1dt << 1.4sw,
+            span(:bold, "Luxembourg"),
+            hbox(:center:top,
+                vbox(:right:top, "1: "),
+                vbox(:right:top, "16,"),
+                vbox(:left:top, "65")
+            )
+        );
+    }
+
+
+    with link = "line.lu.1" {
+        track(:first :double :cat:ac25 :pax, lt[:lux.fe, :pfa - 170m]);
+
+        guide(:linenum :cat:ac25 :pax,
+                lt[:lux.fe + 1.3km] << 1.2dt
+            --  lt[:lux.fe + 1.3km] << 3.5dt
+        );
+        label(:linenum :cat:ac25 :pax,
+            lt[:lux.fe + 1.3km] << 3.5dt - (1.0dt, 0dt),
+            hbox(:center:top, "1")
+        );
+    }
+
+
+    with link = "point.lu.Pfaffenthal-Kirchberg" {
+        track(:first:station :double :cat:ac25 :pax,
+                lt[:pfa - 170m, :pfa + 170m]
+        );
+
+        platform(:cat:ac25 :pax,
+                lt[:pfa - 120m, :pfa + 120m] >> 0.5dt
+            --  lt[:pfa + 120m, :pfa - 120m] << 1.2dt
+        );
+        platform(:cat:ac25 :pax,
+                lt[:pfa - 120m, :pfa + 120m] << 0.5dt
+            --  lt[:pfa + 120m, :pfa - 120m] >> 1.2dt
+        );
+
+        marker(:left :de.hp :cat:ac25 :pax, lt[:pfa] << 1dt);
+        station(:left :cat:ac25 :pax, lt[:pfa - 0.2sw] << 1dt << 1.4sw,
+            "Pfaffenthal-Kirchberg", "19,10"
+        );
+    }
+
+
+    with link = "line.lu.1" {
+        track(:first :double :cat:ac25 :pax, lt[:pfa + 170m, :dom.a]);
+    }
+
+
+    with link = "point.lu.Dommeldange" {
+        # Voie 1
+        track(:first:station :cat:ac25 :pax, lt[:dom.a, :dom.f] >> 0.5dt);
+            # 803-804
+            track(:station :cat:ac25,
+                    lt[:dom.xa + 15m] >> 0.5dt
+                --  lt[:dom.xa + 85m] << 0.5dt
+            );
+            # 821-822
+            track(:station :cat:ac25,
+                    lt[:dom.xf + 160m] >> 0.5dt
+                --  lt[:dom.xf + 210m] << 0.5dt
+            );
+
+        # Voie 2
+        track(:first:station :cat:ac25 :pax, lt[:dom.a, :dom.f] << 0.5dt);
+            # 801-802
+            track(:station :cat:ac25,
+                    lt[:dom.xa - 85m] << 0.5dt
+                --  lt[:dom.xa - 15m] >> 0.5dt
+            );
+            # 823-824
+            track(:station :cat:ac25,
+                    lt[:dom.xf + 260m] << 0.5dt
+                --  lt[:dom.xf + 310m] >> 0.5dt
+            );
+
+        # Voie 3
+        track(:station :cat:ac25,
+                lt[:dom - 20m, :dom.xf + 300m] << 1.5dt
+        );
+            # 818-819
+            track(:station :cat:ac25,
+                    lt[:dom.xf + 60m] << 1.5dt
+                --  lt[:dom.xf + 110m] << 0.5dt
+            );
+
+        # Voie 4
+        track(:station :cat:ac25,
+                lt[:dom + 30m, :dom.xf - 120m] << 2.5dt
+            --  lt[:dom.xf - 60m, :dom.xf - 59m] << 1.5dt
+        );
+
+        # Voie 5
+        track(:station :cat:ac25,
+                lt[:dom - 71m, :dom - 70m] << 0.5dt
+            --  lt[:dom + 80m, :dom.xf - 185m] << 3.5dt
+            --  lt[:dom.xf - 135m, :dom.xf - 134m] << 2.5dt
+        );
+
+        # Perron 1
+        platform(:cat:ac25 :pax,
+                lt[:dom - 70m, :dom + 120m] >> 0.5dt
+            --  lt[:dom + 120m, :dom - 70m] << 1.2dt
+        );
+
+        # Perron 2/3
+        platform(:cat:ac25 :pax,
+                lt[:dom + 25m, :dom + 215m] << 0.5dt
+            --  lt[:dom + 215m, :dom + 25m] >> 1.5dt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, lt[:dom] >> 1dt);
+        station(:right :cat:ac25 :pax, lt[:dom - 0.3sw] >> 1dt >> 1.3sh,
+            "Dommeldange", "20,83"
+        );
+    }
+
+
+    with link = "line.lu.1" {
+        track(:first :double :cat:ac25 :pax, lt[:dom.f, :wal - 240m]);
+    }
+
+
+    with link = "point.lu.Walferdange" {
+        track(:first:station :double :cat:ac25 :pax,
+                lt[:wal - 240m, :wal + 75m]
+        );
+        platform(:cat:ac25 :pax,
+                lt[:wal - 190m, :wal + 25m] << 0.5dt
+            --  lt[:wal + 25m, :wal - 190m] >> 1.2dt
+        );
+        platform(:cat:ac25 :pax,
+                lt[:wal - 190m, :wal + 10m] >> 0.5dt
+            --  lt[:wal + 10m, :wal - 190m] << 1.2dt
+        );
+        marker(:left :de.hp :cat:ac25 :pax, lt[:wal] << 1.0dt);
+        marker(:left :de.exbf :cat:ac25 :pax, lt[:wal] << 1.0dt);
+        station(:left :cat:ac25 :pax, lt[:wal - 0.4sw] << 1.5dt << 1.4sw,
+            "Walferdange", "24,00"
+        );
+    }
+
+
+    with link = "line.lu.1" {
+        track(:first :double :cat:ac25 :pax, lt[:wal + 0.7km, :wal + 75m]);
+        line_badge(:cat:ac25 :pax, lt[:wal + 0.7km], "1");
+        track(:first :double :cat:ac25 :pax, lt[:wal + 0.7km, :hei - 110m]);
+    }
+
+
+    with link = "point.lu.Heisdorf" {
+        track(:first:station :double :cat:ac25 :pax,
+                lt[:hei - 110m, :hei + 200m]
+        );
+        platform(:cat:ac25 :pax,
+                lt[:hei - 50m, :hei + 140m] << 0.5dt
+            --  lt[:hei + 140m, :hei - 50m] >> 1.2dt
+        );
+        platform(:cat:ac25 :pax,
+                lt[:hei - 60m, :hei + 150m] >> 0.5dt
+            --  lt[:hei + 150m, :hei - 60m] << 1.2dt
+        );
+        marker(:right :de.hp :cat:ac25 :pax, lt[:hei] >> 1.0dt);
+        station(:right :cat:ac25 :pax, lt[:hei - 0.3sw] >> 1.0dt >> 1.4sw,
+            "Heisdorf", "25,53"
+        );
+    }
+}
+
