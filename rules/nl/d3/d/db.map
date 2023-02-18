@@ -1,0 +1,70 @@
+# NL DB.  Den Dolder - Baarn
+#
+let db = path("d4.nl.db");
+
+with detail = 3 {
+    # point.nl.Den-Dolder: nl.UZ
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax,
+                db[:dld + 0.5sw + 4dl, :dld.yb] << 1dt
+            ..  db[:pz + 1.9dt, :pz + 2dt]
+        );
+    }
+
+    with link = "point.nl.De-Paltz" {
+        track(:first:station :cat:dc15 :pax, db[:pz + 2dt, :pz + 1sw + 2dt]);
+        marker(:left :de.hp :removed, db[:pz + 2dt + 0.5sw]);
+        slabel(:left :removed, db[:pz + 2dt] << 1.4sh, "De Paltz");
+    }
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax, db[:pz + 1sw + 2dt, :stz - 1sw]);
+
+        guide(:linenum :cat:dc15 :pax,
+                db[:pz + 1.7km] >> 0.8dt
+            --  db[:pz + 1.7km] >> 3.0dt
+        );
+        label(:linenum :cat:dc15 :pax, db[:pz + 1.7km] >> 3.0dt,
+            hbox(:left:middle, " DB")
+        );
+    }
+
+    with link = "point.nl.Soest-Zuid" {
+        track(:first:station :cat:dc15 :pax, db[:stz - 1sw, :stz + 1sw]);
+        marker(:right :de.hp :cat:dc15 :pax, db[:stz]);
+        slabel(:left :cat:dc15 :pax, db[:stz - 0.8sw] << 1.0dt,
+            "Soest Zuid"
+        );
+    }
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax, db[:stz + 1sw, :st - 1sw]);
+    }
+
+    with link = "point.nl.Soest-Zuid" {
+        track(:first:station :cat:dc15 :pax, db[:st - 1sw, :st + 1sw]);
+        marker(:right :de.bf :cat:dc15 :pax, db[:st]);
+        slabel(:left :cat:dc15 :pax, db[:st] + (-1.8dt, 0.5sw), "Soest");
+    }
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax, db[:st + 1sw, :sd - 1sw]);
+    }
+
+    with link = "point.nl.Soestdijk" {
+        track(:first:station :cat:dc15 :pax, db[:sd - 1sw, :sd + 0.5sw]);
+        marker(:left :de.hp :cat:dc15 :pax, db[:sd]);
+        slabel(:left :cat:dc15 :pax, db[:sd - 0.2sw] << 1.6sh,
+            "Soestdijk"
+        );
+    }
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax,
+                db[:sd + 0.5sw, :brna.yyd - 3dt]
+            ..  path("d4.nl.az")[:brna.yd, :brna + 1sw] << 1.5dt
+        );
+    }
+}
+
