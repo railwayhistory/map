@@ -1,84 +1,76 @@
 # DE 1010.  Schleswig - Schleswig Altstadt
 #
-let slesla = path("d4.de.1010");
+let sl = path("d4.de.1010");
 
 with detail = [4, 5] {
     # point.de.Schleswig  de.1040
 
 
     with link = "line.de.1010" {
-        track(:second :removed, slesla[:a, :got - 1sw]);
-        with layer = 1 line_badge(:removed, slesla[:a + .47km], "1010");
+        track(:second :removed, sl[:a, :sla.a]);
+
+        guide(:linenum :removed,
+                sl[:sla.a - 400m] >> 0.8dt
+            --  sl[:sla.a - 400m] >> 3.0dt
+        );
+        label(:linenum :removed, sl[:sla.a - 400m] >> 3.0dt,
+            hbox(:center:top, "1010")
+        );
     }
 
 
     with link = "point.de.Gottorf" {
-        track(:second :station :removed, slesla[:got - 1sw, :got + 1sw]);
-        marker(:de.zst :right :removed, slesla[:got]);
-        label(slesla[:got] >> 1.3sh + (.5sw, 0sh),
-            hbox(:center :top, span(:medium :removed, "Gottorf"))
+        track(:second :station :gone, sl[:got - 1sw, :got + 1sw]);
+        marker(:de.zst :right :gone, sl[:got]);
+        label(sl[:got] >> 1.3sh + (.5sw, 0sh),
+            hbox(:center :top, span(:medium :gone, "Gottorf"))
         );
-    }
-
-
-    with link = "line.de.1010" {
-        track(:second :removed, slesla[:got + 1sw, :sla.a]);
     }
 
 
     with link = "point.de.Schleihalle" {
-        marker(:de.zst :left :removed, slesla[:slh]);
-        label(slesla[:slh - .6sw] << 1sh - (1dt, 0dt),
-            hbox(:right :base, span(:medium :removed, "Schleihalle"))
+        marker(:de.zst :left :gone, sl[:slh]);
+        label(sl[:slh - .6sw] << 1sh - (1dt, 0dt),
+            hbox(:right :base, span(:medium :gone, "Schleihalle"))
         );
-    }
-
-
-    with link = "line.de.1010" {
-        track(:second :removed, slesla[:slh + 1sw, :dom - 1sw]);
     }
 
 
     with link = "point.de.Domziegelhof" {
-        marker(:de.zst :left :removed, slesla[:dom]);
-        label(slesla[:dom - 0.8sw] << 0.8sh,
-            hbox(:right :bottom, span(:medium :removed, "Domziegelhof"))
+        marker(:de.zst :left :gone, sl[:dom]);
+        label(sl[:dom - 0.8sw] << 0.8sh,
+            hbox(:right :bottom, span(:medium :gone, "Domziegelhof"))
         );
-    }
-
-
-    with link = "line.de.1010" {
-        track(:second :removed, slesla[:dom + 1sw, :sla.a]);
     }
 
 
     with link = "point.de.Schleswig-Altstadt" {
         # Gl. 1
         track(:station :removed,
-                slesla[:sla.a + 99m, :sla.a + 100m]
-            --  slesla[:sla.a + 100m + 1dl, :sla - .6sw] << 1dt
+                sl[:sla.a + 99m, :sla.a + 100m]
+            --  sl[:sla.a + 100m + 1dl, :sla - .6sw] << 1dt
         );
 
         # Gl. 2
         track(:second:station :removed,
-                slesla[:sla.a, :sla.f]
+                sl[:sla.a, :sla.f]
         );
        
         # Gl. 3
         track(:station :removed,
-                slesla[:sla.a + 100m + 3.6dl, :sla.a + 100m + 3.7dl]
-            ..  slesla[:sla.a + 100m + 4.7dl, :sla.f] >> 1dt
+                sl[:sla.a + 100m + 3.6dl, :sla.a + 100m + 3.7dl]
+            ..  sl[:sla.a + 100m + 4.7dl, :sla.f] >> 1dt
         );
 
         # Gl. 5
         track(:station :removed,
-                slesla[:sla.a + 100m + 1.9dl, :sla.a + 100m + 2dl]
-            ..  slesla[:sla.a + 100m + 4dl, :sla.f] >> 2dt
+                sl[:sla.a + 100m + 1.9dl, :sla.a + 100m + 2dl]
+            ..  sl[:sla.a + 100m + 4dl, :sla.f] >> 2dt
         );
 
-        marker(:de.bf :removed :left, slesla[:sla]);
+        marker(:de.bf :removed :left, sl[:sla]);
         station(:top :right_align :removed,
-            slesla[:sla] << 1.3sh + (.2sw, 0sw),
+            sl[:sla] << 1.3sh + (.2sw, 0sw),
             span(:medium :bold :removed, "Schleswig Altstadt"),
             "1010: 136,02"
         );

@@ -1,0 +1,28 @@
+# DE 9105.  Suchsdorf - Kiel-Scheerhafen
+#
+let sw = path("d4.de.9105");
+
+with detail = 3 {
+    with link = "point.de.Suchsdorf-NE" {
+        track(:third:station,
+                sw[:suc - 0.5sw - 1.1dl, :suc - 0.5sw - 1dl]
+            --  sw[:suc - 0.5sw, :suc.yw] >> 1dt
+        );
+    }
+
+    with link = "line.de.9105" {
+        track(:third,
+                sw[:suc.yw - 0.1dl, :suc.yw] >> 1dt
+            --  sw[:suc.yw + 1100m, :wik.xa]
+        );
+
+        guide(:linenum,
+                sw[:suc.yw + 1.1km] >> 0.8dt
+            --  sw[:suc.yw + 1.1km] >> 3.0dt
+        );
+        label(:linenum, sw[:suc.yw + 1.1km] >> 3.5dt,
+            hbox(:left:middle, "9105")
+        );
+    }
+}
+

@@ -3,15 +3,47 @@
 let budhus = path("d4.de.1012");
 
 with detail = [4, 5] {
+    let nf = path("d4.de.1040");
+
     # point.de.Büdelsdorf  de.1040
 
 
+    with link = "point.de.Rendsburg-Gr" {
+        track(:station,
+                nf[:bud + 300m - 0.5sw, :bud + 300m + 0.2sw] << 1.5dt
+        );
+        marker(:left :de.dirgr, nf[:bud + 300m] << 1.5dt);
+        guide(:open,
+                nf[:bud + 300m] >> 1.0dt
+            --  nf[:bud + 300m] >> 3.0dt
+        );
+        slabel(:right, nf[:bud + 300m] >> 3.0dt,
+            hbox(:left:middle,
+                vbox(:center:middle,
+                    "  AKN ",
+                    hbar(0.3),
+                    "DB"
+                ),
+                span(:xsmall, " 1012: ??")
+            )
+        );
+    }
+
+    with link = "line.de.1012" {
+        track(:station,
+                nf[:bud + 300m + 0.19sw, :bud + 300m + 0.2sw] << 1.5dt
+            ..  budhus[:bud.gg, :gen - 250m]
+        );
+    }
+}
+
+
+with detail = [4, 5] {
     with link = "point.de.Rendsburg-Gewerbegebiet-Nord" {
         let budhus.gen = path("d4.de.1012.gen");
 
         with layer = -2 track(:station,
-                path("d4.de.1040")[:bud + 1sw, :bud + 1.01sw] << 1.5dt
-            ..  budhus[:bud.gg, :gen]
+                budhus[:gen - 250m, :gen]
         );
         with layer = -4 track(:second:station :removed,
                 budhus[:gen, :gen + 0.5sw]
@@ -122,13 +154,14 @@ with detail = [4, 5] {
         marker(:de.anst :removed :right, budhus[:nor + 0.5sw] >> 1dt);
         marker(:de.exbf :removed :right, budhus[:nor + 0.5sw] >> 1dt);
         station(:left :removed, budhus[:nor + 1.5sw] << 2dt,
-            span(:bold, "Norderstapel"), "31,04"
+            span(:bold, "Norderstapel"), "1012: 31,04 · AX1: ??"
         );
     }
 
 
     with link = "line.de.1012" {
         track(:second :removed, budhus[:nor + 1.5sw, :swa - 1sw]);
+        line_badge(:removed, budhus[:nor + 2.6km], "1012");
     }
 
 
@@ -136,24 +169,21 @@ with detail = [4, 5] {
         track(:second:station :removed, budhus[:swa - 1sw, :swa + 1sw]);
         marker(:de.anst :removed :left, budhus[:swa]);
         marker(:de.exbf :removed :left, budhus[:swa]);
-        station(:left :removed, budhus[:swa] << 2.0sh,
+        station(:left :removed, budhus[:swa] << 2.3sh,
             "Schwabstedt", "36,44"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed :flip, budhus[:ran - 2.4km, :swa + 1sw]);
-        line_badge(:removed, budhus[:ran - 2.4km], "1012");
-        track(:second :removed, budhus[:ran - 2.4km, :ran - 1sw]);
+        track(:second :removed, budhus[:swa + 1sw, :ran - 1sw]);
     }
 
 
     with link = "point.de.Rantrum" {
         track(:second:station :removed, budhus[:ran - 1sw, :ran + 1sw]);
-        marker(:de.anst :removed :left, budhus[:ran]);
-        marker(:de.exbf :removed :left, budhus[:ran]);
-        station(:left :removed, budhus[:ran - .3sw] << 2.0sh,
+        marker(:de.bf :removed :left, budhus[:ran]);
+        station(:left :removed, budhus[:ran - .3sw] << 1.8sh,
             "Rantrum", "42,29"
         );
     }
@@ -161,12 +191,13 @@ with detail = [4, 5] {
 
     with link = "line.de.1012" {
         track(:second :removed, budhus[:ran + 1sw, :mil - 1sw]);
+        line_badge(:removed, budhus[:mil - 1.3km], "1012");
     }
 
 
     with link = "point.de.Mildstedt" {
         track(:second:station :removed, budhus[:mil - 1sw, :mil + 1sw]);
-        marker(:de.hst :removed :left, budhus[:mil]);
+        marker(:de.anst :removed :left, budhus[:mil]);
         marker(:de.exbf :removed :left, budhus[:mil]);
         station(:left :removed, budhus[:mil + .4sw] << 1.4sh,
             hbox(:left:top, "Mildstedt"), "45,96"

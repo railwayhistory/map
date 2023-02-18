@@ -1,3 +1,6 @@
+# DE 9105.  Suchsdorf - Kiel-Scheerhafen
+#
+let sw = path("d4.de.9105");
 
 with detail = 4 {
     with link = "point.de.Suchsdorf-NE" {
@@ -6,7 +9,7 @@ with detail = 4 {
         # Gl. 3
         with layer = -2 track(:third :station,
                 hasfle[:suc.a + 1.9dl, :suc.a + 2dl]
-            --  hasfle[:suc.a + 3dl, :awik] >> 1dt
+            --  hasfle[:suc.a + 3dl, :suc.yw] >> 1dt
         );
 
         # Gl. 4
@@ -19,8 +22,17 @@ with detail = 4 {
         marker(:de.bft :open :right, hasfle[:suc - 2dl - 0.3sw] >> 2dt);
         station(:right :open, hasfle[:suc - 2dl - 0.6sw] >> 2dt >> 1.4sh,
             span(:bold, "Suchsdorf NE"),
-            "9105: ??"
+            "9105: 0,0"
         );
     };
+
+
+    with link = "line.de.9105" {
+        track(:third,
+                sw[:suc.yw - 0.1dl, :suc.yw] >> 1dt
+            ..  sw[:suc.yw + 500m, :wik.xa]
+        );
+        line_badge(:open, sw[:suc.yw + 1.35km], "9105");
+    }
 }
 

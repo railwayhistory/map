@@ -14,7 +14,7 @@ with detail = [4, 5] {
         );
 
         with layer = -4 track(:first :double :removed,
-                path("d4.de.1040.neu")[:neu.h + 2dl, :xneu]
+                path("d4.de.1040.neu")[:neu.yh, :xneu]
         );
 
         with layer = 1 line_badge(:pax :cat:ac15, nf[:xneu + 0.7km], "1040");
@@ -55,9 +55,19 @@ with detail = [4, 5] {
                     nf[:nor + 190m] >> 0.5dt
                 --  nf[:nor + 260m] << 0.5dt
             );
-        marker(:de.bf :cat:ac15 :pax :right, nf[:nor] >> 0.5dt);
+
+        platform(:cat:ac15 :pax,
+                nf[:nor - 190m, :nor + 40m] >> 0.5dt
+            --  nf[:nor + 40m, :nor - 190m] << 1.2dt
+        );
+        platform(:cat:ac15 :pax,
+                nf[:nor + 165m, :nor + 370m] << 0.5dt
+            --  nf[:nor + 370m, :nor + 165m] >> 1.2dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :right, nf[:nor] >> 1.0dt);
         station(:right :cat:ac15 :pax :left_align,
-            nf[:nor - 0.4sw] >> 0.5dt >> 1.4sh,
+            nf[:nor - 0.4sw] >> 1.0dt >> 1.4sh,
             "Nortorf",
             hbox(:left :base,
                 span(:xsmall, " 88,87 "),
@@ -76,17 +86,17 @@ with detail = [4, 5] {
         track(:first:station :double :cat:ac15 :pax,
                 nf[:bok - 1sw, :bok + 1sw]
         );
-        with layer = -1 marker(:de.hp :removed:left, nf[:bok] << 0.5dt);
-        with layer = -2 marker(:de.bf :gone :left, nf[:bok] << 0.5dt);
+        marker(:de.hp :removed:left, nf[:bok] << 0.5dt);
+        marker(:de.exbf :removed :left, nf[:bok] << 0.5dt);
         station(:left :right_align :removed,
-            nf[:bok - 0.4sw] << 0.5dt << 1.8sh,
+            nf[:bok - 0.35sw] << 1.0dt << 1.8sh,
             "Bokel", "95,13 (94,37)"
         );
     }
 
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:bok - 1sw, :bos - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:bok + 1sw, :bos - 1sw]);
     }
 
 
@@ -94,7 +104,7 @@ with detail = [4, 5] {
         track(:first:station :double :cat:ac15 :pax,
                 nf[:bos - 1sw, :bos + 100m]
         );
-        with layer = -4 marker(:de.bk :left :removed, nf[:bos] << 0.5dt);
+        marker(:de.bk :left :removed, nf[:bos] << 0.5dt);
         station(:left :removed, nf[:bos - 0.2sw] << 0.5dt << 1.6sw,
             "Bokelholm Süd", "??"
         );
@@ -124,8 +134,9 @@ with detail = [4, 5] {
 
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:bon + 1sw, :oro.a]);
-        with layer = 1 line_badge(:pax :cat:ac15, nf[:oro - 3.0km], "1040");
+        track(:first :double :cat:ac15 :pax :flip, nf[:oro - 3km, :bon + 1sw]);
+        line_badge(:pax :cat:ac15, nf[:oro - 3.0km], "1040");
+        track(:first :double :cat:ac15 :pax, nf[:oro - 3km, :oro.a]);
     }
 
 
@@ -150,8 +161,8 @@ with detail = [4, 5] {
         );
 
         marker(:de.bbf :cat:ac15 :right, nf[:oro] >> 0.5dt);
-        with layer = -4 marker(:de.bf :right :removed, nf[:oro] >> 0.5dt);
-        station(:left :cat:ac15, nf[:oro - 1.0sw] << 0.5dt << 1.0sh,
+        marker(:de.exbf :cat:ac15 :right, nf[:oro] >> 0.5dt);
+        station(:left :cat:ac15, nf[:oro - 1.0sw] << 0.5dt << 0.8sh,
             span(:medium :bold, "Osterrönfeld"),
             vbox(:center :top,
                 "1022: 30,96",
@@ -349,40 +360,22 @@ with detail = [4, 5] {
 
         # Strecke 1012.
         track(:station,
-                nf[:bud + .499sw, :bud + .5sw] << 0.5dt
-            --  nf[:bud + .5sw + 1dl, :bud + 1sw] << 1.5dt
+                nf[:bud - 0.1dl, :bud] << 0.5dt
+            --  nf[:bud + 50m, :bud + 300m - 0.5sw] << 1.5dt
         );
 
-        with layer = -1 marker(:de.bf :removed :left, nf[:bud] << 0.5dt);
-        with detail = 5 {
-            station(:left :closed, nf[:bud - .2sw] << 0.5dt << 1.8sh,
-                "Büdelsdorf",
-                hbox(:center :top :closed,
-                    vbox(:right :top,
-                        span(:xsmall, "1012: "), span(:xsmall, "1040: ")
-                    ),
-                    vbox(:right :top,
-                        span(:xsmall, "0,"), span(:xsmall, "115,")
-                    ),
-                    vbox(:left :top,
-                        span(:xsmall, "42"), span(:xsmall, "35")
-                    )
-                )
-            );
-        }
-        with detail = 4 {
-            station(:left :right_align :removed,
-                nf[:bud - .2sw] << 0.5dt << 1.8sh,
-                "Büdelsdorf",
-                hbox(:center:top :removed :xsmall,
-                    vbox(:right:top, "1012: ", "1040: "),
-                    vbox(:right:top, "0,", "115,"),
-                    vbox(:left:top, "42 ←", "35 ←"),
-                    vbox(:right:top, " 0,", " 115,", "(109,"),
-                    vbox(:left:top, "34", "27", "70)")
-                )
-            );
-        }
+        with layer = -1 marker(:de.bf :removed :left, nf[:bud] << 1.5dt);
+        station(:left :right_align :removed,
+            nf[:bud - .2sw] << 1.5dt << 1.8sh,
+            "Büdelsdorf",
+            hbox(:center:top :removed :xsmall,
+                vbox(:right:top, "1012: ", "1040: "),
+                vbox(:right:top, "0,", "115,"),
+                vbox(:left:top, "42 ←", "35 ←"),
+                vbox(:right:top, " 0,", " 115,", "(109,"),
+                vbox(:left:top, "34", "27", "70)")
+            )
+        );
     }
 
 
