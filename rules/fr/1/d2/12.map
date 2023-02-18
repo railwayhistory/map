@@ -1,0 +1,140 @@
+# FR 120.  Colmar - Neuf-Brisach frontière
+with detail = 2 {
+    let cb = path("d2.fr.120");
+
+    with link = "line.fr.120" {
+        track(:first, cb[:col, :vog]);
+        track(:first :removed, cb[:vog, :nbf]);
+
+        line_badge(:open, cb[:col + 10km], "120");
+    }
+
+    with link = "point.fr.Volgelsheim" {
+        with layer = 1 marker(:statdot, cb[:vog]);
+        slabel(:left, cb[:vog] + (-0.5dt, 0.8dt),
+            hbox(:right:top, "Volgelsheim")
+        );
+    }
+}
+
+
+# FR 121.  Colmar - Bollwiller
+with detail = 2 {
+    let cb1 = path("d2.fr.121.1");
+    let cb2 = path("d2.fr.121.2");
+
+    with link = "line.fr.121" {
+        track(:first :closed, cb1[:col.ye, :ens]);
+        track(:first :removed, cb2[:ens.yb, :bol.ye]);
+
+        line_badge(:closed, cb1[:col.ye + 10km], "121");
+        line_badge(:closed, cb2[:ens.yb + 2.3km] << 0.4dt, "121");
+    }
+
+    with link = "point.fr.Ensisheim" {
+        with layer = 1 marker(:statdot :closed, cb1[:ens]);
+        slabel(:right :closed, cb1[:ens] + (1.5dt, 1.0dt), "Ensisheim");
+    }
+}
+
+
+# FR 122.  Bollwiller - Lautenbach
+with detail = 2 {
+    let bl = path("d2.fr.122");
+
+    with link = "line.fr.122" {
+        track(:first :removed, bl[:bol.yl, :lau]);
+
+        line_badge(:removed, bl[:lau - 4.3km] @ 14 >> 0.2dt, "122");
+    }
+
+    with link = "point.fr.Lautenbach" {
+        with layer = 1 marker(:statdot :removed, bl[:lau]);
+        slabel(:left :removed, bl[:lau] + (-1.5dt, 0.8dt), "Lautenbach");
+    }
+}
+
+
+# FR 123.  Volgelsheim - Bantzenheim
+with detail = 2 {
+    let vb = path("d2.fr.123");
+
+    with link = "line.fr.123" {
+        track(:first :removed, vb[:vog.yb, :blo]);
+        track(:first, vb[:blo, :ban.yv]);
+
+        line_badge(:removed, vb[:vog.yb + 9km], "123");
+    }
+
+    with link = "point.fr.Blodelsheim" {
+        with layer = 1 marker(:statdot, vb[:blo]);
+        slabel(:left, vb[:blo] + (-1.5dt, 0.8dt), "Blodelsheim");
+    }
+}
+
+
+# FR 124.  Mulhouse - Chalampé frontière
+with detail = 2 {
+    let mc = path("d2.fr.124");
+
+    with link = "line.fr.124" {
+        track(:first :cat:ac25 :pax, mc[:mul.ym, :chx]);
+        track(:first :cat:ac15 :pax, mc[:chx, :chf]);
+
+        line_badge(:cat:ac25 :pax, mc[:mul.ym + 8km], "124");
+    }
+
+    with link = "point.fr.Bantzenheim" {
+        with layer = 1 marker(:statdot :cat:ac25 :pax, mc[:ban]);
+        slabel(:left :cat:ac25 :pax, mc[:ban] + (-1.5dt, -0.5dt),
+            "Bantzenheim"
+        );
+    }
+
+    with link = "point.int.Chalampé-Neuenburg-Baden" {
+        marker(:refdt :cat:ac15 :right, mc[:chf]);
+        marker(:refdt :cat:ac15 :left, mc[:chf]);
+    }
+}
+
+
+# FR 125.  Lutterbach - Rixheim
+with detail = 2 {
+    let lr = path("d2.fr.125");
+
+    with link = "line.fr.125" {
+        track(:first :double :cat:ac25, lr[:lut.yn, :rix.yn]);
+
+        guide(:linenum :cat:ac25,
+                lr[:rix.yn - 3.1km] << 1dt
+            --  lr[:rix.yn - 3.1km] << 3dt
+        );
+        label(:linenum :cat:ac25, lr[:rix.yn - 3.1km] << 3dt,
+            hbox(:center:bottom, "125")
+        );
+    }
+
+    with link = "point.fr.Mulhouse-Nord" {
+        with layer = 1 marker(:statdot :cat:ac25, lr[:mun]);
+    }
+}
+
+
+# FR 129.  Colmar - Marckolsheim
+with detail = 2 {
+    let cm = path("d2.fr.129");
+
+    with link = "line.fr.129" {
+        track(:first :narrow:g1000 :removed, cm[:col.yh, :mar]);
+
+        line_badge(:removed, cm[:mar - 8km] @ -15 >> 0.3dt, "129");
+    }
+
+    with link = "point.fr.Marckolsheim" {
+        with layer = 1 marker(:statdot :removed, cm[:mar]);
+        slabel(:right :removed, cm[:mar] + (-1dt, -1dt),
+            vbox(:left:bottom, "Marckols-", "heim")
+        );
+    }
+}
+
