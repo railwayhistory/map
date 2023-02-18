@@ -67,20 +67,12 @@ given a VzG number are also included.
 ## FR: France
 
 France has been split into regions roughly correlating with the first
-digit of the line number of the RFN.
+digit of the line number of the RFN. 
 
-| region             | overview    | detail      |
-| ------------------ | ----------- | ----------- |
-| 0                  | in progress | not started |
-| 1                  | in progress | not started |
-| 2                  | in progress | not started |
-| 3                  | in progress | not started |
-| 4                  | in progress | not started |
-| 5                  | not started | not started |
-| 6                  | not started | not started |
-| 7                  | not started | not started |
-| 8                  | not started | not started |
-| 9                  | not started | not started |
+| region             | overview     | detail      |
+| ------------------ | ------------ | ----------- |
+| 0 to 9             | RFN complete | not started |
+| p (Paris)          | RFN complete | not started |
 
 
 ## GB: United Kingdom
@@ -99,7 +91,7 @@ lines.
 
 | region                          | overview    | detail      |
 | ------------------------------- | ----------- | ----------- |
-| A (Scottish Region – “Alba”)    | not started | not started |
+| A (Scottish Region – “Alba”)    | in progress | in progress |
 | E (Eastern Region)              | not started | not started |
 | L (Greater London)              | in progress | not started |
 | M (London Midland Region)       | in progress | not started |

@@ -34,6 +34,10 @@
 
 | Date | Update |
 | ---- | ------ |
+| 2023-02-18 | Added detail 1 for borders between France and Switzerland
+and France and Italy. |
+| 2023-02-18 | Added details 0 and 1 for France. |
+| 2023-02-12 | Added lines GB WCK and GB TSO. |
 | 2022-12-31 | Added detail 2 of lines FR 9xx. |
 | 2022-12-15 | Added detail 2 of lines FR 8xx. |
 | 2022-12-01 | Added detail 2 of lines FR 7xx. |
