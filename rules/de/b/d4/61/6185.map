@@ -1,0 +1,77 @@
+# DE 6185.  Berlin-Spandau Ost - Oebisfelde
+#
+let bl = path("d4.de.b.6107");
+
+with detail = [4, 5] {
+    # point.de.Berlin-Spandau-Ost    de.6107
+    # point.de.Berlin-Spandau-Mitte  de.6107
+    # point.de.Berlin-Spandau        de.6107
+    # point.de.Berlin-Spandau-West   de.6100
+
+
+    with link = "line.de.6185" {
+        track(:first :cat:ac15 :pax :flip:tight :casing,
+                bl[:ned - 300m, :spa.f] << 0.5dt
+        );
+        track(:first :cat:ac15 :pax :tight,
+                bl[:ned - 300m, :ned - 800m] >> 0.5dt
+            ..  bl[:spa.yn, :spa.f] >> 1.5dt
+        );
+    }
+
+
+    with link = "point.de.Berlin-Nennhauser-Damm" {
+        track(:first:station :cat:ac15 :pax,
+                bl[:ned - 300m, :ned + 300m] >> 0.5dt
+        );
+            track(:station :cat:ac15,
+                    bl[:ned - 160m] >> 0.5dt
+                --  bl[:ned - 25m] << 0.5dt
+            );
+
+        track(:first:station :cat:ac15 :pax,
+                bl[:ned - 300m, :ned + 300m] << 0.5dt
+        );
+            track(:station :cat:ac15,
+                    bl[:ned - 205m] << 0.5dt
+                --  bl[:ned - 40m] << 2.5dt
+            );
+
+        track(:first:station :removed,
+                bl[:ned - 300m, :ned + 100m] << 1.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                bl[:ned + 9m, :ned + 10m] << 0.5dt
+            --  bl[:ned + 100m, :ned + 300m] << 1.5dt
+        );
+
+        track(:first:station :cat:ac15,
+                bl[:ned - 300m, :ned - 40m] << 2.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                bl[:ned - 206m, :ned - 205m] << 0.5dt
+            --  bl[:ned - 40m, :ned + 300m] << 2.5dt
+        );
+
+        marker(:left :de.abzw :cat:ac15, bl[:ned] << 2.5dt);
+        station(:bottom :cat:ac15, bl[:ned] << 2.5dt << 1.2sh,
+            "B. Nennhauser Damm",
+            hbox(:center:top,
+                vbox(:right:top, "6185: ", "6179: "),
+                vbox(:right:top, "115,", "16,"),
+                vbox(:left:top, "90", "06")
+            )
+        );
+    }
+
+
+    with link = "line.de.6185" {
+        track(:first :double :cat:ac15 :pax, bl[:ned + 300m, :wus.a]);
+    }
+
+
+    # point.de.Wustermark      de.6107
+    # point.de.Wustermark-Awn  de.6107
+}
+
+

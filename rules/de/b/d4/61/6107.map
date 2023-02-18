@@ -1,0 +1,303 @@
+# DE 6107.  Berlin Lehrt Bf - Lehrte
+#
+let bl = path("d4.de.b.6107");
+
+with detail = 4 {
+    # point.de.Berlin-Lehrter-Bf: de.6171
+
+    # point.de.Berlin-Moabit: de.6170
+
+
+    with link = "line.de.6107" {
+        track(:first :double :cat:ac15 :pax, bl[:moa.a, :jun - 450m]);
+    }
+
+
+    with link = "point.de.Berlin-Jungfernheide-Fernbahn" {
+        track(:first:station :double :cat:ac15 :pax,
+                bl[:jun - 450m, :jun + 260m]
+        );
+        platform(:cat:ac15 :pax,
+                bl[:jun - 130m, :jun + 80m] >> 0.5dt
+            --  bl[:jun + 80m, :jun - 130m] >> 0.5dt
+        );
+
+        with layer = 2 marker(:left :de.hp :cat:ac15 :pax, bl[:jun] << 0.5dt);
+        with layer = 1 marker(:left :de.hp.casing :cat:ac15 :pax, bl[:jun] << 0.5dt);
+    }
+
+
+    with link = "line.de.6107" {
+        with layer = -1 track(:first :double :cat:ac15 :pax,
+                bl[:jun + 260m, :vlr - 100m]
+        );
+    }
+
+
+    with link = "point.de.Berlin-Vlr" {
+        track(:first:station :double :cat:ac15 :pax,
+                bl[:vlr - 100m, :vlr + 100m]
+        );
+        track(:first:station :double :removed,
+                bl[:vlr - 100m, :vlr + 100m] << 2dt
+        );
+        track(:first:station :cat:ac15,
+                bl[:vlr - 100m, :vlr + 100m] << 3.5dt
+        );
+        track(:first:station :removed,
+                bl[:vlr - 100m, :vlr + 100m] << 4.5dt
+        );
+
+        marker(:right :de.abzw :removed, bl[:vlr] >> 0.5dt);
+    }
+
+    
+    with link = "point.de.Berlin-Siemensstadt-Fürstenbrunn" {
+        track(:first:station :double :cat:ac15 :pax,
+                bl[:vlr + 100m, :fub + 150m]
+        );
+        track(:first:station :removed,
+                bl[:vlr + 100m, :fub + 150m] << 1.5dt
+        );
+        track(:first:station :removed,
+                bl[:vlr + 100m, :fub] << 2.5dt
+        );
+        track(:first:station :cat:ac15,
+                bl[:vlr + 100m, :fub - 50m] << 3.5dt
+            --  bl[:fub, :fub + 150m] << 2.5dt
+        );
+            track(:station :removed,
+                    bl[:fub] << 2.5dt
+                --  bl[:fub + 50m] << 1.5dt
+            );
+        track(:first:station :removed,
+                bl[:vlr + 100m, :fub - 100m] << 4.5dt
+            --  bl[:fub - 50m, :fub - 49m] << 3.5dt
+        );
+
+        marker(:right :de.bf :removed, bl[:fub] >> 0.5dt);
+    }
+
+
+    with link = "line.de.6107" {
+        track(:first :double :cat:ac15 :pax, bl[:fub + 150m, :wie - 350m]);
+    }
+
+
+    with link = "point.de.Berlin-Wiesendamm" {
+        # Gl. 1
+        track(:first:station :cat:ac15 :pax,
+                bl[:wie - 350m, :wie + 350m] >> 0.5dt
+        );
+            # W3 - W4
+            track(:station :cat:ac15,
+                    bl[:wie - 280m] >> 0.5dt
+                --  bl[:wie - 130m] << 0.5dt
+            );
+
+        # Gl. 2
+        track(:first:station :cat:ac15 :pax,
+                bl[:wie - 350m, :wie + 350m] << 0.5dt
+        );
+            # W7 - W8
+            track(:station :cat:ac15,
+                    bl[:wie + 30m] << 0.5dt
+                --  bl[:wie + 170m] << 2.5dt
+            );
+            # W9 - W10 
+            track(:station :cat:ac15,
+                    bl[:wie + 130m] << 0.5dt
+                --  bl[:wie + 280m] >> 0.5dt
+            );
+
+        track(:first:station :removed,
+                bl[:wie - 350m, :wie + 350m] << 1.5dt
+        );
+
+        # Gl. 3
+        track(:first:station :cat:ac15,
+                bl[:wie - 350m, :wie + 350m] << 2.5dt
+        );
+            # W5 - W6
+            track(:station :cat:ac15,
+                    bl[:wie - 170m] << 2.5dt
+                --  bl[:wie - 30m] << 0.5dt
+            );
+
+        marker(:left :de.abzw :cat:ac15, bl[:wie] << 2.5dt);
+        station(:bottom :cat:ac15, bl[:wie] << 2.5dt << 1.2sh,
+            hbox(:center:base, span(:light, "B.-"), "Wiesendamm"),
+            hbox(:center:top,
+                vbox(:right:top, "6107: ", "6179: "),
+                vbox(:right:top, "8,", "8,"),
+                vbox(:left:top, "66", "66")
+            )
+        );
+    }
+
+
+    with link = "line.de.6107" {
+        track(:first :cat:ac15 :pax :tight,
+                bl[:wie + 350m, :sdo.xo] >> 0.5dt
+            ..  bl[:sdo.yo, :sdo - 450m] >> 1.5dt
+        );
+        track(:first :cat:ac15 :pax :flip:tight,
+                bl[:wie + 350m, :sdo.xo] << 0.5dt
+            ..  bl[:sdo.yo, :sdo - 450m] << 1.5dt
+        );
+    }
+
+
+    with link = "point.de.Berlin-Spree" {
+        marker(:right :de.bk :removed, bl[:sre] >> 0.5dt);
+        station(:top :removed, bl[:sre] >> 0.5dt >> 1.0sh,
+            "Spree", "8,75"
+        );
+    }
+
+
+    with link = "point.de.Berlin-Spandau-Ost" {
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo - 450m, :sdo + 500m] >> 1.5dt
+        );
+            # W21 - W22
+            track(:station :cat:ac15,
+                    bl[:sdo - 350m] >> 1.5dt
+                --  bl[:sdo - 210m] >> 0.5dt
+            );
+
+        # Gl. 4
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo - 450m, :sdo + 500m] >> 0.5dt
+        );
+            # W31 - W32
+            track(:station :cat:ac15,
+                    bl[:sdo - 170m] >> 0.5dt
+                --  bl[:sdo + 30m] >> 1.5dt
+            );
+            # W27 - W28
+            track(:station :cat:ac15,
+                    bl[:sdo + 15m] >> 0.5dt
+                --  bl[:sdo + 130m] << 0.5dt
+            );
+
+        # Gl. 5
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo - 450m, :sdo + 500m] << 0.5dt
+        );
+            # W25 - W26
+            track(:station :cat:ac15,
+                    bl[:sdo - 110m] << 0.5dt
+                --  bl[:sdo] >> 0.5dt
+            );
+
+        # Gl. 6
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo - 450m, :sdo + 500m] << 1.5dt
+        );
+            # W23 - W24
+            track(:station :cat:ac15,
+                    bl[:sdo - 270m] << 1.5dt
+                --  bl[:sdo - 130m] << 0.5dt
+            );
+
+        marker(:right :de.bft :cat:ac15, bl[:sdo] >> 1.5dt);
+        slabel(:top :cat:ac15 :medium, bl[:sdo] >> 1.5dt >> 1.1sh,
+            "B.-S. Ost"
+        );
+    }
+
+
+    with link = "point.de.Berlin-Spandau-Mitte" {
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo + 500m, :spa - 300m] >> 1.5dt
+        );
+            # Gl. W540
+            track(:station,
+                    bl[:spm + 40m] >> 1.5dt
+                --  bl[:spm + 120m] >> 2.5dt
+            );
+
+        # Gl. 4
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo + 500m, :spa - 300m] >> 0.5dt
+        );
+
+        # Gl. 5
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo + 500m, :spa - 300m] << 0.5dt
+        );
+            # W546 - W547
+            track(:station :cat:ac15,
+                    bl[:spm + 90m] << 0.5dt
+                --  bl[:spm + 225m] << 1.5dt
+            );
+
+        # Gl. 6
+        track(:first:station :cat:ac15 :pax,
+                bl[:sdo + 500m, :spa - 300m] << 1.5dt
+        );
+            # W539 - W633
+            track(:station :cat:ac15,
+                    bl[:spm] << 1.5dt
+                --  bl[:spm + 120m] << 2.5dt
+            );
+
+        # Gl. 7
+        track(:first:station :cat:ac15,
+                bl[:spm - 460m, :spa - 300m] << 2.5dt
+        );
+            # W632 - W535
+            track(:station :cat:ac15,
+                    bl[:spm - 445m] << 2.5dt
+                --  bl[:spm - 300m] << 1.5dt
+            );
+
+        marker(:left :de.bft :cat:ac15, bl[:spm] << 2.5dt);
+        slabel(:bottom :cat:ac15 :medium, bl[:spm] << 2.5dt << 1.2sh,
+            "B.-S. Mitte"
+        );
+    }
+
+
+    with link = "point.de.Berlin-Spandau" {
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                bl[:spa - 300m, :spa + 600m] >> 1.5dt
+        );
+
+        # Gl. 4
+        track(:first:station :cat:ac15 :pax,
+                bl[:spa - 300m, :spa + 600m] >> 0.5dt
+        );
+
+        # Gl. 5
+        track(:first:station :cat:ac15 :pax,
+                bl[:spa - 300m, :spa + 600m] << 0.5dt
+        );
+
+        # Gl. 6
+        track(:first:station :cat:ac15 :pax,
+                bl[:spa - 300m, :spa + 600m] << 1.5dt
+        );
+
+        # Gl. 7
+        track(:first:station :cat:ac15,
+                bl[:spa - 300m, :spa + 600m] << 2.5dt
+        );
+
+        platform(:cat:ac15 :pax,
+                bl[:spa - 15m, :spa + 380m] >> 1.5dt
+            --  bl[:spa + 380m, :spa - 15m] << 0.5dt
+        );
+        platform(:cat:ac15 :pax,
+                bl[:spa - 15m, :spa + 380m] << 1.5dt
+            --  bl[:spa + 380m, :spa - 15m] >> 0.5dt
+        );
+
+        marker(:left :de.bf :cat:ac15 :pax, bl[:spa] << 2.5dt);
+    }
+}
+
