@@ -288,8 +288,8 @@ with detail = 3 {
 
     with link = "point.gb.Invershin" {
         track(:first:station :pax, iw[:ins - 1sw, :ins + 1sw]);
-        marker(:left :de.hp :pax, iw[:ins]);
-        marker(:left :de.exbf :pax, iw[:ins]);
+        marker(:left :de.hp :pax, iw[:ins] @ -5);
+        marker(:left :de.exbf :pax, iw[:ins] @ -5);
         slabel(:right :pax, iw[:ins] >> 2.5dt, "Invershin");
     }
 
@@ -315,13 +315,18 @@ with detail = 3 {
     }
 
     with link = "line.gb.WCK" {
-        track(:first :pax, iw[:rog + 1sw, :mou - 1sw]);
+        track(:first :pax, iw[:rog + 1sw, :mou - 1.5sw]);
     }
 
     with link = "point.gb.The-Mound" {
-        track(:first:station :pax, iw[:mou - 1sw, :mou + 1sw]);
-        marker(:right :de.bf :removed, iw[:mou]);
-        slabel(:left :removed, iw[:mou] + (-1.5sw, -0.3sw),
+        track(:first:station :pax, iw[:mou - 1.5sw, :mou + 1sw]);
+        track(:third:station :removed,
+                iw[:mou - 1sw - 1.1dl, :mou - 1sw - 1dl]
+            --  iw[:mou - 1sw, :mou] >> 1dt
+            ..  path("d4.gb.dnb")[:mou.fd + 0.9sw, :mou.fd + 1sw]
+        );
+        marker(:right :de.bf :removed, iw[:mou - 0.5sw] >> 1dt);
+        slabel(:left :removed, iw[:mou] + (-2.0sw, -0.3sw),
             hbox(:right:top :bold, "The Mound")
         );
     }
@@ -536,6 +541,9 @@ with detail = 3 {
 
     with link = "point.gb.Wick" {
         track(:first:station :pax, iw[:wic.yl - 1sw, :wic]);
+        track(:third:station :removed,
+                path("d4.gb.llr")[:wic.yl + 1sw, :wic.yl]
+        );
         marker(:left :de.bf :pax, iw[:wic - 0.5sw]);
         slabel(:right :pax, iw[:wic] + (0.9sw, 0.5dt),
             span(:bold, "Wick")
