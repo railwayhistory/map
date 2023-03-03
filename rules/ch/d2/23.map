@@ -1,0 +1,130 @@
+# CH 230.  Delémont Est - Basel SBB Ost
+with detail = 2 {
+    let db = path("d2.ch.230");
+
+    with link = "line.ch.230" {
+        track(:first :cat:ac15 :pax, db[:del.yb, :aes]);
+        track(:first :double :cat:ac15 :pax, db[:aes, :dre.y]);
+        track(:first :double :cat:ac15 :pax, db[:dre.y, :bao]);
+
+        line_label(:left:s :cat:ac15 :pax, db[:del.yb + 18km], "230 ");
+    }
+}
+
+
+# CH 232.  Moutier - Lengnau Ost
+with detail = 2 {
+    let ml = path("d2.ch.232");
+
+    with link = "line.ch.232" {
+        track(:first :cat:ac15 :pax, ml[:mou.yg, :leo.y]);
+        line_badge(:cat:ac15 :pax, ml[:mou.yg + 5.5km], "232");
+    }
+}
+
+
+# CH 233.  Le Locle - Les Brenets
+with detail = 2 {
+    let lb = path("d2.ch.233");
+
+    with link = "line.ch.233" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, lb[:loc.yb, :bre]);
+
+        line_label(:right:s :cat:dc15 :pax, lb[:loc.yb + 0.95km], "233");
+    }
+
+    with link = "point.ch.Les-Brenets" {
+        statdot(:cat:dc15 :pax, lb[:bre]);
+        slabel(:left :cat:dc15 :pax, lb[:bre] + (1.0dt, -1.5dt),
+                "Les Brenets"
+        );
+    }
+}
+
+
+# CH 234.  La Chaux-de-Fonds - Les Ponts-de-Martel
+with detail = 2 {
+    let cp = path("d2.ch.234");
+
+    with link = "line.ch.234" {
+        with layer = -1 track(:first :narrow:g1000 :cat:dc15 :pax,
+                cp[:cdf.yn, :cfg] << 0.5dt
+            ..  cp[:cdf.yb, :cdf.yp - 1dt] >> 0.5dt
+            ..  cp[:cdf.yp + 1dt, :pon]
+        );
+        line_label(:left:w :cat:dc15 :pax, cp[:pon - 3km], "234");
+    }
+
+    with link = "point.ch.Les-Ponts-de-Martel" {
+        statdot(:cat:dc15 :pax, cp[:pon]);
+        slabel(:left :cat:dc15 :pax, cp[:pon] + (-1.3dt, 1.0dt),
+            "Les Ponts-de-Martel"
+        );
+    }
+}
+
+
+# CH 236.  Tavannes - La Chaux-de-Fonds
+with detail = 2 {
+    let tc = path("d2.ch.236");
+
+    with link = "line.ch.236" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, tc[:tav.yn, :noi.yg]);
+
+        line_label(:right:s :cat:dc15 :pax, tc[:tav.yn + 4km], "236");
+    }
+
+    with link = "point.ch.Le-Noirmont" {
+        track(:first:station :narrow:g1000 :cat:dc15 :pax, tc[:noi.yg, :noi]);
+        statdot(:cat:dc15 :pax, tc[:noi]);
+        slabel(:left :cat:dc15 :pax, tc[:noi] + (-1.3dt, 0.5dt),
+            "Le Noirmont"
+        );
+    }
+        
+    with link = "line.ch.236" {
+        track(:first :narrow:g1000 :cat:dc15 :pax,
+                tc[:noi, :cdf.yn - 1dt]
+            ..  tc[:cdf.yn, :cdf] >> 0.5dt
+        );
+
+        line_label(:right:e :cat:dc15 :pax, tc[:noi + 8km], "236");
+    }
+}
+
+
+# CH 237.  Le Noirmont - Glovelier
+with detail = 2 {
+    let nc = path("d2.ch.237.1");
+    let cg = path("d2.ch.237.2");
+
+    with link = "line.ch.237" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, nc[:noi.yg, :com.f]);
+        track(:first :narrow:g1000 :cat:dc15 :pax, cg[:com.yg, :glo.yn]);
+
+        line_label(:left:se :cat:dc15 :pax, nc[:noi.yg + 14.5km], "237");
+    }
+}
+
+
+# CH 238.  Porrentruy - Bonfol-Frontière
+with detail = 2 {
+    let pb = path("d2.ch.238");
+
+    with link = "line.ch.238" {
+        track(:first :cat:ac15 :pax,
+                pb[:por, :por.yb - 1dt] << 0.5dt
+            ..  pb[:por.yb + 2dt, :bon]
+        );
+        line_label(:right:w :cat:ac15 :pax, pb[:bon - 3.5km], "238");
+    }
+
+    with link = "point.ch.Bonfol" {
+        statdot(:cat:ac15 :pax, pb[:bon]);
+        slabel(:right :cat:ac15 :pax, pb[:bon] + (1.5dt, 1.0dt), "Bonfol");
+    }
+
+    with link = "line.ch.238" {
+        track(:first :removed, pb[:bon, :bof]);
+    }
+}
