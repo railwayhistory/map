@@ -7,8 +7,27 @@ with detail = [4, 5] {
     # point.gb.Rose-Street-Jn  gb.HL
 
     with link = "line.gb.WCK" {
-        track(:first :pax, iw[:inv.aw, :cla - 1sw]);
-        line_badge(:pax, iw[:inv.aw + 0.8km], "WCK");
+        track(:first :pax, iw[:inv.aw, :can - 0.5sw]);
+        line_badge(:pax, iw[:inv.aw + 0.6km], "WCK");
+    }
+
+    with link = "point.gb.Canal-Branch-Jn" {
+        track(:first:station :pax, iw[:can - 0.5sw, :can + 0.5sw]);
+        track(:first:station :removed,
+                path("d4.gb.imb")[:can, :can + 0.5sw]
+        );
+        marker(:right :de.abzw :removed, iw[:can]);
+        station(:top :removed, iw[:can] >> 1.2sh,
+            "Canal Branch Jn.",
+            hbox(:center:top,
+                vbox(:right:top, "WCK: ", "IMB: "),
+                vbox(:right:top, "??", "??")
+            )
+        );
+    }
+
+    with link = "line.gb.WCK" {
+        track(:first :pax, iw[:can + 0.5sw, :cla - 1sw]);
     }
 
     with link = "point.gb.Clachnaharry" {
@@ -21,7 +40,7 @@ with detail = [4, 5] {
             ..  iw[:cla.xxf, :cla.xxf + 0.1dl] >> 0.5dt
         );
         marker(:left :de.bf :gone, iw[:cla]);
-        station(:top :gone, iw[:cla] >> 1.5dt,
+        station(:left :gone, iw[:cla - 0.4sw] >> 1.5dt,
             "Clachnaharry", "??"
         );
     }
@@ -162,7 +181,10 @@ with detail = [4, 5] {
             ..  iw[:mui - 180m, :mui - 0.7sw] << 2dt
         );
         track(:station :removed,
-                iw[:mui - 400m, :mui.yf] >> 2dt
+                iw[:mui - 400m, :mui - 100m] >> 2dt
+        );
+        track(:first:station :removed,
+                iw[:mui - 100m, :mui.yf] >> 2dt
         );
         track(:station :removed,
                 iw[:mui - 500m]
@@ -180,7 +202,11 @@ with detail = [4, 5] {
         );
         platform(:pax,
                 iw[:mui - 100m, :mui + 50m] >> 1.0dt
-            --  iw[:mui + 50m, :mui - 100m] << 1.55dt
+            --  iw[:mui + 50m, :mui - 100m] << 1.5dt
+        );
+        platform(:removed,
+                iw[:mui - 100m, :mui + 50m] >> 2.0dt
+            --  iw[:mui + 50m, :mui - 100m] << 1.5dt
         );
 
         marker(:left :de.bf :pax, iw[:mui] << 1.0dt);
