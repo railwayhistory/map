@@ -34,6 +34,7 @@
 
 | Date | Update |
 | ---- | ------ |
+| 2023-04-06 | Added details 0, 1, and 2 for Switzerland. |
 | 2023-02-18 | Added detail 1 for borders between France and Switzerland
 and France and Italy. |
 | 2023-02-18 | Added details 0 and 1 for France. |
