@@ -1,0 +1,239 @@
+# CH 850.  St. Gallen - Winterthur
+with detail = 2 {
+    let gw = path("d2.ch.850");
+
+    with link = "point.ch.St-Gallen" {
+        track(:first:station :double :cat:ac15 :pax, gw[:sga.yt, :sga.yh]);
+        statdot(:cat:ac15 :pax, gw[:sga]);
+        slabel(:left :cat:ac15 :pax, gw[:sga] + (0.3dt, -1.8dt),
+            span(:bold, "St. Gallen")
+        );
+    }
+
+    with link = "line.ch.850" {
+        track(:first :double :cat:ac15 :pax, gw[:sga.yh, :gos]);
+    }
+
+    with link = "point.ch.Gossau-SG" {
+        track(:first:station :double :cat:ac15 :pax, gw[:gos, :gos.ys]);
+        statdot(:cat:ac15 :pax, gw[:gos]);
+        slabel(:left :cat:ac15 :pax, gw[:gos] + (-1.5km, -0.5dt),
+            vbox(:right:bottom, "Gossau", span(:light, "SG"))
+        );
+    }
+
+    with link = "line.ch.850" {
+        track(:first :double :cat:ac15 :pax, gw[:gos.ys, :wil.yu]);
+        line_label(
+            :left:n :double :cat:ac15 :pax, gw[:wil.yu - 10.5km], " 850"
+        );
+    }
+
+    with link = "point.ch.Wil-SG" {
+        track(:first:station :double :cat:ac15 :pax, gw[:wil.yu, :wil.yf]);
+        statdot(:cat:ac15 :pax, gw[:wil]);
+        slabel(:right :cat:ac15 :pax, gw[:wil] + (1.5dt, 0dt),
+            hbox(:left:base, "Wil", span(:light, " SG"))
+        );
+    }
+
+    with link = "line.ch.850" {
+        track(:first :double :cat:ac15 :pax, gw[:wil.yf, :gru]);
+        line_label(:left:n :double :cat:ac15 :pax, gw[:gru - 9.5km], "850");
+    }
+
+    with link = "point.ch.Winterthur-Grüze" {
+        track(:first:station :double :cat:ac15 :pax, gw[:gru, :win.yw]);
+        statdot(:cat:ac15 :pax, gw[:gru]);
+    }
+}
+
+
+# CH 851.  Wil - Frauenfeld
+with detail = 2 {
+    let wf = path("d2.ch.851");
+
+    with link = "line.ch.851" {
+        track(:first :narrow:g1000 :cat:dc12 :pax, wf[:wil.yf, :fra.yw]);
+        line_label(:right:sw :cat:dc12 :pax, wf[:wil.yf + 8km], "851");
+    }
+}
+
+
+# CH 852.  Sulgen - Gossau SG
+with detail = 2 {
+    let sg = path("d2.ch.852");
+
+    with link = "line.ch.852" {
+        track(:first :cat:ac15 :pax, sg[:sul.yg, :gos.ys]);
+        line_label(:left:sw :cat:ac15 :pax, sg[:gos.ys - 8km], "852");
+    }
+}
+
+
+# CH 853.  Wil SG - Uznach
+with detail = 2 {
+    let wu = path("d2.ch.853");
+
+    with link = "line.ch.853" {
+        track(:first :cat:ac15 :pax, wu[:wil.yu, :lic - 1dt]);
+        line_label(:right:e :cat:ac15 :pax, wu[:wil.yu + 10km], "853");
+    }
+
+    with link = "point.ch.Lichtensteig" {
+        track(:first:station :cat:ac15 :pax,
+                wu[:lic - 1dt, :lic - 0.99dt]
+            ..  wu[:lic.ys, :lic.ys + 0.1dl] >> 0.3dt
+        );
+        statdot(:cat:ac15 :pax, wu[:lic]);
+        slabel(:right :cat:ac15 :pax, wu[:lic] + (1.5dt, 2.0dt),
+            "Lichtensteig"
+        );
+    }
+
+    with link = "line.ch.853" {
+        track(:first :cat:ac15 :pax, wu[:lic.ys + 0.1dl, :wat] >> 0.3dt);
+    }
+
+    with link = "point.ch.Wattwil" {
+        track(:first:station :cat:ac15 :pax,
+                wu[:wat, :wat.yn - 0.1dl] >> 0.3dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                wu[:wat, :wat.yn - 0.1dl] << 0.3dt
+        );
+        statdot(:cat:ac15 :pax, wu[:wat]);
+        slabel(:left :cat:ac15 :pax, wu[:wat] + (-1.8dt, 1.3dt),
+            "Wattwil"
+        );
+    }
+
+    with link = "line.ch.853" {
+        track(:first :cat:ac15 :pax,
+                wu[:wat.yn - 0.1dl, :wat.yn] >> 0.3dt
+            ..  wu[:wat.yn + 1dt, :uzn.yw]
+        );
+        line_badge(:cat:ac15 :pax, wu[:wat.yn + 5km], "853");
+    }
+}
+
+
+# CH 854.  Gossau SG - Wasserauen
+with detail = 2 {
+    let gw = path("d2.ch.854");
+
+    with link = "line.ch.854" {
+        with layer = -1 track(:first :narrow:g1000 :cat:dc15 :pax,
+                gw[:gos.yh, :her.yg]
+        );
+        with layer = -1 track(:first :narrow:g1000 :cat:dc15 :pax,
+                gw[:her.ya, :app]
+        );
+
+        line_label(:right:n :cat:dc15 :pax, gw[:her.ya + 10.55km], "854");
+    }
+
+    with link = "point.ch.Appenzell" {
+        track(:first:station :narrow:g1000 :cat:dc15 :pax, gw[:app, :app.yg]);
+        statdot(:cat:dc15 :pax, gw[:app]);
+        slabel(:right :cat:dc15 :pax, gw[:app] + (1.7km, 0.5dt),
+            "Appenzell"
+        );
+    }
+
+    with link = "line.ch.854" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, gw[:app.yg, :was]);
+        line_label(:left:w :cat:dc15 :pax, gw[:app.yg + 4.2km], "854");
+    }
+
+    with link = "point.ch.Wasserauen" {
+        statdot(:cat:dc15 :pax, gw[:was]);
+        slabel(:bottom :cat:dc15 :pax, gw[:was] + (0dt, 0.8dt), "Wasserauen");
+    }
+}
+
+
+# CH 855.  St. Gallen AB - Appenzell
+with detail = 2 {
+    let ga = path("d2.ch.855");
+
+    with link = "line.ch.855" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, ga[:sga.ya, :gai]);
+        line_label(:left:w :cat:dc15 :pax, ga[:sga.ya + 7.15km], "855");
+    }
+
+    with link = "point.ch.Gais" {
+        statdot(:cat:dc15 :pax, ga[:gai]);
+        slabel(:right :cat:dc15 :pax, ga[:gai] + (-1.0dt, -1.3dt), "Gais");
+    }
+
+    with link = "line.ch.855" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, ga[:gai, :app.yg]);
+        line_label(:right:e :cat:dc15 :pax, ga[:app.yg - 3.2km], "855");
+    }
+}
+
+
+# CH 856.  Altstätten Stadt - Gais
+with detail = 2 {
+    let ag = path("d2.ch.856");
+
+    with link = "point.ch.Altstätten-Stadt" {
+        statdot(:cat:dc15 :pax, ag[:alt]);
+    }
+
+    with link = "line.ch.856" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, ag[:alt, :gai]);
+
+        line_label(:right:s :cat:dc15 :pax, ag[:alt + 2km], "856");
+    }
+}
+
+
+# CH 857.  Rorschach - Heiden
+with detail = 2 {
+    let rh = path("d2.ch.857");
+
+    with link = "line.ch.857" {
+        track(:first :cat:ac15 :pax, rh[:ror.yh, :hei]);
+        line_label(:right:e :cat:ac15 :pax, rh[:hei - 1.3km], "857");
+    }
+
+    with link = "point.ch.Heiden" {
+        statdot(:cat:ac15 :pax, rh[:hei]);
+        slabel(:bottom :cat:ac15 :pax, rh[:hei] + (0dt, 0.8dt), "Heiden");
+    }
+}
+
+
+# CH 858.  Rheineck - Walzenhausen
+with detail = 2 {
+    let rw = path("d2.ch.858");
+
+    with link = "line.ch.858" {
+        track(:first :narrow:g1200 :cat:dc6 :pax, rw[:rhe.yw, :wal]);
+    }
+
+    with link = "point.ch.Walzenhausen" {
+        statdot(:cat:dc6 :pax, rw[:wal]);
+    }
+}
+
+
+# CH 859.  St. Gallen TB - Trogen
+with detail = 2 {
+    let gt = path("d2.ch.859");
+
+    with link = "line.ch.859" {
+        track(:first :narrow:g1000 :cat:dc15 :pax, gt[:sga.yt, :tro]);
+
+        line_label(:left:s :cat:dc15 :pax, gt[:tro - 3.2km], " 859");
+    }
+
+    with link = "point.ch.Trogen" {
+        statdot(:cat:dc15 :pax, gt[:tro]);
+        slabel(:right :cat:dc15 :pax, gt[:tro] + (1.5dt, 0.8dt), "Trogen");
+    }
+
+}
+

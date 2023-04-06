@@ -1,0 +1,61 @@
+# CH 591.  San Antonino (dira) - Camorino Nord
+with detail = 2 {
+    with link = "line.ch.591" {
+        track(:first :cat:ac15 :pax, path("d2.ch.591")[:san.y, :can]);
+    }
+}
+
+# CH 592.  Giubiasco Ovest - Camorino Sud
+with detail = 2 {
+    let gc = path("d2.ch.593");
+
+    with link = "line.ch.592" {
+        track(:first :cat:ac15 :pax,
+                gc[:gio.y - 0.1dl, :gio.y]
+            ..  gc[:cad.yg, :cas] >> 0.5dt
+        );
+    }
+}
+
+
+# CH 593.  Giubiasco Ovest - Camorino (dira)
+with detail = 2 {
+    with link = "line.ch.592" {
+        track(:first :cat:ac15 :pax, path("d2.ch.593")[:gio.y, :cad.yg]);
+    }
+}
+
+
+# CH 594.  Rynächt (Spw) - Pozzo Negro (dira) (GBT West)
+with detail = 2 {
+    let rg = path("d2.ch.595");
+
+    with link = "line.ch.594" {
+        track(:first :cat:ac15 :pax,
+                rg[:ryn.y - 0.1dl, :ryn.y] >> 0.2dt
+            ..  rg[:ryn.xs, :poz.xn] >> 0.5dt
+            ..  rg[:poz.yn, :poz.yn + 0.1dl] >> 1.0dt
+        );
+    }
+}
+
+
+# CH 595.  Rynächt (Abzw) - Giustizia (dira) (GBT Ost)
+with detail = 2 {
+    let rg = path("d2.ch.595");
+
+    with link = "line.ch.595" {
+        track(:first :cat:ac15 :pax,
+                rg[:ryn.y - 0.1dl, :ryn.y] << 0.2dt
+            ..  rg[:ryn.xs, :poz.xn]
+            ..  rg[:poz.yn, :poz.yn + 0.1dl] >> 0.6dt
+        );
+        track(:first :double :cat:ac15 :pax,
+                rg[:poz.yn, :giu.y - 2dt] >> 0.8dt
+            ..  rg[:giu.y - 0.1dl, :giu.y]
+        );
+
+        line_label(:left:w :cat:ac15 :pax, rg[:ryn.xs + 25km], "594 · 595");
+    }
+}
+

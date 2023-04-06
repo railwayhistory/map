@@ -1,0 +1,160 @@
+# CH 410.  Olten - Biel/Bienne
+with detail = 2 {
+    let ob = path("d2.ch.410");
+
+    with link = "line.ch.410" {
+        track(:first :double :cat:ac15 :pax, ob[:olt.ys, :oen]);
+        line_badge(:cat:ac15 :pax, ob[:oen - 7km], "410");
+    }
+
+    with link = "point.ch.Oensingen" {
+        statdot(:cat:ac15 :pax, ob[:oen] >> 0.3dt);
+        slabel(:right :cat:ac15 :pax, ob[:oen] + (0.5dt, -0.1dt),
+            hbox(:left:top, "Oensingen")
+        );
+    }
+
+    with link = "line.ch.410" {
+        track(:first :double :cat:ac15 :pax, ob[:oen, :nbi]);
+    }
+
+    with link = "point.ch.Niederbipp" {
+        statdot(:cat:ac15 :pax, ob[:nbi] >> 0.3dt);
+        slabel(:left :cat:ac15 :pax, ob[:nbi] + (-1.8dt, 0dt), "Niederbipp");
+    }
+
+    with link = "line.ch.410" {
+        track(:first :double :cat:ac15 :pax, ob[:nbi, :sol.yw]);
+    }
+
+    with link = "point.ch.Solothurn" {
+        track(:first:station :double :cat:ac15 :pax, ob[:sol.yw, :sow.ym]);
+        statdot(:cat:ac15 :pax, ob[:sol]);
+        slabel(:left :cat:ac15 :pax, ob[:sol] + (0.5dt, 1.3km),
+            vbox(:right:top :bold, "Solo-", "thurn     ")
+        );
+    }
+
+    with link = "line.ch.410" {
+        track(:first :double :cat:ac15 :pax, ob[:sow.ym, :leo.y]);
+        line_badge(:cat:ac15 :pax, ob[:sow.ym + 6km], "410");
+    }
+
+    with link = "point.ch.Lengnau-BE" {
+        track(:first:station :double :cat:ac15 :pax, ob[:leo.y, :len]);
+        statdot(:cat:ac15 :pax, ob[:len]);
+        slabel(:left :cat:ac15 :pax, ob[:len] + (0dt, -1.3dt), "Lengnau");
+    }
+
+    with link = "line.ch.410" {
+        track(:first :double :cat:ac15 :pax, ob[:len, :bie.yb]);
+    }
+
+    with link = "point.ch.Biel-Bienne" {
+        track(:first:station :double :cat:ac15 :pax, ob[:bie.yb, :bie]);
+        # ch.210
+    }
+}
+
+
+# CH 411.  Solothurn - Oensingen
+with detail = 2 {
+    let so = path("d2.ch.411");
+
+    with link = "line.ch.411" {
+        track(:first :narrow:g1000 :cat:dc12 :pax,
+                so[:sol, :nbi.yl - 2dt]
+            ..  so[:nbi.yl, :nbi] << 0.7dt
+        );
+        track(:first :narrow:g1000 :cat:dc12 :pax, so[:nbi, :oen.yb] << 0.7dt);
+
+        line_label(:left:s :cat:dc12 :pax, so[:sol + 4km], "411 ");
+    }
+}
+
+
+# CH 412.  Oensingen - Balsthal
+with detail = 2 {
+    let ob = path("d2.ch.412");
+
+    with link = "line.ch.412" {
+        track(:first :cat:ac15 :pax, ob[:oen.yb, :bal]);
+
+        line_label(:left:e :cat:ac15 :pax, ob[:bal - 0.8km], "412");
+    }
+
+    with link = "point.ch.Balsthal" {
+        statdot(:cat:ac15 :pax, ob[:bal]);
+        slabel(:left :cat:ac15 :pax, ob[:bal] + (3dt, -1.3dt), "Balsthal");
+    }
+}
+
+
+# CH 413.  Langenthal - Niederbipp
+with detail = 2 {
+    let ln = path("d2.ch.413");
+
+    with link = "line.ch.413" {
+        track(:first:station :narrow:g1000 :cat:dc12 :pax,
+                ln[:lan.yn, :lag.yu]
+        );
+        track(:first :narrow:g1000 :cat:dc12 :pax, ln[:lag.yu, :nbi.yl]);
+
+        line_label(:right:sw :cat:dc12 :pax, ln[:lan.yn + 6.15km], "413");
+    }
+}
+
+
+# CH 414.  Langenthal Gaswerk - Melchnau
+with detail = 2 {
+    let lm = path("d2.ch.414");
+
+    with link = "line.ch.414" {
+        with layer = -1 track(:first :narrow:g1000 :cat:dc12 :pax,
+                lm[:lag.yu, :suz]
+        );
+    }
+
+    with link = "point.ch.St-Urban-Ziegelei" {
+        statdot(:cat:dc12 :pax, lm[:suz]);
+        slabel(:right :cat:dc12 :pax, lm[:suz] + (1.5dt, 0dt),
+            vbox(:left:middle, "St. Urban", " Ziegelei")
+        );
+    }
+
+    with link = "line.ch.414" {
+        track(:first :narrow:g1000 :removed, lm[:suz, :mel]);
+        line_label(:left:w :removed, lm[:mel - 1.4km], "414");
+    }
+
+    with link = "point.ch.Melchnau" {
+        statdot(:removed, lm[:mel]);
+        slabel(:bottom :removed, lm[:mel] + (1.5dt, 0.8dt), "Melchnau");
+    }
+}
+
+
+# CH 415.  Wanzwil (Abzw) - Busswil
+with detail = 2 {
+    let wb = path("d2.ch.415");
+
+    with link = "line.ch.415" {
+        track(:first :cat:ac15 :pax, wb[:wan.ys, :sol.yw]);
+        track(:first :closed, wb[:sol.yl, :bur]);
+
+        line_label(:left:n :cat:ac15 :pax, wb[:wan.ys + 6.5km], "415 ");
+        line_label(:left:w :closed, wb[:bur - 4km], "415");
+    }
+
+    with link = "point.ch.Büren-Aare" {
+        statdot(:cat:ac15 :pax, wb[:bur]);
+        slabel(:right :cat:ac15 :pax, wb[:bur] + (-0.5dt, 0.8dt),
+            hbox(:left:top, "Büren")
+        );
+    }
+
+    with link = "line.ch.415" {
+        track(:first :cat:ac15 :pax, wb[:bur, :bus]);
+    }
+}
+
