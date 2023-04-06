@@ -1,0 +1,68 @@
+# CH 870.  St.Gallen West - Wattwil
+with detail = 2 {
+    let gw = path("d2.ch.870");
+
+    with link = "line.ch.870" {
+        track(:first :cat:ac15 :pax, gw[:sga.yh, :her.yg]);
+    }
+
+    with link = "point.ch.Herisau" {
+        track(:first:station :cat:ac15 :pax, gw[:her.yg, :her.ya]);
+        statdot(:cat:ac15 :pax, gw[:her]);
+        slabel(:right :cat:ac15 :pax, gw[:her] + (1.0dt, -0.3dt),
+            hbox(:left:top, "Herisau")
+        );
+    }
+
+    with link = "line.ch.870" {
+        track(:first :cat:ac15 :pax, gw[:her.ya, :deg]);
+        track(:first :double :cat:ac15 :pax, gw[:deg, :dew]);
+        track(:first :cat:ac15 :pax,
+                gw[:dew, :lic.ys - 700m]
+            ..  gw[:lic.ys, :lic.ys + 0.1dl] << 0.3dt
+        );
+        track(:first :cat:ac15 :pax, gw[:lic.ys, :wat] << 0.3dt);
+
+        line_label(:right:s :cat:ac15 :pax, gw[:lic.ys - 7.8km], "870");
+    }
+}
+
+
+# CH 871.  Wattwil - Ebnat-Kappel
+with detail = 2 {
+    let we = path("d2.ch.871");
+
+    with link = "line.ch.871" {
+        track(:first :cat:ac15 :pax,
+                we[:wat.yn - 0.1dl, :wat.yn] << 0.3dt
+            ..  we[:wat.yn + 1000m, :ebn]
+        );
+        line_label(:left:w :cat:ac15 :pax, we[:wat.yn + 2.0km], "871");
+    }
+
+    with link = "point.ch.Ebnat-Kappel" {
+        statdot(:cat:ac15 :pax, we[:ebn]);
+        slabel(:right :cat:ac15 :pax, we[:ebn] + (1.5dt, -0.3dt),
+            "Ebnat-Kappel"
+        );
+    }
+}
+
+
+# CH 872.  Ebnat-Kappel - Nesslau-Neu St. Johann
+with detail = 2 {
+    let en = path("d2.ch.872");
+
+    with link = "line.ch.872" {
+        track(:first :cat:ac15 :pax, en[:ebn, :nes]);
+        line_label(:right:e :cat:ac15 :pax, en[:nes - 2.7km], "872");
+    }
+
+    with link = "point.ch.Nesslau-Neu-St-Johann" {
+        statdot(:cat:ac15 :pax, en[:nes]);
+        slabel(:bottom :cat:ac15 :pax, en[:nes] + (0dt, 0.8dt),
+            vbox(:center:top, " Nesslau-", "Neu-St. Johann")
+        );
+    }
+}
+
