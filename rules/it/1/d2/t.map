@@ -1,0 +1,144 @@
+# IT TC.  Torino Stura - Milano Certosa (A.V.)
+with detail = 2 {
+    let tc = path("d2.it.tc");
+
+    with link = "line.it.TC" {
+        track(:first :double :cat:dc30 :pax, tc[:stu.ya, :stc]);
+        track(:first :double :cat:ac25 :v300 :pax, tc[:stc, :cig.yb]);
+        with layer = 3 {
+            track(:first :double :cat:ac25 :v300 :pax, tc[:cig.yb, :noo.yn]);
+            track(:first :double :cat:ac25 :v300 :pax, tc[:noo.yn, :rhc]);
+        }
+        with layer = 1 {
+            casing(:first :double :cat:ac25 :v300 :pax,
+                tc[:noo.yn - 3km, :noo.yn - 0.5km]
+            );
+            casing(:first :double :cat:ac25 :v300 :pax,
+                tc[:rhc - 8km, :rhc - 0.5km]
+            );
+        }
+        track(:first :double :cat:dc30 :pax, tc[:rhc, :rhf.yt]);
+    }
+}
+
+
+# IT TCB.  Cigliano - Bianzè
+with detail = 2 {
+    let cb = path("d2.it.tcb");
+
+    with link = "line.it.TCB" {
+        track(:first :double :cat:ac25, cb[:cig.yb, :bic]);
+        track(:first :double :cat:dc30, cb[:bic, :bia.ya]);
+    }
+}
+
+
+# IT TCN.  Novara Ovest - Novara Boschetto
+with detail = 2 {
+    with link = "line.it.TCN" {
+        with layer = 2 {
+            track(:first :double :cat:dc30,
+                    path("d2.it.tcn")[:noo.yn, :nob.ya]
+            );
+        }
+    }
+}
+
+
+# IT TR.  Torino Porta Nuova - Rho
+with detail = 2 {
+    let tr = path("d2.it.tr");
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:tor.yn, :stu]);
+    }
+
+    with link = "point.it.Torino-Stura" {
+        track(:first:station :double :cat:dc30 :pax, tr[:stu, :stu.ya]);
+        statdot(:cat:dc30 :pax, tr[:stu]);
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:stu.ya, :set]);
+    }
+
+    with link = "point.it.Settimo-Torinese" {
+        statdot(:cat:dc30 :pax, tr[:set]);
+        slabel(:right :cat:dc30 :pax, tr[:set] + (0.8dt, 0dt),
+            hbox(:left:top, "Settimo Torinese")
+        );
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:set, :chi.yi]);
+    }
+
+    with link = "point.it.Chivasso" {
+        track(:first:station :double :cat:dc30 :pax, tr[:chi.yi, :chi.ya]);
+        statdot(:cat:dc30 :pax, tr[:chi]);
+        slabel(:left :cat:dc30 :pax, tr[:chi.yi] + (-2.0km, -1.3dt),
+            "Chivasso"
+        );
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:chi.ya, :cas]);
+    }
+
+    with link = "point.it.Castelrosso" {
+        statdot(:cat:dc30 :pax, tr[:cas]);
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:cas.yc, :bia.ya]);
+
+        line_label(:right:nw :double :cat:dc30 :pax, tr[:cas.yc + 10km], "TR");
+    }
+
+    with link = "point.it.Bianzè" {
+        track(:first:station :double :cat:dc30 :pax, tr[:bia.ya, :bia]);
+        statdot(:cat:dc30 :pax, tr[:bia]);
+        slabel(:right :cat:dc30 :pax, tr[:bia] + (1.5dt, 2.0dt), "Bianzè");
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:bia, :san]);
+    }
+
+    with link = "point.it.Santhià" {
+        statdot(:cat:dc30 :pax, tr[:san]);
+        slabel(:right :cat:dc30 :pax, tr[:san] + (2.5dt, -0.8dt), "Santhià");
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:san, :ver.yv]);
+        line_label(:right:n :double :cat:dc30 :pax, tr[:san + 8km], "TR");
+    }
+
+    with link = "point.it.Vercelli" {
+        track(:first:station :double :cat:dc30 :pax, tr[:ver.yv, :ver.ym]);
+        statdot(:cat:dc30 :pax, tr[:ver]);
+        slabel(:left :cat:dc30 :pax, tr[:ver] + (-2.5dt, 1.0dt),
+            hbox(:right:top, "Vercelli")
+        );
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:ver.ym, :nov.yb]);
+        line_label(:right:n :double :cat:dc30 :pax, tr[:ver.ym + 8km], " TR");
+    }
+
+    with link = "point.it.Novara" {
+        track(:first:station :double :cat:dc30 :pax, tr[:nov.yb, :nov.ym]);
+        statdot(:cat:dc30 :pax, tr[:nov]);
+        slabel(:right :cat:dc30 :pax, tr[:nov] + (2.5dt, 0.8dt),
+            span(:bold, "Novara")
+        );
+    }
+
+    with link = "line.it.TR" {
+        track(:first :double :cat:dc30 :pax, tr[:nov.ym, :rho.yn]);
+        line_label(:right:n :double :cat:dc30 :pax, tr[:nov.ym + 16km], "TR");
+    }
+}
+

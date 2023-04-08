@@ -1,0 +1,49 @@
+# IT NBD.  (Novara -) Vignale - Borgomanero - Domodossola
+with detail = 2 {
+    let vd = path("d2.it.nbd");
+    let goz = path("d2.it.nbd.goz");
+
+    with link = "line.it.NBD" {
+        track(:first :cat:dc30 :pax, vd[:vig.yd, :bor]);
+        line_label(:left:e :cat:dc30 :pax, vd[:vig.yd + 15km], "NBD");
+    }
+
+    with link = "point.it.Borgomanero" {
+        statdot(:cat:dc30 :pax, vd[:bor]);
+        slabel(:left :cat:dc30 :pax, vd[:bor] + (-1.8dt, 1.0dt),
+            "Borgomanero"
+        );
+    }
+
+    with link = "line.it.NBD" {
+        track(:first :cat:dc30 :pax, vd[:bor, :goz]);
+    }
+
+    with link = "point.it.Gozzano" {
+        statdot(:removed, goz[:goz]);
+        statdot(:cat:dc30 :pax, vd[:goz]);
+        slabel(:left :cat:dc30 :pax, goz[:goz] + (-1.8dt, 1.0dt), "Gozzano");
+    }
+
+    with link = "line.it.NBD" {
+        track(:first :removed, goz[:goz.ys, :goz.yn]);
+        track(:first :cat:dc30 :pax, vd[:goz, :ome]);
+
+        line_label(:right:w :cat:dc30 :pax, vd[:goz + 6.8km], "NBD");
+    }
+
+    with link = "point.it.Omegna" {
+        statdot(:cat:dc30 :pax, vd[:ome]);
+        slabel(:left :cat:dc30 :pax, vd[:ome] + (-1.5dt, 1.0dt), "Omegna");
+    }
+
+    with link = "line.it.NBD" {
+        track(:first :cat:dc30 :pax,
+                vd[:ome, :cuz.yn - 2dt]
+            ..  vd[:cuz.yn + 1dt, :vog.yd - 1dt] << 0.8dt
+            ..  vd[:vog.yd + 3dt, :dom.yn]
+        );
+        line_label(:left:n :cat:dc30 :pax, vd[:cuz + 3km] << 0.8dt, "NBD");
+    }
+}
+
