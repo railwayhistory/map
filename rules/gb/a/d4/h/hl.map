@@ -186,12 +186,13 @@ with detail = [4, 5] {
     }
 
     with link = "point.gb.Ballinluig" {
-        track(:first:station :removed,
+        track(:station :removed,
                 hl[:bal - 280m, :bal - 90m - 0.7dl] << 2dt
         );
         track(:first:station :removed,
                 hl[:bal - 181m - 0.7dl, :bal - 180m - 0.7dl]
             --  hl[:bal - 90m - 0.7dl, :bal + 30m - 0.7dl] << 2dt
+            ..  path("d4.gb.baf")[:bal.fa, :bal.fa + 0.1dl]
         );
         track(:first:station :removed,
                 hl[:bal - 181m, :bal - 180m] >> 1dt
@@ -387,7 +388,21 @@ with detail = [4, 5] {
     }
 
     with link = "line.gb.HL" {
-        track(:first :double :pax, hl[:str + 100m, :das - 100m]);
+        track(:first :double :pax, hl[:str + 100m, :dac - 100m]);
+    }
+
+    with link = "point.gb.Dalnacardoch" {
+        track(:first:station :double :pax, hl[:dac - 100m, :dac + 100m]);
+            track(:station,
+                    hl[:dac - 50m] >> 0.5dt
+                --  hl[:dac + 50m] << 0.5dt
+            );
+        marker(:right :de.uest, hl[:dac] >> 0.5dt);
+        station(:top, hl[:dac] >> 0.5dt >> 1.2sh, "Dalnacardoch", "44 76");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :double :pax, hl[:dac + 100m, :das - 100m]);
         line_badge(:pax, hl[:das - 5.7km], "HL");
     }
 
@@ -588,7 +603,13 @@ with detail = [4, 5] {
         line_badge(:pax, hl[:avi.a - 2.8km], "HL");
     }
 
-    with link = "point.gb.Carrbridge" {
+    with link = "point.gb.Aviemore" {
+        let ai = path("d4.gb.ai");
+
+        track(:station,
+                hl[:avi.yf - 31m, :avi.yf - 30m] << 0.5dt
+            --  hl[:avi.yf + 40m, :avi.yf + 200m] << 1.5dt
+        );
         track(:first:station :pax,
                 hl[:avi.a, :avi - 420m]
             ..  hl[:avi - 320m, :avi + 640m] << 0.5dt
@@ -602,11 +623,31 @@ with detail = [4, 5] {
         track(:first:station :museum,
                 hl[:avi - 286m, :avi - 285m] >> 0.5dt
             ..  hl[:avi - 185m, :avi.yf] >> 1.5dt
+            ..  ai[:avi.yf + 100m, :avi.yf + 500m] >> 1.5dt
         );
         track(:station,
                 hl[:avi - 31m, :avi - 30m] >> 1.5dt
             ..  hl[:avi + 30m, :avi + 160m] >> 2.5dt
             ..  hl[:avi + 240m, :avi + 241m] >> 1.5dt
+        );
+            track(:station,
+                    ai[:avi.yf + 260m] >> 1.5dt
+                --  ai[:avi.yf + 320m] >> 2.5dt
+            );
+        track(:station,
+                hl[:avi.yf - 120m, :avi.yf] >> 2.5dt
+            ..  ai[:avi.yf + 100m, :avi.yf + 450m] >> 2.5dt
+        );
+        track(:station,
+                ai[:avi.yf + 140m, :avi.yf + 240m] >> 3.5dt
+        );
+        track(:station,
+                ai[:avi.yf + 99m, :avi.yf + 100m] >> 2.5dt
+            --  ai[:avi.yf + 180m, :avi.yf + 240m] >> 4.5dt
+        );
+        track(:station,
+                ai[:avi.yf + 59m - 0.7dl, :avi.yf + 60m - 0.7dl] >> 2.5dt
+            --  ai[:avi.yf + 180m - 0.7dl, :avi.yf + 240m] >> 5.5dt
         );
 
         platform(:pax,
@@ -626,7 +667,7 @@ with detail = [4, 5] {
         station(:left :pax, hl[:avi - 0.3sw] << 1.0dt << 1.5sh,
             span(:bold, "Aviemore"),
             hbox(:center:top,
-                vbox(:right:top, "HL: ", "??: "),
+                vbox(:right:top, "HL: ", "AI: "),
                 vbox(:right:top, "83 ", "83 "),
                 vbox(:left:top, "31", "31")
             )
@@ -837,17 +878,20 @@ with detail = [4, 5] {
     }
 
     with link = "point.gb.Cradlehall" {
-        track(:first:station :double :pax, hl[:cra - 150m, :cra + 150m]);
-            track(:station,
-                    hl[:cra - 100m] << 0.5dt
-                --  hl[:cra - 15m] >> 0.5dt
-            );
-            track(:station,
-                    hl[:cra + 15m] >> 0.5dt
-                --  hl[:cra + 100m] << 0.5dt
-            );
-        marker(:right :de.uest, hl[:cra] >> 0.5dt);
-        station(:right, hl[:cra - 0.4sw] >> 0.5dt >> 1.0sw,
+        with layer = 2 {
+            track(:first:station :double :pax, hl[:cra - 150m, :cra + 150m]);
+                track(:station,
+                        hl[:cra - 100m] << 0.5dt
+                    --  hl[:cra - 15m] >> 0.5dt
+                );
+                track(:station,
+                        hl[:cra + 15m] >> 0.5dt
+                    --  hl[:cra + 100m] << 0.5dt
+                );
+            marker(:right :de.uest, hl[:cra] >> 0.5dt);
+        }
+        with layer = 1 marker(:right :de.uest.casing, hl[:cra] >> 0.5dt);
+        station(:right, hl[:cra] + (1.3sw, -0.2sw),
             "Cradlehall", "116 44"
         );
     }
@@ -866,7 +910,7 @@ with detail = [4, 5] {
         station(:bottom, hl[:mil] << 1.5dt << 1.2sh + (1.5sw, 0dt),
             span(:bold, "Millburn Jn"),
             hbox(:center:top,
-                vbox(:right:top, "HL: ", "??: "),
+                vbox(:right:top, "HL: ", "AI: "),
                 vbox(:right:top, "117 ", "143 "),
                 vbox(:left:top, "37", "39")
             )
@@ -906,6 +950,7 @@ with detail = [4, 5] {
 
     with link = "point.gb.Inverness" {
         let wk = path("d4.gb.wck");
+        let ai = path("d4.gb.ai");
 
         # Down North
         track(:first:station :pax,
@@ -959,8 +1004,14 @@ with detail = [4, 5] {
 
         # East Line
         track(:first:station :pax,
-                hl[:mil.y, :mil - 100m] << 1.5dt
-            ..  hl[:mil + 30m, :mil + 31m] << 0.5dt
+                ai[:inv.af, :inv.af + 0.1dl] << 1.5dt
+            ..  hl[:mil.y, :mil - 100m] << 1.5dt
+            --  hl[:mil + 30m, :mil + 31m] << 0.5dt
+        );
+        track(:first:station :removed,
+                ai[:inv.af, :inv.af + 0.1dl] << 2.5dt
+            ..  hl[:mil.y, :mil - 230m] << 2.5dt
+            --  hl[:mil - 100m, :mil - 99m] << 1.5dt
         );
 
         # Platform 1

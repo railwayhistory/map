@@ -51,6 +51,7 @@ with detail = 3 {
 
     with link = "line.gb.HL" {
         track(:first :pax, hl[:int.f, :dag - 1sw]);
+        line_badge(:pax, hl[:dag - 2.2km], "HL");
     }
 
     with link = "point.gb.Dalguise" {
@@ -77,6 +78,7 @@ with detail = 3 {
         track(:first:station :removed,
                 hl[:bal - 1sw + 1.1dl, :bal - 1sw + 1dl]
             --  hl[:bal - 1sw + 2dl, :bal - 1sw + 3dl] << 1dt
+            ..  path("d4.gb.baf")[:bal.fa + 0.9dl, :bal.fa + 1dl]
         );
         track(:first:station :pax, hl[:bal - 1sw, :bal + 1sw]);
         marker(:right :de.bf :removed, hl[:bal]);
@@ -87,6 +89,7 @@ with detail = 3 {
 
     with link = "line.gb.HL" {
         track(:first :pax, hl[:bal + 1sw, :pit - 1sw]);
+        line_badge(:pax, hl[:bal + 3.5km], "HL");
     }
 
     with link = "point.gb.Pitlochry" {
@@ -218,7 +221,7 @@ with detail = 3 {
         line_badge(:pax, hl[:avi - 3.5km], "HL");
     }
 
-    with link = "point.gb.Carrbridge" {
+    with link = "point.gb.Aviemore" {
         track(:first:station :pax, hl[:avi - 1sw, :avi + 1sw]);
         track(:first:station :pax,
                 hl[:avi - 1sw + 0.9dl, :avi - 1sw + 1dl]
@@ -232,7 +235,7 @@ with detail = 3 {
 
     with link = "line.gb.HL" {
         track(:first :pax, hl[:avi + 1sw, :car - 1sw]);
-        line_label(:left:e :pax, hl[:avi + 3km], "HL");
+        line_label(:left:e :pax, hl[:avi + 4km], "HL");
     }
 
     with link = "point.gb.Carrbridge" {
@@ -319,19 +322,22 @@ with detail = 3 {
     }
 
     with link = "point.gb.Cradlehall" {
-        track(:first:station :double :pax, hl[:cra - 0.5sw, :cra + 0.5sw]);
-        marker(:right :de.uest, hl[:cra] >> 0.5dt);
+        with layer = 2 track(
+            :first:station :double :pax, hl[:cra - 0.5sw, :cra + 0.5sw]
+        );
+        with layer = 2 marker(:right :de.uest, hl[:cra] >> 0.5dt);
+        with layer = 1 marker(:right :de.uest.casing, hl[:cra] >> 0.5dt);
     }
 
     with link = "line.gb.HL" {
         with layer = 2 track(:first :double :pax, hl[:cra + 0.5sw, :inv.ap]);
         with layer = 1 casing(:first :double :pax,
-                hl[:cra + 0.7sw, :inv.ap - 0.2sw]
+                hl[:cra - 0.4sw, :inv.ap - 0.2sw]
         );
     }
 
     with link = "point.gb.Millburn-Jn" {
-        marker(:left :de.abzw, hl[:mil] << 0.5dt);
+        marker(:left :de.abzw, hl[:mil] << 2.5dt);
     }
 
     with link = "point.gb.Welshs-Bridge" {
@@ -344,11 +350,21 @@ with detail = 3 {
 
     with link = "point.gb.Inverness" {
         let wk = path("d4.gb.wck");
+        let ai = path("d4.gb.ai");
 
         track(:first:station :double :pax, hl[:inv.ap, :inv + 0.5sw]);
         track(:first:station :pax,
                 hl[:inv + 0.5sw, :inv] << 1.5dt
             --  wk[:ros + 0.9sw, :ros + 1sw]
+        );
+
+        track(:first:station :pax,
+                hl[:mil - 2dl, :mil + 1dl] << 1.5dt
+            --  hl[:mil + 2dl, :mil + 2.1dl] << 0.5dt
+        );
+        track(:first:station :removed,
+                hl[:mil - 2dl, :mil] << 2.5dt
+            --  hl[:mil + 1dl, :mil + 1.1dl] << 1.5dt
         );
 
         marker(:top :de.bf :pax, hl[:inv + 0.5sw] >> 0.5dt);
