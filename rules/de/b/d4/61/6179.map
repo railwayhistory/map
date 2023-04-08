@@ -34,5 +34,165 @@ with detail = [4, 5] {
                 cw[:sdo.yo + 0.1dl, :spm - 460m] << 2.5dt
         );
     }
+
+
+    with link = "point.de.Berlin-Spandau-Gbf" {
+        let spg = path("d4.de.6179.spg");
+
+        # Gl. 21 (?)
+        track(:station,
+                cw[:spg - 210m, :spg.yb + 60m + 0.7dl] << 1.5dt
+        );
+
+        # Gl. 22 (?)
+        track(:station,
+                cw[:spg - 161m, :spg - 160m] << 1.5dt
+            --  cw[:spg - 120m, :spg] << 0.5dt
+            --  cw[:spg + 40m, :spg + 41m] << 1.5dt
+        );
+
+        # Gl. 23 (?)
+        track(:third:station,
+                cw[:spg.yb - 0.1dl, :spg.yb] << 1.5dt
+            --  cw[:spg.yb + 40m, :spg.yb + 60m] << 0.5dt
+        );
+
+        # GL. 31
+        track(:station :cat:ac15,
+                cw[:spg.yb - 0.1dl, :spg.yb + 0.7dl] << 2.5dt
+            --  cw[:spg.yb + 60m + 0.7dl, :spg.fw - 210m] << 1.5dt
+            --  cw[:spg.fw - 110m, :spg.fw - 109m] << 2.5dt
+        );
+        track(:first:station :removed, cw[:spg.fw - 210m, :spg.fw] << 1.5dt);
+
+        # Gl. 32
+        track(:first:station :cat:ac15,
+                cw[:spg - 150m, :spg.fw] << 2.5dt
+        );
+
+        # Ladegleise
+        track(:station :removed, spg[:a, :spg] << 3.5dt);
+        track(:station :removed,
+                spg[:a, :spg - 40m] << 4.5dt
+            --  spg[:spg + 40m, :spg + 41m] << 2.5dt
+        );
+
+        marker(:left :de.gbf :removed, cw[:spg] << 4.5dt);
+    }
+
+    with link = "line.de.6179" {
+        track(:first :removed, cw[:spg.fw, :bra] << 1.5dt);
+        track(:first :cat:ac15 :flip, cw[:spg.fw, :bra] << 2.5dt);
+    }
+
+    # point.de.Berlin-Nennhauser-Damm: de.6185
+
+    with link = "point.de.Berlin-Staaken-Bstg" {
+        track(:first:station :double :cat:ac15 :pax,
+                cw[:ned + 300m, :stb + 420m] << 2dt
+        );
+
+        platform(:cat:ac15 :pax,
+                cw[:stb - 60m, :stb + 60m] << 1.5dt
+            --  cw[:stb + 60m, :stb - 60m] >> 2.5dt
+        );
+        
+        marker(:left :de.hp :cat:ac15 :pax, cw[:stb] << 2.5dt);
+    }
+
+    with link = "point.de.Berlin-Staaken" {
+        track(:station,
+                cw[:stw - 740m, :stw - 430m] << 5.5dt
+            --  cw[:stw - 350m, :stw - 349m] << 4.5dt
+        );
+
+        track(:station,
+                cw[:stw - 1000m, :stw - 320m] << 4.5dt
+            ..  cw[:stw - 180m, :stw + 265m] << 3.5dt
+            --  cw[:stw + 365m, :stw + 366m] << 2.5dt
+        );
+            track(:station,
+                cw[:stw + 265m] << 3.5dt -- cw[:stw + 300m] << 4dt
+            );
+
+        track(:station,
+                cw[:stw - 751m, :stw - 750m] << 4.5dt
+            --  cw[:stw - 670m, :stw - 400m] << 3.5dt
+            --  cw[:stw - 320m, :stw - 319m] << 4.5dt
+        );
+
+        track(:first:station :double :cat:ac15 :pax,
+                cw[:stb + 420m, :stw.f] << 2dt
+        );
+            track(:station :cat:ac15,
+                    cw[:stw.f - 565m] << 2.5dt
+                --  cw[:stw.f - 475m] << 1.5dt
+            );
+            track(:station :cat:ac15,
+                    cw[:stw.f - 460m] << 1.5dt
+                --  cw[:stw.f - 370m] << 2.5dt
+            );
+
+        marker(:left :de.gbf :cat:ac15, cw[:stw] << 3.5dt);
+        marker(:left :de.exbf :cat:ac15, cw[:stw] << 3.5dt);
+        station(:bottom :cat:ac15, cw[:stw] << 4.5dt << 1.1sh + (-0.5sw, 0dt),
+            "B.-Staaken", "6179: 18,40"
+        );
+    }
+
+    with link = "line.de.6179" {
+        track(:first :double :cat:ac15 :pax, cw[:stw.f, :dal.a] << 2dt);
+        line_label(:left:n :cat:ac15 :pax, cw[:stw.f + 600m] << 2.5dt, "6179");
+    }
+
+    with link = "point.de.Dallgow-Döberitz" {
+        track(:station :removed, 
+                cw[:dal - 311m, :dal - 310m] << 2.5dt
+            --  cw[:dal - 150m, :dal - 40m] << 6.5dt
+        );
+        track(:station :removed, cw[:dal - 190m, :dal - 40m] << 5.5dt);
+        track(:station :removed, cw[:dal - 230m, :dal - 40m] << 4.5dt);
+        track(:station :removed, cw[:dal - 270m, :dal - 40m] << 3.5dt);
+
+        track(:first:station :double :cat:ac15 :pax,
+                cw[:dal.a, :dal.f] << 2dt
+        );
+
+        platform(:cat:ac15 :pax,
+                cw[:dal - 140m, :dal + 30m] << 1.5dt
+            --  cw[:dal + 30m, :dal - 140m] >> 2.5dt
+        );
+
+        marker(:left :de.hp :cat:ac15 :pax, cw[:dal] << 6.5dt);
+        marker(:left :de.exbf :cat:ac15 :pax, cw[:dal] << 6.5dt);
+        station(:top :cat:ac15 :pax, cw[:dal - 0.4sw] >> 2.0dt,
+            vbox(:center:bottom,
+                span(:italic :removed, "Dallgow-Döberitz"),
+                hbox(:center:base :italic :removed,
+                    "Dallgow", span(:light, " (b Berlin)")
+                ),
+                "Dallgow-Döberitz"
+            ),
+            hbox(:center:base, span(:removed, "22,67 → "), "22,20")
+        );
+    }
+
+    with link = "line.de.6179" {
+        track(:first :double :cat:ac15 :pax, cw[:dal.f, :wot.a] << 2dt);
+    }
+
+    with link = "point.de.Wustermark-Rbf-Wot" {
+        # Gl. 5
+        track(:station :cat:ac15,
+                cw[:wot + 9m, :wot + 10m] << 2.5dt
+            --  cw[:wot + 90m, :wot.f] << 3.5dt
+        );
+
+        # Gl. 24
+        track(:first:station :cat:ac15 :pax, cw[:wot.a, :wot.f] << 2.5dt);
+
+        # Gl. 33
+        track(:first:station :cat:ac15 :pax, cw[:wot.a, :wot.f] << 1.5dt);
+    }
 }
 
