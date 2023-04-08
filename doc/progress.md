@@ -28,6 +28,17 @@ industrial lines are omitted.
 ¹ The overview map currently does not contain the light railways
   (buurtspoorwegen/chemins de fer d'intérêt local).
 
+
+## CH: Switzerland
+
+The overview map currently only covers railway lines and interurban tram
+lines. City tram lines and industrial lines are omitted.
+
+| region         | overview  | detail      |
+| -------------- | --------- | ----------- |
+| entire country | complete  | not started |
+
+
 ## DE: Germany
 
 Germany has been split into regions roughly covering the last regional

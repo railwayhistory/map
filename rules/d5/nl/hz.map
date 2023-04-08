@@ -1,0 +1,105 @@
+# NL HZ.  Haarlem - Zandvoort aan Zee.
+#
+let hz = path("path.nl.hz");
+
+with detail = 5 {
+    # point.nl.Haarlem: nl.ar
+
+
+    with link = "line.nl.hz" {
+        track(:first :double :cat, hz[:hlm.z, :ovn - 130m]);
+        with layer = 1 line_badge(:open, hz[:ovn - 600m], "HZ");
+    }
+
+
+    with link = "point.nl.Overveen" {
+        # Spoor 1
+        track(:first:station :cat,
+                hz[:ovn - 130m, :ovn - 129m] >> 0.5dt
+            ..  hz[:ovn, :ovn + 180m] >> 1.0dt
+            ..  hz[:ovn + 309m, :ovn + 310m] >> 0.5dt
+        );
+
+        # Spoor 2
+        track(:first:station :cat,
+                hz[:ovn - 130m, :ovn - 129m] << 0.5dt
+            ..  hz[:ovn, :ovn + 180m] << 1.0dt
+            ..  hz[:ovn + 309m, :ovn + 310m] << 0.5dt
+        );
+
+        # Perron
+        platform(:open,
+                hz[:ovn - 50m] >> 0.30dt
+            --  hz[:ovn - 45m] >> 0.35dt
+            ..  hz[:ovn, :ovn + 180m] >> 0.6dt
+            ..  hz[:ovn + 225m] >> 0.37dt
+            --  hz[:ovn + 230m] >> 0.35dt
+            --  hz[:ovn + 230m] << 0.35dt
+            --  hz[:ovn + 225m] << 0.42dt
+            --  hz[:ovn + 180m, :ovn] >> 0.6dt
+            ..  hz[:ovn - 45m] << 0.47dt
+            --  hz[:ovn - 50m] << 0.45dt
+        );
+
+        marker(:de.hp :right, hz[:ovn] >> 1.0dt);
+        station(:top, hz[:ovn] >> 1.0dt >> 1.4sw,
+            "Overveen", "HZ: 2,17"
+        );
+    }
+
+
+    with link = "line.nl.hz" {
+        track(:first :double :cat, hz[:ovn + 310m, :zvt.a]);
+        with layer = 1 line_badge(:open, hz[:zvt - 3.0km], "HZ");
+    }
+
+
+    with link = "point.nl.Zandvoort-aan-Zee" {
+        # Spoor 1
+        track(:first:station :cat, hz[:zvt.a, :zvt] << 0.5dt);
+
+        # Spoor 2
+        track(:first:station :cat,
+                hz[:zvt.a, :zvt.a + 1m] >> 0.5dt
+            ..  hz[:zvt.a + 140m, :zvt] >> 1.5dt
+        );
+
+        # Spoor 3
+        track(:station :cat,
+                hz[:zvt.a + 229m, :zvt.a + 230m] >> 1.5dt
+            ..  hz[:zvt.a + 300m, :zvt - 360m] >> 0.5dt
+            ..  hz[:zvt - 275m, :zvt - 274m] >> 1.5dt
+        );
+
+        # 251A - 251B
+        track(:station :cat,
+                hz[:zvt.a + 59m, :zvt.a + 60m] << 0.5dt
+            ..  hz[:zvt.a + 140m, :zvt.a + 141m] >> 1.5dt
+        );
+
+        # 253A - 253B
+        track(:station :cat,
+                hz[:zvt.a + 199m, :zvt.a + 200m] >> 1.5dt
+            ..  hz[:zvt.a + 280m, :zvt.a + 281m] << 0.5dt
+        );
+
+        # 257A - 257B
+        track(:station :cat,
+                hz[:zvt - 401m, :zvt - 400m] >> 0.5dt
+            ..  hz[:zvt - 330m, :zvt - 329m] << 0.5dt
+        );
+
+        # Perron
+        platform(:open,
+                hz[:zvt - 240m, :zvt] >> 1.1dt
+            --  hz[:zvt, :zvt - 240m] >> 0.1dt
+        );
+
+        marker(:de.bf :top, hz[:zvt] >> 0.5dt);
+        station(:left, hz[:zvt] + (-1.3sw, -0.3sw),
+            span(:bold, "Zandvoort aan Zee"),
+            "HZ: 8,19"
+        );
+    }
+}
+

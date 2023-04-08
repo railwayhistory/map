@@ -1,0 +1,160 @@
+# CH 600.  Immensee - Chiasso
+#
+let ic = path("d4.ch.600");
+
+with detail = 3 {
+
+    with link = "point.ch.Bodio" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:bod - 1sw, :bod + 1sw]
+        );
+        marker(:left :de.bf :cat:ac15 :pax, ic[:bod] << 0.5dt);
+        with layer = -1 marker(
+            :left :de.bf.casing :cat:ac15 :pax, ic[:bod] << 0.5dt
+        );
+        slabel(:left :cat:ac15 :pax, ic[:bod] >> 3.5dt, "Bodio");
+    }
+}
+
+with detail = 3 {
+    let rg = path("d4.ch.595");
+
+    with link = "line.ch.600" {
+        let rg = path("d4.ch.595");
+
+        track(:first :double :cat:ac15 :pax,
+                ic[:bod + 1sw, :bod + 1.1sw]
+            ..  rg[:poz - 0.1dl, :poz] << 2dt
+        );
+        with layer = -1 casing(:first :double :cat:ac15 :pax,
+                ic[:bod + 1sw, :bod + 1.1sw]
+            ..  rg[:poz - 0.1dl, :poz] << 2dt
+        );
+    }
+
+    with link = "point.ch.Pollegio-Nord-dira" {
+        track(:first:station :double :cat:ac15 :pax,
+                rg[:poz, :pol + 1sw] << 2dt
+        );
+        marker(:left :de.abzw :cat:ac15, rg[:pol] << 2.5dt);
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax,
+                rg[:pol + 1sw, :pol + 1.1sw] << 2dt
+            ..  ic[:bia.a - 500m, :bia.a] << 1dt
+        );
+    }
+
+    with link = "point.ch.Biasca" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:bia.a, :bia.a + 0.1dl] << 1dt
+            ..  ic[:bia.xn, :bia + 1sw]
+        );
+        marker(:right :de.bf :cat:ac15 :pax, ic[:bia] >> 0.5dt);
+        with layer = -1 marker(
+            :right :de.bf.casing :cat:ac15 :pax, ic[:bia] >> 0.5dt
+        );
+        slabel(:right :cat:ac15 :pax, ic[:bia + 0.5sw] << 1.5dt,
+            span(:bold, "Biasca")
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:bia + 1sw, :bia + 1.1sw]
+            ..  rg[:git - 1.1sw, :git - 1sw] << 2dt
+        );
+    }
+
+    with link = "point.ch.Giustizia-dira" {
+        track(:first:station :cat:ac15 :pax,
+                rg[:git - 1sw, :git - 2.4dl] << 1.5dt
+            --  rg[:git - 0.4dl, :git - 0.2dl] >> 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                rg[:git - 1sw, :git - 1.6dl] << 2.5dt
+            --  rg[:git + 0.4dl, :git + 0.5dl] << 0.5dt
+        );
+        track(:first:station :double :cat:ac15 :pax, rg[:git - 1sw, :git]);
+        track(:first:station :double :cat:ac15 :pax, ic[:git, :git + 1sw]);
+        marker(:right :de.abzw :cat:ac15, rg[:git] >> 0.5dt);
+    }
+}
+
+with detail = 3 {
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:git + 1sw, :oso - 1sw]);
+    }
+
+    with link = "point.ch.Osogna-Cresciano" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:oso - 1sw, :oso + 1sw]
+        );
+        marker(:right :de.bbf :cat:ac15, ic[:oso] >> 0.5dt);
+        marker(:right :de.exbf :cat:ac15, ic[:oso] >> 0.5dt);
+        slabel(:left :cat:ac15, ic[:oso + 0.3sw] >> 1.5dt >> 1.8sh,
+            "Osogna-Cresciano"
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:oso + 1sw, :cla - 1sw]);
+    }
+
+    with link = "point.ch.Claro" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:cla - 1sw, :cla + 1sw]
+        );
+        marker(:left :de.bbf :cat:ac15, ic[:cla] << 0.7dt);
+        marker(:left :de.exbf :cat:ac15, ic[:cla] << 0.7dt);
+        slabel(:right :cat:ac15, ic[:cla] + (2.0sw, 0.3sw), "Claro");
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:cla + 1sw, :can - 0.5sw]);
+    }
+
+    with link = "point.ch.Castione-Nord-c-bin" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:can - 0.5sw, :can + 0.5sw]
+        );
+        marker(:left :de.uest :cat:ac15, ic[:can] << 0.5dt);
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:can + 0.5sw, :cas - 1sw]);
+    }
+
+    with link = "point.ch.Castione-Arbedo" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:cas - 1sw, :cas + 1sw]
+        );
+        marker(:left :de.bf :cat:ac15 :pax, ic[:cas] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, ic[:cas + 0.4sw] >> 2.5dt,
+            span(:bold, "Castione-Arbedo")
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:cas + 1sw, :bep - 1sw]);
+    }
+
+    with link = "point.ch.Bellinzona-S-Paolo" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:bep - 1sw, :bep.f]
+        );
+        marker(:right :de.gbf :cat:ac15, ic[:bep] >> 0.5dt);
+    }
+
+    with link = "point.ch.Bellinzona" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:bep.f, :bel + 1sw]
+        );
+        marker(:right :de.bf :cat:ac15 :pax, ic[:bel] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax, ic[:bel + 0.4sw] >> 0.5dt >> 1.2sw,
+            span(:bold, "Bellinzona")
+        );
+    }
+}
+

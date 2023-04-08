@@ -1,0 +1,667 @@
+# CH 600.  Immensee - Chiasso
+#
+let ic = path("d4.ch.600");
+
+with detail = [4, 5] {
+
+    with link = "point.ch.Bodio" {
+        # Bin. 2
+        track(:first:station :cat:ac15 :pax, ic[:bod.a, :bod.f] << 0.5dt);
+            track(:station :cat:ac15 :pax,
+                    ic[:bod + 550m] << 0.5dt
+                --  ic[:bod + 630m] >> 0.5dt
+            );
+
+        # Bin. 3
+        track(:first:station :cat:ac15 :pax, ic[:bod.a, :bod.f] >> 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:bod - 460m] >> 0.5dt
+                --  ic[:bod - 350m] >> 2.5dt
+            );
+            track(:station :cat:ac15 :pax,
+                    ic[:bod - 415m] >> 0.5dt
+                --  ic[:bod - 350m] << 0.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:bod + 650m] >> 0.5dt
+                --  ic[:bod + 730m] << 0.5dt
+            );
+
+        # Bin. 4
+        track(:station :cat:ac15, ic[:bod.a, :bod + 180m] >> 1.5dt);
+            track(:station :cat:ac15,
+                    ic[:bod - 15m] >> 1.5dt
+                --  ic[:bod + 120m] >> 3.5dt
+            );
+
+        # Bin. 5
+        track(:station :cat:ac15,
+                ic[:bod - 466m - 0.7dl, :bod - 465m - 0.7dl] >> 1.5dt
+            --  ic[:bod - 400m - 0.7dl, :bod + 240m] >> 2.5dt
+        );
+            track(:station :cat:ac15,
+                    ic[:bod + 50m] >> 2.5dt
+                --  ic[:bod + 160m] >> 0.5dt
+            );
+
+        # Bin. 6
+        track(:station :cat:ac15, ic[:bod - 100m, :bod + 240m] >> 3.5dt);
+
+        # Bin. 15
+        track(:station :cat:ac15,
+                ic[:bod - 580m, :bod - 430m] >> 3.5dt
+            --  ic[:bod - 370m, :bod - 369m] >> 2.5dt
+        );
+
+        # Bin. 56
+        track(:station :cat:ac15, ic[:bod - 150m, :bod + 250m] >> 3.5dt);
+
+        platform(:cat:ac15 :pax,
+                ic[:bod - 65m, :bod + 80m] << 0.5dt
+            --  ic[:bod + 80m, :bod - 65m] >> 1.2dt
+        );
+
+        marker(:left :de.bf :cat:ac15 :pax, ic[:bod] << 1.0dt);
+        station(:left :cat:ac15 :pax, ic[:bod] >> 7.0dt,
+            hbox(:center:base, "Bodio", span(:light, " TI")),
+            "600: 125,50"
+        );
+    }
+}
+
+
+with detail = [4, 5] {
+    let rg = path("d4.ch.595");
+
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax,
+                ic[:bod.f, :bod.f + 300m]
+            ..  rg[:pol - 650m, :pol - 330m] << 3dt
+        );
+        casing(:first :double :cat:ac15 :pax,
+                ic[:bod.f + 299m, :bod.f + 300m]
+            ..  rg[:pol - 650m, :pol - 649m] << 3dt
+        );
+    }
+
+    with link = "point.ch.Pollegio-Nord-dira" {
+        track(:first:station :double :cat:ac15 :pax,
+                rg[:pol - 330m, :pol - 329m] << 3dt
+            ..  rg[:pol - 80m, :pol + 350m] << 2dt
+        );
+            track(:station :cat:ac15,
+                    rg[:pol + 20m] << 1.5dt
+                --  rg[:pol + 165m] << 2.5dt
+            );
+
+        marker(:left :de.abzw :cat:ac15, rg[:pol] << 2.5dt);
+        station(:right :cat:ac15, rg[:pol + 0.4sw] << 2.5dt << 1.4sh,
+            hbox(:center:base, "Pollegio Nord", span(:light, " (dira)")),
+            hbox(:center:top,
+                vbox(:right:top, "600: ", "590: "),
+                vbox(:right:top, "127,", "157,"),
+                vbox(:left:top, "96", "55 ◊")
+            )
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax,
+                rg[:pol + 350m, :pol.yb] << 2dt
+            ..  ic[:pol.yp + 1dt, :bia.a]
+        );
+    }
+
+    with link = "point.ch.Biasca" {
+        let bi = path("d4.ch.600.bia");
+
+        # A1
+        track(:first:station :cat:ac15 :pax, ic[:bia.a, :bia.f] >> 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:bia.xn - 96m, :bia.xn - 95m] >> 0.5dt
+                ..  ic[:bia.xn, :bia.xn + 0.1dl] << 0.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:bia + 770m] >> 0.5dt
+                --  ic[:bia + 860m] << 0.5dt
+            );
+
+        # A2
+        track(:first:station :cat:ac15 :pax, ic[:bia.a, :bia.f] << 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:bia - 220m] << 0.5dt
+                --  ic[:bia - 160m] >> 0.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:bia - 180m] << 0.5dt
+                --  ic[:bia + 120m] << 6.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:bia + 880m] << 0.5dt
+                --  ic[:bia + 970m] >> 0.5dt
+            );
+
+        # A3
+        track(:station :cat:ac15 :pax,
+                ic[:bia - 130m, :bia + 730m] << 1.5dt
+            --  ic[:bia + 810m, :bia + 811m] << 0.5dt
+        );
+
+        # A4
+        track(:station :cat:ac15,
+                ic[:bia - 80m, :bia + 650m] << 2.5dt
+            --  ic[:bia + 730m, :bia + 780m] << 1.5dt
+        );
+
+        # A5
+        track(:station :cat:ac15, ic[:bia - 30m, :bia + 370m] << 3.5dt);
+
+        # A7
+        track(:station :cat:ac15, ic[:bia + 20m, :bia + 330m] << 4.5dt);
+
+        # A8
+        track(:station :cat:ac15, ic[:bia + 70m, :bia + 290m] << 5.5dt);
+
+        # A9
+        track(:station :cat:ac15, ic[:bia + 120m, :bia + 250m] << 6.5dt);
+            track(:station :cat:ac15,
+                    ic[:bia + 250m] << 6.5dt
+                --  ic[:bia + 410m] << 2.5dt
+            );
+
+        # A11 - A14
+        track(:station :cat:ac15,
+                ic[:bia + 99m, :bia + 100m] >> 0.5dt
+            --  ic[:bia + 140m, :bia + 480m] >> 1.5dt
+        );
+            track(:station :cat:ac15,
+                    ic[:bia + 240m] >> 1.5dt
+                --  ic[:bia + 280m] >> 2.5dt
+            );
+
+        # A12 - A13
+        track(:station :cat:ac15,
+                ic[:bia + 230m, :bia + 400m] >> 2.5dt
+        );
+
+        # B1
+        track(:station :removed,
+                bi[:bia - 570m] << 1.5dt
+            --  bi[:bia - 520m] << 0.5dt
+        );
+        track(:station :cat:ac15,
+                bi[:bia - 520m, :bia - 430m] << 0.5dt
+            --  bi[:bia - 380m, :bia - 379m] << 1.5dt
+        );
+
+        # B2
+        track(:station :cat:ac15,
+                bi[:a, :bia - 220m] << 1.5dt
+            --  bi[:bia - 120m, :bia - 119m] << 3.5dt
+        );
+
+        # B3
+        track(:station :cat:ac15, bi[:a, :bia - 170m] << 2.5dt);
+            track(:station :cat:ac15,
+                    bi[:bia - 520m] << 2.5dt
+                --  bi[:bia - 470m] << 1.5dt
+            );
+
+        # B4
+        track(:station :cat:ac15, bi[:bia - 510m, :bia - 30m] << 3.5dt);
+
+        # B5
+        track(:station :cat:ac15, bi[:bia - 470m, :bia + 20m] << 4.5dt);
+
+        # B6
+        track(:station :cat:ac15, bi[:bia - 430m, :bia + 70m] << 5.5dt);
+
+        # B8
+        track(:station :cat:ac15,
+                bi[:bia - 551m, :bia - 550m] << 2.5dt
+            --  bi[:bia - 390m, :bia + 120m] << 6.5dt
+        );
+
+        # B27
+        track(:station,
+                bi[:bia - 391m, :bia - 390m] << 6.5dt
+            --  bi[:bia - 350m, :bia - 200m] << 7.5dt
+        );
+
+        # C2
+        track(:station,
+                bi[:bia - 200m, :bia + 210m] << 7.5dt
+        );
+
+        # C5
+        track(:station,
+                bi[:bia - 100m, :bia - 10m] << 8.5dt
+            --  bi[:bia + 30m, :bia + 31m] << 9.5dt
+        );
+
+        # C6
+        track(:station,
+                bi[:bia - 100m, :bia + 130m] << 9.5dt
+        );
+
+        # C9
+        track(:station,
+                bi[:bia - 100m, :bia + 90m] << 10.5dt
+            --  bi[:bia + 250m, :bia + 251m] << 6.5dt
+        );
+
+        # „M1“
+        track(:station,
+                ic[:bia + 309m, :bia + 310m] << 6.5dt
+            --  ic[:bia + 360m, :bia + 650m] << 5.5dt
+        );
+
+        # „M2“
+        track(:station, ic[:bia + 250m, :bia + 650m] << 6.5dt);
+
+        # „M3“
+        track(:station,
+                ic[:bia + 279m, :bia + 280m] << 6.5dt
+            --  ic[:bia + 330m, :bia + 830m] << 7.5dt
+        );
+
+        # „M4“
+        track(:station,
+                ic[:bia + 509m, :bia + 510m] << 7.5dt
+            --  ic[:bia + 560m, :bia + 830m] << 8.5dt
+        );
+
+        # „M5“
+        track(:station,
+                ic[:bia + 560m - 0.7dl, :bia + 1060m] << 9.5dt
+        );
+
+        # „M6“
+        track(:station,
+                ic[:bia + 459m - 0.7dl, :bia + 460m - 0.7dl] << 7.5dt
+            --  ic[:bia + 610m - 0.7dl, :bia + 1060m] << 10.5dt
+        );
+
+        # Perron 1
+        platform(:cat:ac15 :pax,
+                ic[:bia - 240m, :bia + 100m] >> 0.5dt
+            --  ic[:bia + 100m, :bia - 240m] << 1.2dt
+        );
+
+        # Perron 2/3
+        platform(:cat:ac15 :pax,
+                ic[:bia - 130m, :bia + 290m] << 1.5dt
+            --  ic[:bia + 290m, :bia - 180m] >> 0.5dt
+        );
+
+        marker(:right :de.bf :cat:ac15 :pax, ic[:bia] >> 1.2dt);
+        station(:right :cat:ac15 :left_align :pax, ic[:bia + 0.6sw] << 12.5dt,
+            span(:bold, "Biasca"),
+            "600: 131,80"
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:bia.f, :git.xb]);
+    }
+
+    with link = "point.ch.Giustizia-dira" {
+        track(:first:station :cat:ac15 :pax, rg[:git.ap, :git.f] >> 0.5dt);
+            track(:first:station :cat:ac15 :pax,
+                    rg[:git + 30m] << 0.5dt
+                --  rg[:git + 210m] >> 0.5dt
+            );
+        track(:first:station :cat:ac15 :pax, rg[:git.ap, :git.f] << 0.5dt);
+
+        track(:first:station :cat:ac15 :pax,
+                ic[:git.xb - 0.1dl, :git.xb] >> 0.5dt
+            ..  rg[:git.yp - 60m, :git.yp] << 1.5dt
+            --  rg[:git, :git + 0.1dl] << 0.5dt
+        );
+        track(:first:station :cat:ac15 :pax,
+                ic[:git.xb - 0.1dl, :git.xb] << 0.5dt
+            ..  rg[:git.yp - 60m, :git - 150m + 0.5dl] << 2.5dt
+            --  rg[:git + 210m + 0.5dl, :git + 211m + 0.5dl] << 0.5dt
+        );
+            track(:first:station :cat:ac15,
+                    rg[:git + 0.5dl, :git + 170m + 0.5dl] << 1.5dt
+            );
+
+        marker(:right :de.abzw :cat:ac15, rg[:git] >> 0.5dt);
+        station(:left :cat:ac15, rg[:git + 0.3sw] >> 0.5dt >> 1.4sw,
+            hbox(:center:base, "Giustizia", span(:light, " (dira)")),
+            hbox(:center:top,
+                vbox(:right:top, "595: ", "600: "),
+                vbox(:right:top, "164,", "135,"),
+                vbox(:left:top, "02 ◊", "04")
+            )
+        );
+    }
+}
+
+with detail = [4, 5] {
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:git.f, :oso.a]);
+    }
+
+    with link = "point.ch.Osogna-Cresciano" {
+        # 1
+        track(:station :cat:ac15, ic[:oso - 130m, :oso + 190m] >> 1.5dt);
+
+        # 2
+        track(:first:station :cat:ac15 :pax, ic[:oso.a, :oso.f] >> 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:oso - 540m] >> 0.5dt
+                --  ic[:oso - 430m] << 0.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:oso - 120m] >> 0.5dt
+                --  ic[:oso - 60m] >> 1.5dt
+            );
+            track(:station :removed,
+                    ic[:oso + 30m] >> 0.5dt
+                --  ic[:oso + 70m] >> 1.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:oso + 640m] >> 0.5dt
+                --  ic[:oso + 750m] << 0.5dt
+            );
+
+        # 3
+        track(:first:station :cat:ac15 :pax, ic[:oso.a, :oso.f] << 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:oso - 670m] << 0.5dt
+                --  ic[:oso - 560m] >> 0.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:oso + 770m] << 0.5dt
+                --  ic[:oso + 880m] >> 0.5dt
+            );
+
+        # 4
+        track(:station :cat:ac15, ic[:oso - 60m, :oso + 380m] << 1.5dt);
+            track(:station :cat:ac15,
+                    ic[:oso + 230m] << 1.5dt
+                --  ic[:oso + 310m] << 0.5dt
+            );
+
+        # 5
+        track(:station, ic[:oso - 170m, :oso - 10m] << 2.5dt);
+        track(:station :cat:ac15,
+                ic[:oso - 111m, :oso - 110m] << 0.5dt
+            --  ic[:oso - 10m, :oso + 280m] << 2.5dt
+        );
+            track(:station :removed,
+                    ic[:oso + 160m] << 2.5dt
+                --  ic[:oso + 210m] << 1.5dt
+            );
+            track(:station :removed,
+                    ic[:oso + 280m] << 2.5dt
+                --  ic[:oso + 330m] << 1.5dt
+            );
+
+        platform(:removed,
+                ic[:oso - 40m, :oso + 70m] << 0.5dt
+            --  ic[:oso + 70m, :oso - 40m] << 0.5dt
+        );
+
+        marker(:right :de.bbf :cat:ac15, ic[:oso] >> 1.5dt);
+        marker(:right :de.exbf :cat:ac15, ic[:oso] >> 1.5dt);
+        station(:left :cat:ac15, ic[:oso + 0.35sw] >> 1.5dt >> 1.8sh,
+            "Osogna-Cresciano", "137,95"
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:oso.f, :cla.a]);
+    }
+
+    with link = "point.ch.Claro" {
+        # 1
+        track(:station :cat:ac15, ic[:cla - 760m, :cla + 10m] << 1.5dt);
+            track(:station :cat:ac15,
+                    ic[:cla - 100m] << 1.5dt
+                --  ic[:cla - 40m] << 0.5dt
+            );
+
+        # 2
+        track(:first:station :cat:ac15 :pax, ic[:cla.a, :cla.f] << 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:cla - 600m] << 0.5dt
+                --  ic[:cla - 530m] << 1.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:cla - 530m] << 0.5dt
+                --  ic[:cla - 420m] >> 0.5dt
+            );
+
+        # 3
+        track(:first:station :cat:ac15 :pax, ic[:cla.a, :cla.f] >> 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:cla - 770m] >> 0.5dt
+                --  ic[:cla - 660m] << 0.5dt
+            );
+
+        # 10?
+        track(:station :cat:ac15,
+                ic[:cla - 591m, :cla - 590m] << 1.5dt
+            --  ic[:cla - 480m, :cla - 390m] << 2.5dt
+        );
+
+        # 20
+        track(:station :cat:ac15,
+                ic[:cla - 680m] << 1.5dt
+            --  ic[:cla - 540m] << 3.0dt
+        );
+
+        platform(:removed,
+                ic[:cla - 40m, :cla + 30m] << 0.5dt
+            --  ic[:cla + 30m, :cla - 40m] << 0.5dt
+        );
+
+        marker(:left :de.bbf :cat:ac15, ic[:cla] << 1.5dt);
+        marker(:left :de.exbf :cat:ac15, ic[:cla] << 1.5dt);
+        station(:right :cat:ac15, ic[:cla + 0.5sw] << 2.5dt << 1.3sh,
+            "Claro", "143,47"
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:cla.f, :can - 220m]);
+    }
+
+    with link = "point.ch.Castione-Nord-c-bin" {
+        track(:first:station :double :cat:ac15 :pax,
+                ic[:can - 220m, :can + 220m]
+        );
+            track(:station :cat:ac15,
+                    ic[:can - 120m] >> 0.5dt
+                --  ic[:can - 10m] << 0.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:can + 10m] << 0.5dt
+                --  ic[:can + 120m] >> 0.5dt
+            );
+
+        marker(:left :de.uest :cat:ac15, ic[:can] << 0.5dt);
+        station(:right :cat:ac15, ic[:can + 0.5sw] << 0.5dt << 1.2sh,
+            hbox(:center:base, "Castione Nord", span(:light, " (c bin)")),
+            "145,86"
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:can + 220m, :cas.a]);
+    }
+
+    with link = "point.ch.Castione-Arbedo" {
+        # 1
+        track(:first:station :cat:ac15 :pax,
+                ic[:cas.a, :cas - 660m] << 0.5dt
+            ..  ic[:cas - 480m, :cas + 300m] << 1.5dt
+            ..  ic[:cas + 450m, :cas.f] << 0.5dt
+        );
+
+        # 2
+        track(:station :cat:ac15, ic[:cas - 480m, :cas - 110m] << 0.5dt);
+        track(:station :cat:ac15 :pax,
+                ic[:cas - 110m, :cas + 210m] << 0.5dt
+            --  ic[:cas + 300m, :cas + 301m] >> 0.5dt
+        );
+            track(:station :cat:ac15,
+                    ic[:cas - 210m] << 0.5dt
+                --  ic[:cas - 140m] >> 0.5dt
+            );
+            track(:station :cat:ac15 :pax,
+                    ic[:cas + 210m] << 0.5dt
+                --  ic[:cas + 300m] << 1.5dt
+            );
+
+        # 3
+        track(:first:station :cat:ac15 :pax, ic[:cas.a, :cas.f] >> 0.5dt);
+            track(:station :cat:ac15,
+                    ic[:cas - 380m] >> 0.5dt
+                --  ic[:cas - 300m] << 0.5dt
+            );
+            track(:station :cat:ac15,
+                    ic[:cas + 110m] >> 0.5dt
+                --  ic[:cas + 190m] << 0.5dt
+            );
+
+        # 4
+        track(:station :cat:ac15,
+                ic[:cas - 610m, :cas - 410m] >> 1.5dt
+        );
+            track(:station :cat:ac15,
+                    ic[:cas - 480m] >> 1.5dt
+                --  ic[:cas - 400m] >> 0.5dt
+            );
+
+        # 5
+        track(:station,
+                ic[:cas - 410m, :cas - 409m] >> 1.5dt
+            ..  ic[:cas - 280m, :cas + 60m] >> 2.5dt
+        );
+
+        # 6
+        track(:station,
+                ic[:cas - 181m, :cas - 180m] >> 2.5dt
+            ..  ic[:cas - 50m, :cas + 60m] >> 3.5dt
+        );
+
+        # Perron 1/2
+        platform(:cat:ac15 :pax,
+                ic[:cas - 110m, :cas + 110m] << 1.5dt
+            --  ic[:cas + 110m, :cas - 110m] >> 0.5dt
+        );
+
+        # Perron 3
+        platform(:cat:ac15 :pax,
+                ic[:cas - 110m, :cas + 110m] >> 0.5dt
+            --  ic[:cas + 110m, :cas - 110m] << 1.2dt
+        );
+
+        marker(:left :de.bf :cat:ac15 :pax, ic[:cas] << 1.5dt);
+        station(:left :cat:ac15 :pax, ic[:cas + 0.4sw] >> 5.0dt,
+            span(:bold, "Castione-Arbedo"),
+            hbox(:center:base, "600: ", span(:removed, "147,27 →"), " 147,53")
+        );
+    }
+
+    with link = "line.ch.600" {
+        track(:first :double :cat:ac15 :pax, ic[:cas.f, :bep.a]);
+    }
+
+    with link = "point.ch.Bellinzona-S-Paolo" {
+        # »A1«
+        track(:first:station :cat:ac15 :pax, ic[:bep.a, :bep.f] >> 0.5dt);
+
+        # »A2«
+        track(:first:station :cat:ac15 :pax, ic[:bep.a, :bep.f] << 0.5dt);
+
+        # »A3«
+        track(:station :cat:ac15, ic[:bep.r + 100m, :bep.f] << 1.5dt);
+
+        # »A4«
+        track(:station :cat:ac15,
+                ic[:bep.r] << 0.5dt -- ic[:bep.r + 100m] << 1.5dt
+            ..  ic[:bep.r + 220m, :bep - 20m] << 2.5dt
+            ..  ic[:bep + 70m, :bep + 71m] << 1.5dt
+        );
+
+        # »A5«
+        track(:station :cat:ac15,
+                ic[:bep + 149m, :bep + 150m] << 1.5dt
+            ..  ic[:bep + 220m, :bep + 230m] << 2.5dt
+            ..  ic[:bep + 300m, :bep + 301m] << 1.5dt
+        );
+
+        # »A8«
+        track(:station :cat:ac15,
+                ic[:bep.r + 170m] >> 0.5dt -- ic[:bep.r + 250m] >> 1.5dt
+            ..  ic[:bep.r + 340m, :bep.f - 150m] >> 2.5dt
+            --  ic[:bep.f - 30m, :bep.f - 29m] >> 1.5dt
+        );
+
+        # »A9«
+        track(:station :cat:ac15, ic[:bep.r + 250m, :bep.f] >> 1.5dt);
+
+        # »B1«/»B2«
+        track(:station :cat:ac15,
+                ic[:bep.r - 60m, :bep.r + 160m] >> 1.5dt
+            --  ic[:bep.r + 320m, :bep + 340m] >> 3.5dt
+            --  ic[:bep.f + 120m, :bep.f + 121m] << 1.5dt
+        );
+
+        # »B3«/»B4«
+        track(:station :cat:ac15,
+                ic[:bep - 441m, :bep - 440m] >> 3.5dt
+            --  ic[:bep - 400m, :bep + 300m] >> 4.5dt
+        );
+
+        # »B7«/»B8«
+        track(:station :cat:ac15, ic[:bep - 300m, :bep + 260m] >> 5.5dt);
+
+        # »B9«/»B10«/»B11«
+        track(:station :cat:ac15, ic[:bep - 250m, :bep + 220m] >> 6.5dt);
+
+        # »B12«/»B13«/»B14«
+        track(:station :cat:ac15, ic[:bep - 180m, :bep + 180m] >> 7.5dt);
+
+        # »B15«/»B16«/»B17
+        track(:station :cat:ac15, ic[:bep - 130m, :bep + 140m] >> 8.5dt);
+
+        # »B18«/»B19«
+        track(:station :cat:ac15, ic[:bep - 100m, :bep + 100m] >> 9.5dt);
+
+        # »B20«/»B21«
+        track(:station :cat:ac15,
+                ic[:bep - 351m, :bep - 350m] >> 4.5dt
+            --  ic[:bep - 50m, :bep + 60m] >> 10.5dt
+            --  ic[:bep + 340m, :bep + 341m] >> 3.5dt
+        );
+    }
+
+    with link = "point.ch.Bellinzona" {
+        # »A1«
+        track(:station :cat:ac15, ic[:bep.f, :bel - 310m] >> 1.5dt);
+        track(:first:station :cat:ac15 :pax,
+                ic[:bel - 431m, :bel - 430m] >> 0.5dt
+            ..  ic[:bel - 310m, :bel + 200m + 0.7dl] >> 1.5dt
+            --  ic[:bel + 320m + 0.7dl, :bel.f] >> 0.5dt
+        );
+
+        # »A2«
+        track(:first:station :cat:ac15 :pax,
+                ic[:bep.f, :bel + 200m] >> 0.5dt
+            --  ic[:bel + 320m, :bel.f] << 0.5dt
+        );
+            track(:station :cat:ac15 :pax,
+                    ic[:bel + 200m] >> 0.5dt
+                --  ic[:bel + 260m + 0.35dl] >> 1.0dt
+            );
+                    
+    }
+}
+
