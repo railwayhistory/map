@@ -112,6 +112,24 @@ lines.
 | W (Western Region)              | not started | not started |
 
 
+## IT: Italy
+
+Italy has been split into eight areas numbered 1 to 8. They roughly cover
+the following regions:
+
+| # | coverage                                            | overview    | detail      |
+| - | --------------------------------------------------- | ----------- | ----------- |
+| 1 | Piemonte, Valle d’Aosta, Western Liguria            | in progress | not started |
+| 2 | Lombardia                                           | not started | not started |
+| 3 | Veneto, Trentiono-Alto Adige, Friuli-Venezia Giulia | not started | not started |
+| 4 | Emilia-Romagna, Toscana, Eastern Liguria            | not started | not started |
+| 5 | Marche, Umbria, Lazio, Abruzzo                      | not started | not started |
+| 6 | Molise, Campania, Puglia, Basilicata, Calabria      | not started | not started |
+| 7 | Sicilia                                             | not started | not started |
+| 8 | Sardegna                                            | not started | not started |
+
+
+
 ## LU: Luxembourg
 
 The overview map currently only covers railway lines. Tram, metro, and
