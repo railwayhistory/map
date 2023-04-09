@@ -15,15 +15,15 @@ within countries for both the overview and detailed maps.
 
 For countries not listed here, work has not started at all.
 
-[BE](#be-belgium)
-[CH](#ch-switzerland)
-[DE](#de-germany)
-[FR](#fr-france)
-[GB](#gb-united-kingdom)
-[IT](#it-italy)
-[LU](#lu-luxembourg)
-[NL](#nl-the-netherlands)
-[NO](#no-norway)
+[BE](#be-belgium) •
+[CH](#ch-switzerland) •
+[DE](#de-germany) •
+[FR](#fr-france) •
+[GB](#gb-united-kingdom) •
+[IT](#it-italy) •
+[LU](#lu-luxembourg) •
+[NL](#nl-the-netherlands) •
+[NO](#no-norway) •
 [RU](#ru-russia)
 
 
