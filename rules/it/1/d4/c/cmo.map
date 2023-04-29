@@ -1,0 +1,125 @@
+# IT CMO.  Cuneo Gesso - Mondovi Breo
+#
+let cm = path("d4.it.cmo");
+
+with detail = [4, 5] {
+    with link = "point.it.Cuneo-Gesso" {
+        # Bin. -2
+        track(:station,
+                cm[:ges - 481m, :ges - 480m]
+            --  cm[:ges - 360m, :ges - 50m] >> 3dt
+        );
+
+        # Bin. -2
+        track(:station,
+                cm[:ges - 400m, :ges - 50m] >> 2dt
+        );
+
+        # Bin. 1
+        track(:station,
+                cm[:ges - 161m, :ges - 160m]
+            --  cm[:ges - 80m, :ges + 120m] >> 1dt
+            --  cm[:ges + 200m, :ges + 201m]
+        );
+
+        # Bin. 2
+        track(:first, cm[:ges.a, :ges.yl + 140m]);
+            track(:station,
+                    cm[:ges - 540m]
+                --  cm[:ges - 480m] << 1dt
+            );
+        track(:first :removed,
+                path("d4.it.cul")[:ges.yl, :ges.yl + 200m]
+        );
+
+        # Bin. 3
+        track(:station, cm[:ges.a, :ges.yl + 60m] << 1dt);
+            track(:station,
+                    cm[:ges.yl - 15m] << 1dt
+                --  cm[:ges.yl + 40m]
+            );
+
+        # Bin. 4
+        track(:station,
+                cm[:ges - 350m, :ges + 80m] << 2dt
+        );
+
+        # Bin. 5
+        track(:station,
+                cm[:ges - 310m, :ges + 40m] << 3dt
+        );
+
+        # Bin. 6
+        track(:station,
+                cm[:ges - 271m + 0.7dl, :ges - 270m + 0.7dl] << 3dt
+            --  cm[:ges - 230m + 0.7dl, :ges] << 4dt
+        );
+
+        # Bin. 7
+        track(:station,
+                cm[:ges - 391m, :ges - 390m] << 1dt
+            --  cm[:ges - 230m, :ges - 40m] << 5dt
+            --  cm[:ges + 120m, :ges + 121m] << 1dt
+        );
+
+        platform(:open,
+                cm[:ges - 80m, :ges + 70m] >> 1dt
+            --  cm[:ges + 70m, :ges - 80m] << 1.7dt
+        );
+
+        marker(:right :de.bf, cm[:ges] >> 3dt);
+        label(cm[:ges] + (7.0dt, 0.5dt),
+            hbox(:left:bottom, vbox(:center:bottom,
+                hbox(:center:top :xsmall,
+                    vbox(:right:top,
+                        "CCF: ", "CCG: ", "CMO: ", "CSL: ", "CUL: "
+                    ),
+                    vbox(:right:top,
+                        "?", "6,", "0,", "0,", "0,"
+                    ),
+                    vbox(:left:top,
+                        "?", "34", "00", "00", "00"
+                    )
+                ),
+                span(:medium :bold, "Cuneo Gesso")
+            ))
+        );
+    }
+
+    with link = "line.it.CMO" {
+        track(:first, cm[:ges.yl + 140m, :bei - 150m]);
+
+        guide(:open,
+                cm[:ges + 4.5km] << 1.0dt
+            --  cm[:ges + 4.5km] << 4.0dt
+        );
+        label(:small, cm[:ges + 4.5km] << 4.0dt + (0dt, 1.4dt),
+            hbox(:left:middle,
+                vbox(:center:middle,
+                    " CMO",
+                    hbar(0.3),
+                    "  * 1887. ‡ 2021 ",
+                    span(:xsmall, " Ges–Roc")
+                )
+            )
+        );
+    }
+
+    with link = "point.it.Beinette" {
+        track(:first:station, cm[:bei - 150m, :bei + 150m]);
+        platform(:open,
+                cm[:bei - 50m, :bei + 35m]
+            --  cm[:bei + 35m, :bei - 50m] << 0.7dt
+        );
+        marker(:right :de.hp, cm[:bei] >> 0.5dt);
+        station(:bottom, cm[:bei] >> 0.5dt >> 1.3sh,
+            "Beinette", "7,81"
+        );
+    }
+
+    with link = "line.it.CMO" {
+        track(:first, cm[:bei + 150m, :f]);
+        slabel(:top :italic, cm[:f + 1dt] + (1.5dt, 0dt), "Mondovì Breo");
+    }
+}
+
