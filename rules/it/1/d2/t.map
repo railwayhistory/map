@@ -4,8 +4,8 @@ with detail = 2 {
 
     with link = "point.it.Torino-Porta-Nuova" {
         statdot(:cat:dc30 :pax, tg[:tor]);
-        slabel(:right :cat:dc30 :pax, tg[:tor] + (1.8km, 0.5dt),
-            hbox(:left:top :medium :bold, "Torino")
+        slabel(:right :cat:dc30 :pax, tg[:tor] + (2.3dt, 1.0dt),
+            span(:medium :bold, "Torino")
         );
     }
 
@@ -25,8 +25,8 @@ with detail = 2 {
     with link = "point.it.Trofarello" {
         track(:first:station :double :cat:dc30 :pax, tg[:tro, :tro.yf]);
         statdot(:cat:dc30 :pax, tg[:tro]);
-        slabel(:left :cat:dc30 :pax, tg[:tro] + (0dt, 0.5dt),
-            vbox(:right:top, "Trofa-", "rello  ")
+        slabel(:left :cat:dc30 :pax, tg[:tro] + (-0.5dt, 0.5dt),
+            vbox(:right:top, "Trofarello")
         );
     }
 
@@ -173,12 +173,16 @@ with detail = 2 {
 
 # IT TCN.  Novara Ovest - Novara Boschetto
 with detail = 2 {
+    let ob = path("d2.it.tcn");
+
     with link = "line.it.TCN" {
         with layer = 2 {
-            track(:first :double :cat:dc30,
-                    path("d2.it.tcn")[:noo.yn, :nob.ya]
-            );
+            track(:first :double :cat:dc30, ob[:noo.yn, :nob.ya]);
         }
+    }
+
+    with link = "point.it.Novara-Boschetto" {
+        statdot(:cat:dc30, ob[:nob]);
     }
 }
 
@@ -211,7 +215,7 @@ with detail = 2 {
     with link = "point.it.Castelnuovo-Scrivia" {
         statdot(:removed, tc[:cas]);
         slabel(:right :removed, tc[:cas] + (-5dt, -0.8dt),
-            vbox(:left:bottom, "Castelnuovo", " Scrivia")
+            vbox(:left:bottom, "C.nuovo", " Scrivia")
         );
     }
 }
@@ -278,52 +282,9 @@ with detail = 2 {
 
     with link = "point.it.Cuneo" {
         statdot(:cat:dc30 :pax, tc[:cun]);
-        slabel(:left :cat:dc30 :pax, tc[:cun] + (-2.0dt, 1.8dt),
+        slabel(:left :cat:dc30 :pax, tc[:cun] + (-1.5dt, 0.3dt),
             span(:bold, "Cuneo")
         );
-    }
-}
-
-
-# IT TDU.  Tranvia  (Torino -) Bivio Cravetta - Druento
-with detail = 2 {
-    let td = path("d2.it.tdu");
-
-    with link = "line.it.TDU" {
-        track(:tram :removed, td[:cra, :dru]);
-    }
-
-    with link = "point.it.Druento" {
-        statdot(:tram :removed, td[:dru]);
-        slabel(:left :tram :removed, td[:dru] + (-1.5dt, 0.8dt), "Druento");
-    }
-}
-
-
-# IT TGB.  Tranvia  Castagneto - Brusasco
-with detail = 2 {
-    let tb = path("d2.it.tgb");
-
-    with link = "line.it.TGB" {
-        track(:tram :removed, tb[:cas, :bru]);
-    }
-
-    with link = "point.it.Brusasco" {
-        statdot(:tram :removed, tb[:bru]);
-        slabel(:right :tram :removed, tb[:bru] + (1.5dt, 0.8dt), "Brusasco");
-    }
-}
-
-
-# IT TGC.  Tramvia  Torino - Gassino - Chivasso
-with detail = 2 {
-    let tc = path("d2.it.tgc");
-
-    with link = "line.it.TGC" {
-        track(:tram :removed, tc[:tor, :cas]);
-        track(:tram :removed, tc[:cas, :chi]);
-
-        line_label(:right:w :tram :removed, tc[:cas - 7km], "TGC");
     }
 }
 
@@ -356,40 +317,8 @@ with detail = 2 {
             tc[:cig.yb + 30km], "TMC"
         );
         line_label(:left:s :double :cat:ac25 :v300 :pax,
-            tc[:noo.yn + 18km], "TMC "
+            tc[:noo.yn + 20km], "TMC "
         );
-    }
-}
-
-
-# IT TML.  Tranvia  Tortona - Monleale
-with detail = 2 {
-    let tm = path("d2.it.tml");
-
-    with link = "line.it.TML" {
-        track(:tram :removed, tm[:tor.ym, :mon]);
-        line_label(:left:s :tram :removed, tm[:mon - 3km], " TML");
-    }
-
-    with link = "point.it.Monleale" {
-        statdot(:tram :removed, tm[:mon]);
-        slabel(:right :tram :removed, tm[:mon] + (1.5dt, 1.0dt), "Monleale");
-    }
-}
-
-
-# IT TMP.  Tranvia  Torino - Moncalieri - Poirino
-with detail = 2 {
-    let tp = path("d2.it.tmp");
-
-    with link = "line.it.TMP" {
-        track(:tram :removed, tp[:tor, :poi]);
-        line_label(:right:n :tram :removed, tp[:poi - 4km], "TMP  ");
-    }
-
-    with link = "point.it.Poirino" {
-        statdot(:tram :removed, tp[:poi]);
-        slabel(:right :tram :removed, tp[:poi] + (1.4dt, 1.0dt), "Poirino");
     }
 }
 
@@ -409,6 +338,7 @@ with detail = 2 {
 
     with link = "point.it.Venaria" {
         statdot(:cat:dc30 :pax, tc[:ven]);
+        slabel(:left :cat:dc30 :pax, tc[:ven] + (-1.5dt, 0.8dt), "Venaria");
     }
 
     with link = "line.it.TOC" {
@@ -421,31 +351,6 @@ with detail = 2 {
     with link = "point.it.Ceres" {
         statdot(:cat:dc30 :pax, tc[:cer]);
         slabel(:top :cat:dc30 :pax, tc[:cer] + (-0.3dt, -0.8dt), "Ceres");
-    }
-}
-
-
-# IT TOG.  Tranvia  Torino - Orbassano - Giaveno
-with detail = 2 {
-    let tg = path("d2.it.tog");
-
-    with link = "line.it.TOG" {
-        track(:tram :removed, tg[:som, :orb]);
-    }
-
-    with link = "point.it.Orbassano" {
-        statdot(:tram :removed, tg[:orb]);
-        slabel(:left :tram :removed, tg[:orb] + (-4.0dt, 0.8dt), "Orbassano");
-    }
-
-    with link = "line.it.TOG" {
-        track(:tram :removed, tg[:orb, :gia]);
-        line_label(:right:s :tram :removed, tg[:orb + 5km], "TOG");
-    }
-
-    with link = "point.it.Giaveno" {
-        statdot(:tram :removed, tg[:gia]);
-        slabel(:left :tram :removed, tg[:gia] + (-1.5dt, 0.8dt), "Giaveno");
     }
 }
 
@@ -527,11 +432,8 @@ with detail = 2 {
 
     with link = "point.it.Settimo-Torinese" {
         statdot(:cat:dc30 :pax, tr[:set]);
-        guide(:cat:dc30 :pax,
-                tr[:set] + (0.6dt, 1.3dt) -- tr[:set]  + (1.3km, 3.0km)
-        );
-        slabel(:right :cat:dc30 :pax, tr[:set] + (1.3km, 3.0km),
-            hbox(:left:top, "Settimo Torinese")
+        slabel(:right :cat:dc30 :pax, tr[:set] + (1.3dt, -0.3dt),
+            vbox(:left:top, "Settimo", "Torinese")
         );
     }
 
@@ -542,8 +444,8 @@ with detail = 2 {
     with link = "point.it.Chivasso" {
         track(:first:station :double :cat:dc30 :pax, tr[:chi.yi, :chi.ya]);
         statdot(:cat:dc30 :pax, tr[:chi]);
-        slabel(:right :cat:dc30 :pax, tr[:chi.yi] + (-1.8km, 3.0km),
-            hbox(:left:top, "Chivasso")
+        slabel(:bottom :cat:dc30 :pax, tr[:chi] + (-1dt, 3.0dt),
+            "Chivasso"
         );
     }
 
@@ -597,7 +499,7 @@ with detail = 2 {
     with link = "point.it.Novara" {
         track(:first:station :double :cat:dc30 :pax, tr[:nov.yb, :nov.ym]);
         statdot(:cat:dc30 :pax, tr[:nov]);
-        slabel(:bottom :cat:dc30 :pax, tr[:nov] + (-1.8dt, 4.3dt),
+        slabel(:left :cat:dc30 :pax, tr[:nov] + (-2.7km, 1.0dt),
             span(:bold, "Novara")
         );
     }
@@ -605,21 +507,6 @@ with detail = 2 {
     with link = "line.it.TOR" {
         track(:first :double :cat:dc30 :pax, tr[:nov.ym, :rho.yn]);
         line_label(:right:n :double :cat:dc30 :pax, tr[:nov.ym + 16km], "TOR");
-    }
-}
-
-
-# IT TPB.  Tramvia  Torino - Piobesi
-with detail = 2 {
-    let tp = path("d2.it.tpb");
-
-    with link = "line.it.TPB" {
-        track(:tram :removed, tp[:tor, :pio]);
-    }
-
-    with link = "point.it.Piobesi" {
-        statdot(:tram :removed, tp[:pio]);
-        slabel(:bottom :tram :removed, tp[:pio] + (-0.5dt, 0.8dt), "Piobesi");
     }
 }
 
@@ -646,109 +533,7 @@ with detail = 2 {
     with link = "point.it.Pinerolo" {
         track(:first:station :cat:dc30 :pax, tp[:pin.yt, :pin]);
         statdot(:cat:dc30 :pax, tp[:pin]);
-        slabel(:left :cat:dc30 :pax, tp[:pin] + (1.0dt, -1.5dt), "Pinerolo");
-    }
-}
-
-
-# IT TPZ.  Tranvia  Torino - Pianezza
-with detail = 2 {
-    let tp = path("d2.it.tpz");
-
-    with link = "line.it.TPZ" {
-        track(:tram :removed, tp[:tor, :pia]);
-    }
-
-    with link = "point.it.Pianezza" {
-        statdot(:tram :removed, tp[:pia]);
-        slabel(:left :tram :removed, tp[:pia] + (-1.5dt, 0dt), "Pianezza");
-    }
-}
-
-
-# IT TRI.  Tranvia  Torino - Rivoli
-with detail = 2 {
-    let tr = path("d2.it.tri");
-
-    with link = "line.it.TRI" {
-        track(:tram :removed, tr[:tor, :riv]);
-    }
-
-    with link = "point.it.Rivoli" {
-        statdot(:tram :removed, tr[:riv]);
-        slabel(:left :tram :removed, tr[:riv] + (-1.5dt, 1.8dt), "Rivoli");
-    }
-}
-
-
-# IT TSE.  Torino corse Regina Margherita - Settimo Stazione
-with detail = 2 {
-    let ts = path("d2.it.tse");
-
-    with link = "line.it.TSE" {
-        track(:tram :removed, ts[:tor, :set]);
-    }
-}
-
-
-# IT TSL.  Tranvia Torino - Saluzzo
-with detail = 2 {
-    let ts = path("d2.it.tsl");
-
-    with link = "line.it.TSL" {
-        track(:tram :removed, ts[:tor, :pil]);
-        line_label(:left:w :tram :removed, ts[:pil - 3km], "TSL");
-    }
-
-    with link = "point.it.Pilone-Virle" {
-        statdot(:tram :removed, ts[:pil]);
-        slabel(:left :tram :removed, ts[:pil] + (-1.5dt, 0.8dt),
-            "Pilone Virle"
-        );
-    }
-
-    with link = "line.it.TSL" {
-        track(:tram :removed, ts[:pil, :sal]);
-
-        line_label(:right:e :tram :removed, ts[:pil + 8km], "TSL");
-        line_label(:left:w :tram :removed, ts[:sal - 5.4km], "TSL");
-    }
-
-    with link = "point.it.Saluzzo-Porta-Torino" {
-        statdot(:tram :removed, ts[:sal]);
-    }
-}
-
-
-# IT TTS.  Tranvia  Tortona - Sale
-with detail = 2 {
-    let ts = path("d2.it.tts");
-
-    with link = "line.it.TTS" {
-        track(:tram :removed, ts[:tor.ys, :sal.yt]);
-        line_badge(:tram :removed, ts[:tor.ys + 5km], "TTS");
-    }
-}
-
-
-# IT TVE.  Tranvia  Torino - Venaria
-with detail = 2 {
-    let tv = path("d2.it.tve");
-
-    with link = "line.it.TVE" {
-        track(:tram :removed, tv[:viu, :ven.yt]);
-    }
-}
-
-
-# IT TVP.  Tranvia Torino - Volpiano
-with detail = 2 {
-    let tv = path("d2.it.tvp");
-
-    with link = "line.it.TVP" {
-        track(:tram :removed, tv[:tor, :vol]);
-
-        line_label(:left:e :tram :removed, tv[:vol - 7km], "TVP");
+        slabel(:left :cat:dc30 :pax, tp[:pin] + (-2.0dt, 0dt), "Pinerolo");
     }
 }
 
