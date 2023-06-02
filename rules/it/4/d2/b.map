@@ -1,0 +1,108 @@
+# IT BAM.  Bologna Centrale - Milano Rogoredo (AV)
+with detail = 2 {
+    let bm = path("d2.it.4.bam");
+
+    with link = "line.it.BAM" {
+        track(:first:station :double :cat:dc30 :pax, bm[:cae.y, :cac]);
+        track(:first:station :double :cat:ac25 :pax, bm[:cac, :rem]);
+
+        line_label(:right:s :double :cat:ac25 :pax, bm[:cac + 10km], "  BAM");
+        line_label(:right:s :double :cat:ac25 :pax, bm[:rem - 10.5km], " BAM");
+    }
+
+    with link = "point.it.Reggio-Emilia-AV-Mediopadana" {
+        statdot(:cat:ac25 :pax, bm[:rem]);
+    }
+
+    with link = "line.it.BAM" {
+        track(:first:station :double :cat:ac25 :pax, bm[:rem, :fio.y]);
+        line_badge(:cat:ac25 :pax, bm[:rem + 14km], "BAM");
+    }
+}
+
+
+# IT BOM.  Bologna Centrale - Milano Rogoredo
+with detail = 2 {
+    let bm = path("d2.it.4.bom");
+
+    with link = "point.it.Bologna-Centrale" {
+        track(:first:station :double :cat:dc30 :pax, bm[:bol, :svi]);
+        statdot(:cat:dc30 :pax, bm[:bol]);
+    }
+
+    with link = "point.it.Santa-Viola" {
+        track(:first:station :double :cat:dc30 :pax, bm[:svi, :svi.yv]);
+    }
+
+    with link = "line.it.BOM" {
+        track(:first :double :cat:dc30 :pax, bm[:svi.yv, :lav.yc]);
+    }
+
+    with link = "point.it.Lavino" {
+        track(:first:station :double :cat:dc30 :pax, bm[:lav.yc, :lav]);
+    }
+
+    with link = "line.it.BOM" {
+        track(:first :double :cat:dc30 :pax, bm[:lav, :cae.y]);
+        track(:first :double :cat:dc30 :pax, bm[:cae.y, :cas]);
+    }
+
+    with link = "point.it.Castelfranco-Emilia" {
+        statdot(:cat:dc30 :pax, bm[:cas]);
+        slabel(:left :cat:dc30 :pax, bm[:cas] + (0.5dt, 0.8dt),
+            vbox(:right:top, "Castelfranco", "Emilia")
+        );
+    }
+
+    with link = "line.it.BOM" {
+        track(:first :double :cat:dc30 :pax, bm[:cas, :mod.yf]);
+        line_label(:left:n :double :cat:dc30 :pax, bm[:cas + 7km], "BOM ");
+    }
+
+    with link = "point.it.Modena" {
+        track(:first:station :double :cat:dc30 :pax, bm[:mod.yf, :mod.yv]);
+        statdot(:cat:dc30 :pax, bm[:mod]);
+        slabel(:left:cat:dc30 :pax, bm[:mod] + (-1.5km, 2.3km),
+            span(:bold, "Modena")
+        );
+    }
+
+    with link = "line.it.BOM" {
+        track(:first :double :cat:dc30 :pax, bm[:mod.yv, :reg.ys]);
+        line_label(:left:n :double :cat:dc30 :pax, bm[:mod.yv + 13km], "BOM ");
+    }
+
+    with link = "point.it.Reggio-Emilia" {
+        track(:first:station :double :cat:dc30 :pax, bm[:reg.ys, :reg.yc]);
+        statdot(:cat:dc30 :pax, bm[:reg]);
+        slabel(:left :cat:dc30 :pax, bm[:reg] + (-0.5dt, 0.8dt),
+            vbox(:right:top, "Reggio", "Emilia")
+        );
+    }
+
+    with link = "line.it.BOM" {
+        track(:first :double :cat:dc30 :pax, bm[:reg.yc, :par.ye]);
+        line_badge(:cat:dc30 :pax, bm[:reg.yc + 14km], "BOM");
+    }
+
+    with link = "point.it.Parma" {
+        track(:first:station :double :cat:dc30 :pax, bm[:par.ye, :par.ys]);
+        statdot(:cat:dc30 :pax, bm[:par]);
+        slabel(:left :cat:dc30 :pax, bm[:par] + (0dt, -2.5dt),
+            span(:bold, "Parma")
+        );
+    }
+
+    with link = "line.it.BOM" {
+        track(:first :double :cat:dc30 :pax, bm[:par.ys, :fid.yf]);
+    }
+
+    with link = "point.it.Fidenza" {
+        track(:first:station :double :cat:dc30 :pax, bm[:fid.yf, :fid.ys]);
+        statdot(:cat:dc30 :pax, bm[:fid]);
+        slabel(:left :cat:dc30 :pax, bm[:fid] + (-1.5dt, 0.5dt),
+            hbox(:right:top, "Fidenza")
+        );
+    }
+}
+
