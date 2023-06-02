@@ -132,7 +132,7 @@ the following regions:
 | # | coverage                                            | overview    | detail      |
 | - | --------------------------------------------------- | ----------- | ----------- |
 | 1 | Piemonte, Valle d’Aosta, Western Liguria            | complete    | not started |
-| 2 | Lombardia                                           | in progress | not started |
+| 2 | Lombardia                                           | complete    | not started |
 | 3 | Veneto, Trentiono-Alto Adige, Friuli-Venezia Giulia | not started | not started |
 | 4 | Emilia-Romagna, Toscana, Eastern Liguria            | not started | not started |
 | 5 | Marche, Umbria, Lazio, Abruzzo                      | not started | not started |
