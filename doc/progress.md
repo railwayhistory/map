@@ -15,6 +15,18 @@ within countries for both the overview and detailed maps.
 
 For countries not listed here, work has not started at all.
 
+[BE](#be-belgium) •
+[CH](#ch-switzerland) •
+[DE](#de-germany) •
+[FR](#fr-france) •
+[GB](#gb-united-kingdom) •
+[IT](#it-italy) •
+[LU](#lu-luxembourg) •
+[NL](#nl-the-netherlands) •
+[NO](#no-norway) •
+[RU](#ru-russia)
+
+
 
 ## BE: Belgium
 
@@ -110,6 +122,24 @@ lines.
 | S (Southern Region)             | not started | not started |
 | U (Northern Ireland – “Ulster”) | not started | not started |
 | W (Western Region)              | not started | not started |
+
+
+## IT: Italy
+
+Italy has been split into eight areas numbered 1 to 8. They roughly cover
+the following regions:
+
+| # | coverage                                            | overview    | detail      |
+| - | --------------------------------------------------- | ----------- | ----------- |
+| 1 | Piemonte, Valle d’Aosta, Western Liguria            | complete    | not started |
+| 2 | Lombardia                                           | in progress | not started |
+| 3 | Veneto, Trentiono-Alto Adige, Friuli-Venezia Giulia | not started | not started |
+| 4 | Emilia-Romagna, Toscana, Eastern Liguria            | not started | not started |
+| 5 | Marche, Umbria, Lazio, Abruzzo                      | not started | not started |
+| 6 | Molise, Campania, Puglia, Basilicata, Calabria      | not started | not started |
+| 7 | Sicilia                                             | not started | not started |
+| 8 | Sardegna                                            | not started | not started |
+
 
 
 ## LU: Luxembourg
