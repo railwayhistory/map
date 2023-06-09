@@ -2,6 +2,11 @@
 
 ## Updates
 
+### 2023-06-11
+
+* Passenger service reopened on line _DE 6588_ between the border and
+  Seifhennersdorf.
+
 ### 2022-12-11
 
 * Passenger service on lines _BE 96_ south of Quévy and _FR 247_ discontinued.
