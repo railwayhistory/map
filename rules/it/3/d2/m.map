@@ -1,10 +1,47 @@
+# IT MBS.  Montebelluna - Bivio Piave (- Susegana)
+with detail = 2 {
+    let ms = path("d2.it.mbs");
+
+    with link = "line.it.MBS" {
+        track(:first :removed, ms[:mon.ys, :pia.y]);
+        line_label(:left:se :removed, ms[:pia.y - 7km], "MBS");
+    }
+}
+
+
+# IT MCL.  Mezzocorona - Mezzolombardo
+with detail = 2 {
+    let mm = path("d2.it.mcl");
+
+    with link = "line.it.MCL" {
+        track(:first :removed, mm[:mec.yl, :mel]);
+    }
+
+    with link = "point.it.Mezzolombardo" {
+        statdot(:removed, mm[:mel]);
+        slabel(:left :removed, mm[:mel] + (-1.5dt, 1.0dt), "Mezzolombardo");
+    }
+}
+
+
+# IT MCP.  Bivio Mirano - Bivio Carpenedo
+with detail = 2 {
+    let mc = path("d2.it.mcp");
+
+    with link = "line.it.MCP" {
+        track(:first :double :removed, mc[:mir.yt, :mir.ym]);
+        track(:first :double :removed, mc[:btr.y, :bca.y]);
+    }
+}
+
+
 # IT MIV.  Milano Centrale - Venezia Santa Lucia
 with detail = 2 {
     let mv = path("d2.it.3.miv");
 
     with link = "point.it.Peschiera-del-Garda" {
         statdot(:cat:dc30 :pax, mv[:pes]);
-        slabel(:right :cat:dc30 :pax, mv[:pes] + (-0.5dt, -1.3dt),
+        slabel(:right :cat:dc30 :pax, mv[:pes] + (0.5dt, -1.3dt),
             vbox(:left:bottom, "Peschiera", "del Garda")
         );
     }
@@ -48,7 +85,7 @@ with detail = 2 {
 
     with link = "point.it.Lonigo" {
         statdot(:cat:dc30 :pax, mv[:lon]);
-        slabel(:right :cat:dc30 :pax, mv[:lon] + (1.5dt, 1.5dt), "Lonigo");
+        slabel(:right :cat:dc30 :pax, mv[:lon] + (2.3dt, 1.0dt), "Lonigo");
     }
 
     with link = "line.it.MIV" {
@@ -83,8 +120,8 @@ with detail = 2 {
     with link = "point.it.Grisignano-di-Zocco" {
         track(:first:station :double :cat:dc30 :pax, mv[:gri.yo, :gri.yt]);
         statdot(:cat:dc30 :pax, mv[:gri]);
-        slabel(:right :cat:dc30 :pax, mv[:gri] + (2dt, 0dt),
-            vbox(:left:middle, "Grisignano", "     di Zocco")
+        slabel(:left :cat:dc30 :pax, mv[:gri] + (-3km, -2.3dt),
+            vbox(:right:top, "Grisignano", "di Zocco       ")
         );
     }
 
@@ -102,7 +139,7 @@ with detail = 2 {
 
     with link = "line.it.MIV" {
         track(:first :double :cat:dc30 :pax, mv[:pad, :gme.ys]);
-        line_badge(:cat:dc30 :pax, mv[:pad + 14km], "MIV");
+        line_label(:left:s :double :cat:dc30 :pax, mv[:pad + 14km], "VAV/MIV");
     }
 
     with link = "point.it.Gruppo-Scambi-Mestre" {
@@ -113,17 +150,158 @@ with detail = 2 {
     with link = "point.it.Venezia-Mestre" {
         track(:first:station :double :cat:dc30 :pax, mv[:gme.yt, :mes]);
         statdot(:cat:dc30 :pax, mv[:mes]);
+        slabel(:right :cat:dc30 :pax :bold, mv[:mes] + (1.5dt, -0.5dt),
+            "Venezia Mestre"
+        );
     }
 
     with link = "line.it.MIV" {
         track(:first :double :cat:dc30 :pax, mv[:mes, :ven]);
+        line_label(:right:n :double :cat:dc30 :pax, mv[:ven - 4km], "MIV  ");
     }
 
     with link = "point.it.Venezia-S-Lucia" {
         statdot(:cat:dc30 :pax, mv[:ven]);
-        slabel(:right :cat:dc30 :pax, mv[:ven] + (-1.3km, -2.0km),
-            span(:medium:bold, "Venezia")
+        slabel(:right :cat:dc30 :pax, mv[:ven] + (1.8dt, 1.0dt),
+            hbox(:left:base, span(:medium:bold, "Venezia "), " S. Lucia")
         );
+    }
+}
+
+
+# IT MMV.  Modena - Bivio Santa Lucia (- Verona)
+with detail = 2 {
+    let mv = path("d2.it.3.mmv");
+
+    with link = "line.it.MMV" {
+        track(:first :cat:dc30 :pax, mv[:suz.yf, :man.yc]);
+        line_label(:right:w :cat:dc30 :pax, mv[:suz.yf + 9km], "MMV");
+    }
+
+    with link = "point.it.Mantova" {
+        track(:first:station :cat:dc30 :pax, mv[:man.yc, :man]);
+        statdot(:cat:dc30 :pax, mv[:man]);
+        slabel(:left :cat:dc30 :pax, mv[:man] + (-1.3dt, -0.3dt), "Mantova");
+    }
+
+    with link = "line.it.MMV" {
+        track(:first :cat:dc30 :pax, mv[:man, :san]);
+    }
+
+    with link = "point.it.San-Antonio-Mantovano" {
+        track(:first:station :cat:dc30 :pax, mv[:san, :san.yp]);
+        statdot(:cat:dc30 :pax, mv[:san]);
+        slabel(:right :cat:dc30 :pax, mv[:san] + (1.8dt, 1.0dt),
+            vbox(:left:bottom, "Sant’Antonio", "Mantovano")
+        );
+    }
+
+    with link = "line.it.MMV" {
+        track(:first :cat:dc30 :pax, mv[:san.yp, :dos.yr]);
+        line_label(:right:w :cat:dc30 :pax, mv[:san.yp + 13km], "MMV");
+    }
+
+    with link = "point.it.Dossobuono" {
+        track(:first:station :cat:dc30 :pax, mv[:dos.yr, :dos]);
+        statdot(:cat:dc30 :pax, mv[:dos]);
+        slabel(:left :cat:dc30 :pax, mv[:dos] + (-1.5dt, 0dt), "Dossobuono");
+    }
+
+    with link = "line.it.MMV" {
+        track(:first :double :cat:dc30 :pax, mv[:dos, :slu.ym]);
+    }
+}
+
+
+# IT MRG.  Mori - Riva del Garda
+with detail = 2 {
+    let mr = path("d2.it.mrg");
+
+    with link = "line.it.MRG" {
+        track(:first :narrow:g760 :removed, mr[:mor, :riv]);
+        line_label(:right:s :removed, mr[:riv - 5.7km], "MRG");
+    }
+
+    with link = "point.it.Riva-del-Garda" {
+        statdot(:removed, mr[:riv]);
+        slabel(:left :removed, mr[:riv] + (-1.5dt, 1.0dt), "Riva del Garda");
+    }
+}
+
+
+# IT MSN.  Bivio Marocco - Bivio Spinea
+with detail = 2 {
+    let ms = path("d2.it.msn");
+
+    with link = "line.it.MSN" {
+        track(:first :double :cat:dc30, ms[:mar.y, :spi.yu]);
+    }
+}
+
+
+# IT MSV.  Motta di Livenza - San Vito al Tagliamento
+with detail = 2 {
+    let mv = path("d2.it.msv");
+
+    with link = "line.it.MSV" {
+        track(:first :removed, mv[:liv.yv, :svi.ym]);
+        line_label(:left:s :removed, mv[:svi.ym - 11km], "MSV");
+    }
+}
+
+
+# IT MTM.  Mantova - Monselice
+with detail = 2 {
+    let mm = path("d2.it.mtm");
+
+    with link = "line.it.MTM" {
+        track(:first :cat:dc30 :pax, mm[:man.yc, :nog.ym]);
+        track(:first :cat:dc30 :pax, mm[:nog.yl, :cer.yv]);
+
+        line_label(:right:n :cat:dc30 :pax, mm[:man.yc + 8km], " MTM");
+        line_label(:left:s :cat:dc30 :pax, mm[:nog.yl + 5km], "MTM");
+    }
+
+    with link = "point.it.Cerea" {
+        track(:first:station :double :cat:dc30 :pax, mm[:cer.yv, :cer]);
+        statdot(:cat:dc30 :pax, mm[:cer]);
+        slabel(:bottom :cat:dc30 :pax, mm[:cer] + (-0.5dt, 1.0dt), "Cerea");
+    }
+
+    with link = "line.it.MTM" {
+        track(:first :double :cat:dc30 :pax, mm[:cer, :leg.yo]);
+        line_label(:left:s :double :cat:dc30 :pax, mm[:cer + 4km], "MTM");
+    }
+
+    with link = "point.it.Legnago" {
+        track(:first:station :double :cat:dc30 :pax, mm[:leg.yo, :leg]);
+        track(:first:station :cat:dc30 :pax, mm[:leg, :leg.yt]);
+        statdot(:cat:dc30 :pax, mm[:leg]);
+        slabel(:right :cat:dc30 :pax, mm[:leg] + (2.5dt, 2.0dt), "Legnago");
+    }
+
+    with link = "line.it.MTM" {
+        track(:first :cat:dc30 :pax, mm[:leg.yt, :mon.ym]);
+        line_label(:left:s :cat:dc30 :pax, mm[:leg.yt + 20km], "MTM");
+    }
+}
+
+
+# IT MTP.  Mantova - Peschiera
+with detail = 2 {
+    let mp = path("d2.it.mtp");
+
+    with link = "line.it.MTP" {
+        track(:first :removed, mp[:san.yp, :pes.ym]);
+        line_label(:left:e :removed, mp[:san.yp + 16km], "MTP");
+    }
+}
+
+
+# IT MXN.  Gruppo Scambi Mestre - Confluenza Udine/Trieste
+with detail = 2 {
+    with link = "line.it.MXN" {
+        track(:first :double :cat:dc30, path("d2.it.mxn")[:gme.yt, :mes.ys]);
     }
 }
 

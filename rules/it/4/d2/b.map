@@ -106,3 +106,72 @@ with detail = 2 {
     }
 }
 
+
+# IT BOP.  Bologna Centrale - Padova
+with detail = 2 {
+    let bp = path("d2.it.4.bop");
+
+    with link = "line.it.BOP" {
+        track(:first :double :cat:dc30 :pax, bp[:bol.yp, :boc.yc]);
+    }
+
+    with link = "point.it.Bologna-Corticella" {
+        track(:first:station :double :cat:dc30 :pax, bp[:boc.yc, :boc]);
+        statdot(:cat:dc30 :pax, bp[:boc]);
+    }
+
+    with link = "line.it.BOP" {
+        track(:first :double :cat:dc30 :pax, bp[:boc, :fer.yr]);
+        line_label(:left:se :double :cat:dc30 :pax, bp[:boc + 20km], "BOP");
+    }
+
+    with link = "point.it.Ferrara" {
+        track(:first:station :double :cat:dc30 :pax, bp[:fer.yr, :fer.yc]);
+        statdot(:cat:dc30 :pax, bp[:fer]);
+        slabel(:right :cat:dc30 :pax, bp[:fer] + (1.5dt, 0.8dt), "Ferrara");
+    }
+}
+
+
+# IT BOV.  Bologna Centrale - Verona Porta Nuova
+with detail = 2 {
+    let bv = path("d2.it.4.bov");
+
+    with link = "line.it.BOV" {
+        track(:first :double :cat:dc30 :pax, bv[:svi.yv, :tav.y]);
+        track(:first :double :cat:dc30 :pax, bv[:tav.y, :sgi]);
+    }
+
+    with link = "point.it.San-Giovanni-in-Persiceto" {
+        track(:first:station :double :cat:dc30 :pax, bv[:sgi, :sgi.yd]);
+        statdot(:cat:dc30 :pax, bv[:sgi]);
+        slabel(:right :cat:dc30 :pax, bv[:sgi] + (1.8dt, 0.8dt),
+            vbox(:left:middle, "San Giovanni", "   in Persiceto")
+        );
+    }
+
+    with link = "line.it.BOV" {
+        track(:first :double :cat:dc30 :pax, bv[:sgi.yd, :cre.yf]);
+        line_label(:left:e :double :cat:dc30 :pax, bv[:sgi.yd + 4km], "BOV");
+    }
+
+    with link = "point.it.Crevalcore" {
+        track(:first:station :double :cat:dc30 :pax, bv[:cre.yf, :cre.ym]);
+        statdot(:cat:dc30 :pax, bv[:cre]);
+        slabel(:right :cat:dc30 :pax, bv[:cre] + (1.5dt, 0.3dt), "Crevalcore");
+    }
+
+    with link = "line.it.BOV" {
+        track(:first :double :cat:dc30 :pax, bv[:cre.ym, :pog.yf]);
+        line_label(:right:w :double :cat:dc30 :pax, bv[:pog.yf - 16km], "BOV");
+    }
+
+    with link = "point.it.Poggio-Rusco" {
+        track(:first:station :double :cat:dc30 :pax, bv[:pog.yf, :pog.ys]);
+        statdot(:cat:dc30 :pax, bv[:pog]);
+        slabel(:left :cat:dc30 :pax, bv[:pog] + (-1.5dt, 1.5dt),
+            "Poggio Rusco"
+        );
+    }
+}
+
