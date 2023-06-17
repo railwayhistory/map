@@ -39,6 +39,7 @@
 
 | Date | Update |
 | ---- | ------ |
+| 2023-06-17 | Added details 0, 1, and 2 for area 3 of Italy. |
 | 2023-06-02 | Added details 0, 1, and 2 for area 2 of Italy. |
 | 2023-04-29 | Added details 0, 1, and 2 for area 1 of Italy. |
 | 2023-04-06 | Added details 0, 1, and 2 for Switzerland. |
