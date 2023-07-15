@@ -6,8 +6,8 @@ with detail = 2 {
         track(:first:station :double :cat:dc30 :pax, bm[:cae.y, :cac]);
         track(:first:station :double :cat:ac25 :pax, bm[:cac, :rem]);
 
-        line_label(:right:s :double :cat:ac25 :pax, bm[:cac + 10km], "  BAM");
-        line_label(:right:s :double :cat:ac25 :pax, bm[:rem - 10.5km], " BAM");
+        line_label(:right:sw :double :cat:ac25 :pax, bm[:cac + 5km], "BAM");
+        line_label(:right:s :double :cat:ac25 :pax, bm[:rem - 12.5km], " BAM");
     }
 
     with link = "point.it.Reggio-Emilia-AV-Mediopadana" {
@@ -17,6 +17,131 @@ with detail = 2 {
     with link = "line.it.BAM" {
         track(:first:station :double :cat:ac25 :pax, bm[:rem, :fio.y]);
         line_badge(:cat:ac25 :pax, bm[:rem + 14km], "BAM");
+    }
+}
+
+
+# IT BAR.  Bivio Arcoveggio - Bologna Arcoveggio
+with detail = 2 {
+    let aa = path("d2.it.bar");
+
+    with link = "line.it.BAR" {
+        track(:first :double :cat:dc30, aa[:bar.y, :arc]);
+    }
+
+    with link = "point.it.Bologna-Arcoveggio" {
+        statdot(:cat:dc30, aa[:arc]);
+    }
+}
+
+
+# IT BCC.  Doppio Bivio Beverara - Castelmaggiore
+with detail = 2 {
+    with link = "line.it.BCC" {
+        track(:first :double :cat:dc30, path("d2.it.bcc")[:bev.yc, :boc.yc]);
+    }
+}
+
+
+# IT BLC.  Bologna Centrale - Lecce
+with detail = 2 {
+    let bl = path("d2.it.4.blc");
+
+    with link = "point.it.Bologna-Centrale" {
+        track(:first:station :double :cat:dc30 :pax, bl[:bol, :bsv.y]);
+        slabel(:right :cat:dc30 :pax :medium :bold, bl[:bol] + (3dt, -2.4km),
+            "Bologna"
+        );
+    }
+
+    with link = "line.it.BLC" {
+        track(:first :double :cat:dc30 :pax, bl[:bsv.y, :imo]);
+        line_badge(:cat:dc30 :pax, bl[:bsv.y + 15km], "BLC");
+    }
+
+    with link = "point.it.Imola" {
+        statdot(:cat:dc30 :pax, bl[:imo]);
+        slabel(:left :cat:dc30 :pax, bl[:imo] + (-2.8dt, 1.3dt), "Imola");
+    }
+
+    with link = "line.it.BLC" {
+        track(:first :double :cat:dc30 :pax, bl[:imo, :cas]);
+    }
+
+    with link = "point.it.Castelbolognese-Riolo-Terme" {
+        track(:first:station :double :cat:dc30 :pax, bl[:cas, :cas.yl]);
+        statdot(:cat:dc30 :pax, bl[:cas]);
+        slabel(:left :cat:dc30 :pax, bl[:cas] + (-2.5dt, -1.0dt),
+            vbox(:right:top, "Castel-", "bolognese-   ")
+        );
+        slabel(:right :cat:dc30 :pax, bl[:cas] + (-2dt, -1.0dt),
+            vbox(:left:top, "", "R.T.")
+        );
+    }
+
+    with link = "line.it.BLC" {
+        track(:first :double :cat:dc30 :pax, bl[:cas.yl, :fae.yf]);
+    }
+
+    with link = "point.it.Faenza" {
+        track(:first:station :double :cat:dc30 :pax, bl[:fae.yf, :fae.yr]);
+        statdot(:cat:dc30 :pax, bl[:fae]);
+        slabel(:right :cat:dc30 :pax, bl[:fae.yr] + (2.5dt, 0dt), "Faenza");
+    }
+
+    with link = "line.it.BLC" {
+        track(:first :double :cat:dc30 :pax, bl[:fae.yr, :rim.yf]);
+        line_badge(:cat:dc30 :pax, bl[:fae.yr + 25km], "BLC");
+    }
+
+    with link = "point.it.Rimini" {
+        track(:first:station :double :cat:dc30 :pax, bl[:rim.yf, :rim.ym]);
+        statdot(:cat:dc30 :pax, bl[:rim]);
+        slabel(:right :cat:dc30 :pax :bold, bl[:rim] + (1.5dt, -0.5dt),
+            "Rimini"
+        );
+    }
+
+    with link = "line.it.BLC" {
+        track(:first :double :cat:dc30 :pax, bl[:rim.ym, :fan]);
+        line_label(:left:s :double :cat:dc30 :pax, bl[:rim.ym + 18km], "  BLC");
+    }
+}
+
+
+# IT BMC.  Barco - Montecchio
+with detail = 2 {
+    let bm = path("d2.it.bmc");
+
+    with link = "line.it.BMC" {
+        track(:first :removed, bm[:bar.ym, :mon]);
+        line_label(:right:s :removed, bm[:bar.ym + 1.5km], "BMC");
+    }
+
+    with link = "point.it.Montecchio" {
+        statdot(:removed, bm[:mon]);
+        slabel(:left :removed, bm[:mon] + (-1.5dt, 0.8dt), "Montecchio");
+    }
+}
+
+
+# IT BML.  Budrio - Massalomarda
+with detail = 2 {
+    let bm = path("d2.it.bml");
+
+    with link = "line.it.BML" {
+        track(:first :removed, bm[:bud.ym, :mas.yb]);
+        line_label(:left:s :removed, bm[:mas.yb - 12km], "BML");
+    }
+}
+
+
+# IT BOC.  Bivio Crociali - Lavino
+with detail = 2 {
+    let cl = path("d2.it.boc");
+
+    with link = "line.it.BOC" {
+        track(:first :double :cat:dc30, cl[:cro.y, :lav.yc]);
     }
 }
 
@@ -50,7 +175,7 @@ with detail = 2 {
     with link = "point.it.Castelfranco-Emilia" {
         statdot(:cat:dc30 :pax, bm[:cas]);
         slabel(:left :cat:dc30 :pax, bm[:cas] + (0.5dt, 0.8dt),
-            vbox(:right:top, "Castelfranco", "Emilia")
+            vbox(:right:top, "Castel- ", "franco E.")
         );
     }
 
@@ -62,8 +187,8 @@ with detail = 2 {
     with link = "point.it.Modena" {
         track(:first:station :double :cat:dc30 :pax, bm[:mod.yf, :mod.yv]);
         statdot(:cat:dc30 :pax, bm[:mod]);
-        slabel(:left:cat:dc30 :pax, bm[:mod] + (-1.5km, 2.3km),
-            span(:bold, "Modena")
+        slabel(:left:cat:dc30 :pax, bm[:mod] + (-0.8dt, 0.2dt),
+            hbox(:right:top :bold, "Modena")
         );
     }
 
@@ -72,11 +197,15 @@ with detail = 2 {
         line_label(:left:n :double :cat:dc30 :pax, bm[:mod.yv + 13km], "BOM ");
     }
 
+    with link = "point.it.Reggio-San-Lazzaro" {
+        statdot(:cat:dc30 :pax, bm[:rsl]);
+    }
+
     with link = "point.it.Reggio-Emilia" {
         track(:first:station :double :cat:dc30 :pax, bm[:reg.ys, :reg.yc]);
         statdot(:cat:dc30 :pax, bm[:reg]);
         slabel(:left :cat:dc30 :pax, bm[:reg] + (-0.5dt, 0.8dt),
-            vbox(:right:top, "Reggio", "Emilia")
+            vbox(:right:top :bold, "Reggio", "Emilia")
         );
     }
 
@@ -100,7 +229,7 @@ with detail = 2 {
     with link = "point.it.Fidenza" {
         track(:first:station :double :cat:dc30 :pax, bm[:fid.yf, :fid.ys]);
         statdot(:cat:dc30 :pax, bm[:fid]);
-        slabel(:left :cat:dc30 :pax, bm[:fid] + (-1.5dt, 0.5dt),
+        slabel(:left :cat:dc30 :pax, bm[:fid] + (-2.2km, -0.8dt),
             hbox(:right:top, "Fidenza")
         );
     }
@@ -128,7 +257,9 @@ with detail = 2 {
     with link = "point.it.Ferrara" {
         track(:first:station :double :cat:dc30 :pax, bp[:fer.yr, :fer.yc]);
         statdot(:cat:dc30 :pax, bp[:fer]);
-        slabel(:right :cat:dc30 :pax, bp[:fer] + (1.5dt, 0.8dt), "Ferrara");
+        slabel(:right :cat:dc30 :pax :bold, bp[:fer] + (1.5dt, 1.3dt),
+            "Ferrara"
+        );
     }
 }
 
@@ -145,7 +276,7 @@ with detail = 2 {
     with link = "point.it.San-Giovanni-in-Persiceto" {
         track(:first:station :double :cat:dc30 :pax, bv[:sgi, :sgi.yd]);
         statdot(:cat:dc30 :pax, bv[:sgi]);
-        slabel(:right :cat:dc30 :pax, bv[:sgi] + (1.8dt, 0.8dt),
+        slabel(:right :cat:dc30 :pax, bv[:sgi] + (1.8dt, 1.0dt),
             vbox(:left:middle, "San Giovanni", "   in Persiceto")
         );
     }
@@ -158,12 +289,24 @@ with detail = 2 {
     with link = "point.it.Crevalcore" {
         track(:first:station :double :cat:dc30 :pax, bv[:cre.yf, :cre.ym]);
         statdot(:cat:dc30 :pax, bv[:cre]);
-        slabel(:right :cat:dc30 :pax, bv[:cre] + (1.5dt, 0.3dt), "Crevalcore");
+        slabel(:right :cat:dc30 :pax, bv[:cre] + (0.5dt, -1.5dt), "Crevalcore");
     }
 
     with link = "line.it.BOV" {
-        track(:first :double :cat:dc30 :pax, bv[:cre.ym, :pog.yf]);
-        line_label(:right:w :double :cat:dc30 :pax, bv[:pog.yf - 16km], "BOV");
+        track(:first :double :cat:dc30 :pax, bv[:cre.ym, :mir.ym]);
+        line_label(:right:w :double :cat:dc30 :pax, bv[:cre.ym + 8km], "BOV");
+    }
+
+    with link = "point.it.Mirandola" {
+        track(:first:station :double :cat:dc30 :pax, bv[:mir.ym, :mir]);
+        statdot(:cat:dc30 :pax, bv[:mir]);
+        slabel(:right :cat:dc30 :pax, bv[:mir] + (1.5dt, 0.8dt),
+            "Mirandola"
+        );
+    }
+
+    with link = "line.it.BOV" {
+        track(:first :double :cat:dc30 :pax, bv[:mir, :pog.yf]);
     }
 
     with link = "point.it.Poggio-Rusco" {
@@ -175,3 +318,85 @@ with detail = 2 {
     }
 }
 
+
+# IT BPM.  Bologna - Portomaggiore
+with detail = 2 {
+    let bp = path("d2.it.bpm");
+
+    with link = "line.it.BPM" {
+        track(:first :cat:dc30 :pax, bp[:bol.yp, :bud]);
+    }
+
+    with link = "point.it.Budrio" {
+        track(:first:station :cat:dc30 :pax, bp[:bud, :bud.ym]);
+        statdot(:cat:dc30 :pax, bp[:bud]);
+        slabel(:right :cat:dc30 :pax, bp[:bud.ym] + (2.5dt, 0.3dt), "Budrio");
+    }
+
+    with link = "line.it.BPM" {
+        track(:first :cat:dc30 :pax, bp[:bud.ym, :pma.yb]);
+        line_label(:left:s :cat:dc30 :pax, bp[:bud.ym + 13km], "BPM");
+    }
+}
+
+
+# IT BPS.  Borgo San Lorenzo - Pontassieve
+with detail = 2 {
+    let bp = path("d2.it.bps");
+
+    with link = "line.it.BPS" {
+        track(:first :pax, bp[:bor.yp, :pon.yb]);
+        line_label(:left:w :pax, bp[:bor.yp + 17km], "BPS");
+    }
+}
+
+
+# IT BSD.  Bologna San Donato - Bologna Fiere
+with detail = 2 {
+    let df = path("d2.it.bsd");
+
+    with link = "point.it.Bologna-San-Donato" {
+        statdot(:cat:dc30, df[:bsd]);
+    }
+
+    with link = "line.it.BSD" {
+        track(:first :double :cat:dc30, df[:bsd, :fie.yd]);
+    }
+}
+
+
+# IT BTR.  Boretto - Reggio Santa Croce
+with detail = 2 {
+    let br = path("d2.it.btr");
+
+    with link = "line.it.BTR" {
+        track(:first :removed, br[:bor.yr, :rsc.yb]);
+        line_label(:left:sw :removed, br[:bor.yr + 8km], "BTR");
+    }
+}
+
+
+# IT BVN.  (Bologna) Bivio Venezia - Bivio Navile
+with detail = 2 {
+    with link = "line.it.BVN" {
+        track(:first :double :cat:dc30 :pax,
+                path("d2.it.bvn")[:svi.yp, :nav.y]
+        );
+    }
+}
+
+
+# IT BXC.  Bivio Bertalia - Bivio Trebbo
+with detail = 2 {
+    with link = "line.it.BXC" {
+        track(:first :double :cat:dc30, path("d2.it.bxc")[:ber.yc, :tre.yb]);
+    }
+}
+
+
+# IT BXT.  Bivio Calderara - Bivio Tavernelle
+with detail = 2 {
+    with link = "line.it.BXT" {
+        track(:first :double :cat:dc30, path("d2.it.bxt")[:cal.y, :tav.y]);
+    }
+}
