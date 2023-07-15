@@ -1,0 +1,188 @@
+# IT RAF.  Roma Termini - Firenze Campo di Marte (Direttissima)
+with detail = 2 {
+    let dd = path("d2.it.5.raf");
+    let ll = path("d2.it.5.rof");
+
+    with link = "line.it.RAF" {
+        track(:first :double :cat:dc30 :pax,
+                dd[:set.yd, :gal.xs - 3km]
+            ..  dd[:gal.xs, :gal.xs + 0.1dt] << 0.8dt
+            ..  dd[:gal.xc, :ors.xd] >> 0.9dt
+            ..  dd[:ors.yd - 0.1dl, :ors.yd]
+        );
+        track(:first :double :cat:dc30 :pax,
+                dd[:ors.yd, :ors.yd + 3km]
+            ..  dd[:bon.yd - 2km, :bon.yd] << 0.8dt
+            ..  dd[:bon.yd + 4km, :bon.yd + 4.1km] << 0.8dt
+            ..  dd[:bon.yd + 6km, :ovs.yd - 3km]
+            ..  dd[:ovs.yd - 0.1dl, :ovs.yd] << 0.8dt
+            ..  dd[:ovs.xd, :ovn.xs] >> 0.8dt
+            ..  dd[:ovn.xn, :all.xs] << 0.8dt
+            ..  dd[:all.xn - 0.1dl, :all.xn] >> 0.8dt
+            ..  dd[:all.xxn, :cit.xl - 3km]
+            ..  ll[:cit.xl, :cit.xn] << 0.9dt
+            ..  dd[:chi - 1km, :chi]
+        );
+
+        line_label(:left:e :double :cat:dc30 :pax, dd[:set.yd + 20km], "RAF");
+        line_label(:right:w :double :cat:dc30 :pax, dd[:ors.yd - 5km] >> 0.9dt,
+            "RAF"
+        );
+        line_label(:left:e :double :cat:dc30 :pax, dd[:ovs.yd - 13km], "RAF");
+        line_label(:left:e :double :cat:dc30 :pax, dd[:cit.xl - 5km], "RAF");
+    }
+}
+
+
+# IT ROF.  Roma Termini - Firenze Santa Maria Novella
+with detail = 2 {
+    let ll = path("d2.it.5.rof");
+
+    with link = "line.it.ROF" {
+        track(:first:station :double :cat:dc30 :pax, ll[:rom.yf, :rti]);
+    }
+
+    with link = "point.it.Roma-Tiburtina" {
+        statdot(:cat:dc30 :pax, ll[:rti]);
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:rti, :rsm]);
+    }
+
+    with link = "point.it.Roma-Smistamento" {
+        statdot(:cat:dc30, ll[:rsm]);
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:rsm, :set]);
+    }
+
+    with link = "point.it.Settebagni" {
+        track(:first:station :double :cat:dc30 :pax, ll[:set, :set.yd]);
+        statdot(:cat:dc30 :pax, ll[:set]);
+        slabel(:right :cat:dc30 :pax, ll[:set] + (1.5dt, 1.8dt),
+            "Settebagni"
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:set.yd, :ort.ys]);
+        line_label(:right:w :double :cat:dc30 :pax, ll[:set.yd + 25.7km],
+            "ROF"
+        );
+        line_label(:left:e :double :cat:dc30 :pax, ll[:ort.ys - 9km], "ROF");
+    }
+
+    with link = "point.it.Orte" {
+        track(:first:station :double :cat:dc30 :pax, ll[:ort.ys, :ort.ya]);
+        statdot(:cat:dc30 :pax, ll[:ort]);
+        slabel(:right :cat:dc30 :pax, ll[:ort] + (1.5dt, 0.8dt), "Orte");
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:ort, :bon.yl]);
+        track(:first :double :cat:dc30 :pax, ll[:bon.yl, :att]);
+    }
+
+    with link = "point.it.Attigliano-Bomarzo" {
+        track(:first:station :double :cat:dc30 :pax, ll[:att, :att.yv]);
+        statdot(:cat:dc30 :pax, ll[:att]);
+        slabel(:right :cat:dc30 :pax, ll[:att] + (1.5dt, -0.2dt),
+            "Attigliano-Bomarzo"
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:att.yv, :orv.ys]);
+        line_label(:right:w :double :cat:dc30 :pax, ll[:att.yv + 8.5km], "ROF");
+    }
+
+    with link = "point.it.Orvieto" {
+        track(:first:station :double :cat:dc30 :pax, ll[:orv.ys, :orv.yn]);
+        statdot(:cat:dc30 :pax, ll[:orv]);
+        slabel(:left :cat:dc30 :pax, ll[:orv] + (0dt, 0.5dt),
+            hbox(:right:top, "Orvieto")
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:orv.yn, :cit.yl]);
+        track(:first :double :cat:dc30 :pax, ll[:cit.yl, :chi]);
+
+        line_label(:right:sw :double :cat:dc30 :pax, ll[:cit.yl - 6km], "ROF");
+    }
+}
+
+
+# IT RPI.  Roma Termini - Pisa Centrale
+with detail = 2 {
+    let rp = path("d2.it.5.rpi");
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:rom.yo, :rtu]);
+    }
+
+    with link = "point.it.Roma-Tuscolana" {
+        statdot(:cat:dc30 :pax, rp[:rtu]);
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:rtu, :ros]);
+    }
+
+    with link = "point.it.Roma-Ostiense" {
+        statdot(:cat:dc30 :pax, rp[:ros]);
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:ros, :rtr]);
+    }
+
+    with link = "point.it.Roma-Trastevere" {
+        track(:first:station :double :cat:dc30 :pax, rp[:rtr, :rtr.yp]);
+        statdot(:cat:dc30 :pax, rp[:rtr]);
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:rtr.yp, :pga]);
+        line_label(:right:se :double :cat:dc30 :pax, rp[:rtr.yp + 7km], "RPI");
+    }
+
+    with link = "point.it.Ponte-Galeria" {
+        track(:first:station :double :cat:dc30 :pax, rp[:pga, :pga.yf]);
+        statdot(:cat:dc30 :pax, rp[:pga]);
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:pga.yf, :mac.yp]);
+        line_label(:left:e :double :cat:dc30 :pax, rp[:pga.yf + 6km], "RPI");
+    }
+
+    with link = "point.it.Maccarese-Fregene" {
+        track(:first:station :double :cat:dc30 :pax, rp[:mac.yp, :mac]);
+        statdot(:cat:dc30 :pax, rp[:mac]);
+        slabel(:left :cat:dc30 :pax, rp[:mac] + (-1.5dt, 1.5dt),
+            "Maccarese-Fregene"
+        );
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:mac, :civ]);
+        line_badge(:cat:dc30 :pax, rp[:mac + 20km], "RPI");
+    }
+
+    with link = "point.it.Civitavecchia" {
+        track(:first:station :double :cat:dc30 :pax, rp[:civ, :civ.yo]);
+        statdot(:cat:dc30 :pax, rp[:civ]);
+        slabel(:left :cat:dc30 :pax, rp[:civ] + (-1.8dt, 1.3dt),
+            "Civitavecchia"
+        );
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:civ.yo, :orb.yp]);
+        line_badge(:cat:dc30 :pax, rp[:civ.yo + 30km], "RPI");
+    }
+}
+

@@ -1,3 +1,66 @@
+# IT MIF.  Massalombarda - Fontanelice
+with detail = 2 {
+    let mf = path("d2.it.mif");
+
+    with link = "line.it.MIF" {
+        track(:first :removed, mf[:mas.yi, :fon]);
+        line_label(:right:se :removed, mf[:mas.yi + 9km], "MIF");
+        line_label(:right:se :removed, mf[:fon - 7km], "MIF");
+    }
+
+    with link = "point.it.Fontanelice" {
+        statdot(:removed, mf[:fon]);
+        slabel(:left :removed, mf[:fon] + (-1.5dt, 0.8dt), "Fontanelice");
+    }
+}
+
+
+# IT MIM.  Mirandola - Modena Piazza Manzoni
+with detail = 2 {
+    let mm = path("d2.it.mim");
+
+    with link = "point.it.Mirandola-SEFTA" {
+        statdot(:removed, mm[:mic]);
+    }
+
+    with link = "line.it.MIM" {
+        track(:first :removed, mm[:mic, :cav.yf]);
+        line_label(:right:e :removed, mm[:mic + 3.5km], "MIM");
+    }
+
+    with link = "point.it.Cavezzo-Villafranca" {
+        track(:first:station :removed, mm[:cav.yf, :cav]);
+        statdot(:removed, mm[:cav]);
+        slabel(:left :removed, mm[:cav] + (-1.0dt, 0dt),
+            vbox(:right:middle, "Cavezzo-", "Villafranca ")
+        );
+    }
+
+    with link = "line.it.MIM" {
+        track(:first :removed, mm[:cav, :mpz.ym]);
+        line_label(:right:se :removed, mm[:cav + 8km], "MIM");
+    }
+}
+
+
+# IT MMC.  Montepulciano - Montepulciano Città
+with detail = 2 {
+    let mm = path("d2.it.mmc");
+
+    with link = "line.it.MMC" {
+        track(:first :narrow:g950 :removed, mm[:mpu.ym, :mpc]);
+        line_label(:left:n :removed, mm[:mpu.ym + 3.6km], " MMC");
+    }
+
+    with link = "point.it.Montepulciano-Città" {
+        statdot(:removed, mm[:mpc]);
+        slabel(:left :removed, mm[:mpc] + (-1.5dt, 0dt),
+            vbox(:right:middle, "Montepulciano", "Città")
+        );
+    }
+}
+
+
 # IT MMV.  Modena - Bivio Santa Lucia (- Verona)
 with detail = 2 {
     let mv = path("d2.it.4.mmv");
@@ -34,6 +97,97 @@ with detail = 2 {
         track(:first:station :cat:dc30 :pax, mv[:suz.yp, :suz.yf]);
         statdot(:cat:dc30 :pax, mv[:suz]);
         slabel(:left :cat:dc30 :pax, mv[:suz] + (-1.5dt, 0.7dt), "Suzzara");
+    }
+}
+
+
+# IT MOD.  Modena Piazza Manzoni - Modena
+with detail = 2 {
+    with link = "line.it.MOD" {
+        track(:first :cat:dc30 :pax, path("d2.it.mod")[:mpz, :mod.ys]);
+    }
+}
+
+
+# IT MPA.  Montepescali - Asciano
+with detail = 2 {
+    let ma = path("d2.it.mpa");
+
+    with link = "line.it.MPA" {
+        track(:first :pax, ma[:mpe.ys, :man]);
+        line_label(:left:se :pax, ma[:mpe.ys + 10km], "MPA");
+    }
+
+    with link = "point.it.Monte-Antico" {
+        track(:first:station :pax, ma[:man, :man.ys]);
+        statdot(:pax, ma[:man]);
+        slabel(:left :pax, ma[:man] + (-0.5dt, -1.0dt), "Monte Antico");
+    }
+
+    with link = "line.it.MPA" {
+        track(:first :museum, ma[:man.ys, :asc.yg]);
+        line_label(:right:n :museum, ma[:man.ys + 6km], "MPA");
+        line_label(:right:w :museum, ma[:asc.yg - 10km], "MPA");
+    }
+
+}
+
+
+# IT MSI.  Monte Antico - Siena
+with detail = 2 {
+    let ms = path("d2.it.msi");
+
+    with link = "line.it.MSI" {
+        track(:first :pax,
+                ms[:man.ys, :bmr.yy]
+            ..  ms[:bmr.yy + 2dt, :sie] >> 0.65dt
+        );
+        line_label(:left:e :pax, ms[:man.ys + 8km], "MSI");
+        line_label(:left:e :pax, ms[:bmr.yy - 4.5km], "MSI");
+    }
+}
+
+
+# IT MSL.  Modena Piazza Manzoni - Sassuolo
+with detail = 2 {
+    let ms = path("d2.it.msl");
+
+    with link = "point.it.Modena-Piazza-Manzoni" {
+        track(:first:station :cat:dc30  :pax, ms[:mpz, :mpz.yv]);
+        statdot(:cat:dc30 :pax, ms[:mpz]);
+    }
+
+    with link = "line.it.MSL" {
+        track(:first :cat:dc30 :pax, ms[:mpz.yv, :sas]);
+        line_label(:right:e :cat:dc30 :pax, ms[:mpz.yv + 8km], "MSL");
+    }
+
+    with link = "point.it.Sassuolo-Terminal" {
+        with layer = 1 statdot(:over :cat:dc30 :pax, ms[:sas]);
+        statdot(:casing :cat:dc30 :pax, ms[:sas]);
+    }
+}
+
+
+# IT MVL.  Modena Piazza Manzoni - Vignola
+with detail = 2 {
+    let mv = path("d2.it.mvl");
+
+    with link = "line.it.MVL" {
+        track(:first :removed, mv[:mpz.yv, :spi]);
+        line_label(:right:e :removed, mv[:mpz.yv + 11km], "MVL");
+    }
+
+    with link = "point.it.Spilamberto" {
+        track(:first:station :removed, mv[:spi, :spi.yb]);
+        statdot(:removed, mv[:spi]);
+        slabel(:left :removed, mv[:spi] + (-1.1dt, 0.5dt),
+            hbox(:right:top, "Spilamberto")
+        );
+    }
+
+    with link = "line.it.MVL" {
+        track(:first :removed, mv[:spi.yb, :vig.ym]);
     }
 }
 
