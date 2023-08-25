@@ -2,6 +2,11 @@
 
 ## Updates
 
+### 2023-09-04
+
+* Passenger service started on line _DE 7390_ between Fangschleuse and
+  Tesla Süd.
+
 ### 2023-06-11
 
 * Passenger service reopened on line _DE 6588_ between the border and
