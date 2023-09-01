@@ -44,13 +44,14 @@
 
 | Date | Update |
 | ---- | ------ |
-| 2023-08-24 | Added details 0, 1, and 2 for area 6 of Italy. |
-| 2023-07-30 | Added details 0, 1, and 2 for area 5 of Italy. |
-| 2023-07-15 | Added details 0, 1, and 2 for area 4 of Italy. |
-| 2023-06-17 | Added details 0, 1, and 2 for area 3 of Italy. |
-| 2023-06-02 | Added details 0, 1, and 2 for area 2 of Italy. |
-| 2023-04-29 | Added details 0, 1, and 2 for area 1 of Italy. |
-| 2023-04-06 | Added details 0, 1, and 2 for Switzerland. |
+| 2023-09-01 | Added overview map for area 6 of Italy. |
+| 2023-08-24 | Added overview map for area 6 of Italy. |
+| 2023-07-30 | Added overview map for area 5 of Italy. |
+| 2023-07-15 | Added overview map for area 4 of Italy. |
+| 2023-06-17 | Added overview map for area 3 of Italy. |
+| 2023-06-02 | Added overview map for area 2 of Italy. |
+| 2023-04-29 | Added overview mapfor area 1 of Italy. |
+| 2023-04-06 | Added overview map for Switzerland. |
 | 2023-02-18 | Added detail 1 for borders between France and Switzerland and France and Italy. |
 | 2023-02-18 | Added details 0 and 1 for France. |
 | 2023-02-12 | Added lines GB WCK and GB TSO. |
