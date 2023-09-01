@@ -1,0 +1,259 @@
+# IT PBG.  Palermo Sant’Erasmo - Burgio
+with detail = 2 {
+    let pb = path("d2.it.pbg");
+
+    with link = "point.it.Palermo-Sant-Erasmo" {
+        statdot(:removed, pb[:pal]);
+    }
+
+    with link = "line.it.PBG" {
+        track(:first :narrow:g950 :removed, pb[:pal, :sca.yc]);
+        line_label(:right:e :removed, pb[:pal + 19km], "PBG");
+        line_label(:left:w :removed, pb[:sca.yc - 7.5km], "PBG");
+    }
+
+    with link = "point.it.San-Carlo" {
+        track(:first:station :narrow:g950 :removed, pb[:sca.yc, :sca]);
+        statdot(:removed, pb[:sca]);
+        slabel(:left :removed, pb[:sca] + (0dt, 0.5dt),
+            hbox(:right:top, "San Carlo")
+        );
+    }
+
+    with link = "line.it.PBG" {
+        track(:first :narrow:g950 :removed, pb[:sca, :bur]);
+        line_label(:left:w :removed, pb[:bur - 2.2km], "PBG");
+    }
+
+    with link = "point.it.Burgio" {
+        statdot(:removed, pb[:bur]);
+        slabel(:right :removed, pb[:bur] + (1.5dt, 1.0dt), "Burgio")
+    }
+}
+
+
+# IT PCM.  Palermo Centrale - Palermo Marittima
+with detail = 2 {
+    let cm = path("d2.it.pcm");
+
+    with link = "line.it.PCM" {
+        track(:first :double :cat:dc30 :pax, cm[:pal.yt, :bor.y]);
+        track(:first :double :cat:dc30 :pax, cm[:bor.y, :ppa]);
+        track(:first :cat:dc30 :pax, cm[:ppa, :pno]);
+    }
+
+    with link = "line.it.PCM" {
+        track(:first :cat:dc30 :pax, cm[:pno.ym, :gia]);
+    }
+
+    with link = "point.it.Giachery" {
+        statdot(:cat:dc30 :pax, cm[:gia]);
+    }
+
+    with link = "line.it.PCM" {
+        track(:first :removed, cm[:gia, :pma]);
+    }
+
+    with link = "point.it.Palermo-Marittima" {
+        statdot(:removed, cm[:pma]);
+    }
+}
+
+
+# IT PLM.  Palermo Centrale - Messina Centrale
+with detail = 2 {
+    let pm = path("d2.it.plm");
+
+    with link = "point.it.Palermo-Centrale" {
+        track(:first:station :double :cat:dc30 :pax, pm[:pal, :pal.yt]);
+        statdot(:cat:dc30 :pax, pm[:pal]);
+        slabel(:right :cat:dc30 :pax, pm[:pal] + (2dt, -2.0dt),
+            span(:bold:large, "Palermo")
+        );
+    }
+
+    with link = "line.it.PLM" {
+        track(:first :double :cat:dc30 :pax, pm[:pal.yt, :pbr.yt]);
+    }
+
+    with link = "point.it.Palermo-Brancaccio" {
+        track(:first:station :double :cat:dc30 :pax, pm[:pbr.yt, :pbr]);
+        statdot(:cat:dc30 :pax, pm[:pbr]);
+    }
+
+    with link = "line.it.PLM" {
+        track(:first :double :cat:dc30 :pax, pm[:pbr, :ter]);
+        line_label(:left:w :double :cat:dc30 :pax, pm[:pbr + 14km], "PLM");
+    }
+
+    with link = "point.it.Termini-Imerese" {
+        statdot(:cat:dc30 :pax, pm[:ter]);
+        slabel(:right :cat:dc30 :pax, pm[:ter] + (1.0dt, -0.5dt),
+            vbox(:left:bottom, "Termini", "Imerese")
+        );
+    }
+
+    with link = "line.it.PLM" {
+        track(:first :double :cat:dc30 :pax, pm[:ter, :fiu]);
+    }
+
+    with link = "point.it.Fiumetorto" {
+        track(:first:station :double :cat:dc30 :pax, pm[:fiu, :fiu.yr]);
+        statdot(:cat:dc30, pm[:fiu]);
+        slabel(:right :cat:dc30 :pax, pm[:fiu] + (1km, 0dt) + (1dt, 0dt),
+            hbox(:left:top, "Fiumetorto")
+        );
+    }
+
+    with link = "line.it.PLM" {
+        track(:first :double :cat:dc30 :pax, pm[:fiu.yr, :ogl]);
+        line_label(:left:s :double :cat:dc30 :pax, pm[:ogl - 10km], "PLM");
+
+        track(:first :cat:dc30 :pax, pm[:ogl, :pat]);
+        line_label(:left:s :double :cat:dc30 :pax, pm[:ogl + 34.3km], "PLM");
+        line_label(:left:s :double :cat:dc30 :pax, pm[:pat - 13.3km], "PLM");
+    }
+
+    with link = "point.it.Patti-San-Piero-Patti" {
+        track(:first:station :double :cat:dc30 :pax, pm[:pat, :pat.yn]);
+        statdot(:cat:dc30 :pax, pm[:pat]);
+        slabel(:right :cat:dc30 :pax, pm[:pat] + (-0.5dt, -0.8dt),
+            vbox(:left:bottom, "Patti-", "San Piero Patti")
+        );
+    }
+
+    with link = "line.it.PLM" {
+        track(:first :cat:dc30 :pax,
+                pm[:pat.yn, :fir.xo - 1.5dt]
+            ..  pm[:fir.xo, :fir.xe] << 0.8dt
+            ..  pm[:fir.xe + 1.5dt, :bte.yo]
+        );
+        track(:first :removed, pm[:bte.ye, :bas.xs]);
+        track(:first :removed, pm[:bas.xn, :sfi.xo]);
+        track(:first :removed, pm[:pac.xe, :rom.xo]);
+        track(:first :removed, pm[:vfr.xe, :mes.xo]);
+
+        line_label(:left:s :removed, pm[:mes.xo - 11.2km], "  PLM");
+    }
+}
+
+
+# IT PLT.  Palermo Lolli - Trapani
+with detail = 2 {
+    let pt = path("d2.it.plt");
+
+    with link = "point.it.Palermo-Lolli" {
+        statdot(:removed, pt[:plo]);
+    }
+
+    with link = "point.it.Palermo-Notarbartolo" {
+        track(:first:station :double :cat:dc30 :pax, pt[:pno, :pno.ym]);
+        statdot(:cat:dc30 :pax, pt[:pno]);
+    }
+
+    with link = "line.it.PLT" {
+        track(:first :double :cat:dc30 :pax, pt[:pno.ym, :pir]);
+        line_label(:right:s :double :cat:dc30 :pax,
+            pt[:pno.ym + 10.5km],
+            "PLT"
+        );
+    }
+
+    with link = "point.it.Piraineto" {
+        track(:first:station :double :cat:dc30 :pax, pt[:pir, :pir.yp]);
+        statdot(:cat:dc30 :pax, pt[:pir]);
+    }
+
+    with link = "line.it.PLT" {
+        track(:first :cat:dc30 :pax, pt[:pir.yp, :cin]);
+    }
+
+    with link = "point.it.Cinisi-Terrasini" {
+        statdot(:cat:dc30 :pax, pt[:cin]);
+        slabel(:left :cat:dc30 :pax, pt[:cin] + (-1.5dt, 0.4dt),
+            "Cinisi-Terrasini"
+        );
+    }
+
+    with link = "line.it.PLT" {
+        track(:first :pax, pt[:cin, :alc]);
+        line_label(:right:s :pax, pt[:alc - 15km], "PLT");
+    }
+
+    with link = "point.it.Alcamo-Diramazione" {
+        track(:first:station :pax, pt[:alc, :alc.yt]);
+        statdot(:pax, pt[:alc]);
+        slabel(:right :pax, pt[:alc] + (1.5dt, 1.0dt), "Alcamo Diramazione");
+    }
+
+    with link = "line.it.PLT" {
+        track(:first :pax, pt[:alc.yt, :sal]);
+        line_label(:left:w :pax, pt[:alc.yt + 12.5km], "PLT");
+    }
+
+    with link = "point.it.Salemi-Gibellina" {
+        track(:first:station :pax, pt[:sal, :sal.yn]);
+        statdot(:pax, pt[:sal]);
+        slabel(:left :pax, pt[:sal] + (-1.5dt, 0.8dt), "Salemi-Gibellina");
+    }
+
+    with link = "line.it.PLT" {
+        track(:first :pax, pt[:sal.yn, :cas]);
+    }
+
+    with link = "point.it.Castelvetrano" {
+        track(:first:station :pax, pt[:cas, :cas.yp]);
+        statdot(:pax, pt[:cas]);
+        slabel(:left :pax, pt[:cas] + (-1.7dt, 0.8dt), "Castelvetrano");
+    }
+
+    with link = "line.it.PLT" {
+        track(:first :pax, pt[:cas.yp, :tra]);
+        line_label(:left:n :pax, pt[:cas.yp + 11km], "PLT");
+        line_label(:left:e :pax, pt[:tra - 20km], "PLT");
+    }
+
+    with link = "point.it.Trapani" {
+        statdot(:pax, pt[:tra] >> 0.3dt);
+        slabel(:left :pax, pt[:tra] >> 0.3dt + (-1.7dt, 1.0dt), "Trapani");
+    }
+}
+
+
+# IT PNM.  Patti-San Piero Patti - Messina Centrale
+with detail = 2 {
+    let pm = path("d2.it.pnm");
+
+    with link = "line.it.PNM" {
+        track(:first :double :cat:dc30 :pax, pm[:pat.yn, :mes.yc]);
+        line_label(:right:n :double :cat:dc30 :pax, pm[:pat.yn + 7km], "PNM");
+        line_label(:right:e :double :cat:dc30 :pax, pm[:mes.xo - 7km], "PNM");
+    }
+
+    with link = "point.it.Messina-Centrale" {
+        track(:first:station :double :cat:dc30 :pax, pm[:mes.yc, :mes]);
+        statdot(:cat:dc30 :pax, pm[:mes]);
+        slabel(:top :cat:dc30 :pax, pm[:mes] + (1.5dt, -1.5dt),
+            span(:bold, "Messina")
+        );
+    }
+}
+
+
+# IT PPR.  Piraineto - Punta Raisi
+with detail = 2 {
+    let pp = path("d2.it.ppr");
+
+    with link = "line.it.PPR" {
+        track(:first :double :cat:dc30 :pax, pp[:pir.yp, :pun]);
+        line_label(:right:s :double :cat:dc30 :pax, pp[:pun - 1.3km], "PPR");
+    }
+
+    with link = "point.it.Punta-Raisi" {
+        statdot(:cat:dc30 :pax, pp[:pun]);
+        slabel(:left :cat:dc30 :pax, pp[:pun] + (-1.5dt, 1.0dt),
+            "Punta Raisi"
+        );
+    }
+}
+
