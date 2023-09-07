@@ -44,7 +44,8 @@
 
 | Date | Update |
 | ---- | ------ |
-| 2023-09-01 | Added overview map for area 6 of Italy. |
+| 2023-09-07 | Added overview map for area 9 of Italy. |
+| 2023-09-01 | Added overview map for area 7 of Italy. |
 | 2023-08-24 | Added overview map for area 6 of Italy. |
 | 2023-07-30 | Added overview map for area 5 of Italy. |
 | 2023-07-15 | Added overview map for area 4 of Italy. |
