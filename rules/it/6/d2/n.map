@@ -280,6 +280,43 @@ with detail = 2 {
 }
 
 
+# IT NPT.  Napoli Montesanto - Pozzuoli - Torregaveta
+with detail = 2 {
+    let nt = path("d2.it.npt");
+
+    with link = "point.it.Napoli-Montesanto" {
+        track(:first:station :double :cat:dc30 :pax, nt[:mon, :mon.yq]);
+        statdot(:cat:dc30 :pax, nt[:mon]);
+    }
+
+    with link = "line.it.NPT" {
+        track(:first :double :cat:dc30 :pax, nt[:mon.yq, :daz]);
+        track(:first :cat:dc30 :pax, nt[:daz, :arc]);
+        track(:first :double :cat:dc30 :pax, nt[:arc, :tor.yq]);
+        line_label(:left:n :double :cat:dc30 :pax, nt[:tor.yq - 5km], "NPT");
+    }
+
+    with link = "point.it.Torregaveta" {
+        track(:first:station :double :cat:dc30 :pax, nt[:tor.yq, :tor]);
+        statdot(:cat:dc30 :pax, nt[:tor]);
+        slabel(:left :cat:dc30 :pax, nt[:tor] + (-1.5dt, 1.0dt),
+            "Torregaveta"
+        );
+    }
+}
+
+
+# IT NQT.  Napoli Montesanto - Quarto - Torregaveta
+with detail = 2 {
+    let nt = path("d2.it.nqt");
+
+    with link = "line.it.NQT" {
+        track(:first :cat:dc30 :pax, nt[:mon.yq, :tor.yq]);
+        line_label(:right:e :cat:dc30 :pax, nt[:tor.yq - 5km], "NQT");
+    }
+}
+
+
 # IT NSN.  Napoli Porta Nolana - Sarno
 with detail = 2 {
     let ns = path("d2.it.nsn");

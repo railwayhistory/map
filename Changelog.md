@@ -46,7 +46,9 @@
 *  Line _IT NVS_ (Novara – Varallo Sesia): heritage service.
 *  Added missing lines:
    *  _IT GCL_ (Genova Piazza Manin – Casella Paese),
-   *  _IT BCA_ (Bolzano - Callalbo).
+   *  _IT BCA_ (Bolzano - Callalbo),
+   *  _IT NPT_ (Napoli Montesanto – Pozzuoli – Torregaveta),
+   *  _IT NQT_ (Napoli Montesanto – Quarto – Torregaveta).
 
 
 ## New Additions
