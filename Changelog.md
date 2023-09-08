@@ -40,8 +40,13 @@
 
 (No corrections tracked before 2022-08-30.)
 
+### 2023-09-08
+
 *  Line _IT SVS_ (Savigliano – Saluzzo): no passenger service.
 *  Line _IT NVS_ (Novara – Varallo Sesia): heritage service.
+*  Added missing lines:
+   *  _IT GCL_ (Genova Piazza Manin – Casella Paese).
+
 
 ## New Additions
 
