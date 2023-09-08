@@ -45,8 +45,9 @@
 *  Line _IT SVS_ (Savigliano – Saluzzo): no passenger service.
 *  Line _IT NVS_ (Novara – Varallo Sesia): heritage service.
 *  Added missing lines:
-   *  _IT GCL_ (Genova Piazza Manin – Casella Paese),
    *  _IT BCA_ (Bolzano - Callalbo),
+   *  _IT GCL_ (Genova Piazza Manin – Casella Paese),
+   *  _IT LMR_ (Lessona – Masserano),
    *  _IT NPT_ (Napoli Montesanto – Pozzuoli – Torregaveta),
    *  _IT NQT_ (Napoli Montesanto – Quarto – Torregaveta),
    *  _IT PAA_ (Pomigliano d'Arco – Acerra).
