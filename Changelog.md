@@ -48,7 +48,8 @@
    *  _IT GCL_ (Genova Piazza Manin – Casella Paese),
    *  _IT BCA_ (Bolzano - Callalbo),
    *  _IT NPT_ (Napoli Montesanto – Pozzuoli – Torregaveta),
-   *  _IT NQT_ (Napoli Montesanto – Quarto – Torregaveta).
+   *  _IT NQT_ (Napoli Montesanto – Quarto – Torregaveta),
+   *  _IT PAA_ (Pomigliano d'Arco – Acerra).
 
 
 ## New Additions
