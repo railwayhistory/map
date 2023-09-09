@@ -40,12 +40,13 @@
 
 (No corrections tracked before 2022-08-30.)
 
-### 2023-09-08
+### 2023-09-09
 
 *  Line _IT SVS_ (Savigliano – Saluzzo): no passenger service.
 *  Line _IT NVS_ (Novara – Varallo Sesia): heritage service.
 *  Added missing lines:
    *  _IT BCA_ (Bolzano - Callalbo),
+   *  _IT CVR_ (Castellanza – Valmorea confine),
    *  _IT GCL_ (Genova Piazza Manin – Casella Paese),
    *  _IT LMR_ (Lessona – Masserano),
    *  _IT NPT_ (Napoli Montesanto – Pozzuoli – Torregaveta),
