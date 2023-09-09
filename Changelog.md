@@ -45,6 +45,7 @@
 *  Line _IT SVS_ (Savigliano – Saluzzo): no passenger service.
 *  Line _IT NVS_ (Novara – Varallo Sesia): heritage service.
 *  Added missing lines:
+   *  _IT ACM_ (Carrara-Avenza – Carrara San Martino),
    *  _IT BCA_ (Bolzano - Callalbo),
    *  _IT CVR_ (Castellanza – Valmorea confine),
    *  _IT GCL_ (Genova Piazza Manin – Casella Paese),
