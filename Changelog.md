@@ -40,6 +40,11 @@
 
 (No corrections tracked before 2022-08-30.)
 
+### 2023-09-10
+
+*  Line _NL SL_ (Sittard – grens): double track between Heerlen and
+   Landgraaf since 2022-05.
+
 ### 2023-09-09
 
 *  Line _IT SVS_ (Savigliano – Saluzzo): no passenger service.
