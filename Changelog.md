@@ -2,6 +2,12 @@
 
 ## Updates
 
+### 2023-09-11
+
+* Passenger service re-established on line _IT CCM_ on section Alba –
+  Castagnole delle Lanze, and line _IT CAM_ on sections Castagnole delle
+  Lanze – Asti and Casale Monferrato – Mortara.
+
 ### 2023-09-04
 
 * Passenger service started on line _DE 7390_ between Fangschleuse and
