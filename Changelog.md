@@ -72,6 +72,7 @@
 
 | Date | Update |
 | ---- | ------ |
+| 2023-09-16 | Added overview map for Slovenia. |
 | 2023-09-07 | Added overview map for area 8 of Italy. |
 | 2023-09-01 | Added overview map for area 7 of Italy. |
 | 2023-08-24 | Added overview map for area 6 of Italy. |

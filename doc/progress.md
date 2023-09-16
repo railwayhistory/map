@@ -175,6 +175,16 @@ industrial lines are omitted.
 | entire country | complete | in progress |
 
 
+## SI: Slovenia
+
+The overview map currently only covers railway lines. Tram, metro, and
+industrial lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | in progress |
+
+
 ## RU: Russia
 
 The only region currently covered is Kaliningrad oblast, designated as KG.
