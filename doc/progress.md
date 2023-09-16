@@ -131,14 +131,14 @@ the following regions:
 
 | # | coverage                                            | overview    | detail      |
 | - | --------------------------------------------------- | ----------- | ----------- |
-| 1 | Piemonte, Valle d’Aosta, Western Liguria            | complete    | not started |
-| 2 | Lombardia                                           | complete    | not started |
-| 3 | Veneto, Trentiono-Alto Adige, Friuli-Venezia Giulia | complete    | not started |
-| 4 | Emilia-Romagna, Toscana, Eastern Liguria            | complete    | not started |
-| 5 | Marche, Umbria, Lazio, Abruzzo                      | complete    | not started |
-| 6 | Molise, Campania, Puglia, Basilicata, Calabria      | complete    | not started |
-| 7 | Sicilia                                             | complete    | not started |
-| 8 | Sardegna                                            | not started | not started |
+| 1 | Piemonte, Valle d’Aosta, Western Liguria            | complete | not started |
+| 2 | Lombardia                                           | complete | not started |
+| 3 | Veneto, Trentiono-Alto Adige, Friuli-Venezia Giulia | complete | not started |
+| 4 | Emilia-Romagna, Toscana, Eastern Liguria            | complete | not started |
+| 5 | Marche, Umbria, Lazio, Abruzzo                      | complete | not started |
+| 6 | Molise, Campania, Puglia, Basilicata, Calabria      | complete | not started |
+| 7 | Sicilia                                             | complete | not started |
+| 8 | Sardegna                                            | complete | not started |
 
 
 

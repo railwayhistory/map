@@ -3,9 +3,9 @@ with detail = 2 {
     let cm = path("d2.it.cam");
 
     with link = "line.it.cam" {
-        track(:first, cm[:cas.ya, :ast.yc]);
-        track(:first, cm[:ast.ym, :cam.ya]);
-        track(:first, cm[:cam.ya, :mor.ya]);
+        track(:first :pax, cm[:cas.ya, :ast.yc]);
+        track(:first , cm[:ast.ym, :cam.ya]);
+        track(:first :pax, cm[:cam.ya, :mor.ya]);
 
         line_label(:left:e, cm[:cas.ya + 10.5km], "CAM");
         line_label(:left:e, cm[:ast.ym + 15.5km], "CAM");
@@ -91,7 +91,8 @@ with detail = 2 {
     }
 
     with link = "link.it.CCM" {
-        track(:first, cc[:cas, :alb]);
+        track(:first :pax, cc[:cas, :alb]);
+	line_label(:left:n :pax, cc[:cas + 4km], " CCM");
     }
 
     with link = "point.it.Alba" {
@@ -126,6 +127,31 @@ with detail = 2 {
     with link = "link.it.CCP" {
         track(:first :cat:dc30 :pax, cc[:cas.yc, :cap.yc]);
         line_label(:left:s :cat:dc30 :pax, cc[:tri - 8km], " CCP");
+    }
+}
+
+
+# IT GCL.  Genova Piazza Manin - Casella Paese
+with detail = 2 {
+    let gc = path("d2.it.gcl");
+    let cc = path("d2.it.gcl.cas");
+
+    with link = "point.it.Genova-Piazza-Manin" {
+        statdot(:cat:dc30 :pax, gc[:gen]);
+    }
+
+    with link = "line.it.GCL" {
+        track(:first :narrow:g1000 :cat:dc30 :pax, gc[:gen, :cad.f]);
+        track(:first :narrow:g1000 :cat:dc30 :pax, cc[:cad.y, :cas]);
+
+        line_label(:right:w :cat:dc30 :pax, gc[:gen + 10km], "GCL");
+    }
+
+    with link = "point.it.Casella-Paese" {
+        statdot(:cat:dc30 :pax, cc[:cas]);
+        slabel(:right :cat:dc30 :pax, cc[:cas] + (1.5dt, 0.8dt),
+            "Casella Paese"
+        );
     }
 }
 
@@ -180,7 +206,7 @@ with detail = 2 {
 
     with link = "line.it.CPG" {
         track(:first :removed, cg[:cog, :gri.yc]);
-        line_label(:right:n :removed, cg[:cog + 3km], "CPG");
+        line_label(:left:s :removed, cg[:cog + 6km], "CPG ");
     }
 }
 

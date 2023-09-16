@@ -2,6 +2,12 @@
 
 ## Updates
 
+### 2023-09-11
+
+* Passenger service re-established on line _IT CCM_ on section Alba –
+  Castagnole delle Lanze, and line _IT CAM_ on sections Castagnole delle
+  Lanze – Asti and Casale Monferrato – Mortara.
+
 ### 2023-09-04
 
 * Passenger service started on line _DE 7390_ between Fangschleuse and
@@ -40,11 +46,34 @@
 
 (No corrections tracked before 2022-08-30.)
 
+### 2023-09-10
+
+*  Line _NL SL_ (Sittard – grens): double track between Heerlen and
+   Landgraaf since 2022-05.
+
+### 2023-09-09
+
+*  Line _IT SVS_ (Savigliano – Saluzzo): no passenger service.
+*  Line _IT NVS_ (Novara – Varallo Sesia): heritage service.
+*  Added missing lines:
+   *  _IT ACM_ (Carrara-Avenza – Carrara San Martino),
+   *  _IT BCA_ (Bolzano - Callalbo),
+   *  _IT CVR_ (Castellanza – Valmorea confine),
+   *  _IT GCF_ (Gioia Tauro – Cinqefrondi),
+   *  _IT GCL_ (Genova Piazza Manin – Casella Paese),
+   *  _IT GSP_ (Gioia Tauro – Sinopoli),
+   *  _IT LMR_ (Lessona – Masserano),
+   *  _IT NPT_ (Napoli Montesanto – Pozzuoli – Torregaveta),
+   *  _IT NQT_ (Napoli Montesanto – Quarto – Torregaveta),
+   *  _IT PAA_ (Pomigliano d'Arco – Acerra).
+
+
 ## New Additions
 
 | Date | Update |
 | ---- | ------ |
-| 2023-09-01 | Added overview map for area 6 of Italy. |
+| 2023-09-07 | Added overview map for area 8 of Italy. |
+| 2023-09-01 | Added overview map for area 7 of Italy. |
 | 2023-08-24 | Added overview map for area 6 of Italy. |
 | 2023-07-30 | Added overview map for area 5 of Italy. |
 | 2023-07-15 | Added overview map for area 4 of Italy. |
