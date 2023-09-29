@@ -46,6 +46,10 @@
 
 (No corrections tracked before 2022-08-30.)
 
+### 2023-09-29
+
+*  Line _FR 062_ (Arches – Saint-Dié-des-Vosges) has passenger service.
+
 ### 2023-09-10
 
 *  Line _NL SL_ (Sittard – grens): double track between Heerlen and
