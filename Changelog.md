@@ -46,6 +46,11 @@
 
 (No corrections tracked before 2022-08-30.)
 
+### 2023-10-03
+
+*  Line _IT API_ (Alessandira – Piacenza) has passenger service between
+   Voghera and Broni.
+
 ### 2023-09-29
 
 *  Line _FR 062_ (Arches – Saint-Dié-des-Vosges) has passenger service.
