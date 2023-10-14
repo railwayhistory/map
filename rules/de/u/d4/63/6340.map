@@ -1,0 +1,191 @@
+# DE 6340.  Halle (Saale) Hbf - Baunatal-Guntershausen
+#
+let hg = path("d4.de.u.6340");
+
+with detail = [4, 5] {
+
+    badge(:cat:ac15 :pax, hg[:ndi.a] >> 0.5dt,
+        hbox(:left:middle,
+            " ",
+            vbox(:center:middle :badgesize, " 6291 ", "6340 "),
+            "→ Erfurt"
+        )
+    );
+    
+
+    with link = "point.de.Neudietendorf" {
+        let nr = path("d4.de.6298");
+
+        # Gl. 1
+        with layer = 2 track(:first:station :cat:ac15 :pax,
+                hg[:ndi.a, :ndi.ys - 250m] >> 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:ac15 :pax,
+                hg[:ndi.yr, :ndi.ys - 250m] >> 0.5dt
+        );
+            # W5 - W6
+            track(:station :cat:ac15,
+                    hg[:ndi - 380m] >> 0.5dt
+                --  hg[:ndi - 280m] >> 1.5dt
+            );
+            # W9 - W10
+            track(:station :cat:ac15,
+                    hg[:ndi - 150m] >> 0.5dt
+                --  hg[:ndi -  50m] << 0.5dt
+            );
+            # W21 - W22
+            track(:station :cat:ac15,
+                    hg[:ndi + 480m] >> 0.5dt
+                --  hg[:ndi + 590m] >> 1.5dt
+            );
+
+        # Gl. 2
+        with layer = 2 track(:first:station :cat:ac15 :pax,
+                hg[:ndi.a, :ndi.ys - 250m] << 0.5dt
+        );
+        with layer = 1 casing(:first:station :cat:ac15 :pax,
+                hg[:ndi.yr, :ndi.ys - 250m] << 0.5dt
+        );
+            # W3 - W4
+            track(:station :cat:ac15,
+                    hg[:ndi - 500m] << 0.5dt
+                --  hg[:ndi - 400m] >> 0.5dt
+            );
+
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                hg[:ndi.a, :ndi.yr - 120m] >> 1.5dt
+        );
+        track(:first:station :pax,
+                hg[:ndi.yr - 120m, :ndi.yr + 20m] >> 1.5dt
+            ..  nr[:ndi.yw, :ndi.yw + 0.1dl] >> 0.5dt
+        );
+            # W1 - W2
+            track(:station :cat:ac15,
+                    hg[:ndi - 580m] >> 1.5dt
+                --  hg[:ndi - 480m] >> 0.5dt
+            );
+            # W24 - W25
+            track(:station :cat:ac15,
+                    hg[:ndi + 610m] >> 1.5dt
+                --  hg[:ndi + 700m] >> 2.5dt
+            );
+            # W26 - W27
+            track(:station :cat:ac15,
+                    hg[:ndi.yr - 120m] >> 1.5dt
+                --  hg[:ndi.yr] >> 0.5dt
+            );
+
+        # Gl. 4
+        track(:first:station,
+                hg[:ndi + 220m, :ndi.yr + 100m] << 1.5dt
+        );
+        with layer = 2 track(:first:station :pax,
+                hg[:ndi.yr - 0.1dl, :ndi.yr] << 0.5dt
+            --  hg[:ndi.yr + 100m, :ndi.yr + 101m] << 1.5dt
+            ..  nr[:ndi.yw, :ndi.yw + 0.1dl] << 0.5dt
+        );
+
+        # Gl. 5
+        track(:station :cat:ac15,
+                hg[:ndi - 150m, :ndi.yr] >> 2.5dt
+        );
+            # W28 - W29
+            track(:station,
+                    hg[:ndi.yr - 80m] >> 2.5dt
+                --  hg[:ndi.yr + 20m] >> 1.5dt
+            );
+
+        # Gl. 7
+        track(:station :cat:ac15,
+                hg[:ndi - 221m, :ndi - 220m] >> 1.5dt
+            --  hg[:ndi - 80m, :ndi + 460m] >> 3.5dt
+            --  hg[:ndi + 540m, :ndi + 541m] >> 2.5dt
+        );
+
+        # Bahnsteig Gl. 1/3
+        platform(:cat:ac15 :pax,
+                hg[:ndi - 20m, :ndi + 190m] >> 0.5dt
+            --  hg[:ndi + 190m, :ndi - 20m] << 1.5dt
+        );
+
+        # Bahnsteig Gl. 2
+        platform(:cat:ac15 :pax,
+                hg[:ndi - 20m, :ndi + 190m] << 0.5dt
+            --  hg[:ndi + 190m, :ndi - 20m] >> 1.2dt
+        );
+
+        # Bahnsteig Gl. 4
+        platform(:open,
+                hg[:ndi + 220m, :ndi + 490m] << 1.5dt
+            --  hg[:ndi + 490m, :ndi + 220m] >> 2.2dt
+        );
+
+        marker(:left :de.bf :cat:ac15 :pax, hg[:ndi] << 0.5dt);
+        station(:top :cat:ac15 :pax, hg[:ndi] >> 5.5dt + (-6dt, 0dt),
+            hbox(:left:top :bold, "Neudietendorf"),
+            hbox(:center:top,
+                vbox(:right:top, "6291: ", "6340: ", "6298: "),
+                vbox(:right:top, "120,", "120,", "−0,"),
+                vbox(:left:top, "96", "96", "14"),
+                vbox(:right:top :removed, " ← ", " ← ", " ← "),
+                vbox(:right:top :removed, "120,", "120,", "−0,"),
+                vbox(:left:top :removed, "89", "89", "21")
+            )
+        );
+    }
+
+
+    with link = "point.de.Neudietendorf-Dn" {
+        # Gl. 1
+        with layer = 2 track(:first:station :cat:ac15 :pax,
+                hg[:ndi.ys - 250m, :ndi.fg] >> 0.5dt
+        );
+            # W43 - W44
+            track(:station :cat:ac15,
+                    hg[:ndi.ys + 120m] >> 0.5dt
+                --  hg[:ndi.ys + 200m] << 0.5dt
+            );
+
+        # Gl. 2
+        with layer = 2 track(:first:station :cat:ac15 :pax,
+                hg[:ndi.ys - 250m, :ndi.fg] << 0.5dt
+        );
+            # W45 - W46
+            track(:station :cat:ac15,
+                    hg[:ndi.ys + 220m] << 0.5dt
+                --  hg[:ndi.ys + 300m] >> 0.5dt
+            );
+
+        # Gl. 5
+        track(:station :cat:ac15,
+                hg[:ndi.yr - 0.1dl, :ndi.yr] >> 2.5dt
+            ..  hg[:ndi.ys - 21m, :ndi.ys - 20m] >> 1.5dt
+            --  hg[:ndi.ys + 50m, :ndi.ys + 51m] >> 0.5dt
+        );
+            # Schutzgleis W41
+            track(:station,
+                    hg[:ndi.ys - 20m, :ndi.ys + 70m] >> 1.5dt
+            );
+
+        # Str. 6730
+        track(:station :removed,
+                hg[:ndi.ys, :ndi.ys + 50m] << 1.5dt
+            --  hg[:ndi.ys + 120m, :ndi.ys + 121m] << 0.5dt
+        );
+
+        marker(:right :de.bft :removed, hg[:ndi.ys + 70m + 0.5sw] >> 0.5dt);
+        station(:top :removed, hg[:ndi.ys + 70m + 0.5sw] >> 0.5dt >> 1.2sw,
+            "N. Dn",
+            hbox(:center:top,
+                vbox(:right:top, "6340: ", "6730: "),
+                vbox(:right:top, "??", "??")
+            )
+        );
+    }
+
+    badge(:cat:ac15 :pax, hg[:ndi.fg],
+        hbox(:right:middle, "Gotha ← ", span(:badgesize, "6340 "))
+    );
+}
+
