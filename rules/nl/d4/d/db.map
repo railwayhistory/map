@@ -1,0 +1,105 @@
+# NL DB.  Den Dolder - Baarn
+#
+let db = path("d4.nl.db");
+
+with detail = [4, 5] {
+    # point.nl.Den-Dolder: nl.UZ
+
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax,
+                db[:dld.f, :dld.yb] << 1dt
+            ..  db[:dld.yb + 200m + 7dt, :pz - 1sw]
+        );
+    }
+
+
+    with link = "point.nl.De-Paltz" {
+        track(:first:station :cat:dc15 :pax, db[:pz - 1sw, :pz + 1sw]);
+        marker(:left :de.hp :removed, db[:pz]);
+        station(:left :removed, db[:pz - 0.4sw] << 1.4sh,
+            "De Paltz", "2,4"
+        );
+    }
+
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax :flip, db[:pz + 1.3km, :pz + 1sw]);
+        line_badge(:cat:dc15 :pax, db[:pz + 1.3km] << 0.15dt, "DB");
+        track(:first :cat:dc15 :pax, db[:pz + 1.3km, :stz - 100m]);
+    }
+
+
+    with link = "point.nl.Soest-Zuid" {
+        track(:first:station :cat:dc15 :pax, db[:stz - 100m, :stz + 180m]);
+        platform(:cat:dc15 :pax,
+                db[:stz - 50m, :stz + 130m]
+            --  db[:stz + 130m, :stz - 50m] << 0.7dt
+        );
+        marker(:right :de.hp :cat:dc15 :pax, db[:stz] >> 0.5dt);
+        station(:right :cat:dc15 :pax, db[:stz + 0.4sw] >> 0.5dt >> 1.2sh,
+            vbox(:left:top,
+                span(:removed, "Nieuwe Weg"),
+                "Soest Zuid"
+            ),
+            "5,14"
+        );
+    }
+
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax, db[:stz + 180m, :st.a]);
+    }
+
+
+    with link = "point.nl.Soest" {
+        # Sp. 1
+        track(:first:station :cat:dc15 :pax, db[:st.a, :st.f]);
+
+        # Sp. 2
+        track(:station :cat:dc15 :pax,
+                db[:st - 201m, :st - 200m]
+            --  db[:st - 120m, :st + 120m] << 1dt
+            --  db[:st + 200m, :st + 201m]
+        );
+
+        platform(:cat:dc15 :pax,
+                db[:st - 80m, :st + 85m]
+            --  db[:st + 85m, :st - 80m] >> 1dt
+        );
+
+        marker(:right :de.bf :cat:dc15 :pax, db[:st]);
+        station(:left :cat:dc15 :pax, db[:st - 0.4sw] << 2.5dt,
+            "Soest", "6,20"
+        );
+    }
+
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax, db[:st.f, :sd - 150m]);
+    }
+
+
+    with link = "point.nl.Soestdijk" {
+        track(:first:station :cat:dc15 :pax, db[:sd - 150m, :sd + 115m]);
+        platform(:cat:dc15 :pax,
+                db[:sd - 100m, :sd + 65m]
+            --  db[:sd + 65m, :sd - 100m] >> 0.7dt
+        );
+        marker(:left :de.hp :cat:dc15 :pax, db[:sd] << 0.5dt);
+        station(:left :cat:dc15 :pax, db[:sd - 0.15sw] << 0.5dt << 1.6sh,
+            "Soestdijk", "7,50"
+        );
+    }
+
+
+    with link = "line.nl.DB" {
+        track(:first :cat:dc15 :pax :flip, db[:sd + 0.8km, :sd + 115m]);
+        line_badge(:cat:dc15 :pax, db[:sd + 0.8km] << 0.1dt, "DB");
+        track(:first :cat:dc15 :pax,
+                db[:sd + 0.8km, :brna.yyd - 5dt]
+            ..  path("d4.nl.az")[:brna.yd, :brna.f] << 2.5dt
+        );
+    }
+}
+
