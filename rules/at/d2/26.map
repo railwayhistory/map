@@ -1,0 +1,243 @@
+# AT 260. Wien Franz-Josefs-Bf - Staatsgrenze nächst Gmünd NÖ
+with detail = 2 {
+    let wg = path("d2.at.260");
+
+    with link = "point.at.Wien-Franz-Josefs-Bf" {
+        statdot(:cat:ac15 :pax, wg[:wie]);
+    }
+
+    with link = "line.at.260" {
+        track(:first :double :cat:ac15 :pax, wg[:wie, :hei.yp]);
+        track(:first :double :cat:ac15 :pax, wg[:hei.yp, :hei.yb]);
+        track(:first :double :cat:ac15 :pax, wg[:hei.yb, :nus.yb]);
+    }
+
+    with link = "point.at.Wien-Nußdorf" {
+        track(:first :double :cat:ac15 :pax, wg[:nus.yb, :nus]);
+        statdot(:cat:ac15 :pax, wg[:nus]);
+    }
+
+    with link = "line.at.260" {
+        track(:first :double :cat:ac15 :pax, wg[:nus, :tul]);
+        line_label(:left:e :double :cat:ac15 :pax, wg[:nus + 5km], "260");
+        line_label(:left:n :double :cat:ac15 :pax, wg[:tul - 7km], "260");
+    }
+
+    with link = "point.at.Tulln-Donau" {
+        track(:first:station :double :cat:ac15 :pax, wg[:tul, :tul.yp]);
+        statdot(:cat:ac15 :pax, wg[:tul]);
+        slabel(:left :cat:ac15 :pax, wg[:tul.yn] + (-1.3dt, 0.5dt),
+            vbox(:right:bottom, "Tulln an ", "der Donau")
+        );
+    }
+
+    with link = "line.at.260" {
+        track(:first :double :cat:ac15 :pax, wg[:tul.yp, :abs.ys]);
+    }
+
+    with link = "point.at.Absdorf-Hippersdorf" {
+        track(:first:station :double :cat:ac15 :pax, wg[:abs.ys, :abs]);
+        track(:first:station :cat:ac15 :pax, wg[:abs, :abs.yk]);
+        statdot(:cat:ac15 :pax, wg[:abs]);
+        slabel(:right :cat:ac15 :pax, wg[:abs] + (1dt, 0dt),
+            vbox(:left:bottom, "Absdorf-", "Hippersdorf")
+        );
+    }
+
+    with link = "line.at.260" {
+        track(:first :cat:ac15 :pax, wg[:abs, :sig.yz]);
+        line_label(:right:sw :cat:ac15 :pax, wg[:abs + 8km], "260");
+        line_label(:left:n :cat:ac15 :pax, wg[:sig.yz - 6.5km], "260");
+    }
+
+    with link = "point.at.Sigmundsherberg" {
+        track(:first:station :cat:ac15 :pax, wg[:sig.yz, :sig]);
+        statdot(:cat:ac15 :pax, wg[:sig]);
+        slabel(:right :cat:ac15 :pax, wg[:sig] + (-1.3dt, -1.0dt),
+            vbox(:left:bottom, "Sigmundsher-", "berg")
+        );
+    }
+
+    with link = "line.at.260" {
+        track(:first :cat:ac15 :pax, wg[:sig, :gop.yr]);
+        line_label(:right:s :cat:ac15 :pax, wg[:gop.yr - 14km], "260");
+    }
+
+    with link = "point.at.Göpfritz" {
+        track(:first:station :cat:ac15 :pax, wg[:gop.yr, :gop]);
+        statdot(:cat:ac15 :pax, wg[:gop]);
+        slabel(:right :cat:ac15 :pax, wg[:gop] + (-1.5dt, 0.8dt),
+            hbox(:left:top, "Göpfritz")
+        );
+    }
+
+    with link = "line.at.260" {
+        track(:first :cat:ac15 :pax, wg[:gop, :swa]);
+    }
+
+    with link = "point.at.Schwarzenau-Waldviertel" {
+        track(:first:station :cat:ac15 :pax, wg[:swa, :swa.ym]);
+        statdot(:cat:ac15 :pax, wg[:swa] >> 0.3dt);
+        slabel(:left :cat:ac15 :pax,
+            wg[:swa] + (0dt, -0.7km) + (-1.3dt, -1.3dt),
+            "Schwarzenau"
+        );
+    }
+
+    with link = "line.at.260" {
+        track(:first :cat:ac15 :pax, wg[:swa.ym, :gmu]);
+        line_label(:right:s :cat:ac15 :pax, wg[:gmu - 5km], "260");
+    }
+
+    with link = "point.at.Gmünd-NÖ" {
+        statdot(:cat:ac15 :pax, wg[:gmu]);
+        slabel(:right :cat:ac15 :pax, wg[:gmu] + (-1.5dt, 0.8dt),
+            hbox(:left:top, "Gmünd NÖ")
+        );
+    }
+
+    with link = "line.at.260" {
+        track(:first :cat:ac15 :pax, wg[:gmu, :gmg]);
+    }
+}
+
+
+# AT 261.  Göpfritz - Raabs a.d. Thaya
+with detail = 2 {
+    let gr = path("d2.at.261");
+
+    with link = "line.at.261" {
+        track(:second :removed, gr[:gop.yr, :raa]);
+        line_label(:left:se :removed, gr[:gop.yr + 9.5km], "261");
+    }
+
+    with link = "point.at.Raabs-Thaya" {
+        statdot(:removed, gr[:raa]);
+        slabel(:top :removed, gr[:raa] + (0.5dt, -0.5dt), "Raabs a.d. Thaya");
+    }
+}
+
+
+# AT 263.  Schwarzenau - Staatsgrenze nächst Fratres
+with detail = 2 {
+    let sf = path("d2.at.263");
+
+    with link = "line.at.263" {
+        track(:second,
+                sf[:swa, :wil.y] << 0.7dt
+            ..  sf[:wil.y + 1dt, :wai]
+        );
+        line_label(:right:w, sf[:wil.y + 2km], "263");
+    }
+
+    with link = "point.at.Waidhofen-Thaya" {
+        statdot(:open, sf[:wai]);
+        slabel(:left, sf[:wai] + (-1.5dt, 1dt),
+            vbox(:right:bottom, "Waidhofen", "a.d. Thaya")
+        );
+    }
+
+    with link = "line.at.263" {
+        track(:second :removed, sf[:wai, :frg]);
+        line_label(:left:e :removed, sf[:wai + 12km], "263");
+        line_label(:right:w :removed, sf[:frg - 4km], "263");
+    }
+
+    with link = "point.int.Fratres-Slavonice" {
+        marker(:left :ref :removed, sf[:frg]);
+        marker(:right :ref :removed, sf[:frg]);
+    }
+}
+
+
+# AT 264.  Schwarzenau - Martinsberg-Gutenbrunn
+with detail = 2 {
+    let sm = path("d2.at.264");
+
+    with link = "line.at.264" {
+        track(:first, sm[:swa.ym, :wal]);
+        line_label(:left:w, sm[:swa.ym + 6km], "264");
+        line_label(:right:ne, sm[:wal - 7km], "264");
+    }
+
+    with link = "point.at.Waldhausen" {
+        statdot(:open, sm[:wal]);
+        slabel(:right, sm[:wal] + (1.7dt, 1.0dt), "Waldhausen");
+    }
+
+    with link = "line.at.264" {
+        track(:first :removed, sm[:wal, :mar]);
+        line_label(:left:w :removed, sm[:wal + 11km], "264");
+    }
+
+    with link = "point.at.Martinsberg-Gutenbrunn" {
+        statdot(:removed, sm[:mar]);
+        slabel(:bottom :removed, sm[:mar] + (0dt, 0.8dt),
+            "Martinsberg-Gutenbrunn"
+        );
+    }
+}
+
+
+# AT 266.  Gmünd N.Ö. - Litschau
+with detail = 2 {
+    let gl = path("d2.at.266");
+
+    with link = "line.at.266" {
+        track(:second :narrow:g760 :museum, gl[:gmu.yl, :ana]);
+        line_label(:right:w :museum, gl[:ana - 4.5km], "266");
+    }
+
+    with link = "point.at.Alt-Nagelberg" {
+        statdot(:museum, gl[:ana]);
+        slabel(:left :museum, gl[:ana] + (-1.3dt, -0.8dt), "Alt Nagelberg");
+    }
+
+    with link = "line.at.266" {
+        track(:second :narrow:g760 :museum, gl[:ana, :lit]);
+        line_label(:left:e :museum, gl[:ana + 8km], "266");
+    }
+
+    with link = "point.at.Litschau" {
+        statdot(:museum, gl[:lit]);
+        slabel(:top :museum, gl[:lit] + (0dt, -0.5dt), "Litschau");
+    }
+}
+
+
+# AT 267.  Alt Nagelberg - Heidenreichstein
+with detail = 2 {
+    let ah = path("d2.at.267");
+
+    with link = "line.at.267" {
+        track(:second :narrow:g760 :museum, ah[:ana.yh, :hei]);
+        line_label(:right:nw :museum, ah[:ana.yh + 7km], "267");
+    }
+
+    with link = "point.at.Heidenreichstein" {
+        statdot(:museum, ah[:hei]);
+        slabel(:top :museum, ah[:hei] + (5dt, -0.5dt), "Heidenreichstein");
+    }
+}
+
+
+# AT 268.  Gmünd N.Ö. - Groß Gerungs
+with detail = 2 {
+    let gg = path("d2.at.268");
+
+    with link = "point.at.Gmünd-NÖ" {
+        track(:second:station :narrow:g760 :museum, gg[:gmu, :gmu.yl]);
+    }
+
+    with link = "line.at.268" {
+        track(:second :narrow:g760 :museum, gg[:gmu.yl, :gge]);
+        line_label(:left:w :museum, gg[:gmu.yl + 9.4km], "268");
+        line_label(:right:n :museum, gg[:gge - 6.45km], "268");
+    }
+
+    with link = "point.at.Groß-Gerungs" {
+        statdot(:museum, gg[:gge]);
+        slabel(:right :museum, gg[:gge] + (1.5dt, 0.8dt), "Groß Gerungs");
+    }
+}
+

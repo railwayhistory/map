@@ -1,0 +1,176 @@
+# AT 250.  Wien Floridsdorf - Staatsgrenze nächst Retz
+with detail = 2 {
+    let fr = path("d2.at.250");
+
+    with link = "line.at.250" {
+        track(:first :double :cat:ac15 :pax, fr[:flo.ys, :jed.yl]);
+        track(:first :double :cat:ac15 :pax, fr[:jed.yl, :kor]);
+    }
+
+    with link = "point.at.Korneuburg" {
+        track(:first:station :double :cat:ac15 :pax, fr[:kor, :kor.yh]);
+        statdot(:cat:ac15 :pax, fr[:kor]);
+        slabel(:right :cat:ac15 :pax, fr[:kor] + (1.5dt, -2.0dt),
+            vbox(:left:top, "Korneu-", "  burg")
+        );
+    }
+
+    with link = "line.at.250" {
+        track(:first :double :cat:ac15 :pax, fr[:kor.yh, :sto]);
+        line_label(:right:s :double :cat:ac15 :pax, fr[:kor.yh + 5km], "250");
+    }
+
+    with link = "point.at.Stockerau" {
+        track(:first:station :cat:ac15 :pax, fr[:sto, :sto.ya]);
+        statdot(:cat:ac15 :pax, fr[:sto]);
+        slabel(:left :cat:ac15 :pax, fr[:sto] + (1.0dt, 0.5dt),
+            hbox(:right:top, "Stockerau")
+        );
+    }
+
+    with link = "line.at.250" {
+        track(:first :cat:ac15 :pax, fr[:sto.ya, :zel.ys]);
+        line_label(:right:w :cat:ac15 :pax, fr[:sto.ya + 7km], "250");
+        line_label(:left:ne :cat:ac15 :pax, fr[:zel.ys - 7.5km],
+            "250"
+        );
+
+        track(:first :cat:ac15 :pax, fr[:zel.ys, :zel]);
+    }
+
+    with link = "point.at.Zellerndorf" {
+        track(:first:station :cat:ac15 :pax, fr[:zel, :zel.yn]);
+        statdot(:cat:ac15 :pax, fr[:zel]);
+        slabel(:right :cat:ac15 :pax, fr[:zel] + (1.5dt, 0dt),
+            hbox(:left:top, "Zellerndorf")
+        );
+    }
+
+    with link = "line.at.250" {
+        track(:first :cat:ac15 :pax, fr[:zel.yn, :ret]);
+    }
+
+    with link = "point.at.Retz" {
+        track(:first:station :cat:ac15 :pax, fr[:ret, :ret.yd]);
+        statdot(:cat:ac15 :pax, fr[:ret]);
+        slabel(:left :cat:ac15 :pax, fr[:ret] + (-1.5dt, 0.5dt), "Retz");
+    }
+
+    with link = "line.at.250" {
+        track(:first :cat:ac15 :pax, fr[:ret.yd, :reg]);
+        line_label(:right:nw :cat:ac15 :pax, fr[:reg - 2km], "250");
+    }
+
+    with link = "point.int.Retz-Šatov" {
+        marker(:right :ref :cat:ac15 :pax, fr[:reg]);
+        marker(:left :ref :cat:ac15 :pax, fr[:reg]);
+    }
+}
+
+
+# AT 252.  Kornneuburg - Hohenau
+with detail = 2 {
+    let kh = path("d2.at.252");
+
+    with link = "line.at.252" {
+        track(:second :museum, kh[:kor.yh, :ern]);
+        line_label(:left:ne :museum, kh[:kor.yh + 8km], "252");
+    }
+
+    with link = "point.at.Ernstbrunn" {
+        statdot(:museum, kh[:ern]);
+        slabel(:left :museum, kh[:ern] + (-1.5dt, 0.5dt), "Ernstbrunn");
+    }
+
+    with link = "line.at.252" {
+        track(:second :closed, kh[:ern, :mil.yg]);
+        line_label(:left:s :closed, kh[:ern + 13km], "252  ");
+    }
+
+    with link = "point.at.Mistelbach-Lokalbahn" {
+        track(:second:station :closed, kh[:mil.yg, :mil]);
+        statdot(:closed, kh[:mil]);
+    }
+
+    with link = "line.at.252" {
+        track(:second :closed, kh[:mil, :dob.yp]);
+        line_label(:left:s :closed, kh[:mil + 6km], "252  ");
+    }
+
+    with link = "point.at.Dobermannsdorf" {
+        track(:second:station :closed, kh[:dob.yp, :dob.ye]);
+        statdot(:closed, kh[:dob]);
+        with zoom = :low {
+            slabel(:left :closed, kh[:dob] + (0dt, -1km) + (-1.5dt, -0.8dt),
+                "Dobermannsdorf"
+            );
+        }
+        with zoom = :high {
+            slabel(:left :closed, kh[:dob] + (-0.5dt, -1.0dt),
+                vbox(:right:bottom, "Dobermanns-  ", "dorf")
+            );
+        }
+    }
+
+    with link = "line.at.252" {
+        track(:second :closed, kh[:dob.ye, :hoh.yk]);
+        with zoom = :high {
+            line_label(:left:s :closed, kh[:dob.ye + 3km], "  252");
+        }
+    }
+}
+
+
+# AT 253.  Dobermannsdorf - Poysdorf
+with detail = 2 {
+    let dp = path("d2.at.253");
+
+    with link = "line.at.253" {
+        track(:second :removed, dp[:dob.ye, :poy]);
+        line_label(:right:s :removed, dp[:dob.ye + 10km], "253");
+    }
+
+    with link = "point.at.Poysdorf" {
+        statdot(:removed, dp[:poy]);
+        slabel(:right :removed, dp[:poy] + (-1.5dt, -1.5dt), "Poysdorf");
+    }
+}
+
+
+# AT 255.  Stockerau - Absdorf-Hippersdorf
+with detail = 2 {
+    let sa = path("d2.at.255");
+
+    with link = "line.at.255" {
+        track(:first :cat:ac15 :pax, sa[:sto.ya, :abs.ys]);
+        line_label(:left:n :cat:ac15 :pax, sa[:abs.ys - 7km], "255");
+    }
+}
+
+
+# AT 257.  Zellerndorf - Sigmundsherberg
+with detail = 2 {
+    let zs = path("d2.at.257");
+
+    with link = "line.at.257" {
+        track(:second :removed, zs[:zel.ys, :sig.yz]);
+        line_label(:left:n :removed, zs[:zel.ys + 8km], "257  ");
+    }
+}
+
+
+# AT 258.  Retz - Drosendorf
+with detail = 2 {
+    let rd = path("d2.at.258");
+
+    with link = "line.at.258" {
+        track(:second :museum, rd[:ret.yd, :dro]);
+        line_label(:right:s :museum, rd[:dro - 14km], "258");
+    }
+
+    with link = "point.at.Drosendorf" {
+        statdot(:museum, rd[:dro]);
+        slabel(:top :museum, rd[:dro] + (0dt, -0.7dt), "Drosendorf");
+    }
+}
+

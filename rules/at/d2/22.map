@@ -1,0 +1,84 @@
+# AT 220.  Stadlau Fbf - Staatsgrenze nächst Marchegg
+with detail = 2 {
+    let sm = path("d2.at.220");
+
+    with link = "line.at.220" {
+        track(:first :double :cat:ac15 :pax, sm[:stf.ym, :asn]);
+        track(:first :cat:ac15 :pax, sm[:asn, :sie.ye]);
+
+        line_label(:right:n :cat:ac15 :pax, sm[:asn + 4km], "220");
+    }
+
+    with link = "point.at.Siebenbrunn-Leopoldsdorf" {
+        track(:first:station :cat:ac15 :pax, sm[:sie.ye, :sie]);
+        statdot(:cat:ac15 :pax, sm[:sie]);
+        slabel(:left :cat:ac15 :pax, sm[:sie] + (1.5dt, -0.8dt),
+            vbox(:right:bottom, "Siebenbrunn-", "Leopoldsdorf ")
+        );
+    }
+
+    with link = "line.at.220" {
+        track(:first :double :cat:ac15 :pax, sm[:sie, :son]);
+        line_label(:left:s :double :cat:ac15 :pax, sm[:son - 1km], "220");
+
+        track(:first :cat:ac15 :pax, sm[:son, :mar.yg]);
+    }
+
+    with link = "point.at.Marchegg" {
+        track(:first:station :cat:ac15 :pax, sm[:mar.yg, :mar]);
+        statdot(:cat:ac15 :pax, sm[:mar]);
+        slabel(:left :cat:ac15 :pax, sm[:mar] + (0dt, 0.6dt),
+            hbox(:right:top, "Marchegg")
+        );
+    }
+
+    with link = "line.at.220" {
+        track(:first :pax, sm[:mar, :mag]);
+    }
+}
+
+
+# AT 225.  Siebenbrunn-Leopoldsdorf - Engelhartstetten
+with detail = 2 {
+    let se = path("d2.at.225");
+
+    with link = "line.at.225" {
+        track(:second :removed, se[:sie.ye, :bre]);
+        line_label(:left:sw :removed, se[:sie.ye + 4.3km], "225");
+    }
+
+    with link = "point.at.Breitstetten" {
+        track(:second:station :removed, se[:bre, :bre.yo]);
+        statdot(:removed, se[:bre]);
+        slabel(:left :removed, se[:bre] + (-1.5dt, 1.5dt), "Breitstetten");
+    }
+
+    with link = "line.at.225" {
+        track(:second :removed, se[:bre.yo, :eng]);
+        line_label(:left:sw :removed, se[:bre.yo + 7km], "225");
+    }
+
+    with link = "point.at.Engelhartstetten" {
+        statdot(:removed, se[:eng]);
+        slabel(:right :removed, se[:eng] + (1.5dt, 0.8dt), "Engelhartstetten");
+    }
+}
+
+
+# AT 226.  Breitstetten - Orth a.d. Donau
+with detail = 2 {
+    let bo = path("d2.at.226");
+
+    with link = "line.at.226" {
+        track(:second :removed, bo[:bre.yo, :ort]);
+        line_label(:left:w :removed, bo[:bre.yo + 3km], "226");
+    }
+
+    with link = "point.at.Orth-Donau" {
+        statdot(:removed, bo[:ort]);
+        slabel(:bottom :removed, bo[:ort] + (0dt, 0.5dt),
+            vbox(:center:top, "Orth", "a.d. Donau")
+        );
+    }
+}
+

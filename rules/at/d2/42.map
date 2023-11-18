@@ -1,0 +1,92 @@
+# AT 420.  Innsbruck Hbf - Bludenz
+with detail = 2 {
+    let ib = path("d2.at.420");
+
+    with link = "line.at.420" {
+        track(:first :double :cat:ac15 :pax, ib[:inn.yb, :inw]);
+    }
+
+    with link = "point.at.Innsbruck-Westbf" {
+        track(:first:station :double :cat:ac15 :pax, ib[:inw, :inw.yg]);
+        statdot(:cat:ac15 :pax, ib[:inw]);
+    }
+
+    with link = "line.at.420" {
+        track(:first :double :cat:ac15 :pax, ib[:inw.yg, :otz]);
+        line_label(:left:n :double :cat:ac15 :pax, ib[:inw.yg + 17km], "420");
+
+        track(:first :cat:ac15 :pax, ib[:otz, :swe]);
+        line_label(:right:s :cat:ac15 :pax, ib[:swe - 9km], "420");
+
+        track(:first :double :cat:ac15 :pax, ib[:swe, :lan]);
+    }
+
+    with link = "point.at.Landeck-Zams" {
+        track(:first :cat:ac15 :pax, ib[:lan, :lan.ym]);
+        statdot(:cat:ac15 :pax, ib[:lan]);
+        slabel(:left :cat:ac15 :pax, ib[:lan] + (-1dt, -1dt),
+            "Landeck-Zams"
+        );
+    }
+
+    with link = "line.at.420" {
+        track(:first :cat:ac15 :pax, ib[:lan.ym, :fle]);
+        track(:first :double :cat:ac15 :pax, ib[:fle, :lae]);
+        track(:first :cat:ac15 :pax, ib[:lae, :blu.ys]);
+        line_label(:right:s :cat:ac15 :pax, ib[:blu.ys - 7.5km], "420");
+    }
+
+    with link = "point.at.Bludenz" {
+        track(:first:station :cat:ac15 :pax, ib[:blu.ys, :blu]);
+        statdot(:cat:ac15 :pax, ib[:blu]);
+        slabel(:left :cat:ac15 :pax :bold, ib[:blu] + (-1.5dt, 2.0dt),
+            "Bludenz"
+        );
+    }
+}
+
+
+# AT 425.  Innsbruck Westbf - Staatsgrenze nächst Scharnitz
+with detail = 2 {
+    let is = path("d2.at.425");
+
+    with link = "line.at.425" {
+        track(:first :cat:ac15 :pax, is[:inw.yg, :sag]);
+        line_label(:right:w :cat:ac15 :pax, is[:sag - 5.5km], "425");
+    }
+}
+
+
+# AT 427.  Staatsgrenze nächst Vils - Reutte in Tirol
+with detail = 2 {
+    let vr = path("d2.at.427");
+
+    with link = "line.at.427" {
+        track(:second :cat:ac15 :pax, vr[:pfg, :reu]);
+        line_label(:right:e :cat:ac15 :pax, vr[:reu - 7.5km], "427");
+    }
+
+    with link = "point.at.Reutte-Tirol" {
+        statdot(:cat:ac15 :pax, vr[:reu]);
+        slabel(:left :cat:ac15 :pax, vr[:reu] + (-1.5dt, 1.0dt),
+            "Reutte in Tirol"
+        );
+    }
+}
+
+
+# AT 428.  Reutte in Tirol - Staatsgrenze nächst Ehrwald
+with detail = 2 {
+    let re = path("d2.at.428");
+
+    with link = "line.at.428" {
+        track(:second :cat:ac15 :pax, re[:reu, :grg]);
+        line_label(:right:e :cat:ac15 :pax, re[:reu + 5.5km], "428");
+    }
+
+    with link = "point.int.Ehrwald-Zugspitzbahn-Griesen-Oberbay" {
+        marker(:left :ref :cat:ac15 :pax, re[:grg]);
+        marker(:right :ref :cat:ac15 :pax, re[:grg]);
+    }
+}
+
