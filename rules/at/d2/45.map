@@ -1,0 +1,129 @@
+# AT 450.  Staatsgrenze nächst Jennersdorf - Graz Hbf
+with detail = 2 {
+    let sg = path("d2.at.450");
+
+    with link = "point.int.Mogersdorf-Szentgotthárd" {
+        marker(:left :ref :pax, sg[:mgg]);
+        marker(:right :ref :pax, sg[:mgg]);
+    }
+
+    with link = "line.at.450" {
+        track(:first :pax, sg[:mgg, :feh.yf]);
+        line_label(:left:n :pax, sg[:mgg + 6km], "450");
+    }
+
+    with link = "point.at.Fehring" {
+        track(:first:station :pax, sg[:feh.yf, :feh]);
+        statdot(:pax, sg[:feh]);
+        slabel(:left :pax, sg[:feh] + (2.5dt, 0.8dt),
+            hbox(:right:top, "Fehring")
+        );
+    }
+
+    with link = "line.at.450" {
+        track(:first :pax, sg[:feh, :fel.yg]);
+    }
+
+    with link = "point.at.Feldbach" {
+        track(:first:station :pax, sg[:fel.yg, :fel]);
+        statdot(:pax, sg[:fel]);
+        slabel(:right :pax, sg[:fel] + (-2.5dt, -1.5dt), "Feldbach");
+    }
+
+    with link = "line.at.450" {
+        track(:first :pax, sg[:fel, :gle]);
+        line_label(:right:w :pax, sg[:fel + 14km], "450");
+    }
+
+    with link = "point.at.Gleisdorf" {
+        track(:first:station :pax, sg[:gle, :gle.yw]);
+        statdot(:pax, sg[:gle]);
+        slabel(:right :pax, sg[:gle] + (1.5dt, -0.5dt), "Gleisdorf");
+    }
+
+
+    with link = "line.at.450" {
+        track(:first :pax, sg[:gle.yw, :sta]);
+        line_label(:left:nw :pax, sg[:sta - 4.6km], "450");
+
+        track(:first :cat:ac15 :pax, sg[:sta, :gra.ys]);
+    }
+}
+
+
+# AT 452.  Fehring - Friedberg
+with detail = 2 {
+    let ff = path("d2.at.452");
+
+    with link = "line.at.452" {
+        track(:first :pax, ff[:feh.yf, :bie]);
+        line_label(:left:se :pax, ff[:feh.yf + 11.5km], "452");
+    }
+
+    with link = "point.at.Bierbaum" {
+        track(:first:station :pax, ff[:bie, :bie.yn]);
+        statdot(:pax, ff[:bie]);
+        slabel(:left :pax, ff[:bie] + (-1.7dt, 1.0dt), "Bierbaum");
+    }
+
+    with link = "line.at.452" {
+        track(:first :pax, ff[:bie.yn, :fri.ya]);
+        line_label(:left:e :pax, ff[:bie.yn + 10km], "452");
+        line_label(:left:e :pax, ff[:fri.ya - 8km], "452");
+    }
+
+    with link = "point.at.Friedberg" {
+        track(:first:station :pax, ff[:fri.ya, :fri]);
+        statdot(:pax, ff[:fri]);
+        slabel(:left :pax, ff[:fri] + (-1.8dt, -0.5dt), "Friedberg");
+    }
+}
+
+
+# AT 453.  Bierbaum - Neudau
+with detail = 2 {
+    let bn = path("d2.at.453");
+
+    with link = "line.at.453" {
+        track(:second :removed, bn[:bie.yn, :neu]);
+        line_label(:right:w :removed, bn[:bie.yn + 4.5km], "453");
+    }
+
+    with link = "point.at.Neudau" {
+        statdot(:removed, bn[:neu]);
+        slabel(:top :removed, bn[:neu] + (-0.3dt, -0.7dt), "Neudau");
+    }
+}
+
+
+# AT 458.  Spielfeld-Straß - Staatsgrenze nächst Bad Radkersburg
+with detail = 2 {
+    let sr = path("d2.at.458");
+
+    with link = "line.at.458" {
+        track(:second :pax, sr[:spi.yr, :rad]);
+        line_label(:left:s :pax, sr[:spi.yr + 18km], "458");
+    }
+
+    with link = "point.at.Bad-Radkersburg" {
+        statdot(:pax, sr[:rad]);
+        with zoom = :low {
+            slabel(:right :pax, sr[:rad] + (1.5dt, 1.8dt),
+                vbox(:left:bottom, "Bad", "Radkersburg")
+            );
+        }
+        with zoom = :high {
+            slabel(:right :pax, sr[:rad] + (1.5dt, 0.8dt), "Bad Radkersburg");
+        }
+    }
+
+    with link = "line.at.458" {
+        track(:second :removed, sr[:rad, :rag]);
+    }
+
+    with link = "point.int.Bad-Radkersburg-Gornja-Radgona" {
+        marker(:left :ref :removed, sr[:rag]);
+        marker(:right :ref :removed, sr[:rag]);
+    }
+}
+

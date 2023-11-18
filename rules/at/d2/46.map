@@ -1,0 +1,76 @@
+# AT 460.  Graz Hbf - Klagenfurt Hbf
+with detail = 2 {
+    let gk = path("d2.at.460");
+
+    with link = "line.at.460" {
+        track(:first :cat:ac15 :pax, gk[:wei.yw, :wet.yl]);
+        line_label(:left:nw :cat:ac15 :pax, gk[:wei.yw + 5km], "460");
+    }
+
+    with link = "point.at.Wettmannstätten" {
+        track(:first:station :pax, gk[:wet.yl, :wet.yw]);
+        statdot(:cat:ac15 :pax, gk[:wet]);
+        slabel(:right :cat:ac15 :pax, gk[:wet] + (-0.5dt, 1.0dt),
+            vbox(:left:top, "Wettmann-", "stätten")
+        );
+    }
+}
+
+
+# AT 460.1.  Werndorf - Knoten Weitendorf
+with detail = 2 {
+    with link = "line.at.460.1" {
+        track(:first :cat:ac15 :pax, path("d2.at.460.1")[:wer.yk, :wei.yw]);
+    }
+}
+
+
+# AT 464.  Zeltweg - Pöls
+with detail = 2 {
+    let zp = path("d2.at.464");
+
+    with link = "line.at.464" {
+        track(:second, zp[:zel.yp, :pol]);
+        line_label(:right:s, zp[:zel.yp + 4km], "464");
+    }
+
+    with link = "point.at.Pöls" {
+        statdot(:open, zp[:pol]);
+        slabel(:top, zp[:pol] + (-0.3dt, -0.5dt), "Pöls");
+    }
+}
+
+
+# AT 465.  Zeltweg - Staatsgrenze nächst Lavamünd
+with detail = 2 {
+    let zl = path("d2.at.465");
+
+    with link = "line.at.465" {
+        track(:first, zl[:zel.yk, :spa]);
+        line_label(:left:w, zl[:zel.yk + 6km], "465");
+        line_label(:right:e, zl[:spa - 11km], "465");
+    }
+
+    with link = "point.at.St-Paul" {
+        track(:first:station, zl[:spa, :spa.yb]);
+        statdot(:open, zl[:spa]);
+        slabel(:right, zl[:spa] + (1.3dt, -0.8dt), "St. Paul");
+    }
+
+    with link = "line.at.465" {
+        track(:first :removed, zl[:spa.yb, :lag]);
+        line_label(:left:sw :removed, zl[:lag - 3km], "465");
+    }
+}
+
+
+# AT 466.  St. Paul - Bleiburg
+with detail = 2 {
+    let pb = path("d2.at.466");
+
+    with link = "line.at.466" {
+        track(:first, pb[:spa.yb, :ble.yp]);
+        line_label(:left:w, pb[:spa.yb + 9km], "466");
+    }
+}
+

@@ -1,0 +1,112 @@
+# AT 175.  Wiener Neustadt Hbf - Puchberg am Schneeberg
+with detail = 2 {
+    let wp = path("d2.at.175");
+
+    with link = "line.at.175" {
+        track(:first :pax, wp[:wne.yp, :bfb]);
+    }
+
+    with link = "point.at.Bad-Fischau-Brunn" {
+        track(:first:station :pax, wp[:bfb, :bfb.yw]);
+        statdot(:pax, wp[:bfb]);
+        slabel(:left :pax, wp[:bfb] + (-0.6km, 0dt) + (-0.5dt, -0.8dt),
+            "Bad Fischau-Brunn"
+        );
+    }
+
+    with link = "line.at.175" {
+        track(:first :pax, wp[:bfb.yw, :wil.yn]);
+        line_label(:left:nw :pax, wp[:bfb.yw + 5.6km], "175");
+    }
+
+    with link = "point.at.Willendorf" {
+        track(:first:station :pax, wp[:wil.yn, :wil]);
+        statdot(:pax, wp[:wil]);
+        slabel(:left :pax, wp[:wil] + (-0.5dt, 0.5dt),
+            hbox(:right:top, "Willendorf")
+        );
+    }
+
+    with link = "line.at.175" {
+        track(:first :pax, wp[:wil, :puc]);
+        line_label(:right:s, wp[:puc - 2.8km], "175");
+    }
+
+    with link = "point.at.Puchberg-Schneeberg" {
+        statdot(:pax, wp[:puc]);
+        slabel(:left :pax, wp[:puc] + (-0.5dt, -0.8dt),
+            vbox(:right:bottom, "Puchberg", "am Schneeberg")
+        );
+    }
+}
+
+
+# AT 176.  Bad Fischau-Brunn - Wöllersdorf
+with detail = 2 {
+    let fw = path("d2.at.176");
+
+    with link = "line.at.176" {
+        track(:second :pax, fw[:bfb.yw, :feu]);
+
+        with zoom = :high {
+            line_label(:right:w :pax, fw[:bfb.yw + 2.0km], "176");
+        }
+    }
+
+    with link = "point.at.Feuerwerksanstalt" {
+        track(:second:station :pax, fw[:feu, :feu.ys]);
+        statdot(:pax, fw[:feu]);
+    }
+
+    with link = "line.at.176" {
+        track(:second :pax, fw[:feu.ys, :wol.yf]);
+    }
+}
+
+
+# AT 177.  Sollenau Aspangbahn - Feuerwerksanstalt
+with detail = 2 {
+    let sf = path("d2.at.177");
+
+    with link = "point.at.Sollenau-Aspangbahn" {
+        track(:first:station :removed, sf[:sol.yf, :sol.ye]);
+        statdot(:removed, sf[:sol]);
+    }
+
+    with link = "line.at.177" {
+        track(:second :removed, sf[:sol.ye, :ste.ys]);
+        track(:second :removed, sf[:ste.yf, :feu.ys]);
+    }
+}
+
+
+# AT 178.  Willendorf - Neunkirchen Lokalb
+with detail = 2 {
+    let wn = path("d2.at.178");
+
+    with link = "line.at.178" {
+        track(:second :removed, wn[:wil.yn, :nkl]);
+        line_label(:right:e :removed, wn[:wil.yn + 7km], "178");
+    }
+
+    with link = "point.at.Neunkirchen-Lokalb" {
+        statdot(:removed, wn[:nkl]);
+    }
+}
+
+
+# AT 179.  Puchberg am Schneeberg - Hochschneeberg
+with detail = 2 {
+    let ph = path("d2.at.179");
+
+    with link = "line.at.179" {
+        track(:first :narrow:g1000 :pax, ph[:puc, :hsn]);
+        line_label(:right:e :pax, ph[:puc + 2.5km], "179");
+    }
+
+    with link = "point.at.Hochschneeberg" {
+        statdot(:pax, ph[:hsn]);
+        slabel(:left :pax, ph[:hsn] + (-1.5dt, 0.8dt), "Hochschneeberg");
+    }
+}
+

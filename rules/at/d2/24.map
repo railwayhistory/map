@@ -1,0 +1,92 @@
+# AT 240.  Wien Hbf-Südosttangente - Staatsgrenze nächst Laa a.d. Thaya
+with detail = 2 {
+    let wl = path("d2.at.240");
+
+    with link = "line.at.240" {
+        track(:first :double :cat:ac15 :pax, wl[:stn.yh, :sta.yl]);
+        track(:first :double :cat:ac15 :pax, wl[:sta.yl, :stf]);
+    }
+
+    with link = "point.at.Stadlau-Fbf" {
+        track(:first:station :double :cat:ac15 :pax, wl[:stf, :stf.ym]);
+        statdot(:cat:ac15, wl[:stf]);
+    }
+
+    with link = "line.at.240" {
+        track(:first :double :cat:ac15 :pax, wl[:stf.ym, :wol]);
+        line_label(:right:w :double :cat:ac15 :pax, wl[:sun.y + 5km], "240");
+
+        track(:first :cat:ac15 :pax, wl[:wol, :mis]);
+        line_label(:left:ne :cat:ac15 :pax, wl[:mis - 8km], "240");
+    }
+
+    with link = "point.at.Mistelbach" {
+        statdot(:cat:ac15 :pax, wl[:mis]);
+        slabel(:right :cat:ac15 :pax,
+            wl[:mis] + (0.2km, 0.3km) + (0.8dt, 0.3dt),
+            hbox(:left:top, "Mistelbach")
+        );
+    }
+
+    with link = "line.at.240" {
+        track(:first :cat:ac15 :pax, wl[:mis, :enz]);
+    }
+
+    with link = "point.at.Enzersdorf-Staatz" {
+        statdot(:cat:ac15 :pax, wl[:enz]);
+        slabel(:left :cat:ac15 :pax, wl[:enz] + (-1.5dt, 0.8dt),
+            "Enzersdorf bei Staatz"
+        );
+    }
+
+    with link = "line.at.240" {
+        track(:first :cat:ac15 :pax, wl[:enz, :laa.yz]);
+        line_label(:right:s :cat:ac15 :pax, wl[:enz + 4km], "240");
+    }
+
+    with link = "point.at.Laa-Thaya" {
+        track(:first:station :cat:ac15 :pax, wl[:laa.yz, :laa]);
+        statdot(:cat:ac15 :pax, wl[:laa]);
+        slabel(:left :cat:ac15 :pax, wl[:laa] + (-1.8dt, 0.5dt),
+            vbox(:right:bottom, "Laa a.d.  ", "Thaya")
+        );
+    }
+
+    with link = "line.at.240" {
+        track(:first :removed, wl[:laa, :lag]);
+    }
+}
+
+
+# AT 242.  Enzersdorf bei Staatz - Poysdorf
+with detail = 2 {
+    let ep = path("d2.at.242");
+
+    with link = "line.at.242" {
+        track(:second :removed, ep[:enz, :poy]);
+        line_label(:left:s :removed, ep[:enz + 4.5km], "242");
+    }
+}
+
+
+# AT 246.  Staatsgrenze nächst Wildendürnbach - Zellerndorf
+with detail = 2 {
+    let nz = path("d2.at.246");
+
+    with link = "line.at.246" {
+        track(:second :removed, nz[:wig, :las.xl]);
+        line_label(:left:w :removed, nz[:wig + 5km], "246");
+    }
+
+    with link = "point.at.Laa-Thaya-Stadt" {
+        track(:second:station, nz[:las.xl, :las]);
+        statdot(:open, nz[:las]);
+    }
+
+    with link = "line.at.246" {
+        track(:second, nz[:las, :zel.yn]);
+        line_label(:left:n, nz[:las + 9km], "246");
+        line_label(:right:s, nz[:zel.yn - 8.8km], "246");
+    }
+}
+

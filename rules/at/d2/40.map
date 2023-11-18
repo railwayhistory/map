@@ -1,0 +1,83 @@
+# AT 400.  Staatsgrenze nächst Kufstein - Staatsgrenze nächst Steinach in Tirol
+with detail = 2 {
+    let kb = path("d2.at.400");
+
+    with link = "line.at.400" {
+        track(:first :double :cat:ac15 :pax, kb[:kug, :kuf]);
+    }
+
+    with link = "point.at.Kufstein" {
+        statdot(:cat:ac15 :pax, kb[:kuf]);
+        slabel(:left :cat:ac15 :pax, kb[:kuf] + (-1.7dt, 0dt), "Kufstein");
+    }
+
+    with link = "line.at.400" {
+        track(:first :double :cat:ac15 :pax, kb[:kuf, :wor.ys]);
+        line_label(:left:nw :double :cat:ac15 :pax, kb[:kuf + 8km], "400");
+    }
+
+    with link = "point.at.Wörgl-Hbf" {
+        track(:first:station :double :cat:ac15 :pax, kb[:wor.ys, :wor]);
+        statdot(:cat:ac15 :pax, kb[:wor]);
+        slabel(:left :cat:ac15 :pax, kb[:wor] + (-1dt, -1dt),
+            hbox(:right:base, span(:bold, "Wörgl "), "Hbf")
+        );
+    }
+
+    with link = "line.at.400" {
+        track(:first :double :cat:ac15 :pax, kb[:wor, :rad.yw]);
+        line_label(:left:n :double :cat:ac15 :pax, kb[:wor + 4km], "400");
+
+        track(:first :double :cat:ac15 :pax, kb[:rad.yw, :jen.ym]);
+        line_label(:right:s :double :cat:ac15 :pax, kb[:rad.yw + 4km], "400 ");
+    }
+
+    with link = "point.at.Jenbach" {
+        track(:first:station :double :cat:ac15 :pax, kb[:jen.ym, :jen]);
+        statdot(:cat:ac15 :pax, kb[:jen]);
+        slabel(:left :cat:ac15 :pax, kb[:jen] + (-1.5km, 0dt) + (-1dt, 0dt),
+            "Jenbach"
+        );
+    }
+
+    with link = "line.at.400" {
+        track(:first :double :cat:ac15 :pax, kb[:jen, :kst.ys]);
+        track(:first :double :cat:ac15 :pax, kb[:kst.ys, :inn]);
+        line_label(:left:w :double :cat:ac15 :pax, kb[:kst.ys + 5km], "400");
+        line_label(:right:s :double :cat:ac15 :pax, kb[:inn - 6km], "400");
+    }
+
+    with link = "point.at.Innsbruck-Hbf" {
+        track(:first:station :double :cat:ac15 :pax, kb[:inn, :inn.yb]);
+        statdot(:cat:ac15 :pax, kb[:inn]);
+        slabel(:left :cat:ac15 :pax :medium :bold,
+            kb[:inn] + (-2.8km, 3km) + (-1dt, 1dt),
+            "Innsbruck"
+        );
+    }
+
+    with link = "line.at.400" {
+        track(:first :double :cat:ac15 :pax, kb[:inn.yb, :ine.y]);
+        track(:first :double :cat:ac15 :pax, kb[:ine.y, :brg]);
+        line_label(:left:w :double :cat:ac15 :pax, kb[:ine.y + 9km], "400");
+    }
+}
+
+
+# AT 405.  Abzw Wörgl 2 - Abzw Fritzens-Wattens 2
+with detail = 2 {
+    let wf = path("d2.at.405");
+
+    with link = "line.at.450", layer = -1 {
+        track(:first :double :cat:ac15 :pax,
+                wf[:rad.yw, :mun.yn - 2km]
+            ..  wf[:mun.yn, :mun.ys] << 1dt
+            ..  wf[:mun.ys + 2km, :jen.ym]
+        );
+        line_label(:left:sw :double :cat:ac15 :pax, wf[:rad.yw + 3km], "405");
+
+        track(:first :double :cat:ac15 :pax, wf[:kst.ys, :ter.yn]);
+        line_label(:right:se :double :cat:ac15 :pax, wf[:kst.ys + 5km], "405");
+    }
+}
+
