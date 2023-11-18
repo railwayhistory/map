@@ -44,7 +44,15 @@
 
 ## Corrections
 
-(No corrections tracked before 2022-08-30.)
+### 2023-10-09
+
+* Re-assigned lines of the Ferrovie del Sud Est according to actual
+  chainage.
+
+### 2023-10-03
+
+*  Line _IT API_ (Alessandira – Piacenza) has passenger service between
+   Voghera and Broni.
 
 ### 2023-09-29
 
@@ -70,6 +78,8 @@
    *  _IT NPT_ (Napoli Montesanto – Pozzuoli – Torregaveta),
    *  _IT NQT_ (Napoli Montesanto – Quarto – Torregaveta),
    *  _IT PAA_ (Pomigliano d'Arco – Acerra).
+
+(No corrections tracked before 2022-08-30.)
 
 
 ## New Additions
