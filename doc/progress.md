@@ -15,6 +15,7 @@ within countries for both the overview and detailed maps.
 
 For countries not listed here, work has not started at all.
 
+[AT](#at-austria) •
 [BE](#be-belgium) •
 [CH](#ch-switzerland) •
 [DE](#de-germany) •
@@ -26,6 +27,16 @@ For countries not listed here, work has not started at all.
 [NO](#no-norway) •
 [RU](#ru-russia)
 
+
+
+## AT: Austria
+
+The overview map currently only covers railway lines. Tram, metro,
+industrial, and forest lines are omitted.
+
+| region         | overview  | detail      |
+| -------------- | --------- | ----------- |
+| entire country | complete  | not started |
 
 
 ## BE: Belgium
