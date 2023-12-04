@@ -44,6 +44,11 @@
 
 ## Corrections
 
+### 2023-12-04
+
+* Line _IT OLU_ (Oleggio ~ Luino ~ confine) does not have passenger
+  service between Sesto Calende and Leveno-Mombello.
+
 ### 2023-10-09
 
 * Re-assigned lines of the Ferrovie del Sud Est according to actual
