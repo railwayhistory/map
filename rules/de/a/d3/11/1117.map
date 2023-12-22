@@ -1,21 +1,27 @@
-# DE 1117.  Lübeck-Kücknitz (ausschl.) - Lübeck Skandinavienkai
+# DE 1117.  Lübeck-Kücknitz - Lübeck Skandinavienkai
 #
-let ks = path("d4.de.1117");
+let ks = path("d3.de.1117");
 
 with detail = 3 {
+    # point.de.Lübeck-Kücknitz-Abzw  de.1113
+
     with link = "line.de.1117" {
-        with layer = -2 track(:second :cat:ac15,
-                ks[:kua + 0.5ssw, :kua + 0.51ssw] << 0.5dt
-            ..  ks[:kur - 1.1ssw, :kur + 0.5ssw] << 1dt
-            ..  ks[:ska + 499m, :ska + 500m]
+        track(:second :rightother :cat:ac15, 
+                ks[:kua + 0.5sw, :kua.ys - 1dt] << 0.5dt
         );
+        track(:second :cat:ac15,
+                ks[:kua.ys - 1dt, :kua.ys - 0.9dt] << 0.5dt
+            ..  ks[:ska - 0.51sw, :ska - 0.5sw]
+        );
+
+        line_label(:left:se :cat:ac15, ks[:kua + 1km] << 0.5dt, "1117");
     }
 
     with link = "point.de.Lübeck-Skandinavienkai" {
-        track(:second:station :cat:ac15, ks[:ska + 500m, :ska + 500m + 2ssw]);
-        marker(:de.gbf :cat:ac15 :right, ks[:ska + 500m + 1ssw]);
-        slabel(:right :cat:ac15, ks[:ska + 500m + 2ssw] >> 1.2ssw,
-            span(:bold, "Lübeck Skandinavienkai")
+        track(:second :station :cat:ac15, ks[:ska - 0.5sw, :ska.f]);
+        marker(:right :de.gbf :cat:ac15, ks[:ska]);
+        slabel(:right :cat:ac15, ks[:ska] >> 1.5sh + (0.5dt, 0.5sh),
+            "Lübeck Skandinavienkai"
         );
     }
 }

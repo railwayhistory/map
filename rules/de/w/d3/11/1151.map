@@ -1,87 +1,118 @@
 # DE 1151.  Wittenberge - Buchholz (Nordh)
 #
-let wb = path("d4.de.w.1151");
+let wb = path("d3.de.w.1151");
 
 with detail = 3 {
     # point.de.Wittenberge  de.6100
 
     with link = "line.de.1151" {
-        with layer = -1 track(:first :removed, wb[:wit.hh, :cum - 1ssw]);
+        track(:first :removed,
+                wb[:wit + 1.5sw, :wit.yd] << 1.5dt
+            ..  wb[:wit.yyd + 2dt, :cum - 1sw]
+        );
+        line_label(:left:ne :removed, wb[:wit.yyd + 3km], "1151");
     }
 
     with link = "point.de.Cumlosen" {
-        track(:first:station :removed, wb[:cum - 1ssw, :cum + 1ssw]);
+        track(:first :station :removed, wb[:cum - 1sw, :cum + 1sw]);
         marker(:de.bf :removed :left, wb[:cum]);
-        slabel(:left :removed, wb[:cum - 1.5ssw] << 2.3ssw,
-            "Cumlosen"
+        slabel(:left :removed, wb[:cum - 0.3sw] << 0.9sh,
+            hbox(:right:top, "Cumlosen")
         );
     }
 
     with link = "line.de.1151" {
-        track(:first :removed, wb[:cum + 1ssw, :lan - 1ssw]);
+        track(:first :removed, wb[:cum + 1sw, :lan - 1sw]);
     }
 
     with link = "point.de.Lanz" {
-        track(:first:station :removed, wb[:lan - 1ssw, :lan + 1ssw]);
+        track(:first:station :removed, wb[:lan - 1sw, :lan + 1sw]);
         marker(:de.bf :removed :right, wb[:lan]);
-        slabel(:top :removed, wb[:lan] >> 1.2ssw, "Lanz");
+        slabel(:top :removed, wb[:lan] >> 1.1sh, "Lanz");
     }
 
     with link = "line.de.1151" {
-        track(:first :removed, wb[:lan + 1ssw, :len - 1ssw]);
-        with layer = 1 line_badge(:removed, wb[:gan + 2.0km], "1151");
+        track(:first :removed, wb[:lan + 1sw, :gan - 0.5sw]);
     }
 
     with link = "point.de.Gandow" {
+        track(:first:station :removed, wb[:gan - 0.5sw, :gan + 0.5sw]);
         marker(:de.bk :removed :left, wb[:gan]);
-    }
-
-    with link = "point.de.Lenzen-Elbe" {
-        track(:first:station :removed, wb[:len - 1ssw, :len + 1ssw]);
-        marker(:de.bf :removed :left, wb[:len]);
-        slabel(:left :removed, wb[:len - 1ssw] << 2.4ssw,
-            hbox(:center:base,
-                span(:regular, "Lenzen "),
-                span(:light, "(Elbe)")
-            )
+        slabel(:bottom :removed :light, wb[:gan] << 1.1sh + (-0.5sw, 0dt),
+            "Gandow"
         );
     }
 
     with link = "line.de.1151" {
-        track(:first :removed, wb[:len + 1ssw, :pol - 1ssw]);
+        track(:first :removed, wb[:gan + 0.5ssw, :len - 1sw]);
     }
 
-    with link = "point.de.Eldenburg" {
-        track(:first:station :removed, wb[:eld - 0.5ssw, :eld + 0.5ssw]);
-        marker(:de.bk :removed :right, wb[:eld]);
-    }
-
-    with link = "point.de.Polz" {
-        track(:first:station :removed, wb[:pol - 1ssw, :pol + 1ssw]);
-        marker(:de.bf :removed :left, wb[:pol]);
-        slabel(:top :removed, wb[:pol] >> 0.5dt, "Polz");
+    with link = "point.de.Lenzen-Elbe" {
+        track(:first:station :removed, wb[:len - 1sw, :len + 1sw]);
+        marker(:de.bf :removed :left, wb[:len]);
+        slabel(:left :removed, wb[:len - 0.5sw] << 1.2sh,
+            hbox(:right:top, hbox(:center:base,
+                span(:regular, "Lenzen "),
+                span(:light, "(Elbe)")
+            ))
+        );
     }
 
     with link = "line.de.1151" {
-        with layer = -1 track(:first :removed, wb[:pol + 1ssw, :dom - 1ssw]);
+        track(:first :removed, wb[:len + 1sw, :eld - 0.5sw]);
+    }
+
+    with link = "point.de.Eldenburg" {
+        track(:first:station :removed, wb[:eld - 0.5sw, :eld + 0.5sw]);
+        marker(:de.bk :removed :right, wb[:eld]);
+        slabel(:top :removed :light, wb[:eld] >> 1.0sh, "Eldenburg");
+    }
+
+    with link = "line.de.1151" {
+        track(:first :removed, wb[:eld + 0.5sw, :pol - 1sw]);
+    }
+
+    with link = "point.de.Polz" {
+        track(:first:station :removed, wb[:pol - 1sw, :pol + 1sw]);
+        marker(:de.bf :removed :left, wb[:pol]);
+        slabel(:bottom :removed, wb[:pol] << 1.1sh, "Polz");
+    }
+
+    with link = "line.de.1151" {
+        track(:first :removed, wb[:pol + 1sw, :dom - 1sw]);
+        line_label(:left:n :removed, wb[:pol + 3.5km], "1151");
     }
 
     with link = "point.de.Dömitz" {
-        track(:first:station :removed, wb[:dom - 1ssw, :dom + 1ssw]);
-        marker(:de.bf :removed :right, wb[:dom]);
-        slabel(:left :removed, wb[:dom - 1ssw] >> 2.0ssw,
+        # DE 1151
+        track(:first :station :removed, wb[:dom - 1ssw, :dom + 1ssw]);
+
+        # DE 6441
+        track(:second :station :removed,
+                wb[:dom - 1sw, :dom + 0.5sw + 1dl] >> 1dt
+            --  wb[:dom + 0.5sw + 2dl, :dom + 0.5sw + 2.1dl]
+        );
+
+        marker(:de.bf :removed :right, wb[:dom] >> 1dt);
+        slabel(:left :removed, wb[:dom - 1sw] >> 1dt >> 1.8sh,
             span(:bold, "Dömitz")
         );
     }
 
     with link = "line.de.1151" {
-        track(:first :removed, wb[:dom + 1ssw, :dog - 0.5ssw]);
+        track(:first :removed, wb[:dom + 1sw, :dog - 0.5sw]);
     }
 
     with link = "point.de.Dömitz-LGr" {
-        track(:first :removed, wb[:dog - 0.5ssw, :dog + 0.5ssw]);
-        with layer = -4 marker(:de.dirgr :removed :right, wb[:dog]);
-        with layer = -4 marker(:de.dirgr :removed :left, wb[:dog]);
+        track(:first :removed, wb[:dog - 0.5sw, :dog + 0.5sw]);
+        marker(:de.lgr :removed :right, wb[:dog]);
+        marker(:de.lgr :removed :left, wb[:dog]);
+        slabel(:left :removed :roman:italic,
+            wb[:dog] >> 1.5sh + (0.3sw, 0dt),
+            "NI/MV"
+        );
     }
+
+    # DE-A
 }
 

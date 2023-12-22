@@ -1,79 +1,67 @@
 # DE 1201.  Niebüll - Süderlügum Grenze
 #
-let ns = path("d4.de.1201");
+let ns = path("d3.de.1201");
 
 with detail = 3 {
+    # point.de.Niebüll  de.1210
+
     with link = "line.de.1201" {
         track(:second :pax,
-                ns[:nie + 1ssw, :nie + 1.1ssw] << 0.5dt
-            ..  ns[:nie.gg + 500m, :uph - 1ssw] << 0.5dt
+                ns[:nie + 1sw, :nie.yt] >> 0.5dt
+            ..  ns[:nie.yyt + 2dt, :uph - 1sw] << 0.5dt
         );
-        track(:second:station :removed,
-                ns[:nie + 1ssw, :nie + 1.1ssw] >> 0.5dt
-            ..  ns[:nie.gg + 500m, :uph - 1ssw] >> 0.5dt
+        track(:second :removed,
+                ns[:nie + 1sw, :nie.yt] >> 1.5dt
+            ..  ns[:nie.yyt + 2dt, :uph - 1sw] >> 0.5dt
         );
+        line_label(:right:w :pax, ns[:nie.yyt + 2.5km] >> 0.5dt, "1201");
     }
 
     with link = "point.de.Uphusum" {
-        track(:second:station :pax, ns[:uph - 1ssw, :uph + 1ssw] << 0.5dt);
-        with layer = -1 track(:second:station :removed,
-                ns[:uph - 1ssw, :uph + 1ssw] >> 0.5dt
-        );
-        marker(:de.hp :pax :right, ns[:uph] >> 0.5dt);
-        with layer = -1 marker(:de.bf :removed :right, ns[:uph] >> 0.5dt);
-        slabel(:right :pax, ns[:uph - 0.5ssw] >> 0.5dt >> 2.0ssw, "Uphusum");
+        track(:second :station :pax, ns[:uph - 1sw, :uph + 1sw] << 0.5dt);
+        track(:second :station :removed, ns[:uph - 1sw, :uph + 1sw] >> 0.5dt);
+        marker(:right :de.hp :pax, ns[:uph] >> 0.5dt);
+        marker(:right :de.exbf :pax, ns[:uph] >> 0.5dt);
+        slabel(:left :pax, ns[:uph - 0.5sw] << 1.5dt, "Uphusum");
     }
 
     with link = "line.de.1201" {
-        track(:second :pax, ns[:uph + 1ssw, :sua - 1ssw] << 0.5dt);
-        track(:second:station :removed, ns[:uph + 1ssw, :sua - 1ssw] >> 0.5dt);
-        with layer = 1 line_badge(:pax, ns[:uph + 1.8km], "1201");
+        track(:second :pax, ns[:uph + 1sw, :sua - 1sw] << 0.5dt);
+        track(:second :removed, ns[:uph + 1sw, :sua - 1sw] >> 0.5dt);
     }
 
     with link = "point.de.Süderlügum-Awanst" {
-        track(:second:station :pax, ns[:sua - 1ssw, :sua + 0.5ssw] << 0.5dt);
-        track(:second:station :removed,
-            ns[:sua - 1ssw, :sua + 0.5ssw] >> 0.5dt
+        track(:second :station :pax, ns[:sua - 1sw, :sud - 0.5sw] << 0.5dt);
+        track(:second :station :removed, ns[:sua - 1sw, :sud - 0.5sw] >> 0.5dt);
+        marker(:left :de.awanst :pax, ns[:sua] << 0.5dt);
+        slabel(:left :pax :light, ns[:sua - 0.6sw] << 0.5dt << 1.5sh,
+            "Süderlügum Awanst"
         );
-        marker(:de.awanst :left, ns[:sua] << 0.5dt);
     }
 
     with link = "point.de.Süderlügum" {
-        track(:second:station :pax, ns[:sua + 0.5ssw, :sua + 2.2ssw] << 0.5dt);
-        track(:second:station :removed,
-            ns[:sua + 0.5ssw, :sua + 2.2ssw] >> 0.5dt
-        );
-
-        with layer = -4 marker(
-            :de.bf :removed :right, ns[:sua + 0.7ssw] >> 0.5dt
-        );
-        marker(:de.hp :pax :left, ns[:sua + 1.2ssw] << 0.5dt);
-        slabel(:left :pax, ns[:sua + 0.4ssw] << 0.5dt << 1.6ssw, "Süderlügum");
+        track(:second :station :pax, ns[:sud - 0.5sw, :sud + 1sw] << 0.5dt);
+        track(:second :station :removed, ns[:sud - 0.5sw, :sud + 1sw] >> 0.5dt);
+        marker(:right :de.hp :pax, ns[:sud] >> 0.5dt);
+        marker(:right :de.exbf :pax, ns[:sud] >> 0.5dt);
+        slabel(:right :pax, ns[:sud - 0.6sw] >> 0.5dt >> 1.9sh, "Süderlügum");
     }
 
     with link = "line.de.1201" {
-        track(:second :pax, ns[:sua + 2.2ssw, :sug - 0.5ssw] << 0.5dt);
-        track(:second:station :removed,
-                ns[:sua + 2.2ssw, :sug - 0.5ssw] >> 0.5dt
-        );
+        track(:second :pax, ns[:sud + 1sw, :sug - 0.5sw] << 0.5dt);
+        track(:second :removed, ns[:sud + 1sw, :sug - 0.5sw] >> 0.5dt);
+        line_label(:right:w :pax, ns[:sud + 1.5km] >> 0.5dt, "1201");
     }
 
     with link = "point.int.Süderlügum-Tønder" {
-        track(:second:station :pax, ns[:sug - 0.5ssw, :sug + 0.5ssw] << 0.5dt);
-        with layer = -1 track(:second:station :removed,
-                ns[:sug - 0.5ssw, :sug + 0.5ssw] >> 0.5dt
-        );
-
-        marker(:de.dirgr :right, ns[:sug] >> 0.5dt);
-        marker(:statdt :right, ns[:sug] << 0.5dt);
-        marker(:de.dirgr :left, ns[:sug] << 0.5dt);
-
-        label(ns[:sug] << 5dt,
-                vbox(:right:middle,
-                    span(:small, "DK"),
-                    hbar(0.3),
-                    span(:small, "DE")
-                )
+        track(:second :station :pax, ns[:sug - 0.5sw, :sug + 1sw] << 0.5dt);
+        track(:second :station :removed, ns[:sug - 0.5sw, :sug + 1sw] >> 0.5dt);
+        marker(:left :de.dirgr :pax, ns[:sug] << 0.5dt);
+        marker(:right :de.dirgr :removed, ns[:sug] >> 0.5dt);
+        slabel(:left :roman:italic, ns[:sug] << 0.5dt << 1.2sh,
+            hbox(:right:middle,
+                vbox(:center:middle, " DK", hrule(), " DE SH ")
+            )
         );
     }
 }

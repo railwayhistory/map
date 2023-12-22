@@ -1,30 +1,50 @@
 # DE 1010.  Schleswig - Schleswig Altstadt
 #
-let slesla = path("d4.de.1010");
+let sa = path("d3.de.1010");
 
 with detail = 3 {
     # point.de.Schleswig  de.1040
-
+ 
     with link = "line.de.1010" {
-        with layer = -1 track(:second:station :removed,
-                slesla[:asla - .1dl, :asla] >> 0.5dt
-            ..  slesla[:asla + 500m, :sla - 1sw]
-        );
-
-        guide(:linenum :removed,
-                slesla[:asla + 1.0km] << 0.7dt
-            --  slesla[:asla + 1.0km] << 3.0dt
-        );
-        label(:linenum :removed, slesla[:asla + 1.0km] << 3.0dt,
-            hbox(:right:middle, "1010 ")
+        track(:second :removed,
+                sa[:sle.ya - 0.1dl, :sle.ya] >> 0.5dt
+            ..  sa[:aa, :got - 0.5sw]
         );
     }
 
+    with link = "point.de.Gottorf" {
+        track(:second :station :removed, sa[:got - 0.5sw, :got + 0.5sw]);
+        marker(:right :de.hp :removed, sa[:got]);
+    }
+
+    with link = "line.de.1010" {
+        track(:second :removed, sa[:got + 0.5sw, :slh - 0.5sw]);
+        line_label(:right:nw :removed, sa[:slh - 0.3sw], "1010");
+    }
+
+    with link = "point.de.Schleihalle" {
+        track(:second :station :removed, sa[:slh - 0.5sw, :slh + 0.5sw]);
+        marker(:left :de.hp :removed, sa[:slh]);
+    }
+
+    with link = "line.de.1010" {
+        track(:second :removed, sa[:slh + 0.5sw, :dom - 0.5sw]);
+    }
+
+    with link = "point.de.Domziegelhof" {
+        track(:second :station :removed, sa[:dom - 0.5sw, :dom + 0.5sw]);
+        marker(:left :de.hp :removed, sa[:dom]);
+    }
+
+    with link = "line.de.1010" {
+        track(:second :removed, sa[:dom + 0.5sw, :sla.f - 1.2sw]);
+    }
+
     with link = "point.de.Schleswig-Altstadt" {
-        track(:second:station :removed, slesla[:sla - 1sw, :sla.f]);
-        marker(:de.bf :removed :left, slesla[:sla]);
-        slabel(:left :removed, slesla[:sla + 0.3sw] << 1.4sh,
-            span(:small :bold :removed, "S. Altstadt")
+        track(:second :station :removed, sa[:sla.f - 1.2sw, :sla.f]);
+        marker(:left :de.gbf :removed, sa[:sla.f - 0.7sw]);
+        slabel(:right :removed, sa[:sla.f - 0.9sw] >> 0.4dt,
+            hbox(:left:top :bold, "S.-Altstadt")
         );
     }
 }

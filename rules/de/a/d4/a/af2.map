@@ -5,29 +5,56 @@ let fr = path("d4.de.af2");
 with detail = 4 {
     # point.de.Flensburg-Kreisb: de.AF1
 
-
     with link = "line.de.AF2" {
         track(:third :narrow:g1000 :removed,
                 fr[:fkr.f, :fkr.f + 50m] >> 2dt
-            ..  fr[:xkr, :asat] >> 1dt
-            ..  fr[:aa + 1sw, :gta - 1sw]
+            ..  fr[:xkr, :fru - 1sw] >> 1dt
         );
     }
-
     
     with link = "point.de.Fruerlund" {
+        track(:third:station :narrow:g1000 :removed,
+                fr[:fru - 1sw, :fru + 1sw] >> 1dt
+        );
         marker(:right :de.zst :removed, fr[:fru] >> 1dt);
         station(:right :removed, fr[:fru + 0.7sw] << 1dt,
             "Fruerlund", "1,5"
         );
     }
 
+    with link = "line.de.AF2" {
+        track(:third :narrow:g1000 :removed,
+                fr[:fru + 1sw, :asat] >> 1dt
+            ..  fr[:gta - 1.1sw, :gta - 1sw]
+        );
+    }
 
     with link = "point.de.Groß-Tarup" {
         track(:third:station :narrow:g1000 :removed,
                 fr[:gta - 1sw, :gta + 1sw]
         );
         marker(:right :de.zst :removed, fr[:gta]);
+        station(:right :removed, fr[:gta] + (0.25km, 0.3km),
+            "Groß Tarup", "3,0"
+        );
+    }
+
+    with link = "line.de.AF2" {
+        track(:third :narrow:g1000 :removed, fr[:gta + 1sw, :tas - 1sw]);
+    }
+
+    with link = "point.de.Tastrup" {
+        track(:third:station :narrow:g1000 :removed,
+                fr[:tas - 1sw, :tas + 1sw]
+        );
+        marker(:right :de.zst :removed, fr[:tas]);
+        station(:right :removed, fr[:tas] << 1.5dt,
+            "Tastrup", "4,9"
+        );
+    }
+
+    with link = "line.de.AF2" {
+        track(:third :narrow:g1000 :removed, fr[:tas + 1sw, :hur - 1sw]);
     }
 }
 

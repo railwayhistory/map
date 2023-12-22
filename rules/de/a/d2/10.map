@@ -1,16 +1,16 @@
 # DE 1000.  Flensburg Weiche - Harrislee Grenze
 with detail = 2 {
-    let flwhag = path("d2.de.1000");
+    let fh = path("d2.de.1000");
 
     with link = "line.de.1000" {
-        with layer = -1 track(:first :double :cat:ac15, flwhag[:flw, :fri.yf]);
-        track(:first :double :cat:ac15 :pax, flwhag[:fri.yf, :hag]);
-        with layer = 1 line_badge(:cat:ac15 :pax, flwhag[:hag - 2.5km], "1000");
+        track(:first :double :cat:ac15, fh[:flw, :fri.yf]);
+        track(:first :double :cat:ac15 :pax, fh[:fri.yf, :hag]);
+        line_label(:left:e :cat:ac15 :pax, fh[:hag - 2km], "1000");
     }
 
     with link = "point.int.Harrislee-Padborg" {
-        marker(:refdt :cat:ac15 :left, flwhag[:hag]);
-        marker(:refdt :cat:ac15 :right, flwhag[:hag]);
+        marker(:refdt :cat:ac15 :left, fh[:hag]);
+        marker(:refdt :cat:ac15 :right, fh[:hag]);
     }
 }
 
@@ -20,8 +20,8 @@ with detail = 2 {
     let flwlin = path("d2.de.1001");
 
     with link = "line.de.1001" {
-        with layer = -1 track(:second :closed, flwlin[:flw.yl, :lin.yf]);
-        with layer = 1 line_badge(:closed, flwlin[:flw.yl + 18km], "1001");
+        track(:second :closed, flwlin[:flw.yl, :lin.yf]);
+        line_label(:right:s :closed, flwlin[:flw.yl + 18km], "1001");
     }
 }
 
@@ -31,7 +31,7 @@ with detail = 2 {
     let fh = path("d2.de.1002");
 
     with link = "line.de.1002" {
-        with layer = -1 track(:second :removed, fh[:wil.y, :fla]);
+        track(:second :removed, fh[:wil.y, :fla]);
     }
 
     with link = "point.de.Flensburg-Alter-Bf" {
@@ -74,14 +74,20 @@ with detail = 2 {
     let jh = path("d2.de.1011");
 
     with link = "line.de.1011" {
-        track(:second :pax, jh[:jub.yh, :hus.yj]);
-        with layer = 1 line_badge(:pax, jh[:ohr - 4km], "1011");
-        with layer = 1 line_badge(:pax, jh[:ohr + 5.5km], "1011");
+        track(:second :pax, jh[:jub.yh, :ohr]);
+        line_label(:left:nw :pax, jh[:ohr - 6.3km], "1011");
     }
 
     with link = "point.de.Ohrstedt" {
-        with layer = 1 marker(:statdot, jh[:ohr]);
-        slabel(:right, jh[:ohr + 3dt] << 3.5dt, "Ohrstedt");
+        statdot(:open, jh[:ohr]);
+        slabel(:right, jh[:ohr] + (-2dt, 0.8dt),
+            hbox(:left:top, "Ohrstedt")
+        )
+    }
+
+    with link = "line.de.1011" {
+        track(:second :pax, jh[:ohr, :hus.yj]);
+        line_label(:left:n :pax, jh[:ohr + 5.5km], "1011");
     }
 }
 
@@ -92,14 +98,20 @@ with detail = 2 {
     let bh = path("d2.de.1012");
 
     with link = "line.de.1012" {
-        with layer = -1 track(:second :removed, bh[:bud, :hus.yb]);
-        with layer = 1 line_badge(:removed, bh[:bud + 14.8km], "1012");
-        with layer = 1 line_badge(:removed, bh[:hus - 7.5km], "1012");
+        track(:second :removed, bh[:bud, :nor]);
+        line_label(:right:s :removed, bh[:bud + 18km], "1012");
     }
 
     with link = "point.de.Norderstapel" {
-        with layer = 1 marker(:statdot :removed, bh[:nor]);
-        slabel(:left :removed, bh[:nor] + (0dt, 4dt), "Norderstapel");
+        marker(:statdot :removed, bh[:nor]);
+        slabel(:left :removed, bh[:nor] + (0dt, 0.8dt),
+            hbox(:right:top, "Norderstapel")
+        );
+    }
+
+    with link = "line.de.1012" {
+        track(:second :removed, bh[:nor, :hus.yb]);
+        line_label(:right:w :removed, bh[:hus - 9km], "1012");
     }
 }
 
@@ -109,34 +121,60 @@ with detail = 2 {
     let hf = path("d2.de.1020");
 
     with link = "line.de.1020" {
-        track(:second :pax, hf[:has, :fle.r]);
-        with layer = 1 line_badge(:pax, hf[:nwi + 8.0km], "1020");
-        with layer = 1 line_badge(:pax, hf[:sor - 4.5km], "1020");
+        track(:second :pax, hf[:has, :suc]);
     }
 
     with link = "point.de.Suchsdorf" {
-        with layer = 1 marker(:statdot :pax, hf[:suc]);
+        track(:second :station :pax, hf[:suc, :suc.y]);
+        statdot(:pax, hf[:suc]);
         slabel(:left :pax, hf[:suc - 1.5dt] << 1.5dt, "Suchsdorf");
     }
 
+    with link = "line.de.1020" {
+        track(:second :pax, hf[:suc.y, :nwi]);
+    }
+
     with link = "point.de.Neuwittenbek" {
-        with layer = 1 marker(:statdot :pax, hf[:nwi]);
+        track(:second :station :pax, hf[:nwi, :nwi.y]);
+        statdot(:pax, hf[:nwi]);
         slabel(:left :pax, hf[:nwi] + (-2.0dt, 1.5dt), "Neuwittenbek");
     }
 
+    with link = "line.de.1020" {
+        track(:second :pax, hf[:nwi.y, :ecs]);
+        line_label(:right:sw :pax, hf[:nwi + 8.0km], "1020");
+    }
+
     with link = "point.de.Eckernförde" {
-        with layer = 1 marker(:statdot :pax, hf[:ecs]);
-        slabel(:right :pax, hf[:ecs] + (2.0dt, 1.0dt), "Eckernförde");
+        track(:second :station :pax, hf[:ecs, :eck.yo]);
+        statdot(:pax, hf[:ecs]);
+        slabel(:right :pax, hf[:ecs] + (1.5dt, 0.5dt), "Eckernförde");
+    }
+
+    with link = "line.de.1020" {
+        track(:second :pax, hf[:eck.yo, :sud.ys]);
     }
 
     with link = "point.de.Süderbrarup" {
-        with layer = 1 marker(:statdot :pax, hf[:sud]);
+        track(:second :station :pax, hf[:sud.ys, :sud.yk]);
+        statdot(:pax, hf[:sud]);
         slabel(:right :pax, hf[:sud] + (2.0dt, 1.5dt), "Süderbrarup");
     }
 
+    with link = "line.de.1020" {
+        track(:second :pax, hf[:sud.yk, :sor.yr]);
+        line_label(:right:w :pax, hf[:sor - 6km], "1020");
+    }
+
     with link = "point.de.Sörup" {
-        with layer = 1 marker(:statdot :pax, hf[:sor]);
+        track(:second :station :pax, hf[:sor.yr, :sor]);
+        statdot(:pax, hf[:sor]);
         slabel(:left :pax, hf[:sor] + (-2.0dt, 1.5dt), "Sörup");
+    }
+
+    with link = "line.de.1020" {
+        track(:second :pax, hf[:sor, :fle.r]);
+        line_label(:right:sw :pax, hf[:sor + 7km], "1020");
     }
 }
 
@@ -146,11 +184,14 @@ with detail = 2 {
     let hw = path("d2.de.1021");
 
     with link = "line.de.1021" {
-        with layer = -1 track(:second :removed, hw[:has.y, :kiw]);
+        track(:second :removed, hw[:has.y, :kiw]);
     }
 
     with link = "point.de.Kiel-West" {
-        with layer = 1 marker(:statdot :removed, hw[:kiw]);
+        marker(:statdot :removed, hw[:kiw]);
+        with zoom = :high {
+            slabel(:top :removed, hw[:kiw] + (2dt, -0.8dt), "K. West");
+        }
     }
 }
 
@@ -160,12 +201,20 @@ with detail = 2 {
     let ko = path("d2.de.1022");
 
     with link = "line.de.1022" {
-        track(:first :pax, ko[:kie.ks, :oro.yk]);
-        with layer = 1 line_badge(:pax, ko[:has + 14km], "1022");
+        track(:first :pax, ko[:kie.ks, :has]);
     }
 
     with link = "point.de.Kiel-Hassee" {
-        with layer = 1 marker(:statdot :pax, ko[:has]);
+        track(:first :pax, ko[:has, :has.y]);
+        statdot(:pax, ko[:has]);
+        slabel(:left :pax, ko[:has] + (0.3dt, 0.5dt),
+            hbox(:right:top, "K.-Hassee C.p.")
+        );
+    }
+
+    with link = "line.de.1022" {
+        track(:first :pax, ko[:has.y, :oro.yk]);
+        line_label(:right:s :pax, ko[:has + 14km], "1022");
     }
 }
 
@@ -176,23 +225,21 @@ with detail = 2 {
     let kn = path("d2.de.1023");
 
     with link = "line.de.1023" {
-        track(:first :pax, kn[:kie.ys, :mal]);
-        track(:first :double :pax, kn[:mal, :eut]);
-        with layer = -1 track(:second :removed, kn[:eut.y, :neg.ns]);
-        track(:first :pax, kn[:neg.nn, :nst]);
-
-        with layer = 1 line_badge(:pax, kn[:asc - 6.5km] @ 8 << 0.4dt, "1023");
-        with layer = 1 line_badge(:pax, kn[:mal - 3.5km] @ 15 << 0.1dt, "1023");
-        with layer = 1 line_badge(:removed, kn[:neg - 5.0km] @ -15, "1023");
+        track(:first :pax, kn[:kie.ys, :pre]);
     }
 
     with link = "point.de.Preetz" {
-        with layer = 1 marker(:statdot :pax, kn[:pre]);
+        marker(:statdot :pax, kn[:pre]);
         slabel(:right :pax, kn[:pre + 2.5dt] << 1.5dt, "Preetz");
     }
 
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:pre, :asc]);
+        line_label(:right:ne :pax, kn[:asc - 6.5km], "1023");
+    }
+
     with link = "point.de.Ascheberg-Holst" {
-        with layer = 1 marker(:statdot :pax, kn[:asc]);
+        marker(:statdot :pax, kn[:asc]);
         label(:pax, kn[:asc] + (-2dt, 1.0dt),
             hbox(:left:top,
                 hbox(:left:base :small,
@@ -203,6 +250,11 @@ with detail = 2 {
         );
     }
 
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:asc, :mal]);
+        line_label(:left:s :pax, kn[:mal - 3.5km], "1023");
+    }
+
     with link = "point.de.Malente-Gremsmühlen" {
         with layer = 1 marker(:statdot :pax, kn[:mal]);
         slabel(:right :pax, kn[:mal + 2.0dt] << 1.2dt,
@@ -210,13 +262,26 @@ with detail = 2 {
         );
     }
 
+    with link = "line.de.1023" {
+        track(:first :double :pax, kn[:mal, :eut]);
+    }
+
     with link = "point.de.Eutin" {
         with layer = 1 marker(:statdot :pax, kn[:eut]);
         slabel(:left :pax, kn[:eut + 2dt] >> 3.0dt, "Eutin");
     }
 
+    with link = "line.de.1023" {
+        track(:second :removed, kn[:eut.y, :neg.ns]);
+        line_label(:left:s :removed, kn[:neg - 5.2km], "1023");
+    }
+
     with link = "point.de.Neustadt-Holst-Gbf" {
         with layer = 1 marker(:statdot, kn[:neg]);
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:neg.nn, :nst]);
     }
 
     with link = "point.de.Neustadt-Holst" {
@@ -234,55 +299,94 @@ with detail = 2 {
     let nf = path("d2.de.1040");
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:neu.yf, :fle]);
-        with layer = 1 line_badge(:cat:ac15 :pax, nf[:oro - 10km], "1040");
-        with layer = 1 line_badge(:cat:ac15 :pax, nf[:jub - 5.5km], "1040");
-        with layer = 1 line_badge(:cat:ac15 :pax, nf[:jub + 10.5km], "1040");
+        track(:first :double :cat:ac15 :pax, nf[:neu.yf, :oro.yk]);
+        line_badge(:cat:ac15 :pax, nf[:oro - 11km], "1040");
     }
 
     with link = "point.de.Osterrönfeld" {
-        with layer = 1 marker(:statdot :cat:ac15, nf[:oro]);
+        track(:first :double :cat:ac15 :pax, nf[:oro.yk, :oro.yo]);
+        statdot(:cat:ac15, nf[:oro]);
         label(:cat:ac15, nf[:oro] + (2.0km, 0dt),
             hbox(:left:middle :small, "Osterrönfeld")
         );
     }
 
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:oro.yo, :ren]);
+    }
+
     with link = "point.de.Rendsburg" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:ren]);
+        statdot(:cat:ac15 :pax, nf[:ren]);
         label(:cat:ac15 :pax, nf[:ren] + (-3dt, 1.0dt),
             hbox(:right:middle :small, "Rendsburg")
         );
     }
 
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:ren, :bud]);
+    }
+
+    with link = "point.de.Büdelsdorf" {
+        statdot(:removed, nf[:bud]);
+        slabel(:right :removed, nf[:bud] + (1.0dt, -0.5dt), "Büdelsdorf");
+    }
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:bud, :ows]);
+    }
+
     with link = "point.de.Owschlag" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:ows]);
+        track(:first :double :cat:ac15 :pax, nf[:ows, :owk]);
+        statdot(:cat:ac15 :pax, nf[:ows]);
         label(:cat:ac15 :pax, nf[:ows] << 2dt,
             hbox(:right:middle :small, "Owschlag")
         );
     }
 
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:owk, :sle]);
+        line_label(:right:w :double :cat:ac15 :pax, nf[:owk + 6km], "1040");
+    }
+
     with link = "point.de.Schleswig" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:sle]);
+        track(:first :double :cat:ac15 :pax, nf[:sle, :sle.ya]);
+        statdot(:cat:ac15 :pax, nf[:sle]);
         label(:cat:ac15 :pax, nf[:sle] + (2.5dt, -0.5dt),
             hbox(:left:middle :small, "Schleswig")
         );
     }
 
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:sle.ya, :jub]);
+        line_label(:left:ne :double :cat:ac15 :pax, nf[:jub - 4.5km], "1040");
+    }
+
     with link = "point.de.Jübek" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:jub]);
-        slabel(:right :cat:ac15 :pax, nf[:jub - 1dt] >> 2dt, "Jübek");
+        track(:first :double :cat:ac15 :pax, nf[:jub, :jub.yh]);
+        statdot(:cat:ac15 :pax, nf[:jub]);
+        slabel(:right :cat:ac15 :pax, nf[:jub] + (1.5dt, -0.5dt), "Jübek");
+    }
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:jub.yh, :flw.yl]);
+        line_label(:right:w :double :cat:ac15 :pax, nf[:jub + 14km], "1040");
     }
 
     with link = "point.de.Flensburg-Weiche" {
-        with layer = 1 marker(:statdot :cat:ac15, nf[:flw]);
-        label(:cat:ac15, nf[:flw] + (-2.0km, 0dt),
-            hbox(:right:top :small, "F. Weiche")
+        track(:first :double :cat:ac15 :pax, nf[:flw.yl, :flw]);
+        statdot(:cat:ac15, nf[:flw]);
+        slabel(:left :cat:ac15, nf[:flw] + (-1.0km, 0.2km) + (-1.0dt, 0dt),
+            hbox(:right:top, "F. Weiche")
         );
     }
 
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:flw, :fle]);
+    }
+
     with link = "point.de.Flensburg" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, nf[:fle]);
-        slabel(:cat:ac15 :pax, nf[:fle] + (3.3km, -1.2km),
+        with layer = 1 statdot(:cat:ac15 :pax, nf[:fle]);
+        slabel(:right :cat:ac15 :pax, nf[:fle] + (3.3km, -1.2km),
             hbox(:left:bottom :bold, "Flensburg")
         );
     }
@@ -294,15 +398,19 @@ with detail = 2 {
     let na = path("d2.de.1041");
 
     with link = "line.de.1041" {
-        with layer = -1 track(:first :removed, na[:neu.yh, :asc.r]);
-        with layer = 1 line_badge(:removed, na[:wan - 5.0km], "1041");
+        track(:first :removed, na[:neu.yh, :wan]);
+        line_label(:left:s :removed, na[:wan - 3.0km], "1041 ");
     }
 
     with link = "point.de.Wankendorf" {
-        with layer = 1 marker(:statdot :removed, na[:wan]);
+        statdot(:removed, na[:wan]);
         label(na[:wan] + (1.7km, 0dt),
             hbox(:left:top :small :removed, "Wankendorf")
         );
+    }
+
+    with link = "line.de.1041" {
+        track(:first :removed, na[:wan, :asc.r]);
     }
 }
 
@@ -312,18 +420,22 @@ with detail = 2 {
     let nh = path("d2.de.1042");
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:neu.yh, :hei.hs]);
-        with layer = 1 line_badge(:pax, nh[:neu.yh + 13.5km], "1042");
-        with layer = 1 line_badge(:pax, nh[:hei - 22.5km], "1042");
+        track(:second :pax, nh[:neu.yh, :hwe]);
+        line_label(:right:s :pax, nh[:neu.yh + 11km], "1042");
     }
 
     with link = "point.de.Hohenwestedt" {
         with layer = 1 marker(:statdot :pax, nh[:hwe]);
-        label(:pax, nh[:hwe + 1dt] << 1.8dt,
+        label(:pax, nh[:hwe] + (-1.5dt, 1dt),
             vbox(:left:top :small,
                 "Hohen-", "westedt"
             )
         );
+    }
+
+    with link = "line.de.1042" {
+        track(:second :pax, nh[:hwe, :hei.hs]);
+        line_label(:left:n :pax, nh[:hei - 22.5km], "1042");
     }
 }
 
@@ -333,19 +445,30 @@ with detail = 2 {
     let no = path("d2.de.1043");
 
     with link = "line.de.1043" {
-        track(:first :pax, no[:neu.yo, :old.yn]);
-        with layer = 1 line_badge(:pax, no[:seg - 10km], "1043");
+        track(:first :pax, no[:neu.yo, :nes]);
     }
 
     with link = "point.de.Neumünster-Süd" {
-        with layer = 1 marker(:statdot :pax, no[:nes]);
+        track(:first :station :pax, no[:nes, :nes.yk]);
+        statdot(:pax, no[:nes]);
+    }
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:nes.yk, :seg.yk]);
+        line_label(:left:s :pax, no[:nes.yk + 11km], " 1043");
     }
 
     with link = "point.de.Bad-Segeberg" {
-        with layer = 1 marker(:statdot :pax, no[:seg]);
+        track(:first :station :pax, no[:seg.yk, :seg.yl]);
+        statdot(:pax, no[:seg]);
         label(:pax, no[:seg - 1dt] >> 1.0dt,
             hbox(:right:top :small, "Bad Segeberg")
         );
+    }
+
+    with link = "line.de.1043" {
+        track(:first :pax, no[:seg.yl, :old.yn]);
+        line_label(:right:e :pax, no[:seg.yl + 5.5km], "1043");
     }
 }
 

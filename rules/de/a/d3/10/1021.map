@@ -1,26 +1,22 @@
-# DE 1021.  Kiel-Hassee Cittipark (ausschl.) - Kiel West
+# DE 1021.  Kiel-Hassee Cittipark - Kiel West
 #
-let hw = path("d4.de.1021");
+let kw = path("d3.de.1021");
 
 with detail = 3 {
     # point.de.Kiel-Hassee  de.1022
 
     with link = "line.de.1021" {
-        with layer = -4 track(:second:station :removed,
-                hw[:has.hn - 0.1dl, :has.hn] >> 0.5dt
-            ..  hw[:has.gg + 1.5dt, :has.gg + 1.51dt]
+        track(:second :closed,
+                kw[:has + 1sw, :has.hn] >> 1dt
+            ..  kw[:has.fw, :kiw - 1sw]
         );
-        with layer = -4 track(:second :removed,
-                hw[:has.gg + 1.51dt, :kiw - 1ssw]
-        );
+        line_label(:right:nw :closed, kw[:kiw - 1km], "1021");
     }
 
     with link = "point.de.Kiel-West" {
-        track(:second :station :removed, hw[:kiw - 1ssw, :kiw + 1ssw]);
-        marker(:de.bf :removed :right, hw[:kiw]);
-        slabel(:top:removed, hw[:kiw + 1.1sh],
-            span(:small :bold :removed, "K. West")
-        );
+        track(:second :station :closed, kw[:kiw - 1sw, :kiw + 1sw]);
+        marker(:right :de.gbf :closed, kw[:kiw]);
+        slabel(:right :closed, kw[:kiw - 0.4sw] >> 1.5sh, "Kiel West");
     }
 }
 

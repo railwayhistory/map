@@ -1,0 +1,80 @@
+# DE 1201.  Niebüll - Süderlügum Grenze
+#
+let ns = path("d4.de.1201");
+
+with detail = 3 {
+    with link = "line.de.1201" {
+        track(:second :pax,
+                ns[:nie + 1ssw, :nie + 1.1ssw] << 0.5dt
+            ..  ns[:nie.gg + 500m, :uph - 1ssw] << 0.5dt
+        );
+        track(:second:station :removed,
+                ns[:nie + 1ssw, :nie + 1.1ssw] >> 0.5dt
+            ..  ns[:nie.gg + 500m, :uph - 1ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.de.Uphusum" {
+        track(:second:station :pax, ns[:uph - 1ssw, :uph + 1ssw] << 0.5dt);
+        with layer = -1 track(:second:station :removed,
+                ns[:uph - 1ssw, :uph + 1ssw] >> 0.5dt
+        );
+        marker(:de.hp :pax :right, ns[:uph] >> 0.5dt);
+        with layer = -1 marker(:de.bf :removed :right, ns[:uph] >> 0.5dt);
+        slabel(:right :pax, ns[:uph - 0.5ssw] >> 0.5dt >> 2.0ssw, "Uphusum");
+    }
+
+    with link = "line.de.1201" {
+        track(:second :pax, ns[:uph + 1ssw, :sua - 1ssw] << 0.5dt);
+        track(:second:station :removed, ns[:uph + 1ssw, :sua - 1ssw] >> 0.5dt);
+        with layer = 1 line_badge(:pax, ns[:uph + 1.8km], "1201");
+    }
+
+    with link = "point.de.Süderlügum-Awanst" {
+        track(:second:station :pax, ns[:sua - 1ssw, :sua + 0.5ssw] << 0.5dt);
+        track(:second:station :removed,
+            ns[:sua - 1ssw, :sua + 0.5ssw] >> 0.5dt
+        );
+        marker(:de.awanst :left, ns[:sua] << 0.5dt);
+    }
+
+    with link = "point.de.Süderlügum" {
+        track(:second:station :pax, ns[:sua + 0.5ssw, :sua + 2.2ssw] << 0.5dt);
+        track(:second:station :removed,
+            ns[:sua + 0.5ssw, :sua + 2.2ssw] >> 0.5dt
+        );
+
+        with layer = -4 marker(
+            :de.bf :removed :right, ns[:sua + 0.7ssw] >> 0.5dt
+        );
+        marker(:de.hp :pax :left, ns[:sua + 1.2ssw] << 0.5dt);
+        slabel(:left :pax, ns[:sua + 0.4ssw] << 0.5dt << 1.6ssw, "Süderlügum");
+    }
+
+    with link = "line.de.1201" {
+        track(:second :pax, ns[:sua + 2.2ssw, :sug - 0.5ssw] << 0.5dt);
+        track(:second:station :removed,
+                ns[:sua + 2.2ssw, :sug - 0.5ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.int.Süderlügum-Tønder" {
+        track(:second:station :pax, ns[:sug - 0.5ssw, :sug + 0.5ssw] << 0.5dt);
+        with layer = -1 track(:second:station :removed,
+                ns[:sug - 0.5ssw, :sug + 0.5ssw] >> 0.5dt
+        );
+
+        marker(:de.dirgr :right, ns[:sug] >> 0.5dt);
+        marker(:statdt :right, ns[:sug] << 0.5dt);
+        marker(:de.dirgr :left, ns[:sug] << 0.5dt);
+
+        label(ns[:sug] << 5dt,
+                vbox(:right:middle,
+                    span(:small, "DK"),
+                    hbar(0.3),
+                    span(:small, "DE")
+                )
+        );
+    }
+}
+

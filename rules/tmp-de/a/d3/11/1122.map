@@ -1,0 +1,50 @@
+# DE 1122.  Lübeck Hbf - Strasburg (Meckl)
+#
+let ls = path("d4.de.a.1122");
+
+with detail = 3 {
+    # point.de.Lübeck-Hbf        de.1120
+    # point.de.Lübeck-Hgbf       de.1120
+    # point.de.Lübeck-Hgbf-Abzw  de.1120
+
+    with link = "line.de.1122" {
+        track(:first :pax,
+                ls[:lua.yb, :lua.yb + 0.1dl]
+            ..  ls[:lua.xb, :stn - 0.5ssw] >> 0.5dt
+        );
+        track(:first :removed,
+                ls[:lua.yb, :lua.yb + 0.1dl] << 1dt
+            ..  ls[:lua.xb, :stn - 0.5ssw] << 0.5dt
+        );
+    }
+
+    with link = "point.de.Strecknitz" {
+        track(:first:station :pax, ls[:stn - 0.5ssw, :stn + 0.5ssw] >> 0.5dt);
+        with layer = -4 track(:first:station :removed,
+                ls[:stn - 0.5ssw, :stn] << 0.5dt
+        );
+        with layer = -1 track(:second:station,
+                ls[:stn - 1.1dl, :stn - 1dl] >> 0.5dt
+            --  ls[:stn, :stn + 0.5ssw] << 0.5dt
+        );
+        marker(:de.abzw :left, ls[:stn] << 0.5dt);
+    }
+
+    with link = "point.de.Lübeck-St-Jürgen" {
+        track(:first:station :pax, ls[:stn + 0.5ssw, :sju + 1ssw] >> 0.5dt);
+        track(:second:station, ls[:stn + 0.5ssw, :sju + 1ssw] << 0.5dt);
+        marker(:de.hp :pax :right, ls[:sju] >> 0.5dt);
+        slabel(:right :pax, ls[:sju - 1ssw] >> 1.2ssw,
+            vbox(:left:top,
+                span(:open, "L. St"),
+                span(:open, "Jürgen")
+            )
+        );
+    }
+
+    with link = "line.de.1122" {
+        track(:first :pax, ls[:sju + 1ssw, :heg - 0.5ssw] >> 0.5dt);
+        track(:first :removed, ls[:stn.ys, :heg - 0.5ssw] << 0.5dt);
+    }
+}
+

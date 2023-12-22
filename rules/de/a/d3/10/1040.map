@@ -1,28 +1,41 @@
 # DE 1040.  Neumünster - Flensburg
 #
-let nf = path("d4.de.1040");
+let nf = path("d3.de.1040");
 
 with detail = 3 {
-    # point.de.Neumünster      de.1220
-    # point.de.Neumünster-Gbf  de.1220
+    # point.de.Neumünster  de.1220
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:neu.yf + 1sw, :asp - 1sw]);
-        track(:first :double :removed,
-                path("d4.de.1040.neu")[:neu.yh, :xneu]
+        track(:first :double:leftother:rightother :cat:ac15 :pax,
+                nf[:neu + 1sw, :neu.yf] << 2dt
+        );
+        track(:first :double :cat:ac15 :pax,
+                nf[:neu.yf - 0.1dl, :neu.yf] << 2dt
+            ..  nf[:neu.fff + 2dt, :sto - 0.5sw]
+        );
+        line_label(
+            :right:sw :cat:ac15 :pax, nf[:sto - 0.7km] >> 0.5dt, "1040"
         );
     }
 
     with link = "point.de.Stover" {
-        marker(:de.bk :removed :left, nf[:sto] << 0.5dt);
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:sto - 0.5sw, :sto + 0.5sw]
+        );
+        marker(:left :de.bk :removed, nf[:sto] << 0.5dt);
+        slabel(:left :removed, nf[:sto - 0.1sw] << 0.5dt << 2.2sw, "Stover");
+    }
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:sto + 0.5sw, :asp - 1sw]);
     }
 
     with link = "point.de.Aspe" {
-        track(:first:station :double :cat:ac15 :pax,
+        track(:first :double:station :cat:ac15 :pax,
                 nf[:asp - 1sw, :asp + 1sw]
         );
-        marker(:de.bf :removed :right, nf[:asp] >> 0.5dt);
-        slabel(:right :removed, nf[:asp - 0.5sw] >> 0.5dt >> 1.2sh, "Aspe");
+        marker(:right :de.bf :removed, nf[:asp] >> 0.5dt);
+        slabel(:right :removed, nf[:asp - 0.7sw] >> 0.5dt >> 1.4sw, "Aspe");
     }
 
     with link = "line.de.1040" {
@@ -30,323 +43,364 @@ with detail = 3 {
     }
 
     with link = "point.de.Nortorf" {
-        track(:first:station :double :cat:ac15 :pax,
+        track(:first :double:station :cat:ac15 :pax,
                 nf[:nor - 1sw, :nor + 1sw]
         );
-        marker(:de.bf :cat:ac15 :pax :right, nf[:nor] >> 0.5dt);
-        slabel(:right :cat:ac15 :pax, nf[:nor - 0.7sw] >> 0.5dt >> 1.3sh,
+        marker(:right :de.bf :cat:ac15 :pax, nf[:nor] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, nf[:nor - 0.7sw] >> 0.5dt >> 1.4sw,
             "Nortorf"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax :flip,
-                nf[:nor + 3.5km, :nor + 1sw]
+        track(:first :double :cat:ac15 :pax, nf[:nor + 1sw, :bok - 0.5sw]);
+        line_label(
+            :right:sw :cat:ac15 :pax, nf[:nor + 4.2km] >> 0.5dt, "1040"
         );
-        line_badge(:cat:ac15 :pax, nf[:nor + 3.5km], "1040");
-        track(:first :double :cat:ac15 :pax, nf[:nor + 3.5km, :bok - 1sw]);
     }
 
     with link = "point.de.Bokel" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:bok - 1sw, :bok + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:bok - 0.5sw, :bok + 0.5sw]
         );
-        marker(:de.hp :removed:left, nf[:bok] << 0.5dt);
-        marker(:de.exbf :removed:left, nf[:bok] << 0.5dt);
-        slabel(:left :removed, nf[:bok - 0.4sw] << 1.0dt << 1.9sw, "Bokel");
+        marker(:left :de.hp :removed, nf[:bok] << 0.5dt);
+        marker(:left :de.exbf :removed, nf[:bok] << 0.5dt);
+        slabel(:left :removed, nf[:bok - 0.5sw] << 0.5dt << 2.3sh,
+            "Bokel"
+        );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:bok + 1sw, :boh - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:bok + 0.5sw, :boh - 0.5sw]);
     }
 
     with link = "point.de.Bokelholm" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:boh - 1sw, :boh + 1sw]
-        )
-        with layer = -4 marker(:de.bf :right :removed, nf[:boh] >> 0.5dt);
-        slabel(:right :removed, nf[:boh - 0.4sw] >> 0.5dt >> 1.4sw,
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:boh - 0.5sw, :boh + 0.5sw]
+        );
+        marker(:right :de.bf :removed, nf[:boh] >> 0.5dt);
+        slabel(:right :removed, nf[:boh - 0.4sw] >> 0.5dt >> 1.4sh,
             "Bokelholm"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:boh + 1sw, :oro - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:boh + 0.5sw, :oro.yk]);
+        track(:first :double:rightother :cat:ac15 :pax,
+                nf[:oro.yk, :oro - 0.5sw]
+        );
+        line_label(
+            :left:ne :cat:ac15 :pax, nf[:oro.yk - 1.2km] << 0.5dt, "1040"
+        );
     }
 
     with link = "point.de.Osterrönfeld" {
-        # Str. 1040
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:oro - 1sw, :oro + 1.5sw]
+        # DE 1022
+        track(:second :station :pax,
+                nf[:oro - 0.5sw, :oro + 0.5sw] >> 1.5dt
+            --  nf[:oro + 0.5sw + 1dl, :oro + 0.5sw + 1.1dl] >> 0.5dt
         );
 
-        # Str. 1022
-        with layer = -2 track(:first:station :pax,
-                nf[:ora + 0.5sw, :ora + 0.51sw] >> 1.5dt
-            --  nf[:ora + 0.5sw + 1dl, :ora + 0.5sw + 1.1dl] >> 0.5dt
+        # DE 1040
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:oro - 0.5sw, :oro + 1sw]
         );
 
-        with layer = -2 marker(:de.bbf :cat:ac15 :right,
-            nf[:ora + 1sw + 1dl] >> 0.5dt
-        );
-        slabel(:right :cat:ac15, nf[:ora] + (1.3km, 0dt),
-            span(:bold, "Osterrönfeld")
+        marker(:right :de.bbf :cat:ac15, nf[:oro] >> 1.5dt);
+        marker(:right :de.exbf :cat:ac15, nf[:oro] >> 1.5dt);
+        slabel(:left :cat:ac15 :bold, nf[:oro - 1.0km] << 3.8dt,
+            "Osterrönfeld"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:oro + 1.5sw, :orb - 0.5sw]);
+        track(:first :double :cat:ac15 :pax, nf[:oro + 1sw, :orb - 0.5sw]);
     }
 
     with link = "point.de.Osterrönfeld-Brücke" {
-        track(:first:station :double :cat:ac15 :pax,
+        track(:first :double:station :cat:ac15 :pax,
                 nf[:orb - 0.5sw, :orb + 0.5sw]
         );
-        marker(:de.uest :cat:ac15 :right, nf[:orb] >> 0.5dt);
+        marker(:left :de.uest :cat:ac15, nf[:orb] << 0.5dt);
     }
 
     with link = "line.de.1040" {
-        with layer = 3 track(:first :double :cat:ac15 :pax,
-                nf[:orb + 0.5sw, :ren.a]
-        );
-        with layer = 1 casing(:first :double :cat:ac15 :pax,
-                nf[:bhbx - 1sw, :bhbx + 1sw]
-        );
+        track(:first :double :cat:ac15 :pax, nf[:orb + 0.5sw, :hbr - 0.5sw]);
     }
 
     with link = "point.de.Hochbrücke" {
-        with layer = 2 marker(:de.bk :removed :left, nf[:hbr] << 0.5dt);
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:hbr - 0.5sw, :hbr + 0.5sw]
+        );
+        marker(:left :de.bk :removed, nf[:hbr] << 0.5dt);
     }
 
+    with link = "line.de.1040" {
+        with layer = 1 track(:first :double :cat:ac15 :pax :casing,
+                nf[:hbr + 0.5sw, :rbr - 0.5sw]
+        );
+    }
 
     with link = "point.de.Rendsburg-Brücke" {
-        with layer = 2 marker(:de.uest :removed :left, nf[:rbr] << 0.5dt);
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:rbr - 0.5sw, :rbr + 0.5sw]
+        );
+        marker(:left :de.bk :removed, nf[:rbr] << 0.5dt);
+    }
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:rbr + 0.5sw, :rsl - 0.5sw]);
     }
 
     with link = "point.de.Rendsburg-Schleife" {
-        with layer = 2 marker(:de.bk :removed :left, nf[:rsl] << 0.5dt);
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:rsl - 0.5sw, :rsl + 0.5sw]
+        );
+        marker(:left :de.bk :removed, nf[:rsl] << 0.5dt);
+    }
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:rsl + 0.5sw, :ren - 1sw]);
     }
 
     with link = "point.de.Rendsburg" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:ren.a, :bud.a]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:ren - 1sw, :ren + 1sw]
         );
-        marker(:de.bf :cat:ac15 :pax :left, nf[:ren] << 0.5dt);
-        slabel(:left :cat:ac15 :pax, nf[:ren] - (1.5km, 0dt),
+        marker(:left :de.bf :cat:ac15 :pax, nf[:ren] << 0.5dt);
+        slabel(:left :cat:ac15 :pax, nf[:ren + 1.2sw] << 0.5dt << 1.2sh,
             hbox(:right:top :bold, "Rendsburg")
         );
     }
 
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:ren + 1sw, :bud - 1sw]);
+    }
+
     with link = "point.de.Büdelsdorf" {
-        # Str. 1040
-        track(:double :first :station :cat:ac15 :pax,
-                nf[:bud.a, :bud + 1.5sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:bud - 1sw, :bud + 1sw]
+        );
+        track(:station,
+                nf[:bud - 0.1dl, :bud] << 0.5dt
+            --  nf[:bud + 1dl, :bud + 2dl] << 1.5dt
         );
 
-        # Str. 1012
-        with layer = -2 track(:second:station,
-                nf[:bud + 0.5sw, :bud + 0.51sw] << 0.5dt
-            ..  path("d4.de.1012")[:bud.gg + 0.9dt, :bud.gg + 1dt]
-        );
-        with layer = -1 marker(:de.bf :removed :left, nf[:bud] << 0.5dt);
+        marker(:left :de.bf :removed, nf[:bud] << 1.5dt);
+        slabel(:right :removed :bold, nf[:bud - 0.2sw] >> 1.5dt, "Büdelsdorf");
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:bud + 1.5sw, :adu - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:bud + 1sw, :adu - 0.5sw]);
+        line_label(:right:w :cat:ac15 :pax, nf[:bud + 3km] >> 0.5dt, "1040");
     }
 
-
     with link = "point.de.Alt-Duvenstedt" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:adu - 1sw, :adu + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:adu - 0.5sw, :adu + 0.5sw]
         );
-        with layer = -1 marker(:de.hst :removed :right, nf[:adu] >> 0.5dt);
-        with layer = -2 marker(:de.bf :gone :right, nf[:adu] >> 0.5dt);
-        slabel(:right :removed, nf[:adu - 0.6sw] >> 0.5dt >> 1.5sw,
+        marker(:right :de.hst :removed, nf[:adu] >> 0.5dt);
+        slabel(:right :removed, nf[:adu - 0.7sw] >> 0.5dt >> 1.4sh,
             "Alt Duvenstedt"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:adu + 1sw, :ows - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:adu + 0.5sw, :ows - 1sw]);
     }
 
-
     with link = "point.de.Owschlag" {
-        track(:double :first :station :cat:ac15 :pax, nf[:ows.a, :ows.f]);
-        marker(:de.bf :cat:ac15 :pax, nf[:ows] >> 0.5dt);
-        slabel(:left :cat:ac15 :pax, nf[:ows - 0.5sw] << 2.5dt,
-            span(:bold, "Owschlag")
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:ows - 1sw, :ows + 1sw]
+        );
+        marker(:right :de.bf :cat:ac15 :pax, nf[:ows] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax :bold, nf[:ows - 0.6sw] >> 0.5dt >> 1.3sh,
+            "Owschlag"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:ows + 1sw, :lot - 1sw]);
-        with layer = 1 line_badge(:cat:ac15 :pax, nf[:ows + 3.2km], "1040");
+        track(:first :double :cat:ac15 :pax, nf[:ows + 1sw, :lot - 0.5sw]);
+        line_label(:left:e :cat:ac15 :pax, nf[:ows + 3km] << 0.5dt, "1040");
     }
 
     with link = "point.de.Lottorf" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:lot - 1sw, :lot + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:lot - 0.5sw, :lot + 0.5sw]
         );
-        with layer = -1 marker(:de.uest :removed :right, nf[:lot] >> 0.5dt);
-        with layer = -2 marker(:de.bf :gone :right, nf[:lot] >> 0.5dt);
-        slabel(:right :removed, nf[:lot - 0.6sw] >> 0.5dt >> 1.6sw,
+        marker(:right :de.uest :removed, nf[:lot] >> 0.5dt);
+        marker(:right :de.exbf :removed, nf[:lot] >> 0.5dt);
+        slabel(:right :removed, nf[:lot - 0.6sw] >> 0.5dt >> 1.7sh,
             "Lottorf"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:lot + 1sw, :sle - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:lot + 0.5sw, :klg - 0.5sw]);
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:klg - 0.5sw, :klg + 0.5sw]
+        );
+        track(:first :double :cat:ac15 :pax, nf[:klg + 0.5sw, :sle - 1sw]);
+        line_label(:right:w :cat:ac15 :pax, nf[:sle - 1.5km] >> 0.5dt, "1040");
     }
 
-
     with link = "point.de.Schleswig" {
-        track(:first:station :double :cat:ac15 :pax, nf[:sle.a, :sle.f]);
-        marker(:de.bf :cat:ac15 :pax :right, nf[:sle] >> 0.5dt);
-        slabel(:right :cat:ac15 :pax, nf[:sle - 0.6sw] + (1.5sw, -0.5sw),
-            span(:bold, "Schleswig")
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:sle - 1sw, :sle + 1sw]
+        );
+        marker(:right :de.bf :cat:ac15 :pax, nf[:sle] >> 0.5dt);
+        slabel(:left :cat:ac15 :pax :bold, nf[:sle + 1dt] << 1.5dt,
+            hbox(:right:top, "Schleswig")
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:sle + 1sw, :sub - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:sle + 1sw, :sub - 0.5sw]);
     }
 
     with link = "point.de.Schuby" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:sub - 1sw, :sub + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:sub - 0.5sw, :sub + 0.5sw]
         );
-        with layer = -1 marker(:de.bf :left :removed, nf[:sub] << 0.5dt);
-        marker(:de.awanst :cat:ac15 :left, nf[:sub.f] << 0.5dt);
-        slabel(:left :cat:ac15, nf[:sub.f] << 0.5dt << 1.4sw,
-            hbox(:center :top,
-                "Schuby ",
-                span(:removed, "(Kr Schleswig)")
-            )
-        );
+        marker(:left :de.awanst :cat:ac15, nf[:sub] << 0.5dt);
+        marker(:left :de.exbf :cat:ac15, nf[:sub] << 0.5dt);
+        slabel(:right :cat:ac15, nf[:sub - 0.5sw] >> 1.5dt, "Schuby");
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:sub - 1sw, :jub - 1sw]);
-        with layer = 1 line_badge(:cat:ac15 :pax, nf[:sub + 3.5km], "1040");
+        track(:first :double :cat:ac15 :pax, nf[:sub + 0.5sw, :jub - 1sw]);
+        line_label(:right:w :cat:ac15 :pax, nf[:jub - 3km] >> 0.5dt, "1040");
     }
-
 
     with link = "point.de.Jübek" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:jub - 1sw, :jub.r + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:jub - 1sw, :jub.yh + 1sw]
         );
-        with layer = -2 track(:second:station :pax,
-                nf[:jub.r - .1dl, :jub.r] << 0.5dt
-            ..  path("d4.de.1011")[:jub.g + 1dt, :jub.g + 1.1dt]
-        );
-
-        with layer = 1 marker(:de.bf :cat:ac15 :pax :left, nf[:jub] << 0.5dt);
-        slabel(:left :cat:ac15 :pax, nf[:jub - 0.8sw] << 0.5dt << 2.4sw,
-            span(:bold, "Jübek")
-        );
+        marker(:left :de.bf :cat:ac15 :pax, nf[:jub] << 0.5dt);
+        slabel(:right :cat:ac15 :bold, nf[:jub - 0.7sw] >> 2.0dt, "Jübek");
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:jub.r + 1sw, :egb - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:jub + 1sw, :egb - 0.5sw]);
+        line_label(:right:w :cat:ac15 :pax, nf[:jub + 4.6km] >> 0.5dt, "1040");
     }
 
     with link = "point.de.Eggebek" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:egb - 1sw, :egb + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:egb - 0.5sw, :egb + 0.5sw]
         );
-        marker(:de.anst :removed:left, nf[:egb] << 0.5dt);
-        with layer = -1 marker(:de.bf :gone:left, nf[:egb] << 0.5dt);
-        slabel(:right :removed, nf[:egb - 0.6sw] >> 1.5dt,
-            "Eggebek"
-        );
+        marker(:left :de.bf :removed, nf[:egb] << 0.5dt);
+        slabel(:right :removed, nf[:egb - 0.6sw] >> 2.0dt, "Eggebek");
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:egb + 1sw, :tar - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:egb + 0.5sw, :egg.yo - 1sw]);
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:egg.yo - 1sw, :egg.yo + 1sw]
+        );
+        track(:first :double :cat:ac15 :pax, nf[:egg.yo + 1sw, :tar - 1sw]);
     }
 
-
     with link = "point.de.Tarp" {
-        track(:first:station :double :cat:ac15 :pax,
+        track(:first :double:station :cat:ac15 :pax,
                 nf[:tar - 1sw, :tar + 1sw]
         );
-        marker(:de.bf :removed, nf[:tar] >> .5dt);
-        with layer = 1 marker(:de.hp :cat:ac15 :pax, nf[:tar] >> .5dt);
-        slabel(:right :cat:ac15 :pax, nf[:tar - 0.4sw] >> 0.5dt >> 2.0sw,
+        marker(:right :de.hp :cat:ac15 :pax, nf[:tar] >> 0.5dt);
+        marker(:right :de.exbf :cat:ac15 :pax, nf[:tar] >> 0.5dt);
+        slabel(:right :cat:ac15 :pax, nf[:tar - 0.5sw] >> 0.5dt >> 2.2sh,
             "Tarp"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:tar + 1sw, :bar - 1sw]);
-        with layer = 1 line_badge(:cat:ac15 :pax, nf[:tar + 2.3km], "1040");
+        track(:first :double :cat:ac15 :pax, nf[:tar + 1sw, :bar - 0.5sw]);
     }
 
     with link = "point.de.Barderup" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:bar - 1sw, :bar + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:bar - 0.5sw, :bar + 0.5sw]
         );
-        with layer = -4 marker(:de.hp :removed :left, nf[:bar] << .5dt);
-        with layer = -4 marker(:de.bk :removed :left, nf[:bar] << .5dt);
-        slabel(:left :removed, nf[:bar - 0.4sw] << .5dt << 1.8sw,
+        marker(:left :de.hp :removed, nf[:bar] << 0.5dt);
+        slabel(:left :removed, nf[:bar - 0.4sw] << 0.5dt << 1.7sh,
             "Barderup"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:bar + 1sw, :fws - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:bar + 0.5sw, :fws - 0.5sw]);
+        line_label(:right:w :cat:ac15 :pax, nf[:bar + 1.8km] >> 0.5dt, "1040");
     }
 
     with link = "point.de.Flensburg-Weiche-Süd" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:fws - 1sw, :fws + 1sw]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:fws - 0.5sw, :fws + 0.5sw]
         );
-        marker(:de.bft :cat:ac15 :right, nf[:fws] >> 0.5dt);
-    }
-        
-    with link = "point.de.Flensburg-Weiche" {
-        # Str. 1040
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:fws + 1sw, :flw.f]
-        );
-
-        # Str. 1001
-        with layer = -4 track(:second:station :closed,
-                path("d4.de.1001")[:flw.c, :flw.c - 0.1dl]
-            ..  nf[:flw.x, :flw.x + 0.1dl] << 0.5dt
-        );
-
-        # Str. A05
-        with layer = -5 track(:second:station :removed,
-                path("d4.de.a05")[:ff + 750m, :ff + 751m] << 1.5dt
-            ..  nf[:flw.x, :flw.x + 0.1dl] << 0.5dt
-        );
-
-        # Str. 1000
-        with layer = -1 track(:first:station :double :cat:ac15,
-                path("d4.de.1000")[:flw, :flw.g]
-        );
-
-        marker(:de.bbf :cat:ac15 :right, nf[:flw] >> 0.5dt);
-        slabel(:right :cat:ac15, nf[:flw - 0.4sw] >> 0.5dt >> 2.2sw,
-            span(:bold, "Flensburg Weiche")
+        marker(:left :de.bft :cat:ac15, nf[:fws] << 0.5dt);
+        slabel(:right :cat:ac15 :light, nf[:fws - 0.5sw] >> 2.5dt,
+            "F.-W. Süd"
         );
     }
 
     with link = "line.de.1040" {
-        track(:first :double :cat:ac15 :pax, nf[:flw.f, :fle - 1sw]);
+        track(:first :double :cat:ac15 :pax, nf[:fws + 0.5sw, :flw - 1sw]);
+    }
+
+    with link = "point.de.Flensburg-Weiche" {
+        # DE 1000
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:flw - 0.5sw, :flw] << 2dt
+            ..  path("d3.de.1000")[:fri.yf, :fri.yf + 0.1dl]
+        );
+
+        # DE 1001
+        track(:second :station :removed,
+                nf[:flw.x, :flw - 0.5sw] << 2.5dt
+        );
+
+        # DE 1002
+        track(:second :station :removed, nf[:flw, :flw.ff] << 1.5dt);
+
+        # DE 1040
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:flw - 1sw, :flw + 1sw]
+        );
+
+        marker(:right :de.bbf :cat:ac15 :pax, nf[:flw] >> 0.5dt);
+        slabel(:right :cat:ac15 :bold,
+            nf[:flw - 0.5sw] >> 0.5dt >> 1.7sh + (0dt, 0.7sh),
+            "F.-Weiche"
+        );
+    }
+
+    with link = "line.de.1040" {
+        track(:first :double:leftother :cat:ac15 :pax,
+                nf[:flw + 1sw, :wil - 0.5sw]
+        );
+    }
+
+    with link = "point.de.Flensburg-Wilhelminental" {
+        track(:first :station :removed,
+                nf[:wil - 0.5sw, :wil + 0.5sw] << 1.5dt
+        );
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:wil - 0.5sw, :wil + 0.5sw]
+        );
+        marker(:left :de.awanst :removed, nf[:wil] << 1.5dt);
+    }
+
+    with link = "line.de.1040" {
+        track(:first :double :cat:ac15 :pax, nf[:wil + 0.5sw, :fle - 1sw]);
     }
 
     with link = "point.de.Flensburg" {
-        track(:first:station :double :cat:ac15 :pax,
-                nf[:fle - 1sw, :fle.r]
+        track(:first :double:station :cat:ac15 :pax,
+                nf[:fle - 1sw, :fle + 1sw]
         );
-        marker(:de.bf :cat:ac15 :pax :left, nf[:fle] << 0.5dt);
-        slabel(:right :cat:ac15 :pax, nf[:fle] + (1.2km, 0.7km),
-            hbox(:left:top :bold :medium, "Flensburg")
+        marker(:left :de.bf :cat:ac15 :pax, nf[:fle] << 0.5dt);
+        slabel(:right :cat:ac15 :pax :bold, nf[:fle] + (1.2sw, -1.3sh),
+            "Flensburg"
         );
     }
+
 }
 

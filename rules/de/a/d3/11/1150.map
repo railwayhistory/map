@@ -1,106 +1,114 @@
 # DE 1150.  Lüneburg - Büchen
 #
-let lb = path("d4.de.1150");
+let lb = path("d3.de.1150");
 
 with detail = 3 {
     # point.de.Lüneburg  de.1720
 
     with link = "line.de.1150" {
-        track(:first :pax, lb[:lun.kk, :jag - 1ssw]);
+        track(:first :pax,
+                lb[:lun + 1sw, :lbn] >> 1.5dt
+            ..  lb[:lun.yyb, :jag - 1sw]
+        );
     }
 
     with link = "point.de.Jäger" {
-        track(:first:station :pax, lb[:jag - 1ssw, :jag + 1ssw]);
-        with layer = -4 marker(:de.anst :removed :left, lb[:jag]);
-        with layer = -5 marker(:de.hp :gone:left, lb[:jag]);
-        slabel(:left :removed, lb[:jag + 0.7ssw] << 1.2ssw, "Jäger");
+        track(:first :station :pax, lb[:jag - 1sw, :jag + 1sw]);
+        marker(:left :de.hp :removed, lb[:jag]);
+        slabel(:left :removed, lb[:jag - 0.5sw] << 1.4sh, "Jäger");
     }
 
     with link = "line.de.1150" {
-        track(:first :pax, lb[:jag + 1ssw, :ade - 1ssw]);
+        track(:first :pax, lb[:jag + 1sw, :ade - 1sw]);
     }
 
     with link = "point.de.Adendorf" {
-        track(:first:station :pax, lb[:ade - 1ssw, :ade + 1ssw]);
-        with layer = -2 marker(:de.bbf :left, lb[:ade]);
-        with layer = -4 marker(:de.bf :removed :left, lb[:ade]);
-        slabel(:left, lb[:ade - 0.6ssw] << 1.4ssw, "Adendorf");
+        track(:first :station :pax, lb[:ade - 1sw, :ade + 1sw]);
+        marker(:left :de.bf :pax, lb[:ade]);
+        slabel(:left :pax, lb[:ade - 0.7sw] << 1.4sh, "Adendorf");
     }
 
     with link = "line.de.1150" {
-        track(:first :pax, lb[:ade + 1ssw, :ech - 1ssw]);
-        with layer = 1 line_badge(:pax, lb[:ade + 4.0km], "1150");
+        track(:first :pax, lb[:ade + 1sw, :ech - 1sw]);
+        line_label(:left:se :pax, lb[:ade + 2km], "1150");
     }
 
     with link = "point.de.Echem" {
-        track(:first:station :pax, lb[:ech - 1ssw, :ech + 1ssw]);
-        marker(:de.hp :pax :left, lb[:ech]);
-        with layer = -4 marker(:de.bf :removed :left, lb[:ech]);
-        slabel(:left :pax, lb[:ech - 0.8ssw] << 1.5ssw,
-            span(:bold, "Echem")
-        );
+        track(:first :station :pax, lb[:ech - 1sw, :ech + 1sw]);
+        marker(:left :de.hp :pax, lb[:ech]);
+        marker(:left :de.exbf :pax, lb[:ech]);
+        slabel(:left :pax :bold, lb[:ech - 0.7sw] << 1.8sh, "Echem");
     }
 
     with link = "line.de.1150" {
-        track(:first :pax, lb[:ech + 1ssw, :hoh - 1ssw]);
+        track(:first :pax, lb[:ech + 1sw, :lag - 1.5sw]);
+        line_label(:left:e :pax, lb[:hoh - 1.2km], "1150");
     }
 
     with link = "point.de.Hohnstorf" {
-        track(:first:station :pax, lb[:hoh - 1ssw, :hoh + 1ssw]);
-        with layer = -4 marker(:de.hp :removed :left, lb[:hoh]);
-        slabel(:left :removed, lb[:hoh - 1ssw] << 1.0ssw,
-            "Hohnstorf"
-        );
+        track(:first :station :pax, lb[:lag - 1.5sw, :lag - 0.5sw]);
+        marker(:left :de.hp :removed, lb[:lag - 1sw]);
+        slabel(:left :removed, lb[:lag - 1.5sw] << 1.4sh, "Hohnstorf");
     }
 
-    with link = "line.de.1150" {
-        track(:first :pax, lb[:hoh + 1ssw, :lau - 1ssw]);
+    with link = "point.de.Lauenburg-Elbe-LGr" {
+        track(:first :station :pax, lb[:lag - 0.5sw, :lag + 0.5sw]);
+        marker(:left :de.lgr, lb[:lag]);
+        marker(:right :de.lgr, lb[:lag]);
+        slabel(:right, lb[:lag] >> 1.2sh + (-0.5sw, 0dt),
+            hbox(:left:top :roman:italic, "NI/SH")
+        );
     }
 
     with link = "point.de.Lauenburg-Elbe" {
-        track(:first:station :pax, lb[:lau - 1ssw, :lau + 1ssw]);
-        marker(:de.bf :pax :left, lb[:lau]);
-        slabel(:left :pax, lb[:lau + 1ssw] << 1.5ssw,
-            hbox(:center:base,
-                span(:regular, "Lauenburg "),
-                span(:light, "(Elbe)")
-            )
+        track(:first :station :pax, lb[:lag + 0.5sw, :lau + 1sw]);
+        marker(:left :de.bf :pax, lb[:lau]);
+        slabel(:left :pax, lb[:lau - 0.3sw] << 1.4sh,
+            hbox(:right:base, "Lauenburg ", span(:light, "(Elbe)"))
         );
     }
 
     with link = "line.de.1150" {
-        track(:first :pax, lb[:lau + 1ssw, :dan - 0.5ssw]);
+        track(:first :pax, lb[:lau + 1sw, :dak - 0.5sw]);
     }
 
     with link = "point.de.Dalldorf-Kreuz" {
-        with layer = -1 marker(:de.bk :removed :left, lb[:dak]);
-    }
-
-    with link = "point.de.Dalldorf" {
-        track(:first:station :pax, lb[:dan - 1ssw, :dal + 1ssw]);
-        marker(:de.bbf :right, lb[:dan]);
-        with layer = -4 marker(:de.bf :removed :right, lb[:dal]);
-        slabel(:left, lb[:dan] << 1.2dt, "Dalldorf");
+        track(:first :station :pax, lb[:dak - 0.5sw, :dak + 0.5sw]);
+        marker(:left :de.bk :removed, lb[:dak]);
+        slabel(:left :removed :light, lb[:dak - 0.5sw] << 1.4sh,
+            "Dalldorf Kreuz"
+        );
     }
 
     with link = "line.de.1150" {
-        track(:first :pax, lb[:dal + 1ssw, :wit - 1ssw]);
+        track(:first :pax, lb[:dak + 0.5sw, :dan - 1sw]);
+    }
+
+    with link = "point.de.Dalldorf" {
+        track(:first :station :pax, lb[:dan - 1sw, :dal + 0.5sw]);
+        marker(:right :de.bbf, lb[:dan]);
+        slabel(:right :pax, lb[:dan - 0.5sw] >> 1.6sh, "Dalldorf");
+
+        marker(:right :de.bf :removed, lb[:dal]);
+        slabel(:left :removed, lb[:dal - 0.5sw] << 1.0dt, "Dalldorf");
+    }
+
+    with link = "line.de.1150" {
+        track(:first :pax, lb[:dal + 0.5sw, :wit - 1sw]);
     }
 
     with link = "point.de.Witzeeze" {
-        track(:first:station :pax, lb[:wit - 1ssw, :wit + 1ssw]);
-        with layer = -1 marker(:de.hp :removed :right, lb[:wit]);
-        slabel(:left :removed, lb[:wit - 0.6ssw] << 1dt, "Witzeeze");
+        track(:first :station :pax, lb[:wit - 1sw, :wit + 1sw]);
+        marker(:right :de.hp :removed, lb[:wit]);
+        slabel(:left :removed, lb[:wit - 0.5sw] << 1.0dt, "Witzeeze");
     }
 
     with link = "line.de.1150" {
         track(:first :pax,
-                lb[:wit + 1ssw, :buc.b - 500m]
-            ..  path("d4.de.a.6100")[:buc - 0.51ssw, :buc - 0.5ssw]
-                    << 0.5dt << 1ssw
+                lb[:wit + 1sw, :buc.yyl - 3dt]
+            ..  path("d3.de.a.6100")[:buc - 0.1dl, :buc] << 1sh << 0.5dt
         );
+        line_label(:left:e :pax, lb[:buc.yyl - 1.2km], "1150");
     }
-
-    # point.de.Büchen  de.6100
 }
 

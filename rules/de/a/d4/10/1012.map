@@ -1,6 +1,67 @@
 # DE 1012.  Büdelsdorf - Husum
 #
-let budhus = path("d4.de.1012");
+let bh = path("d4.de.1012");
+
+let bud_gen = vbox(:center:bottom,
+    span(:bold, "1012"),
+    hrule(),
+    span(:xsmall, " Büdelsdorf – Husum "),
+    hbox(:center:top,
+        vbox(:center:top, " ∗ ", " ‡ "),
+        vbox(:left:top, "1910 Pre ", "1974 ")
+    ),
+    hrule(),
+    span(:xsmall, " Büdelsdorf – Gew.N. "),
+    "AKN"
+);
+let foc_hoh = vbox(:center:bottom,
+    span(:bold, "1012"),
+    hrule(),
+    span(:xsmall, " Büdelsdorf – Husum "),
+    hbox(:center:top,
+        vbox(:center:top, " ∗ ", " ‡ "),
+        vbox(:left:top, "1910 Pre ", "1974 ")
+    ),
+    hrule(),
+    span(:xsmall, " Fockbek – Hohn "),
+    " † 1988 "
+);
+let hoh_erf = vbox(:center:bottom,
+    span(:bold, "1012"),
+    hrule(),
+    span(:xsmall, " Büdelsdorf – Husum "),
+    hbox(:center:top,
+        vbox(:center:top, " ∗ ", " ‡ "),
+        vbox(:left:top, "1910 Pre ", "1974 ")
+    ),
+    hrule(),
+    span(:xsmall, " Hohn – Erfde "),
+    " † 1974 "
+);
+let erf_swa = vbox(:center:bottom,
+    span(:bold, "1012"),
+    hrule(),
+    span(:xsmall, " Büdelsdorf – Husum "),
+    hbox(:center:top,
+        vbox(:center:top, " ∗ ", " ‡ "),
+        vbox(:left:top, "1910 Pre ", "1974 ")
+    ),
+    hrule(),
+    span(:xsmall, " Erfde – Schwabstedt "),
+    " † 1988 "
+);
+let swa_hus = vbox(:center:bottom,
+    span(:bold, "1012"),
+    hrule(),
+    span(:xsmall, " Büdelsdorf – Husum "),
+    hbox(:center:top,
+        vbox(:center:top, " ∗ ", " ‡ "),
+        vbox(:left:top, "1910 Pre ", "1974 ")
+    ),
+    hrule(),
+    span(:xsmall, " Schwabstedt – Husum "),
+    " † 1989 "
+);
 
 with detail = [4, 5] {
     let nf = path("d4.de.1040");
@@ -32,181 +93,181 @@ with detail = [4, 5] {
     with link = "line.de.1012" {
         track(:station,
                 nf[:bud + 300m + 0.19sw, :bud + 300m + 0.2sw] << 1.5dt
-            ..  budhus[:bud.gg, :gen - 250m]
+            ..  bh[:bud.gg, :gen - 250m]
         );
+        line_box(:right:se, bh[:bud.gg + 300m], (1sw, 0dt), bud_gen);
     }
 }
 
 
 with detail = [4, 5] {
     with link = "point.de.Rendsburg-Gewerbegebiet-Nord" {
-        let budhus.gen = path("d4.de.1012.gen");
+        let bh.gen = path("d4.de.1012.gen");
 
         with layer = -2 track(:station,
-                budhus[:gen - 250m, :gen]
+                bh[:gen - 250m, :gen]
         );
         with layer = -4 track(:second:station :removed,
-                budhus[:gen, :gen + 0.5sw]
+                bh[:gen, :gen + 0.5sw]
         );
 
         with layer = -2 track(:station,
-                budhus[:gen, :gen - .1dl]
-            ..  budhus.gen[:a, :f]
+                bh[:gen, :gen - .1dl]
+            ..  bh.gen[:a, :f]
         );
         with layer = -2 track(:station,
-                budhus.gen[:x, :x + .1dl]
-            ..  budhus.gen[:aa, :ff]
+                bh.gen[:x, :x + .1dl]
+            ..  bh.gen[:aa, :ff]
         );
 
-        marker(:de.anst :right, budhus[:gen]);
-        with layer = -1 station(:left, budhus[:gen] >> 1.4sw ,
+        marker(:de.anst :right, bh[:gen]);
+        with layer = -1 station(:left, bh[:gen] >> 1.4sw ,
             "R. Gewerbegebiet Nord", "3,07"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:gen + 0.5sw, :foc - 1sw]);
+        track(:second :removed, bh[:gen + 0.5sw, :foc - 1sw]);
     }
 
 
     with link = "point.de.Fockbek" {
-        track(:second:station :removed, budhus[:foc - 1sw, :foc + 1sw]);
-        marker(:de.anst :removed :left, budhus[:foc]);
-        marker(:de.exbf :removed :left, budhus[:foc]);
-        station(:bottom :removed, budhus[:foc] << 1.3sh,
+        track(:second:station :removed, bh[:foc - 1sw, :foc + 1sw]);
+        marker(:de.anst :removed :left, bh[:foc]);
+        marker(:de.exbf :removed :left, bh[:foc]);
+        station(:bottom :removed, bh[:foc] << 1.3sh,
             "Fockbek", "4,26"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed :flip, budhus[:foc + 1.8km, :foc + 1sw]);
-        line_badge(:removed, budhus[:foc + 1.8km], "1012");
-        track(:second :removed, budhus[:foc + 1.8km, :gar - 1sw]);
+        track(:second :removed, bh[:foc + 1sw, :gar - 1sw]);
     }
 
 
     with link = "point.de.Garlbek" {
-        track(:second :station :removed, budhus[:gar - 1sw, :gar + 1sw]);
-        marker(:de.hp :removed :right, budhus[:gar]);
-        station(:top :removed, budhus[:gar] >> 1.2sw,
+        track(:second :station :removed, bh[:gar - 1sw, :gar + 1sw]);
+        marker(:de.hp :removed :right, bh[:gar]);
+        station(:top :removed, bh[:gar] >> 1.2sw,
             "Garlbek", "7,38"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:gar + 1sw, :hoh - 1sw]);
+        track(:second :removed, bh[:gar + 1sw, :hoh - 1sw]);
+        line_box(:right:s :removed, bh[:hoh - 1km], (-3sw, 0dt), foc_hoh);
     }
 
 
     with link = "point.de.Hohn" {
-        track(:second:station :removed, budhus[:hoh - 1sw, :hoh + 1sw]);
-        marker(:de.bf :removed :left, budhus[:hoh]);
-        station(:bottom :removed, budhus[:hoh] << 1.2sw,
+        track(:second:station :removed, bh[:hoh - 1sw, :hoh + 1sw]);
+        marker(:de.bf :removed :left, bh[:hoh]);
+        station(:bottom :removed, bh[:hoh] << 1.2sw,
             "Hohn", "10,75"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:hoh + 1sw, :chr - 1sw]);
+        track(:second :removed, bh[:hoh + 1sw, :chr - 1sw]);
     }
 
 
     with link = "point.de.Christiansholm" {
-        track(:second:station :removed, budhus[:chr - 1sw, :chr + 1sw]);
-        marker(:de.bf :removed :left, budhus[:chr]);
-        station(:bottom :removed, budhus[:chr] << 1.2sw,
+        track(:second:station :removed, bh[:chr - 1sw, :chr + 1sw]);
+        marker(:de.bf :removed :left, bh[:chr]);
+        station(:bottom :removed, bh[:chr] << 1.2sw,
             "Christiansholm", "17,42"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:chr + 1sw, :erf - 1sw]);
+        track(:second :removed, bh[:chr + 1sw, :erf - 1sw]);
+        line_box(:right:s :removed, bh[:chr + 2.0km], (-3sw, 0dt), hoh_erf);
     }
 
 
     with link = "point.de.Erfde" {
-        track(:second:station :removed, budhus[:erf - 1sw, :erf + 1sw]);
-        marker(:de.bf :removed :left, budhus[:erf]);
-        station(:bottom :removed, budhus[:erf] << 1.2sw,
+        track(:second:station :removed, bh[:erf - 1sw, :erf + 1sw]);
+        marker(:de.bf :removed :left, bh[:erf]);
+        station(:bottom :removed, bh[:erf] << 1.2sw,
             "Erfde", "23,02"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed :flip, budhus[:erf + 3.0km, :erf + 1sw]);
-        line_badge(:removed, budhus[:erf + 3.0km], "1012");
-        track(:second :removed, budhus[:erf + 3.0km, :nor - 1sw]);
+        track(:second :removed, bh[:erf + 1sw, :nor - 1sw]);
     }
 
 
     with link = "point.de.Norderstapel" {
-        track(:second :station :removed, budhus[:nor - 1sw, :nor + 1.5sw]);
+        track(:second :station :removed, bh[:nor - 1sw, :nor + 1.5sw]);
         track(:station :removed,
-                budhus[:nor, :nor + 1sw] >> 1dt
-            --  budhus[:nor + 1sw + 1dl, :nor + 1sw + 1.1dl]
+                bh[:nor, :nor + 1sw] >> 1dt
+            --  bh[:nor + 1sw + 1dl, :nor + 1sw + 1.1dl]
         );
-        marker(:de.anst :removed :right, budhus[:nor + 0.5sw] >> 1dt);
-        marker(:de.exbf :removed :right, budhus[:nor + 0.5sw] >> 1dt);
-        station(:left :removed, budhus[:nor + 1.5sw] << 2dt,
+        marker(:de.anst :removed :right, bh[:nor + 0.5sw] >> 1dt);
+        marker(:de.exbf :removed :right, bh[:nor + 0.5sw] >> 1dt);
+        station(:left :removed, bh[:nor + 1.5sw] << 2dt,
             span(:bold, "Norderstapel"), "1012: 31,04 · AX1: ??"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:nor + 1.5sw, :swa - 1sw]);
-        line_badge(:removed, budhus[:nor + 2.6km], "1012");
+        track(:second :removed, bh[:nor + 1.5sw, :swa - 1sw]);
+        line_box(:right:sw :removed, bh[:nor + 2.5km], (0dt, 1sw), erf_swa);
     }
 
 
     with link = "point.de.Schwabstedt" {
-        track(:second:station :removed, budhus[:swa - 1sw, :swa + 1sw]);
-        marker(:de.anst :removed :left, budhus[:swa]);
-        marker(:de.exbf :removed :left, budhus[:swa]);
-        station(:left :removed, budhus[:swa] << 2.3sh,
+        track(:second:station :removed, bh[:swa - 1sw, :swa + 1sw]);
+        marker(:de.anst :removed :left, bh[:swa]);
+        marker(:de.exbf :removed :left, bh[:swa]);
+        station(:left :removed, bh[:swa] << 2.3sh,
             "Schwabstedt", "36,44"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:swa + 1sw, :ran - 1sw]);
+        track(:second :removed, bh[:swa + 1sw, :ran - 1sw]);
+        line_box(:right:sw :removed, bh[:ran - 2.5km], (0dt, 1sw), swa_hus);
     }
 
 
     with link = "point.de.Rantrum" {
-        track(:second:station :removed, budhus[:ran - 1sw, :ran + 1sw]);
-        marker(:de.bf :removed :left, budhus[:ran]);
-        station(:left :removed, budhus[:ran - .3sw] << 1.8sh,
+        track(:second:station :removed, bh[:ran - 1sw, :ran + 1sw]);
+        marker(:de.bf :removed :left, bh[:ran]);
+        station(:left :removed, bh[:ran - .3sw] << 1.8sh,
             "Rantrum", "42,29"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:ran + 1sw, :mil - 1sw]);
-        line_badge(:removed, budhus[:mil - 1.3km], "1012");
+        track(:second :removed, bh[:ran + 1sw, :mil - 1sw]);
+        line_label(:left:n :removed, bh[:mil - 1.0km], "1012 ");
     }
 
 
     with link = "point.de.Mildstedt" {
-        track(:second:station :removed, budhus[:mil - 1sw, :mil + 1sw]);
-        marker(:de.anst :removed :left, budhus[:mil]);
-        marker(:de.exbf :removed :left, budhus[:mil]);
-        station(:left :removed, budhus[:mil + .4sw] << 1.4sh,
+        track(:second:station :removed, bh[:mil - 1sw, :mil + 1sw]);
+        marker(:de.anst :removed :left, bh[:mil]);
+        marker(:de.exbf :removed :left, bh[:mil]);
+        station(:left :removed, bh[:mil + .4sw] << 1.4sh,
             hbox(:left:top, "Mildstedt"), "45,96"
         );
     }
 
 
     with link = "line.de.1012" {
-        track(:second :removed, budhus[:mil + 1sw, :hus.b]);
+        track(:second :removed, bh[:mil + 1sw, :hus.b]);
     }
 
 

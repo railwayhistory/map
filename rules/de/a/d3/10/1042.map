@@ -1,177 +1,166 @@
 # DE 1042.  Neumünster - Heide (Holst)
 #
-let nh = path("d4.de.1042");
+let nh = path("d3.de.1042");
 
 with detail = 3 {
     # point.de.Neumünster  de.1220
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:neu.kk, :nst - 1ssw]);
+        track(:second :pax,
+                nh[:neu + 1sw, :neu.yh] << 3.5dt
+            ..  nh[:neu.yyh + 1dt, :nst - 1sw]
+        );
     }
 
     with link = "point.de.Neumünster-Stadtwald" {
-        track(:second:station :pax, nh[:nst - 1ssw, :nst + 1ssw]);
-        marker(:de.hp :pax :open :left, nh[:nst]);
-        slabel(:left :pax, nh[:nst] >> 1.0dt, "N. Stadtwald");
+        track(:second :station :pax, nh[:nst - 1sw, :nst + 1sw]);
+        marker(:left :de.hp :pax, nh[:nst]);
+        slabel(:left :pax, nh[:nst + 0.3sw] >> 1.0dt, "N. Stadtwald");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:nst + 1ssw, :was - 1ssw]);
+        track(:second :pax, nh[:nst + 1sw, :was - 1sw]);
+        line_label(:left:n :pax, nh[:nst + 2km], "1042");
     }
 
     with link = "point.de.Wasbek" {
-        track(:second:station :pax, nh[:was - 1ssw, :was + 1ssw]);
-        marker(:de.hp :pax :open :left, nh[:was]);
-        with layer = -1 marker(:de.bf :gone :left, nh[:was]);
-        slabel(:bottom :pax, nh[:was] << 1.4ssw, "Wasbek");
+        track(:second :station :pax, nh[:was - 1sw, :was + 1sw]);
+        marker(:left :de.hp :pax, nh[:was]);
+        marker(:left :de.exbf :pax, nh[:was]);
+        slabel(:bottom :pax, nh[:was] << 1.7sh, "Wasbek");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:was + 1ssw, :bun - 1ssw]);
+        track(:second :pax, nh[:was + 1sw, :bun - 0.7sw]);
     }
 
     with link = "point.de.Bünzenfeld" {
-        track(:second:station :pax, nh[:bun - 1ssw, :bun + 1ssw]);
-        marker(:de.ldst :removed :left, nh[:bun]);
-        slabel(:left:removed, nh[:bun - 1ssw] << 1.0ssw,
-            hbox(:right:top, "Bünzenfeld")
-        );
+        track(:second :station :pax, nh[:bun - 0.7sw, :bun + 0.7sw]);
+        marker(:left :de.ldst :removed, nh[:bun]);
+        slabel(:bottom :removed, nh[:bun] << 1.1sh + (-1sw, 0dt), "Bünzenfeld");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:bun + 1ssw, :auk - 1ssw]);
+        track(:second :pax, nh[:bun + 0.7sw, :auk - 1sw]);
     }
 
     with link = "point.de.Aukrug" {
-        track(:second:station :pax, nh[:auk - 1ssw, :auk + 1ssw]);
-        marker(:de.hp :pax :open :right, nh[:auk]);
-        with layer = -1 marker(:de.bf :gone :right, nh[:auk]);
-        slabel(:top :pax :open, nh[:auk] >> 1.4ssw,
-            vbox(:center :bottom,
-                span(:removed, "Innien"),
-                "Aukrug"
-            )
-        );
+        track(:second :station :pax, nh[:auk - 1sw, :auk + 1sw]);
+        marker(:right :de.hp :pax, nh[:auk]);
+        marker(:right :de.exbf :pax, nh[:auk]);
+        slabel(:top :pax, nh[:auk] >> 1.55sh + (0.5sw, 0dt), "Aukrug*");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:auk + 1ssw, :hwe - 1ssw]);
-        with layer = 1 line_badge(:pax, nh[:auk + 3km], "1042");
+        track(:second :pax, nh[:auk + 1sw, :hwe - 1sw]);
+        line_label(:left:n :pax, nh[:hwe - 2km], "1042");
     }
 
     with link = "point.de.Hohenwestedt" {
-        track(:second:station :pax, nh[:hwe - 1ssw, :hwe + 1ssw]);
-        marker(:de.bf :pax :open :right, nh[:hwe]);
-        slabel(:bottom :pax, nh[:hwe - 0.7km] << 0.5dt,
-            span(:small :bold, "Hohenwestedt")
+        track(:second :station :pax, nh[:hwe - 1sw, :hwe + 1sw]);
+        marker(:right :de.bf :pax, nh[:hwe]);
+        slabel(:right :pax :bold, nh[:hwe + 1.5sw] >> 1.2sh,
+            "Hohenwestedt"
         );
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:hwe + 1ssw, :ost - 1ssw]);
+        track(:second :pax, nh[:hwe + 1sw, :ost - 1sw]);
+        line_label(:left:n :pax, nh[:ost - 1.5km], "1042 ");
     }
 
     with link = "point.de.Osterstedt" {
-        track(:second:station :pax, nh[:ost - 1sw, :ost + 1sw]);
-        marker(:de.hp :pax :open :right, nh[:ost]);
-        with layer = -1 marker(:de.bf :gone :right, nh[:ost]);
-        slabel(:top :pax :open, nh[:ost] >> 1.4ssw + (1ssw, 0ssw),
-            "Osterstedt"
-        );
+        track(:second :station :pax, nh[:ost - 1sw, :ost + 1sw]);
+        marker(:right :de.hp :pax, nh[:ost]);
+        marker(:right :de.exbf :pax, nh[:ost]);
+        slabel(:right :pax, nh[:ost - 0.5sw] >> 1.7sh, "Osterstedt");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:ost + 1ssw, :ber - 1ssw]);
+        track(:second :pax, nh[:ost + 1sw, :ber - 1sw]);
     }
 
     with link = "point.de.Beringstedt" {
-        track(:second:station :pax, nh[:ber - 1ssw, :ber + 1ssw]);
-        marker(:de.hp :pax :open :left, nh[:ber]);
-        with layer = -1 marker(:de.bf :gone :left, nh[:ber]);
-        slabel(:top :pax :open, nh[:ber] >> 1dt, "Beringstedt");
+        track(:second :station :pax, nh[:ber - 1sw, :ber + 1sw]);
+        marker(:left :de.hp :pax, nh[:ber] << 0.1sh);
+        marker(:left :de.exbf :pax, nh[:ber] << 0.1sh);
+        slabel(:top :pax, nh[:ber] >> 1.0dt, "Beringstedt");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:ber + 1ssw, :gok - 1ssw]);
+        track(:second :pax, nh[:ber + 1sw, :gok - 1sw]);
     }
-
 
     with link = "point.de.Gokels" {
-        track(:second:station :pax, nh[:gok - 1ssw, :gok + 1ssw]);
-        marker(:de.hp :pax :open :left, nh[:gok]);
-        with layer = -1 marker(:de.bf :gone :left, nh[:gok]);
-        slabel(:bottom :pax :open, nh[:gok] << 1.4ssw, "Gokels");
+        track(:second :station :pax, nh[:gok - 1sw, :gok + 1sw]);
+        marker(:left :de.hp :pax, nh[:gok]);
+        marker(:left :de.exbf :pax, nh[:gok]);
+        slabel(:bottom :pax, nh[:gok] << 1.7sh, "Gokels");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:gok + 1ssw, :had - 1ssw]);
+        track(:second :pax, nh[:gok + 1sw, :had - 1sw]);
     }
 
     with link = "point.de.Hademarschen" {
-        track(:second:station :pax, nh[:had - 1ssw, :had + 1ssw]);
-        marker(:de.hp :pax :open :right, nh[:had]);
-        with layer = -1 marker(:de.bf :gone :right, nh[:had]);
-        slabel(:top :pax :open, nh[:had] >> 1.4ssw, "Hademarschen");
+        track(:second :station :pax, nh[:had - 1sw, :had + 1sw]);
+        marker(:left :de.hp :pax, nh[:had]);
+        marker(:left :de.exbf :pax, nh[:had]);
+        slabel(:bottom :pax, nh[:had] << 1.5sh, "Hademarschen");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:had + 1ssw, :bel - 1ssw]);
+        track(:second :pax, nh[:had + 1sw, :bel - 1sw]);
+        line_label(:right:s :pax, nh[:had + 1.8km], "1042");
     }
 
     with link = "point.de.Beldorf" {
-        track(:second:station :pax, nh[:bel - 1ssw, :bel + 1ssw]);
-        marker(:de.hp :pax :open :left, nh[:bel]);
-        with layer = -1 marker(:de.bf :gone :left, nh[:bel]);
-        slabel(:bottom :pax :open, nh[:bel] << 1.4ssw, "Beldorf");
+        track(:second :station :pax, nh[:bel - 1sw, :bel + 1sw]);
+        marker(:left :de.hp :pax, nh[:bel] << 0.1sh);
+        marker(:left :de.exbf :pax, nh[:bel] << 0.1sh);
+        slabel(:bottom :pax, nh[:bel] << 1.7sh, "Beldorf");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:bel + 1ssw, :bed - 1ssw]);
+        track(:second :pax, nh[:had + 1sw, :bgra]);
     }
 
     with link = "point.de.Beldorf-Dkst" {
-        track(:second:station :pax, nh[:bed - 1ssw, :bed + 1ssw]);
-        with layer = -1 marker(:de.dkst :closed :right, nh[:bed]);
-    }
-
-    with link = "struct.de.Hochbrücke-Grünental" {
-        slabel(:left, nh[:bgrf] << 1.5dt,
-            hbox(:right:top :italic,
-                "Hochbrücke Grünental"
-            )
-        );
+        track(:second :station :pax, nh[:bgra, :bgrf]);
+        marker(:right :de.dkst :removed, nh[:bed]);
+        slabel(:right :removed, nh[:bed] + (-1sh, -1.5sh), "Beldorf Dkst");
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:bed + 1ssw, :alb - 1ssw]);
+        track(:second :pax, nh[:bgrf, :alb - 1sw]);
     }
 
     with link = "point.de.Albersdorf" {
-        track(:second:station :pax, nh[:alb - 1ssw, :alb + 1ssw]);
-        marker(:de.hp :pax :open :left, nh[:alb]);
-        with layer = -1 marker(:de.bf :gone :left, nh[:alb]);
-        slabel(:left :pax :open, nh[:alb - 0.4ssw] << 2.6ssw, "Albersdorf");
+        track(:second :station :pax, nh[:alb - 1sw, :alb + 1sw]);
+        marker(:left :de.hp :pax, nh[:alb]);
+        marker(:left :de.exbf :pax, nh[:alb]);
+        slabel(:left :pax, nh[:alb] << 1.8sh + (1.5sw, 0dt),
+            hbox(:right:top, "Albersdorf")
+        );
     }
 
     with link = "line.de.1042" {
-        track(:second :pax, nh[:alb + 1ssw, :nha - 1ssw]);
-        with layer = 1 line_badge(:pax, nh[:alb + 4km], "1042");
+        track(:second :pax, nh[:alb + 1sw, :nha - 1sw]);
     }
 
     with link = "point.de.Nordhastedt" {
-        track(:second:station :pax, nh[:nha - 1ssw, :nha + 1ssw]);
-        marker(:de.hp :pax :open :right, nh[:nha]);
-        with layer = -1 marker(:de.bf :gone :right, nh[:nha]);
-        slabel(:top :pax :open, nh[:nha] >> 1.4ssw + (2ssw, 0ssw),
-            "Nordhastedt"
-        );
+        track(:second :station :pax, nh[:nha - 1sw, :nha + 1sw]);
+        marker(:right :de.hp :pax, nh[:nha]);
+        marker(:right :de.exbf :pax, nh[:nha]);
+        slabel(:right :pax, nh[:nha + 1sw] >> 1.7sh, "Nordhastedt");
     }
 
     with link = "line.de.1042" {
         track(:second :pax,
-                nh[:nha + 1ssw, :hei.bb - 1ssw]
-            ..  nh[:hei - 1.1ssw, :hei - 1ssw] >> 1.5dt
+                nh[:nha + 1sw, :hei.yyn]
+            ..  nh[:hei.hs, :hei - 1sw] >> 1.5dt
         );
+        line_label(:right:s :pax, nh[:hei.yyn - 1.5km], " 1042");
     }
 
     # point.de.Heide-Holst  de.1210

@@ -1,79 +1,62 @@
-# DE 1000.  Flensburg Weiche - Harrislee Grenze
+# DE 1000. Flensburg Weiche - Flensburg Grenze
 #
-let flwhag = path("d4.de.1000");
+let fp = path("d3.de.1000");
 
 with detail = 3 {
     # point.de.Flensburg-Weiche  de.1040
 
     with link = "line.de.1000" {
-        with layer = 3 track(:first:station :double :cat:ac15,
-                flwhag[:flw.g, :ffle]
-        );
-        with layer = 4 track(:first:station :cat:ac15,
-                flwhag[:ffle, :fri - 0.5ssw] << 0.5dt
-        );
-        with layer = 4 track(:first:station :cat:ac15 :pax,
-                flwhag[:ffle, :fri - 0.5ssw] >> 0.5dt
+        track(:first :double:rightother :cat:ac15 :pax,
+            fp[:fri.yf, :fri - 0.5sw]
         );
     }
 
     with link = "point.de.Flensburg-Friedensweg" {
-        with layer = -1 track(:first:station :cat:ac15,
-                flwhag[:fri - 0.5ssw, :fri] << 0.5dt
+        # DE 1000
+        track(:first :double:station :cat:ac15 :pax,
+                fp[:fri - 0.5sw, :fri + 0.5sw]
         );
-        with layer = -1 track(:first:station :cat:ac15 :pax,
-                flwhag[:fri - 0.5ssw, :fri] >> 0.5dt
+
+        # DE 1005
+        track(:first :station :cat:ac15 :pax,
+                fp[:fri - 0.5sw, :fri] >> 1.5dt
+            --  fp[:fri + 2dl, :fri + 2.1dl] << 0.5dt
         );
-        track(:first:station :double :cat:ac15 :pax,
-                flwhag[:fri, :fri + 0.5ssw]
+
+        marker(:right :de.abzw :cat:ac15, fp[:fri] >> 1.5dt);
+        slabel(:right :cat:ac15 :light, fp[:fri + 1sw] >> 2.0dt,
+            vbox(:left:bottom, "Friedens-", "weg")
         );
-        marker(:de.abzw :cat:ac15, flwhag[:fri] >> 0.5dt);
     }
 
     with link = "line.de.1000" {
-        track(:first :double :cat:ac15 :pax,
-                flwhag[:fri + 0.5ssw, :har - 1ssw]
-        );
-
-        guide(:linenum :cat:ac15 :pax,
-                flwhag[:fri + 1.5km] >> 1.2dt
-            --  flwhag[:fri + 1.5km] >> 3.5dt
-        );
-        label(:linenum :cat:ac15 :pax, flwhag[:fri + 1.5km] >> 4.0dt,
-            hbox(:left:middle, "1000")
-        );
+        track(:first :double :cat:ac15 :pax, fp[:fri + 0.5sw, :har - 1sw]);
+        line_label(:left:e :cat:ac15 :pax, fp[:fri + 1.3km] << 0.5dt, "1000");
     }
 
     with link = "point.de.Harrislee" {
-        track(:first:station :double :cat:ac15 :pax,
-                flwhag[:har - 1ssw, :har + 1ssw]
+        track(:first :double:station :cat:ac15 :pax,
+                fp[:har - 1sw, :har + 1sw]
         );
-        with layer = -1 marker(:de.bf :removed, flwhag[:har] >> .5dt);
-        slabel(:left :removed, flwhag[:har - 0.3sw] << 1.8dt, "Harrislee");
+        marker(:right :de.bf :removed, fp[:har] >> 0.5dt);
+        slabel(:right :removed, fp[:har - 0.6sw] >> 0.5dt >> 1.5sh,
+            "Harrislee"
+        );
     }
 
     with link = "line.de.1000" {
-        track(:first :double :cat:ac15 :pax,
-                flwhag[:har + 1ssw, :hag - 0.5ssw]
-        );
+        track(:first :double :cat:ac15 :pax, fp[:har + 1sw, :hag - 0.5sw]);
     }
 
     with link = "point.int.Harrislee-Padborg" {
-        track(:first:station :double :cat:ac15 :pax,
-                flwhag[:hag - 0.5sw, :hag + 0.5sw]
+        track(:first :double:station :cat:ac15 :pax,
+                fp[:hag - 0.5sw, :hag + 0.5sw]
         );
-        marker(:de.dirgr :cat:ac15, flwhag[:hag] >> 0.5dt);
-        marker(:statdt :cat:ac15, flwhag[:hag] << 0.5dt);
-        marker(:de.dirgr :cat:ac15 :left, flwhag[:hag] << 0.5dt);
-        label(:cat:ac15 :pax :badgesize,
-            flwhag[:hag] << 5dt,
-            hbox(
-                :right :middle,
-                vbox(:center :middle,
-                    " DK FP ",
-                    hbar(0.3),
-                    " DE 1000 "
-                )
+        marker(:left :de.dirgr :cat:ac15 :pax, fp[:hag] << 0.5dt);
+        marker(:right :de.dirgr :cat:ac15 :pax, fp[:hag] >> 0.5dt);
+        slabel(:left :cat:ac15 :roman:italic :pax, fp[:hag] << 0.5dt << 1.2sh,
+            hbox(:right:middle,
+                vbox(:center:middle, " DK ", hrule(), " DE SH ")
             )
         );
     }

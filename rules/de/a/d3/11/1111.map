@@ -1,43 +1,48 @@
-# DE 1111.  Pönitz (Holst) (ausschl.) - Ahrensbök
+# DE 1111.  Pönitz (Holst) - Ahrensbök
 #
-let pa = path("d4.de.1111");
+let pa = path("d3.de.1111");
 
 with detail = 3 {
+    # point.de.Pönitz-Holst  de.1110
+
     with link = "line.de.1111" {
-        track(:second :removed, pa[:aahr, :bra - 1ssw]);
-        with layer = 1 line_badge(:removed, pa[:bra - 1.4km], "1111");
+        track(:second :removed,
+                pa[:pon + 0.52sw, :pon.ya] >> 1dt
+            ..  pa[:pon.ffa, :bra - 0.5sw]
+        );
     }
-    
+
     with link = "point.de.Brauner-Hirsch" {
-        track(:second:station :removed, pa[:bra - 1ssw, :bra + 1ssw]);
-        marker(:de.hp :removed :right, pa[:bra]);
-        slabel(:left :removed, pa[:bra - 1ssw] >> 1.5ssw, "Brauner Hirsch");
+        track(:second :station :removed, pa[:bra - 0.5sw, :bra + 0.5sw]);
+        marker(:right :de.hp :removed, pa[:bra]);
+        slabel(:left :removed, pa[:bra] >> 1.5sh + (2sw, 0dt),
+            "Brauner Hirsch"
+        );
     }
 
     with link = "line.de.1111" {
-        track(:second :removed, pa[:bra + 1ssw, :hol - 1ssw]);
+        track(:second :removed, pa[:bra + 0.5sw, :hol - 0.5sw]);
+        line_label(:left:nw :removed, pa[:bra + 1.0km], "1111");
     }
 
     with link = "point.de.Holstendorf" {
-        track(:second:station :removed, pa[:hol - 1ssw, :hol + 1ssw]);
-        marker(:de.bf :removed :right, pa[:hol]);
-        slabel(:left :removed, pa[:hol + 0.8ssw] >> 1.5ssw,
-            "Holstendorf"
+        track(:second :station :removed, pa[:hol - 0.5sw, :hol + 0.5sw]);
+        marker(:right :de.hp :removed, pa[:hol]);
+        slabel(:left :removed, pa[:hol + 0.5sw] >> 1.0sh,
+            "Holstendorf*"
         );
     }
 
     with link = "line.de.1111" {
-        track(:second :removed, pa[:hol + 1ssw, :ahr - 1ssw]);
+        track(:second :removed, pa[:hol + 0.5sw, :ahr - 0.5sw]);
     }
-
 
     with link = "point.de.Ahrensbök" {
-        track(:second:station :removed, pa[:ahr - 1ssw, :f]);
-        marker(:de.bf :removed :right, pa[:ahr]);
-        slabel(:left :removed, pa[:ahr + 0.6ssw] >> 1.5ssw,
-            span(:bold, "Ahrensbök")
+        track(:second :station :removed, pa[:ahr - 0.5sw, :ahr + 0.5sw]);
+        marker(:right :de.bf :removed, pa[:ahr]);
+        slabel(:left :removed :bold, pa[:ahr + 0.5sw] >> 1.3sh,
+            "Ahrensbök"
         );
     }
-
 }
 

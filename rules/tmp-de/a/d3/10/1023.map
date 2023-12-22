@@ -1,0 +1,270 @@
+# DE 1023.  Kiel Hbf (ausschl.) - Neustadt (Holst)
+#
+let kn = path("d4.de.1023");
+
+with detail = 3 {
+    # point.de.Kiel-Hbf  de.1220
+
+    with link = "line.de.1023" {
+        with layer = -1 track(:first :pax,
+                path("d4.de.1220")[:kie.aa - 200m, :kie.aa - 201m] << 0.5dt
+            ..  kn[:kss - 0.51sw, :kss - 0.5sw]
+        );
+    }
+
+    with link = "point.de.Kiel-Hbf-Ss" {
+        track(:first:station :pax, kn[:kss - 0.5sw, :kss + 0.5sw]);
+        track(:second:station, kn[:kss - 0.5sw, :kss + 0.5sw] << 1dt);
+        with layer = 2 track(:first:station,
+                kn[:kss - 0.5sw, :kss - 0.5dl] >> 1dt
+            --  kn[:kss + 0.5dl, :kss + 0.51dl]
+        );
+        marker(:de.abzw :left, kn[:kss] << 1dt);
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:kss + 0.5sw, :elh - 1sw]);
+    }
+
+    with link = "point.de.Kiel-Elmschenhagen" {
+        track(:first:station :pax, kn[:elh - 1sw, :elh + 1sw]);
+        marker(:de.bf :pax :left, kn[:elh]);
+        with layer = -1 slabel(:right :pax, kn[:elm] << 1.7sh - (1sh, 0sh),
+            "K.-Elmschenhagen"
+        );
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:elh + 1sw, :kro - 1sw]);
+    }
+
+    with link = "point.de.Kroog" {
+        track(:first:station :pax, kn[:kro - 1sw, :kro + 1sw]);
+        marker(:de.hp :closed :right, kn[:kro]);
+        slabel(:bottom :closed, kn[:kro] >> 1.1sh, "Kroog");
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:kro + 1sw, :raw - 1sw]);
+    }
+
+    with link = "point.de.Raisdorf-West" {
+        track(:first:station :pax, kn[:raw - 1sw, :raw + 1sw]);
+        marker(:de.awanst :left, kn[:raw]);
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:raw + 1sw, :rai - 1sw]);
+    }
+
+    with link = "point.de.Raisdorf" {
+        track(:first:station :pax, kn[:rai - 1sw, :rai + 1sw]);
+        marker(:de.bf :pax :right, kn[:rai]);
+        slabel(:right :pax, kn[:rai + .6sw] << 1dt, "Raisdorf");
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:rai + 1sw, :pre - 1sw]);
+        with layer = -1 casing(:first, kn[:pre.a - 1dt, :pre.a + 1dt]);
+
+        guide(:linenum :pax,
+                kn[:rai + 3.2km] << 1.0dt
+            --  kn[:rai + 3.2km] << 3.0dt
+        );
+        label(:linenum :pax, kn[:rai + 3.2km] << 3.5dt,
+            hbox(:left:middle, "1023")
+        );
+    }
+
+    with link = "point.de.Preetz" {
+        track(:first:station :pax, kn[:pre - 1sw, :pre + 1sw]);
+        marker(:de.bf :pax :left, kn[:pre]);
+        slabel(:right :pax, kn[:pre - 0.4sw] << 1.5sh,
+            hbox(:left:top, "Preetz")
+        );
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:pre + 1sw, :kuh - 1sw]);
+    }
+
+    with link = "point.de.Kühren-Holst" {
+        track(:first:station :pax, kn[:kuh - 1sw, :kuh + 1sw]);
+        with layer = -1 marker(:de.bf :removed :right, kn[:kuh]);
+        slabel(:left, kn[:kuh + .15sw] >> 1.8sh,
+            hbox(:center :base,
+                span(:small:removed, "Kühren "),
+                span(:small :light :removed, "(Holst)")
+            )
+        );
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:kuh + 1sw, :wah - 1sw]);
+    }
+
+    with link = "point.de.Wahlstorf" {
+        track(:first:station :pax, kn[:wah - 1sw, :wah + 1sw]);
+        marker(:de.bf :removed :left, kn[:wah]);
+        slabel(:right :removed, kn[:wah + .4sw] << 1.3sh, "Wahlstorf");
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:wah + 1sw, :asc - 1sw]);
+        with layer = 1 line_badge(:pax, kn[:asc - 2km] << 0.1dt, "1023");
+    }
+
+    with link = "point.de.Ascheberg-Holst" {
+        track(:first:station :pax, kn[:asc - 1sw, :asc + 1sw]);
+        with layer = -4 track(:first:station :closed,
+                path("d4.de.1041")[:asc.b, :asc.r]
+        );
+        marker(:de.bf :pax :right, kn[:asc]);
+        label(kn[:asc] >> 1.1sh - (1.5sw, 0sw),
+            vbox(:left :top :pax,
+                hbox(:left :base,
+                    span(:small :bold, "Ascheberg "),
+                    span(:small, "(Holst)")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:asc + 1sw, :plo - 1sw]);
+    }
+
+    with link = "point.de.Plön" {
+        track(:first:station :pax, kn[:plo - 1sw, :plo + 1sw]);
+        marker(:de.bf :pax :left, kn[:plo]);
+        slabel(:top :pax, kn[:plo] << 1.1sw - (.5sw, 0sw), "Plön");
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax, kn[:plo + 1ssw, :tim - 1ssw]);
+        guide(:linenum :pax,
+                kn[:plo + 2.8km] << 0.7dt
+            --  kn[:plo + 2.8km] << 3dt
+        );
+        label(:linenum :pax, kn[:plo + 2.8km] << 3dt,
+            hbox(:center:bottom, "1023")
+        );
+    }
+
+    with link = "point.de.Timmdorf" {
+        track(:first:station :pax, kn[:tim - 1ssw, :tim + 1ssw]);
+        with layer = -1 marker(:de.bf :removed :right, kn[:tim]);
+        slabel(:bottom :removed, kn[:tim] >> 1.2ssw, "Timmdorf");
+    }
+
+    with link = "line.de.1023" {
+        track(:first :pax,
+                kn[:tim + 1ssw, :mal - 1ssw - .4km]
+            ..  kn[:mal - 1ssw - .1dl, :mal - 1ssw] << 0.5dt);
+    }
+
+    with link = "point.de.Malente-Gremsmühlen" {
+        track(:first:station :pax, kn[:mal - 1ssw, :mal + 1ssw] << 0.5dt);
+        track(:first:station :pax,
+                kn[:mal - 1ssw - .1dl, :mal - 1ssw] << 0.5dt
+            --  kn[:mal - 1ssw + 1dl, :mal + 1ssw] >> 0.5dt
+        );
+        with layer = -1 track(:second :station :closed,
+                path("d4.de.1112")[:mal.bbb, :mal.bbb - .1dl]
+            ..  kn[:mal - .2ssw, :mal + .5ssw] << 0.5dt << 1ssw
+        );
+        marker(:de.hp :pax :left, kn[:mal] << 0.5dt);
+        marker(:de.uest :pax :left, kn[:mal] << 0.5dt);
+        with layer = -4 marker(:de.bf :removed :left, kn[:mal] << 0.5dt);
+        slabel(:right :pax, kn[:mal + 1.5ssw] << 2dt,
+            span(:small :bold, "Bad Malente-Gremsmühlen")
+        );
+    }
+
+    with link = "line.de.1023" {
+        track(:double :first :pax, kn[:mal + 1ssw, :eut - 1ssw]);
+        with layer = 1 line_badge(:pax, kn[:eut - 2.4km], "1023");
+    }
+
+    with link = "point.de.Eutin" {
+        track(:first:station :pax, kn[:eut - 1ssw, :eut + .5ssw] << 0.5dt);
+        with layer = -4 track(:second:station :removed,
+                kn[:eut + .5ssw, :eut + 1ssw] << .5dt
+        );
+        track(:first:station :pax, kn[:eut - 1ssw, :eut + 1ssw] >> 0.5dt);
+        marker(:de.bf :pax :left, kn[:eut - .5ssw] << 0.5dt);
+        slabel(:right :pax, kn[:eut] << .5dt << 1.3ssw,
+            span(:small :bold, "Eutin")
+        );
+    }
+
+    with link = "line.de.1023" {
+        track(:second :removed,
+                kn[:eut + 1ssw, :eut.fff] << .5dt
+            ..  kn[:rob - 1.1ssw, :rob - 1ssw]
+        );
+        with layer = 1 line_badge(
+            :removed, kn[:eut.fff - 0.7km] << 0.5dt, "1023"
+        );
+    }
+
+    with link = "point.de.Röbel" {
+        track(:second:station :removed, kn[:rob - 1ssw, :rob + 1ssw]);
+        marker(:de.hp :removed :right, kn[:rob]);
+        slabel(:right :removed, kn[:rob + .3ssw] << .7ssw, "Röbel");
+    }
+
+    with link = "line.de.1023" {
+        track(:second :removed, kn[:rob + 1ssw, :buj - 1ssw]);
+    }
+
+    with link = "point.de.Bujendorf" {
+        track(:second :station :removed, kn[:buj - 1ssw, :buj + 1ssw]);
+        marker(:de.bf :removed :left, kn[:buj]);
+        slabel(:right :removed, kn[:buj] << 1.5ssw, "Bujendorf");
+    }
+
+    with link = "line.de.1023" {
+        track(:second :removed, kn[:buj + 1ssw, :ove - 1ssw]);
+    }
+
+    with link = "point.de.Ovelgönne-Holst" {
+        track(:second :station :removed, kn[:ove - 1ssw, :ove + 1ssw]);
+        marker(:de.hp :removed :right, kn[:ove]);
+        slabel(:bottom :removed, kn[:ove] >> 1.4ssw, "Ovelgönne");
+    }
+
+    with link = "line.de.1023" {
+        track(:second :removed, kn[:ove + 1ssw, :neg.a]);
+    }
+
+    with link = "point.de.Neustadt-Holst-Gbf" {
+        with layer = -4 track(:second :removed, kn[:neg.a, :neg.ns]);
+        track(:first:station :pax, path("d4.de.1100")[:neg.b, :neg.nn]);
+        track(:first:station, path("d4.de.1100")[:neg.nn, :neg.g]);
+        track(:first:station :pax, kn[:neg.nn, :nst.a]);
+
+        marker(:de.gbf, kn[:neg]);
+        slabel(:right, kn[:neg - 0.4ssw] >> 1.7ssw,
+            hbox(:left :base,
+                span(:small :bold, "Neustadt "),
+                span(:small, "(Holst) "),
+                span(:small :bold, "Gbf")
+            )
+        );
+    }
+
+    with link = "point.de.Neustadt-Holst" {
+        track(:first:station :pax, kn[:nst.a, :nst + 0.5ssw]);
+        marker(:de.hp :pax :left, kn[:f - .5ssw]);
+        marker(:de.awanst :pax :left, kn[:f - .5ssw]);
+        with layer = -1 marker(:de.bf :gone :left, kn[:f - .5ssw]);
+        slabel(:right :pax, kn[:nst] + (1.0ssw, 0ssw),
+            hbox(:left :base,
+                span(:small :bold, "Neustadt "),
+                span(:small, "(Holst) ")
+            )
+        );
+    }
+}
+

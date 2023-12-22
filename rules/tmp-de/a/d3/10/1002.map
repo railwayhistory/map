@@ -1,0 +1,28 @@
+# DE 1002.  Flensburg Weiche - Flensburg Hafen Ost
+# DE 1003.  Flensburg Alter Bf - Flensburg Hafen West
+#
+let flafhw = path("d4.de.1003");
+let flwfho = path("d4.de.1002");
+let nf = path("d4.de.1040");
+
+with detail = 3 {
+    # point.de.Flensburg-Weiche  de.1040
+
+    with link = "line.de.1002" {
+        track(:second :removed :flip,
+               nf[:flw.f, :fle - 1.5ssw] << 1.5dt
+            .. flwfho[:fla - 1.1ssw, :fla - 1ssw]
+        );
+    }
+
+    with link = "point.de.Flensburg-Alter-Bf" {
+        track(:second :station :removed, flwfho[:fla - 1ssw, :fla + .5ssw]);
+        track(:station :removed, flwfho[:fla + .5ssw, :f]);
+        track(:station :removed,
+                flwfho[:fla + .5ssw, :fla + .6ssw]
+            ..  flafhw[:afhw + 0.7km, :f]
+        )
+        marker(:right :de.bf :removed, flwfho[:fla.bf - 0.5dt]);
+    }
+}
+

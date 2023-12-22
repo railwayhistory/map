@@ -1,0 +1,77 @@
+# DE 1204.  Abzw Hörn - Tönning
+#
+let ht = path("d4.de.1204");
+
+with detail = 3 {
+    with link = "line.de.1204" {
+        track(:second :pax,
+                path("d4.de.1210")[:hor - 0.49sw, :hor - 0.5sw] >> 0.5dt
+            ..  ht[:pla - 0.51ssw, :pla - 0.5ssw]
+        );
+    }
+
+    with link = "point.de.Platenhörn" {
+        track(:second:station :pax, ht[:pla - 0.5ssw, :pla + 0.5ssw]);
+        with layer = -1 marker(:de.hp :removed :left, ht[:pla]);
+        slabel(:left :removed,
+            path("d4.de.a15")[:pla + 0.4ssw] >> 1.5dt,
+            "Platenhörn"
+        );
+    }
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:pla + 0.5ssw, :but - 1ssw]);
+    }
+
+    with link = "point.de.Büttel" {
+        track(:second:station :pax, ht[:but - 1ssw, :but + 1ssw]);
+        with layer = -1 marker(:de.hst :removed :left, ht[:but]);
+        with layer = -2 marker(:de.bf :gone :left, ht[:but]);
+        slabel(:left :removed, ht[:but + 0.4ssw] >> 1.0dt, "Büttel");
+    }
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:but + 1ssw, :wit - 1ssw]);
+    }
+
+    with link = "point.de.Witzwort" {
+        track(:second:station :pax, ht[:wit - 1ssw, :wit + 1ssw]);
+        marker(:de.hp :pax :left, ht[:wit]);
+        slabel(:left :pax, ht[:wit + 0.4ssw] >> 1.0dt, "Witzwort");
+    }
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:wit + 1ssw, :har - 1ssw]);
+        with layer = 1 line_badge(:open :pax, ht[:wit + 1.8km], "1204");
+    }
+
+    with link = "point.de.Harblek" {
+        track(:second:station :pax, ht[:har - 1ssw, :har + 1ssw]);
+        marker(:de.hp :pax :right, ht[:har]);
+        with layer = -1 marker(:de.bf :removed :right, ht[:har]);
+        slabel(:left :pax, ht[:har + 0.4sw] >> 1.3ssw, "Harblek");
+    }
+
+    with link = "line.de.1204" {
+        track(:second :pax, ht[:har + 1ssw, :ton - 1ssw]);
+    }
+
+    with link = "point.de.Tönning" {
+        track(:second:station :pax, ht[:ton - 1ssw, :ton + 1ssw]);
+        track(:second:station :pax,
+                path("d4.de.1205")[:ton + 1.5ssw, :ton + 1.49ssw]
+            ..  ht[:ton - 0.5ssw, :ton - 0.49ssw]
+        );
+
+        marker(:de.bf :pax :left, ht[:ton]);
+        slabel(:left :pax, ht[:ton + 0.4ssw] >> 2.5dt,
+            span(:bold, "Tönning")
+        );
+    }    
+
+    with link = "point.de.Tönning-Hafen" {
+        with layer = -1 track(:station :removed, ht[:ton + 1ssw, :f]);
+    }
+}
+
+

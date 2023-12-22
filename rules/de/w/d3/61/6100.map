@@ -1,6 +1,6 @@
 # DE 6100.  Berlin-Spandau - Hamburg-Altona
 #
-let ba = path("d4.de.w.6100");
+let ba = path("d3.de.w.6100");
 
 with detail = 3 {
     with link = "line.de.6100" {
@@ -231,23 +231,30 @@ with detail = 3 {
     }
 
     with link = "point.de.Wittenberge" {
-        # Str. 6100
-        track(:first:station :double :cat:ac15 :pax, ba[:wit - 1ssw, :wit.u]);
-
-        # Str. 1151
-        with layer = -4 track(:first:station :removed,
-                ba[:wit.yd - 0.1dl, :wit.yd] << 0.5dt
-            ..  path("d4.de.w.1151")[:wit.hh - 0.1dl, :wit.hh]
+        # DE 6100
+        track(:first :double:station :cat:ac15 :pax,
+                ba[:wit - 1sw, :wit + 1sw]
         );
 
-        marker(:de.bf :cat:ac15 :pax :left, ba[:wit] << 0.5dt);
-        slabel(:left :cat:ac15 :pax, ba[:wit - 0.4ssw] << 0.5dt << 1.6ssw,
+        # DE ?? - DE 1151
+        track(:first :station :cat:ac15 :pax,
+                ba[:wit - 1sw, :wit + 0.5sw + 1dl] << 1.5dt
+            --  ba[:wit + 0.5sw + 2dl, :wit + 0.5sw + 2.1dl] << 0.5dt
+        );
+        track(:first :station :removed,
+                ba[:wit - 0.5sw + 1dl, :wit + 1.5sw] << 1.5dt
+        );
+
+        marker(:de.bf :cat:ac15 :pax :left, ba[:wit] << 1.5dt);
+        slabel(:left :cat:ac15 :pax, ba[:wit - 0.4ssw] << 1.5dt << 1.6ssw,
             span(:bold, "Wittenberge")
         );
     }
 
     with link = "point.de.Wittenberge-Nord" {
-        track(:first:station :double :cat:ac15 :pax, ba[:wit.u, :win + 1ssw]);
+        track(:first:station :double :cat:ac15 :pax,
+                ba[:wit + 1sw, :win + 1sw]
+        );
         marker(:de.bft :cat:ac15 :left, ba[:win] << 0.5dt);
         with layer = -1 marker(
             :de.bft.casing :cat:ac15 :left, ba[:win] << 0.5dt
@@ -402,7 +409,7 @@ with detail = 3 {
     }
 
     with link = "point.de.point.de.Hagenow-Land" {
-        let ho = path("d4.de.w.6928");
+        let ho = path("d3.de.w.6928");
 
         track(:first:station :double :cat:ac15 :pax,
                 ba[:hag - 1ssw, :hag + 1ssw]

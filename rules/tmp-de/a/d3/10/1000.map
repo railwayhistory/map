@@ -1,0 +1,81 @@
+# DE 1000.  Flensburg Weiche - Harrislee Grenze
+#
+let flwhag = path("d4.de.1000");
+
+with detail = 3 {
+    # point.de.Flensburg-Weiche  de.1040
+
+    with link = "line.de.1000" {
+        with layer = 3 track(:first:station :double :cat:ac15,
+                flwhag[:flw.g, :ffle]
+        );
+        with layer = 4 track(:first:station :cat:ac15,
+                flwhag[:ffle, :fri - 0.5ssw] << 0.5dt
+        );
+        with layer = 4 track(:first:station :cat:ac15 :pax,
+                flwhag[:ffle, :fri - 0.5ssw] >> 0.5dt
+        );
+    }
+
+    with link = "point.de.Flensburg-Friedensweg" {
+        with layer = -1 track(:first:station :cat:ac15,
+                flwhag[:fri - 0.5ssw, :fri] << 0.5dt
+        );
+        with layer = -1 track(:first:station :cat:ac15 :pax,
+                flwhag[:fri - 0.5ssw, :fri] >> 0.5dt
+        );
+        track(:first:station :double :cat:ac15 :pax,
+                flwhag[:fri, :fri + 0.5ssw]
+        );
+        marker(:de.abzw :cat:ac15, flwhag[:fri] >> 0.5dt);
+    }
+
+    with link = "line.de.1000" {
+        track(:first :double :cat:ac15 :pax,
+                flwhag[:fri + 0.5ssw, :har - 1ssw]
+        );
+
+        guide(:linenum :cat:ac15 :pax,
+                flwhag[:fri + 1.5km] >> 1.2dt
+            --  flwhag[:fri + 1.5km] >> 3.5dt
+        );
+        label(:linenum :cat:ac15 :pax, flwhag[:fri + 1.5km] >> 4.0dt,
+            hbox(:left:middle, "1000")
+        );
+    }
+
+    with link = "point.de.Harrislee" {
+        track(:first:station :double :cat:ac15 :pax,
+                flwhag[:har - 1ssw, :har + 1ssw]
+        );
+        with layer = -1 marker(:de.bf :removed, flwhag[:har] >> .5dt);
+        slabel(:left :removed, flwhag[:har - 0.3sw] << 1.8dt, "Harrislee");
+    }
+
+    with link = "line.de.1000" {
+        track(:first :double :cat:ac15 :pax,
+                flwhag[:har + 1ssw, :hag - 0.5ssw]
+        );
+    }
+
+    with link = "point.int.Harrislee-Padborg" {
+        track(:first:station :double :cat:ac15 :pax,
+                flwhag[:hag - 0.5sw, :hag + 0.5sw]
+        );
+        marker(:de.dirgr :cat:ac15, flwhag[:hag] >> 0.5dt);
+        marker(:statdt :cat:ac15, flwhag[:hag] << 0.5dt);
+        marker(:de.dirgr :cat:ac15 :left, flwhag[:hag] << 0.5dt);
+        label(:cat:ac15 :pax :badgesize,
+            flwhag[:hag] << 5dt,
+            hbox(
+                :right :middle,
+                vbox(:center :middle,
+                    " DK FP ",
+                    hbar(0.3),
+                    " DE 1000 "
+                )
+            )
+        );
+    }
+}
+

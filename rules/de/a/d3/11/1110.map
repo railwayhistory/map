@@ -1,81 +1,76 @@
-# DE 1110.  Eutin - Bad Schwartau Abzw (ausschl.)
+# DE 1110.  Eutin - Lübeck Hbf
 #
-let el = path("d4.de.1110");
+let el = path("d3.de.1110");
 
 with detail = 3 {
+    # point.de.Eutin  de.1023
+
     with link = "line.de.1110" {
         track(:first :pax,
-                el[:eut + 1ssw, :eut.x] >> 0.5dt
-            ..  el[:eut.gg + 0.2km, :boc - 1ssw]
+                el[:eut + 0.5sw, :eut.yl] >> 0.5dt
+            ..  el[:eut.yyl + 1sw, :boc - 0.5sw]
         );
+        line_label(:right:e :pax, el[:boc - 1.2km], "1110");
     }
 
     with link = "point.de.Bockholt" {
-        track(:first:station :pax, el[:boc - 1ssw, :boc + 1ssw]);
-        with layer = -1 marker(:de.hp :removed :right, el[:boc]);
-        slabel(:left :removed, el[:boc + 0.35ssw] >> 1.7ssw, "Bockholt");
+        track(:first :station :pax, el[:boc - 0.5sw, :boc + 0.5sw]);
+        marker(:right :de.hp :removed, el[:boc]);
+        slabel(:left :removed, el[:boc + 0.5sw] >> 1.7sh, "Bockholt");
     }
 
     with link = "line.de.1110" {
-        track(:first :pax, el[:boc + 1ssw, :ott - 1ssw]);
-        with layer = 1 line_badge(:open :pax, el[:boc + 1.7km], "1110");
+        track(:first :pax, el[:boc + 0.5sw, :ott - 0.5sw]);
     }
 
     with link = "point.de.Ottendorf-Holst" {
-        track(:first:station :pax, el[:ott - 1ssw, :ott + 1ssw]);
-        with layer = -1 marker(:de.bf :removed :right, el[:ott]);
-        slabel(:left :removed, el[:ott + 0.5ssw] >> 1.5ssw,
-            hbox(:right:base,
-                span(:regular, "Ottendorf "),
-                span(:light, "(Holst)")
-            )
+        track(:first :station :pax, el[:ott - 0.5sw, :ott + 0.5sw]);
+        marker(:right :de.bf :removed, el[:ott]);
+        slabel(:left :removed, el[:ott + 0.55sw] >> 1.5sh,
+            hbox(:right:base, "Ottendorf ", span(:light, "(Holst)"))
         );
     }
 
     with link = "line.de.1110" {
-        track(:first :pax, el[:ott + 1ssw, :pon - 1ssw]);
+        track(:first :pax, el[:ott + 0.5sw, :pon - 0.5sw]);
+        line_label(:left:w :pax, el[:pon - 1.8km], "1110");
     }
 
     with link = "point.de.Pönitz-Holst" {
-        track(:first:station :pax, el[:pon - 1ssw, :pon + 1ssw]);
-        marker(:de.bf :pax :right, el[:pon]);
-        label(el[:pon] << 1.0dt,
-            vbox(:left:middle :small :pax,
-                span(:bold, "Ponitz"),
-                span(:regular, " (Holst)")
-            )
+        track(:first :station :pax, el[:pon - 0.5sw, :pon + 0.5sw]);
+        marker(:right :de.bf :pax, el[:pon]);
+        slabel(:right:pax, el[:pon + 0.6sw] << 1.2dt,
+            hbox(:left:base, span(:bold, "Pönitz "), "(Holst)*")
         );
     }
 
     with link = "line.de.1110" {
-        track(:first :pax, el[:pon + 1ssw, :gle - 1ssw]);
+        track(:first :pax, el[:pon + 0.5sw, :gle - 0.5sw]);
     }
 
     with link = "point.de.Gleschendorf" {
-        track(:first:station :pax, el[:gle - 1ssw, :gle + 1ssw]);
-        with layer = -1 marker(:de.hp :removed :right, el[:gle]);
-        slabel(:right :removed, el[:gle + 0.3ssw] << 0.7dt,
-            "Gleschend."
-        );
+        track(:first :station :pax, el[:gle - 0.5sw, :gle + 0.5sw]);
+        marker(:right :de.hp :removed, el[:gle]);
+        slabel(:right :removed, el[:gle + 0.6sw] << 1.2dt, "Gleschendorf*");
     }
-        
+
     with link = "line.de.1110" {
-        track(:first :pax, el[:gle + 1ssw, :pan - 1ssw]);
-        with layer = 1 line_badge(:open :pax, el[:pan - 1.7km], "1110");
+        track(:first :pax, el[:gle + 0.5sw, :pan - 0.5sw]);
+        line_label(:left:w :pax, el[:gle + 2km], "1110");
     }
 
     with link = "point.de.Pansdorf" {
-        track(:first:station :pax, el[:pan - 1ssw, :pan + 1ssw]);
-        marker(:de.bf :pax :left, el[:pan]);
-        slabel(:left :pax, el[:pan + 0.4ssw] >> 2dt, "Pansdorf");
+        track(:first :station :pax, el[:pan - 0.5sw, :pan + 0.5sw]);
+        marker(:right :de.bf :pax, el[:pan]);
+        slabel(:left :pax, el[:pan + 0.4sw] >> 1.8sh, "Pansdorf");
     }
 
     with link = "line.de.1110" {
         track(:first :pax,
-                el[:pan + 1ssw, :f - 300m]
-            ..  path("d4.de.1100")[:aeut, :swa + 0.5ssw] >> 0.5dt
+                el[:pan + 0.5sw, :swr.yye - 2dt]
+            ..  el[:swr.ye, :swa - 0.5sw] >> 0.5dt
         );
+        line_label(:right:e :pax, el[:swr.yye - 1km], "1110");
     }
 }
-
 

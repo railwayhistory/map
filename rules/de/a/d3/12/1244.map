@@ -1,105 +1,246 @@
 # DE 1244.  Hamburg Hbf - Aumühle
 #
+let ba = path("d3.de.a.6100");
 
 with detail = 3 {
-    let ba = path("d3.de.6100.hmb");
 
     with link = "line.de.1244" {
-        with layer = 2 track(:first:double :rail:rc12 :pax,
-                ba[:ham.aa, :ber.f] << 2dt
-            ..  path("d4.de.a.6100")[:ber + 1ssw, :ber + 0.9ssw] << 2dt
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:anc + 0.5sw, :anc - 0.5sw] << 2dt
         );
-        with layer = 1 casing(:first :double :rail:rc12,
-                ba[:ham.aa, :anc] << 2dt
-        );
-        with layer = 1 casing(:first :double :rail:rc12,
-                ba[:ros, :tie] << 2dt
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:anc - 0.5sw, :ros + 0.5sw] << 2dt
         );
     }
 
     with link = "point.de.Hamburg-Rothenburgsort-S-Bahn" {
-        marker(:de.hp :rail:rc12 :pax :right, ba[:ros] >> 2.5dt);
-    }
-
-    with link = "point.de.Hamburg-Tiefstack" {
-        marker(:de.hp :rail:rc12 :pax :right, ba[:tie] >> 2.5dt);
-        marker(:de.hp.casing :rail:rc12 :pax :right, ba[:tie] >> 2.5dt);
-    }
-
-    with link = "point.de.Hamburg-Billwerder-Moorfleet" {
-        marker(:de.hp :rail:rc12 :pax :right, ba[:bim] >> 2.5dt);
-    }
-
-    with link = "point.de.Hamburg-Mittlerer-Landweg" {
-        marker(:de.hp :rail:rc12 :pax :right, ba[:mit] >> 2.5dt);
-    }
-
-    with link = "point.de.Hamburg-Allermöhe-S-Bahn" {
-        marker(:de.hp :rail:rc12 :pax :right, ba[:als] >> 2.5dt);
-    }
-
-    with link = "point.de.Hamburg-Nettelnburg" {
-        marker(:de.hp :rail:rc12 :pax :right, ba[:net] >> 2.5dt);
-    }
-}
-
-with detail = 3 {
-    let ba = path("d4.de.a.6100");
-
-    with link = "point.de.Hamburg-Bergedorf-S-Bahn" {
-        track(:first:station :double :rail:rc12 :pax,
-                ba[:ber + 1ssw, :ber - 1ssw] << 2dt
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:ros + 0.5sw, :ros - 0.5sw] << 2dt
         );
-        marker(:de.bf :rail:rc12 :pax :right, ba[:ber] >> 2.5dt);
+        marker(:right :de.hp :rail:rc12 :pax, ba[:ros] >> 2.5dt);
+        with zoom = :high slabel(:right :rail:rc12 :pax,
+            ba[:ros - 0.5sw] >> 2.5dt >> 1.2sh,
+            "Rothenburgsort"
+        );
     }
 
     with link = "line.de.1244" {
-        track(:first :double :rail:rc12 :pax,
-                ba[:ber - 1ssw, :rei + 1ssw] << 2dt
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:ros - 0.5sw, :rop + 0.5sw] << 2dt
+        );
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:rop + 0.5sw, :rop - 0.5sw] << 2dt
+        );
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:rop - 0.5sw, :tie + 0.5sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Tiefstack" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:tie + 0.5sw, :tie - 0.5sw] << 2dt
+        );
+        marker(:right :de.hp :rail:rc12 :pax, ba[:tie] >> 2.5dt);
+        with zoom = :high slabel(:right :rail:rc12 :pax,
+            ba[:tie - 0.5sw] >> 2.5dt >> 1.2sh,
+            "Tiefstack"
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:tie - 0.5sw, :rtk + 0.5sw] << 2dt
+        );
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:rtk + 0.5sw, :rtk - 0.5sw] << 2dt
+        );
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:rtk - 0.5sw, :bil + 0.5sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Billwerder-Moorfleet" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:bil + 0.5sw, :bia - 0.5sw] << 2dt
+        );
+        marker(:right :de.hp :rail:rc12 :pax, ba[:bia] >> 2.5dt);
+        with zoom = :high slabel(:right :rail:rc12 :pax,
+            ba[:bil - 1sw] >> 2.5dt >> 1.2sh,
+            "Billwerder-Moorfleet"
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:bia - 0.5sw, :biu + 0.5sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Billwerder-Üst" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:biu + 0.5sw, :biu - 0.5sw] << 2dt
+        );
+        marker(:right :de.uest :rail:rc12, ba[:biu] >> 2.5dt);
+        with zoom = :high slabel(:right :rail:rc12 :light,
+            ba[:biu - 0.5sw] >> 2.5dt >> 1.2sh,
+            "Billwerder (Üst)"
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:biu - 0.5sw, :mit + 0.5sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Mittlerer-Landweg" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:mit + 0.5sw, :mit - 0.5sw] << 2dt
+        );
+        marker(:right :de.hp :rail:rc12 :pax, ba[:mit] >> 2.5dt);
+        with zoom = :high slabel(:right :rail:rc12 :pax,
+            ba[:mit - 0.8sw] >> 2.5dt >> 1.0sh,
+            vbox(:left:bottom, "Mittlerer", "Landweg")
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:mit - 0.5sw, :all + 1sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Allermöhe-S-Bahn" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:all + 1sw, :als - 0.5sw] << 2dt
+        );
+        marker(:right :de.hp :rail:rc12 :pax, ba[:als] >> 2.5dt);
+        with zoom = :high slabel(:top :rail:rc12 :pax,
+            ba[:als] >> 2.5dt >> 1.2sh,
+            vbox(:center:bottom, " Aller-", "möhe")
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:als - 0.5sw, :net + 1sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Nettelnburg" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:net + 1sw, :beg - 1sw] << 2dt
+        );
+        marker(:right :de.hp :rail:rc12 :pax, ba[:net] >> 2.5dt);
+        with zoom = :high slabel(:top :rail:rc12 :pax,
+            ba[:net] >> 2.5dt >> 1.2sh,
+            vbox(:center:bottom, " Netteln-", "burg")
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:beg - 1sw, :ber + 1sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Hamburg-Bergedorf-S-Bahn" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:ber + 1sw, :ber - 1sw] << 2dt
+        );
+        marker(:right :de.bf :rail:rc12 :pax, ba[:ber] >> 2.5dt);
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:ber - 1sw, :mow + 0.5sw] << 2dt
+        );
+    }
+
+    with link = "point.de.Reinbek-LGr-S-Bahn" {
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:mow + 0.5sw, :reg - 0.5sw] << 2dt
+        );
+        marker(:right :de.lgr :rail:rc12, ba[:reg] >> 2.5dt);
+        slabel(:left :rail:rc12, ba[:reg] >> 2.5dt >> 1.4sh + (1.8sw, 0dt),
+            span(:italic, "HH/SH")
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:reg - 0.5sw, :rei + 0.5sw] << 2dt
         );
     }
 
     with link = "point.de.Reinbek" {
-        track(:first:station :double :rail:rc12 :pax,
-                ba[:rei + 1ssw, :rei - 1ssw] << 2dt
+        track(:first :double:station :rail:rc12 :pax,
+                ba[:rei + 0.5sw, :rei - 0.5sw] << 2dt
         );
-        marker(:de.hp :rail:rc12 :pax :right, ba[:rei] >> 2.5dt);
-        slabel(:left :rail:rc12 :pax, ba[:rei + 0.3ssw] >> 2.5dt >> 1.5ssw,
+        marker(:right :de.hp :rail:rc12 :pax, ba[:rei] >> 2.5dt);
+        marker(:right :de.exbf :rail:rc12 :pax, ba[:rei] >> 2.5dt);
+        slabel(:top :rail:rc12 :pax, ba[:rei] >> 2.5dt >> 1.7sh + (-1sw, 0dt),
             "Reinbek"
         );
     }
 
     with link = "line.de.1244" {
-        track(:first :double :rail:rc12 :pax,
-                ba[:rei - 1ssw, :woh + 1ssw] << 2dt
+        track(:first :double:rightother :rail:rc12 :pax,
+                ba[:rei - 0.5sw, :woh + 1sw] << 2dt
         );
     }
 
     with link = "point.de.Wohltorf" {
-        track(:first:station :rail:rc12 :pax,
-                ba[:woh + 1ssw, :woh - 1ssw] << 1.5dt
+        track(:first :station :rail:rc12 :pax,
+                ba[:woh + 1sw, :woh - 0.5sw] << 2.5dt
+            --  ba[:woh - 0.5sw - 1dl, :woh - 0.5sw - 1.1dl] << 1.5dt
         );
-        track(:first:station :rail:rc12 :pax,
-                ba[:woh + 1ssw, :woh - 0.6ssw] << 2.5dt
-            --  ba[:woh - 0.6ssw - 1dl, :woh - 0.6ssw - 1.1dt] << 1.5dt
+        track(:first :station :rail:rc12 :pax,
+                ba[:woh + 1sw, :woh - 1sw] << 1.5dt
         );
-        marker(:de.bf :rail:rc12 :pax :right, ba[:woh] >> 2.5dt);
-        slabel(:left :rail:rc12 :pax, ba[:woh + 0.5ssw] >> 2.5dt >> 1.5ssw,
+        marker(:right :de.bf :rail:rc12 :pax, ba[:woh] >> 2.5dt);
+        slabel(:left :rail:rc12 :pax, ba[:woh + 0.5sw] >> 2.5dt >> 1.2sh,
             "Wohltorf"
         );
     }
 
     with link = "line.de.1244" {
-        track(:first :rail:rc12 :pax, ba[:woh - 1ssw, :aum + 1ssw] << 1.5dt);
+        track(:first :rightother :rail:rc12 :pax,
+                ba[:woh - 1sw, :sil + 0.5sw] << 1.5dt
+        );
+    }
+
+    with link = "point.de.Aumühle-Silk" {
+        track(:first :station :rail:rc12 :pax,
+                ba[:sil + 0.5sw, :sil - 0.5sw] << 1.5dt
+        );
+        marker(:right :de.anst :removed, ba[:sil] >> 1.5dt);
+        slabel(:left :removed :light, ba[:sil + 0.4sw] >> 1.5dt >> 1.2sh,
+            "Silk"
+        );
+    }
+
+    with link = "line.de.1244" {
+        track(:first :rightother :rail:rc12 :pax,
+                ba[:sil - 0.5sw, :aum + 1sw] << 1.5dt
+        );
     }
 
     with link = "point.de.Aumühle" {
-        track(:first:station :rail:rc12 :pax,
-                ba[:aum + 1ssw, :aum - 1ssw] << 1.5dt
+        # DE 1244
+        track(:first :station :rail:rc12 :pax,
+                ba[:aum + 1sw, :aum + 0.1sw] << 1.5dt
         );
-        marker(:de.bf :rail:rc12 :pax :right, ba[:aum] >> 1.5dt);
-        slabel(:left :rail:rc12 :pax, ba[:aum - 1ssw] >> 1.5dt >> 1.5ssw,
-            span(:bold, "Aumühle")
+
+        # DE 1285
+        track(:first :station :cat:ac15,
+                ba[:aum - 0.1sw, :aua + 0.5sw] << 1.5dt
+        );
+
+        marker(:right :de.bf :rail:rc12 :pax, ba[:aum] >> 1.5dt);
+        slabel(:top :rail:rc12 :pax :bold,
+            ba[:aum] >> 1.5dt >> 1.0sh + (-1sw, 0dt),
+            "Aumühle"
         );
     }
 }

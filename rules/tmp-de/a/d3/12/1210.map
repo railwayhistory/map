@@ -448,12 +448,19 @@ with detail = 3 {
     }
 
     with link = "line.de.1210" {
-        track(:first :double :pax, en[:hor + 0.5ssw, :hus - 1ssw]);
+        track(:first :double :pax,
+                en[:hor + 0.5ssw, :hus.aa]
+            ..  en[:hus - 1.01sw, :hus - 1sw]
+        );
     }
 
     with link = "point.de.Husum" {
-        track(:first:station :double :pax, en[:hus - 1ssw, :hus + 1ssw]);
-        marker(:de.bf :pax :right, en[:hus] >> 0.5dt);
+        track(:first:station :double :pax, en[:hus - 1sw, :hus + 1sw]);
+        track(:second:station :removed,
+                en[:hus - 1sw, :hus + 0.5sw] >> 1.5dt
+            --  en[:hus + 0.5sw + 1dl, :hus + 0.5sw + 1.1dl] >> 0.5dt
+        );
+        marker(:de.bf :pax :right, en[:hus] >> 1.5dt);
         slabel(:left :pax, en[:hus] - (1100m, 0m),
             span(:bold, "Husum")
         );
@@ -520,7 +527,11 @@ with detail = 3 {
                 en[:bre - 0.6ssw - 1.1dl, :bre - 0.6ssw - 1dl] >> 0.5dt
             --  en[:bre - 0.6ssw, :bre + 1ssw] << 0.5dt
         );
-        track(:first :pax, en[:bre - 1ssw, :bre + 1ssw] >> 0.5dt);
+        track(:first:station :pax, en[:bre - 1ssw, :bre + 1ssw] >> 0.5dt);
+        track(:second:station :removed,
+                en[:bre.yl, :bre + 0.6sw] >> 1.5dt
+            --  en[:bre + 0.6sw + 1dl, :bre + 0.6sw + 1.1dl] >> 0.5dt
+        );
         marker(:de.bf :pax :left, en[:bre] << 0.5dt);
         slabel(:left :pax, en[:bre - 0.35ssw] << 0.5dt << 2.0ssw,
             span(:bold, "Bredstedt")

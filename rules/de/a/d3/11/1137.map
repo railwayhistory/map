@@ -1,20 +1,24 @@
 # DE 1137.  Brandenbaum - Lübeck Konstinbahnhof
 #
-let bk = path("d4.de.1137");
+let bk = path("d3.de.1137");
 
 with detail = 3 {
     # point.de.Brandenbaum  de.1131
 
     with link = "line.de.1137" {
-        track(:second,
-                bk[:bra.yk - 0.1dl, :bra.yk]
-            ..  bk[:aa, :kon - 1ssw]
+        track(:station,
+                bk[:bra + 0.5sw, :bra.yk] << 1dt
+            ..  bk[:aa + 1dt, :kon - 1sw]
         );
+        line_label(:right:sw, bk[:kon - 2.2km], "1137");
     }
 
     with link = "point.de.Lübeck-Konstinbahnhof" {
-        track(:second:station, bk[:kon - 1ssw, :kon + 1ssw]);
-        marker(:de.gbf :left, bk[:kon]);
+        track(:station, bk[:kon - 1sw, :kon + 1sw]);
+        marker(:left :de.gbf, bk[:kon]);
+        slabel(:bottom, bk[:kon] << 1.2sh,
+            vbox(:center:top, "Konstin-", "bahnhof")
+        );
     }
 }
 

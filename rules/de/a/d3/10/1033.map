@@ -1,19 +1,87 @@
-# DE 1033.  DE 1033 - Meimersdorf Mitte -  Kiel SS
+# DE 1033 - Meimersdorf Mitte -  Kiel SS
 #
-let ak = path("d4.de.1220");
-let kn = path("d4.de.1023");
+let ms = path("d3.de.1033");
 
-with detail = 3 {
-    # point.de.Meimersdorf-Rbf  de.1031
-    
+with detail = 3, zoom = :high {
+    # point.de.Meimersdorf-Mf  de.1220
+
     with link = "line.de.1033" {
-        with layer = 2 track(:first,
-                ak[:meo - 0.1dl, :meo] << 1.5dt
-            ..  kn[:kss - 0.51ssw, :kss - 0.5ssw] >> 1dt
+        track(:first :leftother:rightother :cat:ac15,
+                ms[:mef + 1sw, :mer - 1sw] << 1.5dt
         );
-        with layer = 1 casing(:first,
-                ak[:meo - 0.1dl, :meo] << 1.5dt
-            ..  kn[:kss - 0.51ssw, :kss - 0.5ssw] >> 1dt
+    }
+
+    with link = "point.de.Meimersdorf-Rbf" {
+        # DE 1033
+        track(:first :station :cat:ac15, ms[:mer - 1sw, :mer + 1sw] << 1.5dt);
+
+        # DE 1031
+        track(:first :station :cat:ac15,
+                ms[:mer - 1sw, :mer + 1sw] << 2.5dt
+        );
+
+        marker(:left :de.bbf :cat:ac15, ms[:mer] << 2.5dt);
+        slabel(:left :cat:ac15 :pax,
+            ms[:mer] << 2.5dt << 1.7sw + (1sw, 0dt),
+            "Meimersdorf Rbf"
+        );
+    }
+
+    with link = "line.de.1033" {
+        with layer = 1 track(:first :leftother:rightother :cat:ac15 :casing,
+                ms[:mer + 1sw, :mmo - 2dl] << 1.5dt
+            ..  ms[:meo - 1.1dl, :meo - 1dl] >> 1.5dt
+        );
+    }
+
+    with link = "point.de.Meimersdorf-Ost" {
+        track(:first :station :cat:ac15,
+                ms[:meo - 1dl, :meo + 1dl] >> 1.5dt
+        );
+        track(:first :station,
+                ms[:meo - 1.1dl, :meo - 1dl] >> 1.5dt
+            --  ms[:meo, :meo + 1dl] >> 2.5dt
+        );
+
+        marker(:right :de.abzw :cat:ac15, ms[:meo] >> 2.5dt);
+        slabel(:right :cat:ac15 :light, ms[:meo] >> 2.5dt + (0dt, 0.8sh),
+            hbox(:left:top, "M. Ost")
+        );
+    }
+
+    with link = "line.de.1033" {
+        track(:first,
+                ms[:meo + 1dl, :meo + 1.1dl] >> 2.5dt
+            ..  ms[:kss - 2dl, :kss - 1dl] >> 1dt
+        );
+    }
+}
+
+with detail = 3, zoom = :low {
+    # point.de.Meimersdorf-Mf  de.1220
+
+    with link = "line.de.1033" {
+        track(:first :leftother:rightother :cat:ac15,
+                ms[:mef + 1sw, :mer - 1sw] << 1.5dt
+        );
+    }
+
+    with link = "point.de.Meimersdorf-Rbf" {
+        track(:first :station :cat:ac15, ms[:mer - 1sw, :mer + 1sw] << 1.5dt);
+        marker(:left :de.bbf :cat:ac15, ms[:mer] << 1.5dt);
+        slabel(:left :cat:ac15 :pax, ms[:mer - 1.3sw] << 3.5dt,
+            "Meimersdorf Rbf"
+        );
+    }
+
+    with link = "line.de.1033" {
+        track(:first :leftother:rightother :cat:ac15,
+                ms[:mer + 1sw, :meo - 4dl] << 1.5dt
+            --  ms[:meo - 1dl, :meo] >> 1.5dt
+        );
+        track(:first :leftother,
+                ms[:meo, :meo + 1dl] >> 1.5dt
+            ..  ms[:kss - 1.5dl, :kss - 1dl] >> 1dt
         );
     }
 }
