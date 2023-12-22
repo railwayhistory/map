@@ -776,13 +776,7 @@ with detail = 2 {
         track(:first :pax, pb[:bra, :brg]);
 
         line_badge(:pax, pb[:oel + 5km] @ -12 << 0.2dt, "6270");
-        guide(:linenum :pax,
-                pb[:rau - 0.2km] << 0.7dt
-            --  pb[:rau - 0.2km] << 3.0dt
-        );
-        label(:linenum :pax, pb[:rau - 0.2km] << 3.0dt + (0dt, -0.2dt),
-            hbox(:left:middle, " 6270")
-        );
+        line_label(:right:e :pax, pb[:ado + 5.5km], "6270");
     }
 
     with link = "point.de.Weischlitz" {
@@ -806,7 +800,14 @@ with detail = 2 {
 
     with link = "point.de.Bad-Brambach" {
         with layer = 1 marker(:statdot :pax, pb[:bra]);
-        slabel(:right :pax, pb[:bra] + (0dt, -1.5dt), "Bad Brambach");
+        with zoom = :high {
+            slabel(:right :pax, pb[:bra] + (-0.5dt, -1.5dt), "Bad Brambach");
+        }
+        with zoom = :low {
+            slabel(:right :pax, pb[:bra] + (-0.3dt, -0.5dt),
+                vbox(:left:bottom, "Bad", "Bramb.")
+            );
+        }
     }
 
     with link = "point.int.Bad-Brambach-Plesná-I" {
