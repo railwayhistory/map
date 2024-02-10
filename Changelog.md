@@ -2,6 +2,13 @@
 
 ## Updates
 
+### 2024-02-10
+
+* Added newly opened line _IT BBT,_ Bari – Bitritto.
+  ([#22](https://github.com/railwayhistory/map/pull/22))
+* Added newly opened line _IT TRG,_ Torino Rebaudengo Fossata – Dev. Madonna
+  di Campagna. ([#21](https://github.com/railwayhistory/map/pull/21))
+
 ### 2023-09-11
 
 * Passenger service re-established on line _IT CCM_ on section Alba –
