@@ -1,0 +1,376 @@
+# GB HL.  Stanley Junction - Inverness (Highland Line)
+#
+let hl = path("d4.gb.hl");
+
+with detail = 3 {
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:sta.yd + 1sw, :mur - 1sw]);
+        line_badge(:pax, hl[:sta.yd + 2.4km], "HL");
+    }
+
+    with link = "point.gb.Murthly" {
+        track(:first:station :pax, hl[:mur - 1sw, :mur + 1sw]);
+        marker(:left :de.bf :removed, hl[:mur]);
+        slabel(:left :removed, hl[:mur - 0.2sw] << 2.2sh, "Murthly");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:mur + 1sw, :kwt.a]);
+    }
+
+    with link = "struct.gb.Kingswood-Tunnel" {
+        marker(:top :tunnel.r :pax, hl[:kwt.a]);
+        marker(:top :tunnel.l :pax, hl[:kwt.a]);
+        marker(:bottom :tunnel.r :pax, hl[:kwt.f]);
+        marker(:bottom :tunnel.l :pax, hl[:kwt.f]);
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:kwt.f, :dun - 1sw]);
+    }
+
+    with link = "point.gb.Dunkeld-Birnam" {
+        track(:first:station :pax, hl[:dun - 1sw, :dun + 1sw]);
+        marker(:right :de.bf :pax, hl[:dun]);
+        slabel(:right :pax, hl[:dun] + (-0.7sw, -1.5sw),
+            "Dunkeld & Birnam"
+        );
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:dun + 1sw, :int.a]);
+    }
+
+    with link = "struct.gb.Inver-Tunnel" {
+        marker(:top :tunnel.r :pax, hl[:int.a]);
+        marker(:top :tunnel.l :pax, hl[:int.a]);
+        marker(:bottom :tunnel.r :pax, hl[:int.f]);
+        marker(:bottom :tunnel.l :pax, hl[:int.f]);
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:int.f, :dag - 1sw]);
+        line_badge(:pax, hl[:dag - 2.2km], "HL");
+    }
+
+    with link = "point.gb.Dalguise" {
+        track(:first:station :pax, hl[:dag - 1sw, :dag + 1sw]);
+        marker(:left :de.bf :removed, hl[:dag]);
+        slabel(:left :removed, hl[:dag - 0.45sw] << 1.6sh, "Dalguise");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:dag + 1sw, :gua - 1sw]);
+    }
+
+    with link = "point.gb.Guay" {
+        track(:first:station :pax, hl[:gua - 1sw, :gua + 1sw]);
+        marker(:right :de.hp :removed, hl[:gua]);
+        slabel(:right :removed, hl[:gua - 0.35sw] >> 1.3sh, "Guay");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:gua + 1sw, :bal - 1sw]);
+    }
+
+    with link = "point.gb.Ballinluig" {
+        track(:first:station :removed,
+                hl[:bal - 1sw + 1.1dl, :bal - 1sw + 1dl]
+            --  hl[:bal - 1sw + 2dl, :bal - 1sw + 3dl] << 1dt
+            ..  path("d4.gb.baf")[:bal.fa + 0.9dl, :bal.fa + 1dl]
+        );
+        track(:first:station :pax, hl[:bal - 1sw, :bal + 1sw]);
+        marker(:right :de.bf :removed, hl[:bal]);
+        slabel(:right :removed, hl[:bal - 0.7sw] >> 1.3sh,
+            span(:bold, "Ballinluig")
+        );
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:bal + 1sw, :pit - 1sw]);
+        line_badge(:pax, hl[:bal + 3.5km], "HL");
+    }
+
+    with link = "point.gb.Pitlochry" {
+        track(:first:station :pax, hl[:pit - 1sw, :pit + 1sw]);
+        marker(:right :de.bf :pax, hl[:pit]);
+        slabel(:right :pax, hl[:pit] + (-0.7sw, -1.5sh), "Pitlochry");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:pit + 1sw, :kit.f - 1dt]);
+    }
+
+    with link = "struct.gb.Killiecrankie-Tunnel" {
+        marker(:top :tunnel.r :pax, hl[:kit.f - 1dt]);
+        marker(:top :tunnel.l :pax, hl[:kit.f - 1dt]);
+        marker(:bottom :tunnel.r :pax, hl[:kit.f]);
+        marker(:bottom :tunnel.l :pax, hl[:kit.f]);
+    }
+
+    with link = "point.gb.Killiecrankie" {
+        track(:first:station :pax, hl[:kit.f, :kil + 1sw]);
+        marker(:right :de.bf :removed, hl[:kil]);
+        slabel(:right :removed, hl[:kil + 1sw] >> 1.0sh,
+            "Killiecrankie"
+        );
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:kil + 1sw, :bla - 1sw]);
+    }
+
+    with link = "point.gb.Blair-Atholl" {
+        track(:first:station :pax,
+                hl[:bla - 1sw, :bla - 1sw + 1dl]
+            ..  hl[:bla - 1sw + 2dl, :bla + 1sw] >> 0.5dt
+        );
+        track(:first:station :pax,
+                hl[:bla - 1sw + 0.9dl, :bla - 1sw + 1dl]
+            ..  hl[:bla - 1sw + 2dl, :bla + 1sw] << 0.5dt
+        );
+        marker(:right :de.bf :pax, hl[:bla] >> 0.5dt);
+        slabel(:top :pax, hl[:bla] >> 0.5dt >> 1.2sh, "Blair Atholl");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :double :pax, hl[:bla + 1sw, :bli - 1sw]);
+    }
+
+    with link = "point.gb.Black-Island" {
+        track(:first:station :double :pax, hl[:bli - 1sw, :bli + 1sw]);
+        marker(:left :de.hp :removed, hl[:bli] << 0.5dt);
+        slabel(:bottom :removed, hl[:bli] << 1.4sh, "Black Island Pl.");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :double :pax, hl[:bli + 1sw, :str - 100m]);
+    }
+
+    with link = "point.gb.Struan" {
+        track(:first:station :double :pax, hl[:str - 1sw, :str + 1sw]);
+        marker(:left :de.bf :removed, hl[:str] << 0.5dt);
+        slabel(:bottom :removed, hl[:str] << 1.2sh, "Struan");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :double :pax, hl[:str + 1sw, :das - 1sw]);
+        line_badge(:pax, hl[:str + 5.3km], "HL");
+    }
+
+    with link = "point.gb.Dalnaspidal" {
+        track(:first:station :double :pax, hl[:das - 1sw, :das + 1sw]);
+        marker(:right :de.bf :removed, hl[:das] >> 0.5dt);
+        slabel(:right :removed, hl[:das - 0.4sw] >> 0.5dt >> 1.4sh,
+            "Dalnaspidal"
+        );
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :double :pax, hl[:das + 1sw, :dal - 1sw]);
+    }
+
+    with link = "point.gb.Dalwhinnie" {
+        track(:first:station :pax,
+                hl[:dal - 1sw, :dal + 1sw - 2dl] << 0.5dt
+            --  hl[:dal + 1sw - 1dl, :dal + 1sw]
+        );
+        track(:first:station :pax,
+                hl[:dal - 1sw, :dal + 1sw - 2dl] >> 0.5dt
+            --  hl[:dal + 1sw - 1dl, :dal + 1sw - 0.9dl]
+        );
+        marker(:right :de.bf :pax, hl[:dal] >> 0.6dt);
+        slabel(:right :pax, hl[:dal] + (1.8sh, 0.9sw), "Dalwhinnie");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:dal + 1sw, :new - 1sw]);
+    }
+
+    with link = "point.gb.Newtonmore" {
+        track(:first:station :pax, hl[:new - 1sw, :new + 1sw]);
+        marker(:left :de.hp :pax, hl[:new]);
+        marker(:left :de.exbf :pax, hl[:new]);
+        slabel(:left :pax, hl[:new - 0.4sw] << 1.0dt << 1.3sh, "Newtonmore");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:new + 1sw, :kin - 1sw]);
+    }
+
+    with link = "point.gb.Kingussie" {
+        track(:first:station :pax, hl[:kin - 1sw, :kin + 1sw]);
+        marker(:left :de.bf :pax, hl[:kin]);
+        slabel(:top :pax, hl[:kin] << 1.4sh + (-1.5sw, 0dt), "Kingussie");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:kin + 1sw, :kic - 1sw]);
+    }
+
+    with link = "point.gb.Kincraig" {
+        track(:first:station :pax, hl[:kic - 1sw, :kic + 1sw]);
+        marker(:left :de.bbf, hl[:kic]);
+        marker(:left :de.exbf, hl[:kic]);
+        slabel(:left, hl[:kic - 0.8sw] << 1.0dt << 1.4sh, "Kincraig");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:kic + 1sw, :avi - 1sw]);
+        line_badge(:pax, hl[:avi - 3.5km], "HL");
+    }
+
+    with link = "point.gb.Aviemore" {
+        track(:first:station :pax, hl[:avi - 1sw, :avi + 1sw]);
+        track(:first:station :pax,
+                hl[:avi - 1sw + 0.9dl, :avi - 1sw + 1dl]
+            --  hl[:avi - 1sw + 2dl, :avi + 1sw] >> 1dt
+        );
+        marker(:left :de.bf :pax, hl[:avi]);
+        slabel(:left :pax, hl[:avi - 1.2sw] << 1.5sh,
+            span(:bold, "Aviemore")
+        );
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:avi + 1sw, :car - 1sw]);
+        line_label(:left:e :pax, hl[:avi + 4km], "HL");
+    }
+
+    with link = "point.gb.Carrbridge" {
+        track(:first:station :pax, hl[:car - 1sw, :car + 1sw]);
+        marker(:right :de.bf :pax, hl[:car]);
+        slabel(:right :pax, hl[:car - 0.4sw] >> 1.3sh, "Carrbridge");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:car + 1sw, :slo - 1sw]);
+    }
+
+    with link = "point.gb.Slochd" {
+        track(:first:station :pax, hl[:slo - 1sw, :slo + 1sw]);
+        marker(:left :de.bbf, hl[:slo]);
+        slabel(:left, hl[:slo] << 2.2sh, "Slochd");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:slo + 1sw, :tom - 1sw]);
+        line_badge(:pax, hl[:slo + 2.5km], "HL");
+    }
+
+    with link = "point.gb.Tomatin" {
+        track(:first:station :pax, hl[:tom - 1sw, :tom + 1sw]);
+        marker(:right :de.bbf, hl[:tom] >> 0.1sw);
+        marker(:right :de.exbf, hl[:tom] >> 0.1sw);
+        slabel(:right, hl[:tom - 1.0sw] >> 1.6sh, "Tomatin");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:tom + 1sw, :moy - 1sw]);
+    }
+
+    with link = "point.gb.Moy" {
+        track(:first:station :pax, hl[:moy - 1sw, :moy + 1sw]);
+        marker(:right :de.bbf, hl[:moy]);
+        marker(:right :de.exbf, hl[:moy]);
+        slabel(:right, hl[:moy - 0.6sw] >> 1.6sh, "Moy");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :pax, hl[:moy + 1sw, :dav - 1sw]);
+    }
+
+    with link = "point.gb.Daviot" {
+        track(:first:station :removed,
+                hl[:dav - 1sw + 0.9dl, :dav - 1sw + 1dl]
+            --  hl[:dav - 1sw + 2dl, :dav + 1sw] << 0.5dt
+        );
+        track(:first:station :pax,
+                hl[:dav - 1sw, :dav - 1sw + 1dl]
+            --  hl[:dav - 1sw + 2dl, :dav + 1sw] >> 0.5dt
+        );
+        marker(:left :de.bf :removed, hl[:dav] << 0.5dt);
+        slabel(:left :removed, hl[:dav - 0.1sw] << 0.5dt << 2.0sh, "Daviot");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :removed, hl[:dav + 1sw, :ban.xn] << 0.5dt);
+        track(:first :pax,
+                hl[:dav + 1sw, :ban.xs] >> 0.5dt
+            ..  hl[:ban.xn, :cul - 1sw] << 0.5dt
+        );
+        track(:first :removed, hl[:ban.xs, :cul - 1sw] >> 0.5dt);
+    }
+
+    with link = "point.gb.Culloden-Moor" {
+        track(:first:station :pax, hl[:cul - 1sw, :cul + 1sw] << 0.5dt);
+
+        track(:first:station :removed, hl[:cul - 1sw, :cul + 1dl] >> 0.5dt);
+        track(:first:station :pax,
+                hl[:cul - 0.1dl, :cul] << 0.5dt
+            --  hl[:cul + 1dl, :cul + 1sw] >> 0.5dt
+        );
+        marker(:right :de.bbf, hl[:cul] >> 0.5dt);
+        marker(:right :de.exbf, hl[:cul] >> 0.5dt);
+        slabel(:right, hl[:cul - 0.4sw] >> 0.5dt >> 1.8sh, "Culloden");
+    }
+
+    with link = "line.gb.HL" {
+        track(:first :double :pax, hl[:cul + 1sw, :cra - 0.5sw]);
+        line_badge(:pax, hl[:cul + 3.7km], "HL");
+    }
+
+    with link = "point.gb.Cradlehall" {
+        with layer = 2 track(
+            :first:station :double :pax, hl[:cra - 0.5sw, :cra + 0.5sw]
+        );
+        with layer = 2 marker(:right :de.uest, hl[:cra] >> 0.5dt);
+        with layer = 1 marker(:right :de.uest.casing, hl[:cra] >> 0.5dt);
+    }
+
+    with link = "line.gb.HL" {
+        with layer = 2 track(:first :double :pax, hl[:cra + 0.5sw, :inv.ap]);
+        with layer = 1 casing(:first :double :pax,
+                hl[:cra - 0.4sw, :inv.ap - 0.2sw]
+        );
+    }
+
+    with link = "point.gb.Millburn-Jn" {
+        marker(:left :de.abzw, hl[:mil] << 2.5dt);
+    }
+
+    with link = "point.gb.Welshs-Bridge" {
+        track(:first:station,
+                hl[:wel - 1.1dl, :wel - 1dl] >> 0.5dt
+            --  hl[:wel, :wel + 0.3sw] >> 1.5dt
+        );
+        marker(:right :de.abzw, hl[:wel] >> 1.5dt);
+    }
+
+    with link = "point.gb.Inverness" {
+        let wk = path("d4.gb.wck");
+        let ai = path("d4.gb.ai");
+
+        track(:first:station :double :pax, hl[:inv.ap, :inv + 0.5sw]);
+        track(:first:station :pax,
+                hl[:inv + 0.5sw, :inv] << 1.5dt
+            --  wk[:ros + 0.9sw, :ros + 1sw]
+        );
+
+        track(:first:station :pax,
+                hl[:mil - 2dl, :mil + 1dl] << 1.5dt
+            --  hl[:mil + 2dl, :mil + 2.1dl] << 0.5dt
+        );
+        track(:first:station :removed,
+                hl[:mil - 2dl, :mil] << 2.5dt
+            --  hl[:mil + 1dl, :mil + 1.1dl] << 1.5dt
+        );
+
+        marker(:top :de.bf :pax, hl[:inv + 0.5sw] >> 0.5dt);
+        slabel(:bottom :pax, hl[:inv + 0.5sw] + (-1.5sw, 1sw),
+            hbox(:center:top :medium :bold, "Inverness")
+        );
+    }
+}
+
