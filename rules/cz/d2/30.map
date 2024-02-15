@@ -1,0 +1,210 @@
+# CZ 300.  Praha-Smíchov - Česká Kubice st.hr.
+with detail = 2 {
+    let pc = path("d2.cz.300");
+
+    with link = "point.cz.Praha-Smíchov" {
+        track(:first :double:station :cat:dc30 :pax, pc[:psm, :psm.yr]);
+        statdot(:cat:dc30 :pax, pc[:psm]);
+    }
+
+    with link = "line.cz.300" {
+        track(:first :double :cat:dc30 :pax, pc[:psm.yr, :zav.y]);
+        track(:first :double :cat:dc30 :pax, pc[:zav.y, :rad]);
+    }
+
+    with link = "point.cz.Praha-Radotín" {
+        statdot(:cat:dc30 :pax, pc[:rad]);
+        slabel(:left :cat:dc30 :pax, pc[:rad] + (-1.5dt, 0dt), "P.-Radotín");
+    }
+
+    with link = "line.cz.300" {
+        track(:first :double :cat:dc30 :pax, pc[:rad, :zad.yl]);
+        line_label(:left:n :double :cat:dc30 :pax, pc[:rad + 8km], "300");
+    }
+
+    with link = "point.cz.Zadní-Třebaň" {
+        track(:first :double:station :cat:dc30 :pax, pc[:zad.yl, :zad]);
+        statdot(:cat:dc30 :pax, pc[:zad]);
+        slabel(:right :cat:dc30 :pax, pc[:zad] + (-1dt, -0.8dt),
+            vbox(:left:bottom, "Zadní", "Třebaň")
+        );
+    }
+
+    with link = "line.cz.300" {
+        track(:first :double :cat:dc30 :pax, pc[:zad, :ber.yr]);
+        line_label(:left:ne :double :cat:dc30 :pax, pc[:zad + 6.5km], "300");
+    }
+
+    with link = "point.cz.Beroun" {
+        track(:first :double:station :cat:dc30 :pax, pc[:ber.yr, :ber]);
+        statdot(:cat:dc30 :pax, pc[:ber]);
+        slabel(:left :cat:dc30 :pax, pc[:ber] + (-1.0dt, -0.8dt), "Beroun");
+    }
+
+    with link = "line.cz.300" {
+        track(:first :double :cat:dc30 :pax, pc[:ber, :krz]);
+        track(:first :double :cat:ac25 :pax, pc[:krz, :zdi]);
+    }
+
+    with link = "point.cz.Zdice" {
+        track(:first :double:station :cat:ac25 :pax, pc[:zdi, :zdi.yp]);
+        statdot(:cat:ac25 :pax, pc[:zdi]);
+        slabel(:left :cat:ac25 :pax, pc[:zdi] + (-1.0dt, -0.5dt), "Zdice");
+    }
+
+    with link = "line.cz.300" {
+        track(:first :double :cat:ac25 :pax, pc[:zdi.yp, :rok.yn]);
+        line_label(:right:se :double :cat:ac25 :pax, pc[:zdi.yp + 7km], "300");
+        line_label(
+            :left:nw :double :cat:ac25 :pax, pc[:rok.yn - 7.5km], "300"
+        );
+    }
+
+    with link = "point.cz.Rokycany" {
+        track(:first :double:station :cat:ac25 :pax, pc[:rok.yn, :rok]);
+        statdot(:cat:ac25 :pax, pc[:rok]);
+        slabel(:left :cat:ac25 :pax, pc[:rok] + (0.3dt, 0.8dt),
+            hbox(:right:top, "Rokycany")
+        );
+    }
+
+    with link = "line.cz.300" {
+        track(:first :double :cat:ac25 :pax, pc[:rok, :ejp]);
+    }
+
+    with link = "point.cz.Ejpovice" {
+        track(:first :double:station :cat:ac25 :pax, pc[:ejp, :ejp.yd]);
+        statdot(:cat:ac25 :pax, pc[:ejp]);
+        slabel(:right :cat:ac25 :pax, pc[:ejp] + (0.3dt, -1.5dt), "Ejpovice");
+    }
+
+    with link = "line.cz.300" {
+        track(:first :pax, pc[:ejp, :chr]);
+    }
+
+    with link = "point.cz.Chrást-u-Plzně" {
+        track(:first :station :pax, pc[:chr, :chr.ys]);
+        statdot(:pax, pc[:chr]);
+        slabel(:right :pax, pc[:chr] + (1.3dt, 0.5dt), "Chrást u Plzně");
+    }
+
+    with link = "line.cz.300" {
+        track(:first :double :removed, pc[:chr.ys, :dou.ye]);
+        line_label(:right:se :double :removed, pc[:chr.ys + 2.1km], "300");
+
+        track(:first :double :cat:ac25 :pax, pc[:dou.ye, :plz.yd]);
+        track(:first :double :cat:ac25 :pax, pc[:plz.yd, :plz.yp]);
+        track(:first :double :pax, pc[:pji.yd, :nho]);
+        track(:first :pax, pc[:nho, :nyr]);
+        line_label(:right:s :pax, pc[:nyr - 2.5km], "300");
+    }
+
+    with link = "point.cz.Nýřany" {
+        track(:first :station :pax, pc[:nyr, :nyr.yh]);
+        statdot(:pax, pc[:nyr]);
+        slabel(:right :pax, pc[:nyr] + (1.3dt, 0dt),
+            hbox(:left:top, "Nýřany")
+        );
+    }
+
+    with link = "line.cz.300" {
+        track(:first :pax, pc[:nyr.yh, :sta]);
+        line_label(:right:e :pax, pc[:nyr.yh + 7km], "300");
+    }
+
+    with link = "point.cz.Staňkov" {
+        statdot(:pax, pc[:sta]);
+        slabel(:right :pax, pc[:sta] + (1.5dt, 1.3dt), "Staňkov");
+    }
+
+    with link = "line.cz.300" {
+        track(:first :pax, pc[:sta, :vra.y]);
+        track(:first :pax, pc[:vra.y, :dom.yj]);
+        line_label(:left:w :pax, pc[:dom.yj - 4.5km], "300");
+    }
+
+    with link = "point.cz.Domažlice" {
+        track(:first :station :pax, pc[:dom.yj, :dom]);
+        statdot(:pax, pc[:dom]);
+        slabel(:left :pax, pc[:dom] + (0dt, -0.2km) + (2dt, -1dt),
+            "Domažlice"
+        );
+    }
+
+    with link = "line.cz.300" {
+        track(:first :pax, pc[:dom, :pas]);
+        track(:first :pax, pc[:pas, :cku]);
+    }
+
+    with link = "point.cz.Česká-Kubice" {
+        statdot(:pax, pc[:cku]);
+        slabel(:left :pax, pc[:cku] + (-1.5dt, 1.3dt), "Česká Kubice");
+    }
+
+    with link = "line.cz.300" {
+        track(:first :pax, pc[:cku, :ckh]);
+        line_label(:left:w :pax, pc[:cku + 3km], "300");
+    }
+
+    with link = "point.int.Česká-Kubice-Furth-im-Wald" {
+        marker(:right :ref :pax, pc[:ckh]);
+        marker(:left :ref :pax, pc[:ckh]);
+    }
+}
+
+
+# CZ 302.  Zadní Třebaň - Lochovice
+with detail = 2 {
+    let zl = path("d2.cz.302a");
+    let ll = path("d2.cz.302b");
+
+    with link = "line.cz.302" {
+        track(:second :pax, zl[:zad.yl, :lit.y]);
+    }
+
+    with link = "point.cz.Liteň" {
+        track(:second :station :pax, zl[:lit.y, :lit]);
+        statdot(:pax, zl[:lit]);
+        slabel(:right :pax, zl[:lit] + (0.6km, 0dt) + (1.0dt, 0dt),
+            hbox(:left:top, "Liteň")
+        );
+    }
+
+    with link = "line.cz.302" {
+        track(:second :pax, ll[:lit.y, :loc.yz]);
+        line_label(:left:nw :pax, ll[:lit.y + 9km], "302");
+    }
+}
+
+
+# CZ 304.  Beroun - Rakovník
+with detail = 2 {
+    let br = path("d2.cz.304");
+
+    with link = "line.cz.304" {
+        track(:second :pax, br[:ber.yr, :bez]);
+    }
+
+    with link = "point.cz.Beroun-Závodí" {
+        track(:second :station :pax, br[:bez, :bez.yr]);
+        statdot(:pax, br[:bez]);
+    }
+
+    with link = "line.cz.304" {
+        track(:second :pax, br[:bez.yr, :rak.yl]);
+        line_label(:right:s :pax, br[:ber.yr + 9km], " 304");
+        line_label(:left:e :pax, br[:rak.yl - 5.3km], "304");
+    }
+}
+
+
+# CZ 306.  Beroun-Závodí - Rudná u Prahy
+with detail = 2 {
+    let br = path("d2.cz.306");
+
+    with link = "line.cz.306" {
+        track(:second :pax, br[:bez.yr, :rud.yb]);
+        line_label(:right:n :pax, br[:bez.yr + 9km], "  306");
+    }
+}
+

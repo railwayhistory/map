@@ -1,0 +1,78 @@
+# CZ 242.  Číčenice - Týn nad Vltavou
+with detail = 2 {
+    let ct = path("d2.cz.242");
+
+    with link = "line.cz.242" {
+        track(:second, ct[:cic.yt, :tyn]);
+        line_label(:right:nw, ct[:cic.yt + 7.3km], "242");
+    }
+
+    with link = "point.cz.Týn-nad-Vltavou" {
+        statdot(:open, ct[:tyn]);
+        slabel(:top, ct[:tyn] + (0dt, -0.6dt),
+            "Týn nad Vltavou"
+        );
+    }
+}
+
+
+# CZ 246.  Číčenice - Nové Údolí hr.st.
+with detail = 2 {
+    let cn = path("d2.cz.246");
+
+    with link = "line.cz.246" {
+        track(:second :pax, cn[:cic.yv, :vol]);
+        line_label(:right:e :pax, cn[:cic.yv + 14.5km], "246");
+        line_label(:right:s :pax, cn[:vol - 5.8km], "246");
+    }
+
+    with link = "point.cz.Volary" {
+        statdot(:pax, cn[:vol]);
+        slabel(:left :pax, cn[:vol] + (2dt, -1.5dt), "Volary");
+    }
+
+    with link = "line.cz.246" {
+        track(:second :pax,
+                cn[:vol, :vol.ys] << 0.32dt
+            ..  cn[:vol.yys, :cer.yc]
+        );
+    }
+
+    with link = "point.cz.Černý-Kříž" {
+        track(:second :station :pax, cn[:cer.yc, :cer]);
+        statdot(:pax, cn[:cer]);
+        slabel(:right :pax, cn[:cer.yc] + (0.2km, 0dt) + (1dt, -0.5dt),
+            "Černý Kříž"
+        );
+    }
+
+    with link = "line.cz.246" {
+        track(:second :pax, cn[:cer, :nud]);
+        line_label(:right:e :pax, cn[:nud - 2.5km], "246");
+    }
+
+    with link = "point.cz.Nové-Údolí" {
+        track(:second :station :removed, cn[:nud, :nuh]);
+        statdot(:pax, cn[:nud]);
+        slabel(:right :pax, cn[:nud] + (-0.8dt, 1.0dt),
+            hbox(:left:top, "Nové Údolí")
+        );
+    }
+}
+
+
+# CZ 248.  Strakonice - Volary
+with detail = 2 {
+    let sv = path("d2.cz.248");
+
+    with link = "line.cz.248" {
+        track(:second :pax,
+                sv[:str.yv, :vol.yys]
+            ..  sv[:vol.ys, :vol] << 0.32dt
+        );
+        line_label(:left:w :pax, sv[:str.yv + 5km], "248");
+        line_label(:right:e :pax, sv[:str.yv + 29.5km], "248");
+        line_label(:right:e :pax, sv[:vol.ys - 7.8km], "248");
+    }
+}
+

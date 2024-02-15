@@ -1,0 +1,121 @@
+# CZ 152.  Pňovany - Bezdružice
+with detail = 2 {
+    let pb = path("d2.cz.152");
+
+    with link = "line.cz.152" {
+        track(:second :pax, pb[:pno.yb, :bez]);
+        line_label(:left:ne :pax, pb[:pno.yb + 12km], "152");
+    }
+
+    with link = "point.cz.Bezdružice" {
+        statdot(:pax, pb[:bez]);
+        slabel(:top :pax, pb[:bez] + (-0.5dt, -0.8dt), "Bezdružice");
+    }
+}
+
+
+# CZ 154.  Svojšín - Bor
+with detail = 2 {
+    let sb = path("d2.cz.154");
+
+    with link = "line.cz.154" {
+        track(:second :museum, sb[:svo.yb, :bor.ys]);
+        line_label(:left:n :museum, sb[:svo.yb + 8km], " 154");
+    }
+}
+
+
+# CZ 156.  Planá u Mariánských Lázní - Tachov
+with detail = 2 {
+    let pt = path("d2.cz.156");
+
+    with link = "line.cz.156" {
+        track(:second :pax, pt[:kar, :tac.yp]);
+        line_label(:right:s :pax, pt[:kar + 6.5km], "156 ");
+    }
+}
+
+
+# CZ 158.  Mariánské Lázně - Karlovy Vary dolní nádraží
+with detail = 2 {
+    let mk = path("d2.cz.158");
+
+    with link = "line.cz.158" {
+        track(:second :pax,
+                mk[:mar.yk, :bec.yr - 1.5dt]
+            ..  mk[:bec.yr, :bec] << 0.35dt
+        );
+        line_label(:left:e :pax, mk[:bec.yr - 5.7km], "158");
+    }
+
+    with link = "point.cz.Bečov-nad-Teplou" {
+        statdot(:pax, mk[:bec]);
+        slabel(:left :pax, mk[:bec] + (-1dt, -1dt), "Bečov nad Teplou");
+    }
+
+    with link = "line.cz.158" {
+        track(:second :pax, mk[:bec, :kra]);
+    }
+
+    with link = "point.cz.Krásný-Jez" {
+        track(:second:station :pax, mk[:kra, :kra.yn]);
+        statdot(:pax, mk[:kra]);
+        slabel(:right :pax, mk[:kra] + (1.5dt, 1.0dt), "Krásný Jez");
+    }
+
+    with link = "line.cz.158" {
+        track(:second :pax, mk[:kra.yn, :kad]);
+        line_label(:right:w :pax, mk[:kra.yn + 7.1km], "158");
+    }
+
+    with link = "point.cz.Karlovy-Vary-dol-n" {
+        statdot(:pax, mk[:kad]);
+    }
+}
+
+
+# CZ 159.  Krásný Jez - Nové Sedlo u Lokte
+with detail = 2 {
+    let kn = path("d2.cz.159");
+
+    with link = "line.cz.159" {
+        track(:second :pax, kn[:kra.yn, :hsk]);
+    }
+
+    with link = "point.cz.Horní-Slavkov-Kounice" {
+        statdot(:pax, kn[:hsk]);
+        slabel(:left :pax, kn[:hsk] + (0dt, 0.4km) + (2.0dt, 0.4dt),
+            hbox(:right:top, "Horní Slavkov-Kounice")
+        );
+    }
+
+    with link = "line.cz.159" {
+        track(:second :closed, kn[:hsk, :lop]);
+        line_label(:left:ne :closed, kn[:hsk + 5.5km], "159");
+    }
+
+    with link = "point.cz.Loket-předměstí" {
+        statdot(:pax, kn[:lop]);
+        with zoom = :high {
+            slabel(:right :pax, kn[:lop] + (1.5dt, 1dt),
+                vbox(:left:bottom, "Loket", "předměstí")
+            );
+        }
+    }
+
+    with link = "line.cz.159" {
+        track(:second :pax, kn[:lop, :nse.yl]);
+    }
+
+    with zoom = :high, link = "line.cz.159" {
+        track(:first :cat:ac25 :pax, kn[:nse.yc, :cho]);
+    }
+
+    with link = "point.cz.Chodov" {
+        statdot(:cat:ac25 :pax, kn[:cho]);
+        slabel(:left :cat:ac25 :pax, kn[:cho] + (-600m, 0dt) + (-1.0dt, 0dt),
+            "Chodov"
+        );
+    }
+}
+

@@ -502,21 +502,30 @@ with detail = 2 {
 with detail = 2 {
     let wa = path("d2.de.6623");
 
-    with link = "line.de.6623" {
-        track(:second :pax, wa[:bag, :anu]);
-    }
-
     with link = "point.int.Bärenstein-Annaberg-Vejprty" {
         marker(:refdt :pax :right, wa[:bag]);
         marker(:refdt :pax :left, wa[:bag]);
+    }
+
+    with link = "line.de.6623" {
+        track(:second :museum, wa[:bag, :kon]);
+        line_label(:right:sw :museum, wa[:bag + 3.6km], "6623");
     }
 
     with link = "point.de.Königswalde-Erzgeb-ob-Bf" {
         with layer = 1 marker(:statdot :removed, wa[:kon]);
     }
 
+    with link = "line.de.6623" {
+        track(:second :museum, wa[:kon, :cra]);
+    }
+
     with link = "point.de.Cranzahl" {
         with layer = 1 marker(:statdot :pax, wa[:cra]);
+    }
+
+    with link = "line.de.6623" {
+        track(:second :pax, wa[:cra, :anu]);
     }
 
     with link = "point.de.point.de.Annaberg-Buchholz-Süd" {
@@ -578,13 +587,13 @@ with detail = 2 {
     }
 
     with link = "point.int.Johanngeorgenstadt-Potůčky" {
-        marker(:refdt :left, js[:jog]);
-        marker(:refdt :right, js[:jog]);
+        marker(:refdt :left :pax, js[:jog]);
+        marker(:refdt :right :pax, js[:jog]);
     }
 
     with link = "point.de.Johanngeorgenstadt" {
         with layer = 1 marker(:statdot :pax, js[:joh]);
-        slabel(:right :pax, js[:joh] + (1.5dt, 0.8dt), "Johanngeorgenstadt");
+        slabel(:right :pax, js[:joh] + (1.5dt, -0.5dt), "Johanngeorgenstadt");
     }
 }
 
@@ -1081,7 +1090,14 @@ with detail = 2 {
 
     with link = "point.de.Klingenthal" {
         with layer = 1 marker(:statdot :pax, zk[:kli]);
-        slabel(:right :pax, zk[:kli] + (1.5dt, 1.0dt), "Klingenthal");
+        slabel(:right :pax, zk[:kli] + (0.6km, 0dt) + (1.0dt, 0.5dt),
+            "Klingenthal"
+        );
+    }
+
+    with link = "point.int.Klingenthal-Kraslice" {
+        marker(:right :ref :pax, zk[:klg]);
+        marker(:left :ref :pax, zk[:klg]);
     }
 }
 

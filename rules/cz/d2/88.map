@@ -1,0 +1,99 @@
+# CZ 880.  Mosty u Jablunkova st.hr. - Dětmarovice
+with detail = 2 {
+    let md = path("d2.cz.880");
+
+    with link = "point.int.Mosty-Svrčinovec" {
+        marker(:left :ref :cat:dc30 :pax, md[:moh]);
+        marker(:right :ref :cat:dc30 :pax, md[:moh]);
+    }
+
+    with link = "line.cz.880" {
+        track(:first :double :cat:dc30 :pax, md[:moh, :cte.yf]);
+        line_label(:left:e :cat:dc30 :pax, md[:moh + 3.8km], "880");
+        line_label(:left:ne :cat:dc30 :pax, md[:cte.yf - 7km], "880");
+    }
+
+    with link = "point.cz.Český-Těšín" {
+        track(:first :double:station :cat:dc30 :pax, md[:cte.yf, :cte.yc]);
+        statdot(:cat:dc30 :pax, md[:cte]);
+        slabel(:left :cat:dc30 :pax, md[:cte] + (-1.5dt, 1.3dt),
+            "Český Těšín"
+        );
+    }
+
+    with link = "line.cz.880" {
+        track(:first :double :cat:dc30 :pax, md[:cte.yc, :cho]);
+    }
+
+    with link = "point.cz.Chotěbuz" {
+        track(:first :double:station :cat:dc30 :pax, md[:cho, :cho.yp]);
+        statdot(:cat:dc30 :pax, md[:cho]);
+        slabel(:left :cat:dc30 :pax, md[:cho] + (-1.6dt, 1.5dt),
+            "Chotěbuz"
+        );
+    }
+
+    with link = "line.cz.880" {
+        track(:first :double :cat:dc30 :pax, md[:cho.yp, :lou.yb]);
+
+        track(:first :double :cat:dc30 :pax, md[:lou.yb, :kou.y]);
+        line_label(:left:e :cat:dc30 :pax, md[:kou.y - 2.5km], "880");
+
+        track(:first :double :cat:dc30 :pax, md[:kou.y, :det.yz]);
+    }
+}
+
+
+# CZ 881.  Louky nad Olší - Bohumín os.n.
+with detail = 2 {
+    let lb = path("d2.cz.881");
+
+    with link = "line.cz.881" {
+        track(:second, lb[:lou.yb, :kar.yp]);
+    }
+
+    with link = "point.cz.Karviná-Doly" {
+        track(:second :station, lb[:kar.yp, :kar]);
+        statdot(:open, lb[:kar]);
+        slabel(:left, lb[:kar] + (0.5dt, 0.8dt),
+            vbox(:right:top, "Karviná-Doly")
+        );
+    }
+
+    with link = "line.cz.881" {
+        track(:second, lb[:kar, :boh.yl]);
+        with zoom = :high line_label(:right:s, lb[:kar + 8km], (0.5dt, 0dt),
+            "881"
+        );
+    }
+}
+
+
+# CZ 882.  Odb Koukolná - Odb Závada
+with detail = 2 {
+    with link = "line.cz.882" {
+        track(:first :cat:dc30, path("d2.cz.882")[:kou.y, :zav.y]);
+    }
+}
+
+
+# CZ 888.  Petrovice u Karviné - Karviná-Doly
+with detail = 2 {
+    let pk = path("d2.cz.888");
+
+    with link = "line.cz.888" {
+        track(:second, pk[:pet.yk, :kam]);
+    }
+
+    with link = "point.cz.Karviná-město" {
+        statdot(:open, pk[:kam]);
+        slabel(:right, pk[:kam] + (1.5dt, 1dt),
+            vbox(:left:middle, "Karviná", "město")
+        );
+    }
+
+    with link = "line.cz.888" {
+        track(:second :removed, pk[:kam, :kar.yp]);
+    }
+}
+
