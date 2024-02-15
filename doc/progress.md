@@ -18,6 +18,7 @@ For countries not listed here, work has not started at all.
 [AT](#at-austria) •
 [BE](#be-belgium) •
 [CH](#ch-switzerland) •
+[CZ](#cz-czechia) .
 [DE](#de-germany) •
 [FR](#fr-france) •
 [GB](#gb-united-kingdom) •
@@ -56,6 +57,16 @@ industrial lines are omitted.
 
 The overview map currently only covers railway lines and interurban tram
 lines. City tram lines and industrial lines are omitted.
+
+| region         | overview  | detail      |
+| -------------- | --------- | ----------- |
+| entire country | complete  | not started |
+
+
+## CZ: Czechia
+
+The overview map currently only covers railway lines. Tram lines and
+industrial lines are omitted.
 
 | region         | overview  | detail      |
 | -------------- | --------- | ----------- |
