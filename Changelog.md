@@ -2,6 +2,13 @@
 
 ## Updates
 
+### 2024-03-02
+
+* Added the newly opened section of _AT 460,_ St.Paul im Lavanttal –
+  Klagenfurt as well as the related re-routing and electrification of
+  other lines in this area.
+  ([#24](https://github.com/railwayhistory/map/pull/24))
+
 ### 2024-02-10
 
 * Added newly opened line _IT BBT,_ Bari – Bitritto.
