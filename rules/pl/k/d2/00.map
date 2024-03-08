@@ -1,0 +1,30 @@
+# PL 8.  Warszawa Zachodnia - Kraków Główny
+with detail = 2 {
+    let wk = path("d2.pl.k.8");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.8" {
+            track(wk[:smo.x, :rac.y]);
+            line_label(:left:w, wk[:rac.y - 7km], "8");
+
+            track(wk[:rac.y, :krb.yp]);
+        }
+
+        with link = "point.pl.Kraków-Batowice" {
+            track(:station, wk[:krb.yp, :krb.ym]);
+            statdot(wk[:krb]);
+            slabel(:left, wk[:krb] + (1.5dt, -1.4dt), "K. Batowice");
+        }
+
+        with link = "line.pl.8" {
+            track(wk[:krb.ym, :kra.yd]);
+        }
+
+        with link = "point.pl.Kraków-Główny" {
+            track(:station, wk[:kra.yd, :kra]);
+            statdot(wk[:kra]);
+            slabel(:left :medium:bold, wk[:kra] + (-2.5dt, 2.0dt), "Kraków");
+        }
+    }
+}
+

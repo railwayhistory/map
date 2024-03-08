@@ -1,0 +1,590 @@
+# PL 1.  Warszawa Centralna – Katowice
+with detail = 2 {
+    let wk = path("d2.pl.w.1");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Warszawa-Centralna" {
+            statdot(wk[:wac]);
+            with zoom = :high slabel(:right, wk[:wac] + (1.3dt, 0dt),
+                hbox(:left:top, "W. Centralna")
+            );
+        }
+
+        with link = "point.pl.Warszawa-Główna" {
+            statdot(wk[:wgl]);
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:wac, :waz]);
+        }
+
+        with link = "point.pl.Warszawa-Zachodnia" {
+            track(:station, wk[:waz, :waz.yr]);
+            statdot(wk[:waz]);
+            with zoom = :high slabel(:right, wk[:waz] + (0dt, 0.8dt),
+                hbox(:left:top, "W. Zachodnia")
+            );
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:waz.yr, :waw]);
+        }
+
+        with link = "point.pl.Warszawa-Włochy" {
+            track(:station, wk[:waw, :waw.yg]);
+            statdot(wk[:waw]);
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:waw.yg, :joz.y]);
+            track(wk[:joz.y, :pru]);
+        }
+
+        with link = "point.pl.Pruszków" {
+            track(:station, wk[:pru, :pru.yk]);
+            statdot(wk[:pru]);
+            slabel(:left, wk[:pru] + (-1.3dt, -0.5dt), "Pruszków");
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:pru.yk, :gro]);
+        }
+
+        with link = "point.pl.Grodzisk-Mazowiecki" {
+            statdot(wk[:gro]);
+            slabel(:left, wk[:gro] + (-1.3dt, -0.5dt), "Grodzisk Mazowiecki");
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:gro, :jak.yz]);
+            with layer = -1 track(wk[:jak.yz, :jak.yz + 4km]);
+            track(wk[:jak.yz + 4km, :ski.yp]);
+            line_label(:right:se, wk[:jak.yz + 6km], "1");
+            line_label(:right:se, wk[:ski.yp - 6km], "1");
+        }
+
+        with link = "point.pl.Skierniewice" {
+            track(:station, wk[:ski.yp, :ski.yl]);
+            statdot(wk[:ski]);
+            slabel(:right, wk[:ski] + (-0.5dt, 1.0dt),
+                hbox(:left:top, "Skierniewice")
+            );
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:ski.yl, :rog]);
+            line_label(:left:n, wk[:ski.yl + 7km], "1");
+        }
+
+        with link = "point.pl.Rogów" {
+            track(:station, wk[:rog, :rog.yb]);
+            statdot(wk[:rog]);
+            slabel(:left, wk[:rog] + (-1.5dt, 0dt), "Rogów");
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:rog.yb, :kol]);
+            line_label(:left:w, wk[:rog.yb + 4.5km], "1");
+        }
+
+        with link = "point.pl.Koluszki" {
+            with layer = -1 {
+                track(:station, wk[:kol, :kol.ys]);
+                statdot(wk[:kol]);
+            }
+            slabel(:left, wk[:kol] + (-1.6dt, 0.3dt), "Koluszki");
+        }
+
+        with link = "line.pl.1" {
+            with layer = -1 track(wk[:kol.ys, :pio]);
+            line_label(:right:e, wk[:pio - 9km], "1");
+        }
+
+        with link = "point.pl.Piotrków-Trybunalski" {
+            track(:station, wk[:pio, :pio.yb]);
+            statdot(wk[:pio]);
+            slabel(:left, wk[:pio] + (-1.6dt, 0.5dt), "Piotrków Trybunalski");
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:pio.yb, :wid.x]);
+            line_label(:left:w, wk[:pio.yb + 15km], "1");
+        }
+    }
+}
+
+
+# PL 2.  Warszawa Centralna - Granica Państwa (Terespol)
+with detail = 2 {
+    let wt = path("d2.pl.2");
+
+    with link = "line.pl.2" {
+        track(:first :double :cat:dc30 :pax, wt[:wac, :waw]);
+    }
+
+    with link = "point.pl.Warszawa-Wschodnia" {
+        track(:first :double:station :cat:dc30 :pax, wt[:waw, :waw.yg]);
+        statdot(:cat:dc30 :pax, wt[:waw]);
+        with zoom = :high slabel(:cat:dc30 :pax :right, wt[:waw] + (0dt, 0dt),
+            vbox(:left:top, "  W.", "Wschodnia")
+        );
+    }
+
+    with link = "line.pl.2" {
+        track(:first :double :cat:dc30 :pax, wt[:waw.yg, :rem]);
+    }
+
+    with link = "point.pl.Warszawa-Rembertów" {
+        track(:first :double:station :cat:dc30 :pax, wt[:rem, :rem.yz]);
+        statdot(:cat:dc30 :pax, wt[:rem]);
+    }
+
+    with link = "line.pl.2" {
+        track(:first :double :cat:dc30 :pax, wt[:rem.yz, :min.yz]);
+        line_label(:right:n :cat:dc30 :pax, wt[:rem.yz + 3km], "2");
+        line_label(:right:n :cat:dc30 :pax, wt[:min.yz - 4km], "2");
+    }
+
+    with link = "point.pl.Mińsk-Mazowiecki" {
+        track(:first :double:station :cat:dc30 :pax, wt[:min.yz, :min]);
+        statdot(:cat:dc30 :pax, wt[:min]);
+        slabel(:right :cat:dc30 :pax, wt[:min] + (1.0dt, -0.5dt),
+            vbox(:left:bottom, "Mińsk", "Mazowiecki")
+        );
+    }
+
+    with link = "line.pl.2" {
+        track(:first :double :cat:dc30 :pax, wt[:min, :sie.ys]);
+        line_label(:right:n :cat:dc30 :pax, wt[:min + 10km], "2");
+        line_label(:left:s :cat:dc30 :pax, wt[:sie.ys - 11.7km], "2");
+    }
+
+    with link = "point.pl.Siedlce" {
+        track(:first :double:station :cat:dc30 :pax, wt[:sie.ys, :sie.yc]);
+        statdot(:cat:dc30 :pax, wt[:sie]);
+        slabel(:left :cat:dc30 :pax, wt[:sie] + (-1.0dt, 0.3dt),
+            hbox(:right:top, "Siedlce")
+        );
+    }
+
+    with link = "line.pl.2" {
+        track(:first :double :cat:dc30 :pax, wt[:sie.yc, :luk.yp]);
+        line_label(:right:ne :cat:dc30 :pax, wt[:dol.y + 4km], "2");
+        line_label(:left:w :cat:dc30 :pax, wt[:luk.yp - 5km], "2");
+    }
+
+    with link = "point.pl.Łuków" {
+        track(:first :double:station :cat:dc30 :pax, wt[:luk.yp, :luk.yl]);
+        statdot(:cat:dc30 :pax, wt[:luk]);
+        slabel(:right :cat:dc30 :pax, wt[:luk] + (1.0dt, -0.8dt), "Łuków");
+    }
+
+    with link = "line.pl.2" {
+        track(:first :double :cat:dc30 :pax, wt[:luk.yl, :ter]);
+        line_label(:left:s :cat:dc30 :pax, wt[:luk.yl + 10km], "2");
+        line_label(:right:n :cat:dc30 :pax, wt[:luk.yl + 40km], "2");
+        line_label(:right:nw :cat:dc30 :pax, wt[:ter - 8km], "2");
+    }
+
+    with link = "point.pl.Terespol" {
+        track(:first :station :cat:dc30 :pax, wt[:ter, :ter.yb]);
+        statdot(:cat:dc30 :pax, wt[:ter]);
+        slabel(:left :cat:dc30 :pax, wt[:ter] + (-1.5dt, 0.8dt), "Terespol");
+    }
+
+    with link = "line.pl.2" {
+        track(:first :cat:dc30 :pax, wt[:ter.yb, :teg]);
+        with zoom = :high line_label(:right:nw :cat:dc30 :pax,
+            wt[:teg - 1km], "2"
+        );
+    }
+}
+
+
+# PL 3.  Warszawa Zachodnia -  Granica Państwa Kunowice
+with detail = 2 {
+    let wf = path("d2.pl.w.3");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.3" {
+            track(:casing, wf[:waw.yg, :wag.yj]);
+        }
+
+        with link = "point.pl.Warszawa-Gołąbki" {
+            track(:station, wf[:wag.yj, :wag.yp]);
+            statdot(wf[:wag.yp]);
+            with zoom = :high slabel(:left, wf[:wag] + (0.5dt, -1.5dt),
+                "W. Gołąbki"
+            );
+        }
+
+        with link = "line.pl.3" {
+            track(wf[:wag.yp, :soc]);
+            line_label(:right:s, wf[:wag.yp + 6km], "3");
+            line_label(:right:s, wf[:soc - 8km], "3");
+        }
+
+        with link = "point.pl.Sochaczew" {
+            statdot(wf[:soc]);
+            slabel(:left, wf[:soc] + (-1.5dt, -0.3dt), "Sochaczew");
+        }
+
+        with link = "line.pl.3" {
+            track(wf[:soc, :bed]);
+            line_label(:right:se, wf[:soc + 8km], "3");
+        }
+
+        with link = "point.pl.Bednary" {
+            statdot(wf[:bed]);
+            slabel(:right, wf[:bed] + (1.3dt, 0dt),
+                hbox(:left:top, "Bednary")
+            );
+        }
+
+        with link = "line.pl.3" {
+            track(wf[:bed, :ark.y]);
+            track(wf[:ark.y, :low.ys]);
+        }
+
+        with link = "point.pl.Łowicz-Główny" {
+            track(:station, wf[:low.ys, :low]);
+            statdot(wf[:low]);
+            slabel(:left, wf[:low] + (-2.0dt, 1.5dt), "Łowicz");
+        }
+
+        with link = "line.pl.3" {
+            track(wf[:low, :jac]);
+            line_label(:right:sw, wf[:low + 4km], "3");
+        }
+
+        with link = "point.pl.Jackowice" {
+            statdot(wf[:jac]);
+            slabel(:right, wf[:jac] + (-0.5dt, -1.5dt), "Jackowice");
+        }
+
+        with link = "line.pl.3" {
+            track(wf[:jac, :kut.yl]);
+            line_label(:right:s, wf[:kut.yl - 10km], "3");
+        }
+
+        with link = "point.pl.Kutno" {
+            track(:station, wf[:kut.yl, :kut.yb]);
+            statdot(wf[:kut]);
+            slabel(:right :bold, wf[:kut] + (-0.5dt, -1.5dt), "Kutno");
+        }
+
+        with link = "line.pl.3" {
+            track(wf[:kut.yb, :krz]);
+            line_label(:left:n, wf[:kut.yb + 4km], "3");
+        }
+
+        with link = "point.pl.Krzewie" {
+            statdot(wf[:krz]);
+            slabel(:left, wf[:krz] + (0.5dt, 1.3dt),
+                hbox(:right:top, "Krzewie")
+            );
+        }
+
+        with link = "line.pl.3" {
+            track(wf[:krz, :tur.x]);
+        }
+    }
+}
+
+
+# PL 4.  Grodzisk Mazowiecki - Zawiercie
+with detail = 2 {
+    let gz = path("d2.pl.w.4");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.4" {
+            track(gz[:jak.yz, :jak.yz + 1.5km]);
+            track(:casing, gz[:jak.yz + 1.5km, :jak.yyz]);
+            with layer = -1 track(gz[:jak.yyz, :sze.ym]);
+            line_label(:left:w, gz[:jak.yyz + 2km], "4");
+        }
+
+        with link = "point.pl.Szeligi" {
+            track(:station, gz[:sze.ym, :sze]);
+            statdot(:nopax, gz[:sze]);
+            slabel(:left :nopax, gz[:sze] + (-1.6dt, 0.8dt), "Szeligi");
+        }
+
+        with link = "line.pl.4" {
+            track(gz[:sze, :str.x]);
+            line_label(:right:e, gz[:sze + 10km], "4");
+        }
+    }
+}
+
+
+# PL 6.  Zielonka -  Granica Państwa (Kuźnica Białostocka)
+with detail = 2 {
+    let zk = path("d2.pl.6");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Zielonka" {
+            track(:station, zk[:zie.yr, :zie]);
+            statdot(zk[:zie]);
+            slabel(:left, zk[:zie] + (-1.0dt, -0.8dt), "Zielonka");
+        }
+
+        with link = "line.pl.6" {
+            track(zk[:zie, :wos]);
+            with zoom = :high line_label(:right:nw, zk[:zie + 4.5km], "6");
+        }
+
+        with link = "point.pl.Wołomin-Słoneczna" {
+            statdot(zk[:wos]);
+            with zoom = :high slabel(:right, zk[:wos] + (1.5dt, -0.3dt),
+                hbox(:left:top, "Wołomin Słoneczna")
+            );
+        }
+
+        with link = "line.pl.6" {
+            track(zk[:wos, :tlu.yl]);
+            line_label(:right:nw, zk[:wos + 7km], "6");
+        }
+
+        with link = "point.pl.Tłuszcz" {
+            track(:station, zk[:tlu.yl, :tlu.yo]);
+            statdot(zk[:tlu]);
+            slabel(:right, zk[:tlu] + (1.3dt, -0.3dt),
+                hbox(:left:top, "Tłuszcz")
+            );
+        }
+
+        with link = "line.pl.6" {
+            track(zk[:tlu.yo, :bug.y]);
+            line_label(:left:se, zk[:tlu.yo + 24km], "6");
+
+            track(zk[:bug.y, :mal.ys]);
+        }
+
+        with link = "point.pl.Małkinia" {
+            track(:station, zk[:mal.ys, :mal]);
+            statdot(zk[:mal]);
+            slabel(:left, zk[:mal] + (-1.5dt, -0.3dt), "Małkinia");
+        }
+
+        with link = "line.pl.6" {
+            with layer = -1 track(zk[:mal, :mal.xo + 1km]);
+            track(zk[:mal.xo + 1km, :lap.yo]);
+            line_label(:right:nw, zk[:mal.yo + 32km], "6");
+        }
+
+        with link = "point.pl.Łapy" {
+            track(:station, zk[:lap.yo, :lap]);
+            statdot(zk[:lap]);
+            slabel(:right, zk[:lap] + (1.3dt, -0.5dt),
+                hbox(:left:top, "Łapy")
+            );
+        }
+
+        with link = "line.pl.6" {
+            track(zk[:lap, :tur.y]);
+            line_label(:left:se, zk[:tur.y - 8km], "6");
+
+            with layer = -1 track(zk[:tur.y, :bia.yb]);
+        }
+
+        with link = "point.pl.Białystok" {
+            track(:station, zk[:bia.yb, :bia.yz]);
+            statdot(zk[:bia]);
+            slabel(:right :medium:bold,
+                zk[:bia] + (0.7km, -1.1km) + (1.5dt, -1.3dt),
+                "Białystok"
+            );
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.6" {
+            track(zk[:bia.yz, :cza]);
+            line_label(:left:e, zk[:bia.yz + 10km], "6");
+        }
+
+        with link = "point.pl.Czarna-Białostocka" {
+            statdot(zk[:cza]);
+            slabel(:right, zk[:cza] + (1.3dt, 1.5dt), "Czarna Białostocka");
+        }
+
+        with link = "line.pl.6" {
+            track(zk[:cza, :gie]);
+            line_label(:right:nw, zk[:cza + 7km], "6");
+        }
+
+        with link = "point.pl.Gieniusze" {
+            statdot(zk[:gie]);
+            slabel(:left, zk[:gie] + (-0.8dt, -0.8dt), "Gieniusze");
+        }
+
+        with link = "line.pl.6" {
+            track(zk[:gie, :sok]);
+        }
+
+        with link = "point.pl.Sokółka" {
+            track(:station, zk[:sok, :sok.ys]);
+            statdot(zk[:sok]);
+            slabel(:left, zk[:sok] + (-0.3dt, -1.2dt), "Sokółka");
+        }
+
+        with link = "line.pl.6" {
+            track(zk[:sok, :kuz]);
+            line_label(:right:nw, zk[:kuz - 8km], "6");
+        }
+
+        with link = "point.pl.Kuźnica-Białostocka" {
+            statdot(zk[:kuz]);
+            slabel(:right, zk[:kuz] + (1.4dt, 0.8dt), "Kuźnica Białostocka");
+        }
+    }
+
+    with railway = :first :cat:dc30 {
+        with link = "line.pl.6" {
+            track(zk[:kuz, :kug]);
+        }
+    }
+}
+
+
+# PL 7.  Warszawa Wschodnia - Granica Państwa (Dorohusk)
+with detail = 2 {
+    let wd = path("d2.pl.w.7");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.7" {
+            track(wd[:waw.yg, :goc.ya]);
+            track(wd[:goc.ya, :wwa]);
+        }
+
+        with link = "point.pl.Warszawa-Wawer" {
+            statdot(wd[:wwa]);
+        }
+
+        with link = "line.pl.7" {
+            track(wd[:wwa, :pil.xs - 1km]);
+            line_label(:right:e, wd[:wwa + 5km], "7");
+            line_label(:right:e, wd[:pil.xs - 7km], "7");
+
+            track(:casing, wd[:pil.xs - 1km, :pil.xs + 1km]);
+            track(wd[:pil.xs + 1km, :pil.yk]);
+        }
+
+        with link = "point.pl.Pilawa" {
+            track(:station, wd[:pil.yk, :pil.yl]);
+            statdot(wd[:pil]);
+            slabel(:left, wd[:pil] + (-1.5dt, 1.3dt), "Pilawa");
+        }
+
+        with link = "line.pl.7" {
+            track(wd[:pil.yl, :zyc.x]);
+            line_label(:right:e, wd[:pil.yl + 9km], "7");
+            line_label(:right:e, wd[:zyc.x - 1.5km], "7");
+        }
+    }
+}
+
+
+# PL 8.  Warszawa Zachodnia - Kraków Główny
+with detail = 2 {
+    let wk = path("d2.pl.w.8");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.8" {
+            track(wk[:waz.yr, :ale.yt]);
+        }
+
+        with link = "point.pl.Warszawa-Aleje-Jerozolimskie" {
+            track(:station, wk[:ale.yt, :ale.yg]);
+            statdot(wk[:ale]);
+        }
+
+        with link = "line.pl.8" {
+            track(wk[:ale.yg, :slu]);
+        }
+
+        with link = "point.pl.Warszawa-Służewiec" {
+            track(:station, wk[:slu, :slu.yl]);
+            statdot(wk[:slu]);
+        }
+
+        with link = "point.pl.Warszawa-Okęcie" {
+            statdot(wk[:oke]);
+        }
+
+        with link = "line.pl.8" {
+            track(wk[:oke, :niw.yj]);
+            track(wk[:niw.yj, :pia]);
+        }
+
+        with link = "point.pl.Piaseczno" {
+            statdot(wk[:pia]);
+            slabel(:left, wk[:pia] + (-2.0dt, 1.0dt), "Piaseczno");
+        }
+
+        with link = "line.pl.8" {
+            track(wk[:pia, :czg.yz]);
+            line_label(:left:w, wk[:pia + 5.5km], "8");
+        }
+
+        with link = "point.pl.Czachówek-Południowy" {
+            track(:station :casing, wk[:czg.yz, :czp]);
+            statdot(wk[:czp]);
+            slabel(:right, wk[:czp] + (1.5dt, 1.0dt), 
+                vbox(:left:middle, "Czachówek", " Południowy")
+            );
+        }
+
+        with link = "line.pl.8" {
+            track(wk[:czp, :czp.x]);
+        }
+    }
+}
+
+
+# PL 9.  Warszawa Wschodnia – Gdańsk Główny
+with detail = 2 {
+    let wg = path("d2.pl.w.9");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.9" {
+            track(wg[:waw.yp, :wpr.yt]);
+            track(wg[:wpr.yt, :wpr.yz]);
+            track(wg[:wpr.yz, :wpr.yg]);
+        }
+
+        with link = "point.pl.Warszawa-Praga" {
+            track(:station, wg[:wpr.yg, :wpr]);
+            statdot(wg[:wpr]);
+            with zoom = :high slabel(:left, wg[:wpr] + (-1.7dt, 1dt),
+                "W. Praga"
+            );
+        }
+
+        with link = "line.pl.9" {
+            track(wg[:wpr, :leg]);
+            line_label(:left:e, wg[:leg - 7km], "9");
+        }
+
+        with link = "point.pl.Legionowo" {
+            track(:station, wg[:leg, :leg.yt]);
+            statdot(wg[:leg]);
+            slabel(:left, wg[:leg] + (-1.5dt, 1.8dt), "Legionowo");
+        }
+
+        with link = "line.pl.9" {
+            track(wg[:leg.yt, :lpr.yp]);
+            track(wg[:lpr.yp, :nas.yl]);
+            line_label(:left:n, wg[:lpr.yp + 11km], "9");
+            line_label(:left:e, wg[:nas.yl - 6.7km], "9");
+        }
+
+        with link = "point.pl.Nasielsk" {
+            track(:station, wg[:nas.yl, :nas.x]);
+            statdot(wg[:nas]);
+            slabel(:right, wg[:nas] + (1.5dt, 1.0dt), "Nasielsk");
+        }
+    }
+}
+
