@@ -49,7 +49,7 @@ with detail = 2 {
         with link = "point.pl.Hajnówka" {
             track(:station, sg[:haj.yl, :haj]);
             statdot(sg[:haj]);
-            slabel(:right, sg[:haj] + (1.5dt, 0.3dt), "Hajnówka");
+            slabel(:right, sg[:haj] + (1.1dt, -0.5dt), "Hajnówka");
         }
     }
 
@@ -84,7 +84,7 @@ with detail = 2 {
 
         with link = "point.pl.Siemianówka" {
             track(:station, sg[:sim.yc, :sim]);
-            statdot(sg[:sim]);
+            statdot(sg[:sim] >> 0.4dt);
             slabel(:left, sg[:sim] + (-1.3dt, -0.3dt), "Siemianówka");
         }
     }
@@ -97,7 +97,7 @@ with detail = 2 {
 
         with link = "point.int.Siemianówka-Свіслач" {
             marker(:left :ref, sg[:sig]);
-            marker(:right :ref, sg[:sig]);
+            marker(:right :ref, sg[:sig] >> 0.8dt);
         }
     }
 }
@@ -256,12 +256,24 @@ with detail = 2 {
 
     with railway = :first {
         with link = "line.pl.37" {
-            track(bz[:wal, :zub.yg]);
-            line_label(:right:ne, bz[:wal + 5km], "37");
+            track(bz[:wal, :wll]);
+            line_label(:left:sw, bz[:wal + 5km], "37");
+        }
+
+        with link = "point.pl.Waliły-Las" {
+            track(:station, bz[:wll, :wll.ys] >> 0.4dt);
+            statdot(bz[:wll]);
+            slabel(:left, bz[:wll] + (-1.0dt, 0.3dt),
+                hbox(:right:top, "Waliły Las")
+            );
+        }
+
+        with link = "line.pl.37" {
+            track(bz[:wll.ys, :zub.yg] >> 0.4dt);
         }
 
         with link = "point.pl.Zubki-Białostockie" {
-            track(:station, bz[:zub.yg, :zub]);
+            track(:station, bz[:zub.yg, :zub] >> 0.4dt);
             statdot(bz[:zub]);
             slabel(:right, bz[:zub] + (1.0dt, 0.5dt),
                 vbox(:left:top, "Zubki", "Białostockie")
@@ -269,8 +281,82 @@ with detail = 2 {
         }
 
         with link = "line.pl.37" {
-            track(bz[:zub, :zug]);
-            line_label(:left:s, bz[:zub + 2.5km], (-0.3dt, 0dt), "37");
+            track(bz[:zub, :zug] >> 0.4dt);
+            # line_label(:left:s, bz[:zub + 2.5km], (-0.3dt, 0dt), "37");
+        }
+    }
+}
+
+
+# PL 38.  Białystok – Granica Państwa Głomno
+with detail = 2 {
+    let bg = path("d2.pl.w.38");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.38" {
+            track(bg[:bia.yb, :bst.yt]);
+            track(bg[:bst.yt, :kny]);
+            line_label(:right:sw, bg[:bst.yt + 10km], "38");
+        }
+
+        with link = "point.pl.Knyszyn" {
+            statdot(bg[:kny]);
+            slabel(:left, bg[:kny] + (-1.7dt, 1.5dt), "Knyszyn");
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:kny, :elk.yo]);
+            line_label(:left:ne, bg[:kny + 29km], "38");
+            line_label(:right:w, bg[:elk.yo - 6.5km], "38");
+        }
+
+        with link = "point.pl.Ełk" {
+            track(:station, bg[:elk.yo, :elk]);
+            track(:station :nocat :nopax, bg[:elk, :elk.yc]);
+            statdot(bg[:elk]);
+            slabel(:left, bg[:elk] + (-1.5dt, 1.5dt), "Ełk");
+        }
+    }
+
+    with railway = :first {
+        with link = "line.pl.38" {
+            track(bg[:elk.yc, :giz.yk]);
+            line_label(:right:sw, bg[:elk.yc + 9.5km], "38");
+            line_label(:left:n, bg[:giz.yk - 7.2km], (-0.3dt, 0dt), "38");
+        }
+
+        with link = "point.pl.Giżycko" {
+            track(:station, bg[:giz.yk, :giz]);
+            statdot(bg[:giz]);
+            slabel(:top, bg[:giz] + (0dt, -0.3km) + (0dt, -0.7dt), "Giżycko");
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:giz, :stw.x]);
+        }
+    }
+}
+
+
+# PL 39.  Olecko - Suwałki
+with detail = 2 {
+    let os = path("d2.pl.39");
+
+    with railway = :second {
+        with link = "line.pl.39" {
+            track(os[:ole.ys, :pap]);
+            line_label(:left:sw, os[:ole.ys + 4km], "39");
+            line_label(:right:nw, os[:pap - 7km], "39");
+        }
+
+        with link = "point.pl.Papiernia" {
+            track(:station, os[:pap, :pap.ys]);
+            statdot(os[:pap]);
+            slabel(:left, os[:pap] + (-1dt, -0.8dt), "Papiernia");
+        }
+
+        with link = "line.pl.39" {
+            track(os[:pap.ys, :suw.yo]);
         }
     }
 }

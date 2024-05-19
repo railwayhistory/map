@@ -1,0 +1,37 @@
+# PL 210. Chojnice - Runowo Pomorskie
+with detail = 2 {
+    let cr = path("d2.pl.g.210");
+
+    with railway = :first :double :pax {
+        with link = "line.pl.210" {
+            track(:casing, cr[:cho.yr, :cho.x]);
+        }
+    }
+}
+
+
+# PL 211.  Chojnice - Kościerzyna
+with detail = 2 {
+    let ck = path("d2.pl.211");
+
+    with railway = :second :pax {
+        with link = "line.pl.211" {
+            track(:casing, ck[:cho.yk, :cho.yk + 3km]);
+            track(ck[:cho.yk + 3km, :lip]);
+            line_label(:left:e, ck[:cho.yk + 8km], "211");
+            line_label(:right:w, ck[:lip - 12km], "211");
+        }
+
+        with link = "point.pl.Lipusz" {
+            track(:station, ck[:lip, :lip.yk]);
+            statdot(ck[:lip]);
+            slabel(:right, ck[:lip] + (1.5dt, 1.5dt), "Lipusz");
+        }
+
+        with link = "line.pl.211" {
+            track(ck[:lip.yk, :kos.yc]);
+            line_label(:left:s, ck[:lip.yk + 7.5km], "211");
+        }
+    }
+}
+

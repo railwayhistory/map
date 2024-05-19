@@ -44,3 +44,75 @@ with detail = 2 {
    } 
 }
 
+
+# PL 38.  Białystok – Granica Państwa Głomno
+with detail = 2 {
+    let bg = path("d2.pl.g.38");
+
+    with railway = :first {
+        with link = "line.pl.38" {
+            track(bg[:stw.x, :ket.yw]);
+            line_label(:left:ne , bg[:ket.yw - 6km], "38");
+        }
+
+        with link = "point.pl.Kętrzyn" {
+            track(:station, bg[:ket.yw, :ket]);
+            statdot(bg[:ket]);
+            slabel(:top, bg[:ket] + (-1dt, -0.8dt), "Kętrzyn");
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:ket, :nml]);
+        }
+
+        with link = "point.pl.Nowy-Młyn" {
+            track(:station, bg[:nml, :nml.yr]);
+            statdot(bg[:nml]);
+            slabel(:bottom, bg[:nml] + (0dt, 0.8dt),
+                vbox(:center:top, "Nowy", "Młyn")
+            );
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:nml.yr, :kor]);
+            line_label(:right:sw, bg[:kor - 7km], "38");
+        }
+
+        # point.pl.Korsze  pl.353
+    }
+
+    with railway = :second {
+        with link = "line.pl.38" {
+            track(bg[:kor, :wia.ys]);
+            line_label(:left:n, bg[:kor + 9km], (-0.5dt, 0dt), "38");
+        }
+
+        with link = "point.pl.Wiatrowiec-Warmiński" {
+            track(:station, bg[:wia.ys, :wia]);
+            statdot(bg[:wia]);
+            slabel(:left, bg[:wia] + (1dt, 0.8dt),
+                vbox(:right:top, "Wiatrowiec", "Warmiński")
+            );
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:wia, :kar.yk]);
+            track(:casing, bg[:kar.yk, :kar.yk + 600m]);
+            track(bg[:kar.yk + 600m, :bar.yl]);
+        }
+
+        with link = "point.pl.Bartoszyce" {
+            track(:station, bg[:bar.yl, :bar]);
+            track(:station :closed, bg[:bar, :bar.ys]);
+            statdot(bg[:bar]);
+            slabel(:left, bg[:bar] + (-1.5dt, 1.3dt), "Bartoszyce");
+        }
+    }
+
+    with railway = :second :closed {
+        with link = "line.pl.38" {
+            track(bg[:bar.ys, :glg]);
+            line_label(:left:ne, bg[:glg - 5km], "38");
+        }
+    }
+}

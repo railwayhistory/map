@@ -47,7 +47,16 @@ with detail = 2 {
         }
 
         with link = "line.pl.1" {
-            track(wk[:pru.yk, :gro]);
+            track(wk[:pru.yk, :mil]);
+        }
+
+        with link = "point.pl.Milanówek" {
+            statdot(wk[:mil]);
+            slabel(:left, wk[:mil] + (-1.3dt, -0.5dt), "Milanówek");
+        }
+
+        with link = "line.pl.1" {
+            track(wk[:mil, :gro]);
         }
 
         with link = "point.pl.Grodzisk-Mazowiecki" {
@@ -118,85 +127,95 @@ with detail = 2 {
 with detail = 2 {
     let wt = path("d2.pl.2");
 
-    with link = "line.pl.2" {
-        track(:first :double :cat:dc30 :pax, wt[:wac, :waw]);
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.2" {
+            track(wt[:wac, :waw]);
+        }
+
+        with link = "point.pl.Warszawa-Wschodnia" {
+            track(:station, wt[:waw, :waw.yg]);
+            statdot(wt[:waw]);
+            with zoom = :high slabel(:right, wt[:waw] + (0dt, 0dt),
+                vbox(:left:top, "  W.", "Wschodnia")
+            );
+        }
+
+        with link = "line.pl.2" {
+            track(wt[:waw.yg, :rem]);
+        }
+
+        with link = "point.pl.Warszawa-Rembertów" {
+            track(:station, wt[:rem, :rem.yz]);
+            statdot(wt[:rem]);
+        }
+
+        with link = "line.pl.2" {
+            track(wt[:rem.yz, :min.yz]);
+            line_label(:right:n, wt[:rem.yz + 3km], "2");
+            line_label(:right:n, wt[:min.yz - 4km], "2");
+        }
+
+        with link = "point.pl.Mińsk-Mazowiecki" {
+            track(:station, wt[:min.yz, :min]);
+            statdot(:cat:dc30 :pax, wt[:min]);
+            slabel(:right, wt[:min] + (1.0dt, -0.5dt),
+                vbox(:left:bottom, "Mińsk", "Mazowiecki")
+            );
+        }
+
+        with link = "line.pl.2" {
+            track(wt[:min, :sie.ys]);
+            line_label(:right:n, wt[:min + 10km], "2");
+            line_label(:left:s, wt[:sie.ys - 11.7km], "2");
+        }
+
+        with link = "point.pl.Siedlce" {
+            track(:station, wt[:sie.ys, :sie.yc]);
+            statdot(wt[:sie]);
+            slabel(:left, wt[:sie] + (-1.0dt, 0.3dt),
+                hbox(:right:top, "Siedlce")
+            );
+        }
+
+        with link = "line.pl.2" {
+            track(wt[:sie.yc, :luk.yp]);
+            line_label(:right:ne, wt[:dol.y + 4km], "2");
+            line_label(:left:w, wt[:luk.yp - 5km], "2");
+        }
+
+        with link = "point.pl.Łuków" {
+            track(:station, wt[:luk.yp, :luk.yl]);
+            statdot(wt[:luk]);
+            slabel(:right, wt[:luk] + (1.0dt, -0.8dt), "Łuków");
+        }
+
+        with link = "line.pl.2" {
+            track(wt[:luk.yl, :kob]);
+            line_label(:left:s, wt[:luk.yl + 10km], "2");
+            line_label(:right:n, wt[:kob - 15km], "2");
+        }
+
+        with link = "point.pl.Kobylany" {
+            statdot(wt[:kob] << 0.45dt);
+            slabel(:left, wt[:kob] + (-1.5dt, -0.5dt), "Kobylany");
+        }
+
+        with link = "line.pl.2" {
+            track(wt[:kob, :ter]);
+            line_label(:right:w, wt[:ter - 2.5km], "2");
+        }
     }
 
-    with link = "point.pl.Warszawa-Wschodnia" {
-        track(:first :double:station :cat:dc30 :pax, wt[:waw, :waw.yg]);
-        statdot(:cat:dc30 :pax, wt[:waw]);
-        with zoom = :high slabel(:cat:dc30 :pax :right, wt[:waw] + (0dt, 0dt),
-            vbox(:left:top, "  W.", "Wschodnia")
-        );
-    }
+    with railway = :first :cat:dc30 {
+        with link = "point.pl.Terespol" {
+            track(:station, wt[:ter, :ter.yb]);
+            statdot(:pax, wt[:ter] << 0.45dt);
+            slabel(:left, wt[:ter] + (-2dt, 0.3dt), "Terespol");
+        }
 
-    with link = "line.pl.2" {
-        track(:first :double :cat:dc30 :pax, wt[:waw.yg, :rem]);
-    }
-
-    with link = "point.pl.Warszawa-Rembertów" {
-        track(:first :double:station :cat:dc30 :pax, wt[:rem, :rem.yz]);
-        statdot(:cat:dc30 :pax, wt[:rem]);
-    }
-
-    with link = "line.pl.2" {
-        track(:first :double :cat:dc30 :pax, wt[:rem.yz, :min.yz]);
-        line_label(:right:n :cat:dc30 :pax, wt[:rem.yz + 3km], "2");
-        line_label(:right:n :cat:dc30 :pax, wt[:min.yz - 4km], "2");
-    }
-
-    with link = "point.pl.Mińsk-Mazowiecki" {
-        track(:first :double:station :cat:dc30 :pax, wt[:min.yz, :min]);
-        statdot(:cat:dc30 :pax, wt[:min]);
-        slabel(:right :cat:dc30 :pax, wt[:min] + (1.0dt, -0.5dt),
-            vbox(:left:bottom, "Mińsk", "Mazowiecki")
-        );
-    }
-
-    with link = "line.pl.2" {
-        track(:first :double :cat:dc30 :pax, wt[:min, :sie.ys]);
-        line_label(:right:n :cat:dc30 :pax, wt[:min + 10km], "2");
-        line_label(:left:s :cat:dc30 :pax, wt[:sie.ys - 11.7km], "2");
-    }
-
-    with link = "point.pl.Siedlce" {
-        track(:first :double:station :cat:dc30 :pax, wt[:sie.ys, :sie.yc]);
-        statdot(:cat:dc30 :pax, wt[:sie]);
-        slabel(:left :cat:dc30 :pax, wt[:sie] + (-1.0dt, 0.3dt),
-            hbox(:right:top, "Siedlce")
-        );
-    }
-
-    with link = "line.pl.2" {
-        track(:first :double :cat:dc30 :pax, wt[:sie.yc, :luk.yp]);
-        line_label(:right:ne :cat:dc30 :pax, wt[:dol.y + 4km], "2");
-        line_label(:left:w :cat:dc30 :pax, wt[:luk.yp - 5km], "2");
-    }
-
-    with link = "point.pl.Łuków" {
-        track(:first :double:station :cat:dc30 :pax, wt[:luk.yp, :luk.yl]);
-        statdot(:cat:dc30 :pax, wt[:luk]);
-        slabel(:right :cat:dc30 :pax, wt[:luk] + (1.0dt, -0.8dt), "Łuków");
-    }
-
-    with link = "line.pl.2" {
-        track(:first :double :cat:dc30 :pax, wt[:luk.yl, :ter]);
-        line_label(:left:s :cat:dc30 :pax, wt[:luk.yl + 10km], "2");
-        line_label(:right:n :cat:dc30 :pax, wt[:luk.yl + 40km], "2");
-        line_label(:right:nw :cat:dc30 :pax, wt[:ter - 8km], "2");
-    }
-
-    with link = "point.pl.Terespol" {
-        track(:first :station :cat:dc30 :pax, wt[:ter, :ter.yb]);
-        statdot(:cat:dc30 :pax, wt[:ter]);
-        slabel(:left :cat:dc30 :pax, wt[:ter] + (-1.5dt, 0.8dt), "Terespol");
-    }
-
-    with link = "line.pl.2" {
-        track(:first :cat:dc30 :pax, wt[:ter.yb, :teg]);
-        with zoom = :high line_label(:right:nw :cat:dc30 :pax,
-            wt[:teg - 1km], "2"
-        );
+        with link = "line.pl.2" {
+            track(wt[:ter.yb, :teg]);
+        }
     }
 }
 
@@ -420,18 +439,18 @@ with detail = 2 {
         }
 
         with link = "line.pl.6" {
-            track(zk[:gie, :sok]);
+            track(zk[:gie, :sok] >> 0.4dt);
         }
 
         with link = "point.pl.Sokółka" {
-            track(:station, zk[:sok, :sok.ys]);
+            track(:station, zk[:sok, :sok.ys] >> 0.4dt);
             statdot(zk[:sok]);
             slabel(:left, zk[:sok] + (-0.3dt, -1.2dt), "Sokółka");
         }
 
         with link = "line.pl.6" {
-            track(zk[:sok, :kuz]);
-            line_label(:right:nw, zk[:kuz - 8km], "6");
+            track(zk[:sok, :kuz] >> 0.4dt);
+            line_label(:right:nw, zk[:kuz - 8km] >> 0.4dt, "6");
         }
 
         with link = "point.pl.Kuźnica-Białostocka" {
@@ -442,7 +461,7 @@ with detail = 2 {
 
     with railway = :first :cat:dc30 {
         with link = "line.pl.6" {
-            track(zk[:kuz, :kug]);
+            track(zk[:kuz, :kug] >> 0.4dt);
         }
     }
 }

@@ -1,0 +1,370 @@
+# PL 100.  Kraków Mydlniki - Kraków Bieżanów
+#
+with detail = 2 {
+    let mb = path("d2.pl.100");
+
+    with railway = :first :double :cat:dc30 :nopax {
+        with link = "line.pl.100" {
+            with layer = -1 track(mb[:klo.yo, :kol]);
+        }
+
+        with link = "point.pl.Kraków-Olsza" {
+            statdot(mb[:kol]);
+        }
+
+        with link = "line.pl.100" {
+            track(mb[:kol, :kol.yl]);
+            track(mb[:kol.yl, :kpl.ym]);
+        }
+    }
+}
+
+
+# PL 101.  Munina - Hrebenne
+with detail = 2 {
+    let mh = path("d2.pl.101");
+
+    with railway = :second :pax {
+        with link = "line.pl.101" {
+            track(mh[:mun.yh, :ngr.yd]);
+            line_label(:left:se, mh[:mun.yh + 8km], "101");
+        }
+
+        with link = "point.pl.Nowa-Grobla" {
+            track(:station, mh[:ngr.yd, :ngr]);
+            statdot(mh[:ngr]);
+            slabel(:left, mh[:ngr] + (-1.5dt, 0.5dt), "Nowa Grobla");
+        }
+
+        with link = "line.pl.101" {
+            track(mh[:ngr, :hor.yk]);
+            track(mh[:hor.yk, :hor]);
+            line_label(:right:n, mh[:hor.yk - 15km], "101");
+        }
+
+        with link = "point.pl.Horyniec-Zdrój" {
+            statdot(mh[:hor]);
+            slabel(:left, mh[:hor] + (-0.5dt, -1.5dt), "Horyniec-Zdrój");
+        }
+    }
+
+    with railway = :second :seasonal {
+        with link = "line.pl.101" {
+            track(mh[:hor, :wer]);
+            line_label(:left:s, mh[:hor + 5.5km], "101");
+        }
+
+        with link = "point.pl.Werchrata" {
+            track(:station, mh[:wer, :wer.yr]);
+            statdot(mh[:wer] >> 0.35dt);
+            slabel(:left, mh[:wer] + (2.5dt, -1.5dt), "Werchrata");
+        }
+
+        with link = "line.pl.101" {
+            track(mh[:wer.yr, :hre.ym]);
+            line_label(:left:e, mh[:hre.ym - 3.5km], (0dt, -0.2dt), "101");
+        }
+    }
+}
+
+
+# PL 102.  Przemyśl - Granica Państwa (Malhowice)
+with detail = 2 {
+    let pm = path("d2.pl.102");
+
+    with railway = :second :double :cat:dc30 :nopax {
+        with link = "line.pl.102" {
+            track(pm[:prm.ym, :pba.yw]);
+            track(pm[:pba.yw, :pba]);
+        }
+    }
+
+    with railway = :second :cat:dc30 :nopax {
+        with link = "line.pl.102" {
+            track(pm[:pba, :ppi]);
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.102" {
+            track(pm[:ppi, :mag]);
+            line_label(:right:ne, pm[:ppi + 3km], "102");
+        }
+
+        with link = "point.int.Malhowice-Нижанковичі" {
+            marker(:left :ref, pm[:mag]);
+            marker(:right :ref, pm[:mag]);
+        }
+    }
+}
+
+
+# PL 103.  Trzebinia - Skawce
+with detail = 2 {
+    let ts = path("d2.pl.103");
+
+    with railway = :second :suspended {
+        with link = "line.pl.103" {
+            track(ts[:trz.yw, :bol.yc]);
+        }
+
+        with link = "point.pl.Bolęcin" {
+            track(:station, ts[:bol.yc, :bol]);
+            statdot(ts[:bol]);
+            slabel(:right, ts[:bol] + (1.3dt, 0dt), "Bolęcin");
+        }
+
+        with link = "line.pl.103" {
+            track(ts[:bol, :okl]);
+            line_label(:left:w, ts[:okl - 7.3km], "103");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "point.pl.Okleśna" {
+            statdot(ts[:okl]);
+            slabel(:right, ts[:okl] + (1.3dt, -0.3dt),
+                hbox(:left:top, "Okleśna")
+            );
+        }
+
+        with link = "line.pl.103" {
+            track(ts[:okl, :spy.yt]);
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.103" {
+            track(ts[:spy.ys, :wad.yt]);
+            line_label(:right:e, ts[:spy.ys + 6.5km], (0dt, 0.2dt), "103");
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.103" {
+            track(ts[:wad.ys, :ska.yt]);
+            line_label(:right:e, ts[:wad.ys + 7km], "103");
+        }
+
+        with link = "point.pl.Skawce" {
+            track(:station, ts[:ska.yt, :ska]);
+            statdot(ts[:ska]);
+            slabel(:left, ts[:ska] + (-1.4dt, 0.8dt), "Skawce");
+        }
+    }
+}
+
+
+# PL 104.  Chabówka - Nowy Sącz
+with detail = 2 {
+    let cn = path("d2.pl.104");
+
+    with railway = :second :nopax {
+        with link = "line.pl.104" {
+            track(cn[:cha, :mar]);
+            line_label(:right:nw, cn[:cha + 10km], "104");
+            line_label(:left:sw, cn[:mar - 20km], "104");
+        }
+    }
+
+    with railway = :second :cat:dc30 :nopax {
+        with link = "point.pl.Marcinkowice" {
+            statdot(cn[:mar]);
+            slabel(:right, cn[:mar] + (-2.5dt, -1.5dt), "Marcinkowice");
+        }
+
+        with link = "line.pl.104" {
+            track(cn[:mar, :nsa.yc]);
+            line_label(:left:w, cn[:mar + 4.5km], "104");
+        }
+    }
+}
+
+
+# PL 105.  Muszyna - Krynica-Zdrój
+with detail = 2 {
+    let mk = path("d2.pl.105");
+
+    with railway = :second :cat:dc30 :pax {
+        with link = "line.pl.105" {
+            track(mk[:mus.yk, :kry]);
+            line_label(:right:w, mk[:kry - 4km], "105");
+        }
+
+        with link = "point.pl.Krynica-Zdrój" {
+            statdot(mk[:kry]);
+            slabel(:top, mk[:kry] + (0dt, -0.8dt), "Krynica-Zdrój");
+        }
+    }
+}
+
+
+# PL 106.  Rzeszów Główny - Jasło
+with detail = 2 {
+    let rj = path("d2.pl.106");
+
+    with railway = :first :pax {
+        with link = "line.pl.106" {
+            track(rj[:rze.yj, :rst.yz]);
+        }
+
+        with link = "point.pl.Rzeszów-Staroniwa" {
+            track(:station, rj[:rst.yz, :rst]);
+            statdot(rj[:rst]);
+        }
+
+        with link = "line.pl.106" {
+            track(rj[:rst, :jfa]);
+            line_label(:right:e, rj[:rst + 7km], "106");
+            line_label(:left:w, rj[:jfa - 10km], "106");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.106" {
+            track(rj[:jfa, :jat]);
+        }
+
+        with link = "point.pl.Jasło-Towarowa" {
+            track(:station, rj[:jat, :jat.ys]);
+            statdot(:nopax, rj[:jat]);
+        }
+
+        with link = "line.pl.106" {
+            track(rj[:jat.ys, :jas.yr]);
+        }
+    }
+}
+
+
+# PL 107.  Nowy Zagórz -  Granica Państwa (Łupków)
+with detail = 2 {
+    let nl = path("d2.pl.107");
+
+    with railway = :first :pax {
+        with link = "line.pl.107" {
+            track(nl[:nza.yl, :zag.yk]);
+        }
+
+        with link = "point.pl.Zagórz" {
+            track(:station, nl[:zag.yk, :zag]);
+            statdot(nl[:zag]);
+            slabel(:left, nl[:zag] + (-1.5dt, 0dt),
+                hbox(:right:top, "Zagórz")
+            );
+        }
+    }
+
+    with railway = :first :seasonal {
+        with link = "line.pl.107" {
+            track(nl[:zag, :rze]);
+            line_label(:right:se, nl[:zag + 15km], "107");
+        }
+
+        with link = "point.pl.Rzepedź" {
+            statdot(nl[:rze]);
+            slabel(:left, nl[:rze] + (-1.5dt, 0dt), "Rzepedź");
+        }
+
+        with link = "line.pl.107" {
+            track(nl[:rze, :nlu]);
+            line_label(:left:w, nl[:rze + 11.3km], "107");
+        }
+
+        with link = "point.pl.Nowy-Łupków" {
+            statdot(nl[:nlu]);
+            slabel(:right, nl[:nlu] + (1.5dt, 1.5dt), "Nowy Łupków");
+        }
+
+        with link = "line.pl.107" {
+            track(nl[:nlu, :lug]);
+        }
+
+        with link = "point.int.Łupków-Palota" {
+            marker(:left :ref, nl[:lug]);
+            marker(:right :ref, nl[:lug]);
+        }
+    }
+}
+
+
+# PL 108.  Stróże - Granica Państwa (Krościenko)
+with detail = 2 {
+    let sk = path("d2.pl.108");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.108" {
+            track(sk[:str.yk, :str.yw]);
+            track(sk[:str.yw, :goz.yg]);
+            line_label(:left:s, sk[:str.yw + 10.5km], "108");
+        }
+
+        with link = "point.pl.Gorlice-Zagórzany" {
+            track(:station, sk[:goz.yg, :goz]);
+            statdot(sk[:goz]);
+            slabel(:right, sk[:goz] + (1.3dt, -0.5dt),
+                hbox(:left:top, "Gorlice Zagórzany")
+            );
+        }
+
+        with link = "line.pl.108" {
+            track(sk[:goz, :jas]);
+            line_label(:right:n, sk[:jas - 9km], (-0.3dt, 0dt), "108");
+        }
+
+        with link = "point.pl.Jasło" {
+            track(:station, sk[:jas, :jas.yr]);
+            statdot(sk[:jas]);
+            slabel(:left, sk[:jas] + (-0.5dt, -1dt), "Jasło");
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.pl.108" {
+            track(sk[:jas.yr, :nza]);
+            line_label(:right:n, sk[:jas.yr + 15km], (-0.2dt, 0dt), "108");
+            line_label(:left:s, sk[:nza - 11km], "108");
+        }
+
+        with link = "point.pl.Nowy-Zagórz" {
+            track(:station, sk[:nza, :nza.yl]);
+            statdot(sk[:nza]);
+            slabel(:left, sk[:nza] + (-1.7dt, 0.5dt), "Nowy Zagórz");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.108" {
+            track(sk[:nza.yl, :zal.y]);
+            track(sk[:zal.y, :krg]);
+            line_label(:left:w, sk[:zal.y + 6km], "108");
+            line_label(:right:nw, sk[:krg - 7.5km], "108");
+        }
+
+        with link = "point.int.Krościenko-Стар'ява" {
+            marker(:left :ref, sk[:krg]);
+            marker(:right :ref, sk[:krg]);
+        }
+    }
+}
+
+
+# PL 109.  Kraków Bieżanów - Wieliczka Rynek
+with detail = 2 {
+    let kw = path("d2.pl.109");
+
+    with railway = :second :cat:dc30 :pax {
+        with link = "line.pl.109" {
+            track(kw[:kbi.yw, :wrk]);
+            line_label(:right:e, kw[:kbi.yw + 2.7km], (0dt, 0.15dt), "109");
+        }
+
+        with link = "point.pl.Wieliczka-Rynek-Kopalnia" {
+            statdot(kw[:wrk]);
+            slabel(:bottom, kw[:wrk] + (0dt, 1dt),
+                vbox(:center:top, " Wieliczka Rynek-", "Kopalnia")
+            );
+        }
+    }
+}
+

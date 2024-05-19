@@ -1,0 +1,488 @@
+# PL 61.  Kielce - Fosowskie
+with detail = 2 {
+    let kf = path("d2.pl.l.61");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.61" {
+            track(kf[:kie.yf, :khe.yp]);
+            track(kf[:khe.yp, :khe]);
+        }
+
+        with link = "point.de.Kielce-Herbskie" {
+            statdot(kf[:khe]);
+            with zoom = :high slabel(:left, kf[:khe] + (0dt, 0.5dt),
+                hbox(:right:top, "Kielce Herbskie")
+            );
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:khe, :suk.ys]);
+            line_label(:right:s, kf[:khe + 2.6km], "61");
+        }
+
+        with link = "point.de.Szczukowice" {
+            track(:station, kf[:suk.ys, :suk]);
+            statdot(:nopax, kf[:suk]);
+            slabel(:left :nopax, kf[:suk] + (-0.3dt, -1.0dt), "Szczukowice");
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:suk, :cza]);
+            line_label(:left:n, kf[:suk + 9km], "61");
+            line_label(:right:s, kf[:cza - 11km], "61");
+        }
+
+        with link = "point.de.Czarnca" {
+            track(:station, kf[:cza, :cza.yp]);
+            statdot(kf[:cza]);
+            slabel(:right, kf[:cza] + (0.3dt, 0.7dt),
+                hbox(:left:top, "Czarnca")
+            );
+        }
+
+        with link = "line.pl.61" {
+            with layer = -1 track(kf[:cza.yp, :zel.x]);
+        }
+    }
+}
+
+
+# PL 62.  Tunel - Sosnowiec Główny
+with detail = 2 {
+    let ts = path("d2.pl.l.62");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.62" {
+            track(ts[:tun.ys, :cha]);
+        }
+
+        with link = "point.pl.Charsznica" {
+            statdot(ts[:cha]);
+            slabel(:left, ts[:cha] + (0dt, 0.5km) + (1.5dt, 0.7dt),
+                hbox(:right:top, "Charsznica")
+            );
+        }
+
+        with link = "line.pl.62" {
+            track(
+                    ts[:cha, :cha.xxx - 0.3km]
+                ..  ts[:cha.xx, :cha.x] << 0.45dt
+            );
+            track(ts[:cha.x, :gaj.x] << 0.45dt);
+        }
+    }
+}
+
+
+# PL 63.  Granica Państwa (Dorohusk) - Naftobaza
+with detail = 2 {
+    let dn = path("d2.pl.63");
+
+    with railway = :first :broad:g1520 {
+        with link = "point.int.Dorohusk-Ягодин" {
+            marker(:right :ref, dn[:dog] >> 0.9dt);
+        }
+
+        with link = "line.pl.63" {
+            track(dn[:dog, :dor] >> 0.9dt);
+        }
+
+        with link = "point.pl.Dorohusk" {
+            track(:station, dn[:dor, :dor.yd] >> 0.9dt);
+        }
+
+        with link = "line.pl.63" {
+            track(dn[:dor.yd, :wol.yd] >> 0.9dt);
+        }
+
+        with link = "point.pl.Wólka-Okopska" {
+            track(:station, dn[:wol.yd, :wol] >> 0.9dt);
+        }
+
+        with link = "line.pl.63" {
+            track(dn[:wol, :che.yw] >> 0.9dt);
+            line_label(:right:s, dn[:che.yw - 6km] >> 0.9dt, (-0.2dt, 0dt),
+                "63"
+            );
+        }
+
+        with link = "point.pl.Chełm" {
+            track(:station, dn[:che.yw, :che] >> 0.9dt);
+        }
+
+        with link = "line.pl.63" {
+            track(dn[:che, :che.yn] >> 0.9dt);
+            track(dn[:che.yn, :naf] >> 0.9dt);
+        }
+
+        with link = "point.pl.Naftobaza" {
+            statdot(dn[:naf] >> 0.9dt);
+            slabel(:left, dn[:naf] >> 0.9dt + (0.5dt, -1.5dt), "Naftobaza");
+        }
+    }
+}
+
+
+# PL 64.  Kozłów - Koniecpol
+with detail = 2 {
+    let kk = path("d2.pl.l.64");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.64" {
+            track(kk[:koz.yk, :sek]);
+            line_label(:left:ne, kk[:koz.yk + 9km], "64");
+        }
+
+        with link = "point.pl.Szczekociny" {
+            statdot(:removed, kk[:sek]);
+            slabel(:right :removed, kk[:sek] + (1.0dt, -0.5dt), "Szczekociny");
+        }
+
+        with link = "line.pl.64" {
+            track(kk[:sek, :sta.yp]);
+            line_label(:right:w, kk[:sta.yp - 4.5km], "64");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.64" {
+            with layer = -1 track(kk[:sta.yp, :kon.yk]);
+            line_label(:left:e, kk[:sta.yp + 5km], "64");
+        }
+    }
+}
+
+
+# PL 65.  Granica Państwa (Hrubieszów) - Sławków LHS
+with detail = 2 {
+    let hs = path("d2.pl.l.65");
+
+    with railway = :first :broad:g1520 {
+        with link = "point.int.Hrubieszów-Łudzin" {
+            marker(:right :ref, hs[:hrg]);
+            marker(:left :ref, hs[:hrg]);
+        }
+
+        with link = "line.pl.65" {
+            track(hs[:hrg, :hrl.yh]);
+        }
+
+        with link = "point.pl.Hrubieszów-LHS" {
+            track(:station, hs[:hrl.yh, :hrl]);
+            statdot(hs[:hrl]);
+        }
+
+        with link = "line.pl.65" {
+            track(
+                    hs[:hrg, :hrc.yyh - 1dt]
+                ..  hs[:hrc.yh, :jar.y] << 0.4dt
+                ..  hs[:jar.yy, :zam]
+            );
+            line_label(:left:nw, hs[:hrc.yh + 4km] << 0.4dt, "65");
+            line_label(:right:s, hs[:zam - 9km], (0.3dt, 0dt), "65");
+        }
+
+        with link = "point.pl.Zamość-Bortatycze" {
+            statdot(hs[:zam] >> 0.4dt);
+            slabel(:top, hs[:zam] >> 0.4dt + (0dt, -0.5km) + (0dt, -0.3dt),
+                vbox(:center:bottom, "Zamość", "Bortatycze")
+            );
+        }
+
+        with link = "line.pl.65" {
+            track(
+                    hs[:zam, :zam.xf]
+                ..  hs[:zam.xff, :zwt] << 0.4dt
+            );
+            line_label(:left:w, hs[:zwi - 7.5km] << 0.4dt, "65");
+        }
+
+        with link = "point.pl.Zwierzyniec-Towarowy" {
+            track(:station, hs[:zwt, :zwt.ys] << 0.4dt);
+        }
+
+        with link = "line.pl.65" {
+            track(hs[:zwt.ys, :der.y] << 0.4dt);
+            line_label(:left:n, hs[:zwt.ys + 12km] << 0.4dt, "65");
+
+            track(
+                    hs[:der.y, :der.yy] << 0.4dt
+                ..  hs[:der.yyy, :nis.x - 0.5km]
+            );
+            track(:casing, hs[:nis.x - 0.5km, :nis.x + 0.5km]);
+            track(hs[:nis.x + 0.5km, :nde.x - 0.5km]);
+            line_label(:left:n, hs[:nis.x + 9km], (0.3dt, 0dt), "65");
+
+            track(:casing, hs[:nde.x - 0.5km, :nde.x + 0.5km]);
+            track(hs[:nde.x + 0.5km, :wol]);
+            line_label(:right:s, hs[:wol - 8km], (0.3dt, 0dt), "65");
+        }
+
+        with link = "point.pl.Wola-Baranowska-LHS" {
+            statdot(hs[:wol] >> 0.4dt);
+            slabel(:right, hs[:wol] + (-3.5dt, 1.5dt),
+                vbox(:left:top, " Wola", "Baranowska", " LHS")
+            );
+        }
+
+        with link = "line.pl.65" {
+            track(hs[:wol, :wol.yp]);
+            track(:casing, hs[:wol.yp, :pad.x + 0.5km]);
+            track(
+                    hs[:pad.x + 0.5km, :ste.yyh]
+                ..  hs[:ste.yh, :ste.yh + 0.1dl] << 0.4dt
+            );
+            line_label(:left:ne, hs[:ste.yyh - 4km], "65");
+
+            track(hs[:ste.yh, :sta] << 0.4dt);
+            track(hs[:sta, :gol.y] << 0.4dt);
+            line_label(:left:ne, hs[:gol.y - 16km], "65");
+
+            track(
+                    hs[:gol.y - 0.1dl, :gol.y] << 0.4dt
+                ..  hs[:gol.yy + 1dt, :wyg.x - 0.5km]
+            );
+            track(:casing, hs[:wyg.x - 0.5km, :wyg.x + 0.5km]);
+            track(hs[:wyg.x + 0.5km, :pol.yyys]);
+            line_label(:left:n, hs[:pol.yyys - 5km], "65");
+
+            track(
+                    hs[:pol.yyys - 0.1dl, :pol.yyys]
+                ..  hs[:pol.yys, :pot.ys] << 0.9dt
+            );
+            track(hs[:pot.ys, :sed] << 0.9dt);
+            line_label(:left:nw, hs[:pot.ys + 5.5km] << 0.9dt, "65");
+
+            track(hs[:sed, :koz.ys] << 0.9dt);
+            track(:casing,
+                    hs[:koz.ys, :koz.yys] << 0.9dt
+                ..  hs[:koz.yyys, :koz.x + 0.5km]
+            );
+            track(
+                    hs[:koz.x + 0.5km, :poc.x]
+                ..  hs[:poc.xx, :cha.x] >> 0.45dt
+            );
+            line_label(:right:e, hs[:koz.x + 5.5km], "65");
+
+            track(hs[:cha.x, :gaj.x] >> 0.45dt);
+        }
+    }
+}
+
+
+# PL 66.  Zwierzyniec Towarowy - Stalowa Wola Południe
+with detail = 2 {
+    let zs = path("d2.pl.66");
+
+    with railway = :first :pax {
+        with link = "line.pl.66" {
+            track(zs[:zwt.ys, :der.y] >> 0.4dt);
+            line_label(:right:s, zs[:zwt.ys + 12km] >> 0.4dt, "66");
+
+            track(
+                    zs[:der.y, :der.yy] >> 0.4dt
+                ..  zs[:der.yyy, :swp.yz]
+            );
+            line_label(:right:s, zs[:der.yyy + 3km], (0.1dt, 0dt), "66");
+        }
+    }
+}
+
+
+# PL 67.  Lublin Główny – Świdnik
+with detail = 2 {
+    let lw = path("d2.pl.67");
+
+    with railway = :first :cat:dc30 {
+        with link = "line.pl.67" {
+            track(lw[:lub.yt, :tat]);
+        }
+
+        with link = "point.pl.Lublin-Tatary" {
+            statdot(lw[:tat]);
+            with zoom = :high slabel(:bottom, lw[:tat] + (-0.5dt, 0.9dt),
+                "L. Tatary"
+            );
+        }
+
+        with link = "line.pl.67" {
+            track(:double, lw[:tat, :swi.yt]);
+        }
+    }
+}
+
+
+# PL 68.  Lublin Główny - Przeworsk
+with detail = 2 {
+    let lp = path("d2.pl.l.68");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.68" {
+            track(lp[:lub.yp, :lze]);
+            line_label(:left:w, lp[:lub.yp + 4km], "68");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.68" {
+            track(lp[:lze, :cha.ys]);
+            line_label(:right:e, lp[:lze + 33.5km], "68");
+            line_label(:left:w, lp[:cha.ys - 9km], "68");
+
+            track(lp[:cha.ys, :swr.ys]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Stalowa-Wola-Rozwadów" {
+            track(:station, lp[:swr.ys, :swr]);
+            statdot(lp[:swr]);
+            slabel(:right, lp[:swr] + (1.5dt, 1.0dt),
+                vbox(:left:bottom, "Stalowa Wola", "Rozwadów")
+            );
+        }
+
+        with link = "line.pl.68" {
+            track(lp[:swr, :swp]);
+            line_label(:right:e, lp[:swr + 2.5km], "68");
+        }
+
+        with link = "point.pl.Stalowa-Wola-Południe" {
+            track(:station, lp[:swp, :swp.yz]);
+            statdot(lp[:swp]);
+            slabel(:left, lp[:swp] + (-1.5dt, -1.0dt),
+                vbox(:right:top, "Stalowa Wola", "Południe")
+            );
+        }
+
+        with link = "line.pl.68" {
+            with layer = -1 track(lp[:swp.yz, :let.x]);
+            line_label(:right:ne, lp[:swp.yz + 5km], "68");
+        }
+    }
+}
+
+
+# PL 69.  Rejowiec -  Granica Państwa (Hrebenne)
+with detail = 2 {
+    let rh = path("d2.pl.69");
+
+    with railway = :second :pax {
+        with link = "line.pl.69" {
+            track(rh[:rej.yh, :rep.y]);
+            track(rh[:rep.y, :kra]);
+            line_label(:right:e, rh[:rep.y + 7.2km], "69");
+        }
+
+        with link = "point.pl.Krasnystaw" {
+            statdot(:nopax, rh[:kra]);
+            slabel(:left :nopax, rh[:kra] + (-1.8dt, 0.8dt), "Krasnystaw");
+        }
+
+        with link = "line.pl.69" {
+            track(rh[:kra, :krz]);
+        }
+
+        with link = "point.pl.Krzak" {
+            statdot(rh[:krz]);
+            slabel(:right, rh[:krz] + (1.7dt, 1.0dt), "Krzak");
+        }
+
+        with link = "line.pl.69" {
+            track(rh[:krz, :kol.y]);
+            line_label(:right:e, rh[:krz + 3.4km], "69");
+
+            track(
+                    rh[:kol.y, :zaw.yyr - 1dt]
+                ..  rh[:zaw.yr, :zaw.yp] >> 0.4dt
+            );
+        }
+
+        with link = "point.pl.Zawada" {
+            track(:station, rh[:zaw.yp, :zaw] >> 0.4dt);
+            statdot(rh[:zaw] >> 0.4dt);
+            slabel(:left, rh[:zaw] >> 0.4dt + (0dt, -1.3dt), "Zawada");
+        }
+
+        with link = "line.pl.69" {
+            track(rh[:zaw, :nik] >> 0.4dt);
+        }
+
+        with link = "point.pl.Niedzieliska-Kolonia" {
+            statdot(rh[:nik] >> 0.4dt);
+            slabel(:left, rh[:nik] + (-1.4km, 0dt) + (-0.5dt, -1.0dt),
+                "Niedzieliska-Kolonia"
+            );
+        }
+
+        with link = "line.pl.69" {
+            track(rh[:nik, :zwi] >> 0.4dt);
+            line_label(:right:e, rh[:zwi - 7.5km] >> 0.4dt, "69");
+        }
+
+        with link = "point.pl.Zwierzyniec" {
+            statdot(rh[:zwi] >> 0.4dt);
+            slabel(:right, rh[:zwi] << 0.4dt + (1dt, -0.3dt), "Zwierzyniec");
+        }
+
+        with link = "line.pl.69" {
+            track(rh[:zwi, :zwt] >> 0.4dt);
+        }
+
+        with link = "point.pl.Zwierzyniec-Towarowy" {
+            track(:station, rh[:zwt, :zwt.ys] >> 0.4dt);
+            statdot(:nopax, rh[:zwt]);
+            slabel(:right :nopax, rh[:zwt] << 0.4dt + (1.4dt, 0.8dt),
+                "Zwierzyniec Towarowy"
+            );
+        }
+
+        with link = "line.pl.69" {
+            track(
+                    rh[:zwt.ys - 0.1dl, :zwt.ys] >> 0.4dt
+                ..  rh[:zwt.yys + 1dt, :joz]
+            );
+            line_label(:right:e, rh[:joz - 4.3km], (0dt, 0.2dt), "69");
+        }
+
+        with link = "point.pl.Józefów-Roztoczański" {
+            statdot(rh[:joz]);
+            slabel(:right, rh[:joz] + (1.5dt, 0.3dt), "Józefów Roztoczański");
+        }
+
+        with link = "line.pl.69" {
+            track(rh[:joz, :bel]);
+            line_label(:left:s, rh[:bel - 11km], "69");
+        }
+
+        with link = "point.pl.Bełżec" {
+            statdot(rh[:bel]);
+            slabel(:right, rh[:bel] + (1.5dt, 0dt), "Bełżec");
+        }
+    }
+
+    with railway = :second :tourist {
+        with link = "line.pl.69" {
+            track(rh[:bel, :hre]);
+            line_label(:right:ne, rh[:bel + 5.3km], "69");
+        }
+
+        with link = "point.pl.Hrebenne" {
+            track(rh[:hre, :hre.ym]);
+            statdot(rh[:hre]);
+            slabel(:right, rh[:hre] + (-0.3dt, -1.5dt), "Hrebenne");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.69" {
+            track(rh[:hre.ym, :hrg]);
+        }
+
+        with link = "point.int.Hrebenne-Рава-Руська" {
+            marker(:right :ref, rh[:hrg]);
+            marker(:left :ref, rh[:hrg]);
+        }
+    }
+}
+
