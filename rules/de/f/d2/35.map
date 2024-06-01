@@ -328,8 +328,19 @@ with detail = 2 {
 
 # DE 3525.  Mainz-Mombach - Mainz-Bischofsheim Überltg I
 with detail = 2 {
-    with link = "line.de.3525" {
-        track(:first :double :cat:ac15, path("d2.de.3525")[:kai, :bis]);
+    let mb = path("d2.de.3525");
+
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.3525" {
+            track(mb[:mom.yw, :nor.ym]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.3525" {
+            track(mb[:nor.ym, :kos]);
+            track(mb[:kos.yb, :bis]);
+        }
     }
 }
 
@@ -337,7 +348,9 @@ with detail = 2 {
 # DE 3527.  Mainz Hbf - Mainz Kaiserbrücke
 with detail = 2 {
     with link = "line.de.3527" {
-        track(:first :double :cat:ac15, path("d2.de.3527")[:mai.yw, :kai]);
+        track(:first :double :cat:ac15 :pax,
+                path("d2.de.3527")[:mai.yw, :nor.ym]
+        );
     }
 }
 
