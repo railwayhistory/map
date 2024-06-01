@@ -213,7 +213,7 @@ with detail = 2 {
         track(:first :double :cat:ac25 :pax, la[:yor, :vir]);
         with layer = 1 line_badge(:cat:ac25 :pax, la[:vir - 20km], "165");
 
-        track(:first :double :cat:ac25 :pax, la[:vir, :ath]);
+        track(:first :double :cat:ac25 :pax, la[:vir, :ath.a]);
         with layer = 1 line_badge(:cat:ac25 :pax, la[:yau - 9km], "165");
     }
 
@@ -225,11 +225,6 @@ with detail = 2 {
     with link = "point.be.Virton" {
         with layer = 1 marker(:statdot :cat:ac25 :pax, la[:vir]);
         slabel(:left :cat:ac25 :pax, la[:vir.a] + (-1.8dt, 3.0dt), "Virton");
-    }
-
-    with link = "point.be.Athus" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, la[:ath]);
-        slabel(:left :cat:ac25 :pax, la[:ath] + (-1.8dt, -0.8km), "Athus");
     }
 }
 
@@ -281,14 +276,28 @@ with detail = 2 {
 with detail = 2 {
     let aa = path("simple.be.167");
 
-    with link = "line.be.167" {
-        with layer = -2 track(:first :cat:ac25, aa[:yau, :athf]);
-        with layer = 1 line_badge(:open :cat:ac25, aa[:yau + 5.5km], "167");
+    with railway = :first :cat:ac25 :pax {
+        with link = "line.be.167" {
+            track(aa[:yau, :ath]);
+            line_label(:right:e, aa[:yau + 5km], "167");
+        }
+
+        with link = "point.be.Athus" {
+            track(:station :double, aa[:ath, :ath.a]);
+            statdot(aa[:ath]);
+            slabel(:left, aa[:ath] + (-1.8dt, -0.8km), "Athus");
+        }
     }
 
-    with link = "point.int.Athus-Rodange" {
-        with layer =1 marker(:refdt :cat:ac25 :right, aa[:athf]);
-        with layer =1 marker(:refdt :cat:ac25 :left, aa[:athf]);
+    with railway = :first :cat:ac25 :nopax {
+        with link = "line.be.167" {
+            track(aa[:ath.a, :athf]);
+        }
+
+        with link = "point.int.Athus-Rodange" {
+            marker(:refdt :right, aa[:athf]);
+            marker(:refdt :left, aa[:athf]);
+        }
     }
 }
 
