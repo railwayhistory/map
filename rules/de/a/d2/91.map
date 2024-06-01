@@ -179,15 +179,19 @@ with detail = 2 {
 with detail = 2 {
     let lb = path("d2.de.9110");
 
-    with link = "line.de.9110" {
-        track(:third, lb[:lun.yb, :ble]);
+    with railway = :third :museum {
+        with link = "line.de.9110" {
+            track(lb[:lun.yb, :neg]);
+            line_label(:right:nw, lb[:lun.yb + 5.5km], "9110");
 
-        line_badge(:open, lb[:ble - 12.7km], "9110");
-    }
+            track(lb[:neg, :ble]);
+            line_label(:right:n, lb[:neg + 2.5km], "9110");
+        }
 
-    with link = "point.de.Bleckede" {
-        with layer = 1 marker(:statdot, lb[:ble]);
-        slabel(:right, lb[:ble] << 1.5dt, "Bleckede");
+        with link = "point.de.Bleckede" {
+            statdot(lb[:ble]);
+            slabel(:right, lb[:ble] << 1.5dt, "Bleckede");
+        }
     }
 }
 
