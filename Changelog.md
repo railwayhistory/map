@@ -2,6 +2,13 @@
 
 ## Updates
 
+### 2024-06-01
+
+* Line _DE 1956_ (Weddel Abzw – Fallersleben) is double tracked since
+  2024-03-02. ([#42])
+
+[#42]: https://github.com/railwayhistory/map/pull/42
+
 ### 2024-03-02
 
 * Added the newly opened section of _AT 460,_ St.Paul im Lavanttal –
@@ -58,9 +65,38 @@
 
 ## Corrections
 
+### 2024-06-01
+
+* Line _BE 167_ (Y.Autelbas – Athus-frontiere) has passenger service to
+  Athus. ([#40])
+* Line _CZ 112_ (Děčín hl.n. západ – Oldřichov u Duchcova) has tourist
+  passenger service only between Děčín and Teplice. ([#37])
+* Line _CZ 163_ (Doupov – Vilémov u Kadaně) has tourist trains from
+  Kadaňský Rohozec. ([#38])
+* Lines _DE 3525_ (Mainz-Mombach – Mainz-Bischofsheim) and _DE 3527_
+  (Mainz Hbf – Mainz Kaiserbrücke) have passenger service. Also added a
+  missing portion between at Kaiserbrücke. ([#39])
+* Line _DE 6356_ (Merseburg – Halle-Nietleben) has no passenger service to
+  Buna Werke. ([#43])
+* Line _DE 6403_ (Magdeburg Hbf – Leipzig Hbf) has no passenger service
+  beyond Leipzig-Wahren.
+* Line _DE 9110_ (Lüneburg – Bleckede) has historic service. ([#36])
+* Line _FR 311_ (Longueau – Boulogne-Ville) is not electrified between
+  St-Roch and Rang-du-Fliers-Verton. ([#26])
+* Fixed typo in Emmersdorf a.d. Donau. ([#41])
+
+[#26]: https://github.com/railwayhistory/map/pull/26
+[#36]: https://github.com/railwayhistory/map/pull/36
+[#37]: https://github.com/railwayhistory/map/pull/37
+[#38]: https://github.com/railwayhistory/map/pull/38
+[#39]: https://github.com/railwayhistory/map/pull/39
+[#40]: https://github.com/railwayhistory/map/pull/40
+[#41]: https://github.com/railwayhistory/map/pull/41
+[#43]: https://github.com/railwayhistory/map/pull/43
+
 ### 2023-12-04
 
-* Line _IT OLU_ (Oleggio ~ Luino ~ confine) does not have passenger
+* Line _IT OLU_ (Oleggio – Luino – confine) does not have passenger
   service between Sesto Calende and Leveno-Mombello.
 
 ### 2023-10-09
