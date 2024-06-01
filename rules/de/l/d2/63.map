@@ -251,18 +251,31 @@ with detail = 2 {
 with detail = 2 {
     let mn = path("d2.de.6356");
 
-    with link = "line.de.6356" {
-        track(:first :cat:ac15 :pax, mn[:mer.yb, :bun.ys]);
-        track(:first :cat:ac15, mn[:bun.ys, :hol.ya]);
-        track(:first :removed, mn[:hol.ya, :awo.y]);
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.de.6356" {
+            track(mn[:mer.yb, :eli.ym]);
+            track(mn[:eli.ym, :bun]);
+        }
+
+        with link = "point.de.Buna-Werke" {
+            track(:station, mn[:bun, :bun.ys]);
+            statdot(mn[:bun]);
+        }
+
+        with link = "line.de.6356" {
+            track(mn[:bun.ys, :hol.yl]);
+        }
+
+        with link = "point.de.Holleben" {
+            track(:station, mn[:hol.yl, :hol.ya]);
+            statdot(mn[:hol]);
+        }
     }
 
-    with link = "point.de.Buna-Werke" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mn[:bun]);
-    }
-
-    with link = "point.de.Holleben" {
-        with layer = 1 marker(:statdot :cat:ac15, mn[:hol]);
+    with railway = :first :removed {
+        with link = "line.de.6356" {
+            track(mn[:hol.ya, :awo.y]);
+        }
     }
 }
 
