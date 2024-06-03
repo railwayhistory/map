@@ -80,6 +80,13 @@
   Buna Werke. ([#43])
 * Line _DE 6403_ (Magdeburg Hbf – Leipzig Hbf) has no passenger service
   beyond Leipzig-Wahren.
+* Line _DE 6444_ (Rieckdahl – Rostock Seehafen Nord) has no passenger
+  service. ([#44])
+* Line _DE 6619_ (Reitzenhain – Flöha) has no passenger service between
+  Marienberg and Pockau-Lengefeld. ([#45])
+* Line _DE 6663_ (Schönheide Ost – Adorf (Vogtl)) has tourist service between
+  Schönheide Süd and Hammerbrücke and no passenger service between
+  Zwotental and Adorf. ([#46])
 * Line _DE 9110_ (Lüneburg – Bleckede) has historic service. ([#36])
 * Line _FR 311_ (Longueau – Boulogne-Ville) is not electrified between
   St-Roch and Rang-du-Fliers-Verton. ([#26])
@@ -93,6 +100,9 @@
 [#40]: https://github.com/railwayhistory/map/pull/40
 [#41]: https://github.com/railwayhistory/map/pull/41
 [#43]: https://github.com/railwayhistory/map/pull/43
+[#44]: https://github.com/railwayhistory/map/pull/44
+[#45]: https://github.com/railwayhistory/map/pull/45
+[#46]: https://github.com/railwayhistory/map/pull/46
 
 ### 2023-12-04
 
