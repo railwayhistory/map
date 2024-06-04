@@ -1164,21 +1164,16 @@ with detail = 2 {
 with detail = 2 {
     let sl = path("d2.de.6656");
 
-    with link = "line.de.6656" {
-        track(:second, sl[:son.ys, :sle]);
+    with railway = :second :closed {
+        with link = "line.de.6656" {
+            track(sl[:son.ys, :sle]);
+            line_label(:left:e, sl[:son.ys + 6km], "6656");
+        }
 
-        guide(:linenum,
-                sl[:son.ys + 6km] << 0.7dt
-            --  sl[:son.ys + 6km] << 3.0dt
-        );
-        label(:linenum, sl[:son.ys + 6km] << 3.0dt + (0dt, 0.2dt),
-            hbox(:right:middle, "6656 ")
-        );
-    }
-
-    with link = "point.de.Schleiz" {
-        with layer = 1 marker(:statdot, sl[:sle]);
-        slabel(:top, sl[:sle] + (0dt, -1.0dt), "Schleiz");
+        with link = "point.de.Schleiz" {
+            statdot(sl[:sle]);
+            slabel(:top, sl[:sle] + (0dt, -1.0dt), "Schleiz");
+        }
     }
 }
 
