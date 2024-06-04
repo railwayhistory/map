@@ -1,16 +1,18 @@
 # DE 1000.  Flensburg Weiche - Harrislee Grenze
 with detail = 2 {
-    let flwhag = path("d2.de.1000");
+    let fh = path("d2.de.1000");
 
-    with link = "line.de.1000" {
-        with layer = -1 track(:first :double :cat:ac15, flwhag[:flw, :fri.yf]);
-        track(:first :double :cat:ac15 :pax, flwhag[:fri.yf, :hag]);
-        with layer = 1 line_badge(:cat:ac15 :pax, flwhag[:hag - 2.5km], "1000");
-    }
+    with railway = :first :double :cat:ac15 :pax  {
+        with link = "line.de.1000" {
+            track(fh[:flw, :fri.yf]);
+            track(fh[:fri.yf, :hag]);
+            line_label(:left:e, fh[:hag - 2.5km], "1000");
+        }
 
-    with link = "point.int.Harrislee-Padborg" {
-        marker(:refdt :cat:ac15 :left, flwhag[:hag]);
-        marker(:refdt :cat:ac15 :right, flwhag[:hag]);
+        with link = "point.int.Harrislee-Padborg" {
+            marker(:ref :left, fh[:hag]);
+            marker(:ref :right, fh[:hag]);
+        }
     }
 }
 
