@@ -515,25 +515,21 @@ with detail = 2 {
 with detail = 2 {
     let mb = path("d2.de.6534");
 
-    with link = "line.de.6534" {
-        track(:tram :cat:dc6, mb[:mun, :buc]);
+    with railway = :third :cat:dc6 :museum {
+        with link = "line.de.6534" {
+            track(mb[:mun, :buc]);
+            line_label(:right:w, mb[:mun + 3.2km], "6534");
+        }
 
-        guide(:linenum :tram,
-                mb[:mun + 3km] >> 0.7dt
-            --  mb[:mun + 3km] >> 3.0dt
-        );
-        label(:linenum :tram, mb[:mun + 3km] >> 3.0dt,
-            hbox(:left:middle, " 6534")
-        );
-    }
-
-    with link = "point.de.Buckow-Märkische-Schweiz" {
-        with layer = 1 marker(:statdot :tram, mb[:buc]);
-        slabel(:top :tram, mb[:buc] + (0dt, -1dt),
-            vbox(:center:bottom,
-                "Buckow", span(:light, "(Märkische"), span(:light, "Schweiz)")
-            )
-        );
+        with link = "point.de.Buckow-Märkische-Schweiz" {
+            statdot(mb[:buc]);
+            slabel(:top, mb[:buc] + (0dt, -1dt),
+                vbox(:center:bottom,
+                    "Buckow",
+                    span(:light, "(Märkische"), span(:light, "Schweiz)")
+                )
+            );
+        }
     }
 }
 
