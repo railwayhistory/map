@@ -950,12 +950,21 @@ with detail = 2 {
 with detail = 2 {
     let gk = path("d2.de.b.6194");
 
-    with link = "line.de.6194" {
-        track(:first :removed, gk[:gra.y, :sen.yg]);
-        track(:first :removed, gk[:sen.yh, :hox]);
-        track(:first, gk[:hox, :str]);
+    with railway = :first :removed {
+        with link = "line.de.6194" {
+            track(:first :removed, gk[:gra.y, :sen.yg]);
+            with zoom = :high line_label(:right:e, gk[:gra.y + 2.5km], "6194"); 
 
-        line_badge(:open, gk[:hox + 4km], "6194");
+            track(:first :removed, gk[:sen.yh, :hox]);
+            line_label(:left:w, gk[:sen.yh + 4.5km], "6194");
+        }
+    }
+
+    with railway = :first :tourist {
+        with link = "line.de.6194" {
+            track(gk[:hox, :str]);
+            line_label(:right:e, gk[:hox + 1.5km], "6194");
+        }
     }
 }
 
@@ -972,9 +981,18 @@ with detail = 2 {
 with detail = 2 {
     let bh = path("d2.de.6198");
 
-    with link = "line.de.6198" {
-        track(:first, bh[:bri.yh, :hos.yb]);
-        track(:first, bh[:hos.yk, :hox]);
+    with railway = :first :cat:ac15 :tourist {
+        with link = "line.de.6198" {
+            track(bh[:bri.yh, :hos.yb]);
+            with zoom = :high line_label(:right:ne, bh[:bri.yh + 3km], "6198");
+        }
+    }
+
+    with railway = :first :tourist {
+        with link = "line.de.6198" {
+            track(:first, bh[:hos.yk, :hox]);
+            with zoom = :high line_label(:left:w, bh[:hos.yk + 1.5km], "6198");
+        }
     }
 }
 

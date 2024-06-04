@@ -2,18 +2,23 @@
 with detail = 2 {
     let gk = path("d2.de.d.6194");
 
-    with link = "line.de.6194" {
-        track(:first, gk[:str, :kam]);
-    }
+    with railway = :first :tourist {
+        with link = "point.de.Straßgräbchen-Bernsdorf-Oberlausitz" {
+            track(:station, gk[:str, :str.yk]);
+            statdot(gk[:str]);
+            slabel(:left, gk[:str] + (-1.8dt, 1.5dt),
+                vbox(:right:bottom,
+                    "Straßgräbchen-    ", "Bernsdorf   ",
+                    span(:light, "(Oberlausitz)")
+                )
+            );
+        }
 
-    with link = "point.de.Straßgräbchen-Bernsdorf-Oberlausitz" {
-        with layer = 1 marker(:statdot, gk[:str]);
-        slabel(:left, gk[:str] + (-1.8dt, 1.5dt),
-            vbox(:right:bottom,
-                "Straßgräbchen-    ", "Bernsdorf   ",
-                span(:light, "(Oberlausitz)")
-            )
-        );
+        with link = "line.de.6194" {
+            track(gk[:str.yk, :kna]);
+            line_label(:left:w, gk[:str.yk + 3km], "6194");
+            track(gk[:kna, :kam]);
+        }
     }
 }
 
