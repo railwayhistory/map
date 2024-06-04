@@ -123,31 +123,35 @@ with detail = 2 {
 with detail = 2 {
     let ks = path("d2.de.9107");
 
-    with link = "line.de.9107" {
-        track(:third, ks[:kss, :son]);
+    with railway = :third :pax {
+        with link = "line.de.9107" {
+            track(ks[:kss, :opp]);
+        }
 
-        guide(:linenum,
-                ks[:son - 7.8km] >> 0.7dt
-            --  ks[:son - 7.8km] >> 3.0dt
-        );
-        label(:linenum, ks[:son - 7.8km] >> 3.0dt + (0.2dt, 0.1dt),
-            hbox(:center:top :badgesize, "9107")
-        );
+        with link = "point.de.Oppendorf" {
+            statdot(ks[:opp]);
+            with zoom = :high slabel(:right, ks[:opp] + (1.5dt, -0.5dt),
+                hbox(:left:top, "K.-Oppendorf")
+            );
+        }
     }
 
-    with link = "point.de.Oppendorf" {
-        with layer = 1 marker(:statdot, ks[:opp]);
-    }
+    with railway = :third :nopax {
+        with link = "line.de.9107" {
+            track(ks[:opp, :son]);
+            line_label(:left:se, ks[:opp + 6.5km], "9107");
+        }
 
-    with link = "point.de.Schönberg-Holst" {
-        with layer = 1 marker(:statdot, ks[:son]);
-        label(ks[:son] + (-0.5dt, 1.0dt),
-            hbox(:left:top :small,
-                hbox(:left:base,
-                    "Schönberg ", span(:light, "(Holst)")
+        with link = "point.de.Schönberg-Holst", railway = :museum {
+            statdot(ks[:son]);
+            slabel(:right, ks[:son] + (-0.5dt, 1.0dt),
+                hbox(:left:top :small,
+                    hbox(:left:base,
+                        "Schönberg ", span(:light, "(Holst)")
+                    )
                 )
-            )
-        );
+            );
+        }
     }
 }
 
