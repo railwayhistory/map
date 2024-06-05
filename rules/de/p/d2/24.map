@@ -3,18 +3,31 @@ with detail = 2 {
     let dh1 = path("d2.de.2400.p1");
     let dh2 = path("d2.de.2400.p2");
 
-    with link = "line.de.2400" {
-        track(:first :double :cat:ac15 :pax, dh1[:der.f, :rat.f]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.2400" {
+            track(dh1[:der.f, :rat.f]);
+        }
 
-        with layer = -1 track(:first :double :cat:ac15, dh2[:wih.ff, :hgo]);
-    }
+        with link = "point.de.Düsseldorf-Rath" {
+            statdot(dh1[:rat]);
+        }
 
-    with link = "point.de.Düsseldorf-Rath" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, dh1[:rat]);
-    }
+        with link = "line.de.2400" {
+            track(dh1[:rat, :rat.f]);
+        }
 
-    with link = "point.de.Hagen-Vorhalle" {
-        with layer = 1 marker(:statdot :cat:ac15, dh2[:vor]);
+        with link = "line.de.2400" {
+            track(dh2[:wih.ff, :vor.f]);
+        }
+
+        with link = "point.de.Hagen-Vorhalle" {
+            track(:station, dh2[:vor.f, :vor]);
+            statdot(dh2[:vor]);
+        }
+
+        with link = "line.de.2400" {
+            track(dh2[:vor, :hgo]);
+        }
     }
 }
 
