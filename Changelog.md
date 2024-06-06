@@ -6,8 +6,16 @@
 
 * Line _DE 1956_ (Weddel Abzw – Fallersleben) is double tracked since
   2024-03-02. ([#42])
+* Line _DE 2852_ (Fröndenberg – Unna) is suspended since 2022-07-24 due to
+  badger’s burrows in the embankments. ([#67])
+* Line _DE 6534_ (Müncheberg – Buckow) was switched from a tram to a
+  regular railway in 2023. ([#56])
+* Line _DE 6656_ (Schönberg – Schleiz) was closed on 2024-03-15. ([#53])
 
 [#42]: https://github.com/railwayhistory/map/pull/42
+[#53]: https://github.com/railwayhistory/map/pull/53
+[#56]: https://github.com/railwayhistory/map/pull/56
+[#67]: https://github.com/railwayhistory/map/pull/67
 
 ### 2024-03-02
 
@@ -73,21 +81,60 @@
   passenger service only between Děčín and Teplice. ([#37])
 * Line _CZ 163_ (Doupov – Vilémov u Kadaně) has tourist trains from
   Kadaňský Rohozec. ([#38])
+* Line _DE 1000_ (Flensburg Weiche – Harrislee Grenze) has passenger
+  service between Flensburg Weiche and Friedensweg. ([#52])
+* Line _DE 1600_ (Osnabrück Hbf Po – Osnabrück Hbf Pu) has passenger
+  service. ([#61])
+* Line _DE 1771_ (North curve Nordstemmen) has passenger service. ([#62])
+* Added missing line _DE 2183_ (Mülheim (Ruhr)-Styrum - Oberhausen Hbf).
+  ([#64])
+* Fixed electrification of line _DE 2213_ (Dortmund-Lütgendortmund –
+  Dortmund West). ([#66])
+* Line _DE 2324_ (Mülheim (Ruhr)-Speldorf – Niederlahnstein) no longer has
+  passenger service to Duisburg-Entenfang. ([#63])
+* Line _DE 2400_ (Düsseldorf Hbf - Essen-Überruhr - Hagen Hbf) has
+  passenger service between Hagen-Vorhalle and Hagen. ([#65])
 * Lines _DE 3525_ (Mainz-Mombach – Mainz-Bischofsheim) and _DE 3527_
   (Mainz Hbf – Mainz Kaiserbrücke) have passenger service. Also added a
   missing portion between at Kaiserbrücke. ([#39])
+* Line _DE 3826_ (Schlüchtern Ziegenberg – Elm) has passenger service.
+  ([#60])
+* Line _DE 4841_ (Maulbronn West - Maulbronn Stadt) has tourist service.
+  ([#71])
+* Line _DE 5230_ (Waigolshausen – Gemünden) has tourist service only.
+  ([#70])
+* Line _DE 6170_ (Ringbahn Berlin) has passenger service (even if not a
+  lot normally) between Gesundbrunnen and Lichtenberg. ([#58])
+* Lines _DE 6194_ (Großräschen – Kamenz) and _DE 6198_ (Brieske – Hosena)
+  have tourist service between Brieske and Kamenz. ([#48])
+* Line _DE 6191_ (Hennersdorf West – Doberlug-Kirchhain Nord) has
+  passenger service. ([#50])
+* Line _DE 6207_ (Horka Grenze – Roßlau) has tourist service between Horka
+  Grenze and Horka. ([#47])
 * Line _DE 6356_ (Merseburg – Halle-Nietleben) has no passenger service to
   Buna Werke. ([#43])
 * Line _DE 6403_ (Magdeburg Hbf – Leipzig Hbf) has no passenger service
   beyond Leipzig-Wahren.
 * Line _DE 6444_ (Rieckdahl – Rostock Seehafen Nord) has no passenger
   service. ([#44])
+* Line _DE 6519_ (Berlin-Grünau – Berlin-Schönefeld Flughafen Süd) has
+  passenger service on the first portion out of Grünau. ([#59])
 * Line _DE 6619_ (Reitzenhain – Flöha) has no passenger service between
   Marienberg and Pockau-Lengefeld. ([#45])
 * Line _DE 6663_ (Schönheide Ost – Adorf (Vogtl)) has tourist service between
   Schönheide Süd and Hammerbrücke and no passenger service between
   Zwotental and Adorf. ([#46])
+* Line _DE 6759_ (Britz – Fürstenberg) has passenger service between Britz
+  and Joachimsthal. ([#57])
+* Lines _DE 6864_ and _DE 6864_ (Blankenburg – Tanne) have historic
+  service between Blankenburg and Rübeland. ([#68])
+* Line _DE 6954_ (Borchtitz – Sassnitz-Mukran) has passenger service
+  ([#49])
+* Line _DE 9107_ (Kiel – Schönberg) has passenger service to
+  Kiel-Oppendorf. ([#51])
 * Line _DE 9110_ (Lüneburg – Bleckede) has historic service. ([#36])
+* Line _DE 9581_ (Gotteszell – Blaibach) has historic service to
+  Viechtach. ([#69])
 * Line _FR 311_ (Longueau – Boulogne-Ville) is not electrified between
   St-Roch and Rang-du-Fliers-Verton. ([#26])
 * Fixed typo in Emmersdorf a.d. Donau. ([#41])
@@ -103,6 +150,26 @@
 [#44]: https://github.com/railwayhistory/map/pull/44
 [#45]: https://github.com/railwayhistory/map/pull/45
 [#46]: https://github.com/railwayhistory/map/pull/46
+[#47]: https://github.com/railwayhistory/map/pull/47
+[#48]: https://github.com/railwayhistory/map/pull/48
+[#49]: https://github.com/railwayhistory/map/pull/49
+[#50]: https://github.com/railwayhistory/map/pull/50
+[#51]: https://github.com/railwayhistory/map/pull/51
+[#52]: https://github.com/railwayhistory/map/pull/52
+[#57]: https://github.com/railwayhistory/map/pull/57
+[#58]: https://github.com/railwayhistory/map/pull/58
+[#59]: https://github.com/railwayhistory/map/pull/59
+[#60]: https://github.com/railwayhistory/map/pull/60
+[#61]: https://github.com/railwayhistory/map/pull/61
+[#62]: https://github.com/railwayhistory/map/pull/62
+[#63]: https://github.com/railwayhistory/map/pull/63
+[#64]: https://github.com/railwayhistory/map/pull/64
+[#65]: https://github.com/railwayhistory/map/pull/65
+[#66]: https://github.com/railwayhistory/map/pull/66
+[#68]: https://github.com/railwayhistory/map/pull/68
+[#69]: https://github.com/railwayhistory/map/pull/69
+[#70]: https://github.com/railwayhistory/map/pull/70
+[#71]: https://github.com/railwayhistory/map/pull/71
 
 ### 2023-12-04
 
@@ -151,6 +218,7 @@
 
 | Date | Update |
 | ---- | ------ |
+| 2024-06-04 | Added old alignment of Line _DE 6183_ near Zwenkau. |
 | 2024-02-15 | Added overview map for Czechia. |
 | 2023-11-18 | Added overview map for Austria. |
 | 2023-09-16 | Added overview map for Slovenia. |
