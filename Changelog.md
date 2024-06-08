@@ -2,7 +2,7 @@
 
 ## Updates
 
-### 2024-06-01
+### 2024-06-08
 
 * Line _DE 1956_ (Weddel Abzw – Fallersleben) is double tracked since
   2024-03-02. ([#42])
@@ -73,10 +73,12 @@
 
 ## Corrections
 
-### 2024-06-01
+### 2024-06-08
 
 * Line _BE 167_ (Y.Autelbas – Athus-frontiere) has passenger service to
   Athus. ([#40])
+* Fixed electrification of line _CH 132_ (Martigny - Le Châtelard-Frontière)
+  which still has third rail sections. ([#73], [#74])
 * Line _CZ 112_ (Děčín hl.n. západ – Oldřichov u Duchcova) has tourist
   passenger service only between Děčín and Teplice. ([#37])
 * Line _CZ 163_ (Doupov – Vilémov u Kadaně) has tourist trains from
@@ -170,6 +172,8 @@
 [#69]: https://github.com/railwayhistory/map/pull/69
 [#70]: https://github.com/railwayhistory/map/pull/70
 [#71]: https://github.com/railwayhistory/map/pull/71
+[#73]: https://github.com/railwayhistory/map/pull/73
+[#74]: https://github.com/railwayhistory/map/pull/74
 
 ### 2023-12-04
 
@@ -218,7 +222,9 @@
 
 | Date | Update |
 | ---- | ------ |
-| 2024-06-04 | Added old alignment of Line _DE 6183_ near Zwenkau. |
+| 2024-06-08 | Added old alignment of line _DE 6183_ near Zwenkau. |
+|            | Added old alignment of line _CH 610_ in Brig. |
+|            | Added “Waldeisenbahn Bad Muskau”, lines _DE BB1_ to _DE BB3_. |
 | 2024-02-15 | Added overview map for Czechia. |
 | 2023-11-18 | Added overview map for Austria. |
 | 2023-09-16 | Added overview map for Slovenia. |
