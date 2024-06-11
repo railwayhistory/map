@@ -2,72 +2,113 @@
 with detail = 2 {
     let mr = path("d2.de.m.5500");
 
-    with link = "line.de.5500" {
-        track(:first :double :cat:ac15 :pax, mr[:mun, :egg]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "point.de.München-Hbf" {
+            track(:station, mr[:mun, :mun.yh]);
+            statdot(mr[:mun]);
+            slabel(:right, mr[:mun] + (8.5km, -4.5km),
+                span(:bold :large, "München")
+            );
+        }
 
-        line_badge(:cat:ac15 :pax, mr[:nff - 10km], "5500");
-        line_badge(:cat:ac15 :pax, mr[:lan - 10km], "5500");
-        guide(:linenum :cat:ac15 :pax,
-                mr[:lan + 11.5km] >> 1dt
-            --  mr[:lan + 11.5km] >> 3dt
-        );
-        label(:linenum :cat:ac15 :pax, mr[:lan + 11.5km] >> 3dt,
-            hbox(:left:middle, " 5500")
-        );
-    }
+        with link = "line.de.5500" {
+            track(mr[:mun.yh, :lai.ys]);
+        }
 
-    with link = "point.de.München-Hbf" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:mun]);
-        slabel(:right :cat:ac15 :pax, mr[:mun] + (8.5km, -4.5km),
-            span(:bold :large, "München")
-        );
-    }
+        with link = "point.de.München-Laim-Rbf" {
+            track(:station, mr[:lai.ys, :mun.yl]);
+            statdot(:nopax, mr[:lai]);
+        }
 
-    with link = "point.de.München-Laim-Rbf" {
-        with layer = 1 marker(:statdot :cat:ac15, mr[:lai]);
-    }
+        with link = "line.de.5500" {
+            track(mr[:mun.yl, :moo]);
+        }
 
-    with link = "point.de.München-Moosach" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:moo]);
-    }
+        with link = "point.de.München-Moosach" {
+            statdot(:pax, mr[:moo]);
+        }
 
-    with link = "point.de.München-Feldmoching" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:fel]);
-    }
+        with link = "line.de.5500" {
+            with layer = -1 track(mr[:moo, :fel.yn]);
+        }
 
-    with link = "point.de.Neufahrn-Freising" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:nff]);
-        slabel(:left :cat:ac15 :pax, mr[:nff] + (-1.5dt, 0dt),
-            vbox(:right:bottom, "Neufahrn", span(:light, "(b Freising)"))
-        );
-    }
+        with link = "point.de.München-Feldmoching" {
+            track(:station, mr[:fel.yn, :fel]);
+            statdot(mr[:fel]);
+        }
 
-    with link = "point.de.Langenbach-Oberbay" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:lba]);
-        slabel(:right :cat:ac15 :pax, mr[:lba] + (1.5dt, -0.8dt),
-            vbox(:left:top, "Langenbach", span(:light, "Oberbay"))
-        );
-    }
+        with link = "line.de.5500" {
+            track(mr[:fel, :nff]);
+            line_label(:right:w, mr[:nff - 10km], "5500");
+        }
 
-    with link = "point.de.Landshut-Bay-Hbf" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:lan]);
-        slabel(:right :cat:ac15 :pax, mr[:lan] + (2.0dt, 1.8dt),
-            hbox(:left:base, "Landshut ", span(:light, "(Bay)"))
-        );
-    }
+        with link = "point.de.Neufahrn-Freising" {
+            track(mr[:nff, :nen.y]);
+            statdot(mr[:nff]);
+            slabel(:left, mr[:nff] + (-1.5dt, 0dt),
+                vbox(:right:bottom, "Neufahrn", span(:light, "(b Freising)"))
+            );
+        }
 
-    with link = "point.de.Neufahrn-Niederbay" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:nfn]);
-        slabel(:left :cat:ac15 :pax, mr[:nfn] + (-1.5dt, 1.5dt),
-            vbox(:right:bottom, "Neufahrn", span(:light, "(Niederbay)"))
-        );
-    }
+        with link = "line.de.5500" {
+            track(mr[:nen.y, :fre]);
+        }
 
-    with link = "point.de.Eggmühl" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mr[:egg]);
-        slabel(:right :cat:ac15 :pax, mr[:egg] + (0.5dt, 0.5dt),
-            hbox(:left:top, "Eggmühl")
-        );
+        with link = "point.de.Freising" {
+            statdot(mr[:fre]);
+            slabel(:left, mr[:fre] + (-1.7dt, -0.3dt), "Freising");
+        }
+
+        with link = "line.de.5500" {
+            track(mr[:fre, :lba]);
+            line_label(:right:nw, mr[:lba - 4km], "5500");
+        }
+
+        with link = "point.de.Langenbach-Oberbay" {
+            track(:station, mr[:lba, :lba.ye]);
+            statdot(mr[:lba]);
+            slabel(:right, mr[:lba] + (1.5dt, -0.8dt),
+                vbox(:left:top, "Langenbach", span(:light, "Oberbay"))
+            );
+        }
+
+        with link = "line.de.5500" {
+            track(mr[:lba.ye, :lan.yr]);
+            line_label(:left:s, mr[:lan - 11km], (-0.5dt, 0dt), "5500");
+        }
+
+        with link = "point.de.Landshut-Bay-Hbf" {
+            track(mr[:lan.yr, :lan.yp]);
+            statdot(mr[:lan]);
+            slabel(:right, mr[:lan] + (2.0dt, 1.8dt),
+                hbox(:left:base, "Landshut ", span(:light, "(Bay)"))
+            );
+        }
+
+        with link = "line.de.5500" {
+            track(mr[:lan.yp, :nfn]);
+            line_label(:right:w, mr[:lan + 11.5km], "5500");
+        }
+
+        with link = "point.de.Neufahrn-Niederbay" {
+            track(mr[:nfn, :nfn.yr]);
+            statdot(mr[:nfn]);
+            slabel(:left, mr[:nfn] + (-1.5dt, 1.5dt),
+                vbox(:right:bottom, "Neufahrn", span(:light, "(Niederbay)"))
+            );
+        }
+
+        with link = "line.de.5500" {
+            track(mr[:nfn.yr, :egg.yl]);
+        }
+
+        with link = "point.de.Eggmühl" {
+            track(:station, mr[:egg.yl, :egg]);
+            statdot(mr[:egg]);
+            slabel(:right, mr[:egg] + (0.5dt, 0.5dt),
+                hbox(:left:top, "Eggmühl")
+            );
+        }
     }
 }
 
