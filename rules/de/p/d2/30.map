@@ -62,25 +62,25 @@ with detail = 2 {
     let lf1 = path("d2.de.3033.1");
     let lf2 = path("d2.de.3033.2");
 
-    with link = "line.de.3033" {
-        with layer = -4 track(:second, lf1[:lin.yf, :kal]);
-        with layer = -4 track(:second :removed, lf1[:kal, :ska]);
-        with layer = -4 track(:second :removed, lf2[:ska.y, :fla.yl]);
+    with railway = :second :museum {
+        with link = "line.de.3033" {
+            track(lf1[:lin.yf, :kal]);
+        }
 
-        guide(:linenum :removed,
-                lf2[:fla.yl - 6.2km] << 0.7dt
-            --  lf2[:fla.yl - 6.2km] << 3.0dt
-        );
-        label(:linenum :removed, lf2[:fla.yl - 6.2km] << 3.0dt,
-            hbox(:center:bottom :badgesize, "3033")
-        );
+        with link = "point.de.Kalenborn" {
+            statdot(lf1[:kal]);
+            slabel(:left, lf1[:kal] + (1dt, -1.2dt),
+                vbox(:right:bottom, "Kalen-    ", "born")
+            );
+        }
     }
 
-    with link = "point.de.Kalenborn" {
-        with layer = 1 marker(:statdot, lf1[:kal]);
-        slabel(:left, lf1[:kal] + (1dt, -1.2dt),
-            vbox(:right:bottom, "Kalen-    ", "born")
-        );
+    with railway = :second :removed {
+        with link = "line.de.3033" {
+            track(lf1[:kal, :ska]);
+            track(lf2[:ska.y, :fla.yl]);
+            line_label(:left:s, lf2[:fla.yl - 6.2km], "3033");
+        }
     }
 }
 
