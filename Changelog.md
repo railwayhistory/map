@@ -73,6 +73,32 @@
 
 ## Corrections
 
+### 2024-06-11
+
+* Lines _DE 1260_ (Hesedorf – Stade) and _DE 9132_ (Bremervörde Süd –
+  Osterholz-Scharmbeck Ost) have tourist service. ([#80])
+* Line _DE 1750_ (Wunstorf – Hannover-Linden – Lehrte Nord) has passenger
+  service between Hannover-Waldheim and Lehrte. ([#79])
+* Line _DE 3033_ (Linz – Flammersfeld) has historic service between Linz
+  and Kalenborn. ([#86])
+* Line _DE 5530_ (München-Laim Rbf – München-Mittersendling) has passenger
+  service between Friedenheimer Brücke and Heimeranplatz West. ([#81])
+* Line _DE 6206_ (Guben – Guben Grenze) has passenger service. ([#78])
+* Downgraded line _DE 6954_ (Borchtitz – Sassnitz-Mukran Pbf) to tourist
+  service. ([#77])
+* Line _DE 9362_ (Wächtersbach – Bad Orb) has historic service ([#85])
+* Line _DE 9604_ (Köln-Niehl Hafen – Benzelrath) is electrified between
+  Köln-Lind and Frechen. ([#87])
+
+[#77]: https://github.com/railwayhistory/map/pull/77
+[#78]: https://github.com/railwayhistory/map/pull/78
+[#79]: https://github.com/railwayhistory/map/pull/79
+[#80]: https://github.com/railwayhistory/map/pull/80
+[#81]: https://github.com/railwayhistory/map/pull/81
+[#85]: https://github.com/railwayhistory/map/pull/85
+[#86]: https://github.com/railwayhistory/map/pull/86
+[#87]: https://github.com/railwayhistory/map/pull/87
+
 ### 2024-06-08
 
 * Line _BE 167_ (Y.Autelbas – Athus-frontiere) has passenger service to
@@ -219,6 +245,14 @@
 
 
 ## New Additions
+
+### 2024-06-11
+
+* Added line _DE 1754_ (Hannover-Wülfel – Hannover-Waldheim) ([#79])
+* Added line _DE 5559_ (Neufahrn Ost – Neufahrn Nord) ([#82])
+
+[#79]: https://github.com/railwayhistory/map/pull/79
+[#82]: https://github.com/railwayhistory/map/pull/82
 
 | Date | Update |
 | ---- | ------ |
