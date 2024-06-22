@@ -246,6 +246,13 @@
 
 ## New Additions
 
+### 2024-06-22
+
+* Added lines _DE 5125_ and _DE 5126_ (connection lines near Coburg).
+  ([#88])
+
+[#88]: https://github.com/railwayhistory/map/pull/79
+
 ### 2024-06-11
 
 * Added line _DE 1754_ (Hannover-Wülfel – Hannover-Waldheim) ([#79])
