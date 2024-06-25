@@ -2,31 +2,51 @@
 with detail = 2 {
     let nb = path("d2.de.9604");
 
-    with link = "line.de.9604" {
-        with layer = -2 track(:second, nb[:nih, :lin]);
-        track(:second :double :pax, nb[:lin, :fre]);
-        with layer = -2 track(:second, nb[:fre, :ben]);
+    with railway = :second :nopax {
+        with link = "point.de.Köln-Niehl-Hafen" {
+            statdot(nb[:nih]);
+        }
+
+        with link = "line.de.9604" {
+            track(nb[:nih, :nie]);
+        }
+
+        with link = "point.de.Köln-Niehl" {
+            track(:station, nb[:nie, :nie.x]);
+            statdot(nb[:nie]);
+        }
+
+        with link = "line.de.9604" {
+            track(nb[:nie.x, :bic]);
+        }
+
+        with link = "point.de.Köln-Bickendorf" {
+            statdot(nb[:bic]);
+        }
+
+        with link = "line.de.9604" {
+            track(nb[:bic, :lin]);
+        }
     }
 
-    with link = "point.de.Köln-Niehl-Hafen" {
-        with layer = 1 marker(:statdot, nb[:nih]);
+    with railway = :second :double :cat:dc75 :pax {
+        with link = "line.de.9604" {
+            track(nb[:lin, :fre]);
+        }
+
+        with link = "point.de.Frechen" {
+            statdot(nb[:fre]);
+        }
     }
 
+    with railway = :second :nopax {
+        with link = "line.de.9604" {
+            track(nb[:fre, :ben]);
+        }
 
-    with link = "point.de.Köln-Niehl" {
-        with layer = 1 marker(:statdot, nb[:nie]);
-    }
-
-    with link = "point.de.Köln-Bickendorf" {
-        with layer = 1 marker(:statdot, nb[:bic]);
-    }
-
-    with link = "point.de.Frechen" {
-        with layer = 1 marker(:statdot, nb[:fre]);
-    }
-
-    with link = "point.de.Benzelrath" {
-        with layer = 1 marker(:statdot, nb[:ben]);
+        with link = "point.de.Benzelrath" {
+            statdot(nb[:ben]);
+        }
     }
 }
 

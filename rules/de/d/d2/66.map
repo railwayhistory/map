@@ -401,47 +401,62 @@ with detail = 2 {
 with detail = 2 {
     let rf = path("d2.de.6619");
 
-    with link = "line.de.6619" {
-        track(:second :removed, rf[:reg, :mar]);
-        track(:second :pax, rf[:mar, :flo.yr]);
+    with railway = :second :removed {
+        with link = "line.de.6619" {
+            track(rf[:reg, :rei]);
+        }
 
-        guide(:linenum :removed,
-                rf[:rei + 5km] >> 0.7dt
-            --  rf[:rei + 5km] >> 3.0dt
-        );
-        label(:linenum :removed, rf[:rei + 5km] >> 3.0dt + (0dt, -0.2dt),
-            hbox(:left:middle, " 6619")
-        );
-        guide(:linenum :pax,
-                rf[:poc + 6.7km] << 0.7dt
-            --  rf[:poc + 6.7km] << 3.0dt
-        );
-        label(:linenum :pax, rf[:poc + 6.7km] << 3.0dt,
-            hbox(:right:middle, "6619 ")
-        );
+        with link = "point.de.Reitzenhain" {
+            statdot(rf[:rei]);
+            slabel(:right, rf[:rei] + (1.5dt, 0.8dt), "Reitzenhain");
+        }
+
+        with link = "line.de.6619" {
+            track(rf[:rei, :mar]);
+            line_label(:right:w, rf[:rei + 5km], "6619");
+        }
     }
 
-    with link = "point.de.Reitzenhain" {
-        with layer = 1 marker(:statdot :removed, rf[:rei]);
-        slabel(:right :removed, rf[:rei] + (1.5dt, 0.5dt), "Reitzenhain");
+    with railway = :second :nopax {
+        with link = "point.de.Marienberg-Sachs" {
+            statdot(rf[:mar]);
+            slabel(:left, rf[:mar] + (2.5dt, -0.5dt),
+                vbox(:right:bottom,
+                    "Marienberg",
+                    span(:light, "(Sachs)    ")
+                )
+            );
+        }
+
+        with link = "line.de.6619" {
+            track(rf[:mar, :poc.yo]);
+            line_label(:left:se, rf[:poc.yo - 3.45km], "6619");
+        }
     }
 
-    with link = "point.de.Marienberg-Sachs" {
-        with layer = 1 marker(:statdot :pax, rf[:mar]);
-        slabel(:left :pax, rf[:mar] + (3dt, -1.0dt),
-            vbox(:right:bottom, "Marienberg", span(:light, "(Sachs)    "))
-        );
-    }
+    with railway = :second :pax {
+        with link = "point.de.Pockau-Lengefeld" {
+            track(:station, rf[:poc.yo, :poc]);
+            statdot(rf[:poc]);
+            slabel(:right, rf[:poc] + (1.3dt, 0dt),
+                vbox(:left:bottom, "Pockau-", "Lengefeld")
+            );
+        }
 
-    with link = "point.de.Pockau-Lengefeld" {
-        with layer = 1 marker(:statdot :pax, rf[:poc]);
-        slabel(:right :pax, rf[:poc] + (1.3dt, 0dt),
-            vbox(:left:bottom, "Pockau-", "Lengefeld")
-        );
-    }
+        with link = "line.de.6619" {
+            track(rf[:poc, :het.yg]);
+            line_label(:left:e, rf[:poc + 6.7km], "6619");
 
-    with link = "point.de.Hetzdorf-Flöhatal" {
-        with layer = 1 marker(:statdot :pax, rf[:het]);
+            track(rf[:het.yg, :het]);
+        }
+
+        with link = "point.de.Hetzdorf-Flöhatal" {
+            statdot(rf[:het]);
+        }
+
+        with link = "line.de.6619" {
+            track(rf[:het, :flo.yr]);
+        }
     }
 }
 
@@ -1078,14 +1093,7 @@ with detail = 2 {
 
     with link = "line.de.6651" {
         track(:second :pax, zk[:zwo.yk, :klg]);
-
-        guide(:linenum :pax,
-                zk[:zwo.yk + 5km] >> 0.7dt
-            --  zk[:zwo.yk + 5km] >> 3.0dt
-        );
-        label(:linenum :pax, zk[:zwo.yk + 5km] >> 3.0dt,
-            hbox(:center:top, "6651")
-        );
+        line_label(:right:n, zk[:zwo.yk + 6km], "6651");
     }
 
     with link = "point.de.Klingenthal" {
@@ -1156,21 +1164,16 @@ with detail = 2 {
 with detail = 2 {
     let sl = path("d2.de.6656");
 
-    with link = "line.de.6656" {
-        track(:second, sl[:son.ys, :sle]);
+    with railway = :second :closed {
+        with link = "line.de.6656" {
+            track(sl[:son.ys, :sle]);
+            line_label(:left:e, sl[:son.ys + 6km], "6656");
+        }
 
-        guide(:linenum,
-                sl[:son.ys + 6km] << 0.7dt
-            --  sl[:son.ys + 6km] << 3.0dt
-        );
-        label(:linenum, sl[:son.ys + 6km] << 3.0dt + (0dt, 0.2dt),
-            hbox(:right:middle, "6656 ")
-        );
-    }
-
-    with link = "point.de.Schleiz" {
-        with layer = 1 marker(:statdot, sl[:sle]);
-        slabel(:top, sl[:sle] + (0dt, -1.0dt), "Schleiz");
+        with link = "point.de.Schleiz" {
+            statdot(sl[:sle]);
+            slabel(:top, sl[:sle] + (0dt, -1.0dt), "Schleiz");
+        }
     }
 }
 
@@ -1272,47 +1275,70 @@ with detail = 2 {
 with detail = 2 {
     let sa = path("d2.de.6663");
 
-    with link = "line.de.6663" {
-        track(:second :closed, sa[:soo, :mul.yf]);
-        track(:second :pax, sa[:mul.yf, :ado.yz]);
+    with railway = :second :closed {
+        with link = "point.de.Schönheide-Ost" {
+            statdot(:closed, sa[:soo]);
+        }
 
-        guide(:linenum :closed,
-                sa[:mul - 4km] >> 0.7dt
-            --  sa[:mul - 4km] >> 3.0dt
-        );
-        label(:linenum :closed, sa[:mul - 4km] >> 3.0dt,
-            hbox(:center:bottom, "6663")
-        )
-        guide(:linenum :pax,
-                sa[:mul + 7.2km] >> 0.7dt
-            --  sa[:mul + 7.2km] >> 3.0dt
-        );
-        label(:linenum :pax, sa[:mul + 7.2km] >> 3.0dt,
-            hbox(:right:middle, "6663 ")
-        );
+        with link = "line.de.6663" {
+            track(sa[:soo, :sos.yw]);
+        }
     }
 
-    with link = "point.de.Schönheide-Ost" {
-        with layer = 1 marker(:statdot :closed, sa[:soo]);
+    with railway = :second :tourist {
+        with link = "point.de.Schönheide-Süd" {
+            statdot(sa[:sos]);
+            slabel(:right, sa[:sos] + (2.0dt, 1.5dt), "Schönheide Süd");
+        }
+
+        with link = "line.de.6663" {
+            track(sa[:sos, :ham]);
+            line_label(:right:s, sa[:ham - 3.5km], "6663");
+        }
+
+        with link = "point.de.Hammerbrücke" {
+            statdot(sa[:ham]);
+        }
     }
 
-    with link = "point.de.Schönheide-Süd" {
-        with layer = 1 marker(:statdot :closed, sa[:sos]);
-        slabel(:right :closed, sa[:sos] + (2.0dt, 1.5dt), "Schönheide");
+    with railway = :second :closed {
+        with link = "line.de.6663" {
+            track(:second :closed, sa[:ham, :mul.yf]);
+        }
     }
 
-    with link = "point.de.Muldenberg" {
-        with layer = 1 marker(:statdot :pax, sa[:mul]);
-        slabel(:right :pax, sa[:mul] + (1.5dt, 1.0dt), "Muldenberg");
+    with railway = :second :pax {
+        with link = "point.de.Muldenberg" {
+            track(:station, sa[:mul.yf, :mul]);
+            statdot(sa[:mul]);
+            slabel(:right, sa[:mul] + (1.5dt, 1.3dt), "Muldenberg");
+        }
+
+        with link = "line.de.6663" {
+            track(sa[:mul, :zwo]);
+            line_label(:right:e, sa[:mul + 7.2km], "6663");
+        }
+
+        with link = "point.de.Zwotental" {
+            track(:station, sa[:zwo, :zwo.yk]);
+            statdot(sa[:zwo]);
+            slabel(:left, sa[:zwo] + (-1.8dt, -0.3dt), "Zwotental");
+        }
     }
 
-    with link = "point.de.Zwotental" {
-        with layer = 1 marker(:statdot :pax, sa[:zwo]);
-        slabel(:left :pax, sa[:zwo] + (-1.8dt, -0.3dt), "Zwotental");
-    }
+    with railway = :second :nopax {
+        with link = "line.de.6663" {
+            track(sa[:zwo.yk, :sie.ye]);
+            line_label(:left:w, sa[:zwo.yk + 5.1km], "6663");
+        }
 
-    with link = "point.de.Siebenbrunn" {
-        with layer = 1 marker(:statdot, sa[:sie]);
+        with link = "point.de.Siebenbrunn" {
+            statdot(sa[:sie]);
+        }
+
+        with link = "line.de.6663" {
+            track(sa[:sie, :ado.yz]);
+        }
     }
 }
 

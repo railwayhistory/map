@@ -2,19 +2,32 @@
 with detail = 2 {
     let do = path("d2.cz.112");
 
-    with link = "line.cz.112" {
-        track(:second :museum, do[:dec.yt, :tep]);
-        line_label(:right:s :museum, do[:dec.yt + 12.5km], "112");
-        line_label(:right:s :museum, do[:tep - 6km], "112");
+    with railway = :second :tourist {
+        with link = "line.cz.112" {
+            track(do[:dec.yt, :tel]);
+            line_label(:right:s, do[:dec.yt + 12.5km], "112");
+        }
+
+        with link = "point.cz.Telnice" {
+            statdot(do[:tel]);
+            slabel(:top, do[:tel] + (0dt, -0.5dt), "Telnice");
+        }
     }
 
-    with link = "point.cz.Teplice-lesní-brána" {
-        track(:second :station :museum, do[:tep, :tep.yo]);
-        statdot(:museum, do[:tep]);
-    }
+    with railway = :second :nopax {
+        with link = "line.cz.112" {
+            track(do[:tel, :tep]);
+            line_label(:right:s, do[:tep - 6km], "112");
+        }
 
-    with link = "line.cz.112" {
-        track(:second :museum, do[:tep.yo, :old.yt]);
+        with link = "point.cz.Teplice-lesní-brána" {
+            track(:station, do[:tep, :tep.yo]);
+            statdot(do[:tep]);
+        }
+
+        with link = "line.cz.112" {
+            track(do[:tep.yo, :old.yt]);
+        }
     }
 }
 

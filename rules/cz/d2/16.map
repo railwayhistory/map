@@ -164,36 +164,29 @@ with detail = 2 {
 with detail = 2 {
     let dv = path("d2.cz.163");
 
-    with link = "point.cz.Doupov" {
-        statdot(:removed, dv[:dou]);
-        slabel(:bottom :removed, dv[:dou] + (0dt, 0.5dt), "Doupov");
+    with railway = :second :removed {
+        with link = "point.cz.Doupov" {
+            statdot(dv[:dou]);
+            slabel(:bottom, dv[:dou] + (0dt, 0.5dt), "Doupov");
+        }
+
+        with link = "line.cz.163" {
+            track(dv[:dou, :kad]);
+        }
     }
 
-    with link = "line.cz.163" {
-        track(:second :removed, dv[:dou, :kad]);
-        line_label(:left:s :removed, dv[:dou + 3.5km], "163");
-    }
+    with railway = :second :tourist {
+        with link = "point.cz.Kadaňský-Rohozec" {
+            statdot(dv[:kad]);
+            slabel(:right, dv[:kad] + (-1.5dt, 0.8dt),
+                vbox(:left:top, "Kadaňský", "Rohozec")
+            );
+        }
 
-    with link = "point.cz.Kadaňský-Rohozec" {
-        statdot(:open, dv[:kad]);
-        slabel(:right, dv[:kad] + (-1.5dt, 0.8dt),
-            vbox(:left:top, "Kadaňský", "Rohozec")
-        );
-    }
-
-    with link = "line.cz.163" {
-        track(:second, dv[:kad, :rad]);
-    }
-
-    with link = "point.cz.Radonice-u-Kadaně" {
-        statdot(:museum, dv[:rad]);
-        slabel(:left :museum, dv[:rad] + (0dt, -0.3dt),
-            vbox(:right:bottom, "Radonice", "u Kadaně")
-        );
-    }
-
-    with link = "line.cz.163" {
-        track(:second :museum, dv[:rad, :vil.yd]);
+        with link = "line.cz.163" {
+            track(dv[:kad, :vil.yd]);
+            line_label(:left:s, dv[:kad + 2.7km], "163");
+        }
     }
 }
 

@@ -2,40 +2,48 @@
 with detail = 2 {
     let bd = path("d2.ch.610");
 
-    with link = "line.ch.610" {
-        track(:first :narrow:g1000 :cat:ac11 :pax, bd[:brt.xa, :owa]);
-        line_label(:left:se :cat:ac11 :pax, bd[:brt.xa + 21.5km], "610");
+    with railway = :first :narrow:g1000 :cat:ac11 :pax {
+        with link = "line.ch.610" {
+            track(bd[:brt.xa, :owa]);
+            line_label(:left:se, bd[:brt.xa + 21.5km], "610");
+        }
+
+        with link = "point.ch.Oberwald" {
+            track(:station, bd[:owa, :owa.yf]);
+            statdot(bd[:owa]);
+            slabel(:left, bd[:owa] + (-1.7dt, 0.5dt), "Oberwald");
+        }
+
+        with link = "line.ch.610" {
+            track(bd[:owa.yf, :rea.yf]);
+            line_label(:right:nw, bd[:owa.yf + 10km], "610");
+        }
+
+        with link = "point.ch.Realp" {
+            track(:station, bd[:rea.yf, :rea]);
+            statdot(bd[:rea]);
+            slabel(:left, bd[:rea] + (-1.5dt, 0.5dt), "Realp");
+        }
+
+        with link = "line.ch.610" {
+            track(:casing, bd[:rea, :and]);
+        }
+
+        with link = "point.ch.Andermatt" {
+            statdot(bd[:and]);
+            slabel(:left, bd[:and] + (-1.7dt, 0.8dt), "Andermatt");
+        }
+
+        with link = "line.ch.610" {
+            track(bd[:and, :dis]);
+            line_label(:right:n, bd[:and + 11.3km], "610");
+        }
     }
 
-    with link = "point.ch.Oberwald" {
-        track(:first:station :narrow:g1000 :cat:ac11 :pax, bd[:owa, :owa.yf]);
-        statdot(:cat:ac11 :pax, bd[:owa]);
-        slabel(:left :cat:ac11 :pax, bd[:owa] + (-1.7dt, 0.5dt), "Oberwald");
-    }
-
-    with link = "line.ch.610" {
-        track(:first :narrow:g1000 :cat:ac11 :pax, bd[:owa.yf, :rea.yf]);
-        line_label(:right:nw :cat:ac11 :pax, bd[:owa.yf + 10km], "610");
-    }
-
-    with link = "point.ch.Realp" {
-        track(:first:station :narrow:g1000 :cat:ac11 :pax, bd[:rea.yf, :rea]);
-        statdot(:cat:ac11 :pax, bd[:rea]);
-        slabel(:left :cat:ac11 :pax, bd[:rea] + (-1.5dt, 0.5dt), "Realp");
-    }
-
-    with link = "line.ch.610" {
-        track(:first :narrow:g1000 :cat:ac11 :pax :casing, bd[:rea, :and]);
-    }
-
-    with link = "point.ch.Andermatt" {
-        statdot(:cat:ac11 :pax, bd[:and]);
-        slabel(:left :cat:ac11 :pax, bd[:and] + (-1.7dt, 0.8dt), "Andermatt");
-    }
-
-    with link = "line.ch.610" {
-        track(:first :narrow:g1000 :cat:ac11 :pax, bd[:and, :dis]);
-        line_label(:right:n :cat:ac11 :pax, bd[:and + 11.3km], "610");
+    with railway = :first :narrow:g1000 :removed {
+        with link = "line.ch.610" {
+            track(path("d2.ch.610.bri")[:bri.ys, :bri.yn]);
+        }
     }
 }
 

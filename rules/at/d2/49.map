@@ -2,45 +2,55 @@
 with detail = 2 {
     let bs = path("d2.at.490");
 
-    with link = "point.int.Bleiburg-Prevalje" {
-        marker(:left :ref :pax, bs[:blg]);
-        marker(:right :ref :pax, bs[:blg]);
+    with railway = :first :pax {
+        with link = "point.int.Bleiburg-Prevalje" {
+            marker(:left :ref, bs[:blg]);
+            marker(:right :ref, bs[:blg]);
+        }
+
+        with link = "line.at.490" {
+            track(bs[:blg, :ble.yp]);
+            line_label(:left:n, bs[:blg + 1.5km], (0.3dt, 0dt), "490");
+        }
     }
 
-    with link = "line.at.490" {
-        track(:first :pax, bs[:blg, :ble.yp]);
-        line_label(:right:s :pax, bs[:blg + 1km], " 490");
+    with railway = :first :cat:ac15 :pax {
+        with link = "point.at.Bleiburg" {
+            track(:first:station :pax,bs[:ble.yp, :ble]);
+            statdot(:pax, bs[:ble]);
+            slabel(:left :pax, bs[:ble] + (0.3dt, 0.5dt),
+                hbox(:right:top, "Bleiburg")
+            );
+        }
+
+        with link = "line.at.490" {
+            track(:first, bs[:ble, :mio]);
+        }
     }
 
-    with link = "point.at.Bleiburg" {
-        track(:first:station :pax,bs[:ble.yp, :ble]);
-        statdot(:pax, bs[:ble]);
-        slabel(:left :pax, bs[:ble] + (1.3dt, 0.8dt),
-            hbox(:right:top, "Bleiburg")
-        );
-    }
+    with railway = :first :removed {
+        with link = "line.at.490" {
+            track(bs[:mio, :vol]);
+            line_label(:right:s, bs[:mio + 3km], "490");
+        }
 
-    with link = "line.at.490" {
-        track(:first, bs[:ble, :mio]);
-        track(:first :closed, bs[:mio, :vol]);
-    }
+        with link = "point.at.Völkermarkt-Kühnsdorf" {
+            track(:station, bs[:vol, :vol.ye]);
+            statdot(bs[:vol]);
+            slabel(:top, bs[:vol] + (0dt, -0.5km) + (0dt, -0.8dt),
+                vbox(:center:bottom, " Völkermarkt-", "Kühnsdorf")
+            );
+        }
 
-    with link = "point.at.Völkermarkt-Kühnsdorf" {
-        track(:first:station :closed, bs[:vol, :vol.ye]);
-        statdot(:closed, bs[:vol]);
-        slabel(:right :closed, bs[:vol] + (0dt, -0.5km) + (-2dt, -0.5dt),
-            vbox(:left:bottom, "Völkermarkt-", "Kühnsdorf")
-        );
-    }
-
-    with link = "line.at.490" {
-        track(:first :closed, bs[:vol.ye, :kla.yv]);
+        with link = "line.at.490" {
+            track(bs[:vol.ye, :tai.yw]);
+        }
     }
 
     with link = "point.at.Klagenfurt-Hbf" {
         track(:first:station :double :cat:ac15 :pax, bs[:kla.yv, :kla.yr]);
         statdot(:cat:ac15 :pax, bs[:kla]);
-        slabel(:right :cat:ac15 :pax, bs[:kla] + (0dt, 0.5dt),
+        slabel(:right :cat:ac15 :pax, bs[:kla] + (0dt, 0.8dt),
             hbox(:left:top :medium :bold, "Klagenfurt")
         );
     }
@@ -62,7 +72,7 @@ with detail = 2 {
     with link = "line.at.490" {
         track(:first :double :cat:ac15 :pax, bs[:vil, :spi]);
         line_label(:right:s :double :cat:ac15 :pax, bs[:vil + 6.3km], "490");
-        line_badge(:cat:ac15 :pax, bs[:spi - 8km], "490");
+        line_label(:left:ne :cat:ac15 :pax, bs[:spi - 8km], "490");
     }
 
     with link = "point.at.Spittal-Millstätter-See" {
@@ -148,6 +158,14 @@ with detail = 2 {
     with link = "point.at.Kötschach-Mauthen" {
         statdot(:open, ak[:kot]);
         slabel(:left, ak[:kot] + (-1.5dt, 0.8dt), "Kötschach-Mauthen");
+    }
+}
+
+
+# AT 490.1.  Mittlern Ost - Mittlern West
+with detail = 2 {
+    with link = "line.at.490.1" {
+        track(:first :cat:ac15 :pax, path("d2.at.490.1")[:mio, :mit.yo]);
     }
 }
 

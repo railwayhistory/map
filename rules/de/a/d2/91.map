@@ -123,31 +123,35 @@ with detail = 2 {
 with detail = 2 {
     let ks = path("d2.de.9107");
 
-    with link = "line.de.9107" {
-        track(:third, ks[:kss, :son]);
+    with railway = :third :pax {
+        with link = "line.de.9107" {
+            track(ks[:kss, :opp]);
+        }
 
-        guide(:linenum,
-                ks[:son - 7.8km] >> 0.7dt
-            --  ks[:son - 7.8km] >> 3.0dt
-        );
-        label(:linenum, ks[:son - 7.8km] >> 3.0dt + (0.2dt, 0.1dt),
-            hbox(:center:top :badgesize, "9107")
-        );
+        with link = "point.de.Oppendorf" {
+            statdot(ks[:opp]);
+            with zoom = :high slabel(:right, ks[:opp] + (1.5dt, -0.5dt),
+                hbox(:left:top, "K.-Oppendorf")
+            );
+        }
     }
 
-    with link = "point.de.Oppendorf" {
-        with layer = 1 marker(:statdot, ks[:opp]);
-    }
+    with railway = :third :nopax {
+        with link = "line.de.9107" {
+            track(ks[:opp, :son]);
+            line_label(:left:se, ks[:opp + 6.5km], "9107");
+        }
 
-    with link = "point.de.Schönberg-Holst" {
-        with layer = 1 marker(:statdot, ks[:son]);
-        label(ks[:son] + (-0.5dt, 1.0dt),
-            hbox(:left:top :small,
-                hbox(:left:base,
-                    "Schönberg ", span(:light, "(Holst)")
+        with link = "point.de.Schönberg-Holst", railway = :museum {
+            statdot(ks[:son]);
+            slabel(:right, ks[:son] + (-0.5dt, 1.0dt),
+                hbox(:left:top :small,
+                    hbox(:left:base,
+                        "Schönberg ", span(:light, "(Holst)")
+                    )
                 )
-            )
-        );
+            );
+        }
     }
 }
 
@@ -179,15 +183,19 @@ with detail = 2 {
 with detail = 2 {
     let lb = path("d2.de.9110");
 
-    with link = "line.de.9110" {
-        track(:third, lb[:lun.yb, :ble]);
+    with railway = :third :museum {
+        with link = "line.de.9110" {
+            track(lb[:lun.yb, :neg]);
+            line_label(:right:nw, lb[:lun.yb + 5.5km], "9110");
 
-        line_badge(:open, lb[:ble - 12.7km], "9110");
-    }
+            track(lb[:neg, :ble]);
+            line_label(:right:n, lb[:neg + 2.5km], "9110");
+        }
 
-    with link = "point.de.Bleckede" {
-        with layer = 1 marker(:statdot, lb[:ble]);
-        slabel(:right, lb[:ble] << 1.5dt, "Bleckede");
+        with link = "point.de.Bleckede" {
+            statdot(lb[:ble]);
+            slabel(:right, lb[:ble] << 1.5dt, "Bleckede");
+        }
     }
 }
 
@@ -441,10 +449,12 @@ with detail = 2 {
 with detail = 2 {
     let bv = path("d2.de.9132");
 
-    with link = "line.de.9132" {
-        track(:second, bv[:bvo.yo, :oho.yb]);
+    with railway = :second :tourist {
+        with link = "line.de.9132" {
+            track(bv[:bvo.yo, :oho.yb]);
 
-        line_badge(:open, bv[:oho.yb - 18km], "9132");
+            line_label(:right:e, bv[:oho.yb - 22km], "9132");
+        }
     }
 }
 

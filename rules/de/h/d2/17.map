@@ -461,9 +461,33 @@ with detail = 2 {
 with detail = 2 {
     let wl = path("d2.de.1750");
 
-    with link = "line.de.1750" {
-        with layer = -1 track(:first :double :cat:ac15, wl[:see.a, :lin.f]);
-        with layer = -1 track(:first :double :cat:ac15, wl[:wha, :leh.a]);
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.1750" {
+            track(:first :double :cat:ac15, wl[:see.a, :lin.f]);
+            track(:first :double :cat:ac15, wl[:wha, :whe]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.1750" {
+            track(:first :double :cat:ac15, wl[:whe, :leh.a]);
+        }
+    }
+}
+
+
+# DE 1754.  Hannover-Wülfel - Hannover-Waldheim
+with detail = 2 {
+    let ww = path("d2.de.1754");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.de.1754" {
+            with zoom = :low track(ww[:wul.yl, :whe]);
+            with zoom = :high track(
+                    ww[:wul.yl - 1.6dt, :wul.yl - 1.5dt]
+                ..  ww[:whe + 1.5dt, :whe + 1.6dt]
+            );
+        }
     }
 }
 
@@ -586,7 +610,7 @@ with detail = 2 {
     let bb = path("d2.de.1771");
 
     with link = "line.de.1771" {
-        track(:first :cat:ac15, bb[:bar.f, :ros]);
+        track(:first :cat:ac15 :pax, bb[:bar.f, :ros]);
     }
 }
 

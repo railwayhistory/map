@@ -26,13 +26,15 @@ with detail = 2 {
 with detail = 2 {
     let gg = path("d2.de.6206");
 
-    with link = "line.de.6206" {
-        track(:first, gg[:gub.yn, :gug]);
-    }
+    with railway = :first :pax {
+        with link = "line.de.6206" {
+            track(gg[:gub.yn, :gug]);
+        }
 
-    with link = "point.int.Guben-Gubin" {
-        marker(:refdt :right, gg[:gug]);
-        marker(:refdt :left, gg[:gug]);
+        with link = "point.int.Guben-Gubin" {
+            marker(:ref :right, gg[:gug]);
+            marker(:ref :left, gg[:gug]);
+        }
     }
 }
 
@@ -41,44 +43,90 @@ with detail = 2 {
 with detail = 2 {
     let hr = path("d2.de.b.6207");
 
-    with link = "line.de.6207" {
-        track(:first :double :cat:ac15, hr[:hog, :sar]);
-        track(:first :double :cat:ac15 :pax, hr[:sar, :ruh.yh]);
-        track(:first :double :cat:ac15 :pax, hr[:ruh.yf, :fax]);
+    with railway = :first :double :cat:ac15 :tourist {
+        with link = "line.de.6207" {
+            track(hr[:hog, :hrg.yl]);
+            line_label(:left:n, hr[:hrg.yl - 4km], "6207");
+        }
 
-        line_badge(:cat:ac15 :pax, hr[:sar + 15km], "6207");
-        line_badge(:cat:ac15 :pax, hr[:hoy + 7km], "6207");
-        line_badge(:cat:ac15 :pax, hr[:bie + 7.5km], "6207");
+        with link = "point.de.Horka-Gbf" {
+            track(:station, hr[:hrg.yl, :sar]);
+            statdot(:nopax, hr[:hrg]);
+        }
     }
 
-    with link = "point.de.Knappenrode" {
-        with layer = 1 marker(:statdot :cat:ac15, hr[:kna]);
-        slabel(:left :cat:ac15, hr[:kna] + (1.5dt, 1.0dt),
-            vbox(:right:top, "Knappen-", "rode ")
-        );
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.6207" {
+            track(hr[:hor, :sar]);
+        }
     }
 
-    with link = "point.de.Hoyerswerda" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:hoy]);
-        slabel(:right :cat:ac15 :pax, hr[:hoy] + (-1.0dt, -1.8dt),
-            "Hoyerswerda"
-        );
-    }
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6207" {
+            track(hr[:sar, :kna.ys]);
+            line_label(:right:s, hr[:sar + 12km], "6207");
+            line_label(:right:sw, hr[:kna.ys - 6km], "6207");
+        }
 
-    with link = "point.de.Hosena" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:hos]);
-        slabel(:right :cat:ac15 :pax, hr[:hos] + (1.5dt, -1.0dt), "Hosena");
-    }
+        with link = "point.de.Knappenrode" {
+            track(:station, hr[:kna.ys, :kna]);
+            statdot(hr[:kna]);
+            slabel(:left, hr[:kna] + (1.5dt, 1.0dt),
+                vbox(:right:top, "Knappen-", "rode ")
+            );
+        }
 
-    with link = "point.de.Lauchhammer" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:lau]);
-        slabel(:bottom :cat:ac15 :pax, hr[:lau] + (0dt, 1.0dt),
-            vbox(:center:top, "Lauch-", "hammer")
-        );
-    }
+        with link = "line.de.6207" {
+            track(hr[:kna, :hoy.yk]);
+        }
 
-    with link = "point.de.Elsterwerda-Biehla" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, hr[:bie + 0.5dt]);
+        with link = "point.de.Hoyerswerda" {
+            track(:station, hr[:hoy.yk, :hoy.yn]);
+            statdot(hr[:hoy]);
+            slabel(:right, hr[:hoy] + (-0.8dt, -1.5dt), "Hoyerswerda");
+        }
+
+        with link = "line.de.6207" {
+            track(hr[:hoy.yk, :hos.yk]);
+            line_label(:right:s, hr[:hoy + 6km], "6207");
+        }
+
+        with link = "point.de.Hosena" {
+            track(:station, hr[:hos.yk, :hos.yb]);
+            statdot(hr[:hos]);
+            slabel(:right, hr[:hos] + (1.5dt, -1.0dt), "Hosena");
+        }
+
+        with link = "line.de.6207" {
+            track(hr[:hos.yb, :ruh.yh]);
+        }
+
+        # point.de.Ruhland
+
+        with link = "line.de.6207" {
+            track(hr[:ruh.yf, :lau]);
+        }
+
+        with link = "point.de.Lauchhammer" {
+            statdot(hr[:lau]);
+            slabel(:bottom, hr[:lau] + (0dt, 1.0dt),
+                vbox(:center:top, "Lauch-", "hammer")
+            );
+        }
+
+        with link = "line.de.6207" {
+            track(hr[:lau, :bie + 0.5dt]);
+            line_label(:right:s, hr[:lau + 7.5km], "6207");
+        }
+
+        with link = "point.de.Elsterwerda-Biehla" {
+            statdot(hr[:bie + 0.5dt]);
+        }
+
+        with link = "line.de.6207" {
+            track(hr[:bie + 0.5dt, :fax]);
+            line_label(:right:sw, hr[:bie + 9km], "6207");
+        }
     }
 }
 
