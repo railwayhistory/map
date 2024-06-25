@@ -90,3 +90,31 @@ with detail = 2 {
 }
 
 
+# PL 212.  Lipusz - Korzybie
+with detail = 2 {
+    let lk = path("d2.pl.212");
+
+    with railway = :second {
+        with link = "line.pl.212" {
+            track(lk[:lip.yk, :lip.yz]);
+            track(lk[:lip.yz, :byt.yl]);
+            line_label(:right:s, lk[:lip.yz + 9km], "212");
+        }
+
+        with link = "point.pl.Bytów" {
+            track(:station, lk[:byt.yl, :byt]);
+            track(:station :suspended, lk[:byt, :byt.ym]);
+            statdot(lk[:byt]);
+            slabel(:left, lk[:byt] + (-0.5dt, -1dt), "Bytów");
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.212" {
+            track(lk[:byt.ym, :kor.yl]);
+            line_label(:left:ne, lk[:byt.ym + 10km], "212");
+            line_label(:right:sw, lk[:kor.yl - 9.1km], "212");
+        }
+    }
+}
+
