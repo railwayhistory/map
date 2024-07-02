@@ -11,7 +11,7 @@ with detail = 2 {
     with railway = :second :nopax {
         with link = "line.pl.290" {
             track(mk[:las.y, :wil.yw]);
-            line_label(:left:nw, mk[:las.y + 3.5km], "290");
+            line_label(:right:se, mk[:las.y + 3.5km], "290");
 
             track(mk[:wil.yw, :wil.yz]);
             track(mk[:wil.yz, :rad.yh]);
@@ -111,6 +111,102 @@ with detail = 2 {
         with link = "line.pl.295" {
             track(wh[:weg.yz, :big]);
             line_label(:right:s, wh[:big - 5km], "295");
+        }
+    }
+}
+
+
+# PL 296.  Wielkie Piekary - Miłkowice
+with detail = 2 {
+    let wm = path("d2.pl.296");
+    let wg = path("d2.pl.d.275");
+
+    with railway = :first :double :cat:dc30 :nopax {
+        with link = "line.pl.296" {
+            track(:casing,
+                    wm[:wie.ym, :mil.yyw]
+                ..  wg[:mil.yw - 930m, :mil.yw - 600m] << 0.8dt
+            );
+            with layer = -1 track(
+                    wg[:mil.yw - 600m, :mil.yw - 599m] << 0.8dt
+                ..  wg[:mil.yw, :mil.yw + 0.1dl]
+            );
+        }
+    }
+}
+
+
+# PL 297.  Nowy Świętów - Głuchołazy Zdrój
+with detail = 2 {
+    let ng = path("d2.pl.297");
+
+    with railway = :second :pax {
+        with link = "line.pl.297" {
+            track(ng[:nsw.yg, :glu]);
+            line_label(:right:e, ng[:nsw.yg + 3.5km], "297");
+        }
+
+        with link = "point.pl.Głuchołazy" {
+            track(:station, ng[:glu, :glu.ym]);
+            statdot(ng[:glu]);
+            slabel(:right, ng[:glu] + (1.3dt, 1.8dt), "Głuchołazy");
+        }
+
+        with link = "point.pl.Głuchołazy-Miasto" {
+            statdot(ng[:glu.yz]);
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.297" {
+            track(ng[:glu.yz, :glz]);
+        }
+
+        with link = "point.pl.Głuchołazy-Zdrój" {
+            statdot(ng[:glz]);
+        }
+    }
+}
+
+
+# PL 298.  Kamienna Góra - Sędzisław
+with detail = 2 {
+    let ks = path("d2.pl.298");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Kamienna-Góra" {
+            statdot(ks[:kam]);
+            slabel(:left, ks[:kam] + (-0.3dt, -0.5dt),
+                vbox(:right:bottom, "Kamienna", "Góra")
+            );
+        }
+
+        with link = "line.pl.298" {
+            track(ks[:kam, :kru.y]);
+            line_label(:right:w, ks[:kam + 1km], "298");
+            track(ks[:kru.y, :sed.yk]);
+        }
+    }
+}
+
+
+# PL 299.  Kamienna Góra - Granica Państwa Lubawka
+with detail = 2 {
+    let kl = path("d2.pl.299");
+
+    with railway = :first :pax {
+        with link = "point.pl.Kamienna-Góra" {
+            track(:station, kl[:kam, :kam.yj]);
+        }
+
+        with link = "line.pl.299" {
+            track(kl[:kam.yj, :lug]);
+            line_label(:right:e, kl[:lug - 6.3km], "299");
+        }
+
+        with link = "point.int.Lubawka-Královec" {
+            marker(:left :ref, kl[:lug]);
+            marker(:right :ref, kl[:lug]);
         }
     }
 }

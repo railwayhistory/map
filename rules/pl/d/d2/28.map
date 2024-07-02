@@ -68,20 +68,20 @@ with detail = 2 {
 
     with railway = :first :double :cat:dc30 :pax {
         with link = "line.pl.282" {
-            track(mj[:mil.yj, :cho.yr]);
-            line_label(:left:ne, mj[:mil.yj + 6km], "282");
+            track(mj[:mil.yj, :cho.yz]);
+            line_label(:left:n, mj[:mil.yj + 4km], "282");
         }
 
         with link = "point.pl.Chojnów" {
-            track(:station, mj[:cho.yr, :cho.yz]);
+            track(:station, mj[:cho.yz, :cho.yr]);
             statdot(mj[:cho]);
-            slabel(:left, mj[:cho] + (-0.7km, 0dt) + (-1dt, -0.5dt),
+            slabel(:left, mj[:cho] + (-0.7km, 0dt) + (-1.3dt, -0.5dt),
                 "Chojnów"
             );
         }
 
         with link = "line.pl.282" {
-            track(mj[:cho.yz, :bol.ym - 1km]);
+            track(mj[:cho.yr, :bol.ym - 1km]);
             line_label(:right:s, mj[:bol.ym - 11km], (0.3dt, 0dt), "282");
             with layer = -1 track(mj[:bol.ym - 1km, :bol.ym]);
         }
@@ -233,8 +233,20 @@ with detail = 2 {
 
     with railway = :second :removed {
         with link = "line.pl.284" {
-            track(lg[:jer.ym, :lwo.yl]);
-            line_label(:right:s, lg[:lwo.yl - 9km], (-0.3dt, 0dt), "284");
+            track(lg[:jer.ym, :nwi.yb]);
+        }
+
+        with link = "point.pl.Nowa-Wieś-Grodziska" {
+            track(lg[:nwi.yb, :nwi]);
+            statdot(lg[:nwi]);
+            slabel(:left, lg[:nwi] + (0dt, -0.2km) + (0dt, -0.3dt),
+                vbox(:right:bottom, "Nowa Wieś   ", "Grodziska")
+            );
+        }
+
+        with link = "line.pl.284" {
+            track(lg[:nwi, :lwo.yl]);
+            line_label(:left:nw, lg[:lwo.yl - 6.5km], "284");
         }
 
         # point.pl.Lwówek-Śląski  pl.283
@@ -254,8 +266,13 @@ with detail = 2 {
 
     with railway = :second :pax {
         with link = "line.pl.285" {
-            with layer = -1 track(ws[:wro.ys, :wro.ys + 4km]);
-            track(ws[:wro.ys + 4km, :kob]);
+            with layer = -1 track(
+                    ws[:wro.ys - 0.1dl, :wro.ys]
+                ..  ws[:wro.xs - 0.1dl, :wro.xs] >> 0.4dt
+                ..  ws[:wro.xxs, :wro.xxs + 0.1dl] << 0.4dt
+                ..  ws[:wro.xxxs, :wro.xxxs + 0.1dl]
+            );
+            track(ws[:wro.xxxs, :kob]);
             line_label(:left:w, ws[:wro.ys + 10km], "285");
         }
 
@@ -302,20 +319,20 @@ with detail = 2 {
         with link = "point.pl.Ścinawka-Średnia" {
             track(:station, kw[:sci, :sci.yo]);
             statdot(kw[:sci]);
-            slabel(:right, kw[:sci] + (0.7km, 0dt) + (0.5dt, 0dt),
-                "Ścinawka Średnia"
+            slabel(:right, kw[:sci] + (0.7km, 0dt) + (1.5dt, 1dt),
+                vbox(:left:middle, "Ścinawka", "   Średnia")
             );
         }
 
         with link = "line.pl.286" {
             track(kw[:sci.yo, :nru]);
+            with zoom = :high line_label(:right:w, kw[:nru - 3.5km], "286");
         }
     }
 
     with railway = :second :pax {
         with link = "line.pl.286" {
             track(kw[:nru, :lud.yn]);
-            line_label(:right:w, kw[:lud.yn - 3.5km], "286");
         }
     }
 

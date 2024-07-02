@@ -73,7 +73,7 @@ with detail = 2 {
 
     with railway = :first :double :cat:dc30 :pax {
         with link = "line.pl.273" {
-            track(ws[:gra.ys, :wmu.ys]);
+            with layer = -1 track(ws[:gra.ys, :wmu.ys]);
         }
 
         with link = "point.pl.Wrocław-Muchobór" {
@@ -155,7 +155,8 @@ with detail = 2 {
 
     with railway = :first :double :cat:dc30 :pax {
         with link = "line.pl.274" {
-            track(wz[:wrs.yg, :wrz]);
+            with layer = -1 track(wz[:wrs.yg, :wrs.yg + 2km]);
+            track(wz[:wrs.yg + 2km, :wrz]);
         }
 
         with link = "point.pl.Wrocław-Zachodni" {
@@ -172,7 +173,9 @@ with detail = 2 {
 
         with link = "point.pl.Imbramowice" {
             statdot(wz[:imb]);
-            slabel(:left, wz[:imb] + (1.3dt, -1.4dt), "Imbramowice");
+            slabel(:right, wz[:imb] + (-1dt, 0.8dt),
+                hbox(:left:top, "Imbramowice")
+            );
         }
 
         with link = "line.pl.274" {
@@ -284,10 +287,10 @@ with detail = 2 {
             track(wz[:jel, :jel.yz] >> 0.35dt);
             track(:casing, wz[:jel.yz, :jel.yz + 1km] >> 0.35dt);
             track(
-                    wz[:jel.yz + 1km, :deb.y] >> 0.35dt
-                ..  wz[:deb.yy, :gry]
+                    wz[:jel.yz + 1km, :deb.yy] >> 0.35dt
+                ..  wz[:deb.yy + 1km, :gry]
             );
-            line_label(:right:s, wz[:deb.yy + 13km], "274");
+            line_label(:right:s, wz[:deb.yy + 8.8km], "274");
         }
 
         with link = "point.pl.Gryfów-Śląski" {
@@ -323,7 +326,7 @@ with detail = 2 {
         with link = "line.pl.274" {
             track(wz[:mik.yb, :stu.y]);
             track(wz[:stu.y, :zgo.yw]);
-            line_label(:left:ne, wz[:stu.y + 4km], "274");
+            line_label(:right:sw, wz[:stu.y + 2km], "274");
             track(wz[:zgo.yw, :zgo]);
         }
     }
@@ -369,13 +372,15 @@ with detail = 2 {
         }
 
         with link = "line.pl.275" {
-            track(wg[:sro.yr, :mal.ym]);
+            track(wg[:sro.yr, :mal.yp]);
         }
 
         with link = "point.pl.Malczyce" {
-            track(:station, wg[:mal.ym, :mal.yw]);
+            track(:station, wg[:mal.yp, :mal.yw]);
             statdot(wg[:mal]);
-            slabel(:right, wg[:mal] + (-1.5dt, -1.4dt), "Malczyce");
+            slabel(:right, wg[:mal] + (0dt, -0.8km) + (-1.5dt, -1.4dt),
+                "Malczyce"
+            );
         }
 
         with link = "line.pl.275" {
@@ -414,7 +419,7 @@ with detail = 2 {
 
         with link = "point.pl.Rokitki" {
             track(wg[:rot, :rot.yk]);
-            statdot(wg[:rot]);
+            statdot(wg[:rot] << 0.35dt);
             slabel(:right, wg[:rot] + (1.3dt, -0.3dt), "Rokitki");
         }
 
@@ -423,12 +428,14 @@ with detail = 2 {
         }
 
         with link = "point.pl.Modła" {
+            track(:station, wg[:mod, :mod.yb]);
             statdot(wg[:mod]);
-            slabel(:right, wg[:mod] + (1.3dt, -0.3dt), "Modła");
+            slabel(:right, wg[:mod] + (0dt, -1.3dt), "Modła");
         }
 
         with link = "line.pl.275" {
-            track(wg[:mod, :lex]);
+            track(wg[:mod.yb, :lex]);
+            line_label(:right:sw, wg[:mod.yb + 7km], "275");
         }
     }
 }
@@ -459,7 +466,7 @@ with detail = 2 {
         with link = "point.pl.Strzelin" {
             track(:station, wm[:str.yb, :str]);
             statdot(wm[:str]);
-            slabel(:left, wm[:str] + (-1.5dt, 0dt), "Strzelin");
+            slabel(:left, wm[:str] + (-1.5dt, -0.8dt), "Strzelin");
         }
     }
 
@@ -504,27 +511,21 @@ with detail = 2 {
         }
 
         with link = "line.pl.276" {
-            track(wm[:klo, :kln.yk + 0.1dl]);
-            line_label(:left:w, wm[:klo + 2km], "276");
+            track(wm[:klo, :kln.yk]);
+            line_label(:right:e, wm[:klo + 2km], "276");
+        }
+
+        with link = "point.pl.Kłodzko-Nowe" {
+            track(:station, wm[:kln.yk, :kln]);
+            statdot(:nopax, wm[:kln]);
+            slabel(:right :nopax, wm[:kln] + (1.5dt, 0.9dt), "K. Nowe");
         }
     }
 
     with railway = :first :cat:dc30 :pax {
         with link = "line.pl.276" {
-            track(wm[:kln.yk - 0.1dl, :kro.ys] >> 0.3dt);
-        }
-
-        with link = "point.pl.Krosnowice-Kłodzkie" {
-            track(:station, wm[:kro.ys, :kro] >> 0.3dt);
-            statdot(wm[:kro]);
-            slabel(:right, wm[:kro] + (1.5dt, 2dt),
-                vbox(:left:bottom, " Krosnowice", "Kłodzkie")
-            );
-        }
-
-        with link = "line.pl.276" {
             track(
-                    wm[:kro, :kro + 50m] >> 0.3dt
+                    wm[:kln, :kro + 50m] >> 0.3dt
                 ..  wm[:kro.ffm, :mie]
             );
             line_label(:right:e, wm[:kro.ffm + 12km], "276");
@@ -563,17 +564,19 @@ with detail = 2 {
         with link = "point.pl.Opole-Wschodnie" {
             track(ow[:opw, :opw.yp]);
             statdot(ow[:opw]);
-            slabel(:right, ow[:opw] + (1.5dt, -0.5dt), "Wsch.");
+            slabel(:right, ow[:opw] + (0dt, -1.5dt), "Wsch.");
         }
 
         with link = "line.pl.277" {
             track(ow[:opw.yp, :ocz]);
-            line_label(:right:w, ow[:opw.yp + 3km], "277");
+            line_label(:right:w, ow[:opw.yp + 3.2km], "277");
         }
 
         with link = "point.pl.Opole-Czarnowąsy" {
             statdot(ow[:ocz]);
-            slabel(:right, ow[:ocz] + (1.0dt, -0.5dt), "Opole Czarnowąsy");
+            slabel(:right, ow[:ocz] + (0.3dt, -0.5dt),
+                vbox(:left:bottom, "Opole", "Czarnowąsy")
+            );
         }
 
         with link = "line.pl.277" {

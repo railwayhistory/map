@@ -32,9 +32,7 @@ with detail = 2 {
     with link = "point.cz.Mikulovice-u-Jeseníku" {
         track(:first :station :pax, hm[:mik, :mik.yz]);
         statdot(:pax, hm[:mik]);
-        slabel(:left :pax, hm[:mik] + (0.5dt, -0.8dt),
-            vbox(:right:bottom, "Mikulovice", "u Jeseníku")
-        );
+        slabel(:left :pax, hm[:mik] + (-1.5dt, 0dt), "Mikulovice u J.");
     }
 
     with link = "line.cz.762" {
@@ -85,7 +83,7 @@ with detail = 2 {
         track(:second :station :pax, lb[:ber, :ber.yj]);
         statdot(:pax, lb[:ber]);
         slabel(:right :pax, lb[:ber] + (1.5dt, 0dt),
-            vbox(:left:bottom, "Bernartice", "u Javorníka")
+            vbox(:left:bottom, "Bernartice u", "Javorníka")
         );
     }
 
@@ -99,18 +97,27 @@ with detail = 2 {
 with detail = 2 {
     let vv = path("d2.cz.767");
 
-    with link = "line.cz.767" {
-        track(:second, vv[:vkr.yv, :vid]);
-        line_label(:right:n, vv[:vkr.yv + 2.3km], "767");
+    with railway = :second :nopax {
+        with link = "line.cz.767" {
+            track(vv[:vkr.yv, :vid]);
+            line_label(:right:n, vv[:vkr.yv + 2.3km], "767");
+        }
+
+        with link = "point.cz.Vidnava" {
+            statdot(vv[:vid]);
+            slabel(:right, vv[:vid] + (1.5dt, 1.3dt), "Vidnava");
+        }
     }
 
-    with link = "point.cz.Vidnava" {
-        statdot(:open, vv[:vid]);
-        slabel(:right, vv[:vid] + (1.5dt, 1.3dt), "Vidnava");
-    }
+    with railway = :second :removed {
+        with link = "line.cz.767" {
+            track(vv[:vid, :vih]);
+        }
 
-    with link = "line.cz.767" {
-        track(:second :removed, vv[:vid, :vih]);
+        with link = "point.int.Kalków-Łąka-Vidnava" {
+            marker(:right :ref, vv[:vih]);
+            marker(:left :ref, vv[:vih]);
+        }
     }
 }
 
