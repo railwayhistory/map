@@ -2,6 +2,13 @@
 
 ## Updates
 
+### 2024-07-20
+
+* Line _FR 330_ (St-Denis – Dieppe): passenger service between Gisors and
+  Serqueux ceased 2024-07-21. ([#89])
+
+[#89]: https://github.com/railwayhistory/map/pull/89
+
 ### 2024-06-08
 
 * Line _DE 1956_ (Weddel Abzw – Fallersleben) is double tracked since
