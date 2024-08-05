@@ -49,21 +49,40 @@ with detail = 2 {
     with railway = :first :double :cat:dc30 {
         with link = "line.pl.171" {
             with layer = -1 track(dp[:sda.ys, :sta.y]);
-            track(dp[:sta.y, :kmu]);
+            track(dp[:sta.y, :kma.yw]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :nopax {
+        with link = "line.pl.171" {
+            track(dp[:kma.yw, :kmu.ys] >> 0.25dst);
+            track(dp[:kmu.ys, :kmb.yz] >> 0.25dst);
         }
 
         with link = "point.pl.Katowice-Muchowiec" {
-            statdot(:removed, dp[:kmu]);
+            statdot(:removed, dp[:kmu] << 100m);
+            with zoom = :high slabel(
+                :right :removed, dp[:kmu] + (0dt, 0.1km) + (0dt, 1dt),
+                hbox(:left:top, "K. Muchowiec")
+            );
         }
+    }
 
+    with railway = :first :suspended {
         with link = "line.pl.171" {
-            track(dp[:kmu, :kmu.ys]);
+            let km = path("d2.pl.171.kmu");
+
+            track(km[:kma.yw, :kmb.ys] << 0.25dst);
+            track(:casing,
+                    km[:kmb.ys - 0.1dl, :kmb.ys] << 0.25dst
+                ..  km[:kmb.yz, :kmb.yz + 0.1dl]
+            );
         }
     }
 
     with railway = :first :cat:dc30 {
         with link = "line.pl.171" {
-            track(:casing, dp[:kmu.ys, :pan.y]);
+            track(:casing, dp[:kmb.yz, :pan.y]);
         }
     }
 }
@@ -202,6 +221,9 @@ with detail = 2 {
 
         with link = "point.pl.Tychy-Lodowisko" {
             statdot(tm[:tlo]);
+            with zoom = :high slabel(:bottom, tm[:tlo] + (-1dt, 1dt),
+                "T. Lodowisko"
+            );
         }
     }
 

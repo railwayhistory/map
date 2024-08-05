@@ -63,32 +63,41 @@ with detail = 2 {
 with detail = 2 {
     let lb = path("d2.cz.766");
 
-    with link = "line.cz.766" {
-        track(:second :pax, lb[:lip.yb, :vkr]);
-        line_label(:left:e :pax, lb[:lip.yb + 9.9km], "766");
+    with railway = :second :pax {
+        with link = "line.cz.766" {
+            track(lb[:lip.yb, :vkr]);
+            line_label(:left:e, lb[:lip.yb + 9.9km], "766");
+        }
+
+        with link = "point.cz.Velká-Kraš" {
+            track(:station, lb[:vkr, :vkr.yv]);
+            statdot(lb[:vkr]);
+            slabel(:left, lb[:vkr] + (-1.8dt, 1.3dt), "Velká Kraš");
+        }
+
+        with link = "line.cz.766" {
+            track(lb[:vkr.yv, :ber]);
+            line_label(:right:w, lb[:vkr.yv + 2.32km], "766");
+        }
+
+        with link = "point.cz.Bernartice-u-Javorníka" {
+            track(:station, lb[:ber, :ber.yj]);
+            statdot(lb[:ber]);
+            slabel(:left, lb[:ber] + (0dt, -0.5km) + (-1.5dt, -0.5dt),
+                vbox(:right:bottom, "Bernartice u", "Javorníka")
+            );
+        }
     }
 
-    with link = "point.cz.Velká-Kraš" {
-        track(:second :station :pax, lb[:vkr, :vkr.yv]);
-        statdot(:pax, lb[:vkr]);
-        slabel(:left :pax, lb[:vkr] + (-1.8dt, 1.0dt), "Velká Kraš");
-    }
+    with railway = :second :removed {
+        with link = "line.cz.766" {
+            track(lb[:ber.yj, :beh]);
+        }
 
-    with link = "line.cz.766" {
-        track(:second :pax, lb[:vkr.yv, :ber]);
-        line_label(:right:w :pax, lb[:vkr.yv + 2.32km], "766");
-    }
-
-    with link = "point.cz.Bernartice-u-Javorníka" {
-        track(:second :station :pax, lb[:ber, :ber.yj]);
-        statdot(:pax, lb[:ber]);
-        slabel(:right :pax, lb[:ber] + (1.5dt, 0dt),
-            vbox(:left:bottom, "Bernartice u", "Javorníka")
-        );
-    }
-
-    with link = "line.cz.766" {
-        track(:second :removed, lb[:ber.yj, :beh]);
+        with link = "point.int.Bernartice-Dziewiętlice" {
+            marker(:right :ref, lb[:beh]);
+            marker(:left :ref, lb[:beh]);
+        }
     }
 }
 
@@ -128,13 +137,13 @@ with detail = 2 {
 
     with link = "line.cz.768" {
         track(:second :pax, bj[:ber.yj, :jav]);
-        line_label(:right:s :pax, bj[:ber.yj + 2.5km], "768");
+        line_label(:left:n :pax, bj[:ber.yj + 2.5km], "768");
     }
 
     with link = "point.cz.Javorník-ve-Slezsku" {
         statdot(:pax, bj[:jav]);
-        slabel(:left :pax, bj[:jav] + (-1.5dt, 0dt),
-            vbox(:right:middle, "Javorník", "ve Slezsku")
+        slabel(:left :pax, bj[:jav] + (-1.5dt, -1.8dt),
+            vbox(:right:top, "Javorník", "ve Slezsku")
         );
     }
 }

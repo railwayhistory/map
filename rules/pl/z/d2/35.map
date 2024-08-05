@@ -1,0 +1,49 @@
+# PL 351.  Poznań Główny – Szczecin Główny
+with detail = 2 {
+    let ps = path("d2.pl.z.351");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.351" {
+            track(ps[:skx, :cho.yg]);
+        }
+
+        with link = "point.pl.Choszczno" {
+            track(:station, ps[:cho.yg, :cho.yk]);
+            statdot(ps[:cho]);
+            slabel(:right, ps[:cho] + (1.3dt, 0dt), "Choszczno");
+        }
+
+        with link = "line.pl.351" {
+            track(ps[:cho.yk, :sta.yg]);
+            line_label(:right:sw, ps[:sta.yg - 7.5km], "351");
+        }
+
+        with link = "point.pl.Stargard" {
+            track(:station, ps[:sta.yg, :sta]);
+            statdot(ps[:sta]);
+            slabel(:left, ps[:sta] + (-1.7dt, 1.3dt), "Stargard");
+        }
+
+        with link = "line.pl.351" {
+            track(ps[:sta, :sda.yc]);
+            line_label(:right:s, ps[:sta + 13km], (0.2dt, 0dt), "351");
+        }
+
+        with link = "point.pl.Szczecin-Dąbie" {
+            track(:station, ps[:sda.yc, :sda.yp]);
+            statdot(ps[:sda]);
+            slabel(:left, ps[:sda] + (1.2dt, -1.3dt), "S. Dąbie");
+        }
+
+        with link = "line.pl.351" {
+            track(ps[:sda.yp, :sda.ys]);
+            track(ps[:sda.ys, :wid.yp]);
+            track(ps[:wid.yp, :reg.y]);
+            track(:casing, ps[:reg.y, :dzi.yp]);
+            track(ps[:dzi.yp, :wst.ys]);
+            track(ps[:wst.ys, :szc.yg]);
+            track(ps[:szc.yg, :szc.yt]);
+        }
+    }
+}
+

@@ -1,0 +1,47 @@
+# PL 780.  Wilka 2 - Wilka 1
+with detail = 2 {
+    with link = "line.pl.780" {
+        track(:first :suspended, path("d2.pl.780")[:wil.yp, :wil.yz]);
+    }
+}
+
+
+# PL 781.  Lasów - Granica Państwa (Pieńsk)
+with detail = 2 {
+    with link = "line.pl.781" {
+        track(:second :removed, path("d2.pl.781")[:las.yp, :pig]);
+    }
+}
+
+
+# PL 786.  Granica Państwa (Trzciniec Zgorzelecki) - Bogatynia
+with detail = 2 {
+    let tb = path("d2.pl.786");
+
+    with railway = :first :pax {
+        with link = "line.pl.786" {
+            track(tb[:krg, :trz.yz]);
+        }
+    }
+
+    with railway = :first :nopax {
+        with link = "line.pl.786" {
+            track(tb[:trz.yz, :tko]);
+            line_label(:left:sw, tb[:trz.yz + 2.3km], "786");
+        }
+    }
+
+    with railway = :first :suspended {
+        with link = "line.pl.786" {
+            track(tb[:tko, :bog]);
+        }
+
+        with link = "point.pl.Bogatynia" {
+            statdot(tb[:bog]);
+            with zoom = :high slabel(
+                :right, tb[:bog] + (1dt, -0.8dt), "Bogatynia"
+            );
+        }
+    }
+}
+

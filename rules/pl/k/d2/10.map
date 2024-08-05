@@ -203,7 +203,7 @@ with detail = 2 {
 with detail = 2 {
     let rj = path("d2.pl.106");
 
-    with railway = :first :pax {
+    with railway = :first :cat:dc30 :pax {
         with link = "line.pl.106" {
             track(rj[:rze.yj, :rst.yz]);
         }
@@ -212,7 +212,9 @@ with detail = 2 {
             track(:station, rj[:rst.yz, :rst]);
             statdot(rj[:rst]);
         }
+    }
 
+    with railway = :first :pax {
         with link = "line.pl.106" {
             track(rj[:rst, :jfa]);
             line_label(:right:e, rj[:rst + 7km], "106");
@@ -333,12 +335,23 @@ with detail = 2 {
         }
     }
 
-    with railway = :second :nopax {
+    with railway = :second :pax {
         with link = "line.pl.108" {
             track(sk[:nza.yl, :zal.y]);
-            track(sk[:zal.y, :krg]);
+            track(sk[:zal.y, :usd]);
             line_label(:left:w, sk[:zal.y + 6km], "108");
-            line_label(:right:nw, sk[:krg - 7.5km], "108");
+        }
+
+        with link = "point.pl.Ustrzyki-Dolne" {
+            statdot(sk[:usd]);
+            slabel(:nw, sk[:usd] + (0.5dt, 0.7dt), "Ustrzyki Dolne");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.108" {
+            track(sk[:usd, :krg]);
+            line_label(:left:se, sk[:krg - 7.5km], "108");
         }
 
         with link = "point.int.Krościenko-Стар'ява" {

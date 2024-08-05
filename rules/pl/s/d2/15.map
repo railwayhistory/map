@@ -70,7 +70,7 @@ with detail = 2 {
         }
     }
 
-    with railway = :first :double :cat:dc30 :pax {
+    with railway = :first :cat:dc30 :pax {
         with link = "line.pl.151" {
             track(kc[:cha, :chg] << 0.35dt);
         }
@@ -163,9 +163,10 @@ with detail = 2 {
         with link = "line.pl.156" {
             track(
                     bj[:buk.yj - 0.1dl, :buk.yj] << 0.45dt
-                ..  bj[:buk.yyj, :jaw.yb]
+                ..  bj[:buk.yyj, :jaw.yb - 1.5km]
             );
             line_label(:left:n, bj[:jaw.yb - 5.5km], "156");
+            with layer = -1 track(bj[:jaw.yb - 1.5km, :jaw.yb]);
         }
     }
 }
@@ -269,15 +270,20 @@ with detail = 2 {
         with link = "point.pl.Pawłowice-Śląskie" {
             track(:station, ow[:paw.yc, :paw]);
             statdot(ow[:paw]);
-            slabel(:left, ow[:paw] + (0dt, 0.5dt),
-                vbox(:right:top, "Pawłowice", "Śląskie")
-            );
+        }
+
+        with link = "line.pl.159" {
+            track(:double, ow[:paw, :pgo]);
+        }
+
+        with link = "point.pl.Pawłowice-Górnicze" {
+            statdot(ow[:pgo]);
         }
     }
 
     with railway = :first :removed {
         with link = "line.pl.159" {
-            track(ow[:paw, :jam]);
+            track(ow[:pgo, :jam]);
             line_label(:right:s, ow[:paw + 4.5km], "159");
         }
 

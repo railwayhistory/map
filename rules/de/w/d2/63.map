@@ -190,35 +190,61 @@ with detail = 2 {
 with detail = 2 {
     let gs = path("d2.de.6327");
 
-    with link = "line.de.6327" {
-        track(:first :pax, gs[:grg, :pas]);
-        track(:first :pax, gs[:pas.ys, :str]);
+    with railway = :first :pax {
+        with link = "point.int.Grambow-Szczecin" {
+            marker(:right :ref, gs[:grg]);
+            marker(:left :ref, gs[:grg]);
+        }
 
-        line_badge(:pax, gs[:loc + 8km], "6327");
-        line_badge(:pax, gs[:pas.ys + 4km], "6327");
-    }
+        with link = "line.de.6327" {
+            track(gs[:grg, :gra]);
+        }
 
-    with link = "point.de.Grambow" {
-        with layer = 1 marker(:statdot :pax, gs[:gra]);
-        slabel(:left :pax, gs[:gra] + (1.5dt, 0.8dt),
-            hbox(:right:top, "Grambow")
-        );
-    }
+        with link = "point.de.Grambow" {
+            statdot(gs[:gra]);
+            slabel(:left, gs[:gra] + (1.5dt, 0.8dt),
+                hbox(:right:top, "Grambow")
+            );
+        }
 
-    with link = "point.de.Löcknitz" {
-        with layer = 1 marker(:statdot :pax, gs[:loc]);
-        slabel(:right :pax, gs[:loc] + (-1.0dt, -1.7dt), "Löcknitz");
-    }
+        with link = "line.de.6327" {
+            track(gs[:gra, :loc]);
+            line_label(:left:ne, gs[:gra + 6km], "6327");
+        }
 
-    with link = "point.de.Pasewalk-Ost" {
-        with layer = 1 marker(:statdot :pax, gs[:pao]);
-    }
+        with link = "point.de.Löcknitz" {
+            statdot(gs[:loc]);
+            slabel(:right, gs[:loc] + (-1.0dt, -1.7dt), "Löcknitz");
+        }
 
-    with link = "point.de.Strasburg-Uckerm" {
-        with layer = 1 marker(:statdot :pax, gs[:str]);
-        slabel(:top :pax, gs[:str] + (1dt, -1.0dt),
-            vbox(:center:bottom, "Strasburg", span(:light, "(Uckerm)"))
-        );
+        with link = "line.de.6327" {
+            track(gs[:loc, :loc.yp]);
+            track(gs[:loc.yp, :pao.yt]);
+            line_label(:right:sw, gs[:loc.yp + 7km], "6327");
+        }
+
+        with link = "point.de.Pasewalk-Ost" {
+            track(:station, gs[:pao.yt, :pao.yk]);
+            statdot(gs[:pao]);
+        }
+
+        with link = "line.de.6327" {
+            track(gs[:pao.yt, :pas]);
+        }
+
+        with link = "line.de.6327" {
+            track(gs[:pas.ys, :cha.yb]);
+            track(gs[:cha.yb, :str.yp]);
+            line_label(:right:s, gs[:cha.yb + 6.5km], "6327");
+        }
+
+        with link = "point.de.Strasburg-Uckerm" {
+            track(:station, gs[:str.yp, :str]);
+            statdot(gs[:str]);
+            slabel(:top :pax, gs[:str] + (1dt, -1.0dt),
+                vbox(:center:bottom, "Strasburg", span(:light, "(Uckerm)"))
+            );
+        }
     }
 }
 
@@ -232,7 +258,7 @@ with detail = 2 {
         track(:first :pax, at[:pas, :tag]);
 
         line_badge(:cat:ac15 :pax, at[:son - 5.7km] << 0.2dt, "6328");
-        line_badge(:pax, at[:tan - 5.5km] << 0.1dt, "6328");
+        line_label(:left:se :pax, at[:tan + 4.5km], "6328");
     }
 
     with link = "point.de.Schönermark-Angermünde" {
@@ -256,7 +282,7 @@ with detail = 2 {
 
     with link = "point.de.Tantow" {
         with layer = 1 marker(:statdot :pax, at[:tan]);
-        slabel(:right :pax, at[:tan] + (1.8dt, 1.3dt), "Tantow");
+        slabel(:left :pax, at[:tan] + (-1.5dt, 0dt), "Tantow");
     }
 }
 

@@ -29,7 +29,14 @@ with detail = 2 {
 
     with railway = :second :cat:dc30 :nopax {
         with link = "line.pl.162" {
-            track(dd[:dgs.yd, :dgh.y]);
+            track(dd[:dgs.yd, :dgh.ys]);
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.162" {
+            track(dd[:dgh.yg, :dgh.yp]);
+            track(dd[:dgh.yp, :dgo.yk]);
         }
     }
 }
@@ -54,15 +61,10 @@ with detail = 2 {
 with detail = 2 {
     let cr = path("d2.pl.164");
 
-    with railway = :second :cat:dc30 :pax {
-        track(
-                cr[:cba.yr - 0.1dl, :cba.yr]
-            ..  cr[:cba.yp, :rko.yp] >> 0.35dt
-            ..  cr[:rko.yc, :rko.yc + 0.1dl]
-        );
-        with zoom = :high line_label(
-            :right:se, cr[:cba.yp + 1.7km] >> 0.35dt, "164"
-        );
+    with railway = :second :cat:dc30 :nopax {
+        track(cr[:cba.yr, :cba.yp]);
+        track(:double, cr[:cba.yp, :rko.yp])
+        track(cr[:rko.yp, :rko.yc]);
     }
 }
 
