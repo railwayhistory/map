@@ -80,6 +80,12 @@
 
 ## Corrections
 
+### 2024-08-12
+
+* Line _DE 9440_ (Haltingen – Kandern) has heritage service. ([#90])
+
+[#90]: https://github.com/railwayhistory/map/pull/90
+
 ### 2024-06-11
 
 * Lines _DE 1260_ (Hesedorf – Stade) and _DE 9132_ (Bremervörde Süd –
