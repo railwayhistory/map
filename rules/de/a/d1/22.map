@@ -1,14 +1,23 @@
 with detail = 1 {
     with link = "line.de.2200" {
-        track(:first :double :cat:ac15 :pax,
-                path("d1.de.a.2200")[:sag, :ham]
-        );
-    }
+        let wh = path("d1.de.a.2200");
 
-    with link = "point.de.Hamburg-Hbf" {
-        label(path("d1.de.a.2200")[:har] + (-3dt, 1.5dt),
-            hbox(:right:top :small :bold :cat:ac15 :pax, "Hamburg")
-        );
+        with railway = :first :double :cat:ac15 :pax {
+            track(wh[:obx, :oha]);
+
+            with link = "point.de.Hamburg-Hbf", layer = 1 {
+                with zoom = :low {
+                    label(wh[:oha],
+                        hbox(:center:middle :medium:bold, "Hamburg")
+                    );
+                }
+                with zoom = :high {
+                    slabel(:ne :small:bold, wh[:oha] + (-11km, 0dt),
+                        "Hamburg"
+                    );
+                }
+            }
+        }
     }
 }
 

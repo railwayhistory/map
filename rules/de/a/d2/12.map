@@ -2,21 +2,24 @@
 with detail = 2 {
     let nw = path("d2.de.1200");
 
-    with link = "line.de.1200" {
-        track(:first :pax, nw[:nie, :kla]);
-        track(:first:double :pax, nw[:kla, :mor]);
-        track(:first :pax, nw[:mor, :wes]);
+    with railway = :first :pax {
+        with link = "line.de.1200" {
+            track(nw[:nie.yt, :kla]);
+            line_label(:left:ne, nw[:nie.yt + 8km], "1200");
 
-        with layer = 1 line_badge(:pax, nw[:kla + 9.0km], "1200*");
-    }
+            track(:double :pax, nw[:kla, :mor]);
 
-    with link = "point.de.Westerland-Sylt" {
-        with layer = 1 marker(:statdot :pax, nw[:wes]);
-        label(:pax, nw[:wes] + (-3.0dt, -0.2dt),
-            hbox(:right:middle :small,
-                span(:bold, "Westerland "), "(Sylt)"
-            )
-        );
+            track(nw[:mor, :wes]);
+            line_label(:left:n, nw[:wes - 6km], (-0.5dt, 0dt), "1200");
+
+        }
+
+        with link = "point.de.Westerland-Sylt" {
+            statdot(nw[:wes]);
+            slabel(:left, nw[:wes] + (-0.8km, 0dt) + (-1.5dt, 0.8dt),
+                hbox(:right:base, span(:bold, "Westerland "), "(Sylt)")
+            );
+        }
     }
 }
 
@@ -25,22 +28,25 @@ with detail = 2 {
 with detail = 2 {
     let ns = path("d2.de.1201");
 
-    with link = "line.de.1201" {
-        track(:second :pax, ns[:nie.yt, :sug]);
+    with railway = :second :pax {
+        with link = "line.de.1201" {
+            track(ns[:nie.yt, :sud]);
+            line_label(:right:nw, ns[:sud - 3.0km], "1201");
+        }
 
-        with layer = 1 line_badge(:pax, ns[:sud - 6.0km], "1201");
-    }
+        with link = "point.de.Süderlügum" {
+            statdot(ns[:sud]);
+            slabel(:right, ns[:sud] + (1.5dt, 0.8dt), "Süderlügum");
+        }
 
-    with link = "point.de.Süderlügum" {
-        with layer = 1 marker(:statdot :pax, ns[:sud]);
-        label(:pax, ns[:sud] >> 1.5dt,
-            hbox(:left:middle :small, "Süderlügum")
-        );
-    }
+        with link = "line.de.1201" {
+            track(ns[:sud, :sug]);
+        }
 
-    with link = "point.int.Süderlügum-Tønder" {
-        with layer = 1 marker(:refdt :right, ns[:sug]);
-        with layer = 1 marker(:refdt :left, ns[:sug]);
+        with link = "point.int.Süderlügum-Tønder" {
+            marker(:ref :right, ns[:sug]);
+            marker(:ref :left, ns[:sug]);
+        }
     }
 }
 
@@ -49,16 +55,20 @@ with detail = 2 {
 with detail = 2 {
     let ht = path("d2.de.1204");
 
-    with link = "line.de.1204" {
-        track(:second :pax, ht[:hor, :ton]);
-        with layer = 1 line_badge(:pax, ht[:ton - 7.5km], "1204");
-    }
-    
-    with link = "point.de.Tönning" {
-        with layer = 1 marker(:statdot :pax, ht[:ton]);
-        label(:pax, ht[:ton] + (-1.5dt, 0dt),
-            hbox(:right:top :small, "Tönning")
-        );
+    with railway = :second :pax {
+        with link = "line.de.1204" {
+            track(ht[:hor, :pls]);
+            track(ht[:pls, :ton.y]);
+            line_label(:right:se, ht[:ton.y - 7.5km], "1204");
+        }
+        
+        with link = "point.de.Tönning" {
+            track(:station, ht[:ton.y, :ton]);
+            statdot(ht[:ton]);
+            slabel(:left, ht[:ton] + (-1.5dt, -0.3dt),
+                hbox(:right:top, "Tönning")
+            );
+        }
     }
 }
 
@@ -67,36 +77,34 @@ with detail = 2 {
 with detail = 2 {
     let tp = path("d2.de.1205");
 
-    with link = "line.de.1205" {
-        track(:second :pax, tp[:ton, :peo]);
+    with railway = :second :pax {
+        with link = "line.de.1205" {
+            track(tp[:ton.y, :peo]);
+            line_label(:right:s, tp[:peo - 10km], "1205");
+        }
 
-        with layer = 1 line_badge(:pax, tp[:peo - 13.5km], "1205");
-    }
-
-    with link = "point.de.Bad-St-Peter-Ording" {
-        with layer = 1 marker(:statdot :pax, tp[:peo]);
-        label(:pax, tp[:peo] - (1.5dt, 0.3dt),
-            hbox(:right:middle :small, "Bad St Peter-Ording")
-        );
+        with link = "point.de.Bad-St-Peter-Ording" {
+            statdot(tp[:peo]);
+            slabel(:left, tp[:peo] + (-1.6dt, 0.5dt), "Bad St Peter-Ording");
+        }
     }
 }
 
 
 # DE 1206.  Heide (Holst) - Büsum.
 with detail = 2 {
-    let heibus = path("d2.de.1206");
+    let hb = path("d2.de.1206");
 
-    with link = "line.de.1206" {
-        track(:second :pax, heibus[:weh, :bus]);
+    with railway = :second :pax {
+        with link = "line.de.1206" {
+            track(hb[:weh, :bus]);
+            line_label(:right:s, hb[:weh + 10.0km], (-0.3dt, 0dt), "1206");
+        }
 
-        with layer = 1 line_badge(:pax, heibus[:weh + 8.0km], "1206");
-    }
-
-    with link = "point.de.Büsum" {
-        with layer = 1 marker(:statdot :pax, heibus[:bus]);
-        label(:pax, heibus[:bus] - (1.5dt, 0.3dt),
-            hbox(:right:middle :small, "Büsum")
-        );
+        with link = "point.de.Büsum" {
+            statdot(hb[:bus]);
+            slabel(:left, hb[:bus] + (-1.5dt, 0.8dt), "Büsum");
+        }
     }
 }
 
@@ -105,17 +113,18 @@ with detail = 2 {
 with detail = 2 {
     let wk = path("d2.de.1207");
 
-    with link = "line.de.1207" {
-        with layer = -1 track(:second :removed, wk[:wed.yk, :kar]);
+    with railway = :second :removed {
+        with link = "line.de.1207" {
+            track(wk[:wed.yk, :kar]);
+            line_label(:left:ne, wk[:kar - 5km], "1207");
+        }
 
-        with layer = 1 line_badge(:removed, wk[:kar - 4.5km], "1207");
-    }
-
-    with link = "point.de.Karolinenkoog" {
-        with layer = 1 marker(:statdot :removed, wk[:kar]);
-        label(wk[:kar - 3dt] - (1.5dt, 0dt),
-            hbox(:right:top :small :removed, "Karolinenkoog")
-        );
+        with link = "point.de.Karolinenkoog" {
+            statdot(wk[:kar]);
+            slabel(:left, wk[:kar] + (-0.5dt, 2dt),
+                hbox(:right:top, "Karolinenkoog")
+            );
+        }
     }
 }
 
@@ -124,97 +133,157 @@ with detail = 2 {
 with detail = 2 {
     let en = path("d2.de.1210");
 
-    with link = "line.de.1210" {
-        track(:first :double :cat:ac15 :pax, en[:elm.yg, :itz]);
-        track(:first :double :pax, en[:itz, :eid]);
-        track(:first :pax, en[:eid, :fri]);
-        track(:first :double :pax, en[:fri, :hat]);
-        track(:first :pax, en[:hat, :bre]);
-        track(:first :double :pax, en[:bre, :nie]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.1210" {
+            track(en[:elm.yg, :glu]);
+            line_label(:right:s, en[:elm.yg + 8km], "1210");
+        }
 
-        with layer = 1 line_badge(:cat:ac15 :pax, en[:glu - 8.7km], "1210");
-        with layer = 1 line_badge(:open :pax, en[:wil + 10.0km], "1210");
-        with layer = 1 line_badge(:open :pax, en[:hei - 10.0km], "1210");
-        with layer = 1 line_badge(:open :pax, en[:wed + 8.0km], "1210");
-        with layer = 1 line_badge(:open :pax, en[:bre - 6.0km], "1210");
-        with layer = 1 line_badge(:open :pax, en[:lin - 8.0km], "1210");
+        with link = "point.de.Glückstadt" {
+            statdot(en[:glu]);
+            slabel(:left, en[:glu] + (0dt, 0.5km) + (3dt, 1dt),
+                hbox(:right:top, "Glückstadt")
+            );
+        }
+
+        with link = "line.de.1210" {
+            track(en[:glu, :als.y]);
+            line_label(:left:e, en[:als.y - 5km], "1210");
+        }
+
+        with link = "point.de.Itzehoe-Alsen" {
+            track(:station, en[:als.y, :als]);
+            statdot(en[:als]);
+            slabel(:right, en[:als] + (1.5dt, 1.3dt), "Alsen");
+        }
+
+        with link = "line.de.1210" {
+            track(en[:als, :itz]);
+        }
+
+        with link = "point.de.Itzehoe" {
+            statdot(en[:itz]);
+            slabel(:right, en[:itz] + (1.5dt, 0.8dt), "Itzehoe");
+        }
     }
 
-    with link = "point.de.Glückstadt" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, en[:glu]);
-        slabel(:left :cat:ac15 :pax, en[:glu] + (3dt, 4.5dt), "Glückstadt");
+    with railway = :first :double :pax {
+        with link = "point.de.Itzehoe" {
+            track(:station, en[:itz, :itz.yw]);
+        }
+
+        with link = "line.de.1210" {
+            track(en[:itz.yw, :wil.yb]);
+            line_label(:right:s, en[:itz.yw + 3.5km], "1210");
+        }
+
+        with link = "point.de.Wilster" {
+            track(:station, en[:wil.yb, :wil]);
+            statdot(en[:wil]);
+            slabel(:bottom :pax, en[:wil] + (0.5dt, 1.2dt), "Wilster");
+        }
+
+        with link = "line.de.1210" {
+            track(en[:wil, :smi.yb]);
+            line_label(:right:s, en[:smi.yb - 13.5km], "1210");
+        }
+
+        with link = "point.de.St-Michaelisdonn" {
+            track(:station, en[:smi.yb, :smi]);
+            statdot(en[:smi]);
+            slabel(:right, en[:smi] + (0.3dt, -1.3dt),
+                vbox(:left:bottom, "St Michaelis-", "donn")
+            );
+        }
+
+        with link = "line.de.1210" {
+            track(en[:smi, :hei.yn]);
+            line_label(:left:e, en[:hei.yn - 8km], "1210");
+        }
+
+        with link = "point.de.Heide-Holst" {
+            track(:station, en[:hei.yn, :hek.yp]);
+            statdot(en[:hei]);
+            slabel(:left, en[:hei] + (-2.0dt, 1.0dt),
+                vbox(:right:middle, span(:bold, "Heide"), "(Holst) ")
+            );
+        }
+
+        with link = "line.de.1210" {
+            track(en[:hek.yp, :wed.yk]);
+            track(en[:wed.yk, :eid]);
+            line_label(:right:w, en[:wed.yk + 6km], "1210");
+        }
     }
 
-    with link = "point.de.Itzehoe-Alsen" {
-        with layer = 1 marker(:statdot :cat:ac15, en[:als]);
-        label(:cat:ac15, en[:als] >> 1.5dt,
-            hbox(:left:middle :small, "Alsen")
-        );
+    with railway = :first :pax {
+        with link = "line.de.1210" {
+            track(en[:eid, :fri]);
+        }
     }
 
-    with link = "point.de.Itzehoe" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, en[:itz]);
-        label(:cat:ac15 :pax, en[:itz] >> 1.5dt,
-            hbox(:left:middle :small, "Itzehoe")
-        );
+    with railway = :first :double :pax {
+        with link = "point.de.Friedrichstadt" {
+            statdot(en[:fri]);
+            slabel(:right, en[:fri] + (1.2dt, -0.3dt),
+                vbox(:left:bottom, "Fried-", "richstadt")
+            );
+        }
+
+        with link = "line.de.1210" {
+            track(en[:fri, :hor]);
+            track(en[:hor, :hus.yb]);
+        }
+
+        with link = "point.de.Husum" {
+            track(:station, en[:hus.yb, :hus.yt]);
+            statdot(en[:hus]);
+            slabel(:left :bold, en[:hus] + (-0.9km, 0dt) + (-0.8dt, 0.3dt),
+                "Husum"
+            );
+        }
+
+        with link = "line.de.1210" {
+            track(en[:hus.yt, :hat]);
+        }
     }
 
-    with link = "point.de.Wilster" {
-        with layer = 1 marker(:statdot :pax, en[:wil]);
-        slabel(:bottom :pax, en[:wil] << 1.5dt, "Wilster");
+    with railway = :first :pax {
+        with link = "line.de.1210" {
+            track(en[:hat, :bre.yl]);
+            line_label(:left:e, en[:hat + 2km], "1210");
+        }
+
+        with link = "point.de.Bredstedt" {
+            track(:station, en[:bre.yl, :bre]);
+            statdot(en[:bre]);
+            slabel(:left, en[:bre] + (-1.6dt, 1.3dt), "Bredstedt");
+        }
     }
 
-    with link = "point.de.St-Michaelisdonn" {
-        with layer = 1 marker(:statdot :pax, en[:smi]);
-        label(en[:smi] + (0.3dt, -2.0dt),
-            vbox(:left:bottom :small :pax, "St Michaelis-", "donn")
-        );
-    }
+    with railway = :first :double :pax {
+        with link = "line.de.1210" {
+            track(en[:bre, :lin.yf]);
+            line_label(:left:e, en[:lin.yf - 8km], "1210");
+        }
 
-    with link = "point.de.Heide-Holst" {
-        with layer = 1 marker(:statdot :pax, en[:hei]);
-        slabel(:left :pax, en[:hei] + (-2.0dt, 1.0dt),
-            vbox(:right:middle, "Heide", span(:light, "(Holst) "))
-        );
-    }
+        with link = "point.de.Lindholm" {
+            track(:station, en[:lin.yf, :lin]);
+            statdot(en[:lin]);
+            slabel(:left, en[:lin] + (0dt, 0.3km) + (1.3dt, 1.2dt),
+                hbox(:right:top, "Lindholm")
+            );
+        }
 
-    with link = "point.de.Weddingstedt" {
-        with layer = 1 marker(:statdot :pax, en[:wed]);
-    }
+        with link = "line.de.1210" {
+            track(en[:lin, :nie]);
+        }
 
-    with link = "point.de.Friedrichstadt" {
-        with layer = 1 marker(:statdot :pax, en[:fri]);
-        label(en[:fri] >> 1.5dt,
-            vbox(:left:bottom :small :pax, "Fried-", "richstadt")
-        );
-    }
-
-    with link = "point.de.Husum" {
-        with layer = 1 marker(:statdot :pax, en[:hus]);
-        label(en[:hus] + (-3.5dt, 0dt),
-            hbox(:right:middle :small:bold :pax, "Husum")
-        );
-    }
-
-    with link = "point.de.Bredstedt" {
-        with layer = 1 marker(:statdot :pax, en[:bre]);
-        label(en[:bre] << 2.0dt,
-            hbox(:right:middle :small :pax, "Bredstedt")
-        );
-    }
-
-    with link = "point.de.Lindholm" {
-        with layer = 1 marker(:statdot, en[:lin]);
-        label(en[:lin] + (4.3dt, 0.7dt),
-            hbox(:left:middle :small, "Lindholm")
-        );
-    }
-
-    with link = "point.de.Niebüll" {
-        with layer = 1 marker(:statdot :pax, en[:nie]);
-        label(en[:nie] >> 1.8dt,
-            hbox(:left:middle :small:bold :pax, "Niebüll")
-        );
+        with link = "point.de.Niebüll" {
+            track(:station, en[:nie, :nie.yt]);
+            statdot(en[:nie]);
+            slabel(:right :bold, en[:nie] + (1.5dt, 0.8dt), "Niebüll");
+        }
     }
 }
 
@@ -223,14 +292,18 @@ with detail = 2 {
 with detail = 2 {
     let wb = path("d2.de.1214");
 
-    with link = "line.de.1214" {
-        track(:second, wb[:wil.yb, :bru]);
-        with layer = 1 line_badge(:open, wb[:wil.yb + 6.5km], "1214");
-    }
+    with railway = :second :nopax {
+        with link = "line.de.1214" {
+            track(wb[:wil.yb, :smg]);
+            line_label(:left:n, wb[:wil.yb + 7km], "1214");
 
-    with link = "point.de.Brunsbüttel" {
-        with layer = 1 marker(:statdot, wb[:bru]);
-        slabel(:bottom, wb[:bru] + (0dt, 1.0dt), "Brunsbüttel");
+            track(wb[:smg, :bru]);
+        }
+
+        with link = "point.de.Brunsbüttel" {
+            statdot(wb[:bru]);
+            slabel(:bottom, wb[:bru] + (0dt, 1.0dt), "Brunsbüttel");
+        }
     }
 }
 
@@ -239,15 +312,24 @@ with detail = 2 {
 with detail = 2 {
     let sb = path("d2.de.1215");
 
-    with link = "line.de.1215" {
-        track(:second, sb[:smi.yb, :con]);
-        with layer = -1 track(:second :removed, sb[:con, :bru]);
+    with railway = :second :nopax {
+        with link = "line.de.1215" {
+            track(sb[:smi.yb, :blg]);
+            line_label(:left:w, sb[:smi.yb + 3.5km], (0dt, -0.3dt), "1215");
 
-        with layer = 1 line_badge(:open, sb[:smi.yb + 4.5km], "1215");
+            track(sb[:blg, :con]);
+        }
     }
 
-    with link = "point.de.Brunsbüttel-Nord" {
-        with layer = 0 marker(:statdot :removed, sb[:bru]);
+    with railway = :second :removed {
+        with link = "line.de.1215" {
+            track(sb[:con, :bru]);
+        }
+
+        with link = "point.de.Brunsbüttel-Nord" {
+            statdot(sb[:bru]);
+            slabel(:left, sb[:bru] + (-0.3dt, -1.3dt), "B. Nord");
+        }
     }
 }
 
@@ -256,15 +338,17 @@ with detail = 2 {
 with detail = 2 {
     let sm = path("d2.de.1216");
 
-    with link = "line.de.1216" {
-        with layer = -1 track(:second :closed, sm[:smi.ym, :mar]);
+    with railway = :second :closed {
+        with link = "line.de.1216" {
+            track(:second :closed, sm[:smi.ym, :maw]);
+            line_label(:left:n, sm[:smi.ym + 3.5km], (0.3dt, 0dt), "1216");
+        }
 
-        with layer = 1 line_badge(:closed, sm[:smi.ym + 4.0km], "1216");
-    }
-
-    with link = "point.de.Marne" {
-        with layer = 1 marker(:statdot :closed, sm[:mar]);
-        slabel(:bottom :closed, sm[:mar] + (0dt, 0.8dt), "Marne");
+        with link = "point.de.Marne" {
+            track(:station, sm[:maw, :mar]);
+            statdot(sm[:mar]);
+            slabel(:bottom, sm[:mar] + (0dt, 0.8dt), "Marne");
+        }
     }
 }
 
@@ -273,51 +357,51 @@ with detail = 2 {
 with detail = 2 {
     let mf = path("d2.de.1217");
 
-    with link = "line.de.1217" {
-        with layer = -2 track(:second :removed, mf[:maw, :frd]);
+    with railway = :second :removed {
+        with link = "line.de.1217" {
+            track(mf[:maw, :krm.y]);
+        }
 
-        guide(:removed,
-                mf[:frd - 2.0km] << 0.5dt
-            --  mf[:frd - 1.0km] << 3.0dt
-        );
-        label(mf[:frd - 1.0km] << 3.2dt,
-            hbox(:right:middle :badgesize :removed, "1217 ")
-        );
-    }
+        with link = "point.de.Kronprinzenkoog-Mittel" {
+            track(:station, mf[:krm.y, :krm]);
+            statdot(mf[:krm]);
+            slabel(:left :removed, mf[:krm + 0.5dt] << 1.5dt,
+                "Kronprinzenkoog"
+            );
+        }
 
-    with link = "point.de.Kronprinzenkoog-Mittel" {
-        with layer = 1 marker(:statdot :removed, mf[:krm]);
-        slabel(:left :removed, mf[:krm + 0.5dt] << 1.5dt,
-            "Kronprinzenkoog"
-        );
-    }
+        with link = "line.de.1217" {
+            track(mf[:krm, :krn]);
+        }
 
-    with link = "point.de.Kronprinzenkoog-Nord" {
-        with layer = 1 marker(:statdot :removed, mf[:krn]);
-    }
+        with link = "point.de.Kronprinzenkoog-Nord" {
+            statdot(mf[:krn]);
+        }
 
-    with link = "point.de.Friedrichskoog-III" {
-        with layer = 1 marker(:statdot :removed, mf[:frd]);
-        slabel(:top :removed, mf[:frd] + (0dt, -1.0dt),
-            "Friedrichskoog III"
-        );
+        with link = "line.de.1217" {
+            track(mf[:krn, :frd]);
+            line_label(:right:sw, mf[:krn + 3.3km], "1217");
+        }
+
+        with link = "point.de.Friedrichskoog-III" {
+            statdot(mf[:frd]);
+            slabel(:left, mf[:frd] + (-1.5dt, 0.8dt),
+                "Friedrichskoog III"
+            );
+        }
     }
 }
+
 
 # DE 1218.  Itzehoe Alsen - Lägerdorf
 with detail = 2 {
     let al = path("d2.de.1218");
 
-    with link = "line.de.1218" {
-        with layer = -1 track(:station, al[:als.y, :lag]);
-
-        guide(:linenum,
-                al[:als.y + 3.5km] >> 0.7dt
-            --  al[:als.y + 3.5km] >> 3.0dt
-        );
-        label(:linenum, al[:als.y + 3.5km] >> 3.0dt,
-            hbox(:center:top :badgesize, "1218")
-        );
+    with railway = :side :nopax {
+        with link = "line.de.1218" {
+            track(al[:als.y, :lag]);
+            line_label(:right:n, al[:als.y + 3.3km], "1218");
+        }
     }
 }
 
@@ -326,69 +410,110 @@ with detail = 2 {
 with detail = 2 {
     let ak = path("d2.de.1220");
 
-    with link = "line.de.1220" {
-        track(:first :double :cat:ac15 :pax, ak[:alt, :kie]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "point.de.Hamburg-Altona" {
+            with layer = -1 track(:station, ak[:alt, :die.y]);
+            statdot(ak[:alt]);
+            with zoom = :high slabel(:left, ak[:alt] + (-2.3dt, -0.5dt),
+                hbox(:right:top, "H.-Altona")
+            );
+        }
 
-        with layer = 1 line_badge(:cat:ac15 :pax, ak[:pin + 3.5km], "1220");
-        with layer = 1 line_badge(:cat:ac15 :pax, ak[:elm + 13.0km], "1220");
-        with layer = 1 line_badge(:cat:ac15 :pax, ak[:wri + 12.0km], "1220");
-        with layer = 1 line_badge(:cat:ac15 :pax, ak[:neu + 9.0km], "1220");
-    }
+        with link = "line.de.1220" {
+            track(ak[:die.y, :eid.yr]);
+        }
 
-    with link = "point.de.Hamburg-Altona" {
-        with layer = 3 marker(:statdot :cat:ac15 :pax, ak[:alt]);
-    }
+        with link = "point.de.Hamburg-Eidelstedt" {
+            track(:station, ak[:eid.yr, :eid]);
+            statdot(ak[:eid]);
+            slabel(:left :cat:ac15, ak[:eid] + (-2.0dt, 1.5dt),
+                hbox(:right:base, span(:light, "H.-"), "Eidelstedt")
+            );
+        }
 
-    with link = "point.de.Hamburg-Eidelstedt" {
-        with layer = 1 marker(:statdot :cat:ac15, ak[:eid]);
-        slabel(:left :cat:ac15, ak[:eid] + (-2.0dt, 1.5dt),
-            hbox(:right:base, span(:light, "H.-"), "Eidelstedt")
-        );
-    }
+        with link = "line.de.1220" {
+            track(ak[:eid, :pin]);
+        }
 
-    with link = "point.de.Pinneberg" {
-        with layer = 2 marker(:statdot :cat:ac15 :pax, ak[:pin]);
-        label(:cat:ac15 :pax, ak[:pin + 1.0dt] << 1.5dt,
-            hbox(:right:top :small, "Pinneberg")
-        );
-    }
+        with link = "point.de.Pinneberg" {
+            statdot(ak[:pin]);
+            slabel(:left, ak[:pin] + (-1.5dt, 0dt),
+                hbox(:right:top, "Pinneberg")
+            );
+        }
 
-    with link = "point.de.Tornesch" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ak[:tor]);
-        slabel(:right :cat:ac15 :pax, ak[:tor - 0.5dt] >> 1.5dt, "Tornesch");
-    }
+        with link = "line.de.1220" {
+            track(ak[:pin, :tor]);
+            line_label(:right:sw, ak[:pin + 1.7km], "1220");
+        }
 
+        with link = "point.de.Tornesch" {
+            statdot(ak[:tor]);
+            slabel(:right :cat:ac15 :pax, ak[:tor] + (1.3dt, -0.3dt),
+                "Tornesch"
+            );
+        }
 
-    with link = "point.de.Elmshorn" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ak[:elm]);
-        label(:cat:ac15 :pax, ak[:elm] << 2.0dt,
-            hbox(:right:middle :small:bold, "Elmshorn")
-        );
-    }
+        with link = "line.de.1220" {
+            track(ak[:tor, :elm]);
+        }
 
-    with link = "point.de.Wrist" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ak[:wri]);
-        label(:cat:ac15 :pax, ak[:wri] >> 2.0dt,
-            hbox(:left:middle :small, "Wrist")
-        );
-    }
+        with link = "point.de.Elmshorn" {
+            track(:station, ak[:elm, :elm.yu]);
+            statdot(ak[:elm]);
+            slabel(:left :bold, ak[:elm] + (-1.7dt, 1.0dt), "Elmshorn");
+        }
 
-    with link = "point.de.Neumünster" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ak[:neu]);
-        label(:cat:ac15 :pax, ak[:neu - 0.5dt] >> 2.0dt,
-            hbox(:left:middle :small:bold, "Neumünster")
-        );
-    }
+        with link = "line.de.1220" {
+            track(ak[:elm.yu, :wri]);
+            line_label(:right:w, ak[:elm.yu + 12km], (0dt, 0.3dt), "1220");
+        }
 
-    with link = "point.de.Meimersdorf-Rbf" {
-        with layer = 1 marker(:statdot :cat:ac15, ak[:meg]);
-    }
+        with link = "point.de.Wrist" {
+            track(:station, ak[:wri, :wri.yi]);
+            statdot(ak[:wri]);
+            slabel(:right, ak[:wri] + (1.7dt, 1.3dt), "Wrist");
+        }
 
-    with link = "point.de.Kiel-Hbf" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ak[:kie]);
-        label(:cat:ac15 :pax, ak[:kie] + (3.0km, 0dt),
-            hbox(:left:top :medium :bold, "Kiel")
-        );
+        with link = "line.de.1220" {
+            track(ak[:wri.yi, :neu.yo]);
+            line_label(:left:se, ak[:neu.yo - 7km], "1220");
+        }
+
+        with link = "point.de.Neumünster" {
+            track(:station, ak[:neu.yo, :neu.yf]);
+            statdot(ak[:neu]);
+            slabel(:right :bold, ak[:neu] + (1.5dt, -1dt),
+                hbox(:left:top, "Neumünster")
+            );
+        }
+
+        with link = "line.de.1220" {
+            track(ak[:neu.yf, :meg]);
+            line_label(:left:e, ak[:neu.yf + 7km], "1220");
+            line_label(:left:e, ak[:meg - 5km], "1220");
+        }
+
+        with link = "point.de.Meimersdorf-Rbf" {
+            statdot(:nopax, ak[:meg]);
+            slabel(:left, ak[:meg] + (-0.7km, 0dt) + (-1dt, 0.8dt),
+                "Meimersdorf"
+            );
+        }
+
+        with link = "line.de.1220" {
+            track(ak[:meg, :meo]);
+            track(ak[:meo, :kie.ys]);
+        }
+
+        with link = "point.de.Kiel-Hbf" {
+            track(:station, ak[:kie.ys, :kie]);
+            statdot(ak[:kie]);
+            slabel(:nw :medium :bold, ak[:kie] + (2.2km, 0.5km) + (0dt, -0.3dt),
+                "Kiel"
+            );
+            with zoom = :high slabel(:top, ak[:kie] + (0dt, -0.7dt), "Hbf");
+        }
     }
 }
 
@@ -397,9 +522,11 @@ with detail = 2 {
 with detail = 2 {
     let wi = path("d2.de.1221");
 
-    with link = "line.de.1221" {
-        track(:second :removed, wi[:wri.yi, :itz.yw]);
-        with layer = 1 line_badge(:removed, wi[:itz - 11.5km], "1221");
+    with railway = :second :removed {
+        with link = "line.de.1221" {
+            track(wi[:wri.yi, :itz.yw]);
+            line_label(:right:s, wi[:itz - 11.5km], "1221");
+        }
     }
 }
 
@@ -408,22 +535,35 @@ with detail = 2 {
 with detail = 2 {
     let ab = path("d2.de.1224");
 
-    with link = "line.de.1224" {
-        track(:first :double :rail:rc12 :pax,
-                ab[:alt.yb - 0.1dl, :alt.yb] << 1dt
-            ..  ab[:bah.yl, :bla]
-        );
-    }
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "line.de.1224" {
+            track(
+                    ab[:alt.yb - 0.1dl, :alt.yb] << 1dt
+                ..  ab[:bah.yl, :bah]
+            );
+        }
 
-    with link = "point.de.Hamburg-Bahrenfeld" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, ab[:bah]);
-    }
+        with link = "point.de.Hamburg-Bahrenfeld" {
+            statdot(ab[:bah]);
+            with zoom = :high slabel(:left, ab[:bah] + (1.5dt, -0.8dt),
+                vbox(:right:bottom,
+                    hbox(:right:base, span(:light, "H.-"), "Bahren-"),
+                    "feld "
+                )
+            );
+        }
 
-    with link = "point.de.Hamburg-Blankenese" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, ab[:bla]);
-        slabel(:left :rail:rc12 :pax, ab[:bla] + (-1.8dt, 1.0dt),
-            hbox(:right:base, span(:light, "H.-"), "Blankenese")
-        );
+        with link = "line.de.1224" {
+            track(ab[:bah, :bla.yw]);
+        }
+
+        with link = "point.de.Hamburg-Blankenese" {
+            track(:station, ab[:bla.yw, :bla]);
+            statdot(ab[:bla]);
+            slabel(:left, ab[:bla] + (-1.5dt, 1.0dt),
+                hbox(:right:base, span(:light, "H.-"), "Blankenese")
+            );
+        }
     }
 }
 
@@ -432,20 +572,22 @@ with detail = 2 {
 with detail = 2 {
     let hp = path("d2.de.1225");
 
-    with link = "line.de.1225" {
-        track(:first :double :rail:rc12 :pax,
-                hp[:rai, :pin] >> 1dt
-        );
-    }
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "line.de.1225" {
+            track(hp[:rai, :eis] >> 1dt);
+        }
 
-    with link = "point.de.Hamburg-Eidelstedt-S-Bahn" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, hp[:eis] >> 1dt);
-    }
+        with link = "point.de.Hamburg-Eidelstedt-S-Bahn" {
+            with layer = 1 marker(:statdot :rail:rc12 :pax, hp[:eis] >> 1dt);
+        }
+        with link = "line.de.1225" {
+            track(:casing, hp[:eis, :eid] >> 1dt);
+            track(hp[:eid, :pin - 1dt] >> 1dt);
+        }
 
-    with link = "point.de.Pinneberg" {
-        with layer = 1 marker(
-            :statdot :rail:rc12 :pax, hp[:pin - 1dt] >> 1dt
-        );
+        with link = "point.de.Pinneberg" {
+            statdot(hp[:pin - 1dt] >> 1dt);
+        }
     }
 }
 
@@ -454,17 +596,19 @@ with detail = 2 {
 with detail = 2 {
     let bw = path("d2.de.1226");
 
-    with link = "line.de.1226" {
-        track(:first :rail:rc12 :pax, bw[:bla.yw, :riu]);
-        track(:first :double :rail:rc12 :pax, bw[:riu, :rou]);
-        track(:first :rail:rc12 :pax, bw[:rou, :wed]);
-    }
+    with railway = :first :rail:rc12 :pax {
+        with link = "line.de.1226" {
+            track(:first :rail:rc12 :pax, bw[:bla.yw, :riu]);
+            track(:first :double :rail:rc12 :pax, bw[:riu, :rou]);
+            track(:first :rail:rc12 :pax, bw[:rou, :wed]);
+        }
 
-    with link = "point.de.Wedel-Holst" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, bw[:wed]);
-        slabel(:left :rail:rc12 :pax, bw[:wed] + (-1.7dt, 0.9dt),
-            hbox(:right:base, "Wedel ", span(:light, "(Holst)"))
-        );
+        with link = "point.de.Wedel-Holst" {
+            statdot(bw[:wed]);
+            slabel(:left, bw[:wed] + (-1.7dt, 0.9dt),
+                hbox(:right:base, "Wedel ", span(:light, "(Holst)"))
+            );
+        }
     }
 }
 
@@ -473,13 +617,21 @@ with detail = 2 {
 with detail = 2 {
     let er = path("d2.de.1234");
 
-    with link = "line.de.1234" {
-        with layer = -2 track(:first :cat:ac15,
-                er[:eid.yr, :bar.yyo - 1dt]
-            ..  er[:bar.yo, :bar.f] >> 0.8dt
-            ..  er[:bar.ff, :hob.yw]
-        );
-        track(:first :double :cat:ac15, er[:hob.yw, :rot.y]);
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.de.1234" {
+            with layer = -1 track(
+                    er[:eid.yr, :bar.yyo - 1dt]
+                ..  er[:bar.yo, :bar.f] >> 0.8dt
+                ..  er[:bar.ff, :hob.yw]
+            );
+            with zoom = :high line_label(:left:s, er[:eid.yr + 3.5km], "1234");
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.1234" {
+            with layer = -1 track(er[:hob.yw, :rot.y]);
+        }
     }
 }
 
@@ -488,12 +640,17 @@ with detail = 2 {
 with detail = 2 {
     let oa = path("d2.de.1239");
 
-    with link = "line.de.1239" {
-        track(:first :double :rail:rc12 :pax, oa[:ohl.ya, :air]);
-    }
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "line.de.1239" {
+            track(oa[:ohl.ya, :air]);
+        }
 
-    with link = "point.de.Hamburg-Airport" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, oa[:air]);
+        with link = "point.de.Hamburg-Airport" {
+            statdot(oa[:air]);
+            with zoom = :high slabel(:left, oa[:air] + (-1.5dt, 0.8dt),
+                hbox(:right:base, span(:light, "H. "), "Airport")
+            );
+        }
     }
 }
 
@@ -502,16 +659,16 @@ with detail = 2 {
 with detail = 2 {
     let ba = path("d2.de.a.6100");
 
-    with link = "line.de.1240" {
-        with layer = 1 track(:first :double :rail:rc12 :pax,
-                ba[:ham, :als] >> 1dt
-        );
-    }
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "point.de.Hamburg-Hbf-S-Bahn" {
+            track(:station, ba[:ham.yk, :ham.yl]);
+            statdot(ba[:ham + 0.3dt] >> 1dt);
+        }
 
-    with link = "point.de.Hamburg-Hbf-S-Bahn" {
-        with layer = 2 marker(
-            :statdot :rail:rc12 :pax, ba[:ham + 0.3dt] >> 1dt
-        );
+        with link = "line.de.1240" {
+            track(ba[:ham.yl, :rai] >> 1dt);
+            track(:casing, ba[:rai, :als] >> 1dt);
+        }
     }
 }
 
@@ -520,20 +677,38 @@ with detail = 2 {
 with detail = 2 {
     let hp = path("d2.de.1241");
 
-    with link = "line.de.1241" {
-        track(:first :double :rail:rc12 :pax,
-                hp[:ham, :has.yo - 1dt] << 1dt
-            ..  hp[:wan.yh + 1dt, :bar.ff] << 0.8dt
-            ..  hp[:bar.f, :pop]
-        );
-    }
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "line.de.1241" {
+            track(hp[:ham.yk, :ham.yo] << 1dt);
+            track(
+                    hp[:ham.yo, :has.yo - 1dt] << 1dt
+                ..  hp[:wan.yh + 1dt, :bap] << 0.8dt
+            );
+            track(:casing,
+                    hp[:bap, :bar.ff] << 0.8dt
+                ..  hp[:bar.f, :bar.yo]
+            );
+            track(hp[:bar.yo, :ohl]);
+        }
 
-    with link = "point.de.Hamburg-Ohlsdorf-S-Bahn" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, hp[:ohl]);
-    }
+        with link = "point.de.Hamburg-Ohlsdorf-S-Bahn" {
+            track(:station, hp[:ohl, :ohl.ya]);
+            statdot(hp[:ohl]);
+            with zoom = :high slabel(:right, hp[:ohl] + (1.6dt, 1dt),
+                hbox(:left:base, span(:light, "H.-"), "Ohlsdorf")
+            );
+        }
 
-    with link = "point.de.Hamburg-Poppenbüttel" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, hp[:pop]);
+        with link = "line.de.1241" {
+            track(hp[:ohl.ya, :pop]);
+        }
+
+        with link = "point.de.Hamburg-Poppenbüttel" {
+            statdot(hp[:pop]);
+            with zoom = :high slabel(:top, hp[:pop] + (0dt, -0.7dt),
+                hbox(:center:base, span(:light, "H.-"), "Poppenbüttel")
+            );
+        }
     }
 }
 
@@ -542,8 +717,10 @@ with detail = 2 {
 with detail = 2 {
     let hp = path("d2.de.1241");
 
-    with link = "line.de.1243" {
-        track(:second :removed, hp[:bar.yo, :ohl] << 0.8dt)
+    with railway = :second :removed {
+        with link = "line.de.1243" {
+            track(hp[:bar.yo, :ohl] << 0.8dt)
+        }
     }
 }
 
@@ -552,14 +729,34 @@ with detail = 2 {
 with detail = 2 {
     let ba = path("d2.de.a.6100");
 
-    with link = "line.de.1244" {
-        track(:first :double :rail:rc12 :pax, ba[:ham.yo, :woh] << 1dt);
-        track(:first :rail:rc12 :pax, ba[:woh, :aum] << 0.8dt);
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "line.de.1244" {
+            track(:casing, ba[:ham.yo, :tie.yg + 1km] << 1dt);
+            with layer = -1 track(ba[:tie.yg + 1km, :all] << 1dt);
+            track(ba[:all, :ber] << 1dt);
+        }
+
+        with link = "point.de.Hamburg-Bergedorf-S-Bahn" {
+            statdot(ba[:ber] >> 1dt);
+        }
+
+        with link = "line.de.1244" {
+            track(ba[:ber, :woh] << 1dt);
+            with zoom = :high line_label(
+                :right:se, ba[:ber - 3km] >> 1dt, "1244"
+            );
+        }
     }
 
-    with link = "point.de.Aumühle" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, ba[:aum] >> 0.8dt);
-        slabel(:right :rail:rc12 :pax, ba[:aum] + (-1dt, -2.5dt), "Aumühle");
+    with railway = :first :rail:rc12 :pax {
+        with link = "line.de.1244" {
+            track(ba[:woh, :aum] << 0.8dt);
+        }
+
+        with link = "point.de.Aumühle" {
+            statdot(ba[:aum] >> 0.8dt);
+            slabel(:right, ba[:aum] + (-1dt, -2.0dt), "Aumühle");
+        }
     }
 }
 
@@ -568,15 +765,23 @@ with detail = 2 {
 with detail = 2 {
     let oo = path("d2.de.1247");
 
-    with link = "line.de.1247" {
-        with layer = -1 track(:second :removed,
-                oo[:ohl, :ohl.ya] << 0.8dt
-            ..  oo[:ohl.yya, :och]
-        );
-    }
+    with railway = :second :removed {
+        with link = "line.de.1247" {
+            track(
+                    oo[:ohl, :ohl.ya] << 0.8dt
+                ..  oo[:ohl.yya, :och]
+            );
+            with zoom = :high line_label(
+                :left:e, oo[:ohl.yya + 3km], "1247"
+            );
+        }
 
-    with link = "point.de.Hamburg-Ochsenzoll" {
-        with layer = 1 marker(:statdot :removed, oo[:och]);
+        with link = "point.de.Hamburg-Ochsenzoll" {
+            statdot(oo[:och]);
+            with zoom = :high slabel(:right, oo[:och] + (-1dt, -1.3dt),
+                hbox(:left:base, span(:light, "H.-"), "Ochsenzoll")
+            );
+        }
     }
 }
 
@@ -585,17 +790,15 @@ with detail = 2 {
 with detail = 2 {
     let wf = path("d2.de.1251");
 
-    with link = "line.de.1251" {
-        with layer = -1 track(:second :removed, wf[:ffin, :fin]);
-    }
+    with railway = :second :removed {
+        with link = "line.de.1251" {
+            track(wf[:ffin, :fin]);
+        }
 
-    with link = "point.de.Hamburg-Finkenwerder" {
-        marker(:statdot :removed, wf[:fin]);
+        with link = "point.de.Hamburg-Finkenwerder" {
+            statdot(wf[:fin]);
+        }
     }
-
-    label(wf[:fin] + (-2dt, 2dt),
-        hbox(:right:top :large :bold :cat:ac15 :pax, "Hamburg")
-    );
 }
 
 
@@ -603,12 +806,14 @@ with detail = 2 {
 with detail = 2 {
     let us = path("d2.de.1252");
 
-    with link = "line.de.1252" {
-        track(:first :cat:ac15, us[:unt, :uns]);
-    }
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.de.1252" {
+            track(us[:unt, :uns]);
+        }
 
-    with link = "point.de.Hamburg-Unterelbe-Seehafen" {
-        with layer = 1 marker(:statdot :cat:ac15, us[:uns]);
+        with link = "point.de.Hamburg-Unterelbe-Seehafen" {
+            statdot(us[:uns]);
+        }
     }
 }
 
@@ -617,18 +822,30 @@ with detail = 2 {
 with detail = 2 {
     let sd = path("d2.de.1253");
 
-    with link = "line.de.1253" {
-        track(:second :double :cat:ac15, sd[:sel.y, :kaw]);
-        track(:second :cat:ac15, sd[:kaw, :hbm.yh]);
-        track(:second :double :cat:ac15, sd[:hbm.yw, :dra]);
-    }
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.de.1253" {
+            track(:double, sd[:sel.y, :kaw]);
+            with zoom = :high line_label(
+                :right:s, sd[:sel.y + 4.3km], "1253"
+            );
+            track(sd[:kaw, :hbm.yh]);
+            track(:double, sd[:hbm.yw, :asu]);
+            with zoom = :high line_label(
+                :left:e, sd[:hbm.yw + 2.5km], "1253"
+            );
+        }
 
-    with link = "point.de.Hamburg-Waltershof-Alte-Süderelbe" {
-        with layer = 1 marker(:statdot :cat:ac15, sd[:asu]);
-    }
+        with link = "point.de.Hamburg-Waltershof-Alte-Süderelbe" {
+            statdot(sd[:asu]);
+        }
 
-    with link = "point.de.Hamburg-Waltershof-Dradenau" {
-        with layer = 1 marker(:statdot :cat:ac15, sd[:dra]);
+        with link = "line.de.1253" {
+            track(:double, sd[:asu, :dra]);
+        }
+
+        with link = "point.de.Hamburg-Waltershof-Dradenau" {
+            statdot(sd[:dra]);
+        }
     }
 }
 
@@ -637,12 +854,17 @@ with detail = 2 {
 with detail = 2 {
     let ms = path("d2.de.1255");
 
-    with link = "line.de.1255" {
-        track(:first :double :cat:ac15, ms[:wik.ys, :sud]);
-    }
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.1255" {
+            track(ms[:wik.ys, :sud]);
+        }
 
-    with link = "point.de.Hamburg-Süd" {
-        with layer = 1 marker(:statdot :cat:ac15, ms[:sud]);
+        with link = "point.de.Hamburg-Süd" {
+            statdot(ms[:sud]);
+            with zoom = :high slabel(:left, ms[:sud] + (1dt, -1.3dt),
+                "H. Süd"
+            );
+        }
     }
 }
 
@@ -664,16 +886,11 @@ with detail = 2 {
 with detail = 2 {
     let sn = path("d2.de.1262");
 
-    with link = "line.de.1262" {
-        track(:station, sn[:sym, :nwk]);
-
-        guide(:open,
-                sn[:nwk - 0.4km] << 0.7dt
-            --  sn[:nwk - 0.4km] << 2.2dt
-        );
-        slabel(:top, sn[:nwk - 0.4km] << 2.5dt,
-            span(:badgesize, "1262")
-        );
+    with railway = :side :nopax {
+        with link = "line.de.1262" {
+            track(sn[:sym, :nwk]);
+            line_label(:right:w, sn[:nwk - 1.2km], "1262");
+        }
     }
 }
 
@@ -682,16 +899,27 @@ with detail = 2 {
 with detail = 2 {
     let sb = path("d2.de.1263");
 
-    with link = "line.de.1263" {
-        track(:station, sb[:stx, :but.f]);
+    with railway = :side :nopax {
+        with link = "line.de.1263" {
+            track(sb[:stx, :but.f]);
+            line_label(:right:w, sb[:but - 0.5km], "1263");
+        }
+    }
+}
 
-        guide(:open,
-                sb[:but - 1km] << 0.7dt
-            --  sb[:but - 1km] << 2.2dt
-        );
-        slabel(:left, sb[:but - 1km] << 3dt + (0dt, 1dt),
-            span(:badgesize, "1263")
-        );
+
+# DE 1264.  Cuxhaven-Groden - Cuxhaven Amerika Bahnhof
+with detail = 2 {
+    let ca = path("d2.de.1264");
+
+    with railway = :side :nopax {
+        with link = "line.de.1264" {
+            track(ca[:gro, :cua]);
+        }
+
+        with link = "point.de.Cuxhaven-Amerika-Bahnhof" {
+            statdot(ca[:cua]);
+        }
     }
 }
 
@@ -700,16 +928,18 @@ with detail = 2 {
 with detail = 2 {
     let hd = path("d2.de.1270");
     
-    with link = "line.de.1270" {
-        with layer = -1 track(:first :double :rail:rc12 :pax,
-                hd[:ham + 0.5dt, :ham + 0.51dt] >> 1dt
-            ..  hd[:ham.yyl, :als.aa]
-            ..  hd[:als - 0.5dt, :als] << 1dt
-        );
-    }
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "line.de.1270" {
+            with layer = -1 track(
+                    hd[:ham + 0.5dt, :ham + 0.51dt] >> 1dt
+                ..  hd[:ham.yyl, :als.aa]
+                ..  hd[:als - 0.5dt, :als] << 1dt
+            );
+        }
 
-    with link = "point.de.Hamburg-Altona-S-Bahn" {
-        with layer = 2 marker(:statdot :rail:rc12 :pax, hd[:als] << 1dt);
+        with link = "point.de.Hamburg-Altona-S-Bahn" {
+            statdot(hd[:als] << 1dt);
+        }
     }
 }
 
@@ -718,21 +948,23 @@ with detail = 2 {
 with detail = 2 {
     let hn = path("d2.de.1271");
 
-    with link = "line.de.1271" {
-        with layer = 1 track(:first :double :rail:rc12 :pax,
-                hn[:ham.yh - 0.1dl, :ham.yh] << 1dt
-            ..  hn[:ham.yyh, :hab.xn]
-            ..  hn[:oha, :har.yt] << 1dt
-        );
-        with layer = -1 track(:first :double :rail:rc12 :pax,
-                hn[:har.yt, :har.yt + 0.1dl] << 1dt
-            ..  hn[:har - 1dt, :thbf - 2dt]
-            ..  hn[:hei.yt + 1dt, :ngr] << 1dt
-        );
-    }
+    with railway = :first :double :rail:rc12 :pax {
+        with link = "line.de.1271" {
+            track(:casing,
+                    hn[:ham.yh - 0.1dl, :ham.yh] << 1dt
+                ..  hn[:ham.yyh, :hab.xn]
+                ..  hn[:oha, :oha + 1km] << 1dt
+            );
+            with layer = -1 track(:first :double :rail:rc12 :pax,
+                    hn[:oha + 1km, :har.yt + 0.1dl] << 1dt
+                ..  hn[:har - 1dt, :thbf - 2dt]
+                ..  hn[:hei.yt + 1dt, :ngr] << 1dt
+            );
+        }
 
-    with link = "Hamburg-Neugraben-S-Bahn" {
-        with layer = 1 marker(:statdot :rail:rc12 :pax, hn[:ngr] << 1dt);
+        with link = "Hamburg-Neugraben-S-Bahn" {
+            statdot(hn[:ngr] << 1dt);
+        }
     }
 }
 
@@ -741,19 +973,46 @@ with detail = 2 {
 with detail = 2 {
     let ba = path("d2.de.1280");
 
-    with link = "line.de.1280" {
-        track(:first :double :cat:ac15, ba[:buc, :mas.yb]);
-        with layer = 1 line_badge(:cat:ac15, ba[:buc + 14.5km], "1280");
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.1280" {
+            track(ba[:buc.ym, :jes.yl]);
+            track(ba[:jes.yl, :mas.yb]);
+            line_label(:left:se, ba[:buc.ym + 14km], "1280");
+        }
 
-        track(:first :double :cat:ac15, ba[:oha, :rot.yf]);
+        with link = "point.de.Maschen-Rbf" {
+            track(:station, ba[:mas.yb, :mec.ym]);
+            statdot(ba[:mas]);
+            slabel(:right :cat:ac15, ba[:mas] + (0.6km, 0dt) + (-2dt, 0dt),
+                vbox(:left:bottom, "Maschen", "    Rbf")
+            );
+        }
+
+        with link = "line.de.1280" {
+            with layer = -1 track(ba[:oha, :rot.yf]);
+        }
+    }
+}
+
+
+# DE 1284.  Stelle - Maschen Rbf
+with detail = 2 {
+    let sm = path("d2.de.1284");
+
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.1284" {
+            track(sm[:ste.ym, :mas.yb]);
+        }
     }
 }
 
 
 # DE 1290.  Hamburg-Wilhelmsburg (Wa) - Hamburg-Peute.
 with detail = 2 {
-    with link = "line.de.1290" {
-        with layer = 2 track(:second, path("d2.de.1290")[:wik.yp, :peu]);
+    with railway = :second :nopax {
+        with link = "line.de.1290" {
+            track(:casing, path("d2.de.1290")[:wik.yp, :peu]);
+        }
     }
 }
 
@@ -762,12 +1021,14 @@ with detail = 2 {
 with detail = 2 {
     let am = path("d2.de.1296");
 
-    with link = "line.de.1296" {
-        track(:second :double :cat:ac15, am[:way, :muh]);
-    }
+    with railway = :second :double :cat:ac15 :nopax {
+        with link = "line.de.1296" {
+            track(am[:way, :muh]);
+        }
 
-    with link = "point.de.Hamburg-Waltershof-Mühlenwerder" {
-        with layer = 1 marker(:statdot :cat:ac15, am[:muh]);
+        with link = "point.de.Hamburg-Waltershof-Mühlenwerder" {
+            statdot(am[:muh]);
+        }
     }
 }
 

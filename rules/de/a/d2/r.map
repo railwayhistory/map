@@ -1,0 +1,85 @@
+# DE RBK.  Rendsburg Kreisbf - Rendsburg
+with detail = 2 {
+    with link = "line.de.RBK" {
+        with layer = -1 track(:third :removed,
+                path("d2.de.rbk")[:ren.yr, :ren.yk]
+        );
+    }
+}
+
+
+# DE RKT.  Ratzeburg Rbf - Klein Thurow
+with detail = 2 {
+    let rt = path("d2.de.rkt");
+
+    with railway = :third :removed {
+        with link = "line.de.RKT" {
+            track(rt[:rat.yt, :der.ys]);
+            with zoom = :high line_label(:left:s, rt[:rat.yt + 2km], "RKT");
+        }
+
+        with link = "point.de.Dermin" {
+            track(:station, rt[:der.ys, :der]);
+            with zoom = :high {
+                statdot(rt[:der]);
+                slabel(:nw, rt[:der] + (1.3dt, -0.5dt), "Dermin");
+            }
+        }
+
+        with link = "line.de.RKT" {
+            track(rt[:der, :kth]);
+            with zoom = :high line_label(:left:s, rt[:kth - 4.5km], "RKT");
+        }
+
+        with link = "point.de.Klein-Thurow" {
+            with zoom = :high {
+                statdot(rt[:kth]);
+                slabel(:right, rt[:kth] + (1.5dt, 0.8dt), "Klein Thurow");
+            }
+        }
+    }
+}
+
+
+# DE RSF.  Rendsburg Kreisbf - Schenefeld (Mittelholst)
+with detail = 2 {
+    let rh = path("d2.de.rsf.1");
+    let hs = path("d2.de.rsf.2");
+
+    with railway = :third :narrow:g1000 :removed {
+        with link = "point.de.Rendsburg-Kreisbf" {
+            track(:station, rh[:ren, :ren.yr]);
+            with zoom = :high statdot(rh[:ren]);
+        }
+
+        with link = "line.de.RSF" {
+            track(rh[:ren.yr, :hwe.ys]);
+            with zoom = :high line_label(:right:e, rh[:ren.yr + 4.5km], "RSF");
+            with zoom = :high line_label(:left:w, rh[:hwe.ys - 8.5km], "RSF");
+
+            track(rh[:hwe.ys, :hwe.yr]);
+        }
+
+        # point.de.Hohenwestedt-Kreisbf
+
+        with link = "line.de.RSF" {
+            track(:casing, hs[:hwe.ys, :hwe.ys + 1km]);
+            track(hs[:hwe.ys + 1km, :sen]);
+            with zoom = :high line_label(:right:se, hs[:sen - 4.3km], "RSF");
+        }
+
+        with link = "point.de.Schenefeld-Mittelholst" {
+            with zoom = :high {
+                statdot(hs[:sen]);
+                slabel(:bottom, hs[:sen] + (0dt, 0.8dt),
+                    vbox(:center:top,
+                        "Schenefeld", span(:light, "(Mittelholst)")
+                    )
+                );
+            }
+        }
+    }
+}
+
+
+
