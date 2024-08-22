@@ -1,33 +1,50 @@
 # DE 1300.  Bremerhaven-Wulsdorf - Buchholz (Nordheide)
 with detail = 2 {
-    let wb = path("d2.de.1300");
+    let wb = path("d2.de.a.1300");
 
-    with link = "line.de.1300" {
-        track(:second :pax, wb[:wul.yb, :xha]);
-        with layer = 1 line_badge(:pax, wb[:wul + 17km], "1300");
-        with layer = 1 line_badge(:pax, wb[:hes + 11km], "1300");
+    with railway = :second :pax {
+        with link = "line.de.1300" {
+            track(wb[:wux, :bvo.yo]);
+            line_label(:left:s, wb[:wux + 17km], (0.2dt, 0dt), "1300");
+        }
 
-        with layer = -1 track(:second :removed, wb[:xha, :buc.yb]);
-        with layer = 1 line_badge(:removed, wb[:har + 8.2km] << 0.2dt, "1300");
+        with link = "point.de.Bremervörde" {
+            track(wb[:bvo.yo, :bvo.yz]);
+            statdot(wb[:bvo]);
+            slabel(:right :pax, wb[:bvo] - (0dt, 0.7dt),
+                vbox(:left:bottom, "Bremer-", "vörde")
+            );
+        }
+
+        with link = "line.de.1300" {
+            track(wb[:bvo.yz, :hes]);
+        }
+
+        with link = "point.de.Hesedorf" {
+            track(wb[:hes, :hes.ys]);
+            statdot(wb[:hes]);
+            slabel(:right, wb[:hes] + (0dt, 0.4km) + (-1.5dt, 0.7dt),
+                hbox(:left:top, "Hesedorf")
+            );
+        }
+
+        with link = "line.de.1300" {
+            track(wb[:hes.ys, :har]);
+            line_label(:right:n, wb[:hes + 10.5km], (-0.3dt, 0dt), "1300");
+        }
+
+        with link = "point.de.Harsefeld" {
+            track(:station, wb[:har, :har.yb]);
+            statdot(wb[:har]);
+            slabel(:left :pax, wb[:har] + (1dt, 3.8dt), "Harsefeld");
+        }
     }
 
-    with link = "point.de.Bremervörde" {
-        with layer = 1 marker(:statdot :pax, wb[:bvo]);
-        slabel(:right :pax, wb[:bvo] - (0dt, 1dt),
-            vbox(:left:bottom, "Bremer-", "vörde")
-        );
-    }
-
-    with link = "point.de.Hesedorf" {
-        with layer = 1 marker(:statdot :pax, wb[:hes]);
-        slabel(:right :pax, wb[:hes] + (-1.5dt, 1.4dt),
-            hbox(:left:top, "Hesedorf")
-        );
-    }
-
-    with link = "point.de.Harsefeld" {
-        with layer = 1 marker(:statdot :pax, wb[:har]);
-        slabel(:left :pax, wb[:har] + (1dt, 3.8dt), "Harsefeld");
+    with railway = :second :removed {
+        with link = "line.de.1300" {
+            track(wb[:har.yb, :buc.yb]);
+            line_label(:right:ne, wb[:har + 15.5km], "1300");
+        }
     }
 }
 
@@ -36,9 +53,12 @@ with detail = 2 {
 with detail = 2 {
     let bc = path("d2.de.1310");
 
-    with link = "line.de.1310" {
-        track(:second :pax, bc[:spe.yc, :cux.yb]);
-        line_badge(:pax, bc[:cux.yb - 11km] << 0.2dt, "1310");
+    with railway = :second :pax {
+        with link = "line.de.1310" {
+            track(bc[:spe.yc, :cux.yb]);
+            line_label(:left:e, bc[:spe.yc + 6.2km], "1310");
+            line_label(:right:nw, bc[:cux.yb - 8km], "1310");
+        }
     }
 }
 
