@@ -1,0 +1,153 @@
+# PL PMZ.  Podmokle Wielkie - Zbąszyń
+with detail = 2 {
+    let pz = path("d2.pl.pmz");
+
+    with railway = :first :removed {
+        with link = "line.pl.PMZ" {
+            track(pz[:pod.yz, :zba.yg]);
+            line_label(:right:w, pz[:pod.yz + 4km], (0dt, 0.1dt), "PMZ");
+        }
+    }
+}
+
+
+# PL PRZ. Przewóz - Przysieka
+with detail = 2 {
+    let pp = path("d2.pl.prz");
+
+    with railway = :second :removed {
+        with link = "line.pl.PRZ" {
+            track(pp[:prz.yp, :prs]);
+            line_label(:left:n, pp[:prz.yp + 4km], "PRZ");
+        }
+
+        with link = "point.pl.Przysieka" {
+            statdot(pp[:prs]);
+            slabel(:right, pp[:prs] + (-2dt, -1.3dt), "Przysieka");
+        }
+    }
+}
+
+
+# PL PSL.  Przybysław - Lgów
+with detail = 2 {
+    let pl = path("d2.pl.psl");
+
+    with railway = :third :narrower:g600 :removed {
+        with link = "line.pl.PSL" {
+            track(pl[:prz, :lgo]);
+            with zoom = :high line_label(:left:n, pl[:lgo - 2.7km], "PSL");
+        }
+
+        with link = "point.pl.Lgów" {
+            with zoom = :high {
+                statdot(pl[:lgo]);
+                slabel(:left, pl[:lgo] + (1.5dt, -1.5dt), "Lgów");
+            }
+        }
+    }
+}
+
+
+# PL PSM.  Poznań Starołęka - Poznań Malta
+with detail = 2 {
+    let sm = path("d2.pl.psm");
+
+    with railway = :third :removed {
+        with link = "line.pl.PSM" {
+            track(sm[:pst, :pma]);
+        }
+    }
+}
+
+
+# PL PSZ.  Poznań Wschód - Zaniemyśl
+with detail = 2 {
+    let pz = path("d2.pl.psz");
+
+    with railway = :third :narrow:g750 :removed {
+        with link = "line.pl.PSZ" {
+            track(pz[:pow.yz, :pma]);
+        }
+
+        with link = "point.pl.Poznań-Malta" {
+            with zoom = :high {
+                statdot(pz[:pma]);
+            }
+        }
+
+        with link = "line.pl.PSZ" {
+            track(pz[:pma, :tul]);
+            with zoom = :high line_label(:right:ne, pz[:tul - 4km], "PSZ");
+        }
+
+        with link = "point.pl.Tulce" {
+            with zoom = :high {
+                statdot(pz[:tul]);
+                slabel(:ne, pz[:tul] + (0.3dt, 0.7dt), "Tulce");
+            }
+        }
+
+        with link = "line.pl.PSZ" {
+            track(pz[:tul, :kre]);
+        }
+
+        with link = "point.pl.Krerowo" {
+            with zoom = :high {
+                statdot(pz[:kre]);
+                slabel(:ne, pz[:kre] + (0.3dt, 0.7dt), "Krerowo");
+            }
+        }
+
+        with link = "line.pl.PSZ" {
+            track(pz[:kre, :pol.ym]);
+            with zoom = :high line_label(:right:ne, pz[:pol.ym - 6km], "PSZ");
+
+            track(pz[:pol.ym, :pol]);
+        }
+
+        with link = "point.pl.Połażejewo" {
+            with zoom = :high {
+                statdot(pz[:pol]);
+                slabel(:right, pz[:pol] + (1.5dt, 1dt), "Połażejewo");
+            }
+        }
+
+        with link = "line.pl.PSZ" {
+            track(pz[:pol, :srm]);
+            with zoom = :high line_label(:left:n, pz[:srm - 5.8km], "PSZ");
+        }
+    }
+
+    with railway = :second :narrow:g750 :museum {
+        with link = "point.pl.Środa-Wielkopolska-Miasto" {
+            statdot(pz[:srm]);
+        }
+
+        with link = "line.pl.PSZ" {
+            track(pz[:srm, :sro.yj]);
+            track(pz[:sro.yj, :ann]);
+        }
+
+        with link = "point.pl.Annopole-Wąskotorowe" {
+            with zoom = :high {
+                statdot(pz[:ann]);
+                slabel(:ne, pz[:ann] + (-1.3dt, -2dt),
+                    vbox(:right:top, "Anno-", "pole ")
+                );
+            }
+        }
+
+        with link = "line.pl.PSZ" {
+            track(pz[:ann, :ann.yc]);
+            track(pz[:ann.yc, :zan]);
+            with zoom = :high line_label(:left:w, pz[:zan - 2.8km], "PSZ");
+        }
+
+        with link = "point.pl.Zaniemyśl" {
+            statdot(pz[:zan]);
+            slabel(:left, pz[:zan] + (-1.5dt, 1.0dt), "Zaniemyśl");
+        }
+    }
+}
+

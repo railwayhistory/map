@@ -1,0 +1,44 @@
+# PL ZNO.  Żnin Wąskotorowy - Ośno Wąskotorowe
+with detail = 2 {
+    let zo = path("d2.pl.zno");
+
+    with railway = :third :narrower:g600 :tourist {
+        with link = "point.pl.Żnin-Wąskotorowy" {
+            track(:station, zo[:zni, :zni.yz]);
+        }
+
+        with link = "line.pl.ZNO" {
+            track(zo[:zni.yz, :ryd]);
+        }
+
+        with link = "point.pl.Rydlewo" {
+            with zoom = :high {
+                statdot(zo[:ryd]);
+                slabel(:left, zo[:ryd] + (-1.5dt, 0.8dt), "Rydlewo");
+            }
+        }
+
+        with link = "line.pl.ZNO" {
+            track(zo[:ryd, :bio]);
+            line_label(:left:w, zo[:bio - 1.3km], (0dt, 0.2dt), "ZNO");
+        }
+
+        with link = "point.pl.Biskupin-Odcinek" {
+            with zoom = :high {
+                statdot(:removed, zo[:bio]);
+                slabel(:left :removed, zo[:bio] + (-1dt, -1.3dt),
+                    "Biskupin Od."
+                );
+            }
+        }
+    }
+
+    with railway = :third :narrower:g600 :removed {
+        with link = "line.pl.ZNO" {
+            track(zo[:bio, :osw]);
+            with zoom = :high line_label(:right:se, zo[:bio + 7km], "ZNO");
+            with zoom = :high line_label(:left:nw, zo[:osw - 5km], "ZNO");
+        }
+    }
+}
+

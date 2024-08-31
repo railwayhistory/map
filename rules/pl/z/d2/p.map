@@ -17,3 +17,57 @@ with detail = 2 {
     }
 }
 
+
+# PL PTG.  Popiele - Trzebiatów - Gryfice Wąskotorowe
+with detail = 2 {
+    let pg = path("d2.pl.ptg");
+
+    with railway = :second :narrow:g1000 :tourist {
+        with link = "line.pl.PTG" {
+            track(pg[:pop.yg, :pog]);
+            line_label(:left:e, pg[:pop.yg + 8km], "PTG");
+            line_label(:left:e, pg[:pog - 11km], "PTG");
+        }
+
+        with link = "point.pl.Pogorzelica-Gryficka" {
+            statdot(pg[:pog]);
+            slabel(:top, pg[:pog] + (0dt, -0.9dt),
+                vbox(:center:bottom, "Pogorzelica", "Gryficka")
+            );
+        }
+    }
+
+    with railway = :third :narrow:g1000 :removed {
+        with link = "line.pl.PTG" {
+            track(pg[:pog, :trm.ym]);
+            with zoom = :high line_label(:right:ne, pg[:pog + 3.5km], "PTG");
+        }
+
+        with link = "point.pl.Trzebiatów-Mokre" {
+            track(:station, pg[:trm.ym, :trm]);
+            with zoom = :high {
+                statdot(pg[:trm]);
+            }
+        }
+
+        with link = "line.pl.PTG" {
+            track(pg[:trm, :tap]);
+            with zoom = :high line_label(:left:sw, pg[:trm + 10.75km], "PTG");
+            with zoom = :high line_label(:left:nw, pg[:tap - 5.75km], "PTG");
+        }
+
+        with link = "point.pl.Tąpadły" {
+            track(:station, pg[:tap, :tap.yg]);
+            with zoom = :high {
+                statdot(pg[:tap]);
+                slabel(:left, pg[:tap] + (2dt, -1.5dt), "Tąpadły");
+            }
+        }
+
+        with link = "line.pl.PTG" {
+            track(pg[:tap.yg, :gry.yp]);
+            with zoom = :high line_label(:right:s, pg[:tap.yg + 4.5km], "PTG");
+        }
+    }
+}
+
