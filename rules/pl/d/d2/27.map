@@ -1,0 +1,646 @@
+# PL 271.  Wrocław Główny – Poznań Główny
+with detail = 2 {
+    let wp = path("d2.pl.d.271");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.271" {
+            track(wp[:wro, :gra.ys]);
+            track(wp[:gra.ys, :gra.yd]);
+            track(wp[:gra.yd, :wmi.ys]);
+        }
+
+        with link = "point.pl.Wrocław-Mikołajów" {
+            track(:station, wp[:wmi.ys, :wmi.yk]);
+            statdot(wp[:wmi]);
+        }
+
+        with link = "line.pl.271" {
+            track(wp[:wmi.yk, :wpo.yg]);
+        }
+
+        with link = "point.pl.Wrocław-Popowice" {
+            track(:station, wp[:wpo.yg, :wpo]);
+            statdot(wp[:wpo]);
+        }
+
+        with link = "line.pl.271" {
+            track(wp[:wpo, :jez.y]);
+            track(wp[:jez.y, :wos.ys]);
+            track(wp[:wos.ys, :wos]);
+        }
+
+        with link = "point.pl.Wrocław-Osobowice" {
+            statdot(wp[:wos]);
+        }
+
+        with link = "line.pl.271" {
+            track(wp[:wos, :zmi.yp]);
+            line_label(:right:w, wp[:wos + 5km], (0dt, -0.2dt), "271");
+            line_label(:left:e, wp[:zmi - 7km], (0dt, -0.2dt), "271");
+        }
+
+        with link = "point.pl.Żmigród" {
+            track(:station, wp[:zmi.yp, :zmi]);
+            statdot(wp[:zmi]);
+            slabel(:right, wp[:zmi] + (1.5dt, 0.8dt), "Żmigród");
+        }
+
+        with link = "line.pl.271" {
+            track(wp[:zmi, :rax]);
+            line_label(:left:e, wp[:rax - 6km], (0dt, 0.1dt), "271");
+        }
+    }
+}
+
+
+# PL 272.  Kluczbork - Poznań Główny
+with detail = 2 {
+    let kp = path("d2.pl.d.272");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.272" {
+            track(kp[:klu.yp, :got.y]);
+            track(kp[:got.y, :kox]);
+            line_label(:right:w, kp[:got.y + 5km], "272");
+        }
+    }
+}
+
+
+# PL 273.  Wrocław Główny - Szczecin Główny
+with detail = 2 {
+    let ws = path("d2.pl.d.273");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.273" {
+            with layer = -1 track(ws[:gra.ys, :wmu.ys]);
+        }
+
+        with link = "point.pl.Wrocław-Muchobór" {
+            track(:station, ws[:wmu.ys, :wmu]);
+            statdot(ws[:wmu]);
+        }
+
+        with link = "line.pl.273" {
+            track(:casing, ws[:wmu, :wku.yg + 0.5km]);
+            track(ws[:wku.yg + 0.5km, :ksi]);
+            line_label(:right:w, ws[:wku.yg + 10km], "273");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.273" {
+            track(ws[:ksi, :brz]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.273" {
+            track(ws[:brz, :wol.ym]);
+        }
+
+        with link = "point.pl.Wołów" {
+            track(:station, ws[:wol.ym, :wol]);
+            statdot(ws[:wol]);
+            slabel(:right, ws[:wol] + (1.5dt, 0.3dt), "Wołów");
+        }
+
+        with link = "line.pl.273" {
+            track(ws[:wol, :sci.yw]);
+            line_label(:left:ne, ws[:wol + 7km], "273");
+
+            track(ws[:sci.yw, :sci.yk]);
+            track(ws[:sci.yk, :sci]);
+        }
+
+        with link = "point.pl.Ścinawa" {
+            statdot(ws[:sci]);
+            slabel(:left, ws[:sci] + (-1km, 0dt) + (-1dt, 0.5dt), "Ścinawa");
+        }
+
+        with link = "line.pl.273" {
+            track(ws[:sci, :rud.yl]);
+            line_label(:right:sw, ws[:rud.yl - 6km], "273");
+
+            track(ws[:rud.yl, :rud.yp]);
+        }
+
+        with link = "point.pl.Rudna-Gwizdanów" {
+            track(:station, ws[:rud.yp, :rud.yh]);
+            statdot(ws[:rud]);
+            slabel(:right, ws[:rud] + (1.5dt, 0dt),
+                vbox(:left:middle, "Rudna", " Gwizdanów")
+            );
+        }
+
+        with link = "line.pl.273" {
+            track(ws[:rud.yh, :glx]);
+            line_label(:right:sw, ws[:glx], "273");
+        }
+    }
+}
+
+
+# PL 274.  Wrocław Świebodzki – Granica Państwa (Zgorzelec)
+with detail = 2 {
+    let wz = path("d2.pl.274");
+
+    with railway = :first :double :suspended {
+        with link = "point.pl.Wrocław-Świebodzki" {
+            statdot(wz[:wrs]);
+        }
+
+        with link = "line.pl.274" {
+            with layer = -1 track(wz[:wrs, :wrs.yg]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.274" {
+            with layer = -1 track(wz[:wrs.yg, :wrs.yg + 2km]);
+            track(wz[:wrs.yg + 2km, :wrz]);
+        }
+
+        with link = "point.pl.Wrocław-Zachodni" {
+            track(:station, wz[:wrz, :wrz.yn]);
+            statdot(wz[:wrz]);
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:wrz.yn, :mie.y]);
+            line_label(:left:n, wz[:wrz.yn + 5km], (0.3dt, 0dt), "274");
+
+            track(wz[:mie.y, :imb]);
+        }
+
+        with link = "point.pl.Imbramowice" {
+            statdot(wz[:imb]);
+            slabel(:right, wz[:imb] + (-1dt, 0.8dt),
+                hbox(:left:top, "Imbramowice")
+            );
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:imb, :jaw.yk]);
+            line_label(:right:se, wz[:jaw.yk - 3km], "274");
+        }
+
+        with link = "point.pl.Jaworzyna-Śląska" {
+            track(:station, wz[:jaw.yk, :jaw.yl]);
+            statdot(wz[:jaw]);
+            slabel(:right, wz[:jaw] + (1.6km, 0dt) + (1.5dt, 0.8dt),
+                "Jaworzyna Śląska"
+            );
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:jaw.yl, :was]);
+            line_label(:right:s, wz[:jaw.yl + 7km], (-0.2dt, 0dt), "274");
+        }
+
+        with link = "point.pl.Wałbrzych-Szczawienko" {
+            track(:station, wz[:was, :was.ym]);
+            statdot(wz[:was]);
+            slabel(:right, wz[:was] + (1.7dt, 1.3dt), "W. Szczawienko");
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:was.ym, :wam]);
+        }
+
+        with link = "point.pl.Wałbrzych-Miasto" {
+            track(:station, wz[:wam, :wam.yv]);
+            statdot(wz[:wam]);
+            slabel(:right, wz[:wam] + (1.7dt, 1.0dt), "W. Miasto");
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:wam.yv, :waf.yv]);
+            track(wz[:waf.yv, :wal.yk]);
+        }
+
+        with link = "point.pl.Wałbrzych-Główny" {
+            track(:station, wz[:wal.yk, :wal]);
+            statdot(wz[:wal]);
+            slabel(:right :bold, wz[:wal] + (0dt, -1.8km), "Wałbrzych");
+            slabel(:bottom, wz[:wal] + (-0.5dt, 1dt), "W Gł.");
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:wal, :bow.ys]);
+        }
+
+        with link = "point.pl.Boguszów-Gorce-Wschód" {
+            track(:station, wz[:bow.ys, :bow]);
+            statdot(wz[:bow]);
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:bow, :bog.yt]);
+            track(wz[:bog.yt, :bog]);
+        }
+
+        with link = "point.pl.Boguszów-Gorce" {
+            statdot(wz[:bog]);
+            slabel(:left, wz[:bog] + (-0.5dt, 0dt),
+                vbox(:right:top, "Boguszów-", "Gorce ")
+            );
+       }
+
+        with link = "line.pl.274" {
+            track(wz[:bog, :boz.yc]);
+            track(wz[:boz.yc, :sed]);
+            line_label(:right:w, wz[:sed - 5.5km], "274");
+        }
+
+        with link = "point.pl.Sędzisław" {
+            track(:station, wz[:sed, :sed.yk]);
+            statdot(wz[:sed]);
+            slabel(:right, wz[:sed] + (-0.3dt, -1.5dt), "Sędzisław");
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:sed.yk, :mag.y]);
+            track(wz[:mag.y, :mar.ym]);
+        }
+
+        with link = "point.pl.Marciszów" {
+            track(:station, wz[:mar.ym, :mar.yj]);
+            statdot(wz[:mar]);
+            slabel(:left, wz[:mar] + (-1.5dt, -0.5dt),
+                hbox(:right:top, "Marciszów")
+            );
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:mar.yj, :jel.yk]);
+            line_label(:left:n, wz[:jel.yk - 6km], "274");
+            track(wz[:jel.yk, :jel]);
+        }
+
+        with link = "point.pl.Jelenia-Góra" {
+            statdot(wz[:jel]);
+            slabel(:right, wz[:jel] + (1.3dt, -1dt), "Jelenia Góra");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.274" {
+            track(wz[:jel, :jel.yz] >> 0.35dt);
+            track(:casing, wz[:jel.yz, :jel.yz + 1km] >> 0.35dt);
+            track(
+                    wz[:jel.yz + 1km, :deb.yy] >> 0.35dt
+                ..  wz[:deb.yy + 1km, :gry]
+            );
+            line_label(:right:s, wz[:deb.yy + 8.8km], "274");
+        }
+
+        with link = "point.pl.Gryfów-Śląski" {
+            track(:station, wz[:gry, :gry.yl]);
+            statdot(wz[:gry]);
+            slabel(:left, wz[:gry] + (-1.7dt, 1.0dt), "Gryfów Śląski");
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:gry.yl, :lub.yl]);
+            line_label(:left:n, wz[:gry.yl + 8km], (-0.2dt, 0dt), "274");
+        }
+
+        with link = "point.pl.Lubań-Śląski" {
+            track(:station, wz[:lub.yl, :lub.yw]);
+            statdot(wz[:lub]);
+            slabel(:right, wz[:lub] + (1.5dt, 0.5dt), "Lubań Śląski");
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.pl.274" {
+            track(wz[:lub.yw, :mik]);
+            line_label(:left:n, wz[:lub.yw + 7.5km], "274");
+        }
+
+        with link = "point.pl.Mikułowa" {
+            track(:station, wz[:mik, :mik.yb]);
+            statdot(wz[:mik]);
+            slabel(:right, wz[:mik] + (-0.5dt, -1.2dt), "Mikułowa");
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:mik.yb, :stu.y]);
+            track(wz[:stu.y, :zgo.yw]);
+            line_label(:right:sw, wz[:stu.y + 2km], "274");
+            track(wz[:zgo.yw, :zgo]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Zgorzelec" {
+            track(:station, wz[:zgo, :zgo.yz]);
+            statdot(wz[:zgo]);
+            slabel(:right, wz[:zgo.yz] + (1.3km, -0.3km) + (1.8dt, -1dt),
+                "Zgorzelec"
+            );
+        }
+
+        with link = "line.pl.274" {
+            track(wz[:zgo.yz, :zgg]);
+        }
+    }
+}
+
+
+# PL 275.  Wrocław Muchobór - Granica Państwa (Gubin)
+with detail = 2 {
+    let wg = path("d2.pl.d.275");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Wrocław-Nowy-Dwór" {
+            track(:station, wg[:wmu.yn, :wnd]);
+            statdot(wg[:wnd]);
+        }
+
+        with link = "line.pl.275" {
+            track(wg[:wnd, :sro]);
+            line_label(:left:ne, wg[:wnd + 9km], "275");
+        }
+
+        with link = "point.pl.Środa-Śląska" {
+            track(:station, wg[:sro, :sro.yr]);
+            statdot(wg[:sro]);
+            slabel(:right, wg[:sro] + (-1.5dt, -0.8dt),
+                vbox(:left:bottom, "Środa", "Śląska")
+            );
+        }
+
+        with link = "line.pl.275" {
+            track(wg[:sro.yr, :mal.yp]);
+        }
+
+        with link = "point.pl.Malczyce" {
+            track(:station, wg[:mal.yp, :mal.yw]);
+            statdot(wg[:mal]);
+            slabel(:right, wg[:mal] + (0dt, -0.8km) + (-1.5dt, -1.4dt),
+                "Malczyce"
+            );
+        }
+
+        with link = "line.pl.275" {
+            track(wg[:mal.yw, :wie.ym]);
+            line_label(:left:n, wg[:wie.ym - 7km], "275");
+            with layer = -1 track(wg[:wie.ym, :leg.yj]);
+        }
+
+        with link = "point.pl.Legnica" {
+            track(:station, wg[:leg.yj, :leg.yr]);
+            statdot(wg[:leg]);
+            slabel(:left :bold, wg[:leg] + (-1.6km, 0dt)  + (-1.5dt, 1dt),
+                "Legnica"
+            );
+        }
+
+        with link = "line.pl.275" {
+            with layer = -1 track(wg[:leg.yr, :mil.yw]);
+            track(wg[:mil.yw, :mil.yj]);
+        }
+
+        with link = "point.pl.Miłkowice" {
+            track(:station, wg[:mil.yj, :mil]);
+            statdot(wg[:mil]);
+            slabel(:right, wg[:mil] + (1.0dt, -0.3dt), "Miłkowice");
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.pl.275" {
+            track(wg[:mil, :rot.yc]);
+            line_label(:right:sw, wg[:mil + 6km], "275");
+
+            track(wg[:rot.yc, :rot]);
+        }
+
+        with link = "point.pl.Rokitki" {
+            track(wg[:rot, :rot.yk]);
+            statdot(wg[:rot] << 0.35dt);
+            slabel(:right, wg[:rot] + (1.3dt, -0.3dt), "Rokitki");
+        }
+
+        with link = "line.pl.275" {
+            track(wg[:rot.yk, :mod]);
+        }
+
+        with link = "point.pl.Modła" {
+            track(:station, wg[:mod, :mod.yb]);
+            statdot(wg[:mod]);
+            slabel(:right, wg[:mod] + (0dt, -1.3dt), "Modła");
+        }
+
+        with link = "line.pl.275" {
+            track(wg[:mod.yb, :lex]);
+            line_label(:right:sw, wg[:mod.yb + 7km], "275");
+        }
+    }
+}
+
+
+# PL 276.  Wrocław Główny – Granica Państwa Międzylesie
+with detail = 2 {
+    let wm = path("d2.pl.276");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.276" {
+            with layer = -1 track(wm[:wro.ym, :lam.y]);
+            track(wm[:lam.y, :bob]);
+            line_label(:left:w, wm[:lam.y + 6km], "276");
+        }
+
+        with link = "point.pl.Boreczek" {
+            track(:station, wm[:bob, :bob.yo]);
+            statdot(wm[:bob]);
+            slabel(:left, wm[:bob] + (-1.7dt, 0.8dt), "Boreczek");
+        }
+
+        with link = "line.pl.276" {
+            track(wm[:bob.yo, :str.yb]);
+            line_label(:right:e, wm[:bob.yo + 5km], "276");
+        }
+
+        with link = "point.pl.Strzelin" {
+            track(:station, wm[:str.yb, :str]);
+            statdot(wm[:str]);
+            slabel(:left, wm[:str] + (-1.5dt, -0.8dt), "Strzelin");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.276" {
+            track(wm[:str, :hen]);
+            line_label(:left:w, wm[:str + 7.5km], "276");
+        }
+
+        with link = "point.pl.Henryków" {
+            statdot(wm[:hen]);
+            slabel(:right, wm[:hen] + (1.5dt, 0.8dt), "Henryków");
+        }
+
+        with link = "line.pl.276" {
+            track(wm[:hen, :kam.yn]);
+            line_label(:left:w, wm[:kam.yn - 5km], "276");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Kamieniec-Ząbkowicki" {
+            track(:station, wm[:kam.yn, :kam.yj]);
+            statdot(wm[:kam]);
+            slabel(:right, wm[:kam] + (1.5km, 0dt) + (1.1dt, 1dt),
+                "Kamieniec Ząbkowicki"
+            );
+        }
+
+        with link = "line.pl.276" {
+            with layer = -1 track(wm[:kam.yj, :kam.yj + 3km]);
+            track(wm[:kam.yj + 3km, :klo.yw]);
+            line_label(:right:se, wm[:kam.yj + 10km], "276");
+        }
+
+        with link = "point.pl.Kłodzko-Główne" {
+            track(:station, wm[:klo.yw, :klo]);
+            statdot(wm[:klo]);
+            slabel(:right, wm[:klo] + (1.5dt, 1.2dt),
+                hbox(:left:base, "Kłodzko", span(:light, " Gł."))
+            );
+        }
+
+        with link = "line.pl.276" {
+            track(wm[:klo, :kln.yk]);
+            line_label(:right:e, wm[:klo + 2km], "276");
+        }
+
+        with link = "point.pl.Kłodzko-Nowe" {
+            track(:station, wm[:kln.yk, :kln]);
+            statdot(:nopax, wm[:kln]);
+            slabel(:right :nopax, wm[:kln] + (1.5dt, 0.9dt), "K. Nowe");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.276" {
+            track(
+                    wm[:kln, :kro + 50m] >> 0.3dt
+                ..  wm[:kro.ffm, :mie]
+            );
+            line_label(:right:e, wm[:kro.ffm + 12km], "276");
+        }
+
+        with link = "point.pl.Międzylesie" {
+            statdot(wm[:mie]);
+            slabel(:left, wm[:mie] + (-1.5dt, 0.8dt), "Międzylesie");
+        }
+
+        with link = "line.pl.276" {
+            track(wm[:mie, :mig]);
+            line_label(:left:sw, wm[:mie + 2.7km], "276");
+        }
+    }
+}
+
+
+# PL 277.  Opole Groszowice - Wrocław Brochów Osobowy
+with detail = 2 {
+    let ow = path("d2.pl.277");
+
+    with railway = :first :double :cat:dc30 :nopax {
+        with link = "line.pl.277" {
+            track(ow[:ogr.yo, :ogr.yg]);
+            track(:casing, ow[:ogr.yg, :opw.yg]);
+            with zoom = :high line_label(:right:w, ow[:ogr.yg + 1.5km], "277");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.277" {
+            track(ow[:opw.yg, :opw]);
+        }
+
+        with link = "point.pl.Opole-Wschodnie" {
+            track(ow[:opw, :opw.yp]);
+            statdot(ow[:opw]);
+            slabel(:right, ow[:opw] + (0dt, -1.5dt), "Wsch.");
+        }
+
+        with link = "line.pl.277" {
+            track(ow[:opw.yp, :ocz]);
+            line_label(:right:w, ow[:opw.yp + 3.2km], "277");
+        }
+
+        with link = "point.pl.Opole-Czarnowąsy" {
+            statdot(ow[:ocz]);
+            slabel(:right, ow[:ocz] + (0.3dt, -0.5dt),
+                vbox(:left:bottom, "Opole", "Czarnowąsy")
+            );
+        }
+
+        with link = "line.pl.277" {
+            track(ow[:ocz, :ocz.ye]);
+            track(ow[:ocz.ye, :jel]);
+            line_label(:right:sw, ow[:ocz.ye + 13km], "277");
+            line_label(:left:n, ow[:jel - 9km], (-0.3dt, 0dt), "277");
+        }
+
+        with link = "point.pl.Jelcz-Miłoszyce" {
+            track(ow[:jel, :jel.yw]);
+            statdot(ow[:jel]);
+            slabel(:right, ow[:jel] + (1.0dt, -1.0dt), "Jelcz Miłoszyce");
+        }
+
+        with link = "line.pl.277" {
+            track(ow[:jel.yw, :cze]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.277" {
+            track(ow[:cze, :wbr.yo]);
+            line_label(:left:nw, ow[:cze + 2.5km], "277");
+        }
+    }
+}
+
+
+# PL 278.  Węgliniec – Zgorzelec
+with detail = 2 {
+    let wz = path("d2.pl.278");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.278" {
+            track(wz[:weg.yz, :las]);
+            line_label(:left:n, wz[:weg.yz + 7.3km], "278");
+        }
+
+        with link = "point.pl.Lasów" {
+            statdot(wz[:las]);
+            slabel(:right, wz[:las] + (1.7dt, 1.0dt), "Lasów");
+        }
+
+        with link = "line.pl.278" {
+            track(wz[:las, :las.yp]);
+            track(wz[:las.yp, :zgo.yp]);
+            line_label(:left:w, wz[:las.yp + 2km], "278");
+            track(wz[:zgo.yp, :zgo.yz]);
+        }
+    }
+}
+
+
+# PL 279.  Lubań Śląski - Węgliniec
+with detail = 2 {
+    let lw = path("d2.pl.279");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.279" {
+            track(lw[:lub.yw, :weg.yl]);
+            line_label(:right:w, lw[:lub.yw + 10km], (0dt, -0.1dt), "279");
+        }
+    }
+}
+

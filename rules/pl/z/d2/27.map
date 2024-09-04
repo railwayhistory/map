@@ -1,0 +1,67 @@
+# PL 273.  Wrocław Główny - Szczecin Główny
+with detail = 2 {
+    let ws = path("d2.pl.z.273");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.273" {
+            track(ws[:kox, :god.yn]);
+            line_label(:right:w, ws[:kox + 6km], (0dt, -0.2dt), "273");
+            line_label(:right:w, ws[:god.yn - 7km], "273");
+        }
+
+        with link = "point.pl.Godków" {
+            track(:station, ws[:god.yn, :god.ys]);
+            statdot(ws[:god]);
+            slabel(:left, ws[:god] + (-1.7dt, 0.5dt), "Godków");
+        }
+
+        with link = "line.pl.273" {
+            track(ws[:god.ys, :gry.yp]);
+            line_label(:right:w, ws[:god.ys + 19km], "273");
+            track(ws[:gry.yp, :gry]);
+        }
+
+        with link = "point.pl.Gryfino" {
+            statdot(ws[:gry]);
+            slabel(:left, ws[:gry] + (-1.6dt, 0.8dt), "Gryfino");
+        }
+
+        with link = "line.pl.273" {
+            track(ws[:gry, :spo]);
+            line_label(:right:w, ws[:spo - 5km], "273");
+        }
+
+        with link = "point.pl.Szczecin-Podjuchy" {
+            track(:station, ws[:spo, :spo.yd]);
+            statdot(ws[:spo]);
+            with zoom = :high slabel(
+                :right, ws[:spo] + (1.5dt, 1.3dt), "S. Podjuchy"
+            );
+        }
+
+        with link = "line.pl.273" {
+            with layer = -1 track(ws[:spo.yd, :szp.yr]);
+            track(ws[:szp.yr, :szp.yd]);
+            track(ws[:szp.yd, :szp.yp]);
+            track(ws[:szp.yp, :szp]);
+        }
+
+        with link = "point.pl.Szczecin-Port-Centralny" {
+            statdot(ws[:szp]);
+        }
+
+        with link = "line.pl.273" {
+            track(ws[:szp, :szc]);
+        }
+
+        with link = "point.pl.Szczecin-Główny" {
+            track(:station, ws[:szc, :szc.yt]);
+            statdot(ws[:szc]);
+            slabel(:right :medium :bold, ws[:szc] + (3.2km, -0.5dt),
+                "Szczecin"
+            );
+            slabel(:top, ws[:szc] + (1.5dt, -0.8dt), "Gł");
+        }
+    }
+}
+

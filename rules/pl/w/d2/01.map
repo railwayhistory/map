@@ -1,0 +1,351 @@
+# PL 10.  Legionowo - Tłuszcz
+with detail = 2 {
+    let lt = path("d2.pl.10");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.10" {
+            track(lt[:leg.yt, :lpi.yp]);
+        }
+
+        with link = "point.pl.Legionowo-Piaski" {
+            track(:station, lt[:lpi.yp, :lpi.yn]);
+            statdot(lt[:lpi]);
+        }
+
+        with link = "line.pl.10" {
+            track(lt[:lpi.yn, :wie]);
+        }
+
+        with link = "point.pl.Wieliszew" {
+            statdot(lt[:wie]);
+            with zoom = :high slabel(:right, lt[:wie] + (0dt, 1dt),
+                hbox(:left:top, "Wieliszew")
+            );
+        }
+
+        with link = "line.pl.10" {
+            track(lt[:wie, :nie]);
+        }
+
+        with link = "point.pl.Nieporęt" {
+            statdot(lt[:nie]);
+        }
+
+        with link = "line.pl.10" {
+            track(lt[:nie, :rad]);
+            line_label(:left:s, lt[:nie + 4.5km], "10");
+        }
+
+        with link = "point.pl.Radzymin" {
+            statdot(lt[:rad]);
+            slabel(:right, lt[:rad] + (1.5dt, 0.5dt),
+                hbox(:left:top, "Radzymin")
+            );
+        }
+
+        with link = "line.pl.10" {
+            track(lt[:rad, :kru]);
+        }
+
+        with link = "point.pl.Krusze" {
+            track(:station, lt[:kru, :kru.yp]);
+            statdot(lt[:kru]);
+            slabel(:top, lt[:kru] + (0dt, -0.9dt), "Krusze");
+        }
+
+        with link = "line.pl.10" {
+            track(lt[:kru.yp, :tlu.yj]);
+            track(lt[:tlu.yj, :tlu.yl]);
+        }
+    }
+}
+
+
+# PL 11.  Skierniewice - Łowicz Główny
+with detail = 2 {
+    let sl = path("d2.pl.11");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.11" {
+            track(sl[:ski.yl, :ski.ys]);
+            track(sl[:ski.ys, :low.yc]);
+            line_label(:left:e, sl[:ski.ys + 9km], "11");
+            with layer = -1 track(sl[:low.yc, :low.ys]);
+        }
+    }
+}
+
+
+# PL 12.  Skierniewice - Łuków
+with detail = 2 {
+    let sl = path("d2.pl.12");
+
+    with railway = :first :double :cat:dc30 {
+        with link = "line.pl.12" {
+            track(sl[:ski.yp, :pus]);
+            line_label(:right:n, sl[:pus - 1km], "12");
+        }
+    }
+
+    with railway = :first :cat:dc30 {
+        with link = "line.pl.12" {
+            track(:casing, sl[:pus, :mar.y]);
+            track(sl[:mar.y, :msz]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 {
+        with link = "line.pl.12" {
+            track(sl[:msz, :czz.y]);
+            line_label(:left:s, sl[:msz + 17km], "12");
+
+            with layer = -1 track(sl[:czz.y, :czw.yc]);
+            track(sl[:czw.yc, :gor]);
+        }
+    }
+
+    with railway = :first :cat:dc30 {
+        with link = "line.pl.12" {
+            track(sl[:gor, :kep]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 {
+        with link = "line.pl.12" {
+            track(sl[:kep, :jaz.y]);
+            line_label(:left:s, sl[:kep + 4km], "12");
+
+            with layer = -1 track(sl[:jaz.y, :pil.ys]);
+        }
+
+        with link = "line.pl.12" {
+            track(sl[:pil.yl, :luk.yw]);
+            line_label(:left:s, sl[:pil.yl + 11km], "12");
+            line_label(:left:s, sl[:luk.yw - 12km], "12");
+
+            track(sl[:luk.yw, :luk.ys]);
+        }
+    }
+}
+
+
+# PL 13.  Krusze - Pilawa
+with detail = 2 {
+    let kp = path("d2.pl.13");
+
+    with railway = :first :cat:dc30 {
+        with link = "line.pl.13" {
+            track(kp[:kru.yp, :jas.y]);
+            with layer = 1 track(:casing, kp[:jas.y, :jas.y + 400m]);
+            track(kp[:jas.y + 400m, :min.yw - 800m]);
+            line_label(:left:w, kp[:jas.y + 13km], "13");
+
+            with layer = 1 track(:casing, kp[:min.yw - 800m, :min.yw]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.13" {
+            track(kp[:min.yw, :zol.y]);
+            line_label(:left:w, kp[:min.yw + 10km], "13");
+
+            track(kp[:zol.y, :pil.ys]);
+        }
+    }
+
+    with link = "point.pl.Pilawa" {
+        track(:first :double:station :cat:dc30 :pax, kp[:pil.ys, :pil.yk]);
+    }
+}
+
+
+# PL 14.  Łódź Kaliska - Grania Państwa (Zasieki)
+with detail = 2 {
+    let lz = path("d2.pl.w.14");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Łódź-Kaliska" {
+            track(:station, lz[:lka.yo, :lka]);
+            statdot(lz[:lka]);
+            with zoom = :high slabel(:left, lz[:lka] + (-1.7dt, 1.0dt),
+                "Lódź Kaliska"
+            );
+        }
+
+        with link = "line.pl.14" {
+            track(lz[:lka, :ret.y]);
+            track(lz[:ret.y, :pab]);
+            line_label(:left:nw, lz[:ret.y + 5km], "14");
+        }
+
+        with link = "point.pl.Pabianice" {
+            statdot(lz[:pab]);
+            slabel(:left, lz[:pab] + (-1.1dt, -0.3dt), "Pabianice");
+        }
+
+        with link = "line.pl.14" {
+            track(lz[:pab, :che.x]);
+        }
+    }
+}
+
+
+# PL 15.  Bednary - Łódź Kaliska
+with detail = 2 {
+    let bl = path("d2.pl.15");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.15" {
+            track(:casing, bl[:low.yd, :lop.yl]);
+        }
+
+        with link = "point.pl.Łowicz-Przedmieście" {
+            track(bl[:lop.yl, :lop]);
+            statdot(bl[:lop]);
+        }
+
+        with link = "line.pl.15" {
+            track(bl[:lop, :str]);
+            line_label(:right:s, bl[:lop + 12km], (-0.3dt, 0dt), "15");
+        }
+
+        with link = "point.pl.Stryków" {
+            statdot(bl[:str]);
+            slabel(:right, bl[:str] + (-1.5dt, 1dt),
+                hbox(:left:top, "Stryków")
+            );
+        }
+
+        with link = "line.pl.15" {
+            track(bl[:str, :zgi.yk]);
+            line_label(:left:nw, bl[:str + 6.8km], "15");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Zgierz" {
+            track(:station, bl[:zgi.yk, :zgi.yw]);
+            statdot(bl[:zgi]);
+            slabel(:left, bl[:zgi] + (-1.7dt, 0.5dt), "Zgierz");
+        }
+
+        with link = "line.pl.15" {
+            track(bl[:zgi.yw, :lka.yo]);
+            line_label(:right:e, bl[:zgi.yw + 5km], "15");
+        }
+    }
+}
+
+
+# PL 16.  Łódź Widzew - Kutno
+with detail = 2 {
+    let lk = path("d2.pl.16");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.16" {
+            track(lk[:lwi.yk, :zgi.yw]);
+            line_label(:right:sw, lk[:lwi.yk + 6.3km], "16");
+        }
+
+        with link = "line.pl.16" {
+            track(lk[:zgi.yk, :ozo]);
+            line_label(:left:e, lk[:zgi.yk + 10km], "16");
+        }
+
+        with link = "point.pl.Ozorków" {
+            statdot(lk[:ozo]);
+            slabel(:left, lk[:ozo] + (-1.7dt, 0.8dt), "Ozorków");
+        }
+
+        with link = "line.pl.16" {
+            track(lk[:ozo, :ozo.yo]);
+            track(lk[:ozo.yo, :kut.yl]);
+            line_label(:right:nw, lk[:kut.yl - 7km], "16");
+        }
+    }
+}
+
+
+# PL 17.  Łódź Fabryczna - Koluszki
+with detail = 2 {
+    let lk = path("d2.pl.17");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Łódź-Fabryczna" {
+            statdot(lk[:lfa]);
+            with zoom = :high slabel(:top, lk[:lfa] + (-1dt, -0.8dt),
+                vbox(:center:bottom, "Lódź ", "Fabryczna")
+            );
+            with zoom = :low slabel(:left :medium :bold,
+                lk[:lfa] + (-4km, 0dt) + (-1dt, 2dt), "Łódź"
+            );
+        }
+
+        with link = "line.pl.17" {
+            track(lk[:lfa, :lwi.yc]);
+        }
+
+        with link = "point.pl.Łódź-Widzew" {
+            track(:station, lk[:lwi.yc, :lwi]);
+            statdot(lk[:lwi]);
+            with zoom = :high slabel(:right, lk[:lwi] + (-1dt, -1.5dt),
+                "Lódź Widzew"
+            );
+        }
+
+        with link = "line.pl.17" {
+            track(lk[:lwi, :lan.yc]);
+            track(lk[:lan.yc, :bed.yc]);
+            track(lk[:bed.yc, :zak.yd]);
+            line_label(:left:s, lk[:bed.yc + 1.5km], "17");
+            line_label(:right:n, lk[:bed.yc + 1.5km], "25");
+
+            track(lk[:zak.yd, :kol.yp]);
+            track(lk[:kol.yp, :kol.yl]);
+        }
+    }
+}
+
+
+# PL 18.  Kutno – Piła Główna
+with detail = 2 {
+    let kp = path("d2.pl.w.18");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.18" {
+            track(kp[:kut.yb, :ost]);
+        }
+
+        with link = "point.pl.Ostrowy" {
+            track(:station, kp[:ost, :ost.yo]);
+            statdot(kp[:ost]);
+            slabel(:right, kp[:ost] + (1.3dt, -0.3dt), "Ostrowy");
+        }
+
+        with link = "line.pl.18" {
+            track(kp[:ost.yo, :rud.x]);
+        }
+    }
+}
+
+
+# PL 19.  Warszawa Główna Towarowa - Józefinów
+with detail = 2 {
+    let wj = path("d2.pl.19");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Warszawa-Główna-Towarowa" {
+            statdot(:nopax, wj[:wgt]);
+        }
+
+        with link = "line.pl.19" {
+            with layer = -1 track(wj[:wgt, :wag.yj]);
+        }
+
+        with link = "line.pl.19" {
+            track(wj[:wag.yp, :joz.y]);
+            with zoom = :high line_label(:right:e, wj[:wag.yp + 1.5km], "19");
+        }
+    }
+}
+

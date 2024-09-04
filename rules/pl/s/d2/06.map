@@ -1,0 +1,237 @@
+# PL 61.  Kielce - Fosowskie
+with detail = 2 {
+    let kf = path("d2.pl.s.61");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.61" {
+            track(kf[:zel.x, :zel]);
+        }
+
+        with link = "point.de.Żelisławice" {
+            statdot(kf[:zel]);
+            slabel(:left, kf[:zel] + (0dt, -1.3dt), "Żelisławice");
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:zel, :kon.yk]);
+            line_label(:left:n, kf[:zel + 5km], "61");
+        }
+
+        with link = "point.de.Koniecpol" {
+            track(:station, kf[:kon.yk, :kon]);
+            statdot(kf[:kon]);
+            slabel(:left, kf[:kon] + (1dt, -1.8dt), "Koniecpol");
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:kon, :kus.yc]);
+            line_label(:right:s, kf[:kus - 10km], "61");
+
+            track(kf[:kus.yc, :kuc.yp]);
+        }
+
+        with link = "point.de.Kucelinka" {
+            track(:station, kf[:kuc.yp, :kuc.yc]);
+            statdot(:nopax, kf[:kuc]);
+            slabel(:right :nopax, kf[:kuc] + (0.8km, 0dt) + (1dt, 0.5dt),
+                hbox(:left:top, "Kucelinka")
+            );
+        }
+
+        with link = "line.pl.61" {
+            track(:casing, kf[:kuc.yc, :kuc.yc + 2km]);
+            track(kf[:kuc.yc + 2km, :czs.yc]);
+        }
+
+        with link = "point.de.Częstochowa-Stradom" {
+            track(:station, kf[:czs.yc, :czs]);
+            statdot(kf[:czs]);
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:czs, :bla]);
+        }
+
+        with link = "point.de.Blachownia" {
+            track(:station, kf[:bla, :bla.yb]);
+            statdot(kf[:bla]);
+            slabel(:right, kf[:bla] + (0dt, 0.8dt),
+                hbox(:left:top, "Blachownia")
+            );
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:bla.yb, :hes]);
+            line_label(:right:s, kf[:hes - 3km], (-0.3dt, 0dt), "61");
+        }
+
+        with link = "point.de.Herby-Stare" {
+            track(:station, kf[:hes, :hes.yl]);
+            statdot(kf[:hes]);
+            slabel(:right, kf[:hes] + (0.5dt, 0.5dt),
+                hbox(:left:top, "Herby Stare")
+            );
+        }
+
+        with link = "line.pl.61" {
+            track(:single :casing, kf[:hes.yl, :lis.ys] >> 0.4st);
+            track(:single :casing,
+                    path("d2.pl.s.61.hes")[:hes.yl, :lis.ys] << 0.4st
+            );
+
+            track(kf[:lis.ys, :lis]);
+        }
+
+        with link = "point.de.Liswarta" {
+            statdot(kf[:lis]);
+            slabel(:left, kf[:lis] + (-0.5dt, -1dt), "Liswarta");
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:lis, :jaw]);
+            line_label(:left:nw, kf[:lis + 3km], "61");
+
+            track(kf[:jaw, :lub.yc]);
+        }
+
+        # point.pl.Lubliniec  pl.143
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.61" {
+            track(kf[:lub.yf, :paw]);
+        }
+
+        with link = "point.de.Pawonków" {
+            statdot(kf[:paw]);
+            slabel(:left, kf[:paw] + (2dt, -1.5dt), "Pawonków");
+        }
+
+        with link = "line.pl.61" {
+            track(kf[:paw, :plu.x]);
+            line_label(:left:n, kf[:plu.x - 2km], "61");
+        }
+    }
+}
+
+
+# PL 62.  Tunel - Sosnowiec Główny
+with detail = 2 {
+    let ts = path("d2.pl.s.62");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.62" {
+            track(ts[:gaj.x, :buk] << 0.45dt);
+            line_label(:left:n, ts[:gaj.x + 12km] << 0.45dt,
+                (0.3dt, 0dt), "62"
+            );
+        }
+
+        with link = "point.pl.Bukowno" {
+            track(:station, ts[:buk, :buk.yj] << 0.45dt);
+            statdot(ts[:buk]);
+            slabel(:right, ts[:buk] + (-1.5dt, 1.3dt),
+                hbox(:left:top, "Bukowno")
+            );
+        }
+
+        with link = "line.pl.62" {
+            with layer = -1 track(
+                    ts[:buk.yj - 0.1dl, :buk.yj] << 0.45dt
+                ..  ts[:buk.yj + 2dt, :sla.yp - 0.5km]
+            );
+            track(ts[:sla.yp - 0.5km, :sla.yp]);
+            track(ts[:sla.yp, :sla.ym]);
+        }
+
+        with link = "point.pl.Sławków" {
+            track(:station, ts[:sla.ym, :sla]);
+            statdot(ts[:sla]);
+        }
+
+        with link = "line.pl.62" {
+            with layer = -1 track(ts[:sla, :dgw.yt - 1km]);
+            track(ts[:dgw.yt - 1km, :dgw.yt]);
+        }
+
+        with link = "point.pl.Dąbrowa-Górnicza-Wschodnia" {
+            track(:station, ts[:dgw.yt, :dgw.yp]);
+            statdot(ts[:dgw]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.62" {
+            track(:casing, ts[:dgw.yp, :dgs]);
+        }
+
+        with link = "point.pl.Dąbrowa-Górnicza-Strzemieszyce" {
+            track(:station, ts[:dgs, :dgs.ys]);
+            statdot(ts[:dgs]);
+        }
+
+        with link = "line.pl.62" {
+            track(ts[:dgs.ys, :ska.ym]);
+        }
+
+        with link = "point.pl.Sosnowiec-Kazimierz" {
+            track(:station, ts[:ska.ym, :ska]);
+            statdot(ts[:ska]);
+        }
+
+        with link = "line.pl.62" {
+            track(ts[:ska, :ska.yz]);
+            track(ts[:ska.yz, :spo.yk]);
+        }
+
+        # point.pl.Sosnowiec-Dańdówka  pl.171
+
+        with link = "line.pl.62" {
+            track(ts[:sda.ys, :sop]);
+        }
+
+        with link = "point.pl.Sosnowiec-Południowy" {
+            track(:station, ts[:sop, :sop.yk]);
+            statdot(ts[:sop]);
+        }
+    }
+
+    with railway = :second :cat:dc30 {
+        with link = "line.pl.62" {
+            track(ts[:sop.yk, :sos.yp]);
+        }
+    }
+}
+
+
+# PL 65.  Granica Państwa (Hrubieszów) - Sławków LHS
+with detail = 2 {
+    let hs = path("d2.pl.s.65");
+
+    with railway = :first :broad:g1520 {
+        with link = "line.pl.65" {
+            track(hs[:gaj.x, :buk] >> 0.45dt);
+            line_label(:right:s, hs[:gaj.x + 11.5km] >> 0.45dt,
+                (-0.3dt, 0dt), "65"
+            );
+        }
+
+        with link = "point.pl.Bukowno" {
+            track(:station, hs[:buk, :buk.yj] >> 0.45dt);
+        }
+
+        with link = "line.pl.65" {
+            track(:casing,
+                    hs[:buk.yj - 0.1dl, :buk.yj] >> 0.45dt
+                ..  hs[:buk.yj + 2dt, :buk.x] >> 0.9dt
+                ..  hs[:bup.x, :bup.ys] << 0.9dt
+                ..  hs[:bup.yys + 1dt, :sla]
+            );
+        }
+
+        with link = "point.pl.Sławków-LHS" {
+            statdot(hs[:sla]);
+        }
+    }
+}
+

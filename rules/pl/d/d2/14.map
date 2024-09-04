@@ -1,0 +1,124 @@
+# PL 143.  Kalety – Wrocław Mikołajów WP2
+with detail = 2 {
+    let kw = path("d2.pl.d.143");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.143" {
+            track(kw[:sto.x, :klu.yk]);
+            line_label(:left:ne, kw[:sto.x + 1km], "143");
+        }
+
+        with link = "point.pl.Kluczbork" {
+            track(:station, kw[:klu.yk, :klu.yp]);
+            statdot(kw[:klu]);
+            slabel(:right, kw[:klu] + (1.4dt, -0.3dt), "Kluczbork");
+        }
+
+        with link = "line.pl.143" {
+            track(kw[:klu.yp, :sma.y]);
+            track(kw[:sma.y, :nam.yk]);
+            line_label(:left:n, kw[:sma.y + 5km], (-0.3dt, 0dt), "143");
+            line_label(:left:n, kw[:nam.yk - 7km], "143");
+        }
+
+        with link = "point.pl.Namysłów" {
+            track(:station, kw[:nam.yk, :nam]);
+            statdot(kw[:nam]);
+            slabel(:left, kw[:nam] + (-1dt, 0.5dt),
+                hbox(:right:top, "Namysłów")
+            );
+        }
+
+        with link = "line.pl.143" {
+            track(kw[:nam, :ole.yh]);
+            line_label(:left:ne, kw[:ole.yc - 12km], "143");
+        }
+
+        with link = "point.pl.Oleśnica" {
+            track(:station, kw[:ole.yh, :ole.yc]);
+            statdot(kw[:ole]);
+            slabel(:left, kw[:ole.yc] + (-1.8km, 0dt) + (-1dt, -0.3dt),
+                "Oleśnica"
+            );
+        }
+
+        with link = "line.pl.143" {
+            track(kw[:ole.yc, :luk.y]);
+            track(kw[:luk.y, :wps.yt]);
+            line_label(:right:s, kw[:luk.y + 10km], (-0.3dt, 0dt), "143");
+        }
+
+        with link = "point.pl.Wrocław-Psie-Pole" {
+            track(:station, kw[:wps.yt, :wps]);
+            statdot(kw[:wps]);
+            slabel(:right, kw[:wps] + (1.5dt, 0dt),
+                hbox(:left:top, "W. Psie Pole")
+            );
+        }
+
+        with link = "line.pl.143" {
+            track(kw[:wps, :wso.yj]);
+        }
+
+        with link = "point.pl.Wrocław-Sołtysowice" {
+            track(:station, kw[:wso.yj, :wso.yo]);
+            statdot(kw[:wso]);
+        }
+
+        with link = "line.pl.143" {
+            track(kw[:wso.yo, :wpo.yw]);
+            track(kw[:wpo.yw, :wmi.yk]);
+        }
+    }
+}
+
+
+# PL 144.  Tarnowskie Góry – Opole Główne
+with detail = 2 {
+    let to = path("d2.pl.d.144");
+
+    with railway = :first :double :cat:dc30 {
+        with link = "line.pl.144" {
+            track(to[:zaw.x, :zaw]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Zawadzkie" {
+            statdot(to[:zaw]);
+            slabel(:right, to[:zaw] + (1.5dt, 0dt), "Zawadzkie");
+        }
+
+        with link = "line.pl.144" {
+            track(to[:zaw, :kol]);
+            line_label(:left:ne, to[:kol - 4km], "144");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.144" {
+            track(to[:kol, :fos.yl]);
+        }
+
+        with link = "point.pl.Fosowskie" {
+            track(:station, to[:fos.yl, :fos]);
+            statdot(to[:fos]);
+            with zoom = :high slabel(:left, to[:fos] + (-0.5dt, 0.8dt),
+                hbox(:right:top, "Fosowskie")
+            );
+            with zoom = :low slabel(
+                :left, to[:fos] + (-1.3km, 0.5dt),
+                hbox(:right:top, "Fosowskie")
+            );
+        }
+
+        with link = "line.pl.144" {
+            track(to[:fos, :bol.yn]);
+            line_label(:right:s, to[:fos + 12km], "144");
+
+            with layer = -1 track(to[:bol.yn, :bol.yw]);
+            track(to[:bol.yw, :opo]);
+        }
+    }
+}
+

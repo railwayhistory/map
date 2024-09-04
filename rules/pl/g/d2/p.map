@@ -1,0 +1,89 @@
+# PL PNG.  Pieniężno - Granica Państwa (Głębock)
+with detail = 2 {
+    let pg = path("d2.pl.png");
+
+    with railway = :second :removed {
+        with link = "line.pl.PNG" {
+            track(pg[:pie.yk, :kog]);
+            line_label(:right:w, pg[:pie.yk + 9km], "PNG");
+        }
+    }
+}
+
+
+# PL PPG.  Przejazdowo - Piaski Gdańskie
+with detail = 2 {
+    let pm = path("d2.pl.ppg.1");
+    let ms = path("d2.pl.ppg.2");
+    let sp = path("d2.pl.ppg.3");
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.PPG" {
+            track(pm[:prz, :kos]);
+            with zoom = :high line_label(
+                :right:e, pm[:prz + 4km], (0dt, 0.15dt), "PPG"
+            );
+        }
+
+        with link = "point.pl.Koszwały" {
+            track(:station, pm[:kos, :kos.yg]);
+            with zoom = :high {
+                statdot(pm[:kos]);
+                slabel(:ne, pm[:kos] + (-1.3dt, -0.8dt), "Koszwały");
+            }
+        }
+
+        with link = "line.pl.PPG" {
+            track(pm[:kos.yg, :lbw]);
+            with zoom = :high line_label(
+                :right:n, pm[:kos.yg + 7km], (0.3dt, 0dt), "PPG"
+            );
+        }
+
+        with link = "point.pl.Prawy-Brzeg-Wisły" {
+            track(:station, pm[:pbw.xa, :pbw.xc]);
+            track(:station, ms[:pbw.xb, :pbw]);
+        }
+    }
+
+    with railway = :third :narrower:g750 :tourist {
+        with link = "point.pl.Prawy-Brzeg-Wisły" {
+            statdot(ms[:pbw]);
+            slabel(:top, ms[:pbw] + (0dt, -0.8dt),
+                vbox(:center:bottom, "Prawy Brzeg", "Wisły")
+            );
+        }
+
+        with link = "line.pl.PPG" {
+            track(ms[:pbw, :ste.yk]);
+            line_label(:right:n, ms[:pbw + 5km], "PPG");
+        }
+
+        # point.pl.Stegna-Gdańska  pl.NDS
+
+        with link = "line.pl.PPG" {
+            track(ms[:ste.yk, :szt.yp]);
+        }
+
+        with link = "point.pl.Sztutowo" {
+            track(:station, ms[:szt.yp, :szt]);
+            statdot(ms[:szt]);
+            slabel(:nw, ms[:szt] + (1.3dt, -0.5dt), "Sztutowo");
+        }
+    }
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.PPG" {
+            track(sp[:szt.yp, :pia]);
+            with zoom = :high line_label(:left:se, sp[:pia - 13km], "PPG");
+        }
+
+        with link = "point.pl.Piaski-Gdańskie" {
+            with zoom = :high {
+                statdot(sp[:pia]);
+                slabel(:top, sp[:pia] + (0.5dt, -0.7dt), "Piaski Gdańskie");
+            }
+        }
+    }
+}
+

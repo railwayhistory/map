@@ -204,37 +204,23 @@ with detail = 2 {
 
 # DE 6589.  Zittau - Hagenwerder
 with detail = 2 {
-    let zh = path("d2.de.6589");
+    let zk = path("d2.de.6589.1");
+    let kh = path("d2.de.6589.2");
 
-    with link = "line.de.6589" {
-        track(:second :pax, zh[:zit.yh, :hig]);
-        track(:second :pax, zh[:trg, :krg]);
-        track(:second :pax, zh[:hgr, :hag.yz]);
+    with railway = :second :pax {
+        with link = "line.de.6589" {
+            track(zk[:zit.yh, :trz.yz]);
+            line_label(:left:e, zk[:zit.yh + 5km], "6589");
+        }
 
-        guide(:linenum :pax,
-                zh[:zit.yh + 5.5km] << 0.7dt
-            --  zh[:zit.yh + 5km] << 2.7dt
-        );
-        label(:linenum :pax, zh[:zit.yh + 5km] << 2.7dt,
-            hbox(:right:middle, "6589 ")
-        );
-        guide(:linenum :pax,
-                zh[:hgr + 1km] << 0.7dt
-            --  zh[:hgr + 1km] << 3.0dt
-        );
-        label(:linenum :pax, zh[:hgr + 1km] << 3.0dt,
-            hbox(:right:middle, "6589 ")
-        );
-    }
+        with link = "point.int.Hagenwerder-Ręczyn" {
+            marker(:ref :left, kh[:hgr]);
+        }
 
-    with link = "point.int.Hirschfelde-Trzciniec-Zgorzelecki" {
-        marker(:refdt :pax :right, zh[:hig]);
-        marker(:refdt :pax :left, zh[:hig]);
-    }
-
-    with link = "point.int.Hagenwerder-Ręczyn" {
-        marker(:refdt :pax :right, zh[:hgr]);
-        marker(:refdt :pax :left, zh[:hgr]);
+        with link = "line.de.6589" {
+            track(kh[:hgr, :hag.yz]);
+            line_label(:left:e, kh[:hgr + 1km], "6589");
+        }
     }
 }
 
