@@ -45,6 +45,28 @@ with detail = 2 {
 }
 
 
+# PL KKD.  Krępa Krajeńska - Dąbrowa Moczele
+with detail = 2 {
+    let kd = path("d2.pl.kkd");
+
+    with railway = :third :narrower:g600 :removed {
+        with link = "line.pl.KKD" {
+            track(kd[:kre.yd, :dab]);
+            with zoom = :high line_label(:right:se, kd[:kre.yd + 11km], "KKD");
+        }
+
+        with link = "point.pl.Dąbrowa-Moczele" {
+            with zoom = :high {
+                statdot(kd[:dab]);
+                slabel(:bottom, kd[:dab] + (0dt, 0.8dt),
+                    vbox(:center:top, "Dąbrowa", "Moczele")
+                );
+            }
+        }
+    }
+}
+
+
 # PL KKE.  Krerowo - Kleszczewo Wielkopolskie
 with detail = 2 {
     let ke = path("d2.pl.kke");
@@ -103,4 +125,81 @@ with detail = 2 {
     }
 }
 
+
+# PL KTK.  Kalisz Wąskotorowy - Turek
+with detail = 2 {
+    let kt = path("d2.pl.ktk");
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "point.pl.Kalisz-Wąskotorowy" {
+            with zoom = :high {
+                statdot(kt[:kal]);
+                slabel(:left, kt[:kal] + (-1.5dt, 0dt),
+                    vbox(:right:middle, "Kalisz", "Wąskotorowy")
+                );
+            }
+        }
+
+        with link = "line.pl.KTK" {
+            track(kt[:kal, :bor]);
+            with zoom = :high line_label(:right:nw, kt[:kal + 4km], "KTK");
+        }
+
+        with link = "point.pl.Borków" {
+            with zoom = :high {
+                statdot(kt[:bor]);
+                slabel(:nw, kt[:bor] + (1dt, 0dt), "Borków");
+            }
+        }
+
+        with link = "line.pl.KTK" {
+            track(kt[:bor, :bor.yr]);
+            track(kt[:bor.yr, :zel.yo]);
+        }
+    }
+
+    with railway = :second :narrower:g750 :suspended {
+        with link = "line.pl.KTK" {
+            track(kt[:zel.yo, :zel]);
+        }
+
+        with link = "point.pl.Żelazków" {
+            statdot(kt[:zel]);
+            slabel(:right, kt[:zel] + (1.5dt, 0.8dt), "Żelazków");
+        }
+
+        with link = "line.pl.KTK" {
+            track(kt[:zel, :zlo]);
+            line_label(:left:e, kt[:zel + 2km], "KTK");
+        }
+    }
+
+    with railway = :second :narrower:g750 :tourist {
+        with link = "point.pl.Złotniki-Wielkie" {
+            statdot(kt[:zlo]);
+            slabel(:right, kt[:zlo] + (1.5dt, 0.8dt), "Złotniki Wielkie");
+        }
+
+        with link = "line.pl.KTK" {
+            track(kt[:zlo, :zbi]);
+        }
+
+        with link = "point.pl.Zbiersk" {
+            statdot(kt[:zbi]);
+            slabel(:left, kt[:zbi] + (-1.3dt, -0.5dt), "Zbiersk");
+        }
+    }
+
+    with railway = :second :narrower:g750 :suspended {
+        with link = "line.pl.KTK" {
+            track(kt[:zbi, :tur]);
+            line_label(:left:s, kt[:zbi + 16km], "KTK");
+        }
+
+        with link = "point.pl.Turek" {
+            statdot(kt[:tur]);
+            slabel(:right, kt[:tur] + (1.5dt, 0.8dt), "Turek");
+        }
+    }
+}
 

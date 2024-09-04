@@ -200,7 +200,7 @@ industrial lines are omitted.
 
 ## PL: Poland
 
-Poland has been split into regions equivalent to the regional railway
+Poland has been split into regions mostly equivalent to the regional railway
 directorates as they were in 1979.
 
 The overview map currently only covers railway lines. Tram, metro, and
@@ -208,14 +208,14 @@ industrial lines are omitted.
 
 | region                          | overview    | detail      |
 | ------------------------------- | ----------- | ----------- |
-| D (Dolnośląska DOKP in Wrocław) | in progress | not started |
+| D (Dolnośląska DOKP in Wrocław) | complete    | not started |
 | G (Północna DOKP in Gdańsk)     | in progress | not started |
 | K (Południowa DOKP in Kraków)   | in progress | not started |
 | L (Wschodnia DOKP in Lublin)    | in progress | not started |
 | P (Zachodnia DOKP in Poznań)    | in progress | not started |
 | S (Śląskia DOKP in Katowice)    | in progress | not started |
 | W (Centralna DOKP in Warszawa)  | in progress | not started |
-| Z (Pomorska DOKP in Szczecin)   | in progress | not started |
+| Z (Pomorska DOKP in Szczecin)   | complete    | not started |
 
 
 ## RU: Russia
