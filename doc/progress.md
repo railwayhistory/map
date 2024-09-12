@@ -209,10 +209,10 @@ industrial lines are omitted.
 | region                          | overview    | detail      |
 | ------------------------------- | ----------- | ----------- |
 | D (Dolnośląska DOKP in Wrocław) | complete    | not started |
-| G (Północna DOKP in Gdańsk)     | in progress | not started |
+| G (Północna DOKP in Gdańsk)     | complete    | not started |
 | K (Południowa DOKP in Kraków)   | in progress | not started |
 | L (Wschodnia DOKP in Lublin)    | in progress | not started |
-| P (Zachodnia DOKP in Poznań)    | in progress | not started |
+| P (Zachodnia DOKP in Poznań)    | complete    | not started |
 | S (Śląskia DOKP in Katowice)    | in progress | not started |
 | W (Centralna DOKP in Warszawa)  | in progress | not started |
 | Z (Pomorska DOKP in Szczecin)   | complete    | not started |

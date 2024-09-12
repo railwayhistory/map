@@ -1,19 +1,29 @@
-# PL LMK. Lichnowy - Malbork Kałdowo Wąskotorowy
+# PL LLG.  Lichnowy - Lipinka Gdańska
+with detail = 2 {
+    let ll = path("d2.pl.llg");
+
+    with railway = :third :narrower:g750 :removed {
+        track(ll[:lic.yl, :lip.yl]);
+        with zoom = :high line_label(:left:se, ll[:lic.yl + 5.6km], "LLG");
+    }
+}
+
+
+# PL LMK.  Lisewo Wąskotorowe - Malbork Kałdowo Wąskotorowy
 with detail = 2 {
     let lm = path("d2.pl.lmk.1");
     let mm = path("d2.pl.lmk.2");
 
     with railway = :third :narrower:g750 :removed {
-        with link = "point.pl.Lichnowy" {
+        with link = "point.pl.Lisewo-Wąskotorowe" {
             with zoom = :high {
-                statdot(lm[:lic]);
-                slabel(:left, lm[:lic] + (0dt, -1.8dt), "Lichnowy");
+                statdot(lm[:lis]);
             }
         }
 
         with link = "line.pl.LMK" {
-            track(lm[:lic, :maw.ym]);
-            with zoom = :high line_label(:left:w, lm[:lic + 7.5km], "LMK");
+            track(lm[:lis, :maw.ym]);
+            with zoom = :high line_label(:right:e, lm[:lis + 4.2km], "LMK");
             track(lm[:maw.ym, :maw]);
             track(mm[:maw.ym, :kra.ym]);
             with zoom = :high line_label(:right:ne, mm[:maw.ym + 5km], "LMK");
@@ -30,6 +40,45 @@ with detail = 2 {
         with link = "line.pl.LMK" {
             track(mm[:kra, :mal.yl]);
             with zoom = :high line_label(:left:e, mm[:kra + 3km], "LMK");
+        }
+    }
+}
+
+
+# PL LND.  Lisewo Wąskotorowe - Nowy Dwór Gdański Wąskotorowy
+with detail = 2 {
+    let ln = path("d2.pl.lnd");
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.LND" {
+            track(ln[:lis, :lic]);
+            with zoom = :high line_label(:left:s, ln[:lis + 3km], "LND");
+        }
+
+        with link = "point.pl.Lichnowy" {
+            track(:station, ln[:lic, :lic.yl]);
+            with zoom = :high {
+                statdot(ln[:lic]);
+                slabel(:nw, ln[:lic] + (-0.3dt, 1dt), "Lichnowy");
+            }
+        }
+
+        with link = "line.pl.LND" {
+            track(ln[:lic.yl, :jez]);
+            with zoom = :high line_label(:right:w, ln[:lic.yl + 6.5km], "LND");
+        }
+
+        with link = "point.pl.Jeziernik" {
+            track(:station, ln[:jez, :jez.yz]);
+            with zoom = :high {
+                statdot(ln[:jez]);
+                slabel(:right, ln[:jez] + (2.3dt, 0.5dt), "Jeziernik");
+            }
+        }
+
+        with link = "line.pl.LND" {
+            track(ln[:jez.yz, :ndw.yo]);
+            with zoom = :high line_label(:right:ne, ln[:ndw.yo - 6km], "LND");
         }
     }
 }
