@@ -1,3 +1,15 @@
+# PL MAG.  Modgarby - Anielin Gradowo
+with detail = 2 {
+    let ma = path("d2.pl.mag");
+
+    with railway = :second :removed {
+        with link = "line.pl.MAG" {
+            track(ma[:mod.ya, :ani]);
+        }
+    }
+}
+
+
 # PL MBC. Mogilno - Barcin
 with detail = 2 {
     let mb = path("d2.pl.mbc");
@@ -5,7 +17,7 @@ with detail = 2 {
     with railway = :second :removed {
         with link = "line.pl.MBC" {
             track(mb[:mog.yb, :bar.ym]);
-            line_label(:right:w, mb[:mog.yb + 11.5km], "MBC");
+            line_label(:left:e, mb[:mog.yb + 8.5km], "MBC");
         }
     }
 }
@@ -26,6 +38,49 @@ with detail = 2 {
                 statdot(md[:deb]);
                 slabel(:left, md[:deb] + (3dt, -1.3dt), "Dębowo");
             }
+        }
+    }
+}
+
+
+# PL MKR.  Mława Wąskotorowa - Krasne
+with detail = 2 {
+    let mk = path("d2.pl.mkr");
+
+    with railway = :second :narrower:g750 :suspended {
+        with link = "line.pl.MKR" {
+            track(mk[:mla, :gru.yc]);
+            line_label(:left:sw, mk[:mla + 9km], "MKR");
+        }
+
+        with link = "point.pl.Grudusk" {
+            track(:station, mk[:gru.yc, :gru]);
+            statdot(mk[:gru]);
+            slabel(:right, mk[:gru] + (1.4dt, -0.3dt), "Grudusk");
+        }
+
+        with link = "line.pl.MKR" {
+            track(mk[:gru, :prm.yp]);
+            line_label(:right:n, mk[:gru + 8km], "MKR");
+        }
+
+        with link = "point.pl.Przasnysz-Miasto" {
+            track(:station, mk[:prm.yp, :prm]);
+            statdot(mk[:prm]);
+            slabel(:ne, mk[:prm] + (0dt, 0.8dt),
+                vbox(:right:top, "Przasnysz", "Miasto")
+            );
+        }
+
+        with link = "line.pl.MKR" {
+            track(mk[:prm, :kra.ym]);
+            line_label(:right:e, mk[:prm + 7.5km], "MKR");
+        }
+
+        with link = "point.pl.Krasne" {
+            track(:station, mk[:kra.ym, :kra]);
+            statdot(mk[:kra]);
+            slabel(:right, mk[:kra] + (1dt, -0.8dt), "Krasne");
         }
     }
 }
@@ -200,7 +255,10 @@ with detail = 2 {
         }
 
         with link = "point.pl.Pastwa-Południowa" {
-            with zoom = :high statdot(mw[:pad]);
+            with zoom = :high {
+                statdot(mw[:pad]);
+                slabel(:left, mw[:pad] + (-1.5dt, 0.8dt), "Pastwa");
+            }
         }
 
         with link = "line.pl.MWW" {
