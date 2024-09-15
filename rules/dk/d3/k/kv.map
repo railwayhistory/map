@@ -1,0 +1,35 @@
+# DK KV.  København H - Københaven G - Hvidovre Fjern
+#
+let kv = path("d4.dk.kv");
+
+with detail = 3 {
+    
+    with link = "line.dk.KV" {
+        track(:first :double :cat:ac25 :pax, kv[:kog + 1sw, :vig - 1sw]);
+    }
+
+    with link = "point.dk.Vigerslev" {
+        track(:first:station :cat:ac25 :pax,
+                kv[:vig - 1sw, :vig - 0.9sw + 0.7dl] >> 0.5dt
+            --  kv[:vig - 0.9sw + 2.7dl, :vig + 1sw] << 1.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                kv[:vig - 1sw, :vig - 0.9sw] << 0.5dt
+            --  kv[:vig - 0.9sw + 2dl, :vig + 1sw] << 2.5dt
+        );
+
+        track(:first:station :cat:ac25 :pax,
+                kv[:vig - 0.9sw + 0.7dl, :vig] >> 0.5dt
+        );
+        track(:first:station :cat:ac25 :pax,
+                kv[:vig - 0.9sw, :vig] << 0.5dt
+        );
+    }
+
+    with link = "line.dk.KV" {
+        track(:first :double :cat:ac25 :pax :casing,
+                kv[:vig + 1sw, :hvf - 1sw] << 2dt
+        );
+    }
+}
+
