@@ -1,0 +1,54 @@
+# NL BZ.  Bilthoven - Zeist
+#
+let bz = path("d4.nl.bz");
+
+with detail = 3 {
+    # point.nl.Bilthoven: nl.UZ
+
+    with link = "line.nl.BZ" {
+        track(:first :double :removed, 
+                bz[:bhv.yz - 0.1dl, :bhv.yz] >> 0.5dt
+            ..  bz[:bhv.yyz, :bed - 1sw]
+        );
+    }
+
+    with link = "point.nl.Bosch-en-Duin" {
+        track(:first:station :double :removed, bz[:bed - 1sw, :bed + 1sw]);
+        marker(:left :de.hp :removed, bz[:bed] << 0.5dt);
+        slabel(:left :removed, bz[:bed] >> 1.0dt,
+            vbox(:right:top, "Bosch", "en Duin")
+        );
+    }
+
+    with link = "line.nl.BZ" {
+        track(:first :double :removed, bz[:bed + 1sw, :hth - 1sw]);
+    }
+
+    with link = "point.nl.Huis-ter-Heide" {
+        track(:first:station :double :removed, bz[:hth - 1sw, :hth + 1sw]);
+        marker(:left :de.bf :removed, bz[:hth] << 0.5dt);
+        slabel(:right :removed, bz[:hth + 0.4sw] << 0.5dt << 1.4sh,
+            "Huis ter Heide"
+        );
+    }
+
+    with link = "line.nl.BZ" {
+        track(:first :double :removed, bz[:hth + 1sw, :zt - 1sw]);
+        guide(:linenum :removed,
+                bz[:hth + 0.9km] << 1.2dt
+            --  bz[:hth + 0.9km] << 3.5dt
+        );
+        label(:linenum :removed, bz[:hth + 0.9km] << 4.0dt,
+            hbox(:left:middle, "BZ")
+        );
+    }
+
+    with link = "point.nl.Zeist" {
+        track(:first:station :double :removed, bz[:zt - 1sw, :zt + 1sw]);
+        marker(:left :de.bf :removed, bz[:zt] << 0.5dt);
+        slabel(:right :removed, bz[:zt + 0.4sw] << 0.5dt << 1.5sh,
+            span(:bold, "Zeist")
+        );
+    }
+}
+
