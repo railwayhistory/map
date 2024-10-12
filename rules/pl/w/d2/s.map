@@ -1,0 +1,51 @@
+# PL SOK.  Stryków Przeładownia - Ozorków Miasto
+with detail = 2 {
+    let so = path("d2.pl.sok");
+
+    with railway = :third :narrower:g600 :removed {
+        with link = "line.pl.SOK" {
+            track(so[:str, :ozm.ys]);
+            with zoom = :high line_label(:right:s, so[:str + 11km], "SOK");
+        }
+    }
+}
+
+
+# PL SWG.  Sochaczew Muzeum - Wyszogród
+with detail = 2 {
+    let sw = path("d2.pl.swg");
+
+    with railway = :second :narrower:g750 :museum {
+        with link = "point.pl.Sochaczew-Muzeum" {
+            statdot(sw[:soc]);
+        }
+
+        with link = "line.pl.SWG" {
+            track(sw[:soc, :tul]);
+            line_label(:left:e, sw[:soc + 8.2km], "SWG");
+        }
+
+        with link = "point.pl.Tułowice-Sochaczewskie" {
+            track(:station, sw[:tul, :tul.yp]);
+            statdot(sw[:tul]);
+            slabel(:left, sw[:tul] + (-1.5dt, 0.8dt),
+                "Tułowice Sochaczewskie"
+            );
+        }
+    }
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.SWG" {
+            track(sw[:tul.yp, :wys]);
+            with zoom = :high line_label(:right:sw, sw[:tul.yp + 3km], "SWG");
+        }
+
+        with link = "point.pl.Wyszogród" {
+            with zoom = :high {
+                statdot(sw[:wys]);
+                slabel(:left, sw[:wys] + (-1.5dt, 0.8dt), "Wyszogród");
+            }
+        }
+    }
+}
+
