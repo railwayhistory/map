@@ -214,7 +214,7 @@ industrial lines are omitted.
 | L (Wschodnia DOKP in Lublin)    | in progress | not started |
 | P (Zachodnia DOKP in Poznań)    | complete    | not started |
 | S (Śląskia DOKP in Katowice)    | in progress | not started |
-| W (Centralna DOKP in Warszawa)  | in progress | not started |
+| W (Centralna DOKP in Warszawa)  | complete    | not started |
 | Z (Pomorska DOKP in Szczecin)   | complete    | not started |
 
 
