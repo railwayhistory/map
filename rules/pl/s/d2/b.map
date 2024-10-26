@@ -2,9 +2,12 @@
 with detail = 2 {
     let br = path("d2.pl.bkr");
 
+    with railway = :second :narrow:g785 :tourist {
+    }
+
     with railway = :third :narrow:g785 :removed {
         with link = "line.pl.BKR" {
-            track(br[:bka.yr, :zbi.yk]);
+            track(br[:nka.yb, :zbi.yk]);
         }
 
         with link = "line.pl.BKR" {
@@ -62,12 +65,60 @@ with detail = 2 {
 }
 
 
-# PL BTB.  Bytom Wąskotorowy – Bibiela Wschód
+# PL BMC.  Bytom Karb Wąskotorowy - Maciejów Śląski
+with detail = 2 {
+    let bm = path("d2.pl.bmc");
+
+    with railway = :third :narrower:g785 :removed {
+        with link = "line.pl.BMC" {
+            track(bm[:ror.yp, :paw.yb]);
+            track(bm[:paw.yb, :rch.yp]);
+            track(bm[:ruw.yw, :rww]);
+        }
+
+        with link = "point.pl.Ruda-Wschodnia-Wąskotorowa" {
+            with zoom = :high statdot(bm[:rww]);
+        }
+
+        with link = "line.pl.BMC" {
+            track(bm[:rww, :zaw.yw]);
+        }
+
+        with link = "point.pl.Poręba-Wąskotorowa" {
+            with zoom = :high statdot(bm[:pow]);
+        }
+
+        with link = "line.pl.BMC" {
+            track(bm[:pow.yw, :zpl.yw]);
+        }
+    }
+}
+
+
+# PL BPP.  Bytom Karb Wąskotorowy - Pole Północne
+with detail = 2 {
+    let bp = path("d2.pl.bpp");
+
+    with railway = :third :narrower:g785 :removed {
+        with link = "line.pl.BPP" {
+            track(bp[:byt, :chp.yb]);
+            track(bp[:chp.yp, :pop.yc]);
+        }
+    }
+}
+
+
+# PL BTB.  Bytom Karb Wąskotorowy – Bibiela
 with detail = 2 {
     let bb = path("d2.pl.btb");
 
-    with railway = :second :narrow:g785 :tourist {
+    with railway = :second :narrower:g785 :tourist {
+        with link = "point.pl.Bytom-Karb-Wąskotorowy" {
+            statdot(bb[:bkw]);
+        }
+
         with link = "line.pl.BTB" {
+            track(bb[:bkw, :nka.yb]);
             track(bb[:byp.yb, :suc.yb]);
             track(bb[:suc.yb, :suc]);
         }
@@ -99,10 +150,10 @@ with detail = 2 {
             with zoom = :high line_label(:left:s, bb[:mia + 3.2km], "BTB");
         }
 
-        with link = "point.pl.Bibiela-Wschód" {
+        with link = "point.pl.Bibiela" {
             with zoom = :high {
                 statdot(bb[:bib]);
-                slabel(:right, bb[:bib] + (1.5dt, 0.8dt), "Bibiela Wschód");
+                slabel(:right, bb[:bib] + (1.5dt, 0.8dt), "Bibiela");
             }
         }
     }

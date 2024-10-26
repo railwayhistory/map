@@ -259,6 +259,12 @@
 
 ## New Additions
 
+### 2024-10-26
+
+* Added overview map of Poland. ([#93])
+
+[#93]: https://github.com/railwayhistory/map/pull/93
+
 ### 2024-06-22
 
 * Added lines _DE 5125_ and _DE 5126_ (connection lines near Coburg).
