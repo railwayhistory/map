@@ -206,16 +206,16 @@ directorates as they were in 1979.
 The overview map currently only covers railway lines. Tram, metro, and
 industrial lines are omitted.
 
-| region                          | overview    | detail      |
-| ------------------------------- | ----------- | ----------- |
-| D (Dolnośląska DOKP in Wrocław) | complete    | not started |
-| G (Północna DOKP in Gdańsk)     | complete    | not started |
-| K (Południowa DOKP in Kraków)   | in progress | not started |
-| L (Wschodnia DOKP in Lublin)    | in progress | not started |
-| P (Zachodnia DOKP in Poznań)    | complete    | not started |
-| S (Śląskia DOKP in Katowice)    | in progress | not started |
-| W (Centralna DOKP in Warszawa)  | complete    | not started |
-| Z (Pomorska DOKP in Szczecin)   | complete    | not started |
+| region                          | overview  | detail      |
+| ------------------------------- | --------- | ----------- |
+| D (Dolnośląska DOKP in Wrocław) | complete  | not started |
+| G (Północna DOKP in Gdańsk)     | complete  | not started |
+| K (Południowa DOKP in Kraków)   | complete  | not started |
+| L (Wschodnia DOKP in Lublin)    | complete  | not started |
+| P (Zachodnia DOKP in Poznań)    | complete  | not started |
+| S (Śląskia DOKP in Katowice)    | complete  | not started |
+| W (Centralna DOKP in Warszawa)  | complete  | not started |
+| Z (Pomorska DOKP in Szczecin)   | complete  | not started |
 
 
 ## RU: Russia
