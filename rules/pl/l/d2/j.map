@@ -1,0 +1,97 @@
+# PL JES.  Jędrzejów Wąskotorowy Osobowy - Szczucin koło Tarnowa Wąskotorowy
+with detail = 2 {
+    let jb = path("d2.pl.jes.1");
+    let bs = path("d2.pl.jes.2");
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.JES" {
+            track(jb[:jed, :jew]);
+        }
+    }
+
+    with railway = :second :narrower:g750 :tourist {
+        with link = "point.pl.Jędrzejów-Wąskotorowy" {
+            statdot(jb[:jew]);
+        }
+
+        with link = "line.pl.JES" {
+            track(jb[:jew, :wyg.x - 1km]);
+            line_label(:left:s, jb[:jew + 8.5km], "JES");
+            with layer = -1 track(jb[:wyg.x - 1km, :wyg.x + 1km]);
+            track(jb[:wyg.x + 1km, :mot]);
+        }
+
+        with link = "point.pl.Motkowice-Wąskotorowe" {
+            statdot(jb[:mot]);
+            slabel(:left, jb[:mot] + (-1.5dt, 1.3dt), "Motkowice");
+        }
+    }
+
+    with railway = :second :narrower:g750 :suspended {
+        with link = "line.pl.JES" {
+            track(jb[:mot, :umi.yc]);
+        }
+
+        with link = "point.pl.Umianowice" {
+            track(:station, jb[:umi.yc, :umi]);
+            statdot(jb[:umi]);
+            slabel(:ne, jb[:umi] + (-1.5dt, 0dt), "Umianowice");
+        }
+
+        with link = "line.pl.JES" {
+            track(jb[:umi, :haj]);
+        }
+
+        with link = "point.pl.Hajdaszek" {
+            track(:station, jb[:haj, :haj.yp]);
+            statdot(jb[:haj]);
+            with zoom = :high slabel(:left,
+                jb[:haj] + (0dt, -0.7km) + (0dt, -0.5dt),
+                "Hajdaszek"
+            );
+        }
+    }
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.JES" {
+            track(jb[:haj.yp, :chm]);
+            with zoom = :high line_label(:right:nw,
+                jb[:haj.yp + 10km], "JES"
+            );
+        }
+
+        with link = "point.pl.Chmielnik" {
+            with zoom = :high {
+                statdot(jb[:chm]);
+                slabel(:left, jb[:chm] + (1dt, -1.5dt), "Chmielnik");
+            }
+        }
+
+        with link = "line.pl.JES" {
+            track(jb[:chm, :chm.ym]);
+            track(jb[:chm.ym, :bog.ys]);
+            with zoom = :high {
+                line_label(:left:s, jb[:chm.ym + 7.4km], "JES");
+                line_label(:right:n, jb[:bog.ys - 7km], "JES");
+            }
+        }
+
+        with link = "point.pl.Bogoria" {
+            track(:station, jb[:bog.ys, :bog]);
+            with zoom = :high {
+                statdot(jb[:bog]);
+                slabel(:right, jb[:bog] + (1.5dt, 0dt), "Bogoria");
+            }
+        }
+
+        with link = "line.pl.JES" {
+            track(bs[:bog.ys, :suc]);
+            with zoom = :high {
+                line_label(:right:e, bs[:bog.ys + 4.3km], "JES");
+                line_label(:right:e, bs[:bog.ys + 24km], "JES");
+                line_label(:left:w, bs[:suc - 8km], "JES");
+            }
+        }
+    }
+}
+
