@@ -1,0 +1,471 @@
+# RU KG 1.  Калининград-Пассажирский - Мамоново
+with detail = 2 {
+    let km = path("d2.ru.kg.1");
+
+    with railway = :first :g1520 :pax {
+        with link = "point.ru.Калининград-Пассажирский" {
+            # see ru.kg.21
+
+            slabel(:left :medium :bold, km[:kal] + (-2.5km, 0.5dt),
+                latspan("Калининград", "Kaliningrad")
+            );
+        }
+
+        with link = "line.ru.kg.1" {
+            track(
+                    km[:kal.ym, :kal.yym]
+                ..  km[:kma.ys, :kma.ys + 4km] >> 0.5st >> 0.5ds
+            );
+            line_label(:right:e,
+                km[:kma.ys + 4km] >> 0.5st >> 0.5ds, (0dt, -0.05dt),
+                "1"
+            );
+            track(km[:kma.ys + 4km, :gol.yd] >> 0.5st >> 0.5ds);
+
+            track(km[:gol.yd, :gol] >> 0.35dt);
+        }
+
+        with link = "point.ru.Голубево" {
+            statdot(km[:gol]);
+            slabel(:left, km[:gol] + (-1.5dt, 0.3dt),
+                latspan("Голубево", "Golubevo")
+            );
+        }
+
+        with link = "line.ru.kg.1" {
+            track(km[:gol, :sve] >> 0.5st >> 0.5ds);
+        }
+
+        with link = "point.ru.Светлое" {
+            statdot(km[:sve]);
+            slabel(:right :pax, km[:sve] + (1dt, 0dt),
+                hbox(:left:top, latspan("Светлое", "Svetloe"))
+            );
+        }
+
+        with link = "line.ru.kg.1" {
+            track(km[:sve, :sve.yk] >> 0.5st >> 0.5ds);
+            track(km[:sve.yk, :sve.yk + 13km] >> 0.5st >> 0.5ds);
+            line_label(:right:s,
+                km[:sve.yk + 13km] >> 0.5dst >> 0.5ds, (-0.05dt, 0dt),
+                "1"
+            );
+            track(km[:sve.yk + 13km, :mam.yb] >> 0.5st >> 0.5ds);
+        }
+
+        with link = "point.ru.Мамоново" {
+            track(:station, km[:mam.yb, :mam] >> 0.5st >> 0.5ds);
+            track(:station :narrow:g1435 :nopax,
+                    km[:mam.yb, :mam] << 0.5st << 0.5ds
+            );
+            statdot(km[:mam]);
+            slabel(:left, km[:mam] + (-1.5dt, -0.3dt),
+                latspan("Мамоново", "Mamonovo")
+            );
+        }
+    }
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.ru.kg.1" {
+            track(km[:mam, :mag] >> 0.5st >> 0.5ds);
+        }
+    }
+}
+
+
+# RU KG 2.  Чернышевское - Калининград-Пассажирский
+with detail = 2 {
+    let tk = path("d2.ru.kg.2");
+
+    with railway = :first :double :g1520 :pax {
+        with link = "line.ru.kg.2" {
+            track(tk[:teg, :ter]);
+        }
+
+        with link = "point.ru.Чернышевское" {
+            statdot(tk[:ter]);
+            slabel(:right, tk[:ter] + (-1dt, 1dt),
+                hbox(:left:top, latspan("Чернышевское", "Chernyshevskoye"))
+            );
+        }
+
+        with link = "line.ru.kg.2" {
+            track(tk[:ter, :ter + 5km]);
+            line_label(:left:n, tk[:ter + 5km], "2");
+            track(tk[:ter + 5km, :nes.yc]);
+        }
+
+        with link = "point.ru.Нестеров" {
+            track(:station, tk[:nes.yc, :nes.ys]);
+            statdot(tk[:nes]);
+            slabel(:right, tk[:nes] + (0dt, -0.2km) + (-2.5dt, -1.3dt),
+                latspan("Нестеров", "Nesterov")
+            );
+        }
+
+        with link = "line.ru.kg.2" {
+            track(tk[:nes.ys, :nes.ys + 13km]);
+            line_label(:right:s, tk[:nes.ys + 13km], "2");
+            track(tk[:nes.ys + 13km, :gus]);
+        }
+
+        with link = "point.ru.kg.Гусев" {
+            track(:station, tk[:gus, :gus.yo]);
+            statdot(tk[:gus]);
+            slabel(:top, tk[:gus] + (0dt, -0.8dt),
+                latspan("Гусев", "Gusev")
+            );
+        }
+
+        with link = "line.ru.kg.2" {
+            track(tk[:gus.yo, :che.ys - 7km]);
+            line_label(:left:n, tk[:che.ys - 7km], "2");
+            track(tk[:che.ys - 7km, :che.ys]);
+
+            track(tk[:che.ys, :che.yz]);
+        }
+
+        with link = "point.ru.Черняховск" {
+            track(:station, tk[:che.yz, :che.yk]);
+            statdot(tk[:che]);
+            slabel(:right :bold, tk[:che] + (2km, 0dt) + (1dt, -0.3dt),
+                latspan("Черняховск", "Chernyakhovsk")
+            );
+        }
+
+        with link = "line.ru.kg.2" {
+            track(tk[:che.yk, :che.yk + 15km]);
+            line_label(:right:s, tk[:che.yk + 15km], "2");
+            track(tk[:che.yk + 15km, :zna.yp]);
+        }
+
+        with link = "point.ru.Знаменск" {
+            track(:station, tk[:zna.yp, :zna]);
+            statdot(tk[:zna]);
+            slabel(:left, tk[:zna] + (0.8dt, 0.8dt),
+                hbox(:right:top, latspan("Знаменск", "Znamensk"))
+            );
+        }
+
+        with link = "line.ru.kg.2" {
+            track(tk[:zna, :gva.yv]);
+        }
+
+        with link = "point.ru.Гвардейск" {
+            track(:station, tk[:gva.yv, :gva.yp]);
+            statdot(tk[:gva]);
+            slabel(:right,tk[:gva] + (0.6km, 0dt) + (1.5dt, -0.7dt),
+                latspan("Гвардейск", "Gvardeysk")
+            );
+        }
+
+        with link = "line.ru.kg.2" {
+            track(tk[:gva.yp, :gva.yp + 7km]);
+            line_label(:right:s, tk[:gva.yp + 7km], "2");
+            track(tk[:gva.yp + 7km, :kom.yk]);
+        }
+
+        with link = "point.ru.Комсомольск-Западный" {
+            track(:station, tk[:kom.yk, :kom]);
+            statdot(tk[:kom]);
+            slabel(:right :pax, tk[:kom] + (-0.3dt, -0.8dt),
+                vbox(:left:bottom,
+                    latspan("Комсомольск", "Komsomolsk"),
+                    latspan("Западный", "Zapadny")
+                )
+            );
+        }
+
+        with link = "line.ru.kg.2" {
+            track(tk[:kom, :kom + 7km]);
+            line_label(:right:s, tk[:kom + 7km], "2");
+            track(tk[:kom + 7km, :kal.yd]);
+            track(tk[:kal.yd, :kal.yv]);
+            track(tk[:kal.yv, :kal.yb]);
+            track(tk[:kal.yb, :kal]);
+        }
+    }
+}
+
+
+# RU KG 3.  Калининград-Пассажирский - Балтийск
+with detail = 2 {
+    let kb = path("d2.ru.kg.3");
+
+    with railway = :first :g1520 :pax {
+        with link = "line.ru.kg.3" {
+            track(kb[:kal.ys, :kal.ys + 10km]);
+            line_label(:right:s, kb[:kal.ys + 10km], (0.2dt, 0dt), "3");
+            track(kb[:kal.ys + 10km, :pri.ys - 6km]);
+            line_label(:left:n, kb[:pri.ys - 6km], "3");
+            track(kb[:pri.ys - 6km, :pri.ys]);
+        }
+
+        with link = "point.ru.Приморск-Новый" {
+            track(:station, kb[:pri.ys, :pri]);
+            statdot(kb[:pri]);
+            slabel(:left, kb[:pri] + (-1.5dt, -0.5dt),
+                latspan("Приморск-Новый", "Primorsk-Novy")
+            );
+        }
+
+        with link = "line.ru.kg.3" {
+            track(kb[:pri, :pri + 7km]);
+            line_label(:right:e, kb[:pri + 7km], "3");
+            track(kb[:pri + 7km, :bal]);
+        }
+
+        with link = "point.ru.Балтийск" {
+            statdot(kb[:bal]);
+            slabel(:left, kb[:bal] + (-1.5dt, 0.8dt),
+                latspan("Балтийск", "Baltiysk")
+            );
+        }
+    }
+}
+
+
+# RU KG 4.  Корнево - Светлое
+with detail = 2 {
+    let ks = path("d2.ru.kg.4");
+
+    with railway = :first :removed {
+        with link = "line.ru.kg.4" {
+            track(ks[:kog, :kor.yb]);
+            track(ks[:kor.yb, :kor]);
+        }
+
+        with link = "point.ru.kg.Корнево" {
+            statdot(ks[:kor]);
+            slabel(:right, ks[:kor] + (1.5dt, 0.5dt),
+                latspan("Корнево", "Kornevo")
+            );
+        }
+
+        with link = "line.ru.kg.4" {
+            track(ks[:kor, :kor.ym]);
+            track(ks[:kor.ym, :kor.ym + 6.5km]);
+            line_label(:left:se, ks[:kor.ym + 6.5km], "4");
+            track(
+                    ks[:kor.ym + 6.5km, :sve.yyk - 1dt]
+                ..  ks[:sve.yk, :sve.yk + 0.1dl] >> 0.4dt
+            );
+        }
+    }
+}
+
+
+# RU KG 5.  Калининград-Пассажирский - Багратионовск
+with detail = 2 {
+    let kb = path("d2.ru.kg.5");
+
+    with railway = :first :g1520 :pax {
+        with link = "line.ru.kg.5" {
+            track(kb[:kal.yb, :dze.yc]);
+            track(kb[:dze.yc, :dze]);
+        }
+
+        with link = "point.ru.Дзержинская-Новая" {
+            track(:station, kb[:dze, :dze.yg]);
+            statdot(kb[:dze]);
+        }
+
+        with link = "line.ru.kg.5" {
+            track(kb[:dze.yg, :dze.yg + 3.5km]);
+            line_label(:left:w, kb[:dze.yg + 3.5km], (0dt, -0.1dt), "5");
+            track(kb[:dze.yg + 3.5km, :vla]);
+        }
+
+        with link = "point.ru.kg.Владимиров" {
+            statdot(kb[:vla]);
+            slabel(:right, kb[:vla] + (1.5dt, 0.8dt),
+                latspan("Владимиров", "Vladimirov")
+            );
+        }
+
+        with link = "line.ru.kg.5" {
+            track(kb[:vla, :bag.yk - 6km]);
+            line_label(:left:w, kb[:bag.yk - 6km], (0dt, -0.1dt), "5");
+            track(kb[:bag.yk - 6km, :bag.yk]);
+        }
+
+        with link = "point.ru.kg.Багратионовск" {
+            track(:station, kb[:bag.yk, :bag]);
+            statdot(kb[:bag]);
+            slabel(:right, kb[:bag] + (1.5dt, 0.8dt),
+                latspan("Багратионовск", "Bagrationovsk")
+            );
+        }
+    }
+
+    with railway = :first :g1520:gg1435 :suspended {
+        with link = "line.ru.kg.5" {
+            track(kb[:bag, :bag + 2.5km]);
+            line_label(:right:n, kb[:bag + 2.5km], (-0.2dt, 0dt), "5");
+            track(kb[:bag + 2.5km, :glg]);
+        }
+
+        with link = "point.int.Багратионовск-Głomno" {
+            marker(:right :ref, kb[:glg]);
+            marker(:left :ref, kb[:glg]);
+        }
+    }
+}
+
+
+# RU KG 6.  Калининград Северный - Светлогорск 1
+with detail = 2 {
+    let kz = path("d2.ru.kg.6.1");
+    let zs = path("d2.ru.kg.6.2");
+    
+    with railway = :first :g1520 :cat:dc30 :pax {
+        with link = "line.ru.kg.6" {
+            track(kz[:kut.yz, :kut.yz + 5km]);
+            line_label(:left:e, kz[:kut.yz + 5km], "6");
+            track(kz[:kut.yz + 5km, :rya]);
+        }
+
+        with link = "point.ru.kg.Рябиновка" {
+            track(:station, kz[:rya, :rya.yr]);
+            statdot(kz[:rya]);
+            slabel(:left, kz[:rya] + (-1.5dt, 1dt),
+                latspan("Рябиновка", "Ryabinovka")
+            );
+        }
+
+        with link = "line.ru.kg.6" {
+            track(kz[:rya.yr, :zel.yy - 6km]);
+            line_label(:left:e, kz[:zel.yy - 6km], "6");
+            track(kz[:zel.yy - 6km, :zel.yy]);
+            track(kz[:zel.yy, :zel.ys]);
+        }
+
+        with link = "point.ru.Зеленоградск-Новый" {
+            track(:station, kz[:zel.ys, :zel]);
+            statdot(kz[:zel]);
+            slabel(:top, kz[:zel] + (0dt, -0.7dt),
+                vbox(:center:bottom,
+                    latspan(" Зеленоградск-", " Zelenogradsk-"),
+                    latspan("Новый", "Novy")
+                )
+            );
+        }
+
+        with link = "line.ru.kg.6" {
+            track(zs[:zel.ys, :zel.yz]);
+            track(zs[:zel.yz, :zel.yz + 8km]);
+            line_label(:left:n, zs[:zel.yz + 8km], "6");
+            track(zs[:zel.yz + 8km, :pio.yk]);
+        }
+
+        with link = "point.ru.kg.Пионерский-Курорт" {
+            track(:station, zs[:pio.yk, :pio]);
+            statdot(zs[:pio]);
+            slabel(:right, zs[:pio] + (-1.8dt, -0.8dt),
+                vbox(:left:bottom,
+                    latspan("Пионерский-", "Pionersky-"),
+                    latspan("Курорт", "Kurort")
+                )
+            );
+        }
+
+        with link = "line.ru.kg.6" {
+            track(zs[:pio, :pio + 2.6km]);
+            line_label(:left:n, zs[:pio + 2.6km], "6");
+            track(zs[:pio + 2.6km, :sve]);
+        }
+
+        with link = "point.ru.kg.Светлогорск-1" {
+            statdot(zs[:sve]);
+            slabel(:left, zs[:sve] + (1dt, 0.8dt),
+                vbox(:right:top,
+                    latspan("Светлогорск 1", "Svetlogorsk 1")
+                )
+            );
+        }
+    }
+}
+
+
+# RU KG 7.  Черняховск - Советск
+with detail = 2 {
+    let cs = path("d2.ru.kg.7");
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.ru.kg.7" {
+            track(cs[:che.ys, :che.yx]);
+            track(cs[:che.yx, :che.yb]);
+            track(cs[:che.yb, :che.yb + 8km]);
+            line_label(:right:w, cs[:che.yb + 8km], "7");
+            track(cs[:che.yb + 8km, :sov.yn - 11km]);
+            line_label(:left:e, cs[:sov.yn - 11km], "7");
+            track(cs[:sov.yn - 11km, :sov.yn]);
+            track(cs[:sov.yn, :sov.yk]);
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        with link = "line.ru.kg.7" {
+            track(cs[:sov.yk, :sov]);
+        }
+
+        with link = "point.ru.kg.Советск" {
+            statdot(cs[:sov]);
+            slabel(:right :bold, cs[:sov] + (1.5dt, 1.3dt),
+                latspan("Советск", "Sovetsk")
+            );
+        }
+    }
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.ru.kg.7" {
+            track(cs[:sov, :sog]);
+        }
+    }
+}
+
+
+# RU KG 8.  Черняховск - Железнодорожный
+with detail = 2 {
+    let cz = path("d2.ru.kg.8");
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.ru.kg.8" {
+            track(cz[:che.yk, :che.yo]);
+            track(
+                    cz[:che.yo, :kra.yy]
+                ..  cz[:kra - 0.1dl, :kra] << 0.5st << 0.5ds
+            );
+        }
+
+        with link = "point.ru.Красновка" {
+            statdot(cz[:kra]);
+        }
+
+        with link = "line.ru.kg.8" {
+            track(cz[:kra, :kra + 15km] << 0.5st << 0.5ds);
+            line_label(:left:nw, cz[:kra + 15km] << 0.5st << 0.5ds, "8");
+            track(cz[:kra + 15km, :zhe.yk] << 0.5st << 0.5ds);
+        }
+
+        with link = "point.ru.Железнодорожный" {
+            track(:station, cz[:zhe.yk, :zhe.yp] << 0.5st << 0.5ds);
+            statdot(cz[:zhe]);
+            slabel(:left, cz[:zhe] + (-0.3dt, -0.3dt),
+                vbox(:right:bottom,
+                    latspan("Железно-", "Zhelezno-"),
+                    latspan("дорожный ", "dorozhny ")
+                )
+            );
+        }
+
+        with link = "line.ru.kg.8" {
+            track(cz[:zhe.yp, :zhg] << 0.5st << 0.5ds);
+        }
+
+        with link = "point.int.Железнодорожный-Skandawa" {
+            marker(:left :ref, cz[:zhg] << 0.5st << 0.5ds);
+        }
+    }
+}
+
