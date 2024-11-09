@@ -23,6 +23,7 @@ For countries not listed here, work has not started at all.
 [FR](#fr-france) •
 [GB](#gb-united-kingdom) •
 [IT](#it-italy) •
+[LT](#lt-lithuania) •
 [LU](#lu-luxembourg) •
 [NL](#nl-the-netherlands) •
 [NO](#no-norway) •
@@ -162,6 +163,17 @@ the following regions:
 | 6 | Molise, Campania, Puglia, Basilicata, Calabria      | complete | not started |
 | 7 | Sicilia                                             | complete | not started |
 | 8 | Sardegna                                            | complete | not started |
+
+
+
+## LT: Lithuania
+
+The overview map currently only covers railway lines. Tram, metro, and
+industrial lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | not started |
 
 
 
