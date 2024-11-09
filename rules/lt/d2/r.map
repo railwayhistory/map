@@ -1,0 +1,149 @@
+# LT RD.  Rimkai - Draugystė
+with detail = 2 {
+    let rd = path("d2.lt.rd");
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.lt.RD" {
+            track(rd[:rim.yd, :dra]);
+            line_label(:left:n, rd[:rim.yd + 1.2km], "RD");
+        }
+
+        with link = "point.lt.Draugystė" {
+            statdot(rd[:dra]);
+            slabel(:left, rd[:dra] + (-1.5dt, 0.8dt), "Draugystė");
+        }
+    }
+}
+
+
+# LT RP.  Radviliškis - Petrašiūnai
+with detail = 2 {
+    let rp = path("d2.lt.rp");
+
+    with railway = :second :g1520 :nopax {
+        with link = "line.lt.RP" {
+            track(rp[:rad.yp, :pet]);
+            line_label(:right:nw, rp[:rad.yp + 10km], "RP");
+            line_label(:right:n, rp[:pet - 7km], (0.4dt, 0dt), "RP");
+        }
+
+        with link = "point.lt.Petrašiūnai" {
+            statdot(rp[:pet]);
+            slabel(:left, rp[:pet] + (0dt, -0.2km) + (-0.5dt, -1dt),
+                "Petrašiūnai"
+            );
+        }
+    }
+}
+
+
+# LT RR.  Radviliškis - Valstybės siena (Rokiškis)
+with detail = 2 {
+    let rr = path("d2.lt.rr");
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lt.RR" {
+            track(rr[:rad, :lin] << 1st << 1ds);
+            track(
+                    rr[:lin - 0.1dl, :lin] << 1st << 1ds
+                ..  rr[:lin.x + 2dt, :pan.yj]
+            );
+            line_label(:left:s, rr[:lin.x + 8.2km], (0.4dt, 0dt), "RR");
+            line_label(:right:n, rr[:pan - 10km], "RR");
+        }
+
+        with link = "point.lt.Panevėžys" {
+            track(:station, rr[:pan.yj, :pan]);
+            track(:station :museum, rr[:pan, :pan.ys]);
+            statdot(rr[:pan]);
+            slabel(:bottom, rr[:pan] + (0dt, 0.8dt), "Panevėžys");
+        }
+    }
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.lt.RR" {
+            with layer = -1 track(rr[:pan.ys, :pan.ys + 8km]);
+            track(rr[:pan.ys + 8km, :ska]);
+            line_label(:left:s, rr[:pan + 12km], (-0.15dt, 0dt), "RR");
+            line_label(:right:n, rr[:ska - 10.3km], "RR");
+        }
+
+        with link = "point.lt.Skapiškis" {
+            track(:station, rr[:ska, :ska.ys]);
+            statdot(rr[:ska]);
+            slabel(:nw, rr[:ska] + (-1dt, 0.9dt), "Skapiškis");
+        }
+
+        with link = "line.lt.RR" {
+            track(rr[:ska.ys, :rok]);
+            line_label(:right:nw, rr[:ska + 11.5km], "RR");
+        }
+
+        with link = "point.lt.Rokiškis" {
+            statdot(rr[:rok]);
+            slabel(:left, rr[:rok] + (0.5dt, -1.4dt), "Rokiškis");
+        }
+
+        with link = "line.lt.RR" {
+            track(rr[:rok, :ros]);
+            line_label(:right:n, rr[:ros - 11km], "RR");
+        }
+    }
+}
+# LT RT.  Radviliškis - Pagėgiai - valstybės siena
+with detail = 2 {
+    let rt = path("d2.lt.rt");
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.lt.RT" {
+            track(rt[:rad, :rad.yp] << 0.5dst << 1ds << 0.5st);
+            track(rt[:rad.yp, :kut.yp] << 0.5dst << 1ds << 0.5st);
+            track(
+                    rt[:kut.yp - 0.1dl, :kut.yp] << 0.5dst << 1ds << 0.5st
+                ..  rt[:jon.ys, :jon]
+            );
+        }
+
+        with link = "point.lt.Jonaitiškiai" {
+            statdot(rt[:jon]);
+            slabel(:left, rt[:jon] + (-1.5dt, 0.8dt), "Jonaitiškiai");
+        }
+
+        with link = "line.lt.RT" {
+            track(rt[:jon, :vid]);
+            line_label(:left:nw, rt[:jon + 5km], "RT");
+            line_label(:right:se, rt[:vid - 13km], "RT");
+            track(rt[:vid, :pag.yn]);
+            line_label(:left:nw, rt[:vid + 25km], "RT");
+            line_label(:right:s, rt[:pag.yn - 8.2km], "RT");
+            track(rt[:pag.yn, :pag.yk]);
+        }
+
+        with link = "point.lt.Pagėgiai" {
+            track(:station, rt[:pag.yk, :pag.ys]);
+            statdot(rt[:pag]);
+            slabel(:left, rt[:pag] + (-1.8dt, 1.8dt),  "Pagėgiai");
+        }
+
+        with link = "line.lt.RT" {
+            track(rt[:pag.ys, :pas]);
+            line_label(:right:e, rt[:pas - 1.5km], (0dt, -0.2dt), "RT");
+        }
+
+        with link = "point.int.Pagėgiai-Советск" {
+            marker(:left :ref, rt[:pas]);
+            marker(:right :ref, rt[:pas]);
+        }
+    }
+}
+
+
+# LT RX.  Šilėnai - Jonaitiškiai
+with detail = 2 {
+    let rx = path("d2.lt.rx");
+    with link = "line.lt.RX" {
+        track(:second :g1520 :nopax, rx[:man.yj, :jon.ys]);
+        with zoom = :high line_label(:right:e, rx[:man.yj + 1km], "RX");
+    }
+}
+

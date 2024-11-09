@@ -1,0 +1,80 @@
+# LT LS.  Lentvaris - Valstybės siena (Senovė)
+with detail = 2 {
+    let ls = path("d2.lt.ls");
+
+    with railway = :first :double :g1520 :cat:ac25 :pax {
+        with link = "line.lt.LS" {
+            track(ls[:len.ym, :set]);
+            with zoom = :high line_label(:left:nw, ls[:len.ym + 2.5km], "LS");
+        }
+
+        with link = "point.lt.Senieji-Trakai" {
+            track(:station, ls[:set, :set.yt]);
+            statdot(ls[:set]);
+            slabel(:nw, ls[:set] + (1.3dt, 0dt),
+                vbox(:left:top, "Senieji", "Trakai")
+            );
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lt.LS" {
+            track(ls[:set.yt, :var.ys]);
+            line_label(:left:w, ls[:set.yt + 9km], (0dt, 0.3dt), "LS");
+            line_label(:left:w, ls[:var.ys - 12km], (0dt, 0.1dt), "LS");
+        }
+
+        with link = "point.lt.Varėna" {
+            track(:station, ls[:var.ys, :var]);
+            statdot(ls[:var]);
+            slabel(:nw, ls[:var] + (0.3dt, 0.8dt), "Varėna");
+        }
+
+        with link = "line.lt.LS" {
+            track(ls[:var, :mar]);
+            line_label(:right:e, ls[:var + 10km], (0dt, -0.1dt), "LS");
+        }
+
+        with link = "point.lt.Marcinkonys" {
+            statdot(ls[:mar]);
+            slabel(:left, ls[:mar] + (-1.3dt, -0.8dt), "Marcinkonys");
+        }
+    }
+
+    with railway = :first :g1520 :suspended {
+        with link = "line.lt.LS" {
+            track(ls[:mar, :ses]);
+            line_label(:right:se, ls[:mar + 9.8km], "LS");
+        }
+
+        with link = "point.int.Senovė-Узбераж" {
+            marker(:left :ref, ls[:ses]);
+            marker(:right :ref, ls[:ses]);
+            with zoom = :low slabel(:bottom :italic,
+                ls[:ses] + (-4.5km, 1km),
+                vbox(:center:top,
+                    latspan("Поречье", "Porechye"),
+                    latspan("– Гродна ", "– Grodna ")
+                )
+            );
+            with zoom = :high slabel(:ne :italic,
+                ls[:ses] + (-0.3dt, -0.3dt),
+                vbox(:left:top,
+                    latspan("Поречье", "Porechye"),
+                    latspan("– Гродна ", "– Grodna ")
+                )
+            );
+        }
+    }
+}
+
+
+# LT LV.  Lentvaris - Vaidotai
+with detail = 2 {
+    with link = "line.lt.LV" {
+        track(:first :double :g1520 :cat:ac25 :nopax,
+                path("d2.lt.lv")[:pan.yl, :vai.yl]
+        );
+    }
+}
+
