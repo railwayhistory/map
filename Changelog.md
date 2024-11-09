@@ -259,6 +259,12 @@
 
 ## New Additions
 
+### 2024-11-09
+
+* Added overview map of Lithuania. ([#95])
+
+[#95]: https://github.com/railwayhistory/map/pull/95
+
 ### 2024-10-26
 
 * Added overview map of Poland. ([#93])
