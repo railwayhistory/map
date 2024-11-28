@@ -1,0 +1,287 @@
+# LV RK.  B.p.223.km. - Rēzekne I
+with detail = 2 {
+    with link = "line.lv.RK" {
+        track(:first :g1520 :nopax, path("d2.lv.rk")[:bp223, :rez.yd]);
+    }
+}
+
+
+# LV RL.  Riga Pasazieru - Liepaja
+with detail = 2 {
+    let rl = path("d2.lv.rl");
+
+    with railway = :first :double :g1520 :cat:dc33 :pax {
+        with link = "line.lv.RL" {
+            track(rl[:rig, :tor]);
+        }
+
+        with link = "point.lv.Torņakalns" {
+            track(:station, rl[:tor, :tor.yz]);
+            statdot(rl[:tor]);
+            slabel(:ne, rl[:tor] + (-0.3km, 0.6km) + (-2dt, 0.5dt),
+                "Torņakalns"
+            );
+        }
+
+        with link = "line.lv.RL" {
+            track(rl[:tor.yz, :tor.yz + 6.5km]);
+            line_label(:left:w, rl[:tor.yz + 6.5km], "RL");
+            track(rl[:tor.yz + 6.5km, :jel.yk - 9km]);
+            line_label(:right:se, rl[:jel.yk - 9km], "RL");
+            track(rl[:jel.yk - 9km, :jel.yk]);
+        }
+
+        with link = "point.lv.Jelgava" {
+            track(:station, rl[:jel.yk, :jel]);
+            statdot(rl[:jel]);
+            slabel(:nw, rl[:jel] + (1.5dt, 0dt), "Jelgava");
+        }
+    }
+
+    with railway = :first :double :g1520 :pax {
+        with link = "point.lv.Jelgava" {
+            track(:station, rl[:jel, :jel.yt + 0.6km]);
+        }
+
+        with link = "line.lv.RL" {
+            with layer = -1 track(rl[:jel.yt + 0.6km, :jel.ym]);
+            with layer = -1 track(rl[:jel.ym, :jel.ym + 0.6km]);
+            track(rl[:jel.ym + 0.6km, :jel.ym + 6km]);
+            line_label(:left:n, rl[:jel.ym + 6km], (0.3dt, 0dt), "RL");
+            track(rl[:jel.ym + 6km, :glu]);
+        }
+
+        with link = "point.lv.Glūda" {
+            track(:station, rl[:glu, :glu.yr]);
+            statdot(rl[:glu]);
+            slabel(:nw, rl[:glu] + (0.5dt, 0.5dt), "Glūda");
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lv.RL" {
+            track(rl[:glu.yr, :glu.yr + 6km]);
+            line_label(:right:s, rl[:glu.yr + 6km], (0.2dt, 0dt), "RL");
+            track(rl[:glu.yr + 6km, :sal + 6km]);
+            line_label(:right:s, rl[:sal + 6km], (0.2dt, 0dt), "RL");
+            track(rl[:sal + 6km, :lie - 15km]);
+            line_label(:left:n, rl[:lie - 15km], (0.2dt, 0dt), "RL");
+            track(rl[:lie - 15km, :lie.yv]);
+            track(rl[:lie.yv, :lie]);
+        }
+
+        with link = "point.lv.Liepaja" {
+            statdot(rl[:lie]);
+            slabel(:left, rl[:lie] + (-1.5dt, 1.0dt), "Liepaja");
+        }
+    }
+}
+
+
+# LV RP.  C.p.Kleperova - Rēzekne II
+with detail = 2 {
+    with link = "line.lv.RP" {
+        track(:first :g1520 :nopax, path("d2.lv.rp")[:kle.yr, :red.yk]);
+    }
+}
+
+
+# LV RR.  Rēzekne II - Rezekne I
+with detail = 2 {
+    with link = "line.lv.RR" {
+        track(:first :g1520 :nopax, path("d2.lv.rr")[:red.yr, :rez.yr]);
+    }
+}
+
+
+# LV RV.  Riga Pasazieru - Lugaži–eksp.
+with detail = 2 {
+    let rv = path("d2.lv.rv");
+
+    with railway = :first :double :g1520 :cat:dc33 :pax {
+        with link = "line.lv.RV" {
+            track(rv[:rig.yl, :zem.yk]);
+            track(rv[:zem.yk, :zem]);
+        }
+
+        with link = "point.lv.Zemitāni" {
+            track(:station, rv[:zem, :zem.ys]);
+            statdot(rv[:zem]);
+            slabel(:right, rv[:zem] + (1.5dt, 0.8dt), "Zemitāni");
+        }
+    }
+
+    with railway = :first :double :g1520 :pax {
+        with link = "line.lv.RV" {
+            track(rv[:zem.ys, :cie.ys]);
+            track(rv[:cie.ys, :cie.ys + 12km]);
+            line_label(:right:nw, rv[:cie.ys + 12km], "RV");
+            track(rv[:cie.ys + 12km, :kri]);
+            track(:single, rv[:kri, :van]);
+            track(rv[:van, :sig]);
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lv.RV" {
+            track(rv[:sig, :sig + 7km]);
+            line_label(:left:s, rv[:sig + 7km], (-0.3dt, 0dt), "RV");
+            track(rv[:sig + 7km, :ier]);
+        }
+
+        with link = "point.lv.Ieriķi" {
+            statdot(rv[:ier]);
+            slabel(:left, rv[:ier] + (-1.5dt, 0dt), "Ieriķi");
+        }
+
+        with link = "line.lv.RV" {
+            track(rv[:ier, :mel.yg]);
+            track(rv[:mel.yg, :mel.yg + 7km]);
+            line_label(:right:w, rv[:mel.yg + 7km], "RV");
+            track(rv[:mel.yg + 7km, :ces]);
+            track(:double, rv[:ces, :jan]);
+            track(rv[:jan, :val - 8.3km]);
+            line_label(:left:e, rv[:val - 8.3km], "RV");
+            track(rv[:val - 8.3km, :val]);
+        }
+
+        with link = "point.lv.Valmiera" {
+            statdot(rv[:val]);
+            slabel(:left, rv[:val] + (-0.8km, 0dt) + (-1.3dt, 2dt),
+                "Valmiera"
+            );
+        }
+
+        with link = "line.lv.RV" {
+            track(rv[:val, :val + 11km]);
+            line_label(:left:se, rv[:val + 11km], "RV");
+            track(rv[:val + 11km, :lug - 7km]);
+            line_label(:right:nw, rv[:lug - 7km], "RV");
+            track(rv[:lug - 7km, :lug]);
+        }
+
+        with link = "point.lv.Lugaži" {
+            statdot(rv[:lug]);
+            slabel(:nw, rv[:lug] + (1dt, 0dt), "Lugaži");
+        }
+
+        with link = "line.lv.RV" {
+            track(rv[:lug, :lug.yr]);
+            track(rv[:lug.yr, :lur]);
+        }
+
+        with link = "point.int.Lugaži-Valga" {
+            marker(:right :ref, rv[:lur]);
+        }
+    }
+}
+
+
+# LV RZ.  Riga Pasažieru - Zilupe-eksp.
+with detail = 2 {
+    let rv = path("d2.lv.rz");
+
+    with railway = :first :double :g1520 :cat:dc33 :pax {
+        with link = "point.lv.Riga-Pasažieru" {
+            statdot(rv[:rig]);
+            slabel(:nw, rv[:rig] + (-0.5dt, 1dt),
+                vbox(:left:top, "R.", " Pas.")
+            );
+
+            slabel(:right :large:bold, rv[:rig] + (3.5km, 1.5dt), "Riga");
+        }
+
+        with link = "line.lv.RZ" {
+            track(rv[:rig, :rig.yl]);
+            track(rv[:rig.yl, :ski.yz]);
+            track(rv[:ski.yz, :ski.ys]);
+            track(rv[:ski.ys, :ski.ys + 10km]);
+            line_label(:right:n, rv[:ski.ys + 10km], (-0.4dt, 0dt), "RZ");
+            track(rv[:ski.ys + 10km, :aiz - 22km]);
+            line_label(:right:ne, rv[:aiz - 22km], "RZ");
+            track(rv[:aiz - 22km, :aiz]);
+        }
+
+        with link = "point.lv.Aizkraukle" {
+            statdot(rv[:aiz]);
+            slabel(:ne, rv[:aiz] + (1dt, 0.7dt), "Aizkraukle");
+        }
+    }
+
+    with railway = :first :double :g1520 :pax {
+        with link = "line.lv.RZ" {
+            track(rv[:aiz, :pla - 13km]);
+            line_label(:right:n, rv[:pla - 13km], (-0.2dt, 0dt), "RZ");
+            track(rv[:pla - 13km, :pla]);
+        }
+
+        with link = "point.lv.Pļaviņas" {
+            track(:station, rv[:pla, :pla.yg]);
+            statdot(rv[:pla]);
+            slabel(:left, rv[:pla] + (1.5dt, -2dt),
+                "Pļaviņas"
+            );
+        }
+
+        with link = "line.lv.RZ" {
+            track(rv[:pla.yg, :kru.yr - 7km]);
+            line_label(:left:w, rv[:kru.yr - 7km], (0dt, -0.2dt), "RZ");
+            track(rv[:kru.yr - 7km, :kru.yr - 3km]);
+            with layer = -1 track(rv[:kru.yr - 3km, :kru.yr - 1.5km]);
+            track(rv[:kru.yr - 1.5km, :kru.yr]);
+        }
+
+        with link = "point.lv.Krustpils" {
+            track(:station, rv[:kru.yr, :kru.yz]);
+            statdot(rv[:kru]);
+            slabel(:ne, rv[:kru] + (-1.5dt, -0.5dt), "Krustpils");
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lv.RZ" {
+            track(rv[:kru.yz, :zil.yl]);
+            track(rv[:zil.yl, :zil.yl + 7km]);
+            line_label(:left:s, rv[:zil.yl + 7km], "RZ");
+            track(rv[:zil.yl + 7km, :bp223 - 8km]);
+            line_label(:left:s, rv[:bp223 - 8km], "RZ");
+            track(rv[:bp223 - 8km, :bp223]);
+            track(rv[:bp223 - 8km, :bp223]);
+            track(:casing, rv[:bp223, :red.yk]);
+        }
+
+        with link = "point.lv.Rēzekne-II" {
+            track(:station, rv[:red.yk, :red]);
+            statdot(rv[:red]);
+            slabel(:nw, rv[:red] + (-1dt, 1dt), "Rēzekne II");
+        }
+
+        with link = "line.lv.RZ" {
+            track(rv[:red, :red + 9.7km]);
+            line_label(:left:s, rv[:red + 9.7km], "RZ");
+            track(rv[:red + 9.7km, :zil - 10.1km]);
+            line_label(:right:ne, rv[:zil - 10.1km], "RZ");
+            track(rv[:zil - 10.1km, :zil]);
+        }
+
+        with link = "point.lv.Zilupe" {
+            statdot(rv[:zil]);
+            slabel(:ne, rv[:zil] + (2dt, 0.8dt), "Zilupe");
+        }
+    }
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.lv.RZ" {
+            track(rv[:zil, :zir]);
+        }
+
+        with link = "point.int.Посинь-Zilupe" {
+            marker(:right :ref, rv[:zir]);
+            marker(:left :ref, rv[:zir]);
+            slabel(:right :italic, rv[:zir] + (1.5dt, 1.5dt),
+                latspan("Новосокольники", "Novosokolniki")
+            );
+        }
+    }
+}
+

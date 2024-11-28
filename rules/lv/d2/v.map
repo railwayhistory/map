@@ -1,0 +1,336 @@
+# LV VA.  Ventspils I - Ventspils Austrumi
+with detail = 2 {
+    with link = "line.lv.VA" {
+        track(:second :g1520 :nopax, path("d2.lv.va")[:ven.ya, :aus.yv]);
+    }
+}
+
+
+# LV VD.  Ventspils - Dundaga
+with detail = 2 {
+    let vd = path("d2.lv.vd");
+
+    with railway = :second :g600 :removed {
+        with link = "line.lv.VD" {
+            track(vd[:ven.yd, :ven.yd + 10km]);
+            line_label(:left:s, vd[:ven.yd + 10km], "VD");
+            track(vd[:ven.yd + 10km, :dun.yv - 7.5km]);
+            line_label(:right:nw, vd[:dun.yv - 7.5km], "VD");
+            track(vd[:dun.yv - 7.5km, :dun.yv]);
+        }
+    }
+}
+
+
+# LV VI.  Ventspils - Indra-eksp.
+with detail = 2 {
+    let vi = path("d2.lv.vi");
+
+    with railway = :first :g1520 :nopax {
+        with link = "point.lv.Ventspils-I" {
+            statdot(vi[:ven]);
+            slabel(:left, vi[:ven] + (-1.5dt, 0.8dt),
+                hbox(:right:base, span(:bold, "Ventspils"), " I")
+            );
+        }
+
+        with link = "line.lv.VI" {
+            track(vi[:ven, :ven.ya]);
+            track(vi[:ven.ya, :ved.yn]);
+        }
+
+        with link = "point.lv.Ventspils-II" {
+            track(:station, vi[:ved.yn, :ved]);
+            statdot(vi[:ved]);
+            slabel(:right, vi[:ved] + (1.3dt, -0.5dt), "Ventspils II");
+        }
+
+        with link = "line.lv.VI" {
+            track(vi[:ved, :ved + 6km]);
+            line_label(:right:ne, vi[:ved + 6km], "VI");
+            track(vi[:ved + 6km, :ste - 15.5km])
+            line_label(:right:ne, vi[:ste - 15.5km], "VI");
+            track(vi[:ste - 15.5km, :ste]);
+        }
+
+        with link = "point.lv.Stende" {
+            track(:station, vi[:ste, :ste.yv]);
+            statdot(vi[:ste]);
+            slabel(:ne, vi[:ste] + (0.5dt, 0.7dt), "Stende");
+        }
+
+        with link = "line.lv.VI" {
+            track(vi[:ste.yv, :tud - 11km]);
+            line_label(:right:ne, vi[:tud - 11km], "VI");
+            track(vi[:tud - 11km, :tud]);
+        }
+
+        # point.lv.Tukums-II
+
+        with link = "line.lv.VI" {
+            track(vi[:tud.yj, :tud.yj + 11.5km]);
+            line_label(:right:e, vi[:tud.yj + 11.5km], (0dt, 0.2dt), "VI");
+            track(vi[:tud.yj + 11.5km, :jel.yt - 9km]);
+            line_label(:left:s, vi[:jel.yt - 9km], (0.2dt, 0dt), "VI");
+            track(vi[:jel.yt - 9km, :jel.yt - 3km]);
+            track(:casing, vi[:jel.yt - 3km, :jel.yt]);
+        }
+
+        # point.lv.Jelgava
+
+        with link = "line.lv.VI" {
+            track(vi[:jel.yk, :jel.yk + 12km]);
+            line_label(:right:n, vi[:jel.yk + 12km], "VI");
+            track(vi[:jel.yk + 12km, :lac - 5.8km]);
+            line_label(:left:s, vi[:lac - 5.8km], "VI");
+            track(vi[:lac - 5.8km, :dad]);
+        }
+
+        with link = "point.lv.Daudzeva" {
+            statdot(vi[:dad]);
+            slabel(:right, vi[:dad] + (-1dt, -1.5dt), "Daudzeva");
+        }
+
+        with link = "line.lv.VI" {
+            track(vi[:dad, :dad.yv]);
+            track(vi[:dad.yv, :lop.y - 11.8km]);
+            line_label(:right:n, vi[:lop.y - 11.8km], "VI");
+            track(vi[:lop.y - 11.8km, :lop.y - 2km]);
+            track(:casing, vi[:lop.y - 2km, :lop.y]);
+            track(vi[:lop.y, :kru.yr]);
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        # point.lv.Krustpils  lv.RZ
+
+        with link = "line.lv.VI" {
+            track(vi[:kru.yz, :kru.yz + 7km]);
+            line_label(:right:n, vi[:kru.yz + 7km], (-0.3dt, 0dt), "VI");
+            track(vi[:kru.yz + 7km, :jer + 7km]);
+            line_label(:right:ne, vi[:jer + 7km], "VI");
+            track(vi[:jer + 7km, :cp383.y - 1.5km]);
+            with layer = -1 track(vi[:cp383.y - 1.5km, :cp383.y - 0.7km]);
+            track(vi[:cp383.y - 0.7km, :cp383.y]);
+
+            track(:double, vi[:cp383.y, :cp387.y - 2.5km]);
+            line_label(:right:e :double, vi[:cp387.y - 2.5km], "VI");
+            track(:double, vi[:cp387.y - 2.5km, :cp387.y]);
+
+            track(vi[:cp387.y, :cp387.y + 0.6km]);
+            with layer = -1 track(vi[:cp387.y, :dau.yr]);
+        }
+
+        with link = "point.lv.Daugavpils-Pas" {
+            track(:station, vi[:dau.yr, :dau]);
+            statdot(vi[:dau]);
+            with zoom = :high slabel(:right, vi[:dau] + (1dt, -0.3dt), "Pas.");
+            slabel(:nw :bold, vi[:dau] + (0dt, 0.85km) + (-1dt, 0.5dt),
+                "Daugavpils"
+            );
+        }
+
+        with link = "line.lv.VI" {
+            track(vi[:dau, :cp401 - 3.5km]);
+            line_label(:right:w, vi[:cp401 - 3.5km], "VI");
+            track(vi[:cp401 - 3.5km, :cp401]);
+
+            track(vi[:cp401, :cp401 + 10km]);
+            line_label(:left:s, vi[:cp401 + 10km], "VI");
+            track(vi[:cp401 + 10km, :ind - 4km]);
+            line_label(:left:sw, vi[:ind - 4km], "VI");
+            track(vi[:ind - 4km, :ind]);
+        }
+
+        with link = "point.lv.Indra" {
+            statdot(vi[:ind]);
+            slabel(:ne, vi[:ind] + (-1.5dt, -0.8dt), "Indra");
+        }
+    }
+
+    with railway = :first :double :g1520 :nopax {
+        with link = "line.lv.VI" {
+            track(vi[:ind, :inr]);
+        }
+
+        with link = "point.int.Бигосово-Indra" {
+            marker(:ref :right, vi[:inr]);
+            marker(:ref :left, vi[:inr]);
+            slabel(:right :italic, vi[:inr] + (1dt, 1dt),
+                latspan("Полацк", "Polatsk")
+            );
+        }
+    }
+}
+
+
+# LV VJ.  Ventspils Jūras - Ventspils 23.pārm
+with detail = 2 {
+    let vj = path("d2.lv.vj");
+
+    with railway = :second :g1520 :nopax {
+        with link = "point.lv.Ventspils-Jūras" {
+            statdot(vj[:jur]);
+            slabel(:left, vj[:jur] + (-1.5dt, 0.8dt), "V. Jūras");
+        }
+
+        with link = "line.lv.VJ" {
+            track(vj[:jur, :v23]);
+        }
+    }
+}
+
+
+# LV VL.  Lugaži - Valka
+with detail = 2 {
+    let vl = path("d2.lv.vl");
+
+    with railway = :first :g1520 :removed {
+        with link = "line.lv.VL" {
+            track(vl[:lug.yr, :val.yv]);
+        }
+    }
+
+    with railway = :second :g1520 :nopax {
+        with link = "point.lv.Valka" {
+            track(:station, vl[:val.yv, :val]);
+            statdot(vl[:val]);
+            slabel(:left, vl[:val] + (-1.5dt, 1dt), "Valka");
+        }
+    }
+}
+
+
+# LV VM.  Valdgale - Mērsrags
+with detail = 2 {
+    let vm = path("d2.lv.vm");
+
+    with railway = :second :g600 :removed {
+        with link = "line.lv.VM" {
+            track(vm[:val.ym, :val.yr]);
+            track(vm[:val.yr, :val.yr + 10km]);
+            line_label(:right:n, vm[:val.yr + 10km], "VM");
+            track(vm[:val.yr + 10km, :mer - 10.7km]);
+            line_label(:right:nw, vm[:mer - 10.7km], "VM");
+            track(vm[:mer - 10.7km, :mer]);
+        }
+
+        with link = "point.lv.Mērsrags" {
+            statdot(vm[:mer]);
+            slabel(:right, vm[:mer] + (1.5dt, 1dt), "Mērsrags");
+        }
+    }
+}
+
+
+# LV VN.  Ventspils Nafta - Ventspils II
+with detail = 2 {
+    let vn = path("d2.lv.vn");
+
+    with railway = :second :g1520 :nopax {
+        with link = "point.lv.Ventspils-Nafta" {
+            statdot(vn[:naf]);
+            slabel(:right, vn[:naf] + (-0.5dt, -1.5dt), "V. Nafta");
+        }
+
+        with link = "line.lv.VN" {
+            track(vn[:naf, :v23]);
+            track(vn[:v23, :aus]);
+        }
+
+        with link = "point.lv.Ventspils-Austrumi" {
+            statdot(vn[:aus]);
+        }
+
+        with link = "line.lv.VN" {
+            track(vn[:aus, :aus.yv]);
+            track(vn[:aus.yv, :ved.yn]);
+        }
+    }
+}
+
+
+# LV VR.  Valka - Rūjiena
+with detail = 2 {
+    let vr = path("d2.lv.vr");
+
+    with railway = :second :g750 :removed {
+        with link = "line.lv.VR" {
+            track(vr[:val, :val + 7.5km]);
+            line_label(:right:sw, vr[:val + 7.5km], "VR");
+            track(vr[:val + 7.5km, :ruj.yv - 10.5km]);
+            line_label(:left:n, vr[:ruj.yv - 10.5km], "VR");
+            track(vr[:ruj.yv - 10.5km, :ruj.yv]);
+        }
+    }
+}
+
+
+# LV VS.  Ventspils - Stende
+with detail = 2 {
+    let vs = path("d2.lv.vs");
+
+    with railway = :second :g600 :removed {
+        with link = "line.lv.VS" {
+            track(vs[:ven, :ven + 12km]);
+            line_label(:left:e, vs[:ven + 12km], (0dt, -0.2dt), "VS");
+            track(vs[:ven + 12km, :maz - 14km]);
+            line_label(:left:se, vs[:maz - 14km], "VS");
+            track(vs[:maz - 14km, :maz]);
+        }
+
+        with link = "point.lv.Mazirbe" {
+            statdot(vs[:maz]);
+            slabel(:top, vs[:maz] + (0dt, -0.8dt), "Mazirbe");
+        }
+
+        with link = "line.lv.VS" {
+            track(vs[:maz, :dun.yv - 7.3km]);
+            line_label(:left:sw, vs[:dun.yv - 7.3km], "VS");
+            track(vs[:dun.yv - 7.3km, :dun.yv]);
+            track(vs[:dun.yv, :dun]);
+        }
+
+        with link = "point.lv.Dundaga" {
+            statdot(vs[:dun]);
+            slabel(:right, vs[:dun] + (1.2dt, 0dt), "Dundaga");
+        }
+
+        with link = "line.lv.VS" {
+            track(vs[:dun, :dun + 11.5km]);
+            line_label(:left:sw, vs[:dun + 11.5km], "VS");
+            track(vs[:dun + 11.5km, :cir]);
+        }
+
+        with link = "point.lv.Cīruļi" {
+            track(:station, vs[:cir, :cir.yr]);
+            statdot(vs[:cir]);
+            slabel(:left, vs[:cir] + (-1.8dt, 1.8dt), "Cīruļi");
+        }
+
+        with link = "line.lv.VS" {
+            track(vs[:cir.yr, :cir.yr + 5km]);
+            line_label(:right:ne, vs[:cir.yr + 5km], "VS");
+            track(vs[:cir.yr + 5km, :val]);
+        }
+
+        with link = "point.lv.Valdgale" {
+            statdot(vs[:val]);
+            slabel(:left, vs[:val] + (-1.5dt, 0.8dt), "Valdgale");
+        }
+
+        with link = "line.lv.VS" {
+            track(vs[:val, :ste.yv]);
+            line_label(:right:e, vs[:val + 7.6km], "VS");
+        }
+    }
+}
+
+
+# LV VV.  Valsts robeža (Valka) - Valka
+with detail = 2 {
+    with link = "line.lv.VV" {
+        track(:side :g1520 :nopax, path("d2.lv.vv")[:var, :val.yv]);
+    }
+}
+

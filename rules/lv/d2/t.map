@@ -1,0 +1,58 @@
+# LV TR.  Valdgale - Roja
+with detail = 2 {
+    let tr = path("d2.lv.tr");
+
+    with railway = :second :g600 :removed {
+        with link = "line.lv.CR" {
+            track(tr[:val.yr, :val.yr + 6.5km]);
+            line_label(:right:w, tr[:val.yr + 6.5km], "TR");
+            track(tr[:val.yr + 6.5km, :sil.yc]);
+            track(tr[:sil.yc, :sil.yc + 9.5km]);
+            line_label(:left:se, tr[:sil.yc + 9.5km], "TR");
+            track(tr[:sil.yc + 9.5km, :roj]);
+        }
+
+        with link = "point.lv.Roja" {
+            statdot(tr[:roj]);
+            slabel(:right, tr[:roj] + (1.5dt, 0.8dt), "Roja");
+        }
+    }
+}
+
+
+# LV TT.  Tornakalns - Tukums II
+with detail = 2 {
+    let tt = path("d2.lv.tt");
+
+    with railway = :first :double :g1520 :cat:dc33 :pax {
+        with link = "line.lv.TT" {
+            track(tt[:tor.yz, :zas]);
+        }
+
+        with link = "point.lv.Zasulauks" {
+            track(:station, tt[:zas, :zas.yb]);
+            statdot(tt[:zas]);
+            slabel(:ne, tt[:zas] + (-1.5dt, -0.3dt), "Zasulauks");
+        }
+
+        with link = "line.lv.TT" {
+            track(tt[:zas.yb, :sko]);
+            line_label(:right:s, tt[:zas.yb + 12.5km], "TT");
+        }
+    }
+
+    with railway = :first :g1520 :cat:dc33 :pax {
+        with link = "line.lv.TT" {
+            track(tt[:sko, :tud.yj - 10km]);
+            line_label(:right:s, tt[:tud.yj - 10km], "TT");
+            track(tt[:tud.yj - 10km, :tud.yj]);
+        }
+
+        with link = "point.lv.Tukums-II" {
+            track(:station, tt[:tud.yj, :tud]);
+            statdot(tt[:tud]);
+            slabel(:ne, tt[:tud] + (1dt, 0.8dt), "Tukums II");
+        }
+    }
+}
+
