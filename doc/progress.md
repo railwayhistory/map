@@ -25,6 +25,7 @@ For countries not listed here, work has not started at all.
 [IT](#it-italy) •
 [LT](#lt-lithuania) •
 [LU](#lu-luxembourg) •
+[LV](#lv-latvia) •
 [NL](#nl-the-netherlands) •
 [NO](#no-norway) •
 [PL](#pl-poland) •
@@ -181,6 +182,17 @@ industrial lines are omitted.
 
 The overview map currently only covers railway lines. Tram, metro, and
 industrial lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | not started |
+
+
+
+## LV: Latvia
+
+The overview map currently only covers railway lines. Tram, metro, and
+industrial lines as well as forest railways are omitted.
 
 | region         | overview | detail      |
 | -------------- | -------- | ----------- |

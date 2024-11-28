@@ -259,6 +259,10 @@
 
 ## New Additions
 
+### 2024-11-28
+
+* Added overview map of Latvia. ([#97])
+
 ### 2024-11-09
 
 * Added overview map of Lithuania. ([#95])
