@@ -259,9 +259,17 @@
 
 ## New Additions
 
+### 2024-12-09
+
+* Added overview map of Estonia ([#100]);
+
+[#100]: https://github.com/railwayhistory/map/pull/100
+
 ### 2024-11-28
 
 * Added overview map of Latvia. ([#97])
+
+[#97]: https://github.com/railwayhistory/map/pull/97
 
 ### 2024-11-09
 
