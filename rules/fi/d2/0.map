@@ -1,0 +1,166 @@
+# FI 001.  Helsinki - Turku
+with detail = 2 {
+    let ht = path("d2.fi.001");
+
+    with railway = :first :double :g1524 :cat:ac25 :pax {
+        with link = "point.fi.Helsinki-asema" {
+            statdot(ht[:hel]);
+            slabel(:bottom :large :bold, ht[:hel] + (0dt, 1.5dt),
+                "Helsinki"
+            );
+        }
+
+        with link = "line.fi.001" {
+            track(ht[:hel, :pas] << 0.5dst << 0.5ds);
+        }
+
+        with link = "point.fi.Pasila-asema" {
+            track(:station, ht[:pas, :pas.yt] << 0.5dst << 0.5ds);
+            track(:station, ht[:pas, :pas.yt] >> 0.5dst >> 0.5ds);
+            statdot(ht[:pas]);
+            slabel(:right, ht[:pas] + (1.5dt, 1dt), "Pasila");
+        }
+
+        with link = "line.fi.001" {
+            track(
+                    ht[:pas.yt - 0.1dl, :pas.yt] << 0.5dst << 0.5ds
+                ..  ht[:pas.yyt + 1dt, :huo]
+            );
+        }
+
+        with link = "point.fi.Huopalahti" {
+            track(:station, ht[:huo, :huo.yh]);
+            statdot(ht[:huo]);
+            slabel(:ne, ht[:huo] + (0dt, 1dt), "Huopalahti");
+        }
+
+        with link = "line.fi.001" {
+            track(ht[:huo.yh, :huo.yh + 16.5km]);
+            line_label(:left:nw, ht[:huo.yh + 16.5km], "001");
+            track(ht[:huo.yh + 16.5km, :kir]);
+        }
+
+        with link = "point.fi.Kirkkonummi" {
+            statdot(ht[:kir]);
+            slabel(:left, ht[:kir] + (4dt, -1.5dt), "Kirkkonummi");
+        }
+    }
+
+    with railway = :first :cat:ac25 :pax {
+        with link = "line.fi.001" {
+            track(ht[:kir, :kel.yb]);
+        }
+
+        with link = "point.fi.Kela" {
+            track(:station, ht[:kel.yb, :kel]);
+            statdot(:removed, ht[:kel]);
+            slabel(:ne :removed, ht[:kel] + (-1.5dt, -0.8dt), "Kela");
+        }
+
+        with link = "line.fi.001" {
+            track(ht[:kel, :kel + 4km]);
+            line_label(:right:sw, ht[:kel + 4km], "001");
+            track(ht[:kel + 4km, :siu]);
+        }
+
+        with link = "point.fi.Siuntio" {
+            statdot(ht[:siu]);
+            slabel(:top, ht[:siu] + (0dt, -0.8dt), "Siuntio");
+        }
+
+        with link = "line.fi.001" {
+            track(ht[:siu, :kar.yl - 11.5km]);
+            line_label(:left:n, ht[:kar.yl - 11.5km], (-0.2dt, 0dt), "001");
+            track(ht[:kar.yl - 11.5km, :kar.yl]);
+            track(ht[:kar.yl, :kar]);
+        }
+
+        with link = "point.fi.Karjaa" {
+            track(:station, ht[:kar, :kar.yh]);
+            track(:station, ht[:kar, :kar.yh] >> 1st >> 1ds);
+            statdot(ht[:kar] >> 0.5st >> 0.5ds);
+            slabel(:nw, ht[:kar] + (0dt, 0.8dt), "Karjaa");
+        }
+
+        with link = "line.fi.001" {
+            track(
+                    ht[:kar.yh - 0.1dl, :kar.yh] >> 1st >> 1ds
+                ..  ht[:kar.yyh, :kar.yyh + 7km]
+            );
+            line_label(:right:s, ht[:kar.yyh + 7km], (0.4dt, 0dt), "001");
+            track(ht[:kar.yyh + 7km, :sal]);
+            line_label(:right:sw, ht[:sal], "001");
+            track(ht[:sal, :kup - 4km]);
+            line_label(:left:n, ht[:kup - 4km], (0.2dt, 0dt), "001");
+            track(ht[:kup - 4km, :kup]);
+        }
+    }
+
+    with railway = :first :double :cat:ac25 :pax {
+        with link = "line.fi.001" {
+            track(ht[:kup, :tur.yt]);
+            track(ht[:tur.yt, :tur]);
+        }
+
+        with link = "point.fi.Turku-asema" {
+            track(:station, ht[:tur, :tur.ys]);
+            statdot(ht[:tur]);
+            slabel(:left :medium :bold, ht[:tur.yt] + (-0.5dt, -1.3dt),
+                "Turku"
+            );
+        }
+    }
+}
+
+
+# FI 002.  Lielahti - Mäntyluoto
+with detail = 2 {
+    let lm = path("d2.fi.002");
+
+    with railway = :first :g1524 :cat:ac25 :pax {
+        with link = "line.fi.002" {
+            track(lm[:lie.yp, :lie.yp + 9.3km]);
+            line_label(:right:s, lm[:lie.yp + 9.3km], (-0.4dt, 0dt), "002");
+            track(lm[:lie.yp + 9.3km, :hei + 2km]);
+            line_label(:left:nw, lm[:hei + 2km], "002");
+            track(lm[:hei + 2km, :kok - 7.5km]);
+            line_label(:left:w, lm[:kok - 7.5km], "002");
+            track(lm[:kok - 7.5km, :kok]);
+        }
+
+        with link = "point.fi.Kokemäki" {
+            track(:station, lm[:kok, :kok.yr]);
+            statdot(lm[:kok]);
+            slabel(:right, lm[:kok] + (-0.5dt, -1.5dt), "Kokemäki");
+        }
+
+        with link = "line.fi.002" {
+            track(lm[:kok.yr, :kok.yr + 5.5km]);
+            line_label(:left:ne, lm[:kok.yr + 5.5km], "002");
+            track(lm[:kok.yr + 5.5km, :por.yn - 5.5km]);
+            line_label(:left:ne, lm[:por.yn - 5.5km], "002");
+            track(lm[:por.yn - 5.5km, :por.yn]);
+            track(lm[:por.yn, :por]);
+        }
+
+        with link = "point.fi.Pori" {
+            statdot(lm[:por]);
+            slabel(:ne, lm[:por] + (-1.5dt, -0.5dt), "Pori");
+        }
+    }
+
+    with railway = :first :g1524 :cat:ac25 :nopax {
+        with link = "line.fi.002" {
+            track(lm[:por, :por + 9km]);
+            line_label(:left:ne, lm[:por + 9km], "002");
+            track(lm[:por + 9km, :man.yt]);
+            track(lm[:man.yt, :man]);
+        }
+
+        with link = "point.fi.Mäntyluoto" {
+            statdot(lm[:man]);
+            slabel(:left, lm[:man] + (-1.5dt, 0.8dt), "Mäntyluoto");
+        }
+    }
+}
+

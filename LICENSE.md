@@ -41,6 +41,13 @@ Germany:
   The data sets don’t seem to be available any more.
 
 
+Finland:
+* Finnish Transport Infrastructure Agency.
+  [Open Data](https://vayla.fi/en/transport-network/data/open-data):
+  Railway network (multi-track) and Railway traffic operating point.
+  Licensed under [cc-by-4.0].
+
+
 France:
 
 * SCNF, [Lignes par
@@ -58,5 +65,6 @@ Netherlands:
 [ODbL]: https://opendatacommons.org/licenses/odbl/
 [legal code]: https://opendatacommons.org/licenses/odbl/1.0/
 [cc-by-3.0-at]: https://creativecommons.org/licenses/by/3.0/at/deed.en
+[cc-by-4.0]: https://creativecommons.org/licenses/by/4.0/
 [cc0]: https://creativecommons.org/publicdomain/zero/1.0/deed
 
