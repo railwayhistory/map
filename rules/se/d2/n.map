@@ -1,0 +1,28 @@
+# SE NHA.  Nynäshamn - Älvsjö
+with detail = 2 {
+    let na = path("d2.se.nha");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "point.se.Nynäshamns-centrum" {
+            statdot(na[:nyn]);
+            slabel(:right, na[:nyn] + (1.5dt, 0.8dt),
+                hbox(:left:base, "Nynäshamn", span(:light, "s centrum"))
+            );
+        }
+
+        with link = "line.se.NHA" {
+            track(na[:nyn, :nyn + 10.5km]);
+            line_label(:left:e, na[:nyn + 10.5km], "NHA");
+            track(na[:nyn + 10.5km, :hem]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.NHA" {
+            track(na[:hem, :alv.yn - 8km]);
+            line_label(:right:sw, na[:alv.yn - 8km], "NHA");
+            track(na[:alv.yn - 8km, :alv.yn]);
+        }
+    }
+}
+

@@ -1,0 +1,66 @@
+# SE KMV.  Kolmården - Virå
+with detail = 2 {
+    let kv = path("d2.se.kmv");
+
+    with railway = :second :g600 :pax :removed {
+        with link = "point.se.Kolmården" {
+            statdot(kv[:kol]);
+            slabel(:bottom, kv[:kol] + (0dt, 0.9dt), "Kolmården");
+        }
+
+        with link = "line.se.KMV" {
+            track(kv[:kol, :vir - 6.5km]);
+            line_label(:left:e, kv[:vir - 6.5km], "KMV");
+            track(kv[:vir - 6.5km, :vir]);
+        }
+
+        with link = "point.se.Virå" {
+            statdot(kv[:vir]);
+            slabel(:top, kv[:vir] + (0dt, -0.6dt), "Virå");
+        }
+    }
+}
+
+
+# SE KUR.  Köping - Källfallet
+with detail = 2 {
+    let kk = path("d2.se.kur");
+
+    with railway = :second :g1093 :pax :removed {
+        with link = "line.se.KUR" {
+            track(kk[:kop.yr, :kop.yr + 7.5km]);
+            line_label(:left:ne, kk[:kop.yr + 7.5km], "KUR");
+            track(kk[:kop.yr + 7.5km, :ugg - 6.8km]);
+            line_label(:right:sw, kk[:ugg - 6.8km], "KUR");
+            track(kk[:ugg - 6.8km, :ugg]);
+        }
+
+        with link = "point.se.Uggelfors" {
+            statdot(kk[:ugg]);
+            slabel(:left, kk[:ugg] + (-1.5dt, 0.8dt), "Uggelfors");
+        }
+
+        with link = "line.se.KUR" {
+            track(kk[:ugg, :ugg + 4.5km]);
+            line_label(:right:w, kk[:ugg + 4.5km], "KUR");
+            track(kk[:ugg + 4.5km, :rid.yl]);
+        }
+
+        with link = "point.se.Riddarhyttan" {
+            track(:station, kk[:rid.yl, :rid]);
+            statdot(kk[:rid]);
+            slabel(:ne, kk[:rid] + (-1dt, 0.3dt), "Riddarhyttan");
+        }
+    }
+
+    with railway = :second :g1093 :nopax :removed {
+        with link = "line.se.KUR" {
+            track(kk[:rid, :kal]);
+        }
+
+        with link = "point.se.Källfallet" {
+            statdot(kk[:kal]);
+            slabel(:left, kk[:kal] + (-1.5dt, 0.8dt), "Källfallet");
+        }
+    }
+}

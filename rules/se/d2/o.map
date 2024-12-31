@@ -1,0 +1,94 @@
+# SE OXV.  Oxelösund - Valskog
+with detail = 2 {
+    let ov = path("d2.se.oxv");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "point.se.Oxelösund" {
+            statdot(ov[:oxe]);
+            slabel(:right, ov[:oxe] + (1.5dt, 0.8dt), "Oxelösund");
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:oxe, :oxe + 5.3km]);
+            line_label(:left:ne, ov[:oxe + 5.3km], "OVX");
+            track(ov[:oxe + 5.3km, :nys]);
+        }
+
+        with link = "point.se.Nyköping-södra" {
+            statdot(ov[:nys]);
+            slabel(:right, ov[:nys] + (1.5dt, 0.8dt), "N. södra");
+        }
+
+        with link = "line.se.OXV" {
+            track(
+                    ov[:nys, :nyk.xo - 0.5dt]
+                ..  ov[:nyk.yo, :nyk.yf] << 1mt << 1ms
+            );
+            track(:casing,
+                    ov[:nyk.yf - 0.1dl, :nyk.yf] << 1mt << 1ms
+                ..  ov[:nyk.yf + 1.29km, :nyk.yf + 1.3km]
+            );
+            track(ov[:nyk.yf + 1.3km, :nyk.yf + 7km]);
+            line_label(:right:s, ov[:nyk.yf + 7km], "OXV");
+            track(ov[:nyk.yf + 7km, :flo - 9.5km]);
+            line_label(:left:e, ov[:flo - 9.5km], (0dt, 0.2dt), "OXV");
+            track(ov[:flo - 9.5km, :flo - 1km]);
+            track(:casing, ov[:flo - 1km, :flo]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.OXV" {
+            track(ov[:flo, :flo + 6km]);
+            line_label(:right:sw, ov[:flo + 6km], "OXV");
+            track(ov[:flo + 6km, :esk.ys - 7.5km]);
+            line_label(:left:e, ov[:esk.ys - 7.5km], "OXV");
+            track(ov[:esk.ys - 7.5km, :esk.ys]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "point.se.Eskilstuna-central" {
+            track(:station, ov[:esk.ys, :esk]);
+            statdot(ov[:esk]);
+            slabel(:left, ov[:esk] + (-1.5dt, 1.8dt),
+                vbox(:right:topbase, "Eskilstuna", "central  ")
+            );
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:esk, :hal]);
+        }
+
+        with link = "point.se.Hällbybrunn" {
+            track(:station, ov[:hal, :hal.ym]);
+            statdot(:removed, ov[:hal]);
+            slabel(:right :removed, ov[:hal] + (1.3dt, -0.3dt), "Hällbybrunn");
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:hal.ym, :fol]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.OXV" {
+            track(ov[:fol, :fol + 1km]);
+            line_label(:left:ne, ov[:fol + 1km], "OXV");
+            track(ov[:fol + 1km, :rek]);
+        }
+
+        with link = "point.se.Rekarne" {
+            track(:station, ov[:rek, :rek.yk]);
+            statdot(ov[:rek]);
+            slabel(:right, ov[:rek] + (0.5dt, -1.3dt), "Rekarne");
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:rek.yk, :rek.yk + 12km]);
+            line_label(:left:n, ov[:rek.yk + 12km], (-0.3dt, 0dt), "OXV");
+            track(ov[:rek.yk + 12km, :val.ye]);
+        }
+    }
+}
+

@@ -1,0 +1,75 @@
+# SE FFO.  Flen - Flens övre
+with detail = 2 {
+    with link = "line.se.FFO" {
+        track(:first :cat:ac15 :pax, path("d2.se.ffo")[:fln.yo, :flo]);
+    }
+}
+
+
+# SE FLJ.  Flemingsberg - Järna
+with detail = 2 {
+    let fj = path("d2.se.flj");
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.FLJ" {
+            track(fj[:fle.yj, :fle.yj + 8km]);
+            line_label(:left:nw, fj[:fle.yj + 8km], "FLJ");
+            track(fj[:fle.yj + 8km, :sos]);
+        }
+
+        with link = "point.se.Södertälje-syd-övre" {
+            track(:station :casing, fj[:sos, :sos.ya]);
+            statdot(fj[:sos]);
+            slabel(:nw, fj[:sos] + (0.5dt, 0.5dt), "S. syd");
+        }
+
+        with link = "line.se.FLJ" {
+            track(:casing, fj[:sos.ya, :sos.ya + 2km]);
+            with layer = -1 track(fj[:sos.ya + 2km, :jar.yf]);
+        }
+    }
+}
+
+
+# SE FKP.  Frövi - Köping
+with detail = 2 {
+    let fk = path("d2.se.fkp");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.FKP" {
+            track(fk[:fro.ya, :fro.yk]);
+            track(fk[:fro.yk, :fro.yk + 9km]);
+            line_label(:left:s, fk[:fro.yk + 9km], (0.3dt, 0dt), "FKP");
+            track(fk[:fro.yk + 9km, :jad.y]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.FKP" {
+            track(fk[:jad.y, :arb]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.FKP" {
+            track(fk[:arb, :arb + 5km]);
+            line_label(:left:se, fk[:arb + 5km], "FKP");
+            track(fk[:arb + 5km, :val]);
+        }
+
+        with link = "point.se.Valskog" {
+            track(:station, fk[:val, :val.ye]);
+            statdot(:nopax, fk[:val]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.FKP" {
+            track(fk[:val.ye, :val.ye + 5km]);
+            line_label(:right:w, fk[:val.ye + 5km], (0dt, 0.2dt), "FKP");
+            track(fk[:val.ye + 5km, :kop.yr]);
+            track(fk[:kop.yr, :kop]);
+        }
+    }
+}
+
