@@ -1,221 +1,282 @@
-# SE VSB.  Västra stambanan.  Stockholm - Göteborg
+# SE VBS.  Vansbro - Särna
 with detail = 2 {
-    let sg = path("d2.se.vsb");
+    let vs = path("d2.se.vbs");
 
-    with railway = :first :double :cat:ac15 :pax {
-        with link = "point.se.Stockholms-central" {
-            statdot(sg[:sto]);
-            slabel(:ne, sg[:sto] + (-1.3dt, -0.8dt), "S. central");
-            slabel(:right :large :bold, sg[:sto] + (2km, 1km),
-                "Stockholm"
+    with railway = :first :nopax {
+        with link = "line.se.VBS" {
+            track(vs[:van.ys, :van.ys + 8.2km]);
+            line_label(:left:n, vs[:van.ys + 8.2km], "VBS");
+            track(vs[:van.ys + 8.2km, :mal.yb - 6km]);
+            line_label(:left:e, vs[:mal.yb - 6km], (0dt, 0.2dt), "VBS");
+            track(vs[:mal.yb - 6km, :mal.yb]);
+        }
+
+        with link = "point.se.Malung" {
+            track(vs[:mal.yb, :mal]);
+            statdot(vs[:mal]);
+            slabel(:left, vs[:mal] + (-1.8dt, 1.5dt), "Malung");
+        }
+
+        with link = "line.se.VBS" {
+            track(vs[:mal, :mal + 5km]);
+            line_label(:right:s, vs[:mal + 5km], (0.5dt, 0dt), "VBS");
+            track(vs[:mal + 5km, :maf]);
+        }
+
+        with link = "point.se.Malungsfors" {
+            statdot(vs[:maf]);
+            slabel(:left, vs[:maf] + (-1.8dt, 1.5dt), "Malungsfors");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.VBS" {
+            track(vs[:maf, :maf + 12km]);
+            line_label(:right:w, vs[:maf + 12km], "VBS");
+            track(vs[:maf + 12km, :sal + 7km]);
+            line_label(:right:w, vs[:sal + 7km], "VBS");
+            track(vs[:sal + 7km, :sar - 10.5km]);
+            line_label(:left:e, vs[:sar - 10.5km], "VBS");
+            track(vs[:sar - 10.5km, :sar]);
+        }
+
+        with link = "point.se.Särna" {
+            statdot(vs[:sar]);
+            slabel(:left, vs[:sar] + (-1.5dt, 0.8dt), "Särna");
+        }
+    }
+}
+
+
+# SE VHS.  Vännäs - Holmsund
+with detail = 2 {
+    let vh = path("d2.se.vhs");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.VHS" {
+            track(vh[:van.yu, :van.yv]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.VHS" {
+            track(vh[:van.yv, :van.yv + 6km]);
+            line_label(:left:sw, vh[:van.yv + 6km], "VHS");
+            track(vh[:van.yv + 6km, :ume]);
+        }
+
+        with link = "point.se.Umeå-central" {
+            statdot(vh[:ume]);
+            slabel(:right, vh[:ume] + (1.3dt, -0.5dt),
+                hbox(:left:base, span(:bold :medium, "Umeå"), " c.")
             );
         }
 
+        with link = "line.se.VHS" {
+            track(vh[:ume, :ume + 3.3km]);
+            line_label(:right:e, vh[:ume + 3.3km], "VHS");
+            track(vh[:ume + 3.3km, :gim]);
+        }
+
+        with link = "point.se.Gimonäs" {
+            statdot(:nopax, vh[:gim]);
+            slabel(:right :nopax, vh[:gim] + (1.5dt, 0.5dt), "Gimonäs");
+        }
+
+        with link = "line.se.VHS" {
+            track(vh[:gim, :gim.yo]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.VHS" {
+            track(vh[:gim.yo, :gim.yo + 4.8km]);
+            line_label(:left:sw, vh[:gim.yo + 4.8km], "VHS");
+            track(vh[:gim.yo + 4.8km, :hol]);
+        }
+
+        with link = "point.se.Holmsund" {
+            statdot(vh[:hol]);
+            slabel(:left, vh[:hol] + (-1.5dt, 1dt), "Holmsund");
+        }
+    }
+}
+
+
+# SE VJS.  Vintjärn - Svartbäcken
+with detail = 2 {
+    let vs = path("d2.se.vjs");
+
+    with railway = :second :g891 :nopax :removed {
+        with link = "line.se.VJS" {
+            track(vs[:vin.yh, :vin.yh + 12km]);
+            line_label(:left:sw, vs[:vin.yh + 12km], "VJS");
+            track(vs[:vin.yh + 12km, :sva]);
+        }
+
+        with link = "point.se.Svartbäcken" {
+            statdot(vs[:sva]);
+            slabel(:bottom, vs[:sva] + (0dt, 0.8dt), "Svartbäcken");
+        }
+    }
+}
+
+
+# SE VLN.  Voxna - Lobonäs
+with detail = 2 {
+    let vl = path("d2.se.vln");
+
+    with railway = :second :g802 :pax :removed {
+        with link = "line.se.VLN" {
+            track(vl[:vox.yl, :vox.yl + 12.5km]);
+            line_label(:left:e, vl[:vox.yl + 12.5km], "VLN");
+            track(vl[:vox.yl + 12.5km, :lob]);
+        }
+
+        with link = "point.se.Lobonäs" {
+            statdot(vl[:lob]);
+            slabel(:top, vl[:lob] + (0dt, -0.8dt), "Lobonäs");
+        }
+    }
+}
+
+
+# SE VMT.  Vikmanshyttan - Turbo
+with detail = 2 {
+    let vt = path("d2.se.vmt");
+
+    with railway = :first :nopax :removed {
+        with link = "line.se.VMT" {
+            track(vt[:vik.yt, :vik.yt + 3km]);
+            line_label(:right:e, vt[:vik.yt + 3km], "VMT");
+            track(vt[:vik.yt + 3km, :tur]);
+        }
+
+        with link = "point.se.Turbo" {
+            statdot(vt[:tur]);
+            slabel(:bottom, vt[:tur] + (0dt, 0.8dt), "Turbo");
+        }
+    }
+}
+
+
+# SE VNX.  Vännäs norra - Vännäs 409
+with detail = 2 {
+    with link = "line.se.VNX" {
+        track(:first :cat:ac15 :pax, path("d2.se.vnx")[:vnn.yu, :van.yv]);
+    }
+}
+
+
+# SE VOV.  Västeraspby - Örnsköldsvik
+with detail = 2 {
+    let vo = path("d2.se.vov");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.VOV" {
+            track(vo[:vas.yo, :vas.yo + 7.5km]);
+            line_label(:right:w, vo[:vas.yo + 7.5km], "VOV");
+            track(vo[:vas.yo + 7.5km, :orn - 4.5km]);
+            line_label(:right:n, vo[:orn - 4.5km], "VOV");
+            track(vo[:orn - 4.5km, :orn]);
+        }
+
+        with link = "point.se.Örnsköldsviks-central" {
+            track(:station, vo[:orn, :orn.yg]);
+            statdot(vo[:orn]);
+            slabel(:right, vo[:orn] + (1.5dt, 0.8dt), "Örnsköldsvik c.");
+        }
+    }
+}
+
+
+# SE VRO.  Värtan - Ropsten
+with detail = 2 {
+    with link = "line.se.VRO" {
+        track(:first :nopax :removed, path("d2.se.vro")[:var, :rop.yv]);
+    }
+}
+
+
+# SE VRV.  Vattjom - Runsvik
+with detail = 2 {
+    let vr = path("d2.se.vrv");
+
+    with railway = :second :pax :removed {
+        with link = "line.se.VRV" {
+            track(vr[:vat.ym, :mat - 0.8km]);
+            line_label(:right:ne, vr[:mat - 0.8km], "VRV");
+            track(vr[:mat - 0.8km, :mat]);
+        }
+
+        with link = "point.se.Matfors" {
+            statdot(vr[:mat]);
+            slabel(:right, vr[:mat] + (1.3dt, 0.2dt), "Matfors");
+        }
+    }
+
+    with railway = :second :nopax :removed {
+        with link = "line.se.VRV" {
+            track(vr[:mat, :run]);
+        }
+
+        with link = "point.se.Runsvik" {
+            statdot(vr[:run]);
+            slabel(:right, vr[:run] + (1.5dt, 0.9dt), "Runsvik");
+        }
+    }
+}
+
+
+# SE VSB.  Väderstad - Bränninge
+with detail = 2 {
+    let vb = path("d2.se.vsb");
+
+    with railway = :first :g891 :pax :removed {
         with link = "line.se.VSB" {
-            track(:casing, sg[:sto, :sts.yc]);
+            track(vb[:vad.yb, :vad.yb + 7km]);
+            line_label(:left:se, vb[:vad.yb + 7km], "VSB");
+            track(vb[:vad.yb + 7km, :ska.yv]);
         }
 
-        with link = "point.se.Stockholms-Södra" {
-            track(:station, sg[:sts.yc, :sts]);
-            statdot(sg[:sts]);
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:sts, :alv.yl]);
-            track(sg[:alv.yl, :alv]);
-        }
-
-        with link = "point.se.Älvsjö" {
-            track(:station, sg[:alv, :alv.yn]);
-            statdot(sg[:alv]);
-            slabel(:left, sg[:alv] + (-1.5dt, 0dt), "Älvsjö");
-        }
+        # point.se.Skänninge  se.HBM
 
         with link = "line.se.VSB" {
-            track(sg[:alv.yn, :alv.yn + 3.5km]);
-            line_label(:right:e, sg[:alv.yn + 3.5km], (0dt, -0.2dt), "VSB");
-            track(sg[:alv.yn + 3.5km, :fle]);
+            track(vb[:ska.yb, :ska.yb + 13km]);
+            line_label(:left:s, vb[:ska.yb + 13km], (-0.3dt, 0dt), "VSB");
+            track(vb[:ska.yb + 13km, :bra.yv]);
+        }
+    }
+}
+
+
+# SE VSH.  Vallvik - Söderhamns västra
+with detail = 2 {
+    let vs = path("d2.se.vsh");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.VSH" {
+            track(vs[:val.ys, :val.yl]);
+            track(vs[:val.yl, :val.yl + 7.5km]);
+            line_label(:left:e, vs[:val.yl + 7.5km], "VSH");
+            track(vs[:val.yl + 7.5km, :sov]);
         }
 
-        with link = "point.se.Flemingsberg" {
-            statdot(sg[:fle]);
-            slabel(:left, sg[:fle] + (-1.7dt, 0dt), "Flemingsberg");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:fle, :fle.yj]);
-            track(sg[:fle.yj, :fle.yj + 10km]);
-            line_label(:right:s, sg[:fle.yj + 10km], (-0.2dt, 0dt), "VSB");
-            track(sg[:fle.yj + 10km, :soh.yc]);
-            track(sg[:soh.yc, :soh]);
-        }
-
-        with link = "point.se.Södertälje-hamn" {
-            statdot(sg[:soh]);
-            with zoom = :high slabel(:right, sg[:soh] + (1.8dt, 1.8dt),
-                "S. hamn"
+        with link = "point.se.Söderhamns-västra" {
+            track(:station, vs[:sov, :sov.yk]);
+            statdot(vs[:sov]);
+            slabel(:left, vs[:sov] + (-0.7km, -0.3km) + (-1.3dt, -1.3dt),
+                "Söderhamn v."
             );
         }
+    }
+}
 
-        with link = "line.se.VSB" {
-            track(sg[:soh, :sos.yv]);
-            with layer = -1 track(sg[:sos.yv, :sos.yv + 2km]);
-            track(:casing, sg[:sos.yv + 2km, :jar.yf - 1km]);
-            track(sg[:jar.yf - 1km, :jar.yf]);
-            track(sg[:jar.yf, :jar]);
-        }
 
-        with link = "point.se.Järna" {
-            statdot(sg[:jar]);
-            slabel(:left, sg[:jar] + (-1.5dt, 0dt), "Järna");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:jar, :jar.ya]);
-            track(sg[:jar.ya, :jar.ya + 7.2km]);
-            line_label(:right:s, sg[:jar.ya + 7.2km], "VSB");
-            track(sg[:jar.ya + 7.2km, :ske.ys - 11km]);
-            line_label(:left:n, sg[:ske.ys - 11km], (0.2dt, 0dt), "VSB");
-            track(sg[:ske.ys - 11km, :ske.ys]);
-        }
-
-        with link = "point.se.Skebokvarn" {
-            track(:station, sg[:ske.ys, :ske]);
-            statdot(:nopax, sg[:ske]);
-            slabel(:nw, sg[:ske] + (-1dt, 1dt), "Skebokvarn");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:ske, :fln.yo - 0.5km]);
-            with layer = -1 track(sg[:fln.yo - 0.5km, :fln.yo]);
-        }
-
-        with link = "point.se.Flen" {
-            track(:station, sg[:fln.yo, :fln]);
-            statdot(sg[:fln]);
-            slabel(:left, sg[:fln] + (-1dt, -0.8dt), "Flen");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:fln, :fln + 12km]);
-            line_label(:right:s, sg[:fln + 12km], (-0.3dt, 0dt), "VSB");
-            track(sg[:fln + 12km, :kat]);
-        }
-
-        with link = "point.se.Katrineholms-central" {
-            track(:station, sg[:kat, :kat.yn]);
-            statdot(sg[:kat]);
-            slabel(:nw, sg[:kat] + (0.5dt, 0.8dt), "Katrineholm");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:kat.yn, :kat.yv]);
-            track(sg[:kat.yv, :kat.yv + 9.5km]);
-            line_label(:left:ne, sg[:kat.yv + 9.5km], "VSB");
-            track(sg[:kat.yv + 9.5km, :hal.yf - 14km]);
-            line_label(:left:n, sg[:hal.yf - 14km], "VSB");
-            track(sg[:hal.yf - 14km, :hal.yf]);
-        }
-
-        with link = "point.se.Hallsbergs-personbangård" {
-            track(:station, sg[:hal.yf, :hal]);
-            statdot(sg[:hal]);
-            slabel(:left, sg[:hal] + (-1dt, -1.3dt), "Hallsberg");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:hal, :har.ys]);
-            track(sg[:har.ys, :tal]);
-            track(sg[:tal, :tal + 9km]);
-            line_label(:left:nw, sg[:tal + 9km], "VSB");
-            track(sg[:tal + 9km, :lax.yo]);
-            track(sg[:lax.yo, :lax.yk]);
-        }
-
-        with link = "point.se.Laxå" {
-            track(:station, sg[:lax.yk, :lax]);
-            statdot(sg[:lax]);
-            slabel(:left, sg[:lax] + (-1dt, -0.8dt), "Laxå");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:lax, :gar]);
-            line_label(:left:w, sg[:lax + 13.3km], (0dt, 0.2dt), "VSB");
-        }
-
-        with link = "point.se.Gårdsjö" {
-            track(:station, sg[:gar, :gar.yh]);
-            statdot(sg[:gar]);
-            slabel(:nw, sg[:gar] + (1.5dt, -0.8dt), "Gårdsjö");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:gar.yh, :gar.yh + 7km]);
-            line_label(:right:se, sg[:gar.yh + 7km], "VSB");
-            track(sg[:gar.yh + 7km, :sko.yk - 10km]);
-            line_label(:right:e, sg[:sko.yk - 10km], (0dt, -0.2dt), "VSB");
-            track(sg[:sko.yk - 10km, :sko.yk]);
-        }
-
-        with link = "point.se.Skövde-central" {
-            track(:station, sg[:sko.yk, :sko]);
-            statdot(sg[:sko]);
-            slabel(:left, sg[:sko] + (-1.5dt, 0.6dt), "Skövde");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:sko, :fal - 12km]);
-            line_label(:right:se, sg[:fal - 12km], "VSB");
-            track(sg[:fal - 12km, :fal]);
-        }
-
-        with link = "point.se.Falköpings-central" {
-            track(:station, sg[:fal, :fal.yn]);
-            statdot(sg[:fal]);
-            slabel(:left, sg[:fal] + (-1.7dt, 0.3dt), "Falköping");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:fal.yn, :her.yu]);
-            line_label(:right:s, sg[:fal.yn + 16km], (-0.4dt, 0dt), "VSB");
-        }
-
-        with link = "point.se.Herrljunga-central" {
-            track(:station, sg[:her.yu, :her]);
-            statdot(sg[:her]);
-            slabel(:left, sg[:her] + (-1.3dt, -0.8dt), "Herrljunga");
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:her, :her + 16.5km]);
-            line_label(:right:s, sg[:her + 16.5km], (-0.5dt, 0dt), "VSB");
-            track(sg[:her + 16.5km, :sar - 10.3km]);
-            line_label(:left:n, sg[:sar - 10.3km], "VSB");
-            track(sg[:sar - 10.3km, :sar]);
-        }
-
-        with link = "point.se.Sävenäs-rangerbangård" {
-            statdot(:nopax, sg[:sar]);
-            slabel(:nw, sg[:sar] + (-0.3dt, 0.8dt),
-                vbox(:left:top, "Sävenäs", "rangerbangård")
-            );
-        }
-
-        with link = "line.se.VSB" {
-            track(sg[:sar, :sav.yk]);
-            track(sg[:sav.yk, :ols.yf]);
-            track(sg[:ols.yf, :got.ym]);
-            track(sg[:got.ym, :got]);
-        }
-
-        with link = "point.se.Göteborg-Central" {
-            statdot(sg[:got]);
-            slabel(:left, sg[:got] + (-1.5dt, 0.8dt),
-                hbox(:right:base,
-                    span(:medium :bold, "Göteborg "), "C."
-                )
-            );
-        }
+# SE VVX.  Vallvik 6 - Ljusne bruk
+with detail = 2 {
+    with link = "line.se.VVX" {
+        track(:second :nopax, path("d2.se.vvx")[:val.yl, :ljb.yv]);
     }
 }
 

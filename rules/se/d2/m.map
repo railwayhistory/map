@@ -1,3 +1,63 @@
+# SE MAD.  Morastrand - Älvdalen
+with detail = 2 {
+    let ma = path("d2.se.mad");
+
+    with railway = :first :nopax {
+        with link = "line.se.MAD" {
+            track(ma[:mos.ya, :mos.ya + 9.5km]);
+            line_label(:left:ne, ma[:mos.ya + 9.5km], "MAD");
+            track(ma[:mos.ya + 9.5km, :mar - 6km]);
+            line_label(:left:ne, ma[:mar - 6km], "MAD");
+            track(ma[:mar - 6km, :mar]);
+        }
+
+        with link = "point.se.Märbäck" {
+            statdot(ma[:mar]);
+            slabel(:right, ma[:mar] + (1.5dt, 0.2dt), "Märbäck");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.MAD" {
+            track(ma[:mar, :alv]);
+        }
+
+        with link = "point.se.Älvdalen" {
+            statdot(ma[:alv]);
+            slabel(:top, ma[:alv] + (-0.3dt, -0.8dt), "Älvdalen");
+        }
+    }
+}
+
+
+# SE MBM.  Munkedals bruk - Munkedals hamn
+with detail = 2 {
+    let mm = path("d2.se.mbm");
+
+    with railway = :first :g600 :removed {
+        with link = "point.se.Munkedals-bruk" {
+            statdot(mm[:mub]);
+            slabel(:right, mm[:mub] + (1.5dt, 0.8dt), "M:s bruk");
+        }
+
+        with link = "line.se.MBM" {
+            track(mm[:mub, :mun]);
+        }
+
+        # point.se.Munkedal  se.GSS
+
+        with link = "line.se.MBM" {
+            track(mm[:mun.yh, :muh]);
+        }
+
+        with link = "point.se.Munkedals-hamn" {
+            statdot(mm[:muh]);
+            slabel(:left, mm[:muh] + (-1.5dt, 0.8dt), "M:s hamn");
+        }
+    }
+}
+
+
 # SE MFL.  Mariefred - Läggesta
 with detail = 2 {
     let ml = path("d2.se.mfl");
@@ -20,6 +80,246 @@ with detail = 2 {
             track(ml[:mar, :mar + 1.35km]);
             line_label(:right:s, ml[:mar + 1.35km], (-0.4dt, 0dt), "MFL");
             track(ml[:mar + 1.35km, :lag.ym]);
+        }
+    }
+}
+
+
+# SE MHH.  Mjölby - Hästholmens hamn
+with detail = 2 {
+    let mh = path("d2.se.mhh");
+
+    with railway = :first :pax :removed {
+        # point.se.Mjölby  se.KHM
+
+        with link = "line.se.MHH" {
+            track(mh[:mjo.yv, :mjo.yv + 5.3km]);
+            line_label(:right:s, mh[:mjo.yv + 5.3km], "MHH");
+            track(mh[:mjo.yv + 5.3km, :vad]);
+        }
+
+        with link = "point.se.Väderstad" {
+            track(mh[:vad, :vad.yb]);
+            statdot(mh[:vad]);
+            slabel(:nw, mh[:vad] + (-3dt, 1dt), "Väderstad");
+        }
+
+        with link = "line.se.MHH" {
+            track(mh[:vad.yb, :has.yf]);
+            line_label(:right:s, mh[:vad.yb + 8km], (-0.3dt, 0dt), "MHH");
+        }
+
+        with link = "point.se.Hästholmen" {
+            track(mh[:has.yf, :has.yo]);
+            statdot(mh[:has]);
+            slabel(:left, mh[:has] + (-1.5dt, 0.5dt), "Hästholmen");
+        }
+    }
+}
+
+
+# SE MKB.  Morjärv - Karlsborgsbruk Norrbotten
+with detail = 2 {
+    let mk = path("d2.se.mkb");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.MKB" {
+            track(mk[:mor.yk, :mor.yk + 6.3km]);
+            line_label(:right:e, mk[:mor.yk + 6.3km], "MKB");
+            track(mk[:mor.yk + 6.3km, :bre - 5.4km]);
+            line_label(:right:ne, mk[:bre - 5.4km], "MKB");
+            track(mk[:bre - 5.4km, :bre]);
+        }
+
+        with link = "point.se.Bredviken" {
+            track(:station, mk[:bre, :bre.yh]);
+            statdot(:nopax, mk[:bre]);
+            slabel(:left, mk[:bre] + (-1.5dt, 1.8dt), "Bredviken");
+        }
+    }
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.MKB" {
+            track(mk[:bre.yh, :bre.yh + 2.4km]);
+            line_label(:left:w, mk[:bre.yh + 2.4km], "MKB");
+            track(mk[:bre.yh + 2.4km, :kar]);
+        }
+
+        with link = "point.se.Karlsborgsbruk-Norrbotten" {
+            statdot(mk[:kar]);
+            slabel(:bottom, mk[:kar] + (0dt, 0.8dt),
+                vbox(:center:top, "Karlsborgsbruk", "Norrbotten")
+            );
+        }
+    }
+}
+
+
+# SE MKS.  Mellerud - Kornsjö gränsen
+with detail = 2 {
+    let mk = path("d2.se.mks");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.MKS" {
+            track(mk[:mel.yk, :mel.yv]);
+            track(mk[:mel.yv, :mel.yv + 2.5km]);
+            line_label(:right:s, mk[:mel.yv + 2.5km], "MKS");
+            track(mk[:mel.yv + 2.5km, :dal.ys]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.MKS" {
+            track(mk[:dal.ys, :dal]);
+        }
+
+        with link = "point.se.Dals-Rostock" {
+            statdot(:nopax, mk[:dal]);
+            slabel(:left, mk[:dal] + (-1.5dt, 0.8dt), "Dals Rostock");
+        }
+
+        with link = "line.se.MKS" {
+            track(mk[:dal, :dal + 7.7km]);
+            line_label(:right:s, mk[:dal + 7.7km], "MKS");
+            track(mk[:dal + 7.7km, :bac.yu]);
+        }
+
+        with link = "point.se.Bäckefors" {
+            track(mk[:bac.yu, :bac.yb]);
+            statdot(mk[:bac]);
+            slabel(:right, mk[:bac] + (1.5dt, 0.5dt), "Bäckefors");
+        }
+
+        with link = "line.se.MKS" {
+            track(mk[:bac.yb, :bac.yb + 5.5km]);
+            line_label(:left:ne, mk[:bac.yb + 5.5km], "MKS");
+            track(mk[:bac.yb + 5.5km, :edd.yl]);
+        }
+
+        with link = "point.se.Ed" {
+            track(mk[:edd.yl, :edd]);
+            statdot(mk[:edd]);
+            slabel(:left, mk[:edd] + (-1.5dt, 0dt), "Ed");
+        }
+
+        with link = "line.se.MKS" {
+            track(mk[:edd, :kog - 6.5km]);
+            line_label(:left:n, mk[:kog - 6.5km], "MKS");
+            track(mk[:kog - 6.5km, :kog]);
+        }
+    }
+}
+
+
+# SE MLX.  Mellerud triangelspår
+with detail = 2 {
+    with link = "line.se.MLX" {
+        track(:first :pax :removed, path("d2.se.mlx")[:mel.yx, :mel.yv]);
+    }
+}
+
+
+# SE MNX.  Mora Noret - Mora Norets norra
+with detail = 2 {
+    with link = "line.se.MNX" {
+        track(:first :nopax :removed, path("d2.se.mnx")[:mon.yn, :mor.yn]);
+    }
+}
+
+
+# SE MOV.  Mellansel - Örnsköldsviks central
+with detail = 2 {
+    let mo = path("d2.se.mov");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.MOV" {
+            track(mo[:mel.yo, :mel.yo + 12.5km]);
+            line_label(:left:sw, mo[:mel.yo + 12.5km], "MOV");
+            track(mo[:mel.yo + 12.5km, :orn.yg]);
+        }
+    }
+}
+
+
+# SE MRG.  Mellerud - Gilserud
+with detail = 2 {
+    let mg = path("d2.se.mrg");
+
+    with railway = :first :tourist {
+        with link = "line.se.MRG" {
+            track(mg[:mel.ya, :mel.ya + 8.6km]);
+            line_label(:left:e, mg[:mel.ya + 8.6km], "MRG");
+            track(mg[:mel.ya + 8.6km, :bil.yu]);
+        }
+
+        with link = "point.se.Billingsfors" {
+            track(mg[:bil.yu, :bil]);
+            statdot(mg[:bil]);
+            slabel(:left, mg[:bil] + (-1.5dt, 0.8dt), "Billingsfors");
+        }
+
+        with link = "line.se.MRG" {
+            track(mg[:bil, :bil.yb]);
+            track(mg[:bil.yb, :bil.yb + 1.1km]);
+            line_label(:right:w, mg[:bil.yb + 1.1km], "MRG");
+            track(mg[:bil.yb + 1.1km, :ben]);
+        }
+
+        with link = "point.se.Bengtsfors" {
+            statdot(mg[:ben]);
+            slabel(:right, mg[:ben] + (1.5dt, 0.5dt), "Bengtsfors");
+        }
+    }
+
+    with railway = :first :closed {
+        with link = "line.se.MRG" {
+            track(mg[:ben, :ben + 18.7km]);
+            line_label(:right:sw, mg[:ben + 18.7km], "MRG");
+            track(mg[:ben + 18.7km, :arj - 8.6km]);
+            line_label(:left:e, mg[:arj - 8.6km], "MRG");
+            track(mg[:arj - 8.6km, :arj]);
+        }
+
+        with link = "point.se.Årjäng" {
+            statdot(mg[:arj])
+            slabel(:right, mg[:arj] + (1.5dt, 0.8dt), "Årjäng");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.MRG" {
+            track(mg[:arj, :arj + 19km]);
+            line_label(:right:w, mg[:arj + 19km], "MRG");
+            track(mg[:arj + 19km, :bet.ys]);
+        }
+
+        with link = "point.se.Beted" {
+            track(mg[:bet.ys, :bet]);
+            statdot(mg[:bet]);
+            slabel(:right, mg[:bet] + (1.5dt, 1.3dt), "Beted");
+        }
+
+        with link = "line.se.MRG" {
+            track(mg[:bet, :gil - 10.5km]);
+            line_label(:right:ne, mg[:gil - 10.5km], "MRG");
+            track(mg[:gil - 10.5km, :gil]);
+        }
+    }
+}
+
+
+# SE MSN.  Mellerud - Sunnanå
+with detail = 2 {
+    let ms = path("d2.se.msn");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.MSN" {
+            track(ms[:mel.ys, :sun]);
+        }
+
+        with link = "point.se.Sunnanå" {
+            statdot(ms[:sun]);
+            slabel(:right, ms[:sun] + (1.5dt, 0.5dt), "Sunnanå");
         }
     }
 }

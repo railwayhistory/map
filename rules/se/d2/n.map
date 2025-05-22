@@ -1,3 +1,18 @@
+# SE NFH.  Nyhyttan - Finnshyttan
+with detail = 2 {
+    let nf = path("d2.se.nfh");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.NFH" {
+            track(nf[:nyh.yf, :nyh.yf + 1.5km]);
+            line_label(:left:n, nf[:nyh.yf + 1.5km], "NFH");
+            track(nf[:nyh.yf + 1.5km, :fin.yn]);
+            track(nf[:fin.yn, :fin]);
+        }
+    }
+}
+
+
 # SE NHA.  Nynäshamn - Älvsjö
 with detail = 2 {
     let na = path("d2.se.nha");
@@ -23,6 +38,165 @@ with detail = 2 {
             line_label(:right:sw, na[:alv.yn - 8km], "NHA");
             track(na[:alv.yn - 8km, :alv.yn]);
         }
+    }
+}
+
+
+# SE NHD.  Näs bruk - Horndals bruk
+with detail = 2 {
+    let nh = path("d2.se.nhd");
+
+    with railway = :first :pax :removed {
+        with link = "point.se.Näs-bruk" {
+            statdot(nh[:nas]);
+            slabel(:bottom, nh[:nas] + (0.3dt, 0.8dt), "Näs bruk");
+        }
+
+        with link = "line.se.SHD" {
+            track(nh[:nas, :vas]);
+            line_label(:right:w, nh[:nas + 3.6km], (0dt, -0.2dt), "NHD");
+        }
+
+        with link = "point.se.Västanhede" {
+            track(nh[:vas, :vas.ym]);
+            statdot(nh[:vas]);
+            slabel(:right, nh[:vas] + (1.5dt, 0.5dt), "Västanhede");
+        }
+
+        with link = "line.se.SHD" {
+            track(nh[:vas, :hob.yn]);
+        }
+    }
+}
+
+
+# SE NKB.  Norberg - Klackberg
+with detail = 2 {
+    let nk = path("d2.se.nkb");
+
+    with railway = :first :removed {
+        with link = "line.se.NKB" {
+            track(nk[:nor.yk, :kla.yk]);
+        }
+
+        with link = "point.se.Klackberg" {
+            track(:station, nk[:kla.yk, :kla]);
+            statdot(nk[:kla]);
+            slabel(:left, nk[:kla] + (-1.5dt, 0.8dt), "Klackberg");
+        }
+    }
+}
+
+
+# SE NLB.  Norrmon - Lövstabruk
+with detail = 2 {
+    let nl = path("d2.se.nlb");
+
+    with railway = :first :g891 :nopax :removed {
+        with link = "line.se.NLB" {
+            track(nl[:nor.yl, :nor.yl + 16.5km]);
+            line_label(:right:sw, nl[:nor.yl + 16.5km], "NLB");
+            track(nl[:nor.yl + 16.5km, :lov]);
+        }
+
+        with link = "point.se.Lövstabruk" {
+            statdot(nl[:lov]);
+            slabel(:top, nl[:lov] + (0dt, -0.8dt), "Lövstabruk");
+        }
+    }
+}
+
+
+# SE NMH.  Näs bruk - Morshyttan
+with detail = 2 {
+    let nm = path("d2.se.nmh");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.NMH" {
+            track(nm[:vas.ym, :mor.yn]);
+        }
+    }
+}
+
+
+# SE NTB.  Nordmark - Taberg
+with detail = 2 {
+    let nn = path("d2.se.ntb.1");
+    let nt = path("d2.se.ntb.2");
+
+    with railway = :first :g891 :nopax :removed {
+        with link = "line.se.NTB" {
+            track(nn[:nor.yt, :nor.yt + 1.8km]);
+            line_label(:left:s, nn[:nor.yt + 1.8km], "NTB");
+            track(nn[:nor.yt + 1.8km, :nob.yt]);
+        }
+
+        with link = "point.se.Nordmarksberg" {
+            track(nn[:nob.yt, :nob]);
+            statdot(nn[:nob]);
+            slabel(:nw, nn[:nob] + (-1dt, 0.9dt),
+                vbox(:left:top, "Nordmarks-", " berg")
+            );
+        }
+
+        with link = "line.se.NTB" {
+            track(nt[:nob.yt, :tab]);
+        }
+
+        with link = "point.se.Taberg" {
+            statdot(nt[:tab]);
+            slabel(:right, nt[:tab] + (1.3dt, 0.5dt), "Taberg");
+        }
+    }
+}
+
+
+# SE NTX.  Nacksta 513 - Nacksta 511
+with detail = 2 {
+    with link = "line.se.NTX" {
+        track(:first :cat:ac15 :nopax, path("d2.se.ntx")[:nas.yv, :nas.yn]);
+    }
+}
+
+
+# SE NYF.  Nyfors 1 - Älvsbyn växel
+with detail = 2 {
+    let na = path("d2.se.nyf");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.NYF" {
+            track(na[:nyf.yo, :nyf.ys]);
+            track(na[:nyf.ys, :nyf.ys + 1km]);
+            line_label(:right:n, na[:nyf.ys + 1km], "NYF");
+            track(na[:nyf.ys + 1km, :alv.ys]);
+        }
+    }
+}
+
+
+# SE NYX.  Nyfors 2 - Nyfors 4
+with detail = 2 {
+    with link = "line.se.NYX" {
+        track(:first :cat:ac15 :nopax, path("d2.se.nyx")[:nyf.yv, :nyf.ys]);
+    }
+}
+
+
+# SE NXN.  Nykroppa - Nykroppa 101
+with detail = 2 {
+    let nn = path("d2.se.nxn");
+
+    with railway = :first :cat:ac15 :seasonal {
+        track(nn[:nyk.yd, :nyk.yn]);
+        track(nn[:nyk.yn, :nyk.yh]);
+    }
+}
+
+
+# SE NXV.  Nykroppa - Hornkullen
+with detail = 2 {
+    with link = "line.se.NXV" {
+        track(:first :cat:ac15 :nopax, path("d2.se.nxv")[:nyk.yn, :nyk.yv]);
     }
 }
 

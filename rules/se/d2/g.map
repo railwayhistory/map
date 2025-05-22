@@ -1,0 +1,405 @@
+# SE GFR.  Gimo - Faringe
+with detail = 2 {
+    let gf = path("d2.se.gfr");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.GFR" {
+            track(gf[:gim.yf, :gim.yf + 15km]);
+            line_label(:right:e, gf[:gim.yf + 15km], "GFR");
+            track(gf[:gim.yf + 15km, :far.yg]);
+        }
+    }
+}
+
+
+# SE GGB.  Gävle central - Gävle godsbangård - Strömsbro
+with detail = 2 {
+    let gs = path("d2.se.ggb");
+
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.se.GGB" {
+            track(gs[:gav.yg, :gag.ym]);
+            track(gs[:gag.ym, :gag]);
+        }
+
+        with link = "point.se.Gävle-godsbangård" {
+            statdot(gs[:gag]);
+            slabel(:left, gs[:gag] + (-0.2km, -0.3dt) + (-1.5dt, 0dt),
+                "G. godsbangård"
+            );
+        }
+
+        with link = "line.se.GGB" {
+            track(gs[:gag, :str.yg]);
+        }
+    }
+}
+
+
+# SE GKJ.  Guttsta - Kohlswa Jernverk
+with detail = 2 {
+    let gk = path("d2.se.gkj");
+
+    with railway = :first :g1093 :nopax :removed {
+        with link = "line.se.GKJ" {
+            track(gk[:gut, :gut + 1.2km]);
+            with zoom = :high line_label(:left:ne, gk[:gut + 1.2km], "GKJ");
+            track(gk[:gut + 1.2km, :koh]);
+        }
+
+        with link = "point.se.Kohlswa-Jernverk" {
+            statdot(gk[:koh]);
+            slabel(:left, gk[:koh] + (-1.5dt, 0.8dt), "Kohlswa Jernverk");
+        }
+    }
+}
+
+
+# SE GKS.  Göteborg Kville - Göteborg Skandiahamnen
+with detail = 2 {
+    let gs = path("d2.se.gks");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.GKS" {
+            track(gs[:kvi.yh, :kvi.yh + 2km]);
+            line_label(:right:se, gs[:kvi.yh + 2km], "GKS");
+            track(gs[:kvi.yh + 2km, :lin]);
+            track(:double, gs[:lin, :ska.yv]);
+            track(:double, gs[:ska.yv, :ska]);
+        }
+
+        with link = "point.se.Göteborg-Skandiahamnen" {
+            statdot(gs[:ska]);
+            slabel(:left, gs[:ska] + (-1.6dt, 0.8dt), "G. Skandiahamnen");
+        }
+    }
+}
+
+
+# SE GKV.  Gammelstad - Karlsvik
+with detail = 2 {
+    let gk = path("d2.se.gkv");
+
+    with railway = :first :museum {
+        with link = "line.se.GKV" {
+            track(gk[:gam.yk, :gam.yk + 2.5km]);
+            line_label(:right:e, gk[:gam.yk + 2.5km], "GKV");
+            track(gk[:gam.yk + 2.5km, :kar]);
+        }
+
+        with link = "point.se.Karlsvik" {
+            statdot(gk[:kar]);
+            slabel(:bottom, gk[:kar] + (0dt, 0.9dt), "Karlsvik");
+        }
+    }
+}
+
+
+# SE GLH.  Gävle central - Gävle-Långharn
+with detail = 2 {
+    let gl = path("d2.se.glh");
+
+    with railway = :first :nopax {
+        with link = "line.se.GLH" {
+            track(gl[:gav.yf, :gav.yf + 3.2km]);
+            line_label(:right:nw, gl[:gav.yf + 3.2km], "GLH");
+            track(gl[:gav.yf + 3.2km, :fli]);
+        }
+
+        with link = "point.se.Fliskär" {
+            statdot(gl[:fli]);
+            slabel(:right, gl[:fli] + (0.4km, 0dt) + (0.8dt, 0.8dt),
+                "Fliskär"
+            );
+        }
+    }
+
+    with railway = :side :nopax {
+        with link = "line.se.GLH" {
+            track(gl[:fli, :lan]);
+        }
+    }
+
+}
+
+
+# SE GMO. Gävle central - Mora central
+with detail = 2 {
+    let gm = path("d2.se.gmo");
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.GMO" {
+            track(gm[:gav.ym, :gav.yv]);
+            track(gm[:gav.yv, :hag]);
+        }
+
+        with link = "point.se.Hagaström" {
+            statdot(:nopax, gm[:hag]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.GMO" {
+            track(gm[:hag, :stv.yg - 9.5km]);
+            line_label(:right:s, gm[:stv.yg - 9.5km], (-0.2dt, 0dt), "GMO");
+            track(gm[:stv.yg - 9.5km, :stv.yg]);
+        }
+
+        # point.se.Storvik   se.SHB
+
+        with link = "line.se.GMO" {
+            track(gm[:stv.yf, :stv.yf + 9.5km]);
+            line_label(:right:s, gm[:stv.yf + 9.5km], "GMO");
+            track(gm[:stv.yf + 9.5km, :fal.yb - 10.4km]);
+            line_label(:left:n, gm[:fal.yb - 10.4km], "GMO");
+            track(gm[:fal.yb - 10.4km, :fal.yb]);
+        }
+
+        with link = "point.se.Falun-central" {
+            track(:station, gm[:fal.yb, :fal]);
+        }
+    }
+
+    with railway = :first :nopax {
+        with link = "line.se.GMO" {
+            track(gm[:fal, :fal + 6km]);
+            line_label(:right:sw, gm[:fal + 6km], "GMO");
+            track(gm[:fal + 6km, :gry]);
+        }
+
+        with link = "point.se.Grycksbo" {
+            statdot(gm[:gry]);
+            slabel(:right, gm[:gry] + (0.5dt, -1dt), "Grycksbo");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.GMO" {
+            track(gm[:gry, :rat.ya]);
+            line_label(:right:sw, gm[:rat.ya - 9.3km], "GMO");
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "point.se.Rättvik" {
+            track(gm[:rat.ya, :rat]);
+            statdot(gm[:rat]);
+            slabel(:right, gm[:rat] + (1.3dt, 0.5dt), "Rättvik");
+        }
+
+        with link = "line.se.GMO" {
+            track(gm[:rat, :rat + 5.6km]);
+            line_label(:right:s, gm[:rat + 5.6km], "GMO");
+            track(gm[:rat + 5.6km, :mon - 5km]);
+            line_label(:left:ne, gm[:mon - 5km], "GMO");
+            track(gm[:mon - 5km, :mon]);
+        }
+
+        with link = "point.se.Mora-Noret" {
+            statdot(:removed, gm[:mon]);
+            slabel(:right :removed, gm[:mon] + (1.5dt, 0dt), "Mora Noret");
+        }
+
+        with link = "line.se.GMO" {
+            track(gm[:mon, :mor.yr]);
+        }
+    }
+}
+
+
+# SE GOD.  Göringen - Dalfors
+with detail = 2 {
+    let gd = path("d2.se.god");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.GOD" {
+            track(gd[:gor.yd, :dal]);
+            line_label(:left:w, gd[:gor.yd + 1.65km] + (0dt, -0.2dt), "GOD");
+        }
+
+        with link = "point.se.Dalfors" {
+            statdot(gd[:dal]);
+            slabel(:right, gd[:dal] + (1.5dt, 0.8dt), "Dalfors");
+        }
+    }
+}
+
+
+# SE GSS.  Göteborg - Strömstad
+with detail = 2 {
+    let gs = path("d2.se.gss");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.GSS" {
+            track(:double, gs[:ols.ys, :kvi]);
+        }
+
+        with link = "point.se.Göteborg-Kville" {
+            track(gs[:kvi, :kvi.yh]);
+            statdot(:nopax, gs[:kvi]);
+        }
+
+        with link = "line.se.GSS" {
+            track(gs[:kvi.yh, :kvi.yh + 9.5km]);
+            line_label(:left:ne, gs[:kvi.yh + 9.5km], "GSS");
+            track(gs[:kvi.yh + 9.5km, :ste - 1km]);
+            line_label(:left:e, gs[:ste - 1km], "GSS");
+            track(gs[:ste - 1km, :udd.yo - 6km]);
+            line_label(:right:w, gs[:udd.yo - 6km], "GSS");
+            track(gs[:udd.yo - 6km, :udd.yo]);
+        }
+
+        with link = "point.se.Uddevalla-central" {
+            track(gs[:udd.yo, :udd]);
+            statdot(gs[:udd]);
+            slabel(:ne, gs[:udd] + (-0.5km, 0.2km) + (-1dt, 0.5dt),
+                "Uddevalla c."
+            );
+        }
+
+        with link = "line.se.GSS" {
+            track(gs[:udd, :udd + 11km]);
+            line_label(:left:ne, gs[:udd + 11km], "GSS");
+            track(gs[:udd + 11km, :mun.yh]);
+        }
+
+        with link = "point.se.Munkedal" {
+            track(gs[:mun.yh, :mun]);
+            statdot(gs[:mun]);
+            slabel(:left, gs[:mun] + (-0.2km, 0dt) + (-1.3dt, 1dt),
+                "Munkedal"
+            );
+        }
+
+        with link = "line.se.GSS" {
+            track(gs[:mun, :sme]);
+        }
+
+        with link = "point.se.Smedberg" {
+            track(gs[:sme, :sme.yl]);
+            statdot(:removed, gs[:sme]);
+            slabel(:right :removed, gs[:sme] + (1.3dt, -0.3dt), "Smedberg");
+        }
+
+        with link = "line.se.GSS" {
+            track(gs[:sme.yl, :sme.yl + 8.5km]);
+            line_label(:right:w, gs[:sme.yl + 8.5km], (0dt, -0.25dt), "GSS");
+            track(gs[:sme.yl + 8.5km, :str - 19km]);
+            line_label(:left:e, gs[:str - 19km], "GSS");
+            track(gs[:str - 19km, :str]);
+        }
+
+        with link = "point.se.Strömstad" {
+            statdot(gs[:str]);
+            slabel(:left, gs[:str] + (-1.5dt, 0.5dt), "Strömstad");
+        }
+    }
+}
+
+
+# SE GSV.  Göteborg Skandiahamnen - Göteborg Volvo
+with detail = 2 {
+    let gv = path("d2.se.gsv");
+
+    with railway = :side :nopax {
+        with link = "line.se.GSV" {
+            track(gv[:ska.yv, :vol]);
+        }
+
+        with link = "point.se.Göteborg-Volvo" {
+            statdot(gv[:vol]);
+            slabel(:left, gv[:vol] + (-1.5dt, 0.5dt), "G. Volvo");
+        }
+    }
+}
+
+
+# SE GTB.  Gyttorp - Bredsjö
+with detail = 2 {
+    let gb = path("d2.se.gtb");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.GTB" {
+            track(gb[:gyt.yb, :str]);
+        }
+
+        with link = "point.se.Striberg" {
+            track(:station, gb[:str, :str.yv]);
+            statdot(gb[:str]);
+            slabel(:right, gb[:str] + (1.3dt, 0dt), "Striberg");
+        }
+
+        with link = "line.se.GTB" {
+            track(gb[:str.yv, :str.yv + 9km]);
+            line_label(:right:sw, gb[:str.yv + 9km], "GTB");
+            track(gb[:str.yv + 9km, :bre.yg - 7.3km]);
+            line_label(:left:ne, gb[:bre.yg - 7.3km], "GTB");
+            track(gb[:bre.yg - 7.3km, :bre.yg]);
+        }
+    }
+}
+
+
+# SE GTV.  Gällivare - Tingvallskulle
+with detail = 2 {
+    let gt = path("d2.se.gtv");
+
+    with railway = :first :nopax :removed {
+        with link = "line.se.GTV" {
+            track(gt[:gal.ym, :gal.ym + 4km]);
+            line_label(:left:se, gt[:gal.ym + 4km], "GTV");
+            track(gt[:gal.ym + 4km, :tin]);
+        }
+
+        with link = "point.se.Tingvallskulle" {
+            statdot(gt[:tin]);
+            slabel(:left, gt[:tin] + (-1.5dt, 0.8dt), "Tingvallskulle");
+        }
+    }
+}
+
+
+# SE GVF.  Gällivare - Vitåfors
+with detail = 2 {
+    let gv = path("d2.se.gvf");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.GVF" {
+            track(gv[:gal.ym, :gal.yo]);
+            track(gv[:gal.yo, :gal.yo + 3.9km]);
+            line_label(:right:nw, gv[:gal.yo + 3.9km], "GVF");
+            track(gv[:gal.yo + 3.9km, :vit]);
+        }
+
+        with link = "point.se.Vitåfors" {
+            statdot(gv[:vit]);
+            slabel(:right, gv[:vit] + (-2dt, -1.3dt), "Vitåfors");
+        }
+    }
+}
+
+
+# SE GVO.  Gävle central - Ockelbo
+with detail = 2 {
+    let go = path("d2.se.gvo");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.GVO" {
+            track(
+                    go[:str - 0.1dl, :str] << 0.5md << 0.5mt
+                ..  go[:str.xn + 0.5dt, :str + 16km]
+            );
+            line_label(:right:sw, go[:str + 16km], "GVO");
+            track(go[:str + 16km, :ock.yg]);
+        }
+    }
+}
+
+
+# SE GVX.  Gällivare 511 - Gällivare 503
+with detail = 2 {
+    with link = "line.se.GVX" {
+        track(:first :cat:ac15 :nopax, path("d2.se.gvx")[:gal.yo, :gal.yv]);
+    }
+}
+

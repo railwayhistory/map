@@ -13,9 +13,7 @@ with detail = 2 {
 
         with link = "point.se.Nyköpings-central" {
             statdot(ja[:nyk]);
-            slabel(:top, ja[:nyk] + (0dt, -0.8dt),
-                vbox(:center:bottom, "Nyköping", "central")
-            );
+            slabel(:top, ja[:nyk] + (-1dt, -1.5dt), "Nyköping c.");
         }
 
         with link = "line.se.JAB" {
@@ -35,6 +33,124 @@ with detail = 2 {
             track(ja[:sta.ys, :sta.ys + 9.5km]);
             line_label(:right:s, ja[:sta.ys + 9.5km], "JAB");
             track(ja[:sta.ys + 9.5km, :aby]);
+        }
+    }
+}
+
+
+# SE JBH.  Jädersbruk - Hovsta
+with detail = 2 {
+    let jh = path("d2.se.jbh");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.JBH" {
+            track(jh[:jad.y, :okn]);
+            track(:double, jh[:okn, :alv]);
+            track(jh[:alv, :alv + 5km]);
+            line_label(:left:n, jh[:alv + 5km], (0.2dt, 0dt), "JBH");
+            track(jh[:alv + 5km, :hov.yj]);
+        }
+    }
+}
+
+
+# SE JGV.  Jörn - Gällivare
+with detail = 2 {
+    let jg = path("d2.se.jgv");
+
+    with railway = :first :pax :closed {
+        with link = "line.se.JGV" {
+            track(jg[:jor.ya, :jor.ya + 8km]);
+            line_label(:left:ne, jg[:jor.ya + 8km], "JGV");
+            track(jg[:jor.ya + 8km, :arv - 9km]);
+            line_label(:right:sw, jg[:arv - 9km], "JGV");
+            track(jg[:arv - 9km, :arv]);
+        }
+    }
+
+    with railway = :first :tourist {
+        with link = "point.se.Arvidsjaur" {
+            track(:station, jg[:arv, :arv.ys]);
+            statdot(jg[:arv]);
+            slabel(:right, jg[:arv] + (1.5dt, -0.2dt), "Arvidsjaur");
+        }
+
+        with link = "line.se.JGV" {
+            track(jg[:arv, :arv + 8km]);
+            line_label(:left:s, jg[:arv + 8km], "JGV");
+            track(jg[:arv + 8km, :var + 3.65km]);
+            line_label(:left:s, jg[:var + 3.65km], "JGV");
+            track(jg[:var + 3.65km, :pol - 13.3km]);
+            line_label(:left:se, jg[:pol - 13.3km], "JGV");
+            track(jg[:pol - 13.3km, :pol]);
+        }
+
+        with link = "point.se.Geografiska-polcirkeln" {
+            statdot(jg[:pol]);
+            slabel(:right, jg[:pol] + (1.7dt, 1.5dt),
+                vbox(:left:topbase, "Geografiska", "polcirkeln")
+            );
+        }
+
+        with link = "line.se.JGV" {
+            track(jg[:pol, :por - 14.75km]);
+            line_label(:left:e, jg[:por - 14.75km], "JGV");
+            track(jg[:por - 14.75km, :por]);
+            track(jg[:por, :gal.yp - 9km]);
+            line_label(:right:n, jg[:gal.yp - 9km], "JGV");
+            track(jg[:gal.yp - 9km, :gal.yp]);
+        }
+    }
+}
+
+
+# SE JLV.  Johannisberg - Ljungaverk
+with detail = 2 {
+    with link = "line.se.JLV" {
+        track(:second :pax :removed, path("d2.se.jlv")[:joh.yl, :lju.yj]);
+    }
+}
+
+
+# SE JMB.  Jularbo - Månsbo
+with detail = 2 {
+    let jm = path("d2.se.jmb");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.JMB" {
+            track(jm[:jul.ym, :jul.ym + 1.5km]);
+            with zoom = :high line_label(:right:s, jm[:jul.ym + 1.5km], "JMB");
+            track(jm[:jul.ym + 1.5km, :man]);
+        }
+
+        with link = "point.se.Månsbo" {
+            statdot(jm[:man]);
+            slabel(:top, jm[:man] + (0dt, -0.2km) + (0.8dt, -0.5dt), "Månsbo");
+        }
+    }
+}
+
+
+# SE JSH.  Jämtlands Sikås - Hammerdal
+with detail = 2 {
+    let jh = path("d2.se.jsh");
+
+    with railway = :second :pax :removed {
+        with link = "line.se.JSH" {
+            track(jh[:jam.yh, :jam.yh + 4km]);
+            line_label(:left:sw, jh[:jam.yh + 4km], "JSH");
+            track(jh[:jam.yh + 4km, :ham]);
+        }
+
+        with link = "point.se.Hammerdal" {
+            statdot(jh[:ham]);
+            slabel(:right, jh[:ham] + (-1.3dt, -1.5dt), "Hammerdal");
+        }
+    }
+
+    with railway = :second :nopax :removed {
+        with link = "line.se.JSH" {
+            track(jh[:ham, :hah]);
         }
     }
 }

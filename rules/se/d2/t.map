@@ -1,0 +1,110 @@
+# SE TBS.  Tilberga - Sala
+with detail = 2 {
+    let ts = path("d2.se.tbs");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.TBS" {
+            track(ts[:til.ys, :til.ys + 6.5km]);
+            line_label(:left:e, ts[:til.ys + 6.5km], (0dt, -0.1dt), "TBS");
+            track(ts[:til.ys + 6.5km, :sal.yt - 5km]);
+            line_label(:left:e, ts[:sal.yt - 5km], "TBS");
+            track(ts[:sal.yt - 5km, :sal.yt]);
+        }
+    }
+}
+
+
+# SE TBV.  Tomteboda bangård - Värtan
+with detail = 2 {
+    let tv = path("d2.se.tbv");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.TBV" {
+            track(tv[:tom.ys, :sno.yk]);
+            track(tv[:sno.yk, :sno]);
+        }
+
+        with link = "point.se.Stockholms-norra" {
+            statdot(tv[:sno]);
+        }
+
+        with link = "line.se.TBV" {
+            track(tv[:sno, :var]);
+        }
+
+        with link = "point.se.Värtan" {
+            statdot(tv[:var]);
+        }
+    }
+}
+
+
+# SE TKP.  Tillberga - Köping
+with detail = 2 {
+    let tk = path("d2.se.tkp");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.TKP" {
+            track(tk[:til.yk, :til.yk + 3km]);
+            line_label(:right:e, tk[:til.yk + 3km], "TKP");
+            track(tk[:til.yk + 3km, :van.ys]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.TKP" {
+            track(tk[:van.ys, :van.ys + 2km]);
+            line_label(:right:e, tk[:van.ys + 2km], "TKP");
+            track(tk[:van.ys + 2km, :vas]);
+        }
+
+        with link = "point.se.Västerås-central" {
+            statdot(tk[:vas]);
+            slabel(:nw, tk[:vas] + (1.3dt, 0dt), "Västerås c.");
+        }
+
+        with link = "line.se.TKP" {
+            track(tk[:vas, :kol.yo - 6km]);
+            line_label(:left:n, tk[:kol.yo - 6km], (0.3dt, 0dt), "TKP");
+            track(tk[:kol.yo - 6km, :kol.yo]);
+            track(tk[:kol.yo, :kol.yb]);
+        }
+
+        with link = "point.se.Kolbäck" {
+            track(:station, tk[:kol.yb, :kol.yr]);
+            statdot(tk[:kol]);
+            slabel(:left, tk[:kol] + (-1.5dt, 0dt), "Kolbäck");
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.TKP" {
+            track(tk[:kol.yr, :kop]);
+            line_label(:left:nw, tk[:kol.yr + 7.3km], "TKP");
+        }
+
+        with link = "point.se.Köping" {
+            statdot(tk[:kop]);
+            slabel(:left, tk[:kop] + (-1km, 0dt) + (-1.5dt, 0.8dt), "Köping");
+        }
+    }
+}
+
+
+# SE TSB.  Tierp - Strömsberg
+with detail = 2 {
+    let ts = path("d2.se.tsb");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.TSB" {
+            track(ts[:tie.ys, :str]);
+            line_label(:right:w, ts[:tie.ys + 4.3km], (0dt, 0.3dt), "TSB");
+        }
+
+        with link = "point.se.Strömsberg" {
+            statdot(ts[:str]);
+            slabel(:right, ts[:str] + (1.5dt, 0.8dt), "Strömsberg");
+        }
+    }
+}
+

@@ -1,3 +1,166 @@
+# SE EKH.  Enköping - Enköpings hamn
+with detail = 2 {
+    let eh = path("d2.se.ekh");
+
+    with railway = :second :nopax :removed {
+        with link = "line.se.EKH" {
+            track(eh[:enk.yh, :enh]);
+        }
+
+        with link = "point.se.Enköpings-hamn" {
+            statdot(eh[:enh]);
+            slabel(:bottom, eh[:enh] + (0dt, 0.8dt), "E:s hamn");
+        }
+    }
+}
+
+
+# SE ELE.  Ed - Le
+with detail = 2 {
+    let el = path("d2.se.ele.2");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.ELE" {
+            track(el[:edd.xl, :lee]);
+        }
+
+        with link = "point.se.Le" {
+            statdot(el[:lee]);
+            slabel(:right, el[:lee] + (0dt, -1.3dt), "Le");
+        }
+    }
+}
+
+
+# SE ENO.  Ervalla - Nora - Otterbäcken
+with detail = 2 {
+    let en = path("d2.se.eno.1");
+    let no = path("d2.se.eno.2");
+
+    with railway = :second :museum {
+        with link = "line.se.ENO" {
+            track(en[:erv.yn, :nor.yo - 8.2km]);
+            line_label(:left:ne, en[:nor.yo - 8.2km], "ENO");
+            track(en[:nor.yo - 8.2km, :nor.yo]);
+        }
+
+        with link = "point.se.Nora-stad" {
+            track(:station, en[:nor.yo, :nor]);
+            statdot(en[:nor]);
+            slabel(:top, en[:nor] + (0dt, -0.8dt), "Nora stad");
+        }
+
+        with link = "line.se.ENO" {
+            track(no[:nor.yo, :pev.yp]);
+            track(no[:pev.yp, :gyt.yb]);
+        }
+
+        with link = "point.se.Gyttorp" {
+            track(:station, no[:gyt.yb, :gyt]);
+            statdot(no[:gyt]);
+            with zoom = :high slabel(
+                :left, no[:gyt] + (-1.3dt, -0.5dt), "Gyttorp"
+            );
+        }
+
+        with link = "line.se.ENO" {
+            track(no[:gyt, :gyt + 2.8km]);
+            line_label(:left:nw, no[:gyt + 2.8km], "ENO");
+            track(no[:gyt + 2.8km, :vik.ys]);
+        }
+
+        with link = "point.se.Vikersvik" {
+            track(:station, no[:vik.ys, :vik.yd]);
+            statdot(no[:vik]);
+            slabel(:left, no[:vik] + (-1.3dt, 0dt), "Vikersvik");
+        }
+
+        with link = "line.se.ENO" {
+            track(no[:vik.yd, :kor.yg]);
+        }
+
+        with link = "point.se.Kortfors" {
+            track(:station, no[:kor.yg, :kor]);
+            statdot(no[:kor]);
+            slabel(:left, no[:kor] + (-1.5dt, 0.5dt), "Kortfors");
+        }
+
+        with link = "line.se.ENO" {
+            track(no[:kor, :bof.yv - 4km]);
+            line_label(:left:w, no[:bof.yv - 4km], "ENO");
+            track(no[:bof.yv - 4km, :bof.yv]);
+        }
+
+        with link = "point.se.Bofors" {
+            track(:station, no[:bof.yv, :bof]);
+            statdot(no[:bof]);
+            slabel(:left, no[:bof] + (-1.5dt, 0.3dt), "Bofors");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.se.ENO" {
+            track(no[:bof, :bof + 6.3km]);
+            line_label(:right:se, no[:bof + 6.3km], "ENO");
+            track(no[:bof + 6.3km, :str.yn]);
+        }
+
+        # point.se.Strömtorp
+    }
+
+    with railway = :second :pax :removed {
+        with link = "line.se.ENO" {
+            track(no[:str.yo, :str.yo + 8km]);
+            line_label(:right:se, no[:str.yo + 8km], "ENO");
+            track(no[:str.yo + 8km, :gul.yt]);
+            line_label(:right:e, no[:gul.yt - 10km], (0dt, -0.1dt), "ENO");
+            track(no[:gul.yt - 10km, :gul.yt]);
+        }
+
+        with link = "point.se.Gullspång" {
+            track(:station, no[:gul.yt, :gul]);
+            statdot(no[:gul]);
+            slabel(:left, no[:gul] + (-1.3dt, -0.5dt), "Gullspång");
+        }
+
+        with link = "line.se.ENO" {
+            track(no[:gul, :gul + 3.5km]);
+            line_label(:right:se, no[:gul + 3.5km], "ENO");
+            track(no[:gul + 3.5km, :ott]);
+        }
+
+        with link = "point.se.Otterbäcken" {
+            statdot(no[:ott]);
+            slabel(:left, no[:ott] + (-1.5dt, 0.8dt), "Otterbäcken");
+        }
+    }
+}
+
+
+# SE ERH.  Enköping - Runhällen
+with detail = 2 {
+    let er = path("d2.se.erh");
+
+    with railway = :second :pax :removed {
+        with link = "line.se.ERH" {
+            track(er[:enk.yr, :enk.yr + 9km]);
+            line_label(:right:sw, er[:enk.yr + 9km], "ERH");
+            track(er[:enk.yr + 9km, :heb.ye - 5km]);
+            line_label(:left:ne, er[:heb.ye - 5km], "ERH");
+            track(er[:heb.ye - 5km, :heb.ye]);
+        }
+
+        # point.se.Heby  se.SHS
+
+        with link = "line.se.ERH" {
+            track(er[:heb.yr, :heb.yr + 5km]);
+            line_label(:right:w, er[:heb.yr + 5km], "ERH");
+            track(er[:heb.yr + 5km, :run.ye]);
+        }
+    }
+}
+
+
 # SE ESN.  Eskilstuna södra - Eskilstuna norra
 with detail = 2 {
     let sn = path("d2.se.esn");
