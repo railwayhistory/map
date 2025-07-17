@@ -1,390 +1,259 @@
 # DE 1022.  Kiel Hbf - Osterrönfeld
 #
-let ko = path("d4.de.1022");
+let ko = path("d3.de.1022");
 
 with detail = 4 {
-    # point.de.Kiel-Hbf  de.1220
-
-
-    with link = "line.de.1022" {
-        with layer = -1 track(:first :pax,
-                ko[:khg.aa, :khg - 1sw] >> 0.5dt
-        );
-        with layer = -4 track(:first :removed,
-                ko[:khg.aa, :khg - 1sw] << 0.5dt
-        );
-    }
-
-
-    with link = "point.de.Kiel-Hg" {
-        with layer = -1 track(:first:station :pax,
-                ko[:khg - 1sw, :khg + 1sw] >> 0.5dt
-        );
-        with layer = -4 track(:first:station :removed,
-                ko[:khg - 1sw, :khg + 1dl] << 0.5dt
-        );
-        with layer = -2 track(:first:station,
-                ko[:khg - 1sw, :khg] << 1.5dt
-            --  ko[:khg + 1dt, :khg + 1sw] << 0.5dt
-        );
-        with layer = -4 marker(:de.abzw :right :removed, ko[:khg] >> 0.5dt);
-        station(:top :removed, ko[:khg] >> 0.5dt >> 1.3sh,
-            "Hg",
-            hbox(:center:top,
-                vbox(:right:top, "1022: ", "1031: "),
-                vbox(:right:top, "1", ""),
-                vbox(:left:top, ",53", "??")
-            )
-        );
-    }
-
-
-    with link = "line.de.1022" {
-        with layer = -1 track(:first :pax, ko[:khg + 1sw, :has.a] >> 0.5dt);
-    }
-
-    with link = "point.de.Kiel-Hassee" {
-        # Gl. 1
-        with layer = -4 track(:station :removed,
-                ko[:has + 0.85sw, :has.hn - 330m] << 1.5dt
-        );
-
-        # Gleis 2 (nach Osterrönfeld)
-        with layer = -2 track(:first:station,
-                ko[:has.a, :has.a + 250m] << 0.5dt
-            --  ko[:has.a + 250m + 1dl, :has.a + 250m + 1.1dl] >> 0.5dt
-        );
-        with layer = -4 track(:first:station :removed,
-                ko[:has.a + 250m + 1dl, :has] << 0.5dt
-        );
-        with layer = -1 track(:first:station :pax,
-                ko[:has - 1.1dl, :has - 1dl] >> 0.5dt
-            --  ko[:has, :has.hn - 130m] << 0.5dt
-            ..  ko[:has.f - 0.1dl, :has.f]
-        );
-            track(:station,
-                    ko[:has.hn - 130m - 4dl] << 0.5dt
-                --  ko[:has.hn - 130m - 3dl] >> 0.5dt
+    with railway = :first :pax {
+        with link = "line.de.1022" {
+            track(:up:ldn,
+                    ko[:kie.ks - 0.1dl, :kie.ks] >> 2.5mo
+                ..  ko[:khg.ym, :khg.ym + 0.1dl] >> 0.5mo
             );
-
-        # Gleis 3 (nach Flensburg)
-        track(:first :station :pax,
-                ko[:has.a, :has] >> 0.5dt
-        );
-        track(:second :station :pax,
-                path("d4.de.1020")[:has, :has.f] >> 0.5dt
-        );
-            track(:station,
-                    ko[:has.hn - 130m - 1dl] >> 0.5dt
-                --  ko[:has.hn - 130m] << 0.5dt
+            track(:dn:rup:lor :removed,  
+                    ko[:kie.ks - 0.1dl, :kie.ks] >> 1.5mo
+                ..  ko[:khg.ym, :khg.ym + 0.1dl] << 0.5mo
             );
-
-        # Gleis 4 (nach Kiel West)
-        with layer = -4 track(:second:station :removed,
-                ko[:has - 0.1dl, :has] >> 0.5dt
-            --  path("d4.de.1021")[:has + 1dl, :has.hn + 40m] >> 1.5dt
-        );
-            with layer = -4 track(:station :removed,
-                    ko[:has.hn - 130m - 3dl] >> 1.5dt
-                --  ko[:has.hn - 130m - 2dl] >> 0.5dt
+            track(ko[:khg.ym, :khg.ym + 0.15km] >> 0.5mo);
+            line_label(:right:s, ko[:khg.ym + 0.15km] >> 0.5mo >> 0.5mt,
+                "1022"
             );
+            track(ko[:khg.ym + 0.15km, :khg] >> 0.5mo);
+        }
 
-        # Gl. 5/6
-        with layer = -2 track(:station,
-                ko[:has + 0.85sw, :has.hn - 330m - 1dl] << 2.5dt
-            --  ko[:has.hn - 330m, :has.hn - 130m] << 1.5dt
-            ..  ko[:has.hn] << 2.1dt
-            --  ko[:has.hn + 0.1dl] << 2.12dt
-        );
-            with layer = -2 track(:station,
-                    ko[:has.hn - 130m - 3dl] << 1.5dt
-                --  ko[:has.hn - 130m - 2dl] << 0.5dt
-            );
-
-        # Bahnsteig 2
-        platform(:pax,
-                ko[:has + 155m, :has + 345m] << 0.5dt
-            --  ko[:has + 345m, :has + 155m] >> 1.1dt
-        );
-
-        # Bahnsteig 3
-        platform(:pax,
-                ko[:has + 155m, :has + 345m] >> 0.5dt
-            --  ko[:has + 345m, :has + 155m] << 1.1dt
-        );
-
-        marker(:de.bf:pax :left, ko[:has + 0.3sw] << 0.5dt);
-        station(:pax :left, ko[:has] + (0sw, 2.5sw),
-            vbox(:center:bottom,
-                span(:medium :bold :removed, "Kiel-Hassee"),
-                span(:medium :bold, "Kiel-Hassee Cittipark")
-            ),
-            hbox(:right :top,
-                vbox(:right :top,
-                    span(:xsmall, "1020: "),
-                    span(:xsmall :removed, "1021: "),
-                    span(:xsmall, "1022: "),
-                    span(:xsmall, "1031: ")
-                ),
-                vbox(:right :top,
-                    span(:xsmall, "2,"),
-                    span(:xsmall :removed, "0,"),
-                    span(:xsmall, "2,"),
-                    span(:xsmall, "")
-                ),
-                vbox(:left :top,
-                    span(:xsmall, "90"),
-                    span(:xsmall :removed, "00"),
-                    span(:xsmall, "90"),
-                    span(:xsmall, "??")
+        with link = "point.de.Kiel-Hg", railway = :station {
+            marker(:left :de.abzw :removed, ko[:khg] << 0.5mo << 0.5mt);
+            station(:bottom :removed,
+                ko[:khg] << 0.5mo << 1.2sh,
+                span(:small, "Hg"),
+                hbox(:center:top,
+                    vbox(:right:top, "1022: ", "1031: "),
+                    vbox(:sep:top,
+                        hbox(:sep:base, "1,", anchor(), "53"),
+                        hbox(:sep:base, "?", anchor(), "?")
+                    )
                 )
-            )
-        );
-    }
-}
+            );
+        }
 
-with detail = [4, 5] {
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:has.f, :rus - 1sw]);
-        with layer = 1 line_badge(:pax, ko[:has.f + 0.22km] >> 0.3dt, "1022");
-    }
+        with link = "line.de.1022" {
+            track(ko[:khg, :has - 160m - 2dl] >> 0.5mo);
+        }
 
+        with link = "point.de.Kiel-Hassee", railway = :station {
+            let hf = path("d3.de.1020");
 
-    with link = "point.de.Russee" {
-        track(:first:station :pax, ko[:rus - 1sw, :rus + 1sw]);
-        platform(:pax,
-                ko[:rus - 55m, :rus + 55m]
-            --  ko[:rus + 55m, :rus - 55m] >> 0.7dt
-        );
-        marker(:left :de.hp :pax, ko[:rus] << 0.5dt);
-        station(:top :pax, ko[:rus] >> 1dt,
-            "Kiel-Russee", "5,34"
-        );
-    }
+            # DE 1031
+            track(:nopax,
+                    ko[:has - 160m - 2dl, :has - 160m - 1dl] << 0.5mo
+                --  ko[:has - 160m, :has - 159m] >> 0.5mo
+            );
+            track(:removed,
+                    ko[:has - 160m - 1dl, :has + 1dl] << 0.5mo
+            );
 
+            # DE 1022
+            track(
+                    ko[:has - 160m - 2dl, :has] >> 0.5mo
+                --  ko[:has + 1dl, :has.yf] << 0.5mo
+            );
 
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:rus + 1sw, :met - 1sw]);
-    }
+            # DE 1020
+            track(hf[:has, :has.yk] >> 0.5mo);
 
+            # DE 1021
+            track(:nopax :removed,
+                    hf[:has + 0.9dl, :has + 1dl] >> 0.5mo
+                --  hf[:has + 2dl, :has.yk] >> 1.5mo
+            );
 
-    with link = "point.de.Kiel-Mettenhof" {
-        track(:first:station :pax, ko[:met - 1sw, :met + 1sw]);
-        with layer = -1 marker(:de.hp :removed :right, ko[:met]);
-        station(:bottom :removed, ko[:met] << 1dt - (2sw, 0sw),
-            "K.-Mettenhof", "??"
-        );
-    }
+            marker(:left :de.bf, ko[:has] << 0.5mo << 0.5mt);
+            station(:left, hf[:has - 0.25sw] << 0.5mo << 1.7sh,
+                span(:bold, "Kiel-Hassee Cittipark"),
+                hbox(:center:top,
+                    vbox(:right:top,
+                        "1020: ", span(:removed, "1021: "), "1022: ", "1031: "
+                    ),
+                    vbox(:sep:top,
+                        hbox(:sep:base, "2,", anchor(), "90"),
+                        hbox(:sep:base :removed, "0,", anchor(), "00"),
+                        hbox(:sep:base, "2,", anchor(), "90"),
+                        hbox(:sep:base, "106,", anchor(), "52")
+                    )
+                )
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(
+                    ko[:has.yf - 0.1dl, :has.yf] << 0.5mo
+                ..  ko[:has.xf + 0.5mo, :has.xf + 0.2km]
+            );
+            line_badge(ko[:has.xf + 0.2km], "1022");
+            track(ko[:has.xf + 0.2km, :rus - 0.5sw]);
+        }
 
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:met + 1sw, :meh - 1sw]);
-    }
+        with link = "point.de.Russee", railway = :station {
+            track(ko[:rus - 0.5sw, :rus + 0.5sw]);
+            marker(:left :de.hp, ko[:rus] << 0.5mt);
+            station(:top :right_align, ko[:rus - 0.5sw] >> 1mt,
+                vbox(:right:base,
+                    span(:former, "Russee"),
+                    "Kiel-Russee"
+                ),
+                hbox(:center:base,
+                    span(:removed, "5,36\u{2006}→\u{2006}"), "5,34"
+                )
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:rus + 0.5sw, :met - 0.5sw]);
+        }
 
-    with link = "point.de.Melsdorf" {
-        track(:first:station :pax, ko[:meh - 1sw, :mel + 1sw]);
-        platform(:pax,
-                ko[:meh - 55m, :meh + 55m]
-            --  ko[:meh + 55m, :meh - 55m] << 0.7dt
-        );
-        marker(:de.hp :pax, ko[:meh] >> 0.5dt);
-        marker(:de.exbf :pax, ko[:meh] >> 0.5dt);
-        station(:top :pax, ko[:meh] >> 0.5dt >> 1.5sh,
-            "Melsdorf",
-            hbox(:center :top,
-                span(:xsmall :removed, "8,07 → "),
-                span(:xsmall, "7,96")
-            )
-        );
-    }
+        with link = "point.de.Kiel-Mettenhof", railway = :station {
+            track(ko[:met - 0.5sw, :met + 0.5sw]);
+            marker(:right :de.hp :removed, ko[:met] >> 0.5mt);
+            station(:top :removed, ko[:met] >> 1.4sh,
+                "Kiel-Mettenhof", "??"
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:met + 0.5sw, :meh - 0.5sw]);
+        }
 
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:mel + 1sw, :fle - 1sw]);
-    }
+        with link = "point.de.Melsdorf", railway = :station {
+            track(ko[:meh - 0.5sw, :meh + 0.5sw]);
+            marker(:right :de.hp, ko[:meh] >> 0.5mt);
+            marker(:right :de.exbf, ko[:meh] >> 0.5mt);
+            station(:top, ko[:meh] >> 1.7sh,
+                "Melsdorf",
+                hbox(:center:base,
+                    span(:removed, "8,07\u{2006}→\u{2006}"), "7,96"
+                )
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:meh + 0.5sw, :meh + 1.7km]);
+            line_badge(ko[:meh + 1.7km], "1022");
+            track(ko[:meh + 1.7km, :fle - 0.5sw]);
+        }
 
-    with link = "point.de.Flemhude" {
-        track(:first:station :pax, ko[:fle - 1sw, :fle + 1sw]);
-        marker(:de.hst :removed :right, ko[:fle]);
-        marker(:de.exbf :removed :right, ko[:fle]);
-        station(:top :removed, ko[:fle] >> 1.5sh,
-            "Flemhude", "11,59"
-        );
-    }
+        with link = "point.de.Flemhude", railway = :station {
+            track(ko[:fle - 0.5sw, :fle + 0.5sw]);
+            marker(:right :de.hp :removed, ko[:fle] >> 0.5mt);
+            station(:top :removed, ko[:fle] >> 1.3sh, "Flemhude", "11,59");
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:fle + 0.5sw, :ach - 0.5sw]);
+        }
 
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:fle + 1sw, :ach - 1sw]);
-    }
+        with link = "point.de.Achterwehr", railway = :station {
+            track(ko[:ach - 0.5sw, :ach + 0.5sw]);
+            marker(:left :de.hp, ko[:ach] << 0.5mt);
+            station(:right, ko[:ach - 0.4sw] << 1.3sh,
+                hbox(:left:top, "Achterwehr"),
+                hbox(:center:base,
+                    span(:removed, "12,60\u{2006}→\u{2006}"), "12,58"
+                )
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:ach + 0.5sw, :fel - 0.5sw]);
+        }
 
-    with link = "point.de.Achterwehr" {
-        track(:first:station :pax, ko[:ach - 1sw, :ach + 1sw]);
-        platform(:pax,
-                ko[:ach - 55m, :ach + 55m]
-            --  ko[:ach + 55m, :ach - 55m] >> 0.7dt
-        );
-        marker(:left :de.hp :pax , ko[:ach] << 0.5dt);
-        station(:right :pax, ko[:ach + 0.3sw] << 0.5dt << 1.7sh,
-            "Achterwehr", "12,58"
-        );
-    }
+        with link = "point.de.Felde-Brandsbek", railway = :station {
+            track(ko[:fel - 0.5sw, :fel + 0.5sw]);
+            marker(:left :de.bf, ko[:fel] << 0.5mt);
+            station(:bottom, ko[:fel] << 1.3sh,
+                vbox(:center:base,
+                    span(:former, "Brandsbek"),
+                    "Felde-Brandsbek"
+                ),
+                hbox(:center:base,
+                    "13,88", span(:removed, "\u{2006}←\u{2006}13,85")
+                )
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:fel + 0.5sw, :bre - 0.5sw]);
+        }
 
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:ach + 1sw, :fel.a]);
-    }
+        with link = "point.de.Bredenbek", railway = :station {
+            track(ko[:bre - 0.5sw, :bre + 0.5sw]);
+            marker(:left :de.hp, ko[:bre] << 0.5mt);
+            station(:bottom, ko[:bre] << 1.3sh, "Bredenbek", "19,16");
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:bre + 0.5sw, :kro - 0.5sw]);
+        }
 
-    with link = "point.de.Felde-Brandsbek" {
-        # Gl. 1
-        track(:first:station :pax, ko[:fel.a, :fel.f]);
-        platform(:pax,
-                ko[:fel - 80m, :fel + 55m]
-            --  ko[:fel + 55m, :fel - 80m] >> 0.7dt
-        );
+        with link = "point.de.Kronsburg", railway = :station {
+            track(ko[:kro - 0.5sw, :kro + 0.5sw]);
+            marker(:right :de.bf :removed, ko[:kro] >> 0.5mt);
+            station(:top :removed, ko[:kro] >> 1.3sh, "Kronsburg", "20,42");
+        }
 
-        # Gl. 2
-        track(:station :pax,
-                ko[:fel.a + 99m, :fel.a + 100m]
-            --  ko[:fel.a + 100m + 1dl, :fel.f - 100m - 1dl] >> 1dt
-            --  ko[:fel.f - 100m, :fel.f - 99m]
-        );
-        platform(:pax,
-                ko[:fel - 100m, :fel + 30m] >> 1.0dt
-            --  ko[:fel + 30m, :fel - 100m] << 1.7dt
-        );
+        with link = "line.de.1022" {
+            track(ko[:kro + 0.5sw, :kro + 1.3km]);
+            line_badge(ko[:kro + 1.3km], "1022");
+            track(ko[:kro + 1.3km, :ost - 0.5sw]);
+        }
 
-        marker(:de.bf:pax :left, ko[:fel] << 0.5dt);
-        station(:bottom :pax, ko[:fel] << 0.5dt << 1.2sh,
-            vbox(:center :top,
-                span(:medium :removed, "Brandsbek"),
-                span(:medium, "Felde-Brandsbek")
-            ),
-            hbox(:center:base,
-                "13,88 ",
-                span(:removed, "← 13,85")
-            )
-        );
-    }
+        with link = "point.de.Ostenfeld-Rendsburg", railway = :station {
+            track(ko[:ost - 0.5sw, :ost + 0.5sw]);
+            marker(:right :de.hst :removed, ko[:ost] >> 0.5mt);
+            station(:top :right_align :removed, ko[:ost - 1.3sw] >> 0.8sh,
+                vbox(:right:base,
+                    "Ostenfeld ", span(:light, " (Kr Rendsburg)")
+                ),
+                "24,35  "
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:ost + 0.5sw, :sul - 0.5sw]);
+        }
 
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:fel.f, :bre - 1sw]);
-        with layer = 1 line_badge(:pax, ko[:fel + 2.5km] @ -2 >> 0.2dt, "1022");
-    }
+        with link = "point.de.Schülldorf", railway = :station {
+            track(ko[:sul - 0.5sw, :suh + 0.5sw]);
+            marker(:right :de.bf :removed, ko[:sul] >> 0.5mt);
+            marker(:right :de.hp, ko[:suh] >> 0.5mt);
+            station(:top, ko[:suh] >> 1.8sh + (-1sw, 0dt),
+                "Schülldorf",
+                hbox(:center:base,
+                    "27,38", span(:removed, "\u{2006}←\u{2006}27,16")
+                )
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:suh + 0.5sw, :suh + 1.2km]);
+            line_badge(ko[:suh + 1.2km], "1022");
+            track(
+                    ko[:suh + 1.2km, :oro.xk - 1.5mo]
+                ..  ko[:oro.yk, :ora] >> 1.5mo
+            );
+        }
 
-    with link = "point.de.Bredenbek" {
-        track(:first:station :pax, ko[:bre - 1sw, :bre + 1sw]);
-        platform(:pax,
-                ko[:bre - 60m, :bre + 50m]
-            --  ko[:bre + 50m, :bre - 60m] >> 0.7dt
-        );
-        marker(:de.hp:pax :left, ko[:bre] << 0.5dt);
-        station(:bottom :pax, ko[:bre] << 1.4sh,
-            "Bredenbek", "19.16"
-        );
-    }
+        with link = "point.de.Osterrönfeld-Awanst" {
+            marker(:right :de.awanst, ko[:ora] >> 1.5mo >> 0.5mt);
+            station(:left, ko[:ora] << 2.5mo,
+                span(:small, "Osterrönfeld Awanst"),
+                "1022: 30,59"
+            );
+        }
 
+        with link = "line.de.1022" {
+            track(ko[:ora, :oro - 0.5sw] >> 1.5mo);
+        }
 
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:bre + 1sw, :kro - 1sw]);
-    }
-
-
-    with link = "point.de.Kronsburg" {
-        track(:first:station :pax, ko[:kro - 1sw, :kro + 1sw]);
-        with layer = -1 marker(:de.bf :removed, ko[:kro]);
-        station(:top :removed, ko[:kro] >> 1.3sh,
-            "Kronsburg", "20,42"
-        );
-    }
-
-
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:kro + 1sw, :ost - 1sw]);
-    }
-
-
-    with link = "point.de.Ostenfeld-Rendsburg" {
-        track(:first:station :pax, ko[:ost - 1sw, :ost + 1sw]);
-        marker(:de.hst :removed, ko[:ost]);
-        marker(:de.exbf :removed, ko[:ost]);
-        station(:top :removed, ko[:ost] >> 1.6sh,
-            vbox(:center :bottom,
-                span(:medium :removed, "Ostenfeld"),
-                span(:medium :light :removed, "(Kr Rendsburg)")
-            ),
-            "24,35"
-        );
-    }
-
-
-    with link = "line.de.1022" {
-        track(:first :pax, ko[:ost + 1sw, :sul - 1sw]);
-    }
-
-
-    with link ="point.de.Schülldorf" {
-        track(:first:station :pax, ko[:sul - 1sw, :suh + 1sw]);
-        platform(:pax,
-                ko[:suh - 55m, :suh + 55m]
-            --  ko[:suh + 55m, :suh - 55m] << 0.7dt
-        );
-        marker(:de.bf :right :removed, ko[:sul] >> 0.5dt);
-        marker(:de.hp :pax :right, ko[:suh] >> 0.5dt);
-        station(:top :pax, ko[:sul + 0.5sw] >> 0.5dt >> 1.7sh,
-            "Schülldorf",
-            hbox(:center :base,
-                span(:xsmall, "27,38 "),
-                span(:xsmall :removed, "← 27,16")
-            )
-        );
-    }
-
-
-    with link = "line.de.1022" {
-        track(:first :pax,
-                ko[:suh + 1sw, :oro.r]
-            ..  ko[:oro.s, :ora - 100m] >> 1.5dt
-        );
-        with layer = 1 line_badge(:pax, ko[:suh + 1.0km] >> 0.1dt, "1022");
-    }
-
-
-    with link = "point.de.Osterrönfeld-Awanst" {
-        # Hauptgleis
-        track(:first:station :pax, ko[:ora - 100m, :ora + 100m] >> 1.5dt);
-
-        # Anschlussgleise
-        with layer = -2 track(:station,
-                ko[:ora - 0.1dl, :ora] >> 1.5dt
-            --  ko[:ora + 4dl, :oro + 50m] >> 5.5dt
-        );
-
-        with layer = -4 track(:station :removed,
-                path("d4.de.1022.ora")[:a, :oro.r - 500m]
-            ..  ko[:oro.r - 0.1dl, :oro.r] >> 1dt
-            ..  ko[:oro.s, :ora - 1dl] >> 2.5dt
-        );
-        with layer = -2 track(:station,
-                ko[:ora - 1dl, :ora + 1dl] >> 2.5dt
-        );
-
-        marker(:de.awanst :right, ko[:ora] >> 2.5dt);
-
-        guide(:open,
-                ko[:ora - 0.8sw] >> 2.5dt >> 0.6sw
-            --  ko[:oro.r] << 2dt
-        );
-
-        station(:right, ko[:oro.r] << 3.5dt + (0dt, 2pt),
-            "Osterrönfeld Awanst",
-            "1022: 30,59"
-        );
+        # point.de.Osterrönfeld  de.1040
     }
 }
 

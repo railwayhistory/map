@@ -1,4 +1,4 @@
-# DE 1000.  Flensburg Weiche - Harrislee Grenze
+# DE 1000. Flensburg Weiche - Flensburg Grenze
 with detail = 2 {
     let fh = path("d2.de.1000");
 
@@ -48,7 +48,7 @@ with detail = 2 {
 }
 
 
-# DE 1005. Flensburg – Flensburg Friedensweg
+# DE 1005.  Flensburg - Flensburg Friedenswerg
 with detail = 2 {
     let ff = path("d2.de.1005");
 
@@ -62,7 +62,7 @@ with detail = 2 {
 }
 
 
-# DE 1010.  Schleswig – Schleswig Altstadt.
+# DE 1010.  Schleswig - Schleswig Altstadt
 with detail = 2 {
     let sa = path("d2.de.1010");
 
@@ -82,7 +82,6 @@ with detail = 2 {
 
 
 # DE 1011.  Jübeck – Husum.
-#
 with detail = 2 {
     let jh = path("d2.de.1011");
 
@@ -151,6 +150,7 @@ with detail = 2 {
 
     with railway = :second :pax {
         with link = "line.de.1020" {
+            track(hf[:has.yf, :has.yk]);
             track(hf[:has.yk, :has.yk + 2.4km]);
             line_label(:left:e, hf[:has.yk + 2.4km], "1020");
             track(hf[:has.yk + 2.4km, :suc]);
@@ -218,7 +218,7 @@ with detail = 2 {
 with detail = 2 {
     let hw = path("d2.de.1021");
 
-    with railway = :second :removed {
+    with railway = :second :nopax :removed {
         with link = "line.de.1021" {
             track(hw[:has.yk, :kiw]);
         }
@@ -242,7 +242,7 @@ with detail = 2 {
         }
 
         with link = "point.de.Kiel-Hassee" {
-            track(:station, ko[:has, :has.yk]);
+            track(:station, ko[:has, :has.yf]);
             statdot(ko[:has]);
             slabel(:left, ko[:has] + (-1dt, 0.3dt),
                 hbox(:right:top, "K.-Hassee")
@@ -250,7 +250,7 @@ with detail = 2 {
         }
 
         with link = "line.de.1022" {
-            track(ko[:has.yk, :has + 14km]);
+            track(ko[:has.yf, :has + 14km]);
             line_label(:right:s, ko[:has + 14km], "1022");
             track(ko[:has + 14km, :sul]);
 
@@ -358,109 +358,6 @@ with detail = 2 {
 with detail = 2 {
     with link = "line.de.1033" {
         track(:first :nopax, path("d2.de.1033")[:meo, :kss.ym]);
-    }
-}
-
-
-# DE 1040.  Neumünster – Flensburg.
-with detail = 2 {
-    let nf = path("d2.de.1040");
-
-    with railway = :first :double :cat:ac15 :pax {
-        with link = "line.de.1040" {
-            track(nf[:neu.yf, :oro - 11km]);
-            line_label(:right:w, nf[:oro - 11km], (0dt, -0.2dt), "1040");
-            track(nf[:oro - 11km, :oro.yk]);
-        }
-
-        with link = "point.de.Osterrönfeld" {
-            track(:station, nf[:oro.yk, :oro.yo]);
-            statdot(nf[:oro]);
-            slabel(:right, nf[:oro] + (1.3km, 0dt) + (1.2dt, 0.8dt),
-                "Osterrönfeld"
-            );
-        }
-
-        with link = "line.de.1040" {
-            track(:casing, nf[:oro.yo, :rbr]);
-            with layer = -1 {
-                track(nf[:rbr, :ren.yo]);
-                track(nf[:ren.yo, :ren]);
-            }
-        }
-
-        with link = "point.de.Rendsburg" {
-            statdot(nf[:ren]);
-            slabel(:left, nf[:ren] + (-0.6km, 0dt) + (-1.5dt, 1.8dt),
-                "Rendsburg"
-            );
-        }
-
-        with link = "line.de.1040" {
-            track(nf[:ren, :bud]);
-            track(nf[:bud, :bud + 5km]);
-            line_label(:right:w, nf[:bud + 5km], "1040");
-            track(nf[:bud + 5km, :ows]);
-        }
-
-        with link = "point.de.Owschlag" {
-            track(:station, nf[:ows, :owk]);
-            statdot(nf[:ows]);
-            slabel(:left, nf[:ows] + (-1.7dt, 1.5dt), "Owschlag");
-        }
-
-        with link = "line.de.1040" {
-            track(nf[:owk, :klg]);
-            track(nf[:klg, :sle]);
-        }
-
-        with link = "point.de.Schleswig" {
-            track(:station, nf[:sle, :sle.ya]);
-            statdot(nf[:sle]);
-            slabel(:left, nf[:sle] + (-1.7dt, -0.3dt),
-                hbox(:right:top, "Schleswig")
-            );
-        }
-
-        with link = "line.de.1040" {
-            track(nf[:sle.ya, :sle.ya + 7km]);
-            line_label(:left:ne, nf[:sle.ya + 7km], "1040");
-            track(nf[:sle.ya + 7km, :jub]);
-        }
-    
-        with link = "point.de.Jübek" {
-            track(:station, nf[:jub, :jub.yh]);
-            statdot(nf[:jub]);
-            slabel(:right, nf[:jub] + (1.5dt, -0.3dt), "Jübek");
-        }
-
-        with link = "line.de.1040" {
-            track(nf[:jub.yh, :egg]);
-            track(nf[:egg, :egg + 5km]);
-            line_label(:right:w, nf[:egg + 5km], "1040");
-            track(nf[:egg + 5km, :flw.yl]);
-        }
-
-        with link = "point.de.Flensburg-Weiche" {
-            track(:station, nf[:flw.yl, :flw]);
-            statdot(nf[:flw]);
-            slabel(:left, nf[:flw] + (-1.6km, 0dt),
-                hbox(:right:top, "F. Weiche")
-            );
-        }
-
-        with link = "line.de.1040" {
-            with layer = -1 track(nf[:flw, :wil.y]);
-            track(nf[:wil.y, :fle]);
-        }
-
-        with link = "point.de.Flensburg" {
-            track(:station, nf[:fle, :fle.yf]);
-            statdot(:cat:ac15 :pax, nf[:fle]);
-            slabel(:right :cat:ac15 :pax, nf[:fle] + (3.3km, -1.2km),
-                hbox(:left:bottom :bold, "Flensburg")
-            );
-        }
     }
 }
 

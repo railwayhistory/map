@@ -1,28 +1,38 @@
 # DE 1002.  Flensburg Weiche - Flensburg Hafen Ost
-# DE 1003.  Flensburg Alter Bf - Flensburg Hafen West
 #
-let flafhw = path("d4.de.1003");
-let flwfho = path("d4.de.1002");
-let nf = path("d4.de.1040");
+let fh = path("d3.de.1002");
 
 with detail = 3 {
-    # point.de.Flensburg-Weiche  de.1040
+    with railway = :second :removed {
+        with link = "line.de.1002" {
+            with layer = -1 track(:ror,
+                fh[:flw + 0.5sw, :wil] << 0.5md << 1ms << 0.5mt
+            );
+        }
 
-    with link = "line.de.1002" {
-        track(:second :removed :flip,
-               nf[:flw.f, :fle - 1.5ssw] << 1.5dt
-            .. flwfho[:fla - 1.1ssw, :fla - 1ssw]
-        );
+        # point.de.Flensburg-Wilhelminental  de.1040
+
+        with link = "line.de.1002" {
+            track(
+                    fh[:wil.ya - 0.1dl, :wil.ya] << 0.5md << 1ms << 0.5mt
+                ..  fh[:wil.yya + 0.5km, :fla - 0.5sw]
+            );
+        }
+
+        with link = "point.de.Flensburg-Alter-Bf", railway = :station {
+            track(fh[:fla - 0.5sw, :fla + 0.5sw]);
+            marker(:right :de.gbf, fh[:fla] >> 0.5mt);
+            marker(:right :de.exbf, fh[:fla] >> 0.5mt);
+            slabel(:w, fh[:fla] >> 0.5mt >> 1.8sh,
+                "F. Alter Bf"
+            );
+        }
     }
 
-    with link = "point.de.Flensburg-Alter-Bf" {
-        track(:second :station :removed, flwfho[:fla - 1ssw, :fla + .5ssw]);
-        track(:station :removed, flwfho[:fla + .5ssw, :f]);
-        track(:station :removed,
-                flwfho[:fla + .5ssw, :fla + .6ssw]
-            ..  flafhw[:afhw + 0.7km, :f]
-        )
-        marker(:right :de.bf :removed, flwfho[:fla.bf - 0.5dt]);
+    with railway = :side :nopax :removed {
+        with link = "line.de.1002" {
+            track(fh[:fla + 0.5sw, :f]);
+        }
     }
 }
 

@@ -1,234 +1,309 @@
-# DE 1020.  Kiel-Hassee - Flensburg
+# DE 1020. Kiel-Hassee Cittipark - Flensburg
 #
-let hasfle = path("d4.de.1020");
+let hf = path("d3.de.1020");
 
 with detail = 3 {
-    # point.de.Kiel-Hassee  de.1022
+    with railway = :second :pax {
+        # point.de.Kiel-Hassee  de.1022
 
-    with link = "line.de.1020" {
-        track(:second :pax,
-                hasfle[:has + 1ssw, :has + 1.1ssw] >> 0.5dt
-            ..  hasfle[:has.ff, :kro - 1ssw]
-        );
+        with link = "line.de.1020" {
+            track(
+                    hf[:has.yk, :has.yk + 200m] >> 0.5ms >> 0.5mt
+                ..  hf[:has.xk, :kro - 0.5sw]
+            );
+        }
+
+        with link = "point.de.Kronshagen", railway = :station {
+            track(hf[:kro - 0.5sw, :kro + 0.5sw]);
+            marker(:left :de.hp, hf[:kro] << 0.5mt);
+            marker(:left :de.exbf, hf[:kro] << 0.5mt);
+            slabel(:left, hf[:kro - 0.3sw] << 0.5mt << 2sh, "Kronshagen");
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:kro + 0.5sw, :kro + 0.9km]);
+            line_label(
+                :left:e, hf[:kro + 0.9km] << 0.5mt, (0dt, -0.3dt), "1020"
+            );
+            track(hf[:kro + 0.9km, :suc - 480m]);
+        }
+
+        with link = "point.de.Suchsdorf", railway = :station {
+            let ks = path("d3.de.9105");
+
+            # DE 1020
+            track(hf[:suc - 480m, :suc.ys + 100m]);
+
+            # DE 9105
+            track(:nopax,
+                    hf[:suc - 381m, :suc - 380m]
+                --  ks[:suc - 380m + 1dl, :suc.ys + 100m] >> 1mt >> 1ms
+            );
+
+            marker(:left :de.bf, hf[:suc] << 0.5mt);
+            slabel(:left :bold, hf[:suc - 0.55sw] << 0.5mt << 1.4sh,
+                "Suchsdorf"
+            );
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:suc.ys + 100m, :lev - 0.5sw]);
+        }
+
+        with link = "point.de.Levensau", railway = :station {
+            track(hf[:lev - 0.5sw, :lev + 0.5sw]);
+            marker(:left :de.hp :removed, hf[:lev] << 0.5mt);
+            slabel(:ne :removed,
+                hf[:lev] + (0dt, 1sh),
+                "Levensau"
+            );
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:lev + 0.5sw, :nwi - 310m]);
+        }
+
+        with link = "point.de.Neuwittenbek", railway = :station {
+            # DE 1020
+            track(hf[:nwi - 310m, :nwi.ys + 100m]);
+
+            # DE 9104
+            track(:nopax,
+                    hf[:nwi - 211m, :nwi - 210m]
+                --  hf[:nwi - 210m + 1dl, :nwi.ys] >> 1mt >> 1ms
+            );
+
+            marker(:left :de.bf, hf[:nwi] << 0.5mt);
+            slabel(:ne :bold, hf[:nwi + 0.8sw] << 0.5mt << 1.1sh,
+                "Neuwittenbek"
+            );
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:nwi.ys + 100m, :nwi.ys + 2.3km]);
+            line_badge(hf[:nwi.ys + 2.3km], "1020");
+            track(hf[:nwi.ys + 2.3km, :get - 0.5sw]);
+        }
+
+        with link = "point.de.Gettorf", railway = :station {
+            track(hf[:get - 0.5sw, :get + 0.5sw]);
+            marker(:right :de.bf, hf[:get] >> 0.5mt);
+            slabel(:right, hf[:get - 0.5sw] >> 0.5mt >> 1.25sh, "Gettorf");
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:get + 0.5sw, :ndo - 0.5sw]);
+        }
+
+        with link = "point.de.Neudorf", railway = :station {
+            track(hf[:ndo - 0.5sw, :ndo + 0.5sw]);
+            marker(:left :de.ldst :removed, hf[:ndo] << 0.5mt);
+            slabel(:right :removed, hf[:ndo - 0.5sw] >> 1mt, "Neudorf");
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:ndo + 0.5sw, :aho - 0.5sw]);
+        }
+
+        with link = "point.de.Altenhof-Schlesw", railway = :station {
+            track(hf[:aho - 0.5sw, :aho + 0.5sw]);
+            marker(:left :de.hp :removed, hf[:aho] << 0.5mt);
+            marker(:left :de.exbf :removed, hf[:aho] << 0.5mt);
+            slabel(:right :removed, hf[:aho - 0.5sw] >> 1.2mt,
+                hbox(:left:base, "Altenhof", span(:light, " (Schlesw)"))
+            );
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:aho + 0.5sw, :aho + 1.9km]);
+            line_label(
+                :left:e, hf[:aho + 1.9km] << 0.5mt, (0dt, 0.2dt), "1020"
+            );
+            track(hf[:aho + 1.9km, :ecs - 0.5sw]);
+        }
+
+        with link = "point.de.Eckernförde", railway = :station {
+            track(hf[:ecs - 0.5sw, :ecs + 0.5sw]);
+            marker(:right :de.bf, hf[:ecs] >> 0.5mt);
+            slabel(:right :bold, hf[:ecs - 0.9sw] >> 0.5mt >> 1.3sh,
+                "Eckernförde"
+            );
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:ecs + 0.5sw, :eck.yk]);
+            track(hf[:eck.yk, :eck.yk + 4.5km]);
+            line_label(:left:e, hf[:eck.yk + 4.5km] << 0.5mt, "1020");
+            track(hf[:eck.yk + 4.5km, :rie - 0.5sw]);
+        }
+
+        with link = "point.de.Rieseby", railway = :station {
+            track(hf[:rie - 0.5sw, :rie + 0.5sw]);
+            marker(:right :de.hp, hf[:rie] >> 0.5mt);
+            marker(:right :de.exbf, hf[:rie] >> 0.5mt);
+            slabel(:right, hf[:rie - 0.5sw] >> 0.5mt >> 1.9sh,
+                "Rieseby"
+            );
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:rie + 0.5sw, :sls - 1sw]);
+        }
+
+        with link = "point.de.Schleibrücke-Süd", railway = :station {
+            track(hf[:sls - 1sw, :sls]);
+            marker(:right :de.hp, hf[:sls - 0.5sw] >> 0.5mt);
+            slabel(:right, hf[:sls - 1sw] >> 0.5mt >> 1.2sh,
+                "Schleibrücke Süd"
+            );
+        }
     }
 
-    with link = "point.de.Kronshagen" {
-        track(:second:station :pax, hasfle[:kro - 1ssw, :kro + 1ssw]);
-        marker(:de.hp :pax :left, hasfle[:kro]);
-        slabel(:left :pax, hasfle[:kro - 0.1ssw] << 1.8ssw, "Kronshagen");
+    with railway = :second :pax :suspended {
+        with link = "line.de.1020" {
+            track(hf[:sls, :sle]);
+        }
+
+        with link = "point.de.Boren-Schleibrücke", railway = :station {
+            marker(:right :de.bk, hf[:sle] >> 0.5mt);
+            slabel(:left :xsmall, hf[:sle - 0.3sw] << 2mt,
+                hbox(:right:base, span(:light, "Boren "), "Schleibrücke")
+            );
+        }
+
+        with link = "line.de.1020" {
+            track(hf[:sle, :sle + 0.5sw]);
+        }
     }
 
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:kro + 1ssw, :suc - 1ssw]);
-    }
+    with railway = :second :pax {
+        with link = "point.de.Schleibrücke-Nord", railway = :station {
+            track(hf[:sle + 0.5sw, :sle + 1.5sw]);
+            marker(:right :de.hp, hf[:sle + 1sw] >> 0.5mt);
+            slabel(:right, hf[:sle + 0.7sw] >> 0.5mt >> 1.2sh,
+                "Schleibrücke Nord"
+            );
+        }
 
-    with link = "point.de.Suchsdorf" {
-        track(:second :station :pax, hasfle[:suc - 1ssw, :suc + 1ssw]);
-        marker(:de.bf :pax :left, hasfle[:suc]);
-        slabel(:left :pax, hasfle[:suc - 1sw] << 1.4sh,
-            span(:small :bold, "Suchsdorf")
-        );
-    }
+        with link = "point.de.Lindaunis", railway = :station {
+            track(hf[:sle + 1.5sw, :sle + 2.6sw]);
+            marker(:right :de.hp, hf[:sle + 2.1sw] >> 0.5mt);
+            marker(:right :de.exbf, hf[:sle + 2.1sw] >> 0.5mt);
+            slabel(:right, hf[:sle + 1.9sw] >> 0.5mt >> 1.6sh, "Lindaunis");
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:suc + 1ssw, :lev - 1ssw]);
-    }
+        with link = "line.de.1020" {
+            track(hf[:sle + 2.6sw, :fah - 0.5sw]);
+        }
 
-    with link = "point.de.Levensau" {
-        track(:second:station :pax, hasfle[:lev - 1ssw, :lev + 1ssw]);
-        with layer = -1 marker(:de.hp :removed :left, hasfle[:lev]);
-        slabel(:left :removed, hasfle[:lev - 0.3sh] + (0dt, 0.55sh),
-            hbox(:right:top, "Levensau")
-        );
-    }
+        with link = "point.de.Fahrtoft", railway = :station {
+            track(hf[:fah - 0.5sw, :fah + 0.5sw]);
+            marker(:left :de.hp :removed, hf[:fah] << 0.5mt);
+            slabel(:left :removed, hf[:fah - 0.3sw] << 0.5mt << 1.7sh,
+                "Fahrtoft"
+            );
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:lev + 1ssw, :nwi - 1ssw]);
-    }
+        with link = "line.de.1020" {
+            track(hf[:fah + 0.5sw, :fah + 1.6km]);
+            line_label(:right:w, hf[:fah + 1.6km] >> 0.5mt, (0dt, -0.15dt),
+                "1020"
+            );
+            track(hf[:fah + 1.6km, :sud.ys]);
 
-    with link = "point.de.Neuwittenbek" {
-        track(:second:station :pax, hasfle[:nwi - 1ssw, :nwi + 1ssw]);
-        marker(:de.bbf :left, hasfle[:nwi]);
-        slabel(:left, hasfle[:nwi - 0.1sw] << 2sh,
-            span(:bold, "Neuwittenbek")
-        );
-    }
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax :flip, hasfle[:nwi + 2.8km, :nwi + 1ssw]);
-        line_badge(:pax, hasfle[:nwi + 2.8km], "1020");
-        track(:second :pax, hasfle[:nwi + 2.8km, :get - 1ssw]);
-    }
+        with link = "point.de.Süderbrarup", railway = :station {
+            track(hf[:sud.ys, :sud.yk + 100m]);
+            track(:nopax,
+                    hf[:sud.yk - 1.1dl, :sud.yk - 1dl]
+                --  hf[:sud.yk, :sud.yk + 0.1dl] >> 1mt >> 1ms
+            );
+            marker(:right :de.bf, hf[:sud] >> 0.5mt);
+            slabel(:right :bold, hf[:sud - 0.4sw] >> 0.5mt >> 1.3sh,
+                "Süderbrarup"
+            );
+        }
 
-    with link = "point.de.Gettorf" {
-        track(:second:station :pax, hasfle[:get - 1ssw, :get + 1ssw]);
-        marker(:de.bf :pax :right, hasfle[:get]);
-        slabel(:right :pax, hasfle[:get - 0.5sw] >> 1.4sh, "Gettorf");
-    }
+        with link = "line.de.1020" {
+            track(hf[:sud.yk + 100m, :moh - 0.5sw]);
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:get + 1ssw, :ndo - 1ssw]);
-    }
+        with link = "point.de.Mohrkirch", railway = :station {
+            track(hf[:moh - 0.5sw, :moh + 0.5sw]);
+            marker(:right :de.bf :removed, hf[:moh] >> 0.5mt);
+            slabel(:right :removed, hf[:moh - 0.5sw] >> 0.5mt >> 1.3sh,
+                "Mohrkirch*"
+            );
+        }
 
-    with link = "point.de.Neudorf" {
-        track(:second:station :pax, hasfle[:ndo - 1ssw, :ndo + 1ssw]);
-        marker(:de.ldst :gone :left, hasfle[:ndo]);
-        slabel(:left :gone, hasfle[:ndo] << 2ssw, "Neudorf");
-    }
+        with link = "line.de.1020" {
+            track(hf[:moh + 0.5sw, :moh + 3km]);
+            line_label(:right:w, hf[:moh + 3km] >> 0.5mt, (0dt, -0.3dt),
+                "1020"
+            );
+            track(hf[:moh + 3km, :sor.yr - 800m]);
+            with layer = -1 track(hf[:sor.yr - 800m, :sor.yr]);
+            track(hf[:sor.yr, :sor.ys]);
+            track(hf[:sor.ys, :sor - 0.5sw]);
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:ndo + 1ssw, :aho - 1ssw]);
-    }
+        with link = "point.de.Sörup", railway = :station {
+            track(hf[:sor - 0.5sw, :sor + 0.5sw]);
+            marker(:right :de.bf, hf[:sor] >> 0.5mt);
+            slabel(:right :bold, hf[:sor - 0.3sw] >> 0.5mt >> 1.25sh,
+                "Sörup"
+            );
+        }
 
-    with link = "point.de.Altenhof-Schlesw" {
-        track(:second:station :pax, hasfle[:aho - 1ssw, :aho + 1ssw]);
-        marker(:de.hp :removed :right, hasfle[:aho])
-        slabel(:right :removed, hasfle[:aho + 0.7sw] >> 1.2sh,
-            hbox(:left :base,
-                span(:small, "Altenhof "),
-                span(:small :light, "(Schlesw)")
-            )
-        );
-    }
+        with link = "line.de.1020" {
+            track(hf[:sor + 0.5sw, :win - 0.5sw]);
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:aho + 1ssw, :ecs - 1ssw]);
-    }
+        with link = "point.de.Winderatt", railway = :station {
+            track(hf[:win - 0.5sw, :win + 0.5sw]);
+            marker(:right :de.hst :removed, hf[:win] >> 0.5mt);
+            marker(:right :de.exbf :removed, hf[:win] >> 0.5mt);
+            slabel(:right :removed, hf[:win - 0.5sw] >> 0.5mt >> 1.6sh,
+                "Winderatt"
+            );
+        }
 
-    with link = "point.de.Eckernförde" {
-        track(:second :station :pax, hasfle[:ecs - 1ssw, :ecs + 2ssw]);
-        marker(:de.bf :pax :right, hasfle[:ecs]);
-        slabel(:right :pax, hasfle[:ecs - 0.9sw] >> 1.3sh,
-            span(:bold, "Eckernförde")
-        );
-    }
+        with link = "line.de.1020" {
+            track(hf[:win + 0.5sw, :hus - 0.5sw]);
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax :flip, hasfle[:rie - 3.2km, :ecs + 2ssw]);
-        line_badge(:pax, hasfle[:rie - 3.2km] << 0.2dt, "1020");
-        track(:second :pax, hasfle[:rie - 3.2km, :rie - 1ssw]);
-    }
+        with link = "point.de.Husby", railway = :station {
+            track(hf[:hus - 0.5sw, :hus + 0.5sw]);
+            marker(:right :de.hp, hf[:hus] >> 0.5mt);
+            marker(:right :de.exbf, hf[:hus] >> 0.5mt);
+            slabel(:right, hf[:hus - 0.25sw] >> 0.5mt >> 1.7sh,
+                "Husby"
+            );
+        }
 
-    with link = "point.de.Rieseby" {
-        track(:second:station :pax, hasfle[:rie - 1ssw, :rie + 1ssw]);
-        marker(:de.hp :pax :right, hasfle[:rie]);
-        slabel(:left :pax, hasfle[:rie - .5ssw] << 1dt, "Rieseby");
-    }
+        with link = "line.de.1020" {
+            track(hf[:hus + 0.5sw, :maa - 0.5sw]);
+        }
 
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:rie + 1ssw, :lin - 3ssw]);
-    }
+        with link = "point.de.Maasbüll-Angeln", railway = :station {
+            track(hf[:maa - 0.5sw, :maa + 0.5sw]);
+            marker(:left :de.bf :removed, hf[:maa] << 0.5mt);
+            slabel(:right :removed, hf[:maa - 0.4sw] >> 1.2mt,
+                hbox(:left:base, "Maasbüll", span(:light, " (Angeln)"))
+            );
+        }
 
-    with link = "point.de.Boren-Schleibrücke" {
-        track(:second:station :pax, hasfle[:lin - 3ssw, :lin - 1ssw]);
-        marker(:de.bk :left, hasfle[:lin - 2ssw]);
-        slabel(:right, hasfle[:lin - 2.5ssw] >> 1dt,
-            hbox(:left :base,
-                span(:small :light, "Boren "),
-                span(:small, "Schleibrücke")
-            )
-        );
-    }
+        with link = "line.de.1020" {
+            track(hf[:maa + 0.5sw, :maa + 1.5km]);
+            line_label(:right:sw, hf[:maa + 1.5km] >> 0.5mt, "1020");
+            track(hf[:maa + 1.5km, :mag]);
+            track(
+                    hf[:mag, :fle.xk]
+                ..  hf[:fle.yk, :fle.yk + 0.1dl] >> 0.5md << 0.5mt
+            );
+        }
 
-    with link = "point.de.Lindaunis" {
-        track(:second:station :pax, hasfle[:lin - 1ssw, :lin + 1ssw]);
-        marker(:de.hp :museum, hasfle[:lin]);
-        slabel(:right :museum, hasfle[:lin - 0.6sw] >> 1.5sh, "Lindaunis");
     }
-
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:lin + 1ssw, :fah - 1ssw]);
-    }
-
-    with link = "point.de.Fahrtoft" {
-        track(:second:station :pax, hasfle[:fah - 1ssw, :fah + 1ssw]);
-        with layer = -1 marker(:de.hst :removed :left, hasfle[:fah]);
-        slabel(:right:removed, hasfle[:fah - 0.35ssw] >> 1dt, "Fahrtoft");
-    }
-
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:fah + 1ssw, :sud - 1ssw]);
-    }
-
-    with link = "point.de.Süderbrarup" {
-        track(:second:station :pax, hasfle[:sud - 1ssw, :sud + 1.5ssw]);
-        marker(:de.bf :pax :right, hasfle[:sud]);
-        slabel(:left :pax, hasfle[:sud - .5ssw] << 1.5dt,
-            span(:small :bold, "Süderbrarup")
-        );
-    }
-
-    with link = "line.de.1020" {
-        track(:second :pax :flip, hasfle[:sud + 3km, :sud + 1.5ssw]);
-        line_badge(:pax, hasfle[:sud + 3km] >> 0.2dt, "1020");
-        track(:second :pax, hasfle[:sud + 3km, :moh - 1ssw]);
-    }
-
-    with link = "point.de.Mohrkirch" {
-        track(:second:station :pax, hasfle[:moh - 1ssw, :moh + 1ssw]);
-        marker(:de.bf :removed, hasfle[:moh]);
-        slabel(:right :removed, hasfle[:moh - 0.6sw] >> 1.3sh, "Mohrkirch");
-    }
-
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:moh + 1ssw, :sor - 1ssw]);
-    }
-
-    with link = "point.de.Sörup" {
-        track(:second:station :pax, hasfle[:sud - 1ssw, :sor + 1ssw]);
-        marker(:de.bf :pax :right, hasfle[:sor]);
-        slabel(:right :pax, hasfle[:sor - .5ssw] >> 1.3ssw,
-            span(:small :bold, "Sörup")
-        );
-    }
-
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:sor + 1ssw, :win - 1ssw]);
-    }
-
-    with link = "point.de.Winderatt" {
-        track(:second:station :pax, hasfle[:win - 1ssw, :win + 1ssw]);
-        marker(:de.hp :closed, hasfle[:win]);
-        slabel(:left :removed, hasfle[:win + 0.8sw] << 0.5dt,
-            hbox(:right:top, "Winderatt")
-        );
-    }
-
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:win + 1ssw, :hus - 1ssw]);
-    }
-
-    with link = "point.de.Husby" {
-        track(:second:station :pax, hasfle[:hus - 1ssw, :huh + 1ssw]);
-        with layer = -1 marker(:de.bf :removed :right, hasfle[:hus]);
-        marker(:de.hp :pax :left, hasfle[:huh]);
-        slabel(:left :pax, hasfle[:huh - 0.6sw] << 0.9sh,
-            hbox(:right:top, "Husby")
-        );
-    }
-
-    with link = "line.de.1020" {
-        track(:second :pax, hasfle[:huh + 1ssw, :maa - 1ssw]);
-    }
-
-    with link = "point.de.Maasbüll-Angeln" {
-        track(:second:station :pax, hasfle[:maa - 1ssw, :maa + 1ssw]);
-        marker(:de.bf :removed :left, hasfle[:maa]);
-        slabel(:right, hasfle[:maa - .4ssw] >> 1dt,
-            hbox(:left :base,
-                span(:small :removed, "Maasbüll "),
-                span(:small :light :removed, "(Angeln)")
-            )
-        );
-    }
-
-    with link = "line.de.1020" {
-        track(:second :pax,
-                hasfle[:maa + 1ssw, :fle.aaa]
-            ..  hasfle[:fle - 1.1ssw, :fle - 1ssw] >> 0.5dt
-        );
-    }
-
-    # point.de.Flensburg  de.1040
 }
 

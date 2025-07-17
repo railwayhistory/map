@@ -1,198 +1,119 @@
 # DE 1001.  Flensburg Weiche - Lindholm
 #
-let flwlin = path("d4.de.1001");
+let fl = path("d3.de.1001");
 
-with detail = [4, 5] {
-    # point.de.Flensburg-Weiche  de.1000
+with detail = 4 {
+    with railway = :second :closed {
+        with link = "line.de.1001" {
+            track(fl[:flw.yyl, :han - 2.8km]);
+            line_badge(fl[:han - 2.8km], "1001");
+            track(fl[:han - 2.8km, :han - 0.5sw]);
+        }
 
+        with link = "point.de.Handewitt", railway = :station {
+            track(fl[:han - 0.5sw, :han + 0.5sw]);
+            marker(:left :de.hst, fl[:han] << 0.5st);
+            marker(:left :de.exbf, fl[:han] << 0.5st);
+            station(:bottom, fl[:han] << 1.7sh,
+                "Handewitt",
+                hbox(:center:base, "5,74 ", span(:former, "(172,74)"))
+            );
+        }
 
-    with link = "line.de.1001" {
-        with layer = -4 track(:second :removed :flip,
-                flwlin[:flw.c + 2km, :flw.c + 6dt]
+        with link = "line.de.1001" {
+            track(fl[:han + 0.5sw, :una - 0.5sw]);
+        }
+
+        with link = "point.de.Unaften", railway = :station {
+            track(fl[:una - 0.5sw, :una + 0.5sw]);
+            marker(:right :de.hp, fl[:una] >> 0.5st);
+            station(:top, fl[:una] >> 0.5dt >> 1.3sh,
+                "Unaften",
+                hbox(:center:base, "7,74 ", span(:former, "(174,74)"))
+            );
+        }
+
+        with link = "line.de.1001" {
+            track(fl[:una + 0.5sw, :wal - 0.5sw]);
+        }
+
+        with link = "point.de.Wallsbüll", railway = :station {
+            track(fl[:wal - 0.5sw, :wal + 0.5sw]);
+            marker(:left :de.bf, fl[:wal] << 0.5st);
+            station(:bottom, fl[:wal] << 1.4sh + (8bp, 0bp),
+                vbox(:center:top,
+                    span(:former, "Meyn-Wallsbüll"),
+                    "Wallsbüll"
+                ),
+                hbox(:center:base, "11,43 ", span(:former, "(178,44)"))
+            );
+        }
+
+        with link = "line.de.1001" {
+            track(fl[:wal + 0.5sw, :saf - 0.5sw]);
+        }
+
+        with link = "point.de.Schafflund", railway = :station {
+            track(fl[:saf - 0.5sw, :saf + 0.5sw]);
+            marker(:left :de.hst, fl[:saf] << 0.5st);
+            marker(:left :de.exbf, fl[:saf] << 0.5st);
+        }
+        station(:bottom, fl[:saf] << 1.8sh,
+            "Schafflund",
+            hbox(:center:base, "15,56 ", span(:former, "(182,57)"))
         );
-        line_badge(:removed, flwlin[:flw.c + 2km], "1001");
-        track(:second :removed,
-                flwlin[:flw.c + 2km, :han - 400m]
-        );
+
+        with link = "line.de.1001" {
+            track(fl[:saf + 0.5sw, :saf + 3km]);
+            line_badge(fl[:saf + 3km], "1001");
+            track(fl[:saf + 3km, :spr - 0.5sw]);
+        }
+
+        with link = "point.de.Sprakebüll", railway = :station {
+            track(fl[:spr - 0.5sw, :spr + 0.5sw]);
+            marker(:right :de.hst, fl[:spr] >> 0.5st);
+            marker(:right :de.exbf, fl[:spr] >> 0.5st);
+            station(:top, fl[:spr] >> 1.7sh,
+                "Sprakebüll",
+                hbox(:center:base, "21,89 ", span(:former, "(188,90)"))
+            );
+        }
+
+        with link = "line.de.1001" {
+            track(fl[:spr + 0.5sw, :ach - 0.5sw]);
+        }
+
+        with link = "point.de.Achtrup", railway = :station {
+            track(fl[:ach - 0.5sw, :ach + 0.5sw]);
+            marker(:left :de.hst, fl[:ach] << 0.5st);
+            marker(:left :de.exbf, fl[:ach] << 0.5st);
+            station(:bottom :removed, fl[:ach] << 1.7sh,
+                "Achtrup",
+                hbox(:center:base, "25,44 ", span(:former, "(192,44)"))
+            );
+        }
+
+        with link = "line.de.1001" {
+            track(fl[:ach + 0.5sw, :lec - 0.5sw]);
+        }
+
+        with link = "point.de.Leck", railway = :station {
+            track(fl[:lec - 0.5sw, :lec + 0.5sw]);
+            marker(:left :de.bf, fl[:lec] << 0.5st);
+            station(:bottom, fl[:lec] << 1.3sh,
+                "Leck",
+                hbox(:center:base, "28,79 ", span(:former, "(195,79)"))
+            );
+        }
+
+        with link = "line.de.1001" {
+            track(fl[:lec + 0.5sw, :lec + 3.5km]);
+            line_badge(fl[:lec + 3.5km], "1001");
+            track(
+                    fl[:lec + 3.5km, :lin.yyf - 1.5dt]
+                ..  fl[:lin.yf, :lin.yf + 0.1dl] >> 1.5dt
+            );
+        }
     }
-
- 
-    with link = "point.de.Handewitt" {
-        # Gl. 1
-        track(:second:station :removed,
-                flwlin[:han - 400m, :han + 300m]
-        );
-
-        # Gl. 2
-        track(:station :removed,
-                flwlin[:han - 300m, :han - 140m] << 1dt
-            --  flwlin[:han - 100m, :han - 99m]
-        );
-
-        # Bst Ri Flensburg
-        platform(:removed,
-                flwlin[:han - 50m, :han + 60m]
-            --  flwlin[:han + 60m, :han - 50m] >> 0.7dt
-        );
-
-        # Bst Ri Lindholm
-        platform(:removed,
-                flwlin[:han + 160m, :han + 260m]
-            --  flwlin[:han + 260m, :han + 160m] >> 0.7dt
-        );
-
-        marker(:de.hst :removed :left, flwlin[:han] << 0.5dt);
-        station(:bottom :removed, flwlin[:han] << 0.5dt << 1.2sh,
-            "Handewitt", "5,74 (172,74)"
-        );
-    }
-
-
-    with link = "line.de.1001" {
-        track(:second :removed, flwlin[:han + 300m, :una - 1sw]);
-    }
-
-
-    with link = "point.de.Unaften" {
-        track(:second:station :removed,
-                flwlin[:una - 1sw, :una + 1sw]
-        );
-        
-        platform(:removed,
-                flwlin[:una - 50m, :una + 50m]
-            --  flwlin[:una + 50m, :una - 50m] << 0.7dt
-        );
-
-        with layer = -4 marker(:de.hp :removed :right, flwlin[:una] >> 0.5dt);
-        station(:top :removed, flwlin[:una] >> 0.5dt >> 1.3sh,
-            "Unaften", "7,74 (174,74)"
-        );
-    }
-
-
-    with link = "line.de.1001" {
-        track(:second :removed, flwlin[:una + 1sw, :wal - 480m]);
-    }
-
-
-    with link = "point.de.Wallsbüll" {
-        # Gl. 1
-        track(:second:station :removed,
-                flwlin[:wal - 480m, :wal + 280m]
-        );
-
-        # Gl. 2
-        track(:station :removed,
-               flwlin[:wal - 361m, :wal - 360m]
-            -- flwlin[:wal - 310m, :wal + 190m] >> 1dt
-            -- flwlin[:wal + 240m, :wal + 241m]
-        );
-
-        # Gl. 3
-        track(:station :removed,
-                flwlin[:wal - 321m, :wal - 320m]
-            --  flwlin[:wal - 270m, :wal - 110m] << 1dt
-            --  flwlin[:wal - 60m, :wal - 59m]
-        );
-
-        # Anschl. Bw
-        track(:station :removed,
-                flwlin[:wal - 420m] >> 10dt
-            --  flwlin[:wal - 320m] >> 5dt
-            ..  flwlin[:wal - 160m, :wal] >> 2dt
-            --  flwlin[:wal + 50m, :wal + 51m] >> 1dt
-        );
-
-        # Bahnsteig 1
-        platform(:removed,
-                flwlin[:wal - 40m, :wal + 70m]
-            --  flwlin[:wal + 70m, :wal - 40m] >> 0.7dt
-        );
-
-        # Bahnsteig 2
-        platform(:removed,
-                flwlin[:wal - 70m, :wal + 70m] >> 1.0dt
-            --  flwlin[:wal + 70m, :wal - 70m] << 0.4dt
-        );
-
-        marker(:de.bf :removed :left, flwlin[:wal] << 0.7dt);
-        station(:bottom :removed, flwlin[:wal] << 0.7dt << 1.2sh + (8bp, 0bp),
-            vbox(:center:top, span(:gone, "Meyn-Wallsbüll"), "Wallsbüll"),
-            "11,43 (178,44)"
-        );
-    }
-
-
-    with link = "line.de.1001" {
-        track(:second :removed, flwlin[:wal + 280m, :saf - 1sw]);
-    }
-
-
-    with link = "point.de.Schafflund" {
-        track(:second:station :removed,
-                flwlin[:saf - 1sw, :saf + 1sw]
-        );
-        marker(:de.hst :removed :left, flwlin[:saf]);
-        marker(:de.exbf :removed :left, flwlin[:saf]);
-        station(:bottom :removed, flwlin[:saf] << 0.5dt << 1.2sh,
-            "Schafflund", "15,56 (182,57)"
-        );
-    }
-
-
-    with link = "line.de.1001" {
-        track(:second :removed :flip, flwlin[:saf + 3km, :saf + 1sw]);
-        line_badge(:removed, flwlin[:saf + 3km], "1001");
-        track(:second :removed, flwlin[:saf + 3km, :spr - 1sw]);
-    }
-
-
-    with link = "point.de.Sprakebüll" {
-        track(:second:station :removed, flwlin[:spr - 1sw, :spr + 1sw]);
-        marker(:de.hst :removed :right, flwlin[:spr]);
-        marker(:de.exbf :removed :right, flwlin[:spr]);
-        station(:top :removed, flwlin[:spr] >> 0.5dt >> 1.2sh,
-            "Sprakebüll", "21,89 (188,90)"
-        );
-    }
-
-
-    with link = "line.de.1001" {
-        with layer = -4 track(:second :removed, flwlin[:spr + 1sw, :ach - 1sw]);
-    }
-
-
-    with link = "point.de.Achtrup" {
-        track(:second:station :removed, flwlin[:ach - 1sw, :ach + 1sw]);
-        marker(:de.hst :removed :left, flwlin[:ach]);
-        marker(:de.exbf :removed :left, flwlin[:ach]);
-        station(:bottom :removed, flwlin[:ach] << 0.5dt << 1.2sh,
-            "Achtrup", "25,44 (192,44)"
-        );
-    }
-
-
-    with link = "lne.de.1001" {
-        with layer = -4 track(:second :removed, flwlin[:ach + 1sw, :lec - 1sw]);
-    }
-
-
-    with link = "point.de.Leck" {
-        track(:second:station :removed, flwlin[:lec - 1sw, :lec + 1sw]);
-        marker(:de.bf :removed :left, flwlin[:lec]);
-        station(:bottom :removed, flwlin[:lec] << 1.2sh,
-            "Leck", "28,79 (195,79)"
-        );
-    }
-
-
-    with link = "line.de.1001" {
-        track(:second :removed :flip, flwlin[:lin.aa - 3km, :lec + 1sw]);
-        line_badge(:removed, flwlin[:lin.aa - 3km], "1001");
-        track(:second :removed, flwlin[:lin.aa - 3km, :lin.aa]);
-    }
-
-
-    # point.de.Lindholm  de.1001
 }
 

@@ -1,81 +1,60 @@
-# DE 1000.  Flensburg Weiche - Harrislee Grenze
+# DE 1000. Flensburg Weiche - Flensburg Grenze
 #
-let flwhag = path("d4.de.1000");
+let fh = path("d3.de.1000");
 
 with detail = 3 {
-    # point.de.Flensburg-Weiche  de.1040
+    with railway = :first :double :cat:ac15 :pax  {
+        # point.de.Flensburg-Weiche  de.1040
 
-    with link = "line.de.1000" {
-        with layer = 3 track(:first:station :double :cat:ac15,
-                flwhag[:flw.g, :ffle]
-        );
-        with layer = 4 track(:first:station :cat:ac15,
-                flwhag[:ffle, :fri - 0.5ssw] << 0.5dt
-        );
-        with layer = 4 track(:first:station :cat:ac15 :pax,
-                flwhag[:ffle, :fri - 0.5ssw] >> 0.5dt
-        );
-    }
+        with link = "line.de.1000" {
+            track(:ror,
+                    fh[:flw - 0.1dl, :flw] << 3ms << 1md << 2mt
+                ..  fh[:fri.yf + 2dt, :fri.yf + 2.1dt]
+            );
+            track(:ror, fh[:fri.yf + 2dt, :fri - 1dl]);
+        }
 
-    with link = "point.de.Flensburg-Friedensweg" {
-        with layer = -1 track(:first:station :cat:ac15,
-                flwhag[:fri - 0.5ssw, :fri] << 0.5dt
-        );
-        with layer = -1 track(:first:station :cat:ac15 :pax,
-                flwhag[:fri - 0.5ssw, :fri] >> 0.5dt
-        );
-        track(:first:station :double :cat:ac15 :pax,
-                flwhag[:fri, :fri + 0.5ssw]
-        );
-        marker(:de.abzw :cat:ac15, flwhag[:fri] >> 0.5dt);
-    }
+        with link = "point.de.Flensburg-Friedensweg", railway = :station {
+            # DE 1000
+            track(fh[:fri - 1dl, :fri + 1dl]);
 
-    with link = "line.de.1000" {
-        track(:first :double :cat:ac15 :pax,
-                flwhag[:fri + 0.5ssw, :har - 1ssw]
-        );
+            # DE 1005
+            track(:single,
+                    fh[:fri - 1dl, :fri] >> 0.5md >> 1ms >> 0.5mt
+                --  fh[:fri + 1dl, :fri + 1.1dl]
+            );
 
-        guide(:linenum :cat:ac15 :pax,
-                flwhag[:fri + 1.5km] >> 1.2dt
-            --  flwhag[:fri + 1.5km] >> 3.5dt
-        );
-        label(:linenum :cat:ac15 :pax, flwhag[:fri + 1.5km] >> 4.0dt,
-            hbox(:left:middle, "1000")
-        );
-    }
+            marker(:right :de.abzw, fh[:fri] >> 0.5md >> 1ms >> 1mt);
+            slabel(:sw :xsmall, fh[:fri] + (0.8sh, -1.4sw),
+                vbox(:left:bottom, "F.", "Friedens-", "weg")
+            );
+        }
 
-    with link = "point.de.Harrislee" {
-        track(:first:station :double :cat:ac15 :pax,
-                flwhag[:har - 1ssw, :har + 1ssw]
-        );
-        with layer = -1 marker(:de.bf :removed, flwhag[:har] >> .5dt);
-        slabel(:left :removed, flwhag[:har - 0.3sw] << 1.8dt, "Harrislee");
-    }
+        with link = "line.de.1000" {
+            track(fh[:fri, :fri + 1.7km]);
+            line_label(:left:e, fh[:fri + 1.7km] << 0.5md, "1000");
+            track(fh[:fri + 1.7km, :har - 0.5sw]);
+        }
 
-    with link = "line.de.1000" {
-        track(:first :double :cat:ac15 :pax,
-                flwhag[:har + 1ssw, :hag - 0.5ssw]
-        );
-    }
+        with link = "point.de.Harrislee", railway = :station {
+            track(fh[:har - 0.5sw, :har + 0.5sw]);
+            marker(:right :de.bf :removed, fh[:har] >> 0.5dst);
+            slabel(:e :removed, fh[:har] << 1.5dt, "Harrislee");
+        }
 
-    with link = "point.int.Harrislee-Padborg" {
-        track(:first:station :double :cat:ac15 :pax,
-                flwhag[:hag - 0.5sw, :hag + 0.5sw]
-        );
-        marker(:de.dirgr :cat:ac15, flwhag[:hag] >> 0.5dt);
-        marker(:statdt :cat:ac15, flwhag[:hag] << 0.5dt);
-        marker(:de.dirgr :cat:ac15 :left, flwhag[:hag] << 0.5dt);
-        label(:cat:ac15 :pax :badgesize,
-            flwhag[:hag] << 5dt,
-            hbox(
-                :right :middle,
-                vbox(:center :middle,
-                    " DK FP ",
-                    hbar(0.3),
-                    " DE 1000 "
+        with link = "line.de.1000" {
+            track(fh[:har + 0.5sw, :hag]);
+        }
+
+        with link = "point.int.Harrislee-Padborg" {
+            marker(:right :de.dirgr, fh[:hag] >> 0.5dst);
+            marker(:left :de.dirgr, fh[:hag] << 0.5dst);
+            slabel(:e, fh[:hag] << 1.7sh,
+                vbox(:right:middle,
+                    "Padborg grænse ", hrule(), "Flensburg Grenze "
                 )
-            )
-        );
+            );
+        }
     }
 }
 
