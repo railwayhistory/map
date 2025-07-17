@@ -104,6 +104,35 @@ with detail = 2 {
 }
 
 
+# SE JKV.  Jönköping Ö - Vireda
+with detail = 2  {
+    let jv = path("d2.se.jkv");
+
+    with railway = :first :g600 :pax :removed {
+        with link = "line.se.JKV" {
+            track(jv[:jon.yv, :ros]);
+        }
+
+        with link = "point.se.Rosendala" {
+            track(jv[:ros, :ros.yh]);
+            statdot(jv[:ros]);
+            slabel(:left, jv[:ros] + (-0.4dt, -1dt), "Rosendala");
+        }
+
+        with link = "line.se.JKV" {
+            track(jv[:ros.yh, :ros.yh + 14km]);
+            line_label(:left:se, jv[:ros.yh + 14km], "JKV");
+            track(jv[:ros.yh + 14km, :vir]);
+        }
+
+        with link = "point.se.Vireda" {
+            statdot(jv[:vir]);
+            slabel(:bottom, jv[:vir] + (0.3dt, 0.8dt), "Vireda");
+        }
+    }
+}
+
+
 # SE JLV.  Johannisberg - Ljungaverk
 with detail = 2 {
     with link = "line.se.JLV" {
@@ -151,6 +180,119 @@ with detail = 2 {
     with railway = :second :nopax :removed {
         with link = "line.se.JSH" {
             track(jh[:ham, :hah]);
+        }
+    }
+}
+
+
+# SE JVJ.  Jenny - Växjö
+with detail = 2 {
+    let jv = path("d2.se.jvj");
+
+    with railway = :first :g891 :museum {
+        with link = "line.se.JVJ" {
+            track(jv[:jen.yh, :jen.yh + 11km]);
+            line_label(:right:s, jv[:jen.yh + 11km], "JVJ");
+            track(jv[:jen.yh + 11km, :bla.yy - 7km]);
+            line_label(:left:w, jv[:bla.yy - 7km], (0dt, 0.25dt), "JVJ");
+            track(jv[:bla.yy - 7km, :bla.yy]);
+        }
+
+        with link = "point.se.Blägda" {
+            track(jv[:bla.yy, :bla]);
+            statdot(jv[:bla]);
+            slabel(:nw, jv[:bla] + (1.5dt, -0.3dt), "Blägda");
+        }
+
+        with link = "line.se.JVJ" {
+            track(jv[:bla, :spa]);
+        }
+
+        with link = "point.se.Spångenäs" {
+            track(jv[:spa, :spa.yv]);
+            statdot(jv[:spa]);
+            slabel(:nw, jv[:spa] + (0.8dt, 0.8dt), "Spångenäs");
+        }
+
+        with link = "line.se.JVJ" {
+            track(jv[:spa.yv, :spa.yv + 12km]);
+            line_label(:left:nw, jv[:spa.yv + 12km], "JVJ");
+            track(jv[:spa.yv + 12km, :hul.yj]);
+        }
+    }
+
+    # point.se.Hultsfred-smalspår -- point.se.Hultsfred  se.LHF
+
+    with railway = :first :g891 :closed {
+        with link = "line.se.JVJ" {
+            track(jv[:hul.ya, :hul.ya + 6.5km]);
+            line_label(:right:e, jv[:hul.ya + 6.5km], "JVJ");
+            track(jv[:hul.ya + 6.5km, :gar.ym]);
+        }
+
+        with link = "point.se.Gårdveda" {
+            track(jv[:gar.ym, :gar.ys]);
+            statdot(jv[:gar]);
+            slabel(:bottom, jv[:gar] + (2dt, 1.3dt), "Gårdveda");
+        }
+
+        with link = "line.se.JVJ" {
+            track(jv[:gar.ys, :gar.ys + 8.45km]);
+            line_label(:left:nw, jv[:gar.ys + 8.45km], "JVJ");
+            track(jv[:gar.ys + 8.45km, :ase.yh - 7.5km]);
+            line_label(:right:s, jv[:ase.yh - 7.5km], (-0.1dt, 0dt), "JVJ");
+            track(jv[:ase.yh - 7.5km, :ase.yh]);
+        }
+    }
+
+    # point.se.Åseda  se.NNB
+
+    with railway = :first :g891 :removed {
+        with link = "line.se.JVJ" {
+            track(jv[:ase.yv, :ase.yv + 5.3km]);
+            line_label(:left:nw, jv[:ase.yv + 5.3km], "JVJ");
+            track(jv[:ase.yv + 5.3km, :sev - 6km]);
+            line_label(:right:e, jv[:sev - 6km], "JVJ");
+            track(jv[:sev - 6km, :sev]);
+        }
+
+        with link = "point.se.Sevedstorp" {
+            track(jv[:sev, :sev.yo]);
+            statdot(jv[:sev]);
+            slabel(:left, jv[:sev] + (-1dt, -1dt), "Sevedstorp");
+        }
+
+        with link = "line.se.JVJ" {
+            track(jv[:sev.yo, :sev.yo + 13.5km]);
+            line_label(:right:e, jv[:sev.yo + 13.5km], "JVJ");
+            track(jv[:sev.yo + 13.5km, :vax.ya]);
+        }
+    }
+}
+
+
+# SE JVR.  Jönköpings central - Vaggeryd
+with detail = 2 {
+    let jv = path("d2.se.jvr");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.JVR" {
+            track(jv[:jon.ys, :jon.yu]);
+            track(jv[:jon.yu, :jog]);
+        }
+
+        with link = "point.se.Jönköpings-godsbangård" {
+            statdot(:nopax, jv[:jog]);
+            slabel(:nw, jv[:jog] + (0.5dt, 0.8dt), "J. g.");
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.se.JVR" {
+            track(jv[:jog, :vag.yj + 7.2km]);
+            line_label(:left:w, jv[:jog + 7.2km], "JVR");
+            track(jv[:jog + 7.2km, :vag.yj]);
+            line_label(:right:e, jv[:vag.yj - 7km], (0dt, 0.2dt), "JVR");
         }
     }
 }

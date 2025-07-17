@@ -1,3 +1,22 @@
+# SE KAS.  Kummelby - Arkösund
+with detail = 2 {
+    let ka = path("d2.se.kas");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.KAS" {
+            track(ka[:kum.ya, :kum.ya + 9.5km]);
+            line_label(:right:ne, ka[:kum.ya + 9.5km], "KAS");
+            track(ka[:kum.ya + 9.5km, :ark - 8.6km]);
+            line_label(:right:ne, ka[:ark - 8.6km], "KAS");
+            track(ka[:ark - 8.6km, :ark]);
+        }
+
+        with link = "point.se.Arkösund" {
+            statdot(ka[:ark]);
+            slabel(:right, ka[:ark] + (1.5dt, 0.8dt), "Arkösund");
+        }
+    }
+}
 # SE KBB.  Kisstjärnsbäcken - Bastkärn
 with detail = 2 {
     let kb = path("d2.se.kbb");
@@ -27,6 +46,27 @@ with detail = 2 {
             track(kb[:kol.yn + 6.8km, :bra.yk - 5km]);
             line_label(:left:e, kb[:bra.yk - 5km], "KBH");
             track(kb[:bra.yk - 5km, :bra.yk]);
+        }
+    }
+}
+
+
+# SE KBK.  Källby - Kinne Kleva
+with detail = 2 {
+    let kk = path("d2.se.kbk");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.KBK" {
+            track(kk[:kal.yk, :kin - 3km]);
+            line_label(:right:nw, kk[:kin - 3km], "KBK");
+            track(kk[:kin - 3km, :kin]);
+        }
+
+        with link = "point.se.Kinne-Kleva" {
+            statdot(kk[:kin]);
+            slabel(:left, kk[:kin] + (0dt, -0.5dt),
+                vbox(:right:bottom, "Kinne-", "Kleva ")
+            );
         }
     }
 }
@@ -329,7 +369,7 @@ with detail = 2 {
         }
 
         with link = "line.se.KHM" {
-            track(km[:nor, :kim.yf + 9.8km]);
+            track(km[:nor, :nor + 9.8km]);
             line_label(:right:s, km[:nor + 9.8km], "KHM");
             track(km[:nor + 9.8km, :kim.yf]);
         }
@@ -340,27 +380,32 @@ with detail = 2 {
             slabel(:left, km[:kim] + (-1.7dt, 0.9dt), "Kimstad");
         }
 
+        with link = "line.se.KHM" {
+            track(km[:kim, :nho.yv]);
+        }
+
         with link = "point.se.Norsholm" {
+            track(km[:nho.yv, :nho]);
             statdot(:nopax, km[:nho] << 0.5lt);
             slabel(:left :nopax, km[:nho] + (-1.5dt, 0.3dt), "Norsholm");
         }
 
         with link = "line.se.KHM" {
-            track(km[:kim, :kim + 14.3km]);
-            line_label(:right:se, km[:kim + 14.3km], "KHM");
-            track(km[:kim + 14.3km, :lin.yb]);
+            track(km[:nho, :nho + 11km]);
+            line_label(:right:se, km[:nho + 11km], "KHM");
+            track(km[:nho + 11km, :lin.yb]);
         }
 
         with link = "point.se.Linköpings-central" {
             track(:station, km[:lin.yb, :lin.yf]);
             statdot(km[:lin]);
             with zoom = :low slabel(
-                :ne, km[:lin] + (0dt, 0.6km) + (0dt, 0.7dt),
-                vbox(:right:top, "Linköping", "c.")
+                :ne, km[:lin] + (0dt, 0.6km) + (1.5dt, 0.5dt),
+                vbox(:right:top, span(:bold, "Linköping"), "c.")
             );
             with zoom = :high slabel(
                 :ne, km[:lin] + (0dt, 0km) + (0dt, 0.7dt),
-                vbox(:right:top, "Linköping", "c.")
+                vbox(:right:top, span(:bold, "Linköping"), "c.")
             );
         }
 
@@ -389,7 +434,9 @@ with detail = 2 {
         with link = "point.se.Nässjö-central" {
             track(:station, km[:nas.yh, :nas.yv]);
             statdot(km[:nas]);
-            slabel(:right, km[:nas] + (1.5dt, 0dt), "Nässjö c.");
+            slabel(:right, km[:nas] + (1.5dt, 0dt),
+                hbox(:left:base, span(:bold, "Nässjö"), " c.")
+            );
         }
 
         with link = "line.se.KHM" {
@@ -415,7 +462,7 @@ with detail = 2 {
         with link = "point.se.Alvesta" {
             track(:station, km[:alv.yk, :alv.yg]);
             statdot(km[:alv]);
-            slabel(:right, km[:alv] + (0.75km, 0dt) + (1dt, 0.8dt),
+            slabel(:right, km[:alv] + (0.75km, 0dt) + (1.3dt, 0.5dt),
                 "Alvesta"
             );
         }
@@ -545,6 +592,102 @@ with detail = 2 {
     }
 }
 
+# SE KMB.  Kalmar - Berga
+with detail = 2 {
+    let kb = path("d2.se.kmb");
+
+    with railway = :first :pax {
+        with link = "line.se.KMB" {
+            track(kb[:kas.yb, :kla.yk]);
+        }
+    }
+
+    with railway = :first :pax :removed {
+        let kk = path("d2.se.kmb.kal");
+
+        with link = "line.se.KMB" {
+            track(kk[:kal.yb, :kal.yt]);
+            track(kk[:kal.yt, :kla.yk]);
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.se.KMB" {
+            track(kb[:kla.yk, :kla.yk + 5km]);
+            line_label(:left:e, kb[:kla.yk + 5km], "KMB");
+            track(kb[:kla.yk + 5km, :blo - 5.4km]);
+            line_label(:right:w, kb[:blo - 5.4km], "KMB");
+            track(kb[:blo - 5.4km, :blo]);
+        }
+
+        with link = "point.se.Blomstermåla" {
+            statdot(kb[:blo]);
+            slabel(:ne, kb[:blo] + (0.5dt, 0.5dt),
+                vbox(:right:topbase, "Blomster-", "måla ")
+            );
+        }
+
+        with link = "line.se.KMB" {
+            track(kb[:blo, :blo.ym]);
+            track(kb[:blo.ym, :san.ym]);
+        }
+
+        with link = "point.se.Sandbäckshult" {
+            track(kb[:san.ym, :san.yf]);
+            statdot(:removed, kb[:san]);
+            slabel(:ne :removed, kb[:san] + (-1.2km, 0dt) + (-2dt, -1.3dt),
+                "Sandbäckshult"
+            );
+        }
+
+        with link = "line.se.KMB" {
+            track(kb[:san.yf, :san.yf + 8km]);
+            line_label(:left:e, kb[:san.yf + 8km], (0dt, 0.1dt), "KMB");
+            track(kb[:san.yf + 8km, :rud.yb]);
+        }
+
+        with link = "point.se.Ruda" {
+            track(kb[:rud.yb, :rud.yo]);
+            statdot(:nopax, kb[:rud]);
+            slabel(:left :nopax, kb[:rud] + (-1.5dt, 0.8dt), "Ruda");
+        }
+
+        with link = "line.se.KMB" {
+            track(kb[:rud.yo, :rud.yo + 9.8km]);
+            line_label(:left:e, kb[:rud.yo + 9.8km], "KMB");
+            track(kb[:rud.yo + 9.8km, :ber.yk]);
+        }
+    }
+}
+
+
+# SE KMT.  Kalmar - Torsås
+with detail = 2 {
+    let kt = path("d2.se.kmt");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.KMT" {
+            track(kt[:kal.yt, :kal.yt + 7km]);
+            line_label(:left:n, kt[:kal.yt + 7km], (0.5dt, 0dt), "KMT");
+            track(kt[:kal.yt + 7km, :lju]);
+        }
+
+        with link = "point.se.Ljungbyholm" {
+            track(kt[:lju, :lju.yp]);
+            statdot(kt[:lju]);
+            slabel(:left, kt[:lju] + (-1.3dt, 0dt), "Ljungbyholm");
+        }
+
+        with link = "line.se.KMT" {
+            track(kt[:lju.yp, :lju.yp + 5km]);
+            line_label(:left:w, kt[:lju.yp + 5km], "KMT");
+            track(kt[:lju.yp + 5km, :tor.yg - 5km]);
+            line_label(:right:se, kt[:tor.yg - 5km], "KMT");
+            track(kt[:tor.yg - 5km, :tor.yg]);
+        }
+    }
+}
+
 
 # SE KMV.  Kolmården - Virå
 with detail = 2 {
@@ -581,6 +724,25 @@ with detail = 2 {
                 "KNH"
             );
             track(km[:kim.yn + 2km, :nho] << 0.5md << 1ms << 0.5lt);
+        }
+    }
+}
+
+
+# SE KPS.  Kvillsfors - Pauliström
+with detail = 2 {
+    let kp = path("d2.se.kps");
+
+    with railway = :first :nopax {
+        with link = "line.se.KPS" {
+            track(kp[:kvi.yp, :kvi.yp + 3.5km]);
+            line_label(:left:e, kp[:kvi.yp + 3.5km], "KPS");
+            track(kp[:kvi.yp + 3.5km, :pau]);
+        }
+
+        with link = "point.se.Pauliström" {
+            statdot(kp[:pau]);
+            slabel(:top, kp[:pau] + (0dt, -0.8dt), "Pauliström");
         }
     }
 }
@@ -641,6 +803,81 @@ with detail = 2 {
         with link = "point.se.Övertorneå" {
             statdot(ko[:ove]);
             slabel(:top, ko[:ove] + (0dt, -0.8dt), "Övertorneå");
+        }
+    }
+}
+
+
+# SE KSG.  Kristianstads central - Gullberna
+with detail = 2 {
+    let kg = path("d2.se.ksg");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.KSG" {
+            track(kg[:kri.yk, :krg.yh]);
+            track(kg[:krg.yh, :krg.ya]);
+            track(kg[:krg.ya, :sol.ya]);
+            line_label(:left:s, kg[:krg.ya + 13km], (-0.2dt, 0dt), "KSG");
+        }
+
+        with link = "point.se.Sölvesborg" {
+            track(kg[:sol.ya, :sol]);
+            statdot(kg[:sol]);
+            slabel(:nw, kg[:sol] + (1.3dt, 0dt), "Sölvesborg");
+        }
+
+        with link = "line.se.KSG" {
+            track(kg[:sol, :sol.yh]);
+            track(kg[:sol.yh, :sol.yh + 6km]);
+            line_label(:right:w, kg[:sol.yh + 6km], "KSG");
+            track(kg[:sol.yh + 6km, :san]);
+        }
+
+        with link = "point.se.Sandbäck" {
+            track(kg[:san, :san.yo]);
+            statdot(:removed, kg[:san]);
+            slabel(:right :removed, kg[:san] + (1.5dt, 1.3dt), "Sandbäck");
+        }
+
+        with link = "line.se.KSG" {
+            track(kg[:san.yo, :kar.yv]);
+            track(kg[:kar.yv, :kar]);
+        }
+
+        with link = "point.se.Karlshamn" {
+            statdot(kg[:kar]);
+            slabel(:bottom, kg[:kar] + (0dt, 0.5km) + (0dt, 0.8dt),
+                "Karlshamn"
+            );
+        }
+
+        with link = "line.se.KSG" {
+            track(kg[:kar.yv, :kar.yv + 14.8km]);
+            line_label(:right:n, kg[:kar.yv + 14.8km], "KSG");
+            track(kg[:kar.yv + 14.8km, :bre.yv]);
+        }
+
+        with link = "point.se.Bredåkra" {
+            track(kg[:bre.yv, :bre]);
+            statdot(:removed, kg[:bre]);
+            slabel(:right :removed, kg[:bre] + (0dt, -1.3dt), "Bredåkra");
+        }
+
+        with link = "line.se.KSG" {
+            track(kg[:bre, :ron]);
+        }
+
+        with link = "point.se.Ronneby" {
+            track(kg[:ron, :ron.yh]);
+            statdot(kg[:ron]);
+            slabel(:ne, kg[:ron] + (-1.5dt, -0.3dt), "Ronneby");
+        }
+
+        with link = "line.se.KSG" {
+            track(kg[:ron.yh, :gul.yt - 7.3km]);
+            line_label(:left:s, kg[:gul.yt - 7.3km], "KSG");
+            track(:casing, kg[:gul.yt - 7.3km, :gul.yt]);
+            track(kg[:gul.yt, :gul]);
         }
     }
 }

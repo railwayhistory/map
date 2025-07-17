@@ -6,6 +6,22 @@ with detail = 2 {
 }
 
 
+# SE LBM.  Lessebo - Målerås
+with detail = 2 {
+    let lm = path("d2.se.lbm");
+
+    with railway = :first :g600 :pax :removed {
+        with link = "line.se.LBM" {
+            track(lm[:les, :les + 5.3km]);
+            line_label(:right:nw, lm[:les + 5.3km], "LBM");
+            track(lm[:les + 5.3km, :mal - 6.5km]);
+            line_label(:left:se, lm[:mal - 6.5km], "LBM");
+            track(lm[:mal - 6.5km, :mal]);
+        }
+    }
+}
+
+
 # SE LCB.  Laxå - Charlottenberg gränsen
 with detail = 2 {
     let lc = path("d2.se.lcb");
@@ -169,6 +185,67 @@ with detail = 2 {
 }
 
 
+# SE LHF.  Linköpings central - Hultsfred
+with detail = 2 {
+    let lh = path("d2.se.lhf");
+
+    with railway = :first :pax {
+        with link = "line.se.LHF" {
+            track(lh[:lin.yb, :lin.yb + 9.5km]);
+            line_label(:left:w, lh[:lin.yb + 9.5km], "LHF");
+            track(lh[:lin.yb + 9.5km, :bja]);
+        }
+
+        with link = "point.se.Bjärka-Säby" {
+            track(lh[:bja, :bja.ya]);
+            statdot(:nopax, lh[:bja]);
+            slabel(:left, lh[:bja] + (-1.5dt, 0.3dt), "Bjärka-Säby");
+        }
+
+        with link = "line.se.LHF" {
+            track(lh[:bja.ya, :bja.ya + 8.55km]);
+            line_label(:right:e, lh[:bja.ya + 8.55km], "LHF");
+            track(lh[:bja.ya + 8.55km, :kis + 4.25km]);
+            line_label(:right:e, lh[:kis + 4.25km], (0dt, -0.1dt), "LHF");
+            track(lh[:kis + 4.25km, :vim - 8km]);
+            line_label(:left:w, lh[:vim - 8km], (0dt, -0.15dt), "LHF");
+            track(lh[:vim - 8km, :vim.yy]);
+        }
+
+        with link = "point.se.Vimmerby" {
+            track(lh[:vim.yy, :vim.ys]);
+            statdot(lh[:vim]);
+            slabel(:right, lh[:vim] + (1dt, -0.5dt), "Vimmerby");
+        }
+
+        with link = "line.se.LHF" {
+            track(lh[:vim.ys, :hul.yl - 7km]);
+            line_label(:left:w, lh[:hul.yl - 7km], "LHF");
+            track(lh[:hul.yl - 7km, :hul.yl]);
+        }
+    }
+}
+
+
+# SE LHP.  Ljungbyholm - Påryd
+with detail = 2 {
+    let lp = path("d2.se.lhp");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.LHP" {
+            track(lp[:lju.yp, :lju.yp + 11km]);
+            line_label(:left:nw, lp[:lju.yp + 11km], "LHP");
+            track(lp[:lju.yp + 11km, :par]);
+        }
+
+        with link = "point.se.Påryd" {
+            statdot(lp[:par]);
+            slabel(:left, lp[:par]  + (-1.5dt, 1dt), "Påryd");
+        }
+    }
+}
+
+
 # SE LHV.  Ljusdal - Hudiksvall
 with detail = 2 {
     let lh = path("d2.se.lhv");
@@ -264,6 +341,25 @@ with detail = 2 {
         with link = "point.se.Ödeshög" {
             statdot(lo[:ode]);
             slabel(:bottom, lo[:ode] + (-0.3dt, 0.8dt), "Ödeshög");
+        }
+    }
+}
+
+
+# SE LKT.  Lidköping - Tun
+with detail = 2 {
+    let lt = path("d2.se.lkt");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.LKT" {
+            track(lt[:lid.yt, :lid.yt + 13.8km]);
+            line_label(:right:se, lt[:lid.yt + 13.8km], "LKT");
+            track(lt[:lid.yt + 13.8km, :tun]);
+        }
+
+        with link = "point.se.Tun" {
+            statdot(lt[:tun]);
+            slabel(:left, lt[:tun] + (-1.5dt, 0.8dt), "Tun");
         }
     }
 }
@@ -379,6 +475,38 @@ with detail = 2 {
         with link = "point.se.Hyvleriet" {
             statdot(ln[:hyv]);
             slabel(:top, ln[:hyv] + (1dt, -0.8dt), "Hyvleriet");
+        }
+    }
+}
+
+
+# SE LRF.  Limmared - Falkenberg
+with detail = 2 {
+    let lf = path("d2.se.lrf");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.LRF" {
+            track(lf[:lim.ya, :lim.ya + 10km]);
+            line_label(:right:s, lf[:lim.ya + 10km], "LRF");
+            track(lf[:lim.ya + 10km, :axe]);
+        }
+
+        # point.se.Axelfors  se.HAF
+
+
+        with link = "line.se.LRF" {
+            track(lf[:axe, :axe + 9km]);
+            line_label(:left:nw, lf[:axe + 9km], "LRF");
+            track(lf[:axe + 9km, :ull.yl - 8km]);
+            line_label(:right:se, lf[:ull.yl - 8km], "LRF");
+            track(lf[:ull.yl - 8km, :ull.yl]);
+        }
+
+        # point.se.Ullared
+
+        with link = "line.se.LRF" {
+            track(lf[:ull.yf, :fal.yl]);
+            line_label(:left:w, lf[:ull.yf + 14km], (0dt, 0.15dt), "LRF");
         }
     }
 }
