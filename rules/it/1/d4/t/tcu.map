@@ -1,0 +1,224 @@
+# IT TCU.  Trofarello - Cuneo
+#
+let tc = path("d4.it.tcu");
+
+with detail = [4, 5] {
+    
+
+    with link = "line.it.TCU" {
+        track(:first :cat:dc30 :pax :flip, tc[:mic.f, :ben + 460m]);
+        track(:first :cat:dc30 :pax :tight, tc[:mic.f, :mad.a]);
+    }
+
+    with link = "point.it.Bivio-Madonna-dell-Olmo" {
+        # Linea Gesso
+        track(:first,
+                tc[:mad.yg - 50m, :mad.yg] << 1dt
+            --  tc[:mad - 85m, :mad - 84m]
+        );
+
+        # Linea Fossano
+        track(:first:station :cat:dc30 :pax, tc[:mad.a, :mad.f]);
+            track(:station :cat:dc30 :pax,
+                    tc[:mad + 15m]
+                --  tc[:mad + 95m] >> 1dt
+            );
+
+        # Linea Saluzzo
+        track(:first:station :cat:dc30 :pax, tc[:mad.a, :mad.f] >> 1dt);
+            track(:station :cat:dc30 :pax,
+                    tc[:mad - 85m] >> 1dt
+                --  tc[:mad - 5m]
+            );
+
+        marker(:left :de.abzw :cat:dc30 :pax, tc[:mad]);
+        station(:left :cat:dc30 :pax, tc[:mad + 0.4sw] >> 2.0dt,
+            span(:bold, "Bivio Madonna dell’Olmo"),
+            hbox(:center:top,
+                vbox(:right:top, "CCS: ", "TCU: ", "CCG: "),
+                vbox(:right:top, "2,", "72,", "3,"),
+                vbox(:left:top, "25", "42", "26")
+            )
+        );
+    }
+
+    with link = "line.it.TCU" {
+        track(:first :double :cat:dc30 :pax, tc[:mad.f, :cun.a] >> 0.5dt);
+    }
+
+    with link = "point.it.Cuneo" {
+        let cun = path("d4.it.tcu.cun");
+
+        # Bin. «-4 Sud»
+        track(:station,
+                tc[:cun + 350m, :cun + 520m] << 3dt
+            --  tc[:cun + 600m, :cun + 601m] << 1dt
+        );
+
+        # Bin. «-3 Sud»
+        track(:station, tc[:cun + 350m, :cun + 560m] << 2dt);
+
+        # Bin. «-2 Sud»
+        track(:station,
+                tc[:cun + 120m, :cun + 280m] << 2dt
+            --  tc[:cun + 330m, :cun + 331m] << 1dt
+        );
+
+        # Bin. «-1 Nord»
+        track(:station,
+                tc[:cun - 530m] << 3dt -- tc[:cun - 510m] << 2.3dt
+            ..  tc[:cun - 370m, :cun - 200m] << 1dt
+            ..  tc[:cun - 110m, :cun - 100m] << 1.5dt
+        );
+            track(:station,
+                    tc[:cun - 230m] << 1dt
+                --  tc[:cun - 170m]
+            );
+
+        # Bin. «-1 Sud»
+        track(:station,
+                tc[:cun + 120m, :gal.a - 0.25dt] << 1dt
+        );
+
+        # Bin. 1
+        track(:first:station :cat:dc30 :pax,
+                tc[:cun.a, :cun + 200m]
+            --  tc[:cun + 379m, :cun + 380m] >> 2dt
+            #--  tc[:cun.a, :cun.f]
+        );
+
+        # Bin. 2
+        track(:first:station :cat:dc30 :pax, tc[:cun.a, :cun + 280m] >> 1dt);
+
+        # Bin. 3
+        track(:station :cat:dc30 :pax,
+                tc[:cun - 281m + 2.1dl, :cun - 280m + 2.1dl] >> 1dt
+            --  tc[:cun - 240m + 2.1dl, :cun + 160m] >> 2dt
+            --  tc[:cun + 235m, :cun + 236m] >> 1dt
+        );
+
+        # Bin. 4
+        track(:station :cat:dc30 :pax,
+                tc[:cun - 361m + 1.4dl, :cun - 360m + 1.4dl]
+            --  tc[:cun - 240m + 1.4dl, :cun - 200m + 2.1dl] >> 3dt
+        );
+        track(:first:station :cat:dc30 :pax,
+                tc[:cun - 200m + 2.1dl, :cun + 260m - 2.1dl] >> 3dt
+            --  tc[:cun + 300m - 2.1dl, :cun + 420m] >> 2dt
+            --  tc[:cun + 500m, :gal.a + 1dt]
+        );
+            track(:station,
+                    tc[:cun + 520m]
+                --  tc[:cun + 560m] << 1dt
+            );
+            track(:station :cat:dc30,
+                    tc[:cun + 560m]
+                --  tc[:cun + 600m] >> 1dt
+            );
+
+        # Bin. 5
+        track(:station :cat:dc30 :pax,
+                tc[:cun - 240m + 0.7dl, :cun + 260m - 1.4dl] >> 4dt
+        );
+
+        # Bin. 6
+        track(:station :cat:dc30 :pax,
+                tc[:cun - 361m + 0.7dl, :cun - 360m + 0.7dl] >> 1dt
+            --  tc[:cun - 200m + 0.7dl, :cun + 220m - 1.4dl] >> 5dt
+            --  tc[:cun + 340m - 1.4dl, :cun + 341m - 1.4dl] >> 2dt
+        );
+
+        # Bin. 7/8
+        track(:station :cat:dc30,
+                tc[:cun - 200m, :cun + 220m - 0.7dl] >> 6dt
+        );
+
+        # Bin. 9/10
+        track(:station :cat:dc30,
+                tc[:cun - 160m, :cun + 180m - 0.7dl] >> 7dt
+            --  tc[:cun + 340m - 0.7dl, :cun + 341m - 0.7dl] >> 3dt
+        );
+
+        # Bin. 11/12
+        track(:station :cat:dc30,
+                tc[:cun - 120m, :cun + 180m] >> 8dt
+        );
+
+        # Bin. 13
+        track(:station :cat:dc30,
+                tc[:cun - 440m] -- tc[:cun - 400m] >> 1dt
+            --  tc[:cun - 80m, :cun + 140m] >> 9dt
+            --  tc[:cun + 500m, :cun + 501m]
+        );
+
+        # Bin. Deposito -1
+        track(:station,
+                cun[:f - 201m, :f - 200m] >> 1dt
+            --  cun[:f - 120m, :f] << 1dt
+        );
+
+        # Bin. Deposito 1
+        track(:station, cun[:f - 160m, :f]);
+
+        # Bin. Deposito 2
+        track(:station :cat:dc30,
+                tc[:cun + 520m, :cun.yd - 2dl] >> 1dt
+            ..  cun[:cun.yd + 2dl, :cun.yd + 230m] >> 1dt 
+        );
+        track(:station, cun[:cun.yd + 230m, :f] >> 1dt);
+
+        # Bin. Deposito 3
+        track(:station :cat:dc30,
+                tc[:cun + 300m - 1.4dl, :cun + 420m + 0.7dl] >> 3dt
+            --  tc[:cun + 460m + 0.7dl, :cun.yd - 2dl] >> 2dt
+            ..  cun[:cun.yd + 2dl, :cun.yd + 230m] >> 2dt 
+        );
+        track(:station, cun[:cun.yd + 230m, :f] >> 2dt);
+            track(:station :cat:dc30,
+                    tc[:cun + 540m] >> 2dt
+                --  tc[:cun + 580m] >> 1dt
+            );
+
+        # Bin. Deposito 4
+        track(:station,
+                cun[:f - 160m, :f] >> 3dt
+        );
+
+        # Bin. Deposito 5
+        track(:station,
+                cun[:f - 241m, :f - 240m] >> 1dt
+            --  cun[:f - 120m, :f] >> 4dt
+        );
+
+        # Banchina 1
+        platform(:cat:dc30 :pax,
+                tc[:cun - 160m, :cun + 110m]
+            --  tc[:cun + 110m, :cun - 160m] >> 0.7dt
+        );
+
+        # Banchina 3/4
+        platform(:cat:dc30 :pax,
+                tc[:cun - 200m + 2.1dl, :cun + 110m] >> 2dt
+            --  tc[:cun + 110m, :cun - 200m + 2.1dl] << 3dt
+        );
+
+        # Banchina 5/6
+        platform(:cat:dc30 :pax,
+                tc[:cun - 200m + 2.1dl, :cun + 110m] >> 4dt
+            --  tc[:cun + 110m, :cun - 200m + 2.1dl] << 5dt
+        );
+
+        marker(:left :de.bf :cat:dc30 :pax, tc[:cun] << 2dt);
+        station(:right:left_align :cat:dc30 :pax,
+            tc[:cun + 0.3sw] << 2dt << 1.8sh,
+            span(:bold, "Cuneo"),
+            hbox(:center:top,
+                vbox(:right:top, "TCU: ", "CBO: "),
+                vbox(:right:top, "75+", "0+"),
+                vbox(:left:top, "680", "000")
+            )
+        );
+    }
+
+}
+

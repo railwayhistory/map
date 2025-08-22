@@ -1,0 +1,175 @@
+# AT 230.  Wien Praterstern - Staatsgrenze nächst Bernhardsthal Fbf
+with detail = 2 {
+    let wb = path("d2.at.230");
+
+    with link = "point.at.Wien-Praterstern" {
+        statdot(:cat:ac15 :pax, wb[:pra]);
+    }
+
+    with link = "line.at.230" {
+        track(:first :double :cat:ac15 :pax, wb[:pra, :flo]);
+    }
+
+    with link = "point.at.Wien-Floridsdorf" {
+        track(:first:station :double :cat:ac15 :pax, wb[:flo, :flo.ys]);
+        statdot(:cat:ac15 :pax, wb[:flo]);
+    }
+
+    with link = "line.at.230" {
+        track(:first :double :cat:ac15 :pax, wb[:flo.ys, :gan]);
+        line_badge(:cat:ac15 :pax, wb[:gan - 10km], "230");
+    }
+
+    with link = "point.at.Gänserndorf" {
+        track(:first:station :double :cat:ac15 :pax, wb[:gan, :gan.ym]);
+        statdot(:cat:ac15 :pax, wb[:gan]);
+        slabel(:bottom :cat:ac15 :pax, wb[:gan] + (1dt, 2.5dt),
+            "Gänserndorf"
+        );
+    }
+
+    with link = "line.at.230" {
+        track(:first :double :cat:ac15 :pax, wb[:gan.ym, :dro]);
+        line_label(:right:w :double :cat:ac15 :pax, wb[:gan.ym + 13km], "230");
+    }
+
+    with link = "point.at.Drösing" {
+        track(:first:station :double :cat:ac15 :pax, wb[:dro, :dro.yz]);
+        statdot(:cat:ac15 :pax, wb[:dro]);
+        slabel(:right :cat:ac15 :pax, wb[:dro] + (1.5dt, 0.8dt), "Drösing");
+    }
+
+    with link = "line.at.230" {
+        track(:first :double :cat:ac15 :pax, wb[:dro.yz, :hoh.yk]);
+    }
+
+    with link = "point.at.Hohenau" {
+        track(:first:station :double :cat:ac15 :pax, wb[:hoh.yk, :hoh]);
+        statdot(:cat:ac15 :pax, wb[:hoh]);
+        slabel(:right :cat:ac15 :pax, wb[:hoh] + (1.5dt, 0.8dt), "Hohenau");
+    }
+
+    with link = "line.at.230" {
+        track(:first :double :cat:ac15 :pax, wb[:hoh, :beb]);
+        line_label(:left:e :double :cat:ac15 :pax, wb[:beb - 3km], "230");
+    }
+
+    with link = "point.int.Bernhardsthal-Břeclav" {
+        marker(:right :ref :cat:ac15 :pax, wb[:beb]);
+        marker(:left :ref :cat:ac15 :pax, wb[:beb]);
+    }
+}
+
+
+# AT 232.  Gänserndorf - Mistelbach Lokalbahn
+with detail = 2 {
+    let gm = path("d2.at.232");
+
+    with link = "line.at.232" {
+        track(:second, gm[:gan.yp, :gsw.ys]);
+        line_label(:right:s, gm[:gan.yp + 5km], "   232");
+    }
+
+    with link = "point.at.Groß-Schweinbarth" {
+        track(:second:station, gm[:gsw.ys, :gsw]);
+        statdot(:open, gm[:gsw]);
+        slabel(:right, gm[:gsw] + (1.5dt, 0.8dt),
+            vbox(:left:bottom, "Groß", "Schweinbarth")
+        );
+    }
+
+    with link = "line.at.232" {
+        track(:second, gm[:gsw, :pir]);
+    }
+
+    with link = "point.at.Bad-Pirawarth" {
+        track(:second:station :museum, gm[:pir, :pir.yd]);
+        statdot(:museum, gm[:pir]);
+        slabel(:left :museum, gm[:pir] + (-1.0dt, 0.3dt),
+            vbox(:right:middle, "Bad  ", "Pirawarth")
+        );
+    }
+
+    with link = "line.at.232" {
+        track(:second :removed, gm[:pir.yd, :paa.xr]);
+        line_label(:left:e :removed, gm[:pir.yd + 7km], "232");
+
+        track(:second, gm[:paa.xr, :mil.yg]);
+    }
+}
+
+
+# AT 233.  Stammersdorf - Groß Schweinbarth
+with detail = 2 {
+    let sg = path("d2.at.233");
+
+    with link = "point.at.Stammersdorf" {
+        statdot(:removed, sg[:sta]);
+    }
+
+    with link = "line.at.233" {
+        track(:second :removed, sg[:sta, :odo]);
+        line_label(:left:s :removed, sg[:odo - 5km], "233  ");
+
+        track(:second, sg[:odo, :gsw.ys]);
+        line_label(:left:s, sg[:odo + 6km], "233");
+    }
+}
+
+
+# AT 234.  Bad Pirawarth - Dobermannsdorf
+with detail = 2 {
+    let pd = path("d2.at.234");
+
+    with link = "line.at.234" {
+        track(:second :museum, pd[:pir.yd, :sul]);
+    }
+
+    with link = "point.at.Sulz-Nexing" {
+        statdot(:museum, pd[:sul]);
+        slabel(:top :museum, pd[:sul] + (0dt, -0.8dt), "Sulz");
+    }
+
+    with link = "line.at.234" {
+        track(:second :removed, pd[:sul, :zis]);
+        line_label(:right:nw :removed, pd[:sul + 3km], "234");
+    }
+
+    with link = "point.at.Zistersdorf" {
+        track(:second:station :closed, pd[:zis, :zis.yd]);
+        statdot(:closed, pd[:zis]);
+        slabel(:right :closed, pd[:zis] + (-0.5dt, 1.0dt),
+            hbox(:left:top, "Zistersdorf")
+        );
+    }
+
+    with link = "line.at.234" {
+        track(:second :removed, pd[:zis.yd, :dob.yp]);
+        line_label(:left:e :removed, pd[:zis + 4km], "234");
+    }
+}
+
+
+# AT 235.  Gänserndorf - Marchegg
+with detail = 2 {
+    let gm = path("d2.at.235");
+
+    with link = "line.at.235" {
+        track(:first :cat:ac15 :pax, gm[:gan.ym, :mar.yg]);
+        line_label(:left:sw :cat:ac15 :pax, gm[:gan.ym + 9.3km], "235");
+    }
+}
+
+
+# AT 237.  Drösing - Zistersdorf
+with detail = 2 {
+    let dz = path("d2.at.237");
+
+    with link = "line.at.237" {
+        track(:second, dz[:dro.yz, :zab]);
+        line_label(:right:s, dz[:dro.yz + 4.1km], "237");
+
+        track(:second :closed, dz[:zab, :zis.yd]);
+    }
+}
+

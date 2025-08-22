@@ -1,0 +1,134 @@
+# AT 180.  Wien Meidling - Wiener Neustadt Hbf
+with detail = 2 {
+    let mn = path("d2.at.180");
+
+    with link = "line.at.180" {
+        track(:first :cat:ac15 :pax, mn[:mei.ye, :mat.y]);
+        
+        track(:first :double :cat:ac15 :pax, mn[:mat.y, :wam.yw]);
+        line_label(:left:w :double :cat:ac15 :pax, mn[:wam.yw - 11km], "180");
+    }
+
+    with link = "point.at.Wampersdorf" {
+        track(:first:station :double :cat:ac15 :pax, mn[:wam.yw, :wam]);
+        statdot(:cat:ac15 :pax, mn[:wam]);
+        slabel(:right :cat:ac15 :pax, mn[:wam] + (1.8dt, 1.0dt),
+            "Wampersdorf"
+        );
+    }
+
+    with link = "line.at.180" {
+        track(:first :double :cat:ac15 :pax, mn[:wam, :ebn.y]);
+        track(:first :cat:ac15 :pax, mn[:ebn.y, :ebe.ys]);
+    }
+
+    with link = "point.at.Ebenfurth" {
+        track(:first:station :cat:ac15 :pax, mn[:ebe.ys, :ebe.yw]);
+        statdot(:cat:ac15 :pax, mn[:ebe]);
+        slabel(:right :cat:ac15 :pax,
+            mn[:ebe] + (1.0km, 0dt) + (1.0dt, 0.2dt),
+            "Ebenfurth"
+        );
+    }
+
+    with link = "line.at.180" {
+        track(:first :double :cat:ac15 :pax, mn[:ebe.yw, :wne.ye]);
+        line_label(:left:n :double :cat:ac15 :pax,
+            mn[:ebe.yw + 2.5km], "  180"
+        );
+    }
+}
+
+
+# AT 181.  Wampersdorf - Gramatneusiedl
+with detail = 2 {
+    let wg = path("d2.at.181");
+
+    with link = "line.at.181" {
+        track(:first :cat:ac15, wg[:wam.yw, :gra.yw]);
+        line_label(:right:nw :cat:ac15, wg[:wam.yw + 6km], "181");
+    }
+}
+
+
+# AT 183.  Ebenfurth - Wittmannsdorf
+with detail = 2 {
+    let ew = path("d2.at.183");
+
+    with link = "line.at.183" {
+        track(:second :removed, ew[:ebe.yw, :sol.ye]);
+        with zoom = :high {
+            line_label(:left:n :removed, ew[:ebe.yw + 5km], "183  ");
+        }
+
+        track(:second :removed, ew[:sol.yw, :wit.ys]);
+    }
+}
+
+
+# AT 185.  Wiener Neustadt Hbf - Staatsgrenze nächst Loipersbach-Schattendorf
+with detail = 2 {
+    let wl = path("d2.at.185");
+
+    with link = "point.at.Wiener-Neustadt-Hbf" {
+        track(:first:station :pax, wl[:wne.ys, :wne.ya]);
+    }
+
+    with link = "line.at.185" {
+        track(:first :pax, wl[:wne.ya, :log]);
+        line_label(:left:sw :pax, wl[:wne.ya + 9km], "185");
+    }
+}
+
+
+# AT 188.  Staatsgrenze Deutschkreutz - Staatsgrenze Rattersdorf-Liebing
+with detail = 2 {
+    let dr = path("d2.at.188");
+
+    with link = "point.int.Deutschkreutz-Harka" {
+        marker(:left :ref :cat:ac25, dr[:deg]);
+        marker(:right :ref :cat:ac25, dr[:deg]);
+    }
+
+    with link = "line.at.188" {
+        track(:first :cat:ac25, dr[:deg, :deu]);
+    }
+
+    with link = "point.at.Deutschkreutz" {
+        statdot(:cat:ac25, dr[:deu]);
+        slabel(:left :cat:ac25, dr[:deu] + (-1.5dt, -0.8dt), "Deutschkreutz");
+    }
+
+    with link = "line.at.188" {
+        track(:first :closed, dr[:deu, :olo.yz]);
+        line_label(:right:e :closed, dr[:deu + 21km], "188");
+    }
+
+    with link = "point.at.Oberloisdorf" {
+        track(:first:station :closed, dr[:olo.yz, :olo]);
+        statdot(:closed, dr[:olo]);
+        slabel(:left :closed, dr[:olo] + (-1.0dt, -0.5dt), "Oberloisdorf");
+    }
+
+    with link = "line.at.188" {
+        track(:first :removed, dr[:olo, :rag]);
+        line_label(:right:e :removed, dr[:rag - 1.5km], "188");
+    }
+}
+
+
+# AT 189.  Staatsgrenze nächst Lutzmannsburg - Oberloisdorf
+with detail = 2 {
+    let zo = path("d2.at.189");
+
+    with link = "point.int.Lutzmannsburg-Répcevis" {
+        marker(:left :ref :removed, zo[:lug]);
+        marker(:right :ref :removed, zo[:lug]);
+    }
+
+    with link = "line.at.189" {
+        track(:second :removed, zo[:lug, :olo.yz]);
+        line_label(:left:nw :removed, zo[:lug + 7.5km], "189");
+    }
+}
+

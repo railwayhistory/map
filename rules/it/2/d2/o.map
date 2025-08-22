@@ -1,0 +1,60 @@
+# IT OBS.  Olmeneta - Brescia
+with detail = 2 {
+    let ob = path("d2.it.obs");
+
+    with link = "line.it.OBS" {
+        track(:first :cat:dc30 :pax, ob[:olm.yb, :sze.yp]);
+        line_badge(:cat:dc30 :pax, ob[:olm.yb + 15km], "OBS");
+    }
+
+    with link = "point.it.San-Zeno-Folzano" {
+        track(:first:station :cat:dc30 :pax, ob[:sze.yp, :sze]);
+        statdot(:cat:dc30 :pax, ob[:sze]);
+        slabel(:left :cat:dc30 :pax, ob[:sze] + (-1.0dt, 0dt),
+            vbox(:right:middle, "San Zeno-", "Folzano  ")
+        );
+    }
+
+    with link = "line.it.OBS" {
+        track(:first :cat:dc30 :pax, ob[:sze, :bre.yc]);
+    }
+}
+
+
+# IT OLU.  Oleggio - Luino - Pino confine
+with detail = 2 {
+    let ol = path("d2.it.olu");
+
+    with link = "line.it.OLU" {
+        track(:first :cat:dc30 :pax, ol[:ole.yl, :ses.yo]);
+        track(:first :cat:dc30, ol[:ses.yl, :lav]);
+
+        line_label(:right:w :cat:dc30, ol[:ses.yl + 10km], "OLU");
+    }
+
+    with link = "point.it.Laveno-Mombello" {
+        statdot(:cat:dc30 :pax, ol[:lav] >> 0.25dt);
+        slabel(:right :cat:dc30 :pax, ol[:lav] + (2.0dt, -1.8dt), "Laveno-M.");
+    }
+
+    with link = "line.it.OLU" {
+        track(:first :cat:dc30 :pax, ol[:lav, :lui]);
+        line_label(:right:w :cat:dc30 :pax, ol[:lav + 6km], "OLU");
+    }
+
+    with link = "point.it.Luino" {
+        statdot(:cat:dc30 :pax, ol[:lui]);
+        slabel(:left :cat:dc30 :pax, ol[:lui] + (-1.3dt, -0.3dt), "Luino");
+    }
+
+    with link = "line.it.OLU" {
+        track(:first :cat:ac15 :pax, ol[:lui, :pic]);
+        line_label(:left:e :cat:ac15 :pax, ol[:lui + 8km], "OLU");
+    }
+
+    with link = "point.int.Pino-Ranzo" {
+        marker(:left :ref :cat:ac15 :pax, ol[:pic]);
+        marker(:right :ref :cat:ac15 :pax, ol[:pic]);
+    }
+}
+

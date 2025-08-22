@@ -237,7 +237,7 @@ with detail = 2 {
     let gs = path("d2.de.6519");
 
     with link = "line.de.6519" {
-        track(:first :cat:ac15, gs[:gru.yf, :bow.y]);
+        track(:first :cat:ac15 :pax, gs[:gru.yf, :bow.y]);
         track(:first :cat:ac15, gs[:die.y, :sfs]);
     }
 
@@ -447,7 +447,7 @@ with detail = 2 {
     with link = "point.de.Möllensee-Hafen" {
         with layer = 1 marker(:statdot :removed, sm[:moh]);
         slabel(:right :removed, sm[:moh] + (1.5dt, -0.5dt),
-            vbox(:left:top, "Möllensee", "Hafen")
+            vbox(:left:top, "Möllensee Hafen")
         );
     }
 }
@@ -515,25 +515,21 @@ with detail = 2 {
 with detail = 2 {
     let mb = path("d2.de.6534");
 
-    with link = "line.de.6534" {
-        track(:tram :cat:dc6, mb[:mun, :buc]);
+    with railway = :third :cat:dc6 :museum {
+        with link = "line.de.6534" {
+            track(mb[:mun, :buc]);
+            line_label(:right:w, mb[:mun + 3.2km], "6534");
+        }
 
-        guide(:linenum :tram,
-                mb[:mun + 3km] >> 0.7dt
-            --  mb[:mun + 3km] >> 3.0dt
-        );
-        label(:linenum :tram, mb[:mun + 3km] >> 3.0dt,
-            hbox(:left:middle, " 6534")
-        );
-    }
-
-    with link = "point.de.Buckow-Märkische-Schweiz" {
-        with layer = 1 marker(:statdot :tram, mb[:buc]);
-        slabel(:top :tram, mb[:buc] + (0dt, -1dt),
-            vbox(:center:bottom,
-                "Buckow", span(:light, "(Märkische"), span(:light, "Schweiz)")
-            )
-        );
+        with link = "point.de.Buckow-Märkische-Schweiz" {
+            statdot(mb[:buc]);
+            slabel(:top, mb[:buc] + (0dt, -1dt),
+                vbox(:center:bottom,
+                    "Buckow",
+                    span(:light, "(Märkische"), span(:light, "Schweiz)")
+                )
+            );
+        }
     }
 }
 
@@ -793,7 +789,9 @@ with detail = 2 {
 
     with link = "point.de.Lauchhammer-Ost" {
         with layer = 1 marker(:statdot, rl[:lao]);
-        slabel(:left, rl[:lao] + (-2dt, 1dt), "Lauchhammer Ost");
+        slabel(:left, rl[:lao] + (-2dt, 1.5dt),
+            vbox(:right:bottom, "Lauchhammer", "Ost")
+        );
     }
 }
 
@@ -859,24 +857,18 @@ with detail = 2 {
 
     with link = "line.de.6576" {
         track(:second :removed, wm[:wei.ym, :mug]);
-
-        guide(:linenum :removed,
-                wm[:wei.ym + 5km] >> 0.7dt
-            --  wm[:wei.ym + 5km] >> 3.0dt
-        );
-        label(:linenum :removed, wm[:wei.ym + 5km] >> 3.0dt,
-            hbox(:left:top, "6576")
-        );
     }
 
     with link = "point.de.Bad-Muskau" {
         with layer = 1 marker(:statdot :removed, wm[:mus]);
-        slabel(:right :removed, wm[:mus] + (1.5dt, 1.0dt), "Bad Muskau");
+        slabel(:right :removed, wm[:mus] + (1.2dt, 0.3dt),
+            hbox(:left:top, "Bad Muskau")
+        );
     }
 
     with link = "point.int.Bad-Muskau-Łęknica" {
-        marker(:refdt :removed :left, wm[:mug]);
-        marker(:refdt :removed :right, wm[:mug]);
+        marker(:ref :removed :left, wm[:mug]);
+        marker(:ref :removed :right, wm[:mug]);
     }
 }
 
@@ -1012,8 +1004,17 @@ with detail = 2 {
 
 # DE 6597.  Charlottenhof (Oberlausitz) - Charlottenhof (Oberlausitz) Awan
 with detail = 2 {
-    with link = "line.de.6597" {
-        track(:second :removed, path("d2.de.6597")[:cha.ya, :caa]);
+    let cc = path("d2.de.6597");
+
+    with railway = :second :removed {
+        with link = "line.de.6597" {
+            track(cc[:cha.ya, :cag]);
+        }
+
+        with link = "point.int.Charlottenhof-Lasów" {
+            marker(:left :ref, cc[:cag]);
+            marker(:right:ref, cc[:cag]);
+        }
     }
 }
 

@@ -1,0 +1,288 @@
+# PL 220.  Olsztyn Główny - Bogaczewo
+with detail = 2 {
+    let ob = path("d2.pl.220");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.220" {
+            track(ob[:olz.yb, :gut]);
+        }
+
+        with link = "point.pl.Gutkowo" {
+            statdot(ob[:gut]);
+            slabel(:right, ob[:gut] + (1dt, -0.8dt), "O. Gutkowo");
+        }
+
+        with link = "line.pl.220" {
+            track(ob[:gut, :gut.yb]);
+            track(ob[:gut.yb, :mor.yo]);
+            line_label(:left:n, ob[:gut.yb + 5.2km], "220");
+            line_label(:right:s, ob[:mor.yo - 9.5km], "220");
+        }
+
+        with link = "point.pl.Morąg" {
+            track(:station, ob[:mor.yo, :mor.ym]);
+            statdot(ob[:mor]);
+            slabel(:left, ob[:mor] + (1.5dt, -1.8dt), "Morąg");
+        }
+
+        with link = "line.pl.220" {
+            track(ob[:mor.ym, :mad]);
+            line_label(:left:n, ob[:mor.ym + 7.7km], "220");
+        }
+
+        with link = "point.pl.Małdyty" {
+            track(:station, ob[:mad, :mad.ym]);
+            statdot(ob[:mad]);
+            slabel(:right, ob[:mad] + (1.3dt, -0.5dt), "Małdyty");
+        }
+
+        with link = "line.pl.220" {
+            track(
+                    ob[:mad.ym, :bog.yyo]
+                ..  ob[:bog.yo, :bog.yo + 0.1dl] << 0.35dt
+            );
+            line_label(:right:w, ob[:bog.yo - 8km], "220");
+        }
+    }
+}
+
+
+# PL 221.  Gutkowo - Braniewo
+with detail = 2 {
+    let gb = path("d2.pl.221");
+
+    with railway = :second :pax {
+        with link = "line.pl.221" {
+            track(gb[:gut.yb, :orn.ys]);
+            line_label(:left:se, gb[:gut.yb + 7.5km], "221");
+            line_label(:right:sw, gb[:orn.ys - 8km], "221");
+        }
+
+        with link = "point.pl.Orneta" {
+            track(:station, gb[:orn.ys, :orn.yb]);
+            statdot(gb[:orn]);
+            slabel(:left, gb[:orn] + (-1.3dt, 0.7dt), "Orneta");
+        }
+
+        with link = "line.pl.221" {
+            track(gb[:orn.yb, :pie]);
+            line_label(:left:e, gb[:orn.yb + 6km], "221");
+        }
+
+        with link = "point.pl.Pieniężno" {
+            track(:station, gb[:pie, :pie.yk]);
+            statdot(gb[:pie]);
+            slabel(:left, gb[:pie] + (-1.6dt, 0.6dt), "Pieniężno");
+        }
+
+        with link = "line.pl.221" {
+            track(
+                    gb[:pie.yk, :bra.yo - 1.5dt]
+                ..  gb[:bra.yo, :bra.yo + 0.1dl] >> 0.35dt
+            );
+            line_label(:right:w, gb[:pie.yk + 13km], (0dt, -0.1dt), "221");
+        }
+    }
+}
+
+
+# PL 222.  Małdyty - Malbork
+with detail = 2 {
+    let mm = path("d2.pl.222");
+
+    with railway = :first :double :removed {
+        with link = "line.pl.222" {
+            track(mm[:mad.ym, :mys.ym]);
+            line_label(:right:s, mm[:mad.ym + 5.5km], "222");
+        }
+
+        with link = "point.pl.Myślice" {
+            track(:station, mm[:mys.ym, :mys.yk]);
+            track(:station :single, mm[:mys.yk, :mys.ye]);
+            statdot(mm[:mys]);
+            slabel(:right, mm[:mys] + (0dt, -0.3km) + (-1dt, -1.3dt),
+                "Myślice"
+            );
+        }
+    }
+
+    with railway = :first :removed {
+        with link = "line.pl.222" {
+            track(mm[:mys.ye, :mal.ym]);
+            line_label(:left:n, mm[:mys.ye + 8.5km], "222");
+            line_label(:right:sw, mm[:mal.ym - 6km], "222");
+        }
+    }
+}
+
+
+# PL 223.  Czerwonka - Ełk
+with detail = 2 {
+    let ce = path("d2.pl.g.223");
+
+    with railway = :second :nopax {
+        with link = "line.pl.223" {
+            track(ce[:cze.ye, :bis]);
+            line_label(:right:ne, ce[:cze.ye + 4km], "223");
+        }
+
+        with link = "point.pl.Biskupiec-Reszelski" {
+            statdot(ce[:bis]);
+            slabel(:right, ce[:bis] + (1.5dt, 1dt),
+                vbox(:left:bottom, "Biskupiec", "Reszelski")
+            );
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.223" {
+            track(ce[:bis, :bis.ys]);
+            track(ce[:bis.ys, :mra.yk]);
+            line_label(:left:s, ce[:bis.ys + 10.8km], "223");
+        }
+
+        with link = "point.pl.Mrągowo" {
+            track(:station, ce[:mra.yk, :mra.yr]);
+            statdot(ce[:mra]);
+            slabel(:right, ce[:mra] + (1.5dt, 0.5dt), "Mrągowo");
+        }
+
+        with link = "line.pl.223" {
+            track(ce[:mra.yr, :bax]);
+        }
+    }
+}
+
+
+# PL 224.  Czerwonka - Granica Państwa Jarzeń
+with detail = 2 {
+    let ck = path("d2.pl.224");
+
+    with railway = :first :removed {
+        with link = "line.pl.224" {
+            with layer = -1 track(ck[:cze.yl, :cze.yyl]);
+            track(ck[:cze.yyl, :lid.ys]);
+            line_label(:right:sw, ck[:cze.yyl + 7km], "224");
+            line_label(:left:ne, ck[:lid.ys - 6.5km], "224");
+        }
+
+        with link = "point.pl.Lidzbark-Warmiński" {
+            track(:station, ck[:lid.ys, :lid.yo]);
+            statdot(ck[:lid]);
+            slabel(:left, ck[:lid] + (-1.3km, 0dt) + (-2dt, 1dt),
+                vbox(:right:bottom, "Lidzbark  ", "Warmiński")
+            );
+        }
+
+        with link = "line.pl.224" {
+            track(ck[:lid.yo, :kog]);
+            line_label(:left:e, ck[:lid.yo + 10km], "224");
+            line_label(:right:w, ck[:kog - 5.2km], "224");
+        }
+    }
+}
+
+
+# PL 225.  Nidzica - Wielbark
+with detail = 2 {
+    let nw = path("d2.pl.225");
+
+    with railway = :first :suspended {
+        with link = "line.pl.225" {
+            track(nw[:nid.yw, :wla.y]);
+            line_label(:left:s, nw[:nid.yw + 7.2km], "225");
+            line_label(:left:s, nw[:wie.yn - 8km], "225");
+
+            track(nw[:wla.y, :wie.yn]);
+        }
+    }
+}
+
+
+# PL 226.  Pruszcz Gdański - Gdańsk Port Północny
+with detail = 2 {
+    let pp = path("d2.pl.226");
+
+    with railway = :first :double :cat:dc30 :nopax {
+        with link = "line.pl.226" {
+            track(pp[:pru.yp, :mot.yg]);
+            line_label(:right:w, pp[:pru.yp + 1.8km], "226");
+            track(pp[:mot.yg, :wis.yk]);
+            track(pp[:wis.yk, :gpp]);
+        }
+
+        with link = "point.pl.Gdańsk-Port-Północny" {
+            statdot(pp[:gpp]);
+        }
+    }
+}
+
+
+# PL 228.  Rumia - Gdynia Port Oksywie
+with detail = 2 {
+    let ro = path("d2.pl.228");
+
+    with railway = :first :cat:dc30 :nopax {
+        with link = "line.pl.228" {
+            track(ro[:rja.yp, :gpf.yz]);
+        }
+    }
+
+    with railway = :first :nopax {
+        with link = "line.pl.228" {
+            track(ro[:gpf.yw, :oks]);
+        }
+
+        with link = "point.pl.Gdynia-Port-Oksywie" {
+            statdot(ro[:oks]);
+        }
+    }
+}
+
+
+# PL 229.  Pruszcz Gdański - Łeba
+with detail = 2 {
+    let pl = path("d2.pl.g.229");
+
+    with railway = :second :suspended {
+        with link = "line.pl.229" {
+            track(pl[:pru.yl, :spi.yg]);
+            line_label(:left:n, pl[:pru.yl + 12.6km], "229");
+        }
+    }
+
+    with railway = :second :pax {
+        with link = "point.pl.Stara-Piła" {
+            track(:station, pl[:spi.yg, :spi]);
+            statdot(pl[:spi]);
+            slabel(:right, pl[:spi.yg] + (1.2km, 0dt) + (1dt, 1.3dt),
+                "Stara Piła"
+            );
+        }
+
+        with link = "line.pl.229" {
+            track(pl[:spi, :gli.yp]);
+            line_label(:left:n, pl[:gli.yp - 3.4km], "229");
+
+            track(:casing, pl[:gli, :gli + 3km]);
+            track(pl[:gli + 3km, :kar.yk]);
+            line_label(:right:s, pl[:gli + 5.5km], "229");
+
+            track(pl[:kar.yk, :kar.ys]);
+        }
+
+        with link = "point.pl.Kartuzy" {
+            track(:station, pl[:kar.ys, :kar.yg]);
+            statdot(pl[:kar]);
+            slabel(:left, pl[:kar] + (-1.6dt, 0.6dt), "Kartuzy");
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.229" {
+            track(pl[:kar.yg, :rox]);
+            line_label(:right:s, pl[:kar + 14.8km], "229");
+        }
+    }
+}
+

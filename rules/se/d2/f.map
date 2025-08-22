@@ -1,0 +1,954 @@
+# SE FBJ.  Falun central - Björbo
+with detail = 2 {
+    let fb = path("d2.se.fbj");
+
+    with railway = :second :pax :removed {
+        with link = "line.se.FBJ" {
+            track(fb[:fal.yr, :rep.yf - 10.7km]);
+            line_label(:right:s, fb[:rep.yf - 10.7km], "FBJ");
+            track(fb[:rep.yf - 10.7km, :rep.yf]);
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.se.FBJ" {
+            track(fb[:rep.yb, :rep.yb + 12km]);
+            line_label(:left:n, fb[:rep.yb + 12km], "FBJ");
+            track(fb[:rep.yb + 12km, :bjo.yr - 7km]);
+            line_label(:right:s, fb[:bjo.yr - 7km], "FBJ");
+            track(fb[:bjo.yr - 7km, :bjo.yr]);
+        }
+    }
+}
+
+
+# SE FFO.  Flen - Flens övre
+with detail = 2 {
+    with link = "line.se.FFO" {
+        track(:first :cat:ac15 :pax, path("d2.se.ffo")[:fln.yo, :flo]);
+    }
+}
+
+
+# SE FGB.  Falun central - Göteborg N
+with detail = 2 {
+    let fg = path("d2.se.fgb");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "point.se.Falun-central" {
+            track(fg[:fal.yb, :fal]);
+            statdot(fg[:fal]);
+            slabel(:right, fg[:fal] + (1.3dt, -0.5dt), "Falun c.");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:fal, :fal.yr]);
+            track(fg[:fal.yr, :fal.yr + 8km]);
+            line_label(:left:w, fg[:fal.yr + 8km], "FGB");
+            track(fg[:fal.yr + 8km, :bor.yr]);
+        }
+
+        with link = "point.se.Borlänge-central" {
+            track(fg[:bor.yr, :bor.ya]);
+            statdot(fg[:bor]);
+            slabel(:right, fg[:bor] + (1.6dt, 1.4dt), "Borlänge c.");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:bor.ya, :bor.ya + 6.75km]);
+            line_label(:right:e, fg[:bor.ya + 6.75km], (0dt, -0.15dt), "FGB");
+            track(fg[:bor.ya + 6.75km, :ram.yi]);
+        }
+
+        with link = "point.se.Rämshyttan" {
+            track(fg[:ram.yi, :ram]);
+            statdot(fg[:ram]);
+            slabel(:left, fg[:ram] + (-1.5dt, 0.3dt), "Rämshyttan");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:ram, :lud.yb - 6.2km]);
+            line_label(:left:w, fg[:lud.yb - 6.2km], "FGB");
+            track(fg[:lud.yb - 6.2km, :lud.yb]);
+        }
+
+        with link = "point.se.Ludvika" {
+            track(fg[:lud.yb, :lud.yf]);
+            track(fg[:lud.yf, :lud.yg]);
+            statdot(fg[:lud]);
+            slabel(:left, fg[:lud] + (-1.5dt, 0dt), "Ludvika");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:lud.yg, :lud.yg + 8km]);
+            line_label(:left:nw, fg[:lud.yg + 8km], "FGB");
+            track(fg[:lud.yg + 8km, :gra.yl]);
+        }
+
+        with link = "point.se.Grängesberg" {
+            track(fg[:gra.yl, :gra]);
+            track(:removed,
+                    fg[:gra.yl, :gra] >> 1mt >> 1ls
+            );
+            statdot(fg[:gra] >> 0.5mt >> 0.5ls);
+            slabel(:left, fg[:gra] >> 0.5mt >> 0.5ls + (-1.5dt, -0.5dt),
+                "Grängesberg"
+            );
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:gra, :grm.yf]);
+            track(:casing, fg[:grm.yf, :grm.yf + 4km]);
+            line_label(:right:se, fg[:grm.yf + 4km], "FGB");
+            track(fg[:grm.yf + 4km, :hor.yn]);
+        }
+
+        with link = "point.se.Hörken" {
+            track(fg[:hor.yn, :hor]);
+            statdot(:removed, fg[:hor]);
+            slabel(:ne :removed, fg[:hor] + (0dt, 300m) + (0dt, 0.5dt),
+                "Hörken"
+            );
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:hor, :sta.yg - 5km]);
+            line_label(:right:e, fg[:sta.yg - 5km], "FGB");
+            track(fg[:sta.yg - 5km, :sta.yg]);
+        }
+
+        with link = "point.se.Ställdalen" {
+            track(fg[:sta.yg, :sta.yf]);
+            statdot(fg[:sta]);
+            slabel(:right, fg[:sta] + (1.5dt, 0.5dt), "Ställdalen");
+        }
+    }
+
+    with railway = :first :cat:ac15 :seasonal {
+        with link = "line.se.FGB" {
+            track(fg[:sta.yf, :sta.yf + 8km]);
+            line_label(:right:se, fg[:sta.yf + 8km], "FGB");
+            track(fg[:sta.yf + 8km, :bre]);
+        }
+
+        with link = "point.se.Bredsjö" {
+            track(fg[:bre, :bre.yg]);
+            statdot(:nopax, fg[:bre]);
+            slabel(:top :nopax, fg[:bre] + (0dt, -0.5km) + (-1dt, -0.8dt),
+                "Bredsjö"
+            );
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:bre.yg, :hal.yg]);
+            track(fg[:hal.yg, :hal]);
+        }
+
+        with link = "point.se.Hällefors" {
+            statdot(fg[:hal]);
+            slabel(:left, fg[:hal] + (-1.5dt, 0.8dt), "Hällefors");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:hal, :hal + 5km]);
+            line_label(:left:w, fg[:hal + 5km], (0dt, -0.2dt), "FGB");
+            track(fg[:hal + 5km, :gry]);
+        }
+
+        with link = "point.se.Grythyttan" {
+            statdot(fg[:gry]);
+            slabel(:right, fg[:gry] + (1dt, -1dt), "Grythyttan");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:gry, :her.yp - 4.9km]);
+            line_label(:right:sw, fg[:her.yp - 4.9km], "FGB");
+            track(fg[:her.yp - 4.9km, :her.yp]);
+        }
+
+        with link = "point.se.Herrhult" {
+            track(fg[:her.yp, :her.yk]);
+            statdot(:nopax, fg[:her]);
+            slabel(:nw, fg[:her] + (1dt, 0.5dt), "Herrhult");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:her.yk, :nyk.yh]);
+            track(fg[:nyk.yh, :nyk.yv]);
+            track(fg[:nyk.yv, :nyk.yv + 4.5km]);
+            line_label(:right:sw, fg[:nyk.yv + 4.5km], "FGB");
+            track(fg[:nyk.yv + 4.5km, :dag.yf]);
+        }
+
+        with link = "point.se.Daglösen" {
+            track(fg[:dag.yf, :dag]);
+            statdot(:nopax, fg[:dag]);
+            slabel(:left, fg[:dag] + (-0.5km, 0dt) + (-1dt, 0.8dt),
+                "Daglösen"
+            );
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:dag, :dag + 5.2km]);
+            line_label(:left:n, fg[:dag + 5.2km], (0.3dt, 0dt), "FGB");
+            track(fg[:dag + 5.2km, :gei]);
+        }
+
+        with link = "point.se.Geijersdal" {
+            track(fg[:gei, :gei.yb]);
+            statdot(:nopax, fg[:gei]);
+            slabel(:nw, fg[:gei] + (-1dt, 0.8dt), "Geijersdal");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:gei.yb, :lin]);
+        }
+
+        with link = "point.se.Lindfors" {
+            track(fg[:lin, :lin.yb]);
+            statdot(:pax :removed, fg[:lin]);
+            slabel(:right :pax :removed, fg[:lin] + (1.3dt, -0.5dt),
+                "Lindfors"
+            );
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:lin.yb, :dej]);
+        }
+
+        with link = "point.se.Deje" {
+            statdot(:pax :removed, fg[:dej]);
+            slabel(:left :pax :removed,
+                fg[:dej] + (-0.5km, 0dt) + (-1dt, -0.8dt),
+                "Deje"
+            );
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:dej, :dej + 6.5km]);
+            line_label(:right:e, fg[:dej + 6.5km], (0dt, 0.1dt), "FGB");
+            track(fg[:dej + 6.5km, :kil.yk]);
+        }
+    }
+
+    # point.se.Kil  se.LCB
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.FGB" {
+            track(fg[:kil.yc, :kil.yc + 5.5km]);
+            line_label(:left:w, fg[:kil.yc + 5.5km], (0dt, 0.2dt), "FGB");
+            track(fg[:kil.yc + 5.5km, :seg - 2km]);
+            line_label(:right:se, fg[:seg - 2km], "FGB");
+            track(fg[:seg - 2km, :saf]);
+        }
+
+        with link = "point.se.Säffle" {
+            statdot(fg[:saf]);
+            slabel(:right, fg[:saf] + (1.4dt, 1.5dt), "Säffle");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:saf, :ama - 7.5km]);
+            line_label(:right:se, fg[:ama - 7.5km], "FGB");
+            track(fg[:ama - 7.5km, :ama]);
+        }
+
+        with link = "point.se.Åmål" {
+            track(fg[:ama, :ama.ya]);
+            statdot(fg[:ama]);
+            slabel(:right, fg[:ama] + (1.5dt, 1.3dt), "Åmål");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:ama.ya, :mel.ya + 7.5km]);
+            line_label(:left:w, fg[:ama.ya + 7.5km], "FGB");
+            track(fg[:ama.ya + 7.5km, :mel.ya]);
+            line_label(:left:w, fg[:mel.ya - 6.5km], (0dt, 0.1dt), "FGB");
+        }
+
+        with link = "point.se.Mellerud" {
+            track(fg[:mel.ya, :mel.yk]);
+            statdot(fg[:mel]);
+            slabel(:nw, fg[:mel] + (1.3dt, 0dt), "Mellerud");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:mel.yk, :mel.yx]);
+            track(fg[:mel.yx, :ska - 5km]);
+            line_label(:left:w, fg[:ska - 5km], (0dt, 0.15dt), "FGB");
+            track(fg[:ska - 5km, :ska]);
+        }
+
+        with link = "point.se.Skälebol" {
+            statdot(:nopax, fg[:ska]);
+            slabel(:right :light, fg[:ska] + (1.5dt, 1dt), "Skälebol");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:ska, :ska + 13km]);
+            line_label(:right:e, fg[:ska + 13km], (0dt, -0.2dt), "FGB");
+            track(fg[:ska + 13km, :oxn]);
+        }
+
+        with link = "point.se.Öxnered" {
+            track(fg[:oxn, :oxn.yh]);
+            track(fg[:oxn.yh, :oxn.yu]);
+            statdot(fg[:oxn]);
+            slabel(:left, fg[:oxn] + (-1.5dt, 0.3dt), "Öxnered");
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.FGB" {
+            track(fg[:oxn.yu, :oxn.ys]);
+            track(fg[:oxn.ys, :tro]);
+            line_label(:right:e, fg[:oxn.ys + 4km], (0dt, 0.1dt), "FGB");
+        }
+
+        with link = "point.se.Trollhättan" {
+            track(fg[:tro, :tro.yn]);
+            statdot(fg[:tro]);
+            slabel(:right, fg[:tro] + (1.3dt, -0.3dt), "Trollhättan");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:tro.yn, :tro.yn + 15.5km]);
+            line_label(:right:e, fg[:tro.yn + 15.5km], (0dt, -0.1dt), "FGB");
+            track(fg[:tro.yn + 15.5km, :alv]);
+        }
+
+        with link = "point.se.Alvhem" {
+            track(fg[:alv, :alv.yl]);
+            statdot(:nopax, fg[:alv]);
+            slabel(:left :nopax, fg[:alv] + (-1.5dt, 0.3dt), "Alvhem");
+        }
+
+        with link = "line.se.FGB" {
+            track(fg[:alv.yl, :ols.ys - 8.5km]);
+            line_label(:right:e, fg[:ols.ys - 8.5km], "FGB");
+            track(fg[:ols.ys - 8.5km, :ols.yv]);
+            track(fg[:ols.yv, :ols.ys]);
+            track(fg[:ols.ys, :ols.yf]);
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.FGB" {
+            track(fg[:ols.yn, :gon]);
+        }
+
+        with link = "point.se.Göteborg-N" {
+            statdot(fg[:gon]);
+        }
+    }
+}
+
+
+# SE FGG.  Fors - Gruvgården
+with detail = 2 {
+    let fg = path("d2.se.fgg");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.FGG" {
+            track(fg[:for.yg, :for.yg + 7km]);
+            line_label(:left:ne, fg[:for.yg + 7km], "FGG");
+            track(fg[:for.yg + 7km, :gru]);
+        }
+
+        with link = "point.se.Gruvgården" {
+            statdot(fg[:gru]);
+            slabel(:left, fg[:gru] + (-1.5dt, 1dt), "Gruvgården");
+        }
+    }
+}
+
+
+# SE FHT.  Forsmo - Hoting
+with detail = 2 {
+    let fh = path("d2.se.fht");
+
+    with railway = :first :nopax {
+        with link = "line.se.FHT" {
+            track(fh[:fos.yh, :fos.yh + 7.5km]);
+            line_label(:right:s, fh[:fos.yh + 7.5km], (0.2dt, 0dt), "FHT");
+            track(fh[:fos.yh + 7.5km, :tag + 11km]);
+            line_label(:right:sw, fh[:tag + 11km], "FHT");
+            track(fh[:tag + 11km, :hot.yt - 5.2km]);
+            line_label(:right:w, fh[:hot.yt - 5.2km], "FHT");
+            track(fh[:hot.yt - 5.2km, :hot.yt]);
+        }
+    }
+}
+
+
+# SE FKN.  Falköpings central - Nässjö central
+with detail = 2 {
+    let fn = path("d2.se.fkn");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.FKN" {
+            track(fn[:fal.yn, :fal.yl]);
+            track(fn[:fal.yl, :fal.yl + 4.5km]);
+            line_label(:left:sw, fn[:fal.yl + 4.5km], "FKN");
+            track(fn[:fal.yl + 4.5km, :var]);
+        }
+
+        with link = "point.se.Vartofta" {
+            track(:station, fn[:var, :var.ya]);
+            statdot(fn[:var]);
+            slabel(:right, fn[:var] + (-1.3dt, -1.6dt), "Vartofta");
+        }
+
+        with link = "line.se.FKN" {
+            track(fn[:var.ya, :var.ya + 7km]);
+            line_label(:left:sw, fn[:var.ya + 7km], "FKN");
+            track(fn[:var.ya + 7km, :jon - 14.3km]);
+            line_label(:right:e, fn[:jon - 14.3km], "FKN");
+            track(fn[:jon - 14.3km, :jon]);
+        }
+
+        with link = "point.se.Jönköpings-central" {
+            statdot(fn[:jon]);
+            slabel(:ne, fn[:jon] + (-1dt, -0.3dt),
+                hbox(:left:base, span(:bold, "Jönköping"), " c.")
+            );
+        }
+
+        with link = "line.se.FKN" {
+            track(fn[:jon, :jon.ys]);
+            track(fn[:jon.ys, :jon.yv]);
+            track(fn[:jon.yv, :jon.yv + 7.5km]);
+            line_label(:left:w, fn[:jon.yv + 7.5km], "FKN");
+            track(fn[:jon.yv + 7.5km, :nas.yj - 5km]);
+            line_label(:right:ne, fn[:nas.yj - 5km], "FKN");
+            track(fn[:nas.yj - 5km, :nas.yj]);
+        }
+    }
+}
+
+
+# SE FKP.  Frövi - Köping
+with detail = 2 {
+    let fk = path("d2.se.fkp");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.FKP" {
+            track(fk[:fro.ya, :fro.yk]);
+            track(fk[:fro.yk, :fro.yk + 9km]);
+            line_label(:left:s, fk[:fro.yk + 9km], (0.3dt, 0dt), "FKP");
+            track(fk[:fro.yk + 9km, :jad.y]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "point.se.Jädersbruk" {
+            slabel(:top :xsmall, fk[:jad.y] + (0.5dt, -0.6dt),
+                vbox(:center:bottom, " Jäders-", "bruk")
+            );
+        }
+
+        with link = "line.se.FKP" {
+            track(fk[:jad.y, :arb]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.FKP" {
+            track(fk[:arb, :arb + 5km]);
+            line_label(:left:se, fk[:arb + 5km], "FKP");
+            track(fk[:arb + 5km, :val]);
+        }
+
+        with link = "point.se.Valskog" {
+            track(:station, fk[:val, :val.ye]);
+            statdot(:nopax, fk[:val]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.FKP" {
+            track(fk[:val.ye, :val.ye + 5km]);
+            line_label(:right:w, fk[:val.ye + 5km], (0dt, 0.2dt), "FKP");
+            track(fk[:val.ye + 5km, :kop.yr]);
+            track(fk[:kop.yr, :kop]);
+        }
+    }
+}
+
+
+# SE FLJ.  Flemingsberg - Järna
+with detail = 2 {
+    let fj = path("d2.se.flj");
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.FLJ" {
+            track(fj[:fle.yj, :fle.yj + 8km]);
+            line_label(:left:nw, fj[:fle.yj + 8km], "FLJ");
+            track(fj[:fle.yj + 8km, :sos]);
+        }
+
+        with link = "point.se.Södertälje-syd-övre" {
+            track(:station :casing, fj[:sos, :sos.ya]);
+            statdot(fj[:sos]);
+            slabel(:nw, fj[:sos] + (0.5dt, 0.5dt), "S. syd");
+        }
+
+        with link = "line.se.FLJ" {
+            track(:casing, fj[:sos.ya, :sos.ya + 2km]);
+            with layer = -1 track(fj[:sos.ya + 2km, :jar.yf]);
+        }
+    }
+}
+
+
+# SE FLR.  Falköping - Landeryd
+with detail = 2 {
+    let fl = path("d2.se.flr");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.FLR" {
+            track(fl[:fal.yl, :fal.yl + 7.7km]);
+            line_label(:right:e, fl[:fal.yl + 7.7km], "FLR");
+            track(fl[:fal.yl + 7.7km, :asa.yv]);
+        }
+
+        with link = "point.se.Åsarp" {
+            track(fl[:asa.yv, :asa]);
+            statdot(fl[:asa]);
+            slabel(:left, fl[:asa] + (-1.5dt, 0.5dt), "Åsarp");
+        }
+
+        with link = "line.se.FLR" {
+            track(fl[:asa, :asa + 5.6km]);
+            line_label(:right:e, fl[:asa + 5.6km], (0dt, -0.3dt), "FLR");
+            track(fl[:asa + 5.6km, :ulr.yg - 6.7km]);
+            line_label(:left:w, fl[:ulr.yg - 6.7km], "FLR");
+            track(fl[:ulr.yg - 6.7km, :ulr.yg]);
+        }
+
+        with link = "point.se.Ulricehamn" {
+            track(fl[:ulr.yg, :ulr.yj]);
+            statdot(fl[:ulr]);
+            slabel(:right, fl[:ulr] + (1.5dt, 1dt), "Ulricehamn");
+        }
+
+        with link = "line.se.FLR" {
+            track(fl[:ulr.yj, :ulr.yj + 8.95km]);
+            line_label(:right:e, fl[:ulr.yj + 8.95km], "FLR");
+            track(fl[:ulr.yj + 8.95km, :lim.yf - 6km]);
+            line_label(:left:w, fl[:lim.yf - 6km], "FLR");
+            track(fl[:lim.yf - 6km, :lim.yf]);
+        }
+
+        # point.se.Limmared  se.AKK
+
+        with link = "line.se.FLR" {
+            track(fl[:lim.yl, :lim.ya]);
+            track(fl[:lim.ya, :lim.ya + 6km]);
+            line_label(:left:w, fl[:lim.ya + 6km], (0dt, 0.2dt), "FLR");
+            track(fl[:lim.ya + 6km, :bur]);
+        }
+    }
+
+    with railway = :first :pax :closed {
+        with link = "point.se.Smålands-Burseryd" {
+            statdot(fl[:bur]);
+            slabel(:left, fl[:bur] + (-1.5dt, 0.8dt),
+                vbox(:right:base, "Smålands", "Burseryd")
+            );
+        }
+
+        with link = "line.se.FLR" {
+            track(fl[:bur, :bur + 6.5km]);
+            line_label(:right:e, fl[:bur + 6.5km], (0dt, -0.2dt), "FLR");
+            track(fl[:bur + 6.5km, :lan.yf]);
+        }
+    }
+}
+
+
+# SE FLS.  Färlöv - Strö
+with detail = 2 {
+    let fs = path("d2.se.fls");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.FLS" {
+            track(fs[:far.ys, :far.ys + 2.5km]);
+            with zoom = :high line_label(:left:ne, fs[:far.ys + 2.5km], "FLS");
+            track(fs[:far.ys + 2.5km, :str]);
+        }
+
+        with link = "point.se.Strö" {
+            statdot(fs[:str]);
+            slabel(:top, fs[:str] + (-0.5dt, -0.6dt), "Strö");
+        }
+    }
+}
+
+
+# SE FLU.  Frövi - Ludvika
+with detail = 2 {
+    let fl = path("d2.se.flu");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.FLU" {
+            track(fl[:fro.yg, :fro.yn]);
+            track(fl[:fro.yn, :fro.yn + 6km]);
+            line_label(:left:ne, fl[:fro.yn + 6km], "FLU");
+            track(fl[:fro.yn + 6km, :sto - 7km]);
+            line_label(:right:sw, fl[:sto - 7km], "FLU");
+            track(fl[:sto - 7km, :sto]);
+        }
+
+        with link = "point.se.Storå" {
+            track(:station, fl[:sto, :sto.yg]);
+            statdot(fl[:sto]);
+            slabel(:left, fl[:sto] + (-1.5dt, -0.3dt), "Storå");
+        }
+
+        with link = "line.se.FLU" {
+            track(fl[:sto.yg, :ban.yk]);
+        }
+
+        with link = "point.se.Bånghammar" {
+            track(:station, fl[:ban.yk, :ban]);
+            statdot(:removed, fl[:ban]);
+            slabel(:ne :removed, fl[:ban] + (0dt, 0.5dt),
+                vbox(:right:top, "Bång-", "hammar ")
+            );
+        }
+
+        with link = "line.se.FLU" {
+            track(fl[:ban, :ban + 6km]);
+            line_label(:right:w, fl[:ban + 6km], "FLU");
+            track(fl[:ban + 6km, :sta.yf]);
+        }
+
+        # point.se.Ställdalen
+
+        with link = "line.se.FLU" {
+            track(fl[:sta.yg, :sta.yg + 5km]);
+            line_label(:right:w, fl[:sta.yg + 5km], "FLU");
+            track(fl[:sta.yg + 5km, :sil.yv]);
+            track(fl[:sil.yv, :sil]);
+        }
+
+        with link = "point.se.Silverhöjden" {
+            statdot(:nopax, fl[:sil]);
+            slabel(:right :nopax, fl[:sil] + (1.5dt, 0.8dt), "Silverhöjden");
+        }
+
+        with link = "line.se.FLU" {
+            track(fl[:sil, :grm.yf - 2km]);
+            with layer = -1 track(
+                    fl[:grm.yf - 2km, :grm.xf - 1dt]
+                ..  fl[:grm.yf, :grm.yf + 0.1dl] << 1mt << 1ls
+            );
+            track(fl[:grm.yf, :gra] << 1mt << 1ls);
+        }
+
+        # point.se.Grängesberg
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.FLU" {
+            track(
+                    fl[:gra.yl - 0.1dl, :gra.yl] << 1mt << 1ls
+                ..  fl[:gra.xl + 0.5dt, :gra.yl + 6.3km]
+
+            );
+            line_label(:left:s, fl[:gra.yl + 6.3km], (-0.3dt, 0dt), "FLU");
+            track(fl[:gra.yl + 6.3km, :lud.yg]);
+        }
+    }
+}
+
+
+# SE FNM.  Fornåsa - Motala central
+with detail = 2 {
+    let fm = path("d2.se.fnm");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.FNM" {
+            track(fm[:for.ym, :for.ym + 9km]);
+            line_label(:right:sw, fm[:for.ym + 9km], "FNM");
+            track(fm[:for.ym + 9km, :mot]);
+        }
+    }
+}
+
+
+# SE FOB.  Färjestaden - Ottenby
+with detail = 2 {
+    let fm = path("d2.se.fob.1");
+    let mo = path("d2.se.fob.2");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.FOB" {
+            track(fm[:lun.yv, :lun.ys]);
+            track(fm[:lun.ys, :lun.ys + 6km]);
+            line_label(:right:e, fm[:lun.ys + 6km], (0dt, -0.2dt), "FOB");
+            track(fm[:lun.ys + 6km, :mor.yo]);
+        }
+
+        with link = "point.se.Mörbylånga" {
+            track(fm[:mor.yo, :mor]);
+            statdot(fm[:mor]);
+            slabel(:left, fm[:mor] + (-1.5dt, 0.8dt), "Mörbylånga");
+        }
+
+        with link = "line.se.FOB" {
+            track(mo[:mor.yo, :mor.yo + 7.1km]);
+            line_label(:left:w, mo[:mor.yo + 7.1km], (0dt, -0.2dt), "FOB");
+            track(mo[:mor.yo + 7.1km, :ott - 6.8km]);
+            line_label(:left:w, mo[:ott - 6.8km], "FOB");
+            track(mo[:ott - 6.8km, :ott]);
+        }
+
+        with link = "point.se.Ottenby" {
+            statdot(mo[:ott]);
+            slabel(:bottom, mo[:ott] + (0dt, 0.8dt), "Ottenby");
+        }
+    }
+}
+
+
+# SE FPB.  Filipstad - Persberg
+with detail = 2 {
+    let fp = path("d2.se.fpb");
+
+    with railway = :first :nopax {
+        with link = "line.se.FPB" {
+            track(fp[:fil, :fil.yh]);
+            track(fp[:fil.yh, :fil.yh + 1.5km]);
+            with zoom = :high line_label(:right:nw, fp[:fil.yh + 1.5km], "FPB");
+            track(fp[:fil.yh + 1.5km, :per.yf]);
+        }
+    }
+}
+
+
+# SE FSB.  Färjestaden - Böda
+with detail = 2 {
+    let fb = path("d2.se.fsb.1");
+    let bb = path("d2.se.fsb.2");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "point.se.Färjestaden" {
+            statdot(fb[:far]);
+            slabel(:right, fb[:far] + (-6dt, -1.5dt), "Färjestaden");
+        }
+
+        with link = "line.se.FSB" {
+            track(fb[:far, :lun.yv]);
+            track(fb[:lun.yv, :lun.yo]);
+            track(fb[:lun.yo, :lun.yo + 3.5km]);
+            line_label(:left:s, fb[:lun.yo + 3.5km], (0.5dt, 0dt), "FSB");
+            track(fb[:lun.yo + 3.5km, :bor.yb - 10km]);
+            line_label(:right:w, fb[:bor.yb - 10km], "FSB");
+            track(fb[:bor.yb - 10km, :bor.yb]);
+        }
+
+        with link = "point.se.Borgholm" {
+            track(fb[:bor.yb, :bor]);
+            statdot(fb[:bor]);
+            slabel(:left, fb[:bor] + (-1.5dt, 0.8dt), "Borgholm");
+        }
+
+        with link = "line.se.FSB" {
+            track(bb[:bor.yb, :bor.yb + 11km]);
+            line_label(:right:w, bb[:bor.yb + 11km], "FSB");
+            track(bb[:bor.yb + 11km, :bod - 9km]);
+            line_label(:left:e, bb[:bod - 9km], "FSB");
+            track(bb[:bod - 9km, :bod]);
+        }
+
+        with link = "point.se.Böda" {
+            statdot(bb[:bod]);
+            slabel(:right, bb[:bod] + (1.5dt, 0.8dt), "Böda");
+        }
+    }
+}
+
+
+# SE FSG.  Fredriksskans - Gävle godsbangård
+with detail = 2 {
+    let fg = path("d2.se.fsg");
+
+    with railway = :side :nopax {
+        with link = "point.se.Fredriksskans" {
+            statdot(fg[:fre]);
+            with zoom = :high slabel(
+                :right, fg[:fre] + (-1.5dt, -1.5dt), "Fredriksskans"
+            );
+        }
+
+        with link = "line.se.FSG" {
+            track(fg[:fre, :gan]);
+        }
+
+        with link = "point.se.Gävle-N" {
+            statdot(:first :pax :removed, fg[:gan]);
+        }
+
+        with link = "line.se.FSG" {
+            track(fg[:gan, :gag.ym]);
+        }
+    }
+}
+
+
+# SE FSH.  Filipstad - Skoghall
+with detail = 2 {
+    let fs = path("d2.se.fsh");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.FSH" {
+            track(fs[:fil.yh, :fin.yn]);
+        }
+
+        with link = "point.se.Finnshyttan" {
+            statdot(fs[:fin]);
+            slabel(:left, fs[:fin] + (-1.5dt, 0.8dt), "Finnshyttan");
+        }
+
+        with link = "line.se.FSH" {
+            track(fs[:fin, :fin + 7.9km]);
+            line_label(:left:ne, fs[:fin + 7.9km], "FSH");
+            track(fs[:fin + 7.9km, :nor.yt]);
+        }
+
+        with link = "point.se.Nordmark" {
+            track(fs[:nor.yt, :nor]);
+            statdot(fs[:nor]);
+            slabel(:ne, fs[:nor] + (-0.5dt, 0.5dt), "Nordmark");
+        }
+
+        with link = "line.se.FSH" {
+            track(fs[:nor, :nor + 13km]);
+            line_label(:left:e, fs[:nor + 13km], "FSH");
+            track(fs[:nor + 13km, :hag]);
+        }
+
+        with link = "point.se.Hagfors" {
+            statdot(fs[:hag]);
+            slabel(:right, fs[:hag] + (1.5dt, 1dt), "Hagfors");
+        }
+
+        with link = "line.se.FSH" {
+            track(fs[:hag, :hag + 4.4km]);
+            line_label(:right:s, fs[:hag + 4.4km], "FSH");
+            track(fs[:hag + 4.4km, :sjo.ye]);
+        }
+
+        with link = "point.se.Sjögränd" {
+            track(fs[:sjo.ye, :sjo]);
+            statdot(fs[:sjo]);
+            slabel(:left, fs[:sjo] + (-1.5dt, 1dt), "Sjögränd");
+        }
+
+        with link = "line.se.FSH" {
+            track(fs[:sjo, :bjo]);
+        }
+
+        with link = "point.se.Björndalsbron" {
+            track(fs[:bjo, :bjo.ys]);
+            statdot(fs[:bjo]);
+            slabel(:right, fs[:bjo] + (1.5dt, 0.8dt), "Björndalsbron");
+        }
+
+        with link = "line.se.FSH" {
+            track(fs[:bjo.ys, :bjo.ys + 8km]);
+            line_label(:right:e, fs[:bjo.ys + 8km], "FSH");
+            track(fs[:bjo.ys + 8km, :dej - 9.8km]);
+            line_label(:right:e, fs[:dej - 9.8km], "FSH");
+            track(fs[:dej - 9.8km, :dej]);
+        }
+
+        # point.se.Deje  se.FGB
+
+        with link = "line.se.FSH" {
+            track(fs[:dej, :dej + 14.5km]);
+            line_label(:left:sw, fs[:dej + 14.5km], "FSH");
+            track(fs[:dej + 14.5km, :kar.yf]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.FSH" {
+            track(fs[:kar.ys, :kar.ys + 4.2km]);
+            line_label(:right:e, fs[:kar.ys + 4.2km], "FSH");
+            track(fs[:kar.ys + 4.2km, :sko]);
+        }
+
+        with link = "point.se.Skoghall" {
+            statdot(fs[:sko]);
+            slabel(:bottom, fs[:sko] + (0dt, 0.8dt), "Skoghall");
+        }
+    }
+}
+
+
+# SE FSL.  Fryksta - Lyckan
+with detail = 2 {
+    let fl = path("d2.se.fsl");
+
+    with railway = :first :g1101 :removed {
+        with link = "line.se.FSL" {
+            track(fl[:fry, :lyc]);
+            line_label(:left:w, fl[:fry + 4.7km], (0dt, -0.25dt), "FSL");
+        }
+
+        with link = "point.se.Lyckan" {
+            statdot(fl[:lyc]);
+            slabel(:right, fl[:lyc] + (1.5dt, 0.8dt), "Lyckan");
+        }
+    }
+}
+
+
+# SE FUG.  Falköping - Uddagården
+with detail = 2 {
+    let fu = path("d2.se.fug");
+
+    with railway = :first :nopax :removed {
+        with link = "line.se.FUG" {
+            track(fu[:fal.yu, :udd - 1.8km]);
+            with zoom = :high line_label(:left:s, fu[:udd - 1.8km], "FUG");
+            track(fu[:udd - 1.8km, :udd]);
+        }
+
+        with link = "point.se.Uddagården" {
+            statdot(fu[:udd]);
+            slabel(:right, fu[:udd] + (1.5dt, 1dt), "Uddagården");
+        }
+    }
+}
+
+
+# SE FVX.  Frövi 312 - Frövi 311
+with detail = 2 {
+    with link = "line.se.FVX" {
+        track(:first :cat:ac15 :nopax, path("d2.se.fvx")[:fro.yk, :fro.yn]);
+    }
+}
+
+
+# SE FYV.  Finspång - Yxviken
+with detail = 2 {
+    let fy = path("d2.se.fyv");
+
+    with railway = :first :g891 :nopax :removed {
+        with link = "line.se.FYV" {
+            track(fy[:fin.yy, :fin.yy + 4.5km]);
+            line_label(:right:w, fy[:fin.yy + 4.5km], "FYV");
+            track(fy[:fin.yy + 4.5km, :yxv]);
+        }
+
+        with link = "point.se.Yxviken" {
+            statdot(fy[:yxv]);
+            slabel(:top, fy[:yxv] + (0dt, -0.8dt), "Yxviken");
+        }
+    }
+}
+

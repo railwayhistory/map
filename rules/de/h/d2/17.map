@@ -87,6 +87,8 @@ with detail = 2 {
         with layer = -1 track(:second, hb[:wal.f, :cor]);
         with layer = -2 track(:second :removed, hb[:cor, :vis.yw]);
         with layer = 1 line_badge(:removed, hb[:vis.yw - 3km], "1711");
+
+        with layer = -1 track(:second :removed, hb[:vis.yr, :vix]);
     }
 
     with link = "point.de.Bennemühlen" {
@@ -120,6 +122,8 @@ with detail = 2 {
     with link = "line.de.1712" {
         track(:second :pax, wb[:wal, :sol.yw]);
         with layer = 1 line_badge(:pax, wb[:wal + 12.5km], "1712");
+
+        track(:second :pax :casing, wb[:sol.yc, :sox]);
     }
 }
 
@@ -154,7 +158,7 @@ with detail = 2 {
     let lc = path("d2.de.h.1720");
 
     with link = "line.de.1720" {
-        track(:first :double :cat:ac15 :pax, lc[:leh, :gbevi]);
+        track(:first :double :cat:ac15 :pax, lc[:leh, :bex]);
 
         with layer = 1 line_badge(:cat:ac15 :pax, lc[:bur + 9.0km], "1720");
         with layer = 1 line_badge(:cat:ac15 :pax, lc[:cel + 23.0km], "1720");
@@ -461,9 +465,33 @@ with detail = 2 {
 with detail = 2 {
     let wl = path("d2.de.1750");
 
-    with link = "line.de.1750" {
-        with layer = -1 track(:first :double :cat:ac15, wl[:see.a, :lin.f]);
-        with layer = -1 track(:first :double :cat:ac15, wl[:wha, :leh.a]);
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.1750" {
+            track(:first :double :cat:ac15, wl[:see.a, :lin.f]);
+            track(:first :double :cat:ac15, wl[:wha, :whe]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.1750" {
+            track(:first :double :cat:ac15, wl[:whe, :leh.a]);
+        }
+    }
+}
+
+
+# DE 1754.  Hannover-Wülfel - Hannover-Waldheim
+with detail = 2 {
+    let ww = path("d2.de.1754");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.de.1754" {
+            with zoom = :low track(ww[:wul.yl, :whe]);
+            with zoom = :high track(
+                    ww[:wul.yl - 1.6dt, :wul.yl - 1.5dt]
+                ..  ww[:whe + 1.5dt, :whe + 1.6dt]
+            );
+        }
     }
 }
 
@@ -586,7 +614,7 @@ with detail = 2 {
     let bb = path("d2.de.1771");
 
     with link = "line.de.1771" {
-        track(:first :cat:ac15, bb[:bar.f, :ros]);
+        track(:first :cat:ac15 :pax, bb[:bar.f, :ros]);
     }
 }
 

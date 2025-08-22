@@ -1,0 +1,46 @@
+# EE HT.  Haapsalu - Tallinn-Balti
+with detail = 2 {
+    let ht = path("d2.ee.ht");
+
+    with railway = :first :g1520 :removed {
+        with link = "point.ee.Haapsalu" {
+            statdot(ht[:haa]);
+            slabel(:left, ht[:haa] + (-1.5dt, 0.8dt), "Haapsalu");
+        }
+
+        with link = "line.ee.HN" {
+            track(ht[:haa, :haa + 10.5km]);
+            line_label(:left:s, ht[:haa + 10.5km], "HT");
+            track(ht[:haa + 10.5km, :tur - 9km]);
+            line_label(:right:nw, ht[:tur - 9km], "HT");
+            track(ht[:tur - 9km, :tur]);
+        }
+    }
+
+    with railway = :first :g1520 :cat:dc30 :pax {
+        with link = "point.ee.Turba" {
+            statdot(ht[:tur]);
+            slabel(:left, ht[:tur] + (-1.3dt, -0.5dt), "Turba");
+        }
+
+        with link = "line.ee.HN" {
+            track(ht[:tur, :kei.yp]);
+            line_label(:right:w, ht[:kei.yp - 8.5km], (0dt, 0.2dt), "HT");
+        }
+    }
+
+    with railway = :first :double :g1520 :cat:dc30 :pax {
+        with link = "point.ee.Keila" {
+            track(:station, ht[:kei.yp , :kei]);
+            statdot(ht[:kei]);
+            slabel(:nw, ht[:kei] + (-1.3dt, 0.9dt), "Keila");
+        }
+
+        with link = "line.ee.HN" {
+            track(ht[:kei, :tal.yh - 10.7km]);
+            line_label(:left:e, ht[:tal.yh - 10.7km], "HT");
+            track(ht[:tal.yh - 10.7km, :tal.yh]);
+        }
+    }
+}
+

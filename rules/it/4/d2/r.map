@@ -1,0 +1,350 @@
+# IT RAF.  Roma Termini - Firenze Campo di Marte (Direttissima)
+with detail = 2 {
+    let dd = path("d2.it.4.raf");
+
+    with link = "line.it.RAF" {
+        track(:first :double :cat:dc30 :pax,
+                dd[:chi, :chi + 1.5km]
+            ..  dd[:chn.y, :chn.y + 2.7km] >> 0.8dt
+            ..  dd[:chn.xn, :bas.xs]
+            ..  dd[:bas.yd - 2km, :bas.yd] << 0.8dt
+        );
+        track(:first :double :cat:dc30 :pax,
+                dd[:bas.yd, :bas.yd + 3km] << 0.8dt
+            ..  dd[:bas.yd + 7km, :ban.yd]
+        );
+        track(:first :double :cat:dc30 :pax, dd[:ban.yd, :bvs.yd]);
+        track(:first :double :cat:dc30 :pax, dd[:bvs.yd, :bvn.yd]);
+        track(:first :double :cat:dc30 :pax, dd[:bvn.yd, :rov.yd]);
+
+        line_label(:left:e :double :cat:dc30 :pax, dd[:bas.xs - 4km], "RAF");
+        line_label(:right:sw :double :cat:dc30 :pax, dd[:bvn.yd - 10km], "RAF");
+        line_label(:left:ne :double :cat:dc30 :pax, dd[:rov.yd - 6km], "RAF");
+    }
+}
+
+
+# IT RCE.  Reggio Emilia - Ciano d'Enza
+with detail = 2 {
+    let rc = path("d2.it.rce");
+
+    with link = "line.it.RCE" {
+        track(:first :cat:dc30 :pax, rc[:reg.yc, :bar]);
+    }
+
+    with link = "point.it.Barco" {
+        track(:first:station :cat:dc30 :pax, rc[:bar, :bar.ym]);
+        statdot(:cat:dc30 :pax, rc[:bar]);
+        slabel(:right :cat:dc30 :pax, rc[:bar] + (0dt, 0.8dt),
+            hbox(:left:top, "Barco")
+        );
+    }
+
+    with link = "line.it.RCE" {
+        track(:first :cat:dc30 :pax, rc[:bar.ym, :cia]);
+        line_label(:left:w :cat:dc30 :pax, rc[:cia - 8km], "RCE");
+    }
+
+    with link = "point.it.Ciano-d-Enza" {
+        statdot(:cat:dc30 :pax, rc[:cia]);
+        slabel(:bottom :cat:dc30 :pax, rc[:cia] + (0dt, 0.8dt),
+            "Ciano d’Enza"
+        );
+    }
+}
+
+
+# IT RFA.  Russi - Faenza
+with detail = 2 {
+    let rf = path("d2.it.rfa");
+
+    with link = "line.it.RFA" {
+        track(:first :cat:dc30 :pax, rf[:fae.yr, :gra]);
+        line_label(:right:w :cat:dc30 :pax, rf[:fae.yr + 5km], "RFA");
+    }
+
+    with link = "point.it.Granarolo-Faentino" {
+        track(:first:station :cat:dc30 :pax, rf[:gra, :gra.yl]);
+        statdot(:cat:dc30 :pax, rf[:gra]);
+        slabel(:right :cat:dc30 :pax, rf[:gra] + (1.0dt, 2.8dt),
+            "Granarolo Faentino"
+        );
+    }
+
+    with link = "line.it.RFA" {
+        track(:first :cat:dc30 :pax, rf[:gra.yl, :rus.yf]);
+    }
+}
+
+
+# IT RMI.  Rolo-Novi-Fabbrico - Mirandola
+with detail = 2 {
+    let rm = path("d2.it.rmi");
+
+    with link = "line.it.RMI" {
+        track(:first :removed, rm[:rol.ym, :mic]);
+        track(:first :removed, rm[:mic, :mir.ym]);
+
+        line_label(:left:s :removed, rm[:rol.ym + 9km], "RMI");
+    }
+}
+
+
+# IT RNF.  Rimini Centrale - Novafeltria
+with detail = 2 {
+    let rn = path("d2.it.rnf");
+
+    with link = "line.it.RNF" {
+        track(:first :narrow:g950 :removed, rn[:rim, :nov]);
+        line_label(:right:e :removed, rn[:rim + 17.3km], "RNF");
+    }
+
+    with link = "point.it.Novafeltria" {
+        statdot(:removed, rn[:nov]);
+        slabel(:bottom :removed, rn[:nov] + (0dt, 0.6dt), "Novafeltria");
+    }
+}
+
+
+# IT ROF.  Roma Termini - Firenze Santa Maria Novella
+with detail = 2 {
+    let ll = path("d2.it.4.rof");
+
+    with link = "point.it.Chiusi-Chianciano-Terme" {
+        track(:first:station :double :cat:dc30 :pax, ll[:chi, :chi.ys]);
+        statdot(:cat:dc30 :pax, ll[:chi]);
+        slabel(:left :bold :cat:dc30 :pax,
+            ll[:chi] - (1km, 0dt) + (-1.8dt, 2.0dt),
+            "Chiusi-Chianciano Terme"
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:chi.ys, :ter.yf]);
+        line_label(:left:e :double :cat:dc30 :pax, ll[:chi.ys + 17km], "ROF");
+    }
+
+    with link = "point.it.Terontola-Cortona" {
+        track(:first:station :double :cat:dc30 :pax, ll[:ter.yf, :ter]);
+        statdot(:cat:dc30 :pax, ll[:ter]);
+        slabel(:right :cat:dc30 :pax, ll[:ter] + (1.5dt, 0.3dt),
+            "Terontola-Cortona"
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:ter, :bas.yl]);
+        track(:first :double :cat:dc30 :pax, ll[:bas.yl, :are.yf]);
+
+        line_label(:right:w :double :cat:dc30 :pax, ll[:ter + 15km], "ROF");
+    }
+
+    with link = "point.it.Arezzo" {
+        track(:first:station :double :cat:dc30 :pax, ll[:are.yf, :are.ys]);
+        statdot(:cat:dc30 :pax, ll[:are]);
+        slabel(:right :cat:dc30 :pax :bold, ll[:are] + (1.3dt, -0.3dt),
+            "Arezzo"
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:are.ys, :ban.yl]);
+        track(:first :double :cat:dc30 :pax, ll[:ban.yl, :bvs.yl]);
+        track(:first :double :cat:dc30 :pax, ll[:bvs.yl, :mva]);
+
+        line_label(:left:n :double :cat:dc30 :pax, ll[:ban.yl + 13.5km], "ROF");
+    }
+
+    with link = "point.it.Montevarchi-Terranuova" {
+        statdot(:cat:dc30 :pax, ll[:mva]);
+        slabel(:left :cat:dc30 :pax, ll[:mva] + (-1.0dt, -0.5dt),
+            vbox(:right:top, "Montevarchi-", "Terranuova ")
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:mva, :bvn.yl]);
+        track(:first :double :cat:dc30 :pax, ll[:bvn.yl, :sel]);
+
+        line_label(:left:se :double :cat:dc30 :pax, ll[:mva + 6km], "ROF");
+    }
+
+    with link = "point.it.Sant-Ellero" {
+        statdot(:cat:dc30 :pax, ll[:sel]);
+        slabel(:right :cat:dc30 :pax, ll[:sel] + (1.5dt, -0.5dt),
+            "Sant’Ellero"
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:sel, :pon.yb]);
+    }
+
+    with link = "point.it.Pontassieve" {
+        track(:first:station :double :cat:dc30 :pax, ll[:pon.yb, :pon]);
+        statdot(:cat:dc30 :pax, ll[:pon]);
+        slabel(:right :cat:dc30 :pax,
+            ll[:pon.yb] + (0.8km, 0dt) + (1.8dt, 0.5dt),
+            "Pontassieve"
+        );
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:pon, :rov.yd]);
+        track(:first :double :cat:dc30 :pax, ll[:rov.yd, :fcm]);
+
+        line_label(:right:s :double :cat:dc30 :pax, ll[:pon + 4.7km], "ROF");
+    }
+
+    with link = "point.it.Firenze-Campo-di-Marte" {
+        track(:first:station :double :cat:dc30 :pax, ll[:fcm, :fcm.yb]);
+        statdot(:cat:dc30 :pax, ll[:fcm]);
+    }
+
+    with link = "line.it.ROF" {
+        track(:first :double :cat:dc30 :pax, ll[:fcm.yb, :fir.yr]);
+    }
+}
+
+
+# IT RPC.  Ravenna - Porto Candiano
+with detail = 2 {
+    with link = "line.it.RPC" {
+        track(:station, path("d2.it.rpc")[:rav.yp, :can]);
+    }
+}
+
+
+# IT RPI.  Roma Termini - Pisa Centrale
+with detail = 2 {
+    let rp = path("d2.it.4.rpi");
+
+    with link = "point.it.Orbetello-Monte-Argentario" {
+        track(:first:station :double :cat:dc30 :pax, rp[:orb.yp, :orb]);
+        statdot(:cat:dc30 :pax, rp[:orb]);
+        slabel(:right :cat:dc30 :pax, rp[:orb] + (1.5dt, 0.8dt),
+            vbox(:left:bottom, "Orbetello-", "Monte Argentario")
+        );
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:orb, :gro]);
+        line_label(:left:ne :double :cat:dc30 :pax, rp[:ris - 11km], "RPI");
+    }
+
+    with link = "point.it.Grosseto" {
+        statdot(:cat:dc30 :pax, rp[:gro]);
+        slabel(:left :cat:dc30 :pax, rp[:gro] + (-1.7dt, 1.0dt), "Grosseto");
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:gro, :mpe]);
+        line_label(:left:e :double :cat:dc30 :pax, rp[:gro + 6km], "RPI");
+    }
+
+    with link = "point.it.Montepescali" {
+        track(:first:station :double :cat:dc30 :pax, rp[:mpe, :mpe.ys]);
+        statdot(:cat:dc30 :pax, rp[:mpe]);
+        slabel(:left :cat:dc30 :pax, rp[:mpe] + (-1.7dt, 1.5dt),
+            "Montepescali"
+        );
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:mpe.ys, :fol]);
+        line_label(:right:s :double :cat:dc30 :pax, rp[:mpe.ys + 18km], "RPI");
+    }
+
+    with link = "point.it.Follonica" {
+        statdot(:cat:dc30 :pax, rp[:fol]);
+        slabel(:left :cat:dc30 :pax, rp[:fol] + (-1.0dt, -0.3dt),
+            hbox(:right:top, "Follonica")
+        );
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:fol, :cam]);
+    }
+
+    with link = "point.it.Campiglia-Marittima" {
+        track(:first:station :double :cat:dc30 :pax, rp[:cam, :cam.yn]);
+        statdot(:cat:dc30 :pax, rp[:cam]);
+        slabel(:right :cat:dc30 :pax, rp[:cam] + (1.5dt, 0dt),
+            "Campiglia Marittima"
+        );
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:cam.yn, :cec]);
+        line_label(:left:e :double :cat:dc30 :pax, rp[:cam.yn + 20km], "RPI");
+    }
+
+    with link = "point.it.Cecina" {
+        track(:first:station :double :cat:dc30 :pax, rp[:cec, :cec.yv]);
+        statdot(:cat:dc30 :pax, rp[:cec]);
+        slabel(:left :cat:dc30 :pax, rp[:cec] + (-1.7dt, 1.5dt), "Cecina");
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax, rp[:cec.yv, :vad]);
+    }
+
+    with link = "point.it.Vada" {
+        track(:first:station :double :cat:dc30 :pax, rp[:vad, :vad.yl]);
+        statdot(:cat:dc30 :pax, rp[:vad]);
+        slabel(:left :cat:dc30 :pax, rp[:vad] + (-1.7dt, 1.5dt), "Vada");
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :cat:dc30 :pax, rp[:vad.yl, :col]);
+        line_label(:right:w :cat:dc30 :pax, rp[:col - 15km], "RPI");
+    }
+
+    with link = "point.it.Collesalvetti" {
+        track(:first:station :double :cat:dc30 :pax, rp[:col, :col.yl]);
+        statdot(:cat:dc30 :pax, rp[:col]);
+        slabel(:right :cat:dc30 :pax, rp[:col] + (1.7dt, 0.8dt),
+            "Collesalvetti"
+        );
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :cat:dc30 :pax, rp[:col.yl, :pis.yr]);
+    }
+}
+
+
+# IT RSM.  Rimini - San Marino Città
+with detail = 2 {
+    let rm = path("d2.it.rsm");
+
+    with link = "line.it.RSM" {
+        track(:first :narrow:g950 :removed, rm[:rim.ym, :mar]);
+        line_label(:left:w :removed, rm[:rim.ym + 8.2km], "RSM");
+    }
+
+    with link = "point.it.San-Marino-Città" {
+        statdot(:removed, rm[:mar]);
+        slabel(:bottom :removed, rm[:mar] + (0dt, 0.8dt), "San Marino Città");
+    }
+}
+
+
+# IT RST.  Bivio Renai - Bivio Samminiatello
+with detail = 2 {
+    let rs = path("d2.it.rst");
+
+    with link = "line.it.RST" {
+        track(:first :double :cat:dc30 :pax, rs[:ren.y, :sam.y]);
+        line_label(:left:n :double :cat:dc30 :pax, rs[:ren.y + 3km], "RST");
+    }
+}
+
+
+# IT RSV.  Ravenna - Porto San Vitale
+with detail = 2 {
+    with link = "line.it.RSV" {
+        track(:station, path("d2.it.rsv")[:rav.yv, :psv]);
+    }
+}
+

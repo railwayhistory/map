@@ -1,0 +1,294 @@
+# AT 100.  Wien Westbf - Salzburg Hbf
+with detail = 2 {
+    let ws = path("d2.at.100");
+
+    with link = "point.at.Wien-Westbf" {
+        statdot(:cat:ac15 :pax, ws[:wie]);
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:wie, :pen.yb]);
+    }
+
+    with link = "point.at.Wien-Penzing" {
+        track(:first:station :double :cat:ac15 :pax, ws[:pen.yb, :pen.yp]);
+        statdot(:cat:ac15 :pax, ws[:pen]);
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:pen.yp, :hut.yp]);
+        track(:first :double :cat:ac15 :pax, ws[:hut.yp, :hut]);
+    }
+
+    with link = "point.at.Wien-Hütteldorf" {
+        statdot(:cat:ac15 :pax, ws[:hut]);
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:hut, :upu]);
+    }
+
+    with link = "point.at.Unter-Purkersdorf" {
+        statdot(:cat:ac15 :pax, ws[:upu]);
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:upu, :wag]);
+        line_label(:left:n :double :cat:ac15 :pax, ws[:upu + 8km], "100");
+        line_label(:left:n :double :cat:ac15 :pax, ws[:wag - 13km], "100");
+    }
+
+    with link = "point.at.Knoten-Wagram" {
+        marker(:right :ref :cat:ac15, ws[:wag]);
+        marker(:left :ref :cat:ac15, ws[:wag]);
+        with zoom = :high {
+            slabel(:right :cat:ac15, ws[:wag] + (0dt, 0.8dt),
+                vbox(:left:top :light, "Knoten", "Wagram")
+            );
+        }
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:wag, :spo.yt]);
+    }
+
+    with link = "point.at.St-Pölten-Hbf" {
+        track(:first:station :double :cat:ac15 :pax, ws[:spo.yt, :spo.yl]);
+        statdot(:cat:ac15 :pax, ws[:spo]);
+        slabel(:left :cat:ac15 :pax :bold,
+            ws[:spo] + (0dt, -1km) + (-1.5dt, -1dt),
+            "St. Pölten"
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:spo.yl, :roh.yo]);
+    }
+
+    with link = "point.at.Knoten-Rohr" {
+        track(:first:station :double :cat:ac15 :pax, ws[:roh.yo, :roh.yw]);
+        marker(:right :ref :cat:ac15, ws[:roh]);
+        marker(:left :ref :cat:ac15, ws[:roh]);
+        with zoom = :high {
+            slabel(:left :cat:ac15, ws[:roh] + (1.0dt, 0.8dt),
+                vbox(:right:top :light, "Knoten Rohr")
+            );
+        }
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:roh.yw, :poc]);
+    }
+
+    with link = "point.at.Pöchlarn" {
+        track(:first:station :double :cat:ac15 :pax, ws[:poc, :poc.yk]);
+        statdot(:cat:ac15 :pax, ws[:poc]);
+        slabel(:right :cat:ac15 :pax, ws[:poc] + (-1.5dt, 0.8dt),
+            hbox(:left:top, "Pöchlarn")
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:poc.yk, :ams]);
+        line_label(:right:s :double :cat:ac15 :pax, ws[:ybb + 4km],
+            "100 · 130"
+        );
+    }
+
+    with link = "point.at.Amstetten" {
+        statdot(:cat:ac15 :pax, ws[:ams]);
+        slabel(:top :cat:ac15 :pax, ws[:ams] + (-1dt, -0.8dt), "Amstetten");
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:ams, :ams.yk]);
+        track(:first :double :cat:ac15 :pax, ws[:ams.yk, :sva.yk]);
+        line_label(:left:ne :double :cat:ac15 :pax, ws[:sjo.yv + 3.5km], "100");
+    }
+
+    with link = "point.at.St-Valentin" {
+        track(:first:station :double :cat:ac15 :pax, ws[:sva.yk, :sva.yn]);
+        statdot(:cat:ac15 :pax, ws[:sva]);
+        slabel(:right :cat:ac15 :pax, ws[:sva] + (1.5dt, 0.5dt),
+            "St. Valentin"
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:sva.yn, :lin.ys]);
+    }
+
+    with link = "point.at.Linz-Hbf" {
+        track(:first:station :double :cat:ac15 :pax, ws[:lin.ys, :lin.yw]);
+        statdot(:cat:ac15 :pax, ws[:lin]);
+        slabel(:left :cat:ac15 :pax :medium :bold, ws[:lin] + (-2.5dt, 0.5dt),
+            "Linz"
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:lin.yw, :mar.yt]);
+        line_label(:right:se :double :cat:ac15 :pax, ws[:mar.yt - 3km],
+            "100"
+        );
+    }
+
+    with link = "point.at.Marchtrenk" {
+        track(:first:station :double :cat:ac15 :pax, ws[:mar.yt, :mar]);
+        statdot(:cat:ac15 :pax, ws[:mar]);
+        slabel(:right :cat:ac15 :pax, ws[:mar] + (0dt, 0.5dt),
+            vbox(:left:top, "March-", "  trenk")
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:mar, :wel]);
+    }
+
+    with link = "point.at.Wels-Hbf" {
+        track(:first:station :double :cat:ac15 :pax, ws[:wel, :wel.yg]);
+        statdot(:cat:ac15 :pax, ws[:wel]);
+        slabel(:left :cat:ac15 :pax, ws[:wel] + (-1.2km, 0dt) + (-2.0dt, 0.8dt),
+            hbox(:right:base, span(:bold, "Wels "), "Hbf")
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:wel.yg, :lam.yo]);
+        track(:first :double :cat:ac15 :pax, ws[:lam.yo, :lam.yg]);
+
+        line_label(:right:se :double :cat:ac15 :pax, ws[:wel.yg + 8km], "100");
+    }
+
+    with link = "point.at.Lambach" {
+        track(:first:station :double :cat:ac15 :pax, ws[:lam.yg, :lam]);
+        statdot(:cat:ac15 :pax, ws[:lam]);
+        slabel(:right :cat:ac15 :pax, ws[:lam] + (1.2km, 0dt) + (0.8dt, 1.5dt),
+            "Lambach"
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:lam, :nki]);
+    }
+
+    with link = "point.at.Neukirchen-Lambach" {
+        statdot(:cat:ac15 :pax, ws[:nki]);
+        slabel(:left :cat:ac15 :pax, ws[:nki] + (-0.8km, 0dt) + (-1.5dt, 1.5dt),
+            vbox(:right:bottom, "Neukirchen  ", "bei Lambach")
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:nki, :att.yr]);
+    }
+
+    with link = "point.at.Attnang-Puchheim" {
+        track(:first:station :double :cat:ac15 :pax, ws[:att.yr, :att.ys]);
+        statdot(:cat:ac15 :pax, ws[:att]);
+        with zoom = :low {
+            slabel(:right :cat:ac15 :pax, ws[:att] + (1.5dt, 1.0dt),
+                "Att.-P."
+            );
+        }
+        with zoom = :high {
+            slabel(:right :cat:ac15 :pax, ws[:att] + (1.8dt, 1.0dt),
+                vbox(:left:middle, "Attang-", " Puchheim")
+            );
+        }
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:att.ys, :vob]);
+    }
+
+    with link = "point.at.Vöcklabruck" {
+        statdot(:cat:ac15 :pax, ws[:vob]);
+        slabel(:bottom :cat:ac15 :pax, ws[:vob] + (0dt, 0.4km) + (0dt, 0.5dt),
+            vbox(:center:top, " Vöckla-", "bruck")
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:vob, :vob.yk]);
+        track(:first :double :cat:ac15 :pax, ws[:vob.yk, :tim]);
+    }
+
+    with link = "point.at.Timelkam" {
+        track(:first:station :double :cat:ac15 :pax, ws[:tim, :tim.ya]);
+        statdot(:cat:ac15 :pax, ws[:tim]);
+        slabel(:left :cat:ac15 :pax, ws[:tim] + (1.3dt, 0.8dt),
+            vbox(:right:top, "Timel-", "kam  ")
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:tim.ya, :vom]);
+        line_label(:right:s :double :cat:ac15 :pax, ws[:tim.ya + 6km],
+            "100"
+        );
+    }
+
+    with link = "point.at.Vöcklamarkt" {
+        statdot(:cat:ac15 :pax, ws[:vom]);
+        slabel(:left :cat:ac15 :pax, ws[:vom] + (-1dt, -1dt), "Vöcklamarkt");
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:vom, :ste.yb]);
+    }
+
+    with link = "point.at.Steindorf-Straßwalchen" {
+        track(:first:station :double :cat:ac15 :pax, ws[:ste.yb, :ste]);
+        statdot(:cat:ac15 :pax, ws[:ste]);
+        slabel(:right :cat:ac15 :pax, ws[:ste] + (0dt, 0.9km) + (-1dt, 0.5dt),
+            vbox(:left:top, "Steindorf", "bei Straßwalchen")
+        );
+    }
+
+    with link = "line.at.100" {
+        track(:first :double :cat:ac15 :pax, ws[:ste, :sal.yw]);
+        line_label(:left:w :double :cat:ac15 :pax, ws[:hwd.y - 9km], "100");
+    }
+
+    with link = "point.at.Salzburg-Hbf" {
+        track(:first:station :double :cat:ac15 :pax, ws[:sal.yw, :sal]);
+        statdot(:cat:ac15 :pax, ws[:sal]);
+        slabel(:right :cat:ac15 :pax :medium :bold,
+            ws[:sal] + (2km, 0dt) + (1dt, -0.5dt),
+            "Salzburg"
+        );
+    }
+}
+
+
+# AT 102.  Wien Penzing - Wien Heiligenstadt
+with detail = 2 {
+    let ph = path("d2.at.102");
+
+    with link = "line.at.102" {
+        track(:first :double :cat:ac15 :pax, ph[:pen.yb, :hei.yp]);
+    }
+}
+
+
+# AT 105.  Wien Penzing - Wien Matzleinsdorf
+with detail = 2 {
+    let pm = path("d2.at.105");
+
+    with link = "line.at.105" {
+        track(:first :double :cat:ac15 :pax, pm[:pen.yp, :spe.yp]);
+    }
+}
+
+
+# AT 108.  Wien Matzleinsdorf - Wien Praterstern
+with detail = 2 {
+    let mp = path("d2.at.108");
+
+    with link = "line.at.108" {
+        track(:first :double :cat:ac15 :pax, mp[:wie.yp, :ren.yf]);
+        track(:first :double :cat:ac15 :pax, mp[:ren.yf, :pra]);
+    }
+}
+

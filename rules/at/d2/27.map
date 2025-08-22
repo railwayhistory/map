@@ -1,0 +1,166 @@
+# AT 270.  Tulln an der Donau - St. Pölten Hbf
+with detail = 2 {
+    let tp = path("d2.at.270");
+
+    with link = "line.at.270" {
+        track(:first :cat:ac15 :pax,
+                tp[:tul.yp, :tfn.yt - 1dt]
+            ..  tp[:tuf.yt, :tuf] >> 0.8dt
+        );
+        line_label(:left:w :cat:ac15 :pax, tp[:tfn.yt - 2km], "270");
+    }
+
+    with link = "point.at.Tullnerfeld" {
+        statdot(:cat:ac15 :pax, tp[:tuf] >> 0.4dt);
+        slabel(:bottom :cat:ac15 :pax, tp[:tuf] + (-1dt, 0.8dt),
+            "Tullnerfeld"
+        );
+    }
+
+    with link = "line.at.270" {
+        track(:first :cat:ac15 :pax,
+                tp[:tuf, :mic.yp] >> 0.8dt
+            ..  tp[:atz, :her.yk]
+        );
+        line_label(:right:s :cat:ac15 :pax, tp[:atz + 8km], " 270");
+    }
+
+    with link = "point.at.Herzogenburg" {
+        track(:first:station :cat:ac15 :pax, tp[:her.yk, :her]);
+        statdot(:cat:ac15 :pax, tp[:her]);
+        slabel(:left :cat:ac15 :pax, tp[:her] + (-1.7dt, 1.3dt),
+            "Herzogenburg"
+        );
+    }
+
+    with link = "line.at.270" {
+        track(:first :cat:ac15 :pax, tp[:her, :spo.yt]);
+        line_label(:right:se :cat:ac15 :pax, tp[:spo.yt - 5km], "270");
+    }
+}
+
+
+# AT 272.  Herzogenburg - Krems a.d. Donau
+with detail = 2 {
+    let hk = path("d2.at.272");
+
+    with link = "line.at.272" {
+        track(:first :pax, hk[:her.yk, :kre.yh]);
+        line_label(:left:e :pax, hk[:her.yk + 9km], "272");
+    }
+}
+
+
+# AT 275.  Absdorf-Hippersdorf - Krems a.d. Donau
+with detail = 2 {
+    let ak = path("d2.at.275");
+
+    with link = "line.at.275" {
+        track(:first :cat:ac15 :pax, ak[:abs.yk, :had.ys]);
+        line_label(:right:s :cat:ac15 :pax, ak[:abs.yk + 8km], "275");
+    }
+
+    with link = "point.at.Hadersdorf-Kamp" {
+        track(:first:station :cat:ac15 :pax, ak[:had.ys, :had]);
+        statdot(:cat:ac15 :pax, ak[:had]);
+        slabel(:left :cat:ac15 :pax, ak[:had] + (-1.8dt, 0.5dt),
+            "Hadersdorf am Kamp"
+        );
+    }
+
+    with link = "line.at.275" {
+        track(:first :cat:ac15 :pax, ak[:had, :kre]);
+        line_label(:left:n :cat:ac15 :pax, ak[:had + 4km], "275");
+    }
+
+    with link = "point.at.Krems-Donau" {
+        track(:first:station :cat:ac15 :pax, ak[:kre, :kre.yh]);
+        statdot(:cat:ac15 :pax, ak[:kre]);
+        slabel(:left :cat:ac15 :pax, ak[:kre] + (0.5dt, -1.8dt),
+            "Krems a.d. Donau"
+        );
+    }
+}
+
+
+# AT 276.  Hadersdorf am Kamp - Sigmundsherberg
+with detail = 2 {
+    let hs = path("d2.at.276");
+
+    with link = "line.at.276" {
+        track(:first :pax, hs[:had.ys, :sig.yh]);
+        line_label(:right:w :pax, hs[:had.ys + 6.5km], "276");
+        line_label(:left:e :pax, hs[:sig.yh - 9.7km], "276");
+    }
+}
+
+
+# AT 278.  Bad Krems - Grein-Bad Kreuzen
+with detail = 2 {
+    let kg = path("d2.at.278");
+
+    with link = "line.at.278" {
+        track(:first :pax, kg[:kre.yh, :emm]);
+        line_label(:right:e :pax, kg[:kre.yh + 19.5km], "278");
+    }
+
+    with link = "point.at.Emmersdorf-Donau" {
+        statdot(:pax, kg[:emm]);
+        slabel(:left :pax, kg[:emm] + (0.5dt, -1.5dt),
+            "Emmersdorf a.d. Donau"
+        );
+    }
+
+    with link = "line.at.278" {
+        track(:first, kg[:emm, :wei]);
+    }
+
+    with link = "point.at.Weitenegg" {
+        statdot(:open, kg[:wei]);
+    }
+
+    with link = "line.at.278" {
+        track(:first :removed, kg[:wei, :isp]);
+        line_label(:right:s :removed, kg[:wei + 13km], "278  ");
+    }
+
+    with link = "point.at.Weins-Isperdorf" {
+        statdot(:open, kg[:isp]);
+    }
+
+    with link = "line.at.278" {
+        track(:first, kg[:isp, :nik]);
+    }
+
+    with link = "point.at.St-Nikola-Struden" {
+        statdot(:pax, kg[:nik]);
+        slabel(:right :pax, kg[:nik] + (-1.0dt, -1.5dt),
+            "St. Nikola-Struden"
+        );
+    }
+
+    with link = "line.at.278" {
+        track(:first :pax, kg[:nik, :gre]);
+        line_label(:left:n :pax, kg[:nik + 2.6km], "278");
+    }
+}
+
+
+# AT 279.  Mauthausen - Grein-Bad Kreuzen
+with detail = 2 {
+    let mg = path("d2.at.279");
+
+    with link = "line.at.279" {
+        track(:first :pax, mg[:mau.yg, :gre]);
+        line_label(:left:s :pax, mg[:mau.yg + 9.2km], " 279");
+        line_label(:right:n :pax, mg[:gre - 4.5km], "279");
+    }
+
+    with link = "point.at.Grein-Bad-Kreuzen" {
+        statdot(:pax, mg[:gre]);
+        slabel(:left :pax, mg[:gre] + (0dt, -0.9km) + (0.5dt, -0.3dt),
+            vbox(:right:bottom, "Grein-", "Bad Kreuzen ")
+        );
+    }
+}
+

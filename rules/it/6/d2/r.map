@@ -1,0 +1,251 @@
+# IT RAN.  Roma Termini - Napoli Centrale (AV)
+with detail = 2 {
+    let rn = path("d2.it.6.ran");
+
+    with link = "line.it.RAN" {
+        track(:first :double :cat:ac25 :pax,
+                rn[:sgo, :sgo + 0.1dl] >> 0.8dt
+            ..  rn[:sgo + 5.5km, :bcs.y]
+        );
+        track(:first :double :cat:ac25 :pax, rn[:bcs.y, :bcn.ya]);
+        track(:first :double :cat:ac25 :pax, rn[:bcn.ya, :nac]);
+        track(:first :double :cat:dc30 :pax, rn[:nac, :naa]);
+
+        line_label(:right:n :double :cat:ac25 :pax, rn[:sgo + 13km], "RAN ");
+        line_label(:right:ne :double :cat:ac25 :pax, rn[:bcs.y + 8km], "RAN");
+        line_label(:right:ne :double :cat:ac25 :pax, rn[:nac - 17km], "RAN");
+    }
+
+    with link = "point.it.Napoli-Afragola" {
+        statdot(:cat:dc30 :pax, rn[:naa]);
+    }
+
+    with link = "line.it.RAN" {
+        track(:first :double :cat:dc30 :pax, rn[:naa, :naa.ys]);
+        track(:first :double :cat:dc30 :pax, rn[:naa.ys, :bcs.ya]);
+    }
+}
+
+
+# IT RCN.  Roma Termini - Cassino - Napoli Centrale
+with detail = 2 {
+    let rn = path("d2.it.6.rcn");
+
+    with link = "point.it.Roccasecca" {
+        track(:first:station :cat:dc30 :pax, rn[:roc.ya, :roc]);
+        statdot(:cat:dc30 :pax, rn[:roc]);
+        slabel(:right :cat:dc30 :pax, rn[:roc] + (-0.5dt, -1.3dt),
+            "Roccasecca"
+        );
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:roc, :cso]);
+        line_label(:left:s :double :cat:dc30 :pax, rn[:roc + 11km], "RCN");
+    }
+
+    with link = "point.it.Cassino" {
+        statdot(:cat:dc30 :pax, rn[:cso]);
+	slabel(:right :cat:dc30 :pax, rn[:cso] + (-2dt, -1.5dt), "Cassino");
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:cso, :rev.ya]);
+    }
+
+    with link = "point.it.Rocca-d-Evandro-San-Vittore" {
+        track(:first:station :cat:dc30 :pax, rn[:rev.ya, :rev.yv]);
+        statdot(:cat:dc30 :pax, rn[:rev]);
+        slabel(:left :cat:dc30 :pax, rn[:rev] + (0dt, 1.8km) + (1dt, 0dt),
+            vbox(:right:top, "Rocca d’Evandro-", "San Vittore ")
+        );
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:rev.yv, :vai.yi]);
+        line_label(:left:sw :double :cat:dc30 :pax, rn[:vai.yi - 13km], "RCN");
+    }
+
+    with link = "point.it.Vairano-Caianello" {
+        track(:first:station :cat:dc30 :pax, rn[:vai.yi, :vai]);
+        statdot(:cat:dc30 :pax, rn[:vai]);
+        slabel(:right :cat:dc30 :pax, rn[:vai] + (1.5dt, 0.8dt),
+            "Vairano-Caianello"
+        );
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:vai, :bga.y]);
+        track(:first :double :cat:dc30 :pax, rn[:bga.y, :spa]);
+    }
+
+    with link = "point.it.Sparanise" {
+        statdot(:cat:dc30 :pax, rn[:spa]);
+        slabel(:bottom :cat:dc30 :pax, rn[:spa] + (-2.5dt, 0.8dt), "Sparanise");
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:spa, :bcn.yl]);
+        track(:first :double :cat:dc30 :pax, rn[:bcn.yl, :cap.ym]);
+
+        line_label(:left:sw :cat:dc30 :pax, rn[:bcn.yl - 3km], "RCN");
+    }
+
+    with link = "point.it.Santa-Maria-Capua-Vetere" {
+        track(:first:station :double :cat:dc30 :pax, rn[:cap.ym, :sma]);
+        statdot(:cat:dc30 :pax, rn[:sma]);
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:sma, :cas.ya]);
+    }
+
+    with link = "point.it.Caserta" {
+        track(:first:station :cat:dc30 :pax, rn[:cas.ya, :cas.yf]);
+        statdot(:cat:dc30 :pax, rn[:cas]);
+        slabel(:top :cat:dc30 :pax, rn[:cas] + (0dt, -0.8dt), "Caserta");
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:cas.yf, :bma.yl]);
+        track(:first :double :cat:dc30 :pax, rn[:bma.yl, :can.yl]);
+    }
+
+    with link = "point.it.Cancello" {
+        track(:first:station :cat:dc30 :pax, rn[:can.yl, :can.yn]);
+        statdot(:cat:dc30 :pax, rn[:can]);
+        slabel(:right :cat:dc30 :pax, rn[:can] + (1.5dt, -0.8dt),
+            hbox(:left:top :bold, "Cancello")
+        );
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax, rn[:can.yn, :bcs.ya]);
+        track(:first :double :cat:dc30 :pax, rn[:bcs.ya, :nap.ya]);
+    }
+
+    with link = "point.it.Napoli-Centrale" {
+        track(:first:station :double :cat:dc30 :pax, rn[:nap.ya, :nap]);
+        with layer = 1 statdot(:cat:dc30 :pax, rn[:nap]);
+        slabel(:bottom :cat:dc30 :pax :large :bold, rn[:nap] + (-1dt, 3.5km),
+            "Napoli"
+        );
+    }
+}
+
+
+# IT REV.  Rooca d’Evandro - Venafro
+with detail = 2 {
+    let rv = path("d2.it.rev");
+
+    with link = "line.it.REV" {
+        track(:first :cat:dc30, rv[:rev.yv, :vnn]);
+        track(:first :cat:dc30, rv[:vnn, :ven.yr]);
+        line_label(:left:s :cat:dc30, rv[:rev.yv + 4.5km], "  REV");
+    }
+}
+
+
+# IT RFN.  Roma Termini - Formia-Gaeta - Napoli Gianturco
+with detail = 2 {
+    let rn = path("d2.it.6.rfn");
+
+    with link = "point.it.Formia-Gaeta" {
+        track(:first:station :double :cat:dc30 :pax, rn[:for.yg, :for]);
+        statdot(:cat:dc30 :pax, rn[:for]);
+        slabel(:right :cat:dc30 :pax, rn[:for] + (-0.3dt, 0.8dt),
+            vbox(:left:top, "Formia-", " Gaeta")
+        );
+    }
+
+    with link = "line.it.RFN" {
+        track(:first :double :cat:dc30 :pax, rn[:for, :min]);
+    }
+
+    with link = "point.it.Minturno-Scauri" {
+        statdot(:cat:dc30 :pax, rn[:min]);
+        slabel(:top :cat:dc30 :pax, rn[:min] + (0.5dt, -1.0dt),
+            vbox(:center:bottom, " Minturno-", "Scauri")
+        );
+    }
+
+    with link = "line.it.RFN" {
+        track(:first :double :cat:dc30 :pax, rn[:min, :min.ys]);
+    }
+
+    with link = "line.it.RFN" {
+        track(:first :double :cat:dc30 :pax, rn[:min.ys, :vli]);
+        line_label(:right:ne :double :cat:dc30 :pax, rn[:min.ys + 13km], "RFN");
+    }
+
+    with link = "point.it.Villa-Literno" {
+        track(:first:station :double :cat:dc30 :pax, rn[:vli, :vli.ya]);
+        statdot(:cat:dc30 :pax, rn[:vli]);
+        slabel(:left :cat:dc30 :pax, rn[:vli] + (-1.5dt, 1.0dt),
+            "Villa Literno"
+        );
+    }
+
+    with link = "line.it.RFN" {
+        track(:first :double :cat:dc30 :pax, rn[:vli.ya, :nap]);
+        line_label(:right:e :double :cat:dc30 :pax, rn[:vli.ya + 9.5km], "RFN");
+    }
+}
+
+
+# IT RGC.  Rocchetta Sant’Antonio-Lacedonia - Gioia del Colle
+with detail = 2 {
+    let rg = path("d2.it.rgc");
+
+    with link = "line.it.RGC" {
+        track(:first, rg[:roc.yg, :spi]);
+        line_label(:left:s, rg[:roc.yg + 27.5km], "RGC");
+    }
+
+    with link = "point.it.Spinazzola" {
+        statdot(:open, rg[:spi] << 0.3dt);
+        slabel(:left, rg[:spi] + (-1.0dt, -1.7dt), "Spinazzola");
+    }
+
+    with link = "line.it.RGC" {
+        track(:first, rg[:spi, :gra.ya]);
+        line_label(:left:sw, rg[:gra.ya - 10km], "RGC");
+    }
+
+    with link = "point.it.Gravina-in-Puglia-RFI" {
+        track(:first:station, rg[:gra.ya, :gra]);
+    }
+
+    with link = "line.it.RGC" {
+        track(:first, rg[:gra, :alt.ym]);
+    }
+
+    with link = "point.it.Altamura-RFI" {
+        track(:first:station, rg[:alt.ym, :alt.yb]);
+        statdot(:pax, rg[:alt] << 0.3dt);
+        slabel(:left :pax, rg[:alt] + (1.3dt, -1.8dt), "Altamura");
+    }
+
+    with link = "line.it.RGC" {
+        track(:first, rg[:alt.yb, :gio.yr]);
+        line_label(:right:n, rg[:alt.yb + 10km], "RGC");
+    }
+}
+
+
+# IT RSF.  Rosarno - San Ferdinando
+with detail = 2 {
+    let rf = path("d2.it.rsf");
+
+    with link = "line.it.RSF" {
+        track(:first :cat:dc30, rf[:ros.yf, :sfe]);
+    }
+
+    with link = "point.it.San-Ferdinando" {
+        statdot(:cat:dc30, rf[:sfe]);
+        slabel(:left :cat:dc30, rf[:sfe] + (-1.5dt, 0.8dt),
+            "San Ferdinando"
+        );
+    }
+}
+

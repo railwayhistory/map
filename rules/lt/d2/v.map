@@ -1,0 +1,322 @@
+# LT VB.  Venta - Bugeniai
+with detail = 2 {
+    let vb = path("d2.lt.vb");
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.lt.VB" {
+            track(vb[:ven.yb, :bug.yn]);
+        }
+
+        with link = "point.lt.Bugeniai" {
+            track(:station, vb[:bug.yn, :bug]);
+            statdot(vb[:bug]);
+            slabel(:right, vb[:bug] + (1.5dt, 0.5dt), "Bugeniai");
+        }
+    }
+}
+
+
+# LT VE.  Vievis - Elektrėnai
+with detail = 2 {
+    let ve = path("d2.lt.ve");
+
+    with railway = :second :g1520 :nopax {
+        with link = "line.lt.VE" {
+            track(ve[:vie.ye, :ele]);
+            line_label(:right:e, ve[:ele - 1.8km], (0dt, -0.2dt), "VE");
+        }
+
+        with link = "point.lt.Elektrėnai" {
+            statdot(ve[:ele]);
+            slabel(:bottom, ve[:ele] + (0dt, 0.8dt), "Elektrėnai");
+        }
+    }
+}
+
+
+# LT VJ.  Vaidotai - Juodšiliai
+with detail = 2 {
+    with link = "line.lt.VJ" {
+        track(:first :double :g1520 :nopax,
+                path("d2.lt.vj")[:vai.yk, :juo.yp]
+        );
+    }
+}
+
+
+# LT VK.  Vilnius - Klaipėda
+with detail = 2 {
+    let vk = path("d2.lt.vk");
+
+    with railway = :first :double :cat:ac25 :g1520 :pax {
+        with link = "point.lt.Vilnius" {
+            track(:station, vk[:vil, :vil.ys]);
+            statdot(vk[:vil]);
+            slabel(:left :large :bold, vk[:vil] + (0.5dt, -1.5dt), "Vilnius");
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:vil.ys, :pan]);
+        }
+
+        with link = "point.lt.Paneriai" {
+            track(:station, vk[:pan, :pan.yv]);
+            statdot(vk[:pan]);
+            with zoom = :high slabel(:nw, vk[:pan] + (1dt, 0.5dt),
+                "Paneriai"
+            );
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:pan.yv, :pan.yl]);
+            track(vk[:pan.yl, :len]);
+            line_label(:left:n, vk[:pan.yl + 2.5km], "VK");
+        }
+
+        with link = "point.lt.Lentvaris" {
+            track(:station, vk[:len, :len.ym]);
+            statdot(vk[:len]);
+            slabel(:right, vk[:len] + (-0.3dt, -1.5dt), "Lentvaris");
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:len.ym, :len.yn]);
+            track(vk[:len.yn, :vie]);
+            line_label(:right:sw, vk[:len.yn + 10.5km], "VK");
+        }
+
+        with link = "point.lt.Vievis" {
+            statdot(vk[:vie]);
+            slabel(:right, vk[:vie] + (1.3dt, -0.3dt), "Vievis");
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:vie, :vie.ye]);
+            track(vk[:vie.ye, :kai]);
+            line_label(:right:s, vk[:vie.ye + 7km], (0.3dt, 0dt), "VK");
+        }
+
+        with link = "point.lt.Kaišiadorys" {
+            track(:station, vk[:kai, :kai.yk]);
+            statdot(vk[:kai]);
+            slabel(:ne, vk[:kai] + (0.3dt, 0.8dt), "Kaišiadorys");
+        }
+    }
+
+    with railway = :first :double :g1520 :pax {
+        with link = "line.lt.VK" {
+            track(vk[:kai.yk, :gai.yp]);
+            line_label(:right:sw, vk[:kai.yk + 9.5km], "VK");
+        }
+
+        with link = "point.lt.Gaižiūnai" {
+            track(:station, vk[:gai.yp, :gai]);
+            statdot(:nopax, vk[:gai]);
+            slabel(:right :nopax, vk[:gai] + (1.3dt, -0.3dt), "Gaižiūnai");
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lt.VK" {
+            track(vk[:gai, :jon]);
+            line_label(:left:e, vk[:gai + 3.3km], (0dt, 0.2dt), "VK");
+        }
+
+        with link = "point.lt.Jonava" {
+            track(:station, vk[:jon, :jon.yr]);
+            statdot(vk[:jon]);
+            slabel(:left, vk[:jon] + (-1.6dt, 1.2dt), "Jonava");
+        }
+
+        with link = "line.lt.VK" {
+            track(:double, vk[:jon.yr, :zei]);
+            track(vk[:zei, :luk]);
+            line_label(:left:ne, vk[:zei + 5km], "VK");
+            track(:double, vk[:luk, :sil]);
+            track(vk[:sil, :ked]);
+            track(:double, vk[:ked, :gim]);
+            line_label(:right:w, vk[:ked + 15km], (0dt, -0.1dt), "VK");
+            line_label(:left:e, vk[:gim - 5.7km], "VK");
+            track(vk[:gim, :lin]);
+            track(vk[:lin, :rad]);
+        }
+    }
+
+    with railway = :first :double :g1520 :pax {
+        with link = "point.lt.Radviliškis" {
+            statdot(vk[:rad]);
+            slabel(:right :bold, vk[:rad] + (1.5dt, -0.5dt), "Radviliškis");
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:rad, :rad.yp]);
+            track(vk[:rad.yp, :kut.yp]);
+            track(vk[:kut.yp, :man.yj]);
+            track(vk[:man.yj, :sin]);
+        }
+
+        with link = "point.lt.Šilėnai" {
+            statdot(vk[:sin]);
+            slabel(:right, vk[:sin] + (1.5dt, 0dt), "Šilėnai");
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:sin, :sia]);
+            line_label(:left:ne, vk[:sin + 4.5km], "VK");
+        }
+
+        with link = "point.lt.Šiauliai" {
+            statdot(vk[:sia]);
+            slabel(:ne, vk[:sia] + (-1dt, 0.7dt), "Šiauliai");
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:sia, :sia.yj]);
+            track(vk[:sia.yj, :kuz]);
+            line_label(:left:ne, vk[:sia.yj + 6km], "VK");
+        }
+
+        with link = "point.lt.Kužiai" {
+            statdot(vk[:kuz]);
+            slabel(:right, vk[:kuz] + (-0.3dt, -1.4dt), "Kužiai");
+        }
+    }
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lt.VK" {
+            track(vk[:kuz, :kuz.ym] << 0.5ds << 0.5st);
+            track(
+                    vk[:kuz.ym - 0.1dl, :kuz.ym] << 0.5ds << 0.5st
+                ..  vk[:kuz.yym + 2dt, :rbp]
+            );
+            line_label(:left:n, vk[:kuz.ym + 6km], "VK");
+            track(:double, vk[:rbp, :rau]);
+            track(vk[:rau, :tbp]);
+            track(:double, vk[:tbp, :lie]);
+            line_label(:right:s, vk[:lie - 4.5km], "VK");
+            track(vk[:lie, :kul]);
+            track(:double, vk[:kul, :kbp]);
+            line_label(:left:nw, vk[:kul + 5km], "VK");
+            track(vk[:kbp, :kre.ys]);
+        }
+
+        with link = "point.lt.Kretinga" {
+            track(:station, vk[:kre.ys, :kre]);
+            statdot(vk[:kre]);
+            slabel(:left, vk[:kre] + (-1.5dt, 0.8dt), "Kretinga");
+        }
+
+        with link = "line.lt.VK" {
+            track(vk[:kre, :kal]);
+            line_label(:right:e, vk[:kre + 9.5km], (0dt, -0.1dt), "VK");
+            track(:double, vk[:kal, :gir]);
+            track(vk[:gir, :kla]);
+        }
+
+        with link = "point.lt.Klaipėda" {
+            statdot(vk[:kla]);
+            slabel(:ne :bold :medium, vk[:kla] + (1.5dt, 1dt), "Klaipėda");
+        }
+    }
+}
+
+
+# LT VM.  Vilnius - Valstybės siena (Kena)
+with detail = 2 {
+    let vm = path("d2.lt.vm");
+
+    with railway = :first :double :g1520 :cat:ac25 :pax {
+        with link = "line.lt.VM" {
+            track(vm[:vil, :nau]);
+            line_label(:left:se, vm[:nau - 4.3km], "VM");
+        }
+
+        with link = "point.lt.Naujoji-Vilnia" {
+            track(:station, vm[:nau, :nau.yt]);
+            statdot(vm[:nau]);
+            slabel(:left, vm[:nau] + (0.8dt, -0.8dt),
+                vbox(:right:bottom, "Naujoji", "Vilnia")
+            );
+        }
+
+        with link = "line.lt.VM" {
+            track(vm[:nau.yt, :kyv.yv]);
+            with zoom = :high line_label(:left:sw, vm[:kyv.yv - 2.5km], "VM");
+        }
+
+        with link = "point.lt.Kyviškės" {
+            track(:station, vm[:kyv.yv, :kyv]);
+            statdot(vm[:kyv]);
+            slabel(:right, vm[:kyv] + (1.3dt, -0.5dt), "Kyviškės");
+        }
+
+        with link = "line.lt.VM" {
+            track(vm[:kyv, :ken]);
+            line_label(:right:n, vm[:kyv + 6km], "VM");
+        }
+
+        with link = "point.lt.Kena" {
+            statdot(vm[:ken]);
+            slabel(:right, vm[:ken] + (1.3dt, -0.3dt), "Kena");
+        }
+
+        with link = "line.lt.VM" {
+            track(vm[:ken, :kes]);
+        }
+
+        with link = "point.int.Гудагай-Šumskas" {
+            marker(:right :ref, vm[:kes]);
+            marker(:left :ref, vm[:kes]);
+            slabel(:right :italic, vm[:kes] + (1.3dt, 1.5dt),
+                latspan("Гудагай – Мінск", "Gudagai – Minsk")
+            );
+        }
+    }
+}
+
+
+# LT VS.  Vilnius - Valstybės siena (Stasylos)
+with detail = 2 {
+    let vs = path("d2.lt.vs");
+
+    with railway = :first :g1520 :pax {
+        with link = "line.lt.VS" {
+            track(vs[:vil.ys, :juo.yk]);
+            line_label(:left:w, vs[:vil.ys + 4km], "VS");
+
+            track(:double, vs[:juo.yk, :juo.yp]);
+            track(vs[:juo.yp, :val.yp]);
+        }
+
+        with link = "point.lt.Valčiūnai"  {
+            track(:station, vs[:val.yp, :val]);
+            statdot(vs[:val]);
+            slabel(:right, vs[:val] + (1.7dt, 1dt), "Valčiūnai");
+        }
+
+        with link = "line.lt.VS" {
+            track(vs[:val, :jas]);
+            line_label(:right:e, vs[:val + 6.3km], "VS");
+        }
+
+        with link = "point.lt.Jašiūnai" {
+            statdot(vs[:jas]);
+            slabel(:right, vs[:jas] + (1.5dt, -0.3dt), "Jašiūnai");
+        }
+    }
+
+    with railway = :first :g1520 :nopax {
+        with link = "line.lt.VS" {
+            track(vs[:jas, :sts]);
+        }
+
+        with link = "point.int.Benekainys-Stasylos" {
+            marker(:right :ref, vs[:sts]);
+            marker(:left :ref, vs[:sts]);
+            slabel(:bottom :italic, vs[:sts] + (0dt, 1dt),
+                latspan("Ліда", "Lida")
+            );
+        }
+    }
+}
+

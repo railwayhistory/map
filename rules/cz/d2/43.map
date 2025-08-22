@@ -1,0 +1,144 @@
+# CZ 430.  Děčín nákl.n. - Jedlová
+with detail = 2 {
+    let dj = path("d2.cz.430");
+
+    with link = "line.cz.430" {
+        track(:first :cat:dc30 :pax, dj[:dec.yj, :dvy]);
+    }
+
+    with link = "point.cz.Děčín-východ" {
+        track(:first :station :cat:dc30 :pax, dj[:dvy, :dvy.yv]);
+        statdot(:cat:dc30 :pax, dj[:dvy]);
+    }
+
+    with link = "line.cz.430" {
+        track(:first :pax,
+                dj[:dvy.yv, :dvy.xxa]
+            ..  dj[:dvy.xa, :dvy.xb] >> 0.4dt
+            ..  dj[:dvy.xxb, :ben]
+        );
+    }
+
+    with link = "point.cz.Benešov-nad-Ploučnicí" {
+        track(:first :station :pax, dj[:ben, :ben.yc]);
+        statdot(:pax, dj[:ben]);
+        slabel(:left :pax, dj[:ben] + (-0.3dt, 0.8dt),
+            vbox(:right:top, "Benešov", "nad", "Ploučnicí")
+        );
+    }
+
+    with link = "line.cz.430" {
+        track(:first :pax, dj[:ben.yc, :cka]);
+        line_label(:left:e :pax, dj[:ben.yc + 4.3km], "430");
+    }
+
+    with link = "point.cz.Česká-Kamenice" {
+        track(:first :station :pax, dj[:cka, :cka.yk]);
+        statdot(:pax, dj[:cka]);
+        slabel(:left :pax, dj[:cka.yk] + (0.3dt, -0.5dt),
+            vbox(:right:bottom, "Česká", "Kamenice")
+        );
+    }
+
+    with link = "line.cz.430" {
+        track(:first :pax, dj[:cka.yk, :jed.yd]);
+        line_label(:left:s :pax, dj[:cka.yk + 4.2km], "430");
+    }
+}
+
+
+# CZ 433.  Velké Březno - Verneřice
+with detail = 2 {
+    let vv = path("d2.cz.433");
+
+    with link = "line.cz.433" {
+        track(:second :museum, vv[:vbr.yv, :zub]);
+        line_label(:left:sw :museum, vv[:vbr.yv + 3.35km], "433");
+    }
+
+    with link = "point.cz.Zubrnice" {
+        statdot(:museum, vv[:zub]);
+        with zoom = :high slabel(:right :museum, vv[:zub] + (0.3dt, -1.3dt),
+            "Zubrnice"
+        );
+    }
+
+    with link = "line.cz.433" {
+        track(:second :removed, vv[:zub, :lov]);
+    }
+
+    with link = "point.cz.Lovečkovice" {
+        track(:second :station :removed, vv[:lov, :lov.yu]);
+        statdot(:removed, vv[:lov]);
+        slabel(:left :removed, vv[:lov] + (-1.0dt, 0dt),
+            hbox(:right:top, "Lovečkovice")
+        );
+    }
+
+    with link = "line.cz.433" {
+        track(:second :removed, vv[:lov.yu, :ver]);
+        line_label(:right:w :removed, vv[:ver - 2.6km], "433");
+    }
+
+    with link = "point.cz.Verneřice" {
+        statdot(:removed, vv[:ver]);
+        slabel(:top :removed, vv[:ver] + (2dt, -0.5dt), "Verneřice");
+    }
+}
+
+
+# CZ 434.  Lovečkovice - Úštěk horní n.
+with detail = 2 {
+    let lu = path("d2.cz.434");
+
+    with link = "line.cz.434" {
+        track(:second :removed, lu[:lov.yu, :ust]);
+        line_label(:right:ne :removed, lu[:lov.yu + 3.3km], "434");
+    }
+}
+
+
+# CZ 435.  Benešov nad Ploučnicí - Česká Lípa
+with detail = 2 {
+    let bc = path("d2.cz.435");
+
+    with link = "line.cz.435" {
+        track(:first :pax, bc[:ben.yc, :cli.yb]);
+        line_label(:right:ne :pax, bc[:ben.yc + 9km], "435");
+    }
+}
+
+
+# CZ 437.  Česká Kamenice - Kamenický Šenov
+with detail = 2 {
+    let ck = path("d2.cz.437");
+
+    with link = "line.cz.437" {
+        track(:second :museum, ck[:cka.yk, :kam]);
+        with zoom = :low line_label(
+            :right:ne :museum, ck[:cka.yk + 1.2km], "437"
+        );
+        with zoom = :high line_label(:left:sw :museum, ck[:kam - 0.5km], "437");
+    }
+
+    with link = "point.cz.Kamenický-Šenov" {
+        statdot(:museum, ck[:kam]);
+        with zoom = :high slabel(:left :museum, ck[:kam] + (-1.5dt, -0.2dt),
+            hbox(:right:top, 
+                vbox(:left:top, "Kamenický", "Šenov")
+            )
+        );
+    }
+}
+
+
+# CZ 438.  Kamenický Šenov - Česká Lípa střelnice
+with detail = 2 {
+    let kc = path("d2.cz.438");
+
+    with link = "line.cz.438" {
+        track(:second :removed, kc[:kam, :cls.yk]);
+        line_label(:right:e :removed, kc[:kam + 12.45km], "438");
+    }
+}
+

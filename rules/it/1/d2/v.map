@@ -1,0 +1,76 @@
+# IT VBC.  Ventimiglia - Olivetta S. Michele confine
+with detail = 2 {
+    let vb = path("d2.it.vbc");
+
+    with link = "line.it.VBC" {
+        track(:first :pax, vb[:ven.yb, :olc]);
+        line_label(:right:w :pax, vb[:ven.yb + 8km], "VBC");
+    }
+
+    with link = "point.int.Olivetta-San-Michele-Piène" {
+        marker(:right :ref :pax, vb[:olc]);
+        marker(:left :ref :pax, vb[:olc]);
+    }
+}
+
+
+# IT VCO.  Ventimiglia - Ventimiglia confine
+with detail = 2 {
+    let vv = path("d2.it.vco");
+
+    with link = "line.it.VCO" {
+        track(:first :double :cat:ac25 :pax, vv[:ven.yb, :vec]);
+        line_label(:left:n :double :cat:ac25 :pax, vv[:vec - 2.0km], "VCO");
+    }
+}
+
+
+# IT VMC.  Vercelli - Mortara - Cava-Carbonara
+with detail = 2 {
+    let vc = path("d2.it.vmc");
+
+    with link = "line.it.VMC" {
+        track(:first :pax, vc[:ver.ym, :mor.yv]);
+        track(:first :pax, vc[:mor.yc, :cav.ym]);
+
+        line_badge(:pax, vc[:ver.ym + 12.5km], "VMC");
+        line_label(:left:s :pax, vc[:cav.ym - 13.2km], "VMC");
+    }
+}
+
+
+# IT VVC.  Valenza - Vercelli
+with detail = 2 {
+    let vv = path("d2.it.vvc");
+
+    with link = "line.it.VVC" {
+        track(:first :cat:dc30 :pax, vv[:val.yv, :cam.ya]);
+        line_badge(:cat:dc30 :pax, vv[:val.yv + 9.5km], "VVC");
+    }
+
+    with link = "point.it.Casale-Monferrato" {
+        track(:first:station :cat:dc30 :pax, vv[:cam.ya, :cam.ym]);
+        statdot(:cat:dc30 :pax, vv[:cam]);
+        slabel(:right :cat:dc30 :pax, vv[:cam] + (1.5dt, 0.5dt),
+            "Casale Monferrato"
+        );
+    }
+
+    with link = "line.it.VVC" {
+        track(:first :cat:dc30 :pax, vv[:cam.ym, :cap]);
+    }
+
+    with link = "point.it.Casale-Popolo" {
+        track(:first:station :cat:dc30 :pax, vv[:cap, :cap.yc]);
+        statdot(:cat:dc30 :pax, vv[:cap]);
+        slabel(:left :cat:dc30 :pax, vv[:cap] + (-1.5dt, 1.5dt),
+            "Casale Popolo"
+        );
+    }
+
+    with link = "line.it.VVC" {
+        track(:first, vv[:cap.yc, :ver.yv]);
+        line_badge(:first, vv[:cap.yc + 10km], "VVC");
+    }
+}
+

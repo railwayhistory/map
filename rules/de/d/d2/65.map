@@ -173,63 +173,54 @@ with detail = 2 {
 
     with link = "line.de.6588" {
         track(:second :pax, me[:mhe.yv, :grg]);
-        track(:second, me[:seg, :eib.yv]);
+        line_label(:right:se, me[:mhe.yv + 3km], "6588 ");
+    }
 
-        guide(:linenum :pax,
-                me[:mhe.yv + 4km] >> 0.7dt
-            --  me[:mhe.yv + 4km] >> 3.0dt
-        );
-        label(:linenum :pax, me[:mhe.yv + 4km] >> 3.0dt + (-0.4dt, 0dt),
-            hbox(:center:bottom, "6588")
-        );
-        guide(:linenum,
-                me[:sei + 2km] << 0.7dt
-            --  me[:sei + 2km] << 3.0dt
-        );
-        label(:linenum, me[:sei + 2km] << 3.0dt + (-0.4dt, 0dt),
-            hbox(:center:bottom, "6588")
-        );
+    with link = "point.int.Großschönau-Sachs-Varnsdorf" {
+        marker(:right :ref :pax, me[:grg]);
+        marker(:left :ref :pax, me[:grg]);
+    }
+
+    with link = "point.int.Seifhennersdorf-Varnsdorf" {
+        marker(:right :ref :pax, me[:seg]);
+        marker(:left :ref :pax, me[:seg]);
+    }
+
+    with link = "line.de.6588" {
+        track(:second :pax, me[:seg, :sei]);
+
     }
 
     with link = "point.de.Seifhennersdorf" {
         with layer = 1 marker(:statdot, me[:sei]);
+    }
+
+    with link = "line.de.6588" {
+        track(:second, me[:sei, :eib.yv]);
+        line_label(:left:s, me[:sei + 2km], "6588  ");
     }
 }
 
 
 # DE 6589.  Zittau - Hagenwerder
 with detail = 2 {
-    let zh = path("d2.de.6589");
+    let zk = path("d2.de.6589.1");
+    let kh = path("d2.de.6589.2");
 
-    with link = "line.de.6589" {
-        track(:second :pax, zh[:zit.yh, :hig]);
-        track(:second :pax, zh[:trg, :krg]);
-        track(:second :pax, zh[:hgr, :hag.yz]);
+    with railway = :second :pax {
+        with link = "line.de.6589" {
+            track(zk[:zit.yh, :trz.yz]);
+            line_label(:left:e, zk[:zit.yh + 5km], "6589");
+        }
 
-        guide(:linenum :pax,
-                zh[:zit.yh + 5.5km] << 0.7dt
-            --  zh[:zit.yh + 5km] << 2.7dt
-        );
-        label(:linenum :pax, zh[:zit.yh + 5km] << 2.7dt,
-            hbox(:right:middle, "6589 ")
-        );
-        guide(:linenum :pax,
-                zh[:hgr + 1km] << 0.7dt
-            --  zh[:hgr + 1km] << 3.0dt
-        );
-        label(:linenum :pax, zh[:hgr + 1km] << 3.0dt,
-            hbox(:right:middle, "6589 ")
-        );
-    }
+        with link = "point.int.Hagenwerder-Ręczyn" {
+            marker(:ref :left, kh[:hgr]);
+        }
 
-    with link = "point.int.Hirschfelde-Trzciniec-Zgorzelecki" {
-        marker(:refdt :pax :right, zh[:hig]);
-        marker(:refdt :pax :left, zh[:hig]);
-    }
-
-    with link = "point.int.Hagenwerder-Ręczyn" {
-        marker(:refdt :pax :right, zh[:hgr]);
-        marker(:refdt :pax :left, zh[:hgr]);
+        with link = "line.de.6589" {
+            track(kh[:hgr, :hag.yz]);
+            line_label(:left:e, kh[:hgr + 1km], "6589");
+        }
     }
 }
 

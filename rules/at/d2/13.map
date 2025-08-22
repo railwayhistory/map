@@ -1,0 +1,136 @@
+# AT 130.  Wien Meidling - Linz Hbf
+with detail = 2 {
+    let wl = path("d2.at.130");
+
+    with link = "line.at.130" {
+        track(:first :double :cat:ac15 :pax, wl[:mei.yh, :had.ym]);
+
+        track(:first :double :cat:ac15 :pax, wl[:had.yt, :tuf]);
+        line_label(:right:sw :double :cat:ac15 :pax, wl[:had.yt + 8km], "130");
+
+        track(:first :double :cat:ac15 :pax, wl[:tuf, :wag]);
+        line_label(:right:s :double :cat:ac15 :pax, wl[:tuf + 16km], "130 ");
+
+        track(:first :double :cat:ac15 :pax, wl[:roh.yw, :mel.yw]);
+        track(:first :double :cat:ac15 :pax, wl[:poc.yw, :ybb.yo]);
+
+        track(:first :double :cat:ac15 :pax, wl[:sjo.yv, :sva.yj]);
+        line_label(:right:sw :double :cat:ac15 :pax, wl[:sjo.yv + 3km], "130");
+        
+        track(:first :double :cat:ac15 :pax, wl[:sva.yn, :ast.yn]);
+    }
+}
+
+
+# AT 131.  Knoten Wagram - Knoten Rohr
+with detail = 2 {
+    let wr = path("d2.at.131");
+
+    with link = "line.at.131" {
+        track(:first :double :cat:ac15, wr[:wag, :roh.yo]);
+        line_label(:left:n :double :cat:ac15, wr[:wag + 5.5km], "131");
+    }
+}
+
+
+# AT 135.  St. Pölten Hbf - Gußwerk
+with detail = 2 {
+    let pg = path("d2.at.135");
+
+    with link = "line.at.135" {
+        track(:first :narrow:g760 :cat:ac65 :pax, pg[:spo.ym, :ogr]);
+        line_label(:left:n :cat:ac65 :pax, pg[:spo.ym + 5km], "135");
+    }
+
+    with link = "point.at.Ober-Grafendorf" {
+        track(:first:station :narrow:g760 :cat:ac65 :pax, pg[:ogr, :ogr.yg]);
+        statdot(:cat:ac65 :pax, pg[:ogr]);
+    }
+
+    with link = "line.at.135" {
+        track(:first :narrow:g760 :cat:ac65 :pax, pg[:ogr.yg, :mar]);
+        line_label(:left:nw :cat:ac65 :pax, pg[:ogr.yg + 18km], "135");
+        line_label(:right:e :cat:ac65 :pax, pg[:mar - 3.3km], "135");
+    }
+
+    with link = "point.at.Mariazell" {
+        statdot(:cat:ac65 :pax, pg[:mar]);
+        slabel(:right :cat:ac65 :pax, pg[:mar] + (1.5dt, 0.8dt), "Mariazell");
+    }
+
+    with link = "line.at.135" {
+        track(:first :narrow:g760 :removed, pg[:mar, :gus]);
+    }
+
+    with link = "point.at.Gußwerk" {
+        statdot(:removed, pg[:gus]);
+        slabel(:bottom :removed, pg[:gus] + (0dt, 0.7dt), "Gußwerk");
+    }
+}
+
+
+# AT 136.  Ober-Grafendorf - Gresten
+with detail = 2 {
+    let og = path("d2.at.136");
+
+    with link = "line.at.136" {
+        track(:first :narrow:g760 :museum, og[:ogr.yg, :haa]);
+    }
+
+    with link = "point.at.Haag-Kleinsierning" {
+        statdot(:museum, og[:haa]);
+        slabel(:left :museum, og[:haa] + (-1.3dt, 1.8dt),
+            vbox(:right:bottom, "Haag-", "Kleinsierning ")
+        );
+    }
+
+    with link = "line.at.136" {
+        track(:first :narrow:g760 :removed, og[:haa, :wie.yo]);
+        line_label(:left:n :removed, og[:haa + 12km], "136  ");
+    }
+
+    with link = "line.at.136" {
+        track(:first, og[:wie.yg, :gre]);
+        line_label(:right:se, og[:wie.yg + 12.5km], "136");
+    }
+
+    with link = "point.at.Gresten" {
+        statdot(:open, og[:gre]);
+        slabel(:right, og[:gre] + (1.4dt, 1.0dt), "Gresten");
+    }
+}
+
+
+# AT 138.  Pöchlarn - Kienberg-Gaming
+with detail = 2 {
+    let pk = path("d2.at.138");
+
+    with link = "line.at.138" {
+        track(:first :pax, pk[:poc.yk, :wie.yo]);
+        line_label(:left:w :pax, pk[:poc.yk + 4.7km], "138");
+    }
+
+    with link = "point.at.Wieselburg-Erlauf" {
+        track(:first:station :pax, pk[:wie.yo, :wie.yo]);
+        statdot(:pax, pk[:wie.yo]);
+        slabel(:right :pax, pk[:wie] + (1.0dt, 0.8dt),
+            vbox(:left:top, "Wieselburg", " an der Erlauf")
+        );
+    }
+
+    with link = "line.at.138" {
+        track(:first :pax, pk[:wie.yg, :sei]);
+        line_label(:left:sw :pax, pk[:wie + 10km], "138");
+    }
+
+    with link = "point.at.Scheibbs" {
+        statdot(:pax, pk[:sei]);
+        slabel(:right :pax, pk[:sei] + (1.5dt, 0.5dt), "Scheibbs");
+    }
+
+    with link = "line.at.138" {
+        track(:first :removed, pk[:sei, :kie]);
+        line_label(:left:w :removed, pk[:sei + 5.5km], "138");
+    }
+}
+

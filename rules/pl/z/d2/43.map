@@ -1,0 +1,85 @@
+# PL 431.  Police - Police Chemia
+with detail = 2 {
+    let pc = path("d2.pl.431");
+
+    with railway = :first :cat:dc30 :nopax {
+        with link = "line.pl.431" {
+            track(pc[:pol.yc, :poc]);
+            line_label(:right:se, pc[:pol.yc + 1.6km], "431");
+        }
+
+        with link = "point.pl.Police-Chemia" {
+            statdot(pc[:poc]);
+            slabel(:left, pc[:poc] + (-1.5dt, 0dt),
+                vbox(:right:middle, "Police", "Chemia")
+            );
+        }
+    }
+}
+
+
+# PL 432.  Szczecin Wstowo - Szczecin Turzyn
+with detail = 2 {
+    let wt = path("d2.pl.432");
+
+    with railway = :second :double :cat:dc30 :nopax {
+        with link = "line.pl.432" {
+            track(wt[:wst.ys, :wst.yg]);
+            track(:casing, wt[:wst.yg, :swz.yg]);
+        }
+
+        with link = "point.pl.Szczecin-Wzgórze-Hetmańskie" {
+            track(:station :pax, wt[:swz.yg, :swz.ys]);
+            statdot(:pax, wt[:swz]);
+        }
+
+        with link = "line.pl.432" {
+            track(wt[:swz.ys, :stu.yg]);
+        }
+    }
+}
+
+
+# PL 433.  Szczecin Główny SG11 – Szczecin Gumieńce
+with detail = 2 {
+    let gg = path("d2.pl.433");
+
+    with railway = :second :cat:dc30 :pax {
+        with link = "line.pl.433" {
+            with layer = -1 track(gg[:szc.yg, :swz.ys]);
+            track(gg[:swz.yg, :sgu.yw]);
+        }
+    }
+}
+
+
+# PL 434.  Mosty R302 - Port Lotniczy Szczecin Goleniów
+with detail = 2 {
+    let mp = path("d2.pl.434");
+
+    with railway = :second :pax {
+        with link = "line.pl.434" {
+            track(mp[:mos.yz, :mos.yp]);
+            track(mp[:mos.yp, :lot]);
+            with zoom = :high line_label(:left:ne, mp[:lot - 1.5km], "434");
+        }
+
+        with link = "point.pl.Port-Lotniczy-Szczecin-Goleniów" {
+            statdot(mp[:lot]);
+            slabel(:right, mp[:lot] + (-3dt, -0.7dt),
+                vbox(:left:bottom, "Port", "Lotniczy", "Szczecin", "Goleniów")
+            );
+        }
+    }
+}
+
+
+# PL 435.  Mosty R302 - Mosty R303
+with detail = 2 {
+    with railway = :second :pax {
+        with link = "line.pl.435" {
+            track(path("d2.pl.435")[:mos.yw, :mos.yp]);
+        }
+    }
+}
+

@@ -1,0 +1,121 @@
+# PL 33.  Kutno - Brodnice
+with detail = 2 {
+    let kb = path("d2.pl.g.33");
+
+    with railway = :first :pax {
+        with link = "line.pl.33" {
+            track(kb[:szc.x, :ryp]);
+            line_label(:right:w, kb[:szc.x + 3km], (0dt, -0.3dt), "33");
+        }
+
+        with link = "point.pl.Rypin" {
+            statdot(kb[:ryp]);
+            slabel(:left, kb[:ryp] + (-1.8dt, 0.8dt), "Rypin");
+        }
+
+        with link = "line.pl.33" {
+            track(kb[:ryp, :bro.yk]);
+            line_label(:right:w, kb[:bro.yk - 6km], "33");
+        }
+    }
+}
+
+
+# PL 35.  Ostrołęka – Szczytno
+with detail = 2 {
+    let os = path("d2.pl.g.35");
+
+    with railway = :first :pax {
+        with link = "line.pl.35" {
+            track(os[:cho.x, :suc.y]);
+            track(os[:suc.y, :wie.yn]);
+        }
+
+        with link = "point.pl.Wielbark" {
+            track(os[:wie.yn, :wie]);
+            statdot(os[:wie]);
+            slabel(:right, os[:wie] + (1.7dt, 0.9dt), "Wielbark");
+        }
+
+        with link = "line.pl.35" {
+            track(os[:wie, :szy.yl]);
+            line_label(:right:w, os[:wie + 6.5km], "35");
+
+            track(os[:szy.yl, :szc.yo]);
+        }
+   } 
+}
+
+
+# PL 38.  Białystok – Granica Państwa Głomno
+with detail = 2 {
+    let bg = path("d2.pl.g.38");
+
+    with railway = :first {
+        with link = "line.pl.38" {
+            track(bg[:stw.x, :ket.yw]);
+        }
+
+        with link = "point.pl.Kętrzyn" {
+            track(:station, bg[:ket.yw, :ket]);
+            statdot(bg[:ket]);
+            slabel(:left, bg[:ket] + (0dt, -0.7km) + (-0.3dt, -0.8dt),
+                "Kętrzyn"
+            );
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:ket, :nml]);
+        }
+
+        with link = "point.pl.Nowy-Młyn" {
+            track(:station, bg[:nml, :nml.yr]);
+            statdot(bg[:nml]);
+            slabel(:right, bg[:nml] + (-2dt, 0.8dt),
+                vbox(:left:top, "Nowy", "Młyn")
+            );
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:nml.yr, :kor]);
+            line_label(:right:sw, bg[:kor - 7km], "38");
+        }
+
+        # point.pl.Korsze  pl.353
+    }
+
+    with railway = :second {
+        with link = "line.pl.38" {
+            track(bg[:kor, :wia.ys]);
+            line_label(:left:n, bg[:kor + 9km], (-0.5dt, 0dt), "38");
+        }
+
+        with link = "point.pl.Wiatrowiec-Warmiński" {
+            track(:station, bg[:wia.ys, :wia]);
+            statdot(bg[:wia]);
+            slabel(:left, bg[:wia] + (1dt, 0.8dt),
+                vbox(:right:top, "Wiatrowiec", "Warmiński")
+            );
+        }
+
+        with link = "line.pl.38" {
+            track(bg[:wia, :kar.yk]);
+            track(:casing, bg[:kar.yk, :kar.yk + 600m]);
+            track(bg[:kar.yk + 600m, :bar.yl]);
+        }
+
+        with link = "point.pl.Bartoszyce" {
+            track(:station, bg[:bar.yl, :bar]);
+            track(:station :closed, bg[:bar, :bar.ys]);
+            statdot(bg[:bar]);
+            slabel(:left, bg[:bar] + (-1.5dt, 1.3dt), "Bartoszyce");
+        }
+    }
+
+    with railway = :second :closed {
+        with link = "line.pl.38" {
+            track(bg[:bar.ys, :glg]);
+            line_label(:left:ne, bg[:glg - 5km], "38");
+        }
+    }
+}

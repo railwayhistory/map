@@ -1,0 +1,151 @@
+# CZ 140.  Vojtanov státní hranice - Cheb
+with detail = 2 {
+    let vc = path("d2.cz.140");
+
+    with link = "line.cz.140" {
+        track(:first :pax, vc[:brh, :plh]);
+    }
+
+    with link = "point.int.Plesná-Schönberg" {
+        marker(:right :ref :pax, vc[:plh]);
+        marker(:left :ref :pax, vc[:plh]);
+    }
+
+    with link = "line.cz.140" {
+        track(:first :pax, vc[:plh, :voh]);
+    }
+
+    with link = "point.int.Schönberg-Vojtanov" {
+        marker(:right :ref :pax, vc[:voh]);
+        marker(:left :ref :pax, vc[:voh]);
+    }
+
+    with link = "line.cz.140" {
+        track(:first :pax, vc[:voh, :voj]);
+        line_label(:right:se :pax, vc[:voj - 3km], "140");
+    }
+
+    with link = "point.cz.Vojtanov" {
+        statdot(:cat:ac25 :pax, vc[:voj]);
+        with zoom = :high {
+            slabel(:left :cat:ac25 :pax, vc[:voj] + (-2.0dt, -1.0dt),
+                "Vojtanov"
+            );
+        }
+    }
+
+    with link = "line.cz.140" {
+        with zoom = :high {
+            track(:first :cat:ac25 :pax,
+                    vc[:voj, :fra.yya]
+                ..  vc[:fra.ya, :fra] << 0.35dt
+            );
+        }
+        with zoom = :low {
+            track(:first :cat:ac25 :pax, vc[:voj, :fra.ya]);
+            track(:first :cat:ac25 :pax, vc[:fra.ya, :fra]);
+        }
+    }
+
+    with link = "point.cz.Františkovy-Lázně" {
+        track(:first:station :cat:ac25 :pax, vc[:fra, :fra.yt]);
+        statdot(:cat:ac25 :pax, vc[:fra]);
+        slabel(:left :cat:ac25 :pax, vc[:fra] + (-1.5dt, -0.3dt),
+            hbox(:right:top, "Františkovy Lázně")
+        );
+    }
+
+    with link = "line.cz.140" {
+        track(:first :cat:ac25 :pax, vc[:fra.yt, :che.yv]);
+        with zoom = :high {
+            line_label(:right:ne :cat:ac25 :pax, vc[:fra.yt + 2.3km], "140");
+        }
+    }
+}
+
+
+# CZ 142.  Františkovy Lázně - Aš st.hr.
+with detail = 2 {
+    let fa = path("d2.cz.142");
+
+    with link = "line.cz.142" {
+        with zoom = :high {
+            track(:second :pax,
+                    fa[:fra, :fra.ya] << 0.35dt
+                ..  fa[:fra.yya, :ass.yh]
+            );
+        }
+        with zoom = :low {
+            track(:second :pax, fa[:fra.ya, :ass.yh]);
+        }
+        line_label(:right:s :pax, fa[:fra.ya + 11km], "  142");
+    }
+
+    with link = "point.cz.Aš" {
+        track(:second:station :pax, fa[:ass.yh, :ass]);
+        statdot(:pax, fa[:ass]);
+        slabel(:right :pax, fa[:ass] + (0.3dt, -1.2dt), "Aš");
+    }
+
+    with link = "line.cz.142" {
+        track(:second :pax, fa[:ass, :ash]);
+    }
+
+    with link = "point.int.Aš-Selb-Plößberg" {
+        marker(:right :ref :pax, fa[:ash]);
+        marker(:left :ref :pax, fa[:ash]);
+    }
+}
+
+
+# CZ 143.  Aš - Hranice v Čechách st.hr.
+with detail = 2 {
+    let ah = path("d2.cz.143");
+
+    with link = "line.cz.143" {
+        track(:second :pax, ah[:ass.yh, :hra]);
+        line_label(:right:w :pax, ah[:ass.yh + 9km], "143");
+    }
+
+    with link = "point.cz.Hranice-v-Čechách" {
+        statdot(:pax, ah[:hra]);
+        slabel(:left :pax, ah[:hra] + (1.0dt, -1.3dt), "Hranice v Čechách");
+    }
+
+    with link = "line.cz.143" {
+        track(:second :removed, ah[:hra, :hrh]);
+    }
+}
+
+
+# CZ 145.  Cheb st.hr. - Cheb
+with detail = 2 {
+    let sc = path("d2.cz.145");
+
+    with link = "point.int.Pomezí-nad-Ohří-Schirnding" {
+        marker(:right :ref :pax, sc[:chc]);
+        marker(:left :ref :pax, sc[:chc]);
+    }
+
+    with link = "line.cz.145" {
+        track(:first :pax, sc[:chc, :che.yp]);
+        line_label(:right:n :pax, sc[:chc + 4km], "145");
+    }
+}
+
+
+# CZ 148.  Slapany hr.st. - Cheb
+with detail = 2 {
+    let sc = path("d2.cz.148");
+
+    with link = "point.int.Slapany-Waldsassen" {
+        marker(:right :ref :removed, sc[:slh]);
+        marker(:left :ref :removed, sc[:slh]);
+    }
+
+    with link = "line.cz.148" {
+        track(:second :removed, sc[:slh, :che.ys]);
+        line_label(:right:nw :removed, sc[:slh + 2km], "148");
+    }
+}
+

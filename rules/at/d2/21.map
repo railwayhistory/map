@@ -1,0 +1,86 @@
+# AT 210.  Wien Rennweg - Staatsgrenze nächst Berg
+with detail = 2 {
+    let rb = path("d2.at.210");
+
+    with link = "line.at.210" {
+        track(:first :double :cat:ac15 :pax, rb[:ren.yf, :zvb]);
+        track(:first :double :cat:ac15 :pax, rb[:kai.yf, :swe]);
+    }
+
+    with link = "point.at.Schwechat" {
+        statdot(:cat:ac15 :pax, rb[:swe]);
+        with zoom = :high {
+            slabel(:right :cat:ac15 :pax, rb[:swe] + (-0.3dt, -1.3dt),
+                "Schwechat"
+            );
+        }
+    }
+
+    with link = "line.at.210" {
+        track(:first :double :cat:ac15 :pax, rb[:swe, :flu]);
+        line_label(:right:n :double :cat:ac15 :pax, rb[:swe + 3km], "210");
+    }
+
+    with link = "point.at.Flughafen-Wien"  {
+        statdot(:cat:ac15 :pax, rb[:flu]);
+        slabel(:right :cat:ac15 :pax,
+            rb[:flu] + (0dt, -0.3km) + (-0.5dt, -0.5dt),
+            vbox(:left:bottom, "Flughafen", "Wien")
+        );
+    }
+
+    with link = "line.at.210" {
+        track(:first :cat:ac15 :pax, rb[:flu, :fis.ym]);
+        track(:first :cat:ac15 :pax, rb[:fis.ym, :pet.yb]);
+        line_label(:right:n :cat:ac15 :pax, rb[:pet.yb - 11km], "210");
+    }
+
+    with link = "point.at.Petronell-Carnuntum"  {
+        track(:first:station :cat:ac15 :pax, rb[:pet.yb, :pet]);
+        statdot(:cat:ac15 :pax, rb[:pet]);
+        slabel(:left :cat:ac15 :pax, rb[:pet] + (0dt, -0.7km) + (2.5dt, -0.3dt),
+            vbox(:right:bottom, "Petronell-", "Carnuntum ")
+        );
+    }
+
+    with link = "line.at.210" {
+        track(:first :cat:ac15 :pax, rb[:pet, :wol]);
+        with zoom = :high {
+            line_label(:left:s :cat:ac15 :pax, rb[:wol - 5.1km], "210");
+        }
+    }
+
+    with link = "point.at.Wolfsthal"  {
+        statdot(:cat:ac15 :pax, rb[:wol]);
+        slabel(:left :cat:ac15 :pax, rb[:wol] + (1.0dt, 0.8dt),
+            vbox(:right:top, "Wolfsthal")
+        );
+    }
+
+    with link = "line.at.210" {
+        track(:first :removed, rb[:wol, :beg]);
+    }
+
+    with link = "point.int.Berg-Kopčany" {
+        marker(:left :ref :removed, rb[:beg]);
+        marker(:right :ref :removed, rb[:beg]);
+    }
+}
+
+
+# AT 215.  Fischamend Reichstraße - Mannersdorf
+with detail = 2 {
+    let fm = path("d2.at.215");
+
+    with link = "line.at.215" {
+        track(:second, fm[:fis.ym, :man]);
+        line_label(:left:w, fm[:fis.ym + 4.2km], "215");
+        line_label(:right:e, fm[:gos + 3km], "215");
+    }
+
+    with link = "point.at.Mannersdorf" {
+        statdot(:open, fm[:man]);
+        slabel(:bottom, fm[:man] + (0dt, 0.5dt), "Mannersdorf");
+    }
+}
+

@@ -81,18 +81,24 @@ with detail = 2 {
     let kp = path("d2.de.5403");
 
     with link = "line.de.5403" {
-        track(:second :pax, kp[:kem.yp, :pfg]);
-        line_badge(:pax, kp[:pfs - 8km] @ -10 << 0.4dt, "5403");
+        track(:second :pax, kp[:kem.yp, :pfs]);
+        line_label(:left:w :pax, kp[:kem.yp + 17km], "5403");
     }
 
     with link = "point.de.Pfronten-Steinach" {
-        with layer = 1 marker(:statdot :pax, kp[:pfs]);
-        slabel(:left :pax, kp[:pfs] + (-1.8dt, 1.3dt), "Pfronten-Steinach");
+        statdot(:cat:ac15 :pax, kp[:pfs]);
+        slabel(:left :cat:ac15 :pax, kp[:pfs] + (-1.8dt, 1.3dt),
+            "Pfronten-Steinach"
+        );
+    }
+
+    with link = "line.de.5403" {
+        track(:second :cat:ac15 :pax, kp[:pfs, :pfg]);
     }
 
     with link = "point.int.Pfronten-Steinach-Schönbichl-Tirol" {
-        marker(:refdt :right, kp[:pfg]);
-        marker(:refdt :left, kp[:pfg]);
+        marker(:ref :cat:ac15 :pax :right, kp[:pfg]);
+        marker(:ref :cat:ac15 :pax :left, kp[:pfg]);
     }
 }
 

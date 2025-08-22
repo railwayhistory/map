@@ -1,0 +1,147 @@
+# AT 460.  Graz Hbf - Klagenfurt Hbf
+with detail = 2 {
+    let gk = path("d2.at.460");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.at.460" {
+            track(gk[:wei.yw, :wet.yl]);
+            line_label(:left:nw, gk[:wei.yw + 5km], "460");
+        }
+
+        with link = "point.at.Wettmannstätten" {
+            track(:station, gk[:wet.yl, :wet.yw]);
+            statdot(gk[:wet]);
+            slabel(:right, gk[:wet] + (-0.5dt, 1.0dt),
+                vbox(:left:top, "Wettmann-", "stätten")
+            );
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "point.at.St-Paul-Lavanttal" {
+            track(:station, gk[:spl.yz, :spl]);
+            statdot(gk[:spl]);
+            slabel(:left, gk[:spl] + (-1.5dt, 0.8dt), "St.Paul im Lavanttal");
+        }
+
+        with link = "line.at.460" {
+            track(gk[:spl, :wie]);
+            line_label(:right:e, gk[:spl + 5km], "460");
+        }
+
+        with link = "point.at.Wiederndorf-Aich" {
+            track(:station, gk[:wie, :wie.yb]);
+            statdot(gk[:wie]);
+            slabel(:right, gk[:wie] + (0.7km, 0dt) + (1dt, -0.5dt),
+                vbox(:left:top, "Wiederndorf-", " Aich")
+            );
+        }
+
+        with link = "line.at.460" {
+            track(gk[:wie.yb, :mit.yo]);
+            track(gk[:mit.yo, :tai.yw]);
+            line_label(:left:n, gk[:mit.yo + 2.5km], (-0.8dt, 0dt), "460");
+            track(gk[:tai.yw, :kla.yv]);
+            line_label(:right:s, gk[:kla.yv - 9.5km], "460");
+        }
+    }
+}
+
+
+# AT 460.1.  Werndorf - Knoten Weitendorf
+with detail = 2 {
+    with link = "line.at.460.1" {
+        track(:first :cat:ac15 :pax, path("d2.at.460.1")[:wer.yk, :wei.yw]);
+    }
+}
+
+
+# AT 464.  Zeltweg - Pöls
+with detail = 2 {
+    let zp = path("d2.at.464");
+
+    with link = "line.at.464" {
+        track(:second, zp[:zel.yp, :pol]);
+        line_label(:right:s, zp[:zel.yp + 4km], "464");
+    }
+
+    with link = "point.at.Pöls" {
+        statdot(:open, zp[:pol]);
+        slabel(:top, zp[:pol] + (-0.3dt, -0.5dt), "Pöls");
+    }
+}
+
+
+# AT 465.  Zeltweg - Staatsgrenze nächst Lavamünd
+with detail = 2 {
+    let zl = path("d2.at.465");
+
+    with railway = :first {
+        with link = "line.at.465" {
+            track(zl[:zel.yk, :wol]);
+            line_label(:left:sw, zl[:zel.yk + 20km], "465");
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "point.at.Wolfsberg" {
+            statdot(zl[:wol]);
+            slabel(:right, zl[:wol] + (1.7dt, 1.0dt), "Wolfsberg");
+        }
+
+        with link = "line.at.465" {
+            track(zl[:wol, :spl.yz]);
+            line_label(:right:e, zl[:spa - 7km], "465");
+        }
+    }
+
+    with railway = :first :removed {
+        with link = "line.at.465" {
+            track(zl[:spl.ys, :spa]);
+        }
+
+        with link = "point.at.St-Paul" {
+            track(zl[:spa, :spa.yb]);
+            statdot(zl[:spa]);
+            slabel(:right, zl[:spa] + (1.3dt, -0.8dt), "St. Paul");
+        }
+
+        with link = "line.at.465" {
+            track(zl[:spa.yb, :lag]);
+            line_label(:left:sw, zl[:lag - 3km], "465");
+        }
+    }
+}
+
+
+# AT 466.  St. Paul - Bleiburg
+with detail = 2 {
+    let pb = path("d2.at.466");
+
+    with railway = :first :removed {
+        with link = "line.at.466" {
+            track(pb[:spa.yb, :jau.yn]);
+            track(pb[:jau.ys, :bls.yw]);
+            line_label(:left:w, pb[:spa.yb + 9km], "466");
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.at.466" {
+            track(pb[:bls.yw, :ble.yp]);
+        }
+    }
+}
+
+
+# AT 466.1.  Wiederndorf-Aich - Bleiburg Stadt Nord
+with detail = 2 {
+    let wb = path("d2.at.466.1");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.at.466" {
+            track(wb[:wie.yb, :bls.yw]);
+        }
+    }
+}
+

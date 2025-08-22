@@ -1,0 +1,46 @@
+with detail = 0 {
+    with link = "line.it.BLC" {
+        track(:first :double :cat:dc30 :pax, path("d0.it.5.blc")[:fan, :ter]);
+    }
+
+    with link = "line.it.ORF" {
+        let of = path("d0.it.orf");
+
+        track(:first :double :cat:dc30 :pax, of[:ort.ya, :ter]);
+        track(:first :cat:dc30 :pax, of[:ter, :cam]);
+        track(:first :double :cat:dc30 :pax, of[:cam, :fol]);
+        track(:first :cat:dc30 :pax, of[:fol, :cpl]);
+        track(:first :double :cat:dc30 :pax, of[:cpl, :fal.yr]);
+    }
+
+    with link = "line.it.RPI" {
+        track(:first :double :cat:dc30 :pax,
+                path("d0.it.5.rpi")[:rom, :orb]
+        );
+    }
+
+    with link = "line.it.RAN" {
+        let dd = path("d0.it.5.ran");
+
+        track(:first :double :cat:dc30 :pax, dd[:rom, :sac]);
+        track(:first :double :cat:ac25 :pax,
+                dd[:sac, :ana.xn - 2dt]
+            ..  dd[:ana.xn, :ana.xs] >> 0.4dt
+            ..  dd[:ana.xs + 2dt, :sgo]
+        );
+    }
+
+    with link = "line.it.RAF" {
+        track(:first :double :cat:dc30 :pax,
+                path("d0.it.5.raf")[:rom, :chi]
+        );
+    }
+
+    with link = "line.it.RCN" {
+        track(:first :double :cat:dc30 :pax,
+                path("d0.it.5.rcn")[:rom, :roc.ya]
+        );
+    }
+}
+
+

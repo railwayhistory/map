@@ -1,0 +1,159 @@
+# IT UCV.  Udine - Cividale
+with detail = 2 {
+    let uc = path("d2.it.ucv");
+
+    with link = "line.it.UCV" {
+        track(:first :pax, uc[:udi.ym, :civ]);
+        line_label(:right:n :pax, uc[:civ - 6km], "UCV");
+    }
+
+    with link = "point.it.Cividale" {
+        statdot(:pax, uc[:civ]);
+        slabel(:left :pax, uc[:civ] + (1.0dt, -1.5dt), "Cividale");
+    }
+}
+
+
+# IT UDM.  Udine - Bivio San Polo (- Monfalcone)
+with detail = 2 {
+    let um = path("d2.it.udm");
+
+    with link = "line.it.UDM" {
+        track(:first:station :double :cat:dc30 :pax, um[:udi.ym, :upa.yc]);
+        track(:first :double :cat:dc30 :pax, um[:upa.yc, :gor]);
+
+        line_badge(:cat:dc30 :pax, um[:upa.yc + 11km], "UDM");
+    }
+
+    with link = "point.it.Gorizia-Centrale" {
+        track(:first:station :double :cat:dc30 :pax, um[:gor, :gor.yn]);
+        statdot(:cat:dc30 :pax, um[:gor]);
+        slabel(:left :cat:dc30 :pax, um[:gor] + (1dt, -2.3dt), "Gorizia");
+    }
+
+    with link = "line.it.UDM" {
+        track(:first :double :cat:dc30 :pax, um[:gor.yn, :ron]);
+        line_label(:right:se :double :cat:dc30 :pax, um[:ron - 5km], "UDM");
+    }
+
+    with link = "point.it.Ronchi-dei-Legionari-Nord" {
+        track(:first:station :double :cat:dc30 :pax, um[:ron, :spo.y]);
+        statdot(:cat:dc30 :pax, um[:ron]);
+        slabel(:right :cat:dc30 :pax, um[:ron] + (1.3dt, -0.5dt),
+            "Ronchi dei Legionari"
+        );
+    }
+}
+
+# IT UPV.  Udine Parco - PM Vat
+with detail = 2 {
+    let pv = path("d2.it.upv");
+
+    with link = "line.it.UPV" {
+        track(:first :cat:dc30,
+                pv[:vat.y + 0.1dl, :vat.y] >> 0.2dt
+            ..  pv[:vat.yy, :upa.yl + 1dl] >> 0.6dt
+            ..  pv[:upa.yc - 1dl, :upa.yc - 1.1dl]
+        );
+    }
+}
+
+
+# IT USG.  Udine - San Giorgio di Nogaro
+with detail = 2 {
+    let ug = path("d2.it.usg");
+
+    with link = "line.it.USG" {
+        track(:first :cat:dc30 :pax, ug[:udi.yc, :car.y]);
+        track(:first :cat:dc30 :pax, ug[:car.y, :pal]);
+
+        line_label(:right:e :cat:dc30 :pax, ug[:car.y + 4km], "USG");
+    }
+
+    with link = "point.it.Palmanova" {
+        track(:first:station :cat:dc30 :pax, ug[:pal, :pal.yc]);
+        statdot(:cat:dc30 :pax, ug[:pal]);
+        slabel(:right :cat:dc30 :pax, ug[:pal] + (1.5dt, 0.8dt), "Palmanova");
+    }
+
+    with link = "line.it.USG" {
+        track(:first :removed, ug[:pal.yc, :sgo.yp]);
+        line_label(:right:se :removed, ug[:pal.yc + 4km], "USG");
+    }
+}
+
+
+# IT UTA.  Udine - Tarvisio confine
+with detail = 2 {
+    let ut = path("d2.it.uta");
+
+    with link = "line.it.UTA" {
+        track(:first :cat:dc30 :pax, ut[:udi.ym, :vat.y]);
+        track(:first :double :cat:dc30 :pax, ut[:vat.y, :gem.yp]);
+
+        line_label(:left:e :double :cat:dc30 :pax, ut[:gem.yp - 11km], "UTA");
+    }
+
+    with link = "point.it.Gemona-del-Friuli" {
+        track(:first:station :double :cat:dc30 :pax, ut[:gem.yp, :gem]);
+        statdot(:cat:dc30 :pax, ut[:gem]);
+        slabel(:right :cat:dc30 :pax, ut[:gem] + (1.5dt, 0.8dt),
+            "Gemona del Friuli"
+        );
+    }
+
+    with link = "line.it.UTA" {
+        track(:first :double :cat:dc30 :pax, ut[:gem, :car]);
+        line_label(:right:w :double :cat:dc30 :pax, ut[:gem + 7km], "UTA");
+    }
+
+    with link = "point.it.Carnia" {
+        track(:first:station :double :cat:dc30 :pax, ut[:car, :car.yv]);
+        statdot(:cat:dc30 :pax, ut[:car]);
+        slabel(:right :cat:dc30 :pax, ut[:car] + (1.5dt, 1.0dt), "Carnia");
+    }
+
+    with link = "line.it.UTA" {
+        track(:first :double :cat:dc30 :pax, ut[:car.yv, :tab]);
+        line_label(:left:s :double :cat:dc30 :pax, ut[:tab - 22.5km], "UTA");
+    }
+
+    with link = "point.it.Tarvisio-Boscoverde" {
+        statdot(:cat:dc30 :pax, ut[:tab]);
+        slabel(:left :cat:dc30 :pax, ut[:tab] + (0dt, -1.7km), "Tarvisio");
+    }
+
+    with link = "line.it.UTA" {
+        track(:first :double :cat:ac15 :pax, ut[:tab, :tac]);
+        line_label(:right:w :double :cat:ac15 :pax, ut[:tab + 3.4km], "UTA");
+    }
+
+    with link = "point.int.Tarvisio-Thörl-Maglern" {
+        marker(:right :ref :cat:ac15 :pax, ut[:tac]);
+        marker(:left :ref :cat:ac15 :pax, ut[:tac]);
+    }
+}
+
+
+# IT UVT.  Udine - Tarvisio confine (vecchia tratta)
+with detail = 2 {
+    let uv = path("d2.it.uvt");
+
+    with link = "line.it.UVT" {
+        track(:first :double :removed, uv[:spe.yv, :tao.ys]);
+        track(:first :double :removed, uv[:car.yn, :pon.ys]);
+        track(:first :double :removed, uv[:pon.yn, :tar.yl]);
+
+        line_label(:right:w :double :removed, uv[:car.yn + 20.3km], "UVT");
+    }
+
+    with link = "point.it.Tarvisio-Centrale" {
+        track(:first:station :double :removed, uv[:tar.yl, :tar]);
+        statdot(:removed, uv[:tar]);
+    }
+
+    with link = "line.it.UVT" {
+        track(:first :double :removed, uv[:tar, :tac.ys]);
+    }
+}
+

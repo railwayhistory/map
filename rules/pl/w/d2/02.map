@@ -1,0 +1,245 @@
+# PL 20.  Warszawa Główna Towarowa - Warszawa Praga
+with detail = 2 {
+    let tp = path("d2.pl.20");
+
+    with railway = :first :cat:dc30 {
+        with link = "line.pl.20" {
+            track(tp[:wgt.yz, :waz.yr]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.20" {
+            track(tp[:waz.yg, :wga.yt]);
+            track(tp[:wga.yt, :wga.yp]);
+        }
+
+        with link = "point.pl.Warszawa-Gdańska" {
+            track(:station, tp[:wga.yp, :wga]);
+            statdot(tp[:wga]);
+            with zoom = :high slabel(:left,
+                tp[:wga] + (-1.2km, 0dt) + (-1.5dt, 0.3dt),
+                "W. Gdańska"
+            );
+        }
+
+        with link = "line.pl.20" {
+            track(tp[:wga, :wpr.yp]);
+            track(tp[:wpr.yp, :wpr.yg]);
+        }
+    }
+}
+
+
+# PL 21.  Warszawa Wileńska - Wołomin Słoneczna
+with detail = 2 {
+    let ws = path("d2.pl.21");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Warszawa-Wileńska" {
+            statdot(ws[:wwi]);
+        }
+
+        with link = "line.pl.21" {
+            track(ws[:wwi, :wwi.yw]);
+            track(ws[:wwi.yw, :zie.yr]);
+            with zoom = :high line_label(:right:nw, ws[:zie - 3.5km], "21");
+
+            with zoom = :high line_label(:left:se, ws[:zie + 4.5km], "21");
+        }
+    }
+}
+
+
+# PL 22.  Tomaszów Mazowiecki - Radom Główny
+with detail = 2 {
+    let tr = path("d2.pl.w.22");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.22" {
+            track(tr[:tom.yr, :raz.yz]);
+            line_label(:left:sw, tr[:tom.yr + 7km], (0.5dt, 0dt), "22");
+        }
+    }
+}
+
+
+# PL 24.  Piotrków Trybunalski - Rogowiec
+with detail = 2 {
+    let pr = path("d2.pl.24");
+
+    with railway = :first {
+        with link = "line.pl.24" {
+            track(pr[:pio.yb, :rog]);
+            line_label(:right:s, pr[:pio.yb + 20km], "24");
+        }
+
+        with link = "point.pl.Rogowiec" {
+            statdot(pr[:rog]);
+            slabel(:right, pr[:rog] + (1.5dt, 0.8dt), "Rogowiec");
+        }
+    }
+}
+
+
+# PL 25.  Łódź Kaliska - Dębica
+with detail = 2 {
+    let ld = path("d2.pl.w.25");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.25" {
+            track(ld[:lka, :lka.yr]);
+            track(ld[:lka.yr, :lch]);
+        }
+
+        with link = "point.pl.Łódź-Chojny" {
+            track(:station, ld[:lch, :lch.yw]);
+            statdot(ld[:lch]);
+            with zoom = :high slabel(:bottom, ld[:lch] + (0dt, 1.4dt),
+                vbox(:center:top, "Łódź", "Chojny")
+            );
+        }
+
+        with link = "line.pl.25" {
+            track(ld[:lch.yw, :lol.yc]);
+            track(ld[:lol.yc, :lol.yw]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 {
+        with link = "line.pl.25" {
+            with layer = -1 {
+                track(ld[:lol.yw, :lol.yg]);
+                track(ld[:lol.yg, :bed.yc]);
+            }
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.25" {
+            track(ld[:zak.yd, :zap.ys]);
+            track(:casing, ld[:zap.ys, :mik.yk]);
+        }
+
+        with link = "point.pl.Mikołajów" {
+            track(:station, ld[:mik.yk, :mik.yr]);
+            statdot(:nopax, ld[:mik]);
+            slabel(:right :nopax, ld[:mik] + (1.3dt, -0.3dt), "Mikołajów");
+        }
+
+        with link = "line.pl.25" {
+            track(ld[:mik.yr, :tom]);
+            line_label(:right:ne, ld[:mik.yr + 7km], "25");
+        }
+
+        with link = "point.pl.Tomaszów-Mazowiecki" {
+            track(:station, ld[:tom, :tom.yr]);
+            statdot(ld[:tom]);
+            slabel(:left, ld[:tom] + (-1.7dt, -0.5dt),
+                vbox(:right:top, "Tomaszów", "Mazowiecki")
+            );
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.pl.25" {
+            track(ld[:tom.yr, :opo.x]);
+            line_label(:right:e, ld[:tom.yr + 7km], "25");
+        }
+    }
+}
+
+
+# PL 26.  Łuków - Radom Główny
+with detail = 2 {
+    let lr = path("d2.pl.w.26");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Łuków" {
+            track(:station, lr[:luk.yp, :luk.ys]);
+        }
+
+        with link = "line.pl.26" {
+            track(lr[:luk.ys, :okr.x]);
+            line_label(:left:w, lr[:luk.ys + 9km], "26");
+        }
+    }
+}
+
+
+# PL 27.  Nasielsk - Toruń Wschodni
+with detail = 2 {
+    let lr = path("d2.pl.w.27");
+
+    with railway = :first :pax {
+        with link = "line.pl.27" {
+            track(lr[:nas.yt, :plo]);
+            line_label(:right:s, lr[:plo - 13km], "27");
+        }
+
+        with link = "point.pl.Płońsk" {
+            statdot(lr[:plo]);
+            slabel(:right, lr[:plo] + (1.0dt, -0.5dt), "Płońsk");
+        }
+
+        with link = "line.pl.27" {
+            track(lr[:plo, :sie.yk]);
+            line_label(:left:ne, lr[:plo + 17km], "27");
+            line_label(:right:s, lr[:sie.yk - 11.3km], "27");
+        }
+
+        with link = "point.pl.Sierpc" {
+            track(:station, lr[:sie.yk, :sie.yb]);
+            statdot(lr[:sie]);
+            slabel(:right, lr[:sie] + (1.3dt, -0.3dt), "Sierpc");
+        }
+
+        with link = "line.pl.27" {
+            track(lr[:sie.yb, :koz.x]);
+            line_label(:left:n, lr[:koz.x - 2km], "27");
+        }
+    }
+}
+
+
+# PL 28.  Wieliszew - Zegrze Południowe
+with detail = 2 {
+    let wz = path("d2.pl.28");
+
+    with railway = :second :cat:dc30 :pax {
+        with link = "line.pl.28" {
+            track(wz[:wie.yz, :zeg]);
+        }
+
+        with link = "point.pl.Zegrze-Południowe" {
+            statdot(wz[:zeg]);
+            slabel(:top, wz[:zeg] + (0dt, -0.5dt),
+                vbox(:center:bottom, "Zegrze", "Południowe")
+            );
+        }
+    }
+}
+
+
+# PL 29.  Tłuszcz - Ostrołęka
+with detail = 2 {
+    let to = path("d2.pl.29");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.29" {
+            track(to[:tlu.yo, :ost.ym]);
+            line_label(:left:e, to[:tlu.yo + 10km], "29");
+            line_label(:right:w, to[:tlu.yo + 35km], "29");
+            line_label(:left:e, to[:ost.ym - 7km], "29");
+        }
+
+        with link = "point.pl.Ostrołęka" {
+            track(:station, to[:ost.ym, :ost.yg]);
+            statdot(to[:ost]);
+            slabel(:right, to[:ost] + (0dt, 1.0dt),
+                hbox(:left:top, "Ostrołęka")
+            );
+        }
+    }
+}
+

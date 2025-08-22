@@ -1,0 +1,230 @@
+# CZ 500.  Pardubice hl.n. - Liberec
+with detail = 2 {
+    let pl = path("d2.cz.500");
+
+    with link = "point.cz.Pardubice-Rosice-nad-Labem" {
+        track(:first :double:station :cat:dc30 :pax, pl[:ros.yh, :ros]);
+        statdot(:cat:dc30 :pax, pl[:ros]);
+    }
+
+    with link = "line.cz.500" {
+        track(:first :double :cat:dc30 :pax, pl[:ros, :opp]);
+        line_label(:left:e :cat:dc30 :pax, pl[:ros + 7km], "500");
+    }
+
+    with link = "point.cz.Opatovice-Pohřebačka" {
+        track(:first :double:station :cat:dc30 :pax, pl[:opp, :opp.yp]);
+        statdot(:cat:dc30 :pax, pl[:opp]);
+        slabel(:right :cat:dc30 :pax, pl[:opp] + (1.5dt, 0dt),
+            vbox(:left:middle, " Opatovice-", "Pohřebačka")
+        );
+    }
+
+    with link = "line.cz.500" {
+        track(:first :cat:dc30 :pax, pl[:opp.yp, :hra.yc]);
+    }
+
+    with link = "point.cz.Hradec-Králové-hl-n" {
+        track(:first :station :cat:dc30 :pax, pl[:hra.yc, :hra.yl]);
+        statdot(:cat:dc30 :pax, pl[:hra]);
+        slabel(:left :cat:dc30 :pax :bold, pl[:hra] + (-1.5dt, 0.8dt),
+            "Hradec Králové"
+        );
+    }
+
+    with link = "line.cz.500" {
+        track(:first :cat:dc30 :pax, pl[:hra.yl, :smi.yh]);
+        line_label(:right:w :cat:dc30 :pax, pl[:hra.yl + 3km], "500");
+    }
+
+    with link = "point.cz.Smiřice" {
+        track(:first :station :cat:dc30 :pax, pl[:smi.yh, :smi]);
+        statdot(:cat:dc30 :pax, pl[:smi]);
+        slabel(:right :cat:dc30 :pax, pl[:smi] + (1.5dt, 1.8dt), "Smiřice");
+    }
+
+    with link = "line.cz.500" {
+        track(:first :cat:dc30 :pax, pl[:smi, :jar]);
+        line_label(:left:e :cat:dc30 :pax, pl[:smi + 2.8km], "500");
+    }
+
+    with link = "point.cz.Jaroměř" {
+        track(:first :station :cat:dc30 :pax, pl[:jar, :jar.yt]);
+        statdot(:cat:dc30 :pax, pl[:jar]);
+        slabel(:left :cat:dc30 :pax, pl[:jar] + (-1.5dt, -0.3dt), "Jaroměř");
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax, pl[:jar.yt, :sta.aah]);
+        line_label(:right:sw :pax, pl[:jar.yt + 6km], "500");
+        line_label(:left:n :pax, pl[:sta - 13km], "500");
+    }
+
+    with link = "point.cz.Stará-Paka" {
+        track(:first :pax,
+                pl[:sta.aah - 0.1dl, :sta.aah]
+            ..  pl[:sta, :sta.yt] >> 0.3dt
+        );
+        track(:first :pax, pl[:sta, :sta.yt] << 0.3dt);
+        statdot(:pax, pl[:sta]);
+        slabel(:left :pax, pl[:sta] + (0dt, 0.2km) + (0dt, 0.8dt),
+            vbox(:right:top, "Stará", "Paka")
+        );
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax,
+                pl[:sta.yt, :sta.ym] >> 0.3dt
+            ..  pl[:sta.yym, :zel.yyt - 1dt]
+            ..  pl[:zel.yt, :zel] << 0.3dt
+        );
+        line_label(:right:sw :pax, pl[:sta.yym + 10km], "500");
+    }
+
+    with link = "point.cz.Železný-Brod" {
+        statdot(:pax, pl[:zel]);
+        slabel(:top :pax, pl[:zel] + (0dt, -0.7dt),
+            vbox(:center:bottom, "Železný", "Brod")
+        );
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax, pl[:zel, :tur.yl]);
+        line_label(:left:w :pax, pl[:tur.yl - 5km], "500");
+    }
+
+    with link = "point.cz.Turnov" {
+        track(:first :station :pax, pl[:tur.yl, :tur.ym]);
+        statdot(:pax, pl[:tur]);
+        slabel(:right :pax, pl[:tur] + (0.9km, 0dt) + (0.8dt, 1.3dt),
+            "Turnov"
+        );
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax, pl[:tur.ym, :lib.yc - 1.5km]);
+        with layer = 1 track(:first :pax :casing,
+                pl[:lib.yc - 1.5km, :lib.yc - 0.5km]
+        );
+        track(:first :pax, pl[:lib.yc - 0.5km, :lib.yc]);
+
+        line_label(:left:e :pax, pl[:tur.ym + 6.5km], "500");
+        line_label(:left:ne :pax, pl[:lib.yc - 6km], "500");
+    }
+
+    with link = "point.cz.Liberec" {
+        track(:first :station :pax, pl[:lib.yc, :lib]);
+        statdot(:pax, pl[:lib]);
+        slabel(:right :pax :bold, pl[:lib] + (1.5dt, 0.5dt), "Liberec");
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax,
+                pl[:lib, :lib.yf] >> 0.3dt
+            ..  pl[:lib.yyf + 0.5dt, :ras.yb]
+        );
+        line_label(:right:nw :pax, pl[:lib + 10km], "500");
+    }
+
+    with link = "point.cz.Raspenava" {
+        track(:first :station :pax, pl[:ras.yb, :ras]);
+        statdot(:pax, pl[:ras]);
+        slabel(:right :pax, pl[:ras] + (1.0dt, -0.8dt), "Raspenava");
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax, pl[:ras, :fry]);
+    }
+
+    with link = "point.cz.Frýdlant-v-Čechách" {
+        track(:first :station :pax, pl[:fry, :fry.yj]);
+        statdot(:pax, pl[:fry]);
+        slabel(:top :pax, pl[:fry] + (0dt, -1.5km) + (0.5dt, -0.5dt),
+            vbox(:center:bottom, "    Frýdlant v", "Čechách")
+        );
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax, pl[:fry.yj, :cer]);
+        line_label(:left:e :pax, pl[:cer - 4.5km], "500");
+    }
+
+    with link = "point.cz.Černousy" {
+        statdot(:pax, pl[:cer]);
+        slabel(:right :pax, pl[:cer] + (1.5dt, 1dt), "Černousy");
+    }
+
+    with link = "line.cz.500" {
+        track(:first :pax, pl[:cer, :ceh]);
+    }
+}
+
+
+# CZ 504.  Raspenava - Bílý Potok pod Smrkem
+with detail = 2 {
+    let rb = path("d2.cz.504");
+
+    with link = "line.cz.504" {
+        track(:second :pax, rb[:ras.yb, :bil]);
+        line_label(:right:n :pax, rb[:ras.yb + 3.05km], "504");
+    }
+
+    with link = "point.cz.Bílý-Potok-pod-Smrkem" {
+        statdot(:pax, rb[:bil]);
+        slabel(:right :pax, rb[:bil] + (1.5dt, 0dt),
+            vbox(:left:middle, "Bílý Potok", "pod Smrkem")
+        );
+    }
+}
+
+
+# CZ 506.  Frýdlant v Čechách - Jindřichovice pod Smrkem st.hr.
+with detail = 2 {
+    let fj = path("d2.cz.506");
+
+    with link = "line.cz.506" {
+        track(:second :pax, fj[:fry.yj, :jin]);
+        line_label(:right:w :pax, fj[:jin - 9.03km], "506");
+    }
+
+    with link = "point.cz.Jindřichovice-pod-Smrkem" {
+        statdot(:pax, fj[:jin]);
+        slabel(:top :pax, fj[:jin] + (0dt, -0.5dt),
+            vbox(:center:bottom, "Jindřichovice", "pod Smrkem")
+        );
+    }
+
+    with link = "line.cz.506" {
+        track(:second :removed, fj[:jin, :jih]);
+    }
+
+    with link = "point.int.Jindřichovice-pod-Smrkem-Pobiedna" {
+        marker(:left :ref :removed, fj[:jih]);
+        marker(:right :ref :removed, fj[:jih]);
+    }
+}
+
+
+# CZ 508.  Frýdlant v Čechách - Heřmanice
+with detail = 2 {
+    let fd = path("d2.cz.508.1");
+    let dh = path("d2.cz.508.2");
+
+    with link = "line.cz.508" {
+        track(:second :narrower:g750 :removed, fd[:fry.yh, :det.yh]);
+        with zoom = :high line_label(
+            :left:n :removed, fd[:fry.yh + 1.5km], "508"
+        );
+
+        track(:second :narrower:g750 :removed, fd[:det.yh, :det]);
+        track(:second :narrower:g750 :removed, dh[:det.yh, :her]);
+    }
+
+    with link = "point.cz.Heřmanice" {
+        statdot(:removed, dh[:her]);
+        slabel(:bottom :removed, dh[:her] + (0dt, 0.2km) + (0dt, 0.5dt),
+            "Heřmanice"
+        );
+    }
+}
+

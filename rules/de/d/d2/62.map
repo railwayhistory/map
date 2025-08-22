@@ -125,13 +125,7 @@ with detail = 2 {
         track(:second :removed, zl[:ooa.y, :ncu]);
         track(:second, zl[:ncu, :lob.yn]);
 
-        guide(:linenum :pax,
-                zl[:ooa - 3km] >> 1dt
-            --  zl[:ooa - 3km] >> 3dt
-        );
-        label(:linenum :pax, zl[:ooa - 3km] >> 3dt + (0dt, -0.1dt),
-            hbox(:left:middle, " 6214")
-        );
+        line_label(:right:sw, zl[:ooa - 2km], "6214");
         guide(:linenum :removed,
                 zl[:her - 3.3km] >> 0.7dt
             --  zl[:her - 3.3km] >> 3.0dt
@@ -203,7 +197,7 @@ with detail = 2 {
 
     with link = "point.de.Ebersbach-Sachs" {
         with layer = 1 marker(:statdot :pax, ow[:ebe]);
-        slabel(:left :pax, ow[:ebe] + (-1.5dt, 2.8dt),
+        slabel(:left :pax, ow[:ebe] + (-1.5dt, 2.3dt),
             vbox(:right:bottom, "Ebersbach   ", span(:light, "(Sachs)"))
         );
     }
@@ -228,21 +222,10 @@ with detail = 2 {
         track(:second :removed, bs[:eur, :nst]);
         track(:second :pax, bs[:nst, :san.ys]);
 
-        guide(:linenum :removed,
-                bs[:bau.yw + 2km] << 0.7dt
-            --  bs[:bau.yw + 2km] << 3.0dt
-        );
-        label(:linenum :removed, bs[:bau.yw + 2km] << 3.0dt,
-            hbox(:left:middle, " 6216")
-        );
-        line_badge(:removed, bs[:nst - 4km] @ -6, "6216");
-        guide(:linenum :pax,
-                bs[:nst + 6km] << 0.7dt
-            --  bs[:nst + 6km] << 3.0dt
-        );
-        label(:linenum :pax, bs[:nst + 6km] << 3.0dt,
-            hbox(:left:middle, " 6216")
-        );
+        line_label(:right:e :removed, bs[:bau.yw + 4.2km], "6216");
+        line_label(:right:e :removed, bs[:eur + 1.1km], "6216");
+        line_label(:left:w :pax, bs[:nst + 5.5km], "6216");
+        with zoom = :high line_label(:right:se :pax, bs[:gos + 2.3km], "6216");
     }
 
     with link = "point.de.Großpostwitz" {
@@ -267,8 +250,8 @@ with detail = 2 {
 
     with link = "point.de.Neustadt-Sachs" {
         with layer = 1 marker(:statdot :pax, bs[:nst]);
-        slabel(:right :pax, bs[:nst] + (2.0dt, 2.5dt),
-            hbox(:left:base, "Neustadt ", span(:light, "(Sachs)"))
+        slabel(:right :pax, bs[:nst] + (0.9km, 0dt) + (1.0dt, 2.0dt),
+            vbox(:left:bottom, "Neustadt", span(:light, "(Sachs)"))
         );
     }
 
@@ -776,13 +759,7 @@ with detail = 2 {
         track(:first :pax, pb[:bra, :brg]);
 
         line_badge(:pax, pb[:oel + 5km] @ -12 << 0.2dt, "6270");
-        guide(:linenum :pax,
-                pb[:rau - 0.2km] << 0.7dt
-            --  pb[:rau - 0.2km] << 3.0dt
-        );
-        label(:linenum :pax, pb[:rau - 0.2km] << 3.0dt + (0dt, -0.2dt),
-            hbox(:left:middle, " 6270")
-        );
+        line_label(:right:e :pax, pb[:ado + 5.5km], "6270");
     }
 
     with link = "point.de.Weischlitz" {
@@ -806,7 +783,14 @@ with detail = 2 {
 
     with link = "point.de.Bad-Brambach" {
         with layer = 1 marker(:statdot :pax, pb[:bra]);
-        slabel(:right :pax, pb[:bra] + (0dt, -1.5dt), "Bad Brambach");
+        with zoom = :high {
+            slabel(:right :pax, pb[:bra] + (-0.5dt, -1.5dt), "Bad Brambach");
+        }
+        with zoom = :low {
+            slabel(:right :pax, pb[:bra] + (-0.3dt, -0.5dt),
+                vbox(:left:bottom, "Bad", "Bramb.")
+            );
+        }
     }
 
     with link = "point.int.Bad-Brambach-Plesná-I" {

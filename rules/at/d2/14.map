@@ -1,0 +1,89 @@
+# AT 140.  Abzw Amstetten 11 - Abzw Weyer 1
+with detail = 2 {
+    let aw = path("d2.at.140");
+
+    with link = "line.at.140" {
+        track(:first :cat:ac15 :pax, aw[:ams.yk, :wai]);
+        line_label(:left:nw :cat:ac15 :pax, aw[:ams.yk + 10km], "140");
+    }
+
+    with link = "point.at.Waidhofen-Ybbs" {
+        track(:first:station :cat:ac15 :pax, aw[:wai, :wai.yk]);
+        statdot(:cat:ac15 :pax, aw[:wai] << 0.3dt);
+        slabel(:right :cat:ac15 :pax, aw[:wai] + (1.5dt, -0.5dt),
+            hbox(:left:base, "Waidhofen ", span(:light, "a.d. Ybbs"))
+        );
+    }
+
+    with link = "line.at.140" {
+        track(:first :cat:ac15 :pax, aw[:wai, :wey.ya]);
+        line_label(:right:s :cat:ac15 :pax, aw[:wey.ya - 7.4km], "140");
+    }
+}
+
+
+# AT 145.  Waidhofen an der Ybbs - Kienberg-Gaming
+with detail = 2 {
+    let wk = path("d2.at.145");
+
+    with link = "line.at.145" {
+        track(:first :narrow:g760 :pax,
+                wk[:wai, :wai.yk - 0.5dt] << 0.7dt
+            ..  wk[:wai.yk + 1.5dt, :pes]
+        );
+    }
+
+    with link = "point.at.Waidhofen-Ybbs-Pestalozzistraße" {
+        statdot(:pax, wk[:pes]);
+    }
+
+    with link = "line.at.145" {
+        track(:first :narrow:g760 :removed, wk[:pes, :gst]);
+    }
+
+    with link = "point.at.Gstadt" {
+        track(:first:station :narrow:g760 :removed, wk[:gst, :gst.yy]);
+        statdot(:removed, wk[:gst]);
+        slabel(:right :removed, wk[:gst] + (-1.5dt, -1.5dt), "Gstadt");
+    }
+
+    with link = "line.at.145" {
+        track(:first :narrow:g760 :removed, wk[:gst.yy, :lun]);
+        line_label(:right:e :removed, wk[:gst.yy + 15.5km], "145");
+        line_label(:right:nw :removed, wk[:lun - 6.2km], "145");
+    }
+
+    with link = "point.at.Lunz-See" {
+        statdot(:museum, wk[:lun]);
+        slabel(:right :museum, wk[:lun] + (1.5dt, 0.8dt), "Lunz am See");
+    }
+
+    with link = "line.at.145" {
+        track(:first :narrow:g760 :museum, wk[:lun, :kie]);
+        line_label(:left:e :pax, wk[:lun + 11.4km], "145");
+    }
+
+    with link = "point.at.Kienberg-Gaming" {
+        statdot(:museum, wk[:kie]);
+        slabel(:right :museum, wk[:kie] + (1dt, 0dt),
+            vbox(:left:top, "Kienberg-", " Gaming")
+        );
+    }
+}
+
+
+# AT 146.  Gstadt - Ybbsitz
+with detail = 2 {
+    let gy = path("d2.at.146");
+
+    with link = "line.at.146" {
+        track(:first :narrow:g760 :removed, gy[:gst.yy, :ybb]);
+        line_label(:right:n :removed, gy[:ybb - 1.9km], "146");
+    }
+
+    with link = "point.at.Ybbsitz" {
+        statdot(:removed, gy[:ybb]);
+        slabel(:right :removed, gy[:ybb] + (1.5dt, 0.8dt), "Ybbsitz");
+    }
+}
+

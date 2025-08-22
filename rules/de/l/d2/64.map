@@ -87,68 +87,129 @@ with detail = 2 {
 with detail = 2 {
     let ml = path("d2.de.6403");
 
-    with link = "line.de.6403" {
-        track(:first :double :cat:ac15 :pax, ml[:mag.yb, :hal.yt]);
-        track(:first :double :cat:ac15 :pax, ml[:hal.ym, :gro.yh]);
-        track(:first :double :cat:ac15 :pax, ml[:gro.ys, :moc.yw]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6403" {
+            track(ml[:mag.yb, :buc.ye]);
+            track(ml[:buc.ye, :buc.yb]);
+            track(ml[:buc.yb, :buc.yn]);
+            track(ml[:buc.yn, :fer]);
+            track(ml[:fer, :buc.ys]);
+            track(ml[:buc.ys, :son.yb]);
+            track(ml[:son.yb, :son]);
+        }
 
-        line_badge(:cat:ac15 :pax, ml[:cao + 9km], "6403");
+        with link = "point.de.Schönebeck-Elbe" {
+            track(:station, ml[:son, :son.ys]);
+            statdot(ml[:son]);
+            slabel(:right, ml[:son] + (1.3dt, 0.3dt),
+                vbox(:left:middle, "Schönebeck ", span(:light, "     (Elbe)"))
+            );
+        }
+
+        with link = "line.de.6403" {
+            with layer = -1 track(ml[:son.ys, :cao.yt]);
+            line_label(:left:w, ml[:son.ys + 5km], "6403");
+        }
+
+        with link = "point.de.Calbe-Saale-Ost" {
+            track(:station, ml[:cao.yt, :cao]);
+            statdot(ml[:cao]);
+            slabel(:right, ml[:cao] + (1.5dt, 0.8dt),
+                hbox(:left:base, "Calbe ", span(:light, "(Saale)"), " Ost")
+            );
+        }
+
+        with link = "line.de.6403" {
+            track(ml[:cao, :kot.yd]);
+            line_label(:left:w, ml[:cao + 9km], "6403");
+        }
+    
+        with link = "point.de.Köthen" {
+            track(:station, ml[:kot.yd, :kot.ys]);
+            statdot(ml[:kot]);
+            slabel(:right, ml[:kot] + (1.5dt, 0.5dt), "Köthen");
+        }
+
+        with link = "line.de.6403" {
+            track(ml[:kot.ys, :stu]);
+            line_label(:right:e, ml[:kot.ys + 7km], "6403");
+        }
+
+        with link = "point.de.Stumsdorf" {
+            track(:station, ml[:stu, :stu.yb]);
+            statdot(ml[:stu]);
+            slabel(:left, ml[:stu] + (-2.0dt, 1.5dt), "Stumsdorf");
+        }
+
+        with link = "line.de.6403" {
+            track(ml[:stu.yb, :nie]);
+            line_label(:left:w, ml[:nie - 1.8km], "6403");
+        }
+
+        with link = "point.de.Niemberg" {
+            track(:station, ml[:nie, :nie.yh]);
+            statdot(ml[:nie]);
+        }
+
+        with link = "line.de.6403" {
+            track(ml[:nie.yh, :hag.yp]);
+            track(ml[:hag.yp, :hag.yn]);
+            track(ml[:hag.yn, :hal.yt]);
+        }
+
+        # Halle-Saale-Hbf
+
+        with link = "line.de.6403" {
+            track(ml[:hal.ym, :leu.yg]);
+            track(ml[:leu.yg, :leu.yt]);
+            track(ml[:leu.yt, :gro.yh]);
+        }
+
+        with link = "point.de.Gröbers" {
+            track(ml[:gro.yh, :gro.ys]);
+            statdot(ml[:gro]);
+            slabel(:right, ml[:gro] + (-1.5dt, -1.5dt), "Gröbers");
+        }
+
+        with link = "line.de.6403" {
+            track(ml[:gro.ys, :ske]);
+        }
+
+        with link = "point.de.Schkeuditz" {
+            track(:station, ml[:ske, :skl]);
+            statdot(:cat:ac15 :pax, ml[:ske]);
+            slabel(:left, ml[:ske] + (1.5dt, 1.3dt),
+                hbox(:right:top, "Schkeuditz")
+            );
+        }
+
+        with link = "point.de.Schkeuditz-Luftfrachtumschlagbahnhof" {
+            statdot(:nopax, ml[:skl] << 0.3dt);
+        }
+
+        with link = "line.de.6403" {
+            track(ml[:ske, :wah]);
+        }
+
+        with link = "point.de.Leipzig-Wahren" {
+            track(:station, ml[:wah, :wah.yr]);
+            statdot(ml[:wah]);
+        }
     }
 
-    with link = "point.de.Schönebeck-Elbe" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:son]);
-        slabel(:right :cat:ac15 :pax, ml[:son] + (1.5dt, 0.3dt),
-            vbox(:left:middle, "Schönebeck ", span(:light, "     (Elbe)"))
-        );
-    }
+    with railway = :first :double :cat:ac15 :nopax {
+        with link = "line.de.6403" {
+            track(ml[:wah.yr, :wie.yl]);
+            track(ml[:wie.yl, :wie]);
+        }
 
-    with link = "point.de.Calbe-Saale-Ost" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:cao]);
-        slabel(:right :cat:ac15 :pax, ml[:cao] + (1.8dt, 0.8dt),
-            hbox(:left:base, "Calbe ", span(:light, "(Saale)"), " Ost")
-        );
-    }
+        with link = "point.de.Wiederitzsch" {
+            statdot(ml[:wie]);
+        }
 
-    with link = "point.de.Köthen" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:kot]);
-        slabel(:right :cat:ac15 :pax, ml[:kot] + (1.8dt, 0.5dt), "Köthen");
-    }
-
-    with link = "point.de.Stumsdorf" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:stu]);
-        slabel(:left :cat:ac15 :pax, ml[:stu] + (-2.0dt, 1.5dt), "Stumsdorf");
-    }
-
-    with link = "point.de.Niemberg" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:nie]);
-    }
-
-    with link = "point.de.Gröbers" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:gro]);
-        slabel(:right :cat:ac15 :pax, ml[:gro] + (-1.5dt, -1.5dt), "Gröbers");
-    }
-
-    with link = "point.de.Schkeuditz" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:ske]);
-    }
-
-    with link = "point.de.Schkeuditz" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:ske]);
-        slabel(:left :cat:ac15 :pax, ml[:ske] + (1.5dt, 1.3dt),
-            hbox(:right:top, "Schkeuditz")
-        );
-    }
-
-    with link = "point.de.Schkeuditz-Luftfrachtumschlagbahnhof" {
-        with layer = 1 marker(:statdot :cat:ac15, ml[:skl] << 0.3dt);
-    }
-
-    with link = "point.de.Leipzig-Wahren" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ml[:wah]);
-    }
-
-    with link = "point.de.Wiederitzsch" {
-        with layer = 1 marker(:statdot :cat:ac15, ml[:wie]);
+        with link = "line.de.6403" {
+            track(ml[:wie, :moc.yw]);
+        }
     }
 }
 

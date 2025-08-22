@@ -44,21 +44,63 @@ with detail = 2 {
 with detail = 2 {
     let mc = path("d2.ch.132");
 
-    with link = "line.ch.132" {
-        track(:first :narrow:g1000 :cat:dc85 :pax,
-                mc[:mar.yc - 0.1dl, :mar.yc]
-            ..  mc[:mar.xf, :ver.xa] << 0.8dt
-            ..  mc[:ver + 800m, :chf]
-        );
-
-        line_label(:right:se :cat:dc85 :pax, mc[:ver + 6km], "132");
+    with railway = :first :narrow:g1000 :cat:dc85 :pax {
+        with link = "line.ch.132" {
+            track(
+                    mc[:mar.yc - 0.1dl, :mar.yc]
+                ..  mc[:mar.xf, :ver] << 0.8dt
+            );
+        }
     }
 
-    with link = "point.ch.La-Châtelard-Frontière" {
-        statdot(:cat:dc85 :pax, mc[:cfr]);
-        slabel(:right :cat:dc85 :pax, mc[:cfr] + (1.5dt, -1.0dt),
-            vbox(:left:top, "La Châtelard-", "  Frontière")
-        );
+    with railway = :first :narrow:g1000 :rail:rc85 :pax {
+        with link = "line.ch.132" {
+            track(:rail:rc85,
+                    mc[:ver - 0.1dl, :ver] << 0.8dt
+                ..  mc[:ver + 800m, :sal]
+            );
+        }
+    }
+
+    with railway = :first :narrow:g1000 :cat:dc85 :pax {
+        with link = "line.ch.132" {
+            track(mc[:sal, :tre]);
+            line_label(:right:se, mc[:sal + 2km], "132");
+        }
+    }
+
+    with railway = :first :narrow:g1000 :rail:rc85 :pax {
+        with link = "line.ch.132" {
+            track(mc[:tre, :cha]);
+        }
+    }
+
+    with railway = :first :narrow:g1000 :cat:dc85 :pax {
+        with link = "line.ch.132" {
+            track(mc[:cha, :cfr]);
+        }
+
+        with link = "point.ch.La-Châtelard-Frontière" {
+            statdot(mc[:cfr]);
+            slabel(:right, mc[:cfr] + (1.5dt, -1.0dt),
+                vbox(:left:top, "La Châtelard-", "  Frontière")
+            );
+        }
+    }
+
+    with railway = :first :narrow:g1000 :rail:rc85 :pax {
+        with link = "line.ch.132" {
+            track(mc[:cfr, :chf]);
+        }
+    }
+
+    with link = "line.ch.132" {
+#       track(:first :narrow:g1000 :cat:dc85 :pax,
+#               mc[:mar.yc - 0.1dl, :mar.yc]
+#           ..  mc[:mar.xf, :ver.xa] << 0.8dt
+#           ..  mc[:ver + 800m, :chf]
+#       );
+
     }
 }
 

@@ -1,0 +1,121 @@
+# AT 320.  Linz Hbf - Selzthal
+with detail = 2 {
+    let ls = path("d2.at.320");
+
+    with link = "line.at.320" {
+        track(:first :double :cat:ac15 :pax, ls[:lin.yt, :tra]);
+    }
+
+    with link = "point.at.Traun" {
+        track(:first:station :double :cat:ac15 :pax, ls[:tra, :tra.ym]);
+        statdot(:cat:ac15 :pax, ls[:tra]);
+        slabel(:left :cat:ac15 :pax, ls[:tra] + (-1.6dt, 0.5dt), "Traun");
+    }
+
+    with link = "line.at.320" {
+        track(:first :double :cat:ac15 :pax, ls[:tra.ym, :net]);
+        track(:first :cat:ac15 :pax, ls[:net, :roh]);
+        line_label(:left:w :cat:ac15 :pax, ls[:net + 1.0km], "320");
+    }
+
+    with link = "point.at.Rohr-Bad-Hall" {
+        track(:first:station :cat:ac15 :pax, ls[:roh, :roh.yh]);
+        statdot(:cat:ac15 :pax, ls[:roh]);
+        slabel(:left :cat:ac15 :pax, ls[:roh] + (-0.5dt, -0.3dt),
+            vbox(:right:bottom, "Rohr- ", "Bad Hall")
+        );
+    }
+
+    with link = "line.at.320" {
+        track(:first :cat:ac15 :pax, ls[:roh.yh, :war]);
+        line_label(:left:w :cat:ac15 :pax, ls[:roh.yh + 11.7km], "320");
+
+        track(:first :double :cat:ac15 :pax, ls[:war, :wad]);
+        track(:first :cat:ac15 :pax, ls[:wad, :kla.yg]);
+    }
+
+    with link = "point.at.Klaus" {
+        track(:first:station :cat:ac15 :pax, ls[:kla.yg, :kla]);
+        statdot(:cat:ac15 :pax, ls[:kla]);
+        slabel(:left :cat:ac15 :pax, ls[:kla] + (-1.6dt, 0.8dt), "Klaus");
+    }
+
+    with link = "line.at.320" {
+        track(:first :cat:ac15 :pax, ls[:kla, :sen.y]);
+        line_label(:right:e :cat:ac15 :pax, ls[:kla + 5km], "320");
+        line_label(:left:w :cat:ac15 :pax, ls[:sen.y - 6km], "320");
+    }
+}
+
+
+# AT 323.  Marchtrenk - Traun
+with detail = 2 {
+    let mt = path("d2.at.323");
+
+    with link = "line.at.323" {
+        track(:first :cat:ac15, mt[:mar.yt, :tra.ym]);
+        line_label(:right:n :cat:ac15, mt[:mar.yt + 6.8km], " 323");
+    }
+}
+
+
+# AT 324.  Rohr-Bad Hall - Bad Hall
+with detail = 2 {
+    let rh = path("d2.at.324");
+
+    with link = "line.at.324" {
+        track(:second :removed, rh[:roh.yh, :hal]);
+        line_label(:left:w :removed, rh[:roh.yh + 1.5km], "324");
+    }
+
+    with link = "point.at.Bad-Hall" {
+        statdot(:removed, rh[:hal]);
+        slabel(:left :removed, rh[:hal] + (0.3dt, 0.8dt),
+            hbox(:right:top, "Bad Hall")
+        );
+    }
+}
+
+
+# AT 326.  Wels Hbf - Rohr-Bad Hall
+with detail = 2 {
+    let wr = path("d2.at.326");
+
+    with link = "line.at.326" {
+        track(:second :pax, wr[:wel.yg, :sat]);
+        line_label(:left:sw :pax, wr[:wel.yg + 7.3km], "326");
+    }
+
+    with link = "point.at.Sattledt" {
+        track(:second:station :pax, wr[:sat, :sat.yg]);
+        statdot(:pax, wr[:sat]);
+        slabel(:left :pax, wr[:sat] + (-0.6km, 0dt) + (-1.0dt, 1.5dt),
+            "Sattledt"
+        );
+    }
+
+    with link = "line.at.326" {
+        track(:second :removed, wr[:sat.yg, :roh.yw]);
+        line_label(:right:n :removed, wr[:sat.yg + 3.7km], "326");
+    }
+}
+
+
+# AT 327.  Sattledt - Grünau im Almtal
+with detail = 2 {
+    let sg = path("d2.at.327");
+
+    with link = "line.at.327" {
+        track(:second :pax, sg[:sat.yg, :gru]);
+        line_label(:right:e :pax, sg[:sat.yg + 5.7km], "327");
+        line_label(:left:w :pax, sg[:gru - 4km], "327");
+    }
+
+    with link = "point.at.Grünau-Almtal" {
+        statdot(:pax, sg[:gru]);
+        slabel(:bottom :pax, sg[:gru] + (0dt, 0.7dt),
+            vbox(:center:top, "Grünau", "im Almtal")
+        );
+    }
+}
+

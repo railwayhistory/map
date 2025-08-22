@@ -1,0 +1,96 @@
+# IT MIC.  Milano Centrale - Chiasso
+#
+let mc = path("d4.it.mic");
+
+with detail = [4, 5] {
+    with link = "point.it.Milano-Centrale" {
+        # Linea Torino
+        track(:first:station :double :cat:dc30 :pax, mc[:mic, :mic.yc] << 2dt);
+
+        # Linea Chiasso
+        track(:first:station :double :cat:dc30 :pax, mc[:mic, :gre.ys]);
+
+        # Circ. Loc.
+        track(:first:station :double :cat:dc30, mc[:mic, :gre.ys] >> 2dt);
+
+        # Linea Venezia
+        track(:first:station :double :cat:dc30 :pax, mc[:mic, :mic.yt] >> 4dt);
+
+        # Linea Bologna
+        track(:first:station :double :cat:dc30 :pax, mc[:mic, :mic.yr] >> 6dt);
+
+        # Linea Genova
+        track(:first:station :double :cat:dc30 :pax, mc[:mic, :mic.yr] >> 8dt);
+    }
+
+    with link = "point.it.Milano-Greco-Pirelli" {
+        # Linea Lecco
+        track(:first:station :double :cat:dc30 :pax,
+                mc[:gre.yg, :gre.f] << 2dt
+        );
+
+        # Linea Chiasso
+        track(:first:station :double :cat:dc30 :pax, mc[:gre.ys, :gre.f]);
+
+        # Circ. Loc.
+        track(:first:station :double :cat:dc30,
+                mc[:gre.ys, :gre + 680m] >> 2dt
+        );
+
+        # Linea Cintura
+        track(:first:station :cat:dc30,
+                mc[:gre.ys, :gre + 850m] >> 3.5dt
+            ..  mc[:gre.f - 430m] >> 0.5dt
+            --  mc[:gre.f - 330m] << 0.5dt
+        );
+        track(:first:station :cat:dc30,
+                mc[:gre.ys, :gre + 850m + 0.7dl] >> 4.5dt
+            ..  mc[:gre.f - 430m + 0.7dl] >> 1.5dt
+            --  mc[:gre.f - 330m + 0.7dl] >> 0.5dt
+        );
+
+        marker(:left :de.bf :cat:dc30 :pax, mc[:gre] << 2.5dt);
+    }
+
+    with link = "point.it.Sesto-San-Giovanni" {
+        # Linea Lecco
+        track(:first:station :double :cat:dc30 :pax,
+                mc[:gre.f, :gre.f + 250m] << 2dt
+            ..  mc[:ses - 1300m, :ses + 200m] << 3dt
+            ..  mc[:ses + 600m, :ses.f] << 2dt
+        );
+        # Linea Chiasso
+        track(:first:station :double :cat:dc30 :pax,
+                mc[:gre.f, :ses - 360m]
+            ..  mc[:ses - 200m, :ses + 200m] << 1dt
+            ..  mc[:ses + 600m, :ses.f]
+        );
+
+        marker(:left :de.bf :cat:dc30 :pax, mc[:ses] << 3.5dt);
+    }
+
+    with link = "line.it.MIC" {
+        track(:first :double :cat:dc30 :pax, mc[:ses.f, :mon.a]);
+    }
+
+    with link = "point.it.Monza" {
+        # Linea Chiasso
+        track(:first:station :double :cat:dc30 :pax, mc[:mon.a, :mon.fc]);
+
+        # Linea Lecco
+        track(:first:station :double :cat:dc30 :pax, mc[:mon.a, :mon] >> 3dt);
+
+        platform(:cat:dc30 :pax,
+                mc[:mon - 340m, :mon + 50m] << 0.5dt
+            --  mc[:mon + 50m, :mon - 340m] >> 1.2dt
+        );
+        platform(:cat:dc30 :pax,
+                mc[:mon - 260m, :mon + 130m] >> 0.5dt
+            --  mc[:mon + 130m, :mon - 260m] << 1.5dt
+        );
+
+        marker(:left :de.bf :cat:dc30 :pax, mc[:mon] << 1.0dt);
+    }
+}
+
+

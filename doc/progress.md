@@ -15,6 +15,35 @@ within countries for both the overview and detailed maps.
 
 For countries not listed here, work has not started at all.
 
+[AT](#at-austria) •
+[BE](#be-belgium) •
+[CH](#ch-switzerland) •
+[CZ](#cz-czechia) .
+[DE](#de-germany) •
+[EE](#ee-estonia) •
+[FR](#fr-france) •
+[GB](#gb-united-kingdom) •
+[IT](#it-italy) •
+[LT](#lt-lithuania) •
+[LU](#lu-luxembourg) •
+[LV](#lv-latvia) •
+[NL](#nl-the-netherlands) •
+[NO](#no-norway) •
+[PL](#pl-poland) •
+[RU](#ru-russia)
+[SE](#se-sweden)
+[SI](#si-slovenia)
+
+
+## AT: Austria
+
+The overview map currently only covers railway lines. Tram, metro,
+industrial, and forest lines are omitted.
+
+| region         | overview  | detail      |
+| -------------- | --------- | ----------- |
+| entire country | complete  | not started |
+
 
 ## BE: Belgium
 
@@ -33,6 +62,16 @@ industrial lines are omitted.
 
 The overview map currently only covers railway lines and interurban tram
 lines. City tram lines and industrial lines are omitted.
+
+| region         | overview  | detail      |
+| -------------- | --------- | ----------- |
+| entire country | complete  | not started |
+
+
+## CZ: Czechia
+
+The overview map currently only covers railway lines. Tram lines and
+industrial lines are omitted.
 
 | region         | overview  | detail      |
 | -------------- | --------- | ----------- |
@@ -75,6 +114,16 @@ given a VzG number are also included.
 | W (Schwerin)       | complete    | not started |
 
 
+## EE: Estonia
+
+The overview map currently only covers railway lines. Tram lines and
+industrial lines are omitted.
+
+| region         | overview  | detail      |
+| -------------- | --------- | ----------- |
+| entire country | complete  | not started |
+
+
 ## FR: France
 
 France has been split into regions roughly correlating with the first
@@ -112,10 +161,50 @@ lines.
 | W (Western Region)              | not started | not started |
 
 
+## IT: Italy
+
+Italy has been split into eight areas numbered 1 to 8. They roughly cover
+the following regions:
+
+| # | coverage                                            | overview    | detail      |
+| - | --------------------------------------------------- | ----------- | ----------- |
+| 1 | Piemonte, Valle d’Aosta, Western Liguria            | complete | not started |
+| 2 | Lombardia                                           | complete | not started |
+| 3 | Veneto, Trentiono-Alto Adige, Friuli-Venezia Giulia | complete | not started |
+| 4 | Emilia-Romagna, Toscana, Eastern Liguria            | complete | not started |
+| 5 | Marche, Umbria, Lazio, Abruzzo                      | complete | not started |
+| 6 | Molise, Campania, Puglia, Basilicata, Calabria      | complete | not started |
+| 7 | Sicilia                                             | complete | not started |
+| 8 | Sardegna                                            | complete | not started |
+
+
+
+## LT: Lithuania
+
+The overview map currently only covers railway lines. Tram, metro, and
+industrial lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | not started |
+
+
+
 ## LU: Luxembourg
 
 The overview map currently only covers railway lines. Tram, metro, and
 industrial lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | not started |
+
+
+
+## LV: Latvia
+
+The overview map currently only covers railway lines. Tram, metro, and
+industrial lines as well as forest railways are omitted.
 
 | region         | overview | detail      |
 | -------------- | -------- | ----------- |
@@ -145,6 +234,26 @@ industrial lines are omitted.
 | entire country | complete | in progress |
 
 
+## PL: Poland
+
+Poland has been split into regions mostly equivalent to the regional railway
+directorates as they were in 1979.
+
+The overview map currently only covers railway lines. Tram, metro, and
+industrial lines are omitted.
+
+| region                          | overview  | detail      |
+| ------------------------------- | --------- | ----------- |
+| D (Dolnośląska DOKP in Wrocław) | complete  | not started |
+| G (Północna DOKP in Gdańsk)     | complete  | not started |
+| K (Południowa DOKP in Kraków)   | complete  | not started |
+| L (Wschodnia DOKP in Lublin)    | complete  | not started |
+| P (Zachodnia DOKP in Poznań)    | complete  | not started |
+| S (Śląskia DOKP in Katowice)    | complete  | not started |
+| W (Centralna DOKP in Warszawa)  | complete  | not started |
+| Z (Pomorska DOKP in Szczecin)   | complete  | not started |
+
+
 ## RU: Russia
 
 The only region currently covered is Kaliningrad oblast, designated as KG.
@@ -158,4 +267,24 @@ industrial lines are omitted.
 
 ¹ Most lines and stations are complete, but some post-war freight lines are
 missing, and gauge information is missing.
+
+
+## SE: Sweden
+
+The overview map currently only covers railway lines. Tram, metro, 
+industrial, and port lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | not started |
+
+
+## SI: Slovenia
+
+The overview map currently only covers railway lines. Tram, metro, and
+industrial lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | not started |
 
