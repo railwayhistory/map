@@ -259,9 +259,15 @@
 
 ## New Additions
 
+### 2025-08-22
+
+* Added overview map of Sweden. ([#101])
+
+[#101]: https://github.com/railwayhistory/map/pull/101
+
 ### 2024-12-09
 
-* Added overview map of Estonia ([#100]);
+* Added overview map of Estonia. ([#100])
 
 [#100]: https://github.com/railwayhistory/map/pull/100
 
