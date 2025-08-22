@@ -117,6 +117,70 @@ with detail = 2 {
 }
 
 
+# SE AHB.  Ängelholm - Helsingborg
+with detail = 2 {
+    let ah = path("d2.se.ahb");
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.AHB" {
+            track(ah[:ang.yh, :ang.yh + 6km]);
+            line_label(:right:se, ah[:ang.yh + 6km], "AHB");
+            track(ah[:ang.yh + 6km, :kat.ym]);
+        }
+
+        with link = "point.se.Kattarp" {
+            track(ah[:kat.ym, :kat.ys]);
+            statdot(ah[:kat]);
+            slabel(:left, ah[:kat] + (-1.7dt, 0.8dt), "Kattarp");
+        }
+
+        with link = "line.se.AHB" {
+            track(ah[:kat.ys, :mar - 2km]);
+            line_label(:right:se, ah[:mar - 2km], "AHB");
+            track(ah[:mar - 2km, :mar]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.AHB" {
+            track(ah[:mar, :hel]);
+        }
+
+        with link = "point.se.Helsingborgs-central" {
+            statdot(ah[:hel]);
+            slabel(:ne, ah[:hel] + (-1.3dt, -1dt),
+                vbox(:right:top,
+                    span(:bold, "Helsing-"),
+                    hbox(:right:base, span(:bold, "borg "), "c.")
+                )
+            );
+        }
+    }
+}
+
+
+# SE AHK.  Ängelholm - Klippan
+with detail = 2 {
+    let ak = path("d2.se.ahk");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.AHK" {
+            track(ak[:ang.yk, :ost.ya - 8km]);
+            line_label(:left:sw, ak[:ost.ya - 8km], "AHK");
+            track(ak[:ost.ya - 8km, :ost.ya]);
+        }
+
+        # point.se.Östra-Ljungby  se.VKB
+
+        with link = "line.se.AHK" {
+            track(ak[:ost.yk, :ost.yk + 3.8km]);
+            line_label(:left:w, ak[:ost.yk + 3.8km], "AHK");
+            track(ak[:ost.yk + 3.8km, :kli.ya]);
+        }
+    }
+}
+
+
 # SE AKF.  Avesta Krylbo - Frövi
 with detail = 2 {
     let af = path("d2.se.akf");
@@ -302,9 +366,18 @@ with detail = 2 {
         }
 
         with link = "line.se.AKK" {
-            track(ak[:vax, :vax + 9km]);
-            line_label(:left:sw, ak[:vax + 9km], "AKK");
-            track(ak[:vax + 9km, :les]);
+            track(ak[:vax, :vax.yo]);
+            track(ak[:vax.yo, :duv.yv]);
+            track(ak[:duv.yv, :vax + 14km]);
+            line_label(:left:sw, ak[:vax + 14km], "AKK");
+            track(ak[:vax + 14km, :les]);
+        }
+
+        with link = "line.se.AKK", railway = :removed {
+            let vd = path("d2.se.akk.vax");
+
+            track(vd[:vax.yo, :vax.yb]);
+            track(vd[:vax.yb, :duv.yv]);
         }
 
         with link = "point.se.Lessebo" {
@@ -334,7 +407,9 @@ with detail = 2 {
 
         with link = "point.se.Gullberna" {
             statdot(:nopax, ak[:gul]);
-            slabel(:left, ak[:gul] + (-1.5dt, 0.2dt), "Gullberna");
+            slabel(:right, ak[:gul] + (0.4km, -0.8km) + (1.5dt, -1dt),
+                "Gullberna"
+            );
         }
 
         with link = "line.se.AKK" {
@@ -348,6 +423,24 @@ with detail = 2 {
             slabel(:bottom, ak[:kar] + (0dt, 0.8dt),
                 hbox(:center:base, span(:bold, "Karlskrona"), " c.")
             );
+        }
+    }
+}
+
+
+# SE AKS.  Älmhult - Kristianstad
+with detail = 2 {
+    let ak = path("d2.se.aks");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.AKS" {
+            track(ak[:alm.yk, :alm.yk + 10km]);
+            line_label(:right:e, ak[:alm.yk + 10km], "AKS");
+            track(ak[:alm.yk + 10km, :sib + 2.2km]);
+            line_label(:left:w, ak[:sib + 2.2km], "AKS");
+            track(ak[:sib + 2.2km, :krg.ya - 4km]);
+            line_label(:right:se, ak[:krg.ya - 4km], "AKS");
+            track(ak[:krg.ya - 4km, :krg.ya]);
         }
     }
 }
@@ -479,6 +572,35 @@ with detail = 2 {
 }
 
 
+# SE ASB.  Älmhult - Sölvesborg
+with detail = 2 {
+    let as = path("d2.se.asb");
+
+    with railway = :first :nopax {
+        with link = "line.se.ASB" {
+            track(as[:alm.ys, :alm.ys + 6km]);
+            line_label(:left:sw, as[:alm.ys + 6km], "ASB");
+            track(as[:alm.ys + 6km, :olo - 6.5km]);
+            line_label(:left:w, as[:olo - 6.5km], (0dt, -0.1dt), "ASB");
+            track(as[:olo - 6.5km, :olo]);
+        }
+
+        with link = "point.se.Olofström" {
+            statdot(as[:olo]);
+            slabel(:left, as[:olo] + (-1.5dt, 0.8dt), "Olofström");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.ASB" {
+            track(as[:olo, :olo + 13km]);
+            line_label(:right:e, as[:olo + 13km], "ASB");
+            track(as[:olo + 13km, :sol.ya]);
+        }
+    }
+}
+
+
 # SE ASL.  Askersund - Lerbäck
 with detail = 2 {
     let al = path("d2.se.asl");
@@ -552,6 +674,25 @@ with detail = 2 {
 }
 
 
+# SE ASU.  Åsen - Unnen
+with detail = 2 {
+    let au = path("d2.se.asu");
+
+    with railway = :first :g1067 :nopax :removed {
+        with link = "line.se.ASU" {
+            track(au[:ase.yu, :ase.yu + 1km]);
+            line_label(:right:w, au[:ase.yu + 1km], (0dt, 0.2dt), "ASU");
+            track(au[:ase.yu + 1km, :unn]);
+        }
+
+        with link = "point.se.Unnen" {
+            statdot(au[:unn]);
+            slabel(:top, au[:unn] + (0dt, -0.7dt), "Unnen");
+        }
+    }
+}
+
+
 # SE ASV.  Ånge - Sundsvalls central
 with detail = 2 {
     let as = path("d2.se.asv");
@@ -596,6 +737,34 @@ with detail = 2 {
             line_label(:right:nw, as[:nas - 4.5km], "ASV");
             track(as[:nas - 4.5km, :nas.yv]);
             track(as[:nas.yv, :nas]);
+        }
+    }
+}
+
+
+# SE ATM.  Åstorp - Mölle
+with detail = 2 {
+    let am = path("d2.se.atm");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.ATM" {
+            track(am[:ast.ym, :kat.yv - 3km]);
+            line_label(:right:s, am[:kat.yv - 3km], "ATM");
+            track(am[:kat.yv - 3km, :kat.yv]);
+            track(am[:kat.yv, :kat.ya]);
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.se.ATM" {
+            track(am[:kat.ym, :kat.ym + 12km]);
+            line_label(:left:ne, am[:kat.ym + 12km], "ATM");
+            track(am[:kat.ym + 12km, :mol]);
+        }
+
+        with link = "point.se.Mölle" {
+            statdot(am[:mol]);
+            slabel(:top, am[:mol] + (-0.8dt, -0.6dt), "Mölle");
         }
     }
 }

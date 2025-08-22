@@ -26,7 +26,7 @@ Austria:
 Belgium:
 
 * Infrabel’s [Lijst en geografische voorstelling van de
-  hoofdsporen][https://opendata.infrabel.be/explore/dataset/geosporen/],
+  hoofdsporen](https://opendata.infrabel.be/explore/dataset/geosporen/),
   licensed under [Creative Commons CC0 1.0 Universal][cc0]
 
 
@@ -54,6 +54,13 @@ Netherlands:
 * [ProRail
   Basiskaart](https://prorailnl.hub.arcgis.com/maps/prorailnl::prorail-basiskaart/about).
 
+
+Sweden:
+
+* [Järnvägsdata via den Nationella Järnvägsdatabasen](https://bransch.trafikverket.se/tjanster/data-kartor-och-geodatatjanster/las-om-vara-data/jarnvagsdata/),
+  licensed under [Creative Commons CC0 1.0 Universal][cc0]
+* [Ortofoto historiska Visning](https://geotorget.lantmateriet.se/dokumentation/GEODOK/61/latest.html),
+  licensed under [Creative Commons CC0 1.0 Universal][cc0].
 
 [ODbL]: https://opendatacommons.org/licenses/odbl/
 [legal code]: https://opendatacommons.org/licenses/odbl/1.0/

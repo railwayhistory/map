@@ -224,6 +224,82 @@ with detail = 2 {
 }
 
 
+# SE HBR.  Helsingborg - Råå
+with detail = 2 {
+    let hr = path("d2.se.hbr");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.HBR" {
+            track(hr[:hel.yr, :tri]);
+        }
+
+        with link = "point.se.Triangeln" {
+            statdot(hr[:tri]);
+        }
+
+        with link = "line.se.HBR" {
+            track(hr[:tri, :tri + 1.5km]);
+            with zoom = :high line_label(:right:e, hr[:tri + 1.5km], "HBR");
+            track(hr[:tri + 1.5km, :raa]);
+        }
+
+        with link = "point.se.Råå" {
+            statdot(hr[:raa]);
+            slabel(:left, hr[:raa] + (-1.5dt, 1.7dt), "Råå");
+        }
+    }
+}
+
+
+# SE HEL.  Helsingborg - Eslöv
+with detail = 2 {
+    let he = path("d2.se.hel");
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.se.HEL" {
+            track(he[:hel, :hel.yr]);
+            track(he[:hel.yr, :ram]);
+        }
+
+        with link = "point.se.Ramlösa" {
+            track(he[:ram, :ram.yl]);
+            statdot(he[:ram]);
+            slabel(:right, he[:ram] + (-0.4dt, -1.6dt), "Ramlösa");
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.HEL" {
+            track(he[:ram.yl, :ram.yl + 11km]);
+            line_label(:left:s, he[:ram.yl + 11km], (0.4dt, 0dt), "HEL");
+            track(he[:ram.yl + 11km, :bil.yl]);
+        }
+
+        with link = "point.se.Billeberga" {
+            track(he[:bil.yl, :bil]);
+            statdot(he[:bil]);
+            slabel(:right, he[:bil] + (0dt, -1.3dt),
+                vbox(:left:base, "Bille-", "berga")
+            );
+        }
+
+        with link = "line.se.HEL" {
+            track(he[:bil, :bil + 3km]);
+            with zoom = :high line_label(:left:sw, he[:bil + 3km], "HEL");
+            track(he[:bil + 3km, :tec.yl]);
+        }
+
+        # point.se.Teckomatorp  se.GBM
+
+        with link = "line.se.HEL" {
+            track(he[:tec.ye, :tec.ye + 7km]);
+            line_label(:left:s, he[:tec.ye + 7km], "HEL");
+            track(he[:tec.ye + 7km, :esl.yl]);
+        }
+    }
+}
+
+
 # SE HFG.  Hällefors - Gravendal
 with detail = 2 {
     let hg = path("d2.se.hfg");
@@ -247,14 +323,14 @@ with detail = 2 {
     with railway = :first :cat:ac15 :pax {
         with link = "line.se.HHA" {
             track(ha[:has.ya, :has.ya + 12.7km]);
-            line_label(:left:s, ha[:has.ya + 12.7km], (0.7dt, 0dt), "HHA");
+            line_label(:right:n, ha[:has.ya + 12.7km], (-0.7dt, 0dt), "HHA");
             track(ha[:has.ya + 12.7km, :kar.yh]);
         }
 
         with link = "point.se.Karpalund" {
             track(ha[:kar.yh, :kar]);
             statdot(:removed, ha[:kar]);
-            slabel(:ne :removed, ha[:kar] + (-0.7km, 0.1km) + (-1dt, 0.8dt),
+            slabel(:ne :removed, ha[:kar] + (-0.7km, 0.1km) + (-1dt, 0.3dt),
                 "Karpalund"
             );
         }
@@ -288,6 +364,65 @@ with detail = 2 {
 }
 
 
+# SE HHR.  Hässleholm - Ramlösa
+with detail = 2 {
+    let hr = path("d2.se.hhr");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.HHR" {
+            track(hr[:has.yh, :has.yh + 6.2km]);
+            line_label(:right:s, hr[:has.yh + 6.2km], "HHR");
+            track(hr[:has.yh + 6.2km, :kli.ye - 8.6km]);
+            line_label(:right:s, hr[:kli.ye - 8.6km], "HHR");
+            track(hr[:kli.ye - 8.6km, :kli.ye]);
+        }
+
+        with link = "point.se.Klippan" {
+            track(hr[:kli.ye, :kli.ya]);
+            statdot(hr[:kli]);
+            slabel(:right, hr[:kli] + (-1dt, -1.5dt), "Klippan");
+        }
+
+        with link = "line.se.HHR" {
+            track(hr[:kli.ya, :kli.ya + 4km]);
+            line_label(:right:s, hr[:kli.ya + 4km], "HHR");
+            track(hr[:kli.ya + 4km, :kar.yv]);
+        }
+
+        with link = "point.se.Kärreberga" {
+            track(hr[:kar.yv, :kar]);
+            statdot(:nopax, hr[:kar]);
+            slabel(:nw, hr[:kar] + (-1.5dt, 1.3dt), "Kärreberga");
+        }
+
+        with link = "line.se.HHR" {
+            track(hr[:kar, :ast.yk]);
+        }
+
+        # point.se.Åstorp                             # se.GBM
+
+        with link = "line.se.HHR" {
+            track(hr[:ast.yr, :ast.ym]);
+            track(hr[:ast.ym, :ast.ym + 2.3km]);
+            line_label(:right:e, hr[:ast.ym + 2.3km], (0dt, -0.2dt), "HHR");
+            track(hr[:ast.ym + 2.3km, :bju.yb]);
+        }
+
+        with link = "point.se.Bjuv" {
+            track(hr[:bju.yb, :bju.yh]);
+            statdot(hr[:bju]);
+            slabel(:left, hr[:bju] + (-0.8km, 0dt) + (-1.5dt, 1.3dt), "Bjuv");
+        }
+
+        with link = "line.se.HHR" {
+            track(hr[:bju.yh, :bju + 7km]);
+            line_label(:left:nw, hr[:bju + 7km], "HHR");
+            track(hr[:bju + 7km, :ram.yh]);
+        }
+    }
+}
+
+
 # SE HKB.  Hallanda - Kättilsbyn
 with detail = 2 {
     let hk = path("d2.se.hkb");
@@ -311,7 +446,7 @@ with detail = 2 {
 with detail = 2 {
     let hb = path("d2.se.hmb");
 
-    with railway = :second :g891 :pax :removed {
+    with railway = :first :g891 :pax :removed {
         with link = "line.se.HMB" {
             track(hb[:har.yv, :har.yv + 2.2km]);
             line_label(:right:s, hb[:har.yv + 2.2km] + (-0.3dt, 0dt), "HMB");
@@ -342,7 +477,7 @@ with detail = 2 {
 with detail = 2 {
     let hn = path("d2.se.hns");
 
-    with railway = :second :nopax {
+    with railway = :first :nopax {
         with link = "line.se.HNS" {
             track(hn[:ham.yn, :aby.yh]);
             track(hn[:aby.yh, :aby.yh + 3km]);
@@ -429,6 +564,52 @@ with detail = 2 {
 }
 
 
+# SE HSL.  Hästveda - Skepparslöv
+with detail = 2 {
+    let hk = path("d2.se.hsl.1");
+    let ks = path("d2.se.hsl.2");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.HSL" {
+            track(hk[:hav.ys, :hav.ys + 7.7km]);
+            line_label(:left:sw, hk[:hav.ys + 7.7km], "HSL");
+            track(hk[:hav.ys + 7.7km, :han]);
+        }
+    }
+
+    with railway = :first :pax :closed {
+        with link = "point.se.Hanaskog" {
+            statdot(hk[:han]);
+            slabel(:right, hk[:han] + (1.5dt, 1dt), "Hanaskog");
+        }
+
+        with link = "line.se.HSL" {
+            track(hk[:han, :han + 5.5km]);
+            line_label(:left:w, hk[:han + 5.5km], "HSL");
+            track(hk[:han + 5.5km, :far.ys]);
+        }
+
+        with link = "point.se.Färlöv" {
+            track(hk[:far.ys, :far]);
+            statdot(:removed, hk[:far]);
+            slabel(:right:removed, hk[:far] + (1.5dt, 1dt), "Färlöv");
+        }
+
+        with link = "line.se.HSL" {
+            track(hk[:far, :kar.yh]);
+        }
+    }
+
+    # point.se.Karpalund  se.HHA
+
+    with railway = :first :pax :removed {
+        with link = "line.se.HSL" {
+            track(ks[:kar.ys, :ske.yk]);
+        }
+    }
+}
+
+
 # SE HSM.  Härnösand - Mörtsal växel
 with detail = 2 {
     let hm = path("d2.se.hsm");
@@ -454,11 +635,70 @@ with detail = 2 {
 }
 
 
+# SE HST.  Hyllie - Svågertorp
+with detail = 2 {
+    with link = "line.se.hst" {
+        track(:first :double :cat:ac15 :pax,
+                path("d2.se.hst")[:hyl.ys, :sva.yh]
+        );
+    }
+}
+
+
+# SE HSV.  Halmstad - Vislanda
+with detail = 2 {
+    let hv = path("d2.se.hsv");
+
+    with railway = :first :g1067 :pax :removed {
+        with link = "line.se.HSV" {
+            track(hv[:hal, :hal + 6km]);
+            line_label(:right:nw, hv[:hal + 6km], "HSV");
+            track(hv[:hal + 6km, :ase.yu - 8km]);
+            line_label(:right:n, hv[:ase.yu - 8km], "HSV");
+            track(hv[:ase.yu - 8km, :ase.yu]);
+        }
+
+        with link = "point.se.Åsen" {
+            track(hv[:ase.yu, :ase]);
+            statdot(hv[:ase]);
+            slabel(:ne, hv[:ase] + (-0.5dt, 0.5dt), "Åsen");
+        }
+
+        with link = "line.se.HSV" {
+            track(hv[:ase, :ase + 5.5km]);
+            line_label(:right:n, hv[:ase + 5.5km], "HSV");
+            track(hv[:ase + 5.5km, :bol]);
+        }
+
+        with link = "point.se.Bolmen" {
+            statdot(hv[:bol]);
+            slabel(:nw, hv[:bol] + (0dt, 1dt), "Bolmen");
+        }
+
+        with link = "line.se.HSV" {
+            track(hv[:bol, :bol + 8km]);
+            line_label(:left:s, hv[:bol + 8km], (-0.2dt, 0dt), "HSV");
+            track(hv[:bol + 8km, :lju.yh]);
+        }
+
+        # point.se.Ljungby
+
+        with link = "line.se.HSV" {
+            track(hv[:lju.yv, :lju.yv + 8km]);
+            line_label(:right:n, hv[:lju.yv + 8km], "HSV");
+            track(hv[:lju.yv + 8km, :vis.yh - 6.2km]);
+            line_label(:left:s, hv[:vis.yh - 6.2km], "HSV");
+            track(hv[:vis.yh - 6.2km, :vis.yh]);
+        }
+    }
+}
+
+
 # SE HUR.  Husums norra - Rågön
 with detail = 2 {
     let hr = path("d2.se.hur");
 
-    with railway = :second :cat:ac15 :nopax {
+    with railway = :first :cat:ac15 :nopax {
         with link = "line.se.HUR" {
             track(hr[:hun.yr, :hun.yr + 1.5km]);
             line_label(:left:w, hr[:hun.yr + 1.5km], "HUR");
@@ -477,7 +717,7 @@ with detail = 2 {
 with detail = 2 {
     let hb = path("d2.se.hvb");
 
-    with railway = :second :g891 :pax :removed {
+    with railway = :first :g891 :pax :removed {
         with link = "line.se.HVB" {
             track(hb[:hud.yb, :hud.yb + 3km]);
             line_label(:right:w, hb[:hud.yb + 3km], "HVB");
@@ -495,7 +735,7 @@ with detail = 2 {
 with detail = 2 {
     let hv = path("d2.se.hvv");
 
-    with railway = :second :g891 :nopax :removed {
+    with railway = :first :g891 :nopax :removed {
         with link = "point.se.Hå" {
             statdot(hv[:haa]);
             slabel(:left, hv[:haa] + (-1.3dt, 0.8dt), "Hå");
@@ -516,6 +756,20 @@ with detail = 2 {
         with link = "point.se.Vallvik-sulfitfabrik" {
             statdot(hv[:vas]);
             slabel(:right, hv[:vas] + (1.5dt, 1dt), "V. sulfitfabrik");
+        }
+    }
+}
+
+
+# SE HYH.  Hörby - Höör
+with detail = 2 {
+    let hh = path("d2.se.hyh");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.HYH" {
+            track(hh[:hor.yh, :hor.yh + 6.3km]);
+            line_label(:right:sw, hh[:hor.yh + 6.3km], "HYH");
+            track(hh[:hor.yh + 6.3km, :hoo.yh]);
         }
     }
 }
