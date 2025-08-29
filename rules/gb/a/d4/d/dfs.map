@@ -1,0 +1,31 @@
+# GB DFS.  Fodderty Junction - Strathpeffer
+#
+let fs = path("d4.gb.dfs");
+
+with detail = [4, 5] {
+    # point.gb.Fodderty-Jn: gb.KYL
+
+    with link = "line.gb.DFS" {
+        track(:first :removed, fs[:fod + 1sw, :str - 330m]);
+        line_badge(:removed, fs[:fod + 1.9km], "DFS");
+    }
+
+    with link = "point.gb.Strathpeffer" {
+        track(:first:station :removed, fs[:str - 330m, :str + 20m]);
+        track(:station :removed, fs[:str - 205m, :str - 20m] >> 1.5dt);
+        track(:station :removed,
+                fs[:str - 281m, :str - 280m]
+            --  fs[:str - 155m, :str - 20m] >> 2.5dt
+        );
+        platform(:removed,
+                fs[:str - 130m, :str + 20m]
+            --  fs[:str + 20m, :str - 130m] << 0.7dt
+        );
+
+        marker(:right :de.bf :removed, fs[:str] >> 2.5dt);
+        station(:top :removed, fs[:str] >> 2.5dt >> 1.3sh,
+            span(:bold, "Strathpeffer"), "DFS: ??"
+        );
+    }
+}
+

@@ -7,8 +7,27 @@ with detail = [4, 5] {
     # point.gb.Rose-Street-Jn  gb.HL
 
     with link = "line.gb.WCK" {
-        track(:first :pax, iw[:inv.aw, :cla - 1sw]);
-        line_badge(:pax, iw[:inv.aw + 0.8km], "WCK");
+        track(:first :pax, iw[:inv.aw, :can - 0.5sw]);
+        line_badge(:pax, iw[:inv.aw + 0.6km], "WCK");
+    }
+
+    with link = "point.gb.Canal-Branch-Jn" {
+        track(:first:station :pax, iw[:can - 0.5sw, :can + 0.5sw]);
+        track(:first:station :removed,
+                path("d4.gb.imb")[:can, :can + 0.5sw]
+        );
+        marker(:right :de.abzw :removed, iw[:can]);
+        station(:top :removed, iw[:can] >> 1.2sh,
+            "Canal Branch Jn.",
+            hbox(:center:top,
+                vbox(:right:top, "WCK: ", "IMB: "),
+                vbox(:right:top, "??", "??")
+            )
+        );
+    }
+
+    with link = "line.gb.WCK" {
+        track(:first :pax, iw[:can + 0.5sw, :cla - 1sw]);
     }
 
     with link = "point.gb.Clachnaharry" {
@@ -21,7 +40,7 @@ with detail = [4, 5] {
             ..  iw[:cla.xxf, :cla.xxf + 0.1dl] >> 0.5dt
         );
         marker(:left :de.bf :gone, iw[:cla]);
-        station(:top :gone, iw[:cla] >> 1.5dt,
+        station(:left :gone, iw[:cla - 0.4sw] >> 1.5dt,
             "Clachnaharry", "??"
         );
     }
@@ -162,7 +181,10 @@ with detail = [4, 5] {
             ..  iw[:mui - 180m, :mui - 0.7sw] << 2dt
         );
         track(:station :removed,
-                iw[:mui - 400m, :mui.yf] >> 2dt
+                iw[:mui - 400m, :mui - 100m] >> 2dt
+        );
+        track(:first:station :removed,
+                iw[:mui - 100m, :mui.yf] >> 2dt
         );
         track(:station :removed,
                 iw[:mui - 500m]
@@ -180,7 +202,11 @@ with detail = [4, 5] {
         );
         platform(:pax,
                 iw[:mui - 100m, :mui + 50m] >> 1.0dt
-            --  iw[:mui + 50m, :mui - 100m] << 1.55dt
+            --  iw[:mui + 50m, :mui - 100m] << 1.5dt
+        );
+        platform(:removed,
+                iw[:mui - 100m, :mui + 50m] >> 2.0dt
+            --  iw[:mui + 50m, :mui - 100m] << 1.5dt
         );
 
         marker(:left :de.bf :pax, iw[:mui] << 1.0dt);
@@ -229,7 +255,7 @@ with detail = [4, 5] {
                     iw[:din - 130m] << 1dt
                 --  iw[:din - 60m]
             );
-        track(:first:station :pax, iw[:din.a, :din.fw]);
+        track(:first:station :pax, iw[:din.a, :din.yk - 40m]);
         track(:first:station :pax,
                 iw[:din - 291m, :din - 290m]
             ..  iw[:din - 200m, :din.yk - 150m] >> 1dt
@@ -249,9 +275,29 @@ with detail = [4, 5] {
         station(:right :pax, iw[:din - 0.3sw] >> 3.0dt,
             span(:bold, "Dingwall"),
             hbox(:center:top,
-                vbox(:right:top, "KYL: ", "WCK: "),
+                vbox(:right:top, "KYL: ", "(WCK: "),
                 vbox(:right:top, "18 ", "0 "),
-                vbox(:left:top, "58", "00")
+                vbox(:left:top, "58", "00)")
+            )
+        );
+    }
+
+    with link = "point.gb.Dingwall-Jn" {
+        track(:first:station :pax,
+                path("d4.gb.kyl")[:din.yk, :din.yk + 150m]
+        );
+        track(:first:station :pax, iw[:din.yk - 40m, :din.fw]);
+        marker(:right :de.abzw :pax, iw[:din.yk]);
+        label(:pax, iw[:din.yk - 0.55sw] >> 1.5sh,
+            hbox(:left:bottom,
+                vbox(:center:bottom,
+                    hbox(:center:top :xsmall,
+                        vbox(:right:top, "KYL: ", "WCK: "),
+                        vbox(:right:top, "18 ", "0 "),
+                        vbox(:left:top, "79", "20")
+                    ),
+                    span(:medium, "Dingwall Jn.")
+                )
             )
         );
     }
@@ -348,17 +394,11 @@ with detail = [4, 5] {
     }
 
     with link = "point.gb.Invergordon" {
-        let ing = path("d4.gb.wck.ing");
-
         track(:first:station :pax, iw[:ing.a, :ing.f]);
         track(:station :pax,
                 iw[:ing.a + 49m, :ing.a + 50m]
             ..  iw[:ing.a + 160m, :ing.f - 160m] >> 1dt
             ..  iw[:ing.f - 50m, :ing.f - 49m]
-        );
-        track(:station :removed,
-                iw[:ing.a + 159m, :ing.a + 160m] >> 1dt
-            ..  ing[:a, :f]
         );
 
         platform(:pax,
@@ -371,7 +411,7 @@ with detail = [4, 5] {
         );
         with layer = 2 marker(:right :de.bf :pax, iw[:ing] >> 1.5dt);
         with layer = 1 marker(:right :de.bf.casing :pax, iw[:ing] >> 1.5dt);
-        station(:bottom :pax, iw[:ing] >> 1.5dt >> 1.4sh,
+        station(:left :pax, iw[:ing] >> 1.5dt >> 2.4sh + (0.5sw, 0dt),
             "Invergordon", "31 37"
         );
     }
@@ -813,8 +853,23 @@ with detail = [4, 5] {
                 --  iw[:mou - 160m] << 1dt
             );
 
-        marker(:right :de.inbf :removed, iw[:mou]);
-        station(:left :removed, iw[:mou + 0.3sw] >> 1.2sh + (-2sw, 0dt),
+        track(:third:station :removed,
+                iw[:mou - 260m, :mou] >> 1dt
+            ..  path("d4.gb.dnb")[:mou.fd, :mou.fd + 0.1dl]
+        );
+        track(:station :removed,
+                iw[:mou - 260m, :mou - 210m] >> 2dt
+            --  iw[:mou - 160m, :mou - 159m] >> 1dt
+        );
+        track(:station :removed,
+                iw[:mou - 201m, :mou - 200m]
+            --  iw[:mou - 80m, :mou - 20m] >> 2dt
+            --  iw[:mou + 40m, :mou + 41m] >> 1dt
+        );
+
+
+        marker(:right :de.bf :removed, iw[:mou - 0.2sw] >> 2dt);
+        station(:left :removed, iw[:mou + 0.3sw] >> 1.2sh + (-1.4sw, -1dt),
             span(:bold, "The Mound"),
             hbox(:center:top,
                 vbox(:right:top, "WCK: ", "DNB: "),
@@ -1318,6 +1373,7 @@ with detail = [4, 5] {
 
     with link = "line.gb.WCK" {
         track(:first :pax, iw[:bil + 190m, :wic - 440m]);
+        line_badge(:pax, iw[:wic - 2.0km], "WCK");
     }
 
     with link = "point.gb.Wick" {
@@ -1331,6 +1387,9 @@ with detail = [4, 5] {
         );
 
         track(:first:station :pax, iw[:wic - 440m, :wic]);
+        track(:third:station :removed,
+                path("d4.gb.llr")[:wic.yl + 150m, :wic.yl]
+        );
 
         track(:station :removed, iw[:wic - 410m, :wic - 310m] >> 1dt);
         track(:station,

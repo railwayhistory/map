@@ -59,27 +59,46 @@ with detail = 2 {
 }
 
 
-# GB AFS.  Aviemore - Forres
+# GB AI.  Aviemore - Forres - Millburn Junction
 with detail = 2 {
-    let af = path("d2.gb.afs");
+    let ai = path("d2.gb.ai");
 
-    with link = "line.gb.AFS" {
-        track(:first :museum, af[:avi.yf, :bro]);
-        track(:first :removed, af[:bro, :for.ya]);
-
-        line_label(:right:w :museum, af[:avi.yf + 4km], "AFS");
-        line_badge(:removed, af[:bro + 15km], "AFS");
-        line_label(:right:nw :removed, af[:for.ya - 7km], "AFS");
+    with link = "line.gb.AI" {
+        track(:first :museum, ai[:avi.yf, :boa]);
+        line_label(:right:w :museum, ai[:avi.yf + 4km], "AI");
     }
 
     with link = "point.gb.Boat-of-Garten" {
-        statdot(:museum, af[:boa] >> 0.3dt);
-        slabel(:right :museum, af[:boa] + (1.8dt, 1.3dt), "Boat of Garten");
+        statdot(:museum, ai[:boa] >> 0.3dt);
+        slabel(:right :museum, ai[:boa] + (1.8dt, 1.3dt), "Boat of Garten");
+    }
+
+    with link = "line.gb.AI" {
+        track(:first :museum, ai[:boa, :bro]);
     }
 
     with link = "point.gb.Broomhill" {
-        statdot(:museum, af[:bro]);
-        slabel(:left :museum, af[:bro] + (-1.5dt, -0.3dt), "Broomhill");
+        statdot(:museum, ai[:bro]);
+        slabel(:left :museum, ai[:bro] + (-1.5dt, -0.3dt), "Broomhill");
+    }
+
+    with link = "line.gb.AI" {
+        track(:first :removed, ai[:bro, :for.ya]);
+        track(:first :pax, ai[:for.ya, :gol]);
+
+        line_badge(:removed, ai[:bro + 15km], "AI");
+        line_label(:right:nw :removed, ai[:for.ya - 7km], "AI");
+        line_badge(:pax, ai[:for.ya + 12km], "AI");
+    }
+
+    with link = "point.gb.Gollanfield" {
+        statdot(:pax, ai[:gol]);
+        slabel(:right :pax, ai[:gol] + (1.3dt, 2.8dt), "Gollanfield");
+    }
+
+    with link = "line.gb.AI" {
+        track(:first :pax, ai[:gol, :mil.y]);
+        line_badge(:pax, ai[:gol + 4.5km] @ -4 >> 0.1dt, "AI");
     }
 }
 
@@ -88,17 +107,18 @@ with detail = 2 {
 with detail = 2 {
     let fk = path("d2.gb.ani2");
 
+    with link = "point.gb.Forres" {
+        track(:first:station :pax, fk[:for.ya, :for]);
+        statdot(:pax, fk[:for]);
+        slabel(:left :pax, fk[:for] + (-1.5dt, -0.5dt), "Forres");
+    }
+
     with link = "line.gb.ANI2" {
         track(:first :pax, fk[:for, :kei]);
 
         line_label(:left:se :pax, fk[:for + 2km], "ANI2");
         line_badge(:pax, fk[:elg + 5km] @ -2, "ANI2");
         line_label(:right:n :pax, fk[:kei - 5km], "ANI2");
-    }
-
-    with link = "point.gb.Forres" {
-        statdot(:pax, fk[:for]);
-        slabel(:left :pax, fk[:for] + (-1.5dt, -0.5dt), "Forres");
     }
 
     with link = "point.gb.Kinloss" {
@@ -128,24 +148,6 @@ with detail = 2 {
     with link = "point.gb.Orton" {
         statdot(:removed, fk[:ort]);
         slabel(:left :removed, fk[:ort] + (-1.5dt, 0.8dt), "Orton");
-    }
-}
-
-
-# GB ANI3.  Forres - Inverness
-with detail = 2 {
-    let fi = path("d2.gb.ani3");
-
-    with link = "line.gb.ANI3" {
-        track(:first :pax, fi[:for, :mil.y]);
-
-        line_badge(:pax, fi[:for + 12km], "ANI3");
-        line_badge(:pax, fi[:gol + 4.5km] @ -4 >> 0.1dt, "ANI3");
-    }
-
-    with link = "point.gb.Gollanfield" {
-        statdot(:pax, fi[:gol]);
-        slabel(:right :pax, fi[:gol] + (1.3dt, 2.8dt), "Gollanfield");
     }
 }
 
