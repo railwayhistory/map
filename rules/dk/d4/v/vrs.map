@@ -1,0 +1,117 @@
+# DK VRS.  Vigerslev - Ringstedt
+#
+let vr = path("d3.dk.vrs");
+
+with detail = 4,
+     railway = :first :cat:ac25 :pax
+{
+    # point.dk.Vigerslev: dk.KVH
+
+    with link = "line.dk.VRS" {
+        with layer = -1 track(:double,
+                path("d3.dk.kvh")[:vig.yr + 3dl, :vig.yr + 3.1dl] << 1mo
+            ..  vr[:vig.xr, :vig.xr + 0.8km]
+        );
+        line_label(:left:n, vr[:vig.xr + 0.8km] << 0.5mo << 0.5mt, "VRS");
+        track(:double, vr[:vig.xr + 0.8km, :ave - 0.5sw]);
+    }
+
+    with link = "point.dk.Avedøre-Havnevej", railway = :station {
+        track(:double, vr[:ave - 0.5sw, :ave + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:ave] >> 0.5mo >> 0.5mt);
+        station(:top :nopax, vr[:ave] >> 0.5md >> 1.4sh,
+            "Avedøre Havnevej", "VRS: 9,13"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(:double, vr[:ave + 0.5sw, :ave + 5km]);
+        line_label(:right:s, vr[:ave + 5km] >> 0.5mo >> 0.5mt, "VRS");
+        track(:double, vr[:ave + 5km, :kil - 0.5sw]);
+    }
+
+    with link = "point.dk.Kildebrønde", railway = :station {
+        track(:double, vr[:kil - 0.5sw, :kil + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:kil] >> 0.5mo >> 0.5mt);
+        station(:left :nopax, vr[:kil + 0.4sw] >> 0.5md >> 1.4sh,
+            "Kildebrønde", "VRS: 21,87"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(:double, vr[:kil + 0.5sw, :jer - 3km]);
+        line_label(:right:se, vr[:jer - 3km] >> 0.5mo >> 0.5mt, "VRS");
+        track(:double, vr[:jer - 3km, :jer - 0.5sw]);
+    }
+
+    with link = "point.dk.Jersie-Fjern", railway = :station {
+        track(:double, vr[:jer - 0.5sw, :jer + 0.5sw]);
+        marker(:left :de.bbf :nopax, vr[:jer] << 0.5mo << 0.5mt);
+        station(:left :nopax, vr[:jer + 0.4sw] >> 2mo,
+            "Jersie Fjern", "VRS: 32,75"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(:double, vr[:jer + 0.5sw, :kon - 500m]);
+    }
+
+    with link = "point.dk.Køge-Nord", railway = :station {
+        track(
+                vr[:kon - 481m, :kon - 480m] >> 0.5mo
+            --  vr[:kon - 480m + 1dl, :kon.yk] >> 1.5mo
+        );
+        track(:double,vr[:kon - 500m, :kon.yk]);
+        track(
+                vr[:kon - 481m, :kon - 480m] << 0.5mo
+            --  vr[:kon - 480m + 1dl, :kon.yk] << 1.5mo
+        );
+        marker(:right :de.bf, vr[:kon] >> 1.5mo >> 0.5mt);
+        # see also dk.KHK
+    }
+
+    with link = "line.dk.VRS" {
+        track(:double :casing, vr[:kon.yk, :lel - 0.5sw]);
+    }
+
+    with link = "point.dk.Lellinge-TS", railway = :station {
+        track(:double, vr[:lel - 0.5sw, :lel + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:lel] >> 0.5mo >> 0.5mt);
+        station(:top :nopax, vr[:lel] >> 0.5md >> 1.3sh,
+            "Lellinge", "VRS: 39,56"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(:double, vr[:lel + 0.5sw, :lel + 2.2km]);
+        line_label(:right:se, vr[:lel + 2.2km] >> 0.5mo >> 0.5mt, "VRS");
+        track(:double, vr[:lel + 2.2km, :bja - 0.5sw]);
+    }
+
+    with link = "point.dk.Bjæverskov-TS", railway = :station {
+        track(:double, vr[:bja - 0.5sw, :bja + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:bja] >> 0.5mo >> 0.5mt);
+        station(:top :nopax, vr[:bja] >> 0.5mo >> 0.5mt >> 1.2sh,
+            "Bjæverskov", "VRS: 46,10"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(:double, vr[:bja + 0.5sw, :bja + 3.6km]);
+        line_label(:left:n, vr[:bja + 3.6km] << 0.5mo << 0.5mt, "VRS");
+        track(:double, vr[:bja + 3.6km, :kva.xk]);
+        track(:double :ror,
+                vr[:kva.xk - 0.1dl, :kva.xk]
+            ..  vr[:kva.yk, :kva.yk + 0.1dl] << 2mo
+        );
+        track(:double :ror, vr[:kva.yk, :kva + 0.5sw] << 2mo);
+        track(:double :ror, vr[:kva + 0.5sw, :rin - 4km] << 2mo);
+        line_label(:left:n, vr[:rin - 4km] << 2.5mo << 0.5mt,
+            (0.5dt, 0dt), "VRS"
+        );
+        track(:double :ror, vr[:rin - 4km, :rin.yf - 300m] << 2mo);
+    }
+
+    # point.dk.Ringsted  dk.KFA
+}
+

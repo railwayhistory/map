@@ -1,0 +1,397 @@
+# DK FPB.  Fredericia - Padborg Landegrænse
+#
+let fp = path("d3.dk.fpb");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax 
+{
+    # point.dk.Fredericia: dk.KF
+
+    with link = "line.dk.FPB" {
+        track(:single :dn:ror :casing,
+                fp[:fre + 0.5sw, :fre.yk - 0.8km] << 1ms << 1.5mt
+            ..  fp[:fre.yk - 0.1dl, :fre.yk] >> 0.5ms >> 0.5mt
+        );
+        track(:single :up:ror:lor :casing,
+                fp[:fre + 0.5sw, :fre.yk - 0.8km] >> 0.5ms >> 0.5mt
+            ..  fp[:fre.yk - 0.1dl, :fre.yk] >> 0.5ms >> 1md << 0.5mt
+        );
+        track(:lor,
+                fp[:fre.yk - 0.1dl, :fre.yk] >> 0.5ms >> 0.5md
+            ..  fp[:fre.zk, :fre.zk + 0.1dl]
+        );
+        track(fp[:fre.zk, :tau.ys - 2.7km]);
+        line_label(:right:s, fp[:tau.ys - 2.7km] >> 0.5md,
+            (-0.4dt, 0dt), "FPB"
+        );
+        track(fp[:tau.ys - 2.7km, :tau.ys - 4md]);
+    }
+
+    with link = "point.dk.Taulov", railway = :station {
+        # DK FPB
+        track(fp[:tau.ys - 4md, :tau + 2dl]);
+        track(fp[:tau + 2dl, :tau + 0.5sw]);
+
+        # DK SHT
+        track(
+                fp[:tau.ys - 0.1dl, :tau.ys] << 1ms << 1md
+            --  fp[:tau.ys + 2dl, :tau.ys + 2.1dl]
+        );
+
+        marker(:right :de.bf, fp[:tau] >> 0.5md);
+        slabel(:top :bold, fp[:tau] >> 0.5md >> 1.0sh, "Taulov");
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:tau + 0.5sw, :tau + 2.5km]);
+        line_label(:left:n, fp[:tau + 2.5km] << 0.5md, "FPB");
+        track(fp[:tau + 2.5km, :elt - 0.5sw]);
+    }
+
+    with link = "point.dk.Eltang", railway = :station {
+        track(fp[:elt - 0.5sw, :elt + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:elt] >> 0.5md);
+        slabel(:left :removed, fp[:elt + 0.5sw] >> 0.5md >> 1.4sh, "Eltang");
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:elt + 0.5sw, :kol - 0.5sw]);
+    }
+
+    with link = "point.dk.Kolding", railway = :station {
+        track(fp[:kol - 0.5sw, :kol + 0.5sw]);
+        marker(:right :de.bf, fp[:kol] >> 0.5md);
+        slabel(:right, fp[:kol - 0.4sw] << 0.8dt,
+            hbox(:left:top :bold, "Kolding")
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:kol + 0.5sw, :ejs - 0.5sw]);
+    }
+
+    with link = "point.dk.Ejstrup", railway = :station {
+        track(fp[:ejs - 0.5sw, :ejs + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:ejs] >> 0.5md);
+        slabel(:top :removed, fp[:ejs] >> 0.5md >> 1.1sh, "Ejstrup");
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:ejs + 0.5sw, :ejs + 3km]);
+        line_label(:right:s, fp[:ejs + 3.0km] >> 0.5md, (-0.3dt, 0dt), "FPB");
+        track(fp[:ejs + 3km, :lun - 0.5sw]);
+    }
+
+    with link = "point.dk.Lunderskov", railway = :station {
+        track(fp[:lun - 0.5sw, :lun + 0.5sw]);
+
+        track(:single :dn:rup,
+                fp[:lun + 0.49sw, :lun + 0.5sw] << 0.5md >> 0.5mt
+            ..  fp[:lun.ye - 0.1dl, :lun.ye] << 0.5ms << 0.5mt
+        );
+        track(:single :up:ldn,
+                fp[:lun + 0.49sw, :lun + 0.5sw] >> 0.5md << 0.5mt
+            ..  fp[:lun.ye - 0.1dl, :lun.ye] >> 0.5ms >> 0.5mt
+        );
+        track(:single,
+                fp[:lun.ye - 1.1dl, :lun.ye - 1dl] >> 0.5ms >> 0.5mt
+            --  fp[:lun.ye - 0.1dl, :lun.ye] >> 1ms >> 1.5mt
+        );
+
+        marker(:right :de.bf, fp[:lun] >> 0.5md);
+        slabel(:right :cat:ac25 :pax, fp[:lun + 0.4sw] << 2.3dt,
+            span(:bold, "Lunderskov")
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(:single :dn:ror,
+                fp[:lun.ye - 0.1dl, :lun.ye] << 0.5ms << 0.5mt
+            ..  fp[:lun.ye + 800m, :lun.xe] << 0.5md >> 0.5mt
+        );
+        with layer = -1 track(:single :up:lor:ror,
+                fp[:lun.ye - 0.1dl, :lun.ye] >> 0.5ms >> 0.5mt
+            ..  fp[:lun.ye + 800m, :lun.ye + 801m] >> 1md
+        );
+        track(:single :up:ldn,
+                fp[:lun.ye + 800m, :lun.ye + 801m] >> 1md
+            ..  fp[:lun.xe, :lun.xe + 0.1dl] >> 0.5md << 0.5mt
+        );
+        track(fp[:lun.xe, :vam - 2.5km]);
+        line_label(:left:w, fp[:vam - 2.5km] << 0.5md, "FPB");
+        track(fp[:vam - 2.5km, :vam - 0.5sw]);
+    }
+
+    with link = "point.dk.Vamdrup", railway = :station {
+        track(fp[:vam - 0.5sw, :vam + 0.5sw]);
+        marker(:right :de.bf, fp[:vam] >> 0.5md);
+        slabel(:left :bold, fp[:vam + 0.45sw] >> 0.5md >> 1.4sw, "Vamdrup");
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:vam + 0.5sw, :fag - 0.3sw]);
+    }
+
+    with link = "point.dk.Farris-Gr", railway = :station {
+        track(fp[:fag - 0.3sw, :fag + 0.3sw]);
+        marker(:right :de.dirgr :removed, fp[:fag] >> 0.5md);
+        marker(:left :de.dirgr :removed, fp[:fag] << 0.5md);
+    }
+
+    with link = "point.dk.Farris", railway = :station {
+        track(fp[:fag + 0.3sw, :far + 0.5sw]);
+        marker(:right :de.bbf, fp[:far] >> 0.5md);
+        marker(:right :de.exbf, fp[:far] >> 0.5md);
+        slabel(:left, fp[:far + 0.45sw] >> 0.5md >> 1.9sh, "Farris");
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:far + 0.5sw, :far + 3.5km]);
+        line_label(:left:w, fp[:far + 3.5km] << 0.5md, "FPB");
+        track(fp[:far + 3.5km, :som - 0.5sw]);
+    }
+
+    with link = "point.dk.Sommersted", railway = :station {
+        track(fp[:som - 0.5sw, :som + 0.5sw]);
+        marker(:right :de.bbf, fp[:som] >> 0.5md);
+        marker(:right :de.exbf, fp[:som] >> 0.5md);
+        slabel(:left, fp[:som + 0.45sw] >> 0.5md >> 1.9sh,
+            "Sommersted"
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:som + 0.5sw, :jeg - 0.5sw]);
+    }
+
+    with link = "point.dk.Jegerup", railway = :station {
+        track(fp[:jeg - 0.5sw, :jeg + 0.5sw]);
+        marker(:right :de.hp :removed, fp[:jeg] >> 0.5md);
+        slabel(:left :removed, fp[:jeg + 0.4sw] >> 0.5md >> 1.6sh,
+            "Jegerup"
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:jeg + 0.5sw, :voj.yh]);
+    }
+
+    with link = "point.dk.Vojens", railway = :station {
+        track(fp[:voj.yh, :voj + 0.5sw]);
+        marker(:left :de.bf, fp[:voj] << 0.5dt);
+        slabel(:right :bold, fp[:voj + 0.45sw] << 0.5md << 1.6sh, "Vojens");
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:voj + 0.5sw, :oje - 0.5sw]);
+    }
+
+    with link = "point.dk.Over-Jerstal", railway = :station {
+        track(fp[:oje - 0.5sw, :oje + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:oje] >> 0.5md);
+        slabel(:left :removed, fp[:oje + 0.5sw] >> 0.5md >> 1.8sh,
+            span(:bold, "Over Jerstal")
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:oje + 0.5sw, :oje + 3.5km]);
+        line_label(:left:w, fp[:oje + 3.5km] << 0.5md, (0dt, -0.2dt), "FPB");
+        track(fp[:oje + 3.5km, :hov - 0.5sw]);
+    }
+
+    with link = "point.dk.Hovslund", railway = :station {
+        track(fp[:hov - 0.5sw, :hov + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:hov] >> 0.5md);
+        slabel(:right :removed, fp[:hov + 0.45sw] << 1.2md,
+            span(:bold, "Hovslund")
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:hov + 0.5sw, :rod - 800m]);
+    }
+
+    with link = "point.dk.Rødekro", railway = :station {
+        # DK FPB
+        track(fp[:rod - 800m, :rod.ya + 2md]);
+
+        # DK ??
+        track(:single,
+                fp[:rod - 800m, :rod - 799m] << 0.5md >> 0.5mt
+            --  fp[:rod - 800m + 1dl, :rod.ya] << 0.5md << 1ms << 0.5mt
+            --  fp[:rod.ya + 1dl, :rod.ya + 1.1dl] << 0.5md >> 0.5mt
+        );
+
+        marker(:left :de.bf, fp[:rod] << 0.5md << 1ms << 1mt);
+        slabel(:right :bold, fp[:rod + 0.45sw] << 1md << 1.5mt << 1.2sh,
+            "Rødekro"
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:rod.ya + 2md, :hjo - 0.5sw]);
+    }
+
+    with link = "point.dk.Hjordkær", railway = :station {
+        track(fp[:hjo - 0.5sw, :hjo + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:hjo] >> 0.5md);
+        slabel(:left :removed, fp[:hjo + 0.6sw] >> 0.5md >> 1.4sw,
+            "Hjordkær"
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:hjo + 0.5sw, :hjo + 2km]);
+        line_label(:left:w, fp[:hjo + 2.0km] << 0.5md, (0dt, 0.2dt), "FPB");
+        track(fp[:hjo + 2km, :bol - 0.5sw]);
+    }
+
+    with link = "point.dk.Bolderslev", railway = :station {
+        track(fp[:bol - 0.5sw, :bol + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:bol] >> 0.5md);
+        slabel(:left :removed, fp[:bol + 0.5sw] >> 0.5md >> 1.6sw,
+            "Bolderslev"
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(fp[:bol + 0.5sw, :tin - 700m]);
+    }
+
+    with link = "point.dk.Tinglev", railway = :station {
+        # mot Sønderborg
+        track(:single,
+                fp[:tin - 381m, :tin - 380m] << 0.5md >> 0.5mt
+            --  fp[:tin - 380m + 1dl, :tin.ys] << 0.5md << 1ms << 0.5mt
+            --  fp[:tin.ys + 1.5dl, :tin.ys + 1.6dl] >> 0.5md << 0.5mt
+        );
+
+        # DK FPB
+        track(fp[:tin - 700m, :tin.ys + 1dl]);
+        track(:single, fp[:tin.ys + 1dl, :tin.ys + 2md] >> 0.5md << 0.5mt);
+        track(:single :nocat :removed,
+                fp[:tin.ys + 1dl, :tin.ys + 2md] << 0.5md >> 0.5mt
+        );
+
+        # fra Tønder
+        track(:single,
+                fp[:tin - 700m, :tin - 699m] >> 0.5md << 0.5mt
+            --  fp[:tin - 700m + 1dl, :tin + 220m - 1dl]
+                    >> 0.5md >> 1ms >> 0.5mt
+            --  fp[:tin + 220m, :tin + 221m] >> 0.5md << 0.5mt
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, fp[:tin] >> 0.5md >> 1mt);
+        slabel(:left :cat:ac25 :pax, fp[:tin + 0.5sw] >> 1md >> 1.5sh,
+            span(:bold, "Tinglev")
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(:single, fp[:tin.ys + 2md, :baj - 0.5sw] >> 0.5md << 0.5mt);
+        track(:single :nocat :removed,
+                fp[:tin.ys + 2md, :baj - 0.5sw] << 0.5md >> 0.5mt
+        );
+    }
+
+    with link = "point.dk.Bajstrup", railway = :station {
+        track(:single, fp[:baj - 0.5sw, :baj + 0.5sw] >> 0.5md << 0.5mt);
+        track(:single :removed :nocat,
+                fp[:baj - 0.5sw, :baj + 0.5sw] << 0.5md >> 0.5mt
+        );
+        marker(:right :de.bf :removed, fp[:baj] >> 0.5md);
+        slabel(:left :removed, fp[:baj + 0.3sw] >> 0.5md >> 1.8sh, "Bajstrup");
+    }
+
+    with link = "line.dk.FPB" {
+        track(:single, fp[:baj + 0.5sw, :baj + 2km] >> 0.5md << 0.5mt);
+        track(:single :removed :nocat,
+                fp[:baj + 0.5sw, :baj + 2km] << 0.5md >> 0.5mt
+        );
+        line_label(:right:ne, fp[:baj + 2km] >> 0.5md, "FPB");
+        track(:single, fp[:baj + 2km, :vej - 800m] >> 0.5md << 0.5mt);
+        track(:single :removed :nocat,
+                fp[:baj + 2km, :vej - 800m] << 0.5md >> 0.5mt
+        );
+    }
+
+    with link = "point.dk.Vejbæk", railway = :station {
+        track(:single, fp[:vej - 800m, :vej - 800m + 1dl] >> 0.5md << 0.5mt);
+        track(:single :nocat :removed,
+                fp[:vej - 800m, :vej - 800m + 1dl] << 0.5md >> 0.5mt
+        );
+        track(:single,
+                fp[:vej - 800m, :vej - 799m] >> 0.5md << 0.5mt
+            --  fp[:vej - 800m + 1dl, :vej - 800m + 1.1dl] << 0.5md >> 0.5mt
+        );
+
+        track(fp[:vej - 800m + 1dl, :vej + 400m - 1dl]);
+
+        track(:single,
+                fp[:vej + 400m - 1.1dl, :vej + 400m - 1dl] << 0.5md >> 0.5mt
+            --  fp[:vej + 399m, :vej + 400m] >> 0.5md << 0.5md
+        );
+        track(:single :nocat :removed,
+                fp[:vej + 400m - 1dl, :vej + 400m] << 0.5md >> 0.5mt
+        );
+        track(:single, fp[:vej + 400m - 1dl, :vej + 400m] >> 0.5md << 0.5mt);
+
+        marker(:left :de.bbf :cat:ac25 :pax, fp[:vej] << 0.5md);
+        slabel(:right :cat:ac25 :pax, fp[:vej + 0.6sw] << 0.5md << 1.3sh,
+            "Vejbæk"
+        );
+    }
+
+    with link = "line.dk.FPB" {
+        track(:single, fp[:vej + 400m, :fah - 0.5sw] >> 0.5md << 0.5mt);
+        track(:single :nocat :removed,
+                fp[:vej + 400m, :fah - 0.5sw] << 0.5md >> 0.5mt
+        );
+    }
+
+    with link = "point.dk.Fårhus" {
+        track(:single, fp[:fah - 0.5sw, :fah + 0.5sw] >> 0.5md << 0.5mt);
+        track(:single :removed :nocat,
+                fp[:fah - 0.5sw, :fah + 0.5sw] << 0.5md >> 0.5mt
+        );
+        marker(:right :de.bf :removed, fp[:fah] >> 0.5md);
+        slabel(:left :removed, fp[:fah + 0.3sw] >> 0.5md >> 1.8sh, "Fårhus");
+    }
+
+    with link = "line.dk.FPB" {
+        track(:single, fp[:fah + 0.5sw, :pad.yt - 2md] >> 0.5md << 0.5mt);
+        track(:single :nocat :removed,
+                fp[:fah + 0.5sw, :pad.yt - 2md] << 0.5md >> 0.5mt
+        );
+    }
+
+    with link = "point.dk.Padborg", railway = :station {
+        track(:single,
+                fp[:pad.yt - 2md, :pad.yt - 1dl] >> 0.5md << 0.5mt
+            --  fp[:pad.yt + 1dl, :pad] >> 0.5insh >> 0.5mt
+        );
+        track(:single :cat:ac15,
+                fp[:pad, :pad + 550m - 1dl] >> 0.5insh >> 0.5mt
+            --  fp[:pad + 550m + 1dl, :pag - 0.3sw] >> 0.5md << 0.5mt
+        );
+
+        track(:single :nocat :removed,
+                fp[:pad.yt - 2md, :pad.yt] << 0.5md >> 0.5mt
+        );
+        track(:single,
+                fp[:pad.yt - 1.1dl, :pad.yt - 1dl] >> 0.5md << 0.5mt
+            --  fp[:pad.yt + 1dl, :pad] << 0.5insh << 0.5mt
+        );
+        track(:single :cat:ac15,
+                fp[:pad, :pad + 550m - 1dl] << 0.5insh << 0.5mt
+            --  fp[:pad + 550m + 1dl, :pag - 0.3sw] << 0.5md >> 0.5mt
+        );
+
+        marker(:left :de.inbf :cat:ac25 :pax, fp[:pad] >> 0.5insh);
+        slabel(:right :cat:ac25 :pax, fp[:pad + 0.5sw] << 0.5insh << 2mt,
+            span(:bold, "Padborg")
+        );
+    }
+}
+

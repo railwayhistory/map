@@ -1,0 +1,123 @@
+# DK HLR.  Hårlev - Rødvig
+#
+let hr = path("d3.dk.hlr");
+
+with detail = 3,
+     railway = :first :pax
+{
+    # point.dk.Hårlev  dk.KFX
+
+    with link = "line.dk.HLR" {
+        track(:lor,
+                hr[:har.yr - 0.1dl, :har.yr] >> 1ms >> 1mt
+            ..  hr[:har.xr + 2mt, :har.xr + 2.01mt]
+        );
+        track(hr[:har.xr + 2mt, :amm - 0.5sw]);
+    }
+
+    with link = "point.dk.Ammerup", railway = :station {
+        track(hr[:amm - 0.5sw, :amm + 0.5sw]);
+        marker(:left :de.hp :removed, hr[:amm] << 0.5mt);
+        slabel(:top :removed, hr[:amm] << 0.5mt << 1.1sh, "Ammerup");
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:amm + 0.5sw, :var - 0.5sw]);
+    }
+
+    with link = "point.dk.Varpelev", railway = :station {
+        track(hr[:var - 0.5sw, :var + 0.5sw]);
+        marker(:right :de.hp, hr[:var] >> 0.5mt);
+        slabel(:bottom, hr[:var] >> 0.5mt >> 1.1sh, "Varpelev");
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:var + 0.5sw, :var + 1.4km]);
+        line_label(:left:s, hr[:var + 1.4km] << 0.5mt, "HLR");
+        track(hr[:var + 1.4km, :kli - 0.5sw]);
+    }
+
+    with link = "point.dk.Klippinge", railway = :station {
+        track(hr[:kli - 0.5sw, :kli + 0.5sw]);
+        marker(:left :de.bf, hr[:kli] << 0.5mt);
+        slabel(:right, hr[:kli] << 0.5mt << 1sh + (1.2dt, 0.5dt), "Klippinge");
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:kli + 0.5sw, :rab - 0.5sw]);
+    }
+
+    with link = "point.dk.Råby", railway = :station {
+        track(hr[:rab - 0.5sw, :rab + 0.5sw]);
+        marker(:left :de.hp :removed, hr[:rab] << 0.5mt);
+        slabel(:right :removed, hr[:rab] << 0.5mt << 1sh + (1.2dt, 0.5dt),
+            "Råby"
+        );
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:rab + 0.5sw, :bja - 0.5sw]);
+    }
+
+    with link = "point.dk.Bjælkerup", railway = :station {
+        track(hr[:bja - 0.5sw, :bja + 0.5sw]);
+        marker(:left :de.hp :removed, hr[:bja] << 0.5mt);
+        slabel(:right :removed, hr[:bja] << 0.5mt << 1sh + (1.2dt, 0.5dt),
+            "Bjælkerup"
+        );
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:bja + 0.5sw, :she - 0.5sw]);
+    }
+
+    with link = "point.dk.Store-Heddinge", railway = :station {
+        track(hr[:she - 0.5sw, :she + 0.5sw]);
+        marker(:left :de.bf, hr[:she] << 0.5mt);
+        slabel(:right, hr[:she] << 0.5mt << 1sh + (1.1dt, 1.1dt),
+            "Store Heddinge"
+        );
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:she + 0.5sw, :sto - 0.5sw]);
+    }
+
+    with link = "point.dk.Storemark", railway = :station {
+        track(hr[:sto - 0.5sw, :sto + 0.5sw]);
+        marker(:right :de.hp :removed, hr[:sto] >> 0.5mt);
+        slabel(:left :removed, hr[:sto] >> 0.5mt >> 1sh + (-1.1dt, 1dt),
+            "Storemark"
+        );
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:sto + 0.5sw, :sto + 1.4km]);
+        line_label(:left:w, hr[:sto + 1.4km] << 0.5mt, "HLR");
+        track(hr[:sto + 1.4km, :lhe - 0.5sw]);
+    }
+
+    with link = "point.dk.Lille-Heddinge", railway = :station {
+        track(hr[:lhe - 0.5sw, :lhe + 0.5sw]);
+        marker(:left :de.hp :removed, hr[:lhe] << 0.5mt);
+        slabel(:right :removed, hr[:lhe] << 0.5mt << 1sh + (1.1dt, 1.2dt),
+            "Lille Heddinge"
+        );
+    }
+
+    with link = "line.dk.HLR" {
+        track(hr[:lhe + 0.5sw, :rod.2024 - 0.5sw]);
+    }
+
+    with link = "point.dk.Rødvig", railway = :station {
+        track(hr[:rod.2024 - 0.5sw, :rod.2024 + 0.5sw]);
+        marker(:left :de.bf :casing, hr[:rod.2024] << 1mt);
+        slabel(:right :bold, hr[:rod.2024] << 1mt << 1sh + (1.1dt, 1.4dt),
+            "Rødvig"
+        );
+
+        track(:removed, hr[:rod.2024 + 0.5sw, :rod + 0.5sw]);
+        with layer = -1 marker(:left :de.bf :removed, hr[:rod] << 0.5mt);
+    }
+}
+

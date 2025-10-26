@@ -1,11 +1,23 @@
-# DK MT.  Snoghøj - Taulov
+# DK MKH.  Masnedsund - Kalvehave
 with detail = 2 {
-    let mt = path("d2.dk.mt");
+    let mk = path("d2.dk.mkh");
 
-    with link = "line.dk.MT" {
-        track(:first :double :cat:ac25 :pax, mt[:sno, :tau.ys]);
+    with railway = :first :pax :removed {
+        with link = "point.dk.Masnedsund" {
+            statdot(mk[:mas]);
+            slabel(:left, mk[:mas] + (-1.8dt, 1dt), "Masnedsund");
+        }
 
-        line_label(:left:n :double :cat:ac25 :pax, mt[:sno + 2.1km], "MT");
+        with link = "line.dk.MKH" {
+            track(mk[:mas, :mas + 9.7km]);
+            line_label(:right:n, mk[:mas + 9.7km], "MKH");
+            track(mk[:mas + 9.7km, :kal]);
+        }
+
+        with link = "point.dk.Kalvehave" {
+            statdot(mk[:kal]);
+            slabel(:bottom, mk[:kal] + (0dt, 0.8dt), "Kalvehave");
+        }
     }
 }
 

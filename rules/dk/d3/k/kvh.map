@@ -1,0 +1,83 @@
+# DK KVH.  København H - Vigerslev - Hvidovre Fjern
+#
+let kh = path("d3.dk.kvh");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax
+{
+    # point.dk.København-H  dk.KFA
+    
+    with link = "line.dk.KV" {
+        track(:single :ror:lor :casing,
+                kh[:dyb - 0.1dl, :dyb]
+                    >> 0.5md << 1mt << 1ms << 0.5md >> 0.5mt
+            ..  kh[:ske, :ske + 0.1dl] << 2md << 2ms >> 0.5mt
+        );
+        track(:single :ror:lor :casing,
+                kh[:dyb - 0.1dl, :dyb]
+                    >> 0.5md << 1.5mt << 2ms << 1md
+            ..  kh[:ske, :ske + 0.1dl] << 2md << 2ms << 0.5mt
+        );
+
+        track(:ror, kh[:ske, :kob.yk] << 2md << 2ms);
+
+        track(:ror,
+                kh[:kob.yk - 0.1dl, :kob.yk] << 2md << 2ms
+            ..  kh[:kob.yg - 0.5sw, :kob.yg] << 1md << 1ms
+        );
+
+        with layer = -1 track(:ror,
+                kh[:kob.yg - 0.5sw, :kob.yg] << 1md << 1ms
+            ..  kh[:kgb + 1sw, :nel - 0.5sw]
+        );
+    }
+
+    with link = "point.dk.København-Syd", railway = :station {
+        with layer = -1 track(kh[:nel - 0.5sw, :nel + 0.5sw]);
+        with layer = -1 track(:cat:dc15,
+            kh[:nel - 0.6sw, :nel + 0.5sw] >> 1md >> 1ms
+        );
+        marker(:right :de.hp :cat:dc15, kh[:nel] >> 1.5md >> 1ms);
+    }
+
+    with link = "point.dk.Vigerslev", railway = :station {
+        track(kh[:nel + 0.5sw, :vig.yr]);
+
+        track(:single, kh[:vig.yr, :vig.yh] >> 0.5md << 0.5mt);
+
+        with layer = -1 track(
+                kh[:vig.yr - 0.1dl, :vig.yr]
+            ..  path("d3.dk.vrs")[:vig.xr, :vig.xr + 0.1dl]
+        );
+
+        track(kh[:nel + 0.5sw, :vig.yr] << 1ms << 1md);
+        track(:casing,
+                kh[:vig.yr - 0.1ld, :vig.yr] << 1ms << 1md
+            ..  kh[:hvf.xv - 2.1md, :hvf.xv - 2md]
+        );
+
+        with zoom = :high marker(:right :de.bbf, kh[:vig] >> 1.5md >> 1ms);
+    }
+
+    with link = "line.dk.KV" {
+        with layer = -1 track(:single :up:ldn,
+                kh[:vig.yh, :hvf.xv - 2md] >> 0.5md << 0.5mt
+            ..  kh[:hvf.yv, :hvf.yv + 0.1dl] >> 0.5md << 1.5mt << 1ms
+        );
+        track(:single :dn:rup,
+                kh[:hvf.xv - 2.1md, :hvf.xv - 2md] << 0.5md >> 0.5mt
+            ..  kh[:hvf.yv, :hvf.yv + 0.1dl] >> 0.5md << 3.5mt << 3ms
+        );
+
+        track(:single :up:ror:lor,
+                kh[:hvf.yv, :hvf - 800m] >> 0.5md << 1.5mt << 1ms
+        );
+
+        track(:single :dn:ror,
+                kh[:hvf.yv, :hvf - 800m] >> 0.5md << 3.5mt << 3ms
+        );
+    }
+
+    # point.dk.Hvidovre-Fjern  dk.KFA
+}
+

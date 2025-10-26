@@ -1,0 +1,104 @@
+# DK VRS.  Vigerslev - Ringstedt
+#
+let vr = path("d3.dk.vrs");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax
+{
+    # point.dk.Vigerslev: dk.KVH
+
+    with link = "line.dk.VRS" {
+        track(vr[:vig.xr, :ave - 0.5sw]);
+    }
+
+    with link = "point.dk.Avedøre-Havnevej", railway = :station {
+        track(vr[:ave - 0.5sw, :ave + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:ave] >> 0.5md);
+        slabel(:left :nopax, vr[:ave] >> 0.5md >> 1.4sh + (2sw, 0dt),
+            "Avedøre Havnevej"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(vr[:ave + 0.5sw, :ave + 5km]);
+        line_label(:right:s, vr[:ave + 5km] >> 0.5md, "VRS");
+        track(vr[:ave + 5km, :kil - 0.5sw]);
+    }
+
+    with link = "point.dk.Kildebrønde", railway = :station {
+        track(vr[:kil - 0.5sw, :kil + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:kil] >> 0.5md);
+        slabel(:left :nopax, vr[:kil + 0.4sw] >> 0.5md >> 1.2sh,
+            "Kildebrønde"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(vr[:kil + 0.5sw, :jer - 3km]);
+        line_label(:right:se, vr[:jer - 3km] >> 0.5md, "VRS");
+        track(vr[:jer - 3km, :jer - 0.5sw]);
+    }
+
+    with link = "point.dk.Jersie-Fjern", railway = :station {
+        track(vr[:jer - 0.5sw, :jer + 0.5sw]);
+        marker(:left :de.bbf :nopax, vr[:jer] << 0.5md);
+        slabel(:left :nopax, vr[:jer + 0.6sw] >> 1md, "Jersie Fjern");
+    }
+
+    with link = "line.dk.VRS" {
+        track(vr[:jer + 0.5sw, :kon - 0.5sw - 2dl]);
+    }
+
+    with link = "point.dk.Køge-Nord", railway = :station {
+        track(:single,
+                vr[:kon - 0.5sw - 1.1dl, :kon - 0.5sw - 1dl] >> 0.5md << 0.5mt
+            --  vr[:kon - 0.5sw, :kon.yk] >> 0.5md >> 1ms >> 0.5mt
+        );
+        track(vr[:kon - 0.5sw - 2dl, :kon.yk]);
+        track(:single,
+                vr[:kon - 0.5sw - 1.1dl, :kon - 0.5sw - 1dl] << 0.5md >> 0.5mt
+            --  vr[:kon - 0.5sw, :kon.yk] << 0.5md << 1ms << 0.5mt
+        );
+        marker(:right :de.bf, vr[:kon] >> 0.5md >> 1ms >> 1mt);
+        slabel(:nw :bold, vr[:kon - 0.3sw] << 2md << 2ms << 1mt,
+            "Køge Nord"
+        );
+    }
+
+    with link = "line.dk.VRS" {
+        track(:casing, vr[:kon.yk, :lel - 0.5sw]);
+    }
+
+    with link = "point.dk.Lellinge-TS", railway = :station {
+        track(vr[:lel - 0.5sw, :lel + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:lel] >> 0.5md);
+        slabel(:top :nopax, vr[:lel] >> 0.5md >> 1.1sh, "Lellinge");
+    }
+
+    with link = "line.dk.VRS" {
+        track(vr[:lel + 0.5sw, :lel + 2.2km]);
+        line_label(:right:se, vr[:lel + 2.2km] >> 0.5md, "VRS");
+        track(vr[:lel + 2.2km, :bja - 0.5sw]);
+    }
+
+    with link = "point.dk.Bjæverskov-TS", railway = :station {
+        track(vr[:bja - 0.5sw, :bja + 0.5sw]);
+        marker(:right :de.bbf :nopax, vr[:bja] >> 0.5md);
+        slabel(:left :nopax, vr[:bja + 0.5sw] >> 0.5md >> 1.3sh, "Bjæverskov");
+    }
+
+    with link = "line.dk.VRS" {
+        track(vr[:bja + 0.5sw, :bja + 3.6km]);
+        line_label(:left:n, vr[:bja + 3.6km] << 0.5md, "VRS");
+        track(vr[:bja + 3.6km, :kva.xk]);
+        track(:ror,
+                vr[:kva.xk - 0.1dl, :kva.xk]
+            ..  vr[:kva.yk, :kva.yk + 0.1dl] << 1md << 1ms
+        );
+        track(:ror, vr[:kva.yk, :kva + 0.5sw] << 1md << 1ms);
+        track(:ror, vr[:kva + 0.5sw, :rin.yf - 1md] << 1md << 1ms);
+    }
+
+    # point.dk.Ringsted  dk.KFA
+}
+

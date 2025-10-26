@@ -1,79 +1,124 @@
-# DK FP.  Fredericia - Padborg Landegrænse
+# DK FPB.  Fredericia - Padborg Landegrænse
 with detail = 2 {
-    let fp = path("d2.dk.fp");
+    let fp = path("d2.dk.fpb");
 
-    with link = "line.dk.FP" {
-        track(:first :double :cat:ac25 :pax, fp[:fre.yt, :tin]);
-        track(:first :cat:ac25 :pax, fp[:tin, :pad]);
-        track(:first :double :cat:ac15 :pax, fp[:pad, :pag]);
+    with railway = :first :double :cat:ac25 :pax {
+        with link = "line.dk.FPB" {
+            track(fp[:fre.yt, :tau.ys]);
+            line_label(:right:s, fp[:fre.yt + 2.8km], (-0.2dt, 0dt), "FPB");
+            track(fp[:tau.ys, :tau]);
+        }
 
-        guide(:linenum :cat:ac25 :pax,
-                fp[:tau + 5.5km] >> 1dt
-            --  fp[:tau + 5.5km] >> 3dt
-        );
-        label(:linenum :cat:ac25 :pax, fp[:tau + 5.5km] >> 2.5dt,
-            hbox(:right:bottom, "FP")
-        );
-        line_badge(:cat:ac25 :pax, fp[:vam + 6.5km], "FP");
-        line_badge(:cat:ac25 :pax, fp[:hov - 3.5km], "FP");
-        line_badge(:cat:ac25 :pax, fp[:rod + 7km], "FP");
-        line_badge(:cat:ac25 :pax, fp[:tin + 7km], "FP");
+        with link = "point.dk.Taulov" {
+            statdot(fp[:tau]);
+            slabel(:left, fp[:tau] + (1.5dt, -1.4dt), "Taulov");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:tau, :tau + 5.5km]);
+            line_label(:right:se, fp[:tau + 5.5km], "FPB");
+            track(fp[:tau + 5.5km, :kol]);
+        }
+
+        with link = "point.dk.Kolding" {
+            statdot(fp[:kol]);
+            slabel(:nw, fp[:kol] + (1.5dt, -0.3dt), "Kolding");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:kol, :kol + 8km]);
+            line_label(:right:s, fp[:kol + 8km], "FPB");
+            track(fp[:kol + 8km, :lun]);
+        }
+
+        with link = "point.dk.Lunderskov" {
+            track(fp[:lun, :lun.ye]);
+            statdot(fp[:lun]);
+            slabel(:right, fp[:lun] + (1.6dt, 1.3dt), "Lunderskov");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:lun.ye, :vam]);
+        }
+
+        with link = "point.dk.Vamdrup" {
+            statdot(fp[:vam]);
+            slabel(:left, fp[:vam] + (-1.5dt, 0.5dt), "Vamdrup");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:vam, :vam + 6.5km]);
+            line_label(:right:e, fp[:vam + 6.5km], "FPB");
+            track(fp[:vam + 6.5km, :voj.yh]);
+        }
+
+        with link = "point.dk.Vojens" {
+            track(fp[:voj.yh, :voj]);
+            statdot(fp[:voj]);
+            slabel(:left, fp[:voj] + (-1.7dt, 0.8dt), "Vojens");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:voj, :oje]);
+        }
+
+        with link = "point.dk.Over-Jerstal" {
+            statdot(:removed, fp[:oje]);
+            slabel(:left :removed, fp[:oje] + (-1.8dt, 0.8dt), "Over Jerstal");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:oje, :hov - 3.5km]);
+            line_label(:left:w, fp[:hov - 3.5km], (0dt, -0.2dt), "FPB");
+            track(fp[:hov - 3.5km, :hov]);
+        }
+
+        with link = "point.dk.Hovslund" {
+            statdot(:removed, fp[:hov]);
+            slabel(:right :removed, fp[:hov] + (1.5dt, 0.5dt), "Hovslund");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:hov, :rod]);
+        }
+
+        with link = "point.dk.Rødekro" {
+            track(fp[:rod, :rod.ya]);
+            statdot(fp[:rod]);
+            slabel(:left, fp[:rod] + (-1.5dt, 0.8dt), "Rødekro");
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:rod.ya, :rod.ya + 7km]);
+            line_label(:right:e, fp[:rod.ya + 7km], (0dt, -0.3dt), "FPB");
+            track(fp[:rod.ya + 7km, :tin.yt]);
+        }
+
+        with link = "point.dk.Tinglev" {
+            track(fp[:tin.yt, :tin.ys]);
+            statdot(fp[:tin]);
+            slabel(:left, fp[:tin] + (-1.5dt, 0.8dt), "Tinglev");
+        }
     }
 
-    with link = "point.dk.Taulov" {
-        statdot(:cat:ac25 :pax, fp[:tau]);
-        slabel(:left :cat:ac25 :pax, fp[:tau] + (1.5dt, -1.4dt), "Taulov");
+    with railway = :first :cat:ac25 :pax {
+        with link = "line.dk.FPB" {
+            track(fp[:tin.ys, :tin.ys + 6.5km]);
+            line_label(:right:ne, fp[:tin.ys + 6.5km], "FPB");
+            track(fp[:tin.ys + 6.5km, :pad.yt]);
+        }
+
+        with link = "point.dk.Padborg" {
+            track(fp[:pad.yt, :pad]);
+            statdot(fp[:pad]);
+            slabel(:left, fp[:pad] + (-1.8dt, 0.8dt), "Padborg");
+        }
     }
 
-    with link = "point.dk.Kolding" {
-        statdot(:cat:ac25 :pax, fp[:kol]);
-        slabel(:right :cat:ac25 :pax, fp[:kol] + (1.5dt, -0.3dt),
-            hbox(:left:top, "Kolding")
-        );
-    }
-
-    with link = "point.dk.Lunderskov" {
-        statdot(:cat:ac25 :pax, fp[:lun]);
-        slabel(:right :cat:ac25 :pax, fp[:lun] + (1.6dt, 1.3dt),
-            "Lunderskov"
-        );
-    }
-
-    with link = "point.dk.Vamdrup" {
-        statdot(:cat:ac25 :pax, fp[:vam]);
-        slabel(:right :cat:ac25 :pax, fp[:vam] + (1.8dt, 1.8dt),
-            "Vamdrup"
-        );
-    }
-
-    with link = "point.dk.Vojens" {
-        statdot(:cat:ac25 :pax, fp[:voj]);
-        slabel(:left :cat:ac25 :pax, fp[:voj] + (-1.7dt, 0.8dt), "Vojens");
-    }
-
-    with link = "point.dk.Over-Jerstal" {
-        statdot(:removed, fp[:oje]);
-        slabel(:left :removed, fp[:oje] + (-1.5dt, 1.0dt), "Over Jerstal");
-    }
-
-    with link = "point.dk.Hovslund" {
-        statdot(:removed, fp[:hov]);
-        slabel(:right :removed, fp[:hov] + (1.5dt, 0.5dt), "Hovslund");
-    }
-
-    with link = "point.dk.Rødekro" {
-        statdot(:cat:ac25 :pax, fp[:rod]);
-        slabel(:right :cat:ac25 :pax, fp[:rod] + (1.8dt, 0.8dt), "Rødekro");
-    }
-
-    with link = "point.dk.Tinglev" {
-        statdot(:cat:ac25 :pax, fp[:tin]);
-        slabel(:left :cat:ac25 :pax, fp[:tin] + (-1.8dt, 1.0dt), "Tinglev");
-    }
-
-    with link = "point.dk.Padborg" {
-        statdot(:cat:ac25 :pax, fp[:pad]);
-        slabel(:left :cat:ac25 :pax, fp[:pad] + (-1.8dt, 0.8dt), "Padborg");
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.dk.FPB" {
+            track(fp[:pad, :pag]);
+        }
     }
 }
 

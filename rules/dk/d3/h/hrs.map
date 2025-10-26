@@ -1,0 +1,78 @@
+# DK HRS.  Hillerød - Harløse - Skævinge
+#
+let hs = path("d3.dk.hrs");
+
+with detail = 3,
+     railway = :first :pax :removed
+{
+    # point.dk.Hillerød  dk.HHS
+
+    with link = "line.dk.HRS" {
+        track(:lor,
+                hs[:hil.ys - 0.1dl, :hil.ys] >> 0.5md >> 1ms >> 0.5mt
+            ..  hs[:hil.xs + 1md, :hil.xs + 1.01md]
+        );
+        track(hs[:hil.xs + 1md, :hll - 0.5sw]);
+    }
+
+    with link = "point.dk.Hillerød-Lokal", railway = :station {
+        track(hs[:hll - 0.5sw, :hll + 0.5sw]);
+        marker(:right :de.bf, hs[:hll] >> 0.5mt);
+        slabel(:left, hs[:hll] >> 0.5mt >> 1.2sh + (0.5sw, -0.8dt),
+            "H. Lokal"
+        );
+    }
+
+    with link = "line.dk.HRS" {
+        track(hs[:hll + 0.5sw, :fre - 0.5sw]);
+    }
+
+    with link = "point.dk.Freerslev", railway = :station {
+        track(hs[:fre - 0.5sw, :fre + 0.5sw]);
+        marker(:left :de.hp, hs[:fre] << 0.5mt);
+        slabel(:bottom, hs[:fre] << 0.5mt << 1.0sh, "Freerslev");
+    }
+
+    with link = "line.dk.HRS" {
+        track(hs[:fre + 0.5sw, :fre + 1km]);
+        line_label(:right:s, hs[:fre + 1km] >> 0.5mt, "HRS");
+        track(hs[:fre + 1km, :har - 0.5sw]);
+    }
+
+    with link = "point.dk.Harløse", railway = :station {
+        track(hs[:har - 0.5sw, :har + 0.5sw]);
+        marker(:right :de.bf, hs[:har] >> 0.5mt);
+        slabel(:left, hs[:har] >> 0.5mt >> 1.7sh + (0dt, 1.4dt), "Harløse");
+    }
+
+    with link = "line.dk.HRS" {
+        track(hs[:har + 0.5sw, :glh - 0.5sw]);
+    }
+
+    with link = "point.dk.Gl-Harløse", railway = :station {
+        track(hs[:glh - 0.5sw, :glh + 0.5sw]);
+        marker(:left :de.hp, hs[:glh] << 0.5mt);
+        slabel(:right, hs[:glh - 0.5sw] << 0.5mt << 1.0sh + (0.5dt, 1dt),
+            "Gl. Harløse"
+        );
+    }
+
+    with link = "line.dk.HRS" {
+        track(hs[:glh + 0.5sw, :bor - 0.5sw]);
+    }
+
+    with link = "point.dk.Borup-Skævinge", railway = :station {
+        track(hs[:bor - 0.5sw, :bor + 0.5sw]);
+        marker(:right :de.hp, hs[:bor] >> 0.5mt);
+        slabel(:top, hs[:bor] >> 0.5mt >> 1.1sh,
+            "Borup"
+        );
+    }
+
+    with link = "line.dk.HRS" {
+        track(hs[:bor + 0.5sw, :ska.yh]);
+    }
+
+    # point.dk.Skævinge  dk.HHS
+}
+

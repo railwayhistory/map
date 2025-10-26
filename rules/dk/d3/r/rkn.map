@@ -1,0 +1,179 @@
+# DK RKN.  Roskilde - Næstved
+#
+let rn = path("d3.dk.rkn");
+
+with detail = 3,
+     railway = :first :pax
+{
+    # point.dk.Roskilde  dk.KFA
+
+    with link = "line.dk.RKN" {
+        track(
+                rn[:ros.yn - 0.1dl, :ros.yn] << 0.5md << 2ms << 1.5mt
+            ..  rn[:ros.xn, :ros + 5km]
+        );
+        line_label(:left:w, rn[:ros + 5km] << 0.5mt, (0dt, -0.2dt), "RKN");
+        track(rn[:ros + 5km, :gad - 0.5sw]);
+    }
+
+    with link = "point.dk.Gadstrup", railway = :station {
+        track(rn[:gad - 0.5sw, :gad + 0.5sw]);
+        marker(:right :de.bf, rn[:gad] >> 0.5mt);
+        slabel(:right, rn[:gad] << 2mt + (0dt, 1dt), "Gadstrup");
+    }
+
+    with link = "line.dk.RKN" {
+        track(rn[:gad + 0.5sw, :hav - 0.5sw]);
+    }
+
+    with link = "point.dk.Havdrup", railway = :station {
+        track(rn[:hav - 0.5sw, :hav + 0.5sw]);
+        marker(:right :de.bf, rn[:hav] >> 0.5mt);
+        slabel(:right, rn[:hav] << 2mt + (0dt, 1dt), "Havdrup");
+    }
+
+    with link = "line.dk.RKN" {
+        track(rn[:hav + 0.5sw, :hav + 2km]);
+        line_label(:right:e, rn[:hav + 2km] >> 0.5mt, "RKN");
+        track(rn[:hav + 2km, :lil - 0.5sw]);
+    }
+
+    with link = "point.dk.Lille-Skensved", railway = :station {
+        track(rn[:lil - 0.5sw, :lil + 0.5sw]);
+        marker(:right :de.bf, rn[:lil] >> 0.5mt);
+        slabel(:left, rn[:lil] >> 0.5mt >> 1.8sh + (0dt, 0.6dt),
+            "Lille Skensved"
+        );
+    }
+
+    with link = "line.dk.RKN" {
+        with layer = -1 track(rn[:lil + 0.5sw, :kox]);
+    }
+}
+
+with detail = 3,
+     railway = :first :cat:ac25 :pax
+{
+    with link = "point.dk.Køge-Nord-N201", railway = :station {
+        with layer = -1 track(:nocat, rn[:kox, :kox + 1dl]);
+        with layer = -1 track(
+                rn[:kox - 0.1dl, :kox] << 1mt << 1ms
+            --  rn[:kox + 1dl, :kox + 2dl]
+        );
+    }
+
+    with link = "line.dk.RKN" {
+        with layer = -1 track(:ror, rn[:kox, :olb.yk]);
+        track(:ror, rn[:olb.yk, :olb - 0.5sw]);
+    }
+
+    with link = "point.dk.Ølby", railway = :station {
+        track(rn[:olb - 0.5sw, :olb + 0.5sw]);
+        track(:double :cat:dc15,
+                rn[:olb - 0.5sw, :olb + 0.5sw] >> 0.5mt >> 1ms >> 0.5md
+        );
+        marker(:right :de.hp :cat:dc15, rn[:olb] >> 0.5mt >> 1ms >> 1md);
+        slabel(:left :cat:dc15,
+            rn[:olb] >> 0.5mt >> 1ms >> 1md >> 1.6sh + (0dt, 0.8dt),
+            "Ølby"
+        );
+    }
+
+    with link = "line.dk.RKN" {
+        track(:ror, rn[:olb + 0.5sw, :kog.a]);
+    }
+
+    with link = "point.dk.Køge", railway = :station {
+        track(:double :cat:dc15,
+                rn[:kog.a, :kog - 0.5sw] >> 0.5mt >> 1ms >> 0.5md
+        );
+
+        track(rn[:kog.a, :kog.yf]);
+
+        track(
+                rn[:kog.a + 0.9dl, :kog.a + 1dl]
+            --  rn[:kog.a + 2dl, :kog + 550m] << 1mt << 1ms
+        );
+        track(:nocat, rn[:kog + 550m, :kog.yf] << 1mt << 1ms);
+
+        marker(:right :de.bf, rn[:kog] >> 0.5mt);
+        slabel(:right :bold, rn[:kog] << 3mt << 1ms + (0dt, 1dt), "Køge");
+    }
+
+    with link = "line.dk.RKN" {
+        track(:lor, rn[:kog.yf, :kog.yf + 300m]);
+        track(rn[:kog.yf + 300m, :kog.yf + 2.4km]);
+        line_label(:right:se, rn[:kog.yf + 2.4km] >> 0.5mt, "RKN");
+        track(rn[:kog.yf + 2.4km, :her - 0.5sw]);
+    }
+
+    with link = "point.dk.Herfølge", railway = :station {
+        track(rn[:her - 0.5sw, :her + 0.5sw]);
+        marker(:left :de.bf, rn[:her] << 0.5mt);
+        slabel(:left, rn[:her] >> 2mt + (0dt, 1.2dt), "Herfølge");
+    }
+
+    with link = "line.dk.RKN" {
+        track(rn[:her + 0.5sw, :tur - 0.5sw]);
+    }
+
+    with link = "point.dk.Tureby", railway = :station {
+        track(rn[:tur - 0.5sw, :tur + 0.5sw]);
+        marker(:left :de.bf, rn[:tur] << 0.5mt);
+        slabel(:left, rn[:tur] >> 2.5mt + (0dt, 1.2dt), "Tureby");
+    }
+
+    with link = "line.dk.RKN" {
+        track(rn[:tur + 0.5sw, :has - 0.5sw]);
+    }
+
+    with link = "point.dk.Haslev", railway = :station {
+        track(rn[:has - 0.5sw, :has + 0.5sw]);
+        marker(:left :de.bf, rn[:has] << 0.5mt);
+        slabel(:left, rn[:has] >> 2.5mt + (0dt, 1.2dt), "Haslev");
+    }
+
+    with link = "line.dk.RKN" {
+        track(rn[:has + 0.5sw, :bra - 0.5sw]);
+    }
+
+    with link = "point.dk.Bråby", railway = :station {
+        track(rn[:bra - 0.5sw, :bra + 0.5sw]);
+        marker(:right :de.bf :removed, rn[:bra] >> 0.5mt);
+        slabel(:left :removed, rn[:bra] >> 0.5mt >> 1.5sh + (0dt, 1.2dt),
+            "Bråby"
+        );
+    }
+
+    with link = "line.dk.RKN" {
+        track(rn[:bra + 0.5sw, :hol - 0.5sw]);
+    }
+
+    with link = "point.dk.Holme-Olstrup", railway = :station {
+        track(rn[:hol - 0.5sw, :hol + 0.5sw]);
+        marker(:left :de.bf, rn[:hol] << 0.5mt);
+        slabel(:nw, rn[:hol - 0.5sw] << 0.5mt << 1.05sh, "Holme-Olstrup");
+    }
+
+    with link = "line.dk.RKN" {
+        track(rn[:hol + 0.5sw, :hol + 2.5km]);
+        line_label(:left:n, rn[:hol + 2.5km] << 0.5mt, (0.2dt, 0dt), "RKN");
+        track(rn[:hol + 2.5km, :nan - 0.5sw]);
+    }
+
+    with link = "point.dk.Næstved-Nord", railway = :station {
+        track(rn[:nan - 0.5sw, :nan + 0.5sw]);
+        marker(:right :de.hp, rn[:nan] >> 0.5mt);
+        slabel(:top, rn[:nan] >> 0.5mt >> 1.05sh, "Næstved Nord");
+    }
+
+    with link = "line.dk.RKN" {
+        track(
+                rn[:nan + 0.5sw, :nas.xr - 0.5sw]
+            ..  rn[:nas.yr, :nas.yr + 0.1dl] << 0.5md << 1ms << 0.5mt
+        );
+    }
+
+    # point.dk.Næstved  dk.RSR
+}
+

@@ -1,0 +1,265 @@
+# DK HNS.  Holbæk - Nykøbing Sjælland
+#
+let hn = path("d3.dk.hns");
+
+with detail = 4,
+     railway = :first :pax
+{
+    # point.dk.Holbæk  dk.RKB
+
+    with link = "line.dk.HNS" {
+        track(:lor,
+                hn[:hol + 0.49sw, :hol + 0.5sw] >> 0.5mo
+            ..  hn[:hol.xf, :hol.xf + 0.1dl] >> 1mo
+        );
+        track(:lor, hn[:hol.xf, :ste - 0.5sw] >> 1mo);
+    }
+
+    with link = "point.dk.Stenhus", railway = :station {
+        track(hn[:ste - 0.5sw, :ste + 0.5sw] >> 1mo);
+        marker(:right :de.hp :casing,
+            hn[:ste] >> 1mo >> 0.5mt, hn[:ste] >> 0.5mo
+        );
+        station(:top, hn[:ste] >> 1mo >> 0.5mt >> 1.3sh + (-0.5dt, 0dt),
+            "Stenhus", "HNS: 1,300"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(:lor, hn[:ste + 0.5sw, :hol.yn] >> 1mo);
+        track(:lor,
+                hn[:hol.yn - 0.1dl, :hol.yn] >> 1mo
+            ..  hn[:hol.xn, :hol.xn + 0.1dl]
+        );
+        track(hn[:hol.xn, :all - 0.5sw]);
+    }
+
+    with link = "point.dk.Allerup", railway = :station {
+        track(hn[:all - 0.5sw, :all + 0.5sw]);
+        marker(:right :de.hp :removed, hn[:all] >> 0.5mt);
+        station(:top :removed, hn[:all] >> 0.5mt >> 1.2sh,
+            "Allerup", "HNS: ??"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:all + 0.5sw, :mar - 0.7km]);
+        line_label(:left:ne, hn[:mar - 0.7km] << 0.5mt, "HNS");
+        track(hn[:mar - 0.7km, :mar - 0.5sw]);
+    }
+
+    with link = "point.dk.Mårsø", railway = :station {
+        track(hn[:mar - 0.5sw, :mar + 0.5sw]);
+        marker(:right :de.bbf :nopax, hn[:mar] >> 0.5mt);
+        marker(:right :de.exbf :nopax, hn[:mar] >> 0.5mt);
+        station(:right:left_align :nopax, hn[:mar - 0.5sw] >> 0.5mt >> 1.7sh,
+            "Mårsø", " HNS: 5,100"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:mar + 0.5sw, :nha - 0.5sw]);
+    }
+
+    with link = "point.dk.Ny-Hagested", railway = :station {
+        track(hn[:nha - 0.5sw, :nha + 0.5sw]);
+        marker(:right :de.hp, hn[:nha] >> 0.5mt);
+        station(:top, hn[:nha] >> 0.5mt >> 1.2sh,
+            "Ny Hagested", "HNS: 7,700"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:nha + 0.5sw, :gis - 0.5sw]);
+    }
+
+    with link = "point.dk.Gislinge", railway = :station {
+        track(hn[:gis - 0.5sw, :gis + 0.5sw]);
+        marker(:right :de.bf, hn[:gis] >> 0.5mt);
+        station(:top, hn[:gis] >> 0.5mt >> 1.2sh,
+            "Gislinge", "HNS: 10,700"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:gis + 0.5sw, :san - 0.5sw]);
+    }
+
+    with link = "point.dk.Sandby", railway = :station {
+        track(hn[:san - 0.5sw, :san + 0.5sw]);
+        marker(:right :de.hst :removed, hn[:san] >> 0.5mt);
+        station(:top :removed, hn[:san] >> 0.5mt >> 1.2sh,
+            "Sandby", "HNS: ??"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:san + 0.5sw, :svi - 0.5sw]);
+    }
+
+    with link = "point.dk.Svinninge", railway = :station {
+        track(hn[:svi - 0.5sw, :svi + 0.5sw]);
+        marker(:left :de.bf, hn[:svi] << 0.5mt);
+        station(:bottom, hn[:svi] << 0.5mt << 1.2sh,
+            "Svinninge", "HNS: 15,800"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:svi + 0.5sw, :svi + 1.3km]);
+        line_label(:left:e, hn[:svi + 1.3km] << 0.5mt, "HNS");
+        track(hn[:svi + 1.3km, :hor - 0.5sw]);
+    }
+
+    with link = "point.dk.Hørve", railway = :station {
+        track(hn[:hor - 0.5sw, :hor + 0.5sw]);
+        marker(:left :de.bf, hn[:hor] << 0.5mt);
+        station(:left:right_align, hn[:hor] << 0.5mt << 1.6sh + (0dt, 1dt),
+            span(:bold, "Hørve"),
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "HVL: "), "HNS: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "0,", anchor(), "0"),
+                    hbox(:sep:base, "19,", anchor(), "700")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:hor + 0.5sw, :far - 0.5sw]);
+    }
+
+    with link = "point.dk.Fårevejle", railway = :station {
+        track(hn[:far - 0.5sw, :far + 0.5sw]);
+        marker(:left :de.bf, hn[:far] << 0.5mt);
+        station(:left, hn[:far] << 0.5mt << 1.5sh + (0dt, 1.2dt),
+            "Fårevejle", "HNS: 23,800"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:far + 0.5sw, :asn - 0.5sw]);
+    }
+
+    with link = "point.dk.Asnæs", railway = :station {
+        track(hn[:asn - 0.5sw, :asn + 0.5sw]);
+        marker(:left :de.bf, hn[:asn] << 0.5mt);
+        station(:top, hn[:asn] << 0.5mt << 1.3sh, "Asnæs", "HNS: 27,000");
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:asn + 0.5sw, :gre - 0.5sw]);
+    }
+
+    with link = "point.dk.Grevinge", railway = :station {
+        track(hn[:gre - 0.5sw, :gre + 0.5sw]);
+        marker(:right :de.bf, hn[:gre] >> 0.5mt);
+        station(:right, hn[:gre] >> 0.5mt >> 1.6sh + (0dt, 1.2dt),
+            "Grevinge", "HNS: 30,400"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:gre + 0.5sw, :kel - 0.5sw]);
+    }
+
+    with link = "point.dk.Kelstrup", railway = :station {
+        track(hn[:kel - 0.5sw, :kel + 0.5sw]);
+        marker(:right :de.hst :removed, hn[:kel] >> 0.5mt);
+        station(:right :removed, hn[:kel] >> 0.5mt >> 1.6sh + (0dt, 0.6dt),
+            "Kelstrup", "HNS: ??"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:kel + 0.5sw, :kel + 1.3km]);
+        line_label(:left:se, hn[:kel + 1.3km] << 0.5mt, "HNS");
+        track(hn[:kel + 1.3km, :vig - 0.5sw]);
+    }
+
+    with link = "point.dk.Vig", railway = :station {
+        track(hn[:vig - 0.5sw, :vig + 0.5sw]);
+        marker(:left :de.bf, hn[:vig] << 0.5mt);
+        station(:left:right_align, hn[:vig] << 0.5mt << 1.5sh + (0dt, 1.2dt),
+            "Vig", "HNS: 36,800 "
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:vig + 0.5sw, :kol - 0.5sw]);
+    }
+
+    with link = "point.dk.Kollekolle", railway = :station {
+        track(hn[:kol - 0.5sw, :kol + 0.5sw]);
+        marker(:right :de.hst :removed, hn[:kol] >> 0.5mt);
+        station(:right :removed, hn[:kol] >> 0.5mt >> 1.6sh + (0dt, 1dt),
+            "Kollekolle", "HNS: ??"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:kol + 0.5sw, :nas - 0.5sw]);
+    }
+
+    with link = "point.dk.Nørre-Asmindrup", railway = :station {
+        track(hn[:nas - 0.5sw, :nas + 0.5sw]);
+        marker(:left :de.bf, hn[:nas] << 0.5mt);
+        station(:left, hn[:nas] << 0.5mt << 1.5sh + (0dt, 1dt),
+            "Nørre Asmindrup", "HNS: 41,300"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:nas + 0.5sw, :som - 0.5sw]);
+    }
+
+    with link = "point.dk.Sommerland-Sjælland", railway = :station {
+        track(hn[:som - 0.5sw, :som + 0.5sw]);
+        marker(:right :de.hp, hn[:som] >> 0.5mt);
+        station(:right, hn[:som] >> 0.5mt >> 1.5sh + (0dt, 1.2dt),
+            "Sommerland Sjælland", "HNS: 42,860"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:som + 0.5sw, :hoj - 0.5sw]);
+    }
+
+    with link = "point.dk.Højby-Sjælland", railway = :station {
+        track(hn[:hoj - 0.5sw, :hoj + 0.5sw]);
+        marker(:left :de.bf, hn[:hoj] << 0.5mt);
+        station(:left, hn[:hoj] << 0.5mt << 1.6sh + (0dt, 1.4dt),
+            "Højby Sjælland", "HNS: 44,500"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:hoj + 0.5sw, :hoj + 1.5km]);
+        line_label(:left:se, hn[:hoj + 1.5km] << 0.5mt, "HNS");
+        track(hn[:hoj + 1.5km, :nyl - 0.5sw]);
+    }
+
+    with link = "point.dk.Nyled", railway = :station {
+        track(hn[:nyl - 0.5sw, :nyl + 0.5sw]);
+        marker(:left :de.hp, hn[:nyl] << 0.5mt);
+        station(:top, hn[:nyl] << 0.5mt << 1.3sh + (0.5dt, 0dt),
+            "Nyled", "HNS: 48,100"
+        );
+    }
+
+    with link = "line.dk.HNS" {
+        track(hn[:nyl + 0.5sw, :nyk - 0.5sw]);
+    }
+
+    with link = "point.dk.Nykøbing-Sjælland", railway = :station {
+        track(hn[:nyk - 0.5sw, :nyk.f]);
+        marker(:left :de.bf, hn[:nyk] << 0.5mt);
+        station(:right, hn[:nyk] + (2dt, 1.8dt),
+            span(:bold, "Nykøbing Sjælland"),
+            "HNS: 49,400"
+        );
+    }
+}
+
+
