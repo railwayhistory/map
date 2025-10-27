@@ -259,6 +259,13 @@
 
 ## New Additions
 
+### 2025-10-27
+
+* Added first part of both overview and detail map of Denmark, covering
+  Sjælland. ([#6])
+
+[#6]: https://github.com/railwayhistory/map/pull/6
+
 ### 2025-08-22
 
 * Added overview map of Sweden. ([#101])
