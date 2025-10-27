@@ -1,0 +1,75 @@
+# DK SRV.  Sorø - Vedde
+#
+let sv = path("d3.dk.srv");
+
+with detail = 4,
+     railway = :first :removed
+{
+    # point.dk.Sorø  dk.KFA
+ 
+    with link = "line.dk.SRV" {
+        track(
+                sv[:sor.yv - 0.1dl, :sor.yv] << 0.5mo << 1sh << 1mt
+            ..  sv[:sor.xv + 1sh, :sob - 0.5sw]
+        );
+    }
+
+    with link = "point.dk.Sorø-By", railway = :station {
+        track(sv[:sob - 0.5sw, :sob + 0.5sw]);
+        marker(:left :de.bf, sv[:sob] << 0.5mt);
+        station(:left, sv[:sob] << 0.5mt << 1.5sh + (0dt, 1.2dt),
+            "Sorø By", "SRV: 2,6"
+        );
+    }
+
+    with link = "line.dk.SRV" {
+        track(sv[:sob + 0.5sw, :sob + 1.2km]);
+        line_label(:left:e, sv[:sob + 1.2km] << 0.5mt, "SRV");
+        track(sv[:sob + 1.2km, :ped - 0.5sw]);
+    }
+
+    with link = "point.dk.Pedersborg", railway = :station {
+        track(sv[:ped - 0.5sw, :ped + 0.5sw]);
+        marker(:left :de.bf, sv[:ped] << 0.5mt);
+        station(:left, sv[:ped] << 0.5mt << 1.6sh + (0dt, 1.2dt),
+            "Pedersborg", "SRV: 5,2"
+        );
+    }
+
+    with link = "line.dk.SRV" {
+        track(sv[:ped + 0.5sw, :doj - 0.5sw]);
+    }
+
+    with link = "point.dk.Døjringe", railway = :station {
+        track(sv[:doj - 0.5sw, :doj + 0.5sw]);
+        marker(:right :de.bf, sv[:doj] >> 0.5mt);
+        station(:right, sv[:doj] >> 0.5mt >> 1.5sh + (0dt, 1.5dt),
+            "Døjringe", "SRV: 8,7"
+        );
+    }
+
+    with link = "line.dk.SRV" {
+        track(sv[:doj + 0.5sw, :mun - 0.5sw]);
+    }
+
+    with link = "point.dk.Munke-Bjergby", railway = :station {
+        track(sv[:mun - 0.5sw, :mun + 0.5sw]);
+        marker(:left :de.bf, sv[:mun] << 0.5mt);
+        station(:left, sv[:mun - 0.3sw] << 0.5mt << 1.1sh,
+            hbox(:right:top, "Munke-Bjergby"), "SRV: 12,3"
+        );
+    }
+
+    with link = "line.dk.SRV" {
+        track(sv[:mun + 0.5sw, :mun + 1km]);
+        line_label(:left:se, sv[:mun + 1km] << 0.5mt, "SRV");
+        track(sv[:mun + 1km, :ved.xs - 1mo]);
+        track(:lor,
+                sv[:ved.xs - 1.1mo, :ved.xs - 1mo]
+            ..  sv[:ved.ys, :ved.ys + 0.1dl] >> 1mo
+        );
+    }
+
+    # point.dk.Vedde  dk.HTL
+}
+

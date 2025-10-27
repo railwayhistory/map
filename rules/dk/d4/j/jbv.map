@@ -1,0 +1,217 @@
+# DK JBV.  Jægersborg - Vedbæk
+#
+let jn = path("d3.dk.jbv.jn");
+let nv = path("d3.dk.jbv.nv");
+
+with detail = 4,
+     railway = :first :pax
+{
+    # point.dk.Jægersborg  dk.HHS
+
+    with link = "line.dk.JBV" {
+        track(:lor,
+                path("d3.dk.hhs")[:jag + 0.49sw, :jag + 0.5sw]
+                    >> 0.5mo >> 1insh >> 0.5mt
+            ..  jn[:jag.xv, :jag.xv + 0.1dl]
+        );
+        track(jn[:jag.xv, :nor - 0.5sw]);
+    }
+
+    with link = "point.dk.Nørgaardsvej", railway = :station {
+        track(jn[:nor - 0.5sw, :nor + 0.5sw]);
+        marker(:right :de.hp, jn[:nor] >> 0.5mt);
+        station(:right, jn[:nor - 0.6sw] >> 0.5mt >> 1.2sh,
+            "Nørgaardsvej", "JBV: 1,200"
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:nor + 0.5sw, :lyl.yl]);
+        track(jn[:lyl.yl, :lyl - 0.5sw]);
+    }
+
+    with link = "point.dk.Lyngby-Lokal", railway = :station {
+        track(jn[:lyl - 0.5sw, :lyl + 0.5sw]);
+        marker(:right :de.hp, jn[:lyl] >> 0.5mt);
+        station(:top:left_align,
+            jn[:lyl - 0.5sw] >> 0.5mt >> 1.3sh + (-1.3sw, 0dt),
+            "Lyngby Lokal",
+            hbox(:center:base, " JBV: 1,900 ", span(:former, "(1,4)"))
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:lyl + 0.5sw, :sme - 0.5sw]);
+    }
+
+    with link = "point.dk.Smedebakken", railway = :station {
+        track(jn[:sme - 0.5sw, :sme + 0.5sw]);
+        marker(:left :de.hp :removed, jn[:sme] << 0.5mt);
+        with layer = -1 guide(:removed,
+                jn[:sme] << 0.5mt << 1.2sh
+            --  jn[:sme] + (-0.6km, 0.5km) + (0.8dt, -1.5dt)
+        );
+        station(:left :removed, jn[:sme] + (-0.6km, 0.5km),
+            "Smedebakken",
+            span(:xsmall :former, "(1,7)")
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:sme + 0.5sw, :slo - 0.5sw]);
+    }
+
+    with link = "point.dk.Slotsparken", railway = :station {
+        track(jn[:slo - 0.5sw, :slo + 0.5sw]);
+        marker(:right :de.hp :removed, jn[:slo] >> 0.5mt);
+        station(:right :removed, jn[:slo] >> 0.5mt >> 1.5sh + (0dt, 1.5dt),
+            vbox(:center:base,
+                span(:former, "Sorgenfri"),
+                "Slotsparken"
+            ),
+            "JBV: ??"
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:slo + 0.5sw, :fug - 0.5sw]);
+    }
+
+    with link = "point.dk.Fuglevad", railway = :station {
+        track(jn[:fug - 0.5sw, :fug + 0.5sw]);
+        marker(:left :de.bf, jn[:fug] << 0.5mt);
+        station(:left:right_align, jn[:fug] << 0.5mt << 1.5sh + (0dt, 1.4dt),
+            "Fuglevad",
+            hbox(:center:base, " JBV: 3,300 ", span(:former, "(2,8)"), " ")
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:fug + 0.5sw, :bor - 0.5sw]);
+    }
+
+    with link = "point.dk.Borrebakken", railway = :station {
+        track(jn[:bor - 0.5sw, :bor + 0.5sw]);
+        marker(:right :de.hp :removed, jn[:bor] >> 0.5mt);
+        station(:right :removed, jn[:bor] >> 0.5mt >> 1.4sh + (0dt, 1.2dt),
+            "Borrebakken", "JBV: ??"
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:bor + 0.5sw, :bre - 0.5sw]);
+    }
+
+    with link = "point.dk.Brede", railway = :station {
+        track(jn[:bre - 0.5sw, :bre + 0.5sw]);
+        marker(:left :de.hp, jn[:bre] << 0.5mt);
+        station(:left:right_align, jn[:bre] << 0.5mt << 1.5sh + (0dt, 1.2dt),
+            "Brede",
+            hbox(:center:base, " JBV: 4,500 ", span(:former, "(3,9)"))
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:bre + 0.5sw, :bre + 0.5km]);
+        line_label(:left:se, jn[:bre + 0.5km] << 0.5mt, "JBV");
+        track(jn[:bre + 0.5km, :orh - 0.5sw]);
+    }
+
+    with link = "point.dk.Ørholm", railway = :station {
+        track(jn[:orh - 0.5sw, :orh + 0.5sw]);
+        marker(:right :de.bf, jn[:orh] >> 0.5mt);
+        station(:bottom, jn[:orh] >> 0.5mt >> 1.4sh + (0.5dt, 0dt),
+            "Ørholm",
+            hbox(:center:base, " JBV: 5,500 ", span(:former, "(4,9)"))
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:orh + 0.5sw, :lun - 0.5sw]);
+    }
+
+    with link = "point.dk.Lundtofte-Ravnholm", railway = :station {
+        track(jn[:lun - 0.5sw, :lun + 0.5sw]);
+        marker(:right :de.hp, jn[:lun] >> 0.5mt);
+        station(:right, jn[:lun + 0.4sw] >> 0.5mt >> 1.1sh,
+            hbox(:left:top, "Ravnholm"), "JBV: 6,100"
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:lun + 0.5sw, :rav - 0.5sw]);
+    }
+
+    with link = "point.dk.Ravneholm", railway = :station {
+        track(jn[:rav - 0.5sw, :rav + 0.5sw]);
+        marker(:left :de.hp :removed, jn[:rav] << 0.5mt);
+        station(:right :removed, jn[:rav] >> 2.5mt + (0dt, 1.2dt),
+            "Ravneholm",
+            hbox(:center:base, "JBV: ", span(:former, "(6,1)"))
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(jn[:rav + 0.5sw, :nar.ys]);
+        track(jn[:nar.ys, :nar - 0.5sw]);
+    }
+
+    with link = "point.dk.Nærum", railway = :station {
+        track(jn[:nar - 0.5sw, :nar]);
+        marker(:top :de.bf, jn[:nar]);
+        station(:top, jn[:nar] + (-0.5sw, -1sh) + (0dt, -1dt),
+            span(:bold, "Nærum"), " JBV: 7,640"
+        );
+    }
+}
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    with link = "line.dk.JBV" {
+        track(nv[:nar.ys, :nar - 0.5sw]);
+    }
+
+    with link = "point.dk.Nærum", railway = :station {
+        track(nv[:nar - 0.5sw, :nar + 0.5sw]);
+        marker(:right :de.bf, nv[:nar]);
+        station(:right, nv[:nar + 0.5sw] >> 0.5mt >> 1.1sh,
+            hbox(:left:top, "Nærum"),
+            "JBV: 7,9"
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(nv[:nar + 0.5sw, :run - 0.5sw]);
+    }
+
+    with link = "point.dk.Rundforbi", railway = :station {
+        track(nv[:run - 0.5sw, :run + 0.5sw]);
+        marker(:left :de.hp, nv[:run] << 0.5mt);
+        station(:left, nv[:run] << 0.5mt << 1.5sh + (0dt, 1.4dt),
+            "Rundforbi", "JBV: 8,8"
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(nv[:run + 0.5sw, :run + 0.6km]);
+        line_label(:left:e, nv[:run + 0.6km] << 0.5mt, (0dt, -0.2dt), "JBV");
+        track(nv[:run + 0.6km, :fry - 0.5sw]);
+    }
+
+    with link = "point.dk.Frydenlund", railway = :station {
+        track(nv[:fry - 0.5sw, :fry + 0.5sw]);
+        marker(:left :de.hp, nv[:fry] << 0.5mt);
+        station(:left, nv[:fry] << 0.5mt << 1.5sh + (0dt, 1.4dt),
+            "Frydenlund", "JBV: 10,2"
+        );
+    }
+
+    with link = "line.dk.JBV" {
+        track(
+                nv[:fry + 0.5sw, :ved.xj]
+            ..  nv[:ved.yj, :ved.yj + 0.1dl] << 0.5mo
+        );
+    }
+}
+

@@ -1,0 +1,26 @@
+# DK VKB.  Vigerslev - Kalvebod
+#
+let vk = path("d3.dk.vkb");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax 
+{
+    with link = "line.dk.VKB" {
+        with layer = -1 track(:lor, vk[:nel - 0.5sw, :vig.yk] >> 1ms >> 1md);
+        with layer = -1 track(:lor,
+                vk[:vig.yk - 0.1dl, :vig.yk] >> 1ms >> 1md
+            ..  vk[:vig.xk + 1md, :vig.xk + 1.1md]
+        );
+        track(vk[:vig.xk + 1md, :kal.xv]);
+
+        track(:single :dn:rup :casing,
+                vk[:kal.xv - 0.1dl, :kal.xv] << 0.5md >> 0.5mt
+            ..  vk[:kal.yv, :kal.yv + 0.1dl] << 0.5md << 1ms << 0.5mt
+        );
+        track(:single :up:ldn,
+                vk[:kal.xv - 0.1dl, :kal.xv] >> 0.5md << 0.5mt
+            ..  vk[:kal.yv, :kal.yv + 0.1dl] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+}
+

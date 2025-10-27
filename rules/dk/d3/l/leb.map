@@ -1,0 +1,128 @@
+# DK LEB.  Lunderskov - Esbjerg
+#
+let le = path("d3.dk.leb");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax
+{
+    # point.dk.Lunderskov  dk.FPB
+
+    with link = "line.dk.LEB" {
+        track(:single :dn:ror:lor :casing,
+                le[:lun.ye - 0.1dl, :lun.ye] << 0.5ms << 0.5mt
+            ..  le[:lun.xe, :lun.xe + 0.1dl] << 0.5md >> 0.5mt
+        );
+        track(:single :up:lor,
+                le[:lun.ye - 0.1dl, :lun.ye] >> 1ms >> 1.5mt
+            ..  le[:lun.xe, :lun.xe + 0.1dl] >> 0.5md << 0.5mt
+        );
+        track(le[:lun.xe, :and - 0.5sw]);
+    }
+
+    with link = "point.dk.Andst", railway = :station {
+        track(le[:and - 0.5sw, :and + 0.5sw]);
+        marker(:right :de.bf :removed, le[:and] >> 0.5md);
+        slabel(:top :removed, le[:and] >> 0.5md >> 1.1sh, "Andst");
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:and + 0.5sw, :and + 2.5km]);
+        line_label(:left:n, le[:and + 2.5km] << 0.5md, "LEB");
+        track(le[:and + 2.5km, :vej.yg]);
+    }
+
+    with link = "point.dk.Vejen", railway = :station {
+        track(le[:vej.yg, :vej + 0.5sw]);
+        marker(:right :de.bf, le[:vej] >> 0.5md);
+        slabel(:ne :bold, le[:vej + 0.3sw] << 0.5md, "Vejen");
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:vej + 0.5sw, :bro - 0.5sw]);
+    }
+
+    with link = "point.dk.Brørup", railway = :station {
+        track( le[:bro - 0.5sw, :bro + 0.5sw]);
+        marker(:right :de.hp, le[:bro] >> 0.5md);
+        slabel(:top, le[:bro] >> 0.5md >> 1.1sh, "Brørup");
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:bro + 0.5sw, :bro + 3.5km]);
+        line_label(:left:n, le[:bro + 3.5km] << 0.5md, "LEB");
+        track(le[:bro + 3.5km, :hol - 0.5sw]);
+    }
+
+    with link = "point.dk.Holsted", railway = :station {
+        track(le[:hol - 0.5sw, :hol + 0.5sw]);
+        marker(:right :de.bf, le[:hol] >> 0.5md);
+        slabel(:top, le[:hol] >> 0.5md >> 1.1sh, "Holsted");
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:hol + 0.5sw, :gor - 0.5sw]);
+    }
+
+    with link = "point.dk.Gørding", railway = :station {
+        track(le[:gor - 0.5sw, :gor + 0.5sw]);
+        marker(:right :de.hp, le[:gor] >> 0.5md);
+        slabel(:top, le[:gor] >> 0.5md >> 1.1sh + (-0.5sw, 0dt), "Gørding");
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:gor + 0.5sw, :gor + 2.8km]);
+        line_label(:right:s, le[:gor + 2.8km] >> 0.5md, "LEB");
+        track(le[:gor + 2.8km, :bra.yt]);
+    }
+
+    with link = "point.dk.Bramming", railway = :station {
+        track(le[:bra.yt, :bra + 320m]);
+        track(:single,
+                le[:bra.yt, :bra + 320m - 1dl] << 0.5md << 1ms << 0.5mt
+            --  le[:bra + 320m, :bra + 321m] << 0.5md >> 0.5mt
+        );
+
+        marker(:right :de.bf, le[:bra] >> 0.5md);
+        slabel(:top :bold, le[:bra] >> 0.5md >> 1.1sh, "Bramming");
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:bra + 320m, :tja - 0.5sw]);
+    }
+
+    with link = "point.dk.Tjæreborg", railway = :station {
+        track(le[:tja - 0.5sw, :tja + 0.5sw]);
+        marker(:left :de.bf, le[:tja] << 0.5md);
+        slabel(:bottom, le[:tja] << 0.5md << 1.4sh + (-0.3sw, 0dt),
+            "Tjæreborg"
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:tja + 0.5sw, :tja + 3.3km]);
+        line_label(:right:s, le[:tja + 3.3km] >> 0.5md, "LEB");
+        track(le[:tja + 3.3km, :jer - 0.5sw]);
+    }
+
+    with link = "point.dk.Jerne", railway = :station {
+        track(le[:jer - 0.5sw, :jer + 0.5sw]);
+        marker(:right :de.hp, le[:jer] >> 0.5md);
+        slabel(:top, le[:jer - 0.3sw] >> 0.5md >> 1.2sh, "Jerne");
+    }
+
+    with link = "line.dk.LEB" {
+        track(le[:jer + 0.5sw, :esb.ys - 1md]);
+    }
+
+    with link = "point.dk.Esbjerg", railway = :station {
+        # DK LEB
+        track(le[:esb.ys - 1md, :esb + 0.5sw]);
+
+        # fra Struer
+        track(:single, le[:esb.ys, :esb + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+
+        marker(:right :de.bf, le[:esb] >> 0.5md >> 1ms >> 1mt);
+        slabel(:right :bold, le[:esb] + (2.0dt, 2.3dt), "Esbjerg");
+    }
+}
+

@@ -1,0 +1,411 @@
+# DK KFS.  København H - Frederikssund
+#
+let kf = path("d3.dk.kfs");
+
+with detail = 4,
+     railway = :first :cat:dc15 :pax
+{
+    with link = "point.dk.København-H", railway = :station {
+        # KKB dn - KFS up
+        track(
+                kf[:kob.a, :kob - 180m - 1dl] >> 2.5mo
+            --  kf[:kob - 180m + 1dl, :kob + 0.5sw] >> 4.5mo
+        );
+
+        # KHK up
+        track(kf[:kob - 180m, :kob + 0.5sw] >> 3.5mo);
+
+        # KHK dn
+        track(
+                kf[:kob - 181m, :kob - 180m] >> 1.5mo
+            --  kf[:kob - 180m + 1dl, :kob + 0.5sw] >> 2.5mo
+        );
+
+        # KKB up - KFS dn
+        track(kf[:kob.a, :kob + 0.5sw] >> 1.5mo);
+    }
+
+    with link = "line.dk.KFS" {
+        track(:up:lor, kf[:kob + 0.5sw, :dyb - 0.5sw] >> 4.5mo);
+        track(:dn:ror:lor, kf[:kob + 0.5sw, :dyb - 0.5sw] >> 1.5mo);
+    }
+
+    with link = "point.dk.Dybbølsbro", railway = :station {
+        # KFS up
+        track(kf[:dyb - 0.5sw, :dyb + 0.5sw] >> 4.5mo);
+
+        # KHK up
+        track(kf[:dyb - 0.5sw, :dyb + 0.5sw] >> 3.5mo);
+
+        # KHK dn
+        track(kf[:dyb - 0.5sw, :dyb + 0.5sw] >> 2.5mo);
+
+        # KFS dn
+        track(kf[:dyb - 0.5sw, :dyb + 0.5sw] >> 1.5mo);
+
+        marker(:right :de.hp, kf[:dyb] >> 4.5mo >> 0.5mt);
+        label(
+            kf[:dyb] >> 4.5mo >> 0.5mt >> 1.7sh + (1.5sw, 0dt),
+            vbox(:right:base,
+                "Dybbølsbro",
+                span(:xsmall, "KFS·KHK:"),
+                span(:xsmall, "0,900")
+            )
+        );
+            
+    }
+
+    with link = "line.dk.KFS" {
+        track(:up:lor, kf[:dyb + 0.5sw, :ske - 0.5sw] >> 4.5mo);
+        track(:dn:ror:lor, kf[:dyb + 0.5sw, :ske - 0.5sw] >> 1.5mo);
+    }
+
+    with link = "point.dk.Skelbæk", railway = :station {
+        track(:up:lor, kf[:ske - 0.5sw, :ske + 0.5sw] >> 4.5mo);
+        track(:up:ror:ldn, kf[:ske - 0.5sw, :ske + 0.5sw] >> 3.5mo);
+        track(:dn:rup:lor, kf[:ske - 0.5sw, :ske + 0.5sw] >> 2.5mo);
+        track(:dn:ror:lor, kf[:ske - 0.5sw, :ske + 0.5sw] >> 1.5mo);
+
+        marker(:right :de.bbf :nopax, kf[:ske] >> 4.5mo >> 0.5mt);
+        station(:top:right_align :nopax, kf[:ske] >> 4.5mo >> 0.5mt >> 1.0sh,
+            "Skelbæk",
+            "KFS·KHK: 1,300"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:up:lor, kf[:ske + 0.5sw, :kob.yk - 150m] >> 4.5mo);
+        track(:dn:ror:lor, kf[:ske + 0.5sw, :kob.yk - 150m] >> 1.5mo);
+
+        track(:up:ldn,
+                kf[:kob.yk - 150m, :kob.yk - 50m] >> 4.5mo
+            ..  kf[:kob.xk, :kob.xk + 0.1dl] >> 2.5mo
+        );
+        with layer = -1 track(:dn:rup, kf[:kob.yk - 151m, :kob.xk] >> 1.5mo);
+
+        track(:up:ldn, kf[:kob.xk, :car - 0.5sw] >> 2.5mo);
+        track(:dn:rup:lor, kf[:kob.xk, :car - 0.5sw] >> 1.5mo);
+    }
+
+    with link = "point.dk.Carlsberg", railway = :station {
+        track(:double :lor, kf[:car - 0.5sw, :car + 0.5sw] >> 2mo);
+        marker(:right :de.hp, kf[:car] >> 2.5mo >> 0.5mt);
+        station(:top, kf[:car] >> 2.5mo >> 0.5mt >> 1.2sh,
+            "Carlsberg", "KFS: 2,550"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double :lor, kf[:car + 0.5sw, :val - 250m] >> 2mo);
+    }
+
+    with link = "point.dk.Valby", railway = :station {
+        let vh = path("d3.dk.kfa");
+
+        # VHT dn
+        track(vh[:val - 250m, :val.xf] >> 1.5mo);
+
+        # KFS dn
+        track(:casing,
+                kf[:val - 221m, :val - 220m] >> 1.5mo
+            --  kf[:val - 220m + 1dl, :val.yf] >> 2.5mo
+            ..  kf[:lan - 0.5sw, :lan - 0.49sw] << 0.5mo
+        );
+
+        # VHT up
+        with layer = -1 track(
+                vh[:val - 250m, :val - 220m - 0.7dl] >> 2.5mo
+            --  vh[:val - 220m + 0.3dl, :val.yf] >> 3.5mo
+            ..  vh[:val.xf, :val.xf + 0.1dl] >> 2.5mo
+        );
+
+        # KFS up
+        track(
+                kf[:val.yf - 1.1dl, :val.yf - 1dl] >> 3.5mo
+            --  kf[:val.yf - 0.1dl, :val.yf] >> 4.5mo
+            ..  kf[:lan - 0.5sw, :lan - 0.49sw] >> 0.5mo
+        );
+
+        marker(:right :de.bf, kf[:val] >> 3.5mo >> 0.5mt);
+    }
+
+    with link = "point.dk.Langgade", railway = :station {
+        track(:double, kf[:lan - 0.5sw, :lan + 0.5sw]);
+        marker(:left :de.hp, kf[:lan] << 0.5mo << 0.5mt);
+        label(kf[:lan] >> 0.5mo >> 2.5mt + (0dt, 1dt),
+            vbox(:left:base,
+                vbox(:center:base,
+                    span(:xsmall, "KFS: 4,800"),
+                    "Langgade"
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:lan + 0.5sw, :pet - 0.5sw]);
+    }
+
+    with link = "point.dk.Peter-Bangsvej", railway = :station {
+        track(:double, kf[:pet - 0.5sw, :pet+ 0.5sw]);
+        marker(:right :de.hp, kf[:pet] >> 0.5mo >> 0.5mt);
+        station(:right, kf[:pet] >> 0.5mo >> 0.5mt >> 1.5sh + (0dt, 1.2dt),
+            "Peter Bangsvej", "KFS: 5,900"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:pet + 0.5sw, :fli - 1sw]);
+    }
+
+    with link = "point.dk.Flintholm", railway = :station {
+        with layer = -1 {
+            track(:double, kf[:fli - 1sw, :fli]);
+            marker(:left :de.hp, kf[:fli - 0.5sw] << 0.5mo << 0.5mt);
+        }
+        station(:right, kf[:fli - 0.5sw] >> 0.5mo >> 3.5mt + (0.5sw, 1.5dt),
+            "Flintholm",
+            hbox(:center:top,
+                vbox(:right:top, "VLH: ", "KFS: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "6,", anchor(), "600"),
+                    hbox(:sep:base, "6,", anchor(), "800")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        with layer = -1 track(:double,
+                kf[:fli, :fli + 0.1dl]
+            ..  kf[:van.yf, :van.yf + 0.1dl] << 1mo
+        );
+        track(:double, kf[:van.yf, :van - 0.5sw] << 1mo);
+    }
+
+    with link = "point.dk.Vanløse", railway = :station {
+        track(:double,
+                kf[:van - 0.5sw, :van + 0.5sw] << 1mo
+            ..  kf[:van + 320m, :van + 400m]
+        );
+        marker(:left :de.bf, kf[:van] << 1.5mo << 0.5mt);
+        station(:top, kf[:van] >> 0.5mo >> 0.5mt >> 1.3sh,
+            "Vanløse", "KFS: 7,300"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:van + 400m, :jyl - 0.5sw]);
+    }
+
+    with link = "point.dk.Jyllingevej", railway = :station {
+        track(:double, kf[:jyl - 0.5sw, :jyl + 0.5sw]);
+        marker(:right :de.hp, kf[:jyl] >> 0.5mo >> 0.5mt);
+        station(:left, kf[:jyl + 0.5sw] << 0.5mo << 1.5mt,
+            hbox(:right:top, "Jyllingevej"),
+            "KFS: 8,200"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:jyl + 0.5sw, :isl - 0.5sw]);
+    }
+
+    with link = "point.dk.Islev", railway = :station {
+        track(:double, kf[:isl - 0.5sw, :isl + 0.5sw]);
+        marker(:right :de.hp, kf[:isl] >> 0.5mo >> 0.5mt);
+        station(:right:left_align,
+            kf[:isl] >> 0.5mo >> 0.5mt >> 1.4sh + (0dt, 1.1dt),
+            "Islev", "KFS: 9,400"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:isl + 0.5sw, :isl + 0.7km]);
+        line_label(:left:e, kf[:isl + 0.7km] << 0.5mo << 0.5mt, "KFS");
+        track(:double, kf[:isl + 0.7km, :hus - 0.5sw]);
+    }
+
+    with link = "point.dk.Husum", railway = :station {
+        track(:double, kf[:hus - 0.5sw, :hus + 0.5sw]);
+        marker(:right :de.hp, kf[:hus] >> 0.5mo >> 0.5mt);
+        station(:right:left_align,
+            kf[:hus] >> 0.5mo >> 0.5mt >> 1.6sh + (0dt, 1.4dt),
+            "Husum", " KFS: 10,752"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:hus + 0.5sw, :her - 0.5sw]);
+    }
+
+    with link = "point.dk.Herlev", railway = :station {
+        track(:double, kf[:her - 0.5sw, :her + 0.5sw]);
+        marker(:left :de.bf, kf[:her] << 0.5mo << 0.5mt);
+        station(:left:right_align,
+            kf[:her - 0.2sw] << 0.5mo << 0.5mt << 1.2sh,
+            hbox(:right:top, "Herlev"),
+            "KFS: 12,340"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:her + 0.5sw, :sko - 0.5sw]);
+    }
+
+    with link = "point.dk.Skovlunde", railway = :station {
+        track(:double, kf[:sko - 0.5sw, :sko + 0.5sw]);
+        marker(:right :de.hp, kf[:sko] >> 0.5mo >> 0.5mt);
+        station(:top, kf[:sko] >> 0.5mo >> 0.5mt >> 1.2sh,
+            "Skovlunde", "KFS: 15,000"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:sko + 0.5sw, :map - 0.5sw]);
+    }
+
+    with link = "point.dk.Malmparken", railway = :station {
+        track(:double, kf[:map - 0.5sw, :map + 0.5sw]);
+        marker(:right :de.hp, kf[:map] >> 0.5mo >> 0.5mt);
+        station(:top, kf[:map] >> 0.5mo >> 0.5mt >> 1.2sh,
+            "Malmparken", "KFS: 16,000"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:map + 0.5sw, :bal - 0.5sw]);
+    }
+
+    with link = "point.dk.Ballerup", railway = :station {
+        track(:double, kf[:bal - 0.5sw, :bal + 0.5sw]);
+        marker(:right :de.bf, kf[:bal] >> 0.5mo >> 0.5mt);
+        station(:right, kf[:bal - 0.5sw] >> 0.5md >> 1.4sh,
+            "Ballerup", " KFS: 17,855"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:bal + 0.5sw, :bal + 1.5km]);
+        line_label(:left:ne, kf[:bal + 1.5km] << 0.5mo << 0.5mt, "KFS");
+        track(:double, kf[:bal + 1.5km, :mal - 0.5sw]);
+    }
+
+    with link = "point.dk.Måløv", railway = :station {
+        track(:double, kf[:mal - 0.5sw, :mal + 0.5sw]);
+        marker(:right :de.hp, kf[:mal] >> 0.5mo >> 0.5mt);
+        station(:right:left_align, kf[:mal - 0.5sw] >> 0.5md >> 1.5sh,
+            "Måløv", " KFS: 21,070"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:mal + 0.5sw, :kil - 0.5sw]);
+    }
+
+    with link = "point.dk.Kildedal", railway = :station {
+        track(:double, kf[:kil - 0.5sw, :kil + 0.5sw]);
+        marker(:right :de.hp, kf[:kil] >> 0.5mo >> 0.5mt);
+        station(:top, kf[:kil] >> 0.5mo >> 0.5mt >> 1.3sh,
+            "Kildedal", "KFS: 23,142"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:kil + 0.5sw, :vek - 0.5sw]);
+    }
+
+    with link = "point.dk.Veksø", railway = :station {
+        track(:double, kf[:vek - 0.5sw, :vek + 0.5sw]);
+        marker(:right :de.bf, kf[:vek] >> 0.5mo >> 0.5mt);
+        station(:top, kf[:vek] >> 0.5md >> 1.4sh, "Veksø", "KFS: 26,240");
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:vek + 0.5sw, :ste - 0.5sw]);
+    }
+
+    with link = "point.dk.Stenløse", railway = :station {
+        track(:double, kf[:ste - 0.5sw, :ste + 0.5sw]);
+        marker(:right :de.hp, kf[:ste] >> 0.5mo >> 0.5mt);
+        station(:right, kf[:ste] >> 0.5mo >> 0.5mt >> 1.5sh + (0dt, 1.1dt),
+            "Stenløse", "KFS: 30,030"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:ste + 0.5sw, :ege - 0.5sw]);
+    }
+
+    with link = "point.dk.Egedal", railway = :station {
+        track(:double, kf[:ege - 0.5sw, :ege + 0.5sw]);
+        marker(:right :de.hp, kf[:ege] >> 0.5mo >> 0.5mt);
+        station(:right:left_align,
+            kf[:ege] >> 0.5mo >> 0.5mt >> 1.5sh + (0dt, 1.1dt),
+            vbox(:left:base,
+                span(:former, "Gl. Toftegård"),
+                "Egedal"
+            ),
+            " KFS: 31,500"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:ege + 0.5sw, :ols - 0.5sw]);
+    }
+
+    with link = "point.dk.Ølstykke", railway = :station {
+        track(:double, kf[:ols - 0.5sw, :ols + 0.5sw]);
+        marker(:right :de.bf, kf[:ols] >> 0.5mo  >> 0.5mt);
+        station(:left, kf[:ols] << 0.5mo,
+            hbox(:right:top, "Ølstykke"),
+            "KFS: 34,060"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:ols + 0.5sw, :vin - 0.5sw]);
+    }
+
+    with link = "point.dk.Vinge", railway = :station {
+        track(:double, kf[:vin - 0.5sw, :vin + 0.5sw]);
+        marker(:right :de.hp, kf[:vin] >> 0.5mo >> 0.5mt);
+        station(:top, kf[:vin - 0.2sw] >> 0.5mo >> 0.5mt >> 1.2sh,
+            "Vinge", "KFS: 37,265"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:vin + 0.5sw, :opp - 0.5sw]);
+    }
+
+    with link = "point.dk.Oppe-Sundby", railway = :station {
+        track(:double, kf[:opp - 0.5sw, :opp + 0.5sw]);
+        marker(:left :de.hp :removed, kf[:opp] << 0.5mo << 0.5mt);
+        station(:bottom :removed, kf[:opp] << 0.5md << 1.4sh,
+            "Oppe Sundby", "KFS: ??"
+        );
+    }
+
+    with link = "line.dk.KFS" {
+        track(:double, kf[:opp + 0.5sw, :opp + 1.8km]);
+        line_label(:left:ne, kf[:opp + 1.8km] << 0.5mo << 0.5mt, "KFS");
+        track(:double, kf[:opp + 1.8km, :fre.yr - 200m]);
+    }
+
+    with link = "point.dk.Frederikssund", railway = :station {
+        track(kf[:fre.yr - 200m, :fre + 360m] >> 0.5mo);
+        track(:casing, kf[:fre.yr - 200m, :fre + 490m] << 0.5mo);
+        marker(:right :de.bf, kf[:fre] >> 0.5mo >> 0.5mt);
+        station(:right, kf[:fre - 0.4sw] >> 0.5mo >> 0.5mt >> 1.3sh,
+            span(:bold, "Frederikssund"),
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "RFH: "), "KFS: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "57,", anchor(), "0"),
+                    hbox(:sep:base, "41,", anchor(), "840")
+                )
+            )
+        );
+    }
+}

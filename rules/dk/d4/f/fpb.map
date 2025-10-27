@@ -1,0 +1,1318 @@
+# DK FPB.  Fredericia - Padborg Landegrænse
+#
+let fp = path("d3.dk.fpb");
+
+with detail = 4,
+     railway = :first :cat:ac25 :pax
+{
+    # point.dk.Fredericia: dk.KF
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:fre.ak, :tau.ys - 2.7km]);
+        line_label(:right:s, fp[:tau.ys - 2.7km] >> 0.5mo >> 0.5mt,
+            (-0.3dt, 0dt), "FPB"
+        );
+        track(:double, fp[:tau.ys - 2.7km, :tau.af]);
+    }
+
+
+    with link = "point.dk.Taulov", railway = :station {
+        let st = path("d3.dk.sht");
+
+        # Sp. 1
+        track(fp[:tau.af, :tau.f] >> 0.5mo);
+            # Sp. 1a3a1
+            track(:side,
+                    fp[:tau - 2310m] >> 0.5mo
+                --  fp[:tau - 2210m] << 0.5mo
+            );
+            # Sp. 121
+            track(:side,
+                    fp[:tau - 460m] >> 0.5mo
+                --  fp[:tau - 380m] << 0.5mo
+            );
+
+        # Sp. 1b
+        track(
+                st[:tau.xs - 0.1dl, :tau.xs] >> 0.5mo
+            ..  fp[:tau.ys - 51m, :tau.ys - 50m] << 1.5mo
+            --  fp[:tau.ys + 50m, :tau.ys + 51m] << 0.5mo
+        );
+
+        # Sp. 2
+        track(:side,
+                fp[:tau - 461m, :tau - 460m] << 1.5mo
+            --  fp[:tau - 380m, :tau + 600m] << 0.5mo
+            --  fp[:tau + 700m, :tau + 701m] >> 0.5mo
+        );
+            # Sp. 231
+            track(:side,
+                    fp[:tau + 600m] << 0.5mo
+                --  fp[:tau + 700m] << 1.5mo
+            );
+
+        # Sp. 3
+        track(
+                fp[:tau.af, :tau - 680m] << 0.5mo
+            --  fp[:tau - 500m, :tau + 700m] << 1.5mo
+            ..  fp[:tau.f - 0.1dl, :tau.f] << 0.5mo
+        );
+            # Sp 3a-1a
+            track(:side,
+                    fp[:tau.ys + 160m] << 0.5mo
+                --  fp[:tau.ys + 260m] >> 0.5mo
+            );
+
+        # Sp. 3b
+        track(
+                st[:tau.xs - 0.1dl, :tau.xs] << 0.5mo
+            ..  fp[:tau.ys - 51m, :tau.ys + 100m] << 2.5mo
+            --  fp[:tau.ys + 300m, :tau.ys + 301m] << 0.5mo
+        );
+
+        # Sp. 4
+        track(:side :nopax,
+                fp[:tau - 1621m, :tau - 1620m] << 0.5mo
+            --  fp[:tau - 1560m, :tau - 500m] << 1.5mo
+        );
+            track(:side :nocat :nopax,
+                    fp[:tau - 700m] << 1.5mo
+                --  fp[:tau - 560m] << 2.5mo
+            );
+
+        # Sp. 4a
+        track(:side :nocat :nopax,
+                fp[:tau - 500m, :tau + 50m] << 2.5mo
+        );
+
+        # Sp. 40
+        track(:side :nopax,
+                fp[:tau.ys - 320m] << 4.0mo
+            --  fp[:tau.ys - 300m] << 3.9mo
+            ..  fp[:tau.ys - 50m, :tau.ys + 100m + 0.7dl] << 3.5mo
+            --  fp[:tau.ys + 300m + 0.7dl, :tau - 1560m] << 1.5mo
+        );
+
+        # Sp. 41ff
+        track(:side :nopax,
+                fp[:tau.ys - 320m] << 5.0mo
+            --  fp[:tau.ys - 300m] << 4.9mo
+            ..  fp[:tau.ys - 50m, :tau.ys + 50m + 0.7dl] << 4.5mo
+        );
+
+        # Sp. 41ff
+        track(:side :nopax,
+                fp[:tau.ys - 320m] << 6.0mo
+            --  fp[:tau.ys - 300m] << 5.9mo
+            ..  fp[:tau.ys - 50m, :tau.ys + 0.7dl] << 5.5mo
+            --  fp[:tau.ys + 100m + 0.7dl, :tau.ys + 100m + 0.71dl] << 3.5mo
+        );
+
+        # Sp. 51
+        track(:side :nopax,
+                fp[:tau - 1560m - 0.7dl, :tau - 500m] << 2.5mo
+        );
+
+        # Sp. 53
+        track(:side :nopax,
+                fp[:tau - 1440m - 0.7dl, :tau - 870m] << 4.5mo
+        );
+
+        # Sp. 55
+        track(:side :nopax,
+                fp[:tau - 1621m - 0.7dl, :tau - 1620m - 0.7dl] << 1.5mo
+            --  fp[:tau - 1380m - 0.7dl, :tau - 920m] << 5.5mo
+            --  fp[:tau - 720m, :tau - 719m] << 1.5mo
+        );
+
+        # Pl. 1
+        platform(:cat:ac25 :pax,
+                fp[:tau - 20m, :tau + 60m] >> 0.5mo
+            --  fp[:tau + 60m, :tau - 20m] << 1.2mo
+        );
+
+        # Pl. 2/3
+        platform(:cat:ac25 :pax,
+                fp[:tau - 140m, :tau] << 0.5mo
+            --  fp[:tau, :tau - 140m] >> 1.5mo
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, fp[:tau] >> 1.2mo);
+        station(:top :cat:ac25 :pax, fp[:tau] >> 1.0mo >> 1.3sh,
+            span(:bold, "Taulov"),
+            hbox(:center:top,
+                vbox(:right:top, "FPB: ", "MT: "),
+                vbox(:right:top, "8,", "222,"),
+                vbox(:left:top, "64", "38")
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:tau.f, :tau + 2.5km]);
+        line_label(:left:n, fp[:tau + 2.5km] << 0.5mo << 0.5mt, "FPB");
+        track(:double, fp[:tau + 2.5km, :elt - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Eltang", railway = :station {
+        track(:double, fp[:elt - 0.5sw, :elt + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:elt] >> 0.5mo >> 0.5mt);
+        station(:left :removed, fp[:elt + 0.35sw] >> 0.5mo >> 0.5mt >> 1.4sh,
+            "Eltang", "14,40"
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:elt + 0.5sw, :elt + 2.3km]);
+        line_label(:left:w, fp[:elt + 2.3km] << 0.5mo << 0.5mt, "FPB");
+        track(:double, fp[:elt + 2.3km, :kol.a]);
+    }
+
+
+    with link = "point.dk.Kolding", railway = :station {
+        # Sp. 1
+        track(fp[:kol.a, :kol.f] >> 0.5mo);
+            # Sp. 121
+            track(:side :nopax,
+                    fp[:kol - 890m] >> 0.5mo
+                --  fp[:kol - 810m] << 0.5mo
+            );
+
+        # Sp. 2
+        track(fp[:kol.a, :kol.f] << 0.5mo);
+            # Sp. 231
+            track(:side :nopax,
+                    fp[:kol - 610m] << 0.5mo
+                --  fp[:kol - 550m] << 1.5mo
+            );
+            # Sp. 211
+            track(:side :nopax,
+                    fp[:kol + 630m] << 0.5mo
+                --  fp[:kol + 700m] >> 0.5mo
+            );
+
+        # Sp. 3
+        track(:side :nopax, fp[:kol - 1320m, :kol + 530m] << 1.5mo);
+            # Sp. 341
+            track(:side :nopax,
+                    fp[:kol - 490m] << 1.5mo
+                --  fp[:kol - 440m] << 2.5mo
+            );
+            # Sp. 211
+            track(:side :nopax,
+                    fp[:kol + 630m] << 0.5mo
+                --  fp[:kol + 700m] >> 0.5mo
+            );
+
+        # Sp. 4/5
+        track(:side :nopax,
+                fp[:kol - 701m, :kol - 700m] << 1.5mo
+            --  fp[:kol - 660m, :kol + 180m] << 2.5mo
+            --  fp[:kol + 280m, :kol + 281m] << 0.5mo
+        );
+
+        # Sp. 6/7
+        track(:side :nocat :nopax,
+                fp[:kol - 250m, :kol + 130m] << 3.5mo
+        );
+
+        # Sp. 8/9
+        track(:side :nocat :nopax,
+                fp[:kol - 301m, :kol - 300m] << 2.5mo
+            --  fp[:kol - 200m, :kol + 80m] << 4.5mo
+            --  fp[:kol + 180m, :kol + 281m] << 2.5mo
+        );
+
+        # Sp. 17/18/19
+        track(:side :nocat :nopax,
+                fp[:kol - 660m] << 2.5mo
+            --  fp[:kol - 540m] << 5.5mo
+        );
+
+        # Sp. 21/22/23
+        track(:side :nocat :nopax,
+                fp[:kol - 780m] << 1.5mo
+            --  fp[:kol - 620m] << 5.5mo
+        );
+
+        # Pl. 1
+        platform(:cat:ac25 :pax,
+                fp[:kol - 215m, :kol + 120m] >> 0.5mo
+            --  fp[:kol + 120m, :kol - 215m] << 1.2mo
+        );
+
+        # Pl. 2/3
+        platform(:cat:ac25 :pax,
+                fp[:kol - 160m, :kol + 90m] << 0.5mo
+            --  fp[:kol + 90m, :kol - 160m] >> 1.5mo
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, fp[:kol] >> 1.2mo);
+        station(:right :cat:ac25 :pax, fp[:kol] << 7.5mo,
+            span(:bold, "Kolding"),
+            "19,91"
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:kol.f, :ejs - 3.3km]);
+        line_label(:right:s, fp[:ejs - 3.3km] >> 0.5mo >> 0.5mt, "FPB");
+        track(:double, fp[:ejs - 3.3km, :ejs - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Ejstrup", railway = :station {
+        track(:double, fp[:ejs - 0.5sw, :ejs + 0.5sw]);
+        marker(:right :de.bf :removed, fp[:ejs] >> 0.5mo >> 0.5mt);
+        station(:top :removed, fp[:ejs] >> 0.5mo >> 0.5mt >> 1.2sh,
+            "Ejstrup", "26,76"
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:ejs + 0.5sw, :ejs + 3km]);
+        line_label(:right:s, fp[:ejs + 3.0km] >> 0.5mo >> 0.5mt,
+            (-0.3dt, 0dt), "FPB"
+        );
+        track(:double, fp[:ejs + 3km, :lun.a]);
+    }
+
+
+    with link = "point.dk.Lunderskov", railway = :station {
+        let le = path("d3.dk.leb");
+
+        # Sp. 1
+        track(
+                fp[:lun.a, :lun.a + 0.1dl] >> 0.5mo
+            ..  le[:lun - 760m, :lun.ye + 200m] >> 1.5mo
+        );
+
+        # Sp. 2
+        track(
+                fp[:lun - 761m, :lun - 760m] >> 1.5mo
+            --  fp[:lun - 660m, :lun + 160m] >> 0.5mo
+            --  fp[:lun + 280m, :lun + 281m] >> 1.5mo
+        );
+            # Sp. 231
+            track(:side,
+                    fp[:lun + 160m] >> 0.5mo
+                --  fp[:lun + 280m] << 0.5mo
+            );
+
+        # Sp. 1b
+        track(
+                fp[:lun.ye - 101m, :lun.ye - 100m] >> 1.5mo
+            --  fp[:lun.ye - 0.1dl, :lun.ye] >> 2.5mo
+            ..  le[:lun.xe - 0.1dl, :lun.xe] >> 0.5mo
+        );
+
+        # Sp. 3
+        track(
+                fp[:lun.a, :lun.fp] << 0.5mo
+        );
+            # Sp. 321
+            track(:side,
+                    fp[:lun - 760m] << 0.5mo
+                --  fp[:lun - 660m] >> 0.5mo
+            );
+
+        # Sp. 3b
+        track(
+                fp[:lun.ye - 101m, :lun.ye - 100m] << 0.5mo
+            --  fp[:lun.ye - 0.1dl, :lun.ye] >> 0.5mo
+            ..  le[:lun.xe - 0.1dl, :lun.xe] << 0.5mo
+        );
+
+        # Sp 4/5
+        track(:side :nocat :nopax,
+                fp[:lun - 340m, :lun.ye] << 1.5mo
+        );
+            # Sp 4/5.4.1
+            track(:side :nocat :nopax,
+                    fp[:lun + 240m] << 1.5mo
+                --  fp[:lun + 350m] << 0.5mo
+            );
+
+        # Sp 6/7/8
+        track(:side :nocat :nopax,
+                fp[:lun - 70m, :lun + 215m] << 2.5mo
+        );
+
+        # Sp 9/10/11
+        track(:side :nocat :nopax,
+                fp[:lun - 211m, :lun - 210m] << 1.5mo
+            --  fp[:lun - 70m, :lun + 140m] << 3.5mo
+            --  fp[:lun + 290m, :lun + 291m] << 1.5mo
+        );
+
+        # Pl. 1
+        platform(
+                fp[:lun - 150m, :lun + 50m] >> 1.5mo
+            --  fp[:lun + 50m, :lun - 150m] << 2.2mo
+        );
+
+        # Pl. 2/3
+        platform(
+                fp[:lun - 260m, :lun + 10m] >> 0.5mo
+            --  fp[:lun + 10m, :lun - 260m] >> 0.5mo
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, fp[:lun] >> 2.2mo);
+        station(:left :cat:ac25 :pax, fp[:lun + 0.4sw] >> 2.2mo >> 1.4sh,
+            span(:bold, "Lunderskov"),
+            hbox(:center:top,
+                vbox(:right:top, "FPN: ", "LE: "),
+                vbox(:right:top, "32,", "−0,"),
+                vbox(:left:top, "79", "02")
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:dn:rup, fp[:lun.fp, :lun.xe] << 0.5mo);
+        with layer = -1 track(:up:ldn,
+                path("d3.dk.leb")[:lun.ye + 199m, :lun.ye + 200m] >> 1.5mo
+            ..  fp[:lun.xe, :lun.xe + 0.1dl] >> 0.5mo
+        );
+        track(:double, fp[:lun.xe, :vam - 2.5km]);
+        line_label(:left:w, fp[:vam - 2.5km] << 0.5mo << 0.5mt, "FPB");
+        track(:double, fp[:vam - 2.5km, :vam.a]);
+    }
+
+
+    with link = "point.dk.Vamdrup", railway = :station {
+        # Sp. 1
+        track(fp[:vam.a, :vam.f] >> 0.5mo);
+            # Sp. 112
+            track(:side :nopax,
+                    fp[:vam - 740m] >> 0.5mo
+                --  fp[:vam - 660m] << 0.5mo
+            );
+
+        # Sp. 2
+        track(fp[:vam.a, :vam.f] << 0.5mo);
+            # Sp. 321
+            track(:side :nopax,
+                    fp[:vam - 610m] << 0.5mo
+                --  fp[:vam - 540m] << 1.5mo
+            );
+            # Sp. 2.1.1
+            track(:side :nopax,
+                    fp[:vam + 275m] << 0.5mo
+                --  fp[:vam + 370m] >> 0.5mo
+            );
+
+        # Sp. 3
+        track(:side :nopax,
+                fp[:vam - 1130m, :vam + 160m] << 1.5mo
+            --  fp[:vam + 250m, :vam + 251m] << 0.5mo
+        );
+
+        # AM 1a
+        track(:side :nocat :nopax,
+                fp[:vam - 450m, :vam - 0.6sw] >> 1.5mo
+        );
+            # AM 1a.1.1
+            track(:side :nocat :nopax,
+                    fp[:vam - 250m] >> 1.5mo
+                --  fp[:vam - 190m] >> 0.5mo
+            );
+
+        # AM K
+        track(:side :nocat :nopax,
+                fp[:vam - 900m, :vam - 680m] << 2.5mo
+            --  fp[:vam - 630m, :vam - 629m] << 1.5mo
+        );
+
+        # Pl. 1
+        platform(
+                fp[:vam - 100m, :vam + 150m] >> 0.5mo
+            --  fp[:vam + 150m, :vam - 100m] << 1.2mo
+        );
+
+        # Pl. 2
+        platform(
+                fp[:vam - 100m, :vam + 150m] << 0.5mo
+            --  fp[:vam + 150m, :vam - 100m] << 0.1mo
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, fp[:vam] >> 1.2mo);
+        station(:left, fp[:vam + 0.3sw] >> 1.0mo >> 1.3sh,
+            span(:bold, "Vamdrup"), "FPB: 38,82"
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:vam.f, :vam + 2.4km]);
+        line_label(:right:e, fp[:vam + 2.4km] >> 0.5mo >> 0.5mt, "FPB");
+        track(:double, fp[:vam + 2.4km, :fag - 0.3sw]);
+    }
+
+
+    with link = "point.dk.Farris-Gr", railway = :station {
+        track(:double, fp[:fag - 0.3sw, :fag + 0.3sw]);
+        marker(:right :de.dirgr :removed, fp[:fag] >> 0.5mo >> 0.5mt);
+        marker(:right :statdt :removed, fp[:fag] << 0.5mo);
+        marker(:left :de.dirgr :removed, fp[:fag] << 0.5mo << 0.5mt);
+        label(:xsmall :removed, fp[:fag] >> 5mo >> 0.5mt,
+            hbox(:right:middle, "FBP: 43,04")
+        );
+        label(:badgesize :removed, fp[:fag] << 4.5mo << 0.5mt,
+            hbox(:left:middle,
+                vbox(:center:middle :bold, "  DK ", hbar(0.3), "  DE "),
+                " < 1920"
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:fag + 0.3sw, :far - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Farris", railway = :station {
+        track(:double, fp[:far - 0.5sw, :far + 0.5sw]);
+        marker(:right :de.bbf :cat:ac25, fp[:far] >> 0.5mo >> 0.5mt);
+        marker(:right :de.exbf :cat:ac25, fp[:far] >> 0.5mo >> 0.5mt);
+        station(:left :cat:ac25, fp[:far + 0.4sw] >> 0.5mo >> 0.5mt >> 1.8sh,
+            "Farris", "43,76"
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:far + 0.5sw, :far + 3.5km]);
+        line_label(:left:w, fp[:far + 3.5km] << 0.5mo << 0.5mt, "FPB");
+        track(:double, fp[:far + 3.5km, :som - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Sommersted", railway = :station {
+        track(:double, fp[:som - 0.5sw, :som + 0.5sw]);
+        marker(:right :de.bbf :cat:ac25, fp[:som] >> 0.5mo >> 0.5mt);
+        marker(:right :de.exbf :cat:ac25, fp[:som] >> 0.5mo >> 0.5mt);
+        label(fp[:som + 0.4sw] >> 0.5mo >> 0.5mt >> 2sh,
+            vbox(:right:base,
+                span(:former, "Sommerstedt "),
+                vbox(:center:topbase,
+                    "Sommersted",
+                    span(:xsmall, "51,82")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:som + 0.5sw, :jeg - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Jegerup", railway = :station {
+        track(:double, fp[:jeg - 0.5sw, :jeg + 0.5sw]);
+        marker(:right :de.hp :removed, fp[:jeg] >> 0.5mo >> 0.5mt);
+        label(:removed, fp[:jeg + 0.4sw] >> 0.5mo >> 0.5mt >> 1.6sh,
+            vbox(:right:base,
+                span(:former, "Jägerup"),
+                vbox(:center:topbase,
+                    "Jegerup",
+                    span(:xsmall, "55,99")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:jeg + 0.5sw, :voj.a]);
+    }
+
+
+    with link = "point.dk.Vojens", railway = :station {
+        # Sp. 1
+        track(
+                fp[:voj - 1121m, :voj - 1120m] << 0.5mo
+            --  fp[:voj - 1030m, :voj + 220m] << 1.5mo
+        );
+            # Sp. 121
+            track(:side :nopax,
+                    fp[:voj + 140m] << 1.5mo
+                --  fp[:voj + 200m] << 0.5mo
+            );
+
+        # Sp. 2
+        track(fp[:voj.a, :voj.f] << 0.5mo);
+            # Sp. 231
+            track(:side :nopax,
+                    fp[:voj + 500m] << 0.5mo
+                --  fp[:voj + 560m] >> 0.5mo
+            );
+
+        # Sp. 3
+        track(fp[:voj.a, :voj.f] >> 0.5mo);
+            # Sp. 3.12.1
+            track(:side :nopax,
+                    fp[:voj - 1.43km] >> 0.5mo
+                --  fp[:voj - 1.31km] << 0.5mo
+            );
+            # Sp. 3a.3.1
+            track(:side :nocat :nopax,
+                    fp[:voj + 210m] >> 0.5mo
+                --  fp[:voj + 260m] >> 1.5mo
+            );
+
+        # Sp. 31
+        track(:side :nocat :nopax,
+                fp[:voj - 1370m, :voj - 350m] << 2.5mo
+        );
+            # Sp. 11a111
+            track(:side :nocat :nopax,
+                    fp[:voj - 1010m] << 2.5mo
+                --  fp[:voj - 970m] << 1.5mo
+            );
+            # Sp. 31321
+            track(:side :nocat :nopax,
+                    fp[:voj - 620m] << 2.5mo
+                --  fp[:voj - 580m] << 3.5mo
+            );
+
+        # Sp. 32/33
+        track(:side :nocat :nopax,
+                fp[:voj - 981m, :voj - 980m] << 2.5mo
+            --  fp[:voj - 940m, :voj - 0.6sw] << 3.5mo
+        );
+            # Sp. 106a/b
+            track(:side :nocat :nopax,
+                    fp[:voj - 300m] << 3.5mo
+                --  fp[:voj - 170m] << 1.5mo
+            );
+
+        # Sp. 34
+        track(:side :nocat :nopax,
+                fp[:voj - 251m, :voj - 250m] << 3.5mo
+            --  fp[:voj - 200m, :voj - 0.6sw] << 4.5mo
+        );
+
+        # Sp. 3a
+        track(:side :nocat :nopax,
+                fp[:voj - 430m, :voj.f] >> 1.5mo
+        );
+
+        # Sp. 3b/3c
+        track(:side :nocat :nopax,
+                fp[:voj - 430m, :voj - 160m] >> 2.5mo
+            --  fp[:voj - 100m, :voj - 99m] >> 1.5mo
+        );
+
+        # Pl. 1
+        platform(
+                fp[:voj - 120m, :voj + 110m] << 1.5mo
+            --  fp[:voj + 110m, :voj - 120m] >> 2.2mo
+        );
+
+        # Pl. 2/3
+        platform(
+                fp[:voj - 150m, :voj + 110m] << 0.5mo
+            --  fp[:voj + 110m, :voj - 150m] << 0.5mo
+        );
+
+        marker(:left :de.bf :cat:ac25 :pax, fp[:voj] << 2.2mo);
+        label(fp[:voj + 0.5sw] << 2.2mo << 1.5sh,
+            vbox(:left:base,
+                hbox(:center:base :former,
+                    "Woyens ", span(:light, "Stsbf")
+                ),
+                vbox(:left:topbase,
+                    span(:bold, "Vojens"),
+                    span(:xsmall, "FPB: 59,22")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:voj.f, :voj + 2.8km]);
+        line_label(:left:w, fp[:voj + 2.8km] << 0.5mo << 0.5mt, "FPB");
+        track(:double, fp[:voj + 2.8km, :oje - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Over-Jerstal", railway = :station {
+        track(:double, fp[:oje - 0.5sw, :oje + 0.5sw]);
+        marker(:right :de.bbf :removed, fp[:oje] >> 0.5mo >> 0.5mt);
+        marker(:right :de.exbf :removed, fp[:oje] >> 0.5mo >> 0.5mt);
+        label(:removed, fp[:oje + 0.4sw] >> 0.5mo >> 0.5mt >> 2sh,
+            vbox(:right:base,
+                span(:former, "Ober Jersdal "),
+                vbox(:center:topbase,
+                    span(:bold, "Over-Jerstal"),
+                    span(:xsmall, "FPB: 65,0")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:oje + 0.5sw, :oje + 3.5km]);
+        line_label(:left:w, fp[:oje + 3.5km] << 0.5mo << 0.5mt,
+            (0dt, -0.2dt), "FPB"
+        );
+        track(:double, fp[:oje + 3.5km, :hov - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Hovslund", railway = :station {
+        track(:double, fp[:hov - 0.5sw, :hov + 0.5sw]);
+        marker(:right :de.bbf :removed, fp[:hov] >> 0.5mo >> 0.5mt);
+        marker(:right :de.exbf :removed, fp[:hov] >> 0.5mo >> 0.5mt);
+        label(:removed, fp[:hov + 0.4sw] >> 0.5mo >> 0.5mt >> 2sh,
+            vbox(:right:base,
+                span(:former, "Haberslund "),
+                vbox(:center:topbase,
+                    span(:bold, "Hovslund"),
+                    span(:xsmall, "FBP: 72,5")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:hov + 0.5sw, :hov + 3km]);
+        line_label(:left:w, fp[:hov + 3km] << 0.5mo << 0.5mt, "FPB");
+        track(:double, fp[:hov + 3km, :rod.af]);
+    }
+
+
+    with link = "point.dk.Rødekro", railway = :station {
+        let ra = path("d4.dk.ra");
+
+        # Sp. 1
+        track(
+                fp[:rod - 751m, :rod - 750m] << 0.5mo
+            --  fp[:rod - 670m, :rod.ya] << 1.5mo
+        );
+        track(:side,
+                fp[:rod.ya, :rod + 430m] << 1.5mo
+            --  fp[:rod + 500m, :rod + 501m] << 0.5mo
+        );
+        track(:nocat :closed,
+                ra[:rod.ya - 0.1dl, :rod.fa] << 1.5mo
+        );
+            # Sp. 1101
+            track(:side :nocat :nopax,
+                    fp[:rod + 110m] << 1.5mo
+                --  fp[:rod + 155m] << 2.5mo
+            );
+
+        # Sp. 2
+        track(fp[:rod.af, :rod.fp] << 0.5mo);
+            # Sp. 231
+            track(:side :nopax,
+                    fp[:rod - 1000m] << 0.5mo
+                --  fp[:rod - 940m] >> 0.5mo
+            );
+            # Sp. 232
+            track(:side :nopax,
+                    fp[:rod + 630m] << 0.5mo
+                --  fp[:rod + 690m] >> 0.5mo
+            );
+
+        # Sp. 3
+        track(fp[:rod.af, :rod.fp] >> 0.5mo);
+            # Sp. 321
+            track(:side :nopax,
+                    fp[:rod - 875m] >> 0.5mo
+                --  fp[:rod - 815m] << 0.5mo
+            );
+
+        # Sp. 10
+        track(:side :nocat :nopax,
+                ra[:rod + 90m, :rod.ya + 200m] << 2.5mo
+        );
+
+        # Sp. 13
+        track(:side :nocat :nopax,
+                ra[:rod + 50m, :rod + 300m] << 3.5mo
+        );
+
+        # Sp. 14/15
+        track(:side :nocat :nopax,
+                ra[:rod + 50m, :rod + 240m] << 4.5mo
+            --  ra[:rod + 430m, :rod + 431m] << 1.5mo
+        );
+
+        # Pl. 1
+        platform(
+                fp[:rod - 240m, :rod + 60m] << 1.5mo
+            --  fp[:rod + 60m, :rod - 240m] >> 2.2mo
+        );
+
+        # Pl. 2/3
+        platform(
+                fp[:rod - 240m, :rod + 85m] << 0.5mo
+            --  fp[:rod + 85m, :rod - 240m] << 0.5mo
+        );
+
+        marker(:left :de.bf :cat:ac25 :pax, fp[:rod - 0.4sw] << 2.2mo);
+        label(:cat:ac25 :pax, fp[:rod] << 2.2mo << 1.8sh,
+            vbox(:left:base,
+                span(:former, "Rothenkrug"),
+                vbox(:center:topbase,
+                    span(:medium:bold, "Rødekro"),
+                    hbox(:center:top :xsmall,
+                        vbox(:right:top,
+                            span(:removed, "RLB: "),
+                            "FPB: ",
+                            span(:closed, "RA: ")
+                        ),
+                        vbox(:right:top,
+                            span(:removed, "?"),
+                            "95,",
+                            span(:closed, "0,")
+                        ),
+                        vbox(:left:top,
+                            span(:removed, "?"),
+                            "24",
+                            span(:closed, "00")
+                        )
+                    )
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:rod.fp, :hjo - 0.5sw]);
+        line_label(:right:e, fp[:rod + 2.5km] >> 0.5mo >> 0.5mt,
+            (0dt, -0.1dt), "FPB"
+        );
+    }
+
+
+    with link = "point.dk.Hjordkær", railway = :station {
+        track(:double, fp[:hjo - 0.5sw, :hjo + 0.5sw]);
+        marker(:right :de.bbf :removed, fp[:hjo] >> 0.5mo >> 0.5mt);
+        marker(:right :de.exbf :removed, fp[:hjo] >> 0.5mo >> 0.5mt);
+        label(:removed, fp[:hjo + 0.5sw] >> 0.5mo >> 0.5mt >> 1.8sh,
+            vbox(:right:base,
+                span(:former, "Jordkirch"),
+                vbox(:center:topbase,
+                    span(:medium, "Hjordkær"),
+                    span(:xsmall, "85,0")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:hjo + 0.5sw, :hjo + 2km]);
+        line_label(:left:w, fp[:hjo + 2.0km] << 0.5mo << 0.5mt,
+            (0dt, 0.2dt), "FPB"
+        );
+        track(:double, fp[:hjo + 2km, :bol - 0.5sw]);
+    }
+
+
+    with link = "point.dk.Bolderslev", railway = :station {
+        track(:double, fp[:bol - 0.5sw, :bol + 0.5sw]);
+        marker(:right :de.bbf :removed, fp[:bol] >> 0.5mo >> 0.5mt);
+        marker(:right :de.exbf :removed, fp[:bol] >> 0.5mo >> 0.5mt);
+        label(:removed, fp[:bol + 0.45sw] >> 0.5mo >> 0.5mt >> 1.8sh,
+            vbox(:right:base,
+                span(:former, "Bollersleben"),
+                vbox(:center:topbase,
+                    span(:medium, "Bolderslev"),
+                    span(:xsmall, "89,3")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:double, fp[:bol + 0.5sw, :bol + 3km]);
+        line_label(:left:w, fp[:bol + 3km] << 0.5mo << 0.5mt, "FPB");
+        track(:double, fp[:bol + 3km, :tin.af]);
+    }
+
+
+    with link = "point.dk.Tinglev", railway = :station {
+        let tt = path("d4.dk.tt");
+        let st = path("d4.dk.st");
+
+        # Sp. 1
+        track(:side :nopax,
+                fp[:tin - 786m, :tin - 785m] >> 0.5mo
+            --  fp[:tin - 680m, :tin.yt] >> 1.5mo
+        );
+        track(:nocat :removed,
+                tt[:tin.at - 0.1dl, :tin.at]
+            ..  tt[:tin.yt, :tin.yt + 0.1dl] >> 1.5mo
+        );
+        track(:nopax,
+                fp[:tin.yt, :tin + 145m] >> 1.5mo
+            --  fp[:tin + 235m, :tin + 236m] >> 0.5mo
+        );
+        track(:side :nopax,
+                fp[:tin + 145m, :tin + 600m] >> 1.5mo
+        );
+
+        # Sp. 2
+        track(fp[:tin.af, :tin.fp] >> 0.5mo);
+            # Sp. 231
+            track(:side,
+                    fp[:tin - 860m] >> 0.5mo
+                --  fp[:tin - 800m] << 0.5mo
+            );
+            # Sp. 232
+            track(:side,
+                    fp[:tin + 260m] >> 0.5mo
+                --  fp[:tin + 320m] << 0.5mo
+            );
+
+        # Sp. 3
+        track(
+                fp[:tin.af, :tin + 420m] << 0.5mo
+            --  fp[:tin + 510m, :tin + 511m] >> 0.5mo
+        );
+        track(:nocat :removed, fp[:tin + 420m, :tin.fp] << 0.5mo);
+            # Sp. 321
+            track(:side :nopax,
+                    fp[:tin - 980m] << 0.5mo
+                --  fp[:tin - 920m] >> 0.5mo
+            );
+            # Sp. 341
+            track(:side,
+                    fp[:tin + 350m] << 0.5mo
+                --  fp[:tin + 400m] << 1.5mo
+            );
+
+        # Sp. 4
+        track(
+                fp[:tin - 376m, :tin - 375m] << 0.5mo
+            --  fp[:tin - 275m, :tin.ys] << 1.5mo
+            ..  st[:tin.ys - 350m, :tin.ys - 351m] << 1.2mo
+            ..  st[:tin.fs, :tin.fs - 0.1dl]
+        );
+
+        # Sp. 5
+        track(
+                fp[:tin - 276m, :tin - 275m] << 1.5mo
+            --  fp[:tin - 175m, :tin + 280m] << 2.5mo
+            --  fp[:tin + 360m, :tin + 361m] << 1.5mo
+        );
+            # Sp. 561
+            track(:side :nocat :nopax,
+                    fp[:tin + 190m] << 2.5mo
+                --  fp[:tin + 230m] << 3.5mo
+            );
+
+        # Sp. 6/7
+        track(:side :nocat :nopax,
+                fp[:tin - 175m, :tin + 300m] << 3.5mo
+        );
+
+        # Sp. 8/9
+        track(:side :nocat :nopax,
+                fp[:tin - 326m, :tin - 325m] << 1.0mo
+            --  fp[:tin - 115m, :tin + 220m] << 4.5mo
+            --  fp[:tin + 380m, :tin.ys] << 2.5mo
+            ..  st[:tin.ys - 350m, :tin.ys - 351m] << 2.2mo
+        );
+
+        # Pl. 1
+        platform(:cat:ac25 :pax,
+                fp[:tin - 100m, :tin + 80m] >> 1.5mo
+            --  fp[:tin + 80m, :tin - 100m] << 2.2mo
+        );
+
+        # Pl. 2/3
+        platform(:cat:ac25 :pax,
+                fp[:tin - 100m, :tin + 80m] >> 0.5mo
+            --  fp[:tin + 80m, :tin - 100m] >> 0.5mo
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, fp[:tin] >> 2.2mo);
+        station(:left :cat:ac25 :pax, fp[:tin + 0.6sw] >> 2.2mo >> 1.4sh,
+            vbox(:center:bottom,
+                span(:former, "Tingleff"),
+                span(:bold, "Tinglev")
+            ),
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "TT: "), "FPB: ", "ST: "),
+                vbox(:right:top, span(:removed, "41,"), "95,", "41,"),
+                vbox(:left:top, span(:removed, "87"), "24", "16")
+            )   
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:nocat :removed, fp[:tin.fp, :baj - 0.5sw] << 0.5mo);
+        track(fp[:tin.fp, :baj - 0.5sw] >> 0.5mo);
+    }
+
+
+    with link = "point.dk.Bajstrup", railway = :station {
+        track(:nocat :removed, fp[:baj - 0.5sw, :baj + 0.5sw] << 0.5mo);
+        track(fp[:baj - 0.5sw, :baj + 0.5sw] >> 0.5mo);
+        marker(:right :de.bf :removed, fp[:baj] >> 0.5mo >> 0.5mt);
+        label(:removed, fp[:baj + 0.3sw] >> 0.5mo >> 0.5mt >> 1.8sh,
+            vbox(:right:base,
+                span(:former, "Baistrup  "),
+                vbox(:center:topbase,
+                    span(:medium, "Bajstrup"),
+                    span(:xsmall, "98,9")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:nocat :removed, fp[:baj + 0.5sw, :baj + 2km] << 0.5mo);
+        track(fp[:baj + 0.5sw, :baj + 2km] >> 0.5mo);
+        line_label(:right:ne, fp[:baj + 2km] >> 0.5mo >> 0.5mt, "FPB");
+        track(:nocat :removed, fp[:baj + 2km, :vej.a] << 0.5mo);
+        track(fp[:baj + 2km, :vej.a] >> 0.5mo);
+    }
+
+
+    with link = "point.dk.Vejbæk", railway = :station {
+        track(:nocat :removed, fp[:vej.a, :vej.a + 330m] << 0.5dt);
+        track(
+                fp[:vej.a + 264m, :vej.a + 265m] >> 0.5dt
+            --  fp[:vej.a + 330m, :vej.f - 330m] << 0.5dt
+            --  fp[:vej.f - 265m, :vej.f - 264m] >> 0.5dt
+        );
+        track(:nocat :removed, fp[:vej.f - 330m, :vej.f] << 0.5dt);
+
+        track(fp[:vej.a, :vej.f] >> 0.5dt);
+
+        marker(:left :de.bbf :cat:ac25, fp[:vej] << 0.5mo << 0.5mt);
+        station(:right :cat:ac25, fp[:vej + 0.45sw] << 0.5mo << 0.5mt << 1.2sh,
+            "Vejbæk", "102,97"
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:nocat :removed, fp[:vej.f, :fah - 0.5sw] << 0.5mo);
+        track(fp[:vej.f, :fah - 0.5sw] >> 0.5mo);
+    }
+
+
+    with link = "point.dk.Fårhus", railway = :station {
+        track(:nocat :removed, fp[:fah - 0.5sw, :fah + 0.5sw] << 0.5mo);
+        track(fp[:fah - 0.5sw, :fah + 0.5sw] >> 0.5mo);
+        marker(:right :de.bf :removed, fp[:fah] >> 0.5mo >> 0.5mt);
+        label(:removed, fp[:fah + 0.4sw] >> 0.5mo >> 0.5mt >> 1.7sw,
+            vbox(:right:base,
+                span(:former, "Schafhaus  "),
+                vbox(:center:topbase,
+                    span(:medium, "Fårhus"),
+                    span(:xsmall, "104,8")
+                )
+            )
+        );
+    }
+
+
+    with link = "line.dk.FPB" {
+        track(:nocat :removed, fp[:fah + 0.5sw, :fah + 1.1km] << 0.5mo);
+        track(fp[:fah + 0.5sw, :fah + 1.1km] >> 0.5mo);
+        line_label(:left:sw, fp[:fah + 1.1km], "FPB");
+        track(:nocat :removed, fp[:fah + 1.1km, :pad.a] << 0.5mo);
+        track(fp[:fah + 1.1km, :pad.a] >> 0.5mo);
+    }
+
+
+    with link = "point.dk.Padborg", railway = :station {
+        # Sp 1
+        track(:nocat :removed,
+                fp[:pad.a, :pad.xn +250m] << 0.5mo
+        );
+        track(
+                fp[:pad.xn + 175m] >> 0.5mo
+            --  fp[:pad.xn + 250m] << 0.5mo
+            ..  fp[:pad - 600m, :pad + 60m] << 1.5mo
+        );
+        track(:nocat :pax,
+                fp[:pad + 60m, :pad + 85m] << 1.5mo
+        );
+        track(:cat:ac15 :pax,
+                fp[:pad + 85m, :pad + 450m] << 1.5mo
+            --  fp[:pad + 550m, :pag - 0.5sw] << 0.5mo
+        );
+            # Sp 01.13.1
+            track(:side :cat:ac15 :nopax,
+                    fp[:pad + 280m] << 1.5mo
+                --  fp[:pad + 320m] << 2.5mo
+            );
+            # Sp 01.12.1 - 012.011.1
+            track(:side :nopax,
+                    fp[:pad - 330m] << 1.5mo
+                --  fp[:pad - 250m] << 3.5mo
+            );
+            # Sp 121
+            track(:side :cat:ac15 :nopax,
+                    fp[:pad + 475m] << 1.25mo
+                --  fp[:pad + 550m] >> 0.5mo
+            );
+
+        # Sp 2
+        track(
+                fp[:pad.a, :pad - 440m] >> 0.5mo
+            ..  fp[:pad - 280m, :pad + 60m] >> 1.5mo
+        );
+        track(:nocat,
+                fp[:pad + 60m, :pad + 85m] >> 1.5mo
+        );
+        track(:cat:ac15,
+                fp[:pad + 85m, :pad + 450m] >> 1.5mo
+            --  fp[:pad + 550m, :pag - 0.5sw] >> 0.5mo
+        );
+            # Sp 211
+            track(:side :nopax,
+                    fp[:pad - 440m] >> 0.5mo
+                --  fp[:pad - 360m] << 1.5mo
+            );
+            # Sp 233
+            track(:side :cat:ac15 :nopax,
+                    fp[:pad + 580m] >> 0.5mo
+                --  fp[:pad + 640m] >> 1.5mo
+            );
+            # Sp 212
+            track(:side :cat:ac15 :nopax,
+                    fp[:pad + 660m] >> 0.5mo
+                --  fp[:pad + 720m] << 0.5mo
+            );
+
+        # Sp 3
+        track(:side :nocat :nopax,
+                fp[:pad.xn, :pad.xn + 50m] >> 2.5mo
+            ..  fp[:pad.xn + 190m, :pad.xn + 200m] >> 1.5mo
+        );
+        track(:side :nopax,
+                fp[:pad.xn + 200m, :pad - 440m - 0.5dl] >> 1.5mo
+            ..  fp[:pad - 280m - 0.5dl, :pad + 60m] >> 2.5mo
+        );
+        track(:side :nopax,
+                fp[:pad + 60m, :pad + 85m] >> 2.5mo
+        );
+        track(:side :cat:ac15 :nopax,
+                fp[:pad + 85m, :pad + 450m + 0.5dl] >> 2.5mo
+            --  fp[:pad + 550m + 0.5dl, :pag - 0.5sw] >> 1.5mo
+        );
+            # Sp 322
+            track(:side :nocat :nopax,
+                    fp[:pad + 475m + 0.5dl] >> 2.25mo
+                --  fp[:pad + 525m] >> 0.75mo
+            );
+
+        # Sp 4
+        track(:side :nopax,
+                fp[:pad.xn + 320m, :pad - 440m - 1.0dl] >> 2.5mo
+            ..  fp[:pad - 280m - 1.0dl, :pad + 60m] >> 3.5mo
+        );
+        track(:side :nocat :nopax,
+                fp[:pad + 60m, :pad + 85m] >> 3.5mo
+        );
+        track(:side :cat:ac15 :nopax,
+                fp[:pad + 85m, :pad + 300m - 0.5dl] >> 3.5mo
+            --  fp[:pad + 350m - 0.5dl, :pad + 351m - 0.5dl] >> 2.5mo
+        );
+
+        # Sp 5
+        track(:side :nopax,
+                fp[:pad.xn + 219m, :pad.xn + 220m] >> 0.5mo
+            --  fp[:pad.xn + 370m, :pad - 440m - 1.5dl] >> 3.5mo
+            ..  fp[:pad - 280m - 1.5dl, :pad + 60m] >> 4.5mo
+        );
+        track(:side :nocat :nopax,
+                fp[:pad + 60m, :pad + 85m] >> 4.5mo
+        );
+        track(:side :cat:ac15 :nopax,
+                fp[:pad + 85m, :pad + 300m] >> 4.5mo
+            --  fp[:pad + 450m, :pad + 451m] >> 1.5mo
+        );
+
+        # Sp 12
+        track(:side :nocat :nopax,
+                fp[:pad.a, :pad.a + 480m] << 1.5mo
+        );
+        track(:side :nopax,
+                fp[:pad.a + 480m, :pad.xn + 120m] << 1.5mo
+            --  fp[:pad.xn + 200m, :pad + 60m] << 3.5mo
+        );
+        track(:side :nocat :nopax,
+                fp[:pad + 60m, :pad + 85m] << 3.5mo
+        );
+        track(:side :cat:ac15 :nopax,
+                fp[:pad + 85m, :pad + 300m] << 3.5mo
+            --  fp[:pad + 400m, :pad + 401m] << 1.5mo
+        );
+
+        # Sp 12e
+        track(:side :nocat :nopax,
+                fp[:pad.a + 440m, :pad.xn + 200m] << 3.5mo
+        );
+
+        # Sp 12l
+        track(:side :nocat :nopax,
+                fp[:pad.a + 359m, :pad.a + 360m] << 1.5mo
+            --  fp[:pad.a + 480m, :pad.xn - 120m] << 4.5mo
+            --  fp[:pad.xn, :pad.xn + 0.1dl] << 1.5mo
+        );
+
+        # Sp 13 - 19
+        track(:side :nopax,
+                fp[:pad - 290m, :pad + 60m] << 2.5mo
+        );
+        track(:side :nocat :nopax,
+                fp[:pad + 60m, :pad + 85m] << 2.5mo
+        );
+        track(:side :cat:ac15 :nopax,
+                fp[:pad + 85m, :pad + 450m + 0.5dl] << 2.5mo
+            --  fp[:pad + 550m + 0.5dl, :pag - 0.5sw] << 1.5mo
+        );
+            # Sp 013.01.1
+            track(:side :nopax,
+                    fp[:pad - 55m] << 2.5mo
+                --  fp[:pad - 15m] << 1.5mo
+            );
+
+        # Sp 14/15
+        track(:side :nopax,
+                fp[:pad - 140m, :pad - 400m] >> 0.5mo
+        );
+
+        # Sp 16
+        track(:side :nopax,
+                fp[:pad - 140m, :pad - 230m] << 0.5mo
+            --  fp[:pad - 270m, :pad - 271m] >> 0.5mo
+        );
+
+        # Sp 30/31/32
+        track(:side :nocat :nopax,
+                fp[:pad - 701m, :pad - 700m] >> 6.5mo
+            --  fp[:pad - 620m, :pad - 450m] >> 4.5mo
+            --  fp[:pad - 410m, :pad - 379m] >> 5.5mo
+        );
+
+        # Sp 33 - 21/22
+        track(:side :nocat :nopax,
+                fp[:pad - 660m, :pad + 300m + 0.5dl] >> 5.5mo
+        );
+
+        # Sp 34/35/..
+        track(:side :nocat :nopax,
+                fp[:pad.a + 460m, :pad.xn] >> 2.5mo
+            ..  fp[:pad - 700m, :pad - 410m] >> 6.5mo
+        );
+
+        # Sp 41 - 23/24
+        track(:side :nocat :nopax,
+                fp[:pad - 600m, :pad - 190m] >> 7.5mo
+            --  fp[:pad - 150m, :pad + 250m + 0.5dl] >> 6.5mo
+        );
+            track(:side :nocat :nopax,
+                    fp[:pad - 450m] >> 7.5mo
+                --  fp[:pad - 370m] >> 5.5mo
+            );
+
+        # Sp 43 - 25/26/27
+        track(:side :nocat :nopax,
+                fp[:pad - 661m, :pad - 660m] >> 6.5mo
+            --  fp[:pad - 580m, :pad + 150m + 0.5dl] >> 8.5mo
+            --  fp[:pad + 450m + 0.5dl, :pad + 451m + 0.5dl] >> 2.5mo
+        );
+
+        # Platform 1
+        platform(
+                fp[:pad - 120m, :pad + 60m] << 1.5mo
+            --  fp[:pad + 60m, :pad - 120m] >> 0.8mo
+        );
+        platform(:nocat,
+                fp[:pad + 60m, :pad + 85m] << 1.5mo
+            --  fp[:pad + 85m, :pad + 60m] >> 0.8mo
+        );
+        platform(:cat:ac15,
+                fp[:pad + 85m, :pad + 270m] << 1.5mo
+            --  fp[:pad + 270m, :pad + 85m] >> 0.8mo
+        );
+
+        # Platform 2
+        platform(
+                fp[:pad - 220m, :pad + 60m] >> 1.5mo
+            --  fp[:pad + 60m, :pad - 220m] << 0.9mo
+        );
+        platform(:nocat,
+                fp[:pad + 60m, :pad + 85m] >> 1.5mo
+            --  fp[:pad + 85m, :pad + 60m] << 0.8mo
+        );
+        platform(:cat:ac15,
+                fp[:pad + 85m, :pad + 200m] >> 1.5mo
+            --  fp[:pad + 200m, :pad + 85m] << 0.8mo
+        );
+
+        marker(:left :de.gbf :nocat, fp[:pak] << 4.5mo);
+        station(:left :nocat, fp[:pak - 0.5sw] >> 5.0mo,
+            "Padborg Kombiterminal", "108,30"
+        );
+
+        marker(:right :de.inbf, fp[:pad] << 0.5insh);
+        station(:right :cat:ac25 :pax, fp[:pad + 0.5sw] << 7.0mo,
+            vbox(:center:bottom,
+                span(:former, "Pattburg"),
+                span(:bold, "Padborg")
+            ),
+            hbox(:center:top,
+                vbox(:right:top, "FPB: ", span(:removed, "TP: ")),
+                vbox(:right:top, "109,", span(:removed, "14,")),
+                vbox(:left:top, "69", span(:removed, "8"))
+            )
+        );
+
+        with layer = -1 guide(:cat:ac25,
+                fp[:pad + 22m] << 5.5mo
+            --  fp[:pad + 22m] << 1.5mo
+        );
+        with layer = -1 guide(:cat:ac25,
+                fp[:pad + 22m] >> 1.5mo
+            --  fp[:pad + 22m] >> 10.5mo
+        );
+        label(fp[:pad + 22m] >> 10.5mo,
+            vbox(:right:middle :small :cat:ac25,
+                hbox(:right:top,
+                    vbox(:right:top,
+                        " 25kV ",
+                        hbar(0.3),
+                        span(:cat:ac15, " 15kV ")
+                    ),
+                    vbox(:right:top,
+                        "50Hz  ",
+                        hbar(0.3),
+                        span(:cat:ac15, "16,7Hz  ")
+                    )
+                )
+            )
+        );
+                
+    }
+}
+

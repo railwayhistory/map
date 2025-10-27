@@ -1,0 +1,200 @@
+# DK KHR.  København H - Helsingør
+#
+let kh = path("d3.dk.khr");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax
+{
+    # point.dk.København-H  dk.KFA
+
+    with link = "line.dk.KHR" {
+        track(:lor,
+                kh[:kob + 0.5sw + 1dl, :kob + 0.5sw + 1.1dl]
+                        << 0.5md >> 1mt >> 1ms >> 0.5md
+            ..  kh[:kob.a, :nor - 0.5sw] >> 0.5ms >> 0.5md
+        );
+    }
+
+    with link = "point.dk.Nørreport", railway = :station {
+        track(kh[:nor - 0.5sw, :nor + 0.5sw] >> 0.5ms >> 0.5md);
+        marker(:right :de.hp :cat:ac25 :pax, kh[:nor] >> 0.5ms >> 1md);
+        slabel(:right, kh[:nor] >> 0.5ms >> 1md >> 1.8sh, "Nørreport");
+    }
+
+    with link = "line.dk.KHR" {
+        track(:lor, kh[:nor + 0.5sw, :ost - 0.5sw] >> 0.5ms >> 0.5md);
+    }
+
+    with link = "point.dk.Østerport", railway = :station {
+        track(kh[:ost - 0.5sw, :ost + 0.5sw] >> 0.5ms >> 0.5md);
+        marker(:right :de.bf, kh[:ost] >> 0.5ms >> 1md);
+        slabel(:right, kh[:ost - 0.2sw] >> 0.5ms >> 1md >> 1.9sh,
+            "Østerport"
+        );
+    }
+
+    with link = "line.dk.KHR" {
+        track(:lor, kh[:ost + 0.5sw, :nha - 0.5sw] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:nha - 0.5sw, :nha + 0.5sw] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:ost + 0.5sw, :heg - 0.5sw] >> 0.5ms >> 0.5md);
+    }
+
+    with link = "point.dk.Helgoland", railway = :station {
+        track(kh[:heg - 0.5sw, :heg + 0.5sw] >> 0.5ms >> 0.5md);
+        marker(:right :de.bbf :nopax, kh[:heg] >> 0.5ms >> 1md);
+        slabel(:right :nopax, kh[:heg - 0.5sw] >> 0.5ms >> 1md >> 1.2sh,
+            "Helgoland"
+        );
+    }
+
+    with link = "line.dk.KHR" {
+        track(:lor, kh[:heg + 0.5sw, :sva - 350m] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:sva - 350m, :sva.yf] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:sva.yf, :hel.xv] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:hel.xv, :hel - 0.5sw] >> 0.5ms >> 0.5md);
+    }
+
+    with link = "point.dk.Hellerup", railway = :station {
+        track(kh[:hel - 0.5sw, :hel + 0.5sw] >> 0.5ms >> 0.5md);
+        marker(:right :de.bf, kh[:hel] >> 0.5ms >> 1md);
+        slabel(:right :bold, kh[:hel - 0.55sw] >> 0.5ms >> 1md >> 1.3sh,
+            "Hellerup"
+        );
+    }
+
+    with link = "line.dk.KHR" {
+        track(:lor, kh[:hel + 0.5sw, :cha - 0.5sw] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:cha - 0.5sw, :cha + 0.5sw] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:cha + 0.5sw, :ord - 0.5sw] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:ord - 0.5sw, :ord + 0.5sw] >> 0.5ms >> 0.5md);
+        track(:lor, kh[:ord + 0.5sw, :kla - 0.5sw] >> 0.5ms >> 0.5md);
+    }
+
+    with link = "point.dk.Klampenborg", railway = :station {
+        track(kh[:kla - 0.5sw, :kla + 0.5sw] >> 0.5ms >> 0.5md);
+        marker(:right :de.bf :cat:ac25 :pax, kh[:kla] >> 0.5md >> 0.5ms);
+        slabel(:right, kh[:kla - 0.5sw] >> 0.5md >> 0.5ms >> 1.3sh,
+            span(:bold, "Klampenborg")
+        );
+    }
+
+    with link = "line.dk.KHR" {
+        track(
+                kh[:kla + 0.5sw, :kla + 0.51sw] >> 0.5ms >> 0.5md
+            ..  kh[:kla.xh, :kla + 2.3km]
+        );
+        line_label(:right:w, kh[:kla + 2.3km] >> 0.5md, "KHR");
+        track(kh[:kla + 2.3km, :sko - 0.5sw]);
+    }
+
+    with link = "point.dk.Skodsborg", railway = :station {
+        track(kh[:sko - 0.5sw, :sko + 0.5sw]);
+        marker(:right :de.bf, kh[:sko] >> 0.5md);
+        slabel(:right, kh[:sko - 0.6sw] >> 0.5md >> 1.4sh,
+            "Skodsborg"
+        );
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:sko + 0.5sw, :ved.xj]);
+        track(:lor, kh[:ved.xj, :ved.yj]);
+        track(kh[:ved.yj, :ved - 0.5sw]);
+    }
+
+    with link = "point.dk.Vedbæk", railway = :station {
+        track(kh[:ved - 0.5sw, :ved + 0.5sw]);
+        marker(:right :de.hp, kh[:ved] >> 0.5md);
+        marker(:right :de.exbf, kh[:ved] >> 0.5md);
+        slabel(:right :bold, kh[:ved - 0.4sw] >> 0.5md >> 1.8sh,
+            "Vedbæk"
+        );
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:ved + 0.5sw, :run - 0.5sw]);
+    }
+
+    with link = "point.dk.Rungsted-Kyst", railway = :station {
+        track(kh[:run - 0.5sw, :run + 0.5sw]);
+        marker(:left :de.bf, kh[:run] << 0.5md);
+        slabel(:right, kh[:run - 0.4sw] >> 1md, "Rungsted Kyst");
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:run + 0.5sw, :run + 1.5km]);
+        line_label(:right:sw, kh[:run + 1.5km] >> 0.5md, "KHR");
+        track(kh[:run + 1.5km, :kok - 0.5sw]);
+    }
+
+    with link = "point.dk.Kokkedal", railway = :station {
+        track(kh[:kok - 0.5sw, :kok + 0.5sw]);
+        marker(:left :de.hp, kh[:kok] << 0.5md);
+        slabel(:left, kh[:kok - 0.35sw] << 0.5md << 1.7sh, "Kokkedal");
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:kok + 0.5sw, :niv - 0.5sw]);
+    }
+
+    with link = "point.dk.Nivå", railway = :station {
+        track(kh[:niv - 0.5sw, :niv + 0.5sw]);
+        marker(:right :de.bf, kh[:niv] >> 0.5md);
+        slabel(:right, kh[:niv - 0.5sw] >> 0.5md >> 1.8sh, "Nivå");
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:niv + 0.5sw, :hum - 0.5sw]);
+    }
+
+    with link = "point.dk.Humlebæk", railway = :station {
+        track(kh[:hum - 0.5sw, :hum + 0.5sw]);
+        marker(:right :de.hp, kh[:hum] >> 0.5md);
+        slabel(:right, kh[:hum - 0.4sw] >> 0.5md >> 1.7sh, "Humlebæk");
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:hum + 0.5sw, :hum + 2km]);
+        line_label(:right:w, kh[:hum + 2km] >> 0.5md, "KHR");
+        track(kh[:hum + 2km, :esp - 0.5sw]);
+    }
+
+    with link = "point.dk.Espergærde", railway = :station {
+        track(kh[:esp - 0.5sw, :esp + 0.5sw]);
+        marker(:right :de.hp, kh[:esp] >> 0.5md);
+        slabel(:right, kh[:esp - 0.6sw] >> 0.5md >> 1.6sh, "Espergærde");
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:esp + 0.5sw, :sne.xh]);
+        track(:lor, kh[:sne.xh, :sne.yh]);
+    }
+
+    with link = "point.dk.Snekkersten", railway = :station {
+        track(:single,
+                kh[:sne.yh, :sne + 220m - 1dl] << 0.5md << 1ms << 0.5mt
+            --  kh[:sne + 220m, :sne + 221m] << 0.5md >> 0.5mt
+        );
+        track(kh[:sne.yh, :sne + 220m]);
+        marker(:right :de.bf, kh[:sne] >> 0.5md);
+        slabel(:nw :bold, kh[:sne + 1.3sw] >> 1md, "Snekkersten");
+    }
+
+    with link = "line.dk.KHR" {
+        track(kh[:sne + 220m, :sne + 1.8km]);
+        line_label(:right:w, kh[:sne + 1.8km] >> 0.5md, "KHR");
+        track(kh[:sne + 1.8km, :hor - 3dl]);
+    }
+
+    with link = "point.dk.Helsingør", railway = :station {
+        track(kh[:hor - 3dl, :hor]);
+        track(:single :nocat,
+                kh[:hor - 2.1dl, :hor - 2dl] << 0.5md >> 0.5mt
+            --  kh[:hor - 1dl, :hor + 1dl] << 0.5md << 1ms << 0.5mt
+        );
+        marker(:right :de.bf, kh[:hor] >> 0.5md);
+        slabel(:nw :bold, kh[:hor + 0.5sw] >> 0.5md >> 1sh,
+            "Helsingør"
+        );
+    }
+}
+
