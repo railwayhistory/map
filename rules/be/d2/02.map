@@ -235,9 +235,15 @@ with detail = 2 {
 with detail = 2 {
     let sm = path("simple.be.25n");
 
-    with link = "line.be.25N" {
-        track(:first :double :cat:dc30 :pax, sm[:sae.g, :yab]);
-        with layer = 1 line_badge(:cat:dc30 :pax, sm[:yab - 5km], "25N");
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.be.25N" {
+            track(sm[:sae.g, :ymz.a]);
+            track(sm[:ymz.a, :ymz]);
+            track(sm[:ymz, :ymn]);
+            track(sm[:ymn, :ymn + 3km]);
+            line_label(:right:w, sm[:ymn + 3km], (0dt, 0.2dt), "25N");
+            with layer = -1 track(sm[:ymn + 3km, :yab]);
+        }
     }
 }
 
@@ -291,9 +297,15 @@ with detail = 2 {
 with detail = 2 {
     let wo = path("simple.be.27b");
 
-    with link = "line.be.27B" {
-        with layer = -2 track(:first :double :cat:dc30, wo[:wee, :mui.f]);
-        with layer = -2 track(:first :double :cat:dc30, wo[:ymu, :nek]);
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.be.27B" {
+            track(:casing, wo[:wee, :wee + 3km]);
+            line_label(:right:nw, wo[:wee + 3km], "27B");
+            track(wo[:wee + 3km, :ypr]);
+            track(wo[:ypr, :mui.f])
+        
+            track(:nopax, wo[:ymu, :nek]);
+        }
     }
 }
 
