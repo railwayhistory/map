@@ -250,20 +250,28 @@ with detail = 2 {
 with detail = 2 {
     let ml = path("d2.fr.668");
 
-    with link = "line.fr.668" {
-        track(:first, ml[:mon.yl, :luc]);
+    with railway = :first :pax {
+        with link = "line.fr.668" {
+            track(ml[:mon.yl, :mon.yl + 9km]);
+            line_label(:left:w, ml[:mon.yl + 9km], "668");
+            track(ml[:mon.yl + 9km, :mar]);
+        }
 
-        line_badge(:open, ml[:mon.yl + 9km] @ 1.5 << 0.1dt, "668");
-    }
+        with link = "point.fr.Marignac-St-Béat" {
+            statdot(ml[:mar]);
+            slabel(:right, ml[:mar] + (1.5dt, 1.3dt), "Marignac-St-Béat");
+        }
 
-    with link = "point.fr.Marignac-St-Béat" {
-        statdot(:medium, ml[:mar]);
-        slabel(:left, ml[:mar] + (-1.5dt, 0dt), "Marignac-St-Béat");
-    }
+        with link = "line.fr.668" {
+            track(ml[:mar, :mar + 7.4km]);
+            line_label(:right:e, ml[:mar + 7.4km], "668");
+            track(ml[:mar + 7.4km, :luc]);
+        }
 
-    with link = "point.fr.Luchon" {
-        statdot(:medium, ml[:luc]);
-        slabel(:bottom, ml[:luc] + (0dt, 0.8dt), "Luchon");
+        with link = "point.fr.Luchon" {
+            statdot(ml[:luc]);
+            slabel(:bottom, ml[:luc] + (0dt, 0.8dt), "Luchon");
+        }
     }
 }
 
