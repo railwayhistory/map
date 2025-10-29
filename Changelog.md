@@ -80,6 +80,21 @@
 
 ## Corrections
 
+### 2025-10-29
+
+* Lines _BE 13_ and _BE 27B_ have passenger service. ([#114])
+* Line _FR 289_ has passenger service between Bethune and St-Pol. ([#114])
+* Line _FR 668_ has passenger service. ([#114])
+* Line _SE SSV_ has historic tram service between Hosjö and Malmköping.
+  ([#114])
+* Line _DE 5731_ has passenger service. ([#114])
+* Line _DE 6311_ is single track between Creidlitz and Lichtenfels.
+  ([#114])
+* Line _DE 3826_ is single track. ([#114])
+* Line _DE 4633_ is electrified. ([#114])
+
+[#114]: https://github.com/railwayhistory/map/pull/114
+
 ### 2024-08-12
 
 * Line _DE 9440_ (Haltingen – Kandern) has heritage service. ([#90])
