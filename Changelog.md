@@ -80,6 +80,12 @@
 
 ## Corrections
 
+### 2025-10-30
+
+* Added line NO NO (Nesttun-Osbanen). ([#121])
+
+[#121]: https://github.com/railwayhistory/map/pull/121
+
 ### 2025-10-29
 
 * Lines _BE 13_ and _BE 27B_ have passenger service. ([#114])
