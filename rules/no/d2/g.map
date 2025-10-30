@@ -90,20 +90,38 @@ with detail = 2 {
 with detail = 2 {
     let gv = path("d2.no.gv");
 
-    with link = "line.no.GV" {
-        with layer = -1 track(:second, gv[:tun, :mid]);
-        with layer = 1 line_badge(:open, gv[:tun + 10.2km], "GV");
+    with railway = :first :nopax {
+        with link = "line.no.GV" {
+            track(gv[:tun, :mid]);
+            line_label(:left:w, gv[:tun + 11.5km], "GV");
+        }
 
-        with layer = -2 track(:second :removed, gv[:mid, :ber]);
+        with link = "point.no.Midttun" {
+            statdot(gv[:mid]);
+            slabel(:right, gv[:mid] + (1.8dt, 1.8dt), "Midttun");
+        }
     }
 
-    with link = "point.no.Midttun" {
-        with layer = 1 marker(:statdot, gv[:mid]);
-        slabel(:right, gv[:mid] + (1.8dt, 1.8dt), "Midttun");
-    }
+    with railway = :first :pax :removed {
+        with link = "line.no.GV" {
+            track(gv[:mid, :nes.yo]);
+        }
 
-    with link = "point.no.Bergen-gamle" {
-        with layer = -1 marker(:statdot :removed, gv[:ber]);
+        with link = "point.no.Nesttun" {
+            track(gv[:nes.yo, :nes]);
+            statdot(gv[:nes]);
+            slabel(:ne, gv[:nes] + (-2dt, -1dt), "Nesttun");
+        }
+
+        with link = "line.no.GV" {
+            track(gv[:nes, :nes + 4.5km]);
+            line_label(:left:e, gv[:nes + 4.5km], "GV");
+            track(gv[:nes + 4.5km, :ber]);
+        }
+
+        with link = "point.no.Bergen-gamle" {
+            statdot(gv[:ber]);
+        }
     }
 }
 
