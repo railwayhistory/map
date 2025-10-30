@@ -83,8 +83,10 @@
 ### 2025-10-30
 
 * Added line NO NO (Nesttun-Osbanen). ([#121])
+* Added line LT AD (Adutiškis – Didžiasalis). ([#131])
 
 [#121]: https://github.com/railwayhistory/map/pull/121
+[#131]: https://github.com/railwayhistory/map/pull/131
 
 ### 2025-10-29
 
