@@ -80,6 +80,12 @@
 
 ## Corrections
 
+### 2025-10-31
+
+* Added line SE FLN (Fjärås - Lygnern). ([#132])
+
+[#132]: https://github.com/railwayhistory/map/pull/132
+
 ### 2025-10-30
 
 * Added line NO NO (Nesttun-Osbanen). ([#121])
