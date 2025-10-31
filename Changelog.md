@@ -83,8 +83,11 @@
 ### 2025-10-31
 
 * Added line SE FLN (Fjärås - Lygnern). ([#132])
+* Added first part of line NO SD (Setesdalsbanen) between Grovane and
+  Røyknes. ([#133])
 
 [#132]: https://github.com/railwayhistory/map/pull/132
+[#133]: https://github.com/railwayhistory/map/pull/133
 
 ### 2025-10-30
 
