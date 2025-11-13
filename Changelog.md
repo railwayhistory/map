@@ -291,6 +291,13 @@
 
 ## New Additions
 
+### 2025-11-13
+
+* Added the second part of both overview and detail map of Denmark, covering
+  Falster and Lolland. ([#134])
+
+[#134]: https://github.com/railwayhistory/map/pull/134
+
 ### 2025-10-27
 
 * Added first part of both overview and detail map of Denmark, covering

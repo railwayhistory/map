@@ -253,15 +253,14 @@ with detail = 4,
         );
     }
 
-    with link = "point.dk.Orehoved", railway = :station {
+    with link = "point.dk.Orehoved-TS", railway = :station {
         track(rr[:ore - 570m, :ore + 0.5sw] << 0.5mo);
         track(
                 rr[:ore - 571m, :ore - 570m] << 0.5mo
             --  rr[:ore - 570m + 1dl, :ore + 0.5sw] >> 0.5mo
         );
         marker(:right :de.bbf :nopax, rr[:ore] >> 0.5mo >> 0.5mt);
-        marker(:right :de.exbf :nopax, rr[:ore] >> 0.5mo >> 0.5mt);
-        station(:left :nopax, rr[:ore + 0.4sw] >> 0.5mo >> 0.5mt >> 2.1sh,
+        station(:right :nopax, rr[:ore] << 0.5mo << 2.5mt + (0dt, 1.4dt),
             "Orehoved", "RSR: 126,88"
         );
     }
@@ -279,7 +278,14 @@ with detail = 4,
         marker(:right :de.hp, rr[:nal] >> 0.5mo >> 0.5mt);
         marker(:right :de.exbf, rr[:nal] >> 0.5mo >> 0.5mt);
         station(:left, rr[:nal + 0.4sw] >> 0.5mo >> 0.5mt >> 1.8sh,
-            "Nørre Alslev", "RSR: 131,81"
+            "Nørre Alslev",
+            hbox(:center:top,
+                vbox(:right:top, "RSR: ", span(:removed, "OHN :")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "131,", anchor(), "81"),
+                    hbox(:sep:base :removed, "??", anchor(), "")
+                )
+            )
         );
     }
 
@@ -314,15 +320,20 @@ with detail = 4,
     }
 
     with link = "point.dk.Nykøbing-Falster", railway = :station {
+        # DK RSR
         track(rr[:nyk.ys, :nyk.yg] >> 0.5mo);
         track(
                 rr[:nyk.ys, :nyk.yg - 1dl] << 0.5mo
             --  rr[:nyk.yg, :nyk.yg + 0.1dl] >> 0.5mo
         );
-        track(
+
+        # DK NKG
+        track(:nopax,
                 rr[:nyk - 501m, :nyk - 500m] << 0.5mo
             --  rr[:nyk - 500m + 1dl, :nyk.yg] << 1.5mo
         );
+
+        # DK SNN
         track(:side :nopax,
                 rr[:nyk.ys - 1.1dl, :nyk.ys - 1dl] << 1.5mo
             --  rr[:nyk.ys, :nyk + 250m - 1dl] << 2.5mo
@@ -330,17 +341,17 @@ with detail = 4,
         );
 
         marker(:right :de.bf :pax, rr[:nyk] >> 0.5mo >> 0.5mt);
-        station(:right, rr[:nyk - 0.7sw] << 2.5mo << 1.5mt,
-            hbox(:left:top :bold, "Nykøbing Falster"),
+        station(:left, rr[:nyk] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, 0.8dt),
+            span(:bold, "Nykøbing Falster"),
             hbox(:center:top,
                 vbox(:right:top,
                     "RSR: ",
-                    span(:removed, "??: "),
+                    span(:removed, "SNN: "),
                     "??: "
                 ),
                 vbox(:sep:top,
                     hbox(:sep:base, "146,", anchor(), "40"),
-                    hbox(:sep:base :removed, "??", anchor(), ""),
+                    hbox(:sep:base :removed, "27,", anchor(), "1"),
                     hbox(:sep:base, "146,", anchor(), "40")
                 )
             )
@@ -365,7 +376,7 @@ with detail = 4,
         station(:right :nopax, rr[:nyv + 0.8sw] << 0.5mt << 1sh,
             hbox(:left:top, "N.F. Vest"),
             hbox(:center:top,
-                vbox(:right:top, "[??: ", "RSR: "),
+                vbox(:right:top, "[NNS: ", "RSR: "),
                 vbox(:sep:top,
                     hbox(:sep:base, "0,", anchor(), "80]"),
                     hbox(:sep:base, "148,", anchor(), "24")
@@ -379,9 +390,9 @@ with detail = 4,
      railway = :first :suspended
 {
     with link = "line.dk.RSR" {
-        track(rr[:nyv + 0.5sw, :nyv + 4km]);
-        line_label(:left:n, rr[:nyv + 4km] << 0.5mt, (0.5dt, 0dt), "RSR");
-        track(rr[:nyv + 4km, :lon - 0.5sw]);
+        track(rr[:nyv + 0.5sw, :nyv + 1.8km]);
+        line_label(:left:n, rr[:nyv + 1.8km] << 0.5mt, "RSR");
+        track(rr[:nyv + 1.8km, :lon - 0.5sw]);
     }
 
     with link = "point.dk.Lolland-Nord", railway = :station {

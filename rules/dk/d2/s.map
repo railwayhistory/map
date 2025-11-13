@@ -51,6 +51,44 @@ with detail = 2 {
 }
 
 
+# DK SNN.  Stubbekøbing - Nykøbing - Nysted
+with detail = 2 {
+    let sn = path("d2.dk.snn");
+
+    with railway = :first :pax :removed {
+        with link = "point.dk.Stubbekøbing" {
+            statdot(sn[:stu]);
+            slabel(:top, sn[:stu] + (0dt, -0.8dt), "Stubbekøbing");
+        }
+
+        with link = "line.dk.SNN" {
+            track(sn[:stu, :stu + 11km]);
+            line_label(:left:nw, sn[:stu + 11km], "SNN");
+            track(sn[:stu + 11km, :nyk.ys]);
+        }
+
+        # point.dk.Nykøbing-Falster  dk.RSR
+
+        with link = "line.dk.SNN" {
+            track(sn[:nyk.yg, :oto.yn]);
+        }
+
+        # point.dk.Øster-Toreby  dk.NNS
+
+        with link = "line.dk.SNN" {
+            track(sn[:oto, :oto + 7.5km]);
+            line_label(:left:w, sn[:oto + 7.5km], "SNN");
+            track(sn[:oto + 7.5km, :nys]);
+        }
+
+        with link = "point.dk.Nysted" {
+            statdot(sn[:nys]);
+            slabel(:bottom, sn[:nys] + (0dt, 0.8dt), "Nysted");
+        }
+    }
+}
+
+
 # DK SNV.  Slagelse - Næstved
 with detail = 2 {
     let sn = path("d2.dk.snv");
