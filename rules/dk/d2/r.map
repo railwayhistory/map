@@ -182,7 +182,9 @@ with detail = 2 {
 
     with railway = :first :pax {
         with link = "line.dk.RSR" {
-            track(rr[:vor, :ore]);
+            track(rr[:vor, :vor + 6km]);
+            line_label(:left:nw, rr[:vor + 6km], "RSR");
+            track(rr[:vor + 6km, :ore]);
             track(:double, rr[:ore, :nyk - 12.5km]);
             line_label(:right:e, rr[:nyk - 12.5km], "RSR");
             track(:double, rr[:nyk - 12.5km, :nyk.ys]);
@@ -191,24 +193,24 @@ with detail = 2 {
         with link = "point.dk.Nykøbing-Falster" {
             track(rr[:nyk.ys, :nyv]);
             statdot(:pax, rr[:nyk]);
-            slabel(:right :bold, rr[:nyk] + (1.8dt, 1.0dt),
-                "Nykøbing Falster"
+            slabel(:left :bold, rr[:nyk] + (-1dt, -0.5dt),
+                vbox(:right:base, "Nykøbing", "Falster")
             );
         }
     }
 
-    with railway = :first :suspended {
+    with railway = :first :pax :suspended {
         with link = "line.dk.RSR" {
             track(rr[:nyv, :nyv + 6km]);
-            line_label(:left:n, rr[:nyv + 6km], (0.8dt, 0dt), "RSR");
+            line_label(:left:n, rr[:nyv + 1.5km], "RSR");
             track(rr[:nyv + 6km, :rof - 8km]);
-            line_label(:right:s, rr[:rof - 8km], (-0.5dt, 0dt), "RSR");
+            line_label(:left:n, rr[:rof - 11km], "RSR");
             track(rr[:rof - 8km, :rof]);
         }
 
         with link = "point.dk.Rødby-Færge" {
             statdot(rr[:rof]);
-            slabel(:left, rr[:rof] + (-1.8dt, 1.0dt), "Rødby Færge");
+            slabel(:ne, rr[:rof] + (-1.3dt, -0.3dt), "Rødby Færge");
         }
     }
 }
