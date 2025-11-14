@@ -88,6 +88,8 @@
   service. ([#135])
 * Lines _DE 4551_ and _DE 4333_ only provide tourist passenger service
   between Altshausen and Pfullendorf. ([#135])
+* Line _DE 9486_ only has full passenger service between Korntal and
+  Heimerdingen and tourist service further to Weissach. ([#135])
 
 [#135]: https://github.com/railwayhistory/map/pull/135
 
