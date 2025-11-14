@@ -369,21 +369,17 @@ with detail = 2 {
 with detail = 2 {
     let rw = path("d2.de.4561");
 
-    with link = "line.de.4561" {
-        track(:second :pax, rw[:ros, :wur]);
+    with railway = :second :tourist {
+        with link = "line.de.4561" {
+            track(rw[:ros, :wur - 5km]);
+            line_label(:left:s, rw[:wur - 5km], "4561");
+            track(rw[:wur - 5km, :wur]);
+        }
 
-        guide(:linenum :pax,
-                rw[:wur - 5km] << 0.7dt
-            --  rw[:wur - 5km] << 3.0dt
-        );
-        label(:linenum :pax, rw[:wur - 5km] << 3.0dt,
-            hbox(:center:bottom :badgesize, "4561")
-        );
-    }
-
-    with link = "point.de.Bad-Wurzach" {
-        with layer = 1 marker(:statdot :pax, rw[:wur]);
-        slabel(:right :pax, rw[:wur] + (1.5dt, 0.8dt), "Bad Wurzach");
+        with link = "point.de.Bad-Wurzach" {
+            statdot(rw[:wur]);
+            slabel(:right, rw[:wur] + (1.5dt, 0.8dt), "Bad Wurzach");
+        }
     }
 }
 
