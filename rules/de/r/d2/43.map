@@ -289,22 +289,25 @@ with detail = 2 {
 with detail = 2 {
     let sb = path("d2.de.4333");
 
-    with link = "line.de.4333" {
-        track(:second :removed, sb[:swa.yp, :pfu]);
-        track(:second :pax, sb[:pfu, :bux]);
-
-        guide(:linenum :removed,
-                sb[:pfu - 7km] >> 0.7dt
-            --  sb[:pfu - 7km] >> 3.0dt
-        );
-        label(:linenum :removed, sb[:pfu - 7km] >> 3.0dt,
-            hbox(:center:top :badgesize, "4333")
-        );
+    with railway = :second :removed {
+        with link = "line.de.4333" {
+            track(sb[:swa.yp, :pfu - 7km]);
+            line_label(:right:n, sb[:pfu - 7km], "4333");
+            track(sb[:pfu - 7km, :pfu]);
+        }
     }
 
-    with link = "point.de.Pfullendorf" {
-        with layer = 1 marker(:statdot :pax, sb[:pfu]);
-        slabel(:left :pax, sb[:pfu] + (1.5dt, -1.5dt), "Pfullendorf");
+    with railway = :second :tourist {
+        with link = "point.de.Pfullendorf" {
+            statdot(sb[:pfu]);
+            slabel(:left, sb[:pfu] + (0dt, -0.5km) + (1.5dt, -0.5dt),
+                "Pfullendorf"
+            );
+        }
+
+        with link = "line.de.4333" {
+            track(sb[:pfu, :bux]);
+        }
     }
 }
 

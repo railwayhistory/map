@@ -86,6 +86,8 @@
   passenger service since 2025-01-07. ([#135])
 * Line _DE 4561_ (Roßberg - Bad Wurzach) only has tourist passenger
   service. ([#135])
+* Lines _DE 4551_ and _DE 4333_ only provide tourist passenger service
+  between Altshausen and Pfullendorf. ([#135])
 
 [#135]: https://github.com/railwayhistory/map/pull/135
 
