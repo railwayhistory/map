@@ -82,8 +82,6 @@
 
 ### 2025-11-14
 
-* Lines _IT CSL_ (Cuneo – Saluzzo) and _IT SVS_ (Savigliano – Saluzzo) have
-  passenger service since 2025-01-07. ([#135])
 * Line _DE 3571_ is now electrified between Hofheim and Bürstadt. ([#135])
 * Lines _DE 4551_ and _DE 4333_ only provide tourist passenger service
   between Altshausen and Pfullendorf. ([#135])
@@ -97,6 +95,10 @@
   the Kassel tram and thus is electric. ([#135])
 * Line _DE 9486_ only has full passenger service between Korntal and
   Heimerdingen and tourist service further to Weissach. ([#135])
+* Lines _IT CSL_ (Cuneo – Saluzzo) and _IT SVS_ (Savigliano – Saluzzo) have
+  passenger service since 2025-01-07. ([#135])
+* Lines _PL 308_ between Mysłakowice and Jelenia Góra and _PL 340_ are now
+  open and have pax service. ([#135])
 
 [#135]: https://github.com/railwayhistory/map/pull/135
 
