@@ -92,6 +92,8 @@
   Heimerdingen and tourist service further to Weissach. ([#135])
 * Line _DE 5330_ has full passenger service between Wassertrüdingen and
   Gunzenhausen. ([#135])
+* Line _DE 9390_ only has tourist service except for a bit that is used by
+  the Kassel tram and thus is electric. ([#135])
 
 [#135]: https://github.com/railwayhistory/map/pull/135
 
