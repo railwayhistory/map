@@ -99,6 +99,9 @@
   passenger service since 2025-01-07. ([#135])
 * Lines _PL 308_ between Mysłakowice and Jelenia Góra and _PL 340_ are now
   open and have pax service. ([#135])
+* Lines _PL 146_ and _PL 131_ between Chorzew Siemkowice and Zduńska Wola
+  including the south to west curve at Zduńska Wola now have pax service.
+  ([#135])
 
 [#135]: https://github.com/railwayhistory/map/pull/135
 
