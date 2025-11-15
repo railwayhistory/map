@@ -105,6 +105,8 @@
 * Lines _PL 146_ and _PL 131_ between Chorzew Siemkowice and Zduńska Wola
   including the south to west curve at Zduńska Wola now have pax service.
   ([#135])
+* Line _PL 201_ does not have pax service between Lipowa Tucholska and
+  Kościerzyna. ([#135])
 * Lines _PL 308_ between Mysłakowice and Jelenia Góra and _PL 340_ are now
   open and have pax service. ([#135])
 * Line _PL 357_ has pax service between Powodowo and Wolsztyn. ([#135])
