@@ -1,0 +1,98 @@
+# DE 6589.  Zittau - Hagenwerder
+#
+let zg = path("d3.de.6589.1");
+let gh = path("d3.de.6589.2");
+
+with detail = 4,
+     railway = :second :pax
+{
+    # point.de.Zittau: de.6214
+
+    with link = "line.de.6589" {
+        track(zg[:zit.yh, :dra - 1km]);
+        line_label(:left:se, zg[:dra - 1km] << 0.5mt, "6589");
+        track(zg[:dra - 1km, :dra - 0.5sw]);
+    }
+
+    with link = "point.de.Drausendorf", railway = :station {
+        track(zg[:dra - 0.5sw, :dra + 0.5sw]);
+        marker(:right :de.hp :removed, zg[:dra] >> 0.5mt);
+        station(:right :removed, zg[:dra] >> 0.5mt >> 1sh + (1.5dt, 1.8dt),
+            "Drausendorf", "6589: 5,120"
+        );
+    }
+
+    with link = "line.de.6589" {
+        track(zg[:dra + 0.5sw, :hib - 0.3sw]);
+    }
+
+    with link = "point.de.Hirschfelde", railway = :station {
+        track(zg[:hib - 0.5sw, :hib + 0.5sw]);
+        marker(:left :de.bf :removed, zg[:hib] << 0.5mt);
+        station(:left :removed, zg[:hib] << 0.5mt << 1sh + (-1.7dt, 0.3dt),
+            "Hirschfelde", "6589: 7,090"
+        );
+    }
+
+    with link = "line.de.6589" {
+        track(zg[:hib + 0.5sw, :hir - 0.3sw]);
+    }
+
+    with link = "point.de.Hirschfelde", railway = :station {
+        track(zg[:hir - 0.5sw, :hir + 0.5sw]);
+        marker(:left :de.hp, zg[:hir] << 0.5mt);
+        station(:left, zg[:hir] << 0.5mt << 1sh + (-1.7dt, 0.5dt),
+            "Hirschfelde", "6589: 7,734"
+        );
+    }
+
+    with link = "line.de.6589" {
+        track(zg[:hir + 0.5sw, :hig - 0.3sw]);
+    }
+
+    with link = "point.int.Hirschfelde-Trzciniec-Zgorzelecki",
+         railway = :station
+    {
+        track(zg[:hig - 0.3sw, :hig + 0.3sw]);
+        marker(:left :de.dirgr :pax, zg[:hig] << 0.5mt);
+        label(zg[:hig] << 0.5mt << 1.2sh,
+            hbox(:right:middle :xsmall,
+                vbox(:left:top, " PL ", hrule(), " DE "),
+                vbox(:right:top, "348: ", hrule(), "6589: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "0,", anchor(), "200"),
+                    hrule(),
+                    hbox(:sep:base, "8,", anchor(), "377")
+                )
+            )
+        );
+    }
+}
+
+with detail = 4,
+     railway = :second :pax
+{
+    with link = "point.int.Hagenwerder-Ręczyn", railway = :station {
+        track(gh[:gha - 0.3sw, :gha + 0.3sw]);
+        marker(:left :de.dirgr, gh[:gha] << 0.5mt);
+        marker(:right :de.dirgr, gh[:gha] >> 0.5mt);
+        label(gh[:gha] << 0.5mt << 1.2sh,
+            hbox(:right:middle :xsmall,
+                vbox(:left:middle, " DE ", hrule(), " PL "),
+                vbox(:right:middle, "6590: ", hrule(), "324: "),
+                vbox(:sep:middle,
+                    hbox(:sep:base, "20,", anchor(), "958"),
+                    hrule(),
+                    hbox(:sep:base, "0,", anchor(), "689")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.6589" {
+        track(gh[:gha + 0.3sw, :gha + 1.3km]);
+        line_label(:left:e, gh[:gha + 1.3km] << 0.5mt, "6589");
+        track(gh[:gha + 1.3km, :hag.yz]);
+    }
+}
+
