@@ -107,6 +107,7 @@
   ([#135])
 * Lines _PL 308_ between Mysłakowice and Jelenia Góra and _PL 340_ are now
   open and have pax service. ([#135])
+* Line _PL 357_ has pax service between Powodowo and Wolsztyn. ([#135])
 
 [#135]: https://github.com/railwayhistory/map/pull/135
 
