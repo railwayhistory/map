@@ -2,6 +2,10 @@
 
 ## 2025-11-15
 
+Additions
+
+* Added the details for the lines south of Görlitz. ([#13])
+
 Corrections
 
 * Line _DE 3571_ is now electrified between Hofheim and Bürstadt. ([#135])
@@ -33,6 +37,7 @@ Corrections
   open and have pax service. ([#135])
 * Line _PL 357_ has pax service between Powodowo and Wolsztyn. ([#135])
 
+[#13]: https://github.com/railwayhistory/map/pull/13
 [#135]: https://github.com/railwayhistory/map/pull/135
 
 
