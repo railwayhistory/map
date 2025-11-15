@@ -95,6 +95,8 @@
   the Kassel tram and thus is electric. ([#135])
 * Line _DE 9486_ only has full passenger service between Korntal and
   Heimerdingen and tourist service further to Weissach. ([#135])
+* Line _FR 247_ (Hautmont – Feignies frontière) and the final section of
+  line _BE 96_ from Quévy to the border have pax service again. ([#135])
 * Lines _IT CSL_ (Cuneo – Saluzzo) and _IT SVS_ (Savigliano – Saluzzo) have
   passenger service since 2025-01-07. ([#135])
 * Lines _PL 308_ between Mysłakowice and Jelenia Góra and _PL 340_ are now
