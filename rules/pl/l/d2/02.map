@@ -1,0 +1,227 @@
+# PL 22.  Tomaszów Mazowiecki - Radom Główny
+with detail = 2 {
+    let tr = path("d2.pl.l.22");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.22" {
+            with layer = -1 track(tr[:raz.yz, :raz.yi]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Radzice" {
+            track(:station, tr[:raz.yi, :raz]);
+            statdot(tr[:raz]);
+            slabel(:right, tr[:raz] + (1.3dt, -0.3dt), "Radzice");
+        }
+
+        with link = "line.pl.22" {
+            track(tr[:raz, :wol]);
+            line_label(:right:ne, tr[:raz + 6km], "22");
+            line_label(:left:s, tr[:wol - 8km], "22");
+        }
+
+        with link = "point.pl.Wolanów" {
+            statdot(tr[:wol]);
+            slabel(:left, tr[:wol] + (0.3dt, 0.8dt),
+                hbox(:right:top, "Wolanów")
+            );
+        }
+
+        with link = "line.pl.22" {
+            track(tr[:wol, :wol.yr]);
+            track(tr[:wol.yr, :rkr]);
+        }
+
+        with link = "point.pl.Radom-Krychnowice" {
+            statdot(:nopax, tr[:rkr]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.22" {
+            track(tr[:rkr, :rad.yt]);
+            with zoom = :high line_label(:left:s, tr[:rad.yt - 2km],
+                (-0.3dt, 0dt), "22"
+            );
+        }
+    }
+}
+
+
+# PL 25.  Łódź Kaliska - Dębica
+with detail = 2 {
+    let ld = path("d2.pl.l.25");
+
+    with railway = :first :pax {
+        with link = "line.pl.25" {
+            with layer = -1 {
+                track(ld[:opo.x, :kon]);
+                line_label(:left:w, ld[:kon - 10km], "25");
+            }
+            track(ld[:kon, :ska.yl]);
+            line_label(:right:ne, ld[:ska.yl - 10km], "25");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.25" {
+            track(ld[:ska.yt, :ske]);
+            track(ld[:ske, :stw]);
+            line_label(:left:sw, ld[:ske + 10km], "25");
+        }
+
+        with link = "point.pl.Starachowice-Wschodnie" {
+            statdot(ld[:stw]);
+            slabel(:left, ld[:stw] + (-1dt, 0dt),
+                vbox(:right:top, "Starachowice", "Wschodnie")
+            );
+        }
+
+        with link = "line.pl.25" {
+            track(ld[:stw, :ost]);
+        }
+
+        with link = "point.pl.Ostrowiec-Świętokrzyski" {
+            statdot(ld[:ost]);
+            slabel(:right, ld[:ost] + (1.5dt, 0dt),
+                vbox(:left:bottom, "Ostrowiec", "Świętokrzyski")
+            );
+        }
+
+        with link = "line.pl.25" {
+            track(ld[:ost, :zal]);
+            line_label(:left:sw, ld[:ost + 20km], "25");
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.25" {
+            track(ld[:zal, :san]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "point.pl.Sandomierz" {
+            statdot(ld[:san] << 0.4dt);
+            slabel(:left, ld[:san] + (-1.3dt, 0.8dt), "Sandomierz");
+        }
+
+        with link = "line.pl.25" {
+            track(ld[:san, :san.yg]);
+            track(ld[:san.yg, :sob.ys]);
+            line_label(:right:e, ld[:san.yg + 1.5km], "25");
+        }
+
+        with link = "point.pl.Sobów" {
+            track(:station, ld[:sob.ys, :sob]);
+            statdot(ld[:sob]);
+            slabel(:left, ld[:sob] + (-1.3dt, 0dt), "Sobów");
+        }
+
+        with link = "line.pl.25" {
+            track(ld[:sob, :oci]);
+        }
+
+        with link = "point.pl.Ocice" {
+            track(:station, ld[:oci, :oci.yr]);
+            statdot(ld[:oci]);
+            slabel(:right, ld[:oci] + (1.5dt, 1dt), "Ocice");
+        }
+    }
+
+    with railway = :first :cat:dc30 {
+        with link = "line.pl.25" {
+            track(ld[:oci.yr, :chm.ym]);
+        }
+
+        with link = "point.pl.Chmielów" {
+            track(:station, ld[:chm.ym, :chm.yw]);
+            statdot(ld[:chm]);
+            slabel(:left, ld[:chm] + (-1.5km, 0.5km) + (-1.5dt, 0.3dt),
+                hbox(:right:top, "Chmielów")
+            );
+        }
+    }
+
+    with railway = :first {
+        with link = "line.pl.25" {
+            with layer = -1 {
+                track(ld[:chm.yw, :pad.yw]);
+                line_label(:right:se, ld[:pad.yw - 2.5km], "25");
+
+                track(ld[:pad.yw, :pad]);
+            }
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "point.pl.Padew" {
+            statdot(ld[:pad]);
+            slabel(:left, ld[:pad] + (-1.5dt, 0.3dt), "Padew");
+        }
+
+        with link = "line.pl.25" {
+            track(ld[:pad, :jas.x]);
+        }
+    }
+}
+
+
+# PL 26.  Łuków - Radom Główny
+with detail = 2 {
+    let lr = path("d2.pl.l.26");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.26" {
+            track(lr[:okr.x, :sta]);
+            line_label(:right:se, lr[:sta - 10km], "26");
+        }
+
+        with link = "point.pl.Stawy" {
+            track(:station, lr[:sta, :sta.yd]);
+            statdot(:nopax, lr[:sta]);
+            slabel(:right :nopax, lr[:sta] + (0.5dt, 0.5dt),
+                hbox(:left:top, "Stawy")
+            );
+        }
+
+        with link = "line.pl.26" {
+            track(lr[:sta.yd, :deb.yl]);
+            with zoom = :high line_label(:right:s, lr[:sta.yd + 1.5km], "26");
+        }
+
+        # point.pl.Dęblin
+
+        with link = "line.pl.26" {
+            track(lr[:deb.yr, :bak]);
+            line_label(:right:s, lr[:deb.yr + 7km], "26");
+        }
+
+        with link = "point.pl.Bąkowiec" {
+            track(:station, lr[:bak, :bak.yk]);
+            statdot(lr[:bak]);
+            slabel(:right, lr[:bak] + (1.8dt, -0.3dt),
+                hbox(:left:top, "Bąkowiec")
+            );
+        }
+
+        with link = "line.pl.26" {
+            track(lr[:bak.yk, :bak.ys]);
+            track(lr[:bak.ys, :gar]);
+        }
+
+        with link = "point.pl.Garbatka-Letnisko" {
+            statdot(lr[:gar]);
+            slabel(:right, lr[:gar] + (0.5dt, 0.5dt),
+                vbox(:left:top, "Garbatka-", " Letnisko")
+            );
+        }
+
+        with link = "line.pl.26" {
+            track(lr[:gar, :rad.yl]);
+            line_label(:left:nw, lr[:rad.yl - 13km], "26");
+        }
+    }
+}
+

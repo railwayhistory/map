@@ -81,14 +81,7 @@ with detail = 2 {
 
     with link = "line.de.6804" {
         track(:second :removed, lg[:lob.yg, :ger]);
-
-        guide(:linenum :removed,
-                lg[:lob.yg + 4km] >> 0.7dt
-            --  lg[:lob.yg + 4km] >> 3.0dt
-        );
-        label(:linenum :removed, lg[:lob.yg + 4km] >> 3.0dt + (0dt, -0.1dt),
-            hbox(:left:middle, " 6804")
-        );
+        line_label(:right:w :removed, lg[:lob.yg + 5.5km], "6804");
     }
 
     with link = "point.de.Gerlebogk" {
@@ -946,36 +939,39 @@ with detail = 2 {
 with detail = 2 {
     let mt = path("d2.de.6864");
 
-    with link = "line.de.6864" {
-        track(:second :cat:ac25, mt[:mic.yt, :hor]);
-        track(:second :removed, mt[:hor, :tan]);
+    with railway = :second :cat:ac25 :museum {
+        with link = "line.de.6864" {
+            track(mt[:mic.yt, :rub]);
+            line_label(:right:se, mt[:mic.yt + 5km], "6864");
+        }
 
-        guide(:linenum :cat:ac25,
-                mt[:mic.yt + 6km] << 0.7dt
-            --  mt[:mic.yt + 6km] << 3.0dt
-        );
-        label(:linenum :cat:ac25, mt[:mic.yt + 6km] << 3.0dt + (0.2dt, 0dt),
-            hbox(:center:top, "6864")
-        );
-        guide(:linenum :removed,
-                mt[:tan - 4km] << 0.7dt
-            --  mt[:tan - 4km] << 3.0dt
-        );
-        label(:linenum :removed, mt[:tan - 4km] << 3.0dt,
-            hbox(:left:middle, " 6864")
-        );
+        with link = "point.de.Rübeland" {
+            statdot(mt[:rub]);
+            slabel(:bottom, mt[:rub] + (0dt, 0.8dt), "Rübeland");
+        }
     }
 
-    with link = "point.de.Elbingerode-Harz" {
-        with layer = 1 marker(:statdot :cat:ac25, mt[:elb]);
-        slabel(:right :cat:ac25, mt[:elb] + (-2.5dt, -1.0dt),
-            vbox(:left:bottom, "Elbingerode", span(:light, "(Harz)"))
-        );
+    with railway = :second :cat:ac25 :nopax {
+        with link = "line.de.6864" {
+            track(mt[:rub, :elw]);
+            track(mt[:elw, :hor]);
+        }
+
+        with link = "point.de.Hornberg-Harz" {
+            statdot(mt[:hor]);
+        }
     }
 
-    with link = "point.de.Tanne" {
-        with layer = 1 marker(:statdot :removed, mt[:tan]);
-        slabel(:right :removed, mt[:tan] + (1.5dt, 1.5dt), "Tanne");
+    with railway = :second :removed {
+        with link = "line.de.6864" {
+            track(mt[:hor, :tan]);
+            line_label(:left:w, mt[:tan - 4km], "6864");
+        }
+
+        with link = "point.de.Tanne" {
+            statdot(mt[:tan]);
+            slabel(:right, mt[:tan] + (1.5dt, 1.5dt), "Tanne");
+        }
     }
 }
 
@@ -1025,17 +1021,19 @@ with detail = 2 {
 with detail = 2 {
     let bm = path("d2.de.6867");
 
-    with link = "line.de.6867" {
-        track(:second :cat:ac25, bm[:bla.ym, :mic]);
-    }
+    with railway = :second :cat:ac25 :museum {
+        with link = "line.de.6867" {
+            track(bm[:bla.ym, :mic]);
+        }
 
-    with link = "point.de.Blankenburg-Harz-Nord" {
-        with layer = 1 marker(:statdot :cat:ac25, bm[:bln]);
-    }
+        with link = "point.de.Blankenburg-Harz-Nord" {
+            statdot(bm[:bln]);
+        }
 
-    with link = "point.de.Michaelstein" {
-        with layer = 1 marker(:statdot :cat:ac25, bm[:mic]);
-        slabel(:left :cat:ac25, bm[:mic] + (0.5dt, -1.8dt), "Michaelstein");
+        with link = "point.de.Michaelstein" {
+            statdot(bm[:mic]);
+            slabel(:left, bm[:mic] + (0.5dt, -1.8dt), "Michaelstein");
+        }
     }
 }
 

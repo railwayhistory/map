@@ -1,0 +1,119 @@
+# AT 440.  Bruck a.d. Mur - Abzw Leoben 2
+with detail = 2 {
+    let bl = path("d2.at.440");
+
+    with link = "line.at.440" {
+        track(:first :double :cat:ac15 :pax, bl[:bru.ym, :leo]);
+        line_label(:right:s :double :cat:ac15 :pax, bl[:bru.ym + 9km], "440");
+    }
+
+    with link = "point.at.Leoben-Hbf" {
+        track(:first:station :double :cat:ac15 :pax, bl[:leo, :leo.ye]);
+        statdot(:cat:ac15 :pax, bl[:leo]);
+        slabel(:right :cat:ac15 :pax, bl[:leo] + (1.5dt, 0.8dt),
+            hbox(:left:top, "Leoben")
+        );
+    }
+
+    with link = "line.at.440" {
+        track(:first :double :cat:ac15 :pax, bl[:leo.ye, :lez.y]);
+        with zoom = :high {
+            line_label(
+                :right:se :double :cat:ac15 :pax, bl[:leo.ye + 2.3km], "440"
+            );
+        }
+    }
+}
+
+
+# AT 441.  Leoben Hbf - Vordernberg
+with detail = 2 {
+    let lv = path("d2.at.441");
+
+    with link = "line.at.441" {
+        track(:second, lv[:leo.ye, :tro]);
+    }
+
+    with link = "point.at.Trofaiach" {
+        statdot(:open, lv[:tro]);
+        slabel(:right, lv[:tro] + (1.5dt, 0.3dt), "Trofaiach");
+    }
+
+    with link = "line.at.441" {
+        track(:second :closed, lv[:tro, :vor]);
+        line_label(:left:e :closed, lv[:tro + 2.5km], "441");
+    }
+
+    with link = "point.at.Vordernberg" {
+        statdot(:open, lv[:vor]);
+        slabel(:right, lv[:vor] + (1.8dt, 0.3dt), "Vordernberg");
+    }
+}
+
+
+# AT 442.  Eisenerz - Vordernberg
+with detail = 2 {
+    let ev = path("d2.at.442");
+
+    with link = "line.at.442" {
+        track(:second, ev[:eis, :erz]);
+        line_label(:right:e, ev[:eis + 3km], "442");
+    }
+
+    with link = "point.at.Erzberg" {
+        statdot(:museum, ev[:erz]);
+        slabel(:bottom :museum, ev[:erz] + (0dt, 0.9km) + (0dt, 0.3dt),
+            "Erzberg"
+        );
+    }
+
+    with link = "line.at.442" {
+        track(:second :museum, ev[:erz, :vom]);
+        line_label(:left:sw :museum, ev[:vom - 2km], "442");
+    }
+
+    with link = "point.at.Vordernberg-Markt" {
+        statdot(:museum, ev[:vom]);
+    }
+
+    with link = "line.at.442" {
+        track(:second, ev[:vom, :vor]);
+    }
+}
+
+
+# AT 443.  Hieflau - Eisenerz
+with detail = 2 {
+    let he = path("d2.at.443");
+
+    with link = "line.at.443" {
+        track(:second, he[:hie.ye, :eis]);
+        line_label(:left:sw, he[:eis - 3.5km], "443");
+    }
+
+    with link = "point.at.Eisenerz" {
+        statdot(:open, he[:eis]);
+        slabel(:right, he[:eis] + (1.5dt, 0.3dt), "Eisenerz");
+    }
+}
+
+
+# AT 445.  St. Michael - Leoben Hbf
+with detail = 2 {
+    let ml = path("d2.at.445");
+
+    with link = "line.at.445" {
+        track(:first :double :cat:ac15 :pax, ml[:smi.yl, :lez.y]);
+        track(:first :double :removed, ml[:lez.y, :gos]);
+        line_label(:right:nw :removed, ml[:lez.y + 1.8km], "445");
+    }
+
+    with link = "point.at.Leoben-Göss" {
+        statdot(:open, ml[:gos]);
+    }
+
+    with link = "line.at.445" {
+        track(:first :cat:ac15, ml[:gos, :leo.yg]);
+    }
+}
+

@@ -1,0 +1,167 @@
+# DK SHT.  Snoghøj - Taulov
+with detail = 2 {
+    let st = path("d2.dk.sht");
+
+    with railway = :first :double :cat:ac25 :pax {
+        with link = "line.dk.SHT" {
+            track(st[:sno, :sno + 2.2km]);
+            line_label(:left:ne, st[:sno + 2.2km], "SHT");
+            track(st[:sno + 2.2km, :tau.ys]);
+        }
+    }
+}
+
+
+# DK SMS.  Svanemøllen - Slangerup
+with detail = 2 {
+    let ss = path("d2.dk.sms");
+
+    with railway = :first :double :cat:dc15 :pax {
+        with link = "line.dk.SMS" {
+            track(
+                    ss[:sva.yf - 0.1dl, :sva.yf] << 1md << 1ms
+                ..  ss[:ryp, :ryp + 0.1dl]
+            );
+            track(ss[:ryp.yf, :emd.yl]);
+            track(ss[:emd.yl, :emd.yl + 6.5km]);
+            line_label(:left:ne, ss[:emd.yl + 6.5km], "SMS");
+            track(ss[:emd.yl + 6.5km, :far.xs]);
+            track(:single, ss[:far.xs, :far]);
+        }
+
+        with link = "point.dk.Farum" {
+            statdot(ss[:far]);
+            slabel(:right, ss[:far] + (1.5dt, 0.3dt), "Farum");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SMS" {
+            track(ss[:far, :far + 7km]);
+            line_label(:left:n, ss[:far + 7km], "SMS");
+            track(ss[:far + 7km, :sla.yh]);
+            track(ss[:sla.yh, :sla]);
+        }
+
+        with link = "point.dk.Slangerup" {
+            statdot(ss[:sla]);
+            slabel(:left, ss[:sla] + (0.8dt, -1.5dt), "Slangerup");
+        }
+    }
+}
+
+
+# DK SNN.  Stubbekøbing - Nykøbing - Nysted
+with detail = 2 {
+    let sn = path("d2.dk.snn");
+
+    with railway = :first :pax :removed {
+        with link = "point.dk.Stubbekøbing" {
+            statdot(sn[:stu]);
+            slabel(:top, sn[:stu] + (0dt, -0.8dt), "Stubbekøbing");
+        }
+
+        with link = "line.dk.SNN" {
+            track(sn[:stu, :stu + 11km]);
+            line_label(:left:nw, sn[:stu + 11km], "SNN");
+            track(sn[:stu + 11km, :nyk.ys]);
+        }
+
+        # point.dk.Nykøbing-Falster  dk.RSR
+
+        with link = "line.dk.SNN" {
+            track(sn[:nyk.yg, :oto.yn]);
+        }
+
+        # point.dk.Øster-Toreby  dk.NNS
+
+        with link = "line.dk.SNN" {
+            track(sn[:oto, :oto + 7.5km]);
+            line_label(:left:w, sn[:oto + 7.5km], "SNN");
+            track(sn[:oto + 7.5km, :nys]);
+        }
+
+        with link = "point.dk.Nysted" {
+            statdot(sn[:nys]);
+            slabel(:bottom, sn[:nys] + (0dt, 0.8dt), "Nysted");
+        }
+    }
+}
+
+
+# DK SNV.  Slagelse - Næstved
+with detail = 2 {
+    let sn = path("d2.dk.snv");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SNV" {
+            track(sn[:sla.yn, :sla.yn + 8km]);
+            line_label(:left:w, sn[:sla.yn + 8km], "SNV");
+            track(sn[:sla.yn + 8km, :dal]);
+        }
+
+        with link = "point.dk.Dalmose" {
+            track(sn[:dal, :dal.ys]);
+            statdot(sn[:dal]);
+            slabel(:right, sn[:dal] + (1.5dt, 0.3dt), "Dalmose");
+        }
+
+        with link = "line.dk.SNV" {
+            track(sn[:dal.ys, :nas.ys]);
+            line_label(:left:s, sn[:dal.ys + 12km], "SNV");
+        }
+    }
+}
+
+
+# DK SRV.  Sorø - Vedde
+with detail = 2 {
+    let sv = path("d2.dk.srv");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SRV" {
+            track(sv[:sor.yv, :sor.yv + 8.3km]);
+            line_label(:right:w, sv[:sor.yv + 8.3km], "SRV");
+            track(sv[:sor.yv + 8.3km, :ved.ys]);
+        }
+    }
+}
+
+
+# DK SVL.  Slagelse - Værslev
+with detail = 2 {
+    let sv = path("d2.dk.svl");
+
+    with railway = :first :pax {
+        with link = "line.dk.SVL" {
+            track(sv[:sla.yv, :sla.yv + 6km]);
+            line_label(:left:e, sv[:sla.yv + 6km], "SVL");
+            track(sv[:sla.yv + 6km, :hon]);
+        }
+
+        with link = "point.dk.Høng" {
+            track(sv[:hon, :hon.yt]);
+            statdot(sv[:hon]);
+            slabel(:left, sv[:hon] + (-1.6dt, 0.8dt), "Høng");
+        }
+    }
+
+    with railway = :first :nopax {
+        with link = "line.dk.SVL" {
+            track(sv[:hon.yt, :gor]);
+        }
+
+        with link = "point.dk.Gørlev" {
+            statdot(:removed, sv[:gor]);
+            slabel(:left :removed, sv[:gor] + (-1.5dt, 0.8dt), "Gørlev");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SVL" {
+            track(sv[:gor, :gor + 6.4km]);
+            line_label(:left:e, sv[:gor + 6.4km], "SVL");
+            track(sv[:gor + 6.4km, :var.ys]);
+        }
+    }
+}

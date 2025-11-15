@@ -1,0 +1,120 @@
+# RU KG 10.  Дзержинская-Новая - Голубево
+with detail = 2 {
+    let dg = path("d2.ru.kg.10");
+
+    with railway = :first :g1520:gg1435 :nopax {
+        with link = "line.ru.kg.10" {
+            track(dg[:dze.yg, :dze.yg + 4km]);
+            line_label(:left:n, dg[:dze.yg + 4km], "10");
+            track(
+                    dg[:dze.yg + 4km, :gol.yyd - 0.5dt]
+                ..  dg[:gol.yd, :gol] << 0.5st << 0.5ds
+            );
+        }
+    }
+}
+
+
+# RU KG 11.  Голубево - Мамоново
+with detail = 2 {
+    let km = path("d2.ru.kg.1");
+
+    with railway = :first :narrow:g1435 :nopax {
+        with link = "line.ru.kg.11" {
+            track(km[:gol, :sve] << 0.5st << 0.5ds);
+        }
+
+        # point.ru.Светлое  ru.kg.1
+
+        with link = "line.ru.kg.11" {
+            track(km[:sve, :sve.yk] << 0.5st << 0.5ds);
+            track(km[:sve.yk, :sve.yk + 13km] << 0.5st << 0.5ds);
+            line_label(:left:n,
+                km[:sve.yk + 13km] << 0.5dst << 0.5ds, (0.2dt, 0dt),
+                "11"
+            );
+            track(km[:sve.yk + 13km, :mam.yb] << 0.5st << 0.5ds);
+        }
+
+        # point.ru.Мамоново  ru.kg.1
+
+        with link = "line.ru.kg.11" {
+            track(km[:mam, :mag] << 0.5st << 0.5ds);
+        }
+    }
+}
+
+
+# RU KG 17.  Пастухово-Новое - «Свобода»
+with detail = 2 {
+    let ps = path("d2.ru.kg.17");
+
+    with railway = :first :double :g1520 :removed {
+        with link = "line.ru.kg.17" {
+            track(
+                    ps[:pas.yw, :svo.yyp - 1dt]
+                ..  ps[:svo.yp, :svo.yp + 0.1dl] >> 0.5st >> 0.5ds
+            );
+            line_label(:right:e, ps[:pas.yw + 2km], (0dt, 0.1dt), "17");
+        }
+    }
+}
+
+
+# RU KG 18.  Новый Черняховск - Железнодорожный
+with detail = 2 {
+    let nz = path("d2.ru.kg.18");
+
+    with railway = :first :narrow :nopax {
+        with link = "point.ru.kg.Новый-Черняховск" {
+            statdot(nz[:nch]);
+            slabel(:left, nz[:nch] + (0dt, -0.7km) + (0dt, -0.8dt),
+                latspan("Новый Ч.", "Novy Ch.")
+            );
+        }
+
+        with link = "line.ru.kg.18" {
+            track(
+                    nz[:nch, :kra.yyy - 1dt]
+                ..  nz[:kra.yy, :kra] >> 0.5st >> 0.5ds
+            );
+        }
+
+        # point.ru.Красновка  ru.kg.8
+
+        with link = "line.ru.kg.18" {
+            track(nz[:kra, :kra + 15km] >> 0.5st >> 0.5ds);
+            line_label(:right:se, nz[:kra + 15km] >> 0.5st >> 0.5ds, "18");
+            track(nz[:kra + 15km, :zhe.yk] >> 0.5st >> 0.5ds);
+        }
+
+        with link = "point.ru.Железнодорожный" {
+            track(:station, nz[:zhe.yk, :zhe.yp] >> 0.5st >> 0.5ds);
+        }
+
+        with link = "line.ru.kg.18" {
+            track(nz[:zhe.yp, :zhg] >> 0.5st >> 0.5ds);
+        }
+
+        with link = "point.int.Железнодорожный-Skandawa" {
+            marker(:right :ref, nz[:zhg] >> 0.5st >> 0.5ds);
+        }
+    }
+}
+
+
+# RU KG 19.  «Свобода» - «Долинино»
+with detail = 2 {
+    let sd = path("d2.ru.kg.19");
+
+    with railway = :first :g1520 :removed {
+        with link = "line.ru.kg.19" {
+            track(
+                    sd[:svo.yd - 0.1dl, :svo.yd] << 0.5st << 0.5ds
+                ..  sd[:svo.yyd + 1dt, :dol]
+            );
+            line_label(:right:n, sd[:dol - 8km], "19"); 
+        }
+    }
+}
+

@@ -239,21 +239,28 @@ with detail = 2 {
 with detail = 2 {
     let kw = path("d2.de.9486");
 
-    with link = "line.de.9486" {
-        track(:second :pax, kw[:kor.yw, :wei]);
+    with railway = :second :pax {
+        with link = "line.de.9486" {
+            track(kw[:kor.yw, :kor.yw + 9.2km]);
+            line_label(:left:n, kw[:kor.yw + 9.2km], "9486");
+            track(kw[:kor.yw + 9.2km, :hei]);
+        }
 
-        guide(:linenum :pax,
-                kw[:wei - 9km] >> 0.7dt
-            --  kw[:wei - 9km] >> 3.0dt
-        );
-        label(:linenum :pax, kw[:wei - 9km] >> 3.0dt,
-            hbox(:center:bottom :badgesize, "9486")
-        );
+        with link = "point.de.Heimerdingen" {
+            statdot(kw[:hei]);
+            slabel(:left, kw[:hei] + (1dt, -1.5dt), "Heimerdingen");
+        }
     }
 
-    with link = "point.de.Weissach" {
-        with layer = 1 marker(:statdot :pax, kw[:wei]);
-        slabel(:left :pax, kw[:wei] + (-1.5dt, 0.8dt), "Weissach");
+    with railway = :second :tourist {
+        with link = "line.de.9486" {
+            track(kw[:hei, :wei]);
+        }
+
+        with link = "point.de.Weissach" {
+            statdot(kw[:wei]);
+            slabel(:left, kw[:wei] + (-1.5dt, 1dt), "Weissach");
+        }
     }
 }
 

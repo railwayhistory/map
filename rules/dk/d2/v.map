@@ -1,0 +1,97 @@
+# DK VHT.  Valby - Høje Taastrup (S-tog)
+with detail = 2 {
+    let vh = path("d2.dk.kfa");
+
+    with railway = :first :double :cat:dc15 :pax {
+        with link = "line.dk.VHT" {
+            with layer = -1 track(vh[:val.yf, :hvf.yv] >> 1md >> 1ms);
+            track(vh[:hvf.yv, :hvf] >> 1md >> 1ms);
+            track(vh[:hvf, :hoj - 6km] >> 1md >> 1ms);
+            line_label(:right:s, vh[:hoj - 6km] >> 1md >> 1ms, "VHT");
+            track(vh[:hoj - 6km, :hoj] >> 1md >> 1ms);
+        }
+
+        with link = "point.dk.Høje-Taastrup" {
+            statdot(vh[:hoj] >> 1md >> 1ms);
+            slabel(:left :cat:ac25, vh[:hoj] >> 1md >> 1ms + (1.5dt, -1dt),
+                vbox(:right:bottom, "Høje", "Taastrup")
+            );
+        }
+    }
+}
+
+
+# DK VKB.  Vigerslev - Kalvebod
+with detail = 2 {
+    let vk = path("d2.dk.vkb");
+
+    with railway = :first :double :cat:ac25 :pax {
+        with link = "line.dk.VKB" {
+            with layer = -1 track(vk[:vig.yk, :kal.yv]);
+        }
+    }
+}
+
+
+# DK VLH.  København Syd - Hellerup
+with detail = 2 {
+    let vh = path("d2.dk.vlh");
+
+    with railway = :first :double :cat:dc15 :pax {
+        with link = "point.dk.København-Syd" {
+            statdot(vh[:nel] >> 1md >> 1ms);
+        }
+
+        with link = "line.dk.VLH" {
+            track(vh[:nel, :vig] >> 1ms >> 1md);
+            track(:casing,
+                    vh[:vig, :vig.yh] >> 1ms >> 1md
+                ..  vh[:vig.xh + 1md, :ler]
+            );
+        }
+
+        with link = "point.dk.Lersøen" {
+            statdot(:nopax, vh[:ler]);
+        }
+
+        with link = "line.dk.VLH" {
+            with layer = -1 track(vh[:ler, :ryp.yf]);
+            track(vh[:ryp.yf, :ryp]);
+            track(
+                    vh[:ryp - 0.1dl, :ryp]
+                ..  vh[:hel.yv, :hel.yv + 0.1dl] << 1md << 1ms
+            );
+        }
+    }
+}
+
+
+# DK VRS.  Vigerslev - Ringstedt
+with detail = 2 {
+    let vr = path("d2.dk.vrs");
+
+    with railway = :first :double :cat:ac25 :pax {
+        with link = "line.dk.VRS" {
+            track(vr[:vig.yr, :vig.yr + 20km]);
+            line_label(:right:se, vr[:vig.yr + 20km], "VRS");
+            track(vr[:vig.yr + 20km, :kon]);
+        }
+
+        with link = "point.dk.Køge-Nord" {
+            statdot(vr[:kon]);
+            slabel(:right, vr[:kon] << 1md << 1ms + (1.5dt, 1.2dt),
+                "Køge Nord"
+            );
+        }
+
+        with link = "line.dk.VRS" {
+            with layer = -1 track(:casing, vr[:kon, :kon + 9km]);
+            line_label(:right:s, vr[:kon + 9km], (0.2dt, 0dt), "VRS");
+            track(
+                    vr[:kon + 9km, :kva.xk]
+                ..  vr[:kva.yk, :rin] << 1md << 1ms
+            );
+        }
+    }
+}
+

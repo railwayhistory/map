@@ -1,0 +1,152 @@
+# AT 200.  Wien Südbf (Ostbahn) - Staatsgrenze nächst Nickelsdorf
+with detail = 2 {
+    let wh = path("d2.at.200");
+
+    with link = "line.at.200" {
+        track(:first :double :cat:ac15 :pax, wh[:wie, :stn.yh]);
+        track(:first :double :cat:ac15 :pax, wh[:stn.yh, :zvb]);
+    }
+
+    with link = "point.at.Wien-Zvbf" {
+        statdot(:cat:ac15, wh[:zvb]);
+    }
+
+    with link = "line.at.200" {
+        track(:first :double :cat:ac15 :pax, wh[:zvb, :zvb.yf]);
+        track(:first :double :cat:ac15 :pax, wh[:zvb.yf, :lan.yz]);
+        track(:first :double :cat:ac15 :pax, wh[:lan.yz, :gra]);
+        line_label(:left:w :double :cat:ac15 :pax, wh[:lan.yz + 3.5km], "200");
+    }
+
+    with link = "point.at.Gramatneusiedl" {
+        track(:first:station :double :cat:ac15 :pax, wh[:gra, :gra.yw]);
+        statdot(:cat:ac15 :pax, wh[:gra]);
+        slabel(:right :cat:ac15 :pax, wh[:gra] + (0dt, -0.5dt),
+            vbox(:left:bottom, "Gramat-", "neusiedl")
+        );
+    }
+
+    with link = "line.at.200" {
+        track(:first :double :cat:ac15 :pax, wh[:gra.yw, :got]);
+    }
+
+    with link = "point.at.Götzendorf" {
+        track(:first:station :double :cat:ac15 :pax, wh[:got, :got.yf]);
+        statdot(:cat:ac15 :pax, wh[:got]);
+        slabel(:right :cat:ac15 :pax,
+            wh[:got.yf] + (0.5km , 0dt) + (1.5dt, -1.0dt),
+            "Götzendorf"
+        );
+    }
+
+    with link = "line.at.200" {
+        track(:first :double :cat:ac15 :pax, wh[:got.yf, :brw.yp]);
+        line_label(:right:n :double :cat:ac15 :pax, wh[:got.yf + 5km], "200");
+
+        track(:first :double :cat:ac15 :pax, wh[:brw.yp, :bru]);
+    }
+
+    with link = "point.at.Bruck-Leitha" {
+        statdot(:cat:ac15 :pax, wh[:bru]);
+        slabel(:left :cat:ac15 :pax, wh[:bru] + (1.5dt, 0.8dt),
+            vbox(:right:top, "Bruck", "a.d. Leitha")
+        );
+    }
+
+    with link = "line.at.200" {
+        track(:first :double :cat:ac15 :pax, wh[:bru, :pao.yn]);
+        track(:first :double :cat:ac15 :pax, wh[:pao.yn, :par]);
+    }
+
+    with link = "point.at.Parndorf" {
+        track(:first:station :double :cat:ac15 :pax, wh[:par, :par.yb]);
+        statdot(:cat:ac15 :pax, wh[:par]);
+        slabel(:right :cat:ac15 :pax, wh[:par] + (-2.5dt, 0.8dt),
+            hbox(:left:top, "Parndorf")
+        );
+    }
+
+    with link = "line.at.200" {
+        track(:first :double :cat:ac15 :pax, wh[:par.yb, :nig]);
+        line_label(:left:s :double :cat:ac15 :pax, wh[:nig - 7km], " 200");
+    }
+}
+
+
+# AT 203.  Bruck a.d. Leitha-West - Petronell-Carnutum
+with detail = 2 {
+    let bp = path("d2.at.203");
+
+    with link = "line.at.203" {
+        track(:second, bp[:brw.yp, :brx]);
+        track(:second :removed, bp[:brx, :pet.yb]);
+        line_label(:right:nw :removed, bp[:brx + 4km], "203");
+    }
+}
+
+
+# AT 205.  Parndorf - Staasgrenze nächst Kittsee
+with detail = 2 {
+    let pk = path("d2.at.205");
+
+    with link = "line.at.205" {
+        track(:second :cat:ac15 :pax, pk[:par.yb, :kig]);
+        line_label(:right:w :cat:ac15 :pax, pk[:kig - 7km], "205");
+    }
+}
+
+
+# AT 208.  Wulkaprodersdorf - Abzw Bruck a.d. Leitha 1
+with detail = 2 {
+    let wp = path("d2.at.208");
+
+    with link = "line.at.208" {
+        track(:second :cat:ac25 :pax, wp[:wul.yp, :wus]);
+        track(:second :cat:ac15 :pax, wp[:wus, :sut]);
+        line_label(:left:e :cat:ac15 :pax, wp[:wus + 3km], "208");
+    }
+
+    with link = "point.at.Schützen-Gebirge" {
+        track(:second:station :cat:ac15 :pax, wp[:sut, :sut.ym]);
+        statdot(:cat:ac15 :pax, wp[:sut]);
+        slabel(:left :cat:ac15 :pax, wp[:sut] + (1dt, -1.0dt),
+            vbox(:right:bottom, "Schützen", "am Gebirge")
+        );
+    }
+
+    with link = "line.at.208" {
+        track(:second :cat:ac15 :pax, wp[:sut.ym, :nsi.yf]);
+        line_label(:left:se :cat:ac15 :pax, wp[:nsi.yf - 7km], "208");
+    }
+
+    with link = "point.at.Neusiedl-See" {
+        track(:second:station :cat:ac15 :pax, wp[:nsi.yf, :nsi]);
+        statdot(:cat:ac15 :pax, wp[:nsi])
+        slabel(:right :cat:ac15 :pax, wp[:nsi] + (1.7dt, 1.0dt),
+            "Neusiedl am See"
+        );
+    }
+
+    with link = "line.at.208" {
+        track(:second :cat:ac15 :pax, wp[:nsi, :pao.yn]);
+    }
+}
+
+
+# AT 209.  Schützen am Gebirge - St. Margarethen-Rust
+with detail = 2 {
+    let sm = path("d2.at.209");
+
+    with link = "line.at.209" {
+        track(:second :removed, sm[:sut.ym, :sma]);
+        line_label(:right:e :removed, sm[:sut.ym + 3.3km], "209");
+    }
+
+    with link = "point.at.St-Margarethen-Rust" {
+        statdot(:removed, sm[:sma]);
+        slabel(:right :removed, sm[:sma] + (1.5dt, 0.8dt),
+            "St. Margarethen-Rust"
+        );
+    }
+}
+

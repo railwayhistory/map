@@ -1,0 +1,77 @@
+# PL 175.  Kłodnica - Kluczbork
+with detail = 2 {
+    let kk = path("d2.pl.d.175");
+
+    with railway = :first :removed {
+        track(kk[:klo.x, :str.yk - 4km]);
+        line_label(:right:w, kk[:str.yk - 10km], "175");
+
+        track(:casing, kk[:str.yk - 4km, :str.yk - 1km]);
+        track(kk[:str.yk - 1km, :str.yk]);
+    }
+
+    # point.pl.Strzelce-Opolskie  pl.132
+
+    with railway = :first {
+        track(kk[:str.yf, :roz]);
+    }
+
+    with railway = :first :suspended {
+        with link = "line.pl.175" {
+            track(kk[:roz, :fos.ys]);
+            line_label(:left:e, kk[:roz + 5km], "175");
+        }
+    }
+
+    # point.pl.Fosowskie  pl.144
+
+    with railway = :first :double :suspended {
+        with link = "line.pl.175" {
+            track(kk[:fos.yk, :kun.y]);
+            line_label(:right:w, kk[:fos.yk + 20km], (0dt, -0.2dt), "175");
+
+            track(kk[:kun.y, :klu.yf]);
+        }
+    }
+}
+
+
+# PL 177.  Racibórz – Granica Państwa (Pietrowice Głubczyckie)
+with detail = 2 {
+    let rp = path("d2.pl.d.177");
+
+    with railway = :second {
+        with link = "line.pl.177" {
+            track(rp[:pie.x, :bab.yo]);
+            line_label(:right:sw, rp[:pie.x + 3km], "177");
+        }
+
+        with link = "point.pl.Baborów" {
+            track(:station, rp[:bab.yo, :bab]);
+            track(:suspended :station, rp[:bab, :bab.yk]);
+            statdot(rp[:bab]);
+            slabel(:right, rp[:bab] + (1.2dt, -0.3dt), "Baborów");
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.177" {
+            with layer = -1 track(rp[:bab.yk, :glu]);
+            line_label(:left:n, rp[:bab.yk + 7km], (-0.3dt, 0dt), "177");
+        }
+
+        with link = "point.pl.Głubczyce" {
+            track(rp[:glu, :glu.yr]);
+            statdot(rp[:glu]);
+            slabel(:right, rp[:glu] + (1.5dt, 0dt), "Głubczyce");
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.177" {
+            track(rp[:glu.yr, :pig]);
+            line_label(:left:nw, rp[:glu.yr + 8km], "177");
+        }
+    }
+}
+

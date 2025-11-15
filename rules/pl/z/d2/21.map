@@ -1,0 +1,120 @@
+# PL 210. Chojnice - Runowo Pomorskie
+with detail = 2 {
+    let cr = path("d2.pl.z.210");
+
+    with railway = :first :double :pax {
+        with link = "line.pl.210" {
+            track(cr[:cho.x, :brz.yw]);
+            track(cr[:brz.yw, :czl.ys]);
+            line_label(:right:s, cr[:brz.yw + 3.5km], "210");
+        }
+
+        with link = "point.pl.Człuchów" {
+            track(:station, cr[:czl.ys, :czl]);
+            statdot(cr[:czl]);
+            slabel(:left, cr[:czl] + (-1.5dt, 0dt), "Człuchów");
+        }
+
+        with link = "line.pl.210" {
+            track(cr[:czl, :czr]);
+            line_label(:right:s, cr[:czl + 16km], "210");
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.pl.210" {
+            track(cr[:czr, :szc.yk]);
+            line_label(:left:n, cr[:szc.yk - 8km], "210");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Szczecinek" {
+            track(:station, cr[:szc.yk, :szc.yp]);
+            statdot(cr[:szc]);
+            slabel(:left, cr[:szc] + (-1.5dt, 0dt), "Szczecinek");
+        }
+    }
+
+    with railway = :first :double :pax {
+        with link = "line.pl.210" {
+            track(cr[:szc.yp, :lub.yb]);
+            line_label(:right:se, cr[:szc.yp + 11.5km], "210");
+        }
+
+        with link = "point.pl.Łubowo" {
+            track(:station, cr[:lub.yb, :lub]);
+            statdot(cr[:lub]);
+            slabel(:left, cr[:lub] + (-1.4dt, -0.3dt), "Łubowo");
+        }
+
+        with link = "line.pl.210" {
+            track(cr[:lub, :cza.yj]);
+        }
+
+        with link = "point.pl.Czaplinek" {
+            track(:station, cr[:cza.yj, :cza]);
+            statdot(cr[:cza]);
+            slabel(:left, cr[:cza] + (-1.5dt, -0.5dt), "Czaplinek");
+        }
+
+        with link = "line.pl.210" {
+            track(cr[:cza, :zlo.yk]);
+            line_label(:left:n, cr[:cza + 10km], "210");
+        }
+
+        with link = "point.pl.Złocieniec" {
+            track(:station, cr[:zlo.yk, :zlo.yg]);
+            statdot(cr[:zlo]);
+            slabel(:left, cr[:zlo] + (1.3dt, 2dt),
+                hbox(:right:top, "Złocieniec")
+            );
+        }
+
+        with link = "line.pl.210" {
+            track(cr[:zlo.yg, :dra]);
+        }
+
+        with link = "point.pl.Drawsko-Pomorskie" {
+            statdot(cr[:dra]);
+            slabel(:bottom, cr[:dra] + (2dt, 1.5dt),
+                vbox(:center:top, "Drawsko", "Pomorskie")
+            );
+        }
+
+        with link = "line.pl.210" {
+            track(cr[:dra, :run.yc]);
+            line_label(:right:sw, cr[:run.yc - 7km], "210");
+        }
+    }
+}
+
+
+# PL 212.  Lipusz - Korzybie
+with detail = 2 {
+    let lk = path("d2.pl.212");
+
+    with railway = :second {
+        with link = "line.pl.212" {
+            track(lk[:lip.yk, :lip.yz]);
+            track(lk[:lip.yz, :byt.yl]);
+            line_label(:right:s, lk[:lip.yz + 9km], "212");
+        }
+
+        with link = "point.pl.Bytów" {
+            track(:station, lk[:byt.yl, :byt]);
+            track(:station :suspended, lk[:byt, :byt.ym]);
+            statdot(lk[:byt]);
+            slabel(:left, lk[:byt] + (-0.5dt, -1dt), "Bytów");
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.212" {
+            track(lk[:byt.ym, :kor.yl]);
+            line_label(:left:ne, lk[:byt.ym + 10km], "212");
+            line_label(:right:sw, lk[:kor.yl - 9.1km], "212");
+        }
+    }
+}
+

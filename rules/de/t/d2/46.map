@@ -237,16 +237,12 @@ with detail = 2 {
 with detail = 2 {
     let th = path("d2.de.4633");
 
-    with link = "line.de.4633" {
-        track(:second :pax, th[:tub.yh, :her.yt]);
-
-        guide(:linenum :pax,
-                th[:tub.yh + 7.5km] << 0.7dt
-            --  th[:tub.yh + 7.5km] << 3.0dt
-        );
-        label(:linenum :pax, th[:tub.yh + 7.5km] << 3.0dt + (0dt, 0.1dt),
-            hbox(:right:middle :badgesize, "4633 ")
-        );
+    with railway = :second :cat:ac15 :pax {
+        with link = "line.de.4633" {
+            track(th[:tub.yh, :tub.yh + 7km]);
+            line_label(:left:ne, th[:tub.yh + 7km], "4633");
+            track(th[:tub.yh + 7km, :her.yt]);
+        }
     }
 }
 
@@ -255,18 +251,27 @@ with detail = 2 {
 with detail = 2 {
     let br = path("d2.de.4634");
 
-    with link = "line.de.4634" {
-        track(:second, br[:bal.yr, :som]);
-        track(:second :removed, br[:som, :rot.yb]);
-
-        line_badge(:open, br[:bal.yr + 5km] @ -15, "4634");
+    with railway = :second :tourist {
+        with link = "line.de.4634" {
+            track(br[:bal.yr, :bal.yr + 5.2km]);
+            line_label(:right:se, br[:bal.yr + 5.2km], "4634");
+            track(br[:bal.yr + 5.2km, :som]);
+        }
+    
+        with link = "point.de.Schömberg-Balingen" {
+            statdot(br[:som]);
+            slabel(:left, br[:som] + (0dt, -0.5dt),
+                vbox(:bottom:right, "Schömberg", span(:light, "(b Balingen)"))
+            );
+        }
     }
 
-    with link = "point.de.Schömberg-Balingen" {
-        with layer = 1 marker(:statdot, br[:som]);
-        slabel(:left, br[:som] + (0dt, -0.5dt),
-            vbox(:bottom:right, "Schömberg", span(:light, "(b Balingen)"))
-        );
+    with railway = :second :removed {
+        with link = "line.de.4634" {
+            track(br[:som, :som + 6.3km]);
+            line_label(:left:w, br[:som + 6.3km], (0dt, 0.2dt), "4634");
+            track(br[:som + 6.3km, :rot.yb]);
+        }
     }
 }
 

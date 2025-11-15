@@ -251,18 +251,31 @@ with detail = 2 {
 with detail = 2 {
     let mn = path("d2.de.6356");
 
-    with link = "line.de.6356" {
-        track(:first :cat:ac15 :pax, mn[:mer.yb, :bun.ys]);
-        track(:first :cat:ac15, mn[:bun.ys, :hol.ya]);
-        track(:first :removed, mn[:hol.ya, :awo.y]);
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.de.6356" {
+            track(mn[:mer.yb, :eli.ym]);
+            track(mn[:eli.ym, :bun]);
+        }
+
+        with link = "point.de.Buna-Werke" {
+            track(:station, mn[:bun, :bun.ys]);
+            statdot(mn[:bun]);
+        }
+
+        with link = "line.de.6356" {
+            track(mn[:bun.ys, :hol.yl]);
+        }
+
+        with link = "point.de.Holleben" {
+            track(:station, mn[:hol.yl, :hol.ya]);
+            statdot(mn[:hol]);
+        }
     }
 
-    with link = "point.de.Buna-Werke" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, mn[:bun]);
-    }
-
-    with link = "point.de.Holleben" {
-        with layer = 1 marker(:statdot :cat:ac15, mn[:hol]);
+    with railway = :first :removed {
+        with link = "line.de.6356" {
+            track(mn[:hol.ya, :awo.y]);
+        }
     }
 }
 
@@ -526,29 +539,57 @@ with detail = 2 {
 with detail = 2 {
     let lp = path("d2.de.l.6383");
 
-    with link = "line.de.6383" {
-        track(:first :double :cat:ac15 :pax, lp[:leu, :pla.yg]);
-        track(:first :double :pax, lp[:pla.yg, :zei]);
-        track(:first :pax, lp[:zei, :cro]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6383" {
+            track(lp[:leu, :pla]);
+        }
 
-        line_badge(:pax, lp[:peg + 6km] @ -1 >> 0.1dt, "6383");
-        line_badge(:pax, lp[:cro - 6.5km] @ 10, "6383");
+        with link = "point.de.Leipzig-Plagwitz" {
+            track(:station, lp[:pla, :pla.yg]);
+            statdot(lp[:pla]);
+        }
     }
 
-    with link = "point.de.Leipzig-Plagwitz" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, lp[:pla]);
+    with railway = :first :double :pax {
+        with link = "line.de.6383" {
+            track(lp[:pla.yg, :kna.yz]);
+            track(lp[:kna.yz, :zwe.yz]);
+            line_label(:right:e, lp[:zwe.yz - 3km], "6383");
+
+            track(:removed, path("d2.de.6383.zwe")[:kna.yz, :zwe.yz]);
+
+            track(lp[:zwe.yz, :zau.y]);
+            track(lp[:zau.y, :peg.yg]);
+        }
+
+        with link = "point.de.Pegau" {
+            track(:station, lp[:peg.yg, :peg]);
+            statdot(lp[:peg]);
+            slabel(:left, lp[:peg] + (-1.5dt, 0.5dt), "Pegau");
+        }
+
+        with link = "line.de.6383" {
+            track(lp[:peg, :zei.yw]);
+            line_label(:right:e, lp[:peg + 5km], (0dt, -0.2dt), "6383");
+
+            track(lp[:zei.yt, :zei.ym]);
+        }
+
+        with link = "point.de.Zeitz" {
+            track(:station, lp[:zei.ym, :zei.yc]);
+            statdot(lp[:zei]);
+            slabel(:right, lp[:zei] + (-1.0dt, 0.8dt),
+                vbox(:left:top, "Zeitz")
+            );
+        }
     }
 
-    with link = "point.de.Pegau" {
-        with layer = 1 marker(:statdot :pax, lp[:peg]);
-        slabel(:left :pax, lp[:peg] + (-1.5dt, 0.5dt), "Pegau");
-    }
+    with railway = :first :pax {
+        with link = "line.de.6383" {
+            track(lp[:zei, :cro]);
 
-    with link = "point.de.Zeitz" {
-        with layer = 1 marker(:statdot :pax, lp[:zei]);
-        slabel(:right :pax, lp[:zei] + (-1.0dt, 0.8dt),
-            vbox(:left:top, "Zeitz")
-        );
+            line_label(:left:nw, lp[:zei.yc + 5.9km], "6383");
+        }
     }
 }
 

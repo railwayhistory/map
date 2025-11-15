@@ -1,0 +1,77 @@
+# SI 20.  Ljubljana - Jesenize d.m.
+with detail = 2 {
+    let lj = path("d2.si.20");
+
+    with link = "point.si.Ljubljana-Šiška" {
+        track(:first:station :double :cat:dc30 :pax, lj[:lju.yo, :sis.yk]);
+        statdot(:cat:dc30, lj[:sis]);
+    }
+
+    with link = "line.si.20" {
+        track(:first :cat:dc30 :pax, lj[:sis.yk, :viz.yl]);
+    }
+
+    with link = "point.si.Ljubljana-Vižmarje" {
+        track(:first:station :cat:dc30 :pax, lj[:viz.yl, :viz]);
+        statdot(:cat:dc30 :pax, lj[:viz]);
+    }
+
+    with link = "line.si.20" {
+        track(:first :cat:dc30 :pax, lj[:viz, :kra]);
+        line_label(:left:ne :cat:dc30 :pax, lj[:sis.yk + 10km], "20");
+    }
+
+    with link = "point.si.Kranj" {
+        track(:first:station :cat:dc30 :pax, lj[:kra, :kra.yt]);
+        statdot(:cat:dc30 :pax, lj[:kra]);
+        slabel(:right :cat:dc30 :pax, lj[:kra] + (1.5dt, 0.3dt), "Kranj");
+    }
+
+    with link = "line.si.20" {
+        track(:first :cat:dc30 :pax, lj[:kra.yt, :jes.ys]);
+        line_label(:right:w :cat:dc30 :pax, lj[:kra.yt + 21.5km], "20");
+    }
+
+    with link = "point.si.Jesenice" {
+        track(:first:station :cat:dc30 :pax, lj[:jes.ys, :jes]);
+        track(:first:station :double :cat:ac15 :pax, lj[:jes, :jes.yt]);
+        statdot(:cat:dc30 :pax, lj[:jes]);
+        slabel(:right :cat:dc30 :pax, lj[:jes] + (1.3dt, -0.5dt), "Jesenice");
+    }
+
+    with link = "line.si.20" {
+        track(:first :cat:ac15 :pax, lj[:jes.yt, :jed]);
+        line_label(:right:w :cat:ac15 :pax, lj[:jed - 1.5km], "20");
+    }
+
+    with link = "point.int.Jesenice-Rosenbach" {
+        marker(:right :ref :cat:ac15 :pax, lj[:jed]);
+        marker(:left :ref :cat:ac15 :pax, lj[:jed]);
+    }
+}
+
+
+# SI 21.  Ljubljana Šiška - Kamnik Graben
+with detail = 2 {
+    let lk = path("d2.si.21");
+
+    with link = "line.si.21" {
+        track(:first :pax, lk[:sis.yk, :crn.yv]);
+    }
+
+    with link = "point.si.Ljubljana-Črnuče" {
+        track(:first:station :pax, lk[:crn.yv, :crn.yl]);
+        statdot(:pax, lk[:crn]);
+    }
+
+    with link = "line.si.21" {
+        track(:first :pax, lk[:crn.yl, :gra]);
+        line_label(:right:w :pax, lk[:crn.yl + 8km], "21");
+    }
+
+    with link = "point.si.Kamnik-Graben" {
+        statdot(:pax, lk[:gra]);
+        slabel(:top :pax, lk[:gra] + (0dt, -0.5dt), "Kamnik Graben");
+    }
+}
+

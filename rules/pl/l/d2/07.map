@@ -1,0 +1,248 @@
+# PL 70.  Włoszczowice - Chmielów
+with detail = 2 {
+    let wc = path("d2.pl.70");
+
+    with railway = :first :cat:dc30 :nopax {
+        with link = "line.pl.70" {
+            track(
+                    wc[:wlo.yc, :gol.yyy]
+                ..  wc[:gol.yy, :sta] << 0.4dt
+            );
+            line_label(:left:sw, wc[:gol.y + 16km], "70");
+        }
+
+        with link = "point.pl.Staszów" {
+            statdot(wc[:sta] << 0.4dt);
+            slabel(:left, wc[:sta] << 0.4dt + (-1dt, -1dt), "Staszów");
+        }
+
+        with link = "line.pl.70" {
+            track(wc[:sta, :rut.y] << 0.4dt);
+            track(
+                    wc[:rut.y, :ste.x] << 0.4dt
+                ..  wc[:ste.xx + 0.5dt, :chm.yw]
+            );
+            line_label(:left:s, wc[:ste.xx + 9km], "70");
+        }
+    }
+}
+
+
+# PL 71.  Ocice - Rzeszów
+with detail = 2 {
+    let or = path("d2.pl.l.71");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.71" {
+            with layer = -1 track(or[:oci.yr, :cmo.x]);
+            line_label(:left:sw, or[:oci.yr + 7km], "71");
+        }
+    }
+}
+
+
+# PL 72.  Zawada – Hrubieszów Miasto
+with detail = 2 {
+    let zh = path("d2.pl.72");
+
+    with railway = :second :pax {
+        with link = "line.pl.72" {
+            track(zh[:zaw.yp, :zam]);
+            line_label(:right:n, zh[:zaw.yp + 2km], (-0.2dt, 0dt), "72");
+        }
+
+        with link = "point.pl.Zamość" {
+            statdot(zh[:zam]);
+            slabel(:bottom, zh[:zam] + (0dt, 1.5dt), "Zamość");
+        }
+
+        with link = "line.pl.72" {
+            track(
+                    zh[:zam, :jar.yy - 1dt]
+                ..  zh[:jar.y, :wer] << 0.4dt
+            );
+            line_label(:right:n, zh[:zam + 6.5km], "72");
+            line_label(:left:s, zh[:wer - 15km] << 0.4dt, "72");
+        }
+
+        with link = "point.pl.Werbkowice" {
+            statdot(zh[:wer]);
+            slabel(:left, zh[:wer] + (0dt, -1.5dt), "Werbkowice");
+        }
+        
+        with link = "line.pl.72" {
+            track(zh[:wer, :hrm] << 0.4dt);
+            with zoom = :high line_label(:left:se,
+                zh[:hrc.yh - 2km] << 0.4dt, "72"
+            );
+        }
+
+        with link = "point.pl.Hrubieszów-Miasto" {
+            statdot(zh[:hrm] << 0.4dt);
+            slabel(:right, zh[:hrm] << 0.4dt + (-1.5dt, -1.5dt), "Hrubieszów");
+        }
+    }
+}
+
+
+# PL 73.  Sitkówka-Nowiny - Busko-Zdrój
+with detail = 2 {
+    let sb = path("d2.pl.73");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.73" {
+            track(sb[:sit.yb, :brz.y]);
+            track(sb[:brz.y, :wlo]);
+            line_label(:left:w, sb[:brz.y + 8km], "73");
+        }
+
+        with link = "point.pl.Włoszczowice" {
+            track(sb[:wlo, :wlo.yc]);
+            statdot(sb[:wlo]);
+            slabel(:left, sb[:wlo] + (-1.5dt, 0.5dt), "Włoszczowice");
+        }
+
+        with link = "line.pl.73" {
+            track(sb[:wlo.yc, :kij.x - 0.5km]);
+            track(:casing, sb[:kij.x - 0.5km, :kij.x + 0.5km]);
+            track(sb[:kij.x + 0.5km, :bus]);
+            line_label(:left:w, sb[:bus - 10km], "73");
+        }
+
+        with link = "point.pl.Busko-Zdrój" {
+            statdot(sb[:bus]);
+            slabel(:right, sb[:bus] + (1.5dt, 0.8dt), "Busko-Zdrój");
+        }
+    }
+}
+
+
+# PL 74.  Sobów - Stalowa Wola Rozwadów
+with detail = 2 {
+    let sw = path("d2.pl.74");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.74" {
+            track(sw[:sob.ys, :fur.ys]);
+            line_label(:right:n, sw[:fur.ys - 1.8km], "74");
+            track(sw[:fur.ys, :gre]);
+        }
+
+        with link = "point.pl.Grębów" {
+            statdot(sw[:gre] << 0.4dt);
+            slabel(:right, sw[:gre] + (0.8dt, -0.3dt),
+                hbox(:left:top, "Grębów")
+            );
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.74" {
+            track(sw[:gre, :swt.yl]);
+            line_label(:left:s, sw[:gre + 6.3km], "74");
+            track(sw[:swt.yl, :swr.ys]);
+        }
+    }
+}
+
+
+# PL 75.  Rytwiany - Połaniec
+with detail = 2 {
+    let rp = path("d2.pl.75");
+
+    with railway = :second :cat:dc30 :nopax {
+        with link = "line.pl.75" {
+            track(
+                    rp[:rut.y - 0.1dl, :rut.y] << 0.4dt
+                ..  rp[:rut.yy, :pol]
+            );
+            line_label(:left:sw, rp[:pol - 6.5km], "75");
+        }
+
+        with link = "point.pl.Połaniec" {
+            statdot(rp[:pol]);
+            slabel(:bottom, rp[:pol] + (0.5dt, 0.8dt), "Połaniec");
+        }
+    }
+}
+
+
+# PL 76.  Bąkowiec - Kozienice
+with detail = 2 {
+    let bk = path("d2.pl.76");
+
+    with railway = :second :cat:dc30 :nopax {
+        with link = "line.pl.76" {
+            track(bk[:bak.yk, :sie.y]);
+            track(bk[:sie.y, :jan]);
+            line_label(:right:s, bk[:sie.y + 3km], (0.3dt, 0dt), "76");
+        }
+
+        with link = "point.pl.Janików" {
+            track(:station, bk[:jan, :jan.ys]);
+            statdot(bk[:jan]);
+            slabel(:right, bk[:jan] + (1.8dt, -0.3dt), "Janików");
+        }
+    }
+
+    with railway = :second :nopax :closed {
+        with link = "line.pl.76" {
+            track(bk[:jan.ys, :koz]);
+        }
+
+        with link = "point.pl.Kozienice" {
+            statdot(bk[:koz]);
+            slabel(:right, bk[:koz] + (-1.5dt, -1.5dt), "Kozienice");
+        }
+    }
+}
+
+
+# PL 77.  Janików – Świerże Górne
+with detail = 2 {
+    let js = path("d2.pl.77");
+
+    with railway = :second :cat:dc30 :nopax {
+        with link = "line.pl.77" {
+            track(js[:jan.ys, :swi]);
+            line_label(:left:ne, js[:jan.ys + 6km], "77");
+        }
+
+        with link = "point.pl.Świerże-Górne" {
+            statdot(js[:swi]);
+            slabel(:top, js[:swi] + (-0.5dt, -0.7dt), "Świerże Górne");
+        }
+    }
+}
+
+
+# PL 78.  Sandomierz - Grębów
+with detail = 2 {
+    let sg = path("d2.pl.78");
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.78" {
+            track(sg[:san, :gre] << 1ms << 1mt);
+            line_label(:left:sw, sg[:san.yg + 2km] << 1ms << 1mt, "78");
+        }
+    }
+}
+
+
+# PL 79.  Padew - Wola Baranowska LHS
+with detail = 2 {
+    let pw = path("d2.pl.79");
+
+    with railway = :second :nopax {
+        with link = "line.pl.79" {
+            with layer = -1 track(
+                    pw[:pad.yw - 0.1dl, :pad.yw]
+                ..  pw[:wol.yp, :wol] << 0.8dt
+            );
+            with zoom = :high line_label(
+                :left:s, pw[:wol.yp + 1km] << 0.8dt, (0.5dt, 0dt), "79"
+            );
+        }
+    }
+}
+

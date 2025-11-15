@@ -1,0 +1,298 @@
+# DK LE.  Lunderskov - Esbjerg
+#
+let le = path("d3.dk.leb");
+
+with detail = 4,
+     railway = :first :cat:ac25 :pax
+{
+    # point.dk.Lunderskov: dk.FP
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:lun.xe, :lun.xe + 1.5km]);
+        line_label(:left:n, le[:lun.xe + 1.5km] << 0.5mo << 0.5mt, "LEB");
+        track(:double, le[:lun.xe + 1.5km, :and - 0.5sw]);
+    }
+
+    with link = "point.dk.Andst", railway = :station {
+        track(:double, le[:and - 0.5sw, :and + 0.5sw]);
+        marker(:right :de.bf :removed, le[:and] >> 0.5mo >> 0.5mt);
+        station(:top :removed, le[:and] >> 0.5mo >> 0.5mt >> 1.1sh,
+            "Andst", "??"
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:and + 0.5sw, :vej.al]);
+    }
+
+    with link = "point.dk.Vejen", railway = :station {
+        track(le[:vej.al, :vej.f] << 0.5mo);
+            track(:side :nopax,
+                    le[:vej - 475m] << 0.5mo
+                --  le[:vej - 385m] >> 0.5mo
+            );
+        track(le[:vej.al, :vej.f] >> 0.5mo);
+            track(:side :nocat :nopax,
+                    le[:vej + 320m] >> 0.5mo
+                --  le[:vej + 380m] >> 1.5mo
+            );
+            track(:side :nocat :nopax,
+                    le[:vej + 570m] >> 0.5mo
+                --  le[:vej + 650m] << 0.5mo
+            );
+        track(:side :nocat :nopax, le[:vej + 210m, :vej + 800m] >> 1.5mo);
+            track(:side :nocat :nopax,
+                    le[:vej + 410m] >> 1.5mo
+                --  le[:vej + 470m] >> 2.5mo
+            );
+        track(:side :nocat :nopax,
+                le[:vej + 210m, :vej + 545m] >> 2.5mo
+            --  le[:vej + 610m, :vej + 611m] >> 1.5mo
+        );
+
+
+        platform(
+                le[:vej - 20m, :vej + 175m] << 0.5mo
+            --  le[:vej + 175m, :vej - 20m] << 0.5mo
+        );
+
+        marker(:right :de.bf :cat:ac25 :pax, le[:vej] >> 0.5mo >> 0.5mt);
+        station(:top, le[:vej] >> 0.5mo >> 0.5mt >> 1.4sh + (0.5sw, 0dt),
+            span(:bold, "Vejen"),
+            hbox(:center:top,
+                vbox(:right:top, "FBP: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "11,", anchor(), "56")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:vej.f, :bro - 100m]);
+    }
+
+    with link = "point.dk.Brørup", railway = :station {
+        track(:double, le[:bro - 100m, :bro + 270m]);
+
+        platform(:cat:ac25 :pax,
+                le[:bro + 20m, :bro + 160m] << 0.5mo
+            --  le[:bro + 160m, :bro + 20m] >> 1.2mo
+        );
+        platform(:cat:ac25 :pax,
+                le[:bro + 20m, :bro + 170m] >> 0.5mo
+            --  le[:bro + 170m, :bro + 20m] << 1.2mo
+        );
+
+        marker(:right :de.hp :cat:ac25 :pax, le[:bro] >> 0.5mo >> 0.5mt);
+        station(:top :cat:ac25 :pax, le[:bro] >> 0.5mo >> 0.5mt >> 1.3sh,
+            "Brørup", "19,41"
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:bro + 270m, :bro + 3.5km]);
+        line_label(:left:n, le[:bro + 3.5km] << 0.5mo << 0.5mt, "LEB");
+        track(:double, le[:bro + 3.5km, :hol.a]);
+    }
+
+    with link = "point.dk.Holsted", railway = :station {
+        track(:double, le[:hol.a, :hol.f]);
+            track(:side,
+                    le[:hol - 570m] << 0.5mo
+                --  le[:hol - 470m] >> 0.5mo
+            );
+            track(:side,
+                    le[:hol + 250m] >> 0.5mo
+                --  le[:hol + 350m] << 0.5mo
+            );
+
+        platform(:cat:ac25 :pax,
+                le[:hol - 90m, :hol + 55m] << 0.5mo
+            --  le[:hol + 55m, :hol - 90m] >> 1.2mo
+        );
+        platform(:cat:ac25 :pax,
+                le[:hol - 90m, :hol + 55m] >> 0.5mo
+            --  le[:hol + 55m, :hol - 90m] << 1.2mo
+        );
+
+        marker(:right :de.bf, le[:hol] >> 1.2mo);
+        station(:top, le[:hol] >> 1.2mo >> 1.3sh,
+            "Holsted", "25,88"
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:hol.f, :gor - 200m]);
+    }
+
+    with link = "point.dk.Gørding", railway = :station {
+        track(:double, le[:gor - 200m, :gor + 100m]);
+
+        platform(
+                le[:gor - 130m, :gor + 20m] << 0.5mo
+            --  le[:gor + 20m, :gor - 130m] >> 1.2mo
+        );
+        platform(
+                le[:gor - 150m, :gor + 15m] >> 0.5mo
+            --  le[:gor + 15m, :gor - 150m] << 1.2mo
+        );
+
+        marker(:right :de.hp :cat:ac25 :pax, le[:gor] >> 0.5mo >> 0.5mt);
+        station(:top :cat:ac25 :pax, le[:gor] >> 0.5mo >> 0.5mt >> 1.3sh,
+            "Gørding", "33,28"
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:gor + 100m, :gor + 2.8km]);
+        line_label(:right:s, le[:gor + 2.8km] >> 0.5mo >> 0.5mt, "LEB");
+        track(:double, le[:gor + 2.8km, :bra.la]);
+    }
+
+    with link = "point.dk.Bramming", railway = :station {
+        # Sp.1 (DK LEB up)
+        track(le[:bra.la, :bra.f] >> 0.5mo);
+            track(:side :nopax,
+                    le[:bra - 705m] >> 0.5mo
+                --  le[:bra - 610m] << 0.5mo
+            );
+
+        # Sp.2 (DK LEB dn)
+        track(le[:bra.la, :bra.f] << 0.5mo);
+            track(:side :nopax,
+                    le[:bra - 580m] << 0.5mo
+                --  le[:bra.yt] << 1.5mo
+            );
+            track(:side,
+                    le[:bra + 370m] << 0.5mo
+                --  le[:bra + 465m] >> 0.5mo
+            );
+
+        # Sp.3 (BTR)
+        track(
+                le[:bra - 500m, :bra + 235m] << 1.5mo
+            --  le[:bra + 330m, :bra + 331m] << 0.5mo
+        );
+            track(:side,
+                    le[:bra - 500m] << 1.5mo
+                --  le[:bra - 380m] << 0.5mo
+            );
+
+        # Sp. 4
+        track(:side :nocat :nopax,
+                le[:bra - 620m] << 5.5mo
+            --  le[:bra - 530m] << 3.5mo
+            ..  le[:bra - 420m, :bra + 170m] << 2.5mo
+            --  le[:bra + 235m, :bra + 236m] << 1.5mo
+        );
+
+        # Sp. 5
+        track(:side :nocat :nopax,
+                le[:bra - 381m, :bra - 380m] << 1.5mo
+            --  le[:bra - 190m, :bra - 65m] << 4mo
+        );
+
+        platform(
+                le[:bra - 210m, :bra + 25m] >> 0.5mo
+            --  le[:bra + 25m, :bra - 210m] << 1.2mo
+        );
+        platform(
+                le[:bra - 200m, :bra + 45m] << 0.5mo
+            --  le[:bra + 45m, :bra - 200m] >> 1.5mo
+        );
+
+        marker(:right :de.bf, le[:bra] >> 1.2mo);
+        station(:top, le[:bra] >> 1.2mo >> 1.2sh,
+            span(:bold, "Bramming"),
+            hbox(:center:top,
+                vbox(:right:top, "LEB: ", span(:nocat, "[BTR: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "39,", anchor(), "271"),
+                    hbox(:sep:base :nocat, "0,", anchor(), "002]")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:bra.f, :bra + 3.3km]);
+        line_label(:right:s, le[:bra + 3.3km] >> 0.5mo >> 0.5mt, "LEB");
+        track(:double, le[:bra + 3.3km, :tja - 300m]);
+    }
+
+    with link = "point.dk.Tjæreborg", railway = :station {
+        track(le[:tja - 300m, :tja + 300m] << 0.5mo);
+        track(
+                le[:tja - 300m, :tja - 299m] >> 0.5mo
+            ..  le[:tja - 70m, :tja + 80m] >> 0.7mo
+            ..  le[:tja + 299m, :tja + 300m] >> 0.5mo
+        );
+
+        platform(
+                le[:tja - 50m, :tja + 40m] << 0.5mo
+            --  le[:tja + 40m, :tja - 50m] >> 1.2mo
+        );
+        platform(
+                le[:tja - 70m, :tja + 80m] >> 1mo
+            --  le[:tja + 80m, :tja - 70m]
+        );
+
+        marker(:left :de.bf, le[:tja] << 1.2mo);
+        station(:bottom, le[:tja] << 1.2mo << 1.3sh + (-0.5sw, 0dt),
+            "Tjæreborg", "47,39"
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:tja + 0.5sw, :tja + 3.3km]);
+        line_label(:right:s, le[:tja + 3.3km] >> 0.5mo >> 0.5mt, "LEB");
+        track(:double, le[:tja + 3.3km, :jer - 110m]);
+    }
+
+    with link = "point.dk.Jerne", railway = :station {
+        track(:double, le[:jer - 110m, :jer + 100m]);
+
+        platform(
+                le[:jer - 45m, :jer + 45m] >> 0.5mo
+            --  le[:jer + 45m, :jer - 45m] << 1.2mo
+        );
+        platform(
+                le[:jer - 70m, :jer + 30m] << 0.5mo
+            --  le[:jer + 30m, :jer - 70m] >> 1.2mo
+        );
+
+        marker(:right :de.hp, le[:jer] >> 0.5mo >> 0.5mt);
+        station(:top, le[:jer] >> 0.5mo >> 0.5mt >> 1.3sh,
+            "Jerne", "53,34"
+        );
+    }
+
+    with link = "line.dk.LEB" {
+        track(:double, le[:jer + 100m, :esb.al]);
+    }
+
+    with link = "point.dk.Esbjerg", railway = :station {
+        # fra Struer
+        track(le[:esb.ys, :esb - 50m] >> 1.5mo);
+
+        # DK LEB up
+        track(le[:esb.al, :esb - 50m] >> 0.5mo);
+
+        # DK LEB dn
+        track(le[:esb.al, :esb + 130m] << 0.5mo);
+
+        marker(:right :de.bf, le[:esb] << 0.5mo >> 0.5mt);
+        station(:right, le[:esb + 0.2sw] << 2.5mo,
+            span(:bold, "Esbjerg"),
+            hbox(:center:top,
+                vbox(:right:top, "??: ", "LEB: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "??", anchor(), ""),
+                    hbox(:sep:base, "55,", anchor(), "70")
+                )
+            )
+        );
+    }
+}
+

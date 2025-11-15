@@ -1,0 +1,526 @@
+# PL 131.  Chorzów Batory – Tczew
+with detail = 2 {
+    let ct = path("d2.pl.s.131");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.131" {
+            track(ct[:cba.yb, :cst.yk]);
+            with zoom = :high line_label(:left:se, ct[:cba.yb + 2km], "131");
+        }
+
+        with link = "point.pl.Chorzów-Stary" {
+            track(:station, ct[:cst.yk, :cst.yr]);
+            statdot(ct[:cst]);
+            with zoom = :high slabel(:right,
+                ct[:cst] + (0.5km, -0.6km) + (1dt, -0.5dt),
+                "Chorzów Stary"
+            );
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:cst.yr, :byt]);
+        }
+
+        with link = "point.pl.Bytom" {
+            track(:station, ct[:byt, :byt.yw]);
+            statdot(ct[:byt]);
+            with zoom = :high slabel(
+                :right, ct[:byt] + (-1dt, -1.5dt), "Bytom"
+            );
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:byt.yw, :bka.yb]);
+            track(ct[:bka.yb, :rad]);
+        }
+
+        with link = "point.pl.Radzionków-Rojca" {
+            track(:station, ct[:rad, :rad.yc]);
+            statdot(ct[:rad]);
+            with zoom = :high slabel(:nw, ct[:rad] + (1.5dt, -0.8dt),
+                "Radzionków Rojca"
+            );
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:rad.yc, :nak]);
+        }
+
+        with link = "point.pl.Nakło-Śląskie" {
+            statdot(ct[:nak]);
+            slabel(:right, ct[:nak] + (2.3dt, 1dt), "Nakło Śląskie");
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:nak, :tar]);
+        }
+
+        with link = "point.pl.Tarnowskie-Góry" {
+            track(:station, ct[:tar, :tar.yo]);
+            statdot(ct[:tar]);
+            slabel(:right, ct[:tar] + (1.5dt, 0.8dt), "Tarnowskie Góry");
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:tar.yo, :tar.yz]);
+            track(ct[:tar.yz, :tar.yt]);
+            track(ct[:tar.yt, :kal]);
+            line_label(:left:e, ct[:kal - 4.5km], "131");
+        }
+
+        with link = "point.pl.Kalety" {
+            track(:station, ct[:kal, :kal.yw]);
+            statdot(ct[:kal]);
+            slabel(:right, ct[:kal] + (1.5dt, 0.8dt), "Kalety");
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:kal.yw, :str]);
+            line_label(:right:w, ct[:kal.yw + 2km], "131");
+        }
+
+        with link = "point.pl.Strzebiń" {
+            track(:station, ct[:str, :str.yw]);
+            statdot(ct[:str]);
+            slabel(:right, ct[:str.yw] + (1.8dt, -1.3dt), "Strzebiń");
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:str.yw, :kan.y]);
+            line_label(:right:w, ct[:kan.y - 4km], "131");
+
+            with layer = -1 track(ct[:kan.y, :hen.yh]);
+        }
+
+        with link = "point.pl.Herby-Nowe" {
+            track(:station, ct[:hen.yh, :hen.yo]);
+            statdot(ct[:hen]);
+            slabel(:left, ct[:hen] + (-1.6dt, 1.0dt), "Herby Nowe");
+        }
+    }
+
+    with railway = :first :cat:dc30 :nopax {
+        with link = "line.pl.131" {
+            track(ct[:hen.yo, :hen.yp] >> 0.4st);
+            track(:casing, path("d2.pl.131.hen")[:hen.yo, :hen.yp] << 0.4st);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :nopax {
+        with link = "line.pl.131" {
+            track(ct[:hen.yp, :ann.x]);
+            line_label(:right:w, ct[:hen.yp + 7km], "131");
+            line_label(:left:e, ct[:hen.yp + 23km], "131");
+        }
+    }
+}
+
+
+# PL 132. Bytom - Wrocław Główny
+with detail = 2 {
+    let bw = path("d2.pl.s.132");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.132" {
+            track(bw[:byt.yw, :bbo]);
+        }
+
+        with link = "point.pl.Bytom-Bobrek" {
+            track(:station, bw[:bbo, :bbo.yk]);
+            statdot(:nopax, bw[:bbo]);
+        }
+
+        with link = "line.pl.132" {
+            track(bw[:bbo.yk, :zbi.yr]);
+        }
+
+        with link = "point.pl.Zabrze-Biskupice" {
+            track(:station, bw[:zbi.yr, :zbi.yg]);
+            statdot(:nopax, bw[:zbi]);
+        }
+    }
+
+    with railway = :first :double :removed {
+        with link = "line.pl.132" {
+            track(bw[:zbi.yg, :zbi.yz]);
+            track(bw[:zbi.yz, :zmi]);
+        }
+
+        with link = "point.pl.Zabrze-Mikulczyce" {
+            track(:station, bw[:zmi, :zmi.yt]);
+            statdot(bw[:zmi]);
+            with zoom = :high slabel(:right, bw[:zmi] + (-0.8dt, -0.8dt),
+                vbox(:left:bottom, "Zabrze", "Mikulczyce")
+            );
+        }
+
+        with link = "line.pl.132" {
+            track(bw[:zmi.yt, :pys.yg]);
+            line_label(:left:n, bw[:zmi.yt + 3km], (0.3dt, 0dt), "132");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Pyskowice" {
+            track(:station, bw[:pys.yg, :pys]);
+            statdot(bw[:pys]);
+            with zoom = :high slabel(:right, bw[:pys] + (1dt, -0.5dt),
+                "Pyskowice"
+            );
+        }
+
+        with link = "line.pl.132" {
+            track(bw[:pys, :pys.ym]);
+            track(bw[:pys.ym, :pac]);
+        }
+
+        with link = "point.pl.Paczyna" {
+            statdot(bw[:pac]);
+            slabel(:right, bw[:pac] + (1.1dt, -0.5dt), "Paczyna");
+        }
+
+        with link = "line.pl.132" {
+            with layer = -1 track(bw[:pac, :pac.yl]);
+            track(bw[:pac.yl, :blo.x]);
+        }
+    }
+}
+
+
+# PL 133.  Dąbrowa Górnicza Ząbkowice - Kraków Główny
+with detail = 2 {
+    let dk = path("d2.pl.s.133");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.133" {
+            track(dk[:daz.yj, :dgh.yg]);
+            track(dk[:dgh.yg, :dgh.ys]);
+            track(dk[:dgh.ys, :dgh.ys + 1km]);
+            with layer = -1 track(dk[:dgh.ys + 1km, :dor.yd]);
+            track(dk[:dor.yd, :dor.yp]);
+            track(dk[:dor.yp, :dor.ym]);
+            track(dk[:dor.ym, :sma.yk]);
+        }
+
+        with link = "point.pl.Sosnowiec-Maczki" {
+            track(:station, dk[:sma.yk, :sma]);
+            statdot(dk[:sma]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.133" {
+            with layer = -1 track(:station :single, dk[:sma, :sma.yd]);
+            with layer = -1 track(:station :single, dk[:sma.yd, :jaw.ym]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Jaworzno-Szczakowa" {
+            track(:station, dk[:jaw.ym, :jaw.yb]);
+            statdot(dk[:jaw]);
+        }
+
+        with link = "line.pl.133" {
+            track(dk[:jaw.yb, :pie.y]);
+            track(dk[:pie.y, :pie.x]);
+        }
+    }
+}
+
+
+# PL 134. Jaworzno Szczakowa - Mysłowice
+with detail = 2 {
+    let jm = path("d2.pl.134");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.134" {
+            track(jm[:jaw.ym, :dlu.ys]);
+            track(jm[:dlu.ys, :dlu.yj]);
+            track(jm[:dlu.yj, :mys.ym]);
+            with zoom = :high {
+                line_label(:right:se, jm[:mys.ym - 2.5km], "134");
+                line_label(:left:nw, jm[:mys.ym - 2.5km], "180");
+            }
+
+            track(jm[:mys.ym, :mys.yj]);
+        }
+    }
+}
+
+
+# DE 135.  Gliwice Łabędy - Pyskowice
+with detail = 2 {
+    let gp = path("d2.pl.135");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.135" {
+            track(gp[:gla.yp, :pys.yg]);
+            with zoom = :high line_label(:left:e, gp[:pys.yg - 2.5km], "135");
+        }
+    }
+}
+
+
+# PL 136.  Kędzierzyn Koźle - Opole Groszowice
+with detail = 2 {
+    let ko = path("d2.pl.s.136");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.136" {
+            track(ko[:kko.yo, :zdz.x]);
+        }
+    }
+}
+
+
+# PL 137.  Katowice - Legnica
+with detail = 2 {
+    let kl = path("d2.pl.s.137");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.137" {
+            with layer = -1 track(kl[:kat.yz, :got.y]);
+            track(kl[:got.y, :cba.yr]);
+        }
+
+        with link = "point.pl.Chorzów-Batory" {
+            track(:station, kl[:cba.yr, :cba.yb]);
+            statdot(kl[:cba]);
+        }
+
+        with link = "line.pl.137" {
+            track(kl[:cba.yb, :rch]);
+        }
+
+        with link = "point.pl.Ruda-Chebzie" {
+            track(:station, kl[:rch, :rch.yo]);
+            statdot(kl[:rch]);
+        }
+
+        with link = "line.pl.137" {
+            track(kl[:rch.yo, :gli.yz - 1.5km]);
+            with zoom = :high line_label(:right:s, kl[:rch.yo + 5km], "137");
+
+            track(:casing, kl[:gli.yz - 1.5km, :gli.yz]);
+        }
+
+        with link = "point.pl.Gliwice" {
+            track(:station, kl[:gli.yz, :gli.yp]);
+            statdot(kl[:gli]);
+            slabel(:left, kl[:gli] + (-0.3dt, 0.4dt),
+                hbox(:right:top, "Gliwice")
+            );
+        }
+
+        with link = "line.pl.137" {
+            track(kl[:gli.yp, :gla.yp]);
+            with zoom = :high line_label(:right:sw, kl[:gla.yp - 1.5km], "137");
+        }
+
+        with link = "point.pl.Gliwice-Łabędy" {
+            track(:station, kl[:gla.yp, :gla]);
+            statdot(kl[:gla]);
+            slabel(:left, kl[:gla] + (-0.7dt, 0.4dt),
+                hbox(:right:top, "G. Łabędy")
+            );
+        }
+
+        with link = "line.pl.137" {
+            track(kl[:gla, :rud.x - 1km]);
+            track(:casing, kl[:rud.x - 1km, :rud.x + 750m]);
+            track(kl[:rud.x + 750m, :rud.yt]);
+            line_label(:left:n, kl[:rud.yt - 2.5km], "137");
+        }
+
+        with link = "point.pl.Rudziniec-Gliwicki" {
+            track(:station, kl[:rud.yt, :rud]);
+            statdot(kl[:rud]);
+            slabel(:left, kl[:rud] + (1.5dt, -0.8dt),
+                vbox(:right:bottom, "Rudziniec", "Gliwicki")
+            );
+        }
+
+        with link = "line.pl.137" {
+            track(kl[:rud, :nwi.y]);
+            with zoom = :high {
+                line_label(:right:s, kl[:rud + 7km], "137");
+                line_label(:left:n, kl[:rud + 7km], "199");
+            }
+
+            track(kl[:nwi.y, :kko]);
+        }
+
+        with link = "point.pl.Kędzierzyn-Koźle" {
+            track(:station, kl[:kko, :kko.yo]);
+            statdot(kl[:kko]);
+            slabel(:right, kl[:kko] + (0.3dt, -0.5dt),
+                vbox(:left:bottom, "Kędzierzyn", "Koźle")
+            );
+        }
+    }
+
+    with railway = :first :double :pax {
+        with link = "line.pl.137" {
+            track(kl[:kko.yo, :kkp.x]);
+        }
+    }
+}
+
+
+# PL 138.  Oświęcim - Katowice
+with detail = 2 {
+    let ok = path("d2.pl.138");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.138" {
+            track(ok[:osw.ym, :osw.yz]);
+            track(ok[:osw.yz, :nbi]);
+        }
+
+        with link = "point.pl.Nowy-Bieruń" {
+            track(:station, ok[:nbi, :nbi.yp]);
+            statdot(ok[:nbi]);
+            with zoom = :high slabel(:right, ok[:nbi] + (1.0dt, -0.3dt),
+                vbox(:left:bottom, "Nowy", "Bieruń")
+            );
+        }
+
+        with link = "line.pl.138" {
+            track(ok[:nbi.yp, :mko.yp]);
+            line_label(:right:w, ok[:nbi.yp + 6km], "138");
+        }
+
+        with link = "point.pl.Mysłowice-Kosztowy" {
+            track(:station, ok[:mko.yp, :mko.yt]);
+            statdot(ok[:mko]);
+        }
+
+        with link = "line.pl.138" {
+            track(ok[:mko.yt, :mbr.yd]);
+            with zoom = :high line_label(:right:w, ok[:mbr.yd - 2km], "138");
+
+            track(ok[:mbr.yd, :mys.yj]);
+        }
+
+        with link = "point.pl.Mysłowice" {
+            track(:station, ok[:mys.yj, :mys]);
+            statdot(ok[:mys]);
+        }
+
+        with link = "line.pl.138" {
+            track(:casing, ok[:mys, :mys.ys]);
+            track(ok[:mys.ys, :sza.y]);
+            track(ok[:sza.y, :ksz.yo]);
+        }
+    }
+}
+
+
+# PL 139.  Katowice – Granica Państwa (Zwardoń)
+with detail = 2 {
+    let kz = path("d2.pl.139");
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.139" {
+            track(kz[:kat.yz, :kbr.yk]);
+            with layer = -1 track(kz[:kbr.yk, :kli.yg - 0.4km]);
+        }
+
+        with link = "point.pl.Katowice-Ligota" {
+            track(kz[:kli.yg - 0.4km, :kli.yt]);
+            statdot(kz[:kli]);
+            slabel(:left, kz[:kli] + (-1.5dt, 1.0dt), "K. Ligota");
+        }
+
+        with link = "line.pl.139" {
+            track(kz[:kli.yt, :mak.yk]);
+            with zoom = :high line_label(:left:w, kz[:kli.yt + 3.2km], "139");
+
+            track(kz[:mak.yk, :tyc]);
+        }
+
+        with link = "point.pl.Tychy" {
+            track(:station, kz[:tyc, :tyc.ym]);
+            statdot(kz[:tyc]);
+            slabel(:right, kz[:tyc] + (1.5dt, 1.0dt), "Tychy");
+        }
+
+        with link = "line.pl.139" {
+            track(kz[:tyc.ym, :psz.yr]);
+            line_label(:left:w, kz[:tyc.ym + 8km], "139");
+
+            track(kz[:psz.yr, :psz]);
+        }
+
+        with link = "point.pl.Pszczyna" {
+            statdot(kz[:psz]);
+            slabel(:right, kz[:psz] + (1.5dt, 1dt), "Pszczyna");
+        }
+
+        with link = "line.pl.139" {
+            track(kz[:psz, :mos.y]);
+            line_label(:left:w, kz[:psz + 4km], (0dt, -0.3dt), "139");
+
+            track(kz[:mos.y, :cze.yk]);
+        }
+
+        # point.pl.Czechowice-Dziedzice  pl.93
+
+        with link = "line.pl.139" {
+            with layer = -1 track(kz[:cze.yz, :bie.yk]);
+            line_label(:right:e, kz[:bie.yk - 4km], "139");
+        }
+
+        with link = "point.pl.Bielsko-Biała-Główna" {
+            track(:station, kz[:bie.yk, :bie]);
+            statdot(kz[:bie]);
+            slabel(:left, kz[:bie.yk] + (-0.8km, 0dt) + (-1dt, 0dt),
+                "Bielsko-Biała Gł."
+            );
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.139" {
+            track(kz[:bie, :bli]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.139" {
+            track(kz[:bli, :wil]);
+        }
+    }
+
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.139" {
+            track(kz[:wil, :zyw.ys]);
+            line_label(:right:ne, kz[:wil + 1.5km], "139");
+        }
+
+        with link = "point.pl.Żywiec" {
+            track(:station, kz[:zyw.ys, :zyw]);
+            statdot(kz[:zyw]);
+            slabel(:left, kz[:zyw] + (-1.5dt, 1.0dt), "Żywiec");
+        }
+
+        with link = "line.pl.139" {
+            track(kz[:zyw, :zwa]);
+            line_label(:left:nw, kz[:zyw + 8.5km], "139");
+            line_label(:right:s, kz[:zwa - 3.5km], "139");
+        }
+
+        with link = "point.pl.Zwardoń" {
+            statdot(kz[:zwa]);
+            slabel(:right, kz[:zwa] + (-3dt, 0.8dt),
+                hbox(:left:top, "Zwardoń")
+            );
+        }
+
+        with link = "line.pl.139" {
+            track(kz[:zwa, :zwg]);
+        }
+    }
+}
+

@@ -46,107 +46,128 @@ with detail = 2 {
 with detail = 2 {
     let lb = path("d2.fr.311");
 
-    with link = "line.fr.311" {
-        track(:first :double :cat:ac25 :pax, lb[:lon.yb, :abb]);
-        track(:first :double :cat:ac25 :pax, lb[:abb, :bou]);
+	with railway = :first :double :cat:ac25 :pax {
+    	with link = "line.fr.311" {
+			track(lb[:lon.yb, :ami.yl]);
+		}
 
-        guide(:linenum :cat:ac25 :pax,
-                lb[:ami + 12km] >> 1dt
-            --  lb[:ami + 12km] >> 3dt
-        );
-        label(:linenum :cat:ac25 :pax, lb[:ami + 12km] >> 3dt,
-            hbox(:center:bottom, "311")
-        );
-        guide(:linenum :cat:ac25 :pax,
-                lb[:abb - 7km] >> 1dt
-            --  lb[:abb - 7km] >> 3dt
-        );
-        label(:linenum :cat:ac25 :pax, lb[:abb - 7km] >> 3dt + (0.6dt, 0dt),
-            hbox(:center:bottom, "311")
-        );
-        line_badge(:cat:ac25 :pax, lb[:noy + 15km], "311");
-        guide(:linenum :cat:ac25 :pax,
-                lb[:eta + 11km] << 1dt
-            --  lb[:eta + 11km] << 3dt
-        );
-        label(:linenum :cat:ac25 :pax, lb[:eta + 11km] << 3dt,
-            hbox(:right:middle, "311 ")
-        );
-        guide(:linenum :cat:ac25 :pax,
-                lb[:hes + 2km] >> 1dt
-            --  lb[:hes + 2km] >> 3dt
-        );
-        label(:linenum :cat:ac25 :pax, lb[:hes + 2km] >> 3dt + (0dt, -0.6dt),
-            hbox(:left:middle, "311 ")
-        );
-    }
+		with link = "point.fr.Amiens" {
+			track(:station, lb[:ami.yl, :ami]);
+			statdot(lb[:ami]);
+			slabel(:right, lb[:ami] + (0dt, -1.5dt),
+				span(:bold, "Amiens")
+			);
+		}
 
-    with link = "point.fr.Amiens" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:ami]);
-        slabel(:right :cat:ac25 :pax, lb[:ami] + (0dt, -1.5dt),
-            span(:bold, "Amiens")
-        );
-    }
+    	with link = "line.fr.311" {
+			track(lb[:ami, :sro]);
+		}
 
-    with link = "point.fr.Saint-Roch" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:sro]);
-        slabel(:left :cat:ac25 :pax, lb[:sro] + (-1.7km, 0.5dt),
-            "Saint-Roch"
-        );
-    }
+		with link = "point.fr.Saint-Roch" {
+			statdot(lb[:sro]);
+			slabel(:left, lb[:sro] + (-1km, 0dt) + (-1dt, 0.5dt),
+				"Saint-Roch"
+			);
+		}
+	}
 
-    with link = "point.fr.Longpré-les-Corps-Saints" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:lon]);
-        slabel(:right :cat:ac25 :pax, lb[:lon] + (-1.5dt, -1.0dt),
-            vbox(:left:bottom, "Longpré-", " les-Corps-", "  Saints")
-        );
-    }
+	with railway = :first :double :pax {
+		with link = "line.fr.311" {
+			track(lb[:sro, :sro.yf]);
+			track(lb[:sro.yf, :lon.yc - 3.5km]);
+			line_label(:right:sw, lb[:sro.yf + 9.5km], "311");
 
-    with link = "point.fr.Abbeville" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:abb]);
-        slabel(:left :cat:ac25 :pax, lb[:abb] + (-1.8dt, 1.3dt),
-            "Abbeville"
-        );
-    }
+			with layer = -1 track(lb[:lon.yc - 3.5km, :lon.yc - 1.5km]);
+			track(lb[:lon.yc - 1.5km, :lon.yc]);
+		}
 
-    with link = "point.fr.Noyelles-sur-Mer" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:noy]);
-        slabel(:right :cat:ac25 :pax, lb[:noy] + (1.8dt, 1.0dt),
-            "Noyelles-sur-Mer"
-        );
-    }
+		with link = "point.fr.Longpré-les-Corps-Saints" {
+			track(:station, lb[:lon.yc, :lon]);
+			statdot(lb[:lon]);
+			slabel(:right, lb[:lon] + (-1.5dt, -1.0dt),
+				vbox(:left:bottom, "Longpré-", " les-Corps-", "  Saints")
+			);
+		}
 
-    with link = "point.fr.Rang-du-Fliers-Verton" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:ran]);
-        slabel(:left :cat:ac25 :pax, lb[:ran] + (-1.8dt, 1.0dt),
-            "Rang-du-Fliers-Verton"
-        );
-    }
+		with link = "line.fr.311" {
+			track(lb[:lon, :abb.yp]);
+			line_label(:right:sw, lb[:abb.yp - 7.8km], "311");
+		}
 
-    with link = "point.fr.Étaples-Le-Touquet" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:eta]);
-        slabel(:left :cat:ac25 :pax, lb[:eta] + (-1.8dt, 2.3dt),
-            "Étaples-Le-Touquet"
-        );
-    }
+		with link = "point.fr.Abbeville" {
+			track(:station, lb[:abb.yp, :abb.ye]);
+			statdot(lb[:abb]);
+			slabel(:left, lb[:abb] + (-1.6dt, 1.4dt), "Abbeville");
+		}
 
-    with link = "point.fr.Hesdigneul" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:hes]);
-        slabel(:left :cat:ac25 :pax, lb[:hes] + (-1.8dt, 2.3dt),
-            "Hesdigneul"
-        );
-    }
+		with link = "line.fr.311" {
+			track(lb[:abb.ye, :noy]);
+		}
 
-    with link = "point.fr.Outreau" {
-        with layer = 1 marker(:statdot :cat:ac25, lb[:out]);
-    }
+		with link = "point.fr.Noyelles-sur-Mer" {
+			track(:station, lb[:noy, :noy.yv]);
+			statdot(lb[:noy]);
+			slabel(:right, lb[:noy] + (1.7dt, 1.0dt), "Noyelles-sur-Mer");
+		}
 
-    with link = "point.fr.Boulogne-Ville" {
-        with layer = 1 marker(:statdot :cat:ac25 :pax, lb[:bou]);
-        slabel(:right :cat:ac25 :pax, lb[:bou] + (1.8dt, 1.5dt),
-            span(:bold, "Boulogne")
-        );
-    }
+		with link = "line.fr.311" {
+			track(lb[:noy.yv, :ran]);
+			line_label(:right:w, lb[:noy + 15km], "311");
+		}
+	}
+
+	with railway = :first :double :cat:ac25 :pax {
+		with link = "point.fr.Rang-du-Fliers-Verton" {
+			statdot(lb[:ran]);
+			slabel(:left, lb[:ran] + (-1.8dt, 1.0dt),
+				"Rang-du-Fliers-Verton"
+			);
+		}
+
+		with link = "line.fr.311" {
+			track(lb[:ran, :eta.ys]);
+			line_label(:left:e, lb[:ran + 5.5km], "311");
+		}
+
+		with link = "point.fr.Étaples-Le-Touquet" {
+			track(:station, lb[:eta.ys, :eta]);
+			statdot(lb[:eta]);
+			slabel(:left, lb[:eta] + (-1.8dt, 2.3dt), "Étaples-Le-Touquet");
+		}
+
+		with link = "line.fr.311" {
+			track(lb[:eta, :hes.yo]);
+			line_label(:left:e, lb[:eta + 8km], "311");
+		}
+
+		with link = "point.fr.Hesdigneul" {
+			track(:station, lb[:hes.yo, :hes]);
+			statdot(lb[:hes]);
+			slabel(:left, lb[:hes] + (-1.8dt, 2.3dt), "Hesdigneul");
+		}
+
+		with link = "line.fr.311" {
+			track(lb[:hes, :out]);
+			line_label(:right:sw, lb[:hes + 2.2km], "311");
+		}
+
+		with link = "point.fr.Outreau" {
+			track(:station, lb[:out, :out.ym]);
+			statdot(:nopax, lb[:out]);
+			slabel(:left :nopax, lb[:out] + (-1.8dt, 1.0dt), "Outreau");
+		}
+
+		with link = "line.fr.311" {
+			track(lb[:out.ym, :bou]);
+		}
+
+		with link = "point.fr.Boulogne-Ville" {
+			statdot(lb[:bou]);
+			slabel(:right, lb[:bou] + (1.7dt, 1.0dt),
+				span(:bold, "Boulogne")
+			);
+		}
+	}
 }
 
 

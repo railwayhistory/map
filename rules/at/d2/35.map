@@ -1,0 +1,106 @@
+# AT 350.  Salzburg Hbf - Wörgl Hbf
+with detail = 2 {
+    let sw = path("d2.at.350");
+
+    with link = "line.at.350" {
+        track(:first :double :cat:ac15 :pax, sw[:sal.yw, :gnv.yh]);
+    }
+
+    with link = "point.at.Salzburg-Gnigl-Vbf" {
+        track(:first:station :double :cat:ac15 :pax, sw[:gnv.yh, :gnv]);
+        statdot(:cat:ac15, sw[:gnv]);
+    }
+
+    with link = "line.at.350" {
+        track(:first :double :cat:ac15 :pax, sw[:gnv, :bis.ys]);
+        line_label(:left:w :double :cat:ac15 :pax, sw[:gnv + 7.4km], "350");
+        line_label(:right:e :double :cat:ac15 :pax, sw[:bis.ys - 7km], "350");
+    }
+
+    with link = "point.at.Bischofshofen" {
+        track(:first:station :double :cat:ac15 :pax, sw[:bis.ys, :bis]);
+        statdot(:cat:ac15 :pax, sw[:bis]);
+        slabel(:left :cat:ac15 :pax, sw[:bis] + (-1.7dt, 0.8dt),
+            "Bischofshofen"
+        );
+    }
+
+    with link = "line.at.350" {
+        track(:first :double :cat:ac15 :pax, sw[:bis, :swa]);
+        line_label(:left:w :double :cat:ac15 :pax, sw[:bis + 7km], "350");
+    }
+
+    with link = "point.at.Schwarzach-St-Veit" {
+        track(:first:station :double :cat:ac15 :pax, sw[:swa, :swa.ys]);
+        statdot(:cat:ac15 :pax, sw[:swa]);
+        slabel(:left :cat:ac15 :pax, sw[:swa] + (1.0dt, -0.5dt),
+            vbox(:right:bottom :bold, "Schwarzach-", "St. Veit ")
+        );
+    }
+
+    with link = "line.at.350" {
+        track(:first :double :cat:ac15 :pax, sw[:swa.ys, :zel]);
+        line_label(:right:s :double :cat:ac15 :pax, sw[:swa.ys + 12km],
+            "350"
+        );
+    }
+
+    with link = "point.at.Zell-See" {
+        statdot(:cat:ac15 :pax, sw[:zel]);
+        slabel(:right :cat:ac15 :pax, sw[:zel] + (1.5dt, 0.8dt), "Zell am See");
+    }
+
+    with link = "line.at.350" {
+        track(:first :double :cat:ac15 :pax, sw[:zel, :wor.ys]);
+        line_label(:right:w :double :cat:ac15 :pax, sw[:zel + 10km], "350");
+        line_label(:right:s :double :cat:ac15 :pax, sw[:wor.ys - 44km],
+            "350"
+        );
+        line_label(:right:sw :double :cat:ac15 :pax, sw[:wor.ys - 5.5km],
+            "350"
+        );
+    }
+}
+
+
+# AT 355.  Bischofshofen - Selzthal
+with detail = 2 {
+    let bs = path("d2.at.355");
+
+    with link = "line.at.355" {
+        track(:first :cat:ac15 :pax, bs[:bis.ys, :sta.ya]);
+        line_label(:left:s :cat:ac15 :pax, bs[:bis.ys + 11km], "355");
+        line_label(:right:nw :cat:ac15 :pax, bs[:sta.ya - 9km], "355");
+    }
+
+    with link = "point.at.Stainach-Irdning" {
+        track(:first:station :cat:ac15 :pax, bs[:sta.ya, :sta]);
+        statdot(:cat:ac15 :pax, bs[:sta]);
+        slabel(:right :cat:ac15 :pax, bs[:sta] + (0.3dt, 0.8dt),
+            vbox(:left:top, "Stainach-", "Irdning")
+        );
+    }
+
+    with link = "line.at.355" {
+        track(:first :double :cat:ac15 :pax, bs[:sta, :li1]);
+        track(:first :cat:ac15 :pax, bs[:li1, :sel.yb]);
+        line_label(:left:s :cat:ac15 :pax, bs[:sel.yb - 7.6km], "355");
+    }
+}
+
+
+# AT 357.  Zell am See Lokalbahn - Krimml
+with detail = 2 {
+    let zk = path("d2.at.357");
+
+    with link = "line.at.357" {
+        track(:second :narrow:g760 :pax, zk[:zel.yk, :kri]);
+        line_label(:right:s :pax, zk[:zel.yk + 26km], "357");
+    }
+
+    with link = "point.at.Krimml" {
+        statdot(:pax, zk[:kri]);
+        slabel(:left :pax, zk[:kri] + (-1.5dt, 1.0dt), "Krimml");
+    }
+}
+

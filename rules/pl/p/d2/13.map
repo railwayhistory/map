@@ -1,0 +1,60 @@
+# PL 131.  Chorzów Batory – Tczew
+with detail = 2 {
+    let ct = path("d2.pl.p.131");
+
+    with railway = :first :double :cat:dc30 :nopax {
+        with link = "line.pl.131" {
+            track(ct[:ann.x, :cho.yw]);
+            line_label(:left:e, ct[:cho.yw - 6km], "131");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "point.pl.Chorzew-Siemkowice" {
+            track(:station, ct[:cho.yw, :cho]);
+            statdot(ct[:cho]);
+            slabel(:left, ct[:cho] + (-1.5dt, 0dt),
+                vbox(:right:middle, "Chorzew", "Siemkowice ")
+            );
+        }
+
+        with link = "line.pl.131" {
+            track(ct[:cho, :zdk]);
+            line_label(:left:e, ct[:cho + 8km], "131");
+            line_label(:right:w, ct[:zdk - 9km], "131");
+        }
+
+        with link = "point.pl.Zduńska-Wola-Karsznice" {
+            track(:station, ct[:zdk, :zdk.yg]);
+            statdot(ct[:zdk]);
+            slabel(:ne, ct[:zdk] + (-0.8dt, 0dt), "Z.W. Karsznice");
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :nopax {
+        with link = "line.pl.131" {
+            track(:casing, ct[:zdk.yg, :dio.yg]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.131" {
+            track(ct[:dio.yg, :pon]);
+            line_label(:left:e, ct[:dio.yg + 6km], "131");
+            line_label(:right:w, ct[:dio.yg + 32km], "131");
+            line_label(:right:w, ct[:pon - 8km], "131");
+        }
+
+        with link = "point.pl.Ponętów" {
+            track(:station, ct[:pon, :pon.yz]);
+            statdot(ct[:pon]);
+            slabel(:right, ct[:pon] + (1.3dt, 0.3dt), "Ponętów");
+        }
+
+        with link = "line.pl.131" {
+            track(:casing, ct[:pon.yz, :bor.y]);
+            track(ct[:bor.y, :bor.x]);
+        }
+    }
+}
+

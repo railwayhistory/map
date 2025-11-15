@@ -33,22 +33,24 @@ with detail = 2 {
 with detail = 2 {
     let gb = path("d2.de.9581");
 
-    with link = "line.de.9581" {
-        track(:second, gb[:got.yv, :vie]);
-        track(:second :removed, gb[:vie, :bla.yv]);
+    with railway = :second :museum {
+        with link = "line.de.9581" {
+            track(gb[:got.yv, :vie]);
+            line_label(:left:n, gb[:vie - 4.6km], "9581");
+        }
 
-        guide(:linenum,
-                gb[:vie - 4.6km] << 0.7dt
-            --  gb[:vie - 4.6km] << 3.0dt
-        );
-        label(:linenum, gb[:vie - 4.6km] << 3.0dt,
-            hbox(:center:top, "9581")
-        );
+        with link = "point.de.Viechtach" {
+            statdot(gb[:vie]);
+            slabel(:left, gb[:vie] + (0dt, 0.5dt),
+                hbox(:right:top, "Viechtach")
+            );
+        }
     }
 
-    with link = "point.de.Viechtach" {
-        with layer = 1 marker(:statdot, gb[:vie]);
-        slabel(:left, gb[:vie] + (0dt, 0.5dt), hbox(:right:top, "Viechtach"));
+    with railway = :second :removed {
+        with link = "line.de.9581" {
+            track(gb[:vie, :bla.yv]);
+        }
     }
 }
 

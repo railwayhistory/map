@@ -1,0 +1,186 @@
+# AT 330.  Wels Hbf - Staatsgrenze nächst Schärding
+with detail = 2 {
+    let ws = path("d2.at.330");
+
+    with link = "line.at.330" {
+        track(:first :double :cat:ac15 :pax, ws[:wel.yp, :hai]);
+        with zoom = :high {
+            line_label(:right:w :double :cat:ac15 :pax,
+                ws[:wel.yp + 3km], "330"
+            );
+        }
+    }
+
+    with link = "point.at.Haiding" {
+        track(:first:station :double :cat:ac15 :pax, ws[:hai, :hai.ya]);
+        statdot(:cat:ac15 :pax, ws[:hai]);
+        slabel(:left :cat:ac15 :pax, ws[:hai] + (-1.6dt, -0.3dt),
+            hbox(:right:top, "Haiding")
+        );
+    }
+
+    with link = "line.at.330" {
+        track(:first :double :cat:ac15 :pax, ws[:hai.ya, :nma.yw]);
+        line_label(:right:s :double :cat:ac15 :pax, ws[:hai.ya + 10km], " 330");
+    }
+
+    with link = "point.at.Neumarkt-Kallham" {
+        track(:first:station :double :cat:ac15 :pax, ws[:nma.yw, :nma]);
+        statdot(:cat:ac15 :pax, ws[:nma]);
+        slabel(:left :cat:ac15 :pax, ws[:nma] + (3dt, -0.5dt),
+            vbox(:right:bottom, "Neumarkt-", "Kallham   ")
+        );
+    }
+
+    with link = "line.at.330" {
+        track(:first :double :cat:ac15 :pax, ws[:nma, :nmw]);
+    }
+
+    with link = "point.at.Neumarkt-Kallham-West" {
+        track(:first:station :double :cat:ac15 :pax, ws[:nmw, :nmw.yb]);
+        statdot(:cat:ac15, ws[:nmw]);
+    }
+
+    with link = "line.at.330" {
+        track(:first :double :cat:ac15 :pax, ws[:nmw.yb, :sae.ya]);
+        line_label(:left:e :double :cat:ac15 :pax, ws[:nmw.yb + 8.5km], "330");
+        line_label(:right:s :double :cat:ac15 :pax, ws[:sae.ya - 7km], " 330");
+    }
+
+    with link = "point.at.Schärding-Einfahrbf" {
+        track(:first:station :double :cat:ac15 :pax, ws[:sae.ya, :sae]);
+        statdot(:cat:ac15, ws[:sae]);
+    }
+
+    with link = "line.at.330" {
+        track(:first :double :cat:ac15 :pax, ws[:sae, :sar]);
+    }
+
+    with link = "point.at.Schärding" {
+        statdot(:cat:ac15 :pax, ws[:sar]);
+        slabel(:right :cat:ac15 :pax, ws[:sar] + (1.6dt, 0.7dt), "Schärding");
+    }
+
+    with link = "line.at.330" {
+        track(:first :double :cat:ac15 :pax, ws[:sar, :sag]);
+        line_label(:right:w :double :cat:ac15 :pax, ws[:sag - 6.7km], "330");
+    }
+}
+
+
+# AT 332.  Haiding - Aschach a.d. Donau
+with detail = 2 {
+    let ha = path("d2.at.332");
+
+    with link = "line.at.332" {
+        track(:second, ha[:hai.ya, :efe.yn]);
+        line_label(:right:w, ha[:hai.ya + 5km], "332");
+    }
+
+    with link = "point.at.Eferding" {
+        track(:second:station :cat:dc75 :pax, ha[:efe.yn, :efe]);
+        statdot(:cat:dc75 :pax, ha[:efe]);
+        slabel(:right :cat:dc75 :pax,
+            ha[:efe] + (0.1km, -0.1km) + (0.8dt, -0.8dt),
+            "Eferding"
+        );
+    }
+
+    with link = "line.at.332" {
+        track(:second, ha[:efe, :asc]);
+        line_label(:right:w, ha[:asc - 3km], "332");
+    }
+
+    with link = "point.at.Aschach-Donau" {
+        statdot(:open, ha[:asc]);
+        slabel(:top, ha[:asc] + (0.3dt, -0.7dt),
+            vbox(:center:bottom, "Aschach", "a.d. Donau")
+        );
+    }
+}
+
+
+# AT 335.  Neumarkt-Kallham West - Staatsgrenze nächst Braunau am Inn
+with detail = 2 {
+    let nb = path("d2.at.335");
+
+    with link = "line.at.335" {
+        track(:first :pax, nb[:nmw.yb, :rie.ya]);
+        line_label(:right:s :pax, nb[:nmw.yb + 12.7km], "335");
+    }
+
+    with link = "point.at.Ried-Innkreis" {
+        track(:first:station :pax, nb[:rie.ya, :rie.ys]);
+        statdot(:pax, nb[:rie]);
+        slabel(:left :pax, nb[:rie] + (0dt, 1.0dt),
+            vbox(:right:top, "Ried im", "Innkreis")
+        );
+    }
+
+    with link = "line.at.335" {
+        track(:first :pax, nb[:rie.ys, :bra.ys]);
+        line_label(:left:n :pax, nb[:rie.ys + 19km], "335");
+    }
+
+    with link = "point.at.Braunau-Inn" {
+        track(:first:station :pax, nb[:bra.ys, :bra]);
+        statdot(:pax, nb[:bra]);
+        with zoom = :low {
+            slabel(:left :pax, nb[:bra.ys] + (0dt, 0.5km) + (0dt, 0.5dt),
+                vbox(:right:top, "Braunau", "am Inn")
+            );
+        }
+        with zoom = :high {
+            slabel(:left :pax, nb[:bra] + (1.8dt, 1.0dt),
+                vbox(:right:top, "Braunau", "am Inn")
+            );
+        }
+    }
+
+    with link = "line.at.335" {
+        track(:first :pax, nb[:bra, :brg]);
+    }
+
+    with link = "point.int.Branau-Inn-Simbach-Inn" {
+        marker(:right :ref :pax, nb[:brg]);
+        marker(:left :ref :pax, nb[:brg]);
+    }
+}
+
+
+# AT 338.  Steindorf bei Straßwalchen - Braunau am Inn
+with detail = 2 {
+    let sb = path("d2.at.338");
+
+    with link = "line.at.338" {
+        track(:second :cat:ac15 :pax, sb[:ste.yb, :fri]);
+    }
+
+    with link = "point.at.Friedburg" {
+        track(:second :pax, sb[:fri, :fri.ys]);
+        statdot(:cat:ac15 :pax, sb[:fri]);
+        slabel(:left :cat:ac15 :pax, sb[:fri] + (-1.7dt, 1.3dt), "Friedburg");
+    }
+
+    with link = "line.at.338" {
+        track(:second :pax, sb[:fri.ys, :bra.ys]);
+        line_label(:left:e :pax, sb[:fri.ys + 15km], "338");
+    }
+}
+
+
+# AT 339.  Friedburg - Schneegattern
+with detail = 2 {
+    let fs = path("d2.at.339");
+
+    with link = "line.at.339" {
+        track(:second :removed, fs[:fri.ys, :sne]);
+        line_label(:right:n :removed, fs[:sne - 1.8km], " 339");
+    }
+
+    with link = "point.at.Schneegattern" {
+        statdot(:removed, fs[:sne]);
+        slabel(:top :removed, fs[:sne] + (2dt, -0.6dt), "Schneegattern");
+    }
+}
+

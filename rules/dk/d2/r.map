@@ -1,0 +1,217 @@
+# DK RFH.  Ringsted - Frederikssund - Hillerød
+with detail = 2 {
+    let rh = path("d2.dk.rfh");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.RFH" {
+            track(
+                    rh[:rin.yf, :rin.yf + 1km] >> 1.5md >> 1ms << 0.5mt
+                ..  rh[:rin.xf, :rin.xf + 8.5km]
+            );
+            line_label(:right:w, rh[:rin.xf + 8.5km], "RFH");
+            track(rh[:rin.xf + 8.5km, :hva.yr]);
+        }
+
+        # point.dk.Hvalsø  dk.RKB
+
+        with link = "line.dk.RFH" {
+            track(rh[:hva.yf, :hva.yf + 6km]);
+            line_label(:right:w, rh[:hva.yf + 6km], "RFH");
+            track(rh[:hva.yf + 6km, :fre.yr - 9km]);
+            line_label(:left:e, rh[:fre.yr - 9km], "RFH");
+            track(rh[:fre.yr - 9km, :fre.yr]);
+        }
+    }
+
+    # point.dk.Frederikssund  dk.FKS
+
+    with railway = :first :project :removed {
+        with link = "line.dk.RFH" {
+            track(rh[:fre.yr, :sla]);
+        }
+
+        # point.dk.Slangerup  dk.SMS
+
+        with link = "line.dk.RFH" {
+            track(rh[:sla.yh, :sla.yh + 4km]);
+            line_label(:right:nw, rh[:sla.yh + 4km], "RFH");
+            track(rh[:sla.yh + 4km, :bro.ys]);
+        }
+    }
+}
+
+
+# DK RKB.  Roskilde - Kalundborg
+with detail = 2 {
+    let rk = path("d2.dk.rkb");
+
+    with railway = :first :double :cat:ac25 :pax {
+        with link = "line.dk.RKB" {
+            track(rk[:ros.yk, :ros.yk + 5km]);
+            line_label(:right:s, rk[:ros.yk + 5km], (-0.2dt, 0dt), "RKB");
+            track(rk[:ros.yk + 5km, :hva.yf]);
+        }
+
+        with link = "point.dk.Hvalsø" {
+            track(rk[:hva.yf, :hva.yr]);
+            statdot(rk[:hva]);
+            slabel(:nw, rk[:hva] + (0dt, 0.6km) + (-1dt, 1dt), "Hvalsø");
+        }
+
+        with link = "line.dk.RKB" {
+            track(rk[:hva.yr, :tol.yh]);
+        }
+
+        with link = "point.dk.Tølløse" {
+            track(rk[:tol.yh, :tol]);
+            statdot(rk[:tol]);
+            slabel(:right, rk[:tol] + (1dt, -0.7dt), "Tølløse");
+        }
+
+        with link = "line.dk.RKB" {
+            track(rk[:tol, :tol + 6.5km]);
+            line_label(:right:w, rk[:tol + 6.5km], "RKB");
+            track(rk[:tol + 6.5km, :hol]);
+        }
+
+        with link = "point.dk.Holbæk" {
+            statdot(rk[:hol]);
+            slabel(:right, rk[:hol] + (1.3dt, -0.3dt), "Holbæk");
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.dk.RKB" {
+            track(rk[:hol, :hol.yn] << 0.5md >> 0.5mt);
+            track(
+                    rk[:hol.yn, :hol.xn] << 0.5md >> 0.5mt
+                ..  rk[:hol.zn, :hol.yn + 5km]
+            );
+            line_label(:right:se, rk[:hol.yn + 5km], "RKB");
+            track(rk[:hol.yn + 5km, :var.ys - 8.5km]);
+            line_label(:left:n, rk[:var.ys - 8.5km], (0.3dt, 0dt), "RKB");
+            track(rk[:var.ys - 8.5km, :var.ys]);
+        }
+
+        with link = "point.dk.Værslev" {
+            track(rk[:var.ys, :var]);
+            statdot(:nopax, rk[:var]);
+            slabel(:left :nopax, rk[:var] + (2.5dt, -1.5dt), "Værslev");
+        }
+
+        with link = "line.dk.RKB" {
+            track(rk[:var, :var + 4km]);
+            line_label(:left:n, rk[:var + 4km], (-0.5dt, 0dt), "RKB");
+            track(rk[:var + 4km, :kal]);
+        }
+
+        with link = "point.dk.Kalundborg" {
+            statdot(rk[:kal]);
+            slabel(:left, rk[:kal] + (-1.5dt, 0.8dt), "Kalundborg");
+        }
+    }
+}
+
+
+# DK RKN.  Roskilde - Næstved
+with detail = 2 {
+    let rn = path("d2.dk.rkn");
+
+    with railway = :first :pax {
+        with link = "line.dk.RKN" {
+            track(rn[:ros.yn, :ros.yn + 11km]);
+            line_label(:right:e, rn[:ros.yn + 11km], "RKN");
+            with layer = -2 track(rn[:ros.yn + 11km, :kox]);
+        }
+    }
+
+    with railway = :first :cat:ac25 :pax {
+        with link = "line.dk.RKN" {
+            with layer = -2 track(rn[:kox, :olb.yk + 1md]);
+            track(rn[:olb.yk + 1md, :kog]);
+        }
+
+        with link = "point.dk.Køge" {
+            track(rn[:kog, :kog.yf]);
+            statdot(rn[:kog] >> 0.5mt >> 1ms);
+            slabel(:right, rn[:kog] + (1.5dt, 1dt), "Køge");
+        }
+
+        with link = "line.dk.RKN" {
+            track(rn[:kog.yf, :kog.yf + 10km]);
+            line_label(:right:se, rn[:kog.yf + 10km], "RKN");
+            track(rn[:kog.yf + 10km, :nas.yr - 7km]);
+            line_label(:right:s, rn[:nas.yr - 7km], (-0.8dt, 0dt), "RKN");
+            track(rn[:nas.yr - 7km, :nas.yr]);
+        }
+    }
+}
+
+
+# DK RSR.  Ringsted – Rødby Færge
+with detail = 2 {
+    let rr = path("d2.dk.rsr");
+
+    with railway = :first :double :cat:ac25 :pax {
+        with link = "line.dk.RSR" {
+            track(
+                    rr[:rin.yr - 0.1dl, :rin.yr] << 1md << 1ms
+                ..  rr[:rin.xr + 1dt, :rin.xr + 10km]
+            );
+            line_label(:right:e, rr[:rin.xr + 10km], "RSR");
+            track(rr[:rin.xr + 10km, :nas.ys]);
+        }
+
+        with link = "point.dk.Næstved" {
+            track(rr[:nas.ys, :nas.yp]);
+            statdot(rr[:nas]);
+            slabel(:left, rr[:nas] + (-1.7dt, 1.3dt), "Næstved");
+        }
+
+        with link = "line.dk.RSR" {
+            track(rr[:nas.yp, :nas.yp + 12.5km]);
+            line_label(:right:e, rr[:nas.yp + 12.5km], "RSR");
+            track(rr[:nas.yp + 12.5km, :vor]);
+        }
+
+        with link = "point.dk.Vordingborg" {
+            statdot(rr[:vor]);
+            slabel(:left, rr[:vor] + (-1.6dt, 0.5dt), "Vordingborg");
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.dk.RSR" {
+            track(rr[:vor, :vor + 6km]);
+            line_label(:left:nw, rr[:vor + 6km], "RSR");
+            track(rr[:vor + 6km, :ore]);
+            track(:double, rr[:ore, :nyk - 12.5km]);
+            line_label(:right:e, rr[:nyk - 12.5km], "RSR");
+            track(:double, rr[:nyk - 12.5km, :nyk.ys]);
+        }
+
+        with link = "point.dk.Nykøbing-Falster" {
+            track(rr[:nyk.ys, :nyv]);
+            statdot(:pax, rr[:nyk]);
+            slabel(:left :bold, rr[:nyk] + (-1dt, -0.5dt),
+                vbox(:right:base, "Nykøbing", "Falster")
+            );
+        }
+    }
+
+    with railway = :first :pax :suspended {
+        with link = "line.dk.RSR" {
+            track(rr[:nyv, :nyv + 6km]);
+            line_label(:left:n, rr[:nyv + 1.5km], "RSR");
+            track(rr[:nyv + 6km, :rof - 8km]);
+            line_label(:left:n, rr[:rof - 11km], "RSR");
+            track(rr[:rof - 8km, :rof]);
+        }
+
+        with link = "point.dk.Rødby-Færge" {
+            statdot(rr[:rof]);
+            slabel(:ne, rr[:rof] + (-1.3dt, -0.3dt), "Rødby Færge");
+        }
+    }
+}
+

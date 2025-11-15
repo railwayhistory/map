@@ -1,0 +1,294 @@
+# PL 300.  Opole Główne - Opole Wschodnie
+with detail = 2 {
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.pl.300" {
+            track(path("d2.pl.300")[:bol.yw, :opw.yg]);
+        }
+    }
+}
+
+
+# PL 301. Opole Główne - Namysłów
+with detail = 2 {
+    let on = path("d2.pl.301");
+
+    with railway = :second :pax {
+        with link = "line.pl.301" {
+            track(on[:bol.yn, :jel]);
+            line_label(:right:nw, on[:bol.yn + 7km], "301");
+        }
+
+        with link = "point.pl.Jełowa" {
+            track(:station, on[:jel, :jel.yk]);
+            statdot(on[:jel]);
+            slabel(:right, on[:jel] + (1.5dt, 0.8dt), "Jełowa");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.301" {
+            track(on[:jel.yk, :mur]);
+            line_label(:left:ne, on[:jel.yk + 5.5km], "301");
+        }
+
+        with link = "point.pl.Murów" {
+            statdot(on[:mur]);
+            slabel(:right, on[:mur] + (1.3dt, -0.5dt), "Murów");
+        }
+    }
+
+    with railway = :second :suspended {
+        with link = "line.pl.301" {
+            track(on[:mur, :bie]);
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.301" {
+            track(on[:bie, :nam.yo]);
+            line_label(:left:e, on[:nam.yo - 7km], "301");
+        }
+    }
+}
+
+
+# PL 302.  Malczyce - Marciszów
+with detail = 2 {
+    let mm = path("d2.pl.302");
+
+    with railway = :second :suspended {
+        with link = "line.pl.302" {
+            track(mm[:mal.ym, :str.yj]);
+            line_label(:right:e, mm[:mal.ym + 7km], "302");
+            line_label(:left:w, mm[:str.yj - 8.5km], "302");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.302" {
+            track(mm[:str.yg, :gra]);
+        }
+
+        with link = "point.pl.Grabina-Śląska" {
+            statdot(mm[:gra]);
+            slabel(:left, mm[:gra] + (2.5dt, 1.3dt),
+                vbox(:right:top, "Grabina", "Śląska")
+            );
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.302" {
+            track(mm[:gra, :roz.yj]);
+            line_label(:right:s, mm[:gra + 3km], "302");
+        }
+
+        with link = "point.pl.Roztoka" {
+            track(:station, mm[:roz.yj, :roz]);
+            statdot(mm[:roz]);
+            slabel(:left, mm[:roz] + (-1.0dt, -0.5dt), "Roztoka");
+        }
+
+        with link = "line.pl.302" {
+            track(mm[:roz, :dom.ym]);
+            line_label(:left:w, mm[:mar.ym - 6km], "302");
+            track(mm[:dom.ym, :mar.ym]);
+        }
+    }
+}
+
+
+# PL 303.  Rokitki - Kożuchów
+with detail = 2 {
+    let rk = path("d2.pl.d.303");
+
+    with railway = :second :pax {
+        with link = "line.pl.303" {
+            track(rk[:rot.yk, :cho.yl]);
+            line_label(:right:w, rk[:rot.yk + 3.5km], "303");
+        }
+
+        with link = "point.pl.Chocianów" {
+            track(:station, rk[:cho.yl, :cho]);
+            statdot(rk[:cho]);
+            slabel(:right, rk[:cho] + (1.5dt, 0.5dt), "Chocianów");
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.303" {
+            track(rk[:cho, :rux]);
+            line_label(:right:w, rk[:cho + 5.5km], "303");
+        }
+    }
+}
+
+
+# PL 304.  Brzeg - Łagiewniki Dzierżoniowskie
+with detail = 2 {
+    let bl = path("d2.pl.304");
+
+    with railway = :second :suspended {
+        with link = "line.pl.304" {
+            track(bl[:brz.yl, :mal]);
+        }
+
+        with link = "point.pl.Małujowice" {
+            statdot(bl[:mal]);
+            slabel(:left, bl[:mal] + (-1dt, -0.3dt), "Małujowice");
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.304" {
+            track(bl[:mal, :gle.yg]);
+            line_label(:left:n, bl[:mal + 4km], "304");
+        }
+
+        with link = "point.pl.Głęboka-Śląska" {
+            track(:station, bl[:gle.yg, :gle]);
+            statdot(bl[:gle]);
+            slabel(:left, bl[:gle] + (1.0dt, 1.0dt),
+                vbox(:right:top, "Głęboka", "Śląska")
+            );
+        }
+
+        with link = "line.pl.304" {
+            track(bl[:gle, :str.yb]);
+            line_label(:right:s, bl[:gle + 3km], (0.5dt, 0dt), "304");
+        }
+
+        # point.pl.Strzelin  pl.276
+
+        with link = "line.pl.304" {
+            track(bl[:str.yl, :kon]);
+            line_label(:left:n, bl[:str.yl + 5km], "304");
+        }
+
+        with link = "point.pl.Kondratowice" {
+            track(:station, bl[:kon, :kon.yz]);
+            statdot(bl[:kon]);
+            slabel(:top, bl[:kon] + (0dt, -1.0dt),
+                vbox(:center:bottom, " Kon-", " drato-", "wice")
+            );
+        }
+
+        with link = "line.pl.304" {
+            track(bl[:kon.yz, :lag.yb]);
+            line_label(:left:n, bl[:kon.yz + 3km], "304");
+        }
+    }
+}
+
+
+# PL 306.  Gogolin - Prudnik
+with detail = 2 {
+    let gp = path("d2.pl.306");
+
+    with railway = :second :removed {
+        with link = "line.pl.306" {
+            track(gp[:gog.yp, :kra]);
+        }
+
+        with link = "point.pl.Krapkowice" {
+            statdot(gp[:kra]);
+            slabel(:left, gp[:kra] + (-1.5dt, 0.5dt), "Krapkowice");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "line.pl.306" {
+            track(gp[:kra, :pru.yg]);
+            line_label(:left:nw, gp[:kra + 4km], "306");
+            line_label(:right:se, gp[:pru.yg - 10km], "306");
+        }
+    }
+}
+
+
+# PL 307.  Namysłów - Kępno
+with detail = 2 {
+    let nk = path("d2.pl.d.307");
+
+    with railway = :second :removed {
+        with link = "line.pl.307" {
+            with layer = -1 track(nk[:nam.yk, :nam.yk + 2km]);
+            track(nk[:nam.yk + 2km, :buk]);
+            line_label(:left:se, nk[:nam.yk + 5km], "307");
+        }
+
+        with link = "point.pl.Bukowa-Śląska" {
+            track(:station, nk[:buk, :buk.ys]);
+            statdot(nk[:buk]);
+            slabel(:right, nk[:buk] + (1.5dt, 1.5dt), "Bukowa Śląska");
+        }
+
+        with link = "line.pl.307" {
+            track(nk[:buk.ys, :bux]);
+        }
+    }
+}
+
+
+# PL 308.  Ogorzelec - Jelenia Góra
+with detail = 2 {
+    let oj = path("d2.pl.308");
+
+    with railway = :second :suspended {
+        with link = "point.pl.Ogorzelec" {
+            statdot(oj[:ogo]);
+            slabel(:right, oj[:ogo] + (0dt, 0.5dt),
+                hbox(:left:top, "Ogorzelec")
+            );
+        }
+
+        with link = "line.pl.308" {
+            track(oj[:ogo, :mys.yk]);
+            line_label(:left:n, oj[:ogo + 8.6km], "308");
+        }
+    }
+
+    with railway = :second :pax {
+        with link = "point.pl.Mysłakowice" {
+            track(:station, oj[:mys.yk, :mys]);
+            statdot(oj[:mys]);
+            slabel(:right, oj[:mys] + (1.5dt, 1.5dt), "Mysłakowice");
+        }
+
+        with link = "line.pl.308" {
+            track(oj[:mys, :jel.yk]);
+            line_label(:left:e, oj[:mys + 3.75km], "308");
+        }
+    }
+}
+
+
+# PL 309.  Kłodzko Nowe – Granica Państwa (Kudowa Słone)
+with detail = 2 {
+    let kk = path("d2.pl.309");
+
+    with railway = :second :pax {
+        with link = "line.pl.309" {
+            track(kk[:kln.yk, :kuz]);
+            line_label(:right:s, kk[:kln.yk + 7km], "309");
+        }
+
+        with link = "point.pl.Kudowa-Zdrój" {
+            statdot(kk[:kuz]);
+            slabel(:right, kk[:kuz] + (0.5dt, -1dt), "Kudowa Zdrój");
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.309" {
+            track(kk[:kuz, :kug]);
+            line_label(:right:s, kk[:kuz + 1.84km], "309");
+        }
+
+        with link = "point.int.Kudowa-Słone-Náchod" {
+            marker(:right :ref, kk[:kug]);
+            marker(:left :ref, kk[:kug]);
+        }
+    }
+}
+

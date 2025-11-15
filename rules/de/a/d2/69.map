@@ -2,27 +2,32 @@
 with detail = 2 {
     let sd = path("d2.de.6905");
 
-    with link = "line.de.6905" {
-        track(:second :removed, sd[:sal.yl, :luc]);
-        track(:second, sd[:luc, :dan.yl]);
-
-        guide(:linenum :removed,
-                sd[:sal.yl + 5km] >> 0.7dt
-            --  sd[:sal.yl + 5km] >> 3.0dt
-        );
-        label(:linenum :removed, sd[:sal.yl + 5km] >> 3.0dt,
-            hbox(:left:middle :badgesize, " 6905")
-        );
-        line_badge(:open, sd[:luc + 10km], "6905");
+    with railway = :second :removed {
+        with link = "line.de.6905" {
+            track(sd[:lux, :luc]);
+        }
     }
 
-    with link = "point.de.Lüchow" {
-        with layer = 1 marker(:statdot, sd[:luc]);
-        slabel(:left, sd[:luc] + (-1.8dt, 0.8dt), "Lüchow");
-    }
+    with railway = :second :nopax {
+        with link = "point.de.Lüchow" {
+            statdot(sd[:luc]);
+            slabel(:left, sd[:luc] + (-1.6dt, 0.5dt), "Lüchow");
+        }
+    
+        with link = "line.de.6905" {
+            track(sd[:luc, :daw.yu]);
+            line_label(:right:w, sd[:luc + 10km], (0dt, -0.2dt), "6905");
+        }
 
-    with link = "point.de.Dannenberg-West" {
-        with layer = 1 marker(:statdot, sd[:daw]);
+        with link = "point.de.Dannenberg-West" {
+            track(:station, sd[:daw.yu, :daw]);
+            statdot(sd[:daw]);
+            slabel(:left, sd[:daw] + (-1.5dt, 0.6dt), "West");
+        }
+    
+        with link = "line.de.6905" {
+            track(sd[:daw, :dan.yl]);
+        }
     }
 }
 
@@ -31,23 +36,28 @@ with detail = 2 {
 with detail = 2 {
     let ho = path("d2.de.a.6928");
 
-    with link = "line.de.6928" {
-        track(:second :removed, ho[:zar, :rat.yh]);
-        track(:second :removed, ho[:rat.yo, :old.yr]);
+    with railway = :second :removed {
+        with link = "line.de.6928" {
+            track(ho[:zar, :hol]);
+        }
 
-        guide(:linenum :removed,
-                ho[:rat.yh - 7km] >> 0.7dt
-            --  ho[:rat.yh - 7km] >> 3.0dt
-        );
-        label(:linenum :removed, ho[:rat.yh - 7km] >> 3.0dt + (0dt, -0.2dt),
-            hbox(:left:middle :badgesize, " 6928")
-        );
-        line_badge(:removed, ho[:rat.yo + 11.5km] @ 2.5 >> 0.1dt, "6928");
-    }
+        with link = "point.de.Hollenbek" {
+            track(:station, ho[:hol, :hol.ym]);
+            statdot(ho[:hol]);
+            slabel(:right, ho[:hol] + (1.3dt, 0dt), "Hollenbek");
+        }
 
-    with link = "point.de.Hollenbek" {
-        with layer = 1 marker(:statdot :removed, ho[:hol]);
-        slabel(:right :removed, ho[:hol] + (1.8dt, 0.3dt), "Hollenbek");
+        with link = "line.de.6928" {
+            track(ho[:hol.ym, :rat.yh]);
+            line_label(:right:sw, ho[:hol.ym + 3km], "6928");
+        }
+
+        with link = "line.de.6928" {
+            track(ho[:rat.yo, :old.yyr]);
+            line_label(:left:n, ho[:rat.yo + 13km], (-0.5dt, 0dt), "6928");
+
+            with layer = -1 track(ho[:old.yyr, :old.yr]);
+        }
     }
 }
 

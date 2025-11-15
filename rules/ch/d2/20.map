@@ -1,0 +1,81 @@
+# CH 200.  Renens VD Ouest - Vallorbe
+with detail = 2 {
+    let rv = path("d2.ch.200");
+
+    with link = "line.ch.200" {
+        track(:first :double :cat:ac15 :pax, rv[:ren.yy, :bus]);
+    }
+
+    with link = "point.ch.Bussigny" {
+        statdot(:cat:ac15 :pax, rv[:bus]);
+    }
+
+    with link = "line.ch.200" {
+        track(:first :double :cat:ac15 :pax, rv[:bus, :dai]);
+        line_label(:right:w :double :cat:ac15 :pax, rv[:bus + 4km], "200");
+    }
+
+    with link = "point.ch.Daillens" {
+        statdot(:cat:ac15, rv[:dai]);
+        slabel(:left :cat:ac15, rv[:dai] + (-1.5dt, 0dt), "Daillens");
+    }
+
+    with link = "line.ch.200" {
+        track(:first :double :cat:ac15 :pax, rv[:dai, :dai.yy]);
+        track(:first :double :cat:ac15 :pax, rv[:dai.yy, :day.yb]);
+        track(:first :double :cat:ac15 :pax, rv[:day.yb, :day]);
+
+        line_label(:left:e :double :cat:ac15 :pax, rv[:day - 10km], "200");
+    }
+
+    with link = "point.ch.Le-Day" {
+        statdot(:cat:ac15 :pax, rv[:day]);
+        slabel(:right :cat:ac15 :pax, rv[:day] + (0dt, -1.7km),
+            "Le Day"
+        );
+    }
+
+    with link = "line.ch.200" {
+        track(:first :double :cat:ac15 :pax, rv[:day, :val]);
+    }
+
+    with link = "point.ch.Vallorbe" {
+        statdot(:cat:ac15 :pax, rv[:val]);
+        slabel(:left :cat:ac15 :pax, rv[:val] + (-2.6km, 1.0dt), "Vallorbe");
+    }
+}
+
+
+# CH 201.  Le Day - Le Brassus
+with detail = 2 {
+    let db = path("d2.ch.201");
+
+    with link = "line.ch.201" {
+        track(:first :cat:ac15 :pax, db[:day.yb, :pon]);
+    }
+
+    with link = "point.ch.Le-Pont" {
+        statdot(:cat:ac15 :pax, db[:pon]);
+        slabel(:left :cat:ac15 :pax, db[:pon] + (-1.5dt, 0.3dt), "Le Pont");
+    }
+
+    with link = "line.ch.201" {
+        track(:first :cat:ac15 :pax, db[:pon, :bra]);
+
+        line_label(:right:se :cat:ac15 :pax, db[:pon + 7.5km], "201");
+    }
+
+    with link = "point.ch.Le-Brassus" {
+        statdot(:cat:ac15 :pax, db[:bra]);
+        slabel(:bottom :cat:ac15 :pax, db[:bra] + (0dt, 0.8dt), "Le Brassus");
+    }
+}
+
+
+# CH 203.  Vallorbe-Frontière - Vallorbe
+with detail = 2 {
+    with link = "line.ch.203" {
+        track(:first :cat:ac25 :pax, path("d2.ch.203")[:vaf, :val]);
+    }
+}
+

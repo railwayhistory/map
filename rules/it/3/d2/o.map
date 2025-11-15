@@ -1,0 +1,50 @@
+# IT OPC.  Prosecco - Opicina Campagna - Sesana
+with detail = 2 {
+    let to = path("d2.it.opc");
+
+    with link = "line.it.OPC" {
+        track(:first :double :removed, to[:prb, :opc]);
+    }
+
+    with link = "point.it.Opicina-Campagna" {
+        statdot(:removed, to[:opc]);
+    }
+
+    with link = "line.it.OPC" {
+        track(:first :double :removed, to[:opc, :opb]);
+    }
+}
+
+# IT OPD.  Ora – Predazzo
+with detail = 2 {
+    let op = path("d2.it.opd");
+
+    with link = "line.it.OPD" {
+        track(:first :narrow:g1000 :removed, op[:ora, :pre]);
+        line_label(:right:n :removed, op[:pre - 18.5km], "OPD");
+    }
+
+    with link = "point.it.Predazzo" {
+        statdot(:removed, op[:pre]);
+        slabel(:top :removed, op[:pre] + (0dt, -0.5dt), "Predazzo");
+    }
+}
+
+
+# IT OTV.  Ostiglia - Trevisio Porta Santi Quaranta
+with detail = 2 {
+    let ot = path("d2.it.otv");
+
+    with link = "line.it.OTV" {
+        track(:first :removed, ot[:ost.yt, :leg.yo]);
+        track(:first :removed, ot[:leg.yt, :gri.yo]);
+        track(:first :removed, ot[:gri.yt, :cam.yo]);
+        track(:first :removed, ot[:cam.yt, :tpq.yc]);
+
+        line_badge(:removed, ot[:ost.yt + 8.5km], "OTV");
+        line_badge(:removed, ot[:leg.yt + 20km], "OTV");
+        line_label(:right:n :removed, ot[:cam.yo - 6km], "OTV");
+        line_badge(:removed, ot[:tpq.yc - 8km], "OTV");
+    }
+}
+

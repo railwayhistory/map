@@ -36,21 +36,29 @@ with detail = 2 {
     let sl = path("simple.nl.sl");
 
     with link = "line.nl.SL" {
-        track(:first :double :cat:dc15 :pax, sl[:std.x, :hrl]);
-        with layer = 1 line_badge(:cat:dc15 :pax, sl[:std.x + 7.2km], "SL");
-
-        track(:first :cat:dc15 :pax, sl[:hrl, :krr]);
-        track(:first :cat:ac15 :pax, sl[:krr, :hang]);
+        track(:first :double :cat:dc15 :pax, sl[:std.x, :hrl.x]);
+        line_label(:left:sw :cat:dc15 :pax, sl[:std.x + 9.2km], "SL");
     }
 
     with link = "point.nl.Heerlen" {
-        with layer = 1 marker(:statdot :cat:dc15 :pax, sl[:hrl]);
+        track(:first:station :double :cat:dc15 :pax, sl[:hrl.x, :hrl]);
+        marker(:statdot :cat:dc15 :pax, sl[:hrl]);
         slabel(:bottom :cat:dc15 :pax, sl[:hrl] + (1dt, 1dt), "Heerlen");
     }
 
+    with link = "line.nl.SL" {
+        track(:first :double :cat:dc15 :pax, sl[:hrl, :lg]);
+    }
+
     with link = "point.nl.Landgraaf" {
-        with layer = 1 marker(:statdot :cat:dc15 :pax, sl[:lg]);
-        slabel(:top :cat:dc15 :pax, sl[:lg] - (0dt, 1.2dt), "Landgraaf");
+        track(:first:station :double :cat:dc15 :pax, sl[:lg, :lg.x]);
+        marker(:statdot :cat:dc15 :pax, sl[:lg]);
+        slabel(:top :cat:dc15 :pax, sl[:lg] - (0dt, 0.8dt), "Landgraaf");
+    }
+
+    with link = "line.nl.SL" {
+        track(:first :cat:dc15 :pax, sl[:lg.x, :krr]);
+        track(:first :cat:ac15 :pax, sl[:krr, :hang]);
     }
 
     with link = "point.int.Haanrade-Herzogenrath" {

@@ -1,0 +1,219 @@
+# PL 40.  Sokółka - Suwałki
+with detail = 2 {
+    let su = path("d2.pl.40");
+
+    with railway = :first :pax {
+        with link = "line.pl.40" {
+            track(su[:sok.ys, :kam.yl]);
+            line_label(:left:e, su[:sok.ys + 8km], "40");
+
+            track(su[:kam.yl, :kam]);
+        }
+
+        with link = "point.pl.Kamienna-Nowa" {
+            statdot(su[:kam]);
+            slabel(:left, su[:kam] + (-1.5dt, 1.0dt), "Kamienna Nowa");
+        }
+
+        with link = "line.pl.40" {
+            track(su[:kam, :lsu]);
+            line_label(:right:sw, su[:kam + 6.2km], "40");
+            line_label(:right:w, su[:lsu - 6km], "40");
+        }
+
+        with link = "point.pl.Las-Suwałki" {
+            statdot(:nopax, su[:lsu]);
+            slabel(:right, su[:lsu] + (1.5dt, 0.8dt), "Las Suwałki");
+        }
+
+        with link = "line.pl.40" {
+            track(su[:lsu, :lsu.yp]);
+            track(su[:lsu.yp, :suw.yo]);
+            track(su[:suw.yo, :suw.ym]);
+        }
+
+        with link = "point.pl.Suwałki" {
+            track(:station, su[:suw.ym, :suw]);
+            statdot(su[:suw]);
+            slabel(:left, su[:suw] + (-1.6dt, 0.7dt), "Suwałki");
+        }
+    }
+}
+
+
+# PL 41.  Ełk - Granica Państwa Gołdap
+with detail = 2 {
+    let eg = path("d2.pl.41");
+
+    with railway = :second {
+        with link = "line.pl.41" {
+            track(eg[:elk.yg, :leg.y]);
+            track(eg[:leg.y, :ole.ys]);
+            line_label(:right:nw, eg[:elk.yg + 12.8km], "41");
+        }
+
+        with link = "point.pl.Olecko" {
+            track(:station, eg[:ole.ys, :ole.yk]);
+            statdot(eg[:ole]);
+            slabel(:right, eg[:ole] + (1.5dt, 0.8dt), "Olecko");
+        }
+    }
+
+    with railway = :second :closed {
+        with link = "line.pl.41" {
+            track(eg[:ole.yk, :bot.yr]);
+            line_label(:right:sw, eg[:ole.yk + 6km], "41");
+            line_label(:right:w, eg[:bot.yr - 7km], "41");
+        }
+
+        with link = "point.pl.Botkuny" {
+            track(:station, eg[:bot.yr, :bot]);
+            statdot(eg[:bot]);
+            slabel(:right, eg[:bot] + (1dt, -0.8dt), "Botkuny");
+        }
+
+        with link = "line.pl.41" {
+            track(eg[:bot, :bot.yz]);
+            track(eg[:bot.yz, :gol.yz]);
+        }
+
+        with link = "point.pl.Gołdap" {
+            track(:station, eg[:gol.yz, :gol]);
+            statdot(eg[:gol]);
+            slabel(:bottom, eg[:gol] + (0dt, 1.3dt), "Gołdap");
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "point.pl.Gołdap" {
+            track(:station, eg[:gol, :gol.yw]);
+        }
+
+        with link = "line.pl.41" {
+            track(eg[:gol.yw, :gog]);
+            line_label(:left:ne, eg[:gog - 2km], "41");
+        }
+    }
+}
+
+
+# PL 43.  Czeremcha -  Granica Państwa (Czeremcha)
+with detail = 2 {
+    let cg = path("d2.pl.43");
+
+    with railway = :first {
+        with link = "line.pl.43" {
+            track(cg[:cze.yg, :czg]);
+            line_label(:left:w, cg[:cze.yg + 3km], "43");
+        }
+
+        with link = "point.int.Czeremcha-Высока-Літоўск" {
+            marker(:left :ref, cg[:czg]);
+            marker(:right :ref, cg[:czg]);
+        }
+    }
+}
+
+
+# PL 44.  Mikołajów - Regny
+with detail = 2 {
+    let mr = path("d2.pl.44");
+
+    with railway = :second {
+        with link = "line.pl.44" {
+            track(mr[:mik.yr, :reg]);
+        }
+
+        with link = "point.pl.Regny" {
+            statdot(mr[:reg]);
+            slabel(:right, mr[:reg] + (1.3dt, 1dt), "Regny");
+        }
+    }
+}
+
+
+# PL 47.  Warszawa Śródmieście WKD - Grodzisk Mazowiecki WKD
+with detail = 2 {
+    let wg = path("d2.pl.47");
+
+    with railway = :second :double :cat:dc30 :pax {
+        with link = "line.pl.47" {
+            track(wg[:ale.yg, :kom.yp]);
+            line_label(:left:n, wg[:ale.yg + 3km], (0.3dt, 0dt), "47");
+        }
+
+        with link = "point.pl.Komorów" {
+            track(:station, wg[:kom.yp, :kom]);
+            statdot(wg[:kom]);
+            slabel(:right, wg[:kom] + (1.5dt, 1.5dt), "Komorów");
+        }
+
+        with link = "line.pl.47" {
+            track(wg[:kom, :poz]);
+        }
+
+        with link = "point.pl.Podkowa-Leśna-Zachodnia" {
+            track(:station, wg[:poz, :poz.ym]);
+            statdot(wg[:poz]);
+            slabel(:right, wg[:poz] + (1dt, 0.5dt),
+                vbox(:left:top, "Podkowa Leśna", "Zachodnia")
+            );
+        }
+
+        with link = "line.pl.47" {
+            track(wg[:poz.ym, :grr]);
+            line_label(:left:n, wg[:grr - 2.3km], "47");
+        }
+
+        with link = "point.pl.Grodzisk-Mazowiecki-Radońska" {
+            statdot(wg[:grr]);
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.47" {
+            track(wg[:grr, :grw]);
+        }
+    }
+}
+
+
+# PL 48.  Podkowa Leśna Główna - Milanówek WKD
+with detail = 2 {
+    let pm = path("d2.pl.48");
+
+    with railway = :second :cat:dc30 :pax {
+        with link = "line.pl.48" {
+            track(pm[:poz.ym, :mig]);
+        }
+
+        with link = "point.pl.Milanówek-Grudów" {
+            statdot(pm[:mig]);
+        }
+    }
+
+    with railway = :second :removed {
+        with link = "line.pl.48" {
+            track(pm[:mig, :mil]);
+        }
+    }
+}
+
+
+# PL 49.  Śniadowo - Łomża
+with detail = 2 {
+    let sl = path("d2.pl.49");
+
+    with railway = :second {
+        with link = "line.pl.49" {
+            track(sl[:sni.yl, :lom]);
+            line_label(:left:e, sl[:sni.yl + 9.6km], "49");
+        }
+
+        with link = "point.pl.Łomża" {
+            statdot(sl[:lom]);
+            slabel(:right, sl[:lom] + (1.5dt, 0.8dt), "Łomża");
+        }
+    }
+}
+

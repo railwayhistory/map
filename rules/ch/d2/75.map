@@ -1,0 +1,133 @@
+# CH 750.  Zürich Oerlikon Nord - Dorfnest
+with detail = 2 {
+    let od = path("d2.ch.750");
+
+    with link = "line.ch.750" {
+        track(:first :double :cat:ac15 :pax, od[:opf.yf, :flu]);
+    }
+
+    with link = "point.ch.Zürich-Flughafen" {
+        statdot(:cat:ac15 :pax, od[:flu]);
+    }
+
+    with link = "line.ch.750" {
+        track(:first :double :cat:ac15 :pax, od[:flu, :dor.yf]);
+    }
+}
+
+
+# CH 751.  Zürich Langstrasse - Winterthur
+with detail = 2 {
+    let zw = path("d2.ch.751");
+
+    with link = "line.ch.751" {
+        track(:first :double :cat:ac15 :pax, zw[:lan, :zur.yl]);
+        track(:first :double :cat:ac15 :pax, zw[:zur.yl, :oer.yl]);
+    }
+
+    with link = "point.ch.Zürich-Oerlikon" {
+        track(:first:station :double :cat:ac15 :pax, zw[:oer.yl, :oer]);
+        statdot(:cat:ac15 :pax, zw[:oer]);
+    }
+
+    with link = "line.ch.751" {
+        track(:first :double :cat:ac15 :pax, zw[:oer, :wal]);
+    }
+
+    with link = "point.ch.Wallisellen" {
+        track(:first:station :double :cat:ac15 :pax, zw[:wal, :wao.y]);
+        statdot(:cat:ac15 :pax, zw[:wal]);
+    }
+
+    with link = "line.ch.751" {
+        track(:first :double :cat:ac15 :pax, zw[:wao.y, :die.ys]);
+    }
+
+    with link = "point.ch.Dietlikon" {
+        track(:first:station :double :cat:ac15 :pax, zw[:die.ys, :die]);
+        statdot(:cat:ac15 :pax, zw[:die]);
+    }
+
+    with link = "line.ch.751" {
+        track(:first :double :cat:ac15 :pax, zw[:die, :hur.yb]);
+        track(:first :double :cat:ac15 :pax, zw[:hur.yb, :eff]);
+    }
+
+    with link = "point.ch.Effretikon" {
+        track(:first:station :double :cat:ac15 :pax, zw[:eff, :eff.yw]);
+        statdot(:cat:ac15 :pax, zw[:eff]);
+        slabel(:right :cat:ac15 :pax, zw[:eff] + (2.0km, 0dt), "Effretikon");
+    }
+
+    with link = "line.ch.751" {
+        track(:first :double :cat:ac15 :pax, zw[:eff.yw, :win.yb]);
+        line_label(:left:e :double :cat:ac15 :pax, zw[:win.yb - 4km], "751");
+    }
+
+    with link = "point.ch.Winterthur" {
+        track(:first:station :double :cat:ac15 :pax, zw[:win.yb, :win.yw]);
+        statdot(:cat:ac15 :pax, zw[:win]);
+        slabel(:left :cat:ac15 :pax, zw[:win] + (-2.0km, 0.6km),
+            hbox(:right:top :bold, "Winterthur")
+        );
+    }
+}
+
+
+# CH 752.  Zürich Oerlikon Nord - Hürlistein (Abzw)
+with detail = 2 {
+    let oh = path("d2.ch.752");
+
+    with link = "line.ch.752" {
+        track(:first :double :cat:ac15 :pax, oh[:ops.yo, :opf.yf]);
+        with layer = 2 track(:first :double :cat:ac15 :pax, oh[:opf.yf, :rie]);
+        with layer = 2 track(:first :cat:ac15 :pax, oh[:rie, :klo]);
+        with layer = 2 track(:first :double :cat:ac15 :pax, oh[:klo, :dor.yf]);
+        with layer = 1 casing(:first :cat:ac15 :pax, oh[:rie, :klo + 1km]);
+        track(:first :double :cat:ac15 :pax, oh[:dor.yf, :hur.yb]);
+    }
+}
+
+
+# CH 753.  Effretikon - Hinwil
+with detail = 2 {
+    let eh = path("d2.ch.753");
+
+    with link = "line.ch.753" {
+        track(:first :cat:ac15 :pax, eh[:eff.yw, :wet.ye]);
+        track(:first :cat:ac15 :pax, eh[:wet.yh, :hin.yb]);
+
+        line_label(:left:s :cat:ac15 :pax, eh[:wet.ye - 9km], "  753");
+    }
+
+    with link = "point.ch.Hinwil" {
+        track(:first:station :cat:ac15 :pax, eh[:hin.yb, :hin]);
+        statdot(:cat:ac15 :pax, eh[:hin]);
+        slabel(:right :cat:ac15 :pax, eh[:hin] + (1.5dt, 1.0dt), "Hinwil");
+    }
+}
+
+
+# CH 754.  Winterthur Grüze - Rüti ZH
+with detail = 2 {
+    let wr = path("d2.ch.754");
+
+    with link = "line.ch.754" {
+        track(:first :cat:ac15 :pax, wr[:gru, :bau]);
+
+        line_label(:left:w :cat:ac15 :pax, wr[:bau - 8km], "754");
+    }
+
+    with link = "point.ch.Bauma" {
+        track(:first:station :cat:ac15 :pax, wr[:bau, :bau.yh]);
+        statdot(:cat:ac15 :pax, wr[:bau]);
+        slabel(:right :cat:ac15 :pax, wr[:bau] + (1.0dt, -0.6dt), "Bauma");
+    }
+
+    with link = "line.ch.754" {
+        track(:first :cat:ac15 :pax, wr[:bau.yh, :rut.yb]);
+
+        line_label(:left:w :cat:ac15 :pax, wr[:bau + 8.7km], "754");
+    }
+}
+

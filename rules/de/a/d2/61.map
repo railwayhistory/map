@@ -2,31 +2,78 @@
 with detail = 2 {
     let ba = path("d2.de.a.6100");
 
-    with link = "line.de.6100" {
-        track(:first :double :cat:ac15 :pax, ba[:gsah, :rot.yf]);
-        track(:first :cat:ac15 :pax, ba[:rot.yf, :anc]);
-        track(:first :double :cat:ac15 :pax, ba[:anc, :alt.yh]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6100" {
+            track(ba[:sax, :buc]);
+        }
 
-        with layer = 1 line_badge(:cat:ac15 :pax, ba[:swa + 7.0km], "6100");
+        with link = "point.de.Büchen" {
+            track(:station, ba[:buc, :buc.yl]);
+            statdot(ba[:buc]);
+            slabel(:right, ba[:buc] + (1.3dt, -0.3dt), "Büchen");
+        }
+
+        with link = "line.de.6100" {
+            track(ba[:buc.yl, :swa]);
+            line_label(:right:s, ba[:swa - 3.5km], "6100");
+        }
+
+        with link = "point.de.Schwarzenbek" {
+            track(:station, ba[:swa, :swa.yo]);
+            statdot(ba[:swa]);
+            slabel(:left, ba[:swa] + (2dt, 1dt),
+                hbox(:right:top, "Schwarzenbek")
+            );
+        }
+
+        with link = "line.de.6100" {
+            track(ba[:swa.yo, :ber]);
+            line_label(:left:ne, ba[:aum - 3km], "6100");
+        }
+
+        with link = "point.de.Hamburg-Bergedorf" {
+            track(:station, ba[:ber, :ber.yg]);
+            statdot(ba[:ber]);
+            with zoom = :high slabel(
+                :left, ba[:ber] + (0dt, 0.6km) + (0dt, 0.5dt),
+                hbox(:right:top, "H.-Bergedorf")
+            );
+        }
+
+        with link = "line.de.6100" {
+            with layer = -1 track(ba[:ber.yg, :rot.y]);
+        }
+
+        with link = "point.de.Hamburg-Rothenburgsort" {
+            track(:station, ba[:rot.y, :rot.yf]);
+            statdot(:nopax, ba[:rot]);
+        }
     }
 
-    with link = "point.de.Büchen" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ba[:buc]);
-        slabel(:right :cat:ac15 :pax, ba[:buc] + (1.5dt, -0.5dt), "Büchen");
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.de.6100" {
+            track(ba[:rot.yf, :anc]);
+        }
     }
 
-    with link = "point.de.Schwarzenbek" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ba[:swa]);
-        label(:cat:ac15 :pax, ba[:swa - 4dt] << 1.5dt,
-            hbox(:right:top :small, "Schwarzenbek")
-        );
-    }
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6100" {
+            track(ba[:anc, :ham.yo]);
+            track(ba[:ham.yo, :ham.yk]);
+        }
 
-    with link = "point.de.Hamburg-Bergedorf" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ba[:ber]);
-    }
+        with link = "point.de.Hamburg-Hbf" {
+            track(:station, ba[:ham.yk, :ham]);
+            statdot(ba[:ham]);
+            slabel(:left :large :bold, ba[:ham] + (-9km, 2km) + (-2dt, 1dt),
+                hbox(:right:top, "Hamburg")
+            );
+            with zoom = :high slabel(:top, ba[:ham] + (0.3km, -0.8km), "Hbf");
+        }
 
-    with link = "point.de.Hamburg-Hbf" {
-        with layer = 3 marker(:statdot:cat:ac15 :pax, ba[:ham]);
+        with link = "line.de.6100" {
+            track(:casing, ba[:ham, :rai]);
+            track(ba[:rai, :alt.yh]);
+        }
     }
 }

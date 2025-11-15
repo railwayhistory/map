@@ -1,0 +1,47 @@
+# PL 362.  Kobylin - Legnica Północna
+with detail = 2 {
+    let kl = path("d2.pl.d.362");
+
+    with railway = :second :removed {
+        with link = "line.pl.362" {
+            track(kl[:pix, :krz.yl]);
+            line_label(:left:n, kl[:krz.yl - 6.5km], (0.3dt, 0dt), "362");
+        }
+
+        with link = "point.pl.Krzelów" {
+            track(:station, kl[:krz.yl, :krz]);
+            statdot(kl[:krz]);
+            slabel(:right, kl[:krz] + (1.5dt, 1dt), "Krzelów");
+        }
+
+        with link = "line.pl.362" {
+            track(kl[:krz, :sci.yk]);
+        }
+
+        # point.pl.Ścinawa  pl.273
+
+        with link = "line.pl.362" {
+            track(kl[:sci, :pat]);
+            line_label(:left:w, kl[:sci + 15km], "362");
+        }
+    }
+
+    with railway = :second :nopax {
+        with link = "point.pl.Pątnów-Legnicki" {
+            statdot(kl[:pat]);
+            slabel(:right, kl[:pat] + (1.5dt, -0.5dt),
+                hbox(:left:top, "Pątnów Legnicki")
+            );
+        }
+
+        with link = "line.pl.362" {
+            track(kl[:pat, :lep - 3km]);
+            with layer = -1 track(kl[:lep - 3km, :lep]);
+        }
+
+        with link = "point.pl.Legnica-Północna" {
+            statdot(kl[:lep]);
+        }
+    }
+}
+

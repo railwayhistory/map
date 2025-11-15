@@ -1,0 +1,80 @@
+# PL WKB.  Werbkowice Wąskotorowe - Granica Państwa (Byków)
+with detail = 2 {
+    let wb = path("d2.pl.wkb");
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.WKB" {
+            track(wb[:wew, :las.yw]);
+            with zoom = :high line_label(:left:w, wb[:wew + 14.7km], "WKB");
+            track(wb[:las.yw, :las.yb]);
+            track(wb[:las.yb, :byk]);
+            with zoom = :high line_label(:left:sw, wb[:las.yb + 8.5km], "WKB");
+        }
+
+        with link = "point.pl.Byków" {
+            with zoom = :high {
+                statdot(wb[:byk]);
+                slabel(:left, wb[:byk] + (-1dt, -0.8dt), "Byków");
+            }
+        }
+
+        with link = "line.pl.WKB" {
+            track(wb[:byk, :byg]);
+        }
+
+        with link = "point.int.Byków-Угнів" {
+            marker(:right :ref, wb[:byg]);
+            marker(:left :ref, wb[:byg]);
+        }
+    }
+}
+
+
+# PL WSZ.  Werbkowice Wąskotorowe - Strzyżów Hrubieszowski
+with detail = 2 {
+    let ws = path("d2.pl.wsz");
+
+    with railway = :third :narrower:g750 :removed {
+        with link = "line.pl.WSZ" {
+            track(ws[:wew, :goz]);
+            with zoom = :high line_label(:left:se, ws[:wew + 1.1km], "WSZ");
+        }
+
+        with link = "point.pl.Gozdów" {
+            track(:station, ws[:goz, :goz.yw]);
+            with zoom = :high {
+                statdot(ws[:goz]);
+                slabel(:left, ws[:goz] + (-1.5dt, 0.3dt), "Gozdów");
+            }
+        }
+
+        with link = "line.pl.WSZ" {
+            track(ws[:goz.yw, :dzi]);
+            with zoom = :high line_label(:left:se, ws[:goz.yw + 5km], "WSZ");
+        }
+
+        with link = "point.pl.Dziekanów-Mijanka" {
+            with zoom = :high {
+                statdot(ws[:dzi]);
+                slabel(:left, ws[:dzi] + (-1.8dt, 0.3dt),
+                    vbox(:right:base, "Dziekanów  ", "Mijanka")
+                );
+            }
+        }
+
+        with link = "line.pl.WSZ" {
+            track(ws[:dzi, :str]);
+            with zoom = :high line_label(:right:n, ws[:dzi + 2.5km], "WSZ");
+        }
+
+        with link = "point.pl.Strzyżów-Hrubieszowski" {
+            with zoom = :high {
+                statdot(ws[:str]);
+                slabel(:right, ws[:str] + (1.5dt, 0.8dt),
+                    "Strzyżów Hrubieszowski"
+                );
+            }
+        }
+    }
+}
+
