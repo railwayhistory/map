@@ -90,6 +90,8 @@
   between Altshausen and Pfullendorf. ([#135])
 * Line _DE 9486_ only has full passenger service between Korntal and
   Heimerdingen and tourist service further to Weissach. ([#135])
+* Line _DE 5330_ has full passenger service between Wassertrüdingen and
+  Gunzenhausen. ([#135])
 
 [#135]: https://github.com/railwayhistory/map/pull/135
 
