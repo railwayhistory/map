@@ -695,14 +695,28 @@ with detail = 2 {
 with detail = 2 {
     let hb = path("d2.de.3571");
 
-    with link = "line.de.3571" {
-        track(:first :pax, hb[:hof.yb, :ben.yh]);
-        line_badge(:pax, hb[:lor - 4.2km], "3571");
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.de.3571" {
+            track(hb[:hof.yb, :bur]);
+        }
     }
 
-    with link = "point.de.Lorsch" {
-        with layer = 1 marker(:statdot :pax, hb[:lor]);
-        slabel(:left :pax, hb[:lor] + (1.0dt, -1.5dt), "Lorsch");
+    with railway = :first :pax {
+        with link = "line.de.3571" {
+            track(hb[:bur, :lor - 4km]);
+            line_label(:right:n, hb[:lor - 4km], "3571");
+            track(hb[:lor - 4km, :lor]);
+        }
+
+        with link = "point.de.Lorsch" {
+            track(hb[:lor, :lor.yh]);
+            statdot(hb[:lor]);
+            slabel(:left :pax, hb[:lor] + (1.0dt, -1.5dt), "Lorsch");
+        }
+
+        with link = "line.de.3571" {
+            track(hb[:lor.yh, :ben.yh]);
+        }
     }
 }
 
