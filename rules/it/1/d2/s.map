@@ -153,15 +153,18 @@ with detail = 2 {
 with detail = 2 {
     let sl = path("d2.it.svs");
 
-    with link = "line.it.SVS" {
-        track(:first, sl[:sav.ys, :sal.ya]);
-        line_badge(:open, sl[:sav.ys + 7km], "SVS");
-    }
+    with railway = :first :pax {
+        with link = "line.it.SVS" {
+            track(sl[:sav.ys, :sal.ya + 7km]);
+            line_label(:right:s, sl[:sav.ys + 7km], "SVS");
+            track(sl[:sav.ys + 7km, :sal.ya]);
+        }
 
-    with link = "point.it.Saluzzo" {
-        track(:first:station, sl[:sal.ya, :sal]);
-        statdot(:open, sl[:sal]);
-        slabel(:left, sl[:sal] + (-1.8dt, 2.0dt), "Saluzzo");
+        with link = "point.it.Saluzzo" {
+            track(sl[:sal.ya, :sal]);
+            statdot(sl[:sal]);
+            slabel(:left, sl[:sal] + (-1.5dt, 0.8dt), "Saluzzo");
+        }
     }
 }
 

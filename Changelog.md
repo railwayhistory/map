@@ -80,6 +80,39 @@
 
 ## Corrections
 
+### 2025-11-14
+
+* Line _DE 3571_ is now electrified between Hofheim and Bürstadt. ([#135])
+* Lines _DE 4551_ and _DE 4333_ only provide tourist passenger service
+  between Altshausen and Pfullendorf. ([#135])
+* Line _DE 4634_ has tourist service between Balingen and Schömberg.
+  ([#135]);
+* Line _DE 4561_ (Roßberg - Bad Wurzach) only has tourist passenger
+  service. ([#135])
+* Line _DE 5330_ has full passenger service between Wassertrüdingen and
+  Gunzenhausen. ([#135])
+* Line _DE 9390_ only has tourist service except for a bit that is used by
+  the Kassel tram and thus is electric. ([#135])
+* Line _DE 9486_ only has full passenger service between Korntal and
+  Heimerdingen and tourist service further to Weissach. ([#135])
+* Line _FR 247_ (Hautmont – Feignies frontière) and the final section of
+  line _BE 96_ from Quévy to the border have pax service again. ([#135])
+* Lines _IT CSL_ (Cuneo – Saluzzo) and _IT SVS_ (Savigliano – Saluzzo) have
+  passenger service since 2025-01-07. ([#135])
+* Line _PL 25_ now has pax service between Ostrowiec Świętokrzyski and
+  Sandomierz. ([#135])
+* Line _PL 38_ now has pax service between Ełk and Giżycko. ([#135])
+* Lines _PL 146_ and _PL 131_ between Chorzew Siemkowice and Zduńska Wola
+  including the south to west curve at Zduńska Wola now have pax service.
+  ([#135])
+* Line _PL 201_ does not have pax service between Lipowa Tucholska and
+  Kościerzyna. ([#135])
+* Lines _PL 308_ between Mysłakowice and Jelenia Góra and _PL 340_ are now
+  open and have pax service. ([#135])
+* Line _PL 357_ has pax service between Powodowo and Wolsztyn. ([#135])
+
+[#135]: https://github.com/railwayhistory/map/pull/135
+
 ### 2025-10-31
 
 * Added line SE FLN (Fjärås - Lygnern). ([#132])

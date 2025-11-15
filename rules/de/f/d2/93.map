@@ -175,16 +175,38 @@ with detail = 2 {
 with detail = 2 {
     let wn = path("d2.de.9390");
 
-    with link = "line.de.9390" {
-        track(:second :pax, wn[:wil.yn, :nau]);
-        line_badge(:pax, wn[:nau - 12km], "9390");
+    with railway = :second :tourist {
+        with link = "line.de.9390" {
+            track(wn[:wil.yn, :aba.ys]);
+        }
     }
-    
-    with link = "point.de.Naumburg-Kassel" {
-        with layer = 1 marker(:statdot :pax, wn[:nau]);
-        slabel(:left :pax, wn[:nau] + (1.0dt, -1.0dt),
-            vbox(:right:bottom, "Naumburg", span(:light, "(Bz Kassel)"))
-        );
+
+    with railway = :second :cat:dc6 :pax {
+        with link = "line.de.9390" {
+            track(wn[:aba.ys, :gri]);
+        }
+
+        with link = "point.de.Baunatal-Großenritte" {
+            statdot(wn[:gri])
+            with zoom = :high slabel(:bottom, wn[:gri] + (0dt, 0.8dt),
+                "B.-Großenritte"
+            );
+        }
+    }
+
+    with railway = :second :tourist {
+        with link = "line.de.9390" {
+            track(wn[:gri, :nau - 12km]);
+            line_label(:right:s, wn[:nau - 12km], (-1dt, 0dt), "9390");
+            track(wn[:nau - 12km, :nau]);
+        }
+        
+        with link = "point.de.Naumburg-Kassel" {
+            statdot(wn[:nau]);
+            slabel(:left, wn[:nau] + (1.0dt, -1.0dt),
+                vbox(:right:bottom, "Naumburg", span(:light, "(Bz Kassel)"))
+            );
+        }
     }
 }
 
