@@ -101,6 +101,7 @@
   passenger service since 2025-01-07. ([#135])
 * Line _PL 25_ now has pax service between Ostrowiec Świętokrzyski and
   Sandomierz. ([#135])
+* Line _PL 38_ now has pax service between Ełk and Giżycko. ([#135])
 * Lines _PL 146_ and _PL 131_ between Chorzew Siemkowice and Zduńska Wola
   including the south to west curve at Zduńska Wola now have pax service.
   ([#135])
