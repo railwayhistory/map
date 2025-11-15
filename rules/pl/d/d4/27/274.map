@@ -1,0 +1,56 @@
+# PL 274.  Wrocław Świebodzki – Granica Państwa (Zgorzelec)
+#
+let wz = path("d3.pl.274");
+
+with detail = 4,
+     railway = :first :pax
+{
+    # ...
+
+    with link = "point.pl.Mikułowa", railway = :station {
+        track(wz[:mik - 0.5sw, :mik.yb]);
+        marker(:left :de.bf, wz[:mik] << 0.5mt);
+        station(:top, wz[:mik] >> 0.5mt + (1dt, -1.3dt),
+            span(:bold, "Mikułowa"),
+            hbox(:center:top,
+                vbox(:right:top, "274: ", span(:removed, "290: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "191,", anchor(), "850"),
+                    hbox(:sep:base :removed, "0,", anchor(), "292")
+                )
+            )
+        );
+    }
+
+    with link = "line.pl.274" {
+        track(wz[:mik.yb, :stu.yl]);
+    }
+
+    with link = "point.pl.Studniska", railway = :station {
+        # PL 779
+        track(:nopax,
+                wz[:stu.yl, :stu + 160m - 1dl] << 1ms << 1mt
+            --  wz[:stu + 160m, :stu + 161m]
+        );
+
+        # PL 274
+        track(wz[:stu.yl, :stu + 210m]);
+
+        marker(:left :de.abzw, wz[:stu] << 1ms << 1.5mt);
+        station(:left,
+            wz[:stu] << 1ms << 1.5mt << 1sh + (-1.3dt, 1.1dt),
+            span(:small :bold, "Studniska"),
+            hbox(:center:top,
+                vbox(:right:top, "274: ", "779: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "192,", anchor(), "999"),
+                    hbox(:sep:base, "0,", anchor(), "171")
+                )
+            )
+        );
+    }
+
+    # ...
+}
+
+

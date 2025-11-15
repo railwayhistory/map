@@ -1,0 +1,64 @@
+# PL 344.  Wilka - Granica Państwa (Zawidów)
+#
+let wz = path("d3.pl.344");
+
+with detail = 4,
+     railway = :second :nopax 
+{
+    # point.pl.Wilka  pl.290
+
+    with link = "line.pl.290" {
+        track(wz[:wil, :wi2]);
+    }
+
+    with link = "point.pl.Wilka-2", railway = :station {
+        marker(:right :de.abzw :removed, wz[:wi2] >> 0.5mt);
+        station(:left:right_align :removed,
+            wz[:wi2] >> 0.5mt >> 1sh + (-1.3dt, 1.3dt),
+            span(:bold :small, "Wilka 2"),
+            hbox(:center:top,
+                vbox(:right:top, "780: ", "344: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "0,", anchor(), "000"),
+                    hbox(:sep:base, "0,", anchor(), "800")
+                )
+            )
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(wz[:wi2, :wi2 + 1km]);
+        line_label(:right:e, wz[:wi2 + 1km] >> 0.5mt, (0dt, 0.2dt), "344");
+        track(wz[:wi2 + 1km, :zaw - 0.5sw]);
+    }
+
+    with link = "point.pl.Zawidów", railway = :station {
+        track(wz[:zaw - 0.5sw, :zaw + 0.5sw]);
+        marker(:left :de.gbf, wz[:zaw] << 0.5mt);
+        station(:right, wz[:zaw] << 0.5mt << 1sh + (1.8dt, 0.6dt),
+            "Zawidów", "344: 2,812"
+        );
+    }
+
+    with link = "line.pl.344" {
+        track(wz[:zaw + 0.5sw, :zwg - 0.3sw]);
+    }
+
+    with link = "point.int.Černousy-Zawidów", railway = :station {
+        track(wz[:zwg - 0.3sw, :zwg + 0.3sw]);
+        marker(:right :de.dirgr, wz[:zwg] >> 0.5mt);
+        marker(:left :de.dirgr, wz[:zwg] << 0.5mt);
+        label(wz[:zwg] << 0.5mt << 1.3sh,
+            hbox(:left:middle :xsmall,
+                vbox(:left:middle, " PL ", hrule(), " CZ "),
+                vbox(:right:middle, "344: ", hrule(), "500: "),
+                vbox(:sep:middle,
+                    hbox(:sep:base, "4,", anchor(), "918"),
+                    hrule(),
+                    hbox(:sep:base, "??", anchor(), "")
+                )
+            )
+        );
+    }
+}
+

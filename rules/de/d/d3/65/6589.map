@@ -1,34 +1,62 @@
 # DE 6589.  Zittau - Hagenwerder
 #
-let zh = path("d4.de.6589");
+let zg = path("d3.de.6589.1");
+let gh = path("d3.de.6589.2");
 
-with detail = 3 {
+with detail = 3,
+     railway = :second :pax
+{
     # point.de.Zittau: de.6214
 
     with link = "line.de.6589" {
-        track(:second :pax :flip, zh[:zit.ah + 3.7km, :zit.ah]);
-        line_badge(:pax, zh[:zit.ah + 3.7km], "6589");
-        track(:second :pax, zh[:zit.ah + 3.7km, :hig - 0.5sw]);
+        track(zg[:zit.yh, :dra - 1km]);
+        line_label(:left:se, zg[:dra - 1km] << 0.5mt, "6589");
+        track(zg[:dra - 1km, :dra - 0.5sw]);
     }
 
-    with link = "point.de.Hirschfelde" {
-        marker(:left :de.bf :removed, zh[:hib]);
-        marker(:left :de.hp :pax, zh[:hir]);
-        slabel(:left :pax, zh[:hir - 0.3km - 0.4sw] << 1.3sw, "Hirschfelde");
-    }
-
-    with link = "point.int.Hirschfelde-Trzciniec-Zgorzelecki" {
-        track(:second:station :pax, zh[:hig - 0.5sw, :hig + 0.5sw]);
-        marker(:left :de.dirgr :pax, zh[:hig]);
-    }
-
-    with link = "point.int.Rosenthal-Trzciniec-Zgorzelecki" {
-        track(:second :pax, zh[:rg1 - 0.5sw, :rg1 + 0.5sw]);
-        marker(:left :de.dirgr :pax, zh[:rg1]);
+    with link = "point.de.Drausendorf", railway = :station {
+        track(zg[:dra - 0.5sw, :dra + 0.5sw]);
+        marker(:right :de.hp :removed, zg[:dra] >> 0.5mt);
+        slabel(:right :removed, zg[:dra] >> 0.5mt >> 1sh + (1.3dt, 1.5dt),
+            "Drausendorf"
+        );
     }
 
     with link = "line.de.6589" {
-        track(:second :pax :flip, zh[:rg1 + 0.5sw, :rg2 - 0.5sw]);
+        track(zg[:dra + 0.5sw, :hib - 0.3sw]);
+    }
+
+    with link = "point.de.Hirschfelde", railway = :station {
+        track(zg[:hib - 0.5sw, :hir + 0.5sw]);
+        marker(:left :de.bf :removed, zg[:hib] << 0.5mt);
+        marker(:left :de.hp, zg[:hir] << 0.5mt);
+        slabel(:left, zg[:hir - 0.3km - 0.4sw] << 1.3sh, "Hirschfelde");
+    }
+
+    with link = "line.de.6589" {
+        track(zg[:hir + 0.5sw, :hig - 0.3sw]);
+    }
+
+    with link = "point.int.Hirschfelde-Trzciniec-Zgorzelecki",
+         railway = :station
+    {
+        track(zg[:hig - 0.3sw, :hig + 0.3sw]);
+        marker(:left :de.dirgr :pax, zg[:hig] << 0.5mt);
+    }
+}
+
+with detail = 3,
+     railway = :second :pax
+{
+    with link = "point.int.Hagenwerder-Ręczyn", railway = :station {
+        track(gh[:gha - 0.3sw, :gha + 0.3sw]);
+        marker(:left :de.dirgr, gh[:gha] << 0.5mt);
+    }
+
+    with link = "line.de.6589" {
+        track(gh[:gha + 0.3sw, :gha + 1.3km]);
+        line_label(:left:e, gh[:gha + 1.3km] << 0.5mt, "6589");
+        track(gh[:gha + 1.3km, :hag.yz]);
     }
 }
 
