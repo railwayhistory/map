@@ -113,14 +113,101 @@ with detail = 2 {
 }
 
 
+# DK NRF.  Nyborg - Ringe - Faaborg
+with detail = 2 {
+    let nf = path("d2.dk.nrf");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.NRF" {
+            track(nf[:nyb.yr, :nyb.yr + 11.5km]);
+            line_label(:right:se, nf[:nyb.yr + 11.5km], "NRF");
+            track(nf[:nyb.yr + 11.5km, :rin.yn]);
+        }
+
+        # point.dk.Ringe  dk.OSB
+
+        with link = "line.dk.NRF" {
+            track(nf[:rin.yf, :rin.yf + 8.4km]);
+            line_label(:right:s, nf[:rin.yf + 8.4km], (-0.5dt, 0dt), "NRF");
+            track(nf[:rin.yf + 8.4km, :kor]);
+        }
+    }
+
+    with railway = :first :museum {
+        with link = "point.dk.Korinth" {
+            statdot(nf[:kor]);
+            slabel(:right, nf[:kor] + (1.5dt, 0.8dt), "Korinth");
+        }
+
+        with link = "line.dk.NRF" {
+            track(nf[:kor, :kor + 3.5km]);
+            line_label(:left:w, nf[:kor + 3.5km], "NRF");
+            track(nf[:kor + 3.5km, :kat.ys]);
+        }
+
+        with link = "point.dk.Katterød" {
+            track(nf[:kat.ys, :kat]);
+            statdot(nf[:kat]);
+            slabel(:nw, nf[:kat] + (-2dt, 0.9dt), "Katterød");
+        }
+
+        with link = "line.dk.NRF" {
+            track(nf[:kat, :kat + 2km]);
+            line_label(:right:s, nf[:kat + 2km], (0.2dt, 0dt), "NRF");
+            track(nf[:kat + 2km, :faa]);
+        }
+
+        with link = "point.dk.Faaborg" {
+            statdot(nf[:faa]);
+            slabel(:ne, nf[:faa] + (-0.3dt, 0.5dt), "Faaborg");
+        }
+    }
+}
+
+
 # DK NRY.  Nakskov - Rødby
 with detail = 2 {
     let nr = path("d2.dk.nry");
 
     with railway = :first :pax :removed {
-        track(nr[:nak.yr, :rod.yn - 15km]);
-        line_label(:right:n, nr[:rod.yn - 15km], "NRY");
-        track(nr[:rod.yn - 15km, :rod.yn]);
+        with link = "line.dk.NRY" {
+            track(nr[:nak.yr, :rod.yn - 15km]);
+            line_label(:right:n, nr[:rod.yn - 15km], "NRY");
+            track(nr[:rod.yn - 15km, :rod.yn]);
+        }
+    }
+}
+
+
+# DK NSH.  Nyborg - Slipshavn
+with detail = 2 {
+    let ns = path("d2.dk.nsh");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.NSH" {
+            track(ns[:nyf.ys, :sli]);
+        }
+
+        with link = "point.dk.Slipshavn" {
+            statdot(ns[:sli]);
+            slabel(:bottom, ns[:sli] + (0dt, 1dt), "Slipshavn");
+        }
+    }
+}
+
+
+# DK NYB.  Nyborg Færge - Nyborg
+with detail = 2 {
+    let nn = path("d2.dk.nyb");
+
+    with railway = :first :double :pax :removed {
+        with link = "point.dk.Nyborg-Færge" {
+            statdot(nn[:nyf]);
+        }
+
+        with link = "line.dk.NYB" {
+            track(nn[:nyf, :nyb.yn]);
+        }
     }
 }
 

@@ -422,20 +422,21 @@ with detail = 3,
 
     with link = "line.dk.KFA" {
         track(kf[:spr + 0.5sw, :nyb - 5km]);
-        line_label(:left:n, kf[:nyb - 5km] << 0.5md, (0.8dt, 0dt), "KFA");
+        line_label(:right:s, kf[:nyb - 5km] >> 0.5md, (-0.8dt, 0dt), "KFA");
         track(kf[:nyb - 5km, :nyb - 0.5sw]);
     }
 
     with link = "point.dk.Nyborg", railway = :station {
         track(kf[:nyb - 0.5sw, :nyb + 0.5sw]);
         marker(:left :de.bf, kf[:nyb] << 0.5md);
-        slabel(:right, kf[:nyb - 0.5sw] >> 1md, "Nyborg");
+        slabel(:right :bold, kf[:nyb - 0.5sw] >> 1md, "Nyborg");
     }
 
     with link = "line.dk.KFA" {
-        track(kf[:nyb + 0.5sw, :nyb.yn]);
-        track(kf[:nyb.yn, :nyb.yr]);
-        track(kf[:nyb.yr, :hju - 2km]);
+        track(:lor, kf[:nyb + 0.5sw, :nyb.yn]);
+        track(:lor, kf[:nyb.yn, :nyb.yr]);
+        track(:lor, kf[:nyb.yr, :nyb.yr + 300m]);
+        track(kf[:nyb.yr + 300m, :hju - 2km]);
         line_label(:right:sw, kf[:hju - 2km] >> 0.5md, "KFA");
         track(kf[:hju - 2km, :hju - 0.5sw]);
     }
@@ -491,24 +492,46 @@ with detail = 3,
     with link = "line.dk.KFA" {
         track(kf[:mar + 0.5sw, :ode - 3.5km]);
         line_label(:right:sw, kf[:ode - 3.5km] >> 0.5md, "KFA");
-        track(kf[:ode - 3.5km, :ode - 320m]);
+        track(kf[:ode - 3.5km, :ode.xm]);
+        track(:ror, kf[:ode.xm, :ode.ym]);
     }
 
     with link = "point.dk.Odense", railway = :station {
-        track(kf[:ode - 320m, :ode.yb]);
-        track(:single,
-                kf[:ode - 320m, :ode - 319m] >> 0.5md << 0.5mt
-            --  kf[:ode - 320m + 1dl, :ode.yb] >> 0.5md >> 1ms >> 0.5mt
+        # DK KFA
+        track(kf[:ode.ym, :ode.yb]);
+
+        # DK OKM - DK OSB
+        track(:single :removed,
+                kf[:ode.ym, :ode - 0.5sw - 2dl] >> 0.5md >> 1ms >> 0.5mt
         );
+        track(:single,
+                kf[:ode - 0.5sw - 3.1dl, :ode - 0.5sw - 3dl] >> 0.5md << 0.5mt
+            --  kf[:ode - 0.5sw - 2dl, :ode.yb] >> 0.5md >> 1ms >> 0.5mt
+        );
+
+        # DK OMF
+        track(:single :removed,
+                kf[:ode - 0.5sw - 1dl, :ode.yb - 1mt] >> 0.5md >> 2ms >> 1.5mt
+        );
+
+        # DK OBO
+        track(:single :removed,
+                kf[:ode - 0.5sw - 2.1dl, :ode - 0.5sw - 2dl]
+                    >> 0.5md >> 1ms >> 0.5mt
+            --  kf[:ode - 1.1mt, :ode.yb - 1mt] >> 0.5md >> 3ms >> 2.5mt
+        );
+
         marker(:left :de.bf :cat:ac25 :pax, kf[:ode] << 0.5md);
-        slabel(:bottom :medium:bold, kf[:ode] << 0.5md << 1.1sh + (1sw, 0dt),
+        slabel(:top :medium:bold,
+            kf[:ode] >> 0.5md >> 3ms >> 2.5mt + (0dt, -0.8dt),
             "Odense"
         );
     }
 
     with link = "line.dk.KFA" {
         track(:ror, kf[:ode.yb, :ode.ys]);
-        track(:casing, kf[:ode.ys, :hol - 2km]);
+        track(:ror :casing, kf[:ode.ys, :ode.ys + 800m]);
+        track(kf[:ode.ys + 800m, :hol - 2km]);
         line_label(:left:nw, kf[:hol - 2km] << 0.5dt, "KFA");
         track(kf[:hol - 2km, :hol - 0.5sw]);
     }
@@ -537,6 +560,7 @@ with detail = 3,
 
     with link = "point.dk.Tommerup", railway = :station {
         track(kf[:tom.ya - 1dl, :tom + 350m]);
+
         track(:single :nopax,
                 kf[:tom.ya - 1.1dl, :tom.ya - 1dl] << 0.5md >> 0.5mt
             --  kf[:tom.ya, :tom + 350m - 1dl] << 0.5md << 1ms << 0.5mt
@@ -627,7 +651,8 @@ with detail = 3,
     with link = "line.dk.KFA" {
         track(kf[:kau + 0.5sw, :mid - 2.8km]);
         line_label(:left:ne, kf[:mid - 2.8km] << 0.5md, "KFA");
-        track(kf[:mid - 2.8km, :mid.yb]);
+        track(kf[:mid - 2.8km, :mis]);
+        track(:ror, kf[:mis, :mid.yb]);
     }
 
     with link = "point.dk.Middelfart", railway = :station {
@@ -641,7 +666,8 @@ with detail = 3,
         );
         track(kf[:mid.yb, :mid + 460m]);
         marker(:right :de.bf, kf[:mid] >> 0.5md >> 1ms >> 0.5mt);
-        slabel(:top :bold, kf[:mid] >> 0.5md >> 1ms >> 0.5mt >> 1.1sh,
+        slabel(:left :bold,
+            kf[:mid] >> 0.5md >> 1ms >> 0.5mt >> 1sh + (4dt, -1dt),
             "Middelfart"
         );
     }

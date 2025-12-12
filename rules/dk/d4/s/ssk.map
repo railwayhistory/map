@@ -1,0 +1,34 @@
+# DK SSK.  Svendstrup - Korsør Færge
+#
+let sk = path("d3.dk.ssk");
+
+with detail = 4,
+     railway = :first :double :pax :removed
+{
+    # point.dk.Svendstrup  dk.KFA
+
+    with link = "line.dk.SSK" {
+        track(sk[:sve.yk, :sve.yk + 1.8km]);
+        line_label(:left:w, sk[:sve.yk + 1.8km] << 0.5mo << 0.5mt,
+            (0dt, 0.1dt), "SSK"
+        );
+        track(sk[:sve.yk + 1.8km, :kor.yh - 0.5seg]);
+    }
+
+    with link = "point.dk.Korsør-Færge", railway = :station {
+        track(sk[:kor.yh - 0.5seg, :kor]);
+        marker(:left :de.bf, sk[:kor - 0.5sw] << 0.5mo << 0.5mt);
+        station(:right,
+            sk[:kor - 0.5sw] << 0.5mo << 0.5mt << 1sh + (1.5dt, 1.8dt),
+            span(:bold, "Korsør"),
+            hbox(:center:top,
+                vbox(:right:top, "KHS: ", "SSK: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "??", anchor()),
+                    hbox(:sep:base, "??", anchor())
+                )
+            )
+        );
+    }
+}
+
