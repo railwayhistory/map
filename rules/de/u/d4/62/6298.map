@@ -1,62 +1,60 @@
 # DE 6298.  Neudietendorf - Ritschenhausen
 #
-let nr = path("d4.de.6298");
+let nr = path("d3.de.6298");
 
-with detail = [4, 5] {
+with detail = 4,
+     railway = :first :excat:ac15 :pax
+{
     # point.de.Neudietendorf: de.6340
 
-    with link = "point.de.Neudietendorf-Ds" {
+    with link = "point.de.Neudietendorf-Ds", railway = :station {
         # Gl. 3
-        track(:first:station :pax,
-                nr[:ndi.yw, :ndi.fa] >> 0.5dt
-        );
+        track(nr[:ndi.yw, :ndi.fa] >> 0.5mo);
             # W61 - W62
-            track(:station,
-                    nr[:ndi.yw + 200m] >> 0.5dt
-                --  nr[:ndi.yw + 280m] << 0.5dt
+            track(:side :nopax,
+                    nr[:ndi.yw + 200m] >> 0.5mo
+                --  nr[:ndi.yw + 280m] << 0.5mo
             );
             # Anschl.
-            track(:station :removed,
-                    nr[:ndi.yf + 70m] >> 0.5dt
-                --  nr[:ndi.yf + 150m] >> 2.0dt
+            track(:side :nopax :removed,
+                    nr[:ndi.yf + 70m] >> 0.5mo
+                --  nr[:ndi.yf + 150m] >> 2.0mo
             );
 
         # Gl. 4
-        track(:first:station :pax,
-                nr[:ndi.yw, :ndi.fa] << 0.5dt
-        );
+        track(nr[:ndi.yw, :ndi.fa] << 0.5mo);
             # W61 - W62
-            track(:station,
-                    nr[:ndi.yw + 320m] << 0.5dt
-                --  nr[:ndi.yw + 400m] >> 0.5dt
+            track(:side :nopax,
+                    nr[:ndi.yw + 320m] << 0.5mo
+                --  nr[:ndi.yw + 400m] >> 0.5mo
             );
 
         # Anschl. Lager
-        track(:station :closed,
-                nr[:ndi.yf + 70m, :ndi.yf + 600m] >> 2.0dt
+        track(:side :nopax :closed,
+                nr[:ndi.yf + 70m, :ndi.yf + 600m] >> 2.0mo
         );
-        track(:station :closed,
-                nr[:ndi.yf + 149m, :ndi.yf + 150m] >> 2.0dt
-            --  nr[:ndi.yf + 220m, :ndi.yf + 400m] >> 3.0dt
+        track(:side :nopax :closed,
+                nr[:ndi.yf + 149m, :ndi.yf + 150m] >> 2.0mo
+            --  nr[:ndi.yf + 220m, :ndi.yf + 400m] >> 3.0mo
         );
-        track(:station :closed,
-                nr[:ndi.yf + 200m, :ndi.yf + 300m] >> 5.0dt
-            --  nr[:ndi.yf + 450m, :ndi.yf + 451m] >> 2.0dt
+        track(:side :nopax :closed,
+                nr[:ndi.yf + 200m, :ndi.yf + 300m] >> 5.0mo
+            --  nr[:ndi.yf + 450m, :ndi.yf + 451m] >> 2.0mo
         );
 
         # Str. 6730
-        track(:station :removed,
-                nr[:ndi.yw] >> 1.5dt
-            --  nr[:ndi.yw + 60m] >> 0.5dt
+        track(:side :nopax :removed,
+                nr[:ndi.yw] >> 1.5mo
+            --  nr[:ndi.yw + 60m] >> 0.5mo
         );
 
-        marker(:left :de.bft :removed, nr[:ndi.yw + 130m] << 0.5dt);
+        marker(:left :de.bft :removed, nr[:ndi.yw + 130m] << 0.5mo);
         with layer = -1 marker(:left :de.bft.casing :removed,
-            nr[:ndi.yw + 130m] << 0.5dt
+            nr[:ndi.yw + 130m] << 0.5mo
         );
         station(:right:left_align :removed,
-            nr[:ndi.yw + 130m - 0.5sw] << 0.5dt << 2.1sw,
-            hbox(:left:top, "N. Ds"),
+            nr[:ndi.yw + 130m] + (0.3km, 0dt) + (2dt, 0dt),
+            "N. Ds",
             hbox(:left:top,
                 vbox(:right:top, "6370: ", "6298: "),
                 vbox(:right:top, "??", "??")
@@ -65,567 +63,658 @@ with detail = [4, 5] {
     }
 
     with link = "line.de.6298" {
-        let nd = path("d4.de.6298.nd");
+        let nd = path("d3.de.6298.nd");
 
-        with layer = -2 track(:first:station :double :removed,
-                nd[:ndi.ya - 0.1dl, :ndi.ya] << 1dt
+        with layer = -1 track(:station :double :removed,
+                nd[:ndi.ya - 0.1dl, :ndi.ya] << 1mo
             ..  nd[:ndi.yya, :ndi.yf]
         );
-
-        track(:first :double :excat:ac15 :pax,
-                nr[:ndi.fa, :sul - 210m]
-        );
     }
-
-
-    with link = "point.de.Sülzenbrücken" {
-        track(:first:station :double :pax, nr[:sul - 210m, :sul + 200m]);
-
-        platform(:pax,
-                nr[:sul - 155m, :sul - 20m] >> 0.5dt
-            --  nr[:sul - 20m, :sul - 155m] << 1.2dt
-        );
-        platform(:pax,
-                nr[:sul + 10m, :sul + 145m] << 0.5dt
-            --  nr[:sul + 145m, :sul + 10m] >> 1.2dt
-        );
-
-        marker(:right :de.hp :pax, nr[:sul] >> 0.5dt);
-        station(:left :pax, nr[:sul + 0.4sw] >> 0.5dt >> 1.4sw,
-            "Sülzenbrücken", "3,38"
-        );
-    }
-
 
     with link = "line.de.6298" {
-        track(:first :double :excat:ac15 :pax,
-                nr[:sul + 1.1km, :sul + 200m]
+        track(:double, nr[:ndi.fa, :sul - 160m]);
+    }
+
+    with link = "point.de.Sülzenbrücken", railway = :station {
+        track(:double :pax, nr[:sul - 160m, :sul + 150m]);
+
+        platform(:pax,
+                nr[:sul - 155m, :sul - 20m] >> 0.5mo >> 0.5mt
+            --  nr[:sul - 20m, :sul - 155m] << 1.3mo
         );
-        line_badge(:pax, nr[:sul + 1.1km], "6298");
-        track(:first :double :excat:ac15 :pax,
-                nr[:sul + 1.1km, :haa - 230m]
+        platform(:pax,
+                nr[:sul + 10m, :sul + 145m] << 0.5mo << 0.5mt
+            --  nr[:sul + 145m, :sul + 10m] >> 1.3mo
+        );
+
+        marker(:right :de.hp, nr[:sul] >> 1.3mo);
+        station(:left, nr[:sul] >> 1.3mo >> 1sh + (-1.3dt, 1.6dt),
+            "Sülzenbrücken",
+            hbox(:center:base, "6298: 3,384", span(:removed, " ← 3,40"))
         );
     }
 
+    with link = "line.de.6298" {
+        track(:double, nr[:sul + 150m, :sul + 1.2km]);
+        line_label(:right:e, nr[:sul + 1.2km] >> 0.5mo >> 0.5mt, "6298");
+        track(:double, nr[:sul + 1.2km, :haa - 180m]);
+    }
 
     with link = "point.de.Haarhausen" {
-        track(:first:station :double :pax, nr[:haa - 230m, :haa + 230m]);
+        track(:first:station :double :pax, nr[:haa - 180m, :haa + 180m]);
 
-        platform(:pax,
-                nr[:haa - 180m, :haa - 40m] >> 0.5dt
-            --  nr[:haa - 40m, :haa - 180m] << 1.2dt
+        platform(
+                nr[:haa - 180m, :haa - 40m] >> 0.5mo >> 0.5mt
+            --  nr[:haa - 40m, :haa - 180m] << 1.3mo
         );
+
         platform(:removed,
-                nr[:haa - 180m, :haa - 40m] << 0.5dt
-            --  nr[:haa - 40m, :haa - 180m] >> 1.2dt
+                nr[:haa - 180m, :haa - 40m] << 0.5mo << 0.5mt
+            --  nr[:haa - 40m, :haa - 180m] >> 1.3mo
         );
         platform(:pax,
-                nr[:haa + 40m, :haa + 180m] << 0.5dt
-            --  nr[:haa + 180m, :haa + 40m] >> 1.2dt
+                nr[:haa + 40m, :haa + 180m] << 0.5mo << 0.5mt
+            --  nr[:haa + 180m, :haa + 40m] >> 1.3mo
         );
 
-        marker(:right :de.hp :pax, nr[:haa] >> 0.5dt);
-        marker(:right :de.bf :removed, nr[:haa - 20m] >> 0.5dt);
-        station(:left :pax, nr[:haa + 0.3sw] >> 0.5dt >> 1.6sw,
+        marker(:right :de.hp :pax, nr[:haa] >> 1.3mo);
+        marker(:right :de.exbf :pax, nr[:haa] >> 1.3mo);
+        station(:left:right_align,
+            nr[:haa] >> 1.3mo >> 1.5sh + (-1.3dt, 1.6dt),
             "Haarhausen",
-            hbox(:center:base, span(:removed, "5,69 → "), "5,71")
+            hbox(:center:base, "6298: ", span(:removed, "5,69 → "), "5,712")
         );
     }
-
 
     with link = "line.de.6298" {
         track(:first :double :excat:ac15 :pax, nr[:haa + 230m, :arn.a]);
     }
 
+    with link = "point.de.Arnstadt-Hbf", railway = :station {
+        let ai = path("d3.de.6733");
+        let as = path("d3.de.6299");
+        let ar = path("d3.de.6298.ar");
 
-    with link = "point.de.Arnstadt-Hbf" {
-        let ai = path("d4.de.6733");
-        let as = path("d4.de.6299");
-        let ar = path("d4.de.6298.ar");
-
-        # Gl. 1
-        track(:first:station :excat:ac15 :pax, nr[:arn.a, :arn.fp] >> 0.5dt);
+        # Gl. 1 (DE 6298 up)
+        track(nr[:arn.a, :arn.fp] >> 0.5mo);
             # W1 - W2
-            track(:station,
-                    nr[:arn - 850m] >> 0.5dt
-                --  nr[:arn - 770m] << 0.5dt
+            track(:side :nopax,
+                    nr[:arn - 850m] >> 0.5mo
+                --  nr[:arn - 770m] << 0.5mo
             );
             # W10 - W11
-            track(:station,
-                    nr[:arn + 100m] >> 0.5dt
-                --  nr[:arn + 190m] << 0.5dt
+            track(:side,
+                    nr[:arn + 100m] >> 0.5mo
+                --  nr[:arn + 190m] << 0.5mo
             );
 
-        # Gl. 2
-        track(:first:station :excat:ac15 :pax, nr[:arn.a, :arn.fp] << 0.5dt);
+        # Gl. 2 (DE 6298 dn)
+        track(nr[:arn.a, :arn.fp] << 0.5mo);
             # W13 - W14
-            track(:station,
-                    nr[:arn + 200m] << 0.5dt
-                --  nr[:arn + 290m] << 1.5dt
+            track(:side,
+                    nr[:arn + 200m] << 0.5mo
+                --  nr[:arn + 290m] << 1.5mo
             );
             # W17 - W18
-            track(:station,
-                    nr[:arn + 630m] << 0.5dt
-                --  nr[:arn + 720m] >> 0.5dt
+            track(:side :nopax,
+                    nr[:arn + 630m] << 0.5mo
+                --  nr[:arn + 720m] >> 0.5mo
             );
 
-        # Gl. 6
-        track(:first:station :excat:ac15 :pax,
-                nr[:arn - 651m, :arn - 650m] << 0.5dt
-            --  nr[:arn - 570m, :arn.ys + 350m] << 1.5dt
+        # Gl. 6 (DE 6299)
+        track(
+                nr[:arn - 651m, :arn - 650m] << 0.5mo
+            --  nr[:arn - 570m, :arn.ys + 350m] << 1.5mo
             ..  as[:arn.fr - 0.1dl, :arn.fr]
         );
             # W15 - W16
-            track(:station,
-                    nr[:arn + 320m] << 1.5dt
-                --  nr[:arn + 410m] << 0.5dt
+            track(:side :nopax,
+                    nr[:arn + 320m] << 1.5mo
+                --  nr[:arn + 410m] << 0.5mo
             );
 
         # Gl. 7
-        track(:station,
-                nr[:arn - 511m, :arn - 510m] << 1.5dt
-            --  nr[:arn - 440m, :arn + 130m - 0.7dl] << 2.5dt
-            --  nr[:arn + 200m - 0.7dl, :arn + 201m - 0.7dl] << 1.5dt
+        track(:side :nopax,
+                nr[:arn - 511m, :arn - 510m] << 1.5mo
+            --  nr[:arn - 440m, :arn + 130m - 0.7dl] << 2.5mo
+            --  nr[:arn + 200m - 0.7dl, :arn + 201m - 0.7dl] << 1.5mo
         );
 
         # Gl. 8
-        track(:station,
-                nr[:arn - 140m, :arn + 150m] << 3.5dt
+        track(:side :nopax,
+                nr[:arn - 140m, :arn + 150m] << 3.5mo
         );
 
         # Gl. 9
-        track(:station,
-                nr[:arn - 800m, :arn - 200m] << 3.5dt
-            --  nr[:arn - 150m, :arn + 100m] << 4.5dt
+        track(:side :nopax,
+                nr[:arn - 800m, :arn - 200m] << 3.5mo
+            --  nr[:arn - 150m, :arn + 100m] << 4.5mo
         );
             # W10 - W6
-            track(:station,
-                    nr[:arn - 630m] << 3.5dt
-                --  nr[:arn - 530m] << 1.5dt
+            track(:side :nopax,
+                    nr[:arn - 630m] << 3.5mo
+                --  nr[:arn - 530m] << 1.5mo
             );
 
         # Gl. 13/17
-        track(:station,
-                nr[:arn - 490m, :arn - 0.7dl] << 5.5dt
-            --  nr[:arn + 50m - 0.7dl, :arn + 51m - 0.7dl] << 4.5dt
+        track(:side :nopax,
+                nr[:arn - 490m, :arn - 0.7dl] << 5.5mo
+            --  nr[:arn + 50m - 0.7dl, :arn + 51m - 0.7dl] << 4.5mo
         );
 
         # Gl. 18/19
-        track(:station,
-                nr[:arn - 591m, :arn - 590m] << 3.5dt
-            --  nr[:arn - 440m, :arn] << 6.5dt
-            --  nr[:arn + 200m, :arn.ys] << 2.5dt
+        track(:side :nopax,
+                nr[:arn - 591m, :arn - 590m] << 3.5mo
+            --  nr[:arn - 440m, :arn] << 6.5mo
+            --  nr[:arn + 200m, :arn.ys] << 2.5mo
             ..  ai[:arn.xi - 60m, :arn.xi]
         );
 
         # Ex-Gleise rechts
-        track(:station :removed,
-                nr[:arn - 790m, :arn - 100m] >> 1.5dt
+        track(:side :nopax :removed,
+                nr[:arn - 790m, :arn - 100m] >> 1.5mo
         );
-        track(:station :removed,
-                nr[:arn - 560m, :arn - 400m] >> 3.5dt
+        track(:side :nopax :removed,
+                nr[:arn - 560m, :arn - 400m] >> 3.5mo
         );
-        track(:station :removed,
-                nr[:arn - 560m, :arn - 450m] >> 4.5dt
-            --  nr[:arn - 350m, :arn - 100m] >> 2.5dt
+        track(:side :nopax :removed,
+                nr[:arn - 560m, :arn - 450m] >> 4.5mo
+            --  nr[:arn - 350m, :arn - 100m] >> 2.5mo
         );
-            track(:station :removed,
-                    nr[:arn - 300m] >> 2.5dt
-                --  nr[:arn - 200m] >> 0.5dt
+            track(:side :nopax :removed,
+                    nr[:arn - 300m] >> 2.5mo
+                --  nr[:arn - 200m] >> 0.5mo
             );
 
         # Bahnsteig 1
-        platform(:excat:ac15 :pax,
-                nr[:arn - 160m, :arn + 40m] >> 0.5dt
-            --  nr[:arn + 40m, :arn - 70m] << 1.2dt
-            --  nr[:arn - 70m, :arn - 165m] << 1.1dt
+        platform(
+                nr[:arn - 160m, :arn + 40m] >> 0.5mo >> 0.5mt
+            --  nr[:arn + 40m, :arn - 70m] << 1.3mo
+            --  nr[:arn - 70m, :arn - 165m] << 1.2mo
         );
         platform(:removed,
-                nr[:arn + 40m, :arn + 90m] >> 0.5dt
-            --  nr[:arn + 90m, :arn + 40m] << 1.2dt
+                nr[:arn + 40m, :arn + 90m] >> 0.5mo >> 0.5mt
+            --  nr[:arn + 90m, :arn + 40m] << 1.3mo
         );
 
         # Bahnsteig 2/6
-        platform(:excat:ac15 :pax,
-                nr[:arn - 130m, :arn + 90m] << 0.5dt
-            --  nr[:arn + 90m, :arn - 130m] >> 1.5dt
+        platform(
+                nr[:arn - 130m, :arn + 90m] << 0.5mo << 0.5mt
+            --  nr[:arn + 90m, :arn - 130m] >> 1.5mo << 0.5mt
         );
 
         # Bw
-        track(:station,
-                nr[:arn - 890m, :arn - 580m] << 2.5dt
+        track(:side :nopax,
+                nr[:arn - 890m, :arn - 580m] << 2.5mo
         );
-        track(:station,
-                nr[:arn - 890m, :arn - 680m] << 1.5dt
-            --  nr[:arn - 630m, :arn - 629m] << 2.5dt
+        track(:side :nopax,
+                nr[:arn - 890m, :arn - 680m] << 1.5mo
+            --  nr[:arn - 630m, :arn - 629m] << 2.5mo
         );
 
-        marker(:left :de.bw, nr[:arn - 890m - 0.3sw] << 1.5dt);
-        slabel(:left, nr[:arn - 890m - 0.65sw] >> 3.5dt,
+        marker(:left :de.bw, nr[:arn - 890m - 0.3sw] << 1.5mo);
+        slabel(:left, nr[:arn - 890m - 0.65sw] >> 3.5mo,
             "Bw Arnstadt/hist"
         );
 
         # Anschluss Stadtverwaltung
-        track(:station,
-                nr[:arn - 630m, :arn - 631m] >> 3.5dt
-            ..  ar[:a + 4dt, :a + 670m]
-            --  ar[:a + 710m, :xa - 50m] << 1dt
+        track(:side :nopax,
+                nr[:arn - 630m, :arn - 631m] >> 3.5mo
+            ..  ar[:a + 4mo, :a + 670m]
+            --  ar[:a + 710m, :xa - 50m] << 1mo
             --  ar[:xa, :f]
         );
-        track(:station,
+        track(:side :nopax,
                 ar[:a + 499m, :a + 500m]
-            --  ar[:a + 550m, :a + 670m + 0.7dl] >> 1dt
+            --  ar[:a + 550m, :a + 670m + 0.7dl] >> 1mo
             --  ar[:a + 710m + 0.7dl, :xa]
         );
-        track(:station,
-                ar[:a + 859m, :a + 860m] << 1dt
-            --  ar[:a + 910m, :a + 1070m] << 2dt
+        track(:side :nopax,
+                ar[:a + 859m, :a + 860m] << 1mo
+            --  ar[:a + 910m, :a + 1070m] << 2mo
         );
-        track(:station,
+        track(:side :nopax,
                 ar[:f - 951m, :f - 950m]
-            --  ar[:f - 800m, :f - 400m] << 3dt
+            --  ar[:f - 800m, :f - 400m] << 3mo
             --  ar[:f - 250m, :f - 249m]
         );
-        track(:station,
-                ar[:f - 850m, :f - 550m] << 2dt
+        track(:side :nopax,
+                ar[:f - 850m, :f - 550m] << 2mo
         );
 
-        marker(:right :de.bf :pax, nr[:arn] >> 1.2dt);
-        station(:left :pax, nr[:arn + 0.2sw] >> 1.2dt >> 1.8sw,
+        marker(:right :de.bf, nr[:arn] >> 1.3mo);
+        station(:left, nr[:arn] >> 1.3mo >> 1sh + (-2.0dt, 1.8dt),
             span(:bold, "Arnstadt Hbf"),
             hbox(:center:top,
                 vbox(:right:top, "6298: ", "6299: ", "6377: "),
-                vbox(:right:top, "9,", "0,", "0,"),
-                vbox(:left:top, "96", "00", "00")
+                vbox(:sep:top,
+                    hbox(:sep:base, "9,", anchor(), "955"),
+                    hbox(:sep:base, "−0,", anchor(), "659"),
+                    hbox(:sep:base :removed, "0,", anchor(), "00")
+                )
+            )
+        );
+    }
+}
+
+with detail = 4,
+     railway = :first :pax
+{
+    with link = "line.de.6298" {
+        track(:double, nr[:arn.fp - 0.1dl, :ars - 0.49sw]);
+    }
+
+    with link = "point.de.Arnstadt-Süd", railway = :station {
+        track(:first:station :double :pax, nr[:ars - 0.5sw, :ars + 200m]);
+
+        platform(:pax,
+                nr[:ars, :ars + 130m] >> 0.5mo << 0.5mt
+            --  nr[:ars + 130m, :ars] >> 0.5mo << 0.5mt
+        );
+        platform(:removed,
+                nr[:ars + 130m, :ars + 200m] >> 0.5mo << 0.5mt
+            --  nr[:ars + 200m, :ars + 130m] >> 0.5mo << 0.5mt
+        );
+
+        marker(:right :de.hp, nr[:ars] >> 0.5mo >> 0.5mt);
+        station(:left, nr[:ars] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, 1.2dt),
+            "Arnstadt Süd", "6298: 11,313"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(:double, nr[:ars + 200m, :goe]);
+    }
+
+    with link = "point.de.Arnstadt-Goerdelerdamm", railway = :station {
+        marker(:left :de.bk :removed, nr[:goe] << 0.5mo << 0.5mt);
+        station(:right :removed,
+            nr[:goe] << 0.5mo << 0.5mt << 1sh + (1dt, 1dt),
+            span(:small, "Goerdelerdamm"), "6298: 12,18"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(:double, nr[:goe, :goe + 1.4km]);
+        line_label(:right:e, nr[:goe + 1.4km] >> 0.5mo >> 0.5mt,
+            (0dt, -0.4dt), "6298"
+        );
+        track(:double, nr[:goe + 1.4km, :loh]);
+    }
+
+    with link = "point.de.Lohmühle", railway = :station {
+        marker(:right :de.bk :removed, nr[:loh] >> 0.5mo >> 0.5mt);
+        label(:removed,
+            nr[:loh] >> 0.5mo >> 0.5mt >> 1.0sh + (-1.3dt, 0.8dt),
+            vbox(:right:base :small,
+                span(:former, "Siegelbach"),
+                vbox(:center:topbase,
+                    "Lohmühle",
+                    span(:xsmall, "6298: 14,98")
+                )
             )
         );
     }
 
-
     with link = "line.de.6298" {
-        track(:first :double :pax, nr[:arn.fp, :ars - 1sw]);
+        track(:double, nr[:loh, :pla.a]);
     }
 
+    with link = "point.de.Plaue-Thür", railway = :station {
+        let pr = path("d3.de.6694");
 
-    with link = "point.de.Arnstadt-Süd" {
-        track(:first:station :double :pax, nr[:ars - 1sw, :ars + 250m]);
-
-        platform(:pax,
-                nr[:ars, :ars + 130m] >> 0.5dt
-            --  nr[:ars + 130m, :ars] >> 0.5dt
-        );
-        platform(:removed,
-                nr[:ars + 130m, :ars + 200m] >> 0.5dt
-            --  nr[:ars + 200m, :ars + 130m] >> 0.5dt
-        );
-
-        marker(:right :de.hp :pax, nr[:ars] >> 0.5dt);
-        station(:left :pax, nr[:ars + 0.55sw] >> 0.5dt >> 1.2sw,
-            "Arnstadt Süd", "11,31"
-        );
-    }
-
-
-    with link = "line.de.6298" {
-        track(:first :double :pax, nr[:ars + 250m, :pla.a]);
-        line_badge(:pax, nr[:ars + 2.0km], "6298");
-    }
-
-
-    with link = "point.de.Arnstadt-Goerdelerdamm" {
-        marker(:left :de.bk :removed, nr[:goe] << 0.5dt);
-        station(:left :removed, nr[:goe + 0.5sw] >> 2.0dt,
-            "Goerdelerdamm", "12,18"
-        );
-    }
-
-
-    with link = "point.de.Lohmühle" {
-        marker(:right :de.bk :removed, nr[:loh] >> 0.5dt);
-        station(:left :removed, nr[:loh + 0.4sw] >> 0.5dt >> 1.0sw,
-            vbox(:center:bottom,
-                span(:gone, "Siegelbach"),
-                "Lohmühle"
-            ),
-            "14,98"
-        );
-    }
-
-
-    with link = "point.de.Plaue-Thür" {
-        let pr = path("d4.de.6694");
-
-        # Gl. 1
-        track(:first:station :pax, nr[:pla.a, :pla.fg] >> 0.5dt);
+        # Gl. 1 (DE 6298 up)
+        track(nr[:pla.a, :pla.fg] >> 0.5mo);
             # W1 - W2
-            track(:station :pax,
-                    nr[:pla.pn - 220m + 0.7dl] >> 0.5dt
-                --  nr[:pla.pn - 130m + 0.7dl] << 0.5dt
+            track(:side,
+                    nr[:pla.pn - 220m + 0.7dl] >> 0.5mo
+                --  nr[:pla.pn - 130m + 0.7dl] << 0.5mo
             );
 
-        # Gl. 2
-        track(:first:station :pax,
-                nr[:pla.a, :pla.yi] << 0.5dt
-            --  nr[:pla.yi + 100m, :pla.yi + 101m] >> 0.5dt
+        # Gl. 2 (DE 6298 dn)
+        track(
+                nr[:pla.a, :pla.yi] << 0.5mo
+            --  nr[:pla.yi + 100m, :pla.yi + 101m] >> 0.5mo
         );
-        track(:first:station :removed,
-                nr[:pla.yi, :pla.fg] << 0.5dt
+        track(:removed,
+                nr[:pla.yi, :pla.fg] << 0.5mo
         );
             # W6 - W7
-            track(:station,
-                    nr[:pla.yi - 50m] << 0.5dt
-                --  pr[:pla.yi + 40m] << 1.5dt
+            track(:side :nopax,
+                    nr[:pla.yi - 50m] << 0.5mo
+                --  pr[:pla.yi + 40m] << 1.5mo
             );
 
-        # Gl. 3
-        track(:second:station :pax,
-                nr[:pla.pn - 221m, :pla.pn - 220m] << 0.5dt
-            --  pr[:pla.pn - 130m, :pla.fi] << 1.5dt
+        # Gl. 3 (DE 6694)
+        track(:second,
+                nr[:pla.pn - 221m, :pla.pn - 220m] << 0.5mo
+            --  pr[:pla.pn - 130m, :pla.fi] << 1.5mo
         );
             # W4 - W5
-            track(:station,
-                    nr[:pla.yi - 160m] << 1.5dt
-                --  nr[:pla.yi - 70m] << 0.5dt
+            track(:side :nopax,
+                    nr[:pla.yi - 160m] << 1.5mo
+                --  nr[:pla.yi - 70m] << 0.5mo
             );
 
         # Gl. 4
-        track(:station :removed,
-                nr[:pla.pn - 80m, :pla + 80m] << 2.5dt
+        track(:side :nopax :removed,
+                nr[:pla.pn - 80m, :pla + 80m] << 2.5mo
         );
 
         # Gl. 5
-        track(:station :removed,
-                nr[:pla.pn - 131m, :pla.pn - 130m] << 1.5dt
-            --  nr[:pla.pn - 30m, :pla + 30m] << 3.5dt
-            --  nr[:pla + 130m, :pla + 131m] << 1.5dt
+        track(:side :nopax :removed,
+                nr[:pla.pn - 131m, :pla.pn - 130m] << 1.5mo
+            --  nr[:pla.pn - 30m, :pla + 30m] << 3.5mo
+            --  nr[:pla + 130m, :pla + 131m] << 1.5mo
         );
 
         # Ladegl. rechts
-        track(:station :removed,
-                nr[:pla - 321m, :pla - 320m] >> 0.5dt
-            --  nr[:pla - 220m, :pla - 0.5sw] >> 2.5dt
+        track(:side :nopax :removed,
+                nr[:pla - 321m, :pla - 320m] >> 0.5mo
+            --  nr[:pla - 220m, :pla - 0.6sw] >> 2.5mo
         );
 
         # Bahnsteig 1
         platform(:removed,
-                nr[:pla - 220m, :pla - 110m] >> 0.5dt
-            --  nr[:pla - 110m, :pla - 220m] << 1.2dt
+                nr[:pla - 220m, :pla - 110m] >> 0.5mo >> 0.5mt
+            --  nr[:pla - 110m, :pla - 220m] << 1.3mo
         );
         platform(:pax,
-                nr[:pla - 110m, :pla + 50m] >> 0.5dt
-            --  nr[:pla + 50m, :pla - 110m] << 1.2dt
+                nr[:pla - 110m, :pla + 50m] >> 0.5mo >> 0.5mt
+            --  nr[:pla + 50m, :pla - 110m] << 1.3mo
         );
 
         # Bahnsteig 2/3
         platform(:removed,
-                nr[:pla - 220m, :pla - 140m] << 0.5dt
-            --  nr[:pla - 140m, :pla - 220m] >> 1.5dt
+                nr[:pla - 220m, :pla - 140m] << 0.5mo >> 0.5mt
+            --  nr[:pla - 140m, :pla - 220m] >> 1.5mo >> 0.5mt
         );
         platform(:pax,
-                nr[:pla - 140m, :pla + 20m] << 0.5dt
-            --  nr[:pla + 20m, :pla - 140m] >> 1.5dt
+                nr[:pla - 140m, :pla + 20m] << 0.5mo >> 0.5mt
+            --  nr[:pla + 20m, :pla - 140m] >> 1.5mo >> 0.5mt
         );
 
-        marker(:right :de.bf :pax, nr[:pla] >> 1.2dt);
-        station(:left :pax, nr[:pla + 0.4sw] >> 1.2dt >> 1.2sw,
+        marker(:right :de.bf :pax, nr[:pla] >> 1.3mo);
+        station(:left :pax, nr[:pla] >> 1.3mo >> 1sh + (-1.5dt, 1dt),
             hbox(:center:base, span(:bold, "Plaue "), "(Thür)"),
             hbox(:center:base,
                 vbox(:right:top, "6298: ", "6694: "),
-                vbox(:right:top, "18,", "0,"),
-                vbox(:left:top, "17", "00")
+                vbox(:sep:top,
+                    hbox(:sep:base, "18,", anchor(), "167"),
+                    hbox(:sep:base, "−0,", anchor(), "720")
+                )
             )
         );
     }
 
 
     with link = "line.de.6298" {
-        track(:first :pax, nr[:pla.fg, :gra.a] >> 0.5dt);
-        track(:first :removed, nr[:pla.fg, :gra.a] << 0.5dt);
-        line_badge(:pax, nr[:pla.fg + 1.3km], "6298");
+        track(:up:ldn, nr[:pla.fg, :pla.yi + 3.1km] >> 0.5mo);
+        track(:dn:rup :removed, nr[:pla.fg, :pla.yi + 3.1km] << 0.5mo);
+        line_label(:right:s, nr[:pla.yi + 3.1km] >> 0.5mo >> 0.5mt,
+            (-0.2dt, 0dt), "6298"
+        );
+        track(:up:ldn, nr[:pla.yi + 3.1km, :gra.a] >> 0.5mo);
+        track(:dn:rup :removed, nr[:pla.yi + 3.1km, :gra.a] << 0.5mo);
     }
 
 
-    with link = "point.de.Gräfenroda" {
-        # Gl. 1
-        track(:second:station,
-                nr[:gra, :gra.f - 250m] >> 2.0dt
-            ..  nr[:gra.f - 1m, :gra.f] >> 1.5dt
+    with link = "point.de.Gräfenroda", railway = :station {
+        # Gl. 1 (DE 6697)
+        track(:side :nopax,
+                nr[:gra, :gra.f - 250m] >> 2.0mo
+            ..  nr[:gra.f - 1m, :gra.f] >> 1.5mo
         );
 
         # Gl. 2
-        track(:station,
-                nr[:gra - 416m, :gra - 415m] >> 0.5dt
-            --  nr[:gra - 320m, :gra - 105m] >> 1.5dt
-            --  nr[:gra - 10m, :gra - 9m] >> 0.5dt
+        track(:side :nopax,
+                nr[:gra - 416m, :gra - 415m] >> 0.5mo
+            --  nr[:gra - 320m, :gra - 105m] >> 1.5mo
+            --  nr[:gra - 10m, :gra - 9m] >> 0.5mo
         );
 
-        # Gl. 3
-        track(:first:station :pax, nr[:gra.a, :gra.f] >> 0.5dt);
+        # Gl. 3 (DE 6298 up)
+        track(nr[:gra.a, :gra.f] >> 0.5mo);
             # W4 - W5
-            track(:station,
-                    nr[:gra + 170m] >> 0.5dt
-                --  nr[:gra + 265m] >> 2.0dt
+            track(:side :nopax, 
+                    nr[:gra + 170m] >> 0.5mo
+                --  nr[:gra + 265m] >> 2.0mo
             );
 
-        # Gl. 4
-        track(:first:station :removed, nr[:gra.a, :gra - 280m] << 0.5dt);
-        track(:station,
-                nr[:gra - 366m, :gra - 365m] >> 0.5dt
-            --  nr[:gra - 280m, :gra.f - 400m] << 0.5dt
-            --  nr[:gra.f - 310m, :gra.f - 309m] >> 0.5dt
+        # Gl. 4 (DE 6298 dn)
+        track(:removed, nr[:gra.a, :gra - 280m] << 0.5mo);
+        track(
+                nr[:gra - 366m, :gra - 365m] >> 0.5mo
+            --  nr[:gra - 280m, :gra.f - 400m] << 0.5mo
+            --  nr[:gra.f - 310m, :gra.f - 309m] >> 0.5mo
         );
-        track(:first:station :removed, nr[:gra.f - 400m, :gra.f] << 0.5dt);
+        track(:removed, nr[:gra.f - 400m, :gra.f] << 0.5mo);
 
         # Bahnsteig 1
-        platform(:open,
-                nr[:gra, :gra + 60m] >> 2.0dt
-            --  nr[:gra + 60m, :gra] << 1.3dt
+        platform(:nopax,
+                nr[:gra, :gra + 60m] >> 2.0mo << 0.5lt
+            --  nr[:gra + 60m, :gra] << 1.3mo
         );
 
         # Bahnsteig 2
-        platform(:open,
-                nr[:gra - 275m, :gra - 140m] >> 1.5dt
-            --  nr[:gra - 140m, :gra - 275m] << 2.2dt
+        platform(:nopax,
+                nr[:gra - 275m, :gra - 140m] >> 1.5mo >> 0.5lt
+            --  nr[:gra - 140m, :gra - 275m] << 2.3mo
         );
 
         # Bahnsteig 3
-        platform(:pax,
-                nr[:gra + 10m, :gra + 165m] >> 0.5dt
-            --  nr[:gra + 165m, :gra + 10m] << 1.1dt
+        platform(
+                nr[:gra + 10m, :gra + 165m] >> 0.5mo >> 0.5mt
+            --  nr[:gra + 165m, :gra + 10m] << 1.2mo
         );
 
-        marker(:right :de.bf :pax, nr[:gra] >> 2dt);
-        station(:top :pax, nr[:gra + 0.2sw] >> 2.0dt >> 1.4sw,
+        marker(:right :de.bf, nr[:gra] >> 2mo >> 0.5lt);
+        station(:top,
+            nr[:gra + 0.2sw] >> 2.0mo >> 0.5lt >> 1sh + (-1dt, -1.3dt),
             span(:bold, "Gräfenroda"),
             hbox(:center:top,
                 vbox(:right:top, span(:closed, "6697: "), "6298: "),
-                vbox(:right:top, span(:closed, "35,"), "24,"),
-                vbox(:left:top, span(:closed, "70"), "17")
+                vbox(:sep:top,
+                    hbox(:sep:base :closed, "35,", anchor(), "697"),
+                    hbox(:sep:base, "24,", anchor(), "167")
+                )
             )
         );
     }
 
-
     with link = "line.de.6298" {
-        track(:first :pax, nr[:gra.f, :dor - 200m] >> 0.5dt);
-        track(:first :removed, nr[:gra.f,  :dor - 200m] << 0.5dt);
-        line_badge(:pax, nr[:dor - 1.6km], "6298");
+        track(:up:ldn:ror, nr[:gra.f, :gra.yg] >> 0.5mo);   
+        track(:dn:rup :removed, nr[:gra.f, :gra.yg] << 0.5mo);   
+
+        track(:up:ldn:ror, nr[:gra.yg, :gra.yg + 0.5seg] >> 0.5mo);
+        track(:dn:rup :removed, nr[:gra.yg, :gra.yg + 0.5seg] << 0.5mo);
+
+        track(:up:ldn, nr[:gra.yg + 0.5seg, :gra.yg + 1km] >> 0.5mo);
+        track(:dn:rup :removed, nr[:gra.yg + 0.5seg, :gra.yg + 1km] << 0.5mo);
+
+        line_label(:left:w, nr[:gra.yg + 1km] << 0.5mo << 0.5mt,
+            (0dt, 0.3dt), "6298"
+        );
+
+        track(:up:ldn, nr[:gra.yg + 1km, :dor - 150m] >> 0.5mo);
+        track(:dn:rup :removed, nr[:gra.yg + 1km, :dor - 150m] << 0.5mo);
     }
 
 
-    with link = "point.de.Dörrberg" {
-        track(:first:station :pax, nr[:dor - 200m, :dor + 1sw] >> 0.5dt);
-        track(:first:station :removed, nr[:dor - 200m, :dor + 1sw] << 0.5dt);
+    with link = "point.de.Dörrberg", railway = :station {
+        track(nr[:dor - 150m, :dor + 0.5sw] >> 0.5mo);
+        track(:removed, nr[:dor - 150m, :dor + 0.5sw] << 0.5mo);
 
         platform(:pax,
-                nr[:dor - 150m, :dor - 10m] >> 0.5dt
-            --  nr[:dor - 10m, :dor - 150m] << 1.2dt
+                nr[:dor - 150m, :dor - 10m] >> 0.5mo >> 0.5mt
+            --  nr[:dor - 10m, :dor - 150m] << 1.3mo
         );
 
-        marker(:right :de.hp :pax, nr[:dor] >> 0.5dt);
-        marker(:right :de.bk :removed, nr[:dor] >> 0.5dt);
-        station(:left :pax, nr[:dor + 0.6sw] >> 0.5dt >> 1.3sw,
-            "Dörrberg", "27,97"
+        marker(:right :de.hp, nr[:dor] >> 1.3mo);
+        station(:left, nr[:dor] >> 1.3mo >> 1sh + (-1.8dt, 1dt),
+            "Dörrberg", "6298: 27,967"
         );
     }
 
 
     with link = "line.de.6298" {
-        track(:first :pax, nr[:dor + 1sw, :tzw.a] >> 0.5dt);
-        track(:first :removed, nr[:dor + 1sw, :tzw.a] << 0.5dt);
+        track(:first :pax, nr[:dor + 0.5sw, :tzw.a] >> 0.5mo);
+        track(:first :removed, nr[:dor + 0.5sw, :tzw.a] << 0.5mo);
     }
 
 
     with link = "struct.de.Tunnel-am-Zwang" {
-        marker(:top :tunnel.r :pax, nr[:tzw.a] >> 0.5dt);
-        marker(:right :tunnel.dt :pax, nr[:tzw.a] << 0.5dt);
-        marker(:top :tunnel.l :pax, nr[:tzw.a] << 0.5dt);
+        marker(:right :tuna, nr[:tzw.a] >> 0.5mo);
+        marker(:right :tuno, nr[:tzw.a]);
+        marker(:left :tuna, nr[:tzw.a] << 0.5mo);
 
-        marker(:bottom :tunnel.l :pax, nr[:tzw.f] >> 0.5dt);
-        marker(:right :tunnel.dt :pax, nr[:tzw.f] << 0.5dt);
-        marker(:bottom :tunnel.r :pax, nr[:tzw.f] << 0.5dt);
+        marker(:right :tunf, nr[:tzw.f] >> 0.5mo);
+        marker(:right :tuno, nr[:tzw.f]);
+        marker(:left :tunf, nr[:tzw.f] << 0.5mo);
 
-        slabel(:right :italic :pax, nr[:tzw.a - 2dt] << 2.5dt,
-            hbox(:left:top, vbox(:center:top,
+        slabel(:right :italic,
+            nr[:tzw.a + 50m] << 0.5mo << 0.5mt + (3.5dt, 2dt),
+            hbox(:left:base, vbox(:center:topbase,
                 "Tunnel am Zwang", "104 m"
             ))
         );
     }
 
+    with link = "line.de.6298" {
+        track(:up:ldn, nr[:tzw.f, :keh] >> 0.5mo);
+        track(:dn:rup :removed, nr[:tzw.f, :keh] << 0.5mo);
+    }
+
+    with link = "point.de.Kehltal", railway = :station {
+        marker(:right :de.bk :removed, nr[:keh] >> 0.5mo >> 0.5mt);
+        station(:left:right_align :removed,
+            nr[:keh] >> 0.5mo >> 0.5mt >> 1sh + (-1.3dt, 0.7dt),
+            span(:small, "Kehltal"), "6298: 32,30"
+        );
+    }
 
     with link = "line.de.6298" {
-        track(:first :pax, nr[:tzw.f, :geh.a] >> 0.5dt);
-        track(:first :removed, nr[:tzw.f, :geh.a] << 0.5dt);
+        track(:up:ldn, nr[:keh, :geh.a] >> 0.5mo);
+        track(:dn:rup :removed, nr[:keh, :geh.a] << 0.5mo);
     }
 
-
-    with link = "point.de.Kehltal" {
-        marker(:right :de.bk :removed, nr[:keh] >> 0.5dt);
-        station(:left :removed, nr[:keh + 0.5sw] >> 0.5dt >> 1.2sw,
-            "Kehltal", "32,30"
-        );
-    }
-
-
-    with link = "point.de.Gehlberg" {
+    with link = "point.de.Gehlberg", railway = :station {
         # Gl. 1
-        track(:first:station :removed,
-                nr[:geh.a, :geh.a + 200m] << 0.5dt
+        track(:removed,
+                nr[:geh.a, :geh.a + 200m] << 0.5mo
         );
-        track(:first:station :pax,
-                nr[:geh.a, :geh.a + 0.1dl] >> 0.5dt
-            ..  nr[:geh.a + 200m, :geh.f] << 0.5dt
+        track(
+                nr[:geh.a, :geh.a + 0.1dl] >> 0.5mo
+            ..  nr[:geh.a + 200m, :geh.f] << 0.5mo
         );
-            track(:station,
-                    nr[:geh + 180m] << 0.5dt
-                --  nr[:geh + 270m] >> 0.5dt
+            track(:side,
+                    nr[:geh + 180m] << 0.5mo
+                --  nr[:geh + 270m] >> 0.5mo
             );
 
         # Gl. 2
-        track(:first:station :removed,
-                nr[:geh.a, :geh.a + 280m] >> 0.5dt
+        track(:removed,
+                nr[:geh.a, :geh.a + 280m] >> 0.5mo
         );
-        track(:first:station :pax,
-                nr[:geh.a + 199m, :geh.a + 200m] << 0.5dt
-            ..  nr[:geh.a + 280m, :geh.f] >> 0.5dt
+        track(
+                nr[:geh.a + 199m, :geh.a + 200m] << 0.5mo
+            ..  nr[:geh.a + 280m, :geh.f] >> 0.5mo
         );
 
         # Bahnsteig 1
         platform(:pax,
-                nr[:geh - 60m, :geh + 100m] << 0.5dt
-            --  nr[:geh + 100m, :geh - 60m] >> 1.2dt
+                nr[:geh - 60m, :geh + 100m] << 0.5mo << 0.5mt
+            --  nr[:geh + 100m, :geh - 60m] >> 1.3mo
         );
 
         # Bahnsteig 2
         platform(:pax,
-                nr[:geh - 60m, :geh + 100m] >> 0.5dt
-            --  nr[:geh + 100m, :geh - 60m] << 1.2dt
+                nr[:geh - 60m, :geh + 100m] >> 0.5mo >> 0.5mt
+            --  nr[:geh + 100m, :geh - 60m] << 1.3mo
         );
 
-        marker(:left :de.bf :pax, nr[:geh] << 0.5dt);
-        station(:bottom :pax, nr[:geh] << 0.5dt << 1.2sw,
-            "Gehlberg", "35,59"
+        marker(:left :de.bf :pax, nr[:geh] << 1.3mo);
+        station(:bottom :pax, nr[:geh] << 1.3mo << 1.3sh,
+            "Gehlberg", "6298: 35,587"
         );
     }
 
-
     with link = "line.de.6298" {
-        track(:first :double :pax, nr[:geh.f, :brt.a]);
+        track(:double, nr[:geh.f, :brt.a]);
     }
 
 
     with link = "struct.de.Brandleite-Tunnel" {
-        marker(:top :tunnel.r :pax, nr[:brt.a] >> 0.5dt);
-        marker(:right :tunnel.dt :pax, nr[:brt.a] << 0.5dt);
-        marker(:top :tunnel.l :pax, nr[:brt.a] << 0.5dt);
+        marker(:right :tuna, nr[:brt.a] >> 0.5mo);
+        marker(:right :tuno, nr[:brt.a]);
+        marker(:left :tuna, nr[:brt.a] << 0.5mo);
 
-        track(:first:tunnel :double :pax, nr[:brt.a, :brt.f]);
+        track(:double :tunnel, nr[:brt.a, :brt.f]);
 
-        marker(:bottom :tunnel.l :pax, nr[:brt.f] >> 0.5dt);
-        marker(:right :tunnel.dt :pax, nr[:brt.f] << 0.5dt);
-        marker(:bottom :tunnel.r :pax, nr[:brt.f] << 0.5dt);
+        marker(:right :tunf, nr[:brt.f] >> 0.5mo);
+        marker(:right :tuno, nr[:brt.f]);
+        marker(:left :tunf, nr[:brt.f] << 0.5mo);
+
+        slabel(:top :italic,
+            nr[:brt.a + 1.5km] << 0.5mo << 0.5mt + (0dt, -2.5dt),
+            hbox(:left:bottom, vbox(:center:bottom,
+                "Brandleite-Tunnel", "3039 m"
+            ))
+        );
     }
 
+    with link = "point.de.Oberhof-Thür", railway = :station {
+        # Gl. 1 (DE 6298 dn)
+        track(nr[:brt.f, :obe.f] << 0.5mo);
+            # W1 - W2
+            track(:side :nopax,
+                    nr[:brt.f + 5m] << 0.5mo
+                --  nr[:brt.f + 90m] >> 0.5mo
+            );
+
+        # Gl. 2 (DE 6298 up)
+        track(
+                nr[:brt.f, :obe + 430m ] >> 0.5mo
+            --  nr[:obe + 520m, :obe + 521m] << 0.5mo
+        );
+
+        # Gl. 4
+        track(:side :nopax :removed,
+                nr[:obe + 120m, :obe + 620m] << 1.5mo
+        );
+
+        # Gl. 5
+        track(:side :nopax,
+                nr[:obe + 99m, :obe + 100m] << 0.5mo
+            --  nr[:obe + 230m, :obe + 500m] << 2.5mo
+        );
+        track(:side :nopax :removed,
+                nr[:obe + 500m, :obe + 510m] << 2.5mo
+            --  nr[:obe + 510m + 1dl, :obe + 510m + 1.1dl] << 1.5mo
+        );
+
+        # Gl. 7
+        track(:side :nopax, nr[:obe + 140m, :obe + 230m] << 2.5mo);
+
+        # Bstg. 1
+        platform(:nopax,
+                nr[:obe - 75m, :obe + 100m] << 0.5mo << 0.5mt
+            --  nr[:obe + 100m, :obe - 75m] >> 1.3mo
+        );
+
+        # Bstg. 2
+        platform(:nopax,
+                nr[:obe - 75m, :obe + 120m] >> 0.5mo >> 0.5mt
+            --  nr[:obe + 120m, :obe - 75m] << 1.3mo
+        );
+
+        marker(:left :de.bf :nopax, nr[:obe] << 1.3mo);
+        station(:right :nopax, nr[:obe] << 1.3mo << 1sh + (1.3dt, 2.7dt),
+            hbox(:right:base, "Oberhof", span(:light, " (Thür)")),
+            "6298: 40,068"
+        );
+            
+    }
 
 }
 

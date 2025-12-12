@@ -1,0 +1,67 @@
+# DE 6340.  Halle (Saale) Hbf - Baunatal-Guntershausen
+#
+let hg = path("d3.de.u.6340");
+
+with detail = 3,
+     railway = :first :double :cat:ac15 :pax
+{
+    badge(:cat:ac15 :pax, hg[:ndi.a] >> 0.5mo,
+        hbox(:left:middle :small,
+            " ",
+            vbox(:center:middle :xsmall, " 6291 ", " 6340 "),
+            "→ Erfurt"
+        )
+    );
+
+    with link = "point.de.Neudietendorf", railway = :station {
+        let nr = path("d3.de.6298");
+
+        # DE 6298 dn
+        with layer = -1 track(:single :nocat,
+                hg[:ndi.yr - 1.1dl, :ndi.yr - 1dl] << 0.5md >> 0.5mt
+            --  hg[:ndi.yr - 0.1dl, :ndi.yr] << 0.5md << 1ms << 0.5mt
+        );
+        track(:single :nocat,
+                hg[:ndi.yr - 0.1dl, :ndi.yr] << 0.5md << 1ms << 0.5mt
+            ..  nr[:ndi.yw + 1dl, :ndi.yw + 1.1dl] << 0.5md >> 0.5mt
+        );
+
+        # DE 6340
+        track(hg[:ndi.a, :ndi.yr]);
+        track(:casing, hg[:ndi.yr, :ndi.ys]);
+
+        # DE 6291 - DE 6298 up
+        track(:single, hg[:ndi.a, :ndi.yr] >> 0.5md >> 1ms >> 0.5mt);
+        with layer = -1 track(:single :nocat,
+                hg[:ndi.yr - 0.1dl, :ndi.yr] >> 0.5md >> 1ms >> 0.5mt
+            ..  nr[:ndi.yw + 1dl, :ndi.yw + 1.1dl] >> 0.5md << 0.5mt
+        );
+
+        marker(:left :de.bf, hg[:ndi] << 0.5md);
+        slabel(:left :bold, hg[:ndi] >> 0.5md >> 1ms >> 1mt + (-1dt, 0dt),
+            "Neudietendorf"
+        );
+    }
+
+    with link = "point.de.Neudietendorf-Dn", railway = :station {
+        # DE 6340
+        track(hg[:ndi.ys, :ndi.fg]);
+
+        # DE 6730
+        track(:single :side :nopax :removed,
+                hg[:ndi.ys - 0.1dl, :ndi.ys] << 0.5md << 1ms << 0.5lt
+            ..  hg[:ndi.ys + 1dl, :ndi.ys + 1.1dl] << 0.5md >> 0.5lt
+        );
+
+        marker(:right :de.bft :removed, hg[:ndi.ys + 1dl] >> 0.5md);
+        slabel(:left :xsmall :removed,
+            hg[:ndi.ys + 1dl] >> 0.5md >> 1sh + (-1.5dt, 0.3dt),
+            "N. Dn"
+        );
+    }
+
+    badge(:cat:ac15 :pax, hg[:ndi.fg],
+        hbox(:right:middle :small, "Gotha ← ", span(:xsmall, "6340 "))
+    );
+}
+
