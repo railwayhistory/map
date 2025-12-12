@@ -1,5 +1,22 @@
 # Change Log
 
+## 2025-12-12
+
+Additions
+
+* Added the third part of overview and detail map of Denmark, covering
+  Funen and Langeland. ([#137])
+
+Corrections
+
+* Line _PL 131_ has no passenger service between Zduńska Wola Karsznice and
+  Borysławice junction north of line _PL 3._ ([#138])
+
+
+[#137]: https://github.com/railwayhistory/map/pull/137
+[#138]: https://github.com/railwayhistory/map/pull/138
+
+
 ## 2025-11-15
 
 Additions
