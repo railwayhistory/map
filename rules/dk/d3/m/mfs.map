@@ -1,0 +1,35 @@
+# DK MFS.  Middelfart - Strib
+#
+let ms = path("d3.dk.mfs");
+
+with detail = 3,
+     railway = :first :pax :removed
+{
+    # dk.KFA
+
+    with link = "line.dk.MFS" {
+        track(:lor,
+                ms[:mis - 0.1dl, :mis] >> 0.5md << 0.5mt
+            ..  ms[:mig.ym + 1md, :mig.ym + 1.1md]
+        );
+    }
+
+    with link = "point.dk.Middelfart-gamle", railway = :station {
+        track(ms[:mig.ym + 1md, :mig.yo]);
+        marker(:left :de.bf, ms[:mig] << 0.5mt);
+    }
+
+    with link = "line.dk.MFS" {
+        track(:ror, ms[:mig.yo, :mig.yo + 1.2km]);
+        track(ms[:mig.yo + 1.19km, :mig.yo + 2.5km]);
+        line_label(:left:e, ms[:mig.yo + 2.5km] << 0.5mt, "MFS");
+        track(ms[:mig.yo + 2.5km, :str - 0.49sw]);
+    }
+
+    with link = "point.dk.Strib", railway = :station {
+        track(ms[:str - 0.5sw, :str + 0.5sw]);
+        marker(:left :de.bf, ms[:str] << 0.5mt);
+        slabel(:right :bold, ms[:str] >> 0.5mt + (1.3dt, 0.8dt), "Strib");
+    }
+}
+

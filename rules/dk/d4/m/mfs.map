@@ -1,0 +1,47 @@
+# DK MFS.  Middelfart - Strib
+#
+let ms = path("d3.dk.mfs");
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    # dk.KFA
+
+    with link = "line.dk.MFS" {
+        track(:station, ms[:mis, :mis + 0.5seg] >> 0.5mo);
+        track(:lor,
+                ms[:mis + 0.5seg - 0.1dl, :mis + 0.5seg] >> 0.5mo
+            ..  ms[:mig.ym - 0.5seg, :mig.ym - 0.5seg + 0.1dl]
+        );
+    }
+
+    with link = "point.dk.Middelfart-gamle", railway = :station {
+        track(ms[:mig.ym - 0.5seg, :mig.yo + 1seg]);
+        marker(:left :de.bf, ms[:mig] << 0.5mt);
+        station(:right, ms[:mig] >> 0.5mt + (1.5dt, 1dt),
+            span(:bold, "Middelfart"),
+            hbox(:center:top,
+                vbox(:right:top, "MFS: ", "OMF: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "??", anchor(), ""),
+                    hbox(:sep:base, "48,", anchor(), "2")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.MFS" {
+        track(ms[:mig.yo + 1seg, :mig.yo + 2.5km]);
+        line_label(:left:e, ms[:mig.yo + 2.5km] << 0.5mt, "MFS");
+        track(ms[:mig.yo + 2.5km, :str - 0.49sw]);
+    }
+
+    with link = "point.dk.Strib", railway = :station {
+        track(ms[:str - 0.5sw, :str + 0.5sw]);
+        marker(:left :de.bf, ms[:str] << 0.5mt);
+        station(:left, ms[:str] << 0.5mt << 1sh + (-1.5dt, 1.5dt),
+            span(:bold, "Strib"), "MFS: ??"
+        );
+    }
+}
+
