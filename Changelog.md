@@ -11,6 +11,10 @@ Updates
 * Changed line _SI 72_ (Prvačina – Ajdovščina) to passenger service which
   resumes 2025-12-14. ([#140])
 * Milano Porta Genova on line _IT MVV_ is closing 2025-12-13. ([#141])
+* The main lines tracks of line _DE 6135_ between Berlin Südkreuz and
+  Blankenfelde are opening on 2025-12-14. ([#142]).
+* The connecting curves at Genshagener Heide, are loosing their passenger
+  service at 2025-12-14. ([#142])
 
 Corrections
 
@@ -20,6 +24,7 @@ Corrections
 [#139]: https://github.com/railwayhistory/map/pull/139
 [#140]: https://github.com/railwayhistory/map/pull/140
 [#141]: https://github.com/railwayhistory/map/pull/141
+[#142]: https://github.com/railwayhistory/map/pull/142
 
 
 ## 2025-12-12
