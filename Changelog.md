@@ -10,6 +10,7 @@ Updates
   Wies-Eibiswald. ([#139])
 * Changed line _SI 72_ (Prvačina – Ajdovščina) to passenger service which
   resumes 2025-12-14. ([#140])
+* Milano Porta Genova on line _IT MVV_ is closing 2025-12-13. ([#141])
 
 Corrections
 
@@ -18,6 +19,7 @@ Corrections
 
 [#139]: https://github.com/railwayhistory/map/pull/139
 [#140]: https://github.com/railwayhistory/map/pull/140
+[#141]: https://github.com/railwayhistory/map/pull/141
 
 
 ## 2025-12-12
