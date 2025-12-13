@@ -8,8 +8,16 @@ Updates
   connecting lines, opening on 2025-12-14. ([#139])
 * Added electrification of line _AT 652_ between Wettmannstätten and
   Wies-Eibiswald. ([#139])
+* Changed line _SI 72_ (Prvačina – Ajdovščina) to passenger service which
+  resumes 2025-12-14. ([#140])
+
+Corrections
+
+* Changed lines _SI 71_ and _IT GNG_ (Nova Gorica – Gorizia) to tourist
+  service. ([#14]0])
 
 [#139]: https://github.com/railwayhistory/map/pull/139
+[#140]: https://github.com/railwayhistory/map/pull/140
 
 
 ## 2025-12-12
