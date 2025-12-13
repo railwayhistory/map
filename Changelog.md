@@ -1,5 +1,17 @@
 # Change Log
 
+## 2025-12-14
+
+Updates
+
+* Added remaining part of line _AT 460_ (aka Koralmbahn) as well its
+  connecting lines, opening on 2025-12-14. ([#139])
+* Added electrification of line _AT 652_ between Wettmannstätten and
+  Wies-Eibiswald. ([#139])
+
+[#139]: https://github.com/railwayhistory/map/pull/139
+
+
 ## 2025-12-12
 
 Additions
