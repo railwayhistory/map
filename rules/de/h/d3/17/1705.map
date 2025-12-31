@@ -1,0 +1,47 @@
+# DE 1705.  Hannover Hbf - Seelze
+#
+let hs = path("d3.de.1705");
+
+with detail = 3,
+     railway = :first :double :cat:ac15 :pax
+{
+    with link = "line.de.1705" {
+        track(:lor, hs[:hle.yw, :hle - 0.49sw] >> 1ms >> 1md);
+    }
+
+    with link = "point.de.Hannover-Leinhausen", railway = :station {
+        track(:lor, hs[:hle - 0.5sw, :hle + 0.5sw] >> 1ms >> 1md);
+        marker(:right :de.hp :casing,
+            hs[:hle] >> 1ms >> 1.5md,
+            hs[:hle] >> 0.5md >> 1ms
+        );
+    }
+
+    with link = "line.de.1705" {
+        track(:lor, hs[:hle + 0.49sw, :kur - 1.9dl] >> 1ms >> 1md);
+        track(:lor, hs[:kur - 2dl, :kur + 0.1dl] >> 1ms >> 1md);
+        track(:lor, hs[:kur, :lea - 2dl] >> 1ms >> 1md);
+        with layer = -1 track(:lor,
+            hs[:lea - 2.1dl, :let.yl + 0.1dl] >> 1ms >> 1md
+        );
+    }
+
+    with link = "point.de.Letter", railway = :station {
+        track(hs[:let.yl, :let + 0.5sw] >> 1ms >> 1md);
+        marker(:right :de.hp :casing,
+            hs[:let] >> 1ms >> 1.5md,
+            hs[:let] >> 1ms >> 0.5md
+        );
+        slabel(:left, hs[:let] >> 1ms >> 1.5md >> 1sh + (1.5dt, -1dt),
+            "Letter"
+        );
+    }
+
+    with link = "line.de.1705" {
+        track(:lor, hs[:let + 0.49sw, :sem] >> 1ms >> 1md);
+        track(:lor, hs[:sem, :see - 549m] >> 1ms >> 1md);
+    }
+
+    # point.de.Seelze  de.1700
+}
+

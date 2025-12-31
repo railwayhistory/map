@@ -1,0 +1,138 @@
+# DE 1750.  Wunstorf - Hannover-Linden - Lehrte Nord
+#
+let wl = path("d3.de.1750");
+
+with detail = 3,
+     railway = :first :double :cat:ac15 :nopax
+{
+    with link = "line.de.1750" {
+        track(:lor, wl[:wun + 900m, :wun + 1100m] >> 1ms >> 1md);
+        track(:lor, wl[:wun + 1099m, :gum.yw - 1md] >> 1ms >> 1md);
+
+        # dn
+        with layer = -1 track(:single :lor:ror,
+            wl[:gum.yw - 1.1md, :gum] >> 0.5md >> 1ms >> 0.5mt
+        );
+
+        # up
+        track(:single :lor,
+                wl[:gum.yw - 1.1md, :gum.yw - 1md] >> 1ms >> 1.5md << 0.5mt
+            ..  wl[:gum.xw - 0.1dl, :gum.xw] >> 2ms >> 2.5md >> 0.5mt
+        );
+        track(:single :lor,
+                wl[:gum.xw - 0.1dl, :gum.xw] >> 2ms >> 2.5md >> 0.5mt
+            ..  wl[:gum - 0.1dl, :gum] >> 1ms >> 1.5md << 0.5mt
+        );
+    }
+
+    with link = "point.de.Gümmerwald", railway = :station {
+        marker(:right :de.abzw, wl[:gum] >> 1ms >> 1.5md);
+        slabel(:ne :xsmall:bold,
+            wl[:gum] >> 1ms >> 1.5md >> 1sh + (1.5dt, 0.3dt),
+            "Gümmerwald"
+        );
+    }
+
+    with link = "line.de.1750" {
+        track(wl[:gum, :ded - 0.49sw] >> 1ms >> 1md);
+    }
+
+    # point.de.Dedensen-Gümmer  de.1700
+
+    with link = "line.de.1750" {
+        track(:lor, wl[:ded + 0.49sw, :lod] >> 1ms >> 1md);
+    }
+
+    # point.de.Lohnde-Seelze  de.1700
+
+    with link = "line.de.1750" {
+        track(:lor, wl[:lod, :sew] >> 1ms >> 1md);
+    }
+
+    # point.de.point.de.Seelze-West  de.1700
+
+    with link = "line.de.1750" {
+        # DE 1750 dn
+        track(:single :dn:lor:rup,
+                wl[:sew, :see + 550m] >> 0.5md >> 1ms >> 0.5mt
+        );
+        track(:single :dn:lor:rup,
+                wl[:see + 550m, :sem] >> 0.5md >> 1ms >> 0.5mt
+        );
+
+        # DE 1750 up
+        track(:single :up:rdn,
+                wl[:sew, :sew + 0.1dl] >> 1.5md >> 1ms << 0.5mt
+            ..  wl[:see + 550m, :see + 551m] >> 1.5md >> 3ms >> 1.5mt
+        );
+        track(:single :dn:lor:rup,
+                wl[:see + 550m, :sem] >> 1.5md >> 3ms >> 1.5mt
+        );
+    }
+
+    with link = "point.de.Seelze-Mitte", railway = :station {
+        marker(:right :de.bft :nopax,
+            wl[:sem] >> 1.5md >> 3ms >> 2mt,
+            wl[:sem] >> 0.5md >> 1ms
+        );
+        slabel(:ne :xsmall,
+            wl[:sem] >> 1.5md >> 3ms >> 2mt >> 1sh + (1dt, 0.3dt),
+            "Seelze Mitte"
+        );
+    }
+
+    with link = "point.de.Seelze-Rbf", railway = :station :single {
+        # DE 1750 dn
+        track(wl[:sem, :ser + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+
+        # DE 1701
+        track(:double, wl[:ser - 0.5sw, :ser + 0.5sw] >> 1md >> 2ms >> 1mt);
+
+        # DE 1750 up
+        track(wl[:sem, :ser + 0.5sw] >> 1.5md >> 3ms >> 1.5mt);
+
+        marker(:right :de.bbf,
+            wl[:ser] >> 1.5md >> 3ms >> 2mt,
+            wl[:ser] >> 0.5md >> 1ms
+        );
+        slabel(:bottom:bold,
+            wl[:ser] >> 1.5md >> 3ms >> 2mt >> 1sh + (1dt, 4dt),
+            "Seelze Rbf"
+        );
+    }
+
+    with link = "point.de.Seelze-Ost", railway = :station :single {
+        # DE 1750 dn
+        track(wl[:ser + 0.49sw, :let.yl] >> 0.5md >> 1ms >> 0.5mt);
+
+        # DE 1701
+        track(:double, wl[:ser + 0.49sw, :let.yl] >> 1md >> 2ms >> 1mt);
+
+        # DE 1750 up
+        track(wl[:ser + 0.49sw, :let.yl] >> 1.5md >> 3ms >> 1.5mt);
+
+        marker(:right :de.bft,
+            wl[:seo] >> 1.5md >> 3ms >> 2mt,
+            wl[:seo] >> 0.5md >> 1ms
+        );
+        slabel(:nw :xsmall,
+            wl[:seo] >> 1.5md >> 3ms >> 2mt >> 1sh + (-2dt, 0.3dt),
+            "Seelze Ost"
+        );
+    }
+
+    with link = "line.de.1750" {
+        # DE 1750 dn
+        track(:single :dn:lor:rup :casing,
+                wl[:let.yl - 0.1dl, :let.yl] >> 0.5md >> 1ms >> 0.5mt
+            ..  wl[:let.xl + 6md, :let.xl + 6.01md] << 0.5md >> 0.5mt
+        );
+
+        # DE 1750 up
+        track(:single :dn:lor:rup,
+                wl[:let.yl - 0.1dl, :let.yl] >> 1.5md >> 3ms >> 1.5mt
+            ..  wl[:let.xl + 6md, :let.xl + 6.01md] >> 0.5md << 0.5mt
+        );
+    }
+}
+

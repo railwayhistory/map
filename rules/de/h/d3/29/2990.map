@@ -1,0 +1,109 @@
+# DE 2990.  Minden (Westf) - Hamm (Westf) Rbf Hvn
+#
+let hh = path("d3.de.h.1700");
+
+with detail = 3,
+     railway = :first :double :cat:ac15 :nopax
+{
+    # point.de.Minden-Westf-Gbf  de.1700
+    # point.de.Minden-Westf  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:min + 600m, :poo.yh - 1dl] >> 1ms >> 1md);
+    }
+
+    # point.de.Porta-Po  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:poo + 0.49sw, :poh - 0.49sw] >> 1ms >> 1md);
+    }
+
+    # point.de.Porta-Po  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:poo + 0.49sw, :poh - 0.49sw] >> 1ms >> 1md);
+    }
+
+    # point.de.Porta-Westfalica-Hp  de.1700
+
+    with link = "line.de.2990" {
+        with layer = -1 track(:lor,
+            hh[:poh - 0.5sw, :poh + 0.5sw] >> 1ms >> 1md
+        );
+        track(:lor, hh[:poh + 0.49sw, :ven - 0.49sw] >> 1ms >> 1md);
+    }
+
+    with link = "point.de.Vennebeck", railway = :station {
+        with layer = -1 track(:pax, hh[:ven - 0.5sw, :ven + 0.5sw]);
+        track(hh[:ven - 0.5sw, :ven + 0.5sw] >> 1ms >> 1md);
+        marker(:left :de.gbf :nopax,
+            hh[:ven] << 0.5md, hh[:ven] >> 1ms >> 1.5md
+        );
+        marker(:left :de.exbf :nopax, hh[:ven] << 0.5md);
+        slabel(:right :nopax, hh[:ven] << 0.5md << 1.5sh + (1.5dt, 1.5dt),
+            "Vennebeck"
+        );
+    }
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:ven + 0.49sw, :wes] >> 1ms >> 1md);
+    }
+
+    # point.de.Weserbrücke-Vennebeck  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:wes, :oea - 0.49sw] >> 1ms >> 1md);
+    }
+
+    with link = "point.de.Bad-Oeynhausen-Gbf", railway = :station {
+        track(hh[:oea - 0.5sw, :oeg + 0.5sw] >> 1ms >> 1md);
+        marker(:right :de.gbf :nopax, hh[:oeg] >> 1ms >> 1.5md);
+        slabel(:left :nopax, hh[:oeg] >> 1ms >> 1.5md >> 1sh + (1.5dt, -1dt),
+            "Bad Oeynhausen Gbf"
+        );
+    }
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:oeg + 0.49sw, :oey - 0.49sw] >> 1ms >> 1md);
+    }
+
+    # point.de.Bad-Oeynhausen  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:oey + 0.49sw, :goh - 0.49sw] >> 1ms >> 1md);
+    }
+
+    with link = "point.de.Gohfeld", railway = :station {
+        # DE 1700
+        with layer = -1 track(:pax, hh[:goh - 0.5sw, :goh + 0.5sw]);
+
+        # DE 2990
+        track(hh[:goh - 0.5sw, :goh + 0.5sw] >> 1ms >> 1md);
+
+        marker(:left :de.gbf :nopax :casing,
+            hh[:goh] << 0.5md, hh[:goh] >> 1ms >> 1.5md
+        );
+        marker(:left :de.exbf :nopax :casing, hh[:goh] << 0.5md);
+        slabel(:left :nopax, hh[:goh] >> 1ms >> 1.5md + (1.5dt, -1dt),
+            "Gohfeld"
+        );
+    }
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:goh + 0.49sw, :loh.ah] >> 1ms >> 1md);
+    }
+
+    # point.de.Löhne-Westf-Pbf  de.1700
+    # point.de.Löhne-Westf-Gbf  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:log.yh, :fal] >> 1ms >> 1md);
+    }
+
+    # point.de.Falscheide-Löhne  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:fal, :lgr] >> 1ms >> 1md);
+    }
+}
+

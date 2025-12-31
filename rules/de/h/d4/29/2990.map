@@ -1,0 +1,111 @@
+# DE 2990.  Minden (Westf) - Hamm (Westf) Rbf Hvn
+#
+let hh = path("d3.de.h.1700");
+
+with detail = 4,
+     railway = :first :double :cat:ac15 :nopax
+{
+    # point.de.Minden-Westf-Gbf  de.1700
+    # point.de.Minden-Westf  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:min + 600m, :poo.yh - 1dl] >> 2mo);
+    }
+
+    # point.de.Porta-Po  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:poo + 0.49sw, :poh - 0.49sw] >> 2mo);
+    }
+
+    # point.de.Porta-Westfalica  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:poh + 0.49sw, :ven - 0.49sw] >> 2mo);
+    }
+
+    with link = "point.de.Vennebeck", railway = :station {
+        with layer = -1 track(:pax, hh[:ven - 0.5sw, :ven + 0.5sw]);
+        track(hh[:ven - 0.5sw, :ven + 0.5sw] >> 2mo);
+        marker(:left :de.gbf :nopax,
+            hh[:ven] << 0.5mo << 0.5mt, hh[:ven] >> 2.5mo >> 0.5mt
+        );
+        marker(:left :de.exbf :nopax, hh[:ven] << 0.5mo << 0.5mt);
+        station(:right:left_align :nopax,
+            hh[:ven] << 0.5mo << 0.5mt << 1.5sh + (1.8dt, 2dt),
+            "Vennebeck",
+            hbox(:center:base,
+                "2990\u{2009}·\u{2009}", span(:former, "1700"), ": 73,938"
+            )
+        );
+    }
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:ven + 0.49sw, :wes] >> 2mo);
+    }
+
+    # point.de.Weserbrücke-Vennebeck  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:wes, :oea - 0.49sw] >> 2mo);
+    }
+
+    with link = "point.de.Bad-Oeynhausen-Gbf", railway = :station {
+        track(hh[:oea - 0.5sw, :oeg + 0.5sw] >> 2mo);
+        marker(:right :de.gbf :nopax, hh[:oeg] >> 2.5mo >> 0.5mt);
+        station(:top :nopax,
+            hh[:oeg] >> 2.5mo >> 0.5mt >> 1sh + (-0.5dt, -0.8dt),
+            "Bad Oeynhausen Gbf",
+            "2990: 78,200"
+        );
+    }
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:oeg + 0.49sw, :oey - 0.49sw] >> 2mo);
+    }
+
+    # point.de.Bad-Oeynhausen  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:oey + 0.49sw, :goh - 0.49sw] >> 2mo);
+    }
+
+    with link = "point.de.Gohfeld", railway = :station {
+        # DE 1700
+        with layer = -1 track(:pax, hh[:goh - 0.5sw, :goh + 0.5sw]);
+
+        # DE 2990
+        track(hh[:goh - 0.5sw, :goh + 0.5sw] >> 2mo);
+
+        marker(:left :de.gbf :nopax,
+            hh[:goh] << 0.5mo << 0.5mt, hh[:goh] >> 2.5mo >> 0.5mt
+        );
+        marker(:left :de.exbf :nopax, hh[:goh] << 0.5mo << 0.5mt);
+        station(:top:right_align :nopax,
+            hh[:goh] >> 2.5mo >> 0.5mt + (1.5dt, -1dt),
+            "Gohfeld",
+            hbox(:center:base,
+                "2990\u{2009}·\u{2009}", span(:former, "1700"), ": 82,101"
+            )
+        );
+    }
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:goh + 0.49sw, :loh.ah] >> 2mo);
+    }
+
+    # point.de.Löhne-Westf-Pbf  de.1700
+    # point.de.Löhne-Westf-Gbf  de.1700
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:log.yh, :fal] >> 2mo);
+    }
+
+    # point.de.Falscheide-Löhne  de.1700
+
+    with link = "line.de.2990" {
+        track(:lor, hh[:fal, :lgr] >> 2mo);
+    }
+}
+
+

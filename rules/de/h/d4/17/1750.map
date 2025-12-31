@@ -1,0 +1,158 @@
+# DE 1750.  Wunstorf - Hannover-Linden - Lehrte Nord
+#
+let wl = path("d3.de.1750");
+
+with detail = 4,
+     railway = :first :double :cat:ac15 :nopax
+{
+    with link = "line.de.1751" {
+        track(:lor, wl[:wun + 1099m, :gum.yw] >> 2mo);
+
+        # dn
+        with layer = -1 track(:single :lor:ror,
+            wl[:gum.yw - 0.1dl, :gum - 3dl] >> 1.5mo
+        );
+
+        # up
+        track(:single :lor,
+                wl[:gum.yw - 0.1dl, :gum.yw] >> 2.5mo
+            ..  wl[:gum.xw - 0.1dl, :gum.xw] >> 6.5mo
+        );
+        track(:single :lor,
+                wl[:gum.xw - 0.1dl, :gum.xw] >> 6.5mo
+            ..  wl[:gum - 3.1dl, :gum - 3dl] >> 4.5mo
+        );
+    }
+
+    with link = "point.de.Gümmerwald", railway = :station :single {
+        track(wl[:gum - 3.1dl, :gum + 3.1dl] >> 1.5mo);
+        track(
+                wl[:gum - 3.1dl, :gum + 0.3dl] >> 2.5mo
+            --  wl[:gum + 1.3dl, :gum + 1.31dl] >> 1.5mo
+        );
+        track(wl[:gum - 3.1dl, :gum + 1dl] >> 3.5mo);
+        track(
+                wl[:gum - 3.1dl, :gum] >> 4.5mo
+            --  wl[:gum + 2dl, :gum + 3.1dl] >> 2.5mo
+        );
+
+        marker(:right :de.abzw, wl[:gum] >> 4.5mo >> 0.5mt);
+        station(:bottom, wl[:gum] >> 4.5mo >> 0.5mt >> 1sh + (-2dt, 0.5dt),
+            span(:small :bold, "Gümmerwald"),
+            hbox(:center:top,
+                vbox(:right:top, "1750: ", "1751: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "4,", anchor(), "015"),
+                    hbox(:sep:top, "4,", anchor(), "041")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1750" {
+        track(wl[:gum + 3dl, :ded - 0.49sw] >> 2mo);
+    }
+
+    # point.de.Dedensen-Gümmer  de.1700
+
+    with link = "line.de.1750" {
+        track(:lor, wl[:ded + 0.49sw, :lod] >> 2mo);
+    }
+
+    # point.de.Lohnde-Seelze  de.1700
+
+    with link = "line.de.1750" {
+        track(:lor, wl[:lod, :sew] >> 2mo);
+    }
+
+    # point.de.Seelze-West  de.1700
+
+    with link = "line.de.1750" {
+        # DE 1750 dn
+        track(:single :dn:lor:rup, wl[:sew, :see + 550m] >> 1.5mo);
+        track(:single :dn:lor:rup, wl[:see + 550m, :sem] >> 1.5mo);
+
+        # DE 1750 up
+        track(:single :up:rdn,
+                wl[:sew, :sew + 0.1dl] >> 2.5mo
+            ..  wl[:see + 550m, :see + 551m] >> 4.5mo
+        );
+        track(:single :dn:lor:rup,
+                wl[:see + 550m, :sem] >> 4.5mo
+        );
+    }
+
+    with link = "point.de.Seelze-Mitte", railway = :station {
+        marker(:right :de.bft :nopax,
+            wl[:sem] >> 4.5mo >> 0.5mt,
+            wl[:sem] >> 1.5mo << 0.5mt
+        );
+        station(:bottom,
+            wl[:sem] >> 4.5mo >> 0.5mt >> 1sh + (0dt, 0.3dt),
+            span(:small, "Seelze Mitte"),
+            "1750: 11,500"
+        );
+    }
+
+    with link = "point.de.Seelze-Rbf", railway = :station :single {
+        # DE 1750 dn
+        track(wl[:sem, :ser + 0.5sw] >> 1.5mo);
+
+        # DE 1701
+        track(:double, wl[:ser - 0.5sw, :ser + 0.5sw] >> 3mo);
+
+        # DE 1750 up
+        track(wl[:sem, :ser + 0.5sw] >> 4.5mo);
+
+        marker(:right :de.bbf,
+            wl[:ser] >> 4.5mo >> 0.5mt,
+            wl[:ser] >> 1.5mo << 0.5mt
+        );
+        station(:bottom, wl[:ser] >> 4.5mo >> 0.5mt >> 1sh + (2dt, 0.5dt),
+            span(:bold, "Seelze Rbf"),
+            hbox(:center:top,
+                vbox(:right:top, "1750: ", "1701: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "12,", anchor(), "34"),
+                    hbox(:sep:base, "9,", anchor(), "13")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Seelze-Ost", railway = :station :single {
+        # DE 1750 dn
+        track(wl[:ser + 0.49sw, :let - 80m] >> 1.5mo);
+        track(wl[:let - 81m, :let.yl] >> 1.5mo);
+
+        # DE 1701
+        track(:double, wl[:ser + 0.49sw, :let - 80m] >> 3mo);
+        track(:double,
+                wl[:let - 81m, :let - 80m] >> 3mo
+            ..  wl[:let.yl - 0.1dl, :let.yl] >> 3.5mo
+        );
+
+        # DE 1750 up
+        track(wl[:ser + 0.49sw, :let - 80m] >> 4.5mo);
+        track(
+                wl[:let - 81m, :let - 80m] >> 4.5mo
+            ..  wl[:let.yl - 0.1dl, :let.yl] >> 5mo
+        );
+    }
+
+    with link = "line.de.1750" {
+        # DE 1750 dn
+        track(:single :dn:lor:rup :casing,
+                wl[:let.yl - 0.1dl, :let.yl] >> 1.5mo
+            ..  wl[:let.xl + 7mo, :let.xl + 7.01mo] << 0.5mo
+        );
+
+        # DE 1750 up
+        track(:single :dn:lor:rup,
+                wl[:let.yl - 0.1dl, :let.yl] >> 5mo
+            ..  wl[:let.xl + 7mo, :let.xl + 7.01mo] >> 0.5mo
+        );
+
+    }
+}
+

@@ -1,0 +1,600 @@
+# DE 1700.  Hannover Hbf - Hamm (Westf)
+#
+let hh = path("d3.de.e.1700");
+
+with detail = 4,
+     railway = :first :double :cat:ac15 :pax
+{
+    with link = "line.de.1700" {
+        track(:ror:lor, hh[:lgr, :her.yk]);
+        track(:ror:lor, hh[:her.yk, :swe - 0.5sw]);
+        track(:ror:lor, hh[:swe - 0.5sw, :swe + 0.5sw]);
+        track(:ror:lor, hh[:swe + 0.5sw, :her - 0.5sw]);
+    }
+
+    with link = "point.de.Herford", railway = :station :single {
+        # DE 2980 - DE 2981
+        track(hh[:her - 0.5sw, :her.yh] << 1.5mo);
+
+        # DE 1700
+        track(:double, hh[:her - 0.5sw, :her.yh + 50m]);
+
+        # DE 2990
+        track(:double :nopax, hh[:her - 0.5sw, :her.yh + 50m] >> 2mo);
+
+        marker(:left :de.bf, hh[:her] << 1.5mo << 0.5mt);
+        station(:right:left_align,
+            hh[:her] << 1.5mo << 0.5mt << 1sh + (1.5dt, 1.8dt),
+            span(:bold, "Herford"),
+            hbox(:center:top, 
+                vbox(:right:top, "2900: ", "1700: ", "2981: ", "2980: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "95,", anchor(), "598"),
+                    hbox(:sep:base, "95,", anchor(), "598"),
+                    hbox(:sep:base, "−0,", anchor(), "011"),
+                    hbox(:sep:base, "−0,", anchor(), "050")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:her.yh + 50m, :her.yh + 2.4km]);
+        line_label(:left:nw, hh[:her.yh + 2.4km] << 0.5mo << 0.5mt, "1700");
+        track(:ror, hh[:her.yh + 2.4km, :ste - 0.3sw]);
+    }
+
+    with link = "point.de.Stedefreund", railway = :station {
+        track(hh[:ste - 0.3sw, :ste + 0.5sw]);
+        track(:nopax, hh[:ste - 0.3sw, :ste + 0.5sw] >> 2mo);
+        marker(:right :de.bk :removed, hh[:ste] >> 2.5mo >> 0.5mt);
+        station(:left:right_align :removed,
+            hh[:ste] >> 2.5mo >> 0.5mt >> 1sh + (-1.3dt, 1dt),
+            span(:small, "Stedefreund"),
+            "2990\u{2009}·\u{2009}1700: 100,40"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:ste + 0.3sw, :brk - 0.5sw]);
+    }
+
+    with link = "point.de.Brake-Bielefeld-Hp", railway = :station {
+        track(hh[:brk - 0.5sw, :brk + 0.5sw]);
+        marker(:left :de.hp, hh[:brk] << 0.5mo << 0.5mt);
+        marker(:left :de.exbf, hh[:brk] << 0.5mo << 0.5mt);
+        station(:right, hh[:brk] << 1.5mo << 0.5mt << 1sh + (0.5sw, -0.3dt),
+            hbox(:left:top,
+                hbox(:left:base,
+                    "Brake ", span(:light, "(b Bielefeld)"), " Hp"
+                )
+            ),
+            "1700: 102,520"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:brk + 0.5sw, :tal - 0.3sw]);
+    }
+
+    with link = "point.de.Talbrücke-Brake", railway = :station {
+        track(hh[:tal - 0.3sw, :tal + 0.3sw]);
+        track(:nopax, hh[:tal - 0.3sw, :tal + 0.3sw] >> 2mo);
+        marker(:right :de.bk :removed, hh[:tal] >> 2.5mo >> 0.5mt);
+        station(:left:right_align :removed,
+            hh[:tal] >> 2.5mo >> 0.5mt >> 1sh + (-1.5dt, 0.5dt),
+            span(:small, "Talbrücke"),
+            "2990\u{2009}·\u{2009}1700: 104,94"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:tal + 0.3sw, :eis - 0.3sw]);
+    }
+
+    with link = "point.de.Eissen-Bielefeld", railway = :station {
+        track(hh[:eis - 0.3sw, :eis + 0.3sw]);
+        track(:nopax, hh[:eis - 0.3sw, :eis + 0.3sw] >> 2mo);
+        marker(:right :de.bk :removed, hh[:eis] >> 2.5mo >> 0.5mt);
+        station(:left:right_align :removed,
+            hh[:eis] >> 2.5mo >> 0.5mt >> 1sh + (-1.5dt, 0.5dt),
+            span(:small, "Eissen"),
+            "2990\u{2009}·\u{2009}1700: 106,23"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:eis + 0.3sw, :biv - 0.5sw]);
+        track(:ror, hh[:biv - 0.5sw, :biv + 0.5sw]);
+        track(:ror, hh[:biv + 0.5sw, :bie.yl - 50m]);
+    }
+
+    with link = "point.de.Bielefeld-Hbf", railway = :single :station {
+        # DE 2984
+        track(
+                hh[:bie.yl, :bie + 230m - 1dl] << 1.5mo
+            --  hh[:bie + 230m, :bie + 231m] << 0.5mo
+        );
+
+        # DE 1700
+        track(:double, hh[:bie.yl - 50m, :bie + 260m]);
+
+        # DE 2990
+        track(:double :nopax, hh[:bie.yl - 50m, :bie + 260m] >> 2mo);
+
+        marker(:left :de.bf, hh[:bie] << 1.5mo << 0.5mt);
+        station(:right, hh[:bie] << 1.5mo << 1mt << 1.45sh + (0dt, 1dt),
+            span(:bold, "Bielefeld Hbf"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax, "2990: "),
+                    "1700: ",
+                    span(:nocat, "2984: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax, "109,", anchor(), "450"),
+                    hbox(:sep:base, "109,", anchor(), "450"),
+                    hbox(:sep:base :nocat, "21,", anchor(), "771")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:bie + 260m, :gne - 0.3sw]);
+    }
+
+    with link = "point.de.Gneisenaustraße-Bielefeld", railway = :station {
+        track(hh[:gne - 0.3sw, :gne + 0.3sw]);
+        track(:nopax, hh[:gne - 0.3sw, :gne + 0.3sw] >> 2mo);
+        marker(:left :de.bk :removed, hh[:gne] << 0.5mo << 0.5mt);
+        station(:right :removed,
+            hh[:gne] << 0.5mo << 0.5mt << 1sh + (1dt, 1.8dt),
+            span(:small, "Gneisenaustraße"),
+            "2990\u{2009}·\u{2009}1700: 111,45"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:gne + 0.3sw, :brg - 0.5sw]);
+        track(:ror, hh[:brg - 0.5sw, :brg + 0.5sw]);
+        track(:ror, hh[:brg + 0.5sw, :bra - 600m]);
+    }
+
+    with link = "point.de.Brackwede", railway = :single :station {
+        # DE 1700
+        track(:double, hh[:bra - 600m, :bra.yp + 250m]);
+
+        # DE 2960
+        track(:single,
+                hh[:bra - 551m + 1.4dl, :bra - 550m + 1.4dl] >> 0.5mo
+            --  hh[:bra - 550m + 2.4dl, :bra.yp] >> 1.5mo
+        );
+
+        # DE 2990
+        track(:nopax,
+                hh[:bra - 600m, :bra - 550m + 0.7dl] >> 1.5mo
+            --  hh[:bra - 550m + 1.7dl, :bra.yp] >> 2.5mo
+        );
+        track(:nopax,
+                hh[:bra - 600m, :bra - 550m] >> 2.5mo
+            --  hh[:bra - 550m + 1dl, :bra.yp] >> 3.5mo
+        );
+
+        # DE 2950
+        track(:single,
+                hh[:bra - 201m, :bra - 200m] >> 3.5mo
+            --  hh[:bra - 200m + 1dl, :bra.yo] >> 4.5mo
+        );
+
+        marker(:left :de.bf, hh[:bra] << 0.5mo << 0.5mt);
+        station(:right:left_align,
+            hh[:bra] << 0.5mo << 0.5mt << 1.5sh + (0dt, 1dt),
+            span(:bold, "Brackwede"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nocat, "2950: "),
+                    span(:nopax, "2990: "),
+                    "1700: ",
+                    span(:nocat, "2960: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nocat, "−0,", anchor(), "020"),
+                    hbox(:sep:base :nopax, "113,", anchor(), "770"),
+                    hbox(:sep:base, "113,", anchor(), "770"),
+                    hbox(:sep:base :nocat, "40,", anchor(), "025")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        with layer = -1 track(:ror, hh[:bra.yp + 250m, :bra.xp]);
+        track(:ror, hh[:bra.xp, :boc - 0.3sw]);
+    }
+
+    with link = "point.de.Bockschatz-Brackwede", railway = :station {
+        track(hh[:boc - 0.3sw, :boc + 0.5sw]);
+        track(:nopax, hh[:boc - 0.3sw, :boc + 0.5sw] >> 2mo);
+        marker(:left :de.bk :removed, hh[:boc] << 0.5mo << 0.5mt);
+        station(:right:left_align :removed,
+            hh[:boc] << 0.5mo << 0.5mt << 1sh + (1.3dt, 1.5dt),
+            span(:small, "Bockschatz"),
+            "2990\u{2009}·\u{2009}1700: 116,68"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:boc + 0.3sw, :umm - 0.5sw]);
+    }
+
+    with link = "point.de.Ummeln", railway = :station {
+        track(hh[:umm - 0.5sw, :umm + 0.5sw]);
+        track(:nopax, hh[:umm - 0.5sw, :umm + 0.5sw] >> 2mo);
+        marker(:left :de.hp.bk :removed, hh[:umm] << 0.5mo << 0.5mt);
+        station(:right:left_align :removed,
+            hh[:umm] << 0.5mo << 0.5mt << 1.6sh + (0dt, 1dt),
+            "Ummeln",
+            "2990\u{2009}·\u{2009}1700: 116,68"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:umm + 0.5sw, :isa - 0.5sw]);
+    }
+
+    with link = "point.de.Isselhorst-Avenwedde", railway = :station {
+        track(hh[:isa - 0.5sw, :iss + 0.5sw]);
+        marker(:left :de.hp, hh[:iss] << 0.5mo << 0.5mt);
+        marker(:left :de.exbf, hh[:iss] << 0.5mo << 0.5mt);
+        station(:right, hh[:iss] << 0.5mo << 0.5mt << 2sh + (0.3dt, 1dt),
+            "Isselhorst-Avenwedde",
+            hbox(:center:top,
+                vbox(:right:top, span(:former, "2990: "), "1700: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :former, "121,", anchor(), "760"),
+                    hbox(:sep:base, "121,", anchor(), "760")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        with layer = -1 track(:ror:lor,
+                hh[:iss + 0.5sw, :iss.zs + 0.1dl]
+        );
+        track(:lor, hh[:iss.zs, :gut.yh - 950m]);
+        track(:lor :casing, hh[:gut.yh - 950m, :gut.yh - 200m]);
+    }
+
+    with link = "point.de.Gütersloh-Hbf", railway = :station {
+        # DE 1700
+        track(hh[:gut.yh - 200m, :gut + 0.5sw]);
+
+        # DE 2990
+        track(:nopax, hh[:gut.yh - 200m, :gut + 0.5sw] << 2mo);
+
+        marker(:right :de.bf, hh[:gut] >> 0.5mo >> 0.5mt);
+        label(hh[:gut] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, 0.7dt),
+            vbox(:right:base,
+                span(:former, "Gütersloh Stsbf"),
+                span(:former, "Gütersloh Reichsb"),
+                vbox(:center:topbase,
+                    span(:bold, "Gütersloh Hbf"),
+                    span( :xsmall,
+                        "1700\u{2009}·\u{2009}2990: 126,878"
+                    )
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:gut + 0.5sw, :hei - 0.5sw]);
+    }
+
+    with link = "point.de.Heidkamp", railway = :station {
+        # DE 1700
+        track(hh[:hei - 0.5sw, :hei + 0.5sw]);
+
+        # DE 2990
+        track(:nopax, hh[:hei - 0.5sw, :hei + 0.5sw] << 2mo);
+
+        marker(:left :de.bk :removed, hh[:hei] << 2.5mo << 0.5mt);
+        station(:right:left_align :removed,
+            hh[:hei] << 2.5mo << 0.5mt << 1sh + (1dt, 1.8dt),
+            span(:small, "Heidkamp"),
+            "1700\u{2009}·\u{2009}2990: 129,73"
+
+        )
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:hei + 0.5sw, :ems - 0.5sw]);
+    }
+
+    with link = "point.de.Rheda-Ems", railway = :station {
+        # DE 1700
+        track(hh[:ems - 0.5sw, :ems + 0.5sw]);
+
+        # DE 2990
+        track(:nopax, hh[:ems - 0.5sw, :ems + 0.5sw] << 2mo);
+
+        marker(:left :de.bk :removed, hh[:ems] << 2.5mo << 0.5mt);
+        station(:right:left_align :removed,
+            hh[:ems] << 2.5mo << 0.5mt << 1sh + (1dt, 1.8dt),
+            span(:small, "Ems"),
+            "1700\u{2009}·\u{2009}2990: 132,34"
+        )
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:ems + 0.5sw, :rhe.yl - 500m]);
+    }
+
+    with link = "point.de.Rheda-Wiedenbrück", railway = :single :station {
+        # DE 1700
+        track(:double, hh[:rhe.yl - 500m, :rhe.ym + 300m]);
+
+        # DE 2990
+        track(:double :nopax, hh[:rhe.yl - 500m, :rhe.ym + 300m] << 2mo);
+
+        # DE 2951 - DE 2013
+        track(:single :removed,
+                hh[:rhe.yl, :rhe.yl + 30m + 1dl] << 3.5mo
+        );
+        track(:single :nopax :nocat,
+                hh[:rhe.yl + 29m, :rhe.yl + 30m] << 2.5mo
+            --  hh[:rhe.yl + 30m + 1dl, :rhe] << 3.5mo
+        );
+        track(:single :nocat, hh[:rhe, :rhe.ym] << 3.5mo);
+
+        marker(:left :de.bf, hh[:rhe] << 3.5mo << 0.5mt);
+        station(:bottom, hh[:rhe] << 3.5mo << 0.5mt << 1.4sh + (2dt, 0dt),
+            vbox(:center:top,
+                hbox(:center:base :former,
+                    "Rheda ", span(:light, "in Westf")
+                ),
+                hbox(:center:base :former,
+                    "Rheda ", span(:light, "(Bz Minden)")
+                ),
+                hbox(:center:base :former,
+                    "Rheda ", span(:light, "(Westf)")
+                ),
+                span(:bold, "Rheda-Wiedenbrück")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax, "2990: "),
+                    "1700: ",
+                    span(:nocat, "2013: "),
+                    span(:removed, "2951: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax, "135,", anchor(), "790"),
+                    hbox(:sep:base, "135,", anchor(), "793"),
+                    hbox(:sep:base :nocat, "50,", anchor(), "103"),
+                    hbox(:sep:base :removed, "24,", anchor(), "03")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:casing :lor, hh[:rhe.ym + 300m, :rhe.ym + 1km]);
+        track(:lor, hh[:rhe.ym + 1km, :bro]);
+    }
+
+    with link = "point.de.Brock-Rheda", railway = :station {
+        marker(:right :de.bk :removed, hh[:bro] >> 0.5mo >> 0.5mt);
+        station(:top :removed,
+            hh[:bro] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, -0.5dt),
+            span(:small, "Brock"),
+            "1700\u{2009}·\u{2009}2990: 139,91"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:bro, :men]);
+    }
+
+    with link = "point.de.Menninghausen-Oelde", railway = :station {
+        marker(:right :de.bk :removed, hh[:men] >> 0.5mo >> 0.5mt);
+        station(:top :removed,
+            hh[:men] >> 0.5mo >> 0.5mt >> 1sh + (-3.5dt, -0.5dt),
+            span(:small, "Menninghausen"),
+            "1700\u{2009}·\u{2009}2990: 143,45"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:men, :oel - 0.49sw]);
+    }
+
+    with link = "point.de.Oelden", railway = :station {
+        track(:nopax, hh[:oel - 0.5sw, :oel + 0.5sw] << 2mo);
+        track(hh[:oel - 0.5sw, :oel + 0.5sw]);
+        marker(:left :de.bf, hh[:oel] << 2.5mo << 0.8mt);
+        station(:bottom, hh[:oel] << 2.5mo << 0.5mt << 1sh + (0.3dt, 0.5dt),
+            "Oelde",
+            "1700\u{2009}·\u{2009}2990: 146,161"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:oel + 0.49sw, :hoh]);
+    }
+
+    with link = "point.de.Hohenhagen-Oelde", railway = :station {
+        marker(:right :de.bk :removed, hh[:hoh] >> 0.5mo >> 0.5mt);
+        station(:top :removed,
+            hh[:hoh] >> 0.5mo >> 0.5mt >> 1sh + (-3.5dt, -0.5dt),
+            span(:small, "Hohenhagen"),
+            "1700\u{2009}·\u{2009}2990: 150,08"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:hoh, :ang]);
+    }
+
+    with link = "point.de.Angelbach-Neubeckum", railway = :station {
+        marker(:right :de.bk :removed, hh[:ang] >> 0.5mo >> 0.5mt);
+        station(:top :removed,
+            hh[:ang] >> 0.5mo >> 0.5mt >> 1sh + (-3.5dt, -0.7dt),
+            span(:small, "Angelbach"),
+            "1700\u{2009}·\u{2009}2990: 152,43"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:ang, :nbe.yw - 0.5seg]);
+    }
+
+    with link = "point.de.Neubeckum", railway = :single :station {
+        # DE 2940
+        track(:nopax,
+                hh[:nbe - 431m, :nbe - 430m] << 2.5mo
+            --  hh[:nbe - 430m + 1dl, :nbe.yb] << 3.5mo
+        );
+
+        # DE 2990
+        track(:double :nopax, hh[:nbe.yw - 0.5seg, :nbe.yb] << 2mo);
+
+        # DE 1700
+        track(:double, hh[:nbe.yw - 0.5seg, :nbe.yb]);
+
+        # DE 9214 - DE 9213
+        track(:nopax :nocat, hh[:nbe.yw, :nbe.ym] >> 1.5mo);
+
+        marker(:left :de.bf, hh[:nbe] << 3.5mo << 0.5mt);
+        station(:bottom, hh[:nbe] << 3.5mo << 0.5mt << 1sh + (3dt, 1dt),
+            vbox(:center:top,
+                span(:former, "Beckum"),
+                span(:former, "Beckum-Ennigerloh"),
+                span(:bold, "Neubeckum")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax :nocat, "9213: "),
+                    span(:nopax :nocat, "9214: "),
+                    "1700: ",
+                    span(:nopax, "2990: "),
+                    span(:nopax :nocat, "2940: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax :nocat, "0,", anchor(), "0"),
+                    hbox(:sep:base :nopax :nocat, "0,", anchor(), "0"),
+                    hbox(:sep:base, "155,", anchor(), "105"),
+                    hbox(:sep:base :nopax, "155,", anchor(), "105"),
+                    hbox(:sep:base :nopax :nocat, "0,", anchor(), "00")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Neubeckum-Pbf", railway = :station {
+        marker(:right :de.bft, hh[:nbe] >> 1.5mo >> 0.5mt);
+        slabel(:top :small,
+            hh[:nbe] >> 1.5mo >> 0.5mt >> 1sh + (-4dt, -0.8dt),
+            "Neubeckum Pbf"
+        );
+    }
+
+    with link = "point.de.Neubeckum-Gbf", railway = :station {
+        track(:nopax, hh[:nbe.yb, :nbg + 0.5sw] << 2mo);
+        track(hh[:nbe.yb, :nbg + 0.5sw]);
+
+        marker(:left :de.bft :nopax, hh[:nbg] << 2.5mo << 0.5mt);
+        station(:bottom :nopax,
+            hh[:nbg] << 2.5mo << 0.5mt << 1sh + (0dt, 0.8dt),
+            span(:small, "Neubeckum Gbf"),
+            "1700\u{2009}·\u{2009}2990: 156,500"
+       );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:nbg + 0.49sw, :vor - 0.49sw]);
+    }
+
+    with link = "point.de.Vorhelm", railway = :station {
+        track(hh[:vor - 0.5sw, :vor + 0.5sw]);
+        track(:nopax, hh[:vor - 0.5sw, :vor + 0.5sw] << 2mo);
+        marker(:right :de.bf :removed, hh[:vor] >> 0.5mo >> 0.5mt);
+        station(:top :removed,
+            hh[:vor] >> 0.5mo >> 0.5mt >> 1sh + (-3dt, -1dt),
+            "Vorhelm",
+            "1700\u{2009}·\u{2009}2990: 159,37"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:vor + 0.49sw, :ahg - 0.49sw]);
+        track(:lor, hh[:ahg - 0.5sw, :ahg + 0.5sw]);
+        track(:lor, hh[:ahg + 0.49sw, :ahl - 0.49sw]);
+    }
+
+    with link = "point.de.Ahlen-Westf", railway = :station {
+        track(hh[:ahl - 0.5sw, :ahl + 0.5sw]);
+        marker(:right :de.bf, hh[:ahl] >> 0.5mo >> 0.5mt);
+        station(:left, hh[:ahl] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, 1dt),
+            hbox(:right:base, "Ahlen ", span(:light, "(Westf)")),
+            "1700: 165,068"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:ahl + 0.49sw, :ric.yn]);
+        track(:lor:ror :casing, hh[:ric.yn - 0.1dl, :ric]);
+    }
+
+    with link = "point.de.Richterbach-Ahlen-Westf", railway = :station {
+        marker(:left :de.bk :removed :casing, hh[:ric] << 0.5mo << 0.5mt);
+        station(:right:left_align :removed,
+            hh[:ric] << 0.5mo << 0.5mt << 1sh + (1.3dt, 1.5dt),
+            span(:small, "Richterbach"),
+            "1700\u{2009}·\u{2009}2990: 167,72"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor:ror :casing, hh[:ric, :ric.ys + 0.1dl]);
+        track(:ror, hh[:ric.ys, :enn]);
+    }
+
+    with link = "point.de.Enninger-Heessen", railway = :station {
+        marker(:right :de.bk :removed :casing, hh[:enn] >> 2.5mo >> 0.5mt);
+        station(:left:right_align :removed,
+            hh[:enn] >> 2.5mo >> 0.5mt >> 1sh + (-1.5dt, 0.8dt),
+            span(:small, "Enninger"),
+            "1700\u{2009}·\u{2009}2990: 170,00"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:enn, :heh - 0.49sw]);
+    }
+
+    with link = "point.de.Heessen-Hp", railway = :station {
+        track(hh[:heh - 0.5sw, :heh + 0.5sw]);
+        track(:nopax, hh[:heh - 0.5sw, :heh + 0.5sw] >> 2mo);
+        marker(:left :de.hp, hh[:heh] << 0.5mo << 0.5mt);
+        station(:right :left_align,
+            hh[:heh] << 0.5mo << 0.5mt << 1sh + (1.5dt, 1.8dt),
+            "Heessen Hp",
+            "1700\u{2009}·\u{2009}2990: 172,339"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:heh + 0.49sw, :hee - 0.49sw]);
+    }
+
+    # point.de.Heessen  de.2990
+
+    with link = "line.de.1700" {
+        with layer = -1 track(:ror, hh[:hee + 0.49sw, :hee.yh]);
+        with layer = -1 track(:ror:lor, hh[:hee.yh, :ham.yf]);
+    }
+}
+

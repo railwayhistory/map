@@ -1,0 +1,791 @@
+# DE 1700.  Hannover Hbf - Hamm (Westf)
+#
+let hh = path("d3.de.h.1700");
+
+with detail = 4,
+     railway = :first :double :cat:ac15 :pax
+{
+    with link = "point.de.Hannover-Hbf", railway = :station {
+        track(hh[:han - 0.5sw, :han + 0.5sw]);
+        track(hh[:han - 0.5sw, :han + 0.5sw] << 2mo);
+        track(hh[:han - 0.5sw, :han + 0.5sw] << 4mo);
+        marker(:left :de.bf, hh[:han] << 4.5mo << 0.5mt);
+        label(hh[:han] >> 0.5mo >> 0.5mt + (1.5dt, -0.5dt),
+            hbox(:left:base, vbox(:center:base,
+                hbox(:center:base :xsmall,
+                    vbox(:right:base, "1700: "),
+                    vbox(:sep:base,
+                        hbox(:sep:base, "0,", anchor(), "000")
+                    )
+                ),
+                span(:bold, "Hannover Hbf")
+            ))
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:han + 0.49sw, :hha - 0.49sw]);
+    }
+
+    with link = "point.de.Hannover-Hainholz", railway = :station {
+        track(hh[:hha - 0.5sw, :hha + 0.5sw]);
+        track(hh[:hha - 0.5sw, :hha + 0.5sw] << 2mo);
+        marker(:right :de.hp :removed, hh[:hha] >> 0.5mo >> 0.5mt);
+        station(:right :removed,
+            hh[:hha] >> 0.5mo >> 0.5mt >> 1sh + (1.5dt, 0dt),
+            "H.-Hainholz",
+            hbox(:center:top,
+                vbox(:right:top, "1700: ", "1710: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "2,", anchor(), "64"),
+                    hbox(:sep:base, "2,", anchor(), "63")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:hha + 0.49sw, :hbu]);
+    }
+
+    with link = "point.de.Hannover-Burg", railway = :station {
+        marker(:right :de.bft :nopax, hh[:hbu] >> 0.5mo >> 0.5mt);
+        station(:top, hh[:hbu] >> 0.5mo >> 0.5mt >> 1sh + (0dt, -0.8dt),
+            span(:small, "H.-Burg"),
+            hbox(:center:top,
+                vbox(:right:top, "1700: ", "1710: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "3,", anchor(), "200"),
+                    hbox(:sep:base, "3,", anchor(), "190")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:hbu, :hbu.yc]);
+        track(:lor:ror :casing, hh[:hbu.yc - 0.1dl, :hle.yw + 0.1dl]);
+        track(:lor:ror, hh[:hle.yw, :hle - 0.49sw]);
+        track(:lor:ror, hh[:hle - 0.5sw, :hle + 0.5sw]);
+        track(:lor:ror, hh[:hle + 0.49sw, :kur - 0.9dl]);
+        track(:lor:ror, hh[:kur - 1dl, :kur + 0.51seg]);
+        track(:lor:ror, hh[:kur + 0.5seg, :lea + 0.1dl]);
+    }
+
+    with link = "point.de.Letter-Abzw", railway = :station {
+        track(hh[:lea, :lea.yr - 2mo]);
+        track(:nopax, hh[:lea, :lea.yr - 2mo] << 2mo);
+        marker(:right :de.abzw,
+            hh[:lea] >> 2.5mo >> 0.5mt,
+            hh[:lea] << 2.5mo << 0.5mt
+        );
+        station(:top, hh[:lea] >> 2.5mo >> 0.5mt >> 1sh + (0dt, -0.5dt),
+            span(:small, "Letter (Abzw)"),
+            hbox(:center:top,
+                vbox(:right:top, "1700: ", span(:nopax, "1701: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "6,", anchor(), "955"),
+                    hbox(:sep:base :nopax, "6,", anchor(), "967")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor:ror, hh[:lea.yr - 2.01mo, :let.yl + 0.1dl]);
+        track(:lor:ror, hh[:let.yl, :let + 0.5sw]);
+        track(:lor:ror, hh[:let + 0.49sw, :sem]);
+        track(:lor:ror, hh[:sem, :see - 549m]);
+    }
+
+    with link = "point.de.point.de.Seelze", railway = :station {
+        # DE 1700
+        track(hh[:see - 550m, :see + 450m]);
+
+        # DE 1705 dn
+        track(:single,
+                hh[:see - 550m, :see + 420m - 1dl] >> 1.5mo
+            --  hh[:see + 420m, :see + 421m] >> 0.5mo
+        );
+
+        # DE 1705 up
+        track(:single,
+                hh[:see - 551m, :see - 550m] >> 2.5mo
+            --  hh[:see - 550m + 1dl, :see - 550m + 1.1dl] >> 1.5mo
+        );
+
+        marker(:right :de.bf, hh[:see] >> 1.5mo >> 0.5mt);
+        station(:top,
+            hh[:see] >> 1.5mo >> 0.5mt >> 1sh + (0.5dt, -0.3dt),
+            span(:bold, "Seelze"),
+            hbox(:center:top,
+                vbox(:right:top, "1705: ", "1700: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "11,", anchor(), "097"),
+                    hbox(:sep:base, "11,", anchor(), "097")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:see + 450m, :sew]);
+    }
+
+    with link = "point.de.point.de.Seelze-West", railway = :station {
+        marker(:left :de.bft :nopax, hh[:sew] << 2.5mo << 0.5mt);
+        station(:bottom :nopax,
+            hh[:sew] << 2.5mo << 0.5mt << 1sh + (-1dt, 0.8dt),
+            span(:small, "Seelze West"),
+            hbox(:center:top,
+                vbox(:right:top, "1700: ", span(:nopax, "1750: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "11,", anchor(), "900"),
+                    hbox(:sep:base :nopax, "10,", anchor(), "400")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:sew, :lod]);
+    }
+
+    with link = "point.de.Lohnde-Seelze", railway = :station {
+        marker(:right :de.bk :removed, hh[:lod] >> 0.5mo >> 0.5mt);
+        station(:top :removed,
+            hh[:lod] >> 0.5mo >> 0.5mt >> 1sh + (1dt, -0.5dt),
+            span(:small, "Lohnde"),
+            hbox(:center:top,
+                vbox(:right:top, "1700: ", span(:nopax, "1750: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "14,", anchor(), "32"),
+                    hbox(:sep:base :nopax, "7,", anchor(), "09")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:lod, :ded - 0.49sw]);
+    }
+
+    with link = "point.de.Dedensen-Gümmer", railway = :station {
+        track(hh[:ded - 0.5sw, :ded + 0.5sw]);
+        track(:nopax, hh[:ded - 0.5sw, :ded + 0.5sw] << 2mo);
+        marker(:right :de.hp, hh[:ded] >> 0.5mo >> 0.5mt);
+        station(:top, hh[:ded] >> 0.5mo >> 0.5mt >> 1sh + (1.5dt, -0.7dt),
+            vbox(:center:base, span(:former, "Dedensen"), "Dedensen-Gümmer"),
+            hbox(:center:top,
+                vbox(:right:top, "1700: ", span(:nopax, "1750: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "16,", anchor(), "362"),
+                    hbox(:sep:base :nopax, "4,", anchor(), "950")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:ded + 0.49sw, :gum - 3dl]);
+        track(:lor, hh[:gum - 3.1dl, :gum + 3.1dl]);
+        with layer = -1 track(:lor:ror, hh[:gum + 3dl, :gum.yw + 0.1dl]);
+        track(:lor:ror, hh[:gum.yw, :wun - 1099m]);
+    }
+
+    with link = "point.de.Wunstorf", railway = :station :single {
+        let wb = path("d3.de.1740");
+
+        # DE 1750 dn
+        track(:nopax,
+                hh[:wun - 1100m, :wun + 450m - 2dl] << 2.5mo
+            --  hh[:wun + 450m, :wun + 451m] << 0.5mo
+        );
+
+        # DE 1750 up
+        track(:nopax,
+                hh[:wun - 1100m, :wun + 450m - 3dl] << 1.5mo
+            --  hh[:wun + 450m - 1dl, :wun + 451m] >> 0.5mo
+        );
+
+        # DE 1700 dn
+        track(hh[:wun - 1100m, :wun + 500m] << 0.5mo);
+
+        # DE 1700 up
+        track(hh[:wun - 1100m, :wun + 500m] >> 0.5mo);
+
+        # DE 1740 dn
+        track(
+                hh[:wun.xo - 0.1dl, :wun.xo] << 0.5mo
+            --  wb[:wun.xo + 2dl, :wun.ym + 300m] >> 0.5mo >> 1mt >> 1insh
+        );
+
+        # DE 1740 up
+        track(
+                hh[:wun.xo - 1.1dl, :wun.xo - 1dl] >> 0.5mo
+            --  wb[:wun.xo + 1dl, :wun.ym + 300m] >> 1.5mo >> 1mt >> 1insh
+        );
+
+        # DE 1751 dn
+        track(:nopax,
+                hh[:wun - 1100m, :wun.xo - 2dl] >> 1.5mo
+            --  wb[:wun.xo, :wun.yb + 650m] >> 2.5mo >> 1mt >> 1insh
+            --  wb[:wun.yb + 650m + 2dl, :wun.yb + 650m + 2.1dl]
+                    >> 0.5mo >> 1mt >> 1insh
+        );
+
+        # DE 1751 up
+        track(:nopax,
+                hh[:wun - 1100m, :wun.xo - 3dl] >> 2.5mo
+            --  wb[:wun.xo - 1dl, :wun.yb + 650m + 1dl]
+                    >> 3.5mo >> 1mt >> 1insh
+            --  wb[:wun.yb + 650m + 3dl, :wun.yb + 650m + 3.1dl]
+                    >> 1.5mo >> 1mt >> 1insh
+        );
+
+
+        marker(:right :de.inbf, hh[:wun] >> 0.5mo >> 0.5mt);
+        station(:top:left_align,
+            hh[:wun] >> 3.5mo >> 1mt >> 1insh + (0dt, -0.5dt),
+            span(:bold, "Wunstorf"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax, "1751: "),
+                    "1740: ", "1700: ",
+                    span(:nopax, "1750: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax, "0,", anchor(), "000"),
+                    hbox(:sep:base, "21,", anchor(), "401"),
+                    hbox(:sep:base, "21,", anchor(), "401"),
+                    hbox(:sep:base :nopax, "0,", anchor(), "000")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:wun + 500m, :due - 0.49sw]);
+    }
+
+    with link = "point.de.Düendorf", railway = :station {
+        track(hh[:due - 0.5sw, :due + 0.5sw]);
+        marker(:right :de.bbf :removed, hh[:due] >> 0.5mo >> 0.5mt);
+        station(:left :removed,
+            hh[:due] >> 0.5mo >> 0.5mt >> 1sh + (-1.8dt, 1dt),
+            "Düendorf", "1700: 23,87"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:due + 0.49sw, :has - 999m]);
+    }
+
+    with link = "point.de.Haste", railway = :station {
+        track(:single,
+                hh[:has - 981m, :has - 980m] << 0.5mo
+            --  hh[:has - 980m + 1dl, :has.yw] << 1.5mo
+        );
+        track(hh[:has - 1000m, :has.yw]);
+        marker(:left :de.bf, hh[:has] << 1.5mo << 0.5mt);
+        station(:right:left_align,
+            hh[:has] << 1.5mo << 0.5mt << 1sh + (1.8dt, 1.5dt),
+            span(:bold, "Haste"),
+            hbox(:center:top,
+                vbox(:right:top, "1700: ", "1761: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "28,", anchor(), "315"),
+                    hbox(:sep:base, "25,", anchor(), "493")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor, hh[:has.yw, :has.xw]);
+        track(hh[:has.xw, :reh - 0.49sw]);
+    }
+
+    with link = "point.de.Rehren", railway = :station {
+        track(hh[:reh - 0.5sw, :reh + 0.5sw]);
+        marker(:right :de.bbf :nopax, hh[:reh] >> 0.5mo >> 0.5mt);
+        station(:top :nopax,
+            hh[:reh] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, -0.8dt),
+            "Rehren", "1700: 31,239"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:reh + 0.49sw, :lin - 0.49sw]);
+    }
+
+    with link = "point.de.Lindhorst-Schaumb-Lippe", railway = :station {
+        track(hh[:lin - 0.5sw, :lin + 0.5sw]);
+        marker(:right :de.bf, hh[:lin] >> 0.5mo >> 0.5mt);
+        station(:left, hh[:lin] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, -0.3dt),
+            hbox(:right:base, "Lindhorst ", span(:light, "(Schaumb-Lippe)")),
+            "1700: 35,731"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:lin + 0.49sw, :pro]);
+    }
+
+    with link = "point.de.Probsthagen-Stadthagen", railway = :station {
+        marker(:right :de.bk :removed, hh[:pro] >> 0.5mo >> 0.5mt);
+        station(:top :removed,
+            hh[:pro] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, -0.5dt),
+            span(:small, "Probsthagen"),
+            "1700: 39,13"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:pro, :sta - 1100m]);
+    }
+
+    with link = "point.de.Stadthagen", railway = :station {
+        track(:single :side :nopax,
+                hh[:sta - 1041m, :sta - 1040m] << 0.5mo
+            --  hh[:sta - 1040m + 1dl, :sta.yl] << 1.5mo
+            --  hh[:sta.yl + 1dl, :sta.yl + 1.1dl] << 0.5mo
+        );
+        track(hh[:sta - 1100m, :sta.yr]);
+        marker(:left :de.bf, hh[:sta] << 1.5mo << 0.5mt);
+        station(:right,
+            hh[:sta] << 1.5mo << 0.5mt << 1sh + (1.8dt, 2.5dt),
+            span(:bold, "Stadthagen"),
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "1742: "), "1700: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "26,", anchor(), "96"),
+                    hbox(:sep:base, "42,", anchor(), "967")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:lor :casing, hh[:sta.yr - 0.1dl, :hob]);
+    }
+
+    with link = "point.de.Hobbensen-Kirchhorsten", railway = :station {
+        marker(:right :de.bk :removed, hh[:hob] >> 0.5mo >> 0.5mt);
+        station(:left :removed,
+            hh[:hob] >> 0.5mo >> 0.5mt >> 1sh + (-1.3dt, 0.5dt),
+            span(:small, "Hobbensen"), "1700: 45,82"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:hob, :kir - 0.49sw]);
+    }
+
+    with link = "point.de.Kirchhorsten", railway = :station {
+        track(hh[:kir - 0.5sw, :kir + 0.5sw]);
+        marker(:left :de.bf, hh[:kir] << 0.5mo << 0.5mt);
+        station(:right, hh[:kir] << 0.5mo << 0.5mt << 1sh + (1.8dt, 2dt),
+            "Kirchhorsten", "1700: 48,518"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:kir + 0.49sw, :tll]);
+    }
+
+    with link = "point.de.Tallensen-Kirchhorsten", railway = :station {
+        marker(:left :de.bk :removed, hh[:tll] << 0.5mo << 0.5mt);
+        station(:right :removed,
+            hh[:tll] << 0.5md << 1sh + (1.8dt, 2.3dt),
+            span(:small, "Tallensen"),
+            "1700: 50,34"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:tll, :mus]);
+    }
+
+    with link = "point.de.Müsingen-Bückeburg", railway = :station {
+        marker(:right :de.bk :removed, hh[:mus] >> 0.5mo >> 0.5mt);
+        station(:left :removed,
+            hh[:mus] >> 0.5mo >> 0.5mt >> 1sh + (-1.5dt, 0.3dt),
+            span(:small, "Müsingen"), "1700: 52,87"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:mus, :buc - 0.49sw]);
+    }
+
+    with link = "point.de.Bückeburg", railway = :station {
+        track(hh[:buc - 0.5sw, :buc + 0.5sw]);
+        marker(:left :de.bf, hh[:buc] << 0.5mo << 0.5mt);
+        station(:bottom, hh[:buc] << 0.5mo << 0.5mt << 1sh + (1.3dt, 1dt),
+            span(:bold, "Bückeburg"), "1700: 55,208"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:buc + 0.49sw, :eve - 0.49sw]);
+    }
+
+    with link = "point.de.Evesen", railway = :station {
+        track(hh[:eve - 0.5sw, :eve + 0.5sw]);
+        marker(:left :de.bf :removed, hh[:eve] << 0.5mo << 0.5mt);
+        station(:left:right_align :removed,
+            hh[:eve] << 0.5mo << 0.5mt << 1sh + (-1.8dt, 2.3dt),
+            "Evesen", "1700: 58,84"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(hh[:eve + 0.49sw, :ber]);
+    }
+
+    with link = "point.de.Berenbusch-Minden", railway = :station {
+        marker(:right :de.bk :removed :casing, hh[:ber] >> 0.5mo >> 0.5mt);
+        station(:right :removed,
+            hh[:ber] >> 0.5md >> 1sh + (1.8dt, 0dt),
+            span(:small, "Berenbusch"),
+            "1700: 61,41"
+        );
+    }
+
+    with link = "point.de.Minden-Westf-Gbf", railway = :station {
+        # DE 1700
+        track(hh[:ber, :min - 600m]);
+
+        # DE 1741
+        track(:single, hh[:mig.yn, :min - 600m] >> 1.5mo);
+
+        # DE 2990
+        track(:single :nopax,
+                hh[:mig.yn + 199m, :mig.yn + 200m] >> 1.5mo
+            --  hh[:mig.yn + 200m + 1dl, :min - 600m] >> 2.5mo
+        );
+
+        marker(:right :de.bft :nopax, hh[:mig] >> 2.5mo >> 0.5mt);
+        station(:top :nopax, hh[:mig] >> 2.5mo >> 0.5mt >> 1sh + (0dt, -0.5dt),
+            hbox(:center:base :small, "M.", span(:light, "(W.)"), " Gbf"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax, "2990: "),
+                    "1741: ",
+                    "1700: "
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax, "61,", anchor(), "902"),
+                    hbox(:sep:base :nopax, "50,", anchor(), "619"),
+                    hbox(:sep:base, "63,", anchor(), "000")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Minden-Westf", railway = :station {
+        # DE 1700
+        track(hh[:min - 600m, :min + 600m]);
+
+        # DE 1741
+        track(:single,
+                hh[:min - 600m, :min - 500m] >> 1.5mo
+            ..  hh[:min - 0.5sw, :min + 0.5sw] >> 0.5mo >> 1insh >> 1mt
+        );
+
+        # DE 2990
+        track(:single :nopax,
+                hh[:min - 600m, :min - 500m] >> 2.5mo
+            ..  hh[:min - 0.5sw, :min + 0.5sw] >> 1.5mo >> 1insh >> 1mt
+        );
+        track(:nopax,
+                hh[:min + 0.49sw, :min + 0.5sw] >> 1mo >> 1insh >> 1mt
+            ..  hh[:min + 600m, :min + 601m] >> 2mo
+        );
+
+        marker(:right :de.inbf, hh[:min] >> 0.5mo >> 0.5mt);
+        station(:left, hh[:min] >> 1.5mo >> 1insh >> 1mt + (-1.8dt, 1.1dt),
+            hbox(:right:base, span(:bold, "Minden "), "(Westf)"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax, "2990: "),
+                    "1741: ",
+                    "1700: "
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax, "64,", anchor(), "359"),
+                    hbox(:sep:base :nopax, "52,", anchor(), "95"),
+                    hbox(:sep:base, "64,", anchor(), "359")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:min + 600m, :poo.yh - 1dl]);
+    }
+
+    with link = "point.de.Porta-Po", railway = :station {
+        let ph = path("d3.de.2991");
+
+        track(hh[:poo.yh - 1dl, :poo + 0.5sw]);
+        track(:nopax, hh[:poo.yh - 1dl, :poo + 0.5sw] >> 2mo);
+        track(:single :removed,
+                hh[:poo.yh - 0.1dl, :poo.yh] >> 2.5mo
+            ..  ph[:poo.xh + 2.5md, :poo.xh + 2.51md] >> 0.5mo
+        );
+        marker(:left :de.abzw :removed, hh[:poo] << 0.5md);
+        station(:right:left_align :removed,
+            hh[:poo] << 0.5md << 1sh + (1dt, 1dt),
+            span(:small, "Porta Po"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "2991: "),
+                    span(:nopax, "2990: "),
+                    "1700: "
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "0,", anchor(), "43"),
+                    hbox(:sep:base :nopax, "67,", anchor(), "64"),
+                    hbox(:sep:base, "67,", anchor(), "64")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:poo + 0.49sw, :poh - 0.49sw]);
+    }
+
+    with link = "point.de.Porta-Westfalica", railway = :station {
+        track(hh[:por - 0.5sw, :poh - 0.5sw]);
+        track(:nopax, hh[:por - 0.5sw, :poh + 0.5sw] >> 2mo);
+        marker(:left :de.bf :removed, hh[:por] << 0.5mo << 0.5mt);
+        station(:right :removed,
+            hh[:por] << 0.5mo << 0.5mt << 1sh + (1.8dt, -1dt),
+            vbox(:center:base,
+                span(:former, "Porta"),
+                "Porta Westfalica"
+            ),
+            span(:xsmall, "2990\u{2009}·\u{2009}1700: 69,75")
+        );
+    }
+
+    with link = "point.de.Porta-Westfalica-Hp", railway = :station {
+        track(hh[:poh - 0.5sw, :poh + 0.5sw]);
+        marker(:left :de.hp :casing,
+            hh[:poh] << 0.5mo << 0.5mt, hh[:poh] >> 0.5mo >> 0.5mt
+        );
+        station(:right, hh[:poh] << 0.5md << 1.5sh + (0.8dt, 2.5dt),
+            hbox(:left:base, "Porta Westfalica", span(:light, " Hp")),
+            "1700: 69,880"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:poh + 0.49sw, :ven - 0.49sw]);
+    }
+
+    # point.de.Vennebeck  de.2990
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:ven + 0.49sw, :wes]);
+    }
+
+    with link = "point.de.Weserbrücke-Vennebeck", railway = :station {
+        marker(:left :de.bk :removed, hh[:wes] << 0.5mo << 0.5mt);
+        station(:right:left_align :removed,
+            hh[:wes] << 0.5mo << 0.5mt << 1sh + (1.5dt, 1.8dt),
+            span(:small, "Weserbrücke"),
+            "2990\u{2009}·\u{2009}1700: 75,96"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:wes, :oea - 0.49sw]);
+    }
+
+    with link = "point.de.Bad-Oeynhausen-Gbf-Abzw", railway = :station {
+        track(hh[:oea - 0.5sw, :oeg + 0.5sw]);
+        marker(:left :de.abzw :nopax, hh[:oea] << 0.5mo << 0.5mt);
+        station(:bottom, hh[:oea] << 0.5mo << 0.5mt << 1sh + (3dt, 0.3dt),
+            span(:small, "Bad Oeynhausen Gbf Abzw"),
+            "1700: 77,300"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:oeg + 0.49sw, :oey - 0.49sw]);
+    }
+
+    with link = "point.de.Bad-Oeynhausen", railway = :station {
+        track(hh[:oey - 0.5sw, :oey + 0.5sw]);
+        track(:nopax, hh[:oey - 0.5sw, :oey + 0.5sw] >> 2mo);
+        marker(:left :de.hp, hh[:oey] << 0.5mo << 0.5mt);
+        marker(:left :de.exbf, hh[:oey] << 0.5mo << 0.5mt);
+        station(:top:right_align, hh[:oey] >> 2.5mo >> 0.5mt + (1.5dt, -1dt),
+            "Bad Oeynhausen",
+            "2990\u{2009}·\u{2009}1700: 79,510"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:oey + 0.49sw, :goh - 0.49sw]);
+    }
+
+    # point.de.Gohfeld  de.2990
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:goh + 0.49sw, :loh.ah]);
+    }
+
+    with link = "point.de.Löhne-Westf-Pbf", railway = :station :single {
+        let el = path("d3.de.1820");
+
+        # DE 1820 dn - DE 2992 dn
+        track(
+                el[:loh.ae, :loh.xe - 4mo] << 0.5mo
+            ..  hh[:loh.ye, :loh.xg] << 2.5mo
+        );
+
+        # DE 1700
+        track(:double :casing,
+                hh[:loh.ah, :loh.xe]
+            ..  hh[:loh.ye, :loh.xg] << 1mo
+        );
+
+        # DE 1820 dn - DE 2992 up
+        with layer = -1 track(
+                el[:loh.xe - 311m, :loh.xe - 310m] << 0.5mo
+            --  el[:loh.xe - 310m + 1dl, :loh.xe - 4mo] >> 0.5mo
+            ..  hh[:loh.ye, :loh.xg] >> 0.5mo
+        );
+
+        # DE 2990
+        track(:double :nopax, hh[:loh.ah, :loh.xg] >> 2mo);
+
+        # DE 2993 dn
+        track(:nopax :removed,
+                hh[:loh.ye + 800m + 2dl, :loh + 1dl] >> 4.5mo
+        );
+        track(:nopax,
+                hh[:loh - 0.1dl, :loh] >> 5.5mo
+            --  hh[:loh + 1dl, :loh + 1.1dl] >> 4.5mo
+            ..  hh[:loh.xg + 300m, :loh.xg + 301m] >> 5.5mo
+        );
+
+        # DE 2993 up
+        track(:nopax,
+                hh[:loh.ye + 799m, :loh.ye + 800m] >> 2.5mo
+            --  hh[:loh.ye + 800m + 3dl, :loh + 1dl] >> 5.5mo
+            ..  hh[:loh.xg + 300m, :loh.xg + 301m] >> 6.5mo
+        );
+
+        marker(:left :de.bf, hh[:loh] << 2.5mo << 0.5mt);
+        station(:bottom, hh[:loh] << 2.5mo << 0.5mt << 1sh + (7dt, 1dt),
+            hbox(:center:base, span(:bold, "Löhne "), "(Westf)",
+                span(:bold, " Pbf")
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax, "2993: "),
+                    span(:nopax, "2990: "),
+                    "2992: ", "1700: ", "1820: "
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax, "85,", anchor(), "295"),
+                    hbox(:sep:base :nopax, "85,", anchor(), "303"),
+                    hbox(:sep:base, "85,", anchor(), "295"),
+                    hbox(:sep:base :nopax, "85,", anchor(), "275"),
+                    hbox(:sep:base :nopax, "81,", anchor(), "975")
+                )
+            )
+        );
+    }
+
+    with link = "point.de.Löhne-Westf-Gbf", railway = :station :single {
+        let lr = path("d3.de.2992");
+
+        # DE 2992 dn
+        with layer = -1 track(
+                hh[:loh.xg, :log - 500m] << 2.5mo
+            ..  hh[:log, :log.yr] << 4mo
+            ..  lr[:log.xr, :log.fr] << 0.5mo
+        );
+
+        # DE 1700
+        track(:double :casing,
+                hh[:loh.xg, :log - 500m] << 1mo
+            ..  hh[:log, :log.yr] << 2mo
+            ..  hh[:log.yh, :log.yh + 0.1dl]
+        );
+
+        # DE 2992 up
+        with layer = -1 track(
+                hh[:loh.xg, :log - 500m] >> 0.5mo
+            ..  hh[:log, :log.yr]
+            ..  lr[:log.xr, :log.fr] >> 0.5mo
+        );
+
+        # DE 2990
+        track(:casing :double :nopax, hh[:loh.xg, :log.yh] >> 2mo);
+
+        # DE 2993 dn
+        track(:nopax,
+                hh[:loh.xg + 300m, :log.yr - 1dl] >> 5.5mo
+            --  hh[:log.yr, :log.yr + 0.1dl] >> 6.5mo
+        );
+        with layer = -1 track(:nopax :removed,
+                hh[:log.yr - 0.1dl, :log.yr] >> 5.5mo
+            ..  lr[:log.yg, :log.fr - 350m - 2.7dl] >> 1.5mo
+            --  lr[:log.fr - 350m - 0.7dl, :log.fr - 350m - 0.69dl] << 0.5mo
+        );   
+
+        # DE 2993 up
+        track(:nopax,
+                hh[:loh.xg + 300m, :log.yr] >> 6.5mo
+            ..  lr[:log.yg, :log.fr - 350m - 2dl] >> 2.5mo
+            --  lr[:log.fr - 350m, :log.fr - 349m] >> 0.5mo
+        );
+
+        marker(:right :de.bft :nopax, hh[:log] >> 6.5mo >> 0.5mt);
+        station(:top, hh[:log] >> 6.5mo >> 0.5mt >> 1sh + (-1dt, -1.3dt),
+            hbox(:center:base :small,
+                "Löhne ", span(:light, "(Westf)"), " Gbf"
+            ),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:nopax, "2993: "),
+                    span(:nopax, "2990: "),
+                    "2992: ",
+                    "1700: "
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :nopax, "87,", anchor(), "640"),
+                    hbox(:sep:base :nopax, "86,", anchor(), "500"),
+                    hbox(:sep:base, "87,", anchor(), "371"),
+                    hbox(:sep:base, "86,", anchor(), "500")
+                )
+            )
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:log.yh, :fal]);
+    }
+
+    with link = "point.de.Falscheide-Löhne", railway = :station {
+        marker(:left :de.bk :removed, hh[:fal] << 0.5mo << 0.5mt);
+        station(:right:left_align :removed,
+            hh[:fal] << 0.5md << 1sh + (1.5dt, 1dt),
+            span(:small, "Falscheide"),
+            "2990\u{2009}·\u{2009}1700: 89,49"
+        );
+    }
+
+    with link = "line.de.1700" {
+        track(:ror, hh[:fal, :lgr]);
+    }
+}
+
