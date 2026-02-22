@@ -1,0 +1,109 @@
+# NL DHA.  Den Helder - Amsterdam Centraal
+with detail = 2 {
+    let da = path("d2.nl.dha");
+
+    with railway = :first :cat:dc15 :pax {
+        with link = "point.nl.Den-Helder" {
+            statdot(da[:den]);
+            slabel(:top, da[:den] + (-0.5dt, -1dt), "Den Helder");
+        }
+
+        with link = "line.nl.DHA" {
+            track(
+                    da[:den, :osl.ys - 1mt]
+                ..  da[:osl.xs + 1mt, :osl.xs + 2.51km] >> 0.5md << 0.5mt
+            );
+            line_label(:right:e, da[:osl.xs + 2.5km] >> 0.5md, "DHA");
+            track(da[:osl.xs + 2.49km, :sag] >> 0.5md << 0.5mt);
+        }
+    }
+
+    with railway = :first :double :cat:dc15 :pax {
+        with link = "line.nl.DHA" {
+            track(da[:sag, :her.yh]);
+        }
+
+        with link = "point.nl.Heerhugowaard" {
+            track(da[:her.yh, :her]);
+            statdot(da[:her]);
+            slabel(:right, da[:her] + (2dt, 2dt),
+                vbox(:left:topbase, "Heer-", " hugowaard")
+            );
+        }
+
+        with link = "line.nl.DHA" {
+            track(da[:her, :pan.yb]);
+            track(da[:pan.yb, :pan]);
+        }
+
+        with link = "point.nl.St-Pancras" {
+            statdot(:removed, da[:pan]);
+            slabel(:nw :removed, da[:pan] + (-0.5dt, 1.5dt), "St. Pancras");
+        }
+
+        with link = "line.nl.DHA" {
+            track(da[:pan, :alk]);
+        }
+
+        with link = "point.nl.Alkmaar" {
+            statdot(da[:alk]);
+            slabel(:left, da[:alk] + (-1.5dt, -0.3dt), "Alkmaar");
+        }
+
+        with link = "line.nl.DHA" {
+            track(da[:alk, :alk + 7.01km]);
+            line_label(:right:e, da[:alk + 7km] >> 0.5md,
+                (0dt, -0.3dt), "DHA"
+            );
+            track(da[:alk + 6.99km, :uit]);
+        }
+
+        with link = "point.nl.Uitgeest" {
+            track(da[:uit, :uit.yh]);
+            statdot(da[:uit]);
+            slabel(:right, da[:uit] + (1.5dt, -0.3dt), "Uitgeest");
+        }
+
+        with link = "line.nl.DHA" {
+            track(da[:uit.yh, :uit.yh + 7.51km]);
+            line_label(:left:sw, da[:uit.yh + 7.5km] << 0.5md, "DHA");
+            track(da[:uit.yh + 7.49km, :zaa.ye]);
+        }
+
+        with link = "point.nl.Zaandam" {
+            track(da[:zaa.ye, :zaa]);
+            statdot(da[:zaa]);
+            slabel(:right, da[:zaa] + (1.5dt, 0.3dt), "Zaandam");
+        }
+    }
+
+    with railway = :first :double :pax :removed {
+        with link = "line.nl.DHA" {
+            track(da[:zaa, :awh.a]);
+        }
+    }
+
+    with railway = :first :double :cat:dc15 :nopax {
+        with link = "line.nl.DHA" {
+            track(da[:awh.a, :sin.yr]);
+        }
+    }
+
+    with railway = :first :double :cat:dc15 :pax {
+        with link = "line.nl.DHA" {
+            track(da[:sin.yr, :sin.yz]);
+            track(da[:sin.yz, :ams]);
+        }
+
+        with link = "point.nl.Amsterdam-Centraal" {
+            statdot(da[:ams]);
+            slabel(:right :bold, da[:ams] + (1dt, -0.8dt),
+                vbox(:left:base,
+                    span(:large, "Amsterdam"),
+                    "Centraal"
+                )
+            );
+        }
+    }
+}
+
