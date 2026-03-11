@@ -1,0 +1,302 @@
+# DK FBM.  Funder - Bramming
+#
+let fb = path("d3.dk.fbm");
+
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Funder  dk.SBS
+
+    with link = "line.dk.FBM" {
+        track(:lor, fb[:fun + 0.49sw, :fun.yb] >> 1mo);
+        track(:lor, fb[:fun.yb, :fun.yb + 1.01seg] >> 1mo);
+        track(:casing,
+                fb[:fun.yb + 1seg, :fun.xb] >> 1mo
+            ..  fb[:fun.zb, :fun.zb + 0.1dl]
+        );
+        track(fb[:fun.zb, :fun.zb + 1.01km]);
+        line_label(:right:e, fb[:fun.zb + 1km] >> 0.5mt, "FBM");
+        track(fb[:fun.zb + 0.99km, :chr - 0.49sw]);
+    }
+
+    with link = "point.dk.Christianshede", railway = :station {
+        track(fb[:chr - 0.5sw, :chr + 0.5sw]);
+        marker(:right :de.bf, fb[:chr] >> 0.5mt);
+        station(:left, fb[:chr] >> 0.5mt >> 1sh + (-2dt, 0.8dt),
+            "Christianshede", "FBM: 6,6"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:chr + 0.49sw, :seb]);
+    }
+
+    with link = "point.dk.Sebstrup", railway = :station {
+        marker(:left :de.anst, fb[:seb] << 0.5mt);
+        station(:right, fb[:seb] << 0.5mt << 1sh + (1.8dt, 1.3dt),
+            span(:small, "Sebstrup"), "FBM: 8,5"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:seb, :hjo - 0.49sw]);
+    }
+
+    with link = "point.dk.Hjøllund", railway = :station {
+        track(fb[:hjo - 0.5sw, :hjo + 0.5sw]);
+        marker(:left :de.hst, fb[:hjo] << 0.5mt);
+        station(:right, fb[:hjo] << 0.5mt << 1sh + (1.5dt, 1.3dt),
+            "Hjøllund", "FBM: 10,6"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:hjo + 0.49sw, :hjo + 2.51km]);
+        line_label(:right:e, fb[:hjo + 2.5km] << 0.5mt, "FBM");
+        track(fb[:hjo + 2.49km, :ham - 0.49sw]);
+    }
+
+    with link = "point.dk.Hampen", railway = :station {
+        track(fb[:ham - 0.5sw, :ham + 0.5sw]);
+        marker(:right :de.bf, fb[:ham] >> 0.5mt);
+        station(:left, fb[:ham] >> 0.5mt >> 1sh + (-2dt, 0.8dt),
+            "Hampen", "FBM: 16,3"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:ham + 0.49sw, :ham + 4.01km]);
+        line_label(:right:se, fb[:ham + 4km] >> 0.5mt, "FBM");
+        track(fb[:ham + 3.99km, :ejs.yr - 0.49seg]);
+    }
+
+    with link = "point.dk.Ejstrupholm", railway = :station {
+        track(
+                fb[:ejs.yr, :ejs + 300m - 1dl] << 1mo
+            --  fb[:ejs + 300m, :ejs + 301m]
+        );
+        track(fb[:ejs.yr - 0.5seg, :ejs + 320m]);
+        marker(:right :de.bf, fb[:ejs] >> 0.5mt);
+        station(:top, fb[:ejs] >> 0.5mt >> 1sh + (-1dt, -0.8dt),
+            span(:bold, "Ejstrupholm"),
+            hbox(:center:top,
+                vbox(:right:top, "FBM: ", "??: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "22,", anchor(), "7"),
+                    hbox(:sep:base, "43,", anchor(), "1")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:ejs + 319m, :lun - 0.49sw]);
+    }
+
+    with link = "point.dk.Lundfod", railway = :station {
+        track(fb[:lun - 0.5sw, :lun + 0.5sw]);
+        marker(:left :de.hst, fb[:lun] << 0.5mt);
+        station(:bottom, fb[:lun] << 0.5mt << 1sh << 0.8dt,
+            "Lundfod", "FBM: 28,5"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:lun + 0.49sw, :lun + 3.01km]);
+        line_label(:right:s, fb[:lun + 3km] >> 0.5mt, "FBM");
+        track(fb[:lun + 2.99km, :brd.xf]);
+        track(:ror,
+                fb[:brd.xf - 0.1dl, :brd.xf]
+            ..  fb[:brd.yf, :brd.yf + 0.1dl] << 1mo
+        );
+        track(:ror, fb[:brd.yf, :brd - 549m] << 1mo);
+    }
+
+    # point.dk.Brande  dk.HBV
+
+    with link = "line.dk.FBM" {
+        track(:station, fb[:brd.yb, :brd.xb] >> 1mo);
+        track(
+                fb[:brd.xb - 0.1dl, :brd.xb] >> 1mo
+            ..  fb[:brd.zb + 1mo, :brd.zb + 1.31km]
+        );
+        line_label(:left:nw, fb[:brd.zb + 1.3km] << 0.5mt, "FBM");
+        track(fb[:brd.zb + 1.29km, :dra - 0.49sw]);
+    }
+
+    with link = "point.dk.Drantum", railway = :station {
+        track(fb[:dra - 0.5sw, :dra + 0.5sw]);
+        marker(:right :de.hst, fb[:dra] >> 0.5mt);
+        station(:top, fb[:dra] >> 0.5mt >> 1sh + (-2.5dt, -1.2dt),
+            "Drantum", "FBM: 42,6"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:dra + 0.49sw, :bla - 0.49sw]);
+    }
+
+    with link = "point.dk.Blåhøj", railway = :station {
+        track(fb[:bla - 0.5sw, :bla + 0.5sw]);
+        marker(:right :de.bf, fb[:bla] >> 0.5mt);
+        station(:top, fb[:bla] >> 0.5mt >> 1sh + (-2.5dt, -1.4dt),
+            "Blåhøj", "FBM: 49,1"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:bla + 0.49sw, :hal - 0.49sw]);
+    }
+
+    with link = "point.dk.Hallundbæk", railway = :station {
+        track(fb[:hal - 0.5sw, :hal + 0.5sw]);
+        marker(:right :de.hp, fb[:hal] >> 0.5mt);
+        station(:left, fb[:hal] >> 0.5mt >> 1sh + (-1.5dt, 1.4dt),
+            "Hallundbæk", "FBM: ??"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:hal + 0.49sw, :fil - 0.49sw]);
+    }
+
+    with link = "point.dk.Filskov", railway = :station {
+        track(fb[:fil - 0.5sw, :fil + 0.5sw]);
+        marker(:left :de.bf, fb[:fil] << 0.5mt);
+        station(:right, fb[:fil] << 0.5mt << 1sh + (2.0dt, 1.7dt),
+            "Filskov", "FBM: 56,3"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:fil + 0.49sw, :kol - 0.49sw]);
+    }
+
+    with link = "point.dk.Kolstrupgård", railway = :station {
+        track(fb[:kol - 0.5sw, :kol + 0.5sw]);
+        marker(:right :de.hp, fb[:kol] >> 0.5mt);
+        station(:top, fb[:kol] >> 0.5mt >> 1sh + (-1.3dt, -1dt),
+            "Kolstrupgård", "FBM: ??"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:kol + 0.49sw, :gri.zf]);
+        with layer = -1 track(
+                fb[:gri.zf - 0.1dl, :gri.zf]
+            ..  fb[:gri.yf - 0.5seg, :gri.yf - 0.49seg] >> 1mo
+        );
+        track(:station, fb[:gri.yf - 0.5seg, :gri.yf] >> 1mo);
+    }
+
+    # point.dk.Grindsted  dk.THK
+}
+
+with detail = 4, railway = :first :pax :closed {
+
+    with link = "line.dk.FBM" {
+        track(:lor,
+                fb[:gri.yb - 0.1dl, :gri.yb + 1seg] >> 1mo
+        );
+        track(
+                fb[:gri.yb + 0.99seg, :gri.yb + 1seg] >> 1mo
+            ..  fb[:gri.xb, :gri.xb + 0.1dl]
+        );
+        track(fb[:gri.xb, :gri.xb + 1.21km]);
+        line_label(:right:se, fb[:gri.xb + 1.2km] >> 0.5mt, "FBM");
+        track(fb[:gri.xb + 1.19km, :hor - 0.49sw]);
+    }
+
+    with link = "point.dk.Horsbøl", railway = :station {
+        track(fb[:hor - 0.5sw, :hor + 0.5sw]);
+        marker(:right :de.hp :removed, fb[:hor] >> 0.5mt);
+        station(:top :removed, fb[:hor] >> 0.5mt >> 1sh + (-2.3dt, -1.2dt),
+            "Horsbøl", "FBM: ??"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:hor + 0.49sw, :kro - 0.49sw]);
+    }
+
+    with link = "point.dk.Krogager", railway = :station {
+        track(fb[:kro - 0.5sw, :kro + 0.5sw]);
+        marker(:right :de.bf :removed, fb[:kro] >> 0.5mt);
+        station(:left :removed, fb[:kro] >> 0.5mt >> 1sh + (-2dt, 0.8dt),
+            "Krogager", "FBM: 74,9"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:kro + 0.49sw, :tof - 0.49sw]);
+    }
+
+    with link = "point.dk.Tofterup", railway = :station {
+        track(fb[:tof - 0.5sw, :tof + 0.5sw]);
+        marker(:right :de.bf :removed, fb[:tof] >> 0.5mt);
+        station(:left :removed, fb[:tof] >> 0.5mt >> 1sh + (-1.8dt, 1.0dt),
+            "Tofterup", "FBM: 80,8"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:tof + 0.49sw, :age - 0.49sw]);
+    }
+
+    with link = "point.dk.Agerbæk", railway = :station {
+        track(fb[:age - 0.5sw, :age + 0.5sw]);
+        marker(:right :de.bf :removed, fb[:age] >> 0.5mt);
+        station(:left :removed, fb[:age] >> 0.5mt >> 1sh + (-2dt, 1.0dt),
+            "Agerbæk",  "FBM: 86,4"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:age + 0.49sw, :age + 2.31km]);
+        line_label(:left:sw, fb[:age + 2.3km] << 0.5mt, "FBM");
+        track(fb[:age + 2.29km, :gle - 0.49sw]);
+    }
+
+    with link = "point.dk.Glejbjerg", railway = :station {
+        track(fb[:gle - 0.5sw, :gle + 0.5sw]);
+        marker(:left :de.bf :removed, fb[:gle] << 0.5mt);
+        station(:right :removed, fb[:gle] << 0.5mt << 1sh + (1.7dt, 1.3dt),
+            "Glejbjerg", "FBM: 91,6"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:gle + 0.49sw, :vej - 0.49sw]);
+    }
+
+    with link = "point.dk.Vejrup", railway = :station {
+        track(fb[:vej - 0.5sw, :vej + 0.5sw]);
+        marker(:right :de.bf :removed, fb[:vej] >> 0.5mt);
+        station(:top :removed, fb[:vej] >> 0.5mt >> 1sh + (-2.3dt, -1.2dt),
+            "Vejrup", "FBM: 96,6"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:vej + 0.49sw, :vbj - 0.49sw]);
+    }
+
+    with link = "point.dk.Vester-Bjerndrup", railway = :station {
+        track(fb[:vbj - 0.5sw, :vbj + 0.5sw]);
+        marker(:right :de.hp :removed, fb[:vbj] >> 0.5mt);
+        station(:left :removed, fb[:vbj] >> 0.5mt >> 1sh + (-1.8dt, 1.0dt),
+            "Vester Bjerndrup", "FBM: ??"
+        );
+    }
+
+    with link = "line.dk.FBM" {
+        track(fb[:vbj + 0.49sw, :vbj + 2.81km]);
+        line_label(:right:se, fb[:vbj + 2.8km] >> 0.5mt, "FBM");
+        track(fb[:vbj + 2.79km, :bra.xf - 2mo]);
+        track(:lor,
+                fb[:bra.xf - 2.01mo, :bra.xf - 1md]
+            ..  fb[:bra.yf, :bra.yf + 0.1dl] >> 1.5mo
+        );
+        track(:lor :removed, fb[:bra.yf, :bra.la] >> 1.5mo);
+    }
+}
+
+

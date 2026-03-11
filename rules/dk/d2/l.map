@@ -1,13 +1,43 @@
-# DK LEB.  Lunderskov - Esbjerg
+# DK LBS.  Laurbjerg - Silkeborg
 with detail = 2 {
-    let le = path("d2.dk.leb");
+    let ls = path("d2.dk.lbs");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.LBS" {
+            track(
+                    ls[:lau.ys - 0.1dl, :lau.ys] >> 0.5md << 0.5mt
+                ..  ls[:lau.xs, :lau.xs + 4.51km]
+            );
+            line_label(:right:se, ls[:lau.xs + 4.5km] >> 0.5mt, "LBS");
+            track(ls[:lau.xs + 4.49km, :tho.ya]);
+        }
+
+        with link = "point.dk.Thorsø", railway = :station {
+            track(ls[:tho.ya, :tho]);
+            statdot(ls[:tho]);
+            slabel(:top, ls[:tho] + (-1dt, -0.8dt), "Thorsø");
+        }
+
+        with link = "line.dk.LBS" {
+            track(ls[:tho, :tho + 11.81km]);
+            line_label(:left:nw, ls[:tho + 11.8km] << 0.5mt, "LBS");
+            track(ls[:tho + 11.79km, :sil.yl]);
+        }
+    }
+}
+
+
+# DK LES.  Lunderskov - Esbjerg - Struer
+with detail = 2 {
+    let le = path("d2.dk.les.1");
+    let es = path("d2.dk.les.2");
 
     with railway = :first :double :cat:ac25 :pax {
         # point.dk.Lunderskov  dk.FPB
 
-        with link = "line.dk.LEB" {
+        with link = "line.dk.LES" {
             track(le[:lun.ye, :vej - 6km]);
-            line_label(:left:n :cat:ac25 :pax, le[:vej - 6km], "LEB");
+            line_label(:left:n :cat:ac25 :pax, le[:vej - 6km], "LES");
             track(le[:vej - 6km, :vej.yg]);
         }
 
@@ -17,9 +47,9 @@ with detail = 2 {
             slabel(:ne, le[:vej] + (-1.3dt, 0dt), "Vejen");
         }
 
-        with link = "line.dk.LEB" {
+        with link = "line.dk.LES" {
             track(le[:vej, :vej + 12.5km]);
-            line_label(:right:s, le[:vej + 12.5km], "LEB");
+            line_label(:right:s, le[:vej + 12.5km], "LES");
             track(le[:vej + 12.5km, :bra.yt]);
         }
 
@@ -29,9 +59,9 @@ with detail = 2 {
             slabel(:ne, le[:bra] + (0.5dt, 1.0dt), "Bramming");
         }
 
-        with link = "line.dk.LEB" {
+        with link = "line.dk.LES" {
             track(le[:bra, :esb - 6km]);
-            line_label(:right:s, le[:esb - 6km], (0.1dt, 0dt), "LEB");
+            line_label(:right:s, le[:esb - 6km], (0.1dt, 0dt), "LES");
             track(le[:esb - 6km, :esb.ys]);
         }
 
@@ -41,6 +71,92 @@ with detail = 2 {
             slabel(:bottom :bold, le[:esb] + (0dt, 1.1dt), "Esbjerg");
         }
     }
+
+    with railway = :first :pax {
+        with link = "line.dk.LES" {
+            track(es[:esb.ys, :esb.ys + 9km]);
+            line_label(:left:e, es[:esb.ys + 9km] << 0.5mt, "LES");
+            track(es[:esb.ys + 9km, :var]);
+        }
+
+        with link = "point.dk.Varde" {
+            track(es[:var, :var.yn]);
+            statdot(es[:var]);
+            slabel(:nw, es[:var] + (0.3dt, 1.2dt), "Varde");
+        }
+
+        with link = "line.dk.LES" {
+            track(es[:var.yn, :tar - 15km]);
+            line_label(:right:w, es[:tar - 15km] >> 0.5mt, "LES");
+            track(es[:tar - 15km, :tar]);
+        }
+
+        with link = "point.dk.Tarm" {
+            track(es[:tar, :tar.yn]);
+            statdot(es[:tar]);
+            slabel(:right, es[:tar] + (1.5dt, 0.3dt), "Tarm");
+        }
+
+        with link = "line.dk.LES" {
+            track(es[:tar.yn, :ske.ys]);
+        }
+
+        with link = "point.dk.Skjern" {
+            track(es[:ske.ys, :ske.yv]);
+            statdot(es[:ske]);
+            slabel(:left, es[:ske] + (-1.8dt, 1.5dt), "Skjern");
+        }
+
+        with link = "line.dk.LES" {
+            track(es[:ske.yv, :ske.yv + 10km]);
+            line_label(:left:e, es[:ske.yv + 10km] << 0.5mt,
+                (0dt, 0.1dt), "LES"
+            );
+            track(es[:ske.yv + 10km, :rin.yh]);
+        }
+
+        with link = "point.dk.Ringkøbing" {
+            track(es[:rin.yh, :rin]);
+            statdot(es[:rin]);
+            slabel(:left, es[:rin] + (-1.8dt, 1.3dt), "Ringkøbing");
+        }
+
+        with link = "line.dk.LES" {
+            track(es[:rin, :rin + 15.2km]);
+            line_label(:left:e, es[:rin + 15.2km] << 0.5mt, "LES");
+            track(es[:rin + 15.2km, :vem]);
+        }
+
+        with link = "point.dk.Vemb" {
+            track(es[:vem, :vem.yl]);
+            statdot(es[:vem]);
+            slabel(:right, es[:vem] + (1.8dt, 1.8dt), "Vemb");
+        }
+
+        with link = "line.dk.LES" {
+            track(es[:vem.yl, :vem + 9km]);
+            line_label(:left:s, es[:vem + 9km] << 0.5mt, "LES");
+            track(es[:vem + 9km, :hol.yv]);
+        }
+
+        with link = "point.dk.Holstebro" {
+            track(es[:hol.yv, :hol]);
+            statdot(es[:hol]);
+            slabel(:right, es[:hol] + (1.5dt, 1dt), "Holstebro");
+        }
+
+        with link = "line.dk.LES" {
+            track(es[:hol, :hol + 5.5km]);
+            line_label(:right:w, es[:hol + 5.5km] >> 0.5mt, "LES");
+            track(es[:hol + 5.5km, :str.yl]);
+        }
+
+        with link = "point.dk.Struer" {
+            track(es[:str.yl, :str]);
+            statdot(es[:str]);
+            slabel(:right, es[:str] + (-1.5dt, -1.4dt), "Struer");
+        }
+    }
 }
 
 
@@ -48,6 +164,128 @@ with detail = 2 {
 with detail = 2 {
     with link = "line.dk.LLX" {
         track(:first :pax :removed, path("d2.dk.llx")[:lyn.yv, :lyl.yl]);
+    }
+}
+
+
+# DK LST.  Langå - Struer
+with detail = 2 {
+    let ls = path("d2.dk.lst");
+
+    with railway = :first :pax {
+        with link = "line.dk.LST" {
+            track(
+                    ls[:lan.ys - 0.1dl, :lan.ys] >> 0.5md << 0.5mt
+                ..  ls[:lan.xs + 1md, :lan.ys + 11.01km]
+            );
+            line_label(:right:s, ls[:lan.ys + 11km] >> 0.5mt,
+                (-0.5dt, 0dt), "LST"
+            );
+            track(ls[:lan.ys + 10.99km, :rod]);
+        }
+
+        with link = "point.dk.Rødkærsbro", railway = :station {
+            track(ls[:rod, :rod.ys]);
+            statdot(ls[:rod]);
+            slabel(:nw, ls[:rod] + (0dt, 0.4km) + (-2dt, 0.8dt),
+                "Rødkærsbro"
+            );
+        }
+
+        with link = "line.dk.LST" {
+            track(ls[:rod.ys, :rod.ys + 6.01km]);
+            line_label(:right:w, ls[:rod.ys + 6km] >> 0.5mt,
+                (0dt, -0.2dt), "LST"
+            );
+            track(ls[:rod.ys + 5.99km, :vib.yv]);
+            track(ls[:vib.yv - 0.1dl, :vib.yh + 0.1dl]);
+            track(ls[:vib.yh, :vib]);
+        }
+
+        with link = "point.dk.Viborg" {
+            statdot(ls[:vib]);
+            slabel(:right, ls[:vib] + (1.3dt, -0.3dt), "Viborg");
+        }
+
+        with link = "line.dk.LST" {
+            track(ls[:vib, :vib.ys]);
+            track(ls[:vib.ys - 0.1dl, :rav.yv + 0.1dl]);
+        }
+    }
+
+    with railway = :first :pax :removed {
+        let vs = path("d2.dk.lst.vis");
+        let vv = path("d2.dk.lst.viv");
+
+        with link = "line.dk.LST" {
+            track(
+                    ls[:vib.yh + 0.1dl, :vib.yh]
+                ..  vs[:vib.xs, :vib.yv + 0.1dl]
+            );
+            track(vs[:vib.yv, :rav.yv]);
+            track(vv[:vib.ys, :vib.yv]);
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.dk.LST" {
+            track(ls[:rav.yv, :rav.yv + 1.71km]);
+            line_label(:right:sw, ls[:rav.yv + 1.7km] >> 0.5mt, "LST");
+            track(ls[:rav.yv + 1.69km, :ski.yo]);
+            track(ls[:ski.yo, :ski]);
+        }
+
+        with link = "point.dk.Skive", railway = :station {
+            track(ls[:ski, :ski.yg]);
+            statdot(ls[:ski]);
+            slabel(:right, ls[:ski] + (1.3dt, -1dt), "Skive");
+        }
+
+        with link = "line.dk.LST" {
+            track(ls[:ski.yg, :est]);
+            track(:removed, path("d2.dk.lst.sks")[:ski.yo, :est]);
+            track(ls[:est, :est + 5.51km]);
+            line_label(:right:se, ls[:est + 5.5km] >> 0.5mt, "LST");
+            track(ls[:est + 5.49km, :str.yl - 5.99km]);
+            line_label(:left:n, ls[:str.yl - 6km] << 0.5mt,
+                (0.5dt, 0dt), "LST"
+            );
+            track(ls[:str.yl - 6.01km, :str.yl]);
+        }
+    }
+}
+
+
+# DK LTY.  Lemvig - Thyborøn
+with detail = 2 {
+    let lt = path("d2.dk.lty");
+    let ht = path("d2.dk.lty.kno");
+
+    with railway = :first :pax {
+        with link = "line.dk.LTY" {
+            track(lt[:lem.yt, :lem.yt + 6.11km]);
+            line_label(:right:sw, lt[:lem.yt + 6.1km] >> 0.5mt, "LTY");
+            track(lt[:lem.yt + 6.09km, :har.yt]);
+            track(lt[:har.yt, :har.yt + 5.01km]);
+            line_label(:right:nw, lt[:har.yt + 5km] >> 0.5mt, "LTY");
+            track(lt[:har.yt + 4.99km, :thh.yl]);
+            track(lt[:thh.yl, :thh]);
+        }
+
+        with link = "point.dk.Thyborøn-Havn" {
+            statdot(lt[:thh]);
+            slabel(:top, lt[:thh] + (0.5dt, -0.8dt), "Thyborøn Havn");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.LTY" {
+            track(ht[:har.yt, :har.yt + 6.01km]);
+            line_label(:left:e, ht[:har.yt + 6km] << 0.5mt,
+                (0dt, -0.25dt), "LTY"
+            );
+            track(ht[:har.yt + 5.99km, :thh.yl]);
+        }
     }
 }
 

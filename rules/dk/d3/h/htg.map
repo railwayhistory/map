@@ -1,0 +1,65 @@
+# DK HTG.  Horsens - Thyregod
+#
+let ht = path("d3.dk.htg");
+
+with detail = 3, railway = :first :pax :removed {
+    # point.dk.Horsens  dk.FFH
+
+    with link = "point.dk.Bygholm", railway = :station {
+        track(:double, ht[:byg - 0.5sw, :byg + 0.5sw] << 1ms << 1md);
+        marker(:left :de.hp,
+            ht[:byg] << 1ms << 1.5md, ht[:byg] << 1ms << 0.5md
+        );
+        slabel(:left, ht[:byg] << 1ms << 1.5md << 1sh + (-1.5dt, 0.8dt),
+            "Bygholm"
+        );
+    }
+
+    with link = "line.dk.HTG" {
+        track(:double :ror, ht[:byg + 0.49sw, :hor.yt] << 1ms << 1md);
+        track(:double :ror,
+                ht[:hor.yt, :hor.xt] << 1ms << 1md
+            ..  ht[:hor.zt + 1md, :hor.zt + 1.1md]
+        );
+        track(:double, ht[:hor.zt + 1md, :hor.zt + 1.41km]);
+        line_label(:right:sw, ht[:hor.zt + 1.4km] >> 0.5md, "HTG");
+        track(:double, ht[:hor.zt + 1.39km, :lma - 0.49sw]);
+    }
+
+    with link = "point.dk.Lund-Mark", railway = :station {
+        track(:double, ht[:lma - 0.5sw, :lma + 0.5sw]);
+        marker(:left :de.hp, ht[:lma] << 0.5md);
+        slabel(:ne, ht[:lma] << 0.5md << 1sh + (3dt, 0.3dt),
+            "Lund Mark"
+        );
+    }
+
+    with link = "line.dk.HTG" {
+        track(:double, ht[:lma + 0.49sw, :lun - 0.49sw]);
+    }
+
+    with link = "point.dk.Lund", railway = :station {
+        track(:double, ht[:lun - 0.5sw, :lun.ys]);
+        marker(:right :de.bf, ht[:lun] >> 0.5md);
+        slabel(:top :bold, ht[:lun] >> 0.5md >> 1sh >> 0.3dt,
+            "Lund"
+        );
+    }
+
+    with link = "line.dk.HTG" {
+        track(:ror,
+                ht[:lun.ys - 0.1dl, :lun.ys] << 0.5md >> 0.5mt
+            ..  ht[:lun.xs, :lun.xs + 0.1dl]
+        );
+        track(ht[:lun.xs, :kor - 0.49sw]);
+    }
+
+    with link = "point.dk.Kørup", railway = :station {
+        track(ht[:kor - 0.5sw, :kor + 0.5sw]);
+        marker(:left :de.bf, ht[:kor] << 0.5mt);
+        slabel(:left, ht[:kor] >> 0.5mt + (-1dt, -0.5dt),
+            "Kørup"
+        );
+    }
+}
+

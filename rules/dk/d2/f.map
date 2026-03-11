@@ -1,3 +1,263 @@
+# DK FBM.  Funder - Bramming
+with detail = 2 {
+    let fb = path("d2.dk.fbm");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.FBM" {
+            let ss = path("d2.dk.sbs");
+
+            with layer = -1 track(
+                    fb[:fun.yb - 1.1mt, :fun.yb - 1mt]
+                ..  ss[:fun.yb + 500m, :fun.yb + 501m] >> 1mt >> 1ms
+            );
+            track(:casing,
+                    ss[:fun.yb + 500m, :fun.yb + 501m] >> 1mt >> 1ms
+                ..  fb[:fun.zb, :fun.zb + 0.1dl]
+            );
+            track(fb[:fun.zb, :fun.zb + 9.01km]);
+            line_label(:right:e, fb[:fun.zb + 9km] >> 0.5mt, "FBM");
+            track(fb[:fun.zb + 8.99km, :ejs.yr]);
+        }
+
+        with link = "point.dk.Ejstrupholm", railway = :station {
+            track(fb[:ejs.yr, :ejs]);
+            statdot(fb[:ejs]);
+            slabel(:left, fb[:ejs] + (1dt, -1.5dt), "Ejstrupholm");
+        }
+
+        with link = "line.dk.FBM" {
+            track(fb[:ejs, :ejs + 7.01km]);
+            line_label(:left:n, fb[:ejs + 7km] << 0.5mt, "FBM");
+            track(fb[:ejs + 6.99km, :brd.yf]);
+        }
+
+        # point.dk.Brande  dk.HBV
+
+        with link = "line.dk.FBM" {
+            track(fb[:brd.yb, :brd.yb + 12.21km]);
+            line_label(:left:w, fb[:brd.yb + 12.2km] << 0.5mt,
+                (0dt, 0.1dt), "FBM"
+            );
+            track(fb[:brd.yb + 12.19km, :gri.zf]);
+            track(:casing, fb[:gri.zf, :gri.yf]);
+        }
+
+        # point.dk.Grindsted  dk.THK
+    }
+
+    with railway = :first :pax :closed {
+        with link = "line.dk.FBM" {
+            track(fb[:gri.yb, :gri.yb + 8.51km]);
+            line_label(:left:nw, fb[:gri.yb + 8.5km] << 0.5mt, "FBM");
+            track(fb[:gri.yb + 8.49km, :bra.xf - 9.49km]);
+            line_label(:right:e, fb[:bra.xf - 9.5km] >> 0.5mt, "FBM");
+            track(
+                    fb[:bra.xf - 9.51km, :bra.xf]
+                ..  fb[:bra.yf, :bra.yf + 0.1dl] >> 0.5md << 0.5mt
+            );
+        }
+    }
+}
+
+
+# DK FFH.  Fredericia - Frederikshavn
+with detail = 2 {
+    let fa = path("d2.dk.ffh.1");
+    let af = path("d2.dk.ffh.2");
+
+    with railway = :first :double :pax {
+        with link = "line.dk.FFH" {
+            track(fa[:fre, :fre + 10.8km]);
+            line_label(:right:w, fa[:fre + 10.8km] >> 0.5md, "FFH");
+            track(fa[:fre + 10.8km, :vej]);
+        }
+
+        with link = "point.dk.Vejle" {
+            track(fa[:vej, :vej.yh]);
+            statdot(fa[:vej]);
+            slabel(:ne, fa[:vej] + (-1.1dt, 0.3dt), "Vejle");
+        }
+
+        with link = "line.dk.FFH" {
+            track(fa[:vej.yh, :vej.yh + 15km]);
+            line_label(:right:w, fa[:vej.yh + 15km] >> 0.5md, "FFH");
+            track(fa[:vej.yh + 15km, :hor.ys]);
+        }
+
+        with link = "point.dk.Horsens" {
+            track(fa[:hor.ys, :hor.yt]);
+            statdot(fa[:hor]);
+            slabel(:right, fa[:hor] + (1.5dt, 0.8dt), "Horsens");
+        }
+
+        with link = "line.dk.FFH" {
+            track(fa[:hor.yt, :hor.yt + 12.3km]);
+            line_label(:right:w, fa[:hor.yt + 12.3km] >> 0.5mt, "FFH");
+            track(fa[:hor.yt + 12.3km, :ska.ys]);
+        }
+
+        with link = "point.dk.Skanderborg" {
+            track(fa[:ska.ys, :ska]);
+            statdot(fa[:ska]);
+            slabel(:nw, fa[:ska] + (1.3dt, 0.3dt), "Skanderborg");
+        }
+
+        with link = "line.dk.FFH" {
+            track(fa[:ska, :ska + 9km]);
+            line_label(:left:se, fa[:ska + 9km] << 0.5mt, "FFH");
+            track(fa[:ska + 9km, :vib.yo]);
+            track(:ror, fa[:vib.yo, :aar.yr]);
+            track(fa[:aar.yr, :aar]);
+        }
+
+        with link = "point.dk.Aarhus-H" {
+            statdot(fa[:aar]);
+            slabel(:right :bold, fa[:aar] + (1.5dt, 0.8dt), "Aarhus H");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:aar.yr, :aar.yr + 14.7km]);
+            line_label(:right:w, af[:aar.yr + 14.7km] >> 0.5mt, "FFH");
+            track(af[:aar.yr + 14.7km, :lau.ys]);
+        }
+
+        with link = "point.dk.Laurbjerg" {
+            track(af[:lau.ys, :lau]);
+            statdot(:removed, af[:lau]);
+            slabel(:right :removed, af[:lau] + (1.3dt, -0.8dt), "Laurbjerg");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:lau, :lan.ys]);
+        }
+
+        with link = "point.dk.Langå" {
+            track(af[:lan.ys, :lan]);
+            statdot(af[:lan]);
+            slabel(:right, af[:lan] + (1.8dt, 1.5dt), "Langå");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:lan, :lan + 5.5km]);
+            line_label(:right:w, af[:lan + 5.5km] >> 0.5md, "FFH");
+            track(af[:lan + 5.5km, :ste.yr]);
+            track(af[:ste.yr, :ran.yr]);
+            track(:removed, path("d2.dk.ffh.ste")[:ste.yr, :ran.ys]);
+        }
+
+        with link = "point.dk.Randers" {
+            track(af[:ran.yr, :ran.ys]);
+            statdot(af[:ran]);
+            slabel(:right, af[:ran] + (1.3dt, -0.5dt), "Randers");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:ran.ys, :ran.ys + 6km]);
+            line_label(:left:ne, af[:ran.ys + 6km] << 0.5mt, "FFH");
+            track(af[:ran.ys + 6km, :far.yv]);
+        }
+
+        with link = "point.dk.Fårup" {
+            track(af[:far.yv, :far]);
+            statdot(af[:far]);
+            slabel(:left, af[:far] + (-1.5dt, 2dt), "Fårup");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:far, :far.ym]);
+            track(af[:far.ym, :far.ym + 8km]);
+            line_label(:left:e, af[:far.ym + 8km] << 0.5md, "FFH");
+            track(af[:far.ym + 8km, :hob]);
+        }
+
+        with link = "point.dk.Hobro" {
+            statdot(af[:hob]);
+            slabel(:left, af[:hob] + (-1.6dt, 0.8dt), "Hobro");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:hob, :hob.ya]);
+            track(af[:hob.ya, :hob.ya + 10km]);
+            line_label(:right:w, af[:hob.ya + 10km] >> 0.5mt, "FFH");
+            track(af[:hob.ya + 10km, :sko.yn]);
+            track(:single, af[:sko.yn, :sto.ys] >> 0.5md << 0.5mt);
+            track(:single,
+                    path("d2.dk.ffh.sko")[:sko.yn, :sto.ys] << 0.5md >> 0.5mt
+            );
+            track(af[:sto.ys, :sve.yh]);
+        }
+
+        with link = "point.dk.Svenstrup-Jylland" {
+            track(af[:sve.yh, :sve]);
+            statdot(af[:sve]);
+            slabel(:right, af[:sve] + (1.5dt, 0.8dt), "Svenstrup Jylland");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:sve, :sve + 4km]);
+            line_label(:left:se, af[:sve + 4km] << 0.5md, "FFH");
+            track(af[:sve + 4km, :aal.yh]);
+            track(af[:aal.yh, :aal]);
+        }
+
+        with link = "point.dk.Aalborg" {
+            statdot(af[:aal]);
+            slabel(:right :bold, af[:aal] + (1.5dt, 1dt), "Aalborg");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:aal, :lfs]);
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.dk.FFH" {
+            track(af[:lfs, :lfn]);
+            track(af[:lfn, :lin.ys]);
+        }
+
+        with link = "point.dk.Lindholm" {
+            track(:double, af[:lin.ys, :lin]);
+            statdot(af[:lin]);
+            slabel(:left, af[:lin] + (-1.8dt, 1.5dt), "Lindholm");
+        }
+
+        with link = "line.dk.FFH" {
+            track(:double, af[:lin, :lin.yl]);
+            track(:double, af[:lin.yl, :lin.yf]);
+            track(
+                    af[:lin.yf - 0.1dl, :lin.yf] >> 0.5md << 0.5mt
+                ..  af[:lin.xf, :lin.yf + 6.5km]
+            );
+            line_label(:right:w, af[:lin.yf + 6.5km] >> 0.5mt, "FFH");
+            track(af[:lin.yf + 6.5km, :hjo.yh - 8km]);
+            line_label(:left:e, af[:hjo.yh - 8km] << 0.5mt, "FFH");
+            track(af[:hjo.yh - 8km, :hjo.yh]);
+        }
+
+        with link = "point.dk.Hjørring" {
+            track(af[:hjo.yh, :hjo]);
+            statdot(af[:hjo]);
+            slabel(:right, af[:hjo] + (-1dt, -1.5dt), "Hjørring");
+        }
+
+        with link = "line.dk.FFH" {
+            track(af[:hjo, :hjo + 14.5km]);
+            line_label(:left:s, af[:hjo + 14.5km] << 0.5mt,
+                (-0.2dt, 0dt), "FFH"
+            );
+            track(af[:hjo + 14.5km, :fre.ys]);
+        }
+
+        with link = "point.dk.Frederikshavn" {
+            track(af[:fre.ys, :fre]);
+            statdot(af[:fre]);
+            slabel(:right :bold, af[:fre] + (1.6dt, 1dt), "Frederikshavn");
+        }
+    }
+}
+
+
 # DK FPB.  Fredericia - Padborg Landegrænse
 with detail = 2 {
     let fp = path("d2.dk.fpb");
@@ -17,17 +277,18 @@ with detail = 2 {
         with link = "line.dk.FPB" {
             track(fp[:tau, :tau + 5.5km]);
             line_label(:right:se, fp[:tau + 5.5km], "FPB");
-            track(fp[:tau + 5.5km, :kol]);
+            track(fp[:tau + 5.5km, :kol.yt]);
         }
 
         with link = "point.dk.Kolding" {
+            track(fp[:kol.yt, :kol]);
             statdot(fp[:kol]);
             slabel(:nw, fp[:kol] + (1.5dt, -0.3dt), "Kolding");
         }
 
         with link = "line.dk.FPB" {
             track(fp[:kol, :kol + 8km]);
-            line_label(:right:s, fp[:kol + 8km], "FPB");
+            line_label(:right:s, fp[:kol + 8km] >> 0.5md, "FPB");
             track(fp[:kol + 8km, :lun]);
         }
 

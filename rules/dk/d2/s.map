@@ -12,6 +12,66 @@ with detail = 2 {
 }
 
 
+# DK SBS.  Skanderborg - Skjern
+with detail = 2 {
+    let ss = path("d2.dk.sbs");
+
+    with railway = :first :pax {
+        with link = "line.dk.SBS" {
+            track(ss[:ska.ys, :ska.ys + 12.51km]);
+            line_label(:right:sw, ss[:ska.ys + 12.5km] >> 0.5mt, "SBS");
+            track(ss[:ska.ys + 12.49km, :sil.yl]);
+        }
+
+        with link = "point.dk.Silkeborg" {
+            track(ss[:sil.yl, :sil.yh]);
+            statdot(ss[:sil]);
+            slabel(:left, ss[:sil] + (1.5dt, -1.8dt), "Silkeborg");
+        }
+
+        with link = "line.dk.SBS" {
+            track(ss[:sil.yh, :sil.yr]);
+            track(ss[:sil.yr, :fun]);
+        }
+
+        with link = "point.dk.Funder" {
+            statdot(:nopax, ss[:fun]);
+            slabel(:right :nopax, ss[:fun] + (1.5dt, 2.5dt), "Funder");
+        }
+
+        with link = "line.dk.SBS" {
+            track(ss[:fun, :fun.yb - 1mt]);
+            with layer = -1 track(ss[:fun.yb - 1.1mt, :fun.yb + 1.5km]);
+            track(ss[:fun.yb + 1.49km, :fun.yb + 14.01km]);
+            line_label(:right:s, ss[:fun.yb + 14km] >> 0.5mt, "SBS");
+            track(ss[:fun.yb + 13.99km, :her.ys]);
+        }
+
+        # point.dk.Herning  dk.HBV
+
+        with link = "line.dk.SBS" {
+            track(ss[:her.yh, :her.yh + 12.51km]);
+            line_label(:right:se, ss[:her.yh + 12.5km] >> 0.5mt, "SBS");
+            track(ss[:her.yh + 12.49km, :tro]);
+        }
+
+        with link = "point.dk.Troldhede" {
+            track(ss[:tro, :tro.yk]);
+            statdot(ss[:tro]);
+            slabel(:left, ss[:tro] + (-1dt, -0.6dt), "Troldhede");
+        }
+
+        with link = "line.dk.SBS" {
+            track(ss[:tro.yk, :tro.yk + 10.01km]);
+            line_label(:right:s, ss[:tro.yk + 10km] >> 0.5mt,
+                (-0.3dt, 0dt), "SBS"
+            );
+            track(ss[:tro.yk + 9.99km, :ske.ys]);
+        }
+    }
+}
+
+
 # DK SHT.  Snoghøj - Taulov
 with detail = 2 {
     let st = path("d2.dk.sht");
@@ -190,6 +250,63 @@ with detail = 2 {
             track(sk[:kor.yh, :kor]);
             statdot(sk[:kor]);
             slabel(:bottom, sk[:kor] + (1dt, 0.8dt), "Korsør");
+        }
+    }
+}
+
+
+# DK STS.  Struer - Thisted
+with detail = 2 {
+    let st = path("d2.dk.sts");
+
+    with railway = :first :pax {
+        with link = "line.dk.STS" {
+            track(st[:str, :str + 5.51km]);
+            line_label(:left:e, st[:str + 5.5km] << 0.5mt, "STS");
+            track(st[:str + 5.49km, :ydb + 8.51km]);
+            line_label(:left:e, st[:ydb + 8.5km] << 0.5mt, "STS");
+            track(st[:ydb + 8.49km, :thi.yf - 6.99km]);
+            line_label(:left:e, st[:thi.yf - 7km] << 0.5mt,
+                (0dt, -0.4dt), "STS"
+            );
+            track(st[:thi.yf - 7.01km, :thi.yf]);
+            track(st[:thi.yf, :thi]);
+        }
+
+        with link = "point.dk.Thisted" {
+            statdot(st[:thi]);
+            slabel(:right, st[:thi] + (1.7dt, 1dt), "Thisted");
+        }
+    }
+}
+
+
+# DK SVB.  Skjern - Videbæk
+with detail = 2 {
+    let sv = path("d2.dk.svb");
+
+    with railway = :first :pax :closed {
+        with link = "line.dk.SVB" {
+            track(:removed, sv[:ske.yv, :ske.xn]);
+            track(sv[:ske.xn, :her - 5.99km]);
+            line_label(:left:se, sv[:her - 6km] << 0.5mt, "SVB");
+            track(sv[:her - 6.01km, :her]);
+        }
+
+        with link = "point.dk.Herborg" {
+            statdot(sv[:her]);
+            slabel(:left, sv[:her] + (-1.5dt, -0.5dt), "Herborg");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SVB" {
+            track(sv[:her, :vid]);
+        }
+
+        with link = "point.dk.Videbæk" {
+            statdot(sv[:vid]);
+            slabel(:top, sv[:vid] + (0.5dt, -0.8dt), "Videbæk");
         }
     }
 }

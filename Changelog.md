@@ -1,5 +1,15 @@
 # Change Log
 
+## 2025-12-12
+
+Additions
+
+* Added the third part of both overview and detail map of Denmark,
+  covering the islands of Funen and Langeland. ([#137])
+
+[#137]: https://github.com/railwayhistory/map/pull/137
+
+
 ## 2025-11-15
 
 Additions

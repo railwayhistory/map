@@ -46,6 +46,26 @@ with detail = 2 {
 }
 
 
+# DK NNN. Nørre Nebel - Nymindegab
+with detail = 2 {
+    let nn = path("d2.dk.nnn");
+
+    with railway = :first :nopax :closed {
+        with link = "line.dk.NNN" {
+            track(nn[:nor.yn, :nor.yn + 4km]);
+            line_label(:left:ne, nn[:nor.yn + 4km] << 0.5mt, "NNN");
+            track(nn[:nor.yn + 4km, :nym]);
+
+        }
+
+        with link = "point.dk.Nymindegab" {
+            statdot(nn[:nym]);
+            slabel(:left, nn[:nym] + (-1.5dt, 0.8dt), "Nymindegab");
+        }
+    }
+}
+
+
 # DK NNS.  Nykøbing Falster Vest - Nakskov
 with detail = 2 {
     let nn = path("d2.dk.nns");
@@ -174,6 +194,42 @@ with detail = 2 {
             track(nr[:nak.yr, :rod.yn - 15km]);
             line_label(:right:n, nr[:rod.yn - 15km], "NRY");
             track(nr[:rod.yn - 15km, :rod.yn]);
+        }
+    }
+}
+
+
+# DK NSF.  Nørresundby - Fjerritslev
+with detail = 2 {
+    let nf = path("d2.dk.nsf");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.NSF" {
+            track(
+                    nf[:lin.yf, :lin.xf] << 0.5md >> 0.5mt
+                ..  nf[:lin.zf, :lin.zf + 3.01km]
+            );
+            line_label(:left:ne, nf[:lin.zf + 3km] << 0.5mt, "NSF");
+            track(nf[:lin.zf + 2.99km, :aab]);
+        }
+
+        with link = "point.dk.Aabybro" {
+            statdot(nf[:aab]);
+            slabel(:right, nf[:aab] + (-1dt, -1.5dt), "Aabybro");
+        }
+
+        with link = "line.dk.NSF" {
+            track(nf[:aab, :rya.yh]);
+            track(nf[:rya.yh, :rya.yh + 5.01km]);
+            line_label(:left:nw, nf[:rya.yh + 5km] << 0.5mt, "NSF");
+            track(nf[:rya.yh + 4.99km, :fje - 5.69km]);
+            line_label(:left:n, nf[:fje - 5.7km] << 0.5mt, "NSF");
+            track(nf[:fje - 5.71km, :fje]);
+        }
+
+        with link = "point.dk.Fjerritslev" {
+            statdot(nf[:fje]);
+            slabel(:top, nf[:fje] + (0dt, -0.8dt), "Fjerritslev");
         }
     }
 }

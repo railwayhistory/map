@@ -55,11 +55,17 @@ with detail = 3,
     }
 
     with link = "line.dk.FPB" {
-        track(fp[:elt + 0.5sw, :kol - 0.5sw]);
+        track(fp[:elt + 0.5sw, :kol.yt - 0.49seg]);
     }
 
     with link = "point.dk.Kolding", railway = :station {
-        track(fp[:kol - 0.5sw, :kol + 0.5sw]);
+        let tk = path("d3.dk.thk");
+
+        track(:single :removed,
+                tk[:kol.xt - 0.1dl, :kol.xt]
+            ..  tk[:kol.yt, :kol - 0.6sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+        track(fp[:kol.yt - 0.5seg, :kol + 0.5sw]);
         marker(:right :de.bf, fp[:kol] >> 0.5md);
         slabel(:right, fp[:kol - 0.4sw] << 0.8dt,
             hbox(:left:top :bold, "Kolding")

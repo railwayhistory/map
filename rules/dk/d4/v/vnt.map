@@ -1,0 +1,401 @@
+# DK VNT.  Varde - Nørre Nebel – Tarm
+#
+let vt = path("d3.dk.vnt");
+
+with detail = 4,
+     railway = :first :pax
+{
+    # point.dk.Varde  dk.LES
+
+    with link = "point.dk.Arnbjerg", railway = :station {
+        track(vt[:arn - 0.5sw, :arn + 0.5sw] << 1ms << 1mt);
+        marker(:left :de.hp :removed,
+            vt[:arn] << 1mo << 0.5mt, vt[:arn] << 1mo >> 0.5mt
+        );
+        label(:removed, vt[:arn] << 1mo << 0.5mt << 1sh + (-1.8dt, 0.8dt),
+            hbox(:right:base, vbox(:center:base,
+                span(:xsmall, "VNT: 0,4"),
+                "Arnbjerg"
+            ))
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(:ror,
+                vt[:arn + 0.49sw, :var.yn - 1mo] << 1ms << 1mt
+            ..  vt[:fri - 0.5sw, :fri - 0.49sw]
+        );
+    }
+
+    with link = "point.dk.Frisvadvej", railway = :station {
+        track(vt[:fri - 0.5sw, :fri + 0.5sw]);
+        marker(:left :de.hp, vt[:fri] << 0.5mt);
+        station(:top, vt[:fri] >> 0.5mt + (0dt, -30m) + (0.5dt, -0.3dt),
+            "Frisvadvej", "VNT: 1,6"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:fri + 0.49sw, :vav - 0.49sw]);
+    }
+
+    with link = "point.dk.Varde-Vest", railway = :station {
+        track(vt[:vav - 0.5sw, :vav + 0.5sw]);
+        marker(:left :de.bf, vt[:vav] << 0.5mt);
+        label(vt[:vav] << 0.5mt << 1sh + (2.3dt, 2.3dt),
+            hbox(:left:base, vbox(:center:base,
+                span(:xsmall, "VNT: 2,4"),
+                "Varde Vest"
+            ))
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:vav + 0.49sw, :bou - 0.49sw]);
+    }
+
+    with link = "point.dk.Boulevarden", railway = :station {
+        track(vt[:bou - 0.5sw, :bou + 0.5sw]);
+        marker(:right :de.hp, vt[:bou] >> 0.5mt);
+        station(:top, vt[:bou] >> 0.5mt >> 1sh + (0.3dt, -0.8dt),
+            "Boulevarden", "VNT: 3,4"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:bou + 0.49sw, :bou + 1km]);
+        line_label(:left:n, vt[:bou + 1km] << 0.5mt, "VNT");
+        track(vt[:bou + 1km, :elk - 0.49sw]);
+    }
+
+    with link = "point.dk.Elkærdam", railway = :station {
+        track(vt[:elk - 0.5sw, :elk + 0.5sw]);
+        marker(:left :de.hp :removed, vt[:elk] << 0.5mt);
+        station(:bottom :removed, vt[:elk] << 0.5mt << 1sh + (0dt, 0.5dt),
+            "Elkærdam", "VNT: 5,6"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:elk + 0.49sw, :hyl - 0.49sw]);
+    }
+
+    with link = "point.dk.Hyllerslev", railway = :station {
+        track(vt[:hyl - 0.5sw, :hyl.s + 0.5sw]);
+        marker(:left :de.hp, vt[:hyl] << 0.5mt);
+        marker(:right :de.bf :removed, vt[:hyl.s] >> 0.5mt);
+        station(:bottom, vt[:hyl] << 0.5mt << 1sh << 1dt,
+            "Hyllerslev", "VNT: 7,2"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:hyl.s + 0.49sw, :jan - 0.49sw]);
+    }
+
+    with link = "point.dk.Janderup", railway = :station {
+        track(vt[:jan - 0.5sw, :jan + 0.5sw]);
+        marker(:right :de.bf, vt[:jan] >> 0.5mt);
+        station(:top, vt[:jan] >> 0.5mt >> 1.0sh >> 0.8dt,
+            "Janderup", "VNT: 8,9"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:jan + 0.49sw, :bil - 0.49sw]);
+    }
+
+    with link = "point.dk.Billum", railway = :station {
+        track(vt[:bil - 0.5sw, :bil + 0.5sw]);
+        marker(:right :de.bf, vt[:bil] >> 0.5mt);
+        station(:top, vt[:bil] >> 0.5mt >> 1.0sh >> 0.8dt,
+            "Billum", "VNT: 11,7"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:bil + 0.49sw, :hes - 0.49sw]);
+    }
+
+    with link = "point.dk.Hesselmed", railway = :station {
+        track(vt[:hes - 0.5sw, :hes + 0.5sw]);
+        marker(:left :de.hp :removed, vt[:hes.t] << 0.5mt);
+        marker(:left :de.bbf :nopax, vt[:hes] << 0.5mt);
+        station(:bottom :nopax,
+            vt[:hes.t] << 0.5mt << 1.0sh + (-70m, 0.8dt),
+            "Hesselmed", "VNT: 14,1"
+        );
+
+        let hes = path("d3.dk.vnt.hes");
+        track(:side :nopax, hes[:hes.yl, :lei.f]);
+        slabel(:ne :italic, hes[:lei] << 0.5dt >> 0.3dt,
+            "Oksbøl Kaserne"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:hes + 0.49sw, :oks - 0.49sw]);
+    }
+
+    with link = "point.dk.Oksbøl", railway = :station {
+        track(vt[:oks - 0.5sw, :oks + 0.5sw]);
+        marker(:left :de.bf, vt[:oks] << 0.5mt);
+        station(:left, vt[:oks] << 0.5mt << 1.0sh + (-1.8dt, 1.4dt),
+            "Oksbøl", "VNT: 15,1"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:oks + 0.49sw, :bau - 0.49sw]);
+    }
+
+    with link = "point.dk.Baunhøj", railway = :station {
+        track(vt[:bau - 0.5sw, :bau + 0.5sw]);
+        marker(:left :de.hp, vt[:bau] << 0.5mt);
+        marker(:left :de.exbf, vt[:bau] << 0.5mt);
+        station(:left, vt[:bau] << 0.5mt << 1.4sh + (-1.5dt, 1.2dt),
+            "Baunhøj", "VNT: 16,2"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:bau + 0.49sw, :vro - 0.49sw]);
+    }
+
+    with link = "point.dk.Vrøgum", railway = :station {
+        track(vt[:vro - 0.5sw, :vro + 0.5sw]);
+        marker(:left :de.hp, vt[:vro] << 0.5mt);
+        marker(:left :de.exbf, vt[:vro] << 0.5mt);
+        station(:left, vt[:vro] << 0.5mt << 1.4sh + (-1.5dt, 1.1dt),
+            "Vrøgum", "VNT: 18,3"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:vro + 0.49sw, :jeg - 0.49sw]);
+    }
+
+    with link = "point.dk.Jegum", railway = :station {
+        track(vt[:jeg - 0.5sw, :jeg + 0.5sw]);
+        marker(:right :de.hp, vt[:jeg] >> 0.5mt);
+        station(:right, vt[:jeg] >> 0.5mt >> 1.0sh + (1.8dt, 1.2dt),
+            "Jegum", "VNT: 19,7"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:jeg + 0.49sw, :jeg + 1.3km]);
+        line_label(:right:w, vt[:jeg + 1.3km] >> 0.5mt, "VNT");
+        track(vt[:jeg + 1.3km, :sov - 0.49sw]);
+    }
+
+    with link = "point.dk.Søvig-Sund", railway = :station {
+        track(vt[:sov - 0.5sw, :sov + 0.5sw]);
+        marker(:left :de.hp :removed, vt[:sov] << 0.5mt);
+        station(:left :removed, vt[:sov] << 0.5mt << 1sh + (-1.8dt, 1.5dt),
+            "Søvig Sund", "VNT: 21,8"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:sov + 0.49sw, :dyr - 0.49sw]);
+    }
+
+    with link = "point.dk.Dyreby", railway = :station {
+        track(vt[:dyr - 0.5sw, :dyr + 0.5sw]);
+        marker(:right :de.hp, vt[:dyr] >> 0.5mt);
+        station(:right, vt[:dyr] >> 0.5mt >> 1.0sh + (1.3dt, 1.2dt),
+            "Dyreby", "VNT: 23,7"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:dyr + 0.49sw, :hen - 0.49sw]);
+    }
+
+    with link = "point.dk.Henne", railway = :station {
+        track(vt[:hen - 0.5sw, :hen + 0.5sw]);
+        marker(:left :de.bf, vt[:hen] << 0.5mt);
+        station(:top, vt[:hen] << 0.5mt << 1sh + (-1.5dt, -1.2dt),
+            "Henne", "VNT: 25,0"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:hen + 0.49sw, :out - 0.49sw]);
+    }
+
+    with link = "point.dk.Outrup", railway = :station {
+        track(vt[:out - 0.5sw, :out + 0.5sw]);
+        marker(:left :de.bf, vt[:out] << 0.5mt);
+        station(:left, vt[:out] << 0.5mt << 1sh + (-2.0dt, 0.3dt),
+            "Outrup", "VNT: 27,7"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:out + 0.49sw, :lof - 0.49sw]);
+    }
+
+    with link = "point.dk.Løftgård", railway = :station {
+        track(vt[:lof - 0.5sw, :lof + 0.5sw]);
+        marker(:right :de.hp, vt[:lof] >> 0.5mt);
+        station(:right, vt[:lof] >> 0.5mt >> 1.0sh + (1.8dt, 1.5dt),
+            "Løftgård", "VNT: 29,1"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:lof + 0.49sw, :lun - 0.49sw]);
+    }
+
+    with link = "point.dk.Lunde-Vestjylland", railway = :station {
+        track(vt[:lun - 0.5sw, :lun + 0.5sw]);
+        marker(:right :de.hp, vt[:lun] >> 0.5mt);
+        marker(:right :de.exbf, vt[:lun] >> 0.5mt);
+        station(:right:left_align,
+            vt[:lun] >> 0.5mt >> 1.4sh + (1.6dt, 1.0dt),
+            "Lunde", " VNT: 32,2"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:lun + 0.49sw, :lun + 1.5km]);
+        line_label(:right:s, vt[:lun + 1.5km] >> 0.5mt, (0.2dt, 0dt), "VNT");
+        track(vt[:lun + 1.5km, :nla - 0.49sw]);
+    }
+
+    with link = "point.dk.Nørre-Nebel-Landevej", railway = :station {
+        track(vt[:nla - 0.5sw, :nla + 0.5sw]);
+        marker(:left :de.hp :removed, vt[:nla] << 0.5mt);
+        station(:left :removed, vt[:nla] << 0.5mt << 1sh + (-1.8dt, 1.8dt),
+            "Nørre Nebel Landevej", "VNT: 35,4"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:nla + 0.49sw, :nor - 0.49sw]);
+    }
+
+    with link = "point.dk.Nørre-Nebel", railway = :station {
+        track(vt[:nor - 0.5sw, :nor + 100m]);
+        track(:closed, vt[:nor + 99m, :nor.yn + 0.5seg]);
+        marker(:right :de.bf, vt[:nor] >> 0.5mt);
+        station(:top, vt[:nor] >> 0.5mt >> 1sh + (1dt, -1dt),
+            span(:bold, "Nørre Nebel"), "VNT: 37,6"
+        );
+    }
+}
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    with link = "line.dk.VNT" {
+        track(vt[:nor.yn + 0.49seg, :nor.yn + 2.5km]);
+        line_label(:right:w, vt[:nor.yn + 2.5km] >> 0.5mt, "VNT");
+        track(vt[:nor.yn + 2.5km, :sbo - 0.49sw]);
+    }
+
+    with link = "point.dk.Sønder-Bork", railway = :station {
+        track(vt[:sbo - 0.5sw, :sbo + 0.5sw]);
+        marker(:right :de.bf, vt[:sbo] >> 0.5mt);
+        station(:right, vt[:sbo] >> 0.5mt >> 1.0sh + (1.5dt, 1.2dt),
+            "Sønder Bork", "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:sbo + 0.49sw, :obl - 0.49sw]);
+    }
+
+    with link = "point.dk.Obling", railway = :station {
+        track(vt[:obl - 0.5sw, :obl + 0.5sw]);
+        marker(:right :de.hp, vt[:obl] >> 0.5mt);
+        station(:right, vt[:obl] >> 0.5mt >> 1.0sh + (1.5dt, 1.6dt),
+            "Obling", "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:obl + 0.49sw, :nbo - 0.49sw]);
+    }
+
+    with link = "point.dk.Nørre-Bork", railway = :station {
+        track(vt[:nbo - 0.5sw, :nbo + 0.5sw]);
+        marker(:right :de.bf, vt[:nbo] >> 0.5mt);
+        station(:right, vt[:nbo + 0.5sw] >> 0.5mt >> 1sh + (-4dt, 2dt),
+            hbox(:left:top, "Nørre Bork"), "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:nbo + 0.49sw, :svi - 0.49sw]);
+    }
+
+    with link = "point.dk.Sønder-Vium", railway = :station {
+        track(vt[:svi - 0.5sw, :svi + 0.5sw]);
+        marker(:right :de.bf, vt[:svi] >> 0.5mt);
+        station(:right, vt[:svi] >> 0.5mt >> 1.0sh + (1.4dt, 2dt),
+            "Sønder Vium", "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:svi + 0.49sw, :hem - 0.49sw]);
+    }
+
+    with link = "point.dk.Hemmet", railway = :station {
+        track(vt[:hem - 0.5sw, :hem + 0.5sw]);
+        marker(:left :de.bf, vt[:hem] << 0.5mt);
+        station(:left, vt[:hem] << 0.5mt << 1sh + (-1.8dt, 1dt),
+            "Hemmet", "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:hem + 0.49sw, :vos - 0.49sw]);
+    }
+
+    with link = "point.dk.Vostrup", railway = :station {
+        track(vt[:vos - 0.5sw, :vos + 0.5sw]);
+        marker(:left :de.bf, vt[:vos] << 0.5mt);
+        station(:top, vt[:vos] << 0.5mt << 1sh + (-1.5dt, -1dt),
+            "Vostrup", "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:vos + 0.49sw, :lon - 0.49sw]);
+    }
+
+    with link = "point.dk.Lønborg", railway = :station {
+        track(vt[:lon - 0.5sw, :lon + 0.5sw]);
+        marker(:left :de.bf, vt[:lon] << 0.5mt);
+        station(:left, vt[:lon] << 0.5mt << 1sh + (-1.6dt, 0.7dt),
+            "Lønborg", "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:lon + 0.49sw, :kyv - 0.49sw]);
+    }
+
+    with link = "point.dk.Kyvling", railway = :station {
+        track(vt[:kyv - 0.5sw, :kyv + 0.5sw]);
+        marker(:right :de.hp, vt[:kyv] >> 0.5mt);
+        station(:bottom, vt[:kyv] >> 0.5mt >> 1.0sh + (0.5dt, 0.8dt),
+            "Kyvling", "VNT: ??"
+        );
+    }
+
+    with link = "line.dk.VNT" {
+        track(vt[:kyv + 0.49sw, :kyv + 1.1km]);
+        line_label(:left:s, vt[:kyv + 1.1km] << 0.5mt, (-0.5dt, 0dt), "VNT");
+        track(vt[:kyv + 1.1km, :tar.xn - 1mo]);
+        track(:station,
+                vt[:tar.xn - 1.1mo, :tar.xn - 1mo]
+            ..  vt[:tar.yn, :tar.yn + 0.1dl] >> 1mo
+        );
+    }
+}
+

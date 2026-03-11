@@ -1,3 +1,19 @@
+# DK VGS.  Varde - Grindsted
+with detail = 2 {
+    let vg = path("d2.dk.vgs");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.VGS" {
+            track(vg[:var.yg, :var.yg + 9.5km]);
+            line_label(:right:nw, vg[:var.yg + 9.5km] >> 0.5mt, "VGS");
+            track(vg[:var.yg + 9.5km, :gri.yv - 7.1km]);
+            line_label(:left:s, vg[:gri.yv - 7.1km] << 0.5mt, "VGS");
+            track(vg[:gri.yv - 7.1km, :gri.yv]);
+        }
+    }
+}
+
+
 # DK VHT.  Valby - Høje Taastrup (S-tog)
 with detail = 2 {
     let vh = path("d2.dk.kfa");
@@ -66,6 +82,60 @@ with detail = 2 {
 }
 
 
+# DK VLV.  Vemb - Lemvig
+with detail = 2 {
+    let vl = path("d2.dk.vlv");
+
+    with railway = :first :pax {
+        with link = "line.dk.VLV" {
+            track(vl[:vem.yl, :vem.yl + 8.41km]);
+            line_label(:left:e, vl[:vem.yl + 8.4km] << 0.5mt, "VLV");
+            track(vl[:vem.yl + 8.39km, :lem.yt - 3.29km]);
+            line_label(:right:nw, vl[:lem.yt - 3.3km] >> 0.5mt, "VLV");
+            track(vl[:lem.yt - 3.31km, :lem.yt]);
+        }
+
+        with link = "point.dk.Lemvig", railway = :station {
+            track(vl[:lem.yt, :lem]);
+            statdot(vl[:lem]);
+            slabel(:right, vl[:lem] + (1.5dt, 0.8dt), "Lemvig");
+        }
+    }
+}
+
+
+# DK VNT.  Varde - Nørre Nebel – Tarm
+with detail = 2 {
+    let vt = path("d2.dk.vnt");
+
+    with railway = :first :pax {
+        with link = "line.dk.VNT" {
+            track(vt[:var.yn, :var.yn + 5.9km]);
+            line_label(:right:s, vt[:var.yn + 5.9km] >> 0.5mt, "VNT");
+            track(vt[:var.yn + 5.9km, :nor - 7.2km]);
+            line_label(:right:w, vt[:nor - 7.2km] >> 0.5mt, "VNT");
+            track(vt[:nor - 7.2km, :nor]);
+        }
+
+        with link = "point.dk.Nørre-Nebel" {
+            track(:closed, vt[:nor, :nor.yn]);
+            statdot(vt[:nor]);
+            slabel(:right, vt[:nor] + (1.5dt, 0dt), "Nørre Nebel");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.VNT" {
+            track(vt[:nor.yn, :tar.yn - 10km]);
+            line_label(:left:e, vt[:tar.yn - 10km] << 0.5mt,
+                (0dt, -0.5dt), "VNT"
+            );
+            track(vt[:tar.yn - 10km, :tar.yn]);
+        }
+    }
+}
+
+
 # DK VRS.  Vigerslev - Ringstedt
 with detail = 2 {
     let vr = path("d2.dk.vrs");
@@ -91,6 +161,30 @@ with detail = 2 {
                     vr[:kon + 9km, :kva.xk]
                 ..  vr[:kva.yk, :rin] << 1md << 1ms
             );
+        }
+    }
+}
+
+
+# DK VVG.  Vejle Nord - Vandel - Grindsted
+with detail = 2 {
+    let vg = path("d2.dk.vvg");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.VVG" {
+            track(vg[:ven, :ven + 10.81km]);
+            line_label(:left:nw, vg[:ven + 10.8km] << 0.5mt, "VVG");
+            track(vg[:ven + 10.79km, :van]);
+        }
+
+        with link = "point.dk.Vandel" {
+            statdot(vg[:van]);
+            slabel(:top, vg[:van] + (1dt, -0.8dt), "Vandel");
+        }
+
+        with link = "line.dk.VVG" {
+            track(vg[:van, :gri.yh]);
+            line_label(:right:s, vg[:van + 9km] >> 0.5mt, (0.5dt, 0dt), "VVG");
         }
     }
 }

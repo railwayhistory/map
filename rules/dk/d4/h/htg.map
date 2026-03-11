@@ -1,0 +1,73 @@
+# DK HTG.  Horsens - Thyregod
+#
+let ht = path("d3.dk.htg");
+
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Horsens  dk.FFH
+
+    with link = "point.dk.Bygholm", railway = :station {
+        track(:double, ht[:byg - 0.5sw, :byg + 0.5sw] << 2mo);
+        marker(:left :de.hp,
+            ht[:byg] << 2.5mo << 0.5mt, ht[:byg] << 1.5mo >> 0.5mt
+        );
+        station(:left, ht[:byg] << 2.5mo << 0.5mt << 1sh + (-1.5dt, 1.5dt),
+            "Bygholm", "HTG: 0,5"
+        );
+    }
+
+    with link = "line.dk.HTG" {
+    }
+
+    with link = "line.dk.HTG" {
+        track(:double :ror, ht[:byg + 0.49sw, :hor.yt] << 2mo);
+        track(:double :ror,
+                ht[:hor.yt, :hor.xt] << 2mo
+            ..  ht[:hor.zt + 1md, :hor.zt + 1.1md]
+        );
+        track(:double, ht[:hor.zt + 1md, :lma - 0.49sw]);
+    }
+
+    with link = "point.dk.Lund-Mark", railway = :station {
+        track(:double, ht[:lma - 0.5sw, :lma + 0.5sw]);
+        marker(:left :de.hp, ht[:lma] << 0.5mo << 0.5mt);
+        station(:bottom, ht[:lma] << 0.5mo << 0.5mt << 1sh + (-1.5dt, 0.8dt),
+            "Lund Mark", "HTG: ??"
+        );
+    }
+
+    with link = "line.dk.HTG" {
+        track(:double, ht[:lma + 0.49sw, :lun - 0.49sw]);
+    }
+
+    with link = "point.dk.Lund", railway = :station {
+        track(:double, ht[:lun - 0.5sw, :lun.ys]);
+        marker(:right :de.bf, ht[:lun] >> 0.5mo >> 0.5mt);
+        station(:top, ht[:lun] >> 0.5mo >> 0.5mt >> 1sh >> 0.8dt,
+            span(:bold, "Lund"),
+            hbox(:center:top,
+                vbox(:right:top, "??: ", "HTG: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "6,", anchor(), "3"),
+                    hbox(:sep:base, "6,", anchor(), "3")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.HTG" {
+        track(:ror,
+                ht[:lun.ys - 0.1dl, :lun.ys] << 0.5mo
+            ..  ht[:lun.xs, :lun.xs + 0.1dl]
+        );
+        track(ht[:lun.xs, :kor - 0.49sw]);
+    }
+
+    with link = "point.dk.Kørup", railway = :station {
+        track(ht[:kor - 0.5sw, :kor + 0.5sw]);
+        marker(:left :de.bf, ht[:kor] << 0.5mt);
+        station(:bottom, ht[:kor] << 0.5mt << 1sh + (1dt, 0.8dt),
+            "Kørup", "HTG: 8,3"
+        );
+    }
+}
+
