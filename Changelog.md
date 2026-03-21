@@ -2,12 +2,21 @@
 
 ## 2026-03-21
 
+Updates
+
+* Line _PL 38_ (Białystok – Granica Państwa Głomno) has passenger service
+  again between Kętrzyn and Korsze since 2026-02-01. Electrification
+  reaches all the way to Korsze since March 2026 after having been opened
+  to Giżycko in December. ([#165])
+
 Corrections
 
 * Line _PL 36_ (Ostrołęka – Łapy) has had passenger service since
   2024-03-18. ([#164])
 
+
 [#164]: https://github.com/railwayhistory/map/pull/164
+[#165]: https://github.com/railwayhistory/map/pull/165
 
 
 ## 2025-12-14
