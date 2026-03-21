@@ -11,6 +11,8 @@ Updates
 * Lines _DE 6207_ between Horka and the border and _PL 295_ between the
   border and Węgliniec have full passenger service since 2026-12-14.
   ([#166])
+* Line _DE 9107_ has passenger service between Oppendorf and Schönberg
+  since 2025-12-14. ([#167])
 
 Corrections
 
@@ -21,6 +23,7 @@ Corrections
 [#164]: https://github.com/railwayhistory/map/pull/164
 [#165]: https://github.com/railwayhistory/map/pull/165
 [#166]: https://github.com/railwayhistory/map/pull/166
+[#167]: https://github.com/railwayhistory/map/pull/167
 
 
 ## 2025-12-14
