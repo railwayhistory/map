@@ -8,6 +8,9 @@ Updates
   again between Kętrzyn and Korsze since 2026-02-01. Electrification
   reaches all the way to Korsze since March 2026 after having been opened
   to Giżycko in December. ([#165])
+* Lines _DE 6207_ between Horka and the border and _PL 295_ between the
+  border and Węgliniec have full passenger service since 2026-12-14.
+  ([#166])
 
 Corrections
 
@@ -17,6 +20,7 @@ Corrections
 
 [#164]: https://github.com/railwayhistory/map/pull/164
 [#165]: https://github.com/railwayhistory/map/pull/165
+[#166]: https://github.com/railwayhistory/map/pull/166
 
 
 ## 2025-12-14
