@@ -213,18 +213,25 @@ with detail = 2 {
 with detail = 2 {
     let ei = path("d2.de.3140");
 
-    with link = "line.de.3140" {
-        track(:first :double :cat:ac15, ei[:ehr.yw, :knw]);
-        track(:first :double :cat:ac15 :pax, ei[:knw, :igg]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.3140" {
+            track(ei[:ehr.yw, :ehr.yw + 8.01km]);
+            line_label(:right:se, ei[:ehr.yw + 8km] >> 0.5md, "3140");
+            track(ei[:ehr.yw + 7.99km, :kno]);
+            track(ei[:kno, :knw]);
+            track(ei[:knw, :ige.yg]);
+        }
 
-        line_badge(:cat:ac15, ei[:ehr.yw + 9km], "3140");
-    }
+        with link = "point.de.Igel", railway = :station {
+            track(ei[:ige.yg, :ige]);
+            statdot(ei[:ige]);
+            slabel(:ne, ei[:ige] + (-0.8km, 0.5km), "Igel");
+        }
 
-    with link = "point.de.Igel" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, ei[:ige]);
-        slabel(:left :cat:ac15 :pax, ei[:ige] + (-0.8km, 0.5km),
-            hbox(:right:top, "Igel")
-        );
+        with link = "line.de.3140" {
+            track(ei[:ige, :ige.yb]);
+            track(ei[:ige.yb, :igg]);
+        }
     }
 }
 
