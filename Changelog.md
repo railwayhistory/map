@@ -13,6 +13,8 @@ Updates
   ([#166])
 * Line _DE 9107_ has passenger service between Oppendorf and Schönberg
   since 2025-12-14. ([#167])
+* Line _AT 220_ is fully double track to Marchegg and electrified to the
+  border since 2025-10-11. ([#168])
 
 Corrections
 
@@ -24,6 +26,7 @@ Corrections
 [#165]: https://github.com/railwayhistory/map/pull/165
 [#166]: https://github.com/railwayhistory/map/pull/166
 [#167]: https://github.com/railwayhistory/map/pull/167
+[#168]: https://github.com/railwayhistory/map/pull/168
 
 
 ## 2025-12-14
