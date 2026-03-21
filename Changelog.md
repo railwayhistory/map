@@ -1,5 +1,15 @@
 # Change Log
 
+## 2026-03-21
+
+Corrections
+
+* Line _PL 36_ (Ostrołęka – Łapy) has had passenger service since
+  2024-03-18. ([#164])
+
+[#164]: https://github.com/railwayhistory/map/pull/164
+
+
 ## 2025-12-14
 
 Updates
