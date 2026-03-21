@@ -20,6 +20,8 @@ Corrections
 
 * Line _PL 36_ (Ostrołęka – Łapy) has had passenger service since
   2024-03-18. ([#164])
+* Line _DE 1020_ is electrified between Flensburg Ost and Flensburg and
+  line _DE 1022_ between Kiel Hbf and Kiel-Hassee since 2023. ([#169]
 
 
 [#164]: https://github.com/railwayhistory/map/pull/164
@@ -27,6 +29,7 @@ Corrections
 [#166]: https://github.com/railwayhistory/map/pull/166
 [#167]: https://github.com/railwayhistory/map/pull/167
 [#168]: https://github.com/railwayhistory/map/pull/168
+[#169]: https://github.com/railwayhistory/map/pull/169
 
 
 ## 2025-12-14
