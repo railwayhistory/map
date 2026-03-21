@@ -24,6 +24,7 @@ Corrections
   2024-03-18. ([#164])
 * Line _DE 1020_ is electrified between Flensburg Ost and Flensburg and
   line _DE 1022_ between Kiel Hbf and Kiel-Hassee since 2023. ([#169]
+* Line _DE 9410_ only has tourist passenger service. ([#170])
 
 
 [#164]: https://github.com/railwayhistory/map/pull/164
@@ -32,6 +33,7 @@ Corrections
 [#167]: https://github.com/railwayhistory/map/pull/167
 [#168]: https://github.com/railwayhistory/map/pull/168
 [#169]: https://github.com/railwayhistory/map/pull/169
+[#170]: https://github.com/railwayhistory/map/pull/170
 
 
 ## 2025-12-14
