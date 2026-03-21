@@ -17,6 +17,8 @@ Updates
   border since 2025-10-11. ([#168])
 * Line _DE 3000_ is electrified between Remagen and Ahrbrück since
   2025-12-14.
+* Line _DE 9581_ has full passenger service between Gotteszell and Viechtach
+  since 2025-12-14. ([#172])
 
 Corrections
 
@@ -38,6 +40,7 @@ Corrections
 [#169]: https://github.com/railwayhistory/map/pull/169
 [#170]: https://github.com/railwayhistory/map/pull/170
 [#171]: https://github.com/railwayhistory/map/pull/171
+[#172]: https://github.com/railwayhistory/map/pull/172
 
 
 ## 2025-12-14
