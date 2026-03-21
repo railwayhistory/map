@@ -32,6 +32,8 @@ Corrections
   passenger service. ([#170])
 * Line _DE 4621_ (Metzingen – Bad Urach) has been electrified since 2022.
   ([#171])
+* Line _DE 3554_ is double tracked between Darmstadt Nord and Darmstadt
+  Ost. ([#174])
 
 
 [#164]: https://github.com/railwayhistory/map/pull/164
@@ -44,6 +46,7 @@ Corrections
 [#171]: https://github.com/railwayhistory/map/pull/171
 [#172]: https://github.com/railwayhistory/map/pull/172
 [#173]: https://github.com/railwayhistory/map/pull/173
+[#174]: https://github.com/railwayhistory/map/pull/174
 
 
 ## 2025-12-14
