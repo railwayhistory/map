@@ -34,7 +34,8 @@ Corrections
   ([#171])
 * Line _DE 3554_ is double tracked between Darmstadt Nord and Darmstadt
   Ost. ([#174])
-
+* Line _DE 9470_ (Amstetten – Gerstetten) only has passenger service on summer
+  weekends. ([#175])
 
 [#164]: https://github.com/railwayhistory/map/pull/164
 [#165]: https://github.com/railwayhistory/map/pull/165
@@ -47,6 +48,7 @@ Corrections
 [#172]: https://github.com/railwayhistory/map/pull/172
 [#173]: https://github.com/railwayhistory/map/pull/173
 [#174]: https://github.com/railwayhistory/map/pull/174
+[#175]: https://github.com/railwayhistory/map/pull/175
 
 
 ## 2025-12-14
