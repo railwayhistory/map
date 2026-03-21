@@ -15,6 +15,8 @@ Updates
   since 2025-12-14. ([#167])
 * Line _AT 220_ is fully double track to Marchegg and electrified to the
   border since 2025-10-11. ([#168])
+* Line _DE 3000_ is electrified between Remagen and Ahrbrück since
+  2025-12-14.
 
 Corrections
 
