@@ -24,7 +24,10 @@ Corrections
   2024-03-18. ([#164])
 * Line _DE 1020_ is electrified between Flensburg Ost and Flensburg and
   line _DE 1022_ between Kiel Hbf and Kiel-Hassee since 2023. ([#169]
-* Line _DE 9410_ only has tourist passenger service. ([#170])
+* Line _DE 9410_ (Neckarbischofsheim – Hüffenhardt) only has tourist
+  passenger service. ([#170])
+* Line _DE 4621_ (Metzingen – Bad Urach) has been electrified since 2022.
+  ([#171])
 
 
 [#164]: https://github.com/railwayhistory/map/pull/164
@@ -34,6 +37,7 @@ Corrections
 [#168]: https://github.com/railwayhistory/map/pull/168
 [#169]: https://github.com/railwayhistory/map/pull/169
 [#170]: https://github.com/railwayhistory/map/pull/170
+[#171]: https://github.com/railwayhistory/map/pull/171
 
 
 ## 2025-12-14
