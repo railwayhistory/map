@@ -15,16 +15,24 @@ Updates
   Blankenfelde are opening on 2025-12-14. ([#142]).
 * The connecting curves at Genshagener Heide, are loosing their passenger
   service at 2025-12-14. ([#142])
+* Line _PL 104_ is electrified and has passenger service between Rabka-Zdrój
+  and Rabka Zaryte as of 2025-12-14. Service was already restored between
+  Chabówka and Rabka-Zdrój last year. ([#143])
+* Line _PL 131_ has passenger service between Herby Nowe and Chorzew
+  Siemkowice as of 2025-12-14. ([#143])
+* Line _PL 245_ (Aleksandrów Kujawski – Ciechocinek Warzelnia Soli) has
+  passenger service as of 2025-12-14. ([#143])
 
 Corrections
 
 * Changed lines _SI 71_ and _IT GNG_ (Nova Gorica – Gorizia) to tourist
-  service. ([#14]0])
+  service. ([#140])
 
 [#139]: https://github.com/railwayhistory/map/pull/139
 [#140]: https://github.com/railwayhistory/map/pull/140
 [#141]: https://github.com/railwayhistory/map/pull/141
 [#142]: https://github.com/railwayhistory/map/pull/142
+[#143]: https://github.com/railwayhistory/map/pull/143
 
 
 ## 2025-12-12
