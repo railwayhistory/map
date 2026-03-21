@@ -19,6 +19,8 @@ Updates
   2025-12-14.
 * Line _DE 9581_ has full passenger service between Gotteszell and Viechtach
   since 2025-12-14. ([#172])
+* Line _DE 3140_ has passenger between Ehrang and Igel since 2025-12-14.
+  ([#173])
 
 Corrections
 
@@ -41,6 +43,7 @@ Corrections
 [#170]: https://github.com/railwayhistory/map/pull/170
 [#171]: https://github.com/railwayhistory/map/pull/171
 [#172]: https://github.com/railwayhistory/map/pull/172
+[#173]: https://github.com/railwayhistory/map/pull/173
 
 
 ## 2025-12-14
