@@ -456,36 +456,37 @@ with detail = 2 {
 with detail = 2 {
     let gg = path("d2.de.6697");
 
-    with link = "line.de.6697" {
-        track(:second, gg[:got.yg, :eml]);
-        track(:second :closed, gg[:eml, :gra.yg]);
+    with railway = :second :nopax {
+        with link = "line.de.6697" {
+            track(gg[:got.yg, :got.yg + 6.01km]);
+            line_label(:left:w, gg[:got.yg + 6km] << 0.5mt, "6697");
+            track(gg[:got.yg + 5.99km, :geo.yf]);
+        }
 
-        guide(:linenum,
-                gg[:got.yg + 3.5km] << 0.7dt
-            --  gg[:got.yg + 3.5km] << 3.0dt
-        );
-        label(:linenum, gg[:got.yg + 3.5km] << 3.0dt,
-            hbox(:left:middle, " 6697")
-        );
-        guide(:linenum :closed,
-                gg[:geo + 10km] >> 0.7dt
-            --  gg[:geo + 10km] >> 3.0dt
-        );
-        label(:linenum :closed, gg[:geo + 10km] >> 3.0dt + (-0.3dt, 0dt),
-            hbox(:center:top, "6697")
-        );
+        with link = "point.de.Georgenthal-Thür", railway = :station {
+            track(gg[:geo.yf, :geo.yt]);
+            statdot(gg[:geo]);
+            slabel(:right, gg[:geo] + (3.3dt, 0dt),
+                vbox(:left:bottom, " Georgenthal", span(:light, "(Thür)"))
+            );
+        }
+
+        with link = "line.de.6697" {
+            track(gg[:geo.yt, :ohr]);
+        }
+
+        with link = "point.de.Ohrdruf" {
+            statdot(gg[:ohr]);
+            slabel(:right, gg[:ohr] + (1.7dt, 1.5dt), "Ohrdruf");
+        }
     }
 
-    with link = "point.de.Emleben" {
-        with layer = 1 marker(:statdot, gg[:eml]);
-        slabel(:right, gg[:eml] + (1.8dt, 1.0dt), "Emleben");
-    }
-
-    with link = "point.de.Georgenthal-Thür" {
-        with layer = 1 marker(:statdot :closed, gg[:geo]);
-        slabel(:right :closed, gg[:geo] + (3.3dt, 0dt),
-            vbox(:left:bottom, "Georgenthal", span(:light, "(Thür)"))
-        );
+    with railway = :second :closed {
+        with link = "line.de.6697" {
+            track(gg[:ohr, :ohr + 7.01km]);
+            line_label(:right:ne, gg[:ohr + 7km] >> 0.5mt, "6697");
+            track(gg[:ohr + 6.99km, :gra.yg]);
+        }
     }
 }
 
