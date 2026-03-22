@@ -16,6 +16,8 @@ Updates
 * Line _DE 1554_ has been electrified. ([#178])
 * Line _DE 3140_ has passenger between Ehrang and Igel since 2025-12-14.
   ([#173])
+* Line _DE 4810_ has been re-opened between Weil der Stadt and Calw.
+  ([#179])
 * Lines _DE 6207_ between Horka and the border and _PL 295_ between the
   border and Węgliniec have full passenger service since 2026-12-14.
   ([#166])
@@ -64,6 +66,7 @@ Corrections
 [#176]: https://github.com/railwayhistory/map/pull/176
 [#177]: https://github.com/railwayhistory/map/pull/177
 [#178]: https://github.com/railwayhistory/map/pull/178
+[#179]: https://github.com/railwayhistory/map/pull/179
 
 
 ## 2025-12-14
