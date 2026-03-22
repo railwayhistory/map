@@ -15,6 +15,8 @@ Updates
   since 2025-12-14. ([#167])
 * Line _DE 3000_ is electrified between Remagen and Ahrbrück since
   2025-12-14.
+* Line _DE 6697_ (Gotha – Gräfenroda) has been re-opened with goods service
+  between Emleben to Ohrdruf in the autumn of 2025. ([#177])
 * Line _DE 9581_ has full passenger service between Gotteszell and Viechtach
   since 2025-12-14. ([#172])
 * Line _PL 38_ (Białystok – Granica Państwa Głomno) has passenger service
@@ -33,6 +35,7 @@ Corrections
   ([#171])
 * Line _DE 9410_ (Neckarbischofsheim – Hüffenhardt) only has tourist
   passenger service. ([#170])
+* Line _DE 9460_ (Eyach – Hechingen) has tourist service.
 * Line _DE 9470_ (Amstetten – Gerstetten) only has passenger service on summer
   weekends. ([#175])
 * Line _PL 36_ (Ostrołęka – Łapy) has had passenger service since
@@ -51,6 +54,7 @@ Corrections
 [#174]: https://github.com/railwayhistory/map/pull/174
 [#175]: https://github.com/railwayhistory/map/pull/175
 [#176]: https://github.com/railwayhistory/map/pull/176
+[#177]: https://github.com/railwayhistory/map/pull/177
 
 
 ## 2025-12-14
