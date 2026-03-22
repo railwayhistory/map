@@ -6,6 +6,14 @@ Updates
 
 * Line _AT 220_ is fully double track to Marchegg and electrified to the
   border since 2025-10-11. ([#168])
+* Line _DE 1522_ (Oldenburg – Wilhelmshaven) has been electrified.
+  ([#178])
+* Line _DE 1540_ has been closed between Sande and Schortens Weißer Floh
+  and replaced with a new line _DE 1546_ which is double track and
+  electrified. ([#178])
+* Line _DE 1552_ has been electrified between Schortens Weißer Floh and
+  Wilhelmshaven Ölweiche. ([#178])
+* Line _DE 1554_ has been electrified. ([#178])
 * Line _DE 3140_ has passenger between Ehrang and Igel since 2025-12-14.
   ([#173])
 * Lines _DE 6207_ between Horka and the border and _PL 295_ between the
@@ -55,6 +63,7 @@ Corrections
 [#175]: https://github.com/railwayhistory/map/pull/175
 [#176]: https://github.com/railwayhistory/map/pull/176
 [#177]: https://github.com/railwayhistory/map/pull/177
+[#178]: https://github.com/railwayhistory/map/pull/178
 
 
 ## 2025-12-14
