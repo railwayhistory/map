@@ -1,41 +1,42 @@
 # Change Log
 
-## 2026-03-21
+## 2026-03-22
 
 Updates
 
-* Line _PL 38_ (Białystok – Granica Państwa Głomno) has passenger service
-  again between Kętrzyn and Korsze since 2026-02-01. Electrification
-  reaches all the way to Korsze since March 2026 after having been opened
-  to Giżycko in December. ([#165])
+* Line _AT 220_ is fully double track to Marchegg and electrified to the
+  border since 2025-10-11. ([#168])
+* Line _DE 3140_ has passenger between Ehrang and Igel since 2025-12-14.
+  ([#173])
 * Lines _DE 6207_ between Horka and the border and _PL 295_ between the
   border and Węgliniec have full passenger service since 2026-12-14.
   ([#166])
 * Line _DE 9107_ has passenger service between Oppendorf and Schönberg
   since 2025-12-14. ([#167])
-* Line _AT 220_ is fully double track to Marchegg and electrified to the
-  border since 2025-10-11. ([#168])
 * Line _DE 3000_ is electrified between Remagen and Ahrbrück since
   2025-12-14.
 * Line _DE 9581_ has full passenger service between Gotteszell and Viechtach
   since 2025-12-14. ([#172])
-* Line _DE 3140_ has passenger between Ehrang and Igel since 2025-12-14.
-  ([#173])
+* Line _PL 38_ (Białystok – Granica Państwa Głomno) has passenger service
+  again between Kętrzyn and Korsze since 2026-02-01. Electrification
+  reaches all the way to Korsze since March 2026 after having been opened
+  to Giżycko in December. ([#165])
 
 Corrections
 
-* Line _PL 36_ (Ostrołęka – Łapy) has had passenger service since
-  2024-03-18. ([#164])
 * Line _DE 1020_ is electrified between Flensburg Ost and Flensburg and
   line _DE 1022_ between Kiel Hbf and Kiel-Hassee since 2023. ([#169]
-* Line _DE 9410_ (Neckarbischofsheim – Hüffenhardt) only has tourist
-  passenger service. ([#170])
-* Line _DE 4621_ (Metzingen – Bad Urach) has been electrified since 2022.
-  ([#171])
 * Line _DE 3554_ is double tracked between Darmstadt Nord and Darmstadt
   Ost. ([#174])
+* Line _DE 4330_ has tourist service between Stockach and Mengen. ([#176])
+* Line _DE 4621_ (Metzingen – Bad Urach) has been electrified since 2022.
+  ([#171])
+* Line _DE 9410_ (Neckarbischofsheim – Hüffenhardt) only has tourist
+  passenger service. ([#170])
 * Line _DE 9470_ (Amstetten – Gerstetten) only has passenger service on summer
   weekends. ([#175])
+* Line _PL 36_ (Ostrołęka – Łapy) has had passenger service since
+  2024-03-18. ([#164])
 
 [#164]: https://github.com/railwayhistory/map/pull/164
 [#165]: https://github.com/railwayhistory/map/pull/165
@@ -49,6 +50,7 @@ Corrections
 [#173]: https://github.com/railwayhistory/map/pull/173
 [#174]: https://github.com/railwayhistory/map/pull/174
 [#175]: https://github.com/railwayhistory/map/pull/175
+[#176]: https://github.com/railwayhistory/map/pull/176
 
 
 ## 2025-12-14
