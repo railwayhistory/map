@@ -61,35 +61,51 @@ with detail = 2 {
 with detail = 2 {
     let zc = path("d2.de.4810");
 
-    with link = "line.de.4810" {
-        track(:first :double :cat:ac15 :pax, zc[:zuf, :mal]);
-        track(:first :cat:ac15 :pax, zc[:mal, :wei]);
-        track(:second :removed, zc[:wei, :cal.yw]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.4810" {
+            track(zc[:zuf, :kor]);
+        }
 
-        guide(:linenum :cat:ac15 :pax,
-                zc[:kor + 10.3km] << 1dt
-            --  zc[:kor + 10.3km] << 3dt
-        );
-        label(:linenum :cat:ac15 :pax, zc[:kor + 10.3km] << 3dt,
-            hbox(:left:middle :badgesize, " 4810")
-        );
-        line_badge(:removed, zc[:wei + 11km] @ 10 >> 0.4dt, "4810");
+        with link = "point.de.Korntal", railway = :station {
+            track(zc[:kor, :kor.yw]);
+            statdot(zc[:kor]);
+        }
+
+        with link = "line.de.4810" {
+            track(zc[:kor.yw, :ren]);
+            line_label(:left:w, zc[:kor + 10.3km] << 0.5md, "4810");
+        }
+
+        with link = "point.de.Renningen", railway = :station {
+            track(zc[:ren, :ren.yb]);
+            statdot(zc[:ren]);
+            slabel(:right, zc[:ren] + (2.0dt, 2.3dt), "Renningen");
+        }
+
+        with link = "line.de.4810" {
+            track(zc[:ren.yb, :mal]);
+        }
     }
 
-    with link = "point.de.Korntal" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, zc[:kor]);
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.de.4810" {
+            track(zc[:mal, :wei]);
+        }
+
+        with link = "point.de.Weil-der-Stadt" {
+            statdot(zc[:wei]);
+            slabel(:left, zc[:wei] + (-2.0dt, 1dt),
+                vbox(:right:bottom, "Weil", "der Stadt")
+            );
+        }
     }
 
-    with link = "point.de.Renningen" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, zc[:ren]);
-        slabel(:right :cat:ac15 :pax, zc[:ren] + (2.5dt, 1.3dt), "Renningen");
-    }
-
-    with link = "point.de.Weil-der-Stadt" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, zc[:wei]);
-        slabel(:left :cat:ac15 :pax, zc[:wei] + (-2.0dt, 1dt),
-            vbox(:right:bottom, "Weil", "der Stadt")
-        );
+    with railway = :second :pax {
+        with link = "line.de.4810" {
+            track(zc[:wei, :wei + 9.51km]);
+            line_label(:left:n, zc[:wei + 9.5km] << 0.5mt, "4810");
+            track(zc[:wei + 9.49km, :cal.yw]);
+        }
     }
 }
 
