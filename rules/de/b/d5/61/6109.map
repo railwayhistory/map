@@ -1,0 +1,55 @@
+# DE 6109.  Berlin Ostbahnhof - Berlin-Spandau
+#
+let os = path("d4.de.6109");
+
+with detail = 5 {
+    # ...
+
+    
+    with layer = 2, link = "point.de.Berlin-Hbf-Stadtb" {
+        # Gl. 11
+        track(:station :cat:ac15 :pax :casing,
+                os[:hbf - 361m, :hbf - 360m] << 0.5dt
+            ..  os[:hbf - 140m, :hbf + 290m] << 2.5dt
+            ..  os[:hbf + 440m, :hbf + 441m] << 0.5dt
+        );
+
+        # Gl. 12
+        track(:first:station :cat:ac15 :pax :casing,
+                os[:hbf.a, :hbf.f] << 0.5dt
+        );
+
+        # Gl. 13
+        track(:first:station :cat:ac15 :pax :casing,
+                os[:hbf.a, :hbf.f] >> 0.5dt
+        );
+
+        # Gl. 14
+        track(:station :cat:ac15 :pax :casing,
+                os[:hbf - 361m, :hbf - 360m] >> 0.5dt
+            ..  os[:hbf - 140m, :hbf + 290m] >> 2.5dt
+            ..  os[:hbf + 440m, :hbf + 441m] >> 0.5dt
+        );
+
+        # Bahnsteig 11/12
+        platform(:cat:ac15 :pax,
+                os[:hbf - 140m, :hbf + 290m] << 2.1dt
+            --  os[:hbf + 290m, :hbf - 140m] >> 0.9dt
+        );
+
+        # Bahnsteig 13/14
+        platform(:cat:ac15 :pax,
+                os[:hbf - 140m, :hbf + 280m] >> 2.1dt
+            --  os[:hbf + 280m, :hbf - 140m] << 0.9dt
+        );
+
+        marker(:left :de.bf :cat:ac15 :pax, os[:hbf] << 2.5dt);
+        with layer = 1 {
+            marker(:left :de.bf.casing :cat:ac15 :pax, os[:hbf] << 2.5dt);
+        }
+    }
+
+
+    # ...
+}
+
