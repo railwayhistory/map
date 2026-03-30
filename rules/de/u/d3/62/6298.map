@@ -1,0 +1,289 @@
+# DE 6298.  Neudietendorf - Ritschenhausen
+#
+let nr = path("d3.de.6298");
+
+with detail = 3,
+     railway = :first :double :excat:ac15 :pax
+{
+    # point.de.Neudietendorf: de.6340
+
+    with link = "point.de.Neudietendorf-Ds", railway = :station {
+        # DE 6298
+        track(nr[:ndi.yw + 1dl, :ndi.yw + 3dl]);
+
+        # DE 6730
+        track(:single :side :removed,
+                nr[:ndi.yw + 1dl, :ndi.yw + 1.1dl] >> 0.5md >> 1ms >> 0.5lt
+            --  nr[:ndi.yw + 2dl, :ndi.yw + 2.1dl] >> 0.5md << 0.5lt
+        );
+
+        marker(:left :de.bft :removed, nr[:ndi.yw + 2dl] << 0.5md);
+        slabel(:right :xsmall :removed,
+            nr[:ndi.yw + 2dl] << 0.5md << 1sh + (1.3dt, 0.8dt),
+            "N. Ds"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(nr[:ndi.yw + 3dl, :sul - 0.49sw]);
+    }
+
+    with link = "point.de.Sülzenbrücken", railway = :station {
+        track(nr[:sul - 0.5sw, :sul + 0.5sw]);
+        marker(:right :de.hp, nr[:sul] >> 0.5md);
+        slabel(:right, nr[:sul] << 0.5md + (1.3dt, 0.9dt), "Sülzenbrücken");
+    }
+
+    with link = "line.de.6298" {
+        track(nr[:sul + 0.49sw, :sul + 1.2km]);
+        line_label(:right:e, nr[:sul + 1.2km] >> 0.5md, "6298");
+        track(nr[:sul + 1.2km, :haa - 0.49sw]);
+    }
+
+    with link = "point.de.Sülzenbrücken", railway = :station {
+        track(nr[:haa - 0.5sw, :haa + 0.5sw]);
+        marker(:right :de.hp, nr[:haa] >> 0.5md);
+        marker(:right :de.exbf, nr[:haa] >> 0.5md);
+        slabel(:right, nr[:haa] << 0.5md + (1.3dt, 0.7dt), "Haarhausen");
+    }
+
+    with link = "line.de.6298" {
+        track(nr[:haa + 0.49sw, :arn - 640m]);
+    }
+
+    with link = "point.de.Arnstadt-Hbf", railway = :station {
+        let as = path("d3.de.6299");
+
+        # DE 6733
+        track(:single :second :nocat :nopax :removed,
+                nr[:arn.ys - 0.1dl, :arn.ys] << 0.5md << 1ms << 0.5mt
+            ..  path("d3.de.6733")[:arn.zi - 0.1dl, :arn.zi]
+        );
+
+        # DE 6299
+        track(:single :nocat,
+                nr[:arn - 640m, :arn - 639m] << 0.5md >> 0.5mt
+            --  nr[:arn - 640m + 1dl, :arn.zs] << 0.5md << 1ms << 0.5mt
+            ..  as[:arn.zs + 1md, :arn.zs + 1.1md]
+        );
+
+        # DE 6298
+        track(nr[:arn - 640m, :arn.ys + 1seg]);
+
+        marker(:right :de.bf, nr[:arn] >> 0.5md);
+        slabel(:left :bold, nr[:arn] >> 0.5md >> 1sh + (-1.8dt, 1.3dt),
+            "Arnstadt Hbf"
+        );
+    }
+}
+
+with detail = 3,
+     railway = :first :double :pax
+{
+    with link = "line.de.6298" {
+        track(nr[:arn.ys + 0.99seg, :ars - 0.49sw]);
+    }
+
+    with link = "point.de.Arnstadt-Süd", railway = :station {
+        track(nr[:ars - 0.5sw, :ars + 0.5sw]);
+        marker(:right :de.hp, nr[:ars] >> 0.5md);
+        slabel(:left, nr[:ars] >> 0.5md >> 1sh + (-1.3dt, 1dt),
+            "Arnstadt Süd"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(nr[:ars + 0.49sw, :goe]);
+    }
+
+    with link = "point.de.Arnstadt-Goerdelerdamm", railway = :station {
+        marker(:left :de.bk :removed, nr[:goe] << 0.5md);
+        slabel(:right :xsmall :removed,
+            nr[:goe] << 0.5md << 1sh + (1.2dt, 1dt),
+            "Goerdelerdamm"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(nr[:goe, :goe + 1.4km]);
+        line_label(:right:e, nr[:goe + 1.4km] >> 0.5md, (0dt, -0.4dt), "6298");
+        track(nr[:goe + 1.4km, :loh]);
+    }
+
+    with link = "point.de.Lohmühle", railway = :station {
+        marker(:right :de.bk :removed, nr[:loh] >> 0.5md);
+        slabel(:left :small :removed,
+            nr[:loh] >> 0.5md >> 1sh + (-0.8dt, 0.6dt),
+            "Siegelbach*"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(nr[:loh, :pla.pn - 220m]);
+    }
+
+    with link = "point.de.Plaue-Thür", railway = :station {
+        let pr = path("d3.de.6694");
+
+        # DE 6298
+        track(nr[:pla.pn - 220m, :pla.yi]);
+        track(:single, nr[:pla.yi, :pla.yi + 1seg] >> 0.5md << 0.5mt);
+        track(:single :removed, nr[:pla.yi, :pla.yi + 1seg] << 0.5md >> 0.5mt);
+
+        # DE 6694
+        track(:single :second,
+                nr[:pla.pn - 220m, :pla.pn - 219m] << 0.5md >> 0.5mt
+            --  pr[:pla.pn - 220m + 1dl, :pla.yi + 1seg]
+                    << 0.5md << 1ms << 0.5mt
+        );
+
+        marker(:right :de.bf, nr[:pla] >> 0.5md);
+        slabel(:right, nr[:pla] << 0.5md << 1ms << 1mt + (1.4dt, 1dt),
+            hbox(:left:base, span(:bold, "Plaue"), " (Thür)")
+        );
+    }
+}
+
+with detail = 3,
+     railway = :first :pax
+{
+    with link = "line.de.6298" {
+        track(:up:ldn,
+                nr[:pla.yi + 1seg, :pla.yi + 3.1km] >> 0.5md << 0.5mt
+        );
+        track(:dn:rup :removed,
+                nr[:pla.yi + 1seg, :pla.yi + 3.1km] << 0.5md >> 0.5mt
+        );
+        line_label(:right:s, nr[:pla.yi + 3.1km] >> 0.5md,
+            (-0.2dt, 0dt), "6298"
+        );
+        track(:up:ldn,
+                nr[:pla.yi + 3.1km, :gra - 360m] >> 0.5md << 0.5mt
+        );
+        track(:dn:rup :removed,
+                nr[:pla.yi + 3.1km, :gra - 360m] << 0.5md >> 0.5mt
+        );
+    }
+
+    with link = "point.de.Gräfenroda", railway = :station {
+        # DE 8298
+        track(:double, nr[:gra - 360m, :gra + 550m]);
+
+        # DE 6697
+        track(:second, nr[:gra, :gra + 550m] >> 0.5md >> 1ms >> 0.5mt);
+
+        marker(:right :de.bf, nr[:gra] >> 0.5md >> 1ms >> 1mt);
+        slabel(:left :bold,
+            nr[:gra] >> 0.5md >> 1ms >> 1mt >> 1sh + (-1.3dt, 0dt),
+            "Gräfenroda"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(:up:ldn:ror,
+                nr[:gra + 550m, :gra.yg] >> 0.5md << 0.5mt
+        );
+        track(:dn:rup :removed,
+                nr[:gra + 550m, :gra.yg] << 0.5md >> 0.5mt
+        );
+
+        track(:up:ldn:ror,
+                nr[:gra.yg, :gra.yg + 0.5seg] >> 0.5md << 0.5mt
+        );
+        track(:dn:rup :removed,
+                nr[:gra.yg, :gra.yg + 0.5seg] << 0.5md >> 0.5mt
+        );
+
+        track(:up:ldn,
+                nr[:gra.yg + 0.5seg, :gra.yg + 1km] >> 0.5md << 0.5mt
+        );
+        track(:dn:rup :removed,
+                nr[:gra.yg + 0.5seg, :gra.yg + 1km] << 0.5md >> 0.5mt
+        );
+        line_label(:left:w, nr[:gra.yg + 1km] << 0.5md, (0dt, 0.3dt), "6298");
+        track(:up:ldn,
+                nr[:gra.yg + 1km, :dor - 0.5sw] >> 0.5md << 0.5mt
+        );
+        track(:dn:rup :removed,
+                nr[:gra.yg + 1km, :dor - 0.5sw] << 0.5md >> 0.5mt
+        );
+    }
+
+    with link = "point.de.Dörrberg", railway = :station {
+        track(nr[:dor - 0.51sw, :dor + 0.51sw] >> 0.5md << 0.5mt);
+        track(:removed, nr[:dor - 0.51sw, :dor + 0.51sw] << 0.5md >> 0.5mt);
+        marker(:right :de.hp, nr[:dor] >> 0.5md);
+        slabel(:left, nr[:dor] >> 0.5md >> 1sh + (-1.3dt, 1dt),
+            "Dörrberg"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(:up:ldn, nr[:dor + 0.5sw, :tzw.a] >> 0.5md << 0.5mt);
+        track(:dn:rup :removed, nr[:dor + 0.5sw, :tzw.a] << 0.5md >> 0.5mt);
+    }
+
+    with link = "struct.de.Tunnel-am-Zwang" {
+        marker(:right :tuna, nr[:tzw.a] >> 0.5md << 0.5mt);
+        marker(:left :tuna, nr[:tzw.a] << 0.5md >> 0.5mt);
+
+        marker(:right :tunf, nr[:tzw.f] >> 0.5md << 0.5mt);
+        marker(:left :tunf, nr[:tzw.f] << 0.5md >> 0.5mt);
+        
+        slabel(:left :xsmall :italic, 
+            nr[:tzw.a + 50m] >> 0.5md + (-2.3dt, -0.3dt),
+            "Tunnel am Zwang"
+        );
+
+    }
+
+    with link = "line.de.6298" {
+        track(:up:ldn, nr[:tzw.f, :keh] >> 0.5md << 0.5mt);
+        track(:dn:rup :removed, nr[:tzw.f, :keh] << 0.5md >> 0.5mt);
+    }
+
+    with link = "point.de.Kehltal", railway = :station {
+        marker(:right :de.bk :removed, nr[:keh] >> 0.5md);
+        slabel(:left :xsmall :removed, nr[:keh] >> 0.5md >> 1sh + (-1dt, 0.8dt),
+            "Kehltal"
+        );
+    }
+
+    with link = "line.de.6298" {
+        track(:up:ldn, nr[:keh, :geh - 760m] >> 0.5md << 0.5mt);
+        track(:dn:rup :removed, nr[:keh, :geh - 760m] << 0.5md >> 0.5mt);
+    }
+
+    with link = "point.de.Gehlberg", railway = :station {
+        track(:double, nr[:geh - 760m, :geh + 0.5sw]);
+        marker(:left :de.bf, nr[:geh] << 0.5md);
+        slabel(:bottom, nr[:geh] << 0.5md << 1sh + (0dt, 0.3dt), "Gehlberg");
+    }
+
+    with link = "line.de.6298" {
+        track(:double, nr[:geh + 0.5sw, :brt.a]);
+    }
+
+    with link = "struct.de.Brandleite-Tunnel" {
+        marker(:right :tuna, nr[:brt.a] >> 0.5md << 0.5mt);
+        marker(:left :tuna, nr[:brt.a] << 0.5md >> 0.5mt);
+
+        track(:double :tunnel, nr[:brt.a, :brt.f]);
+
+        marker(:right :tunf, nr[:brt.f] >> 0.5md << 0.5mt);
+        marker(:left :tunf, nr[:brt.f] << 0.5md >> 0.5mt);
+
+        slabel(:top :xsmall :italic,
+            nr[:brt.a + 1.5km] >> 0.5md + (-2dt, -1.5dt),
+            "Brandleite-Tunnel"
+        );
+    }
+
+    with link = "point.de.Oberhof-Thür", railway = :station {
+        track(:double, nr[:brt.f, :obe + 1.2sw]);
+        marker(:left :de.bf :nopax, nr[:obe + 0.7sw] << 0.5md);
+        slabel(:left :nopax, nr[:obe] >> 0.5md + (-1.8dt, 0.5dt),
+            hbox(:right:base, "Oberhof", span(:light, " (Thür)"))
+        );
+    }
+}
