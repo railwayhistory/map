@@ -12,6 +12,8 @@ Updates
 * Line _IT PSZ_ (Parma – Suzzara) has electric service since 2026-05-18.
   Line _IT SZF_ (Suzzara – Ferrara) is now also fully electric, not sure
   when the gap between Suzzara and Poggio Rusco was closed. ([#181])
+* Line _PL 49_ (Śniadowo – Łomża) has been re-opened for passenger service
+  in summer 2026. ([#183])
 * Line _PL 214_ (Somonino – Kartuzy) has been re-opened for passenger
   service in summer 2026. ([#182])
 
@@ -20,6 +22,7 @@ Corrections
 [#180]: https://github.com/railwayhistory/map/pull/180
 [#181]: https://github.com/railwayhistory/map/pull/181
 [#182]: https://github.com/railwayhistory/map/pull/182
+[#183]: https://github.com/railwayhistory/map/pull/183
 
 
 ## 2026-03-22
