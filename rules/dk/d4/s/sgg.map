@@ -1,0 +1,192 @@
+# DK SGG.  Skive - Glyngøre
+#
+let sg = path("d3.dk.sgg");
+let ski = path("d3.dk.sgg.ski");
+
+# Gammel rute i Skive
+#
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Skive  dk.LST
+
+    with link = "line.dk.SGG" {
+        track(ski[:ski + 0.49sw, :ski.yn - 0.9dl]);
+
+        track(:station, ski[:ski.yn - 1dl, :ski.yn + 2dl]);
+        track(:station,
+                ski[:ski.yn - 0.1dl, :ski.yn]
+            --  ski[:ski.yn + 1dl, :ski.yn + 2dl] << 1mo
+        );
+
+        track(:lor, ski[:ski.yn + 1.9dl, :skn - 0.49sw]);
+    }
+
+    with link = "point.dk.Skive-Nord", railway = :station {
+        track(ski[:skn - 0.5sw, :skn + 0.5sw] << 1mo);
+        track(ski[:skn - 0.5sw, :skn + 0.5sw]);
+        marker(:left :de.hst, ski[:skn] << 1mo << 0.5mt);
+        label(ski[:skn] >> 0.5mt + (2dt, 0.8dt),
+            vbox(:left:base,
+                hbox(:left:base, "  ", span(:former, "Skive Holdeplads")),
+                vbox(:center:topbase,
+                    "Skive Nord",
+                    hbox(:center:top :xsmall,
+                        vbox(:right:top, "SVS: ", "SGG: "),
+                        vbox(:sep:top,
+                            hbox(:sep:base, "0,", anchor(), "8"),
+                            hbox(:sep:base, "0,", anchor(), "8")
+                        )
+                    )
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(:lor, ski[:skn + 0.49sw, :skn.yn - 1seg]);
+        track(:lor, ski[:skn.yn - 1.01seg, :skn.yn]);
+    }
+}
+
+
+# Ny rute
+#
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Skive  dk.LST
+
+    with link = "line.dk.SGG" {
+        track(:lor, sg[:ski + 0.49sw, :ski.yg] >> 2mo);
+        track(:lor,
+                sg[:ski.yg - 0.1dl, :ski.yg] >> 2mo
+            ..  sg[:ski.xg + 2mo, :ski.xg + 2.1mo]
+        );
+        track(:lor, sg[:ski.xg + 2mo, :skn - 0.49sw]);
+    }
+
+    with link = "point.dk.Skive-Nord", railway = :station {
+        track(sg[:skn - 0.5sw, :skn + 0.5sw] << 1mo);
+        track(sg[:skn - 0.5sw, :skn + 0.5sw]);
+        marker(:right :de.hp, sg[:skn] >> 0.5mt);
+        label(sg[:skn] << 1ms << 1.5mt + (-1.8dt, 0.3dt),
+            hbox(:right:base,
+                vbox(:center:base,
+                    hbox(:center:top :xsmall,
+                        vbox(:right:top, "SVS: ", "SGG: "),
+                        vbox(:sep:top,
+                            hbox(:sep:base, "?", anchor(), "?"),
+                            hbox(:sep:base, "?", anchor(), "?")
+                        )
+                    ),
+                    "Skive Nord"
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(:lor, sg[:skn + 0.49sw, :skn.yn - 1seg]);
+        track(:station, sg[:skn.yn - 1.1seg, :skn.yn]);
+        track(:lor, sg[:skn.yn - 0.1dl, :skn.ys + 0.1dl]);
+        track(:lor, sg[:skn.ys, :skn.ys + 1seg]);
+        track(sg[:skn.ys + 0.99seg, :skn.ys + 1.31km]);
+        line_label(:right:w, sg[:skn.ys + 1.3km] >> 0.5mt, "SGG");
+        track(sg[:skn.ys + 1.29km, :dol - 0.49sw]);
+    }
+
+    with link = "point.dk.Dølbyvad", railway = :station {
+        track(sg[:dol - 0.5sw, :dol + 0.5sw]);
+        marker(:left :de.hp, sg[:dol] << 0.5mt);
+        station(:left, sg[:dol] << 0.5mt << 1sh + (-1.5dt, 1.2dt),
+            "Dølbyvad", "SSG: 5,8"
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(sg[:dol + 0.49sw, :lyb - 0.49sw]);
+    }
+
+    with link = "point.dk.Lyby", railway = :station {
+        track(sg[:lyb - 0.5sw, :lyb + 0.5sw]);
+        marker(:left :de.hp, sg[:lyb] << 0.5mt);
+        marker(:left :de.exbf, sg[:lyb] << 0.5mt);
+        station(:left:right_align,
+            sg[:lyb] << 0.5mt << 1.4sh + (-1.9dt, 1.5dt),
+            "Lyby", "SSG: 9,2 "
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(sg[:lyb + 0.49sw, :jeb - 0.49sw]);
+    }
+
+    with link = "point.dk.Jebjerg", railway = :station {
+        track(sg[:jeb - 0.5sw, :jeb + 0.5sw]);
+        marker(:right :de.bf, sg[:jeb] >> 0.5mt);
+        station(:right, sg[:jeb] >> 0.5mt >> 1sh + (1.8dt, 1.1dt),
+            "Jebjerg", "SSG: 12,8"
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(sg[:jeb + 0.49sw, :ros - 0.49sw]);
+    }
+
+    with link = "point.dk.Roslev", railway = :station {
+        track(sg[:ros - 0.5sw, :ros + 0.5sw]);
+        marker(:left :de.bf, sg[:ros] << 0.5mt);
+        station(:left, sg[:ros] << 0.5mt << 1sh + (-1.8dt, 1.5dt),
+            "Roslev", "SSG: 17,2"
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(sg[:ros + 0.49sw, :tin - 0.49sw]);
+    }
+
+    with link = "point.dk.Tinghøj", railway = :station {
+        track(sg[:tin - 0.5sw, :tin + 0.5sw]);
+        marker(:right :de.hp, sg[:tin] >> 0.5mt);
+        station(:right, sg[:tin] >> 0.5mt >> 1sh + (1.6dt, 1dt),
+            "Tinghøj", "SSG: 19,5"
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(sg[:tin + 0.49sw, :dur - 0.49sw]);
+    }
+
+    with link = "point.dk.Durup", railway = :station {
+        track(sg[:dur - 0.5sw, :dur + 0.5sw]);
+        marker(:right :de.bf, sg[:dur] >> 0.5mt);
+        station(:right:left_align, sg[:dur] >> 0.5mt >> 1sh + (1.8dt, 1.2dt),
+            "Durup", "SSG: 22,6"
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(sg[:dur + 0.49sw, :dur + 1.31km]);
+        line_label(:right:sw, sg[:dur + 1.3km] >> 0.5mt, "SGG");
+        track(sg[:dur + 1.29km, :bys - 0.49sw]);
+    }
+
+    with link = "point.dk.Bysted", railway = :station {
+        track(sg[:bys - 0.5sw, :bys + 0.5sw]);
+        marker(:right :de.hp, sg[:bys] >> 0.5mt);
+        station(:top, sg[:bys] >> 0.5mt >> 1sh >> 0.8dt,
+            "Bysted", "SSG: 25,3"
+        );
+    }
+
+    with link = "line.dk.SGG" {
+        track(sg[:bys + 0.49sw, :gly - 0.49sw]);
+    }
+
+    with link = "point.dk.Glyngøre", railway = :station {
+        track(sg[:gly - 0.5sw, :gly + 100m]);
+        track(:side, sg[:gly + 99m, :gly.f]);
+        marker(:left :de.bf, sg[:gly] << 0.5mt);
+        station(:bottom, sg[:gly] << 0.5mt << 1sh + (-1dt, 1dt),
+            span(:bold, "Glyngøre"), "SSG: 28,6"
+        );
+    }
+}
+

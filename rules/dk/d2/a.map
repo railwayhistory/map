@@ -1,0 +1,163 @@
+# DK ABH.  Aalborg - Hadsund
+with detail = 2 {
+    let ah = path("d2.dk.abh");
+
+    with railway = :first :removed {
+        with link = "line.dk.ABH" {
+            track(ah[:gug.yh, :gug.yh + 10.51km]);
+            line_label(:left:w, ah[:gug.yh + 10.5km] << 0.5mt, "ABH");
+            track(ah[:gug.yh + 10.49km, :han - 8.49km]);
+            line_label(:left:w, ah[:han - 8.5km] << 0.5mt, "ABH");
+            track(ah[:han - 8.51km, :han]);
+        }
+    }
+}
+
+
+# DK AHG.  Aarhus H - Grenaa
+with detail = 2 {
+    let ag = path("d2.dk.ahg");
+
+    with railway = :first :cat:dc75 :pax {
+        with link = "line.dk.AHG" {
+            track(:double,
+                    ag[:aar, :aar.xg] << 1ms
+                ..  ag[:aar.zg, :ost]
+            );
+            track(ag[:ost, :ost + 4.61km]);
+            line_label(:right:w, ag[:ost + 4.6km] >> 0.5mt,
+                (0dt, -0.3dt), "AHG"
+            );
+            track(ag[:ost + 4.59km, :ryo.yr - 4.09km]);
+            line_label(:right:nw, ag[:ryo.yr - 4.1km] >> 0.5mt, "AHG");
+            track(ag[:ryo.yr - 4.11km, :ryo.yr]);
+        }
+
+        with link = "point.dk.Ryomgård", railway = :station {
+            track(ag[:ryo.yr, :ryo.yh]);
+            statdot(ag[:ryo]);
+            slabel(:left, ag[:ryo.yr] + (-0.5km, 0dt) + (-2.8dt, 2.3dt),
+                "Ryomgård"
+            );
+        }
+
+        with link = "line.dk.AHG" {
+            track(ag[:ryo.yh, :ryo.yh + 9.51km]);
+            line_label(:right:n, ag[:ryo.yh + 9.5km] >> 0.5mt,
+                (-0.5dt, 0dt), "AHG"
+            );
+            track(ag[:ryo.yh + 9.49km, :tru.ye]);
+        }
+
+        with link = "point.dk.Trustrup", railway = :station {
+            track(ag[:tru.ye, :tru]);
+            statdot(ag[:tru]);
+            slabel(:left, ag[:tru] + (-0.3dt, -1.5dt), "Trustrup");
+        }
+
+        with link = "line.dk.AHG" {
+            track(ag[:tru, :tru + 5.01km]);
+            line_label(:right:nw, ag[:tru + 5km] >> 0.5mt, "AHG");
+            track(ag[:tru + 4.99km, :gre]);
+        }
+
+        with link = "point.dk.Grenaa" {
+            statdot(ag[:gre]);
+            slabel(:right, ag[:gre] + (1.5dt, 1dt), "Grenaa");
+        }
+    }
+}
+
+
+# DK AHS.  (Aalborg -) Svenstrup Jylland - Hvalpsund
+with detail = 2 {
+    let sh = path("d2.dk.ahs");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.AHS" {
+            track(
+                    sh[:sve.yh - 0.1dl, :sve.yh] >> 0.5md << 0.5mt
+                ..  sh[:sve.xh + 1md, :sve.yh + 8.21km]
+            );
+            line_label(:right:s, sh[:sve.yh + 8.2km] >> 0.5mt, "AHS");
+            track(sh[:sve.yh + 8.19km, :aar.ys - 7.49km]);
+            line_label(:left:nw, sh[:aar.ys - 7.5km] << 0.5mt, "AHS");
+            track(sh[:aar.ys - 7.51km, :aar.ys]);
+        }
+
+        # point.dk.Aars  dk.HSL
+
+        with link = "line.dk.AHS" {
+            track(sh[:aar.yh, :aar.yh + 12.01km]);
+            line_label(:left:nw, sh[:aar.yh + 12km] << 0.5mt, "AHS");
+            track(sh[:aar.yh + 11.99km, :hva]);
+        }
+
+        with link = "point.dk.Hvalpsund", railway = :station {
+            statdot(sh[:hva]);
+            slabel(:bottom, sh[:hva] + (-0.3dt, 0.8dt), "Hvalpsund");
+        }
+    }
+}
+
+
+# DK AHT.  Aarhus - Hammel - Thorsø
+with detail = 2 {
+    let ah = path("d2.dk.aht.1");
+    let ht = path("d2.dk.aht.2");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.AHT" {
+            track(
+                    ah[:aar.yt - 0.1dl, :aar.yt] >> 0.5md << 0.5mt
+                ..  ah[:aar.xt + 1md, :aar.xt + 13.51km]
+            );
+            line_label(:left:ne, ah[:aar.xt + 13.5km] << 0.5mt, "AHT");
+            track(ah[:aar.xt + 13.49km, :ham.yt - 3.99km]);
+            line_label(:right:w, ah[:ham.yt - 4km] >> 0.5mt,
+                (0dt, 0.2dt), "AHT"
+            );
+            track(ah[:ham.yt - 4.01km, :ham.yt]);
+        }
+
+        with link = "point.dk.Hammel", railway = :station {
+            track(ah[:ham.yt, :ham]);
+            statdot(ah[:ham]);
+            slabel(:right, ah[:ham] + (1.5dt, 0.8dt), "Hammel");
+        }
+
+        with link = "line.dk.AHT" {
+            track(ht[:ham.yt, :tho.ya + 4.01km]);
+            line_label(:right:w, ht[:ham.yt + 4km] >> 0.5mt, "AHT");
+            track(ht[:tho.ya + 3.99km, :tho.ya]);
+        }
+    }
+}
+
+
+# DK AOH.  Aalborg - Aalborg Østhavnen
+with detail = 2 {
+    let ao = path("d2.dk.aoh");
+
+    with railway = :first :museum {
+        with link = "line.dk.AOH" {
+            track(
+                    ao[:aal.yh - 0.1dl, :aal.yh] << 0.5md >> 0.5mt
+                ..  ao[:aal.xh, :gug.yh]
+            );
+            track(ao[:gug.yh, :gug.yh + 4.51km]);
+            line_label(:left:e, ao[:gug.yh + 4.5km] << 0.5mt,
+                (0dt, -0.3dt), "AOH"
+            );
+            track(ao[:gug.yh + 4.49km, :oha]);
+        }
+
+        with link = "point.dk.Alborg-Østhavnen" {
+            statdot(ao[:oha]);
+            slabel(:top, ao[:oha] + (-0.5dt, -0.7dt),
+                "A. Østhavnen"
+            );
+        }
+    }
+}
+

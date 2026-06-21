@@ -17,3 +17,67 @@ with detail = 2 {
     }
 }
 
+
+# DK TFL.  Thisted - Fjerritslev
+with detail = 2 {
+    let tf = path("d2.dk.tfl");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.TFL" {
+            track(tf[:thi.yf, :thi.yf + 6.31km]);
+            line_label(:left:e, tf[:thi.yf + 6.3km] << 0.5mt, "TFL");
+            track(tf[:thi.yf + 6.31km, :fje - 8.49km]);
+            line_label(:left:s, tf[:fje - 8.5km] << 0.5mt, "TFL");
+            track(tf[:fje - 8.51km, :fje]);
+        }
+    }
+}
+
+
+# DK THK.  Trolhede - Kolding
+with detail = 2 {
+    let tk = path("d2.dk.thk");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.THK" {
+            track(tk[:tro.yk, :tro.yk + 13.01km]);
+            line_label(:left:w, tk[:tro.yk + 13km] << 0.5mt, "THK");
+            track(tk[:tro.yk + 12.99km, :gri.xf]);
+            with layer = -1 track(tk[:gri.xf, :gri.yf - 599m]);
+            track(tk[:gri.yf - 600m, :gri.yf]);
+        }
+
+        with link = "point.dk.Grindsted", railway = :station {
+            track(tk[:gri.yf, :gri]);
+            track(:closed, tk[:gri, :gri.yb]);
+            statdot(tk[:gri]);
+            slabel(:right, tk[:gri] + (1.7dt, 0dt), "Grindsted");
+        }
+
+        with link = "line.dk.THK" {
+            track(tk[:gri.yb, :gri.yb + 9.51km]);
+            line_label(:left:sw, tk[:gri.yb + 9.5km] << 0.5mt, "THK");
+            track(tk[:gri.yb + 9.49km, :ges - 5.99km]);
+            line_label(:right:e, tk[:ges - 6km] >> 0.5mt, "THK");
+            track(tk[:ges - 6.01km, :ges]);
+        }
+
+        with link = "point.dk.Gesten", railway = :station {
+            track(tk[:ges, :ges.yv]);
+            statdot(tk[:ges]);
+            slabel(:left, tk[:ges] + (-1.3dt, 2.5dt), "Gesten");
+        }
+
+        with link = "line.dk.THK" {
+            track(tk[:ges.yv, :ges.yv + 9.01km]);
+            line_label(:left:s, tk[:ges.yv + 9km] << 0.5mt,
+                (0.3dt, 0dt), "THK"
+            );
+            track(
+                    tk[:ges.yv + 8.99km, :kol.xt]
+                ..  tk[:kol.yt, :kol.yt + 0.1dl] >> 0.5md << 0.5mt
+            );
+        }
+    }
+}
+

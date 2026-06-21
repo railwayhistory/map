@@ -1,0 +1,91 @@
+# DK SVB.  Skjern - Videbæk
+#
+let sv = path("d3.dk.svb");
+
+with detail = 3, railway = :first :pax :closed {
+    # point.dk.Skjern  dk.LES
+
+    with link = "line.dk.SVB" {
+        track(:lor :removed,
+                sv[:ske.yv - 0.1dl, :ske.yv] >> 1ms >> 1mt
+            ..  sv[:ske.xv + 2mt, :ske.xv + 2.1mt]
+        );
+        track(:removed, sv[:ske.xv + 2mt, :ske.xn + 0.1dl]);
+        track(sv[:ske.xn, :ske.xv + 2.31km]);
+        line_label(:right:w, sv[:ske.xv + 2.3km] >> 0.5mt, (0dt, 0.2dt), "SVB");
+        track(sv[:ske.xv + 2.29km, :kon - 0.49sw]);
+    }
+
+    with link = "point.dk.Kongsholm", railway = :station {
+        track(sv[:kon - 0.5sw, :kon + 0.5sw]);
+        marker(:left :de.bf :removed, sv[:kon] << 0.5mt);
+        slabel(:left :removed, sv[:kon] << 0.5mt << 1sh + (-1.3dt, 0.8dt),
+            "Kongsholm"
+        );
+    }
+
+    with link = "line.dk.SVB" {
+        track(sv[:kon + 0.49sw, :sad - 0.49sw]);
+    }
+
+    with link = "point.dk.Sædding", railway = :station {
+        track(sv[:sad - 0.5sw, :sad + 0.5sw]);
+        marker(:left :de.bf :removed, sv[:sad] << 0.5mt);
+        slabel(:left :removed, sv[:sad] << 0.5mt << 1sh + (-1.5dt, 0.6dt),
+            "Sædding"
+        );
+    }
+
+    with link = "line.dk.SVB" {
+        track(sv[:sad + 0.49sw, :ris - 0.49sw]);
+    }
+
+    with link = "point.dk.Risdal", railway = :station {
+        track(sv[:ris - 0.5sw, :ris + 0.5sw]);
+        marker(:right :de.hp :removed, sv[:ris] >> 0.5mt);
+        slabel(:right :removed, sv[:ris] >> 0.5mt >> 1sh + (1.3dt, 1.1dt),
+            "Risdal"
+        );
+    }
+
+    with link = "line.dk.SVB" {
+        track(sv[:ris + 0.49sw, :her - 0.49sw]);
+    }
+
+    with link = "point.dk.Herborg", railway = :station {
+        track(sv[:her - 0.5sw, :her + 0.5sw]);
+        marker(:left :de.bf, sv[:her] << 0.5mt);
+        slabel(:left, sv[:her] << 0.5mt << 1sh + (-1.7dt, 0.6dt),
+            "Herborg"
+        );
+    }
+}
+
+with detail = 3, railway = :first :pax :removed {
+    with link = "line.dk.SVB" {
+        track(sv[:her + 0.49sw, :her + 1.91km]);
+        line_label(:right:nw, sv[:her + 1.9km] >> 0.5mt, "SVB");
+        track(sv[:her + 1.89km, :vit - 0.49sw]);
+    }
+
+    with link = "point.dk.Videbæk-Gl-Kongevej", railway = :station {
+        track(sv[:vit - 0.5sw, :vit + 0.5sw]);
+        marker(:left :de.hp, sv[:vit] << 0.5mt);
+        slabel(:left, sv[:vit] << 0.5mt << 1sh + (-1.3dt, 0.8dt),
+            "Videbæk ved Gl. Kongevej"
+        );
+    }
+
+    with link = "line.dk.SVB" {
+        track(sv[:vit + 0.49sw, :vid - 0.49sw]);
+    }
+
+    with link = "point.dk.Videbæk", railway = :station {
+        track(sv[:vid - 0.5sw, :vid.f]);
+        marker(:left :de.bf, sv[:vid] << 0.5mt);
+        slabel(:left :bold, sv[:vid] << 0.5mt << 1sh + (-1.5dt, 0.8dt),
+            "Videbæk"
+        );
+    }
+}
+

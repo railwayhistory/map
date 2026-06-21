@@ -142,9 +142,9 @@ with detail = 4,
         station(:top :cat:ac25 :pax, fp[:tau] >> 1.0mo >> 1.3sh,
             span(:bold, "Taulov"),
             hbox(:center:top,
-                vbox(:right:top, "FPB: ", "MT: "),
+                vbox(:right:top, "FPB: ", "[SHT: "),
                 vbox(:right:top, "8,", "222,"),
-                vbox(:left:top, "64", "38")
+                vbox(:left:top, "640", "335]")
             )
         );
     }
@@ -161,7 +161,7 @@ with detail = 4,
         track(:double, fp[:elt - 0.5sw, :elt + 0.5sw]);
         marker(:right :de.bf :removed, fp[:elt] >> 0.5mo >> 0.5mt);
         station(:left :removed, fp[:elt + 0.35sw] >> 0.5mo >> 0.5mt >> 1.4sh,
-            "Eltang", "14,40"
+            "Eltang", "FPB: 14,40"
         );
     }
 
@@ -174,7 +174,15 @@ with detail = 4,
 
 
     with link = "point.dk.Kolding", railway = :station {
-        # Sp. 1
+        let tk = path("d3.dk.thk");
+
+        # DK THK
+        track(:removed,
+                tk[:kol.xt - 0.1dl, :kol.xt]
+            ..  tk[:kol.yt, :kol - 65m] >> 1.5mo
+        );
+
+        # Sp. 1 (DK FPB up)
         track(fp[:kol.a, :kol.f] >> 0.5mo);
             # Sp. 121
             track(:side :nopax,
@@ -182,7 +190,7 @@ with detail = 4,
                 --  fp[:kol - 810m] << 0.5mo
             );
 
-        # Sp. 2
+        # Sp. 2 (DK FPB dn)
         track(fp[:kol.a, :kol.f] << 0.5mo);
             # Sp. 231
             track(:side :nopax,
@@ -251,10 +259,16 @@ with detail = 4,
             --  fp[:kol + 90m, :kol - 160m] >> 1.5mo
         );
 
-        marker(:right :de.bf :cat:ac25 :pax, fp[:kol] >> 1.2mo);
-        station(:right :cat:ac25 :pax, fp[:kol] << 7.5mo,
+        marker(:right :de.bf, fp[:kol] >> 1.2mo);
+        station(:right:left_align, fp[:kol] << 7.5mo,
             span(:bold, "Kolding"),
-            "19,91"
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "THK: "), "FPB: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "87,", anchor(), "9"),
+                    hbox(:sep:base, "19,", anchor(), "905")
+                )
+            )
         );
     }
 
@@ -285,7 +299,7 @@ with detail = 4,
 
 
     with link = "point.dk.Lunderskov", railway = :station {
-        let le = path("d3.dk.leb");
+        let le = path("d3.dk.les.1");
 
         # Sp. 1
         track(
@@ -367,9 +381,9 @@ with detail = 4,
         station(:left :cat:ac25 :pax, fp[:lun + 0.4sw] >> 2.2mo >> 1.4sh,
             span(:bold, "Lunderskov"),
             hbox(:center:top,
-                vbox(:right:top, "FPN: ", "LE: "),
+                vbox(:right:top, "FPN: ", "[LES: "),
                 vbox(:right:top, "32,", "−0,"),
-                vbox(:left:top, "79", "02")
+                vbox(:left:top, "79", "02]")
             )
         );
     }
@@ -378,7 +392,7 @@ with detail = 4,
     with link = "line.dk.FPB" {
         track(:dn:rup, fp[:lun.fp, :lun.xe] << 0.5mo);
         with layer = -1 track(:up:ldn,
-                path("d3.dk.leb")[:lun.ye + 199m, :lun.ye + 200m] >> 1.5mo
+                path("d3.dk.les.1")[:lun.ye + 199m, :lun.ye + 200m] >> 1.5mo
             ..  fp[:lun.xe, :lun.xe + 0.1dl] >> 0.5mo
         );
         track(:double, fp[:lun.xe, :vam - 2.5km]);

@@ -1,0 +1,47 @@
+# DK NNN. Nørre Nebel - Nymindegab
+#
+let nn = path("d3.dk.nnn");
+
+with detail = 3,
+     railway = :first :nopax :closed
+{
+    with link = "line.dk.NNN" {
+        track(:station, nn[:nor.yn, :nor.yn + 0.5seg]);
+        track(nn[:nor.yn + 0.49seg, :hou - 0.49sw]);
+    }
+
+    with link = "point.dk.Houstrupvej", railway = :station {
+        track(nn[:hou - 0.5sw, :hou + 0.5sw]);
+        marker(:right :de.hp, nn[:hou] >> 0.5mt);
+        slabel(:right, nn[:hou] >> 0.5mt >> 1sh + (-2dt, -1dt),
+            "Houstrupvej"
+        );
+    }
+
+    with link = "line.dk.NNN" {
+        track(nn[:hou + 0.49sw, :hou + 1.8km]);
+        line_label(:left:ne, nn[:hou + 1.8km] << 0.5mt, "NNN");
+        track(nn[:hou + 1.8km, :kra - 0.49sw]);
+    }
+
+    with link = "point.dk.Kragelund", railway = :station {
+        track(nn[:kra - 0.5sw, :kra + 0.5sw]);
+        marker(:right :de.hp, nn[:kra] >> 0.5mt);
+        slabel(:right, nn[:kra] >> 0.5mt >> 1sh + (1.3dt, 0.5dt),
+            "Kragelund"
+        );
+    }
+
+    with link = "line.dk.NNN" {
+        track(nn[:kra + 0.49sw, :nym - 0.49sw]);
+    }
+
+    with link = "point.dk.Nymindegab", railway = :station {
+        track(nn[:nym - 0.5sw, :nym + 450m]);
+        marker(:left :de.bf, nn[:nym] << 0.5mt);
+        slabel(:left :bold, nn[:nym] << 0.5mt << 1sh + (-1.3dt, 1dt),
+            "Nymindegab"
+        );
+    }
+}
+

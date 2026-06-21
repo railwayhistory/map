@@ -4,6 +4,9 @@
 
 Additions
 
+* Added the third part of overview and detail map of Denmark, covering
+  Midt- and Nordjylland. ([#180])
+
 Updates
 
 Corrections

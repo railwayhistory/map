@@ -1,3 +1,114 @@
+# DK HBS.  Horsens - Bryrup - Silkeborg
+with detail = 2 {
+    let hs = path("d2.dk.hbs");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HBS" {
+            track(
+                    hs[:lun.ys - 0.1dl, :lun.ys] >> 0.5md << 0.5mt
+                ..  hs[:lun.xs, :lun.xs + 5.71km]
+            );
+            line_label(:right:w, hs[:lun.xs + 5.7km] >> 0.5mt, "HBS");
+            track(hs[:lun.xs + 5.69km, :brv]);
+        }
+    }
+
+    with railway = :first :museum {
+        with link = "point.dk.Bryrup" {
+            statdot(hs[:brv]);
+            slabel(:bottom, hs[:brv] + (0dt, 1.1dt), "Bryrup");
+        }
+
+        with link = "line.dk.HBS" {
+            track(hs[:brv, :vra]);
+        }
+
+        with link = "point.dk.Vrads" {
+            statdot(hs[:vra]);
+            slabel(:left, hs[:vra] + (-1.5dt, 0.8dt), "Vrads");
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HBS" {
+            track(hs[:vra, :vra + 12.01km]);
+            line_label(:right:w, hs[:vra + 12km] >> 0.5mt, "HBS");
+            track(hs[:vra + 11.99km, :sil.yh]);
+        }
+    }
+}
+
+
+# DK HBV.  Holstebro - Vejle
+with detail = 2 {
+    let hv = path("d2.dk.hbv");
+
+    with railway = :first :pax {
+        with link = "line.dk.HBV" {
+            track(hv[:hol.yv, :hol.yv + 9.21km]);
+            line_label(:left:sw, hv[:hol.yv + 9.2km] << 0.5mt, "HBV");
+            track(hv[:hol.yv + 9.19km, :her.yh - 7.99km]);
+            line_label(:left:s, hv[:her.yh - 8km] << 0.5mt, "HBV");
+            track(hv[:her.yh - 8.01km, :her.yh]);
+        }
+
+        with link = "point.dk.Herning", railway = :station {
+            track(hv[:her.yh, :her.ys]);
+            statdot(hv[:her]);
+            slabel(:left, hv[:her.yh] + (-1km, 0dt) + (-2dt, 1.5dt),
+                "Herning"
+            );
+        }
+
+        with link = "line.dk.HBV" {
+            track(hv[:her.ys, :her.ys + 11.01km]);
+            line_label(:right:e, hv[:her.ys + 11km] >> 0.5mt,
+                (0dt, 0.2dt), "HBV"
+            );
+            track(hv[:her.ys + 10.99km, :brd.yf]);
+        }
+
+        with link = "point.dk.Brande", railway = :station {
+            track(hv[:brd.yf, :brd.yb]);
+            statdot(hv[:brd]);
+            slabel(:left, hv[:brd] + (-1.5dt, 1.5dt), "Brande");
+        }
+
+        with link = "line.dk.HBV" {
+            track(hv[:brd.yb, :brd.yb + 6.01km]);
+            line_label(:left:s, hv[:brd.yb + 6km] << 0.5mt, "HBV");
+            track(hv[:brd.yb + 5.99km, :thy.yh]);
+        }
+
+        with link = "point.dk.Thyregod", railway = :station {
+            track(hv[:thy.yh, :thy]);
+            statdot(hv[:thy]);
+            slabel(:left, hv[:thy] + (-1.5dt, 0.6dt), "Thyregod");
+        }
+
+        with link = "line.dk.HBV" {
+            track(hv[:thy, :thy + 9.01km]);
+            line_label(:left:w, hv[:thy + 9km] << 0.5mt, "HBV");
+            track(hv[:thy + 8.99km, :ven - 4.91km]);
+            line_label(:left:sw, hv[:ven - 4.9km] << 0.5mt, "HBV");
+            track(hv[:ven - 4.89km, :ven]);
+        }
+
+        with link = "point.dk.Vejle-Nord", railway = :station {
+            statdot(:removed, hv[:ven]);
+            slabel(:right :removed, hv[:ven] + (1.3dt, -1dt), "V. Nord");
+        }
+
+        with link = "line.dk.HBV" {
+            track(
+                    hv[:ven - 0.1dl, :ven]
+                ..  hv[:vej.yh, :vej.yh + 0.1dl] >> 0.5md << 0.5mt
+            );
+        }
+    }
+}
+
+
 # DK HFH.  Hillerød - Frederiksværk - Hundested Havn
 with detail = 2 {
     let hh = path("d2.dk.hfh");
@@ -25,6 +136,39 @@ with detail = 2 {
         with link = "point.dk.Hundested-Havn" {
             statdot(hh[:huh]);
             slabel(:left, hh[:huh] + (-1.5dt, 0.8dt), "Hundested Havn");
+        }
+    }
+}
+
+
+# DK HHH.  Hjørring - Hirtshals
+with detail = 2 {
+    let hh = path("d2.dk.hhh");
+    let hjv = path("d2.dk.hhh.hjv");
+
+    with railway = :first :pax :removed {
+        with link = "point.dk.Hjørring-V" {
+            statdot(hjv[:hjv]);
+        }
+
+        with link = "line.dk.HHH" {
+            track(hjv[:hjv, :hjv.ya]);
+            track(hjv[:hjv.ya, :vel.yv]);
+        }
+    }
+
+    with railway = :first :pax {
+        with link = "line.dk.HHH" {
+            track(hh[:hjo.yh, :hjo.ya]);
+            track(hh[:hjo.ya, :vel.yv]);
+            track(hh[:vel.yv, :vel.yv + 5.51km]);
+            line_label(:right:w, hh[:vel.yv + 5.5km] >> 0.5mt, "HHH");
+            track(hh[:vel.yv + 5.49km, :hir]);
+        }
+
+        with link = "point.dk.Hirtshals", railway = :station {
+            statdot(hh[:hir]);
+            slabel(:top, hh[:hir] + (-0.3dt, -0.8dt), "Hirtshals");
         }
     }
 }
@@ -84,6 +228,27 @@ with detail = 2 {
 }
 
 
+# DK HJM.  Horsens - Juelsminde
+with detail = 2 {
+    let hj = path("d2.dk.hjm");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HJM" {
+            track(hj[:hor.yj, :hor.yj + 7.01km]);
+            line_label(:left:w, hj[:hor.yj + 7km] << 0.5mt, "HJM");
+            track(hj[:hor.yj + 6.99km, :jue - 3.99km]);
+            line_label(:right:n, hj[:jue - 4km] >> 0.5mt, (-0.5dt, 0dt), "HJM");
+            track(hj[:jue - 4.01km, :jue]);
+        }
+
+        with link = "point.dk.Juelsminde" {
+            statdot(hj[:jue]);
+            slabel(:right, hj[:jue] + (1.5dt, 0.5dt), "Juelsminde");
+        }
+    }
+}
+
+
 # DK HKG.  Hillerød - Kagerup - Gilleleje
 with detail = 2 {
     let hg = path("d2.dk.hkg");
@@ -118,6 +283,26 @@ with detail = 2 {
 }
 
 
+# DK HLA.  Hjørring - Løkken - Aabybro
+with detail = 2 {
+    let ha = path("d2.dk.hla");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HLA" {
+            track(path("d2.dk.hla.hjv")[:hjv.ya, :liv.yv]);
+            track(ha[:hjo.ya, :liv.yv]);
+            track(ha[:liv.yv, :liv.yv + 8.01km]);
+            line_label(:right:se, ha[:liv.yv + 8.9km] >> 0.5mt, "HLA");
+            track(ha[:liv.yv + 7.99km, :lok + 5.51km]);
+            line_label(:left:w, ha[:lok + 5.5km] << 0.5mt, "HLA");
+            track(ha[:lok + 5.49km, :rya.yh - 5.99km]);
+            line_label(:right:e, ha[:rya.yh - 6km] >> 0.5mt, "HLA");
+            track(ha[:rya.yh - 6.01km, :rya.yh]);
+        }
+    }
+}
+
+
 # DK HLR.  Hårlev - Rødvig
 with detail = 2 {
     let hr = path("d2.dk.hlr");
@@ -132,6 +317,54 @@ with detail = 2 {
         with link = "point.dk.Rødvig" {
             statdot(hr[:rod.2024]);
             slabel(:left, hr[:rod.2024] + (-1.5dt, 0.8dt), "Rødvig");
+        }
+    }
+}
+
+
+# DK HLS.  Hobro - Løgstør
+with detail = 2 {
+    let hl = path("d2.dk.hls");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HLS" {
+            track(
+                    hl[:hob.ya, :hob.xa] << 0.5md >> 0.5mt
+                ..  hl[:hob.za + 1md, :hob.ya + 12.91km]
+            );
+            line_label(:right:s, hl[:hob.ya + 12.9km] >> 0.5mt, "HLS");
+            track(hl[:hob.ya + 12.89km, :aal.yh]);
+        }
+
+        with link = "point.dk.Aalestrup", railway = :station {
+            track(hl[:aal.yh, :aal]);
+            statdot(hl[:aal]);
+            slabel(:ne, hl[:aal] + (-0.5dt, 0.5dt), "Aalestrup");
+        }
+
+        with link = "line.dk.HLS" {
+            track(hl[:aal, :aal + 9.51km]);
+            line_label(:right:w, hl[:aal + 9.5km] >> 0.5mt, "HLS");
+            track(hl[:aal + 9.49km, :aar.yh]);
+        }
+
+        with link = "point.dk.Aars", railway = :station {
+            track(hl[:aar.yh, :aar.ys]);
+            statdot(hl[:aar]);
+            slabel(:right, hl[:aar] + (1.5dt, 0.8dt), "Aars");
+        }
+
+        with link = "line.dk.HLS" {
+            track(hl[:aar.ys, :aar.ys + 6.51km]);
+            line_label(:left:ne, hl[:aar.ys + 6.5km] << 0.5mt, "HLS");
+            track(hl[:aar.ys + 6.49km, :log - 6.99km]);
+            line_label(:right:sw, hl[:log - 7km] >> 0.5mt, "HLS");
+            track(hl[:log - 7.01km, :log]);
+        }
+
+        with link = "point.dk.Løgstør", railway = :station {
+            statdot(hl[:log]);
+            slabel(:left, hl[:log] + (-1.5dt, 0.8dt), "Løgstør");
         }
     }
 }
@@ -176,6 +409,48 @@ with detail = 2 {
 }
 
 
+# DK HOA.  Hou - Odder - Aarhus H
+with detail = 2 {
+    let ha = path("d2.dk.hoa");
+
+    with railway = :first :pax :removed {
+        with link = "point.dk.Hou" {
+            statdot(ha[:hou]);
+            slabel(:right, ha[:hou] + (1.5dt, 0.8dt), "Hou");
+        }
+
+        with link = "line.dk.HOA" {
+            track(ha[:hou, :hou + 5.01km]);
+            line_label(:right:sw, ha[:hou + 5km] >> 0.5mt, "HOA");
+            track(ha[:hou + 4.99km, :odd.yh]);
+            track(ha[:odd.yh, :odd]);
+        }
+    }
+
+    with railway = :first :cat:dc75 :pax {
+        with link = "point.dk.Odder" {
+            statdot(ha[:odd]);
+            slabel(:left, ha[:odd] + (-1.5dt, 0.8dt), "Odder");
+        }
+
+        with link = "line.dk.HOA" {
+            track(ha[:odd, :odd + 10.91km]);
+            line_label(:right:w, ha[:odd + 10.9km] >> 0.5mt, "HOA");
+            track(
+                    ha[:odd + 10.89km, :vib.zo - 1md]
+                ..  ha[:vib.xo, :vib.yo] >> 0.5md >> 1ms >> 0.5mt
+            );
+            track(ha[:vib.yo, :aar.yt] >> 0.5md >> 1ms >> 0.5mt);
+            with layer = -1 track(
+                    ha[:aar.yt - 1.1dl, :aar.yt] >> 0.5md >> 1ms >> 0.5mt
+                ..  ha[:aar.yr + 1md, :aar.yr + 1.1md] << 0.5md << 1ms << 0.5mt
+            );
+            track(ha[:aar.yr + 1md, :aar] << 0.5md << 1ms << 0.5mt);
+        }
+    }
+}
+
+
 # DK HRG.  Helsingør - Gilleleje
 with detail = 2 {
     let hg = path("d2.dk.hrg");
@@ -185,6 +460,34 @@ with detail = 2 {
             track(hg[:hor, :hor + 12.6km]);
             line_label(:right:sw, hg[:hor + 12.6km], "HRG");
             track(hg[:hor + 12.6km, :gil]);
+        }
+    }
+}
+
+# DK HRH.  Hjørring - Hørby
+with detail = 2 {
+    let hh = path("d2.dk.hrh");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HRH" {
+            track(:casing, hh[:hjo.yh, :hjo.yh + 3.01km]);
+            track(hh[:hjo.yh + 3km, :hjo.yh + 12.01km]);
+            line_label(:left:w, hh[:hjo.yh + 12km] << 0.5mt, "HRH");
+            track(hh[:hjo.yh + 11.99km, :ost.yv + 0.1dl]);
+        }
+
+        with link = "point.dk.Østervrå", railway = :station {
+            track(hh[:ost.yv, :ost]);
+            statdot(hh[:ost]);
+            slabel(:top, hh[:ost] + (0dt, -0.4km) + (3dt, -0.3dt),
+                "Østervrå"
+            );
+        }
+
+        with link = "line.dk.HRH" {
+            track(hh[:ost - 0.1dl, :ost + 6.01km]);
+            line_label(:right:ne, hh[:ost + 6km] >> 0.5mt, "HRH");
+            track(hh[:ost + 5.99km, :hor.yb]);
         }
     }
 }
@@ -199,6 +502,65 @@ with detail = 2 {
             track(hs[:hil.ys, :hil.ys + 5km]);
             line_label(:right:s, hs[:hil.ys + 5km], "HRS");
             track(hs[:hil.ys + 5km, :ska.yh]);
+        }
+    }
+}
+
+
+# DK HSO.  Horsens - Odder
+with detail = 2 {
+    let ho = path("d2.dk.hso");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HSO" {
+            track(ho[:hor.yo, :hor.yo + 16.31km]);
+            line_label(:right:nw, ho[:hor.yo + 16.3km] >> 0.5mt, "HSO");
+            track(ho[:hor.yo + 16.29km, :odd.yh]);
+        }
+    }
+}
+
+
+# DK HTG.  Horsens - Thyregod
+with detail = 2 {
+    let ht = path("d2.dk.htg");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HTG" {
+            track(:double, ht[:hor.yt, :hor.yt + 2.21km]);
+            with zoom = :high line_label(
+                :left:ne, ht[:hor.yt + 2.2km] << 0.5md, "HTG"
+            );
+            track(:double, ht[:hor.yt + 2.19km, :lun]);
+        }
+        
+        with link = "point.dk.Lund", railway = :station {
+            track(:double, ht[:lun, :lun.ys]);
+            statdot(ht[:lun]);
+            slabel(:right, ht[:lun] + (1.5dt, -0.5dt), "Lund");
+        }
+
+        with link = "line.dk.HTG" {
+            track(
+                    ht[:lun.ys - 0.1dl, :lun.ys] << 0.5md >> 0.5mt
+                ..  ht[:lun.xs, :lun.xs + 4.51km]
+            );
+            line_label(:left:n, ht[:lun.xs + 4.5km] << 0.5mt, "HTG");
+            track(ht[:lun.xs + 4.49km, :ras]);
+        }
+
+        with link = "point.dk.Rask-Mølle", railway = :station {
+            track(ht[:ras, :ras.ye]);
+            statdot(ht[:ras]);
+            slabel(:right, ht[:ras] + (-2.5dt, -1.8dt), "Rask Mølle");
+        }
+
+        with link = "line.dk.HTG" {
+            track(ht[:ras.ye, :ras.ye + 7.21km]);
+            line_label(:left:n, ht[:ras.ye + 7.2km] << 0.5mt, "HTG");
+            track(ht[:ras.ye + 7.19km, :thy.yh - 5.29km]);
+            line_label(:right:sw, ht[:thy.yh - 5.3km] >> 0.5mt, "HTG");
+            track(ht[:thy.yh - 5.31km, :thy.yh]);
         }
     }
 }
@@ -225,6 +587,23 @@ with detail = 2 {
             track(ht[:ved, :tol.yh - 6km]);
             line_label(:left:se, ht[:tol.yh - 6km], "HTL");
             track(ht[:tol.yh - 6km, :tol.yh]);
+        }
+    }
+}
+
+
+# DK HVI.  Herning - Viborg
+with detail = 2 {
+    let hv = path("d2.dk.hvi");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.HVI" {
+            track(hv[:her.yv, :her.yv + 6.01km]);
+            line_label(:right:w, hv[:her.yv + 6km] >> 0.5mt, "HVI");
+            track(hv[:her.yv + 5.99km, :vib.yf - 8.99km]);
+            line_label(:left:se, hv[:vib.yf - 9km] << 0.5mt, "HVI");
+            track(hv[:vib.yf - 9.01km, :vib.yf]);
+            track(hv[:vib.yf, :vib.yh]);
         }
     }
 }
