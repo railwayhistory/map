@@ -4,7 +4,16 @@
 
 Additions
 
-* Added the third part of overview and detail map of Denmark, covering
+Updates
+
+Corrections
+
+
+## 2026-06-21
+
+Additions
+
+* Added the fourth part of overview and detail map of Denmark, covering
   Midt- and Nordjylland. ([#180])
 
 Updates
@@ -21,7 +30,6 @@ Updates
 * Line _PL 318_ has been re-opened between Bielawa Góry Sowie and
   Bielawa Zachodnia in summer 2026. ([#185])
 
-Corrections
 
 [#180]: https://github.com/railwayhistory/map/pull/180
 [#181]: https://github.com/railwayhistory/map/pull/181
