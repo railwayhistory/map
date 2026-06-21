@@ -14,6 +14,8 @@ Updates
   when the gap between Suzzara and Poggio Rusco was closed. ([#181])
 * Line _PL 49_ (Śniadowo – Łomża) has been re-opened for passenger service
   in summer 2026. ([#183])
+* Line _PL 104_ has been re-opened for passenger service between
+  Marcinkowice and Nowy Sącz in summer 2026. ([#184]
 * Line _PL 214_ (Somonino – Kartuzy) has been re-opened for passenger
   service in summer 2026. ([#182])
 
@@ -23,6 +25,7 @@ Corrections
 [#181]: https://github.com/railwayhistory/map/pull/181
 [#182]: https://github.com/railwayhistory/map/pull/182
 [#183]: https://github.com/railwayhistory/map/pull/183
+[#184]: https://github.com/railwayhistory/map/pull/184
 
 
 ## 2026-03-22
