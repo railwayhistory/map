@@ -2,10 +2,26 @@
 with detail = 2 {
     let gk = path("d2.at.460");
 
-    with railway = :first :cat:ac15 :pax {
+    with railway = :first :double :cat:ac15 :pax {
         with link = "line.at.460" {
-            track(gk[:wei.yw, :wet.yl]);
+            track(gk[:fel.yk, :fel.yk + 6km]);
+            line_label(:right:e, gk[:fel.yk + 6km], "460");
+            track(gk[:fel.yk + 6km, :wun]);
+        }
+
+        with link = "point.at.Wundschuh" {
+            track(gk[:wun, :wun.yw]);
+            statdot(:nopax, gk[:wun]);
+            with zoom = :high slabel(
+                :left :nopax, gk[:wun] + (-1.8dt, 1dt), "Wundschuh"
+            );
+        }
+
+        with link = "line.at.460" {
+            track(gk[:wun.yw, :wei.yw]);
+            track(gk[:wei.yw, :wei.yw + 5km]);
             line_label(:left:nw, gk[:wei.yw + 5km], "460");
+            track(gk[:wei.yw + 5km, :wet.yl]);
         }
 
         with link = "point.at.Wettmannstätten" {
@@ -15,9 +31,24 @@ with detail = 2 {
                 vbox(:left:top, "Wettmann-", "stätten")
             );
         }
-    }
 
-    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.at.460" {
+            track(gk[:wet.yw, :wes.yl]);
+        }
+
+        with link = "point.at.Weststeiermark" {
+            track(gk[:wes.yl, :wes.yw]);
+            statdot(gk[:wes]);
+            slabel(:bottom, gk[:wes] + (0dt, 1.0dt),
+                vbox(:center:top, " West-", "steiermark")
+            );
+        }
+
+        with link = "line.at.460" {
+            track(gk[:wes.yw, :spl.yz]);
+            line_label(:right:s, gk[:wes.yw + 20km], "460");
+        }
+
         with link = "point.at.St-Paul-Lavanttal" {
             track(:station, gk[:spl.yz, :spl]);
             statdot(gk[:spl]);
@@ -48,10 +79,47 @@ with detail = 2 {
 }
 
 
-# AT 460.1.  Werndorf - Knoten Weitendorf
+# AT 460.1.  Wundschuh - Werndorf Süd
 with detail = 2 {
-    with link = "line.at.460.1" {
-        track(:first :cat:ac15 :pax, path("d2.at.460.1")[:wer.yk, :wei.yw]);
+    let ww = path("d2.at.460.1");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.at.460.1" {
+            track(
+                    ww[:wun.yw - 0.1dl, :wun.yw] << 0.5md >> 0.5mt
+                ..  ww[:wer.yw, :wer.yw + 0.1dl] >> 0.5md << 0.5mt
+            );
+        }
+    }
+}
+
+
+# AT 460.2.  Werndorf - Knoten Weitendorf
+with detail = 2 {
+    let ww = path("d2.at.460.2");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.at.460.2" {
+            track(
+                    ww[:wer.yk - 0.1dl, :wer.yk] >> 0.5md << 0.5mt
+                ..  ww[:wei.yw, :wei.yw + 0.1dl] << 0.5md >> 0.5mt
+            );
+        }
+    }
+}
+
+
+# AT 460.3.  Weitmannstätten Ost - Weitmannstätten Nord
+with detail = 2 {
+    let ww = path("d2.at.460.3");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.at.460.2" {
+            track(
+                    ww[:weo - 0.1dl, :weo] >> 0.5md << 0.5mt
+                ..  ww[:wen, :wen + 0.1dl]
+            );
+        }
     }
 }
 

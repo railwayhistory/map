@@ -203,39 +203,61 @@ with detail = 2 {
 with detail = 2 {
     let rm = path("d2.de.4330");
 
-    with link = "line.de.4330" {
-        track(:first :double :pax, rm[:rad.ys, :sta]);
-        track(:second :pax, rm[:sta.yf, :sto]);
-        track(:second, rm[:sto, :men.ys]);
-
-        guide(:linenum :pax,
-                rm[:sta - 4km] >> 1dt
-            --  rm[:sta - 4km] >> 3dt
-        );
-        label(:linenum :pax, rm[:sta - 4km] >> 3dt,
-            hbox(:left:middle :badgesize, " 4330")
-        );
-        line_badge(:open, rm[:swa + 6.5km], "4330");
+    with railway = :first :double :pax {
+        with link = "line.de.4330" {
+            track(rm[:rad.ys, :rad.ys + 2.71km]);
+            line_label(:right:w, rm[:rad.ys + 2.7km] >> 0.5md, "4330");
+            track(rm[:rad.ys + 2.69km, :sta]);
+        }
     }
 
-    with link = "point.de.Stahringen" {
-        with layer = 1 marker(:statdot :pax, rm[:sta]);
-        slabel(:right :pax, rm[:sta] + (1.5dt, 1.5dt), "Stahringen");
+    with railway = :second :pax {
+        with link = "point.de.Stahringen", railway = :station {
+            track(rm[:sta, :sta.yf]);
+            statdot(rm[:sta]);
+            slabel(:right, rm[:sta] + (1.5dt, 1.5dt), "Stahringen");
+        }
+
+        with link = "line.de.4330" {
+            track(rm[:sta.yf, :sta.yf + 5.21km]);
+            line_label(:left:e, rm[:sta.yf + 5.2km] << 0.5mt, "4330");
+            track(rm[:sta.yf + 5.19km, :sto]);
+        }
+
+        with link = "point.de.Stockach" {
+            statdot(rm[:sto]);
+            slabel(:right, rm[:sto] + (1.5dt, 1.1dt), "Stockach");
+        }
     }
 
-    with link = "point.de.Stockach" {
-        with layer = 1 marker(:statdot :pax, rm[:sto]);
-        slabel(:right :pax, rm[:sto] + (1.8dt, 1.0dt), "Stockach");
-    }
+    with railway = :second :tourist {
+        with link = "line.de.4330" {
+            track(rm[:sto, :swa]);
+        }
 
-    with link = "point.de.Schwackenreuthe" {
-        with layer = 1 marker(:statdot, rm[:swa]);
-        slabel(:left, rm[:swa] + (-1.8dt, 0dt), "Schwackenreuthe");
-    }
+        with link = "point.de.Schwackenreuthe", railway = :station {
+            track(rm[:swa, :swa.yp]);
+            statdot(rm[:swa]);
+            slabel(:left, rm[:swa] + (-1.3dt, 0dt), "Schwackenreuthe");
+        }
 
-    with link = "point.de.Krauchenwies" {
-        with layer = 1 marker(:statdot, rm[:kra]);
-        slabel(:right, rm[:kra] + (1.8dt, 1.5dt), "Krauchenwies");
+        with link = "line.de.4330" {
+            track(rm[:swa.yp, :swa.yp + 8.01km]);
+            line_label(:right:w, rm[:swa.yp + 8km] << 0.5mt, "4330");
+            track(rm[:swa.yp + 7.99km, :kra]);
+        }
+    
+        with link = "point.de.Krauchenwies" {
+            statdot(rm[:kra]);
+            slabel(:left, rm[:kra] + (-1.3dt, -0.5dt), "Krauchenwies");
+        }
+
+        with link = "line.de.4330" {
+            track(rm[:kra, :kra.ys]);
+            track(rm[:kra.ys, :kra.ys + 3.01km]);
+            line_label(:right:n, rm[:kra.ys + 3.0km] >> 0.5mt, "4330");
+            track(rm[:kra.ys + 2.99km, :men.ys]);
+        }
     }
 }
 

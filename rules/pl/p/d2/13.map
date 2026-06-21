@@ -2,14 +2,13 @@
 with detail = 2 {
     let ct = path("d2.pl.p.131");
 
-    with railway = :first :double :cat:dc30 :nopax {
-        with link = "line.pl.131" {
-            track(ct[:ann.x, :cho.yw]);
-            line_label(:left:e, ct[:cho.yw - 6km], "131");
-        }
-    }
-
     with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.131" {
+            track(ct[:ann.x, :cho.yw - 6km]);
+            line_label(:left:e, ct[:cho.yw - 6km], "131");
+            track(ct[:cho.yw - 6km, :cho.yw]);
+        }
+
         with link = "point.pl.Chorzew-Siemkowice" {
             track(:station, ct[:cho.yw, :cho]);
             statdot(ct[:cho]);
@@ -35,9 +34,7 @@ with detail = 2 {
         with link = "line.pl.131" {
             track(:casing, ct[:zdk.yg, :dio.yg]);
         }
-    }
 
-    with railway = :first :double :cat:dc30 :pax {
         with link = "line.pl.131" {
             track(ct[:dio.yg, :pon]);
             line_label(:left:e, ct[:dio.yg + 6km], "131");
@@ -52,8 +49,13 @@ with detail = 2 {
         }
 
         with link = "line.pl.131" {
-            track(:casing, ct[:pon.yz, :bor.y]);
-            track(ct[:bor.y, :bor.x]);
+            track(:casing, ct[:pon.yz, :bor.y + 1mt]);
+        }
+    }
+
+    with railway = :first :double :cat:dc30 :pax {
+        with link = "line.pl.131" {
+            track(ct[:bor.y + 1mt, :bor.x]);
         }
     }
 }

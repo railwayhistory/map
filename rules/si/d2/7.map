@@ -40,7 +40,7 @@ with detail = 2 {
 # SI 71.  Cepišče Šempeter pri Gorici - Vrtojba d.m.
 with detail = 2 {
     with link = "line.si.71" {
-        track(:first, path("d2.si.71")[:cse.y, :vrd]);
+        track(:first :tourist, path("d2.si.71")[:cse.y, :vrd]);
     }
 }
 
@@ -49,14 +49,17 @@ with detail = 2 {
 with detail = 2 {
     let pa = path("d2.si.72");
 
-    with link = "line.si.72" {
-        track(:first, pa[:prv.ya, :ajd]);
-        line_label(:left:s, pa[:prv.ya + 7.25km], "72");
-    }
+    with railway = :first :pax {
+        with link = "line.si.72" {
+            track(pa[:prv.ya, :prv.ya + 7.25km]);
+            line_label(:left:s, pa[:prv.ya + 7.25km], "72");
+            track(pa[:prv.ya + 7.25km, :ajd]);
+        }
 
-    with link = "point.si.Ajdovščina" {
-        statdot(:open, pa[:ajd]);
-        slabel(:right, pa[:ajd] + (1.5dt, 0.8dt), "Ajdovščina");
+        with link = "point.si.Ajdovščina" {
+            statdot(pa[:ajd]);
+            slabel(:right, pa[:ajd] + (1.5dt, 0.8dt), "Ajdovščina");
+        }
     }
 }
 

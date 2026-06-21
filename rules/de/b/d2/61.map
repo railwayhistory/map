@@ -279,16 +279,33 @@ with detail = 2 {
 
 # DE 6129.  Genshagener Heide Mitte - Ludwigsfelde
 with detail = 2 {
-    with link = "line.de.6129" {
-        track(:first :cat:ac15 :pax, path("d2.de.6129")[:gen, :bir.yg]);
+    let gl = path("d2.de.6129");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.de.6129" {
+            track(
+                    gl[:gen - 0.1dl, :gen] >> 0.5md << 0.5mt
+                ..  gl[:ghn.y, :ghn.y + 0.1dl]
+            );
+            track(gl[:ghn.y, :gbw]);
+            with layer = -1 track(
+                    gl[:gbw - 0.1dl, :gbw]
+                ..  gl[:bir.yg, :bir.yg + 0.1dl] >> 0.5md << 0.5mt
+            );
+        }
     }
 }
 
 
 # DE 6130.  Genshagener Heide West - Genshagener Heide Nord
 with detail = 2 {
+    let gg = path("d2.de.6130");
+
     with link = "line.de.6130" {
-        track(:first :cat:ac15 :pax, path("d2.de.6130")[:ghw, :ghn.y]);
+        track(:first :cat:ac15 :nopax,
+                gg[:ghw - 0.1dl, :ghw] << 0.5md >> 0.5mt
+            ..  gg[:ghn.y, :ghn.y + 0.1dl]
+        );
     }
 }
 
@@ -305,35 +322,68 @@ with detail = 2 {
 with detail = 2 {
     let bh = path("d2.de.b.6132");
 
-    with link = "line.de.6132" {
-        track(:first :double :cat:ac15 :pax, bh[:skr, :ngo]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6132" {
+            track(bh[:skr, :pri]);
+            track(bh[:pri, :skr.ym]);
+            with layer = -1 track(bh[:skr.ym, :skr.xm]);
+            track(bh[:skr.xm, :lis]);
+            track(bh[:lis, :lis.yt]);
+            track(bh[:lis.yt, :tel.yl]);
+        }
 
-        line_badge(:cat:ac15 :pax, bh[:luc - 11km], "6132");
-    }
+        with link = "point.de.Teltow" {
+            track(bh[:tel.yl, :tel.yh]);
+            statdot(bh[:tel]);
+            slabel(:right, bh[:tel] + (1.7dt, 1dt), "Tlo.");
+        }
 
-    with link = "point.de.Teltow" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, bh[:tel]);
-    }
+        with link = "line.de.6132" {
+            track(bh[:tel.yh, :gbs]);
+            with layer = -1 track(bh[:gbs, :bir.yg]);
+            with layer = -1 track(bh[:bir.yg, :bis.y]);
+            track(bh[:bis.y, :lud]);
+        }
 
-    with link = "point.de.Ludwigsfelde" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, bh[:lud]);
-        slabel(:left :cat:ac15 :pax, bh[:lud] + (-1.5dt, 0.8dt),
-            "Ludwigsfelde"
-        );
-    }
+        with link = "point.de.Ludwigsfelde" {
+            statdot(bh[:lud]);
+            slabel(:left, bh[:lud] + (-1.5dt, 0.8dt),
+                "Ludwigsfelde"
+            );
+        }
 
-    with link = "point.de.Luckenwalde" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, bh[:luc]);
-        slabel(:left :cat:ac15 :pax, bh[:luc] + (-1.8dt, 0.3dt),
-            "Luckenwalde"
-        );
-    }
+        with link = "line.de.6132" {
+            track(bh[:lud, :lud + 11km]);
+            line_label(:right:e, bh[:lud + 11km], "6132");
+            track(bh[:lud + 11km, :luc]);
+        }
 
-    with link = "point.de.Jüterbog" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, bh[:jut]);
-        slabel(:right :cat:ac15 :pax, bh[:jut] + (0.5dt, 0.5dt),
-            hbox(:left:top, "Jüterbog")
-        );
+        with link = "point.de.Luckenwalde" {
+            track(bh[:luc, :luc.yh]);
+            statdot(bh[:luc]);
+            slabel(:left, bh[:luc] + (-1.8dt, 0.3dt),
+                "Luckenwalde"
+            );
+        }
+
+        with link = "line.de.6132" {
+            track(bh[:luc.yh, :luc.yh + 6.3km]);
+            line_label(:right:se, bh[:luc.yh + 6.3km], "6132");
+            track(bh[:luc.yh + 6.3km, :jut.yz]);
+        }
+
+        with link = "point.de.Jüterbog" {
+            track(bh[:jut.yz, :jut.yf]);
+            statdot(bh[:jut]);
+            slabel(:right, bh[:jut] + (1dt, 0.5dt),
+                hbox(:left:top, "Jüterbog")
+            );
+        }
+
+        with link = "line.de.6132" {
+            track(bh[:jut.yf, :den]);
+            track(bh[:den, :ngo]);
+        }
     }
 }
 
@@ -342,52 +392,86 @@ with detail = 2 {
 with detail = 2 {
     let be = path("d2.de.6135");
 
-    with link = "line.de.6135" {
-        track(:first :double :rail:rc75 :pax,
-                be[:att, :mah - 5km]
-            ..  be[:mah - 0.5km, :mah] >> 1dt
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6135" {
+            track(be[:skr.ym, :skr.xm + 2md]);
+            track(be[:skr.xm + 2md, :lic]);
+            track(be[:lic, :gdn]);
+            track(:casing, be[:gdn, :gds.yw]);
+            track(be[:gds.yw, :bla]);
+            track(be[:bla, :bla + 5km]);
+            line_label(:right:e, be[:bla + 5km], "6135");
+            track(be[:bla + 5km, :zoa]);
+            track(be[:zoa, :zos]);
+        }
+
+        with link = "point.de.Zossen" {
+            statdot(be[:zos]);
+            slabel(:right, be[:zos] + (1.5dt, 0.8dt), "Zossen");
+        }
+
+        with link = "line.de.6135" {
+            track(be[:zos, :zos + 13km]);
+            line_label(:left:w, be[:zos + 13km], "6135");
+            track(be[:zos + 13km, :uck.yd]);
+        }
+
+        with link = "point.de.Luckau-Uckro" {
+            track(be[:uck.yd, :uck.yf]);
+            statdot(be[:uck]);
+            slabel(:left, be[:uck] + (-1.3dt, -1.0dt),
+                vbox(:right:top, "Luckau-", "Uckro ")
+            );
+        }
+
+        with link = "line.de.6135" {
+            track(be[:uck.yf, :uck.yf + 16km]);
+            line_label(:right:e, be[:uck + 16km], "6135");
+            track(be[:uck.yf + 16km, :don]);
+            track(be[:don, :dob]);
+        }
+
+        with link = "point.de.Doberlug-Kirchhain" {
+            statdot(be[:dob]);
+            slabel(:left, be[:dob] + (-1.0dt, 0dt),
+                vbox(:right:bottom, "Doberlug-", "Kirchhain ")
+            );
+        }
+
+        with link = "line.de.6135" {
+            track(be[:dob, :dob + 9km]);
+            line_label(:left:w, be[:dob + 9km], "6135");
+            track(be[:dob + 9km, :els.yb - 2km]);
+            with layer = -1 track(be[:els.yb - 2km, :els.yb]);
+        }
+
+        with link = "point.de.Elsterwerda" {
+            track(be[:els.yb, :els]);
+            statdot(be[:els]);
+            slabel(:right :bold, be[:els] + (1.5dt, 1.8dt), "Elsterwerda");
+        }
+
+        with link = "line.de.6135" {
+            track(be[:els, :elx]);
+        }
+
+        with link = "point.de.Elsterwerda-Strw" {
+            marker(:ref :right, be[:elx]);
+            marker(:ref :left, be[:elx]);
+        }
+    }
+}
+
+
+# DE 6136.  Glasower Damm Süd - Glasower Damm West
+with detail = 2 {
+    let sw = path("d2.de.6136");
+
+    with link = "line.de.6136" {
+        with layer = -1 track(:first :cat:ac15 :nopax,
+                sw[:gds - 0.1dl, :gds] << 0.5md >> 0.5mt
+            ..  sw[:gdw + 2.5md, :gdw + 2.6md] << 0.5md >> 0.5mt
         );
-        track(:first, be[:mah, :gds] >> 0.15dt);
-        track(:first :double :cat:ac15 :pax, be[:gds, :elx]);
-
-        line_badge(:cat:ac15 :pax, be[:zos + 13km], "6135");
-        line_badge(:cat:ac15 :pax, be[:dob - 10km], "6135");
-        line_badge(:cat:ac15 :pax, be[:els - 10km], "6135");
-    }
-
-    with link = "point.de.Blankenfelde-Teltow-Fläming" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, be[:bla]);
-    }
-
-    with link = "point.de.Zossen" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, be[:zos]);
-        slabel(:right :cat:ac15 :pax, be[:zos] + (1.8dt, 0.8dt), "Zossen");
-    }
-
-    with link = "point.de.Luckau-Uckro" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, be[:uck]);
-        slabel(:left :cat:ac15 :pax, be[:uck] + (-1.3dt, -1.0dt),
-            vbox(:right:top, "Luckau-", "Uckro ")
-        );
-    }
-
-    with link = "point.de.Doberlug-Kirchhain" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, be[:dob]);
-        slabel(:left :cat:ac15 :pax, be[:dob] + (-1.0dt, 0dt),
-            vbox(:right:bottom, "Doberlug-", "Kirchhain ")
-        );
-    }
-
-    with link = "point.de.Elsterwerda" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, be[:els]);
-        slabel(:right :cat:ac15 :pax, be[:els] + (1.5dt, 1.8dt),
-            span(:bold, "Elsterwerda")
-        );
-    }
-
-    with link = "point.de.Elsterwerda-Strw" {
-        marker(:refdt :cat:ac15 :right, be[:elx]);
-        marker(:refdt :cat:ac15 :left, be[:elx]);
     }
 }
 
@@ -554,14 +638,25 @@ with detail = 2 {
 with detail = 2 {
     let gb = path("d2.de.6151");
 
-    with link = "line.de.6151" {
-        track(:first :double :cat:ac15 :pax,
-                gb[:gdo.yf, :bos]
-        );
-    }
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.de.6151" {
+            track(gb[:gdn, :gdo.yn]);
+            track(gb[:gdo.yf, :ber.yw]);
+            track(gb[:ber.yw, :ber]);
+        }
 
-    with link = "point.de.Berlin-Flughafen-BER" {
-        with layer = 2 marker(:statdot :cat:ac15 :pax, gb[:ber]);
+        with link = "point.de.Berlin-Flughafen-BER" {
+            statdot(gb[:ber]);
+            slabel(:nw, gb[:ber] + (-0.5dt, 1.3dt),
+                "Fl. B.-B."
+            );
+        }
+
+        with link = "line.de.6151" {
+            track(gb[:ber, :die.y]);
+            track(gb[:die.y, :bow.y]);
+            track(:single, gb[:bow.y, :bos] >> 0.5md << 0.5mt);
+        }
     }
 }
 

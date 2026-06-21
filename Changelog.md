@@ -1,13 +1,133 @@
 # Change Log
 
+## Unreleased next version
+
+Additions
+
+Updates
+
+Corrections
+
+
+## 2026-03-22
+
+Updates
+
+* Line _AT 220_ is fully double track to Marchegg and electrified to the
+  border since 2025-10-11. ([#168])
+* Line _DE 1522_ (Oldenburg – Wilhelmshaven) has been electrified.
+  ([#178])
+* Line _DE 1540_ has been closed between Sande and Schortens Weißer Floh
+  and replaced with a new line _DE 1546_ which is double track and
+  electrified. ([#178])
+* Line _DE 1552_ has been electrified between Schortens Weißer Floh and
+  Wilhelmshaven Ölweiche. ([#178])
+* Line _DE 1554_ has been electrified. ([#178])
+* Line _DE 3140_ has passenger between Ehrang and Igel since 2025-12-14.
+  ([#173])
+* Line _DE 4810_ has been re-opened between Weil der Stadt and Calw.
+  ([#179])
+* Lines _DE 6207_ between Horka and the border and _PL 295_ between the
+  border and Węgliniec have full passenger service since 2026-12-14.
+  ([#166])
+* Line _DE 9107_ has passenger service between Oppendorf and Schönberg
+  since 2025-12-14. ([#167])
+* Line _DE 3000_ is electrified between Remagen and Ahrbrück since
+  2025-12-14.
+* Line _DE 6697_ (Gotha – Gräfenroda) has been re-opened with goods service
+  between Emleben to Ohrdruf in the autumn of 2025. ([#177])
+* Line _DE 9581_ has full passenger service between Gotteszell and Viechtach
+  since 2025-12-14. ([#172])
+* Line _PL 38_ (Białystok – Granica Państwa Głomno) has passenger service
+  again between Kętrzyn and Korsze since 2026-02-01. Electrification
+  reaches all the way to Korsze since March 2026 after having been opened
+  to Giżycko in December. ([#165])
+
+Corrections
+
+* Line _DE 1020_ is electrified between Flensburg Ost and Flensburg and
+  line _DE 1022_ between Kiel Hbf and Kiel-Hassee since 2023. ([#169]
+* Line _DE 3554_ is double tracked between Darmstadt Nord and Darmstadt
+  Ost. ([#174])
+* Line _DE 4330_ has tourist service between Stockach and Mengen. ([#176])
+* Line _DE 4621_ (Metzingen – Bad Urach) has been electrified since 2022.
+  ([#171])
+* Line _DE 9410_ (Neckarbischofsheim – Hüffenhardt) only has tourist
+  passenger service. ([#170])
+* Line _DE 9460_ (Eyach – Hechingen) has tourist service.
+* Line _DE 9470_ (Amstetten – Gerstetten) only has passenger service on summer
+  weekends. ([#175])
+* Line _PL 36_ (Ostrołęka – Łapy) has had passenger service since
+  2024-03-18. ([#164])
+
+[#164]: https://github.com/railwayhistory/map/pull/164
+[#165]: https://github.com/railwayhistory/map/pull/165
+[#166]: https://github.com/railwayhistory/map/pull/166
+[#167]: https://github.com/railwayhistory/map/pull/167
+[#168]: https://github.com/railwayhistory/map/pull/168
+[#169]: https://github.com/railwayhistory/map/pull/169
+[#170]: https://github.com/railwayhistory/map/pull/170
+[#171]: https://github.com/railwayhistory/map/pull/171
+[#172]: https://github.com/railwayhistory/map/pull/172
+[#173]: https://github.com/railwayhistory/map/pull/173
+[#174]: https://github.com/railwayhistory/map/pull/174
+[#175]: https://github.com/railwayhistory/map/pull/175
+[#176]: https://github.com/railwayhistory/map/pull/176
+[#177]: https://github.com/railwayhistory/map/pull/177
+[#178]: https://github.com/railwayhistory/map/pull/178
+[#179]: https://github.com/railwayhistory/map/pull/179
+
+
+## 2025-12-14
+
+Updates
+
+* Added remaining part of line _AT 460_ (aka Koralmbahn) as well its
+  connecting lines, opening on 2025-12-14. ([#139])
+* Added electrification of line _AT 652_ between Wettmannstätten and
+  Wies-Eibiswald. ([#139])
+* Changed line _SI 72_ (Prvačina – Ajdovščina) to passenger service which
+  resumes 2025-12-14. ([#140])
+* Milano Porta Genova on line _IT MVV_ is closing 2025-12-13. ([#141])
+* The main lines tracks of line _DE 6135_ between Berlin Südkreuz and
+  Blankenfelde are opening on 2025-12-14. ([#142]).
+* The connecting curves at Genshagener Heide, are loosing their passenger
+  service at 2025-12-14. ([#142])
+* Line _PL 104_ is electrified and has passenger service between Rabka-Zdrój
+  and Rabka Zaryte as of 2025-12-14. Service was already restored between
+  Chabówka and Rabka-Zdrój last year. ([#143])
+* Line _PL 131_ has passenger service between Herby Nowe and Chorzew
+  Siemkowice as of 2025-12-14. ([#143])
+* Line _PL 245_ (Aleksandrów Kujawski – Ciechocinek Warzelnia Soli) has
+  passenger service as of 2025-12-14. ([#143])
+
+Corrections
+
+* Changed lines _SI 71_ and _IT GNG_ (Nova Gorica – Gorizia) to tourist
+  service. ([#140])
+
+[#139]: https://github.com/railwayhistory/map/pull/139
+[#140]: https://github.com/railwayhistory/map/pull/140
+[#141]: https://github.com/railwayhistory/map/pull/141
+[#142]: https://github.com/railwayhistory/map/pull/142
+[#143]: https://github.com/railwayhistory/map/pull/143
+
+
 ## 2025-12-12
 
 Additions
 
-* Added the third part of both overview and detail map of Denmark,
-  covering the islands of Funen and Langeland. ([#137])
+* Added the third part of overview and detail map of Denmark, covering
+  Funen and Langeland. ([#137])
+
+Corrections
+
+* Line _PL 131_ has no passenger service between Zduńska Wola Karsznice and
+  Borysławice junction north of line _PL 3._ ([#138])
+
 
 [#137]: https://github.com/railwayhistory/map/pull/137
+[#138]: https://github.com/railwayhistory/map/pull/138
 
 
 ## 2025-11-15
