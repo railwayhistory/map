@@ -18,6 +18,8 @@ Updates
   Marcinkowice and Nowy Sącz in summer 2026. ([#184]
 * Line _PL 214_ (Somonino – Kartuzy) has been re-opened for passenger
   service in summer 2026. ([#182])
+* Line _PL 318_ has been re-opened between Bielawa Góry Sowie and
+  Bielawa Zachodnia in summer 2026. ([#185])
 
 Corrections
 
@@ -26,6 +28,7 @@ Corrections
 [#182]: https://github.com/railwayhistory/map/pull/182
 [#183]: https://github.com/railwayhistory/map/pull/183
 [#184]: https://github.com/railwayhistory/map/pull/184
+[#185]: https://github.com/railwayhistory/map/pull/185
 
 
 ## 2026-03-22
