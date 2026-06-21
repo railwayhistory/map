@@ -94,24 +94,28 @@ with detail = 2 {
 with detail = 2 {
     let sf = path("d2.it.szf");
 
-    with link = "line.it.SZF" {
-        track(:first :pax, sf[:suz.yf, :pog.ys]);
-        line_label(:left:s :pax, sf[:suz.yf + 14km], "SZF");
-    }
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.it.SZF" {
+            track(sf[:suz.yf, :suz.yf + 14.01km]);
+            line_label(:left:s, sf[:suz.yf + 14km] << 0.5mt, "SZF");
+            track(sf[:suz.yf + 13.99km, :pog.ys]);
+        }
 
-    with link = "line.it.SZF" {
-        track(:first :cat:dc30 :pax, sf[:pog.yf, :por.ym]);
-        line_label(:left:sw :cat:dc30 :pax, sf[:por.ym - 18km], "SZF");
-    }
+        with link = "line.it.SZF" {
+            track(sf[:pog.yf, :por.ym - 17.99km]);
+            line_label(:left:sw, sf[:por.ym - 18km], "SZF");
+            track(sf[:por.ym - 18.01km, :por.ym]);
+        }
 
-    with link = "point.it.Porotto" {
-        track(:first:station :cat:dc30 :pax, sf[:por.ym, :por]);
-        statdot(:removed, sf[:por]);
-        slabel(:top :removed, sf[:por] + (1dt, -1.3dt), "Porotto");
-    }
+        with link = "point.it.Porotto", railway = :station {
+            track(sf[:por.ym, :por]);
+            statdot(:removed, sf[:por]);
+            slabel(:top :removed, sf[:por] + (1.5dt, -1.3dt), "Porotto");
+        }
 
-    with link = "line.it.SZF" {
-        track(:first :cat:dc30 :pax, sf[:por, :fer.yr]);
+        with link = "line.it.SZF" {
+            track(sf[:por, :fer.yr]);
+        }
     }
 }
 
