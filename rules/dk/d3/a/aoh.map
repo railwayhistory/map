@@ -1,0 +1,71 @@
+# DK AOH.  Aalborg - Aalborg Østhavnen
+#
+let ao = path("d3.dk.aoh");
+
+with detail = 3, railway = :first :museum {
+    #  point.dk.Aalborg  dk.FFH
+
+    with link = "line.dk.AOH" {
+        track(:ror,
+                ao[:aal + 160m + 1.9dl, :aal.yh - 0.99km]
+                        << 0.5md << 1ms << 0.5mt
+        );
+        line_label(:left:w, ao[:aal.yh - 1km] << 0.5md << 1ms << 1mt, "AOH");
+        track(:ror,
+                ao[:aal.yh - 1.01km, :aal.yh] << 0.5md << 1ms << 0.5mt
+        );
+        track(:station,
+                ao[:aal.yh - 0.1dl, :aal.yh] << 0.5md << 1ms << 0.5mt
+            ..  ao[:aal.xh + 2md, :aal.xh + 2.1md]
+        );
+    }
+
+    with link = "point.dk.Østeraadalen", railway = :station {
+        marker(:left :de.hp, ao[:oda] << 0.4md << 0.5mt @ 13);
+        slabel(:right, ao[:oda] << 0.4md << 0.5mt << 1sh + (1.2dt, 1.3dt),
+            "Østeraadalen"
+        );
+    }
+
+    with link = "line.dk.AOH" {
+        track(ao[:aal.xh + 2md, :gug - 0.49sw]);
+    }
+
+    with link = "point.dk.Gug", railway = :station {
+        track(ao[:gug - 0.5sw, :gug + 0.5sw]);
+        marker(:left :de.bf :removed, ao[:gug] << 0.5mt);
+        slabel(:right :removed, ao[:gug] << 0.5mt << 1sh + (1.3dt, 0.3dt),
+            "Gug"
+        );
+    }
+
+    with link = "line.dk.AOH" {
+        track(ao[:gug + 0.49sw, :lun - 0.49sw]);
+    }
+
+    with link = "point.dk.Lundergårde", railway = :station {
+        track(ao[:lun - 0.5sw, :lun + 0.5sw]);
+        marker(:right :de.hp :removed, ao[:lun] >> 0.5mt);
+        slabel(:bottom :removed, ao[:lun] >> 0.5mt >> 1sh + (-1dt, 0.2dt),
+            "Lundergårde"
+        );
+    }
+
+    with link = "line.dk.AOH" {
+        track(ao[:lun + 0.49sw, :gug.yh]);
+        
+        track(:ror, ao[:gug.yh - 0.1dl, :gug.yh + 1.1seg]);
+        track(ao[:gug.yh + 1seg, :oha - 3.99km]);
+        line_label(:left:se, ao[:oha - 4km] << 0.5mt, "AOH");
+        track(ao[:oha - 4.01km, :oha - 0.49sw]);
+    }
+
+    with link = "point.dk.Alborg-Østhavnen", railway = :station {
+        track(ao[:oha - 0.5sw, :oha + 0.5sw]);
+        marker(:right :de.bf, ao[:oha] >> 0.5mt);
+        slabel(:right :bold, ao[:oha] >> 0.5mt >> 1sh + (1.8dt, 0.6dt),
+            "Alborg Østhavnen"
+        );
+    }
+}
+

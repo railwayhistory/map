@@ -76,7 +76,8 @@ with detail = 3, railway = :first :pax {
     }
 
     with link = "line.dk.LST" {
-        track(ls[:rod.ys - 0.1dl, :rod + 4.01km]);
+        track(:lor, ls[:rod.ys - 0.1dl, :rod.ys + 1seg]);
+        track(ls[:rod.ys + 0.9seg, :rod + 4.01km]);
         line_label(:right:w, ls[:rod + 4km] >> 0.5mt, (0dt, -0.3dt), "LST");
         track(ls[:rod + 3.99km, :rin - 0.49sw]);
     }
@@ -92,7 +93,7 @@ with detail = 3, railway = :first :pax {
 
     with link = "line.dk.LST" {
         track(ls[:rin + 0.49sw, :rin + 1.51km]);
-        line_label(:right:sw, ls[:rin + 1.5km] >> 0.5mt, "LST");
+        line_label(:left:ne, ls[:rin + 1.5km] << 0.5mt, "LST");
         track(ls[:rin + 1.49km, :vib.yv]);
         track(ls[:vib.yv - 0.1dl, :vib.yh - 0.9seg]);
         track(:lor, ls[:vib.yh - 1.1seg, :vib.yh + 0.1dl]);
@@ -100,6 +101,7 @@ with detail = 3, railway = :first :pax {
     }
 
     with link = "point.dk.Viborg", railway = :station {
+        # DK FVB
         track(:removed,
                 ls[:vib - 400m, :vib + 500m - 2dl] << 2ms << 2mt
             --  ls[:vib + 500m, :vib + 501m]
@@ -113,10 +115,12 @@ with detail = 3, railway = :first :pax {
         # DK LST
         track(ls[:vib - 400m, :vib + 550m]);
 
+        # DK VBA
         track(:removed,
                 ls[:vib - 351m, :vib - 350m]
             --  ls[:vib - 350m + 1dl, :vib + 550m] >> 1ms >> 1mt
         );
+
         marker(:right :de.bf, ls[:vib] >> 1ms >> 1.5mt);
         slabel(:right :bold, ls[:vib] >> 1ms >> 1.5mt >> 1sh + (1.5dt, 0.3dt),
             "Viborg"
@@ -161,7 +165,9 @@ with detail = 3, railway = :first :pax :removed {
 
     with link = "line.dk.LST" {
         track(:lor, vs[:vib.ys, :vib.ys + 1seg]);
-        track(vs[:vib.ys + 0.9seg, :vib.yv - 0.9seg]);
+        track(vs[:vib.ys + 0.9seg, :vib.ym]);
+        track(:ror, vs[:vib.ym - 0.1dl, :vib.ym + 1seg]);
+        track(vs[:vib.ym + 0.9seg, :vib.yv - 0.9seg]);
         track(:ror, vs[:vib.yv - 1seg, :vib.yv]);
 
         track(vs[:vib.yv, :vib.yv + 0.81km]);
@@ -245,24 +251,22 @@ with detail = 3, railway = :first :pax {
         track(ls[:hoj + 0.49sw, :hoj + 2.71km]);
         line_label(:left:ne, ls[:hoj + 2.7km] << 0.5mt, "LST");
         track(ls[:hoj + 2.69km, :ski.yo]);
-        track(:station, ls[:ski.yo - 0.1dl, :ski - 0.5sw - 1.9dl]);
+        track(:station, ls[:ski.yo - 0.1dl, :ski - 0.5sw - 2.9dl]);
     }
 
     with link = "point.dk.Skive", railway = :station {
-        track(ls[:ski - 0.5sw - 2dl, :ski + 0.5sw]);
+        track(ls[:ski - 0.5sw - 3dl, :ski + 0.5sw]);
+        track(:removed, ls[:ski - 0.5sw - 1dl, :ski + 0.5sw] >> 1ms >> 1mt);
         track(:removed,
-                ls[:ski - 0.5sw - 1.1dl, :ski - 0.5sw - 1dl]
-            --  ls[:ski - 0.5sw, :ski + 0.5sw] >> 1ms >> 1mt
+                ls[:ski - 0.5sw - 2.1dl, :ski - 0.5sw - 2dl]
+            --  ls[:ski - 0.5sw, :ski + 0.5sw] >> 2ms >> 2mt
         );
-        marker(:right :de.bf, ls[:ski] >> 1ms >> 1.5mt);
-        slabel(:top :bold, ls[:ski] >> 1ms >> 1.5mt >> 1sh + (1dt, -0.4dt),
-            "Skive"
-        );
+        marker(:right :de.bf, ls[:ski] >> 2ms >> 2.5mt);
     }
 
     with link = "line.dk.LST" {
-        track(ls[:ski + 0.49sw, :ski.yg]);
-        track(:lor, ls[:ski.yg, :ski.yg + 1seg]);
+        track(:ror, ls[:ski + 0.49sw, :ski.yg]);
+        track(:ror, ls[:ski.yg, :ski.yg + 1seg]);
         track(ls[:ski.yg + 0.9seg, :est + 0.1dl]);
     }
 }
@@ -276,8 +280,15 @@ with detail = 3, railway = :first :pax :removed {
     }
 
     with link = "point.dk.Skive", railway = :station {
-        track(si[:ski.ys, :ski + 0.5sw]);
+        track(si[:ski.ys, :ski.yn + 2dl]);
+        track(
+                si[:ski.yn - 0.1dl, :ski.yn]
+            --  si[:ski.yn + 1dl, :ski.yn + 2dl] << 1ms << 1mt
+        );
         marker(:right :de.bf, si[:ski] >> 0.5mt);
+        slabel(:right :bold :open, si[:ski] >> 0.5mt >> 1sh + (1.5dt, 0.5dt),
+            "Skive"
+        );
     }
 
     with link = "line.dk.LST" {

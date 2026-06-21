@@ -172,13 +172,13 @@ with detail = 3,
         );
 
         track(:single :removed,
-                fa[:hor.yo, :hor + 650m - 1dl] >> 0.5md >> 2ms >> 1.5mt
+                fa[:hor - 0.5sw, :hor + 650m - 1dl] >> 0.5md >> 2ms >> 1.5mt
             --  fa[:hor + 650m, :hor + 651m] >> 0.5md >> 1ms >> 0.5mt
         );
 
         marker(:right :de.bf, fa[:hor] >> 0.5md >> 2ms >> 2mt);
         slabel(:right :bold,
-            fa[:hor] >> 0.5md >> 2ms >> 2mt >> 1sh + (1.3dt, 1.2dt),
+            fa[:hor] >> 0.5md >> 2ms >> 2mt + (0.5dt, -2dt),
             "Horsens"
         );
     }
@@ -307,9 +307,9 @@ with detail = 3,
     }
 
     with link = "line.dk.FFH" {
-        track(fa[:has + 0.49sw, :has + 1.7km]);
-        line_label(:left:se, fa[:has + 1.7km] << 0.5md, "FFH");
-        track(fa[:has + 1.7km, :vib.yo - 1seg]);
+        track(fa[:has + 0.49sw, :has + 1.01km]);
+        line_label(:left:e, fa[:has + 1km] << 0.5md, "FFH");
+        track(fa[:has + 0.99km, :vib.yo - 1seg]);
         track(:ror, fa[:vib.yo - 1seg, :ros - 0.49sw]);
         track(:ror, fa[:ros - 0.5sw, :ros + 0.5sw]);
         track(:ror, fa[:ros + 0.49sw, :vib - 0.49sw]);
@@ -317,46 +317,58 @@ with detail = 3,
 
     with link = "point.dk.Viby-Jylland", railway = :station {
         track(fa[:vib - 0.5sw, :vib + 0.5sw]);
-        track(:single, fa[:vib - 0.5sw, :vib + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        track(:single :cat:dc75,
+                fa[:vib - 0.5sw, :vib + 0.5sw] >> 0.5md >> 1ms >> 0.5mt
+        );
         marker(:right :de.bf, fa[:vib] >> 0.5md >> 1ms >> 1mt);
-        slabel(:right, fa[:vib] >> 0.5md >> 1ms >> 1mt >> 1sh + (1.8dt, 1.8dt),
+        slabel(:right, fa[:vib] >> 0.5md >> 1ms >> 1mt >> 1sh + (1.8dt, 1.3dt),
             hbox(:left:base, "Viby ", span(:light, "Jylland"))
         );
     }
 
     with link = "line.dk.FFH" {
-        track(:ror, fa[:vib + 0.49sw, :aar.yr - 0.5seg]);
-        track(:lor:ror, fa[:aar.yr - 0.51seg, :aar.yr + 0.1dl]);
-        track(:lor:ror, fa[:aar.yr, :aar - 0.49sw]);
+        track(:ror, fa[:vib + 0.49sw, :kon - 0.49sw]);
+        track(:ror, fa[:kon - 0.5sw, :kon + 0.5sw]);
+        track(:ror :casing,
+                fa[:kon + 0.49sw, :kon + 0.5sw]
+            ..  fa[:aar.yr, :aar.yr + 0.1dl] >> 1ms >> 1md
+        );
+        track(:lor:ror, fa[:aar.yr, :aar - 0.99km] >> 1ms >> 1md);
     }
 
     with link = "point.dk.Aarhus-H", railway = :station {
+        # DK HOA - DK AHG
+        track(:cat:dc75,
+                fa[:aar - 1km, :aar + 340m] << 1ms << 1md
+        );
+
         # DK FFH out
-        track(fa[:aar - 0.5sw, :aar + 0.5sw] << 1ms << 1md);
+        track(fa[:aar - 1km, :aar + 340m]);
 
         # DK FFH in
-        track(fa[:aar - 0.5sw, :aar + 0.5sw]);
+        track(fa[:aar - 1km, :aar + 340m] >> 1ms >> 1md);
 
-        marker(:left :de.bf, fa[:aar] << 1ms << 1.5md);
-        slabel(:left :bold, fa[:aar] << 1ms << 1.5md << 1sh + (2dt, -1.3dt),
+        marker(:left :de.bf, fa[:aar] << 1.5md << 1ms);
+        slabel(:nw :bold,
+            fa[:aar] >> 1.5md >> 1ms + (0dt, 0.3dt),
             "Aarhus H"
         );
     }
 
     with link = "line.dk.FFH" {
-        track(:ror:lor, af[:aar + 0.49sw, :aar.yr] >> 1ms >> 1md);
+        track(:ror:lor, af[:aar + 0.99km, :aar.yr]);
 
         track(:single :dn:ror:lor :casing,
-                af[:aar.yr - 0.1dl, :aar.yr + 500m] >> 1ms >> 0.5md >> 0.5mt
+                af[:aar.yr - 0.1dl, :aar.yr + 500m] << 0.5md >> 0.5mt
             ..  af[:aar.xr, :aar.xr + 301m] >> 0.5md << 0.5mt
         );
 
-        track(:single:up:ror:lor,
-                af[:aar.yr - 0.1dl, :aar.yr] >> 1ms >> 1.5md << 0.5mt
-            ..  af[:aar.yr + 499m, :aar.yr + 500m] >> 1ms >> 1.5md
+        track(:single:up:ror:lor :casing,
+                af[:aar.yr - 0.1dl, :aar.yr] >> 0.5md << 0.5mt
+            ..  af[:aar.yr + 499m, :aar.yr + 500m] >> 0.5md
         );
         with layer = -1 track(:single:up:ror:lor,
-                af[:aar.yr + 499m, :aar.yr + 500m] >> 1ms >> 1.5md
+                af[:aar.yr + 499m, :aar.yr + 500m] >> 0.5md
             ..  af[:aar.xr, :aar.xr + 0.1dl] << 0.5md
         );
         track(:single:up:ror:lor,
@@ -365,8 +377,8 @@ with detail = 3,
         );
 
         track(af[:aar.xr + 300m, :aar.xr + 1.6km]);
-        line_label(:left:n, af[:aar.xr + 1.6km] << 0.5md,
-            (-0.3dt, 0dt), "FFH"
+        line_label(:right:s, af[:aar.xr + 1.6km] >> 0.5md,
+            (0.1dt, 0dt), "FFH"
         );
         track(af[:aar.xr + 1.6km, :bra - 0.49sw]);
     }
@@ -430,7 +442,9 @@ with detail = 3,
     }
 
     with link = "line.dk.FFH" {
-        track(af[:hin + 0.49sw, :had - 0.49sw]);
+        track(af[:hin + 0.49sw, :hin + 4.01km]);
+        line_label(:right:w, af[:hin + 4km] >> 0.5md, "FFH");
+        track(af[:hin + 3.99km, :had - 0.49sw]);
     }
 
     with link = "point.dk.Hadsten", railway = :station {
@@ -562,7 +576,7 @@ with detail = 3,
     with link = "point.dk.Bjerregrav", railway = :station {
         track(af[:bje - 0.5sw, :bje + 0.5sw]);
         marker(:left :de.bf :removed, af[:bje] << 0.5md);
-        slabel(:left :removed, af[:bje] << 0.5md << 1sh + (-1.8dt, 1.5dt),
+        slabel(:right :removed, af[:bje] >> 0.5md + (1.3dt, 1dt),
             "Bjerregrav"
         );
     }
@@ -574,7 +588,7 @@ with detail = 3,
     with link = "point.dk.Kovsted", railway = :station {
         track(af[:kov - 0.5sw, :kov + 0.5sw]);
         marker(:left :de.hp :removed, af[:kov] << 0.5md);
-        slabel(:left :removed, af[:kov] << 0.5md << 1sh + (-1.7dt, 1.5dt),
+        slabel(:right :removed, af[:kov] >> 0.5md + (1.5dt, 0.5dt),
             "Kovsted"
         );
     }
@@ -582,8 +596,8 @@ with detail = 3,
     with link = "line.dk.FFH" {
         track(af[:kov + 0.49sw, :kov + 1.4km]);
         line_label(:right:sw, af[:kov + 1.4km] >> 0.5md, "FFH");
-        track(af[:kov + 1.4km, :far.yv - 450m]);
-        with layer = -1 track(:ror, af[:far.yv - 450m, :far.yv]);
+        track(af[:kov + 1.4km, :far.yv - 949m]);
+        with layer = -1 track(:ror, af[:far.yv - 950m, :far.yv]);
     }
 
     with link = "point.dk.Fårup", railway = :station {
@@ -601,7 +615,8 @@ with detail = 3,
 
     with link = "line.dk.FFH" {
         track(:ror, af[:far + 0.49sw, :far.ym]);
-        track(af[:far.ym - 0.1dl, :far.ym + 2.5km]);
+        track(:ror, af[:far.ym - 0.1dl, :far.ym + 1seg]);
+        track(af[:far.ym + 0.9seg, :far.ym + 2.5km]);
         line_label(:left:n, af[:far.ym + 2.5km] << 0.5md,
             (-0.4dt, 0dt), "FFH"
         );
@@ -770,7 +785,7 @@ with detail = 3,
     }
 
     with link = "point.dk.Svenstrup-Jylland", railway = :station {
-        # fra Hvalpsund
+        # DK AHS
         track(:single :removed,
                 af[:sve.yh, :sve + 0.5sw] << 0.5md << 1ms << 0.5mt
             --  af[:sve + 0.5sw + 1dl, :sve + 0.5sw + 1.1dl] << 0.5md >> 0.5mt
@@ -781,8 +796,8 @@ with detail = 3,
 
         marker(:left :de.hp, af[:sve] << 0.5md << 1ms << 1mt);
         marker(:left :de.exbf, af[:sve] << 0.5md << 1ms << 1mt);
-        slabel(:left :bold,
-            af[:sve] << 0.5md << 1ms << 1mt << 1.4sh + (-1.3dt, 1dt),
+        slabel(:right :bold,
+            af[:sve] >> 0.5md + (1dt, 1dt),
             "Svenstrup Jylland"
         );
     }
@@ -803,10 +818,11 @@ with detail = 3,
     }
 
     with link = "line.dk.FFH" {
-        track(af[:ska.t + 0.49sw, :aal.yh]);
+        track(af[:ska.t + 0.49sw, :aal.yh - 1seg]);
+        track(:ror, af[:aal.yh - 1.01seg, :aal.yh + 0.1dl]);
         track(:ror, af[:aal.yh, :aal.yh + 1km]);
         line_label(:left:e, af[:aal.yh + 1km] << 0.5md, "FFH");
-        track(:ror, af[:aal.yh + 1km, :aal - 160m - 2dl]);
+        track(:ror, af[:aal.yh + 1km, :aal - 160m - 1.9dl]);
     }
 
     with link = "point.dk.Aalborg", railway = :station {
@@ -970,13 +986,24 @@ with detail = 3,
     with link = "line.dk.FFH" {
         track(af[:has + 0.49sw, :has + 2.7km]);
         line_label(:left:e, af[:has + 2.7km] << 0.5mt, (0dt, -0.2dt), "FFH");
-        track(af[:has + 2.7km, :hjo.yh - 0.49seg]);
+        with layer = -1 track(:casing, af[:has + 2.7km, :hjo.yh - 0.49seg]);
     }
 
     with link = "point.dk.Hjørring", railway = :station {
-        track(af[:hjo.yh - 0.5seg, :hjo + 0.5sw]);
+        #  DK HHH
+        track(:casing, af[:hjo.yh, :hjo - 0.6sw] << 3ms << 3mt);
+
+        #  DK HLA
+        track(:removed :casing, af[:hjo.yh, :hjo - 0.6sw] << 2ms << 2mt);
+
+        #  DK HRH
+        track(:removed :casing, af[:hjo.yh, :hjo - 0.6sw] << 1ms << 1mt);
+
+        # DK FFH
+        track(:casing, af[:hjo.yh - 0.5seg, :hjo + 0.5sw]);
+
         marker(:left :de.bf, af[:hjo] << 0.5mt);
-        slabel(:top :bold, af[:hjo] << 0.5mt << 1sh << 0.3dt,
+        slabel(:top :bold, af[:hjo] << 0.5mt << 1sh + (3.5dt, -1dt),
             "Hjørring"
         );
     }
@@ -1060,7 +1087,7 @@ with detail = 3,
 
     with link = "line.dk.FFH" {
         track(af[:elg + 0.49sw, :elg + 2.1km]);
-        line_label(:left:s, af[:elg + 2.1km] << 0.5mt, (0.3dt, 0dt), "FFH");
+        line_label(:right:n, af[:elg + 2.1km] >> 0.5mt, (-0.3dt, 0dt), "FFH");
         track(af[:elg + 2.1km, :fre.yg]);
         track(af[:fre.yg, :fre.ys - 0.49seg]);
         track(:lor, af[:fre.ys - 0.5seg, :fre.ys + 0.1dl]);
@@ -1084,8 +1111,9 @@ with detail = 3,
     let fre = path("d3.dk.ffh.fre");
 
     with link = "line.dk.FFH" {
-        track(fre[:fre.yg, :fre.ys + 0.1dl]);
-        track(fre[:fre.ys, :fre - 0.49sw]);
+        track(fre[:fre.yg, :fre.xs]);
+        track(:lor, fre[:fre.xs - 0.1dl, :fre.ys + 0.1dl]);
+        track(:lor, fre[:fre.ys, :fre - 0.49sw]);
     }
 
     with link = "point.dk.Frederikshavn", railway = :station {

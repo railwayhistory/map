@@ -26,7 +26,9 @@ with detail = 2 {
         with link = "point.dk.Silkeborg" {
             track(ss[:sil.yl, :sil.yh]);
             statdot(ss[:sil]);
-            slabel(:left, ss[:sil] + (1.5dt, -1.8dt), "Silkeborg");
+            slabel(:top, ss[:sil] + (0dt, -0.3km) + (0dt, -1dt),
+                "Silkeborg"
+            );
         }
 
         with link = "line.dk.SBS" {
@@ -72,6 +74,34 @@ with detail = 2 {
 }
 
 
+# DK SGG.  Skive - Glyngøre
+with detail = 2 {
+    let sg = path("d2.dk.sgg");
+    let ski = path("d2.dk.sgg.ski");
+
+    with railway = :first :pax :removed {
+        with link = "point.dk.Skive", railway = :station {
+            track(ski[:ski.ys, :ski]);
+            statdot(ski[:ski]);
+        }
+
+        with link = "line.dk.SGG" {
+            track(ski[:ski, :skn.yn]);
+            track(sg[:ski.yg, :skn.yn]);
+            track(sg[:skn.yn, :skn.ys]);
+            track(sg[:skn.ys, :skn.ys + 11.01km]);
+            line_label(:right:w, sg[:skn.ys + 11km] >> 0.5mt, "SGG");
+            track(sg[:skn.ys + 10.99km, :gly]);
+        }
+
+        with link = "point.dk.Glyngøre", railway = :station {
+            statdot(sg[:gly]);
+            slabel(:ne, sg[:gly] + (1dt, 0.8dt), "Glyngøre");
+        }
+    }
+}
+
+
 # DK SHT.  Snoghøj - Taulov
 with detail = 2 {
     let st = path("d2.dk.sht");
@@ -81,6 +111,22 @@ with detail = 2 {
             track(st[:sno, :sno + 2.2km]);
             line_label(:left:ne, st[:sno + 2.2km], "SHT");
             track(st[:sno + 2.2km, :tau.ys]);
+        }
+    }
+}
+
+
+# DK SKR.  Silkeborg - Kjellerup - Rødkærsbro
+with detail = 2 {
+    let sr = path("d2.dk.skr");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SKR" {
+            track(sr[:sil.yr, :sil.yr + 14.01km]);
+            line_label(:right:w, sr[:sil.yr + 14km] >> 0.5mt,
+                (0dt, -0.3dt), "SKR"
+            );
+            track(sr[:sil.yr + 13.99km, :rod.ys]);
         }
     }
 }
@@ -349,3 +395,23 @@ with detail = 2 {
         }
     }
 }
+
+
+# DK SVS.  Skive - Spøttrup
+with detail = 2 {
+    let ss = path("d2.dk.svs");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SVS" {
+            track(ss[:skn.ys, :skn.ys + 8.01km]);
+            line_label(:right:sw, ss[:skn.ys + 8km] >> 0.5mt, "SVS");
+            track(ss[:skn.ys + 7.99km, :spo]);
+        }
+
+        with link = "point.dk.Spøttrup" {
+            statdot(ss[:spo]);
+            slabel(:top, ss[:spo] + (0dt, -0.7dt), "Spøttrup");
+        }
+    }
+}
+
