@@ -1,0 +1,133 @@
+# DE 6022.  Berlin Jungfernheide - Berlin-Gartenfeld
+#
+let jg = path("d4.de.6022");
+
+with detail = [4, 5] {
+    # point.de.Berlin-Jungfernheide: de.6020
+
+    
+    with link = "line.de.6022" {
+        with layer = -1 track(:first  :exrail:rc75 :removed :tight,
+                jg[:wer - 150m, :jun.yyg + 3dt] >> 0.5dt
+            ..  jg[:jun.yg, :jun.a] << 2.5dt
+        );
+        track(:first :exrail:rc75 :removed :flip:tight,
+                jg[:wer - 150m, :jun.yyg + 3dt] << 0.5dt
+            ..  jg[:jun.yg, :jun.yg - 0.1dl] << 3.5dt
+            ..  jg[:chg.yn, :jun.a] << 4.5dt
+        );
+    }
+
+
+    with link = "point.de.Berlin-Wernerwerk" {
+        track(:first:station :double :exrail:rc75 :removed,
+                jg[:wer - 150m, :wer + 100m]
+        );
+        platform(:exrail:rc75 :removed,
+                jg[:wer - 100m, :wer + 50m] >> 0.5dt
+            --  jg[:wer + 50m, :wer - 100m] >> 0.5dt
+        );
+        marker(:left :de.hp :removed, jg[:wer] << 0.5dt);
+        station(:left :removed, jg[:wer - 0.3sw] << 0.5dt << 1.4sh,
+            "Wernerwerk", "1,94"
+        );
+    }
+
+
+    with link = "line.de.6022" {
+        track(:first :double :exrail:rc75 :removed,
+                jg[:wer + 100m, :sie - 200m]
+        );
+        line_label(:right:s :exrail:rc75 :removed, jg[:wer + 600m] >> 0.5dt,
+            "6022"
+        );
+    }
+
+
+    with link = "point.de.Berlin-Siemensstadt" {
+        track(:first:station :double :exrail:rc75 :removed,
+                jg[:sie - 200m, :gar.a]
+        );
+        platform(:exrail:rc75 :removed,
+                jg[:sie - 150m, :sie] >> 0.5dt
+            --  jg[:sie, :sie - 150m] >> 0.5dt
+        );
+        marker(:left :de.hp :removed, jg[:sie] << 0.5dt);
+        station(:left :removed,
+            jg[:sie + 0.5sw] << 0.5dt << 1.2sh + (-0.5dt, 0dt),
+            hbox(:right :base, span(:light, "B.-"), "Siemenswerk"),
+            "3,12"
+        );
+    }
+
+
+    with link = "point.de.Berlin-Gartenfeld" {
+        # Gl. 1
+        track(:first:station :exrail:rc75 :removed,
+                jg[:gar.a, :gar - 900m] >> 0.5dt
+            ..  jg[:gar - 740m, :gar - 380m] >> 1.5dt
+            --  jg[:gar - 330m, :gar] >> 0.5dt
+        );
+            # W28 - W26
+            track(:station :exrail:rc75 :removed,
+                    jg[:gar - 900m] >> 0.5dt
+                --  jg[:gar - 850m] << 0.5dt
+            );
+            # W11 - W2
+            track(:station :exrail:rc75 :removed,
+                    jg[:gar - 330m] >> 0.5dt
+                --  jg[:gar - 180m] << 2.5dt
+            );
+
+        # Gl. 2
+        track(:station :exrail:rc75 :removed,
+                jg[:gar - 841m, :gar - 840m] << 1.5dt
+            --  jg[:gar - 740m, :gar - 380m - 0.7dl] >> 0.5dt
+            --  jg[:gar - 330m - 0.7dl, :gar - 299m - 0.7dl] << 0.5dt
+        );
+
+        # Gl. 4
+        track(:station :exrail:rc75 :removed,
+                jg[:gar - 1000m, :gar - 160m] << 0.5dt
+        );
+
+        # Gl. 5
+        track(:station :exrail:rc75 :removed,
+                jg[:gar - 1000m, :gar - 230m] << 1.5dt
+        );
+
+        # Gl. 6
+        track(:station :exrail:rc75 :removed,
+                jg[:gar - 841m, :gar - 840m] << 0.5dt
+            --  jg[:gar - 740m, :gar - 380m - 0.7dl] << 2.5dt
+            --  jg[:gar - 330m - 0.7dl, :gar - 299m - 0.7dl] << 1.5dt
+        );
+
+        # Gl. 8
+        track(:first:station :exrail:rc75 :removed,
+                jg[:gar.a, :gar.a + 0.1dl] << 0.5dt
+            ..  jg[:gar - 780m, :gar - 380m] << 3.5dt
+            --  jg[:gar - 330m, :gar] << 2.5dt
+        );
+            # W8 - W3
+            track(:station :exrail:rc75 :removed,
+                    jg[:gar - 330m] << 2.5dt
+                --  jg[:gar - 180m] >> 0.5dt
+            );
+
+        platform(:exrail:rc75 :removed,
+                jg[:gar - 150m, :gar] >> 0.5dt
+            --  jg[:gar, :gar - 150m] >> 0.2dt
+        );
+        platform(:exrail:rc75 :removed,
+                jg[:gar - 150m, :gar] << 2.5dt
+            --  jg[:gar, :gar - 150m] >> 1.8dt
+        );
+
+        marker(:top :de.bf :exrail:rc75 :removed, jg[:gar] << 1dt);
+        station(:left :exrail:rc75 :removed, jg[:gar] + (-1.5sw, -0.1sw),
+            span(:bold, "Berlin-Gartenfeld"), "6022: 4,46"
+        );
+    }
+}
+

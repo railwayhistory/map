@@ -1,0 +1,45 @@
+# DE 6022.  Berlin Jungfernheide - Berlin-Gartenfeld
+#
+let jg = path("d4.de.6022");
+
+with detail = 3 {
+    # point.de.Berlin-Jungfernheide: de.6020
+
+    with link = "line.de.6022" {
+        track(:first :double :exrail:rc75 :removed,
+                jg[:chg.yn, :chg.yn + 0.1dl] >> 2dt
+            ..  jg[:wer - 0.1sw, :wer]
+        );
+    }
+
+    with link = "point.de.Berlin-Wernerwerk" {
+        track(:first:station :double :exrail:rc75 :removed,
+                jg[:wer, :sie - 1sw]
+        );
+        marker(:left :de.hp :exrail:rc75 :removed, jg[:wer + 0.5sw] << 0.5dt);
+    }
+
+    with link = "point.de.Berlin-Siemensstadt" {
+        track(:first:station :double :exrail:rc75 :removed,
+                jg[:sie - 1sw, :sie + 1sw]
+        );
+        marker(:left :de.hp :exrail:rc75 :removed, jg[:sie] << 0.5dt);
+    }
+
+    with link = "line.de.6022" {
+        track(:first :double :exrail:rc75 :removed,
+                jg[:sie + 1sw, :gar - 0.5sw]
+        );
+    }
+
+    with link = "point.de.Berlin-Gartenfeld" {
+        track(:first:station :double :exrail:rc75 :removed,
+                jg[:gar - 0.5sw, :gar]
+        );
+        marker(:top :de.bf :exrail:rc75 :removed, jg[:gar]);
+        slabel(:top :exrail:rc75 :removed, jg[:gar] + (-1.0dt, -2.3dt),
+            span(:bold, "B.-Gartenfeld")
+        );
+    }
+}
+

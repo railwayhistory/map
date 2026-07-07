@@ -6,15 +6,71 @@ with detail = [4, 5] {
     # point.de.Berlin-Spandau-Ost    de.6107
     # point.de.Berlin-Spandau-Mitte  de.6107
     # point.de.Berlin-Spandau        de.6107
-    # point.de.Berlin-Spandau-West   de.6107
+
+
+    with link = "point.de.Berlin-Spandau-West" {
+        # Gl. 3
+        track(:first:station :cat:ac15 :pax,
+                ba[:spa + 600m, :spa.f] >> 1.5dt
+        );
+            # W702 - W703
+            track(:station :cat:ac15 :pax,
+                    ba[:spw - 350m] >> 1.5dt
+                --  ba[:spw - 215m] >> 0.5dt
+            );
+
+        # Gl. 4
+        track(:first:station :cat:ac15 :pax,
+                ba[:spa + 600m, :spa.f] >> 0.5dt
+        );
+            # W706 - W707
+            track(:station :cat:ac15 :pax,
+                    ba[:spw - 180m] >> 0.5dt
+                --  ba[:spw - 70m] << 0.5dt
+            );
+            # W712 - W713
+            track(:station :cat:ac15 :pax,
+                    ba[:spw + 190m] >> 0.5dt
+                --  ba[:spw + 330m] >> 1.5dt
+            );
+
+        # Gl. 5
+        track(:first:station :cat:ac15 :pax,
+                ba[:spa + 600m, :spa.f] << 0.5dt
+        );
+            # W708 - W709
+            track(:station :cat:ac15 :pax,
+                    ba[:spw + 35m] << 0.5dt
+                --  ba[:spw + 145m] >> 0.5dt
+            );
+            # W710 - W711
+            track(:station :cat:ac15 :pax,
+                    ba[:spw + 95m] << 0.5dt
+                --  ba[:spw + 235m] << 1.5dt
+            );
+
+        # Gl. 6
+        track(:first:station :cat:ac15 :pax,
+                ba[:spa + 600m, :spa.f] << 1.5dt
+        );
+            # W704 - W705
+            track(:station :cat:ac15 :pax,
+                    ba[:spw - 260m] << 1.5dt
+                --  ba[:spw - 135m] << 0.5dt
+            );
+
+        marker(:right :de.bft :cat:ac15, ba[:spw] >> 1.5dt);
+
+    }
+
 
     with link = "line.de.6100" {
         track(:first :cat:ac15 :pax :tight:flip,
                 ba[:szw - 0.2sw, :szw - 0.21sw] << 0.5dt
-           ..   ba[:sdu.yn, :sdu.f] << 1.5dt
+           ..   ba[:spa.yn, :spa.f] << 1.5dt
         );
-        track(:first :cat:ac15 :pax :tight,
-                ba[:szw - 0.2sw, :sdu.f] >> 0.5dt
+        with layer = -2 track(:first :cat:ac15 :pax :tight,
+                ba[:szw - 0.2sw, :spa.f] >> 0.5dt
         );
         track(:first :double :cat:ac15 :pax, ba[:szw - 0.2sw, :gahs - 0.5sw]);
         with layer = 1 line_badge(:cat:ac15 :pax, ba[:szw + 0.8km], "6100");

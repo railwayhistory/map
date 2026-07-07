@@ -1,0 +1,157 @@
+# DE 6025.  Westkreuz - Berlin-Spandau
+#
+let ws = path("d4.de.6025");
+
+with detail = [4, 5] {
+    # ...
+
+
+    with link = "point.de.Berlin-Olympiastadion" {
+        track(:station :rail:rc75 :pax,
+                ws[:oly - 75m, :oly + 75m] >> 8.5dt
+        );
+
+        track(:station :rail:rc75 :pax,
+                ws[:oly - 75m, :oly + 75m] >> 7.5dt
+        );
+        track(:station :rail:rc75 :pax,
+                ws[:oly - 75m, :oly + 75m] >> 6.5dt
+        );
+
+        track(:station :rail:rc75 :pax,
+                ws[:oly - 75m, :oly + 75m] >> 5.5dt
+        );
+        track(:station :rail:rc75 :pax,
+                ws[:oly - 75m, :oly + 75m] >> 4.5dt
+        );
+
+        track(:station :rail:rc75 :pax,
+                ws[:oly - 75m, :oly + 75m] >> 3.5dt
+        );
+        track(:station :rail:rc75 :pax,
+                ws[:oly - 75m, :oly + 75m] >> 2.5dt
+        );
+
+        track(:first:station :rail:rc75 :pax,
+                ws[:oly.a, :oly + 75m] >> 1.5dt
+        );
+        track(:first:station :rail:rc75 :pax,
+                ws[:oly.a, :oly + 400m] >> 0.5dt
+        );
+        track(:first:station :rail:rc75 :pax,
+                ws[:oly.a, :oly + 400m] << 0.5dt
+        );
+    }
+
+
+    with link = "line.de.6025" {
+        track(:first :double :rail:rc75 :pax,
+                ws[:oly + 400m, :pic - 350m]
+        );
+    }
+
+
+    with link = "point.de.Berlin-Pichelsberg" {
+        track(:first:station :rail:rc75 :pax,
+                ws[:pic - 350m, :pic + 80m] >> 0.5dt
+            --  ws[:pic + 160m, :pic + 420m] >> 1.0dt
+            ..  ws[:pic + 579m, :pic + 580m] >> 0.5dt
+        );
+        track(:station :rail:rc75,
+                ws[:pic + 79m, :pic + 80m] >> 0.5dt
+            --  ws[:pic + 160m, :pic + 350m]
+        );
+        track(:first:station :rail:rc75 :pax,
+                ws[:pic - 350m, :pic + 80m] << 0.5dt
+            --  ws[:pic + 160m, :pic + 420m] << 1.0dt
+            ..  ws[:pic + 579m, :pic + 580m] << 0.5dt
+        );
+            track(:station :rail:rc75,
+                    ws[:pic + 80m] << 0.5dt
+                --  ws[:pic + 160m]
+            );
+
+        platform(:rail:rc75 :pax,
+                ws[:pic - 120m, :pic + 30m] >> 0.5dt
+            --  ws[:pic + 30m, :pic - 120m] >> 0.5dt
+        );
+
+        marker(:left :de.bf :rail:rc75 :pax, ws[:pic] << 0.5dt);
+        station(:bottom :rail:rc75 :pax,
+            ws[:pic] << 0.5dt << 1.4sh + (-5dt, 0dt),
+            hbox(:center:base, span(:light, "B. "), "Pichelsberg"),
+            "17,33"
+        );
+    }
+
+
+    with link = "line.de.6025" {
+        with layer = 1 track(:first :double :rail:rc75 :pax :casing,
+                ws[:pic + 580m, :srw.yyo]
+            ..  ws[:srw.yo, :srw - 250m] >> 3dt
+        );
+
+        line_label(:left:e :rail:rc75 :pax, ws[:pic + 1000m], "6025");
+    }
+
+
+    with link = "point.de.Berlin-Stresow" {
+        # Gl. 1/2
+        track(:first:station :double :rail:rc75 :pax,
+                ws[:srw - 250m, :spa - 300m] >> 3dt
+        );
+            # W751 - W752
+            track(:station :rail:rc75,
+                    ws[:srw + 180m] >> 3.5dt
+                --  ws[:srw + 270m] >> 2.5dt
+            );
+
+        platform(:rail:rc75 :pax,
+                ws[:srw - 60m, :srw + 90m] >> 3.5dt
+            --  ws[:srw + 90m, :srw - 60m] << 2.5dt
+        );
+        marker(:right :de.hp.bft :rail:rc75 :pax, ws[:srw] >> 3.5dt);
+    }
+
+
+    with link = "point.de.Berlin-Spandau-S-Bahn" {
+        # Gl. 1
+        track(:first:station :rail:rc75 :pax,
+                ws[:spa - 300m, :spa + 150m] >> 3.5dt
+        );
+        track(:station :rail:rc75,
+                ws[:spa + 150m, :spa + 151m] >> 3.5dt
+            --  ws[:spa + 220m, :spa + 360m] >> 4.5dt
+        );
+
+        # Gl. 2
+        track(:first:station :rail:rc75 :pax,
+                ws[:spa - 300m, :spa + 150m] >> 2.5dt
+        );
+        track(:station :rail:rc75,
+                ws[:spa + 150m, :spa + 635m] >> 2.5dt
+        );
+            # W753 - W754
+            track(:station :rail:rc75,
+                    ws[:spa - 200m] >> 2.5dt
+                --  ws[:spa - 100m] >> 3.5dt
+            );
+            # W761 - W763
+            track(:station :rail:rc75,
+                    ws[:spa + 150m + 0.7dl] >> 2.5dt
+                --  ws[:spa + 220m + 0.7dl] >> 3.5dt
+            );
+
+        # Gl. 8
+        track(:station :rail:rc75,
+                ws[:spa + 150m, :spa + 380m] >> 3.5dt
+        );
+
+        platform(:rail:rc75 :pax,
+                ws[:spa - 15m, :spa + 135m] >> 3.5dt
+            --  ws[:spa + 135m, :spa - 15m] << 2.5dt
+        );
+        marker(:right :de.bf :rail:rc75 :pax, ws[:spa] >> 3.5dt);
+    }
+}
+
