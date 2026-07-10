@@ -1,0 +1,114 @@
+# NL ZSG.  Zaandam - Amsterdam Singelgracht
+#
+let zs = path("d3.nl.zsg");
+
+with detail = 3, railway = :first :cat:dc15 :pax {
+    # point.nl.Zaandam  nl.DHA
+
+    with link = "line.nl.ZSH" {
+        track(:dn:rud,
+                zs[:zaa.xa, :het.f] << 0.5ms << 0.5mt
+            ..  zs[:hem - 1dl, :hem - 0.9dl] << 0.5md << 1ms << 0.5mt
+        );
+        track(:ud:ldn:rup,
+                zs[:zaa.xa, :het.f] >> 0.5ms >> 0.5mt
+            ..  zs[:hem - 1dl, :hem - 0.9dl] >> 0.5md << 0.5mt
+        );
+        track(:up:lud,
+                zs[:zaa.xa, :het.f] >> 1.5ms >> 1.5mt
+            ..  zs[:hem - 1dl, :hem - 0.9dl] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+    
+    with link = "point.nl.Hemtunnel-aansl", railway = :station {
+        track(zs[:hem - 1dl, :hem + 0.1dl] << 0.5md << 1ms << 0.5mt);
+        track(
+                zs[:hem - 1.1dl, :hem - 1dl] >> 0.5md << 0.5mt
+            --  zs[:hem, :hem + 0.1dl] << 0.5md >> 0.5mt
+        );
+        track(zs[:hem - 1dl, :hem + 0.1dl] >> 0.5md << 0.5mt);
+        track(zs[:hem - 1dl, :hem + 0.1dl] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:right :de.abzw, zs[:hem] >> 0.5md >> 1ms >> 1mt);
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:dn:rud, zs[:hem, :hou] << 0.5md << 1ms << 0.5mt);
+        track(:double:ud:ldn:rup, zs[:hem, :hou]);
+        track(:up:lud, zs[:hem, :hou] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Houtrakpolder", railway = :station {
+        marker(:right :de.abzw, zs[:hou] >> 0.5md >> 1ms >> 1mt);
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:dn:rud, zs[:hou, :rad - 1.9dl] << 0.5md << 1ms << 0.5mt);
+        track(:double:ud:ldn:rup, zs[:hou, :rad - 1.9dl]);
+        track(:up:lud, zs[:hou, :rad - 1.9dl] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Radarweg", railway = :station {
+        track(
+                zs[:rad - 2dl, :rad - 1dl] << 0.5md << 1ms << 0.5mt
+            --  zs[:rad, :asl.yz] << 0.5md << 2ms << 1.5mt
+        );
+        track(zs[:rad - 1dl, :asl.yz] << 0.5md << 1ms << 0.5mt);
+        track(:double, zs[:rad - 2dl, :asl.yz]);
+        track(zs[:rad - 1dl, :asl.yz] >> 0.5md >> 1ms >> 0.5mt);
+        track(
+                zs[:rad - 2dl, :rad - 1dl] >> 0.5md >> 1ms >> 0.5mt
+            --  zs[:rad, :asl.yz] >> 0.5md >> 2ms >> 1.5mt
+        );
+
+        marker(:left :de.abzw, zs[:rad] << 0.5md << 2ms << 2mt);
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:dn:rud, zs[:asl.yz, :asl.yr] << 0.5md << 2ms << 1.5mt);
+        track(:double:ud:ldn:rup, zs[:asl.yz, :asl.yr]);
+        track(:up:lud, zs[:asl.yz, :asl.yr] >> 0.5md >> 2ms >> 1.5mt);
+    }
+
+    with link = "point.nl.Amsterdam-Sloterdijk", railway = :station {
+        track(
+                zs[:asl.yr - 0.1dl, :asl.yr] << 0.5md << 2ms << 1.5mt
+            ..  zs[:asl - 200m, :asl + 560m - 1dl] << 0.5md << 1ms << 0.5mt
+            --  zs[:asl + 560m, :asl + 561m] << 0.5md >> 0.5mt
+        );
+        track(:double, zs[:asl.yr - 0.1dl, :asl + 560m + 2dl]);
+        track(
+                zs[:asl.yr - 0.1dl, :asl.yr] >> 0.5md >> 2ms >> 1.5mt
+            ..  zs[:asl - 200m, :asl + 560m - 1dl] >> 0.5md >> 1ms >> 0.5mt
+            --  zs[:asl + 560m, :asl + 561m] >> 0.5md << 0.5mt
+        );
+
+        track(:double,
+                zs[:asl.yr - 0.1dl, :asl.yr + 0.5dl] >> 1md >> 3ms >> 2mt
+            ..  zs[:asl - 200m + 0.5dl, :asl + 560m - 0.5dl]
+                    >> 1md >> 2ms >> 1mt
+            --  zs[:asl + 560m + 0.5dl, :asl + 560m + 2dl] >> 1md >> 1ms
+        );
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:double:ror, zs[:asl + 560m + 1.9dl, :obr]);
+    }
+
+    with link = "point.nl.Overbrakerpolder", railway = :station {
+        marker(:right :de.uest, zs[:obr] >> 1ms >> 1.5md);
+    }
+
+    with link = "line.nl.ZSH" {
+        with layer = 1 track(:station :casing,
+                zs[:obr - 0.1dl, :obr] << 0.5md >> 0.5mt
+            ..  zs[:sin + 1dl, :sin + 1.1dl] << 0.5dst << 1.5st << 2ds
+        );
+        with layer = 1 track(:station :casing,
+                zs[:obr - 0.1dl, :obr] >> 0.5md << 0.5mt
+            ..  zs[:sin + 1dl, :sin + 1.1dl] >> 0.5dst << 0.5st
+        );
+    }
+
+    # point.nl.Singelgracht  nl.DHA
+}
+
