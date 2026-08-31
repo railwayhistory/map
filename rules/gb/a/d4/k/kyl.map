@@ -1,0 +1,403 @@
+# GB KYL.  Dingwall - Kyle of Lochalsh
+#
+let dk = path("d4.gb.kyl");
+
+with detail = [4, 5] {
+    # point.gb.Dingwall-Jn  gb.WCK
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:din.yk + 150m, :fod - 1sw]);
+        line_badge(:pax, dk[:din.yk + 1.6km], "KYL");
+    }
+
+    with link = "point.gb.Fodderty-Jn" {
+        track(:first:station :pax, dk[:fod - 1sw, :fod + 1sw]);
+        track(:first:station :removed, path("d2.gb.dfs")[:fod, :fod + 1sw]);
+        marker(:left :de.bk, dk[:fod]);
+        marker(:left :de.abzw :removed :removed, dk[:fod]);
+        station(:bottom, dk[:fod] + (0.3sw, 1.2sh),
+            vbox(:center:top,
+                span(:removed :italic, "Fodderty Jn."), "Foderty"
+            ),
+            hbox(:center:top,
+                vbox(:right:top, "KYL: ", span(:removed, "DFS: ")),
+                vbox(:right:top, "2 ", span(:removed, "2 ")),
+                vbox(:left:top, "31", span(:removed, "31"))
+            )
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:fod + 1sw, :ach - 220m]);
+        line_badge(:pax, dk[:ach - 1.4km], "KYL");
+    }
+
+    with link = "point.gb.Achterneed" {
+        track(:first:station :pax, dk[:ach - 220m, :ach + 220m]);
+        track(:station :removed,
+                dk[:ach - 171m, :ach - 170m]
+            ..  dk[:ach - 100m, :ach + 170m] >> 1dt
+        );
+            track(:station :removed,
+                    dk[:ach + 80m] >> 1dt
+                --  dk[:ach + 170m]
+            );
+        platform(:removed,
+                dk[:ach - 20m, :ach + 60m]
+            --  dk[:ach + 60m, :ach - 20m] >> 0.7dt
+        );
+        platform(:removed,
+                dk[:ach - 20m, :ach + 60m] >> 1.0dt
+            --  dk[:ach + 60m, :ach - 20m] << 1.7dt
+        );
+        marker(:left :de.bf :removed, dk[:ach] << 0.5dt);
+        station(:top :removed, dk[:ach] >> 2.0dt,
+            vbox(:center:bottom,
+                span(:gone :italic, "Strathpeffer"),
+                "Achterneed"
+            ),
+            "??"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:ach + 220m, :gar - 330m]);
+    }
+
+    with link = "point.gb.Garve" {
+        track(:station,
+                dk[:gar - 201m, :gar - 200m] << 1dt
+            ..  dk[:gar - 90m, :gar - 60m] << 2.2dt
+        );
+        with layer = -1 track(:station :removed,
+                dk[:gar - 60m, :gar - 30m] << 2.2dt
+            ..  dk[:gar + 30m, :gar + 31m] << 1dt
+        );
+
+        track(:first:station :pax,
+                dk[:gar - 281m, :gar - 280m]
+            ..  dk[:gar - 200m, :gar + 30m] << 1dt
+            ..  dk[:gar + 90m, :gar + 91m]
+        );
+
+        track(:first:station :pax, dk[:gar - 330m, :gar + 140m]);
+
+        platform(:pax,
+                dk[:gar - 80m, :gar + 30m]
+            --  dk[:gar + 30m, :gar - 80m] << 0.7dt
+        );
+        platform(:pax,
+                dk[:gar - 80m, :gar + 30m] << 1.0dt
+            --  dk[:gar + 30m, :gar - 80m] >> 1.7dt
+        );
+
+        marker(:right :de.bf :pax, dk[:gar] >> 0.5dt);
+        station(:right :pax, dk[:gar - 0.4sw] >> 0.5dt >> 1.3sh,
+            "Garve", "??"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:gar + 140m, :loc - 80m]);
+        line_badge(:pax, dk[:gar + 3.9km], "KYL");
+    }
+
+    with link = "point.gb.Lochluichart" {
+        track(:first:station :pax, dk[:loc - 80m, :loc + 100m]);
+        platform(:pax,
+                dk[:loc - 30m, :loc + 50m]
+            --  dk[:loc + 50m, :loc - 30m] << 0.7dt
+        );
+        marker(:right :de.hp :pax, dk[:loc] >> 0.5dt);
+        station(:top :pax, dk[:loc] >> 0.5dt >> 1.2sh,
+            hbox(:center:bottom,
+                vbox(:center:bottom,
+                    span(:removed :italic, "Lochluichart High"),
+                    "Lochluichart"
+                ),
+                "   "
+            ),
+            "17 20"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:loc + 100m, :aca - 280m]);
+    }
+
+    with link = "point.gb.Achanalt" {
+        track(:first:station :pax,
+                dk[:aca - 280m, :aca - 230m]
+            ..  dk[:aca - 130m, :aca + 30m] >> 1dt
+            ..  dk[:aca + 130m, :aca + 180m]
+        );
+        track(:first:station :removed, dk[:aca - 230m, :aca + 130m]);
+        platform(:pax,
+                dk[:aca - 50m, :aca + 20m] >> 1dt
+            --  dk[:aca + 20m, :aca - 50m] << 1.7dt
+        );
+        marker(:right :de.hp :pax, dk[:aca] >> 1.5dt);
+        marker(:right :de.exbf :pax, dk[:aca] >> 1.5dt);
+        station(:top :pax, dk[:aca] >> 2.5dt >> 1.2sh,
+            "Achanalt", "21 34"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:aca + 180m, :acn - 400m]);
+        line_badge(:pax, dk[:acn - 3.7km], "KYL");
+    }
+
+    with link = "point.gb.Achnasheen" {
+        track(:first:station :pax,
+                dk[:acn - 351m, :acn - 350m]
+            ..  dk[:acn - 250m, :acn + 20m] << 1dt
+            ..  dk[:acn + 100m, :acn + 101m]
+        );
+
+        track(:first:station :pax, dk[:acn - 400m, :acn + 150m]);
+
+        track(:station,
+                dk[:acn - 281m, :acn - 280m]
+            ..  dk[:acn - 180m, :acn - 50m] >> 1dt
+        );
+            track(:station :removed,
+                    dk[:acn - 150m] >> 1dt
+                --  dk[:acn - 50m]
+            );
+
+        platform(:pax,
+                dk[:acn - 40m, :acn + 70m]
+            --  dk[:acn + 70m, :acn - 40m] << 0.7dt
+        );
+        platform(:pax,
+                dk[:acn - 85m, :acn + 20m] << 1.0dt
+            --  dk[:acn + 20m, :acn - 85m] >> 1.7dt
+        );
+
+        marker(:right :de.bf :pax, dk[:acn] >> 1.0dt);
+        station(:left :pax, dk[:acn + 0.3sw] >> 1.0dt >> 1.2sh,
+            "Achnasheen", "27 72"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:acn + 150m, :gle - 1sw]);
+    }
+
+    with link = "point.gb.Glencarron" {
+        track(:first:station :pax, dk[:gle - 1sw, :gle + 1sw]);
+        marker(:left :de.hp :removed, dk[:gle]);
+        station(:right :removed, dk[:gle] + (0.1sw, 2.0sw),
+            "Glencarron", "36 19"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:gle + 1sw, :acs - 110m]);
+    }
+
+    with link = "point.gb.Achnashellach" {
+        track(:first:station :pax, dk[:acs - 110m, :acs + 60m]);
+        platform(:pax,
+                dk[:acs - 60m, :acs + 10m]
+            --  dk[:acs + 10m, :acs - 60m] >> 0.7dt
+        );
+        marker(:left :de.hp :pax, dk[:acs] << 0.5dt);
+        station(:top :pax, dk[:acs] >> 1.5dt,
+            "Achnashellach    ", "40 34"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:acs + 60m, :sta - 320m]);
+        line_badge(:pax, dk[:acs + 3.8km], "KYL");
+    }
+
+    with link = "point.gb.Strathcarron" {
+        track(:first:station :pax,
+                dk[:sta - 271m, :sta - 270m]
+            ..  dk[:sta - 170m, :sta + 70m] << 1dt
+            ..  dk[:sta + 150m, :sta + 151m]
+        );
+        track(:first:station :pax, dk[:sta - 320m, :sta + 200m]);
+        track(:station,
+                dk[:sta - 191m, :sta - 190m]
+            ..  dk[:sta - 100m, :sta - 70m] >> 1dt
+        );
+
+        platform(:pax,
+                dk[:sta - 70m, :sta + 20m] << 1dt
+            --  dk[:sta + 20m, :sta - 70m] >> 1.7dt
+        );
+        platform(:pax,
+                dk[:sta - 60m, :sta + 30m]
+            --  dk[:sta + 30m, :sta - 60m] << 0.7dt
+        );
+
+        marker(:right :de.bf :pax, dk[:sta] >> 1.0dt);
+        station(:left :pax, dk[:sta + 0.4sw] >> 1.0dt >> 1.3sh,
+            "Strathcarron", "45 74"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:sta + 200m, :att - 180m]);
+    }
+
+    with link = "point.gb.Attadale" {
+        track(:station :removed, dk[:att - 130m, :att - 30m] << 1dt);
+        track(:first:station :pax, dk[:att - 180m, :att + 60m]);
+            track(:station :removed,
+                    dk[:att - 130m]
+                --  dk[:att - 60m] << 1dt
+            );
+
+        platform(:pax,
+                dk[:att - 20m, :att + 10m]
+            --  dk[:att + 10m, :att - 20m] >> 0.7dt
+        );
+
+        marker(:left :de.hp :pax, dk[:att] << 1dt);
+        marker(:left :de.exbf :pax, dk[:att] << 1dt);
+        station(:right :pax, dk[:att + 0.3sw] << 2dt << 1.4sh,
+            "Attadale", "48 22"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:att + 60m, :sto - 300m]);
+    }
+
+    with link = "point.gb.Stromeferry" {
+        track(:station :removed,
+                dk[:sto - 320m, :sto + 65m] << 1dt
+            ..  dk[:sto + 200m, :sto + 201m]
+        );
+
+        track(:first:station :pax, dk[:sto - 300m, :sto + 250m]);
+            track(:station :removed,
+                    dk[:sto - 250m]
+                --  dk[:sto - 200m] << 1dt
+            );
+
+        track(:station :removed,
+                dk[:sto - 181m, :sto - 180m]
+            ..  dk[:sto - 125m, :sto - 120m] >> 1dt
+            ..  dk[:sto - 35m] >> 3dt -- dk[:sto - 35m] >> 3.1dt
+        );
+
+        platform(:removed,
+                dk[:sto - 20m, :sto + 65m] << 1.0dt
+            --  dk[:sto + 65m, :sto - 20m] >> 1.7dt
+        );
+        platform(:pax,
+                dk[:sto - 20m, :sto + 65m]
+            --  dk[:sto + 65m, :sto - 20m] << 0.7dt
+        );
+
+        marker(:right :de.hp :pax, dk[:sto + 0.5sw] >> 0.5dt);
+        marker(:right :de.exbf :pax, dk[:sto + 0.5sw] >> 0.5dt);
+        station(:top :pax, dk[:sto + 0.5sw] >> 1.5dt >> 1.2sh,
+            "Stromeferry", "53 15"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:sto + 250m, :dun - 75m]);
+        line_label(:right:e :pax, dk[:sto + 2.3km], "KYL");
+    }
+
+    with link = "point.gb.Duncraig" {
+        track(:first:station :pax, dk[:dun - 75m, :dun + 75m]);
+        platform(:pax,
+                dk[:dun - 25m, :dun + 25m]
+            --  dk[:dun + 25m, :dun - 25m] >> 0.7dt
+        );
+        marker(:left :de.hp :pax, dk[:dun] << 0.5dt);
+        station(:right :pax, dk[:dun + 0.15sw] << 0.5dt << 1.5sh,
+            "Duncraig", "57 09"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:dun + 75m, :plo - 110m]);
+    }
+
+    with link = "point.gb.Plockton" {
+        track(:first:station :pax, dk[:plo - 110m, :plo + 250m]);
+        track(:station :removed, dk[:plo + 30m, :plo + 150m] >> 1dt);
+        track(:station :removed,
+                dk[:plo + 30m] -- dk[:plo + 90m] >> 1dt
+            --  dk[:plo + 120m, :plo + 140m] >> 2dt
+        );
+
+        platform(:pax,
+                dk[:plo - 60m, :plo + 20m]
+            --  dk[:plo + 20m, :plo - 60m] << 0.7dt
+        );
+        marker(:right :de.hp :pax, dk[:plo] >> 1.0dt);  
+        marker(:right :de.exbf :pax, dk[:plo] >> 1.0dt);  
+        station(:left :pax, dk[:plo + 0.2sw] >> 2.0dt >> 1.2sh,
+            "Plockton", "58 22"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:plo + 110m, :dui - 110m]);
+    }
+
+    with link = "point.gb.Duirinish" {
+        track(:first:station :pax, dk[:dui - 110m, :dui + 90m]);
+        platform(:pax,
+                dk[:dui - 60m, :dui + 40m]
+            --  dk[:dui + 40m, :dui - 60m] >> 0.7dt
+        );
+        marker(:left :de.hp :pax, dk[:dui] << 0.5dt);
+        station(:right :pax, dk[:dui + 0.3sw] << 0.5dt << 1.9sh,
+            "Duirinish", "59 58"
+        );
+    }
+
+    with link = "line.gb.KYL" {
+        track(:first :pax, dk[:dui + 90m, :kyl.a]);
+        line_label(:right:e :pax, dk[:dui + 2.7km], "KYL");
+    }
+
+    with link = "point.gb.Kyle-of-Lochalsh" {
+        track(:station,
+                dk[:kyl.a + 150m] << 0.8dt --  dk[:kyl.a + 155m] << 0.9dt
+            ..  dk[:kyl - 150m, :kyl.f] << 3dt
+        );
+        track(:station,
+                dk[:kyl.a + 49m, :kyl.a + 50m]
+            ..  dk[:kyl.a + 150m] << 0.8dt --  dk[:kyl.a + 155m] << 0.9dt
+            ..  dk[:kyl - 150m, :kyl.f] << 2dt
+        );
+        track(:first:station :pax, dk[:kyl.a, :kyl.f]);
+        track(:station,
+                dk[:kyl.a + 129m, :kyl.a + 130m]
+            ..  dk[:kyl.a + 180m, :kyl - 60m] >> 1dt
+            ..  dk[:kyl, :kyl + 0.1dl]
+        );
+        track(:station,
+                dk[:kyl - 231m, :kyl - 230m] >> 1dt
+            ..  dk[:kyl - 150m, :kyl - 100m] >> 2dt
+        );
+
+        platform(:pax,
+                dk[:kyl - 150m, :kyl + 30m]
+            --  dk[:kyl + 30m, :kyl - 150m] >> 0.7dt
+        );
+        platform(:pax,
+                dk[:kyl - 150m, :kyl + 30m] << 2dt
+            --  dk[:kyl + 30m, :kyl - 150m] >> 1.3dt
+        );
+
+        marker(:left :de.inbf :pax, dk[:kyl] << 3.5dt);
+        station(:left :pax, dk[:kyl + 0.2sw] >> 4dt,
+            span(:bold, "Kyle of Lochalsh"), "KYL: 63 64"
+        );
+    }
+}
+

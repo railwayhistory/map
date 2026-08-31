@@ -1,0 +1,36 @@
+# GB HL.  Stanley Junction - Inverness
+with detail = 2 {
+    let si = path("d2.gb.hl");
+
+    with link = "line.gb.HL" {
+        track(:first :pax, si[:stj, :bla]);
+        track(:first :double :pax, si[:bla, :dal]);
+        track(:first :pax, si[:dal, :cul]);
+        track(:first :double :pax, si[:cul, :inv]);
+
+        line_label(:right:s :double :pax, si[:stj + 7km], "HL");
+        line_label(:right:s :double :pax, si[:bal + 14km], " HL");
+        line_badge(:pax, si[:avi - 13.5km] @ -3 << 0.1dt, "HL");
+        line_label(:left:e :double :pax, si[:avi + 8km], "HL");
+        line_label(:left:e :double :pax, si[:avi + 8km], "HL");
+        line_label(:right:w :double :pax, si[:cul - 11km], "HL");
+    }
+
+    with link = "point.gb.Ballinluig" {
+        statdot(:removed, si[:bal]);
+        slabel(:right :removed, si[:bal] + (1.5dt, 0.5dt), "Ballinluig");
+    }
+
+    with link = "point.gb.Aviemore" {
+        statdot(:pax, si[:avi]);
+        slabel(:left :pax, si[:avi] + (-1.5dt, 0.5dt), "Aviemore");
+    }
+
+    with link = "point.gb.Inverness" {
+        statdot(:pax, si[:inv]);
+        slabel(:bottom :pax, si[:inv] + (-2dt, 0.8dt),
+            span(:medium :bold, "Inverness")
+        );
+    }
+}
+
