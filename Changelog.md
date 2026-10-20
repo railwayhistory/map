@@ -8,6 +8,12 @@ Updates
 
 Corrections
 
+* Line _AT 150_ is electrified with 3000 V= between Spielfeld-Straß and
+  the border. ([#187])
+* Line _SI 30_ is single track north of Maribor. ([#187])
+
+[#187]: https://github.com/railwayhistory/map/pull/187
+
 
 ## 2026-06-21
 
