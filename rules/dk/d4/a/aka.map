@@ -1,0 +1,62 @@
+# DK AKA.  Aakirkeby - Almindingen
+#
+let aa = path("d3.dk.aka");
+
+with detail = 4, railway = :third :narrow:g1000 :pax :removed {
+    # point.dk.Aakirkeby  dk.RNX
+
+    with link = "line.dk.AKA" {
+        track(:lor, aa[:aki + 0.49sw, :aki.ya] >> 1lo);
+        track(:lor,
+                aa[:aki.ya - 0.1dl, :aki.ya] >> 1lo
+            ..  aa[:aki.xa + 1lt, :aki.xa + 1.1lt]
+        );
+        track(aa[:aki.xa + 1lt, :aki.xa + 0.51km]);
+        line_label(:right:w, aa[:aki.xa + 0.5km] >> 0.5lt, "AKA");
+        track(aa[:aki.xa + 0.49km, :sko - 0.49sw]);
+    }
+
+    with link = "point.dk.Skørrebro", railway = :station {
+        track(aa[:sko - 0.5sw, :sko + 0.5sw]);
+        marker(:right :de.hp, aa[:sko] >> 0.5lt);
+        station(:right, aa[:sko] >> 0.5lt >> 1sh + (1.3dt, 1dt),
+            "Skørrebro", "AKA: 2,8"
+        );
+    }
+
+    with link = "line.dk.AKA" {
+        track(aa[:sko + 0.49sw, :val + 0.1dl]);
+    }
+
+    with link = "point.dk.Vallensgård", railway = :station {
+        marker(:left :de.anst, aa[:val] << 0.5lt);
+        station(:left, aa[:val] << 0.5lt << 1sh + (-1.3dt, 1.1dt),
+            span(:small, "Vallensgård"), "AKA: ??"
+        );
+    }
+
+    with link = "line.dk.AKA" {
+        track(aa[:val - 0.1dl, :val + 0.71km]);
+        line_label(:right:nw, aa[:val + 0.7km] >> 0.5lt, "AKA");
+        track(aa[:val + 0.69km, :alm.yg + 0.1dl]);
+    }
+
+    with link = "point.dk.Almindingen", railway = :station {
+        let ag = path("d3.dk.agh");
+
+        track(aa[:alm.yg, :alm.f]);
+        track(ag[:alm.yg, :alm + 0.5sw]);
+        marker(:left :de.bf, aa[:alm] << 0.5lt);
+        station(:left, aa[:alm] << 0.5lt << 1sh + (-1.5dt, 1dt),
+            span(:bold, "Almindingen"),
+            hbox(:center:top,
+                vbox(:right:top, "AKA: ", "AGH: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "5,", anchor(), "0"),
+                    hbox(:sep:base, "5,", anchor(), "0")
+                )
+            )
+        );
+    }
+}
+

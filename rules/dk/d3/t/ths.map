@@ -1,0 +1,65 @@
+# DK THS.  Tønder - Højer Sluse
+#
+let th = path("d3.dk.ths");
+
+with detail = 3, railway = :first :pax :removed {
+    # point.dk.Tønder  dk.BTR
+
+    with link = "line.dk.THS" {
+        track(:ror, th[:ton.yt, :trn - 0.49sw] << 1ms << 1mt);
+        track(:ror, th[:trn - 0.5sw, :trn + 0.5sw] << 1ms << 1mt);
+        track(:ror, th[:trn + 0.49sw, :ton.yh] << 1ms << 1mt);
+        track(:ror,
+                th[:ton.yh - 0.1dl, :ton.yh] << 1ms << 1mt
+            ..  th[:ton.xh, :ton.xh + 0.1dl]
+        );
+        track(th[:ton.xh, :mog - 0.49sw]);
+    }
+
+    with link = "point.dk.Møgeltønder", railway = :station {
+        track(th[:mog - 0.5sw, :mog + 0.5sw]);
+        marker(:left :de.bf, th[:mog] << 0.5mt);
+        slabel(:bottom, th[:mog] << 0.5mt << 1sh << 0.3dt,
+            "Møgeltønder"
+        );
+    }
+
+    with link = "line.dk.THS" {
+        track(th[:mog + 0.49sw, :mog + 1.61km]);
+        line_label(:right:s, th[:mog + 1.6km] >> 0.5mt, (0.8dt, 0dt), "THS");
+        track(th[:mog + 1.59km, :dal - 0.49sw]);
+    }
+
+    with link = "point.dk.Daler", railway = :station {
+        track(th[:dal - 0.5sw, :dal + 0.5sw]);
+        marker(:right :de.hst, th[:dal] >> 0.5mt);
+        slabel(:top, th[:dal] >> 0.5mt >> 1sh >> 0.2dt,
+            "Daler"
+        );
+    }
+
+    with link = "line.dk.THS" {
+        track(th[:dal + 0.49sw, :hoj - 0.49sw]);
+    }
+
+    with link = "point.dk.Højer", railway = :station {
+        track(th[:hoj - 0.5sw, :hoj + 0.5sw]);
+        marker(:right :de.bf, th[:hoj] >> 0.5mt);
+        slabel(:top, th[:hoj] >> 0.5mt >> 1sh >> 0.2dt,
+            span(:bold, "Højer")
+        );
+    }
+
+    with link = "line.dk.THS" {
+        track(th[:hoj + 0.49sw, :hos - 0.49sw]);
+    }
+
+    with link = "point.dk.Højer-Sluse", railway = :station {
+        track(th[:hos - 0.5sw, :hos + 0.5sw]);
+        marker(:left :de.bf, th[:hos] << 0.5mt);
+        slabel(:bottom, th[:hos] >> 0.5mt >> 0.4dt,
+            span(:bold, "Højer Sluse")
+        );
+    }
+}
+

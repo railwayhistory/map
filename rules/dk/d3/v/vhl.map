@@ -1,0 +1,91 @@
+# DK VHL.  Vojens - Haderslev
+#
+let vh = path("d3.dk.vhl");
+
+with detail = 3, railway = :first :museum {
+    with link = "line.dk.VHL" {
+        track(:lor,
+                vh[:voj.yh - 0.1dl, :voj.yh] >> 0.5md >> 1ms >> 0.5mt
+            ..  vh[:voj.xh, :voj.xh + 0.1dl]
+        );
+        track(vh[:voj.xh, :voj.xh + 1.61km]);
+        line_label(:left:s, vh[:voj.xh + 1.6km] << 0.5mt, "VHL");
+        track(vh[:voj.xh + 1.59km, :sty - 0.49sw]);
+    }
+
+    with link = "point.dk.Styding", railway = :station {
+        track(vh[:sty - 0.5sw, :sty + 0.5sw]);
+        marker(:right :de.hp, vh[:sty] >> 0.5mt);
+        slabel(:bottom, vh[:sty] >> 0.5mt >> 1sh + (-0.4dt, 0.4dt),
+            "Styding"
+        );
+    }
+
+    with link = "line.dk.VHL" {
+        track(vh[:sty + 0.49sw, :ham - 0.49sw]);
+    }
+
+    with link = "point.dk.Hammelev-Sønderjylland", railway = :station {
+        track(vh[:ham - 0.5sw, :ham + 0.5sw]);
+        marker(:right :de.hp, vh[:ham] >> 0.5mt);
+        marker(:right :de.exbf, vh[:ham] >> 0.5mt);
+        slabel(:bottom, vh[:ham] >> 0.5mt >> 1.4sh >> 0.3dt,
+            "Hammelev"
+        );
+    }
+
+    with link = "line.dk.VHL" {
+        track(vh[:ham + 0.49sw, :str - 0.49sw]);
+    }
+
+    with link = "point.dk.Strengløkke", railway = :station {
+        track(vh[:str - 0.5sw, :str + 0.5sw]);
+        marker(:right :de.hp, vh[:str] >> 0.5mt);
+        slabel(:bottom, vh[:str] >> 0.5mt >> 1sh >> 0.3dt,
+            "Strengløkke"
+        );
+    }
+
+    with link = "line.dk.VHL" {
+        track(vh[:str + 0.49sw, :hav.ys + 0.1dl]);
+    }
+
+    with link = "point.dk.Haderslev-Vest", railway = :station {
+        track(vh[:hav.ys, :hav + 0.5sw]);
+        marker(:right :de.bf, vh[:hav] >> 0.5mt);
+        guide(:open,
+                vh[:hav] << 1mt
+            --  vh[:hav] + (0dt, -0.25km) + (0.5dt, -4.5dt)
+        );
+        slabel(:top :bold, vh[:hav] + (0dt, -0.25km) + (9dt, -4.5dt),
+            "Haderslev Vest"
+        );
+    }
+}
+
+with detail = 3, railway = :first :removed {
+    with link = "line.dk.VHL" {
+        track(vh[:hav + 0.49sw, :hab - 0.49sw]);
+    }
+
+    with link = "point.dk.Haderslev-By", railway = :station {
+        track(vh[:hab - 0.5sw, :hab + 0.5sw]);
+        marker(:right :de.bf, vh[:hab] >> 0.5mt);
+    }
+
+    with link = "line.dk.VHL" {
+        track(vh[:hab + 0.49sw, :had - 0.49sw]);
+    }
+
+    with link = "point.dk.Haderslev-Amts", railway = :station {
+        track(vh[:had - 0.5sw, :had + 0.5sw]);
+        marker(:right :de.bf :casing, vh[:had] >> 0.5mt);
+        slabel(:right :bold, vh[:had] + (0dt, -0.25km) + (-7dt, -1.3dt),
+            "Haderslev By"
+        );
+       #slabel(:bottom :bold, vh[:had] >> 0.5mt >> 1sh >> 0.3dt,
+       #    "Haderslev By"
+       #);
+    }
+}
+

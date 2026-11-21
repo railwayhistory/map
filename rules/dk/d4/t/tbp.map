@@ -1,0 +1,52 @@
+# DK TBP.  Tørsbøl - Padborg
+#
+let tp = path("d3.dk.tbp");
+
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Tørsbøl  dk.SBT
+
+    with link = "line.dk.TBP" {
+        track(:ror,
+                tp[:tor.yp - 0.1dl, :tor.yp] << 1mo
+            ..  tp[:tor.xp + 2mo, :tor.xp + 2.1mo]
+        );
+        track(tp[:tor.xp + 2mo, :tor.xp + 1.51km]);
+        line_label(:right:se, tp[:tor.xp + 1.5km] >> 0.5mt, "TBP");
+        track(tp[:tor.xp + 1.49km, :hol - 0.49sw]);
+    }
+
+    with link = "point.dk.Holbøl", railway = :station {
+        track(tp[:hol - 0.5sw, :hol + 0.5sw]);
+        marker(:left :de.bf, tp[:hol] << 0.5mt);
+        station(:bottom, tp[:hol] << 0.5mt << 1sh << 0.8dt,
+            span(:former, "Holebüll"),
+            "Holbøl",
+            "TBP: 3,9"
+        );
+    }
+
+    with link = "line.dk.TBP" {
+        track(tp[:hol + 0.49sw, :sme - 0.49sw]);
+    }
+
+    with link = "point.dk.Smedeby", railway = :station {
+        track(tp[:sme - 0.5sw, :sme + 0.5sw]);
+        marker(:left :de.bf, tp[:sme] << 0.5mt);
+        station(:right, tp[:sme] << 0.5mt << 1sh + (1.8dt, 1.4dt),
+            span(:former, "Norderschmedeby"),
+            "Smedeby",
+            "TBP: 10,9"
+        );
+    }
+
+    with link = "line.dk.TBP" {
+        track(tp[:sme + 0.49sw, :sme + 1.21km]);
+        line_label(:left:w, tp[:sme + 1.2km] << 0.5mt, (0dt, 0.3dt), "TBP");
+        track(tp[:sme + 1.19km, :pad.xt]);
+        track(:station,
+                tp[:pad.xt - 0.1dl, :pad.xt]
+            ..  tp[:pad.yt, :pad.yt + 0.1dl] << 1.5mo
+        );
+    }
+}
+

@@ -131,7 +131,7 @@ with detail = 4,
 
     with link = "point.dk.Langgade", railway = :station {
         track(:double, kf[:lan - 0.5sw, :lan + 0.5sw]);
-        marker(:left :de.hp, kf[:lan] << 0.5mo << 0.5mt);
+        marker(:left :de.hp :casing, kf[:lan] << 0.5mo << 0.5mt);
         label(kf[:lan] >> 0.5mo >> 2.5mt + (0dt, 1dt),
             vbox(:left:base,
                 vbox(:center:base,
@@ -149,7 +149,11 @@ with detail = 4,
     with link = "point.dk.Peter-Bangsvej", railway = :station {
         track(:double, kf[:pet - 0.5sw, :pet+ 0.5sw]);
         marker(:right :de.hp, kf[:pet] >> 0.5mo >> 0.5mt);
-        station(:right, kf[:pet] >> 0.5mo >> 0.5mt >> 1.5sh + (0dt, 1.2dt),
+        guide(:open :casing,
+                kf[:pet - 0.5dt] >> 0.5mo >> 0.5mt >> 1sh >> 1dt
+            --  kf[:pet] + (650m, 250m)
+        );
+        station(:right, kf[:pet] + (650m, 250m) + (1dt, 1.3dt),
             "Peter Bangsvej", "KFS: 5,900"
         );
     }
@@ -162,8 +166,12 @@ with detail = 4,
         with layer = -1 {
             track(:double, kf[:fli - 1sw, :fli]);
             marker(:left :de.hp, kf[:fli - 0.5sw] << 0.5mo << 0.5mt);
+            guide(:open,
+                    kf[:fli] << 0.5mo << 0.5mt << 1sh << 1dt
+                --  kf[:fli] + (-450m, 140m)
+            );
         }
-        station(:right, kf[:fli - 0.5sw] >> 0.5mo >> 3.5mt + (0.5sw, 1.5dt),
+        station(:left, kf[:fli] + (-450m, 140m) + (-1dt, 1.3dt),
             "Flintholm",
             hbox(:center:top,
                 vbox(:right:top, "VLH: ", "KFS: "),
@@ -188,9 +196,22 @@ with detail = 4,
                 kf[:van - 0.5sw, :van + 0.5sw] << 1mo
             ..  kf[:van + 320m, :van + 400m]
         );
+        track(:removed, kf[:van - 0.5sw, :van + 0.5sw] >> 0.5mo);
+        track(:removed, kf[:van - 0.5sw, :van + 0.5sw] >> 1.5mo);
+
         marker(:left :de.bf, kf[:van] << 1.5mo << 0.5mt);
         station(:top, kf[:van] >> 0.5mo >> 0.5mt >> 1.3sh,
-            "Vanløse", "KFS: 7,300"
+            "Vanløse",
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "FBV: "),
+                    "KFS: "
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "", anchor(), "??"),
+                    hbox(:sep:base, "7,", anchor(), "300")
+                )
+            )
         );
     }
 
