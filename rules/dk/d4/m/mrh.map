@@ -1,0 +1,113 @@
+# DK MRH.  Maribo - Rødbyhavn
+#
+let mr = path("d3.dk.mrh");
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    # point.dk.Maribo  dk.NNS
+
+    with link = "line.dk.MRH" {
+        track(:ror,
+                mr[:mar.yr - 0.1dl, :mar.yr] << 1mo
+            ..  mr[:mar.xr, :mar.xr + 0.1dl]
+        );
+        track(mr[:mar.xr, :soh - 0.5sw]);
+    }
+
+    with link = "point.dk.Søholtvejen", railway = :station {
+        track(mr[:soh - 0.5sw, :soh + 0.5sw]);
+        marker(:left :de.hp, mr[:soh] << 0.5mt);
+        station(:right, mr[:soh] << 0.5mt << 1sh + (1.0dt, 1.1dt),
+            "Søholtvejen", "MRH: 4,4"
+        );
+    }
+
+    with link = "line.dk.MRH" {
+        track(mr[:soh + 0.5sw, :soh + 0.8km]);
+        line_label(:right:e, mr[:soh + 0.8km] >> 0.5mt, "MRH");
+        track(mr[:soh + 0.8km, :bur - 0.5sw]);
+    }
+
+    with link = "point.dk.Bursø", railway = :station {
+        track(mr[:bur - 0.5sw, :bur + 0.5sw]);
+        marker(:left :de.hp, mr[:bur] << 0.5mt);
+        marker(:left :de.exbf, mr[:bur] << 0.5mt);
+        station(:right:left_align,
+            mr[:bur] << 0.5mt << 1.5sh + (1dt, 1.1dt),
+            "Bursø", " MRH: 6,0"
+        );
+    }
+
+    with link = "line.dk.MRH" {
+        track(mr[:bur + 0.5sw, :hol - 0.5sw]);
+    }
+
+    with link = "point.dk.Holeby", railway = :station {
+        track(mr[:hol - 0.5sw, :hol + 0.5sw]);
+        marker(:left :de.bf, mr[:hol] << 0.5mt);
+        station(:right, mr[:hol] << 0.5mt << 1sh + (1.2dt, 1.5dt),
+            "Holeby", "MRH: 8,9"
+        );
+    }
+
+    with link = "line.dk.MRH" {
+        track(mr[:hol + 0.5sw, :hoj - 0.5sw]);
+    }
+
+    with link = "point.dk.Højbygård", railway = :station {
+        track(mr[:hoj - 0.5sw, :hoj + 0.5sw]);
+        marker(:left :de.hp, mr[:hoj] << 0.5mt);
+        station(:bottom, mr[:hoj] << 0.5mt << 1sh + (0dt, 0.8dt),
+            "Højbygård", "MRH: 10,6"
+        );
+    }
+
+    with link = "line.dk.MRH" {
+        track(mr[:hoj + 0.5sw, :hoj + 1.6km]);
+        line_label(:right:s, mr[:hoj + 1.6km] >> 0.5mt, "MRH");
+        track(mr[:hoj + 1.6km, :rod.yn]);
+    }
+
+    with link = "point.dk.Rødby", railway = :station {
+        track(mr[:rod.yn, :rod + 0.5sw]);
+        marker(:right :de.bf, mr[:rod] >> 0.5mt);
+        station(:right:left_align, mr[:rod] << 0.5mt + (1.2dt, 1.8dt),
+            span(:bold, "Rødby"),
+            hbox(:center:top,
+                vbox(:right:top, "??: ", "MRH: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "36,", anchor(), "7"),
+                    hbox(:sep:base, "14,", anchor(), "4")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.MRH" {
+        track(mr[:rod + 0.5sw, :rod + 1.8km]);
+        line_label(:right:e, mr[:rod + 1.8km] >> 0.5mt, (0dt, -0.1dt), "MRH");
+        track(mr[:rod + 1.8km, :ven + 0.5sw]);
+    }
+
+    with link = "point.dk.Vennersminde", railway = :station {
+        track(mr[:ven - 0.5sw, :ven + 0.5sw]);
+        marker(:left :de.hp, mr[:ven] << 0.5mt);
+        station(:left, mr[:ven] >> 0.5mt + (-1.3dt, 0.5dt),
+            "Vennersminde", "MRH: 17,6"
+        );
+    }
+
+    with link = "line.dk.MRH" {
+        track(mr[:ven + 0.5sw, :roh + 0.5sw]);
+    }
+
+    with link = "point.dk.Rødbyhavn", railway = :station {
+        track(mr[:roh - 0.5sw, :roh + 0.5sw]);
+        marker(:right :de.bf, mr[:roh] >> 0.5mt);
+        station(:left, mr[:roh] >> 0.5mt >> 1sh + (-1.2dt, 0.8dt),
+            span(:bold, "Rødbyhavn"), "MRH: 19,6"
+        );
+    }
+}
+

@@ -2,37 +2,44 @@
 with detail = 2 {
     let ra = path("d2.de.3000");
 
-    with link = "line.de.3000" {
-        track(:second :double :pax, ra[:rem.ya, :wal]);
-        with layer = 1 line_badge(
-            :pax, ra[:rem.ya + 8km] @ -12 >> 0.2dt, "3000"
-        );
+    with railway = :second :cat:ac15 :pax {
+        with link = "line.de.3000" {
+            track(:double, ra[:rem.ya, :rem.ya + 6.51km]);
+            line_label(:left:n, ra[:rem.ya + 6.5km] << 0.5md, "3000");
+            track(:double, ra[:rem.ya + 6.49km, :wal]);
 
-        track(:second :pax, ra[:wal, :abr]);
+            track(ra[:wal, :abr]);
+        }
 
-        track(:second :removed, ra[:abr, :ade]);
-        guide(:linenum :removed,
-                ra[:ade - 2.8km] << 0.7dt
-            --  ra[:ade - 2.8km] << 3.0dt
-        );
-        label(:linenum :removed, ra[:ade - 2.8km] << 3.0dt,
-            hbox(:left:middle :badgesize, " 3000")
-        );
+        with link = "point.de.Ahrbrück" {
+            statdot(ra[:abr]);
+            slabel(:right, ra[:abr] + (1.5dt, 1.8dt), "Ahrbrück");
+        }
     }
 
-    with link = "point.de.Ahrbrück" {
-        with layer = 1 marker(:statdot :pax, ra[:abr]);
-        slabel(:right :pax, ra[:abr] + (1.5dt, 1.8dt), "Ahrbrück");
-    }
+    with railway = :second :pax :removed {
+        with link = "line.de.3000" {
+            track(ra[:abr, :abr + 2.81km]);
+            line_label(:right:se, ra[:abr + 2.8km] >> 0.5mt, "3000");
+            track(ra[:abr + 2.79km, :lie]);
+            track(ra[:lie, :dum]);
+        }
 
-    with link = "point.de.Dümpelfeld" {
-        with layer = 1 marker(:statdot :removed, ra[:dum]);
-        slabel(:right :removed, ra[:dum] + (1.5dt, 1.8dt), "Dümpelfeld");
-    }
+        with link = "point.de.Dümpelfeld" {
+            statdot(ra[:dum]);
+            slabel(:right, ra[:dum] + (1.5dt, 1.8dt), "Dümpelfeld");
+        }
 
-    with link = "point.de.Adenau" {
-        with layer = 1 marker(:statdot :removed, ra[:ade]);
-        slabel(:bottom :removed, ra[:ade] + (0dt, 1.0dt), "Adenau");
+        with link = "line.de.3000" {
+            track(ra[:dum, :dum + 3.91km]);
+            line_label(:left:w, ra[:dum + 3.9km] >> 0.5mt, "3000");
+            track(ra[:dum + 3.89km, :ade]);
+        }
+
+        with link = "point.de.Adenau" {
+            statdot(ra[:ade]);
+            slabel(:bottom, ra[:ade] + (0dt, 1.0dt), "Adenau");
+        }
     }
 }
 

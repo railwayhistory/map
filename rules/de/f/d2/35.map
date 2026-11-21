@@ -405,17 +405,36 @@ with detail = 2 {
 with detail = 2 {
     let du = path("d2.de.3554");
 
-    with link = "line.de.3554" {
-        track(:second :pax, du[:dno.yo, :gum.yd]);
-        line_badge(:pax, du[:dos + 8km] @ 20 >> 0.3dt, "3554");
-    }
+    with railway = :second :pax {
+        with link = "line.de.3554" {
+            track(:double, du[:dno.yo, :dos]);
+        }
 
-    with link = "point.de.Darmstadt-Ost" {
-        with layer = 1 marker(:statdot :pax, du[:dos]);
-    }
+        with link = "point.de.Darmstadt-Ost", railway = :station {
+            track(du[:dos, :dos.yz]);
+            statdot(du[:dos]);
+        }
 
-    with link = "point.de.Reinheim-Odenw" {
-        with layer = 1 marker(:statdot :pax, du[:rei]);
+        with link = "line.de.3554" {
+            track(du[:dos.yz, :dos + 7.01km]);
+            line_label(:right:n, du[:dos + 7km] >> 0.5mt, "3554");
+            track(du[:dos + 6.99km, :rei.yr]);
+        }
+
+        with link = "point.de.Reinheim-Odenw", railway = :station {
+            track(du[:rei.yr, :rei.yz]);
+            statdot(du[:rei]);
+            slabel(:nw, du[:rei] + (1.0dt, 0.3dt),
+                vbox(:left:top,
+                    "Reinheim",
+                    span(:light, "(O.w)")
+                )
+            );
+        }
+
+        with link = "line.de.3554" {
+            track(du[:rei.yz, :gum.yd]);
+        }
     }
 }
 
@@ -695,14 +714,28 @@ with detail = 2 {
 with detail = 2 {
     let hb = path("d2.de.3571");
 
-    with link = "line.de.3571" {
-        track(:first :pax, hb[:hof.yb, :ben.yh]);
-        line_badge(:pax, hb[:lor - 4.2km], "3571");
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.de.3571" {
+            track(hb[:hof.yb, :bur]);
+        }
     }
 
-    with link = "point.de.Lorsch" {
-        with layer = 1 marker(:statdot :pax, hb[:lor]);
-        slabel(:left :pax, hb[:lor] + (1.0dt, -1.5dt), "Lorsch");
+    with railway = :first :pax {
+        with link = "line.de.3571" {
+            track(hb[:bur, :lor - 4km]);
+            line_label(:right:n, hb[:lor - 4km], "3571");
+            track(hb[:lor - 4km, :lor]);
+        }
+
+        with link = "point.de.Lorsch" {
+            track(hb[:lor, :lor.yh]);
+            statdot(hb[:lor]);
+            slabel(:left :pax, hb[:lor] + (1.0dt, -1.5dt), "Lorsch");
+        }
+
+        with link = "line.de.3571" {
+            track(hb[:lor.yh, :ben.yh]);
+        }
     }
 }
 

@@ -1,0 +1,35 @@
+# DK FSS.  Frederikshavn - Skagen (smalspor)
+#
+let fs = path("d3.dk.fss");
+
+with detail = 3, railway = :first :g1000 :pax :removed {
+    with link = "line.dk.FSS" {
+        track(
+                fs[:fre.ys - 0.1dl, :fre.ys] >> 1ms >> 1mt
+            ..  fs[:fre.zs + 2mt, :ell - 0.49sw]
+        );
+    }
+
+    with link = "point.dk.Elling-FSJ", railway = :station {
+        track(fs[:ell - 0.5sw, :ell + 0.5sw]);
+        marker(:left :de.hp, fs[:ell] << 0.5lt);
+        slabel(:left, fs[:ell] << 0.5mt << 1sh + (-1.8dt, 1.5dt), "Elling");
+    }
+
+    with link = "line.dk.FSS" {
+        track(fs[:ell + 0.49sw, :ell + 2.01km]);
+        line_label(:left:ne, fs[:ell + 2km] << 0.5lt, "FSS");
+        track(fs[:ell + 1.99km, :rim - 0.49sw]);
+    }
+
+    with link = "point.dk.Rimmen-FSJ", railway = :station {
+        track(fs[:rim - 0.5sw, :rim + 0.5sw]);
+        marker(:left :de.hp, fs[:rim] << 0.5lt);
+        slabel(:left, fs[:rim] << 0.5mt << 1sh + (-1.4dt, 1.3dt), "Rimmen");
+    }
+
+    with link = "line.dk.FSS" {
+        track(fs[:rim + 0.5sw, :jer.yf]);
+    }
+}
+

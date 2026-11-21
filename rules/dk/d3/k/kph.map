@@ -1,0 +1,115 @@
+# DK KPH.  København H - Peberholm grænse
+#
+let kp = path("d3.dk.kph");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax
+{
+    with link = "line.dk.KPH" {
+        track(:ror:lor,
+                kp[:kob + 0.5sw, :dyb] >> 0.5md << 1mt << 1ms << 0.5md
+        );
+
+        track(:single :ror:lor :casing,
+                kp[:dyb - 0.1dl, :dyb] >> 0.5md << 0.5mt
+            ..  kp[:ske, :ske + 0.1dl] << 1md << 1ms >> 0.5mt
+        );
+        with layer = -1 track(:single :ror:lor,
+                kp[:dyb - 0.1dl, :dyb]
+                    >> 0.5md << 1mt << 1ms << 0.5md << 0.5mt
+            ..  kp[:ske, :ske + 0.1dl] << 1md << 1ms << 0.5mt
+        );
+
+        track(:ror:lor :casing,
+                kp[:ske, :kob.yk] << 1md << 1ms
+        );
+        track(:ror:lor,
+                kp[:kob.yk - 0.1dl, :kob.yk] << 1md << 1ms
+            ..  kp[:kob.yg - 0.5sw, :kob.yg]
+        );
+    }
+
+    # point.dk.Bavnehøj
+
+    with link = "line.dk.KPH" {
+        with layer = -1 track(kp[:kob.yg, :kal.yv]);
+    }
+
+    with link = "point.dk.Kalvebod", railway = :station {
+        track(:single,
+                kp[:kal.yv, :kal.yv + 1sw] << 0.5md << 1ms << 0.5mt
+            --  kp[:kal.yv + 1sw + 1dl, :kal.yv + 1sw + 1.1dl]
+                    << 0.5md >> 0.5mt
+        );
+        track(kp[:kal.yv, :kal.yv + 1sw]);
+        track(:single,
+                kp[:kal.yv, :kal.yv + 1sw] >> 0.5md >> 1ms >> 0.5mt
+            --  kp[:kal.yv + 1sw + 1dl, :kal.yv + 1sw + 1.1dl]
+                    >> 0.5md << 0.5mt
+        );
+        marker(:right :de.bbf :nopax,
+                kp[:kal.yv + 0.5sw] >> 0.5md >> 1ms >> 1mt
+        );
+        slabel(:right :nopax, kp[:kal + 0.2sw] << 0.5md << 1ms << 1.5mt,
+            "Kalvebod"
+        );
+    }
+
+    with link = "line.dk.KPH" {
+        track(kp[:kal.yv + 1sw, :kal.yv + 1km]);
+        line_label(:right:ne, kp[:kal.yv + 1km] >> 0.5md, "KPH");
+        track(kp[:kal.yv + 1km, :ore - 0.5sw]);
+    }
+
+    with link = "point.dk.Ørestad", railway = :station {
+        track(kp[:ore - 0.5sw, :ore + 0.5sw]);
+        marker(:right :de.hp, kp[:ore] >> 0.5md);
+        slabel(:ne, kp[:ore] >> 0.5dt >> 1.1sh + (1sw, 0dt), "Ørestad");
+    }
+
+    with link = "line.dk.KPH" {
+        track(kp[:ore + 0.5sw, :tar - 0.5sw]);
+    }
+
+    with link = "point.dk.Tårnby", railway = :station {
+        track(kp[:tar - 0.5sw, :tar + 0.5sw]);
+        marker(:right :de.hp, kp[:tar] >> 0.5md);
+        slabel(:top, kp[:tar] << 1md, "Tårnby");
+    }
+
+    with link = "line.dk.KPH" {
+        track(kp[:tar + 0.5sw, :kas.yv]);
+    }
+
+    with link = "point.dk.Københavns-Lufthavn-Kastrup", railway = :station {
+        track(kp[:kas.yv, :kas.yo]);
+        track(:single,
+                path("d3.dk.kph.kas")[:kas.yv, :kas.yo] << 0.5md >> 0.5mt
+        );
+        marker(:right :de.bf, kp[:kas] >> 0.5md);
+        slabel(:bottom, kp[:kas] >> 0.5md >> 1.1sh,
+            vbox(:center:top, "Københavns", "Lufthavn", "Kastrup")
+        );
+    }
+
+    with link = "line.dk.KPH" {
+        track(kp[:kas.yo, :peb - 0.5sw]);
+    }
+
+    with link = "point.dk.Peberholm", railway = :station {
+        track(kp[:peb - 0.5sw, :peb + 0.5sw]);
+        marker(:right :de.bbf :nopax, kp[:peb] >> 0.5md);
+        slabel(:left :nopax, kp[:peb + 0.3sw] >> 0.5md >> 1.9sh,
+            "Peberholm"
+        );
+    }
+
+    with link = "line.dk.KPH" {
+        track(kp[:peb + 0.5sw, :peb + 1.8km]);
+        line_label(:right:ne, kp[:peb + 1.8km] >> 0.5md, "KPH");
+        track(kp[:peb + 1.8km, :peg - 0.3sw]);
+    }
+
+    # point.int.Lernacken-Peberholm  se.PHL
+}
+

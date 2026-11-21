@@ -292,33 +292,36 @@ with detail = 2 {
 with detail = 2 {
     let ps = path("d2.it.psz");
 
-    with link = "line.it.PSZ" {
-        track(:first :double :cat:dc30 :pax, ps[:par.ye, :par.yb]);
-        track(:first :double :cat:dc30 :pax, ps[:par.yb, :bpe.y]);
-        track(:first :pax, ps[:bpe.y, :bor.yr]);
+    with railway = :first :cat:dc30 :pax {
+        with link = "line.it.PSZ" {
+            track(:double, ps[:par.ye, :par.yb]);
+            track(:double, ps[:par.yb, :bpe.y]);
+            track(ps[:bpe.y, :bor.yr - 7.99km]);
+            line_label(:left:e, ps[:bor.yr - 8km], (0dt, -0.4dt), "PSZ");
+            track(ps[:bor.yr - 8.01km, :bor.yr]);
+        }
 
-        line_label(:left:se :pax, ps[:bor.yr - 8km], "PSZ");
-    }
+        with link = "point.it.Boretto", railway = :station {
+            track(ps[:bor.yr, :bor]);
+            statdot(ps[:bor]);
+            slabel(:top, ps[:bor] + (0dt, -0.5dt), "Boretto");
+        }
 
-    with link = "point.it.Boretto" {
-        track(:first:station :pax, ps[:bor.yr, :bor]);
-        statdot(:pax, ps[:bor]);
-        slabel(:top :pax, ps[:bor] + (0dt, -0.5dt), "Boretto");
-    }
+        with link = "line.it.PSZ" {
+            track(ps[:bor, :gua.yr]);
+        }
 
-    with link = "line.it.PSZ" {
-        track(:first :pax, ps[:bor, :gua.yr]);
-    }
+        with link = "point.it.Guastalla", railway = :station {
+            track(ps[:gua.yr, :gua]);
+            statdot(ps[:gua]);
+            slabel(:right, ps[:gua] + (1.5dt, 2.0dt), "Guastalla");
+        }
 
-    with link = "point.it.Guastalla" {
-        track(:first:station :cat:dc30 :pax, ps[:gua.yr, :gua]);
-        statdot(:cat:dc30 :pax, ps[:gua]);
-        slabel(:right :cat:dc30 :pax, ps[:gua] + (1.5dt, 2.0dt), "Guastalla");
-    }
-
-    with link = "line.it.PSZ" {
-        track(:first :pax, ps[:gua, :suz.yp]);
-        line_label(:left:se :pax, ps[:gua + 5.5km], "PSZ");
+        with link = "line.it.PSZ" {
+            track(ps[:gua, :gua + 5.51km]);
+            line_label(:left:e, ps[:gua + 5.5km], (0dt, -0.2dt), "PSZ");
+            track(ps[:gua + 5.49km, :suz.yp]);
+        }
     }
 }
 

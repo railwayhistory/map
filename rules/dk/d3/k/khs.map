@@ -1,0 +1,24 @@
+# DK KHS.  Korsør - Halsskov
+#
+let kh = path("d3.dk.khs");
+
+with detail = 3,
+     railway = :first :pax :removed
+{
+    with link = "line.dk.KHS" {
+        track(:ror,
+                kh[:kor.yh - 0.1dl, :kor.yh] << 0.5md >> 0.5mt
+            ..  kh[:kor.xh + 1md, :kor.xh + 1.1md]
+        );
+        track(kh[:kor.xh, :kor.xh + 1.2km]);
+        line_label(:left:n, kh[:kor.xh + 1.2km] << 0.5mt, "KHS");
+        track(kh[:kor.xh + 1.2km, :hal - 0.5sw]);
+    }
+
+    with link = "point.dk.Halsskov", railway = :station {
+        track(kh[:hal - 0.5sw, :hal + 0.5sw]);
+        marker(:right :de.bf :casing, kh[:hal] >> 0.5mt);
+        slabel(:bottom :bold, kh[:hal] + (-3dt, 1dt), "Halsskov");
+    }
+}
+

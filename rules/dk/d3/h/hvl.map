@@ -1,0 +1,83 @@
+# DK HVL.  Hørve - Værslev
+#
+let hv = path("d3.dk.hvl");
+
+with detail = 3,
+     railway = :first :pax :removed
+{
+    # point.dk.Hørve  dk.HNS
+
+    with link = "line.dk.HVL" {
+        track(hv[:hor.yv, :hor.yv + 1.25km]);
+        line_label(:right:s, hv[:hor.yv + 1.25km] >> 0.5mt, "HVL");
+        track(hv[:hor.yv + 1.25km, :bje - 0.5sw]);
+    }
+
+    with link = "point.dk.Bjergesø", railway = :station {
+        track(hv[:bje - 0.5sw, :bje + 0.5sw]);
+        marker(:left :de.hp, hv[:bje] << 0.5mt);
+        slabel(:left, hv[:bje + 0.5sw] >> 1.2mt, "Bjergesø");
+    }
+
+    with link = "line.dk.HVL" {
+        track(hv[:bje + 0.5sw, :sta - 0.5sw]);
+    }
+
+    with link = "point.dk.Starreklinte", railway = :station {
+        track(hv[:sta - 0.5sw, :sta + 0.5sw]);
+        marker(:left :de.bf, hv[:sta] << 0.5mt);
+        slabel(:left, hv[:sta + 0.5sw] >> 1.2mt, "Starreklinte");
+    }
+
+    with link = "line.dk.HVL" {
+        track(hv[:sta + 0.5sw, :fol - 0.5sw]);
+    }
+
+    with link = "point.dk.Føllenslev", railway = :station {
+        track(hv[:fol - 0.5sw, :fol + 0.5sw]);
+        marker(:left :de.bf, hv[:fol] << 0.5mt);
+        slabel(:bottom, hv[:fol] << 0.5mt << 1.05sh, "Føllenslev");
+    }
+
+    with link = "line.dk.HVL" {
+        track(hv[:fol + 0.5sw, :esk - 0.5sw]);
+    }
+
+    with link = "point.dk.Eskebjerg", railway = :station {
+        track(hv[:esk - 0.5sw, :esk + 0.5sw]);
+        marker(:left :de.bf, hv[:esk] << 0.5mt);
+        slabel(:bottom, hv[:esk] << 0.5mt << 1.2sh, "Eskebjerg");
+    }
+
+    with link = "line.dk.HVL" {
+        track(hv[:esk + 0.5sw, :all - 0.5sw]);
+    }
+
+    with link = "point.dk.Alleshave", railway = :station {
+        track(hv[:all - 0.5sw, :all + 0.5sw]);
+        marker(:left :de.bf, hv[:all] << 0.5mt);
+        slabel(:left, hv[:all] >> 1.7mt + (0dt, 1dt), "Alleshave");
+    }
+
+    with link = "line.dk.HVL" {
+        track(hv[:all + 0.5sw, :kal - 0.5sw]);
+    }
+
+    with link = "point.dk.Kaldred", railway = :station {
+        track(hv[:kal - 0.5sw, :kal + 0.5sw]);
+        marker(:left :de.hp, hv[:kal] << 0.5mt);
+        slabel(:left, hv[:kal] >> 2mt + (0dt, 1dt), "Kaldred");
+    }
+
+    with link = "line.dk.HVL" {
+        track(hv[:kal + 0.5sw, :kal + 1.5km]);
+        line_label(:left:w, hv[:kal + 1.5km] << 0.5mt, (0dt, 0.3dt), "HVL");
+        track(
+                hv[:kal + 1.5km, :var.xs]
+            ..  hv[:var.ys, :var.ys + 0.1dl] >> 1mt >> 1ms
+        );
+    }
+
+    # point.dk.Værslev  dk.RKB
+}
+

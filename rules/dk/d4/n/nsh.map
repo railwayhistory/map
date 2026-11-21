@@ -1,0 +1,54 @@
+# DK NSH.  Nyborg - Slipshavn
+#
+let ns = path("d3.dk.nsh");
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    # point.dk.Nyborg-Færge  dk.NYB
+
+    with link = "line.dk.NSH" {
+        track(:ror,
+                ns[:nyf.yk - 0.1dl, :nyf.yk] << 0.5mo
+            ..  ns[:nyf.xk + 1md, :nyf.xk + 1.1md]
+        );
+        track(ns[:nyf.xk, :ska - 0.5sw]);
+    }
+
+    with link = "point.dk.Skærven", railway = :station {
+        track(ns[:ska - 0.5sw, :ska + 0.5sw]);
+        marker(:left :de.hp, ns[:ska] << 0.5mt);
+        station(:right, ns[:ska] << 0.5mt << 1sh + (2dt, 1dt),
+            "Skærven", "NSH: 3,0"
+        );
+    }
+
+    with link = "line.dk.NSH" {
+        track(ns[:ska + 0.5sw, :knu - 0.5sw]);
+    }
+
+    with link = "point.dk.Knudshoved", railway = :station {
+        track(ns[:knu - 0.5sw, :knu + 0.5sw]);
+        track(:side :nopax, path("d3.dk.nsh.knu")[:knu, :knu.f]);
+        marker(:left :de.hst, ns[:knu] << 0.5mt);
+        label(ns[:knu] << 0.5mt << 1sh + (1.5dt, 0.8dt),
+            hbox(:left:base, vbox(:center:base,
+                span(:xsmall, "NSH: 3,9"),
+                "Knudshoved"
+            ))
+        );
+    }
+
+    with link = "line.dk.NSH" {
+        track(ns[:knu + 0.5sw, :sli - 0.5sw]);
+    }
+
+    with link = "point.dk.", railway = :station {
+        track(ns[:sli - 0.5sw, :sli + 0.5sw]);
+        marker(:right :de.hst :casing, ns[:sli] >> 0.5mt);
+        station(:left, ns[:sli] << 0.5mt + (-1.5dt, 0.8dt),
+            span(:bold, "Slipshavn"), "NSH: 5,8"
+        );
+    }
+}
+

@@ -1,0 +1,36 @@
+# DK RKA.  Rødekro - Åbenrå
+#
+let ra = path("d3.dk.rka");
+
+with detail = 3, railway = :first :pax :closed {
+    # point.dk.Rødekro  dk.FPB
+
+    with link = "line.dk.RKA" {
+        track(:ror,
+                ra[:rod.ya - 0.1dl, :rod.ya] << 0.5md << 1ms << 0.5mt
+            ..  ra[:rod.xa + 2md, :rod.xa + 2.1md]
+        );
+        track(ra[:rod.xa + 2md, :ris - 0.49sw]);
+    }
+
+    with link = "point.dk.Rise", railway = :station {
+        track(ra[:ris - 0.5sw, :ris + 0.5sw]);
+        marker(:right :de.hp :removed, ra[:ris] >> 0.5mt);
+        slabel(:right :removed, ra[:ris] << 0.5mt + (1dt, -0.3dt), "Rise");
+    }
+
+    with link = "line.dk.RKA" {
+        track(ra[:ris + 0.49sw, :ris + 2.71km]);
+        line_label(:left:s, ra[:ris + 2.7km] << 0.5mt, (0.2dt, 0dt), "RKA");
+        track(ra[:ris + 2.69km, :abe - 0.49sw]);
+    }
+
+    with link = "point.dk.Aabenraa", railway = :station {
+        track(ra[:abe - 0.5sw, :abe + 0.5sw]);
+        with layer = 2 marker(:right :de.bf :casing, ra[:abe] >> 0.5mt);
+        slabel(:left, ra[:abe] >> 0.5mt >> 1sh + (-2.0dt, 1dt),
+            span(:bold, "Aabenraa")
+        );
+    }
+}
+

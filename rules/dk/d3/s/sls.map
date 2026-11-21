@@ -1,0 +1,35 @@
+# DK SLS.  Skrøbelev - Spodsbjerg
+#
+let ss = path("d3.dk.sls");
+
+with detail = 3,
+     railway = :first :pax :removed
+{
+    # point.dk.Skrøbelev  dk.RBK
+
+    with link = "line.dk.SLS" {
+        track(:ror, ss[:skr.ys, :skr.ys + 0.5seg]);
+        track(ss[:skr.ys + 0.5seg, :kro - 0.49sw]);
+    }
+
+    with link = "point.dk.Krogsbjerg", railway = :station {
+        track(ss[:kro - 0.5sw, :kro + 0.5sw]);
+        marker(:left :de.bf, ss[:kro] << 0.5mt);
+        slabel(:bottom, ss[:kro] >> 0.5mt + (0dt, 0.3dt), "Krogsbjerg");
+    }
+
+    with link = "line.dk.SLS" {
+        track(ss[:kro + 0.49sw, :kro + 1.3km]);
+        line_label(:left :se, ss[:kro + 1.3km] << 0.5mt, "SLS");
+        track(ss[:kro + 1.3km, :spo - 0.49sw]);
+    }
+
+    with link = "point.dk.Spodsbjerg", railway = :station {
+        track(ss[:spo - 0.5sw, :spo + 0.5sw]);
+        marker(:right :de.bf, ss[:spo] >> 0.5mt);
+        slabel(:right :bold, ss[:spo] >> 0.5mt >> 1sh + (1.5dt, 1.8dt),
+            "Spodsbjerg"
+        );
+    }
+}
+

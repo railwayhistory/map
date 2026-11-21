@@ -1,0 +1,78 @@
+# PL 786.  Granica Państwa (Trzciniec Zgorzelecki) - Bogatynia
+#
+let tb = path("d3.pl.786");
+
+with detail = 4,
+     railway = :second :pax
+{
+    # point.int.Rosenthal-Trzciniec-Zgorzelecki: de.6589
+    
+    with link = "line.pl.786" {
+        track(tb[:gtr + 0.3sw, :gtr + 0.5km]);
+        line_label(:right:e, tb[:gtr + 0.5km] >> 0.5mt, "786");
+        track(tb[:gtr + 0.5km, :trz]);
+    }
+
+    with link = "point.pl.Trzciniec-Zgorzelecki" {
+        marker(:right :de.abzw, tb[:trz] >> 0.5mt);
+        station(:right, tb[:trz] << 0.5mt + (1.5dt, 1dt),
+            span(:small :bold, "Trzciniec-Zgorzelecki"),
+            hbox(:center:top,
+                vbox(:right:top, "348: ", span(:nopax, "786: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "0,", anchor(), "010"),
+                    hbox(:sep:base :nopax, "26,", anchor(), "142")
+                )
+            )
+        );
+    }
+}
+
+with detail = 4,
+     railway = :second :nopax
+{
+    with link = "line.pl.786" {
+        track(tb[:trz, :tor - 0.5sw]);
+    }
+
+    with link = "point.pl.Turoszów" {
+        track(tb[:tor - 0.5sw, :tor + 0.5sw]);
+        marker(:left :de.gbf, tb[:tor] << 0.5mt);
+        station(:top, tb[:tor] << 0.5mt << 1sh + (0.5dt, -0.8dt),
+            "Turoszów", "786: 27,896"
+        );
+    }
+
+    with link = "line.pl.786" {
+        track(:second, tb[:tor + 0.5sw, :tor + 1.3km]);
+        line_label(:left:w, tb[:tor + 1.3km] << 0.5mt, (0dt, -0.3dt), "786");
+        track(:second, tb[:tor + 1.3km, :tb5]);
+    }
+
+    with link = "point.pl.Turów-Bocznica-5" {
+        marker(:right :de.anst :removed, tb[:tb5] >> 0.5mt);
+        station(:right :removed, tb[:tb5] << 0.5mt + (0.3dt, -0.8dt),
+            span(:small, "KWB Turów Bocznica 5"),
+            "786: 31,167"
+        );
+    }
+}
+
+with detail = 4,
+     railway = :second :removed
+{
+
+    with link = "line.pl.786" {
+        track(tb[:tb5, :bog - 0.5sw]);
+    }
+
+    with link = "point.pl.Bogatynia" {
+        track(:second:station, tb[:bog - 0.5sw, :bog.f]);
+        marker(:right :de.bf, tb[:bog] >> 0.5mt);
+        station(:right, tb[:bog] << 0.5mt + (1.3dt, 1dt),
+            span(:bold, "Bogatynia"),
+            "786: 32,760"
+        );
+    }
+}
+

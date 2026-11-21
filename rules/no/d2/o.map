@@ -2,25 +2,35 @@
 with detail = 2 {
     let of = path("d2.no.of");
 
-    with link = "line.no.OF" {
-        track(:first :cat:ac15, of[:nah, :nar]);
-        track(:first :cat:ac15 :pax, of[:nar, :bjg]);
-        with layer = 1 line_badge(:cat:ac15 :pax, of[:nar + 14.5km] @ 5, "OF");
+    with railway = :first :cat:ac15 :nopax {
+        with link = "point.no.Narvik-Havn" {
+            statdot(of[:nah]);
+            slabel(:left, of[:nah] + (-1.5dt, 0.8dt), "Narvik Havn");
+        }
+
+        with link = "line.no.OF" {
+            track(of[:nah, :nar]);
+        }
     }
 
-    with link = "point.no.Narvik-Havn" {
-        with layer = 1 marker(:statdot :cat:ac15, of[:nah]);
-        slabel(:left :cat:ac15, of[:nah] + (-1.5dt, 0.8dt), "Narvik Havn");
-    }
+    with railway = :first :cat:ac15 :pax {
+        with link = "point.no.Narvik" {
+            statdot(of[:nar]);
+            slabel(:left :bold, of[:nar] + (1dt, -1.5dt), "Narvik");
+        }
 
-    with link = "point.no.Narvik" {
-        with layer = 1 marker(:statdot :cat:ac15 :pax, of[:nar]);
-        slabel(:left :cat:ac15 :pax, of[:nar] + (1dt, -1.5dt), "Narvik");
-    }
+        with link = "line.no.OF" {
+            track(of[:nar, :nar + 4.5km]);
+            line_label(:left:s, of[:nar + 4.5km], "OF");
+            track(of[:nar + 4.5km, :bjg - 4.97km]);
+            line_label(:left:se, of[:bjg - 4.97km], "OF");
+            track(of[:bjg - 4.97km, :bjg]);
+        }
 
-    with link = "point.int.Bjørnfjell-Riksgränsen" {
-        marker(:refdt :cat:ac15 :right, of[:bjg]);
-        marker(:refdt :cat:ac15 :left, of[:bjg]);
+        with link = "point.int.Bjørnfjell-Riksgränsen" {
+            marker(:ref :right, of[:bjg]);
+            marker(:ref :left, of[:bjg]);
+        }
     }
 }
 

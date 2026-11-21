@@ -1,0 +1,84 @@
+# DK BRB.  Brenderup - Bogense
+#
+let bb = path("d3.dk.brb");
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    # point.dk.Brenderup  dk.OMF
+
+    with link = "line.dk.BRB" {
+        track(:ror,
+                bb[:bre.yb, :bre.xb] << 1mo
+            ..  bb[:bre.zb + 5mo, :bre.zb + 5.1mo]
+        );
+        track(bb[:bre.zb + 5mo, :hol - 0.49sw]);
+    }
+
+    with link = "point.dk.Holse", railway = :station {
+        track(bb[:hol - 0.5sw, :hol + 0.5sw]);
+        marker(:right :de.bf, bb[:hol] >> 0.5mt);
+        station(:right, bb[:hol] >> 0.5mt >> 1sh + (1.5dt, -1dt),
+            hbox(:left:top, "Holse"), "BRB: 2,5"
+        );
+    }
+
+    with link = "line.dk.BRB" {
+        track(bb[:hol + 0.49sw, :mej - 0.49sw]);
+    }
+
+    with link = "point.dk.Mejlskov", railway = :station {
+        track(bb[:mej - 0.5sw, :mej + 0.5sw]);
+        marker(:left :de.bf, bb[:mej] << 0.5mt);
+        station(:top, bb[:mej] << 0.5mt << 1sh + (-0.5dt, -0.9dt),
+            "Mejlskov", "BRB: 5,0"
+        );
+    }
+
+    with link = "line.dk.BRB" {
+        track(bb[:mej + 0.49sw, :mej + 1.3km]);
+        line_label(:right:n, bb[:mej + 1.3km] >> 0.5mt, (0.5dt, 0dt), "BRB");
+        track(bb[:mej + 1.3km, :esk - 0.49sw]);
+    }
+
+    with link = "point.dk.Eskelund", railway = :station {
+        track(bb[:esk - 0.5sw, :esk + 0.5sw]);
+        marker(:left :de.hp, bb[:esk] << 0.5mt);
+        station(:top, bb[:esk] << 0.5mt << 1sh + (-0.5dt, -0.9dt),
+            "Eskelund", "BRB: 7,5"
+        );
+    }
+
+    with link = "line.dk.BRB" {
+        track(bb[:esk + 0.49sw, :kas - 0.49sw]);
+    }
+
+    with link = "point.dk.Kassemose", railway = :station {
+        track(bb[:kas - 0.5sw, :kas + 0.5sw]);
+        marker(:right :de.bf, bb[:kas] >> 0.5mt);
+        station(:right, bb[:kas] >> 0.5mt >> 1sh + (1.5dt, 1.8dt),
+            "Kassemose", "BRB: 8,5"
+        );
+    }
+
+    with link = "line.dk.BRB" {
+        track(bb[:kas + 0.49sw, :tof - 0.49sw]);
+    }
+
+    with link = "point.dk.Tofte", railway = :station {
+        track(bb[:tof - 0.5sw, :tof + 0.5sw]);
+        marker(:left :de.hp, bb[:tof] << 0.5mt);
+        station(:left:right_align, bb[:tof] << 0.5mt << 1sh + (-1.3dt, 1.1dt),
+            "Tofte", "BRB: 10,0 "
+        );
+    }
+
+    with link = "line.dk.BRB" {
+        track(bb[:tof + 0.49sw, :bog.xb - 1mo]);
+        track(:ror,
+                bb[:bog.xb - 1.1mo, :bog.xb - 1mo]
+            ..  bb[:bog.yb, :bog.yb + 0.1dl] << 1mo
+        );
+    }
+}
+

@@ -2,41 +2,44 @@
 with detail = 2 {
     let fa = path("d2.fr.3.289");
 
-    with link = "line.fr.289" {
-        track(:first :closed, fa[:fou.yp, :spo.yf]);
-        track(:first :removed, fa[:spo.ya, :abb.yp]);
+    with railway = :first :pax {
+        with link = "line.fr.289" {
+            track(fa[:fou.yp, :fou.yp + 10.8km]);
+            line_label(:right:s, fa[:fou.yp + 10.8km], (-0.2dt, 0dt), "289");
+            track(fa[:fou.yp + 10.8km, :bri.yb]);
+        }
 
-        guide(:linenum :closed,
-                fa[:fou.yp + 11km] >> 0.7dt
-            --  fa[:fou.yp + 11km] >> 3.0dt
-        );
-        label(:linenum :closed, fa[:fou.yp + 11km] >> 3.0dt,
-            hbox(:center:bottom, "289")
-        );
-        guide(:linenum :removed,
-                fa[:spo.ya + 5km] >> 0.7dt
-            --  fa[:spo.ya + 5km] >> 3.0dt
-        );
-        label(:linenum :removed, fa[:spo.ya + 5km] >> 3.0dt + (0dt, 0.1dt),
-            hbox(:right:middle, "289 ")
-        );
-        guide(:linenum :removed,
-                fa[:fre + 17.5km] >> 0.7dt
-            --  fa[:fre + 17.5km] >> 3.0dt
-        );
-        label(:linenum :removed, fa[:fre + 17.5km] >> 3.0dt,
-            hbox(:right:middle, "289 ")
-        );
+        with link = "point.fr.Brias" {
+            track(fa[:bri.yb, :bri]);
+            statdot(:removed, fa[:bri]);
+            slabel(:left :removed, fa[:bri] + (-1.5dt, 0.5dt), "Brias");
+        }
+
+        with link = "line.fr.289" {
+            track(fa[:bri, :spo.yf]);
+        }
     }
 
-    with link = "point.fr.Brias" {
-        with layer = 1 marker(:statdot :removed, fa[:bri]);
-        slabel(:left :removed, fa[:bri] + (-1.5dt, 0.5dt), "Brias");
-    }
+    with railway = :first :pax :removed {
+        with link = "line.fr.289" {
+            track(fa[:spo.ya, :spo.ya + 5km]);
+            line_label(:right:e, fa[:spo.ya + 5km], "289");
+            track(fa[:spo.ya + 5km, :fre.ys]);
+        }
+ 
+        with link = "point.fr.Frévent" {
+            track(fa[:fre.ys, :fre]);
+            statdot(fa[:fre]);
+            slabel(:left, fa[:fre] + (0.8dt, -1.5dt), "Frévent");
+        }
 
-    with link = "point.fr.Frévent" {
-        with layer = 1 marker(:statdot :removed, fa[:fre]);
-        slabel(:left :removed, fa[:fre] + (0.8dt, -1.5dt), "Frévent");
+        with link = "line.fr.289" {
+            track(fa[:fre, :fre + 7.4km]);
+            line_label(:right:se, fa[:fre + 7.4km], "289");
+            track(fa[:fre + 7.4km, :abb.yp - 9.3km]);
+            line_label(:right:s, fa[:abb.yp - 9.3km], "289");
+            track(fa[:abb.yp - 9.3km, :abb.yp]);
+        }
     }
 }
 

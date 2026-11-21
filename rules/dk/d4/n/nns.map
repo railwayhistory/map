@@ -1,0 +1,238 @@
+# DK NNS.  Nykøbing Falster Vest - Nakskov
+#
+let nn = path("d3.dk.nns");
+
+with detail = 4,
+     railway = :first :pax
+{
+    # point.dk.Nykøbing-Falster-Vest  dk.RSR
+
+    with link = "line.dk.NNS" {
+        track(:lor,
+                nn[:nyv - 0.1dl, :nyv] >> 1mo
+            ..  nn[:nyv.xn, :nyv.xn + 0.1dl]
+        );
+        line_label(:left:ne, nn[:nyv.xn] << 0.5mt, "NNS");
+        track(:ror, nn[:nyv.xn, :oto.yn]);
+    }
+
+    with link = "point.dk.Øster-Toreby", railway = :station {
+        track(nn[:oto.yn, :oto + 0.5sw]);
+        track(:removed, path("d3.dk.snn")[:oto, :oto + 0.5sw]);
+        marker(:right :de.hp, nn[:oto] >> 0.5mt);
+        station(:top, nn[:oto] >> 0.5mt >> 1.2sh,
+            "Øster Toreby", "NNS: 2,8"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:oto + 0.5sw, :oto + 3km]);
+        line_label(:right:s, nn[:oto + 3km] >> 0.5mt, (0.5dt, 0dt), "NNS");
+        track(nn[:oto + 3km, :gra - 0.5sw]);
+    }
+
+    with link = "point.dk.Grænge", railway = :station {
+        track(nn[:gra - 0.5sw, :gra + 0.5sw]);
+        marker(:left :de.bf, nn[:gra] << 0.5mt);
+        station(:bottom, nn[:gra] << 0.5mt << 1sh + (-1.5dt, 0.8dt),
+            hbox(:right:top, "Grænge"), "NNS: 7,6"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:gra + 0.5sw, :kru - 0.5sw]);
+    }
+
+    with link = "point.dk.Krungerup", railway = :station {
+        track(nn[:kru - 0.5sw, :kru + 0.5sw]);
+        marker(:left :de.hp :removed, nn[:kru] << 0.5mt);
+        station(:bottom :removed, nn[:kru] << 0.5mt << 1sh + (-2dt, 0.5dt),
+            "Krungerup", "NNS: ?"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:kru + 0.5sw, :sak - 0.5sw]);
+    }
+
+    with link = "point.dk.Sakskøbing", railway = :station {
+        track(nn[:sak - 0.5sw, :sak + 0.5sw]);
+        marker(:right :de.bf, nn[:sak] >> 0.5mt);
+        station(:top, nn[:sak] >> 0.5mt >> 1.2sh,
+            "Sakskøbing", "NNS: 17,4"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:sak + 0.5sw, :vab - 0.5sw]);
+    }
+
+    with link = "point.dk.Våbensted", railway = :station {
+        track(nn[:vab - 0.5sw, :vab + 0.5sw]);
+        marker(:left :de.hp :removed, nn[:vab] << 0.5mt);
+        station(:bottom :removed, nn[:vab] << 0.5mt << 1sh + (1.5dt, 1dt),
+            "Våbensted", "NNS: ?"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:vab + 0.5sw, :vab + 2.7km]);
+        line_label(:left:n, nn[:vab + 2.7km] << 0.5mt, (0.3dt, 0dt), "NNS");
+        track(nn[:vab + 2.7km, :mar.yb - 200m]);
+    }
+
+    with link = "point.dk.Maribo", railway = :station {
+        # DK MBH
+        track(:side :nopax,
+                nn[:mar.yb - 180m] >> 140m --  nn[:mar.yb - 140m] >> 100m
+            ..  nn[:mar.yb, :mar.yb + 120m - 1dl] >> 1mo
+        );
+            track(:side :nopax,
+                    nn[:mar.yb + 120m - 1dl] >> 1mo
+                --  nn[:mar.yb + 120m]
+            );
+
+
+        # DK MTR
+        track(:side :nopax,
+                nn[:mar.yb + 120m, :mar - 1dl] >> 1mo
+            --  nn[:mar, :mar + 0.1dl]
+        );
+        track(:removed, nn[:mar - 1dl, :mar.yr + 200m] >> 1mo);
+
+        # DK NNS
+        track(
+                nn[:mar.yb - 200m, :mar.yb + 50m]
+            ..  nn[:mar - 280m + 2dl, :mar + 190m - 2dl] << 2mo
+            --  nn[:mar + 190m, :mar.yr + 200m]
+        );
+
+        # DK ??
+        track(:side :nopax,
+                nn[:mar - 281m, :mar - 280m]
+            --  nn[:mar - 280m + 1dl, :mar + 400m] << 1mo
+        );
+        track(:removed, nn[:mar + 400m, :mar.yr] << 1mo);
+
+        track(:nopax, nn[:mar.yb + 50m, :mar.yr + 190m]);
+
+        marker(:left :de.bf, nn[:mar] << 0.5mt << 2mo);
+        station(:bottom, nn[:mar] << 0.5mt << 2mo << 1.3sh,
+            span(:bold, "Maribo"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "MTR: "),
+                    span(:museum, "MBH: "),
+                    "NNS: ",
+                    span(:removed, "MRH: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "0,", anchor(), "0"),
+                    hbox(:sep:base :museum, "0,", anchor(), "0"),
+                    hbox(:sep:base, "25,", anchor(), "4"),
+                    hbox(:sep:base :removed, "0,", anchor(), "0")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:mar.yr + 200m, :mar.yt]);
+        track(:ror, nn[:mar.yt, :mar.yt + 200m]);
+        track(nn[:mar.yt + 200m, :eri - 0.5sw]);
+    }
+
+    with link = "point.dk.Erikstrup", railway = :station {
+        track(nn[:eri - 0.5sw, :eri + 0.5sw]);
+        marker(:right :de.hp :removed, nn[:eri] >> 0.5mt);
+        station(:bottom :removed, nn[:eri] << 0.5mt << 0.8dt,
+            "Erikstrup", "NNS: ??"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:eri + 0.5sw, :ost - 0.5sw]);
+    }
+
+    with link = "point.dk.Østofte", railway = :station {
+        track(nn[:ost - 0.5sw, :ost + 0.5sw]);
+        marker(:right :de.hp :removed, nn[:ost] >> 0.5mt);
+        station(:top :removed, nn[:ost] >> 0.5mt >> 1.2sh,
+            "Østofte", "NNS: ??"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:ost + 0.5sw, :ost + 1.4km]);
+        line_label(:left:n, nn[:ost + 1.4km] << 0.5mt, "NNS");
+        track(nn[:ost + 1.4km, :ryd - 0.5sw]);
+    }
+
+    with link = "point.dk.Ryde", railway = :station {
+        track(nn[:ryd - 0.5sw, :ryd + 0.5sw]);
+        marker(:right :de.bf, nn[:ryd] >> 0.5mt);
+        station(:top, nn[:ryd] >> 0.5mt >> 1sh + (1.3dt, -0.8dt),
+            "Ryde", "NNS: 33,9"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:ryd + 0.5sw, :sol - 0.5sw]);
+    }
+
+    with link = "point.dk.Søllested", railway = :station {
+        track(nn[:sol - 0.5sw, :sol + 0.5sw]);
+        marker(:left :de.bf, nn[:sol] << 0.5mt);
+        station(:bottom, nn[:sol] << 0.5mt << 1.3sh + (-2dt, 0dt),
+            "Søllested", "NNS: 41,0"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:sol + 0.5sw, :avn - 0.5sw]);
+    }
+
+    with link = "point.dk.Avnede", railway = :station {
+        track(nn[:avn - 0.5sw, :avn + 0.5sw]);
+        marker(:right :de.hp, nn[:avn] >> 0.5mt);
+        station(:top, nn[:avn] >> 0.5mt >> 1.4sh + (1.5dt, 0dt),
+            "Avnede", "NNS: 45,0"
+        );
+    }
+
+    with link = "line.dk.NNS" {
+        track(nn[:avn + 0.5sw, :avn + 1.8km]);
+        line_label(:right:s, nn[:avn + 1.8km] >> 0.5mt, "NNS");
+        track(nn[:avn + 1.8km, :nak.yr - 200m]);
+    }
+
+    with link = "point.dk.Nakskov", railway = :station {
+        # DK NRY
+        track(:side :nopax,
+                path("d3.dk.nry")[:nak.yr + 120m, :nak + 385m + 1dl] << 1mo
+            --  nn[:nak - 385m, :nak - 384m]
+        );
+
+        # DK NNS - NKN
+        track(nn[:nak.yr - 200m, :nak.f]);
+
+        marker(:left :de.bf, nn[:nak] << 0.5mt);
+        station(:bottom, nn[:nak] << 0.5mt << 1.2sh + (-0.3dt, 0dt),
+            span(:bold, "Nakskov"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    span(:removed, "NKN: "),
+                    "NNS: ",
+                    span(:removed, "NRY: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "0,", anchor(), "0"),
+                    hbox(:sep:base, "50,", anchor(), "2"),
+                    hbox(:sep:base :removed, "0,", anchor(), "0")
+                )
+            )
+        );
+    }
+}
+
+

@@ -1,0 +1,143 @@
+# DK VHT. Valby - Høje Taastrup (S-tog)
+#
+let vh = path("d3.dk.kfa");
+
+with detail = 4,
+     railway = :first :cat:dc15 :pax
+{
+    # point.dk.Valby  de.KFS
+
+    with link = "line.dk.VHT" {
+        with layer = -1 track(:double :lor,
+            vh[:val.xf, :dan.x + 0.5mo + 1mt] >> 2mo
+        );
+    }
+
+    with link = "point.dk.Danshøj", railway = :station {
+        track(:double,
+                vh[:dan.x + 0.5mo + 1mt, :dan.x + 0.5mo + 1mt + 1sw] >> 2mo
+        );
+        marker(:right :de.hp,
+            vh[:dan.x + 0.5mo + 1mt + 0.5sw] >> 2.5mo >> 0.5mt
+        );
+        station(:top:right_align, vh[:dan + 1sw] >> 2.5mo >> 0.5mt >> 1.2sh,
+            "Danshøj",
+            hbox(:right:top,
+                vbox(:right:top, "VLH: ", "VHT: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "4,", anchor(), "139"),
+                    hbox(:sep:base, "5,", anchor(), "260")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.VHT" {
+        track(:double :lor, vh[:dan + 0.5sw, :hvn - 0.5sw] >> 2mo);
+    }
+
+    with link = "point.dk.Hvidovre-Nær", railway = :station {
+        track(:double, vh[:hvn - 0.5sw, :hvn + 0.5sw] >> 2mo);
+        marker(:right :de.hp, vh[:hvn] >> 2.5mo >> 0.5mt);
+        station(:top, vh[:hvn] >> 2.5mo >> 0.5mt >> 1.2sh,
+            hbox(:center:base, "Hvidovre", span(:light, " Nær")),
+            "VHT: 6,300"
+        );
+    }
+
+    with link = "line.dk.VHT" {
+        track(:double :lor, vh[:hvn + 0.5sw, :rod - 0.5sw] >> 2mo);
+    }
+
+    with link = "point.dk.Rødovre", railway = :station {
+        track(:double, vh[:rod - 0.5sw, :rod + 0.5sw] >> 2mo);
+        marker(:right :de.hp, vh[:rod] >> 2.5mo >> 0.5mt);
+        station(:top, vh[:rod] >> 2.5mo >> 0.5mt >> 1.2sh,
+            "Rødovre", "VHT: 7,400"
+        );
+    }
+
+    with link = "line.dk.VHT" {
+        track(:double :lor, vh[:rod + 0.5sw, :brb - 0.5sw] >> 2mo);
+    }
+
+    with link = "point.dk.Brøndbyøster", railway = :station {
+        track(:double, vh[:brb - 0.5sw, :brb + 0.5sw] >> 2mo);
+        marker(:right :de.hp, vh[:brb] >> 2.5mo >> 0.5mt);
+        station(:top, vh[:brb] >> 2.5mo >> 0.5mt >> 1.2sh,
+            "Brøndbyøster", "VHT: 8,500"
+        );
+    }
+
+    with link = "line.dk.VHT" {
+        track(:double :lor, vh[:brb + 0.5sw, :glo - 0.5sw] >> 2mo);
+    }
+
+    with link = "point.dk.Glostrup", railway = :station {
+        track(:double, vh[:glo - 0.5sw, :glo + 0.5sw] >> 2mo);
+        marker(:right :de.bf, vh[:glo] >> 2.5mo >> 0.5mt);
+        station(:top, vh[:glo] >> 2.5mo >> 0.5mt >> 1.3sh - (0.5dt, 0dt),
+            "Glostrup",
+            hbox(:center:top,
+                vbox(:right:top, "VHT: ", span(:cat:ac25, "KFA: ")),
+                vbox(:sep:top,
+                    hbox(:sep:base, "11,", anchor(), "214"),
+                    hbox(:sep:base :cat:ac25, "11,", anchor(), "214")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.VHT" {
+        track(:double :lor, vh[:glo + 0.5sw, :alb - 0.5sw] >> 2mo);
+    }
+
+    with link = "point.dk.Albertslund", railway = :station {
+        track(:double, vh[:alb - 0.5sw, :alb + 0.5sw] >> 2mo);
+        marker(:right :de.hp, vh[:alb] >> 2.5mo >> 0.5mt);
+        station(:top, vh[:alb] >> 2.5mo >> 0.5mt >> 1.25sh + (-0.5dt, 0dt),
+            "Albertslund", "VHT: 14,100"
+        );
+    }
+
+    with link = "line.dk.VHT" {
+        track(:double :lor, vh[:alb + 0.5sw, :alb + 1.7km] >> 2mo);
+        line_label(:right:s, vh[:alb + 1.7km] >> 2.5mo >> 0.5mt, "VHT");
+        track(:double :lor, vh[:alb + 1.7km, :tas - 0.5sw] >> 2mo);
+    }
+
+    with link = "point.dk.Taastrup", railway = :station {
+        track(:double, vh[:tas - 0.5sw, :tas + 0.5sw] >> 2mo);
+        marker(:right :de.bf, vh[:tas] >> 2.5mo >> 0.5mt);
+        station(:top, vh[:tas] >> 2.5mo >> 0.5mt >> 1.25sh + (-0.5dt, 0dt),
+            "Taastrup", "VHT: 17,400"
+        );
+    }
+
+    with link = "line.dk.VHT" {
+        track(:double :lor, vh[:tas + 0.5sw, :hoj - 550m] >> 2mo);
+    }
+
+    with link = "point.dk.Høje-Taastrup", railway = :station {
+        track(
+                vh[:hoj - 550m, :hoj - 430m - 1.4dl] >> 2.5mo
+            --  vh[:hoj - 430m - 0.4dl, :hoj + 210m] >> 3.5mo
+        );
+        track(
+                vh[:hoj - 550m, :hoj - 430m - 0.7dl] >> 1.5mo
+            --  vh[:hoj - 430m + 0.3dl, :hoj + 210m] >> 2.5mo
+        );
+        marker(:right :de.bf, vh[:hoj] >> 3.5mo >> 0.5mt);
+        station(:top :cat:ac25, vh[:hoj] >> 3.5mo >> 0.5mt >> 1.2sh,
+            span(:bold, "Høje Taastrup"),
+            hbox(:center:top,
+                vbox(:right:top, span(:cat:dc15, "VHT: "), "KFA: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :cat:dc15, "19,", anchor(), "500"),
+                    hbox(:sep:base, "19,", anchor(), "500")
+                )
+            )
+        );
+    }
+}
+

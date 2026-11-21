@@ -226,9 +226,25 @@ with detail = 2 {
 with detail = 2 {
     let np = path("d2.de.m.5330");
 
-    with link = "line.de.5330" {
-        track(:second :museum, np[:nor.ya, :gun.yn]);
-        line_badge(:museum, np[:nor.ya + 12km], "5330");
+    with railway = :second :museum {
+        with link = "line.de.5330" {
+            track(np[:nor.ya, :nor.ya + 12km]);
+            line_label(:right:nw, np[:nor.ya + 12km], "5330");
+            track(np[:nor.ya + 12km, :was]);
+        }
+    }
+
+    with railway = :second :pax {
+        with link = "point.de.Wassertrüdingen" {
+            statdot(np[:was]);
+            slabel(:left, np[:was] + (-1.5dt, 0.8dt), "Wassertrüdingen");
+        }
+
+        with link = "line.de.5330" {
+            track(np[:was, :was + 5.8km]);
+            line_label(:right:nw, np[:was + 5.8km], "5330");
+            track(np[:was + 5.8km, :gun.yn]);
+        }
     }
 }
 

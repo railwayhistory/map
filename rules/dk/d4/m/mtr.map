@@ -1,0 +1,110 @@
+# DK MTR.  Maribo - Torrig
+#
+let mt = path("d3.dk.mtr");
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    # point.dk.Maribo  dk.NNS
+
+    with link = "line.dk.MTR" {
+        track(:lor, mt[:mar.yr + 200m, :mar.yt] >> 1mo);
+        track(:lor,
+                mt[:mar.yt - 0.1dl, :mar.yt] >> 1mo
+            ..  mt[:mar.xt, :mar.xt + 0.1dl]
+        );
+        track(mt[:mar.xt, :eri - 0.5sw]);
+    }
+
+    with link = "point.dk.Erikstrup-Nord", railway = :station {
+        track(mt[:eri - 0.5sw, :eri + 0.5sw]);
+        marker(:right :de.hp, mt[:eri] >> 0.5mt);
+        station(:right, mt[:eri] >> 0.5mt >> 1sh + (1.2dt, 1dt),
+            "Erikstrup", "MTR: 4,2"
+        );
+    }
+
+    with link = "line.dk.MTR" {
+        track(mt[:eri + 0.5sw, :eri + 1.4km]);
+        line_label(:right:w, mt[:eri + 1.4km] >> 0.5mt, "MTR");
+        track(mt[:eri + 1.4km, :nor - 0.5sw]);
+    }
+
+    with link = "point.dk.Nørreballe", railway = :station {
+        track(mt[:nor - 0.5sw, :nor + 0.5sw]);
+        marker(:left :de.bf, mt[:nor] << 0.5mt);
+        station(:left, mt[:nor] << 0.5mt << 1sh + (-1.3dt, 1.3dt),
+            "Nørreballe", "MTR: 6,9"
+        );
+    }
+
+    with link = "line.dk.MTR" {
+        track(mt[:nor + 0.5sw, :hav - 0.5sw]);
+    }
+
+    with link = "point.dk.Havløkke", railway = :station {
+        track(mt[:hav - 0.5sw, :hav + 0.5sw]);
+        marker(:right :de.bf, mt[:hav] >> 0.5mt);
+        station(:right, mt[:hav] >> 0.5mt >> 1sh + (1.6dt, 0.8dt),
+            "Havløkke", "MTR: 10,2"
+        );
+    }
+
+    with link = "line.dk.MTR" {
+        track(mt[:hav + 0.5sw, :sto - 0.5sw]);
+    }
+
+    with link = "point.dk.Stokkemarke", railway = :station {
+        track(mt[:sto - 0.5sw, :sto + 0.5sw]);
+        marker(:left :de.bf, mt[:sto] << 0.5mt);
+        station(:bottom, mt[:sto] << 0.5mt << 1sh + (-1dt, 0.8dt),
+            "Stokkemarke", "MTR: 13,4"
+        );
+    }
+
+    with link = "line.dk.MTR" {
+        track(mt[:sto + 0.5sw, :ves - 0.5sw]);
+    }
+
+    with link = "point.dk.Vesterborg", railway = :station {
+        track(mt[:ves - 0.5sw, :ves + 0.5sw]);
+        marker(:right :de.bf, mt[:ves] >> 0.5mt);
+        station(:right, mt[:ves] >> 0.5mt >> 1sh + (1.2dt, 0.8dt),
+            "Vesterborg", "MTR: 17,3"
+        );
+    }
+
+    with link = "line.dk.MTR" {
+        track(mt[:ves + 0.5sw, :lin - 0.5sw]);
+    }
+
+    with link = "point.dk.Lindet", railway = :station {
+        track(mt[:lin - 0.5sw, :lin + 0.5sw]);
+        marker(:left :de.bf, mt[:lin] << 0.5mt);
+        station(:left, mt[:lin] << 0.5mt << 1sh + (-1.3dt, 1.2dt),
+            "Lindet", "MTR: 20,1"
+        );
+    }
+
+    with link = "line.dk.MTR" {
+        track(mt[:lin + 0.5sw, :lin + 0.9km]);
+        line_label(:right:w, mt[:lin + 0.9km] >> 0.5mt, "MTR");
+        track(mt[:lin + 0.9km, :bir - 0.5sw]);
+    }
+
+    with link = "point.dk.Birket", railway = :station {
+        track(mt[:bir - 0.5sw, :bir + 0.5sw]);
+        marker(:right :de.hp, mt[:bir] >> 0.5mt);
+        station(:right:left_align, mt[:bir] >> 0.5mt >> 1sh + (1.3dt, 1.4dt),
+            "Birket", "MTR: 22,0"
+        );
+    }
+
+    with link = "line.dk.MTR" {
+        track(mt[:bir + 0.5sw, :tor.ym - 200m]);
+        track(:ror, mt[:tor.ym - 200m, :tor.ym]);
+    }
+
+    # point.dk.Torrig  dk.NKN
+}
+

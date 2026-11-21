@@ -1,0 +1,81 @@
+# DK NKG.  Nykøbing Falster - Gedser
+#
+let ng = path("d3.dk.nkg");
+
+with detail = 3,
+     railway = :first :nopax
+{
+    # point.dk.Nykøbing-Falster  dk.RSR
+
+    with link = "line.dk.NKG" {
+        track(:lor,
+                ng[:nyk.yg - 0.1dl, :nyk.yg] << 0.5md << 1ms << 0.5mt
+            ..  ng[:nyk.xg + 2mt, :nyk.xg + 2.1mt]
+        );
+        track(ng[:nyk.xg + 2mt, :nyk.xg + 3km]);
+        line_label(:right:e, ng[:nyk.xg + 3km] >> 0.5mt, "NKG");
+        track(ng[:nyk.xg + 3km, :vag - 0.5sw]);
+    }
+
+    with link = "point.dk.Væggerløse", railway = :station {
+        track(ng[:vag - 0.5sw, :vag + 0.5sw]);
+        marker(:left :de.bbf, ng[:vag] << 0.5mt);
+        marker(:left :de.exbf, ng[:vag] << 0.5mt);
+        slabel(:right, ng[:vag] << 0.5mt << 1.5sh + (1.2dt, 1.2dt),
+            "Væggerløse"
+        );
+    }
+
+    with link = "line.dk.NKG" {
+        track(ng[:vag + 0.5sw, :mar - 0.5sw]);
+    }
+
+    with link = "point.dk.Marrebæk", railway = :station {
+        track(ng[:mar - 0.5sw, :mar + 0.5sw]);
+        marker(:left :de.hp :removed, ng[:mar] << 0.5mt);
+        slabel(:right :removed, ng[:mar] << 0.5mt << 1sh + (1.2dt, 1.2dt),
+            "Marrebæk"
+        );
+    }
+
+    with link = "line.dk.NKG" {
+        track(ng[:mar + 0.5sw, :fis - 0.5sw]);
+    }
+
+    with link = "point.dk.Fiskebæk", railway = :station {
+        track(ng[:fis - 0.5sw, :fis + 0.5sw]);
+        marker(:right :de.bbf, ng[:fis] >> 0.5mt);
+        marker(:right :de.exbf, ng[:fis] >> 0.5mt);
+        slabel(:right, ng[:fis] << 0.5mt + (1.2dt, 1dt),
+            "Fiskebæk"
+        );
+    }
+
+    with link = "line.dk.NKG" {
+        track(ng[:fis + 0.5sw, :geb - 0.5sw]);
+    }
+
+    with link = "point.dk.Gedesby", railway = :station {
+        track(ng[:geb - 0.5sw, :geb + 0.5sw]);
+        marker(:right :de.hp :removed, ng[:geb] >> 0.5mt);
+        slabel(:right :removed, ng[:geb] << 0.5mt + (1dt, 0.8dt),
+            "Gedesby"
+        );
+    }
+
+    with link = "line.dk.NKG" {
+        track(ng[:geb + 0.5sw, :geb + 2.6km]);
+        line_label(:left:w, ng[:geb + 2.6km] << 0.5mt, "NKG");
+        track(ng[:geb + 2.6km, :ged - 0.5sw]);
+    }
+
+    with link = "point.dk.Gedser", railway = :station {
+        track(ng[:ged - 0.5sw, :ged + 0.5sw]);
+        marker(:left :de.bbf, ng[:ged] << 0.5mt);
+        marker(:left :de.exbf, ng[:ged] << 0.5mt);
+        slabel(:right :bold, ng[:ged] << 0.5mt << 1.5sh + (1.2dt, 1.2dt),
+            "Gedser"
+        );
+    }
+}
+

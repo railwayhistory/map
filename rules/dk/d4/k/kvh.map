@@ -1,0 +1,193 @@
+# DK KVH.  København H - Vigerslev - Hvidovre Fjern
+#
+let kh = path("d3.dk.kvh");
+
+with detail = 4,
+     railway = :first :cat:ac25 :pax
+{
+    # point.dk.København-H  dk.KFA
+    
+    with link = "line.dk.KVH" {
+        track(:up:ror:lor, kh[:kob + 0.5sw, :dyb - 0.5sw] << 1.5mo);
+        track(:dn:ror, kh[:kob + 0.5sw, :dyb - 0.5sw] << 4.5mo);
+
+        track(:up:ror:lor, kh[:dyb - 0.5sw, :dyb + 0.5sw] << 1.5mo);
+        track(:dn:ror, kh[:dyb - 0.5sw, :dyb + 0.5sw] << 4.5mo);
+
+        track(:up:ror:lor, kh[:dyb + 0.5sw, :ske.xk] << 1.5mo);
+        track(:dn:ror, kh[:dyb + 0.5sw, :ske.xk] << 4.5mo);
+
+        track(:up:ror:lor :casing,
+                kh[:ske.xk, :ske.xk + 0.1dl] << 1.5mo
+            ..  kh[:kob.yk - 151m, :kob.yk - 150m] << 3.5mo
+        );
+        track(:dn:ror,
+                kh[:ske.xk, :kob.yk - 150m] << 4.5mo
+        );
+
+        track(:up:ror:ldn,
+                kh[:kob.yk - 150m, :kob.yk - 149m] << 3.5mo
+            ..  kh[:kob.xk + 80m, :bav - 0.5sw] << 1.5mo
+        );
+        track(:dn:rup,
+                kh[:kob.yk - 150m, :kob.yk - 149m] << 4.5mo
+            ..  kh[:kob.xk + 80m, :bav - 0.5sw] << 2.5mo
+        );
+
+        track(:up:ror:ldn, kh[:bav - 0.5sw, :kob.yg] << 1.5mo);
+        track(:dn:rup, kh[:bav - 0.5sw, :kob.yg] << 2.5mo);
+
+        track(:up:ror:ldn :casing,
+                kh[:kob.yg - 0.1dl, :kob.yg] << 1.5mo
+            ..  kh[:kgb - 0.1dl, :kgb] >> 0.5mo 
+        );
+        track(:dn:rup :casing,
+                kh[:kob.yg - 0.1dl, :kob.yg] << 2.5mo
+            ..  kh[:kgb - 0.1dl, :kgb] << 0.5mo 
+        );
+    }
+
+    with link = "point.dk.København-G", railway = :station {
+        track(:double, kh[:kgb, :kgb + 1sw]);
+        marker(:left :de.bbf :nopax, kh[:kgb + 0.5sw] << 0.5mo << 0.5mt);
+        station(:bottom, kh[:kgb + 0.5sw] << 0.5mo << 0.5mt << 1.3sh,
+            "K. G", "KVH: 3,200"
+        );
+    }
+
+    with link = "line.dk.KVH" {
+        track(:double :ror, kh[:kgb + 1sw, :sja - 0.5sw]);
+        track(:double :ror, kh[:sja - 0.5sw, :sja + 0.5sw]);
+        track(:double :ror, kh[:sja + 0.5sw, :kog.yk]);
+        with layer = -1 track(:double, kh[:kog.yk, :vig.yk]);
+        with layer = -1 track(:double :ror:lor, kh[:vig.yk, :nel - 0.5sw]);
+    }
+
+    with link = "point.dk.København-Syd", railway = :station {
+        track(:double, kh[:nel - 0.5sw, :nel + 0.5sw]);
+        track(:double :cat:dc15, kh[:nel - 0.5sw, :nel + 0.5sw] >> 2mo);
+        marker(:right :de.hp :cat:dc15, kh[:nel] >> 2.5mo >> 0.5mt);
+        with zoom = :low station(:left, kh[:nel + 1sw] << 2.5mo << 1.5mt,
+            hbox(:right:top :bold, "København Syd"),
+            hbox(:right:base,
+                "4,571 ·", span(:cat:dc15, " 2,348 · 4,400")
+            )
+        );
+        with zoom = :high station(:left, kh[:nel + 1sw] << 2.5mo << 1.5mt,
+            hbox(:right:top :bold, "København Syd"),
+            hbox(:center:top,
+                vbox(:right:top,
+                    "KVH: ",
+                    span(:cat:dc15, "VLH: "),
+                    span(:cat:dc15, "KHK: ")
+                ),
+                vbox(:sep:top,
+                    hbox(:sep:base, "4,", anchor(), "571"),
+                    hbox(:sep:base :cat:dc15, "2,", anchor(), "348"),
+                    hbox(:sep:base :cat:dc15, "4,", anchor(), "400")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.KVH" {
+        track(:double :ror:lor, kh[:nel + 0.5sw, :vig - 0.5sw]);
+    }
+
+    with link = "point.dk.Vigerslev", railway = :station {
+        track(:double :cat:dc15, kh[:vig - 0.5sw, :vig.yr + 3dl] >> 2mo);
+
+        track(:double, kh[:vig - 0.5sw, :vig.yr + 3dl]);
+
+        track(
+                kh[:vig.yr] >> 0.5mo
+            --  kh[:vig.yr + 1dl] << 0.5mo
+        );
+        track(
+                kh[:vig.yr - 0.8dl, :vig.yr - 0.7dl] << 0.5mo
+            --  kh[:vig.yr + 0.3dl, :vig.yr + 3dl] << 1.5mo
+        );
+
+        track(:double,
+                kh[:vig - 0.51sw, :vig - 0.5sw] << 2mo
+            ..  kh[:vig.yr + 1dl, :vig.yr + 3dl] << 3.5mo
+        );
+
+        marker(:right :de.bbf :nopax, kh[:vig] >> 2.5mo >> 0.5mt);
+        with zoom = :low station(:right :nopax,
+            kh[:vig - 0.5sw] >> 2.5mo >> 1mt >> 1.2sh,
+            span(:bold, "Vigerslev"),
+            hbox(:center:base, span(:cat:dc15, "2,50"), " · 6,20")
+        );
+        with zoom = :high label(:nopax,
+            kh[:vig - 0.5sw] >> 2.5mo >> 1mt >> 1.2sh,
+            hbox(:left:base,
+                vbox(:center:base,
+                    hbox(:center:bottom :xsmall,
+                        vbox(:right:bottom,
+                            span(:cat:dc15, "VLH: "),
+                            "KVH: ",
+                            "VRS: ",
+                            "[VKB: "
+                        ),
+                        vbox(:sep:bottom,
+                            hbox(:sep:base :cat:dc15, "2,", anchor(), "500"),
+                            hbox(:sep:base, "6,", anchor(), "200"),
+                            hbox(:sep:base, "6,", anchor(), "200"),
+                            hbox(:sep:base, "0,", anchor(), "254]")
+                        )
+                    ),
+                    span(:bold, "Vigerslev")
+                )
+            )
+        );
+    }
+
+    with link = "point.dk.Vigerslev" {
+        track(:ror, kh[:vig.yr + 3dl, :via - 0.5sw] >> 0.5mo);
+        track(:ror, kh[:via - 0.5sw, :vig.yh] >> 0.5mo);
+
+        track(:up:ldn :casing,
+                kh[:vig.yr + 2.9dl, :vig.yr + 3dl] << 3mo
+            ..  kh[:vig.yh, :vig.yh + 0.1dl] << 0.5mo
+        );
+        track(:dn:rup :casing,
+                kh[:vig.yr + 2.9dl, :vig.yr + 3dl] << 4mo
+            ..  kh[:vig.yh, :vig.yh + 0.1dl] << 1.5mo
+        );
+    }
+
+    with link = "point.dk.Vigerslev", railway = :station {
+        track(kh[:vig.yh, :vig.yh + 250m + 2dl] >> 0.5mo);
+
+        track(
+                kh[:vig.yh, :vig.yh + 250m - 1dl] << 0.5mo
+            --  kh[:vig.yh + 250m, :vig.yh + 251m] >> 0.5mo
+        );
+        track(
+                kh[:vig.yh, :vig.yh + 250m - 0.3dl] << 1.5mo
+            --  kh[:vig.yh + 250m + 0.7dl, :vig.yh + 250m + 2dl] << 0.5mo
+        );
+    }
+
+    with link = "line.dk.KVH" {
+        track(:double, kh[:vig.yh + 250m + 2dl, :hvf.xv]);
+
+        with layer = -1 track(:up:ldn:ror,
+                kh[:hvf.xv - 0.1dl, :hvf.xv] >> 0.5mo
+            ..  kh[:hvf.yv, :hvf.yv + 0.1dl] << 0.5mo
+        );
+        track(:dn:rup,
+                kh[:hvf.xv - 0.1dl, :hvf.xv] << 0.5mo
+            ..  kh[:hvf.yv, :hvf.yv + 0.1dl] << 3mo
+        );
+
+        track(:up:ror:lor, kh[:hvf.yv, :hvf - 850m] << 0.5mo);
+        track(:dn:ror,
+                kh[:hvf.yv, :hvf - 1200m] << 3mo
+            ..  kh[:hvf - 851m, :hvf - 850m] << 2.5mo
+        );
+
+    }
+}
+

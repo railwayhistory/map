@@ -1,0 +1,53 @@
+# DK AKA.  Aakirkeby - Almindingen
+#
+let aa = path("d3.dk.aka");
+
+with detail = 3, railway = :third :narrow:g1000 :pax :removed {
+    # point.dk.Aakirkeby  dk.RNX
+
+    with link = "line.dk.AKA" {
+        track(:lor, aa[:aki + 0.49sw, :aki.ya] >> 1ls >> 1lt);
+        track(:lor,
+                aa[:aki.ya - 0.1dl, :aki.ya] >> 1ls >> 1lt
+            ..  aa[:aki.xa + 1lt, :aki.xa + 1.1lt]
+        );
+        track(aa[:aki.xa + 1lt, :sko - 0.49sw]);
+    }
+
+    with link = "point.dk.Skørrebro", railway = :station {
+        track(aa[:sko - 0.5sw, :sko + 0.5sw]);
+        marker(:right :de.hp, aa[:sko] >> 0.5lt);
+        slabel(:right, aa[:sko] >> 0.5lt >> 1sh + (1.1dt, 0.9dt),
+            "Skørrebro"
+        );
+    }
+
+    with link = "line.dk.AKA" {
+        track(aa[:sko + 0.49sw, :sko + 0.71km]);
+        line_label(:right:w, aa[:sko + 0.7km] >> 0.5lt, "AKA");
+        track(aa[:sko + 0.69km, :val + 0.1dl]);
+    }
+
+    with link = "point.dk.Vallensgård", railway = :station {
+        marker(:left :de.anst, aa[:val] << 0.5lt);
+        slabel(:left :xsmall, aa[:val] << 0.5lt << 1sh + (-1.1dt, 0.9dt),
+            "Vallensgård"
+        );
+    }
+
+    with link = "line.dk.AKA" {
+        track(aa[:val - 0.1dl, :alm.yg + 0.1dl]);
+    }
+
+    with link = "point.dk.Almindingen", railway = :station {
+        let ag = path("d3.dk.agh");
+
+        track(aa[:alm.yg, :alm + 0.5sw]);
+        track(ag[:alm.yg, :alm + 0.5sw]);
+        marker(:left :de.bf, aa[:alm] << 0.5lt);
+        slabel(:left, aa[:alm] << 0.5lt << 1sh + (-1.2dt, 0.9dt),
+            span(:bold, "Almindingen")
+        );
+    }
+}
+

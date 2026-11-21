@@ -1,0 +1,40 @@
+# DE 6590.  Görlitz - Hagenwerder Grenze
+#
+let gh = path("d3.de.6590");
+
+with detail = 4,
+     railway = :second :pax
+{
+    # ...
+
+    with link = "point.de.Hagenwerder", railway = :station {
+        track(gh[:hag - 0.5sw, :hag.yz]);
+        marker(:left :de.bf, gh[:hag] << 0.5mt);
+        station(:left, gh[:hag] >> 0.5mt + (-1.3dt, 1dt),
+            span(:bold, "Hagenwerder"),
+            hbox(:center:top,
+                vbox(:right:top, "6590: ", "6589: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "217,", anchor(), "020"),
+                    hbox(:sep:base, "23,", anchor(), "438")
+                )
+            )
+        );
+    }
+}
+
+with detail = 4,
+     railway = :second :pax :removed
+{
+    with link = "line.de.6590" {
+        track(:ror, gh[:hag.yz, :gha - 0.3sw]);
+    }
+
+    with link = "point.int.Hagenwerder-Radomierzyce", railway = :station {
+        track(gh[:gha - 0.3sw, :gha + 0.3sw]);
+        marker(:left :de.dirgr, gh[:gha] << 0.5mt);
+        marker(:right :de.dirgr, gh[:gha] >> 0.5mt);
+    }
+}
+
+

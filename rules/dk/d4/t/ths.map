@@ -1,0 +1,74 @@
+# DK THS.  Tønder - Højer Sluse
+#
+let th = path("d3.dk.ths");
+
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Tønder  dk.BTR
+
+    with link = "line.dk.THS" {
+        track(:ror, th[:ton.yt, :trn - 0.49sw] << 1mo);
+        track(:ror, th[:trn - 0.5sw, :trn + 0.5sw] << 1mo);
+        track(:ror, th[:trn + 0.49sw, :ton.yh] << 1mo);
+        track(:ror,
+                th[:ton.yh - 0.1dl, :ton.yh] << 1mo
+            ..  th[:ton.xh, :ton.xh + 0.1dl]
+        );
+        track(th[:ton.xh, :ton.xh + 0.71km]);
+        line_label(:left:n, th[:ton.xh + 0.7km] << 0.5mt, (-0.3dt, 0dt), "THS");
+        track(th[:ton.xh + 0.69km, :mog - 0.49sw]);
+    }
+
+    with link = "point.dk.Møgeltønder", railway = :station {
+        track(th[:mog - 0.5sw, :mog + 0.5sw]);
+        marker(:left :de.bf, th[:mog] << 0.5mt);
+        station(:bottom, th[:mog] << 0.5mt << 1sh << 0.8dt,
+            span(:former, "Mögeltondern"),
+            "Møgeltønder",
+            "THS: 5,3"
+        );
+    }
+
+    with link = "line.dk.THS" {
+        track(th[:mog + 0.49sw, :dal - 0.49sw]);
+    }
+
+    with link = "point.dk.Daler", railway = :station {
+        track(th[:dal - 0.5sw, :dal + 0.5sw]);
+        marker(:right :de.hst, th[:dal] >> 0.5mt);
+        station(:top, th[:dal] >> 0.5mt >> 1sh >> 0.7dt,
+            span(:former, "Dahler-Osterby"),
+            "Daler",
+            "THS: 8,3"
+        );
+    }
+
+    with link = "line.dk.THS" {
+        track(th[:dal + 0.49sw, :hoj - 0.49sw]);
+    }
+
+    with link = "point.dk.Højer", railway = :station {
+        track(th[:hoj - 0.5sw, :hoj + 0.5sw]);
+        marker(:right :de.bf, th[:hoj] >> 0.5mt);
+        station(:top, th[:hoj] >> 0.5mt >> 1sh >> 0.7dt,
+            span(:former, "Hoyer"),
+            span(:bold, "Højer"),
+            "THS: 12,0"
+        );
+    }
+
+    with link = "line.dk.THS" {
+        track(th[:hoj + 0.49sw, :hos - 0.49sw]);
+    }
+
+    with link = "point.dk.Højer-Sluse", railway = :station {
+        track(th[:hos - 0.5sw, :hos + 25m]);
+        marker(:left :de.bf, th[:hos] << 0.5mt);
+        station(:bottom, th[:hos] >> 0.5mt >> 0.8dt,
+            span(:former, "Hoyer Schleuse"),
+            span(:bold, "Højer Sluse"),
+            "THS: 13,3"
+        );
+    }
+}
+
+

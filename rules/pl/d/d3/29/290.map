@@ -1,0 +1,137 @@
+# PL 290.  Mikułowa - Granica Państwa (Krzewina Zgorzelecka)
+#
+let mk = path("d3.pl.290");
+
+with detail = 3,
+    railway = :second :nopax
+{
+    # point.pl.Mikułowa                           pl.274
+
+    with link = "line.pl.290" {
+        track(:ror :removed, mk[:mik.yb, :las]);
+    }
+
+    with link = "point.pl.Las", railway = :station {
+        marker(:left :de.abzw :removed, mk[:las] << 0.5mt);
+        slabel(:bottom :xsmall :bold :removed,
+            mk[:las] << 0.5mt << 1sh + (-0.5dt, 0.5dt), "Las"
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(mk[:las, :sul - 0.5sw]);
+    }
+
+    with link = "point.pl.Sulików", railway = :station {
+        track(mk[:sul - 0.5sw, :sul + 0.5sw]);
+        marker(:left :de.gbf, mk[:sul] << 0.5mt);
+        slabel(:right, mk[:sul] << 0.5mt << 1sh + (1.3dt, 1.5dt), "Sulików");
+    }
+
+    with link = "line.pl.290" {
+        track(:second, mk[:sul + 0.5sw, :sul + 1.8km]);
+        line_label(:left:nw, mk[:sul + 1.8km] << 0.5mt, "290");
+        track(:second, mk[:sul + 1.8km, :wil]);
+    }
+
+    with link = "point.pl.Wilka", railway = :station {
+        marker(:left :de.abzw, mk[:wil] << 0.5mt);
+        slabel(:right :xsmall :bold, mk[:wil] << 0.5mt << 1sh + (1.3dt, 1.5dt),
+            "Wilka"
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(mk[:wil, :wi1]);
+    }
+
+    with link = "point.pl.Wilka-1", railway = :station {
+        marker(:left :de.abzw :removed, mk[:wi1] << 0.5mt);
+        slabel(:left :xsmall :bold :removed,
+            mk[:wi1] << 0.5mt << 1sh + (-1.3dt, 1dt),
+            "Wilka 1"
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(mk[:wi1, :wi3]);
+        track(mk[:wi3, :rad - 0.5sw]);
+    }
+
+    with link = "point.pl.Radomierzyce", railway = :station {
+        track(mk[:rad - 0.5sw, :rad + 0.5sw]);
+        marker(:right :de.hp :removed, mk[:rad] >> 0.5mt);
+        slabel(:right :removed,
+            mk[:rad] >> 0.5mt >> 1sh + (0dt, -0.5km),
+            "Radomierzyce"
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(:second, mk[:rad + 0.5sw, :rec]);
+    }
+}
+
+with detail = 3,
+    railway = :second :pax
+{
+    with link = "point.pl.Ręczyn", railway = :station {
+        marker(:right :de.abzw :nopax, mk[:rec] >> 0.5mt);
+        slabel(:left :xsmall :bold :nopax,
+            mk[:rec] >> 0.5mt >> 1sh + (-1.2dt, 0.8dt),
+            "Ręczyn"
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(mk[:rec, :rec + 1.5km]);
+        line_label(:left:nw, mk[:rec + 1.5km] << 0.5mt, "290");
+        track(mk[:rec + 1.5km, :krz - 0.5sw]);
+    }
+
+    with link = "point.pl.Krzewina-Zgorzelecka", railway = :station {
+        track(mk[:krz - 0.5sw, :krz + 0.5sw]);
+        marker(:right :de.bf :pax, mk[:krz] >> 0.5mt);
+        slabel(:left :pax, mk[:krz] >> 0.5mt >> 1sh + (-1.3dt, 0.8dt),
+            "Krzewina Zgorzelecka"
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(mk[:krz + 0.5sw, :bra - 0.5sw]);
+    }
+
+    with link = "point.pl.Bratków-Zgorzelecki", railway = :station {
+        track(mk[:bra - 1sw, :bra + 1sw]);
+        marker(:right :de.hp :removed, mk[:bra] >> 0.5mt);
+        slabel(:left :removed, mk[:bra] >> 0.5mt >> 1sh + (-1.2dt, 0.9dt),
+            "Bratków Zgorzelecki"
+        );
+    }
+
+    with link = "line.pl.290" {
+        track(mk[:bra + 0.5sw, :bra + 2.8km]);
+        line_label(:left:w, mk[:bra + 2.8km] << 0.5mt, "290");
+        track(mk[:bra + 2.8km, :gkr - 0.3sw]);
+    }
+
+    with link = "point.int.Krzewina-Zgorzelecka-Rosenthal", railway = :station {
+        track(mk[:gkr - 0.3sw, :gkr + 0.3sw]);
+        marker(:right :de.dirgr :pax, mk[:gkr] >> 0.5mt);
+    }
+
+    with link = "point.de.Rosenthal", railway = :station {
+        marker(:left :de.hp :removed, mk[:ros] << 0.5mt);
+        slabel(:right :removed, mk[:ros] << 0.5mt << 1sh + (0.8dt, 1.2dt),
+            "Rosenthal"
+        );
+    }
+
+    with link = "point.int.Rosenthal-Trzciniec-Zgorzelecki",
+         railway = :station
+    {
+        track(mk[:gkr + 0.3sw, :gtr + 0.3sw]);
+        marker(:left :de.dirgr, mk[:gtr] << 0.5mt);
+    }
+}
+

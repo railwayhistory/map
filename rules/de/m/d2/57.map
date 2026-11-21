@@ -472,13 +472,17 @@ with detail = 2 {
 with detail = 2 {
     let ht = path("d2.de.5731");
 
-    with link = "line.de.5731" {
-        track(:second, ht[:hor.yt, :tra]);
-    }
+    with railway = :second :pax {
+        with link = "line.de.5731" {
+            track(ht[:hor.yt, :hor.yt + 1.1km]);
+            line_label(:left:s, ht[:hor.yt + 1.1km], (0.3dt, 0dt), "5731");
+            track(ht[:hor.yt + 1.1km, :tra]);
+        }
 
-    with link = "point.de.Traunreut" {
-        with layer = 1 marker(:statdot, ht[:tra]);
-        slabel(:right, ht[:tra] + (1.3dt, 0.8dt), "Traunreut");
+        with link = "point.de.Traunreut" {
+            statdot(ht[:tra]);
+            slabel(:right, ht[:tra] + (1.3dt, 1dt), "Traunreut");
+        }
     }
 }
 

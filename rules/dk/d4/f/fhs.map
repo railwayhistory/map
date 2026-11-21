@@ -1,0 +1,178 @@
+# DK FHS.  Frederikshavn - Skagen
+#
+let fs = path("d3.dk.fhs");
+
+with detail = 4, railway = :first :pax :removed {
+    let fre = path("d3.dk.fhs.fre");
+
+    with link = "line.dk.FHS" {
+        track(:lor, fre[:fre + 0.49sw, :fre.ys] >> 1mo);
+        track(:lor, fre[:fre.ys - 0.1dl, :fre.ys + 1seg] >> 1mo);
+        track(
+                fre[:fre.ys + 0.99seg, :fre.xs - 1mo] >> 1mo
+            ..  fre[:fre.zs, :aph.yf + 2.1mo]
+        );
+    }
+}
+
+with detail = 4, railway = :first :pax {
+    # point.dk.Frederikshavn  dk.FFH
+
+    with link = "line.dk.FHS" {
+        track(:lor, fs[:fre + 0.99sw, :fre.ys] >> 1mo);
+        track(:lor,
+                fs[:fre.ys - 0.1dl, :fre.ys] >> 1mo
+            ..  fs[:aph.yf + 2mo, :aph.yf + 2.1mo]
+        );
+        track(fs[:aph.yf + 2mo, :aph - 0.49sw]);
+    }
+
+    with link = "point.dk.Apholmen", railway = :station {
+        track(fs[:aph - 0.5sw, :aph + 0.5sw]);
+        marker(:right :de.hp :removed, fs[:aph] >> 0.5mt);
+        station(:right :removed, fs[:aph] >> 0.5mt >> 1sh + (2dt, 0.8dt),
+            "Apholmen", "FHS: ??"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:aph + 0.49sw, :aph + 1.51km]);
+        line_label(:right:sw, fs[:aph + 1.5km] >> 0.5mt, "FHS");
+        track(fs[:aph + 1.49km, :str - 0.49sw]);
+    }
+
+    with link = "point.dk.Strandby", railway = :station {
+        track(fs[:str - 0.5sw, :str + 0.5sw]);
+        marker(:right :de.bf, fs[:str] >> 0.5mt);
+        station(:right, fs[:str] >> 0.5mt >> 1sh + (2dt, 0.8dt),
+            "Strandby", "FHS: 6,3"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:str + 0.49sw, :rim - 0.49sw]);
+    }
+
+    with link = "point.dk.Rimmen", railway = :station {
+        track(fs[:rim - 0.5sw, :rim + 0.5sw]);
+        marker(:right :de.hp, fs[:rim] >> 0.5mt);
+        marker(:right :de.exbf, fs[:rim] >> 0.5mt);
+        station(:right, fs[:rim] >> 0.5mt >> 1.4sh + (2.2dt, 0.5dt),
+            "Rimmen", "FHS: 9,5"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:rim + 0.49sw, :jer.yf]);
+        track(fs[:jer.yf - 0.1dl, :jer - 0.49sw]);
+    }
+
+    with link = "point.dk.Jerup", railway = :station {
+        track(fs[:jer - 0.5sw, :jer + 0.5sw]);
+        marker(:right :de.bf, fs[:jer] >> 0.5mt);
+        station(:right:left_align, fs[:jer] >> 0.5mt >> 1sh + (2dt, 0.8dt),
+            "Jerup", " FHS: 12,9"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:jer + 0.49sw, :nap - 0.49sw]);
+    }
+
+    with link = "point.dk.Napstjert", railway = :station {
+        track(fs[:nap - 0.5sw, :nap + 0.5sw]);
+        marker(:left :de.hp, fs[:nap] << 0.5mt);
+        station(:left, fs[:nap] << 0.5mt << 1sh + (-1.8dt, 1.2dt),
+            "Napstjert", "FHS: 15,6"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:nap + 0.49sw, :alb - 0.49sw]);
+    }
+
+    with link = "point.dk.Ålbæk", railway = :station {
+        track(fs[:alb - 0.5sw, :alb + 0.5sw]);
+        marker(:right :de.bf, fs[:alb] >> 0.5mt);
+        station(:right, fs[:alb] >> 0.5mt >> 1sh + (1.8dt, 1.3dt),
+            "Ålbæk", "FHS: 19,7"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:alb + 0.49sw, :alb + 2.71km]);
+        line_label(:right:w, fs[:alb + 2.7km] >> 0.5mt, (0dt, 0.2dt), "FHS");
+        track(fs[:alb + 2.69km, :bun - 0.49sw]);
+    }
+
+    with link = "point.dk.Bunken", railway = :station {
+        track(fs[:bun - 0.5sw, :bun + 0.5sw]);
+        marker(:left :de.hp, fs[:bun] << 0.5mt);
+        station(:left, fs[:bun] << 0.5mt << 1sh + (-2.0dt, 1.0dt),
+            "Bunken", "FHS: 24,5"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:bun + 0.49sw, :hul - 0.49sw]);
+    }
+
+    with link = "point.dk.Hulsig", railway = :station {
+        track(fs[:hul - 0.5sw, :hul + 0.5sw]);
+        marker(:left :de.bf, fs[:hul] << 0.5mt);
+        station(:left:right_align, fs[:hul] << 0.5mt << 1sh + (-2.0dt, 1.0dt),
+            "Hulsig", "FHS: 28,0 "
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:hul + 0.49sw, :san - 0.49sw]);
+    }
+
+    with link = "point.dk.Sandmilen", railway = :station {
+        track(fs[:san - 0.5sw, :san + 0.5sw]);
+        marker(:left :de.hp :removed, fs[:san] << 0.5mt);
+        station(:left :removed, fs[:san] << 0.5mt << 1sh + (-2.1dt, 0.4dt),
+            "Sandmilen", "FHS: 33,2"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:san + 0.49sw, :san + 1.51km]);
+        line_label(:right:nw, fs[:san + 1.5km] >> 0.5mt, "FHS");
+        track(fs[:san + 1.49km, :hoj - 0.49sw]);
+    }
+
+    with link = "point.dk.Højen", railway = :station {
+        track(fs[:hoj - 0.5sw, :hoj + 0.5sw]);
+        marker(:left :de.hp :removed, fs[:hoj] << 0.5mt);
+        station(:left :removed, fs[:hoj] << 0.5mt << 1sh + (-2dt, 0.8dt),
+            "Højen", "FHS: ??"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:hoj + 0.49sw, :frv - 0.49sw]);
+    }
+
+    with link = "point.dk.Frederikshavnsvej", railway = :station {
+        track(fs[:frv - 0.5sw, :frv + 0.5sw]);
+        marker(:right :de.hp, fs[:frv] >> 0.5mt);
+        station(:bottom, fs[:frv] >> 0.5mt >> 1sh + (1.3dt, 0.8dt),
+            "Frederikshavnsvej", "FHS: 37,9"
+        );
+    }
+
+    with link = "line.dk.FHS" {
+        track(fs[:frv + 0.49sw, :ska - 0.49sw]);
+    }
+
+    with link = "point.dk.Skagen", railway = :station {
+        track(fs[:ska - 0.5sw, :ska.f]);
+        marker(:right :de.bf, fs[:ska] >> 0.5mt);
+        station(:bottom, fs[:ska] >> 0.5mt >> 1sh >> 0.8dt,
+            span(:bold, "Skagen"), "FHS: 39,6"
+        );
+    }
+}
+

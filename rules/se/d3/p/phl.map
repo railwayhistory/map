@@ -1,0 +1,36 @@
+# SE PHL.  Peberholm riksgräns - Lernacken
+#
+let pl = path("d3.se.phl");
+
+with detail = 3,
+     railway = :first :double :cat:ac25 :pax
+{
+    with link = "point.int.Lernacken-Peberholm", railway = :station {
+        track(pl[:peg - 0.3sw, :peg + 0.3sw]);
+        marker(:right :de.dirgr, pl[:peg] >> 0.5md);
+        marker(:left :de.dirgr, pl[:peg] << 0.5md);
+        label(:badgesize, pl[:peg] >> 5dt,
+            hbox(:right:middle,
+                vbox(:right:middle, " DK ", hrule(), " SE "),
+                vbox(:left:middle, "KPH  ", hrule(), "PHL  ")
+            )
+        );
+            
+    }
+
+    with link = "line.se.PHL" {
+        track(pl[:peg + 0.3sw, :peg + 2.7km]);
+        line_label(:right:ne, pl[:peg + 2.7km] >> 0.5md, "PHL");
+        track(pl[:peg + 2.7km, :leg - 0.3sw]);
+    }
+
+    with link = "point.se.Lernacken-stråkgräns", railway = :station {
+        track(pl[:leg - 0.3sw, :leg + 0.3sw]);
+        marker(:right :ref, pl[:leg] >> 0.5md);
+        marker(:left :ref, pl[:leg] << 0.5md);
+        label(:badgesize, pl[:leg] >> 0.5md >> 1.5dt,
+            vbox(:center:top, "PHL", hrule(), "LNF")
+        );
+    }
+}
+

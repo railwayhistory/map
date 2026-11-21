@@ -1,0 +1,61 @@
+# DK GTV.  Gesten - Vejen
+#
+let gv = path("d3.dk.gtv");
+
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Gesten  dk.THK
+
+    with link = "line.dk.GTV" {
+        track(:lor,
+                gv[:ges.yv - 0.1dl, :ges.yv] >> 1mo
+            ..  gv[:ges.xv, :ges.xv + 0.1dl]
+        );
+        track(gv[:ges.xv, :ges.xv + 1.11km]);
+        line_label(:left:w, gv[:ges.xv + 1.1km] << 0.5mt, "GTV");
+        track(gv[:ges.xv + 1.09km, :fal - 0.49sw]);
+    }
+
+    with link = "point.dk.Fællesvejen", railway = :station {
+        track(gv[:fal - 0.5sw, :fal + 0.5sw]);
+        marker(:left :de.hp, gv[:fal] << 0.5mt);
+        station(:right, gv[:fal] << 0.5mt << 1sh + (1.5dt, 1.1dt),
+            "Fællesvejen", "GTV: 3,0"
+        );
+    }
+
+    with link = "line.dk.GTV" {
+        track(gv[:fal + 0.49sw, :gam - 0.49sw]);
+    }
+
+    with link = "point.dk.Gamst", railway = :station {
+        track(gv[:gam - 0.5sw, :gam + 0.5sw]);
+        marker(:left :de.bf, gv[:gam] << 0.5mt);
+        station(:bottom, gv[:gam] << 0.5mt << 1sh + (1.3dt, 1.3dt),
+            "Gamst", "GTV: 4,7"
+        );
+    }
+
+    with link = "line.dk.GTV" {
+        track(gv[:gam + 0.49sw, :gam + 1.01km]);
+        line_label(:right:se, gv[:gam + 1km] >> 0.5mt, "GTV");
+        track(gv[:gam + 0.99km, :ves - 0.49sw]);
+    }
+
+    with link = "point.dk.Vestermark", railway = :station {
+        track(gv[:ves - 0.5sw, :ves + 0.5sw]);
+        marker(:right :de.hp, gv[:ves] >> 0.5mt);
+        station(:top, gv[:ves] >> 0.5mt >> 1sh + (-2dt, -1dt),
+            "Vestermark", "GTV: 7,7"
+        );
+    }
+
+    with link = "line.dk.GTV" {
+        track(gv[:ves + 0.49sw, :vej.xg]);
+        track(:lor,
+                gv[:vej.xg - 0.1dl, :vej.xg]
+            ..  gv[:vej.yg, :vej.yg + 0.1dl] >> 1.5mo
+        );
+    }
+}
+
+

@@ -1,0 +1,330 @@
+# DK HHS.  Hellerup - Hillerød - Snekkersten
+#
+let hs = path("d3.dk.hhs");
+let hb = path("d3.dk.hhs.hel");
+
+with detail = 4,
+     railway = :first :cat:dc15 :pax
+{
+    with link = "line.dk.HHS" {
+        # HHS up
+        track(:up:lor:ror, hb[:hel.yh, :hel.yb] << 2.5mo);
+        track(:up:ldn:ror :casing,
+                hb[:hel.yb - 0.1dl, :hel.yb] << 2.5mo
+            ..  hb[:hel.xb + 2.5mo, :ber - 0.5sw] >> 0.5mo
+        );
+
+        # HHS dn
+        track(:dn:ror,
+                hs[:hel.yh - 0.1dl, :hel.yh] << 4.5mo
+            ..  hs[:hel.yc - 0.1dl, :hel.yc] << 0.5mo
+        );
+        track(:dn:rup, hs[:hel.yc, :ber - 0.5sw] << 0.5mo);
+    }
+
+    with link = "point.dk.Bernstorffsvej", railway = :station {
+        track(hb[:ber - 0.5sw, :ber.xn] >> 0.5mo);
+        track(hs[:ber - 0.5sw, :ber.xn] << 0.5mo);
+        marker(:left :de.hp, hs[:ber] << 0.5mo << 0.5mt);
+        station(:left, hs[:ber] << 0.5mo << 0.5mt << 1.6sh + (0dt, 1.2dt),
+            "Bernstorffsvej", "HHS: 9,300"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:ber.xn, :gen - 0.5sw]);
+    }
+
+    with link = "point.dk.Gentofte", railway = :station {
+        track(:double, hs[:gen - 0.5sw, :gen + 0.5sw]);
+        marker(:left :de.bf, hs[:gen] << 0.5mo << 0.5mt);
+        station(:left, hs[:gen + 0.5sw] << 0.5mo << 0.5mt << 1sh,
+            hbox(:right:top, "Gentofte"),
+            "HHS: 10,926"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:gen + 0.5sw, :jag - 0.5sw]);
+    }
+
+    with link = "point.dk.Jægersborg", railway = :station {
+        track(:double, hs[:jag - 0.5sw, :jag + 0.5sw]);
+        track(:nocat, hs[:jag - 0.5sw, :jag + 0.5sw] >> 0.5mo >> 1mt >> 1insh);
+        marker(:right :de.inbf, hs[:jag] >> 0.5mo >> 0.5mt);
+        station(:left, hs[:jag + 0.5sw] << 0.5mo << 0.8mt,
+            hbox(:right:top :bold, "Jægersborg"),
+            hbox(:center:top,
+                vbox(:right:top, span(:nocat, "JBV: "), "HHS: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :nocat, "0,", anchor(), "000"),
+                    hbox(:sep:base, "12,", anchor(), "560")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:jag + 0.5sw, :lyn.yv]);
+    }
+
+    with link = "point.dk.Lyngby", railway = :station {
+        track(:double, hs[:lyn.yv, :lyn + 150m]);
+        track(:removed,
+                hs[:lyn.yv, :lyn + 120m - 1dl] >> 1.5mo
+            --  hs[:lyn + 120m, :lyn + 121m] >> 0.5mo
+        );
+        marker(:right :de.bf, hs[:lyn] >> 1.5mo >> 0.5mt);
+        station(:left:right_align, hs[:lyn + 0.5sw] << 0.5mo << 0.5mt,
+            hbox(:right:top :bold, "Lyngby"),
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "??: "), "HHS: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :removed, "??", anchor(), ""),
+                    hbox(:sep:base, "13,", anchor(), "890")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double :casing, hs[:lyn + 0.5sw + 2dl, :lyn + 1km]);
+        line_label(:left:e, hs[:lyn + 1km] << 0.5mo << 0.5mt,
+            (0dt, 0.2dt), "HHS"
+        );
+        track(:double, hs[:lyn + 1km, :sor - 0.5sw]);
+    }
+
+    with link = "point.dk.Sorgenfri", railway = :station {
+        track(:double, hs[:sor - 0.5sw, :sor + 0.5sw]);
+        marker(:right :de.hp, hs[:sor] >> 0.5mo >> 0.5mt);
+        station(:left, hs[:sor + 0.5sw] << 0.5mo << 1.5mt,
+            hbox(:right:top, "Sorgenfri"),
+            "HHS: 15,728"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:sor + 0.5sw, :vir.1928 - 0.5sw]);
+    }
+
+    with link =  "point.dk.Virum", railway = :station {
+        track(:double, hs[:vir.1928 - 0.5sw, :vir.1928 + 0.5sw]);
+        marker(:right :de.hp :removed, hs[:vir.1928] >> 0.5mo >> 0.5mt);
+        station(:left:right_align :removed,
+            hs[:vir.1928] << 1mo << 1.5mt + (0dt, 1dt),
+            "Virum", "HHS: ?? "
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:vir.1928 + 0.5sw, :vir - 0.5sw]);
+    }
+
+    with link =  "point.dk.Virum", railway = :station {
+        track(:double, hs[:vir - 0.5sw, :vir + 0.5sw]);
+        marker(:right :de.hp, hs[:vir] >> 0.5mo >> 0.5mt);
+        station(:left:right_align, hs[:vir] << 1mo << 1.5mt + (0dt, 1dt),
+            "Virum", "HHS: 17,700 "
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:vir + 0.5sw, :hol - 0.5sw]);
+    }
+
+    with link =  "point.dk.Holte", railway = :station {
+        track(:double, hs[:hol - 0.5sw, :hol + 0.5sw]);
+        marker(:right :de.bf, hs[:hol] >> 0.5mo >> 0.5mt);
+        station(:right:left_align,
+            hs[:hol] >> 0.5mo >> 0.5mt >> 1.5sh + (0dt, 1dt),
+            "Holte", "HHS: 18,960"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:hol + 0.5sw, :bir - 0.5sw]);
+    }
+
+    with link =  "point.dk.Birkerød", railway = :station {
+        track(:double, hs[:bir - 0.5sw, :bir + 0.5sw]);
+        marker(:right :de.bf, hs[:bir] >> 0.5mo >> 0.5mt);
+        station(:top, hs[:bir] >> 0.5md >> 1.5sh + (0.5dt, 0dt),
+            "Birkerød", "HHS: 23,823"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:bir + 0.5sw, :hov - 0.5sw]);
+    }
+
+    with link =  "point.dk.Høvelte", railway = :station {
+        track(:double, hs[:hov - 0.5sw, :hov + 0.5sw]);
+        marker(:right :de.hp, hs[:hov] >> 0.5mo >> 0.5mt);
+        station(:left:right_align, hs[:hov + 0.5sw] << 0.5mo << 1.5mt,
+            hbox(:right:top, "Høvelte"),
+            "HHS: 26,300"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:hov + 0.5sw, :all - 0.5sw]);
+    }
+
+    with link =  "point.dk.Allerød", railway = :station {
+        track(:double, hs[:all - 0.5sw, :all + 0.5sw]);
+        marker(:left :de.bf, hs[:all] << 0.5mo << 0.5mt);
+        station(:left:right_align, hs[:all] << 0.5md << 1.8sh + (0dt, 1dt),
+            vbox(:right:base,
+                span(:former, "Lillerød "),
+                "Allerød"
+            ),
+            "HHS: 29,335 "
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:all + 0.5sw, :all + 3km]);
+        line_label(:right:sw, hs[:all + 3km] >> 0.5mo >> 0.5mt, "HHS");
+        track(:double, hs[:all + 3km, :fav - 0.5sw]);
+    }
+
+    with link =  "point.dk.Favrholm", railway = :station {
+        track(:double, hs[:fav - 0.5sw, :fav + 0.5sw]);
+        marker(:right :de.hp, hs[:fav] >> 0.5mo >> 0.5mt);
+        station(:right:left_align,
+            hs[:fav] >> 0.5mo >> 0.5mt >> 1.4sh + (0dt, 1.2dt),
+            "Favrholm",
+            hbox(:left:top,
+                vbox(:right:top, span(:nocat, "HFH: "), " HHS: "),
+                vbox(:sep:top,
+                    hbox(:sep:base :nocat, "1,", anchor(), "846"),
+                    hbox(:sep:base, "34,", anchor(), "536")
+                )
+            )
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(:double, hs[:fav + 0.5sw, :hil.yh]);
+        track(:double :lor, hs[:hil.yh, :hil - 0.5sw]);
+    }
+
+    with link = "point.dk.Hillerød", railway = :station {
+        track(:nocat, hs[:hil - 0.5sw, :hil - 0.2dl] << 1.5mo);
+        track(:double, hs[:hil - 0.5sw, :hil - 0.2dl]);
+        track(:nocat, hs[:hil + 0.2dl, :hil + 0.5sw] << 1.5mo);
+        track(:nocat, hs[:hil + 0.2dl, :hil + 0.5sw] << 0.5mo);
+        marker(:left :de.bf, hs[:hil] << 1.5mo << 0.5mt);
+        station(:right:left_align,
+            hs[:hil] >> 1.5mo + (1dt, 1.4dt),
+            span(:bold, "Hillerød"),
+            hbox(:right:top :nocat,
+                vbox(:right:top, "[HKG: ", span(:cat:dc15, "HHS: "), "[HFH: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "0,", anchor(), "561]"),
+                    hbox(:sep:base :cat:dc15, "36,", anchor(), "500"),
+                    hbox(:sep:base, "−0,", anchor(), "078]")
+                )
+            )
+        );
+    }
+}
+
+with detail = 4,
+     railway = :first :pax
+{
+    with link = "line.dk.HHS" {
+        track(:lor, hs[:hil + 0.5sw, :hil.yg] << 0.5mo);
+        track(:lor,
+                hs[:hil.yg - 0.1dl, :hil.yg] << 0.5mo
+            ..  hs[:hil.xg, :hil.xg + 0.1dl]
+        );
+        track(hs[:hil.xg, :hil.xg + 1.4km]);
+        line_label(:right:n, hs[:hil.xg + 1.4km] >> 0.5mt, (0.5dt, 0dt), "HHS");
+        track(hs[:hil.xg + 1.4km, :gro - 0.5sw]);
+    }
+
+    with link =  "point.dk.Grønholt", railway = :station {
+        track(hs[:gro - 0.5sw, :gro + 0.5sw]);
+        marker(:left :de.hp, hs[:gro] << 0.5mt);
+        station(:top, hs[:gro] << 0.5mt << 1.4sh + (-0.5dt, 0dt),
+            "Grønholt", "HHS: 41,740"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(hs[:gro + 0.5sw, :kra - 0.5sw]);
+    }
+
+    with link =  "point.dk.Kratbjerg", railway = :station {
+        track(hs[:kra - 0.5sw, :kra + 0.5sw]);
+        marker(:left :de.hp, hs[:kra] << 0.5mt);
+        station(:left, hs[:kra] << 0.5mt << 1.6sh + (0dt, 1.2dt),
+            "Kratbjerg", "HHS: 43,820"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(hs[:kra + 0.5sw, :fre - 0.5sw]);
+    }
+
+    with link =  "point.dk.Fredensborg", railway = :station {
+        track(hs[:fre - 0.5sw, :fre + 0.5sw]);
+        marker(:left :de.bf, hs[:fre] << 0.5mt);
+        station(:top, hs[:fre] << 0.5mt << 1.3sh + (-0.5dt, 0dt),
+            "Fredensborg", "HHS: 45,404"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(hs[:fre + 0.5sw, :lan - 0.5sw]);
+    }
+
+    with link =  "point.dk.Langerød", railway = :station {
+        track(hs[:lan - 0.5sw, :lan + 0.5sw]);
+        marker(:right :de.hp, hs[:lan] >> 0.5mt);
+        station(:bottom, hs[:lan] >> 0.5mt >> 1.2sh,
+            "Langerød", "HHS: 48,230"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(hs[:lan + 0.5sw, :kvi - 0.5sw]);
+    }
+
+    with link =  "point.dk.Kvistgård", railway = :station {
+        track(hs[:kvi - 0.5sw, :kvi + 0.5sw]);
+        marker(:right :de.hp, hs[:kvi] >> 0.5mt);
+        marker(:right :de.exbf, hs[:kvi] >> 0.5mt);
+        station(:right, hs[:kvi + 0.6sw] >> 0.5mt >> 1.5sh,
+            hbox(:left:top, "Kvistgård"),
+            "HHS: 51,760"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(hs[:kvi + 0.5sw, :mor - 0.5sw]);
+    }
+
+    with link =  "point.dk.Mørdrup", railway = :station {
+        track(hs[:mor - 0.5sw, :mor + 0.5sw]);
+        marker(:right :de.hp, hs[:mor] >> 0.5mt);
+        station(:bottom, hs[:mor] >> 0.5mt >> 1.3sh + (0.5dt, 0dt),
+            "Mørdrup", "HHS: 54,020"
+        );
+    }
+
+    with link = "line.dk.HHS" {
+        track(hs[:mor + 0.5sw, :mor + 1.2km]);
+        line_label(:left:s, hs[:mor + 1.2km] << 0.5mt, (-1dt, 0dt), "HHS");
+        track(hs[:mor + 1.2km, :sne.xh - 2.5mo]);
+        track(:ror,
+                hs[:sne.xh - 2.51mo, :sne.xh - 2.5mo]
+            ..  hs[:sne.yh, :sne.yh + 0.1dl] << 1.5mo
+        );
+    }
+
+    # point.dk.Snekkersten  dk.KHR
+}
+

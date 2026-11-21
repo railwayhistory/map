@@ -1,0 +1,428 @@
+# SE OBV.  Olsfors - Bergsviken
+with detail = 2 {
+    let ob = path("d2.se.obv");
+
+    with railway = :first :g750 :nopax :removed {
+        with link = "point.se.Olsfors" {
+            statdot(ob[:ols]);
+            slabel(:left, ob[:ols] + (-1.5dt, 0.8dt), "Olsfors");
+        }
+
+        with link = "line.se.OBV" {
+            track(ob[:ols, :ols + 5km]);
+            line_label(:left:s, ob[:ols + 5km], (-0.3dt, 0dt), "OBV");
+            track(ob[:ols + 5km, :ber]);
+        }
+
+        with link = "point.se.Bergsviken" {
+            statdot(ob[:ber]);
+            slabel(:right, ob[:ber] + (1.5dt, 0.8dt), "Bergsviken");
+        }
+    }
+}
+
+
+# SE ODM.  Örbyhus - Dannemora
+with detail = 2 {
+    let od = path("d2.se.odm");
+
+    with railway = :first :nopax {
+        with link = "line.se.ODM" {
+            track(od[:orb.yd, :orb.yd + 4km]);
+            line_label(:right:n, od[:orb.yd + 4km], "ODM");
+            track(od[:orb.yd + 4km, :dan.yv]);
+        }
+    }
+
+    with railway = :first :pax :removed {
+        with link = "point.se.Dannemora" {
+            track(:station, od[:dan.yv, :dan.yn]);
+        }
+    }
+}
+
+
+# SE OHS.  Oskarshamn - Sevedstorp
+with detail = 2 {
+    let os = path("d2.se.ohs");
+
+    with railway = :first :g891 :pax :removed {
+        with link = "line.se.OHS" {
+            track(os[:osk.yr, :osk.yr + 6km]);
+            line_label(:left:nw, os[:osk.yr + 6km], "OHS");
+            track(os[:osk.yr + 6km, :rud.yo - 7km]);
+            line_label(:right:se, os[:rud.yo - 7km], "OHS");
+            track(os[:rud.yo - 7km, :rud.yo]);
+        }
+
+        # point.se.Ruda  se.KMB
+
+        with link = "line.se.OHS" {
+            track(os[:rud.yb, :rud.yb + 8km]);
+            line_label(:right:se, os[:rud.yb + 8km], "OHS");
+            track(os[:rud.yb + 8km, :sko.yf - 5.1km]);
+            line_label(:left:nw, os[:sko.yf - 5.1km], "OHS");
+            track(os[:sko.yf - 5.1km, :sko.yf]);
+        }
+
+        with link = "point.se.Skoghult" {
+            track(os[:sko.yf, :sko.ym]);
+            statdot(os[:sko]);
+            slabel(:left, os[:sko] + (-1.5dt, 0.8dt), "Skoghult");
+        }
+
+        with link = "line.se.OHS" {
+            track(os[:sko.ym, :sko.ym + 8.2km]);
+            line_label(:left:n, os[:sko.ym + 8.2km], "OHS");
+            track(os[:sko.ym + 8.2km, :alg]);
+        }
+
+        with link = "point.se.Älghult" {
+            statdot(os[:alg]);
+            slabel(:top, os[:alg] + (0dt, -0.8dt), "Älghult");
+        }
+
+        with link = "line.se.OHS" {
+            track(os[:alg, :alg + 5km]);
+            line_label(:right:s, os[:alg + 5km], "OHS");
+            track(os[:alg + 5km, :sav.yo]);
+        }
+
+        # point.se.Sävsjöström  se.NNB
+
+        with link = "line.se.OHS" {
+            track(os[:sav.yb, :sev.yo + 4.75km]);
+            line_label(:right:se, os[:sav.yb + 4.75km], "OHS");
+            track(os[:sav.yb + 4.75km, :sev.yo - 5km]);
+            line_label(:left:ne, os[:sev.yo - 5km], "OHS");
+            track(os[:sev.yo - 5km, :sev.yo]);
+        }
+    }
+}
+
+
+# SE ORS.  Örebro - Svartå
+with detail = 2 {
+    let os = path("d2.se.ors");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.ORS" {
+            track(os[:ors.yv, :ors.yv + 13km]);
+            line_label(:right:e, os[:ors.yv + 13km], (0dt, -0.2dt), "ORS");
+            track(os[:ors.yv + 13km, :sva.yo - 10km]);
+            line_label(:left:nw, os[:sva.yo - 10km], "ORS");
+            track(os[:sva.yo - 10km, :sva.yo]);
+        }
+    }
+}
+
+
+# SE OSA.  Ormaryd - Smålands Anneberg
+with detail = 2 {
+    let oa = path("d2.se.osa");
+
+    with railway = :first :g600 :pax :removed {
+        with link = "line.se.OSA" {
+            track(oa[:orm, :orm + 3.6km]);
+            line_label(:right:w, oa[:orm + 3.6km], (0dt, -0.1dt), "OSA");
+            track(oa[:orm + 3.6km, :ann]);
+        }
+
+        with link = "point.se.Smålands-Anneberg" {
+            statdot(oa[:ann]);
+            slabel(:right, oa[:ann] + (-2dt, -0.8dt),
+                vbox(:left:bottom, "Smålands", "Anneberg")
+            );
+        }
+    }
+}
+
+
+# SE OSB.  Örebro - Skebäck
+with detail = 2 {
+    let os = path("d2.se.osb");
+
+    with railway = :side :nopax {
+        with link = "line.se.OSB" {
+            track(os[:ors.yo, :ske - 0.5km]);
+            with zoom = :high line_label(:right:nw, os[:ske - 0.5km], "OSB");
+            track(os[:ske - 0.5km, :ske]);
+        }
+
+        with link = "point.se.Skebäck" {
+            statdot(os[:ske]);
+            slabel(:right, os[:ske] + (1.5dt, 0.8dt), "Skebäck");
+        }
+    }
+}
+
+
+# SE OSF.  Orrskog - Söderfors
+with detail = 2 {
+    let os = path("d2.se.osf");
+
+    with railway = :first :pax :removed {
+        with link = "line.se.OSF" {
+            track(os[:orr.ys, :orr.ys + 4km]);
+            line_label(:left:n, os[:orr.ys + 4km], "OSF");
+            track(os[:orr.ys + 4km, :sod]);
+        }
+
+        with link = "point.se.Söderfors" {
+            statdot(os[:sod]);
+            slabel(:left, os[:sod] + (-1.5dt, 0.8dt), "Söderfors");
+        }
+    }
+}
+
+
+# SE OST.  Östersunds västra - Storuman
+with detail = 2 {
+    let os = path("d2.se.ost");
+
+    with railway = :first :tourist {
+        with link = "line.se.OST" {
+            track(os[:osv.yh, :osv.yh + 5km]);
+            line_label(:right:w, os[:osv.yh + 5km], "OST");
+            track(os[:osv.yh + 5km, :jam.yh - 9.5km]);
+            line_label(:right:n, os[:jam.yh - 9.5km], "OST");
+            track(os[:jam.yh - 9.5km, :jam.yh]);
+        }
+
+        with link = "point.se.Jämtlands-Sikås" {
+            track(:station, os[:jam.yh, :jam]);
+            statdot(os[:jam]);
+            slabel(:left, os[:jam] + (-1.3dt, -0.5dt), "Jämtlands Sikås");
+        }
+
+        with link = "line.se.OST" {
+            track(os[:jam, :jam + 14km]);
+            line_label(:left:se, os[:jam + 14km], "OST");
+            track(os[:jam + 14km, :ulr]);
+        }
+
+        with link = "point.se.Ulriksfors" {
+            track(:station, os[:ulr, :ulr.ys]);
+            statdot(os[:ulr]);
+            slabel(:right, os[:ulr] + (1.5dt, 1.3dt), "Ulriksfors");
+        }
+
+        with link = "line.se.OST" {
+            track(os[:ulr.ys, :hot - 9.5km]);
+            line_label(:left:e, os[:hot - 9.5km], (0dt, -0.15dt), "OST");
+            track(os[:hot - 9.5km, :hot]);
+        }
+
+        with link = "point.se.Hoting" {
+            track(:station, os[:hot, :hot.yt]);
+            statdot(os[:hot]);
+            slabel(:right, os[:hot] + (0.5km, -0.7km) + (1dt, -1dt),
+                "Hoting"
+            );
+        }
+
+        with link = "line.se.OST" {
+            track(os[:hot.yt, :hot.yt + 13km]);
+            line_label(:right:w, os[:hot.yt + 13km], (0dt, 0.1dt), "OST");
+            track(os[:hot.yt + 13km, :vil - 7km]);
+            line_label(:right:w, os[:vil - 7km], "OST");
+            track(os[:vil - 7km, :vil]);
+        }
+
+        with link = "point.se.Vilhelmina" {
+            statdot(os[:vil]);
+            slabel(:right, os[:vil] + (1.5dt, 0.5dt), "Vilhelmina");
+        }
+
+        with link = "line.se.OST" {
+            track(os[:vil, :lov]);
+            track(os[:lov, :lov + 15.7km]);
+            line_label(:right:nw, os[:lov + 15.7km], "OST");
+            track(os[:lov + 15.7km, :sto.yv - 5.6km]);
+            line_label(:left:e, os[:sto.yv - 5.6km], "OST");
+            track(os[:sto.yv - 5.6km, :sto.yv]);
+            track(os[:sto.yv, :sto.yn]);
+        }
+    }
+}
+
+
+# SE OUV.  Orrskog - Untraverket
+with detail = 2 {
+    let ou = path("d2.se.ouv");
+
+    with railway = :first :nopax :removed {
+        with link = "line.se.OUV" {
+            track(ou[:orr.yu, :orr.yu + 2.55km]);
+            line_label(:left:e, ou[:orr.yu + 2.55km], "OUV");
+            track(ou[:orr.yu + 2.55km, :unt]);
+        }
+
+        with link = "point.se.Untraverket" {
+            statdot(ou[:unt]);
+            slabel(:left, ou[:unt] + (-1.5dt, 0.8dt), "Untraverket");
+        }
+    }
+}
+
+
+# SE OVA.  Ovansjö - Ånge godsbangård
+with detail = 2 {
+    let oa = path("d2.se.ova");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.OVA" {
+            track(
+                    oa[:ova.ym - 0.1dl, :ova.ym] << 0.5md >> 0.5mt
+                ..  oa[:ang.xv, :ang.yv]
+            );
+            track(oa[:ang.yv, :ang.yo]);
+        }
+    }
+}
+
+
+# SE OVG.  Örnsköldsviks central - Gimmonäs
+with detail = 2 {
+    let og = path("d2.se.ovg");
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.OVG" {
+            track(og[:orn.yg, :orn.yg + 6.5km]);
+            line_label(:left:s, og[:orn.yg + 6.5km], "OVG");
+            track(og[:orn.yg + 6.5km, :hun]);
+        }
+
+        with link = "point.se.Husums-norra" {
+            track(:station, og[:hun, :hun.yr]);
+            statdot(:nopax, og[:hun]);
+            slabel(:left, og[:hun] + (-1.5dt, 0dt), "Husums norra");
+        }
+
+        with link = "line.se.OVG" {
+            track(og[:hun.yr, :hun.yr + 9.5km]);
+            line_label(:left:e, og[:hun.yr + 9.5km], (0dt, -0.1dt), "OVG");
+            track(og[:hun.yr + 9.5km, :nor + 7km]);
+            line_label(:right:nw, og[:nor + 7km], "OVG");
+            track(og[:nor + 7km, :gim.yo - 5km]);
+            line_label(:left:se, og[:gim.yo - 5km], "OVG");
+            track(og[:gim.yo - 5km, :gim.yo]);
+        }
+    }
+}
+
+
+# SE OXO.  Oxmyran - Öreälv
+with detail = 2 {
+    let oo = path("d2.se.oxo");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "line.se.OXO" {
+            track(oo[:oxy.y, :oxy.y + 3km]);
+            line_label(:left:se, oo[:oxy.y + 3km], "OXO");
+            track(oo[:oxy.y + 3km, :ore.y]);
+        }
+    }
+}
+
+
+# SE OXV.  Oxelösund - Valskog
+with detail = 2 {
+    let ov = path("d2.se.oxv");
+
+    with railway = :first :cat:ac15 :nopax {
+        with link = "point.se.Oxelösund" {
+            statdot(ov[:oxe]);
+            slabel(:right, ov[:oxe] + (1.5dt, 0.8dt), "Oxelösund");
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:oxe, :oxe + 5.3km]);
+            line_label(:left:ne, ov[:oxe + 5.3km], "OVX");
+            track(ov[:oxe + 5.3km, :nys]);
+        }
+
+        with link = "point.se.Nyköping-södra" {
+            statdot(ov[:nys]);
+            slabel(:right, ov[:nys] + (1.5dt, 0.8dt), "N. södra");
+        }
+
+        with link = "line.se.OXV" {
+            track(
+                    ov[:nys, :nyk.xo - 0.5dt]
+                ..  ov[:nyk.yo, :nyk.yf] << 1mt << 1ls
+            );
+            track(:casing,
+                    ov[:nyk.yf - 0.1dl, :nyk.yf] << 1mt << 1ls
+                ..  ov[:nyk.yf + 1.29km, :nyk.yf + 1.3km]
+            );
+            track(ov[:nyk.yf + 1.3km, :nyk.yf + 7km]);
+            line_label(:right:s, ov[:nyk.yf + 7km], "OXV");
+            track(ov[:nyk.yf + 7km, :flo - 9.5km]);
+            line_label(:left:e, ov[:flo - 9.5km], (0dt, 0.2dt), "OXV");
+            track(ov[:flo - 9.5km, :flo - 1km]);
+            track(:casing, ov[:flo - 1km, :flo]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.OXV" {
+            track(ov[:flo, :flo + 6km]);
+            line_label(:right:sw, ov[:flo + 6km], "OXV");
+            track(ov[:flo + 6km, :esk.ys - 7.5km]);
+            line_label(:left:e, ov[:esk.ys - 7.5km], "OXV");
+            track(ov[:esk.ys - 7.5km, :esk.ys]);
+        }
+    }
+
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "point.se.Eskilstuna-central" {
+            track(:station, ov[:esk.ys, :esk]);
+            statdot(ov[:esk]);
+            slabel(:left, ov[:esk] + (-1.5dt, 1.8dt), "Eskilstuna c.");
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:esk, :hal]);
+        }
+
+        with link = "point.se.Hällbybrunn" {
+            track(:station, ov[:hal, :hal.ym]);
+            statdot(:removed, ov[:hal]);
+            slabel(:right :removed, ov[:hal] + (1.3dt, -0.3dt), "Hällbybrunn");
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:hal.ym, :fol]);
+        }
+    }
+
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.se.OXV" {
+            track(ov[:fol, :fol + 1km]);
+            line_label(:left:ne, ov[:fol + 1km], "OXV");
+            track(ov[:fol + 1km, :rek]);
+        }
+
+        with link = "point.se.Rekarne" {
+            track(:station, ov[:rek, :rek.yk]);
+            statdot(ov[:rek]);
+            slabel(:right, ov[:rek] + (0.5dt, -1.3dt), "Rekarne");
+        }
+
+        with link = "line.se.OXV" {
+            track(ov[:rek.yk, :rek.yk + 12km]);
+            line_label(:left:n, ov[:rek.yk + 12km], (-0.3dt, 0dt), "OXV");
+            track(ov[:rek.yk + 12km, :val.ye]);
+        }
+    }
+}
+
+
+# SE OXX.  Öxnered 124 - Öxnered 125
+with detail = 2 {
+    with link = "line.se.OXX" {
+        track(:first :cat:ac15 :pax, path("d2.se.oxx")[:oxn.yv, :oxn.ys]);
+    }
+}
+

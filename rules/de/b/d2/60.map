@@ -406,23 +406,47 @@ with detail = 2 {
 }
 
 
-# DE 6035.  Berlin Potsdamer Ringbf - Attilastraße - Mariendorf
+# DE 6035.  Berlin Potsdamer Ringbf - Blankenfelde (Kr Teltow-Fläming)
 with detail = 2 {
-    let bm = path("d2.de.6035");
+    let bb = path("d2.de.6035");
 
-    with link = "line.de.6035" {
-        track(:first :double :rail:rc75 :pax,
-                bm[:yox, :skr.ym] >> 1dt
-            ..  bm[:att - 0.1dt, :att]
-        );
+    with railway = :first :double :rail:rc75 :pax {
+        with link = "line.de.6035" {
+            track(bb[:yox, :skr] >> 1md >> 1ms);
+        }
+
+        with link = "point.de.Berlin-Südkreuz-Vorortbahn" {
+            statdot(bb[:skr] >> 1md >> 1ms);
+        }
+
+        with link = "line.de.6035" {
+            track(bb[:skr, :pri] >> 1md >> 1ms);
+        }
+    
+        with link = "point.de.Berlin-Priesterweg" {
+            track(bb[:pri, :skr.ym] >> 1md >> 1ms);
+            statdot(bb[:pri] >> 1md >> 1ms);
+        }
+
+        with link = "line.de.6035" {
+            track(:casing, bb[:skr.ym, :skr.xm + 2md] >> 1md >> 1ms);
+            track(bb[:skr.xm + 2md, :lic] >> 1md >> 1ms);
+        }
     }
 
-    with link = "point.de.Berlin-Südkreuz-Vorortbahn" {
-        with layer = 1 marker(:statdot :rail:rc75 :pax, bm[:skr] >> 1dt);
-    }
+    with railway = :first :rail:rc75 :pax {
+        with link = "line.de.6035" {
+            track(bb[:lic, :gdn] >> 0.5md >> 1ms >> 0.5mt);
+            track(:casing, bb[:gdn, :gds.yw] >> 0.5md >> 1ms >> 0.5mt);
+            track(:casing, bb[:gds.yw, :bla] >> 0.5md >> 1ms >> 0.5mt);
+        }
 
-    with link = "point.de.Berlin-Priesterweg" {
-        with layer = 1 marker(:statdot :rail:rc75 :pax, bm[:pri] >> 1dt);
+        with link = "point.de.Blankenfelde-Teltow-Fläming-S-Bahn" {
+            statdot(bb[:bla] >> 0.5md >> 1ms >> 0.5mt);
+            slabel(:ne, bb[:bla] >> 0.5md >> 1ms >> 0.5mt + (-1dt, -0.5dt),
+                "Bfd."
+            );
+        }
     }
 }
 
@@ -431,30 +455,16 @@ with detail = 2 {
 with detail = 2 {
     let pl = path("d2.de.6036");
 
-    with link = "line.de.6036" {
-        track(:first :double :rail:rc75 :pax, pl[:skr.ym, :lis] >> 1dt);
-    }
+    with railway = :first :double :rail:rc75 :pax {
+        with link = "line.de.6036" {
+            track(pl[:skr.ym, :skr.xm] >> 1md >> 1ms);
+            track(pl[:skr.xm, :lis] >> 1md >> 1ms);
+        }
 
-    with link = "point.de.Berlin-Lichterfelde-Süd" {
-        with layer = 1 marker(:statdot :rail:rc75 :pax, pl[:lis] >> 1dt);
-    }
-}
-
-
-# DE 6037.  Mahlow - Blankenfelde (Kr Teltow-Fläming)
-with detail = 2 {
-    let mb = path("d2.de.6037");
-
-    with link = "line.de.6037" {
-        track(:first :rail:rc75 :pax, mb[:mah, :bla] >> 0.8dt);
-    }
-
-    with link = "point.de.Mahlow" {
-        with layer = 1 marker(:statdot :rail:rc75 :pax, mb[:mah] >> 0.8dt);
-    }
-
-    with link = "point.de.Blankenfelde-Teltow-Fläming-S-Bahn" {
-        with layer = 2 marker(:statdot :rail:rc75 :pax, mb[:bla] >> 0.8dt);
+        with link = "point.de.Berlin-Lichterfelde-Süd" {
+            track(pl[:lis, :lis.yt] >> 1md >> 1ms);
+            statdot(pl[:lis] >> 1md >> 1ms);
+        }
     }
 }
 
@@ -477,15 +487,17 @@ with detail = 2 {
 with detail = 2 {
     let lt = path("d2.de.6039");
 
-    with link = "line.de.6039" {
-        track(:first :rail:rc75 :pax,
-                lt[:lis.yt - 0.1dt, :lis.yt] >> 0.8dt
-            ..  lt[:lis.yyt, :tel]
-        );
-    }
+    with railway = :first :rail:rc75 :pax {
+        with link = "line.de.6039" {
+            track(
+                    lt[:lis.yt - 0.1dt, :lis.yt] >> 1.5md >> 1ms << 0.5mt
+                ..  lt[:lis.xt + 1md, :tel]
+            );
+        }
 
-    with link = "point.de.Teltow-Stadt" {
-        with layer = 1 marker(:statdot :rail:rc75 :pax, lt[:tel]);
+        with link = "point.de.Teltow-Stadt" {
+            with layer = 1 marker(:statdot :rail:rc75 :pax, lt[:tel]);
+        }
     }
 }
 
@@ -505,8 +517,13 @@ with detail = 2 {
 
 # DE 6065.  Großbeeren Süd - Großbeeren West
 with detail = 2 {
+    let gg = path("d2.de.6065");
+
     with link = "line.de.6065" {
-        track(:first :cat:ac15 :pax, path("d2.de.6065")[:gbs, :gbw]);
+        with layer = -1 track(:first :cat:ac15 :nopax,
+                gg[:gbs - 0.1dl, :gbs] >> 0.5md << 0.5mt
+            ..  gg[:gbw, :gbw + 0.1dl]
+        );
     }
 }
 

@@ -20,6 +20,7 @@ For countries not listed here, work has not started at all.
 [CH](#ch-switzerland) •
 [CZ](#cz-czechia) .
 [DE](#de-germany) •
+[DK](#dk-denmark) •
 [EE](#ee-estonia) •
 [FR](#fr-france) •
 [GB](#gb-united-kingdom) •
@@ -31,6 +32,7 @@ For countries not listed here, work has not started at all.
 [NO](#no-norway) •
 [PL](#pl-poland) •
 [RU](#ru-russia)
+[SE](#se-sweden)
 [SI](#si-slovenia)
 
 
@@ -111,6 +113,16 @@ given a VzG number are also included.
 | T (Stuttgart)      | complete    | not started |
 | U (Erfurt)         | complete    | not started |
 | W (Schwerin)       | complete    | not started |
+
+
+## DK: Denmark
+
+The overview map currently only covers railway lines. Tram lines and
+industrial lines are omitted.
+
+| region         | overview    | detail      |
+| -------------- | ----------- | ----------- |
+| entire country | in progress | in progress |
 
 
 ## EE: Estonia
@@ -268,6 +280,16 @@ industrial lines are omitted.
 missing, and gauge information is missing.
 
 
+## SE: Sweden
+
+The overview map currently only covers railway lines. Tram, metro, 
+industrial, and port lines are omitted.
+
+| region         | overview | detail      |
+| -------------- | -------- | ----------- |
+| entire country | complete | not started |
+
+
 ## SI: Slovenia
 
 The overview map currently only covers railway lines. Tram, metro, and
@@ -275,5 +297,5 @@ industrial lines are omitted.
 
 | region         | overview | detail      |
 | -------------- | -------- | ----------- |
-| entire country | complete | in progress |
+| entire country | complete | not started |
 

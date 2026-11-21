@@ -1,0 +1,47 @@
+# DK DMS.  Dalmose - Skælskør
+#
+let ds = path("d3.dk.dms");
+
+with detail = 3,
+     railway = :first :pax :removed
+{
+    # point.dk.Dalmose  dk.SNV
+
+    with link = "line.dk.DMS" {
+        track(
+                ds[:dal.ys - 0.1dl, :dal.ys] >> 1mt >> 1ms
+            ..  ds[:dal.xs + 2ms, :dal.xs + 1km]
+        );
+        line_label(:right:se, ds[:dal.xs + 1km] >> 0.5mt, "DMS");
+        track(ds[:dal.xs + 1km, :son - 0.5sw]);
+    }
+
+    with link = "point.dk.Sønder-Bjerge", railway = :station {
+        track(ds[:son - 0.5sw, :son + 0.5sw]);
+        marker(:left :de.bf, ds[:son] << 0.5mt);
+        slabel(:left, ds[:son + 0.5sw] >> 1.2mt, "Sønder Bjerge");
+    }
+
+    with link = "line.dk.DMS" {
+        track(ds[:son + 0.5sw, :tja - 0.5sw]);
+    }
+
+    with link = "point.dk.Tjæreby", railway = :station {
+        track(ds[:tja - 0.5sw, :tja + 0.5sw]);
+        marker(:left :de.bf, ds[:tja] << 0.5mt);
+        slabel(:bottom, ds[:tja] << 0.5mt << 1.1sh + (0.3dt, 0dt), "Tjæreby");
+    }
+
+    with link = "line.dk.DMS" {
+        track(ds[:tja + 0.5sw, :tja + 2.2km]);
+        line_label(:right:s, ds[:tja + 2.2km] >> 0.5mt, "DMS");
+        track(ds[:tja + 2.2km, :ska - 0.5sw]);
+    }
+
+    with link = "point.dk.Skælskør", railway = :station {
+        track(ds[:ska - 0.5sw, :ska + 0.5sw]);
+        marker(:right :de.bf, ds[:ska] >> 0.5mt);
+        slabel(:left :bold, ds[:ska] << 1.5mt + (-1dt, 1dt), "Skælskør");
+    }
+}
+

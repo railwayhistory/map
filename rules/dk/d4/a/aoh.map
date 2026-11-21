@@ -1,0 +1,67 @@
+# DK AOH.  Aalborg - Aalborg Østhavnen
+#
+let ao = path("d3.dk.aoh");
+
+with detail = 4, railway = :first :museum {
+    #  point.dk.Aalborg  dk.FFH
+
+    with link = "line.dk.AOH" {
+        track(:ror, ao[:aal + 160m + 1.9dl, :aal.yh - 0.99km] << 1.5mo);
+        line_label(:left:w, ao[:aal.yh - 1km] << 1.5mo << 0.5mt, "AOH");
+        track(:ror, ao[:aal.yh - 1.01km, :aal.yh] << 1.5mo);
+        track(:ror,
+                ao[:aal.yh - 0.1dl, :aal.yh] << 1.5mo
+            ..  ao[:oda - 0.5sw, :oda - 0.49sw]
+        );
+    }
+
+    with link = "point.dk.Østeraadalen", railway = :station {
+        track(ao[:oda - 0.5sw, :oda + 0.5sw]);
+        marker(:left :de.hp, ao[:oda] << 0.5mt);
+        station(:right, ao[:oda] << 0.5mt << 1sh + (1.5dt, 0.7dt),
+            "Østeraadalen", "AOH: ??"
+        );
+    }
+
+    with link = "line.dk.AOH" {
+        track(ao[:oda + 0.49sw, :gug - 0.49sw]);
+    }
+
+    with link = "point.dk.Gug", railway = :station {
+        track(ao[:gug - 0.5sw, :gug + 0.5sw]);
+        marker(:left :de.bf :removed, ao[:gug] << 0.5mt);
+        station(:right:left_align :removed,
+            ao[:gug] << 0.5mt << 1sh + (2dt, 0.5dt),
+            "Gug", " ABH: 4,5"
+        );
+    }
+
+    with link = "line.dk.AOH" {
+        track(ao[:gug + 0.49sw, :lun - 0.49sw]);
+    }
+
+    with link = "point.dk.Lundergårde", railway = :station {
+        track(ao[:lun - 0.5sw, :lun + 0.5sw]);
+        marker(:right :de.hp :removed, ao[:lun] >> 0.5mt);
+        station(:bottom :removed, ao[:lun] >> 0.5mt >> 1sh >> 0.6dt,
+            "Lundergårde", "ABH: 6,5"
+        );
+    }
+
+    with link = "line.dk.AOH" {
+        track(ao[:lun + 0.49sw, :gug.yh]);
+        track(:ror, ao[:gug.yh - 0.1dl, :gug.yh + 2.1seg]);
+        track(ao[:gug.yh + 2seg, :oha - 3.99km]);
+        line_label(:left:se, ao[:oha - 4km] << 0.5mt, "AOH");
+        track(ao[:oha - 4.01km, :oha - 0.49sw]);
+    }
+
+    with link = "point.dk.Alborg-Østhavnen", railway = :station {
+        track(ao[:oha - 0.5sw, :oha.f]);
+        marker(:right :de.bf, ao[:oha] >> 0.5mt);
+        station(:right, ao[:oha] >> 0.5mt >> 1sh + (2.2dt, 0.7dt),
+            span(:bold, "Alborg Østhavnen"), "AOH: ??"
+        );
+    }
+}
+

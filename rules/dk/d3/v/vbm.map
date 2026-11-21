@@ -1,0 +1,31 @@
+# DK VBM.  Vordingborg - Masnedø
+#
+let vm = path("d3.dk.vbm");
+
+with detail = 3,
+     railway = :first :pax :removed
+{
+    # point.dk.Vordingborg  dk.RSR
+
+    with link = "point.dk.Masnedsund", railway = :station {
+        track(vm[:mas.yk, :mas + 0.5sw] << 0.5md >> 0.5mt);
+        marker(:left :de.bf, vm[:mas] << 0.5md);
+        slabel(:left :bold, vm[:mas] >> 100m >> 1dt + (0dt, 1dt),
+            "Masnedsund"
+        );
+    }
+
+    with link = "line.dk.VBM" {
+        track(
+                vm[:mas + 0.49sw, :mas + 0.5sw] << 0.5md >> 0.5mt
+            ..  vm[:mas + 800m, :mas + 1.2km]
+        );
+        line_label(:left:w, vm[:mas + 1.2km] << 0.5mt, "VBM");
+        track(vm[:mas + 1.2km, :mao]);
+    }
+
+    with link = "point.dk.Masnedø", railway = :station {
+        marker(:top :de.bf, vm[:mao]);
+    }
+}
+

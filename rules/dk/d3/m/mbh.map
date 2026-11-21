@@ -1,0 +1,35 @@
+# DK MBH.  Maribo - Bandholm
+#
+let mb = path("d3.dk.mbh");
+
+with detail = 3,
+     railway = :first :museum
+{
+    with link = "line.dk.MBH" {
+        track(:lor, mb[:mar.yb, :mar.yb + 500m]);
+        track(mb[:mar.yb + 500m, :mag - 0.5sw]);
+    }
+
+    with link = "point.dk.Maglemer", railway = :station {
+        track(mb[:mag - 0.5sw, :mag + 0.5sw]);
+        marker(:left :de.hp :removed, mb[:mag] << 0.5mt);
+        slabel(:right :removed, mb[:mag] >> 0.5mt + (1dt, 1dt),
+            "Maglemer"
+        );
+    }
+
+    with link = "line.dk.MBH" {
+        track(mb[:mag + 0.5sw, :mag + 1km]);
+        line_label(:right:w, mb[:mag + 1km] >> 0.5mt, "MBH");
+        track(mb[:mag + 1km, :ban - 0.5sw]);
+    }
+
+    with link = "point.dk.Bandholm", railway = :station {
+        track(mb[:ban - 0.5sw, :ban + 0.5sw]);
+        marker(:right :de.bf, mb[:ban] >> 0.5mt);
+        slabel(:right :bold, mb[:ban] >> 0.5mt >> 1sh + (1.5dt, 1.4dt),
+            "Bandholm"
+        );
+    }
+}
+

@@ -159,23 +159,37 @@ with detail = 2 {
 with detail = 2 {
     let cn = path("d2.pl.104");
 
+    with railway = :second :cat:dc30 :pax {
+        with link = "line.pl.104" {
+            track(cn[:cha, :rza]);
+        }
+
+        with link = "point.pl.Rabka-Zaryte" {
+            statdot(cn[:rza]);
+            slabel(:top, cn[:rza] + (-1dt, -1dt),
+                vbox(:right:bottom, "Rabka", "Zaryte")
+            );
+        }
+    }
+
     with railway = :second :nopax {
         with link = "line.pl.104" {
-            track(cn[:cha, :mar]);
+            track(cn[:rza, :mar]);
             line_label(:right:nw, cn[:cha + 10km], "104");
             line_label(:left:sw, cn[:mar - 20km], "104");
         }
     }
 
-    with railway = :second :cat:dc30 :nopax {
+    with railway = :second :cat:dc30 :pax {
         with link = "point.pl.Marcinkowice" {
             statdot(cn[:mar]);
             slabel(:right, cn[:mar] + (-2.5dt, -1.5dt), "Marcinkowice");
         }
 
         with link = "line.pl.104" {
-            track(cn[:mar, :nsa.yc]);
-            line_label(:left:w, cn[:mar + 4.5km], "104");
+            track(cn[:mar, :mar + 4.51km]);
+            line_label(:left:w, cn[:mar + 4.5km] << 0.5mt, "104");
+            track(cn[:mar + 4.49km, :nsa.yc]);
         }
     }
 }

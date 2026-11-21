@@ -1,0 +1,28 @@
+# DK ODS.  Odense Syd - Odense Kløvermosevej
+#
+let os = path("d3.dk.ods");
+
+with detail = 4,
+     railway = :first :pax :removed
+{
+    with link = "point.dk.Odense-Syd", railway = :station {
+        track(
+                os[:ode - 71m, :ode - 70m] << 0.5mo
+            ..  os[:ods - 450m, :ods + 0.5sw]
+        );
+        marker(:left :de.bf, os[:ods] << 0.5mt);
+        station(:right, os[:ods] << 0.5mt << 1sh + (-4dt, 0.8dt),
+            hbox(:left:top :bold, "Odense Syd"), "ODS: 0,0"
+        );
+    }
+
+    with link = "line.dk.ODS" {
+        track(os[:ods + 0.5sw, :osy.ys - 0.8km]);
+        line_label(:left:w, os[:osy.ys - 0.8km] << 0.5mt,
+            (0dt, -0.4dt), "ODS"
+        );
+        track(os[:osy.ys - 0.8km, :osy.ys]);
+    }
+}
+
+

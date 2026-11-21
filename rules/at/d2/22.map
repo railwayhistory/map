@@ -2,38 +2,38 @@
 with detail = 2 {
     let sm = path("d2.at.220");
 
-    with link = "line.at.220" {
-        track(:first :double :cat:ac15 :pax, sm[:stf.ym, :asn]);
-        track(:first :cat:ac15 :pax, sm[:asn, :sie.ye]);
+    with railway = :first :double :cat:ac15 :pax {
+        with link = "line.at.220" {
+            track(sm[:stf.ym, :asn + 4.01km]);
+            line_label(:right:n, sm[:asn + 4km] >> 0.5md, "220");
+            track(sm[:asn + 3.99km, :sie.ye]);
+        }
 
-        line_label(:right:n :cat:ac15 :pax, sm[:asn + 4km], "220");
+        with link = "point.at.Siebenbrunn-Leopoldsdorf", railway = :station {
+            track(sm[:sie.ye, :sie]);
+            statdot(sm[:sie]);
+            slabel(:left, sm[:sie] + (1.5dt, -0.8dt),
+                vbox(:right:bottom, "Siebenbrunn-", "Leopoldsdorf ")
+            );
+        }
+
+        with link = "line.at.220" {
+            track(sm[:sie, :son - 0.99km]);
+            line_label(:left:s, sm[:son - 1km] << 0.5md, "220");
+            track(sm[:son - 1.01km, :mar.yg]);
+        }
+
+        with link = "point.at.Marchegg", railway = :station {
+            track(sm[:mar.yg, :mar]);
+            statdot(sm[:mar]);
+            slabel(:ne, sm[:mar] + (0dt, 0.8dt), "Marchegg");
+        }
     }
 
-    with link = "point.at.Siebenbrunn-Leopoldsdorf" {
-        track(:first:station :cat:ac15 :pax, sm[:sie.ye, :sie]);
-        statdot(:cat:ac15 :pax, sm[:sie]);
-        slabel(:left :cat:ac15 :pax, sm[:sie] + (1.5dt, -0.8dt),
-            vbox(:right:bottom, "Siebenbrunn-", "Leopoldsdorf ")
-        );
-    }
-
-    with link = "line.at.220" {
-        track(:first :double :cat:ac15 :pax, sm[:sie, :son]);
-        line_label(:left:s :double :cat:ac15 :pax, sm[:son - 1km], "220");
-
-        track(:first :cat:ac15 :pax, sm[:son, :mar.yg]);
-    }
-
-    with link = "point.at.Marchegg" {
-        track(:first:station :cat:ac15 :pax, sm[:mar.yg, :mar]);
-        statdot(:cat:ac15 :pax, sm[:mar]);
-        slabel(:left :cat:ac15 :pax, sm[:mar] + (0dt, 0.6dt),
-            hbox(:right:top, "Marchegg")
-        );
-    }
-
-    with link = "line.at.220" {
-        track(:first :pax, sm[:mar, :mag]);
+    with railway = :first :cat:ac15 :pax {
+        with link = "line.at.220" {
+            track(sm[:mar, :mag]);
+        }
     }
 }
 

@@ -1,0 +1,51 @@
+# DK ORA.  Ørsø - Asaa
+#
+let oa = path("d3.dk.ora");
+
+with detail = 4, railway = :first :pax :removed {
+    # point.dk.Ørsø  dk.NFH
+
+    with link = "line.dk.ORA" {
+        track(:lor,
+                oa[:ors.ya - 0.1dl, :ors.ya] >> 1mo
+            ..  oa[:ors.xa + 1mo, :ors.xa + 1.1mo]
+        );
+        track(oa[:ors.xa + 1mo, :kov - 0.49sw]);
+    }
+
+    with link = "point.dk.Kovshede", railway = :station {
+        track(oa[:kov - 0.5sw, :kov + 0.5sw]);
+        marker(:left :de.hp, oa[:kov] << 0.5mt);
+        station(:top, oa[:kov] << 0.5mt << 1sh << 1dt,
+            "Kovshede", "ORA: 2,3"
+        );
+    }
+
+    with link = "line.dk.ORA" {
+        track(oa[:kov + 0.49sw, :kov + 0.76km]);
+        line_label(:right:n, oa[:kov + 0.75km] >> 0.5mt, (-0.3dt, 0dt), "ORA");
+        track(oa[:kov + 0.74km, :hed - 0.49sw]);
+    }
+
+    with link = "point.dk.Hedegaard", railway = :station {
+        track(oa[:hed - 0.5sw, :hed + 0.5sw]);
+        marker(:left :de.hp, oa[:hed] << 0.5mt);
+        station(:top, oa[:hed] << 0.5mt << 1sh << 0.8dt,
+            "Hedegaard", "ORA: 3,8"
+        );
+    }
+
+    with link = "line.dk.ORA" {
+        track(oa[:hed + 0.49sw, :asa - 0.49sw]);
+    }
+
+    with link = "point.dk.Asaa", railway = :station {
+        track(oa[:asa - 0.5sw, :asa.f]);
+        marker(:left :de.bf, oa[:asa] << 0.5mt);
+        station(:right:left_align, oa[:asa] << 0.5mt << 1sh + (2dt, 1dt),
+            span(:bold, "Asaa"), " ORA: 5,4"
+        );
+    }
+}
+
+

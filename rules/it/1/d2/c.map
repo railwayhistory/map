@@ -215,21 +215,30 @@ with detail = 2 {
 with detail = 2 {
     let cs = path("d2.it.csl");
 
-    with link = "line.it.CSL" {
-        track(:first :removed, cs[:mad.ym, :mad.yc]);
-        track(:first, cs[:mad.yc, :bus.yd]);
-        line_label(:right:w, cs[:mad.yc + 8km], "CSL");
+    with railway = :first :pax :removed {
+        with link = "line.it.CSL" {
+            track(:first :removed, cs[:mad.ym, :mad.yc]);
+        }
     }
 
-    with link = "point.it.Busca" {
-        track(:first:station, cs[:bus.yd, :bus]);
-        statdot(:first, cs[:bus]);
-        slabel(:left, cs[:bus] + (-1.5dt, 0.8dt), "Busca");
-    }
+    with railway = :first :pax {
+        with link = "line.it.CSL" {
+            track(cs[:mad.yc, :mad.yc + 8km]);
+            line_label(:right:w, cs[:mad.yc + 8km], "CSL");
+            track(cs[:mad.yc + 8km, :bus.yd]);
+        }
 
-    with link = "line.it.CSL" {
-        track(:first, cs[:bus, :sal]);
-        line_label(:right:w, cs[:sal - 5km], "CSL");
+        with link = "point.it.Busca" {
+            track(cs[:bus.yd, :bus]);
+            statdot(cs[:bus]);
+            slabel(:left, cs[:bus] + (-1.5dt, 0.8dt), "Busca");
+        }
+
+        with link = "line.it.CSL" {
+            track(cs[:bus, :sal - 5km]);
+            line_label(:right:w, cs[:sal - 5km], "CSL");
+            track(cs[:sal - 5km, :sal]);
+        }
     }
 }
 
