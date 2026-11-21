@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased next version
+## 2026-11-21
 
 Additions
 
