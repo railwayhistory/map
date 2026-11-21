@@ -23,16 +23,16 @@ with detail = 4,
     }
 
     with link = "point.dk.Østerport", railway = :station {
-        track(:double, kh[:ost - 0.5sw, :ost + 0.5sw] << 2mo);
+        track(:double, kh[:ost - 0.5sw, :ost + 750m] << 2mo);
         marker(:left :de.bf, kh[:ost] << 2.5mo << 0.5mt);
     }
 
     with link = "line.dk.KKB" {
-        track(:double :ror, kh[:ost + 0.5sw, :nha - 0.5sw] << 2mo);
+        track(:double :ror, kh[:ost + 749m, :nha - 250m] << 2mo);
     }
 
     with link = "point.dk.Nordhavn", railway = :station {
-        track(:double, kh[:nha - 0.5sw, :nha + 0.5sw] << 2mo);
+        track(:double, kh[:nha - 251m, :nha + 0.5sw] << 2mo);
         marker(:left :de.hp, kh[:nha] << 2.5mo << 0.5mt);
         station(:left, kh[:nha] << 2.5mo << 0.5mt << 1.4sh + (0dt, 1.2dt),
             "Nordhavn", "KKB: 4,500"
@@ -40,9 +40,9 @@ with detail = 4,
     }
 
     with link = "line.dk.KKB" {
-        track(:ror :double, kh[:nha + 0.5sw, :heg - 0.5sw] << 2mo);
-        track(:ror :double, kh[:heg - 0.5sw, :heg + 0.5sw] << 2mo);
-        track(:ror :double, kh[:heg + 0.5sw, :sva - 400m] << 2mo);
+        track(:ror:lor :double :casing, kh[:nha + 0.5sw, :heg - 0.5sw] << 2mo);
+        track(:ror:lor :double, kh[:heg - 0.5sw, :heg + 0.5sw] << 2mo);
+        track(:ror:lor :double, kh[:heg + 0.5sw, :sva - 400m] << 2mo);
     }
 
     with link = "point.dk.Svanemøllen", railway = :station {
@@ -64,14 +64,21 @@ with detail = 4,
             --  kh[:sva - 350m + 2dl, :sva.yf] << 4.5mo
         );
 
-        marker(:left :de.bf, kh[:sva] << 4.5mo << 0.5mt);
-        station(:left, kh[:sva + 0.5sw] << 4.5mo << 0.5mt << 1sh,
+        # LOP
+        track(:nocat :museum, 
+                kh[:sva - 400m, :sva - 350m - 0.7dl] << 3.5mo
+            --  kh[:sva - 350m + 1.3dl, :sva.yf] << 5.5mo
+        );
+
+        marker(:left :de.bf, kh[:sva] << 5.5mo << 0.5mt);
+        station(:left, kh[:sva + 0.5sw] << 5.5mo << 0.5mt << 1sh,
             hbox(:right:top, "Svanemøllen"),
             hbox(:center:top,
-                vbox(:right:top, "KKB: ", "SMS: "),
+                vbox(:right:top, "KKB: ", "SMS: ", span(:nocat, "[LOP: ")),
                 vbox(:sep:top,
                     hbox(:sep:base, "5,", anchor(), "800"),
-                    hbox(:sep:base, "5,", anchor(), "800")
+                    hbox(:sep:base, "5,", anchor(), "800"),
+                    hbox(:sep:base, "13,", anchor(), "337]")
                 )
             )
         );

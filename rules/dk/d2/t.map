@@ -18,6 +18,22 @@ with detail = 2 {
 }
 
 
+# DK TBP.  Tørsbøl - Padborg
+with detail = 2 {
+    let tp = path("d2.dk.tbp");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.TBP" {
+            track(tp[:tor.yp, :tor.yp + 7.01km]);
+            line_label(:left:w, tp[:tor.yp + 7km] << 0.5mt,
+                (0dt, 0.4dt), "TBP"
+            );
+            track(tp[:tor.yp + 6.99km, :pad.yt]);
+        }
+    }
+}
+
+
 # DK TFL.  Thisted - Fjerritslev
 with detail = 2 {
     let tf = path("d2.dk.tfl");
@@ -77,6 +93,35 @@ with detail = 2 {
                     tk[:ges.yv + 8.99km, :kol.xt]
                 ..  tk[:kol.yt, :kol.yt + 0.1dl] >> 0.5md << 0.5mt
             );
+        }
+    }
+}
+
+
+# DK THS.  Tønder - Højer Sluse
+with detail = 2 {
+    let th = path("d2.dk.ths");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.THS" {
+            track(th[:ton.yh, :hoj]);
+            line_label(:right:s, th[:ton.yh + 6.5km] >> 0.5mt,
+                (0.3dt, 0dt), "THS"
+            );
+        }
+
+        with link = "point.dk.Højer" {
+            statdot(th[:hoj]);
+            slabel(:top, th[:hoj] + (0dt, -0.9dt), "Hojer");
+        }
+
+        with link = "line.dk.THS" {
+            track(th[:hoj, :hos]);
+        }
+
+        with link = "point.dk.Højer-Sluse" {
+            statdot(th[:hos]);
+            slabel(:bottom, th[:hos] + (-2dt, 0.8dt), "Hojer Sluse");
         }
     }
 }

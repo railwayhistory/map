@@ -1,0 +1,40 @@
+# DK KHO.  København H - Hvidovre Fjern
+#
+let kh = path("d3.dk.kho");
+
+with detail = 4, railway = :first :double :pax :removed {
+    with link = "line.dk.KHO" {
+        let kf = path("d3.dk.kfa");
+
+        track(:single :dn:rup,
+                kf[:kob - 200m, :kob - 201m] >> 1.5mo
+            ..  kh[:kob.xn, :kob.xn + 0.1dl] << 0.5mo
+        );
+        track(:single :up:ldn,
+                kf[:kob - 200m, :kob - 201m] >> 2.5mo
+            ..  kh[:kob.xn, :kob.xn + 0.1dl] >> 0.5mo
+        );
+        track(kh[:kob.xn, :kob.yl]);
+        track(:station, kh[:kob.yl - 0.1dl, :kob.yl + 1seg]);
+        track(kh[:kob.yl + 0.99seg, :fre.yl - 0.99seg]);
+    }
+
+    with link = "point.dk.Frederiksberg", railway = :station {
+        track(kh[:fre.yl - 1seg, :fre.yv]);
+        marker(:left :de.bf, kh[:fre] << 0.5mo << 0.5mt);
+        station(:bottom, kh[:fre] << 0.5mo << 0.5mt << 1sh + (4dt, 0.6dt),
+            span(:bold, "Frederiksberg"),
+            hbox(:center:top,
+                vbox(:right:top, "FBV: ", "FNB: ", "KHO: "),
+                vbox(:right:top, "??", "??", "??")
+            )
+        );
+    }
+
+    with link = "line.dk.KHO", layer = -2  {
+        track(:station, kh[:fre.yv - 0.1dl, :fre.yv + 1seg]);
+        track(kh[:fre.yv + 0.99seg, :hvf.yk - 500m]);
+        track(:station, kh[:hvf.yk - 501m, :hvf.yk + 200m]);
+    }
+}
+

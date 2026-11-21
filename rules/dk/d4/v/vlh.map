@@ -65,23 +65,48 @@ with detail = 4,
 
     with link = "point.dk.Flintholm", railway = :station {
         track(:double :casing, vh[:fli - 0.5sw, :fli + 0.5sw]);
-        marker(:right :de.bf, vh[:fli] >> 0.5mo >> 0.5mt);
-    }
-
-    with link = "line.dk.VLH" {
-        track(:double, vh[:fli + 0.5sw, :cfr - 0.5sw]);
-    }
-
-    with link = "point.dk.C-F-Richs-Vej", railway = :station {
-        track(:double, vh[:cfr - 0.5sw, :cfr + 0.5sw]);
-        marker(:right :de.hp :removed, vh[:cfr] >> 0.5mo >> 0.5mt);
-        station(:right :removed, vh[:cfr] >> 0.5mo >> 0.5mt + (1.3sw, 0.8sh),
-            "C.F. Richs Vej", "VLH: ??"
+        with layer = 1 marker(:right :de.bf :casing,
+            vh[:fli] >> 0.5mo >> 0.5mt
         );
     }
 
     with link = "line.dk.VLH" {
-        track(:double, vh[:cfr + 0.5sw, :gro - 0.5sw]);
+        track(:double, vh[:fli + 0.5sw, :frn.yv + 0.1dl]);
+        track(:double, vh[:frn.yv, :cfr - 0.49sw]);
+    }
+
+    with link = "point.dk.C-F-Richs-Vej", railway = :station {
+        track(:double, vh[:cfr - 0.5sw, :frn - 3.9dl]);
+        marker(:right :de.hp :removed :casing, vh[:cfr] >> 0.5mo >> 0.5mt);
+        station(:right :removed,
+            vh[:cfr] + (120m, 0dt) + (1.5dt, 5.0dt),
+            "C.F. Richs Vej", "VLH: ??"
+        );
+    }
+
+    with link = "point.dk.Frederiksberg-Nord", railway = :station {
+        # DK VFN
+        track(:nopax :removed,
+                vh[:frn - 4dl, :frn - 2.3dl] << 2.5mo
+            --  vh[:frn - 0.3dl, :frn - 0.2dl] << 0.5mo
+        );
+        track(:nopax :removed,
+                vh[:frn - 4dl, :frn - 3dl] << 1.5mo
+            --  vh[:frn - 1dl, :frn - 0.9dl] >> 0.5mo
+        );
+
+        # DK VLH
+        track(:double, vh[:frn - 4dl, :frn + 1dl]);
+
+        # DK FBN
+        track(:nopax :removed,
+                vh[:frn - 0.6dl, :frn - 0.5dl] >> 1.5mo
+            --  vh[:frn + 0.5dl, :frn + 0.6dl] >> 0.5mo
+        );
+    }
+
+    with link = "line.dk.VLH" {
+        track(:double, vh[:frn + 0.9dl, :gro - 0.5sw]);
     }
 
     with link = "point.dk.Grøndal", railway = :station {
@@ -117,7 +142,7 @@ with detail = 4,
     with link = "point.dk.Nørrebro", railway = :station {
         track(:double, vh[:nor - 0.5sw, :nor + 0.5sw]);
         marker(:right :de.hp, vh[:nor] >> 0.5mo >> 0.5mt);
-        station(:right, vh[:nor] >> 0.5mo >> 0.5mt >> 1.4sh + (0dt, 1dt),
+        station(:right, vh[:nor] + (290m, 0dt) + (2dt, 2dt),
             "Nørrebro", "VLH: 9,740"
         );
     }
@@ -129,7 +154,7 @@ with detail = 4,
     with link = "point.dk.Bispebjerg", railway = :station {
         track(:double, vh[:bis - 0.5sw, :bis + 0.5sw]);
         marker(:right :de.hp, vh[:bis] >> 0.5mo >> 0.5mt);
-        station(:right, vh[:bis] >> 0.5mo >> 0.5mt >> 1.6sh + (0dt, 1dt),
+        station(:left, vh[:bis] << 1.5mo << 0.5mt + (-2dt, 1dt),
             "Bispebjerg", "VLH: 10,387"
         );
     }
@@ -144,7 +169,7 @@ with detail = 4,
         label(vh[:ler - 0.3sw] << 1.5mo << 1.5mt,
             vbox(:right:base,
                 hbox(:center:top :xsmall,
-                    vbox(:right:top, "VLH: ", span(:nocat, "??: ")),
+                    vbox(:right:top, "VLH: ", span(:nocat, "LOP: ")),
                     vbox(:sep:top,
                         hbox(:sep:base, "10,", anchor(), "600"),
                         hbox(:sep:base :nocat, "10,", anchor(), "600")

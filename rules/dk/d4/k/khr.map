@@ -33,31 +33,41 @@ with detail = 4,
     }
 
     with link = "point.dk.Østerport", railway = :station {
-        track(:double, kh[:ost - 0.5sw, :ost + 0.5sw]);
+        track(:double, kh[:ost - 0.5sw, :ost + 750m]);
+
+        track(:nocat :museum,
+                kh[:ost + 619m, :ost + 620m] >> 0.5mo
+            ..  kh[:ost + 700m, :ost + 750m] >> 1.5mo
+        );
+
         marker(:right :de.bf, kh[:ost] >> 0.5mo >> 0.5mt);
         station(:right, kh[:ost - 0.2sw] >> 0.5mo >> 0.5mt >> 1.9sh,
             "Østerport",
             hbox(:center:top,
-                vbox(:right:top, span(:cat:dc15, "KKB: "), "KHR: "),
+                vbox(:right:top,
+                    span(:cat:dc15, "KKB: "), "KHR: ",
+                    span(:nocat :museum, "[LOP: ")
+                ),
                 vbox(:sep:top,
-                    hbox(:sep:base :cat:dc15, "3,", anchor(), "06"),
-                    hbox(:sep:base, "3,", anchor(), "06")
+                    hbox(:sep:base :cat:dc15, "3,", anchor(), "055"),
+                    hbox(:sep:base, "3,", anchor(), "055"),
+                    hbox(:sep:base :nocat :museum, "16,", anchor(), "003]")
                 )
             )
         );
     }
 
     with link = "line.dk.KHR" {
-        track(:double :lor, kh[:ost + 0.5sw, :nha - 0.5sw]);
-        track(:double :lor, kh[:nha - 0.5sw, :nha + 0.5sw]);
-        track(:double :lor, kh[:nha + 0.5sw, :heg - 0.5sw]);
+        track(:double :lor:ror, kh[:ost + 749m, :nha - 250m]);
+        track(:double :station, kh[:nha - 251m, :nha + 0.5sw]);
+        track(:double :lor :casing, kh[:nha + 0.5sw, :heg - 0.5sw]);
     }
 
     with link = "point.dk.Helgoland", railway = :station {
         track(:double, kh[:heg - 0.5sw, :heg + 0.5sw]);
         marker(:right :de.bbf :nopax, kh[:heg] >> 0.5mo >> 0.5mt);
         station(:right :nopax, kh[:heg - 0.5sw] >> 0.5mo >> 0.5mt >> 1.2sh,
-            "Helgoland", "KHR: 5,20"
+            "Helgoland", "KHR: 5,200"
         );
     }
 
@@ -78,13 +88,16 @@ with detail = 4,
             span(:bold, "Hellerup"),
             hbox(:center:top :cat:dc15,
                 vbox(:right:top,
-                    span(:cat:ac25, "KHR: "), "??: ", "KKB: ", "[VLH: "
+                    "HHS: ",
+                    "KKB: ",
+                    "[VLH: ",
+                    span(:cat:ac25, "KHR: ")
                 ),
                 vbox(:sep:top,
-                    hbox(:sep:base :cat:ac25, "7,", anchor(), "825"),
-                    hbox(:sep:base, "??", anchor(), ""),
                     hbox(:sep:base, "7,", anchor(), "825"),
-                    hbox(:sep:base, "13,", anchor(), "876]")
+                    hbox(:sep:base, "7,", anchor(), "825"),
+                    hbox(:sep:base, "13,", anchor(), "876]"),
+                    hbox(:sep:base :cat:ac25, "7,", anchor(), "825")
                 )
             )
         );

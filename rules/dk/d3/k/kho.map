@@ -1,0 +1,25 @@
+# DK KHO.  København H - Hvidovre Fjern
+#
+let kh = path("d3.dk.kho");
+
+with detail = 3, railway = :first :double :pax :removed {
+    with link = "line.dk.KHO" {
+        let kf = path("d3.dk.kfa");
+
+        track(
+                kf[:kob - 0.49sw, :kob - 0.5sw] << 0.5md >> 1mt >> 1ms >> 0.5md
+            ..  kh[:kob.xn, :kob.yl]
+        );
+        track(:station, kh[:kob.yl - 0.1dl, :fre.yl + 0.1dl]);
+    }
+
+    with link = "point.dk.Frederiksberg", railway = :station {
+        track(kh[:fre.yl, :fre.yv]);
+        marker(:left :de.bf, kh[:fre] << 0.5md);
+    }
+
+    with link = "line.dk.KHO" {
+        with layer = -2 track(kh[:fre.yv, :hvf.yk]);
+    }
+}
+

@@ -1,0 +1,31 @@
+# DK LOP.  Lersøen - Østerport
+#
+let lo = path("d3.dk.lop");
+
+with detail = 3, railway = :first :museum {
+    # point.dk.Lersøen  dk.VLH
+
+    with link = "line.dk.LOP" {
+        track(:lor,
+                lo[:bis + 1.9sw, :bis + 2sw] >> 0.5md >> 1ms >> 0.5md
+            ..  lo[:ryp.yf, :ryp + 0.5sw] >> 1.5md >> 2ms >> 0.5mt
+            ..  lo[:sva.yf, :sva.yf + 0.1dl] >> 3.5ms >> 2.5mt >> 1md
+        );
+    }
+
+    # point.dk.Svanemøllen  dk.KKB
+
+    with link = "line.dk.LOP" {
+        track(:lor,
+                lo[:sva + 350m + 2.5dl, :nha - 350m] >> 1md >> 1.5ms >> 0.5mt
+        );
+        with layer = -1 track(:lor:ror,
+                lo[:nha - 351m, :nha - 350m] >> 1md >> 1.5ms >> 0.5mt
+            ..  lo[:nha + 250m, :nha + 251m] << 0.5md << 1.5ms << 0.5mt
+        );
+        track(:ror,
+                lo[:nha + 250m, :ost - 0.5sw] << 1md << 1.5ms << 0.5mt
+        );
+    }
+}
+

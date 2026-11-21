@@ -1,0 +1,31 @@
+# DK KHP.  København H - Hellerup
+#
+let kh = path("d3.dk.khp");
+
+with detail = 4, railway = :first :double :pax :removed {
+    with link = "line.dk.KHP" {
+        track(:station, kh[:kob.yl, :kob.yl + 1seg]);
+        track(kh[:kob.yl + 0.99seg, :nor.yf - 0.99seg]);
+        track(:station, kh[:nor.yf - 1seg, :nor.yf + 0.1dl]);
+        track(kh[:nor.yf, :nor - 0.49sw]);
+    }
+
+    with link = "point.dk.Nørrebro-gammel", railway = :station {
+        track(kh[:nor - 0.5sw, :nor + 0.5sw]);
+        marker(:right :de.bf, kh[:nor] >> 0.5mo >> 0.5mt);
+        station(:right, kh[:nor] >> 0.5mo >> 0.5mt >> 1sh + (1.4dt, 1.1dt),
+            "Nørrebro",
+            hbox(:center:top,
+                vbox(:right:top, "FNB: ", "KHP: "),
+                vbox(:left:top, "??", "??")
+            )
+        );
+    }
+
+    with link = "line.dk.KHP" {
+        track(kh[:nor + 0.49sw, :ryp.yk - 2seg]);
+        with layer = -2 track(:station, kh[:ryp.yk - 2.01seg, :ryp.yk]);
+    }
+}
+
+

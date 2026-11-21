@@ -60,6 +60,16 @@ with detail = 2 {
 }
 
 
+# DK FBV.  Frederiksberg - Vanløse
+with detail = 2 {
+    with link = "line.dk.FBV", layer = -2  {
+        track(:first :double :pax :removed,
+                path("d2.dk.fbv")[:fre.yv, :van.yf]
+        );
+    }
+}
+
+
 # DK FFH.  Fredericia - Frederikshavn
 with detail = 2 {
     let fa = path("d2.dk.ffh.1");
@@ -316,14 +326,14 @@ with detail = 2 {
 
         with link = "line.dk.FPB" {
             track(fp[:tau, :tau + 5.5km]);
-            line_label(:right:se, fp[:tau + 5.5km], "FPB");
+            line_label(:left:nw, fp[:tau + 5.5km] << 0.5md, "FPB");
             track(fp[:tau + 5.5km, :kol.yt]);
         }
 
         with link = "point.dk.Kolding" {
             track(fp[:kol.yt, :kol]);
             statdot(fp[:kol]);
-            slabel(:nw, fp[:kol] + (1.5dt, -0.3dt), "Kolding");
+            slabel(:right, fp[:kol] + (2km, 0dt) + (0dt, 0.8dt), "Kolding");
         }
 
         with link = "line.dk.FPB" {
@@ -349,14 +359,27 @@ with detail = 2 {
 
         with link = "line.dk.FPB" {
             track(fp[:vam, :vam + 6.5km]);
-            line_label(:right:e, fp[:vam + 6.5km], "FPB");
-            track(fp[:vam + 6.5km, :voj.yh]);
+            line_label(:left:w, fp[:vam + 6.5km] << 0.5md, "FPB");
+            track(fp[:vam + 6.5km, :som]);
+        }
+
+        with link = "point.dk.Sommersted" {
+            statdot(:nopax, fp[:som]);
+            slabel(:left :nopax, fp[:som] + (-1dt, 0.5dt),
+                vbox(:right:top, "Sommer-", "sted ")
+            );
+        }
+
+        with link = "line.dk.FPB" {
+            track(fp[:som, :voj.yh]);
         }
 
         with link = "point.dk.Vojens" {
             track(fp[:voj.yh, :voj]);
             statdot(fp[:voj]);
-            slabel(:left, fp[:voj] + (-1.7dt, 0.8dt), "Vojens");
+            slabel(:ne, fp[:voj] + (-0.3km, 0.7km) + (-1.7dt, 0.8dt),
+                "Vojens"
+            );
         }
 
         with link = "line.dk.FPB" {
@@ -376,17 +399,17 @@ with detail = 2 {
 
         with link = "point.dk.Hovslund" {
             statdot(:removed, fp[:hov]);
-            slabel(:right :removed, fp[:hov] + (1.5dt, 0.5dt), "Hovslund");
+            slabel(:right :removed, fp[:hov] + (1.5dt, 0dt), "Hovslund");
         }
 
         with link = "line.dk.FPB" {
-            track(fp[:hov, :rod]);
+            track(fp[:hov, :rod.yb]);
         }
 
         with link = "point.dk.Rødekro" {
-            track(fp[:rod, :rod.ya]);
+            track(fp[:rod.yb, :rod.ya]);
             statdot(fp[:rod]);
-            slabel(:left, fp[:rod] + (-1.5dt, 0.8dt), "Rødekro");
+            slabel(:left, fp[:rod] + (-1.7dt, 1.7dt), "Rødekro");
         }
 
         with link = "line.dk.FPB" {
@@ -398,7 +421,7 @@ with detail = 2 {
         with link = "point.dk.Tinglev" {
             track(fp[:tin.yt, :tin.ys]);
             statdot(fp[:tin]);
-            slabel(:left, fp[:tin] + (-1.5dt, 0.8dt), "Tinglev");
+            slabel(:left, fp[:tin] + (-1.5dt, 1.2dt), "Tinglev");
         }
     }
 

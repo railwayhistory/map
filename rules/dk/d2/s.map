@@ -74,6 +74,76 @@ with detail = 2 {
 }
 
 
+# DK SBT.  Sønderborg - Tønder
+with detail = 2 {
+    let st = path("d2.dk.sbt");
+
+    with railway = :first :cat:ac25 :pax {
+        with link = "point.dk.Sønderborg", railway = :station {
+            statdot(st[:son]);
+            slabel(:bottom, st[:son] + (0dt, 0.4km) + (0dt, 1dt),
+                "Sønderborg"
+            );
+        }
+
+        with link = "line.dk.SBT" {
+            track(st[:son, :vso.ys]);
+        }
+
+        with link = "point.dk.Vester-Sottrup", railway = :station {
+            track(st[:vso.ys, :vso]);
+            statdot(:removed, st[:vso]);
+            slabel(:right :removed, st[:vso] + (1dt, -0.8dt),
+                "Vester Sottrup"
+            );
+        }
+
+        with link = "line.dk.SBT" {
+            track(st[:vso, :vso + 3.81km]);
+            line_label(:right:s, st[:vso + 3.8km] >> 0.5mt, "SBT");
+            track(st[:vso + 3.79km, :gra.ya]);
+        }
+
+        with link = "point.dk.Gråsten", railway = :station {
+            track(st[:gra.ya, :gra]);
+            statdot(st[:gra]);
+            slabel(:left, st[:gra] + (-1.2dt, -0.5dt), "Gråsten");
+        }
+
+        with link = "line.dk.SBT" {
+            track(st[:gra, :tor]);
+        }
+
+        with link = "point.dk.Tørsbøl", railway = :station {
+            track(st[:tor, :tor.yp]);
+            statdot(st[:tor]);
+            slabel(:left, st[:tor] + (-1.5km, 0dt) + (-1.8dt, 0.3dt),
+                "Tørsbøl"
+            );
+        }
+
+        with link = "line.dk.SBT" {
+            track(st[:tor.yp, :tor.yp + 6.01km]);
+            line_label(:right:s, st[:tor.yp + 6km] >> 0.5mt, "SBT");
+            track(
+                    st[:tor.yp + 5.99km, :tin.xs - 0.5md]
+                ..  st[:tin.ys, :tin.ys + 0.1dl] >> 0.5md << 0.5mt
+            );
+        }
+    }
+
+    # point.dk.Tinglev  dk.FPB
+
+    with railway = :first :expax :suspended {
+        with link = "line.dk.SBT" {
+            track(st[:tin.yt, :tin.yt + 14.01km]);
+            line_label(:right:s, st[:tin.yt + 14km] >> 0.5mt, "SBT");
+            track(st[:tin.yt + 13.99km, :ton.yt]);
+        }
+    }
+}
+
+
 # DK SGG.  Skive - Glyngøre
 with detail = 2 {
     let sg = path("d2.dk.sgg");
@@ -146,6 +216,51 @@ with detail = 2 {
         with link = "point.dk.Spodsbjerg" {
             statdot(ss[:spo]);
             slabel(:right, ss[:spo] + (1.5dt, 0.8dt), "Spodsbjerg");
+        }
+    }
+}
+
+
+# DK SMM.  Sønderborg - Mommark Færge
+with detail = 2 {
+    let sm = path("d2.dk.smm");
+
+    with railway = :first :pax :removed {
+        with link = "line.dk.SMM" {
+            track(sm[:son, :sob]);
+        }
+
+        with link = "point.dk.Sønderborg-By", railway = :station {
+            statdot(sm[:sob]);
+        }
+
+        with link = "line.dk.SMM" {
+            track(sm[:sob, :vol.yv]);
+            track(sm[:vol.yv - 0.1dl, :vol.yo + 1dl]);
+            track(sm[:vol.yo, :maj.yo]);
+            track(sm[:maj.yo - 0.1dl, :nta.yt + 1dl]);
+            track(sm[:nta.yt, :lmo]);
+        }
+
+        with link = "point.dk.Lille-Mommark", railway = :station {
+            track(sm[:lmo, :lmo.ys]);
+            statdot(sm[:lmo]);
+            slabel(:left, sm[:lmo] + (-1.3dt, 2dt),
+                vbox(:right:topbase, "Lille-", "Mommark   ")
+            );
+        }
+
+        with link = "line.dk.SMM" {
+            track(sm[:lmo.ys - 0.1dl, :lmo.ys + 2.41km]);
+            line_label(:right:w, sm[:lmo.ys + 2.4km] >> 0.5mt, "SMM");
+            track(sm[:lmo.ys + 2.39km, :mom]);
+        }
+
+        with link = "point.dk.Mommark-Færge", railway = :station {
+            statdot(sm[:mom]);
+            slabel(:right, sm[:mom] + (1.7dt, 0.9dt),
+                "Mommark Færge"
+            );
         }
     }
 }
@@ -276,6 +391,45 @@ with detail = 2 {
             track(sv[:sor.yv, :sor.yv + 8.3km]);
             line_label(:right:w, sv[:sor.yv + 8.3km], "SRV");
             track(sv[:sor.yv + 8.3km, :ved.ys]);
+        }
+    }
+}
+
+
+# DK SSB.  Sønderborg - Skovby
+with detail = 2 {
+    let ss = path("d2.dk.ssb");
+
+    with railway = :first :g1000 :pax :removed {
+        with link = "line.dk.SSB" {
+            track(ss[:vol.yv, :vol]);
+        }
+
+        with link = "point.dk.Vollerup-ABA", railway = :station {
+            track(ss[:vol, :vol.yn]);
+            statdot(ss[:vol]);
+            slabel(:left, ss[:vol] + (0.5dt, -1.5dt), "Vollerup");
+        }
+
+        with link = "line.dk.SSB" {
+            track(ss[:vol.yn, :vol.yo]);
+        }
+
+        with link = "line.dk.SSB" {
+            track(ss[:maj.yo, :nta.yt]);
+        }
+
+        with link = "line.dk.SSB" {
+            track(ss[:lmo.ys, :lmo.ys + 1.46km]);
+            line_label(:left:w, ss[:lmo.ys + 1.45km] << 0.5lt,
+                (0dt, 0.2dt), "SSB"
+            );
+            track(ss[:lmo.ys + 1.44km, :sko]);
+        }
+
+        with link = "point.dk.Skovby-Als" {
+            statdot(ss[:sko]);
+            slabel(:bottom, ss[:sko] + (0dt, 0.8dt), "Skovby");
         }
     }
 }

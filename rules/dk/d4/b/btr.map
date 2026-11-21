@@ -5,7 +5,7 @@ let bt = path("d3.dk.btr");
 with detail = 4,
      railway = :first :pax
 {
-    # point.dk.Bramming                           dk.LE
+    # point.dk.Bramming  dk.LES
 
     with link = "line.dk.BTR" {
         track(
@@ -165,7 +165,9 @@ with detail = 4,
     }
 
     with link = "line.dk.BTR" {
-        track(bt[:ska + 0.5sw, :dos - 0.5sw]);
+        track(bt[:ska + 0.5sw, :ska + 1.46km]);
+        line_label(:right:ne, bt[:ska + 1.45km] >> 0.5mt, "BTR");
+        track(bt[:ska + 1.44km, :dos - 0.5sw]);
     }
 
     with link = "point.dk.Døstrup-Sønderjylland", railway = :station {
@@ -181,13 +183,13 @@ with detail = 4,
     }
 
     with link = "line.dk.BTR" {
-        track(bt[:dos + 0.5sw, :dos + 1.5km]);
-        line_label(:left:w, bt[:dos + 1.5km] << 0.5mt, (0dt, -0.1dt), "BTR");
-        track(bt[:dos + 1.5km, :bre - 180m]);
+        track(bt[:dos + 0.5sw, :dos + 3.01km]);
+        line_label(:left:w, bt[:dos + 3km] << 0.5mt, (0dt, -0.1dt), "BTR");
+        track(bt[:dos + 2.99km, :bre - 180m]);
     }
 
     with link = "point.dk.Bredebro", railway = :station {
-        track(bt[:bre - 180m, :bre.yr]);
+        track(bt[:bre - 180m, :bre.yr + 0.5seg]);
         track(:removed,
                 bt[:bre - 151m, :bre - 150m]
             --  bt[:bre - 150m + 1dl, :bre.yr] << 1mo
@@ -196,17 +198,19 @@ with detail = 4,
         station(:right, bt[:bre + 0.3sw] << 1mo << 0.5mt << 1.6sh,
             span(:bold, "Bredebro"),
             hbox(:center:top,
-                vbox(:right:top, "BTR: ", span(:removed, "??: ")),
+                vbox(:right:top, "BTR: ", span(:removed, "RBB: ")),
                 vbox(:sep:top,
-                    hbox(:sep:base, "48,", anchor(), "99"),
-                    hbox(:sep:base :removed, "??", anchor(), "")
+                    hbox(:sep:base, "48,", anchor(), "990"),
+                    hbox(:sep:base :removed, "36,", anchor(), "5")
                 )
             )
         );
     }
 
     with link = "line.dk.BTR" {
-        track(bt[:bre.yr, :vis - 0.5sw]);
+        track(bt[:bre.yr + 0.49seg, :bre.yr + 2.31km]);
+        line_label(:right:e, bt[:bre.yr + 2.3km] >> 0.5mt, "BTR");
+        track(bt[:bre.yr + 2.29km, :vis - 0.5sw]);
     }
 
     with link = "point.dk.Visby", railway = :station {
@@ -236,7 +240,8 @@ with detail = 4,
     }
 
     with link = "line.dk.BTR" {
-        track(bt[:tin + 0.3sw, :ton.yh]);
+        track(bt[:tin + 0.3sw, :ton.yh - 0.99seg]);
+        track(:ror, bt[:ton.yh - 1seg, :ton.yh + 0.1dl]);
         track(:ror, bt[:ton.yh, :trn - 0.5sw]);
     }
 
@@ -268,12 +273,14 @@ with detail = 4,
             ),
             hbox(:center:top,
                 vbox(:right:top,
-                    span(:removed, "??: "), "BTR: ", span(:closed, "??: ")
+                    span(:removed, "THS: "),
+                    "BTR: ",
+                    span(:suspended, "[SBT: ")
                 ),
                 vbox(:sep:top,
-                    hbox(:sep:base :removed, "??", anchor(), ""),
+                    hbox(:sep:base :removed, "0,", anchor(), "0"),
                     hbox(:sep:base, "63,", anchor(), "939"),
-                    hbox(:sep:base :removed, "??", anchor(), "")
+                    hbox(:sep:base :suspended, "67,", anchor(), "871]")
                 )
             )
         );
