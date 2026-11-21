@@ -14,10 +14,13 @@ Corrections
 
 * Line _AT 150_ is electrified with 3000 V= between Spielfeld-Straß and
   the border. ([#187])
+* Line _LV GA_ has regular passenger service in the Gulbene – Alūksne
+  section. ([#189])
 * Line _SI 30_ is single track north of Maribor. ([#187])
 
 [#187]: https://github.com/railwayhistory/map/pull/187
 [#188]: https://github.com/railwayhistory/map/pull/188
+[#189]: https://github.com/railwayhistory/map/pull/189
 
 
 ## 2026-06-21
@@ -40,7 +43,6 @@ Updates
   service in summer 2026. ([#182])
 * Line _PL 318_ has been re-opened between Bielawa Góry Sowie and
   Bielawa Zachodnia in summer 2026. ([#185])
-
 
 [#180]: https://github.com/railwayhistory/map/pull/180
 [#181]: https://github.com/railwayhistory/map/pull/181
