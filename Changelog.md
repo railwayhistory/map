@@ -1,5 +1,14 @@
 # Change Log
 
+## Unreleased next version
+
+Additions
+
+Updates
+
+Corrections
+
+
 ## 2026-11-21
 
 Additions
@@ -7,8 +16,6 @@ Additions
 * Added the fifth part of the overview and detail map of Denmark, covering
   Sydjylland, Bornholm, and the old routing of lines to København H.
   ([#188])
-
-Updates
 
 Corrections
 
