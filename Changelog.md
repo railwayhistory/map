@@ -4,6 +4,10 @@
 
 Additions
 
+* Added the fifth part of the overview and detail map of Denmark, covering
+  Sydjylland, Bornholm, and the old routing of lines to København H.
+  ([#188])
+
 Updates
 
 Corrections
@@ -13,6 +17,7 @@ Corrections
 * Line _SI 30_ is single track north of Maribor. ([#187])
 
 [#187]: https://github.com/railwayhistory/map/pull/187
+[#188]: https://github.com/railwayhistory/map/pull/188
 
 
 ## 2026-06-21
