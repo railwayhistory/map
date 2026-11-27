@@ -1,0 +1,243 @@
+# DE 6020.  Berlin-Moabit - Berlin-Moabit
+#
+let mm = path("d4.de.6170");
+
+with detail = [4, 5] {
+    with link = "line.de.6020" {
+        track(:first :double :rail:rc75 :pax,
+                mm[:beu + 150m, :weh.a] << 2dt
+        );
+    }
+
+
+    with link = "point.de.Berlin-Westhafen" {
+        # Ri. Gesundbrunnen
+        track(:first:station :rail:rc75 :pax,
+                mm[:weh.a, :weh.a + 0.1dl] << 1.5dt
+            ..  mm[:weh, :weh + 380m] << 2.5dt
+        );
+
+        # Ri. Hbf
+        track(:first:station :rail:rc75 :pax,
+                mm[:weh + 169m, :weh + 170m] << 2.5dt
+            --  mm[:weh + 270m, :weh + 380m] << 3.5dt
+        );
+
+        # aus Ri. Hbf
+        track(:first:station :rail:rc75 :pax,
+                mm[:weh + 169m, :weh + 170m] << 5.5dt
+            --  mm[:weh + 270m, :weh + 380m] << 4.5dt
+        );
+
+        # Ri. Jungfernheide
+        track(:first:station :rail:rc75 :pax,
+                mm[:weh.a, :weh.a + 0.1dl] << 2.5dt
+            ..  mm[:weh, :weh + 380m] << 5.5dt
+        );
+
+        platform(:rail:rc75 :pax,
+                mm[:weh, :weh + 150m] << 2.5dt
+            --  mm[:weh + 150m, :weh] >> 3.2dt
+        );
+        platform(:rail:rc75 :pax,
+                mm[:weh, :weh + 150m] << 5.5dt
+            --  mm[:weh + 150m, :weh] >> 4.8dt
+        );
+
+        marker(:left :de.bf :rail:rc75 :pax, mm[:weh] << 5.5dt);
+        station(:top :rail:rc75 :pax, mm[:weh] << 5.5dt << 1.4sh,
+            hbox(:center:base, "B.-", span(:bold, "Westhafen")),
+            hbox(:center:top,
+                vbox(:right:top, "6020: ", "6017: "),
+                vbox(:right:top, "0,", "?"),
+                vbox(:left:top, "67", "?")
+            )
+        );
+    }
+
+
+    with link = "line.de.6020" {
+        with layer = -1 track(:first :rail:rc75 :pax :flip:tight,
+                mm[:wea.a, :wea.a - 250m] >> 1.5dt
+            ..  mm[:weh + 420m, :weh + 380m] >> 2.5dt
+        );
+        with layer = -1 track(:first :rail:rc75 :pax :tight,
+                mm[:wea.a, :wea.a - 250m] >> 2.5dt
+            ..  mm[:weh + 420m, :weh + 380m] >> 5.5dt
+        );
+    }
+
+
+    with link = "point.de.Berlin-Wedding" {
+        # Ri. Gesundbrunnen
+        track(:first:station :rail:rc75 :pax, mm[:wea.a, :wed.f] << 1.5dt);
+            track(:station :rail:rc75,
+                    mm[:wed + 350m] << 1.5dt
+                --  mm[:wed + 450m] << 2.5dt
+            );
+
+        # aus Ri. Hbf
+        track(:first:station :rail:rc75 :pax,
+                mm[:wea.y, :wed - 350m] << 2.5dt
+            --  mm[:wed - 230m, :wed - 229m] << 1.5dt
+        );
+
+        # Ri. Hbf
+        track(:first:station :rail:rc75 :pax,
+                mm[:wea.y, :wed - 350m] << 3.5dt
+            --  mm[:wed - 230m, :wed - 229m] << 4.5dt
+        );
+
+        # Ri. Moabit
+        track(:first:station :rail:rc75 :pax,
+                mm[:wea.a, :wea.a + 0.1dl] << 2.5dt
+            ..  mm[:wea.y, :wed + 50m] << 4.5dt
+            ..  mm[:wed + 300m, :wed.f] << 2.5dt
+        );
+            track(:station :rail:rc75,
+                    mm[:wed + 470m] << 2.5dt
+                --  mm[:wed + 570m] << 1.5dt
+            );
+
+        platform(:rail:rc75 :pax,
+                mm[:wed - 130m, :wed + 20m] << 1.5dt
+            --  mm[:wed + 20m, :wed - 130m] >> 2.2dt
+        );
+        platform(:rail:rc75 :pax,
+                mm[:wed - 130m, :wed + 20m] << 4.5dt
+            --  mm[:wed + 20m, :wed - 130m] >> 3.8dt
+        );
+
+        marker(:left :de.bf :rail:rc75 :pax, mm[:wed] << 4.5dt);
+        station(:top :rail:rc75 :pax, mm[:wed] << 4.5dt << 1.4sh,
+            span(:bold, "Berlin-Wedding"),
+            hbox(:center:top,
+                vbox(:right:top, "6020: ", "6019: "),
+                vbox(:right:top, "2,", "?"),
+                vbox(:left:top, "52", "?")
+            )
+        );
+    }
+
+
+    with link = "line.de.6020" {
+        let jg = path("d4.de.6022");
+        
+        track(:first :rail:rc75 :pax :tight :casing,
+                mm[:wee.f, :chg.ys] >> 2.5dt
+            ..  jg[:chg.yn - 80m, :jun.a] << 1.5dt
+        );
+        track(:first :rail:rc75 :pax :flip:tight :casing,
+                mm[:wee.f, :chg.ys] >> 1.5dt
+            ..  jg[:chg.yn - 80m, :jun.a] << 3.5dt
+        );
+    }
+
+
+    with link = "point.de.Berlin-Jungfernheide" {
+        # aus Siemensstadt
+        track(:first :station :removed,
+                mm[:jun.a, :jun - 460m] << 4.5dt
+            --  mm[:jun - 400m, :jun - 399m] << 3.5dt
+        );
+
+        # Gl. 1
+        track(:first:station :rail:rc75 :pax,
+                mm[:jun.a, :jun + 300m] << 3.5dt
+            ..  mm[:jun.f - 0.1dl, :jun.f] << 2.5dt
+        );
+            track(:station :removed,
+                    mm[:jun + 50m] << 3.5dt
+                --  mm[:jun + 100m] << 2.5dt
+            );
+
+        # Gl. 3/2
+        track(:first:station :removed,
+                mm[:jun.a, :jun + 280m] << 2.5dt
+        );
+            track(:station :removed,
+                    mm[:jun + 75m] << 2.5dt
+                --  mm[:jun + 125m] << 1.5dt
+            );
+
+        # Gl. 4
+        track(:first:station :rail:rc75 :pax, mm[:jun.a, :jun.f] << 1.5dt);
+            track(:station :removed,
+                    mm[:jun + 75m] << 1.5dt
+                --  mm[:jun + 125m] << 2.5dt
+            );
+
+        platform(:rail:rc75 :pax,
+                mm[:jun - 75m, :jun + 75m] << 3.5dt
+            --  mm[:jun + 75m, :jun - 75m] >> 3.0dt
+        );
+        platform(:removed,
+                mm[:jun - 75m, :jun + 75m] << 2.5dt
+            --  mm[:jun + 75m, :jun - 75m] >> 2.0dt
+        );
+        platform(:rail:rc75 :pax,
+                mm[:jun - 75m, :jun + 75m] << 1.5dt
+            --  mm[:jun + 75m, :jun - 75m] >> 2.0dt
+        );
+        platform(:removed,
+                mm[:jun + 125m, :jun + 275m] << 3.5dt
+            --  mm[:jun + 275m, :jun + 125m] >> 2.5dt
+        );
+
+        marker(:left :de.hp :rail:rc75 :pax, mm[:jun] << 3.5dt);
+        marker(:left :de.exbf :rail:rc75 :pax, mm[:jun] << 3.5dt);
+        station(:top :rail:rc75 :pax, mm[:jun] << 4.0dt << 1.3sh,
+            vbox(:center:bottom,
+                hbox(:center:base, "B. ", span(:bold, "Jungfernheide    ")),
+                "(S-Bahn)"
+            ),
+            hbox(:center:top,
+                vbox(:right:top, span(:removed, "6022: "), "6020: "),
+                vbox(:right:top, span(:removed, "0,"), "34,"),
+                vbox(:left:top, span(:removed, "00"), "62")
+            )
+        );
+    }
+
+
+    with link = "line.de.6020" {
+        track(:first :double :rail:rc75 :pax,
+                mm[:jun.f, :beu - 510m] << 2dt
+        );
+    }
+
+
+    with link = "point.de.Berlin-Markthalle" {
+        marker(:left :de.bk :removed, mm[:mar] << 2.5dt);
+        station(:top :removed, mm[:mar] << 2.5dt << 1.0sh,
+            "Markthalle    ", "35,88"
+        );
+    }
+
+
+    with link = "point.de.Berlin-Beusselstraße" {
+        track(:first:station :double :rail:rc75 :pax,
+                mm[:beu - 510m, :beu + 150m] << 2dt
+        );
+            track(:station :rail:rc75,
+                    mm[:beu - 460m] << 1.5dt
+                --  mm[:beu - 380m] << 2.5dt
+            );
+            track(:station :rail:rc75,
+                    mm[:beu - 360m] << 2.5dt
+                --  mm[:beu - 280m] << 1.5dt
+            );
+
+        platform(:rail:rc75 :pax,
+                mm[:beu - 50m, :beu + 100m] << 2.5dt
+            --  mm[:beu + 100m, :beu - 50m] >> 1.5dt
+        );
+        marker(:left :de.bf :rail:rc75 :pax, mm[:beu] << 2.5dt);
+        station(:top :rail:rc75 :pax, mm[:beu] << 2.5dt << 1.4sh,
+            hbox(:center:base,
+                span(:light, "B.-"), "Beusselstraße           "
+            ),
+            "36,69"
+        );
+    }
+}

@@ -1,0 +1,39 @@
+# DE 6024.  Berlin Ostbahnhof - Potsdam Stadt
+#
+let op = path("d4.de.6024");
+
+with detail = 5 {
+    # ...
+
+
+    with layer = 2, link = "point.de.Berlin-Hbf-Lehrter-Bf-S-Bahn" {
+        # Gl. 15
+        track(:first:station :rail:rc75 :pax :casing,
+                op[:hbf.a, :hbf - 360m] >> 1.5dt
+            ..  op[:hbf - 140m, :hbf + 290m] >> 3.5dt
+            ..  op[:hbf + 440m, :hbf.f] >> 1.5dt
+        );
+
+        # Gl. 16
+        track(:first:station :rail:rc75 :pax :casing,
+                op[:hbf.a, :hbf - 360m] >> 2.5dt
+            ..  op[:hbf - 70m, :hbf + 80m] >> 5.5dt
+            ..  op[:hbf + 289m, :hbf + 290m] >> 4.5dt
+            ..  op[:hbf + 440m, :hbf.f] >> 2.5dt
+        );
+
+        platform(:rail:rc75 :pax,
+                op[:hbf - 70m, :hbf + 80m] >> 3.9dt
+            --  op[:hbf + 80m, :hbf - 70m] << 5.1dt
+        );
+
+        marker(:right :de.hp :rail:rc75 :pax, op[:hbf] >> 5.5dt);
+        with layer = 1 {
+            marker(:right :de.hp.casing :rail:rc75 :pax, op[:hbf] >> 5.5dt);
+        }
+    }
+
+
+    # ...
+}
+
