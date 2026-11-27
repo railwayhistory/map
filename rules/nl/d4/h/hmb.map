@@ -1,0 +1,260 @@
+# NL HMB.  Hoorn - Medemblik
+#
+let hm = path("d3.nl.hmb");
+
+with detail = 4,
+     railway = :second :museum
+{
+    # point.nl.Hoorn  nl.ZEH
+
+    with link = "line.nl.HMB" {
+        track(:ror, hm[:hoo + 329m, :hko - 0.49sw] << 1.5mo);
+    }
+
+    with link = "point.nl.Hoorn-Koepoortsweg", railway = :station {
+        track(hm[:hko - 0.5sw, :hko + 0.5sw] << 1.5mo);
+        marker(:left :de.hp :removed,
+            hm[:hko] << 1.5mo << 0.5mt, hm[:hko] << 1.5mo >> 0.5mt
+        );
+        station(:right :removed,
+            hm[:hko] >> 0.5mo >> 0.5mt + (1dt, 0dt),
+            hbox(:left:top, "Hoorn Koepoortsweg"), "HMB: 0,3"
+        );
+    }
+
+    with link = "line.nl.HMB" {
+        track(
+                hm[:hko + 0.49sw, :hoo.ym] << 1.5mo
+            ..  hm[:hoo.xm + 1.5mo, :wbl - 0.49sw]
+        );
+    }
+
+    with link = "point.nl.Westerblokker" {
+        track(hm[:wbl - 0.5sw, :wbl + 0.5sw]);
+        marker(:left :de.hp :removed, hm[:wbl] << 0.5mt);
+        station(:left :removed, hm[:wbl] << 0.5mt << 1sh + (-2dt, 1.5dt),
+            "Westerblokker", "HMB: 2,3"
+        );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:wbl + 0.49sw, :zwa - 189m]);
+    }
+
+    with link = "point.nl.Zwaag", railway = :station {
+        track(hm[:zwa - 190m, :zwa + 120m]);
+
+        track(:side :nopax,
+                hm[:zwa - 161m, :zwa - 160m]
+            --  hm[:zwa - 160m + 1dl, :zwa + 130m] >> 1mo
+        );
+            track(:side :nopax,
+                    hm[:zwa + 85m - 1dl] >> 1mo
+                --  hm[:zwa + 85m]
+            );
+
+        marker(:right :de.bbf :nopax, hm[:zwa] >> 1mo >> 0.5lt);
+        marker(:right :de.exbf :nopax, hm[:zwa] >> 1mo >> 0.5lt);
+        station(:right :nopax,
+            hm[:zwa] >> 1mo >> 0.5lt >> 1.4sh + (1.8dt, 1.2dt),
+            "Zwaag", "HMB: 3,6"
+        );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:zwa + 0.49sw, :zwd - 0.49sw]);
+    }
+
+    with link = "point.nl.Zwaagdijk" {
+        track(hm[:zwd - 0.5sw, :zwd + 0.5sw]);
+        marker(:left :de.hp :removed, hm[:zwd] << 0.5mt);
+        station(:left :removed, hm[:zwd] << 0.5mt << 1sh + (-2dt, 2.2dt),
+            "Zwaagdijk", "HMB: 4,8"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:zwd + 0.49sw, :zwd + 0.81km]);
+        line_label(:right:sw, hm[:zwd + 0.8km] >> 0.5mt, "HMB");
+        track(hm[:zwd + 0.79km, :wog - 0.89m]);
+    }
+
+    with link = "point.nl.Wognum-Nibbixwoud", railway = :station {
+        track(:side :nopax,
+                hm[:wog - 20m, :wog + 345m - 2dl] << 2mo
+            --  hm[:wog + 345m, :wog + 346m]
+        );
+
+        track(:side :nopax,
+                hm[:wog - 61m, :wog - 60m]
+            --  hm[:wog - 60m + 1dl, :wog + 345m - 1dl] << 1mo
+        );
+            track(:side :nopax,
+                    hm[:wog + 100m - 1dl] << 1mo
+                --  hm[:wog + 100m] << 2mo
+            );
+
+        # NL HMB
+        track(hm[:wog - 90m, :wog + 375m]);
+
+        platform(
+                hm[:wog - 10m, :wog + 155m] << 0.5mt
+            --  hm[:wog + 155m, :wog - 10m] >> 0.7mo
+        );
+
+        marker(:left :de.bf, hm[:wog] << 2mo << 0.5mt);
+        station(:left, hm[:wog] << 2mo << 0.5mt << 1sh + (-1.5dt, 1.2dt),
+            "Wognum-Nibbixwoud", "HMB: 6,2"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:wog + 374m, :wij - 0.49sw]);
+    }
+
+    with link = "point.nl.Wijzend" {
+        track(hm[:wij - 0.5sw, :wij + 0.5sw]);
+        marker(:left :de.hp :removed, hm[:wij] << 0.5mt);
+        station(:left :removed, hm[:wij] << 0.5mt << 1sh + (-1.5dt, 1.2dt),
+            "Wijzend", "HMB: 7,2"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:wij + 0.49sw, :ben - 0.49sw]);
+    }
+
+    with link = "point.nl.Benningbroek-Sijbekarspel" {
+        track(hm[:ben - 0.5sw, :ben + 0.5sw]);
+        marker(:right :de.bf :removed, hm[:ben] >> 0.5mt);
+        station(:right :removed, hm[:ben] >> 0.5mt >> 1sh + (1.5dt, 1.2dt),
+            "Benningbroek-Sijbekarspel", "HMB: 8,6"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:ben + 0.49sw, :abb - 0.49sw]);
+    }
+
+    with link = "point.nl.Abbekerk-Lambertschaag" {
+        track(hm[:abb - 0.5sw, :abb + 0.5sw]);
+        marker(:left :de.bf :removed, hm[:abb] << 0.5mt);
+        station(:left :removed, hm[:abb] << 0.5mt << 1sh + (-1.8dt, 1.5dt),
+            "Abbekerk-Lambertschaag", "HMB: 10,0"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:abb + 0.49sw, :mwo - 154m]);
+    }
+
+    with link = "point.nl.Midwoud-Oostwoud", railway = :station {
+        track(hm[:mwo - 155m, :mwo + 70m]);
+        track(:side :nopax,
+                hm[:mwo - 126m, :mwo - 125m]
+            --  hm[:mwo - 125m + 1dl, :mwo + 40m] >> 1mo
+        );
+
+        marker(:right :de.bbf :nopax, hm[:mwo] >> 1mo >> 0.5lt);
+        marker(:right :de.exbf :nopax, hm[:mwo] >> 1mo >> 0.5lt);
+        station(:bottom :nopax,
+            hm[:mwo] >> 1mo >> 0.5lt >> 1.4sh + (2dt, 1.2dt),
+            "Midwoud-Oostwoud", "HMB: 13,5"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:mwo + 69m, :twi - 49m]);
+    }
+
+    with link = "point.nl.Twisk" {
+        track(hm[:twi - 50m, :twi + 155m]);
+        track(:side :nopax,
+                hm[:twi + 20m, :twi + 125m - 1dl] << 1mo
+            --  hm[:twi + 125m, :twi + 126m]
+        );
+
+        platform(
+                hm[:twi - 20m, :twi + 125m - 2dl] << 0.5mt
+            --  hm[:twi + 125m - 2dl, :twi - 20m] >> 0.7mo
+        );
+
+        marker(:left :de.bf, hm[:twi] << 1mo << 0.5lt);
+        slabel(:left, hm[:twi] << 1mo << 0.5lt << 1sh + (-1.3dt, 1.2dt),
+            "Twisk"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:twi + 154m, :opp - 49m]);
+    }
+
+    with link = "point.nl.Opperdoes", railway = :station {
+        track(hm[:opp - 50m, :opp + 315m]);
+            track(:side :nopax,
+                    hm[:opp + 85m - 1dl]
+                --  hm[:opp + 85m] >> 1mo
+            );
+
+        track(:side :nopax, hm[:opp + 20m, :opp + 285m] >> 1mo);
+
+        platform(
+                hm[:opp - 20m, :opp + 40m] >> 0.5mt
+            --  hm[:opp + 40m, :opp - 20m] << 0.7mo
+        );
+
+        marker(:right :de.bf, hm[:opp] >> 1mo >> 0.5lt);
+        station(:right, hm[:opp] >> 1mo >> 0.5lt >> 1sh + (1.8dt, 2dt),
+            "Opperdoes", "HMB: 17,5"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:opp + 314m, :opo - 0.49sw]);
+    }
+
+    with link = "point.nl.Opperdoes-Oosteinde" {
+        track(hm[:opo - 0.5sw, :opo + 0.5sw]);
+        marker(:left :de.hp :removed, hm[:opo] << 0.5mt);
+        station(:left :removed, hm[:opo] << 0.5mt << 1sh + (-1.8dt, 0dt),
+            "Opperdoes-Oosteinde", "HMB: 18,2"
+       );
+    }
+
+    with link = "line.nl.HMB" {
+        track(hm[:opo + 0.49sw, :opo + 0.61km]);
+        line_label(:right:nw, hm[:opo + 0.6km] >> 0.5mt, "HMB");
+        track(hm[:opo + 0.59km, :med - 369m]);
+    }
+
+    with link = "point.nl.Medemblik", railway = :station {
+        track(:side :nopax,
+                hm[:med - 211m - 0.7dl, :med - 210m - 0.7dl]
+            --  hm[:med - 210m + 0.3dl, :med + 80m - 1dl] << 1mo
+            --  hm[:med + 80m + 1dl, :med + 195m] >> 1mo
+        );
+
+        # NL HMB
+        track(hm[:med - 370m, :med + 195m]);
+
+        track(:side :nopax,
+                hm[:med - 341m, :med - 340m]
+            --  hm[:med - 340m + 1dl, :med - 50m] >> 1mo
+        );
+            track(:side :nopax,
+                    hm[:med - 210m] >> 1mo
+                --  hm[:med - 210m + 1dl]
+            );
+
+        platform(
+                hm[:med - 140m, :med + 20m] >> 0.5mt
+            --  hm[:med + 20m, :med - 140m] << 0.7mo
+        );
+
+        marker(:right :de.bf, hm[:med] >> 1mo >> 0.5mt);
+        station(:top, hm[:med] << 1mo << 0.5mt + (0dt, -0.8dt),
+            span(:bold, "Medemblik"), "HMB: 20,2"
+       );
+    }
+}
+

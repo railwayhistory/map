@@ -1,0 +1,170 @@
+# NL ZSG.  Zaandam - Amsterdam Singelgracht
+#
+let zs = path("d3.nl.zsg");
+
+with detail = 4, railway = :first :cat:dc15 :pax {
+    # point.nl.Zaandam  nl.DHA
+
+    with link = "line.nl.ZSG" {
+        track(:dn:rud, zs[:zaa.fs, :zaa.fs + 1.51km] << 0.5mo);
+        track(:ud:ldn:rup, zs[:zaa.fs, :zaa.fs + 1.51km] >> 0.5mo);
+        track(:up:lud, zs[:zaa.fs, :zaa.fs + 1.51km] >> 1.5mo);
+
+        line_label(:right:e, zs[:zaa.fs + 1.5km] >> 1.5mo >> 0.5mt,
+            (0dt, -0.3dt), "ZSG"
+        );
+        track(:dn:rud,
+                zs[:zaa.fs + 1.49km, :hem - 500m] << 0.5mo
+            ..  zs[:hem - 190m, :hem - 3dl] << 1.5mo
+        );
+        track(:ud:ldn:rup, zs[:zaa.fs + 1.49km, :hem - 3dl] >> 0.5mo);
+        track(:up:lud, zs[:zaa.fs + 1.49km, :hem - 3dl] >> 1.5mo);
+    }
+    
+    with link = "point.nl.Hemtunnel-aansl", railway = :station {
+        track(zs[:hem - 3dl, :hem + 1dl] << 1.5mo);
+        track(
+                zs[:hem - 2.1dl, :hem - 2dl] >> 0.5mo
+            --  zs[:hem - 1dl, :hem + 1dl] << 0.5mo
+        );
+        track(zs[:hem - 3dl, :hem + 1dl] >> 0.5mo);
+        track(zs[:hem - 3dl, :hem + 1dl] >> 1.5mo);
+
+        marker(:right :de.abzw, zs[:hem] >> 1.5mo >> 0.5mt);
+        station(:left, zs[:hem] >> 1.5mo >> 0.5mt >> 1sh + (-1dt, 1dt),
+            span(:small, "Hemtunnel aansl."), "ZSG: 175,121"
+        );
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:dn:rdn, zs[:hem + 0.9dl, :hou] << 1.5mo);
+        track(:dn:ldn:rup, zs[:hem + 0.9dl, :hou] << 0.5mo);
+        track(:up:ldn:rup, zs[:hem + 0.9dl, :hou] >> 0.5mo);
+        track(:up:lup, zs[:hem + 0.9dl, :hou] >> 1.5mo);
+    }
+
+    with link = "point.nl.Houtrakpolder", railway = :station {
+        marker(:right :de.abzw, zs[:hou] >> 1.5mo >> 0.5mt);
+        station(:left, zs[:hou] >> 1.5mo >> 0.5mt >> 1sh + (-1.3dt, 1.5dt),
+            span(:small, "Houtrakpolder aansl."), "ZSG: 176,259"
+        );
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:dn:rdn, zs[:hou - 0.1dl, :rad - 4.9dl] << 1.5mo);
+        track(:dn:ldn:rup, zs[:hou - 0.1dl, :rad - 4.9dl] << 0.5mo);
+        track(:up:ldn:rup, zs[:hou - 0.1dl, :rad - 4.9dl] >> 0.5mo);
+        track(:up:lup, zs[:hou - 0.1dl, :rad - 4.9dl] >> 1.5mo);
+    }
+
+    with link = "point.nl.Radarweg", railway = :station {
+        track(
+                zs[:rad - 5dl, :rad - 2.3dl] << 1.5mo
+            --  zs[:rad - 0.3dl, :asl.yz + 2dl] << 2.5mo
+        );
+            track(
+                    zs[:asl.yz - 2dl] << 2.5mo
+                --  zs[:asl.yz] << 1.5mo
+            );
+        track(
+                zs[:rad - 2.1dl, :rad - 2dl] << 0.5mo
+            --  zs[:rad, :asl.yz + 2dl] << 1.5mo
+        );
+        track(zs[:rad - 5dl, :asl.yz + 2dl] << 0.5mo);
+        track(zs[:rad - 5dl, :asl.yz + 2dl] >> 0.5mo);
+            track(
+                    zs[:rad - 2dl] >> 0.5mo
+                --  zs[:rad] >> 1.5mo
+            );
+        track(
+                zs[:rad - 2.1dl, :rad - 2dl] >> 2mo
+            --  zs[:rad, :asl.yz + 2dl] >> 1.5mo
+        );
+        track(
+                zs[:rad - 5.1dl, :rad - 4dl] >> 1.5mo
+            --  zs[:rad, :asl.yz + 2dl] >> 2.5mo
+        );
+
+        marker(:left :de.abzw, zs[:rad] << 2.5mo << 0.5mt);
+        station(:top, zs[:rad] << 2.5mo << 0.5mt << 1sh << 0.5dt,
+            span(:small :bold, "Radarweg aansl"),
+            hbox(:center:top,
+                vbox(:right:top, "ZSG: ", "[RAG: "),
+                vbox(:sep:top,
+                    hbox(:sep:base, "177,", anchor(), "538"),
+                    hbox(:sep:base, "200,", anchor(), "148]")
+                )
+            )
+        );
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:dn:rdn, zs[:asl.yz + 1.9dl, :asl.yr] << 2.5mo);
+        track(:dn:ldn:rup, zs[:asl.yz + 1.9dl, :asl.yr] << 0.5mo);
+        track(:up:ldn:rup, zs[:asl.yz + 1.9dl, :asl.yr] >> 0.5mo);
+        track(:up:lup:ror, zs[:asl.yz + 1.9dl, :asl.yr] >> 2.5mo);
+
+        track(:dn:rdn,
+                zs[:asl.yr - 0.1dl, :asl.yr] << 2.5mo
+            ..  zs[:asl - 200m, :asl - 199m] << 1.5mo
+        );
+        track(:dn:ldn:rup, zs[:asl.yr - 0.1dl, :asl - 199m] << 0.5mo);
+        track(:up:ldn:rup, zs[:asl.yr - 0.1dl, :asl - 199m] >> 0.5mo);
+        track(:up:lup:ror,
+                zs[:asl.yr - 0.1dl, :asl.yr] >> 2.5mo
+            ..  zs[:asl - 200m, :asl - 199m] >> 1.5mo
+        );
+    }
+
+    with link = "point.nl.Amsterdam-Sloterdijk",
+         railway = :station,
+         layer = -1 
+    {
+        track(
+                zs[:asl - 200m, :asl + 560m - 1dl] << 1.5mo
+            --  zs[:asl + 560m, :asl + 561m] << 0.5mo
+        );
+        track(zs[:asl - 200m, :asl + 620m] << 0.5mo);
+        track(zs[:asl - 200m, :asl + 620m] >> 0.5mo);
+        track(
+                zs[:asl - 200m, :asl + 560m - 1dl] >> 1.5mo
+            --  zs[:asl + 560m, :asl + 561m] >> 0.5mo
+        );
+        track(
+                zs[:asl - 200m, :asl + 560m - 0.5dl] >> 2.5mo
+            --  zs[:asl + 560m + 0.25dl, :asl + 620m] >> 1.75mo
+        );
+        track(
+                zs[:asl - 200m, :asl + 560m] >> 3.5mo
+            --  zs[:asl + 560m + 0.75dl, :asl + 620m] >> 2.75mo
+        );
+    }
+
+    with link = "line.nl.ZSH" {
+        track(:double:ror, zs[:asl + 620m, :obr - 2dl]);
+    }
+
+    with link = "point.nl.Overbrakerpolder", railway = :station {
+        track(:double, zs[:obr - 2dl, :obr + 2dl]);
+
+        track(:double, zs[:obr - 2dl, :obr + 2dl] >> 2.25mo);
+
+        track(
+                zs[:obr + 0.74dl, :obr + 0.75dl] >> 2.75mo
+            --  zs[:obr + 2dl, :obr + 2.1dl] >> 4mo
+        );
+        track(
+                zs[:obr - 2.1dl, :obr - 2dl] >> 2.75mo
+            --  zs[:obr + 0.2dl, :obr + 2dl] >> 5mo
+        );
+
+        marker(:right :de.uest, zs[:obr] >> 5mo >> 0.5mt);
+        station(:bottom, zs[:obr] >> 5mo >> 0.5mt >> 1sh >> 0.5dt,
+            span(:small, "Overbrakerpolder aansl."),
+            "ZSG: 180,510"
+        );
+    }
+
+    # point.nl.Singelgracht  nl.DHA
+}
+

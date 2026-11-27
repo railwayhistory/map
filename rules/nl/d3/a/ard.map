@@ -1,0 +1,790 @@
+# NL ARD.  Amsterdam Singelgracht - Rotterdam Centraal
+#
+let ar = path("d3.nl.ard");
+
+with detail = 3, railway = :first :double :cat:dc15 :pax {
+    # point.nl.Singelgracht  nl.DHA
+
+    with link = "line.nl.ARD" {
+        track(:station, ar[:sin + 1dl, :obr] << 1ms << 1md);
+    }
+
+    # point.nl.Overbrakerpolder  nl.ZSG
+
+    with link = "line.nl.ARD" {
+        track(:ror, ar[:obr, :asl - 560m - 1.9dl] << 1ms << 1md);
+    }
+
+    # point.nl.Amsterdam-Sloterdijk  nl.ZSG
+
+    with link = "line.nl.ARD" {
+        track(:ror,
+                ar[:asl.yr, :asl.xz] << 1md << 3ms << 2mt
+            ..  ar[:asl.zz, :asl.zz + 0.1dl]
+        );
+        line_label(:left:n, ar[:asl.zz] << 0.5md, "ARD");
+        track(
+                ar[:asl.zz, :haz - 0.49sw]
+        );
+    }
+
+    with link = "point.nl.Halfweg-Zwanenburg", railway = :station {
+        track(ar[:haz - 0.5sw, :haz + 0.5sw]);
+        marker(:left :de.hp, ar[:haz] << 0.5md);
+        slabel(:right, ar[:haz] >> 0.5md + (0.8dt, -0.5dt),
+            vbox(:left:base, "Halfweg-", "Zwanenburg")
+        );
+    }
+
+    with link = "point.nl.Halfweg", railway = :station {
+        track(ar[:haz + 0.49sw, :haz + 1.6sw]);
+        marker(:left :de.dkst, ar[:haz + 1.1sw] << 0.5md);
+        marker(:left :de.exbf, ar[:haz + 1.1sw] << 0.5md);
+        slabel(:ne, ar[:haz + 1.1sw] << 0.5md << 1.4sh + (-0.5dt, -0.3dt),
+            "Halfweg"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:haz + 1.59sw, :hsp - 0.49sw]);
+    }
+
+    with link = "point.nl.Haarlem-Spaarnwoude", railway = :station {
+        track(ar[:hsp - 0.5sw, :hsp + 0.5sw]);
+        marker(:right :de.hp, ar[:hsp] >> 0.5md);
+        slabel(:right, ar[:hsp] >> 0.5md >> 1sh + (-4dt, -1dt),
+            vbox(:left:base, "Haarlem", "Spaarnwoude")
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:hsp + 0.49sw, :spb + 0.1dl]);
+    }
+
+    with link = "point.nl.Spaarnebrug-Haarlem", railway = :station {
+        marker(:left :de.dkst, ar[:spb] << 0.5md);
+    }
+
+    with link = "point.nl.Haarlem", railway = :station {
+        track(:single :nopax,
+                ar[:haa - 401m, :haa - 400m] << 0.5md >> 0.5mt
+            --  ar[:haa - 400m + 1dl, :hzu - 1dl] << 0.5md << 1ms << 0.5mt
+        );
+        track(ar[:spb - 0.1dl, :hzu - 1dl]);
+
+        marker(:left :de.bf, ar[:haa] << 0.5md << 1ms << 1mt);
+        slabel(:right :bold, ar[:haa] >> 0.5md + (-3dt, -1dt), "Haarlem");
+    }
+
+    with link = "point.nl.Zuidelijke-splitsing-Haarlem", railway = :station {
+        track(:single :nopax,
+                ar[:hzu - 1.1dl, :hzu + 1dl] << 0.5md << 1ms << 0.5mt
+        );
+        track(ar[:hzu - 1.1dl, :hzu + 1dl]);
+        track(:single :nopax,
+                ar[:hzu - 1.1dl, :hzu - 1dl] >> 0.5md >> 1ms >> 0.5mt
+            --  ar[:hzu, :hzu + 0.1dl] >> 0.5md << 0.5mt
+        );
+        marker(:right :de.uest :nopax, ar[:hzu] >> 0.5md);
+    }
+
+    with link = "line.nl.ARD" {
+        track(:single :nopax :ror,
+                ar[:hzu + 0.9dl, :hag - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:lor, ar[:hzu + 0.9dl, :hag - 0.49sw]);
+    }
+
+    with link = "point.nl.Haarlem-goed", railway = :station {
+        track(:single :nopax,
+                ar[:hag - 0.5sw, :hag + 670m - 1dl] << 0.5md << 1ms << 0.5mt
+            --  ar[:hag + 670m, :hag + 671m] << 0.5md >> 0.5mt
+        );
+        track(ar[:hag - 0.5sw, :hag + 700m]);
+        marker(:left :de.gbf :nopax, ar[:hag] << 0.5md << 1ms << 1mt);
+        slabel(:left :nopax, ar[:hag] >> 0.5md + (-1dt, 1dt),
+            "Haarlem goed."
+        );
+
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:hag + 699m, :hee - 0.49sw]);
+    }
+
+    with link = "point.nl.Heemstede-Aerdenhout", railway = :station {
+        track(ar[:hee - 0.5sw, :hee + 0.5sw]);
+        marker(:right :de.hp, ar[:hee] >> 0.5md);
+        slabel(:left, ar[:hee] >> 0.5md >> 1sh + (-0.8dt, 0.6dt),
+            "Heemstede-Aerdenhout*"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:hee + 0.49sw, :hee + 1.31km]);
+        line_label(:left:w, ar[:hee + 1.3km] << 0.5md, (0dt, 0.2dt), "ARD");
+        track(ar[:hee + 1.29km, :woe - 0.49sw]);
+    }
+
+    with link = "point.nl.Woestduin", railway = :station {
+        track(ar[:woe - 0.5sw, :woe + 0.5sw]);
+        marker(:right :de.hp :removed, ar[:woe] >> 0.5md);
+        slabel(:left :removed, ar[:woe] >> 0.5md >> 1sh + (-0.8dt, 0.6dt),
+            "Woestduin*"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:woe + 0.49sw, :vog - 0.49sw]);
+    }
+
+    with link = "point.nl.Vogelenzang-Bennebroek", railway = :station {
+        track(ar[:vog - 0.5sw, :vog + 0.5sw]);
+        marker(:left :de.bf :removed, ar[:vog] << 0.5md);
+        slabel(:left :removed, ar[:vog] >> 0.5md + (-1.2dt, 0.8dt),
+            "Vogelenzang-Bennebroek"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:vog + 0.49sw, :doo - 0.49sw]);
+    }
+
+    with link = "point.nl.Doodweg", railway = :station {
+        track(ar[:doo - 0.5sw, :doo + 0.5sw]);
+        marker(:right :de.hp :removed, ar[:doo] >> 0.5md);
+        slabel(:left :removed, ar[:doo] >> 0.5md >> 1sh + (-1.2dt, 0.9dt),
+            "Doodweg"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:doo + 0.49sw, :hil - 0.49sw]);
+    }
+
+    with link = "point.nl.Hillegom", railway = :station {
+        track(ar[:hil - 0.5sw, :hil + 0.5sw]);
+        marker(:left :de.hp, ar[:hil] << 0.5md);
+        marker(:left :de.exbf, ar[:hil] << 0.5md);
+        slabel(:right, ar[:hil] << 0.5md << 1.4sh + (1.5dt, 1.5dt),
+            "Hillegom"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:hil + 0.49sw, :hib - 0.49sw]);
+    }
+
+    with link = "point.nl.Hillegommerbeek", railway = :station {
+        track(ar[:hib - 0.5sw, :hib + 0.5sw]);
+        marker(:left :de.bf :removed, ar[:hib] << 0.5md);
+        slabel(:right :removed, ar[:hib] << 0.5md << 1sh + (1.4dt, 1.6dt),
+            "Hillegommerbeek"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:hib + 0.49sw, :vee - 0.49sw]);
+    }
+
+    with link = "point.nl.Veenenburg", railway = :station {
+        track(ar[:vee - 0.5sw, :vee + 0.5sw]);
+        marker(:left :de.bf :removed, ar[:vee] << 0.5md);
+        slabel(:right :removed, ar[:vee] << 0.5md << 1sh + (1.4dt, 1.6dt),
+            "Veenenburg"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:vee + 0.49sw, :lis - 0.49sw]);
+    }
+
+    with link = "point.nl.Lisse", railway = :station {
+        track(ar[:lis - 0.5sw, :lis + 0.5sw]);
+        marker(:left :de.uest :nopax, ar[:lis] << 0.5md);
+        marker(:left :de.exbf :nopax, ar[:lis] << 0.5md);
+        slabel(:right :nopax, ar[:lis] << 0.5md << 1.4sh + (1.4dt, 1.6dt),
+            "Lisse"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:lis + 0.49sw, :nwi - 0.49sw]);
+    }
+
+    with link = "point.nl.Noordwijkerhout", railway = :station {
+        track(ar[:nwi - 0.5sw, :nwi + 0.5sw]);
+        marker(:left :de.abzw :removed, ar[:nwi] << 0.5md);
+        marker(:left :de.exbf :removed, ar[:nwi] << 0.5md);
+        slabel(:right :removed, ar[:nwi] << 0.5md << 1.4sh + (1.6dt, 1.6dt),
+            "Noordwijkerhout*"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:nwi + 0.49sw, :nwi + 1.61km]);
+        line_label(:right:e, ar[:nwi + 1.6km] >> 0.5md, "ARD");
+        track(ar[:nwi + 1.59km, :voh - 0.49sw]);
+    }
+
+    with link = "point.nl.Voorhout", railway = :station {
+        track(ar[:voh - 0.5sw, :voh + 0.5sw]);
+        marker(:left :de.hp, ar[:voh] << 0.5md);
+        slabel(:right, ar[:voh] << 0.5md << 1sh + (1.3dt, 1dt),
+            "Voorhout"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:double, ar[:voh + 0.49sw, :lei.xh]);
+
+        with layer = -1 track(:dn:ror,
+                ar[:lei.xh - 0.1dl, :lei.xh] << 0.5md >> 0.5mt
+            ..  ar[:lei.yh, :lei.yh + 0.1dl] << 0.5md << 1ms << 0.5mt
+        );
+        track(:up:lor,
+                ar[:lei.xh - 0.1dl, :lei.xh] >> 0.5md << 0.5mt
+            ..  ar[:lei.yh, :lei.yh + 0.1dl] >> 0.5md >> 1ms >> 0.5mt
+        );
+
+        track(:dn:ror, ar[:lei.yh, :lei - 0.49sw] << 0.5md << 1ms << 0.5mt);
+        track(:up:lor, ar[:lei.yh, :lei - 0.49sw] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Leiden-Centraal", railway = :station :single {
+        # NL WDL
+        track(:double, ar[:lei + 0.6sw, :lei.yw] << 1md << 2ms << 1mt);
+
+        # NL ARD dn - NL ARD l-dn
+        track(ar[:lei - 0.5sw, :lei.yw + 0.5seg] << 0.5md << 1ms << 0.5mt);
+
+        # NL ARL - NL ARD r-dn/l-up
+        track(:double, ar[:lei - 0.5sw, :lei.yw + 0.5seg]);
+
+        # NL ARD up - NL ARD r-up
+        track(ar[:lei - 0.5sw, :lei.yw + 0.5seg] >> 0.5md >> 1ms >> 0.5mt);
+
+        marker(:left :de.bf, ar[:lei] << 0.5md << 1ms << 1mt);
+        slabel(:right :bold,
+            ar[:lei] << 0.5md << 1ms << 1mt << 1sh + (1.8dt, 1.5dt),
+            "Leiden Centraal"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:rdn,
+            ar[:lei.yw + 0.49seg, :dvi - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:lei.yw + 0.49seg, :dvi - 0.49sw]);
+        track(:lup,
+            ar[:lei.yw + 0.49seg, :dvi - 0.49sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.De-Vink", railway = :station :single {
+        track(ar[:dvi - 0.5sw, :dvi + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:dvi - 0.5sw, :dvi + 0.5sw]);
+        track(ar[:dvi - 0.5sw, :dvi + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:right :de.hp, ar[:dvi] >> 0.5md >> 1ms >> 1mt);
+        slabel(:left, ar[:dvi] >> 0.5md >> 1ms >> 1mt >> 1sh + (-1.5dt, 0.8dt),
+            "De Vink"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:rdn, ar[:dvi + 0.49sw, :vos - 0.49sw] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:dvi + 0.49sw, :vos - 0.49sw]);
+        track(:lup, ar[:dvi + 0.49sw, :vos - 0.49sw] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Voorschoten", railway = :station :single {
+        track(ar[:vos - 0.5sw, :vos + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:vos - 0.5sw, :vos + 0.5sw]);
+        track(ar[:vos - 0.5sw, :vos + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.hp, ar[:vos] << 0.5md << 1ms << 1mt);
+        marker(:left :de.exbf, ar[:vos] << 0.5md << 1ms << 1mt);
+        slabel(:right,
+            ar[:vos] << 0.5md << 1ms << 1mt << 1.4sh + (1.6dt, 1.5dt),
+            "Voorschoten*"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:rdn, ar[:vos + 0.49sw, :vos + 1.61km] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:vos + 0.49sw, :vos + 1.61km]);
+        track(:lup, ar[:vos + 0.49sw, :vos + 1.61km] >> 0.5md >> 1ms >> 0.5mt);
+        
+        line_label(:right:se, ar[:vos + 1.6km] >> 0.5md >> 1ms >> 1mt, "ARD");
+        
+        track(:rdn, ar[:vos + 1.59km, :sta - 0.49sw] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:vos + 1.59km, :sta - 0.49sw]);
+        track(:lup, ar[:vos + 1.59km, :sta - 0.49sw] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Statistiek", railway = :station :single {
+        track(ar[:sta - 0.5sw, :sta + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:sta - 0.5sw, :sta + 0.5sw]);
+        track(ar[:sta - 0.5sw, :sta + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.hp :removed, ar[:sta] << 0.5md << 1ms << 1mt);
+        slabel(:right :removed,
+            ar[:sta] << 0.5md << 1ms << 1mt << 1sh + (1.5dt, 1.8dt),
+            "Statistiek"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:rdn, ar[:sta + 0.49sw, :dma - 0.49sw] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:sta + 0.49sw, :dma - 0.49sw]);
+        track(:lup, ar[:sta + 0.49sw, :dma - 0.49sw] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Den-Haag-Mariahoeve", railway = :station :single {
+        track(ar[:dma - 0.5sw, :dma.yd] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:dma - 0.5sw, :dma.yd]);
+        track(ar[:dma - 0.5sw, :dma.yd] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:right :de.bf, ar[:dma] >> 0.5md >> 1ms >> 1mt);
+        slabel(:left,
+            ar[:dma] >> 0.5md >> 1ms >> 1mt >> 1sh + (-1.5dt, 0.5dt),
+            span(:bold, "D.H. Mariahoeve")
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(:lor:ror, ar[:dma.yd, :dma.yu]);
+        track(:ror :casing,
+                ar[:dma.yu - 0.1dl, :dma.yu]
+            ..  ar[:dla.yr, :dla.yr + 0.1dl] << 0.5ms << 0.5md
+        );
+    }
+
+    with link = "point.nl.Den-Haag-Laan-van-NOI", railway = :station {
+        track(ar[:dla.yr, :dla.yc] << 0.5ms << 0.5md);
+        track(ar[:dla.yr, :dla.yc] >> 0.5ms >> 0.5md);
+        track(:tram, ar[:dla.yr, :dla.yc] >> 0.5ms >> 1md >> 1ms >> 0.5ld);
+        marker(:right :de.bf, ar[:dla] >> 0.5ms >> 1md >> 1ms >> 1ld);
+        slabel(:top,
+            ar[:dla] >> 0.5ms >> 1md >> 1ms >> 1ld >> 1sh + (-5dt, -0.7dt),
+            span(:bold, "D.H. Laan van NOI")
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(:ror :casing, ar[:dla.yc, :dhs.yc] << 0.5ms << 0.5md);
+        track(:lor :casing, ar[:dla.yc, :dhs.yc] >> 0.5ms >> 0.5md);
+    }
+
+    with link = "point.nl.Den-Haag-HS", railway = :station :single {
+        # NL DBH dn
+        track(:nopax :removed,
+                ar[:dhs.yb, :dhs + 0.5sw] << 1.5ms << 2md >> 0.5mt
+        );
+
+        # NL DBH up
+        track(:nopax,
+                ar[:dhs.yb, :dhs + 0.5sw] << 1.5ms << 1md << 0.5mt
+            --  ar[:dhs + 0.5sw + 1dl, :dhs + 0.5sw + 1.1dl]
+                    << 0.5ms << 1md >> 0.5mt
+        );
+
+        # NL ARD l-dn
+        track(
+                ar[:dhs.yc, :dhs + 750m] << 0.5ms << 1md >> 0.5mt
+            ..  ar[:dhs + 1.0km, :dhs + 1.01km] << 0.5md << 1ms << 0.5mt
+        );
+
+        # NL ARD r-dn
+        track(
+                ar[:dhs.yc, :dhs + 750m] << 0.5ms << 0.5mt
+            ..  ar[:dhs + 1.0km, :dhs + 1.01km] << 0.5md >> 0.5mt
+        );
+
+        # NL ARD l-up
+        track(
+                ar[:dhs.yc, :dhs + 750m] >> 0.5ms >> 0.5mt
+            ..  ar[:dhs + 1.0km, :dhs + 1.01km] >> 0.5md << 0.5mt
+        );
+
+        # NL ARD r-up
+        track(
+                ar[:dhs.yc, :dhs + 750m] >> 0.5ms >> 1md << 0.5mt
+            ..  ar[:dhs + 1.0km, :dhs + 1.01km] >> 0.5md >> 1ms >> 0.5mt
+        );
+
+        # NL DCH dn
+        track(
+                ar[:dhs.yc, :dhs + 0.5sw + 1dl] >> 1.5ms >> 1md >> 0.5mt
+        );
+
+        # NL DCH up
+        track(
+                ar[:dhs.yc, :dhs + 0.5sw] >> 1.5ms >> 2md << 0.5mt
+            --  ar[:dhs + 0.5sw + 2dl, :dhs + 0.5sw + 2.1dl]
+                    >> 0.5ms >> 1md << 0.5mt
+        );
+
+        marker(:right :de.bf, ar[:dhs] >> 1.5ms >> 2md);
+        slabel(:left, ar[:dhs] >> 1.5ms >> 2md >> 1sh + (-1.8dt, 0.3dt),
+            span(:bold, "Den Haag HS")
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn, ar[:dhs + 1km, :dmo - 0.49sw] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:dhs + 1km, :dmo - 0.49sw]);
+        track(:up:lup, ar[:dhs + 1km, :dmo - 0.49sw] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Den-Haag-Moerwijk", railway = :station :single {
+        track(ar[:dmo - 0.5sw, :dmo + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:dmo - 0.5sw, :dmo + 0.5sw]);
+        track(ar[:dmo - 0.5sw, :dmo + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.hp, ar[:dmo] << 0.5md << 1ms << 1mt);
+        slabel(:left, ar[:dmo] >> 0.5md >> 1ms >> 1mt + (-1dt, 1dt),
+            "D.H. Moerwijk"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+            ar[:dmo + 0.49sw, :rwa - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:dmo + 0.49sw, :rwa - 0.49sw]);
+        track(:up:lup,
+            ar[:dmo + 0.49sw, :rwa - 0.49sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.Rijswijk-Wateringen", railway = :station :single {
+        track(ar[:rwa - 0.5sw, :rwa + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:rwa - 0.5sw, :rwa + 0.5sw]);
+        track(ar[:rwa - 0.5sw, :rwa + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.hp :removed, ar[:rwa] << 0.5md << 1ms << 1mt);
+        slabel(:left :removed,
+            ar[:rwa] >> 0.5md >> 1ms >> 1mt + (-1.3dt, 1.5dt),
+            "Rijswijk-Wateringen*"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+            ar[:rwa + 0.49sw, :rit.a] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:rwa + 0.49sw, :rit.a]);
+        track(:up:lup,
+            ar[:rwa + 0.49sw, :rit.a] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single :tunnel {
+        marker(:left :tuna, ar[:rit.a] << 0.5md << 1ms << 1mt);
+        marker(:right :tuna, ar[:rit.a] >> 0.5md >> 1ms >> 1mt);
+
+        track(:dn:rdn,
+            ar[:rit.a - 0.1dl, :rij - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:rit.a - 0.1dl, :rij - 0.49sw]);
+        track(:up:lup,
+            ar[:rit.a - 0.1dl, :rij - 0.49sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.Rijswijk", railway = :station :single :tunnel {
+        track(ar[:rij - 0.5sw, :rij + 0.7sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:rij - 0.5sw, :rij + 0.7sw]);
+        track(ar[:rij - 0.5sw, :rij + 0.7sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:right :de.hp, ar[:rij] >> 0.5md >> 1ms >> 1mt);
+        slabel(:left, ar[:rij] >> 0.5md >> 1ms >> 1mt >> 1sh + (-1.3dt, 1.5dt),
+            "Rijswijk"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single :tunnel {
+        marker(:left :tunf, ar[:rij + 0.7sw] << 0.5md << 1ms << 1mt);
+        marker(:right :tunf, ar[:rij + 0.7sw] >> 0.5md >> 1ms >> 1mt);
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn, ar[:rij + 0.69sw, :dea] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:rij + 0.69sw, :dea]);
+        track(:up:lup, ar[:rij + 0.69sw, :dea] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Delft-aansl", railway = :station {
+        marker(:right :de.abzw :removed, ar[:dea] >> 0.5md >> 1ms >> 1mt);
+        slabel(:left :xsmall :removed,
+            ar[:dea] >> 0.5md >> 1ms >> 1mt >> 1sh + (-1.2dt, 1.2dt),
+            "Delft aansl."
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+                ar[:dea - 0.1dl, :tha - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:dea - 0.1dl, :tha - 0.49sw]);
+        track(:up:lup,
+                ar[:dea - 0.1dl, :tha - 0.49sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.t-Haantje", railway = :station :single {
+        track(ar[:tha - 0.5sw, :tha + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:tha - 0.5sw, :tha + 0.5sw]);
+        track(ar[:tha - 0.5sw, :tha + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.hp :removed, ar[:gis - 1.1sw] << 0.5md << 1ms << 1mt);
+        slabel(:right :removed,
+            ar[:gis - 1.1sw] << 0.5md << 1ms << 1mt << 1sh + (0.5dt, -0.3dt),
+            "’t Haantje"
+        );
+    }
+
+    with
+        link = "point.nl.Nederlandse-Gist-Fabriek",
+        railway = :station :single
+    {
+        track(ar[:tha + 0.49sw, :gis + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:tha + 0.49sw, :gis + 0.5sw]);
+        track(ar[:tha + 0.49sw, :gis + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.gbf :nopax, ar[:gis] << 0.5md << 1ms << 1mt);
+        slabel(:right :nopax,
+            ar[:gis] << 0.5md << 1ms << 1mt << 1sh + (1.5dt, 1.2dt),
+            "Nederlandse Gist Fabriek"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+                ar[:gis + 0.49sw, :siw - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:gis + 0.49sw, :siw - 0.49sw]);
+        track(:up:lup,
+                ar[:gis + 0.49sw, :siw - 0.49sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.Singelweg", railway = :station :single {
+        track(ar[:siw - 0.5sw, :gia] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:siw - 0.5sw, :gia]);
+        track(ar[:siw - 0.5sw, :gia] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.hp :removed, ar[:siw] << 0.5md << 1ms << 1mt);
+        slabel(:right :removed,
+            ar[:siw] << 0.5md << 1ms << 1mt << 1sh + (1.5dt, 1.8dt),
+            "Singelweg"
+        );
+    }
+
+    with
+        link = "point.nl.Nederlandse-Gist-Fabriek-aansl",
+        railway = :station
+    {
+        marker(:right :de.abzw :removed, ar[:gia] >> 0.5md >> 1ms >> 1mt);
+        slabel(:left :xsmall :removed,
+            ar[:gia] >> 0.5md >> 1ms >> 1mt >> 1sh + (-1.2dt, 1.2dt),
+            "Nederlandse Gist Fabriek aansl."
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+                ar[:gia - 0.1dl, :gia + 0.7sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:gia - 0.1dl, :gia + 0.7sw]);
+        track(:up:lup,
+                ar[:gia - 0.1dl, :gia + 0.7sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single :tunnel {
+        marker(:right :tuna, ar[:gia + 0.7sw] >> 0.5md >> 1ms >> 1mt);
+        marker(:left :tuna, ar[:gia + 0.7sw] << 0.5md << 1ms << 1mt);
+
+        track(:dn:rdn,
+                ar[:gia + 0.69sw, :del - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:gia + 0.69sw, :del - 0.49sw]);
+        track(:up:lup,
+                ar[:gia + 0.69sw, :del - 0.49sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.Delft", railway = :station :single :tunnel {
+        track(ar[:del - 0.5sw, :del + 0.5sw] << 0.5md << 1ms << 0.5mt);
+        track(:double, ar[:del - 0.5sw, :del + 0.5sw]);
+        track(ar[:del - 0.5sw, :del + 0.5sw] >> 0.5md >> 1ms >> 0.5mt);
+        marker(:left :de.bf, ar[:del] << 0.5md << 1ms << 1mt);
+        slabel(:right,
+            ar[:del] << 0.5md << 1ms << 1mt << 1sh + (1.3dt, 1.0dt),
+            "Delft"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single :tunnel {
+        track(:dn:rdn,
+                ar[:del + 0.49sw, :wit.f] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:del + 0.49sw, :wit.f]);
+        track(:up:lup,
+                ar[:del + 0.49sw, :wit.f] >> 0.5md >> 1ms >> 0.5mt
+        );
+
+        marker(:right :tunf, ar[:wit.f] >> 0.5md >> 1ms >> 1mt);
+        marker(:left :tunf, ar[:wit.f] << 0.5md << 1ms << 1mt);
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+                ar[:wit.f - 0.1dl, :dca - 0.49sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:wit.f - 0.1dl, :dca - 0.49sw]);
+        track(:up:lup,
+                ar[:wit.f - 0.1dl, :dca - 0.49sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.Delft-Campus", railway = :station :single {
+        track(
+                ar[:dca - 0.5sw, :dca + 500m - 1dl] << 0.5md << 1ms << 0.5mt
+            --  ar[:dca + 500m, :dca + 501m] << 0.5md >> 0.5mt
+        );
+        track(:double, ar[:dca - 0.5sw, :dca + 550m]);
+        track(
+                ar[:dca - 0.5sw, :dca + 500m - 1dl] >> 0.5md >> 1ms >> 0.5mt
+            --  ar[:dca + 500m, :dca + 501m] >> 0.5md << 0.5mt
+        );
+        marker(:right :de.bf, ar[:dca] >> 0.5md >> 1ms >> 1mt);
+        slabel(:left, ar[:dca] >> 0.5md >> 1ms >> 1mt >> 1sh + (-1dt, 1.2dt),
+            "Delft Campus*"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:dca + 549m, :dzo]);
+    }
+
+    with link = "point.nl.Delft-Zuid-Overloopwissels", railway = :station {
+        marker(:left :de.uest, ar[:dzo] << 0.5md);
+        slabel(:right :xsmall :nopax,
+            ar[:dzo] << 0.5md << 1sh + (1.3dt, 0.9dt),
+            "Delft Zuid Overloopwissels"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:dzo - 0.1dl, :dzo + 2.31km]);
+        line_label(:right:e, ar[:dzo + 2.3km] >> 0.5md, "ARD");
+        track(ar[:dzo + 2.29km, :ket - 0.49sw]);
+    }
+
+    with link = "point.nl.Kethel", railway = :station {
+        track(ar[:ket - 0.5sw, :ket + 0.5sw]);
+        marker(:left :de.hp :removed, ar[:ket] << 0.5md);
+        slabel(:right :removed, ar[:ket] << 0.5md << 1sh + (1.2dt, 1.1dt),
+            "Kethel"
+        );
+    }
+
+    with link = "line.nl.ARD" {
+        track(ar[:ket + 0.49sw, :sga.yh - 1seg]);
+        track(:ror, ar[:sga.yh - 1.1seg, :sga.yh]);
+    }
+
+    with link = "point.nl.Schiedam-Centrum", railway = :station :single {
+        track(
+                ar[:sga.yh + 69m, :sga.yh + 70m] << 0.5md >> 0.5mt
+            --  ar[:sga.yh + 70m + 1dl, :sch + 0.5sw] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double, ar[:sga.yh, :sch + 0.5sw]);
+        track(:nopax :nocat,
+            ar[:sga.yh, :sga.yh + 70m + 1dl] >> 0.5md >> 1ms >> 0.5mt
+        );
+        track(
+                ar[:sga.yh + 69m, :sga.yh + 70m] >> 0.5md << 0.5mt
+            --  ar[:sga.yh + 70m + 1dl, :sch + 0.5sw] >> 0.5md >> 1ms >> 0.5mt
+        );
+        track(:double :tram,
+                ar[:sga.yh, :sch + 0.5sw] >> 0.5md >> 2ms >> 1mt >> 0.5ld
+        );
+        marker(:right :de.bf, ar[:sch] >> 0.5md >> 2ms >> 1mt >> 1ld);
+        slabel(:bottom :bold,
+            ar[:sch] >> 0.5md >> 2ms >> 1mt >> 1ld >> 1sh + (-7dt, 0.5dt),
+            "Schiedam Centrum*"
+        );
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+                ar[:sch + 0.4sw, :rma] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:sch + 0.4sw, :rma]);
+        track(:up:lup,
+                ar[:sch + 0.4sw, :rma] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.Rotterdam-Rechter-Maasoever-aansl" {
+        marker(:right :de.abzw :removed, ar[:rma] >> 0.5md >> 1ms >> 1mt);
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn,
+                ar[:rma - 0.1dl, :deb + 0.1dl] << 0.5md << 1ms << 0.5mt
+        );
+        track(:double :ldn:rup, ar[:rma - 0.1dl, :deb + 0.1dl]);
+        track(:up:lup,
+                ar[:rma - 0.1dl, :deb + 0.1dl] >> 0.5md >> 1ms >> 0.5mt
+        );
+    }
+
+    with link = "point.nl.Delfshavense-Schie" {
+        marker(:left :de.dkst :nopax, ar[:deb] << 0.5md << 1ms << 1mt);
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn, ar[:deb, :sba] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:deb, :sba]);
+        track(:up:lup, ar[:deb, :sba] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Delfshaven-Schiebrug" {
+        marker(:left :de.abzw :nopax, ar[:sba] << 0.5md << 1ms << 1mt);
+    }
+
+    with link = "line.nl.ARD", railway = :single {
+        track(:dn:rdn, ar[:sba - 0.1dl, :rot.xu] << 0.5md << 1ms << 0.5mt);
+        track(:double :ldn:rup, ar[:sba - 0.1dl, :rot.xu]);
+        track(:up:lup, ar[:sba - 0.1dl, :rot.xu] >> 0.5md >> 1ms >> 0.5mt);
+    }
+
+    with link = "point.nl.Rotterdam-Centraal", railway = :station :single {
+        # NL UTR
+        track(:double, ar[:rot.yu, :rot + 0.5sw] << 2md << 2ms);
+        track(
+                ar[:rot + 0.49sw, :rot + 0.5sw] << 2.5md << 2ms >> 0.5mt
+            --  ar[:rot + 0.5sw + 3dl, :rot + 0.5sw + 4dl]
+                    << 0.5md << 1ms << 0.5mt
+        );
+        track(ar[:rot + 0.40sw, :rot + 0.5sw + 1dl] << 1.5md << 2ms << 0.5mt);
+
+        # NL RTH
+        track(:double, ar[:rot.yu, :rot + 0.5sw] << 1md << 1ms);
+        track(ar[:rot + 0.49sw, :rot + 0.5sw + 2dl] << 1.5md << 1ms >> 0.5mt);
+        track(ar[:rot + 0.49sw, :rot + 0.5sw + 3dl] << 0.5md << 1ms << 0.5mt);
+
+
+        # NL ARD
+        track(
+                ar[:rot.xu - 0.1dl, :rot.xu] << 0.5md << 1ms << 0.5mt
+            --  ar[:rot.xu + 1dl, :rot.xu + 1.1dl] << 0.5md >> 0.5mt
+        );
+        track(:double, ar[:rot.xu - 0.1dl, :rot + 0.5sw + 4dl]);
+        track(
+            ar[:rot.xu - 0.1dl, :rot + 0.5sw + 4dl] >> 0.5md >> 1ms >> 0.5mt
+        );
+
+        marker(:right :de.bf, ar[:rot] >> 0.5md >> 1ms >> 1mt);
+        slabel(:bottom :bold, ar[:rot] >> 0.5md >> 1ms >> 1mt >> 1sh >> 0.7dt,
+            hbox(:center:base, "R. Centraal", span(:regular, "*"))
+        );
+    }
+}
+

@@ -1,0 +1,62 @@
+# NL DHA.  Den Helder - Amsterdam Centraal
+#
+let da = path("d3.nl.dha");
+
+
+with detail = 5, railway = :first :double :cat:dc15 :pax {
+    # ...
+
+    with link = "line.nl.DHA" {
+        track(:double, da[:kog + 0.5sw, :zaa.ad]);
+    }
+
+    with link = "point.nl.Zaandam", railway = :station :single {
+        let ze = path("d3.nl.zeh");
+        let zs = path("d3.nl.zsg");
+
+        # Sp. PP - 401 (NL ZEH up)
+        track(
+                ze[:zaa.ae + 0.1dl, :zaa.ae] << 0.5mo
+            ..  zs[:zaa.ye, :zaa - 430m] << 1.5mo
+            ..  zs[:zaa - 205m, :zaa + 140m] << 3mo
+            ..  zs[:zaa + 420m, :zaa + 421m] << 0.5mo
+        );
+
+        # Sp. 421 - 402 (NL DHA dn - NL ZSG dn)
+        with layer = -1 track(zs[:zaa.ad, :zaa.ye] << 0.5mo);
+        track(zs[:zaa.ye - 0.1dl, :zaa.fs] << 0.5mo);
+
+        # Sp. 422 - 403 (NL DHA up - NL ZSG ctr)
+        with layer = -1 track(
+                zs[:zaa.ad, :zaa.ye] >> 0.5mo
+        );
+        track(
+                zs[:zaa.ye - 0.1dl, :zaa.ye] >> 0.5mo
+            ..  zs[:zaa - 920m, :zaa - 910m] >> 1mo
+            ..  zs[:zaa - 820m, :zaa.fs] >> 0.5mo
+        );
+            # 255 - 269
+            track(
+                    zs[:zaa - 911m, :zaa - 910m] >> 1mo
+                ..  zs[:zaa - 820m, :zaa - 539m] >> 1.5mo
+            );
+
+        # Sp. PC - 404 (NL ZEH dn - NL ZSG up)
+        track(:casing,
+                ze[:zaa.ae + 0.1dl, :zaa.ae] >> 0.5mo
+            ..  zs[:zaa.ye, :zaa.ye + 0.1dl] >> 2.5mo
+        );
+        track(
+                zs[:zaa.ye, :zaa - 670m] >> 2.5mo
+            ..  zs[:zaa - 530m, :zaa.fs] >> 1.5mo
+        );
+
+        # Sp. 423 - 405
+        track(
+                zs[:zaa.ad + 159m, :zaa.ad + 160m] >> 0.5mo
+            ..  zs[:zaa.ye - 20m, :zaa + 140m] >> 4mo
+            ..  zs[:zaa + 280m, :zaa + 281m] >> 1.5mo
+        );
+    }
+}
+
